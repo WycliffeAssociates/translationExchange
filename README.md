@@ -1,5 +1,5 @@
 # translationDB
-A local database to help translators send and access their audio files in a quick and efficient way. The system must be able to operate fully, without any kind of remote internet access. 
+A local database to help translators send and access their audio files in an organized and efficient way. The system must be able to operate fully, without any kind of remote internet access. 
 
 ## Objective
 - The goal of TranslationDB is to be a strong Back-End DBMS for [translationRecorder](https://github.com/WycliffeAssociates/translationRecorder) and a related UI for interfacting with the information on the database.
