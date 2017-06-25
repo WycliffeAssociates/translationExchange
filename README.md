@@ -6,7 +6,8 @@ A local database to help translators send and access their audio files in an org
 - The database will be able to interact with the UI using a customized REST API that is running on the local server.
 - Store large files in the host machine's "File System", in order to save on space in MongoDB (*and to avoid the 2GB limit on 32-bit machines*)
 
-## Bult Using
+## Built Using
 * [MongoDB](https://www.mongodb.com/) - Chosen because of NoSQL Document Store benefits
 * [Python 2.7](https://www.python.org/download/releases/2.7/)
+* [PyMongo 3.4](https://api.mongodb.com/python/current/#) - MongoDB Framework for Python
 * [Django](https://github.com/django/django) - For running a local Web Server
