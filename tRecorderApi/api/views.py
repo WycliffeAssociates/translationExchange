@@ -1,18 +1,24 @@
 from django.http import HttpResponse
+from django.shortcuts import render
+from django.core.files.storage import FileSystemStorage
 import json
-from api.models import Uploads
-
+import zipfile
+from os import remove
 
 def index(request):
-    return HttpResponse("Hello World!")
-
-def getCounter(request):
-    data = json.dumps({"counter": "1"})
-    return HttpResponse(data, content_type='application/json')
+    return render(request, 'index.html')
 
 def upload(request):
-    # request.data.files
-    # process zip file
-    # write to db
-    
-    return HttpResponse("ok")
+    if request.method == 'POST' and request.FILES['upload']:
+        upload = request.FILES['upload']
+        fs = FileSystemStorage()
+        filename = fs.save(upload.name, upload)
+        uploaded_file_url = fs.url(filename)
+
+        zip = zipfile.ZipFile(upload)
+        zip.extractall("media/unzipped")
+        remove(uploaded_file_url)
+        zip.close()
+
+        #return render(request, 'index.html', {"uploaded_file_url": uploaded_file_url})
+        return HttpResponse(json.dumps({"response": "ok"}), content_type='application/json')
