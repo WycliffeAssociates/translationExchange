@@ -1,19 +1,46 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import AudioPlayer from './MainPage_Components/Audio_Player/audioPlayer';
+
+
+
+
+import SearchBar from './MainPage_Components/Search_Bar/search_bar';
+
 
 class App extends Component {
-  render() {
+
+
+
+
+    render() {
     return (
+
       <div className="App">
+          <SearchBar/>
+
         <div className="App-header">
+
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+          <h2>Welcome to translation Manager!</h2>
+
+        </div >
+
+
+          <div className="App-audioPlayer">
+
+              <AudioPlayer/>
+
+
+
+          </div>
+
+
       </div>
+
+
+
     );
   }
 }
