@@ -1,6 +1,10 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.test import TestCase
+from .models import File
 
-# Create your tests here.
+class ModelTestCase(TestCase):
+    """This class defines the test suite for the file model."""
+
+    def setUp(self):
+        """Define the test client and other test variables."""
+        self.file_location = "uploads/file.zip"
+        self.file = File(location=self.file_location)
