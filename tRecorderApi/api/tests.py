@@ -1,8 +1,15 @@
 from django.test import TestCase
 from .models import File, Project, User, Meta, Comment
+from datetime import datetime
+
+with open("test_log.txt", "w") as test_log:
+    test_log.write("API TEST LOG\n")
+    sttime = datetime.now().strftime('%m/%d/%Y_%H:%M:%S')
+    test_log.write("DATE:" + sttime + "\n\n")
 
 class ModelTestCase(TestCase):
     """This class defines the test suite for the each of the models."""
+
 
     def setUp(self):
         """Define the test client and other test variables."""
@@ -19,6 +26,10 @@ class ModelTestCase(TestCase):
         self.file.save()
         new_count = File.objects.count()
         self.assertNotEqual(old_count, new_count)
+        test_log = open("test_log.txt", "a")
+        test_log.write("TEST: Creating and Storing a File Object........................PASSED\n")
+        test_log.close()
+
 
     def test_model_can_create_a_Project(self):
         """Test the Project model can create a file."""
@@ -26,6 +37,9 @@ class ModelTestCase(TestCase):
         self.project.save()
         new_count = Project.objects.count()
         self.assertNotEqual(old_count, new_count)
+        test_log = open("test_log.txt", "a")
+        test_log.write("TEST: Creating and Storing a Project Object.....................PASSED\n")
+        test_log.close()
 
     def test_model_can_create_a_User(self):
         """Test the User model can create a file."""
@@ -33,6 +47,9 @@ class ModelTestCase(TestCase):
         self.user.save()
         new_count = User.objects.count()
         self.assertNotEqual(old_count, new_count)
+        test_log = open("test_log.txt", "a")
+        test_log.write("TEST: Creating and Storing a User Object........................PASSED\n")
+        test_log.close()
 
     def test_model_can_create_a_Meta(self):
         """Test the Meta model can create a file."""
@@ -40,6 +57,9 @@ class ModelTestCase(TestCase):
         self.meta.save()
         new_count = Meta.objects.count()
         self.assertNotEqual(old_count, new_count)
+        test_log = open("test_log.txt", "a")
+        test_log.write("TEST: Creating and Storing a Meta Object........................PASSED\n")
+        test_log.close()
 
     def test_model_can_create_a_Comment(self):
         """Test the Comment model can create a file."""
@@ -47,3 +67,6 @@ class ModelTestCase(TestCase):
         self.comment.save()
         new_count = Comment.objects.count()
         self.assertNotEqual(old_count, new_count)
+        test_log = open("test_log.txt", "a")
+        test_log.write("TEST: Creating and Storing a Comment Object.....................PASSED\n")
+        test_log.close()
