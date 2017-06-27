@@ -20,7 +20,7 @@ class File(models.Model):
     duration = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     checked_level = models.IntegerField(default=0)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.location
@@ -36,15 +36,15 @@ class Meta(models.Model):
     startv = models.IntegerField(default=0)
     endv = models.IntegerField(default=0)
     markers = models.TextField()
-    file = models.ForeignKey(File, on_delete=models.CASCADE)
+    file = models.ForeignKey(File, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return '{}-{}-{}'.format(self.language, self.anthology, self.slug)
 
 class Comment(models.Model):
     location = models.CharField(max_length=250)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    file = models.ForeignKey(File, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    file = models.ForeignKey(File, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.location
