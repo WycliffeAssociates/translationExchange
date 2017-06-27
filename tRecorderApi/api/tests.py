@@ -2,6 +2,7 @@ from django.test import TestCase
 from .models import File, Project, User, Meta, Comment
 from datetime import datetime
 
+#Creating a text file to log the results of each of the tests
 with open("test_log.txt", "w") as test_log:
     test_log.write("API TEST LOG\n")
     sttime = datetime.now().strftime('%m/%d/%Y_%H:%M:%S')
@@ -25,9 +26,11 @@ class ModelTestCase(TestCase):
         old_count = File.objects.count()
         self.file.save()
         new_count = File.objects.count()
-        self.assertNotEqual(old_count, new_count)
         test_log = open("test_log.txt", "a")
-        test_log.write("TEST: Creating and Storing a File Object........................PASSED\n")
+        if self.assertNotEqual(old_count, new_count):
+            test_log.write("TEST: Creating and Storing a File Object........................FAILED\n")
+        else:
+            test_log.write("TEST: Creating and Storing a File Object........................PASSED\n")
         test_log.close()
 
 
@@ -36,9 +39,11 @@ class ModelTestCase(TestCase):
         old_count = Project.objects.count()
         self.project.save()
         new_count = Project.objects.count()
-        self.assertNotEqual(old_count, new_count)
         test_log = open("test_log.txt", "a")
-        test_log.write("TEST: Creating and Storing a Project Object.....................PASSED\n")
+        if self.assertNotEqual(old_count, new_count):
+            test_log.write("TEST: Creating and Storing a Project Object.....................FAILED\n")
+        else:
+            test_log.write("TEST: Creating and Storing a Project Object.....................PASSED\n")
         test_log.close()
 
     def test_model_can_create_a_User(self):
@@ -46,9 +51,11 @@ class ModelTestCase(TestCase):
         old_count = User.objects.count()
         self.user.save()
         new_count = User.objects.count()
-        self.assertNotEqual(old_count, new_count)
         test_log = open("test_log.txt", "a")
-        test_log.write("TEST: Creating and Storing a User Object........................PASSED\n")
+        if self.assertNotEqual(old_count, new_count):
+            test_log.write("TEST: Creating and Storing a User Object........................FAILED\n")
+        else:
+            test_log.write("TEST: Creating and Storing a User Object........................PASSED\n")
         test_log.close()
 
     def test_model_can_create_a_Meta(self):
@@ -56,9 +63,11 @@ class ModelTestCase(TestCase):
         old_count = Meta.objects.count()
         self.meta.save()
         new_count = Meta.objects.count()
-        self.assertNotEqual(old_count, new_count)
         test_log = open("test_log.txt", "a")
-        test_log.write("TEST: Creating and Storing a Meta Object........................PASSED\n")
+        if self.assertNotEqual(old_count, new_count):
+            test_log.write("TEST: Creating and Storing a Meta Object........................FAILED\n")
+        else:
+            test_log.write("TEST: Creating and Storing a Meta Object........................PASSED\n")
         test_log.close()
 
     def test_model_can_create_a_Comment(self):
@@ -66,7 +75,9 @@ class ModelTestCase(TestCase):
         old_count = Comment.objects.count()
         self.comment.save()
         new_count = Comment.objects.count()
-        self.assertNotEqual(old_count, new_count)
         test_log = open("test_log.txt", "a")
-        test_log.write("TEST: Creating and Storing a Comment Object.....................PASSED\n")
+        if self.assertNotEqual(old_count, new_count):
+            test_log.write("TEST: Creating and Storing a Comment Object.....................FAILED\n")
+        else:
+            test_log.write("TEST: Creating and Storing a Comment Object.....................PASSED\n")
         test_log.close()
