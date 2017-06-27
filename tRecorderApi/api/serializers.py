@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from .models import Project, User, File, Meta, Comment
+from .models import Language, User, File, Meta, Comment
 
-class ProjectSerializer(serializers.ModelSerializer):
+class LanguageSerializer(serializers.ModelSerializer):
     """Serializer to map the Model instance into JSON format."""
 
     class Meta:
         """Meta class to map serializer's fields with the model fields."""
-        model = Project
+        model = Language
         fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):

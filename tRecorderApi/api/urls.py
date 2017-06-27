@@ -1,11 +1,11 @@
 from django.conf.urls import url, include
 from . import views
 from rest_framework import routers
-from api.views import ProjectViewSet, UserViewSet, FileViewSet
+from api.views import LanguageViewSet, UserViewSet, FileViewSet
 from api.views import MetaViewSet, CommentViewSet, FileUploadView
 
 router = routers.DefaultRouter()
-router.register(r'projects', ProjectViewSet)
+router.register(r'languages', LanguageViewSet)
 router.register(r'users', UserViewSet)
 router.register(r'files', FileViewSet)
 router.register(r'metas', MetaViewSet)
