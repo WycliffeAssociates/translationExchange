@@ -5,7 +5,8 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import ProjectsListContainer from "./projects/ProjectsListContainer";
-import ProjectContainer from "./projects/ProjectContainer"
+import ProjectContainer from "./projects/ProjectContainer";
+import ChapterContainer from "./chapter/ChapterContainer";
 import './App.css';
 
 class App extends Component {
@@ -17,7 +18,8 @@ class App extends Component {
              */
             <Switch>
                 <Route exact path='/projects' component={ProjectsListContainer}/>
-                <Route exact path='/projects/:id' component={ProjectContainer}/>
+                <Route exact path='/projects/:projectid' component={ProjectContainer}/>
+                <Route exact path='/projects/:projectid/ch:chid' component={ChapterContainer}/>
             </Switch>
         );
   }
