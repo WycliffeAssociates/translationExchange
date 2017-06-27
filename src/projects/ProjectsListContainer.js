@@ -16,7 +16,7 @@ class ProjectsListContainer extends Component {
     */
     constructor(props) {
         super(props);
-        this.state = {projects: []};
+        this.state = {projects:[]};
     }
 
     /*
@@ -25,10 +25,18 @@ class ProjectsListContainer extends Component {
      */
     componentDidMount() {
         //I would do a web request here...
+        //Just going to put fake data in state instead
         this.setState({projects:
             [
-                {id: 16, name: "foo"},
-                {id: 17, name: "bar"}
+                {
+                    id: 16,
+                    book: "Mark",
+                    language: "English",
+                    translationType: "Unlocked Literal Bible",
+                    percentFinished: 5.6,
+                    contributors: ["Alison"],
+                    dateModified: "20 June 2017 4:16 pm"
+                }
             ]
         });
     }
@@ -39,7 +47,10 @@ class ProjectsListContainer extends Component {
      */
     render () {
         return (
-            <ProjectsList projects={this.state.projects}/>
+            <div>
+                Projects List Container
+                <ProjectsList projects={this.state.projects}/>
+            </div>
         );
     }
 }
