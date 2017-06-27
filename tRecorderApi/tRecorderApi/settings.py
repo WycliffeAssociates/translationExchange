@@ -31,13 +31,15 @@ ALLOWED_HOSTS = ['172.19.145.88', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'api.apps.ApiConfig',
+    #'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -76,18 +78,10 @@ WSGI_APPLICATION = 'tRecorderApi.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.dummy',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
     }
 }
-
-AUTHENTICATION_BACKENDS = (
-    'mongoengine.django.auth.MongoEngineBackend',
-)
-SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
-SESSION_ENGINE = 'mongoengine.django.sessions'
-
-from mongoengine import connect
-connect('trecorder', username='max', password='12345678')
 
 
 # Password validation

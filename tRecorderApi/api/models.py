@@ -1,53 +1,52 @@
-from mongoengine import *
 from django.db import models
 
-class Meta(EmbeddedDocument):
+class User(models.Model):
+    name = models.CharField(max_length=50)
+    agreed = models.BooleanField()
+    picture = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
+
+class Meta(models.Model):
     #meta_id = ObjectIdField(default=ObjectId)
-    anthology = StringField(min_length=1)
-    language = StringField(min_length=1)
-    version = StringField(min_length=1)
-    slug = StringField(min_length=1)
-    book_number = IntField(min_value=1)
-    mode = StringField(min_length=1)
-    chapter = IntField(min_value=1)
-    startv = IntField(min_value=1)
-    endv = IntField(min_value=1)
-    markers = DictField()
+    anthology = models.CharField(max_length=2)
+    language = models.CharField(max_length=20)
+    version = models.CharField(max_length=3)
+    slug = models.CharField(max_length=3)
+    book_number = models.IntegerField(default=0)
+    mode = models.CharField(max_length=10)
+    chapter = models.IntegerField(default=0)
+    startv = models.IntegerField(default=0)
+    endv = models.IntegerField(default=0)
+    #markers = DictField() ???
 
     def __str__(self):
         return '{}-{}-{}'.format(self.language, self.anthology, self.slug)
 
-class Comment(EmbeddedDocument):
+class Comment(models.Model):
     #comment_id = ObjectIdField(default=ObjectId)
-    location = StringField(min_length=1)
-    user = ReferenceField('User')
+    location = models.CharField(max_length=250)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.location
 
-class File(Document):
-    location = StringField(min_length=1)
-    duration = IntField(min_value=0)
-    rating = IntField(min_value=0)
-    checked_level = IntField(min_value=0)
-    project_id = StringField(max_length=24)
-    meta_data = EmbeddedDocumentField(Meta)
-    comments = ListField(EmbeddedDocumentField(Comment))
+class File(models.Model):
+    location = models.CharField(max_length=250)
+    duration = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0)
+    checked_level = models.IntegerField(default=0)
+    project_id = models.CharField(max_length=24)
+    #meta_data = EmbeddedDocumentField(Meta)
+    #comments = ListField(EmbeddedDocumentField(Comment))
 
     def __str__(self):
         return self.location
 
-class Project(Document):
-    lang = StringField(min_length=1)
-    code = StringField(min_length=1)
+class Project(models.Model):
+    lang = models.CharField(max_length=50)
+    code = models.CharField(max_length=20)
 
     def __str__(self):
         return self.lang
-
-class User(Document):
-    name = StringField(min_length=1)
-    agreed = BooleanField()
-    picture = StringField(min_length=1)
-
-    def __str__(self):
-        return self.name
