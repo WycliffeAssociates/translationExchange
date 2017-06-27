@@ -4,6 +4,36 @@ from django.core.files.storage import FileSystemStorage
 import json
 import zipfile
 from os import remove
+from rest_framework import viewsets
+from .serializers import ProjectSerializer, UserSerializer, FileSerializer
+from .serializers import CommentSerializer, MetaSerializer
+from .models import Project, User, File, Comment, Meta
+
+class ProjectViewSet(viewsets.ModelViewSet):
+    """This class handles the http GET, PUT and DELETE requests."""
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+
+class UserViewSet(viewsets.ModelViewSet):
+    """This class handles the http GET, PUT and DELETE requests."""
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class FileViewSet(viewsets.ModelViewSet):
+    """This class handles the http GET, PUT and DELETE requests."""
+    queryset = File.objects.all()
+    serializer_class = FileSerializer
+
+class MetaViewSet(viewsets.ModelViewSet):
+    """This class handles the http GET, PUT and DELETE requests."""
+    queryset = Meta.objects.all()
+    serializer_class = MetaSerializer
+
+class CommentViewSet(viewsets.ModelViewSet):
+    """This class handles the http GET, PUT and DELETE requests."""
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
 
 def index(request):
     return render(request, 'index.html')
