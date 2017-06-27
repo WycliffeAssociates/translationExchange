@@ -3,6 +3,14 @@
     <input type="submit" /> {% csrf_token %}
 </form>
 
-{% if uploaded_file_url %}
-<p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-{% endif %}
+<a href="/api/projects">Projects</a> <br><br>
+<a href="/api/users">Users</a> <br><br>
+<a href="/api/files">Files</a> <br><br>
+<a href="/api/metas">Metas</a> <br><br>
+<a href="/api/comments">Comments</a> <br><br>
+
+<div>
+    {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+    {% endif %}
+</div>
