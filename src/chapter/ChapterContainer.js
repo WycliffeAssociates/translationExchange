@@ -8,23 +8,55 @@ class ChapterContainer extends Component {
     }
 
     componentDidMount () {
-        var chunkID = this.props.match.params.chid;
+        var chapterID = this.props.match.params.chid;
         //do a web request here for segments (chunks or verses) of chapter...
+        //this is just fake data for now
         this.setState(
             {
                 segments: [
                     {
-                        id: 1,
+                        mode: "chunk",
                         number: 1,
-                        takes: [{}, {}, {}]
+                        takes: [
+                            {
+                                audioSource: "audiosource",
+                                author: "Bob the Translator",
+                                rating: 3,
+                                timestamp: "timestamp"
+                            },
+                            {
+                                audioSource: "audiosource",
+                                author: "Bob the Translator",
+                                rating: 2,
+                                timestamp: "timestamp"
+                            },
+                            {
+                                audioSource: "audiosource",
+                                author: "Bob the Translator",
+                                rating: 3,
+                                timestamp: "timestamp"
+                            }
+                        ]
                     },
                     {
-                        id: 2,
+                        mode: "chunk",
                         number: 3,
-                        takes: [{}, {}]
+                        takes: [
+                            {
+                                audioSource: "audiosource",
+                                author: "Alice the Translator",
+                                rating: 1,
+                                timestamp: "timestamp"
+                            },
+                            {
+                                audioSource: "audiosource",
+                                author: "Alice the Translator",
+                                rating: 3,
+                                timestamp: "timestamp"
+                            }
+                        ]
                     }
-                ],
-                mode: "chunk"
+                ]
             }
         );
     }

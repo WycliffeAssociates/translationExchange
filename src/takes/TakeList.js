@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 import Take from "./Take";
+import TakePropTypes from "./TakePropTypes";
 
 class TakeList extends Component {
     render () {
@@ -18,5 +20,9 @@ class TakeList extends Component {
         );
     }
 }
+
+TakeList.propTypes = {
+    takes: PropTypes.arrayOf(TakePropTypes).isRequired
+};
 
 export default TakeList;

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import TakeList from "../takes/TakeList";
+import PropTypes from "prop-types";
+import Chunk from "./Chunk";
+import ChunkPropTypes from "./ChunkPropTypes";
 
 class ChunkList extends Component {
     render () {
@@ -11,24 +13,18 @@ class ChunkList extends Component {
     }
 
     createListItem (segment) {
-        var modeLabel = "";
-        switch (this.props.mode) {
-            case "verse":
-                modeLabel = "Verse";
-                break;
-            case "chunk":
-                modeLabel = "Chunk";
-                break;
-        }
         return (
-            <li key={segment.id}>
-                Displaying takes for {modeLabel} {segment.number}...
-                <TakeList
-                    takes={segment.takes}
+            <li>
+                <Chunk
+                    chunk={segment}
                 />
             </li>
         );
     }
 }
+
+ChunkList.propTypes = {
+    segments: PropTypes.arrayOf(ChunkPropTypes)
+};
 
 export default ChunkList;

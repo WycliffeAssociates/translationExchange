@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AudioPlayer from '../AudioPlayer';
+import TakePropTypes from "./TakePropTypes";
 
 class Take extends Component {
     render () {
@@ -14,5 +15,9 @@ class Take extends Component {
         );
     }
 }
+
+Take.propTypes = {
+    take: TakePropTypes
+};
 
 export default Take;
