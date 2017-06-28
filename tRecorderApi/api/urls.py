@@ -1,20 +1,20 @@
 from django.conf.urls import url, include
 from . import views
 from rest_framework import routers
-from api.views import LanguageViewSet, UserViewSet, FileViewSet
-from api.views import MetaViewSet, CommentViewSet, FileUploadView
+from api import views
 
 router = routers.DefaultRouter()
-router.register(r'languages', LanguageViewSet)
-router.register(r'users', UserViewSet)
-router.register(r'files', FileViewSet)
-router.register(r'metas', MetaViewSet)
-router.register(r'comments', CommentViewSet)
+router.register(r'languages', views.LanguageViewSet)
+router.register(r'users', views.UserViewSet)
+router.register(r'files', views.FileViewSet)
+router.register(r'metas', views.MetaViewSet)
+router.register(r'comments', views.CommentViewSet)
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    #url(r'^upload$', views.upload, name='upload'),
-    url(r'^upload/(?P<filename>[^/]+)$', FileUploadView.as_view())
+    url(r'^upload/(?P<filename>[^/]+)$', views.FileUploadView.as_view()),
+    url(r'^stream/(?P<filepath>.*)$', views.FileStreamView.as_view()),
+    url(r'^get_project/$', views.ProjectViewSet.as_view())
 ]
 
 urlpatterns += router.urls
