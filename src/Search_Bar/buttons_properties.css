@@ -1,0 +1,6 @@
+.dropdown-menu[aria-labelledby = ddown] {
+    background-color: lightblue;
+    max-width: 80px; //This, by the way, is not working for some reason.
+border-radius: 0;
+    margin: 0;
+}

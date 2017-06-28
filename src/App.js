@@ -11,6 +11,7 @@ import Header from "./js/layout/header"
 import Home from "./js/pages/home"
 import Projects from "./js/pages/projects"
 import About from "./js/pages/about"
+import SearchButtons from "./Search_Bar/all_buttons";
 
 
 class App extends Component {
@@ -22,6 +23,10 @@ class App extends Component {
              */
             <div>
             <Header/>
+                <div className="App-buttons">
+                    <SearchButtons/>
+
+                </div>
             <Switch>
                 <Route exact path='/home' component={Home}/>
                 {/*<Route exact path='/projects' component={Projects}/>*/}
