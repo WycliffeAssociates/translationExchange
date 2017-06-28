@@ -2,17 +2,10 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import AudioPlayer from './MainPage_Components/Audio_Player/audioPlayer';
-
-
-
-
 import SearchBar from './MainPage_Components/Search_Bar/search_bar';
 
 
 class App extends Component {
-
-
-
 
     render() {
     return (
@@ -31,6 +24,10 @@ class App extends Component {
 
               <AudioPlayer/>
 
+          </div>
+
+          <div className="App-footer">
+              <p>Footer</p> <br></br>
           </div>
 
       </div>

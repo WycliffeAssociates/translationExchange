@@ -9,20 +9,29 @@
 
 .App-header {
   background-color: #222;
-  height: 100px;
+  height: 150px;
   padding: 150px;
   color: white;
 }
 
 .App-main {
   position: relative;
-  left: 22%;
-  width: 60%;
-
+  left: 240px;
 }
 
 .App-intro {
   font-size: large;
+}
+
+.App-footer {
+    position: relative;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: #222;
+    height: 100px;
+    color: white;
+    font-size: small;
 }
 
 @keyframes App-logo-spin {

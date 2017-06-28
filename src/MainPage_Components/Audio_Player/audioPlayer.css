@@ -1,3 +1,10 @@
 .buffer-between-takes {
     height: 20px;
 }
+
+.buffer-between-src {
+    height: 4px;
+    width: 700px;
+    background-color: #e2e2e2;
+}
+

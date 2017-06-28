@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import playlist from './playlist.json';
 import sourcePlaylist from './playlist.json';
@@ -6,10 +5,10 @@ import Audio from 'react-audioplayer';
 import './audioPlayer.css'
 
 const Style = {
-    boxShadow: '10px 10px 5px #888888'
+    //boxShadow: '3px 10px 10px #888888',
 };
 
- function buildSourceAudio(props) {
+function buildSourceAudio(props) {
 
      if(props[0].hasSource) {
 
@@ -19,17 +18,27 @@ const Style = {
          }];
 
          return (
-             <Audio
-                 width={700}
-                 fullPlayer={false}
-                 autoPlay={false}
-                 style={Style}
-                 playlist={srcPlaylist}
-             />);
+             <div>
+                 <Audio
+                     width={700}
+                     fullPlayer={false}
+                     autoPlay={false}
+                     style={Style}
+                     playlist={srcPlaylist}
+
+                 />
+                 <p className="buffer-between-src"/>
+             </div>);
      }
 
      else {
-         return(<h5>No Source Audio</h5>);
+         return(
+             <div>
+                 <p className="buffer-between-src"/>
+                 <h5>No Source Audio</h5>
+                 <p className="buffer-between-src"/>
+             </div>
+         );
      }
 
 }
@@ -61,6 +70,7 @@ function buildTakes() {
                 {buildSourceAudio(newPlaylist)}
 
                 <div className="buffer-between-takes" />
+
 
             </div>)
     }
