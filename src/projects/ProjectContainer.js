@@ -14,9 +14,20 @@ class ProjectContainer extends Component {
         this.setState(
             {
                 chapters: [
-                    {number: 1},
-                    {number: 2},
-                    {number: 16}
+                    {
+                        number: 1,
+                        percentFinished: 100.0,
+                        checkingLevel: 2,
+                        contributors: ["Alison"],
+                        timestamp: "20 June 2017 4:16 pm"
+                    },
+                    {
+                        number: 16,
+                        percentFinished: 16.0,
+                        checkingLevel: 0,
+                        contributors: ["Bob the Translator"],
+                        timestamp: "20 June 2017 6:07 am"
+                    }
                 ]
             }
         );
