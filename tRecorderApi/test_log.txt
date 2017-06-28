@@ -1,0 +1,8 @@
+API TEST LOG
+DATE:06/28/2017_08:26:49
+
+TEST: Creating and Storing a Comment Object.....................PASSED
+TEST: Creating and Storing a File Object........................PASSED
+TEST: Creating and Storing a Meta Object........................PASSED
+TEST: Creating and Storing a Project Object.....................PASSED
+TEST: Creating and Storing a User Object........................PASSED

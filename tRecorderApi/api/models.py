@@ -35,7 +35,7 @@ class Meta(models.Model):
     chapter = models.IntegerField(default=0)
     startv = models.IntegerField(default=0)
     endv = models.IntegerField(default=0)
-    markers = models.TextField()
+    markers = models.TextField(null=True, blank=True)
     file = models.ForeignKey(File, on_delete=models.CASCADE, null=True, blank=True)
 
     def __unicode__(self):
