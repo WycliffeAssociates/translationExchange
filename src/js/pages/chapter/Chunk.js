@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import TakeList from "../takes/TakeList";
+import TakeList from "./takes/TakeList";
 import ChunkPropTypes from "./ChunkPropTypes";
 
 class Chunk extends Component {
