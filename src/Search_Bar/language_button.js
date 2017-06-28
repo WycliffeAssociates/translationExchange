@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Button, SplitButton, Modal, ButtonToolbar, MenuItem} from 'react-bootstrap';
-import ProjectsListContainer from './ProjectListContainer'
-
+import ProjectsListContainer from './language_display'
 
 
 class LanguageButton extends Component {
@@ -42,8 +41,6 @@ class LanguageButton extends Component {
 render(){
 
 
-
-
     return(
 
 
@@ -59,11 +56,7 @@ render(){
                 dialogClassName="custom-modal"
             >
 
-
                    <ProjectsListContainer/>
-
-
-
             </Modal>
         </ButtonToolbar>
 
