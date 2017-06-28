@@ -4,15 +4,16 @@
 
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import ProjectsListContainer from "./js/pages/ProjectsListContainer";
-import ProjectContainer from "./js/pages/ProjectContainer"
+import ChapterContainer from "./js/pages/chapter/ChapterContainer";
+import ProjectsListContainer from "./js/pages/projects/ProjectsListContainer";
+import ProjectContainer from "./js/pages/projects/ProjectContainer";
 import './App.css';
-import Header from "./js/layout/header"
-import Home from "./js/pages/home"
-import Projects from "./js/pages/projects"
-import About from "./js/pages/about"
-import SearchButtons from "./Search_Bar/all_buttons";
 
+import Header from "./js/layout/header";
+import Home from "./js/pages/home";
+import AudioSearchBar from "./AudioSearchBar";
+import About from "./js/pages/about";
+import SearchButtons from "./Search_Bar/all_buttons";
 
 class App extends Component {
     render() {
@@ -28,15 +29,16 @@ class App extends Component {
 
                 </div>
             <Switch>
+                <Route exact path='/testing' component={AudioSearchBar}/>
                 <Route exact path='/home' component={Home}/>
-                {/*<Route exact path='/projects' component={Projects}/>*/}
                 <Route exact path='/projects' component={ProjectsListContainer}/>
-                <Route exact path='/projects/:id' component={ProjectContainer}/>
+                <Route exact path='/projects/:projectid' component={ProjectContainer}/>
+                <Route exact path='/projects/:projectid/ch:chid' component={ChapterContainer}/>
                 <Route exact path='/about' component={About}/>
             </Switch>
             </div>
         );
-  }
+    }
 }
 
 export default App;

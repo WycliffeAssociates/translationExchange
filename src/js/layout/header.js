@@ -3,6 +3,7 @@ import {
     Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink, Container, Row, Col,
     Jumbotron, InputGroup, Input, InputGroupAddon,} from 'reactstrap';
 import 'bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 class Header extends Component {
     constructor(props) {
@@ -23,14 +24,20 @@ class Header extends Component {
             <div>
 
                 <Navbar style={{borderRadius: '0px'}} color="default" inverse fixed>
-                    <NavbarBrand href="/home/">Translation Manager</NavbarBrand>
+                    <LinkContainer to="/home/">
+                        <NavbarBrand>Translation Manager</NavbarBrand>
+                    </LinkContainer>
                     <Collapse isOpen={this.state.isOpen} navbar>
 
                         <Nav className="ml-auto" navbar >
 
                             <NavItem  style={{marginLeft: '900px', marginTop: '15px', fontsize:'30px'}}>
-                                <NavLink href="/projects/">Projects</NavLink>
-                                <NavLink href="/about/"> About</NavLink>
+                                <LinkContainer to="/projects/">
+                                    <NavLink>Projects</NavLink>
+                                </LinkContainer>
+                                <LinkContainer to="/about/">
+                                    <NavLink> About</NavLink>
+                                </LinkContainer>
                             </NavItem>
 
                         </Nav>
