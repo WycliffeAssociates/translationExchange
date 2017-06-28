@@ -48,3 +48,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.location
+
+class Song(model.Model):
+    name = model.CharField(max_length=525)
+    audio_file = model.FileField()
