@@ -13,6 +13,8 @@ __pycache__/
 *.png
 *.jpeg
 *.jpg
+DB_backend_requirements.txt
+Create_Statements.txt
 
 # Distribution / packaging
 .Python
