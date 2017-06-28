@@ -1,2 +1,4 @@
-*.pyc
+*.py[cod]
 .idea/
+.DS_Store
+migrations/
