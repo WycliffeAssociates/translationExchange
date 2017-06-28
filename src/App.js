@@ -27,17 +27,13 @@ class App extends Component {
 
         </div >
 
-
           <div className="App-main">
 
               <AudioPlayer/>
 
           </div>
 
-
       </div>
-
-
 
     );
   }
