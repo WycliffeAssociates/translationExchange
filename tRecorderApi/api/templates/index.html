@@ -1,8 +1,17 @@
-<form action="/api/upload" method="post" enctype="multipart/form-data">
+<form action="/api/upload/zip" method="post" enctype="multipart/form-data">
     <input type="file" name="upload" />
     <input type="submit" /> {% csrf_token %}
 </form>
 
-{% if uploaded_file_url %}
-<p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-{% endif %}
+<a href="/api/languages">Languages</a> <br><br>
+<a href="/api/users">Users</a> <br><br>
+<a href="/api/files">Files</a> <br><br>
+<a href="/api/metas">Metas</a> <br><br>
+<a href="/api/comments">Comments</a> <br><br>
+<a href="/api/upload/zip">Upload zip</a> <br><br>
+
+<div>
+    {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+    {% endif %}
+</div>
