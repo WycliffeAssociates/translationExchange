@@ -23,16 +23,14 @@ class App extends Component {
         <div className="App-header">
 
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to translation Manager!</h2>
+          <h2>Welcome to Translation Manager!</h2>
 
         </div >
 
 
-          <div className="App-audioPlayer">
+          <div className="App-main">
 
               <AudioPlayer/>
-
-
 
           </div>
 

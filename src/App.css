@@ -9,9 +9,16 @@
 
 .App-header {
   background-color: #222;
-  height: 120px;
+  height: 100px;
   padding: 150px;
   color: white;
+}
+
+.App-main {
+  position: relative;
+  left: 22%;
+  width: 60%;
+
 }
 
 .App-intro {
