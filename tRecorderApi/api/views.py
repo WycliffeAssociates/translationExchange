@@ -2,6 +2,7 @@ from django.http import HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 import json
+from django.core import serializers
 import zipfile
 from os import remove
 from rest_framework import viewsets, views
@@ -43,20 +44,36 @@ class ProjectViewSet(views.APIView):
 
     def post(self, request):
         # just to test that it works
-        me = json.loads(request.body)
+        data = json.loads(request.body)
+
+        f = File.objects.filter(checked_level=data["checked_level"])
+        f.filter(meta__language=data["language"])
+        f.filter(meta__slug=data["slug"])
+        f.filter(meta__chapter=data["chapter"])
+
+        res = serializers.serialize('json', f)
                 
-        return Response(me, status=200)
+        return Response(res, status=200)
 
 class FileUploadView(views.APIView):
     parser_classes = (FileUploadParser,)
 
     def post(self, request, filename, format='zip'):
         if request.method == 'POST' and request.data['file']:
+            import uuid
+            import time
+
+            uuid_name = str(time.time()) + str(uuid.uuid4())
             upload = request.data['file']
             
+            # Unzip files
             zip = zipfile.ZipFile(upload)
-            zip.extractall("media/unzipped")
+            zip.extractall("media/dump/"+uuid_name)
             zip.close()
+
+            # Read wave meta
+
+            # Move files to specified folders
 
             return Response({"response":"ok"}, status=200)
         return Response(status=404)
@@ -65,8 +82,8 @@ class FileStreamView(views.APIView):
     parser_classes = (MP3StreamParser,)
 
     def get(self, request, filepath, format='mp3'):
-        print filepath
-        sound = pydub.AudioSegment.from_wav(filepath + ".wav")
+        filepath = "media/saved/" + filepath + ".wav"
+        sound = pydub.AudioSegment.from_wav(filepath)
         file = sound.export("audio.mp3", format="mp3")
         
         return StreamingHttpResponse(file)
