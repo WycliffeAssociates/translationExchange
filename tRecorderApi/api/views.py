@@ -7,14 +7,14 @@ from os import remove
 from rest_framework import viewsets, views
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser, FileUploadParser
-from .serializers import ProjectSerializer, UserSerializer, FileSerializer
+from .serializers import LanguageSerializer, UserSerializer, FileSerializer
 from .serializers import CommentSerializer, MetaSerializer
-from .models import Project, User, File, Comment, Meta
+from .models import Language, User, File, Comment, Meta
 
-class ProjectViewSet(viewsets.ModelViewSet):
+class LanguageViewSet(viewsets.ModelViewSet):
     """This class handles the http GET, PUT and DELETE requests."""
-    queryset = Project.objects.all()
-    serializer_class = ProjectSerializer
+    queryset = Language.objects.all()
+    serializer_class = LanguageSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     """This class handles the http GET, PUT and DELETE requests."""
