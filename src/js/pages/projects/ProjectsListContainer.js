@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import ProjectsList from "./ProjectsList";
+import {Button, Col, FormGroup, Input, Jumbotron, Label} from "reactstrap";
 
 class ProjectsListContainer extends Component {
     /*
@@ -16,7 +17,7 @@ class ProjectsListContainer extends Component {
     */
     constructor(props) {
         super(props);
-        this.state = {projects: []};
+        this.state = {projects:[]};
     }
 
     /*
@@ -25,10 +26,36 @@ class ProjectsListContainer extends Component {
      */
     componentDidMount() {
         //I would do a web request here...
+        //Just going to put fake data in state instead
         this.setState({projects:
             [
-                {id: 16, name: "foo"},
-                {id: 17, name: "bar"}
+                {
+                    id: 16,
+                    book: "Matthew",
+                    language: "English",
+                    translationType: "Unlocked Literal Bible",
+                    percentFinished: 5.6,
+                    contributors: ["Alison"],
+                    dateModified: "20 June 2017 4:16 pm"
+                },
+                {
+                    id: 17,
+                    book: "Mark",
+                    language: "English",
+                    translationType: "Unlocked Literal Bible",
+                    percentFinished: 5.6,
+                    contributors: ["Alison"],
+                    dateModified: "20 June 2017 4:16 pm"
+                },
+                {
+                    id: 18,
+                    book: "Luke",
+                    language: "English",
+                    translationType: "Unlocked Literal Bible",
+                    percentFinished: 5.6,
+                    contributors: ["Alison"],
+                    dateModified: "20 June 2017 4:16 pm"
+                }
             ]
         });
     }
@@ -39,7 +66,37 @@ class ProjectsListContainer extends Component {
      */
     render () {
         return (
-            <ProjectsList projects={this.state.projects}/>
+            <div>
+                <Jumbotron style={{  margin: '10%', marginTop:'7%', padding: '3px', fontSize: '15px', backgroundColor:'#D4D4D4', borderRadius: '25px'}}>
+                    <h1 style={{textAlign: 'center', fontSize: '23px', color:'white', fontWeight:'bold'}} className="display-3">select language</h1>
+
+                    <Jumbotron fluid style={{backgroundColor: 'white', padding: '15px', paddingBottom:'30px'}}>
+                        <FormGroup>
+                            <h1 style={{textAlign: 'center', fontSize: '23px'}} className="display-3">select the following</h1>
+
+                            <FormGroup>
+
+                                <Input type="search" name="search" id="exampleSearch" placeholder="search" />
+                            </FormGroup>
+                            <Label for="exampleSearch">Choose Target Language</Label>
+
+                            <Input type="select" name="selectMulti" id="exampleSelectMulti" style = {{height: '300px', fontSize: '30px' }} multiple>
+                                <option>English</option>
+                                <option>Spanish</option>
+                                <option>Korean</option>
+                                <option>German</option>
+                            </Input>
+
+                        </FormGroup>
+                        {/*<ProjectsList projects={this.state.projects}/>*/}
+                    </Jumbotron>
+
+                </Jumbotron>
+
+
+
+
+            </div>
         );
     }
 }
