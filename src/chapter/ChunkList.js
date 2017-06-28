@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TakeList from "../takes/TakeList";
 
 class ChunkList extends Component {
     render () {
@@ -22,6 +23,9 @@ class ChunkList extends Component {
         return (
             <li key={segment.id}>
                 Displaying takes for {modeLabel} {segment.number}...
+                <TakeList
+                    takes={segment.takes}
+                />
             </li>
         );
     }
