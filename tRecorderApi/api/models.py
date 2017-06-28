@@ -4,7 +4,7 @@ class Language(models.Model):
     lang = models.CharField(max_length=50)
     code = models.CharField(max_length=20)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.lang
 
 class User(models.Model):
@@ -12,7 +12,7 @@ class User(models.Model):
     agreed = models.BooleanField()
     picture = models.CharField(max_length=250)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
 class File(models.Model):
@@ -22,7 +22,7 @@ class File(models.Model):
     checked_level = models.IntegerField(default=0)
     language = models.ForeignKey(Language, on_delete=models.CASCADE, null=True, blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.location
 
 class Meta(models.Model):
@@ -38,7 +38,7 @@ class Meta(models.Model):
     markers = models.TextField(null=True, blank=True)
     file = models.ForeignKey(File, on_delete=models.CASCADE, null=True, blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return '{}-{}-{}'.format(self.language, self.anthology, self.slug)
 
 class Comment(models.Model):
@@ -46,5 +46,5 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     file = models.ForeignKey(File, on_delete=models.CASCADE, null=True, blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.location
