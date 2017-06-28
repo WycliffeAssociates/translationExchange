@@ -115,14 +115,14 @@
             </td>
             <td class="text">
 <p id="t1" class="stm run hide_run"><span class="key">from</span> <span class="nam">rest_framework</span> <span class="key">import</span> <span class="nam">serializers</span><span class="strut">&nbsp;</span></p>
-<p id="t2" class="stm run hide_run"><span class="key">from</span> <span class="op">.</span><span class="nam">models</span> <span class="key">import</span> <span class="nam">Project</span><span class="op">,</span> <span class="nam">User</span><span class="op">,</span> <span class="nam">File</span><span class="op">,</span> <span class="nam">Meta</span><span class="op">,</span> <span class="nam">Comment</span><span class="strut">&nbsp;</span></p>
+<p id="t2" class="stm run hide_run"><span class="key">from</span> <span class="op">.</span><span class="nam">models</span> <span class="key">import</span> <span class="nam">Language</span><span class="op">,</span> <span class="nam">User</span><span class="op">,</span> <span class="nam">File</span><span class="op">,</span> <span class="nam">Meta</span><span class="op">,</span> <span class="nam">Comment</span><span class="strut">&nbsp;</span></p>
 <p id="t3" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t4" class="stm run hide_run"><span class="key">class</span> <span class="nam">ProjectSerializer</span><span class="op">(</span><span class="nam">serializers</span><span class="op">.</span><span class="nam">ModelSerializer</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t4" class="stm run hide_run"><span class="key">class</span> <span class="nam">LanguageSerializer</span><span class="op">(</span><span class="nam">serializers</span><span class="op">.</span><span class="nam">ModelSerializer</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t5" class="pln">    <span class="str">"""Serializer to map the Model instance into JSON format."""</span><span class="strut">&nbsp;</span></p>
 <p id="t6" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t7" class="stm run hide_run">    <span class="key">class</span> <span class="nam">Meta</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t8" class="pln">        <span class="str">"""Meta class to map serializer's fields with the model fields."""</span><span class="strut">&nbsp;</span></p>
-<p id="t9" class="stm run hide_run">        <span class="nam">model</span> <span class="op">=</span> <span class="nam">Project</span><span class="strut">&nbsp;</span></p>
+<p id="t9" class="stm run hide_run">        <span class="nam">model</span> <span class="op">=</span> <span class="nam">Language</span><span class="strut">&nbsp;</span></p>
 <p id="t10" class="stm run hide_run">        <span class="nam">fields</span> <span class="op">=</span> <span class="str">'__all__'</span><span class="strut">&nbsp;</span></p>
 <p id="t11" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t12" class="stm run hide_run"><span class="key">class</span> <span class="nam">UserSerializer</span><span class="op">(</span><span class="nam">serializers</span><span class="op">.</span><span class="nam">ModelSerializer</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
@@ -168,7 +168,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.4.1</a>,
-            created at 2017-06-27 15:29
+            created at 2017-06-28 10:37
         </p>
     </div>
 </div>
