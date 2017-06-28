@@ -23,10 +23,13 @@ class ProjectsList extends Component {
         Here's an example of how to create a link using React Router
      */
     createListItem (project) {
+        console.log(project);
         return (
-            <li key="{project.id}">
-                <Link to={'/projects/' + project.id}>{project.book} ({project.language})</Link>
-            </li>
+
+            <option >
+                {project.book}
+                {/*<Link to={'/projects/' + project.id}>{project.book} ({project.language})</Link>*/}
+            </option>
         );
     }
 }

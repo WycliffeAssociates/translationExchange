@@ -24,7 +24,9 @@ class App extends Component {
             <Header/>
             <Switch>
                 <Route exact path='/home' component={Home}/>
-                <Route exact path='/projects' component={Projects}/>
+                {/*<Route exact path='/projects' component={Projects}/>*/}
+                <Route exact path='/projects' component={ProjectsListContainer}/>
+                <Route exact path='/projects/:id' component={ProjectContainer}/>
                 <Route exact path='/about' component={About}/>
             </Switch>
             </div>
