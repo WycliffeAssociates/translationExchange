@@ -62,6 +62,7 @@ class FileUploadView(views.APIView):
         if request.method == 'POST' and request.data['file']:
             import uuid
             import time
+            from tinytag import TinyTag
 
             uuid_name = str(time.time()) + str(uuid.uuid4())
             upload = request.data['file']
@@ -71,9 +72,13 @@ class FileUploadView(views.APIView):
             zip.extractall("media/dump/"+uuid_name)
             zip.close()
 
-            # Read wave meta
+            # Walk through all extracted files
+            # And read wave meta
+            #file = TinyTag.get("path to file")
 
             # Move files to specified folders
+
+            # Save meta to database
 
             return Response({"response":"ok"}, status=200)
         return Response(status=404)
