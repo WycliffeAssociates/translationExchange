@@ -1,8 +1,13 @@
 API TEST LOG
-DATE:06/28/2017_08:26:49
+DATE:06/28/2017_11:02:14
 
+TEST: Printing Each Model's Unicode.............................PASSED
 TEST: Creating and Storing a Comment Object.....................PASSED
 TEST: Creating and Storing a File Object........................PASSED
 TEST: Creating and Storing a Meta Object........................PASSED
 TEST: Creating and Storing a Project Object.....................PASSED
 TEST: Creating and Storing a User Object........................PASSED
+TEST: Posting Comment Object to API.............................PASSED
+TEST: Posting File Object to API................................PASSED
+TEST: Posting Language Object to API............................PASSED
+TEST: Posting Meta Object to API................................PASSED
