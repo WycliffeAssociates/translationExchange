@@ -9,6 +9,11 @@ __pycache__/
 #Mac Systems
 *.DS_Store
 
+# Mockups and designs
+*.png
+*.jpeg
+*.jpg
+
 # Distribution / packaging
 .Python
 env/
