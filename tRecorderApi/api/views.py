@@ -53,6 +53,10 @@ class ProjectViewSet(views.APIView):
         for item in metas.values():
             dic = {}
             dic["take"] = Take.objects.filter(meta=item["take_id"]).values()[0]
+            if item["markers"]:
+                item["markers"] = json.loads(item["markers"])
+            else:
+                item["markers"] = {}
             dic["meta"] = item
             lst.append(dic)
 
