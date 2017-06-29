@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AudioPlayer from '../../../shared/AudioPlayer';
+import AudioPlayer from '../../../audio player/AudioPlayer';
 import TakePropTypes from "./TakePropTypes";
 
 class Take extends Component {

@@ -6,6 +6,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {Col, Row} from "reactstrap";
+
 
 class ProjectsList extends Component {
     /*
@@ -13,9 +15,9 @@ class ProjectsList extends Component {
      */
     render () {
         return (
-            <ul>
+            <tbody>
                 {this.props.projects.map(this.createListItem)}
-            </ul>
+            </tbody>
         );
     }
 
@@ -26,10 +28,16 @@ class ProjectsList extends Component {
         console.log(project);
         return (
 
-            <option >
-                {project.book}
-                {/*<Link to={'/projects/' + project.id}>{project.book} ({project.language})</Link>*/}
-            </option>
+        <tr>
+            <th scope="row"> <Link to={'/projects/' + project.id}>{project.language}</Link> </th>
+            <td><Link to={'/projects/' + project.id}>{project.book}</Link>  </td>
+            <td><Link to={'/projects/' + project.id}>{project.percentFinished}</Link></td>
+            <td><Link to={'/projects/' + project.id}>{project.translationType}</Link></td>
+
+
+        </tr>
+
+
         );
     }
 }

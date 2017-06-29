@@ -10,10 +10,11 @@ import ProjectContainer from "./js/pages/projects/ProjectContainer";
 import './App.css';
 
 import Header from "./js/layout/header";
+import Footer from "./js/layout/footer";
 import Home from "./js/pages/home";
 import AudioSearchBar from "./AudioSearchBar";
 import About from "./js/pages/about";
-import SearchButtons from "./Search_Bar/all_buttons";
+import SearchButtons from "./js/search buttons/all_buttons";
 
 class App extends Component {
     render() {
@@ -23,11 +24,9 @@ class App extends Component {
                 be rendered for each one
              */
             <div>
-            <Header/>
-                <div className="App-buttons">
-                    <SearchButtons/>
 
-                </div>
+            <Header/>
+
             <Switch>
                 <Route exact path='/testing' component={AudioSearchBar}/>
                 <Route exact path='/home' component={Home}/>
@@ -36,6 +35,9 @@ class App extends Component {
                 <Route exact path='/projects/:projectid/ch:chid' component={ChapterContainer}/>
                 <Route exact path='/about' component={About}/>
             </Switch>
+
+                <Footer/>
+
             </div>
         );
     }

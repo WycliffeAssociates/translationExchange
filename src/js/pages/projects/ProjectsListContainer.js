@@ -8,7 +8,8 @@
 
 import React, { Component } from 'react';
 import ProjectsList from "./ProjectsList";
-import {Button, Col, FormGroup, Input, Jumbotron, Label} from "reactstrap";
+import {Button, Col, FormGroup, Input, Jumbotron, Label, Table} from "reactstrap";
+import SearchButtons from "../../search buttons/all_buttons";
 
 class ProjectsListContainer extends Component {
     /*
@@ -67,31 +68,26 @@ class ProjectsListContainer extends Component {
     render () {
         return (
             <div>
-                <Jumbotron style={{  margin: '10%', marginTop:'7%', padding: '3px', fontSize: '15px', backgroundColor:'#D4D4D4', borderRadius: '25px'}}>
-                    <h1 style={{textAlign: 'center', fontSize: '23px', color:'white', fontWeight:'bold'}} className="display-3">select language</h1>
 
-                    <Jumbotron fluid style={{backgroundColor: 'white', padding: '15px', paddingBottom:'30px'}}>
-                        <FormGroup>
-                            <h1 style={{textAlign: 'center', fontSize: '23px'}} className="display-3">select the following</h1>
+                <div className="App-buttons">
+                    <SearchButtons/>
+                </div>
 
-                            <FormGroup>
+                <h1>Available Projects</h1>
 
-                                <Input type="search" name="search" id="exampleSearch" placeholder="search" />
-                            </FormGroup>
-                            <Label for="exampleSearch">Choose Target Language</Label>
+                <Table striped>
+                    <thead>
+                    <tr>
+                        <th>Language</th>
+                        <th>Book</th>
+                        <th>Percent Complete</th>
+                        <th>Translation Type</th>
+                    </tr>
+                    </thead>
 
-                            <Input type="select" name="selectMulti" id="exampleSelectMulti" style = {{height: '300px', fontSize: '30px' }} multiple>
-                                <option>English</option>
-                                <option>Spanish</option>
-                                <option>Korean</option>
-                                <option>German</option>
-                            </Input>
+                    <ProjectsList projects={this.state.projects}/>
 
-                        </FormGroup>
-                        {/*<ProjectsList projects={this.state.projects}/>*/}
-                    </Jumbotron>
-
-                </Jumbotron>
+                </Table>
 
 
 

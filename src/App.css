@@ -24,12 +24,12 @@
 }
 
 .App-footer {
-    position: relative;
+    position: fixed;
     left: 0px;
     right: 0px;
     bottom: 0px;
     background-color: #222;
-    height: 100px;
+    height: 50px;
     color: white;
     font-size: small;
 }
