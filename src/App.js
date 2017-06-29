@@ -14,6 +14,8 @@ import Header from './js/layout/header'
 import AudioSearchBar from './AudioSearchBar'
 import Home from './js/pages/home'
 import About from './js/pages/about'
+import AudioPlayer from './js/shared/Audio_Player/audioPlayer.js'
+import './js/shared/Audio_Player/audioPlayer.css'
 
 var stars;
 var starAmount;
@@ -47,6 +49,15 @@ class App extends Component {
                 This is a list of different possible routes and what components should
                 be rendered for each one
              */
+
+
+            /* for displaying audio app
+            <div className="App-main">
+                <AudioPlayer />
+            </div>
+            */
+
+
             <div>
             <Header/>
             {this.Star()}
@@ -59,6 +70,7 @@ class App extends Component {
                 <Route exact path='/about' component={About}/>
             </Switch>
             </div>
+
         );
     }
     
