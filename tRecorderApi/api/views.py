@@ -4,15 +4,19 @@ from django.core.files.storage import FileSystemStorage
 import json
 from django.core import serializers
 import zipfile
-from os import remove
+#from os import remove
 from rest_framework import viewsets, views
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser, FileUploadParser
 from parsers import MP3StreamParser
 from .serializers import LanguageSerializer, BookSerializer, UserSerializer
 from .serializers import TakeSerializer, CommentSerializer
-from .models import Language, Book, User, Take, Comment 
+from .models import Language, Book, User, Take, Comment
 import pydub
+import time
+import uuid
+import os
+from tinytag import TinyTag
 
 class LanguageViewSet(viewsets.ModelViewSet):
     """This class handles the http GET, PUT and DELETE requests."""
@@ -82,31 +86,28 @@ class ProjectViewSet(views.APIView):
 
 class FileUploadView(views.APIView):
     parser_classes = (FileUploadParser,)
-
     def post(self, request, filename, format='zip'):
         if request.method == 'POST' and request.data['file']:
-            import uuid
-            import time
-            from tinytag import TinyTag
-
             uuid_name = str(time.time()) + str(uuid.uuid4())
-            upload = request.data['file']
-            
-            # Unzip files
+            upload = request.data["file"]
+            #unzip files
             zip = zipfile.ZipFile(upload)
-            zip.extractall("media/dump/"+uuid_name)
+            file_name = 'media/dump/' + uuid_name
+            zip.extractall(file_name)
             zip.close()
+            #extract metadata / get the apsolute path to the file to be stored
+            for root, dirs, files in os.walk(file_name):
+                for f in files:
+                    abpath = os.path.join(root, os.path.basename(f))
+                    meta = TinyTag.get(abpath)
+                    print(meta.artist)
 
-            # Walk through all extracted files
-            # And read wave meta
-            #file = TinyTag.get("path to file")
+                    #store the metadata inside the database
 
-            # Move files to specified folders
 
-            # Save meta to database
-
-            return Response({"response":"ok"}, status=200)
-        return Response(status=404)
+            return Response({"response": "ok"}, status=200)
+        else:
+            return Response(status=404)
 
 class FileStreamView(views.APIView):
     parser_classes = (MP3StreamParser,)
@@ -115,7 +116,7 @@ class FileStreamView(views.APIView):
         filepath = "media/saved/" + filepath + ".wav"
         sound = pydub.AudioSegment.from_wav(filepath)
         file = sound.export("audio.mp3", format="mp3")
-        
+
         return StreamingHttpResponse(file)
 
 def index(request):
