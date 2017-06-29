@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import Take from "./Take";
+import TakeContainer from "./TakeContainer";
 import TakePropTypes from "./TakePropTypes";
 
 class TakeList extends Component {
@@ -14,7 +14,7 @@ class TakeList extends Component {
 
     createListItem (take) {
         return (
-            <Take
+            <TakeContainer
                 take={take}
             />
         );
