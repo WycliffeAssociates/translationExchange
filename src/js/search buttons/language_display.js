@@ -83,10 +83,6 @@ class ProjectsListContainer extends Component {
                     </Jumbotron>
 
                 </Jumbotron>
-
-
-
-
             </div>
         );
     }

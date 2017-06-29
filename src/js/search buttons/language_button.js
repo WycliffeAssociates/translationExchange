@@ -22,8 +22,6 @@ class LanguageButton extends Component {
 
     }
 
-
-
     getInitialState() {
         return {show: false};
     }
@@ -63,14 +61,6 @@ render(){
 
     ); }
 }
-
-
-
-
-
-
-
-
 
 
 export default LanguageButton;

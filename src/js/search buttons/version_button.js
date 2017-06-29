@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, SplitButton, Modal, ButtonToolbar, MenuItem} from 'react-bootstrap';
-import Version from "./book_display";
+import Version from "./version_display";
 
 
 class LanguageButton extends Component {

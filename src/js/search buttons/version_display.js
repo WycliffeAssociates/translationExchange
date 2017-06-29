@@ -71,11 +71,13 @@ class Version extends Component {
                             </FormGroup>
                             <Label for="exampleSearch">Choose Book</Label>
 
-                            <Input type="select" name="selectMulti" id="exampleSelectMulti" style = {{height: '300px', fontSize: '30px' }} multiple>
-                                <option>Matthew</option>
-                                <option>Mark</option>
-                                <option>Luke</option>
-                                <option>John</option>
+                            <Input type="select" name="selectMulti" id="exampleSelectMulti" style = {{height: '300px', fontSize: '20px' }} multiple>
+                                <option>Old Testament/Unlocked Literal Bible</option>
+                                <option>New Testament/Unlocked Literal Bible</option>
+                                <option>Old Testament/Unlocked Dynamic Bible</option>
+                                <option>New Testament/Unlocked Dynamic Bible</option>
+                                <option>Old Testament/Regular</option>
+                                <option>New Testament/Regular</option>
                             </Input>
 
                         </FormGroup>
