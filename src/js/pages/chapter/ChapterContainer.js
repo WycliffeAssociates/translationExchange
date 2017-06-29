@@ -19,18 +19,21 @@ class ChapterContainer extends Component {
                         number: 1,
                         takes: [
                             {
+                                id: 1,
                                 audioSource: "audiosource",
                                 author: "Bob the Translator",
                                 rating: 3,
                                 timestamp: "timestamp"
                             },
                             {
+                                id: 2,
                                 audioSource: "audiosource",
-                                author: "Bob the Translator",
+                                author: "Alice the Translator",
                                 rating: 2,
                                 timestamp: "timestamp"
                             },
                             {
+                                id: 5,
                                 audioSource: "audiosource",
                                 author: "Bob the Translator",
                                 rating: 3,
@@ -43,12 +46,14 @@ class ChapterContainer extends Component {
                         number: 3,
                         takes: [
                             {
+                                id: 8,
                                 audioSource: "audiosource",
-                                author: "Alice the Translator",
+                                author: "Bob the Translator",
                                 rating: 1,
                                 timestamp: "timestamp"
                             },
                             {
+                                id: 10,
                                 audioSource: "audiosource",
                                 author: "Alice the Translator",
                                 rating: 3,
