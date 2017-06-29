@@ -50,11 +50,11 @@ class ProjectViewSet(views.APIView):
         data = json.loads(request.body)
 
         lst = []
-        takes = Take.objects \
-            .filter(language__code=data["language"]) \
-            .filter(book__code=data["slug"]) \
-            .filter(chapter=data["chapter"]) \
-            .values()
+        takes = Take.objects.all()
+        if "language" in data: takes.filter(language__code=data["language"])
+        if "slug" in data: takes.filter(book__code=data["slug"])
+        if "chapter" in data: takes.filter(chapter=data["chapter"])
+        takes = takes.values()
 
         for take in takes:
             dic = {}
