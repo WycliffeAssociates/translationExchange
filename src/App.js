@@ -12,12 +12,8 @@ import Header from './js/layout/header'
 import AudioSearchBar from './AudioSearchBar'
 import Home from './js/pages/home'
 import About from './js/pages/about'
-import Star from './Star'
 
 class App extends Component {
-
-
-
 
     render() {
         return (
@@ -33,10 +29,8 @@ class App extends Component {
             </div>
             */
 
-
             <div>
             <Header/>
-                <Star dbStar="1"/> {/*TODO this will have to be changed to whatever we get from the database*/}
             <Switch>
                 <Route exact path='/testing' component={AudioSearchBar}/>
                 <Route exact path='/home' component={Home}/>
@@ -49,7 +43,6 @@ class App extends Component {
 
         );
     }
-    
 
 }
 
