@@ -21,6 +21,7 @@ function buildSourceAudio(props) {
 
             return (
                 <div>
+                    <p className="buffer-between-takes" />
                     <Audio
                         width={700}
                         fullPlayer={false}
