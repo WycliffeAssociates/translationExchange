@@ -5,9 +5,9 @@ from api import views
 
 router = routers.DefaultRouter()
 router.register(r'languages', views.LanguageViewSet)
+router.register(r'books', views.BookViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'files', views.TakeViewSet)
-router.register(r'metas', views.MetaViewSet)
 router.register(r'comments', views.CommentViewSet)
 
 urlpatterns = [

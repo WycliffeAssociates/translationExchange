@@ -9,15 +9,20 @@ from rest_framework import viewsets, views
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser, FileUploadParser
 from parsers import MP3StreamParser
-from .serializers import LanguageSerializer, UserSerializer, TakeSerializer
-from .serializers import CommentSerializer, MetaSerializer
-from .models import Language, User, Take, Comment, Meta
+from .serializers import LanguageSerializer, BookSerializer, UserSerializer
+from .serializers import TakeSerializer, CommentSerializer
+from .models import Language, Book, User, Take, Comment 
 import pydub
 
 class LanguageViewSet(viewsets.ModelViewSet):
     """This class handles the http GET, PUT and DELETE requests."""
     queryset = Language.objects.all()
     serializer_class = LanguageSerializer
+
+class BookViewSet(viewsets.ModelViewSet):
+    """This class handles the http GET, PUT and DELETE requests."""
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     """This class handles the http GET, PUT and DELETE requests."""
@@ -28,11 +33,6 @@ class TakeViewSet(viewsets.ModelViewSet):
     """This class handles the http GET, PUT and DELETE requests."""
     queryset = Take.objects.all()
     serializer_class = TakeSerializer
-
-class MetaViewSet(viewsets.ModelViewSet):
-    """This class handles the http GET, PUT and DELETE requests."""
-    queryset = Meta.objects.all()
-    serializer_class = MetaSerializer
 
 class CommentViewSet(viewsets.ModelViewSet):
     """This class handles the http GET, PUT and DELETE requests."""
@@ -45,7 +45,18 @@ class ProjectViewSet(views.APIView):
     def post(self, request):
         data = json.loads(request.body)
 
-        metas = Meta.objects.filter(language=data["language"])
+        lst = []
+        takes = Take.objects \
+            .filter(language__code=data["language"]) \
+            .filter(book__code=data["slug"]) \
+            .filter(chapter=data["chapter"]) \
+            .values()
+
+        """for take in takes:
+            take["language"] = Language.objects.get(pk=take["language_id"])
+            take["book"] = Book.objects.get(pk=take["book_id"])
+"""
+        """metas = Meta.objects.filter(language=data["language"])
         metas.filter(slug=data["slug"])
         metas.filter(chapter=data["chapter"])
 
@@ -58,9 +69,9 @@ class ProjectViewSet(views.APIView):
             else:
                 item["markers"] = {}
             dic["meta"] = item
-            lst.append(dic)
+            lst.append(dic)"""
 
-        return Response(lst, status=200)
+        return Response(takes, status=200)
 
 class FileUploadView(views.APIView):
     parser_classes = (FileUploadParser,)

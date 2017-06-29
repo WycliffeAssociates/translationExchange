@@ -1,11 +1,19 @@
 from django.db import models
 
 class Language(models.Model):
-    lang = models.CharField(max_length=50)
-    code = models.CharField(max_length=20)
+    code = models.CharField(max_length=20, unique=True, blank=True)
+    name = models.CharField(max_length=100, blank=True)
 
     def __unicode__(self):
-        return self.lang
+        return self.name
+
+class Book(models.Model):
+    code = models.CharField(max_length=3, unique=True, blank=True)
+    name = models.CharField(max_length=100, blank=True)
+    booknum = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return self.name
 
 class User(models.Model):
     name = models.CharField(max_length=50)
@@ -21,22 +29,16 @@ class Take(models.Model):
     rating = models.IntegerField(default=0)
     checked_level = models.IntegerField(default=0)
     language = models.ForeignKey(Language, on_delete=models.CASCADE, null=True, blank=True)
-
-    def __unicode__(self):
-        return self.location
-
-class Meta(models.Model):
-    anthology = models.CharField(max_length=2)
-    language = models.CharField(max_length=20)
-    version = models.CharField(max_length=3)
-    slug = models.CharField(max_length=3)
-    book_number = models.IntegerField(default=0)
-    mode = models.CharField(max_length=10)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True, blank=True)
+    anthology = models.CharField(max_length=2, blank=True)
+    version = models.CharField(max_length=3, blank=True)
+    #slug = models.CharField(max_length=3)
+    #book_number = models.IntegerField(default=0)
+    mode = models.CharField(max_length=10, blank=True)
     chapter = models.IntegerField(default=0)
     startv = models.IntegerField(default=0)
     endv = models.IntegerField(default=0)
     markers = models.TextField(null=True, blank=True)
-    take = models.ForeignKey(Take, on_delete=models.CASCADE, null=True, blank=True)
 
     def __unicode__(self):
         return '{}-{}-{}'.format(self.language, self.anthology, self.slug)

@@ -1,4 +1,6 @@
 *.py[cod]
 .idea/
 .DS_Store
-migrations/
+migrations/*
+media/dump/*
+media/saved/*
