@@ -10,40 +10,35 @@ const Style = {
 
 function buildSourceAudio(props) {
 
-     if(props[0].hasSource) {
 
-         var srcPlaylist = [{
-             "name": "Source Audio",
-             "src": props[0].sourceAudio // index is required to access JSON data
-         }];
+    for (let i = 0; i < props.length; i++) {
+        if (props[i].hasSource) {
 
-         return (
-             <div>
-                 <Audio
-                     width={700}
-                     fullPlayer={false}
-                     autoPlay={false}
-                     style={Style}
-                     playlist={srcPlaylist}
+            var srcPlaylist = [{
+                "name": "Source Audio",
+                "src": props[i].sourceAudio
+            }];
 
-                 />
-                 <p className="buffer-between-src"/>
-             </div>);
-     }
+            return (
+                <div>
+                    <p className="buffer-between-takes" />
+                    <Audio
+                        width={700}
+                        fullPlayer={false}
+                        autoPlay={false}
+                        style={Style}
+                        playlist={srcPlaylist}
+                    />
+                </div>
+            );
+        }
+    }
 
-     else {
-         return(
-             <div>
-                 <p className="buffer-between-src"/>
-                 <h5>No Source Audio</h5>
-                 <p className="buffer-between-src"/>
-             </div>
-         );
-     }
+    return <h5>No source audio</h5>
 
 }
 
-function buildTakes() {
+function buildTakes(props) {
 
     var arrTakes = []; // holds each Audio tag
     var jsonPlaylist = playlist.playlist; // local array that holds objects from JSON file
@@ -67,7 +62,6 @@ function buildTakes() {
                     playlist={newPlaylist}
                 />
 
-                {buildSourceAudio(newPlaylist)}
 
                 <div className="buffer-between-takes" />
 
@@ -82,6 +76,7 @@ class AudioPlayer extends Component {
     render() {
         return (
             <div>
+                {buildSourceAudio(playlist.playlist)}
             {buildTakes()}
             </div>
         );

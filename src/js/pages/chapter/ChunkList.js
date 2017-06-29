@@ -6,19 +6,17 @@ import ChunkPropTypes from "./ChunkPropTypes";
 class ChunkList extends Component {
     render () {
         return (
-            <ul>
+            <div>
                 {this.props.segments.map(this.createListItem.bind(this))}
-            </ul>
+            </div>
         );
     }
 
     createListItem (segment) {
         return (
-            <li>
-                <Chunk
-                    chunk={segment}
-                />
-            </li>
+            <Chunk
+                chunk={segment}
+            />
         );
     }
 }

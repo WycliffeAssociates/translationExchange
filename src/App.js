@@ -8,19 +8,11 @@ import ChapterContainer from "./js/pages/chapter/ChapterContainer";
 import ProjectsListContainer from "./js/pages/projects/ProjectsListContainer";
 import ProjectContainer from "./js/pages/projects/ProjectContainer";
 import './App.css';
-import ReactStars from 'react-stars'
-import { render } from 'react-dom'
 import Header from './js/layout/header'
 import AudioSearchBar from './AudioSearchBar'
 import Home from './js/pages/home'
 import About from './js/pages/about'
 import Star from './Star'
-
-var stars;
-var starAmount;
-var dbStar
-var ReactDOM = require('react-dom');
-
 
 class App extends Component {
 
@@ -33,6 +25,15 @@ class App extends Component {
                 This is a list of different possible routes and what components should
                 be rendered for each one
              */
+
+
+            /* for displaying audio app
+            <div className="App-main">
+                <AudioPlayer />
+            </div>
+            */
+
+
             <div>
             <Header/>
                 <Star dbStar="1"/> {/*TODO this will have to be changed to whatever we get from the database*/}
@@ -45,32 +46,12 @@ class App extends Component {
                 <Route exact path='/about' component={About}/>
             </Switch>
             </div>
+
         );
     }
     
 
 }
-
-
-
-
-
-// function Star(){
-//
-//     dbStar = 2; //TODO this will have to be changed to whatever we get from the database
-//     const ratingChanged = (newRating) => {//when the rating is changed it is logged here
-//         console.log(newRating)
-//     }
-//
-//     render(<ReactStars count={3} onChange={ratingChanged} size={24} color2={'#ffd700'} half={false} value={dbStar}/>, document.getElementById('stars'));
-//
-//
-//     //npm install react-stars --save
-//     //if it does not work run this. Run npm first, only run yarn if npm does not work
-//     //yarn add react-stars-ie
-//     //https://www.npmjs.com/package/react-stars-ie
-//
-// }
 
 export default App;
 
