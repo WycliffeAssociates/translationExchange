@@ -1,0 +1,22 @@
+<form action="/api/upload/zip" method="post" enctype="multipart/form-data">
+    <input type="file" name="upload" />
+    <input type="submit" /> {% csrf_token %}
+</form>
+
+<a href="/api/languages">Languages</a> <br><br>
+<a href="/api/books">Books</a> <br><br>
+<a href="/api/users">Users</a> <br><br>
+<a href="/api/files">Files</a> <br><br>
+<a href="/api/comments">Comments</a> <br><br>
+<a href="/api/upload/zip">Upload zip</a> <br><br>
+
+<audio controls>
+  <source src="/api/stream/en/mrk/07/en-x-demo2_ulb_b42_mrk_c07_v01_t05" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+
+<div>
+    {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+    {% endif %}
+</div>

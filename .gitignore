@@ -1,7 +1,12 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+.mypy_cache/
+
 *.py[cod]
 *$py.class
+migrations/*
+media/dump/*
+media/saved/*
 
 # C extensions
 *.so
@@ -106,6 +111,3 @@ ENV/
 
 # mkdocs documentation
 /site
-
-# mypy
-.mypy_cache/
