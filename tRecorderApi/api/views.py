@@ -52,26 +52,33 @@ class ProjectViewSet(views.APIView):
             .filter(chapter=data["chapter"]) \
             .values()
 
-        """for take in takes:
-            take["language"] = Language.objects.get(pk=take["language_id"])
-            take["book"] = Book.objects.get(pk=take["book_id"])
-"""
-        """metas = Meta.objects.filter(language=data["language"])
-        metas.filter(slug=data["slug"])
-        metas.filter(chapter=data["chapter"])
-
-        lst = []
-        for item in metas.values():
+        for take in takes:
             dic = {}
-            dic["take"] = Take.objects.filter(meta=item["take_id"]).values()[0]
-            if item["markers"]:
-                item["markers"] = json.loads(item["markers"])
+            # Include language name
+            dic["language"] = Language.objects.filter(pk=take["language_id"]).values()[0]
+            # Include book name
+            dic["book"] = Book.objects.filter(pk=take["book_id"]).values()[0]
+            # Include author of file
+            dic["user"] = User.objects.filter(pk=take["user_id"]).values()[0]
+            
+            # Include comments
+            dic["comments"] = []
+            for cmt in Comment.objects.filter(file=take["id"]).values():
+                dic2 = {}
+                dic2["comment"] = cmt
+                # Include author of comment
+                dic2["user"] = User.objects.filter(pk=cmt["user_id"]).values()[0]
+                dic["comments"].append(dic2)
+            
+            # Parse markers
+            if take["markers"]:
+                take["markers"] = json.loads(take["markers"])
             else:
-                item["markers"] = {}
-            dic["meta"] = item
-            lst.append(dic)"""
+                take["markers"] = {}
+            dic["take"] = take
+            lst.append(dic)
 
-        return Response(takes, status=200)
+        return Response(lst, status=200)
 
 class FileUploadView(views.APIView):
     parser_classes = (FileUploadParser,)
