@@ -10,6 +10,7 @@ var file = [];
 // requires a name (str) and src (str) when it is called
 // name : name to display on take
 // src  : url of file to be played in audio player
+
 class AudioComponent extends Component {
 
     render() {
