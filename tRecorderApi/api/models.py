@@ -15,7 +15,7 @@ class User(models.Model):
     def __unicode__(self):
         return self.name
 
-class File(models.Model):
+class Take(models.Model):
     location = models.CharField(max_length=250)
     duration = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
@@ -36,7 +36,7 @@ class Meta(models.Model):
     startv = models.IntegerField(default=0)
     endv = models.IntegerField(default=0)
     markers = models.TextField(null=True, blank=True)
-    file = models.ForeignKey(File, on_delete=models.CASCADE, null=True, blank=True)
+    take = models.ForeignKey(Take, on_delete=models.CASCADE, null=True, blank=True)
 
     def __unicode__(self):
         return '{}-{}-{}'.format(self.language, self.anthology, self.slug)
@@ -44,7 +44,7 @@ class Meta(models.Model):
 class Comment(models.Model):
     location = models.CharField(max_length=250)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    file = models.ForeignKey(File, on_delete=models.CASCADE, null=True, blank=True)
+    file = models.ForeignKey(Take, on_delete=models.CASCADE, null=True, blank=True)
 
     def __unicode__(self):
         return self.location

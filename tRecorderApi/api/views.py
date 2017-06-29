@@ -9,9 +9,9 @@ from rest_framework import viewsets, views
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser, FileUploadParser
 from parsers import MP3StreamParser
-from .serializers import LanguageSerializer, UserSerializer, FileSerializer
+from .serializers import LanguageSerializer, UserSerializer, TakeSerializer
 from .serializers import CommentSerializer, MetaSerializer
-from .models import Language, User, File, Comment, Meta
+from .models import Language, User, Take, Comment, Meta
 import pydub
 
 class LanguageViewSet(viewsets.ModelViewSet):
@@ -24,10 +24,10 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class FileViewSet(viewsets.ModelViewSet):
+class TakeViewSet(viewsets.ModelViewSet):
     """This class handles the http GET, PUT and DELETE requests."""
-    queryset = File.objects.all()
-    serializer_class = FileSerializer
+    queryset = Take.objects.all()
+    serializer_class = TakeSerializer
 
 class MetaViewSet(viewsets.ModelViewSet):
     """This class handles the http GET, PUT and DELETE requests."""
@@ -43,17 +43,20 @@ class ProjectViewSet(views.APIView):
     parser_classes = (JSONParser,)
 
     def post(self, request):
-        # just to test that it works
         data = json.loads(request.body)
 
-        f = File.objects.filter(checked_level=data["checked_level"])
-        f.filter(meta__language=data["language"])
-        f.filter(meta__slug=data["slug"])
-        f.filter(meta__chapter=data["chapter"])
+        metas = Meta.objects.filter(language=data["language"])
+        metas.filter(slug=data["slug"])
+        metas.filter(chapter=data["chapter"])
 
-        res = serializers.serialize('json', f)
-                
-        return Response(res, status=200)
+        lst = []
+        for item in metas.values():
+            dic = {}
+            dic["take"] = Take.objects.filter(meta=item["take_id"]).values()[0]
+            dic["meta"] = item
+            lst.append(dic)
+
+        return Response(lst, status=200)
 
 class FileUploadView(views.APIView):
     parser_classes = (FileUploadParser,)
