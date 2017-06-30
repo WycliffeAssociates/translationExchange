@@ -25,7 +25,7 @@ class TakeContainer extends Component {
 
                 <strong>Take by {this.props.take.author} on {this.props.take.timestamp}</strong>
                 <TakeRating rating={this.props.take.rating} onChange={this.onRatingSet.bind(this)}/>
-                <AudioComponent name={this.props.take.author} src={this.props.take.audioSource} />
+                <AudioComponent name={'Rating: ' + this.props.take.rating + '/3 '} src={this.props.take.audioSource} />
                 <br />
                 <br />
             </div>
