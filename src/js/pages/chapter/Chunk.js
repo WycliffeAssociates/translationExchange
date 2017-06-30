@@ -1,22 +1,43 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
 import TakeList from "./takes/TakeList";
 import ChunkPropTypes from "./ChunkPropTypes";
 import AudioComponent from './takes/AudioComponent'
+import { Button, Panel } from "react-bootstrap";
 
 class Chunk extends Component {
+    constructor (props) {
+        super(props);
+        this.state = {open: false};
+    }
+
+    toggle () {
+        this.setState({ open: !this.state.open });
+    }
+
     render () {
+        var modeLabel = "";
+        switch (this.props.chunk.mode) {
+            case "chunk":
+                modeLabel = "Chunk";
+                break;
+            case "verse":
+                modeLabel = "Verse";
+                break;
+            default:
+                modeLabel = "Segment";
+        }
         return (
             <div>
-                Displaying {this.props.chunk.mode} {this.props.chunk.number} <br />
-                <br />
+                <Button onClick={this.toggle.bind(this)}>
+                    {modeLabel} {this.props.chunk.number}
+                </Button>
                 <strong>Source Audio for {this.props.chunk.mode} {this.props.chunk.number}</strong>
                 <AudioComponent name="Source Audio" src={this.props.chunk.sourceAudio} />
-                <br />
-                <br />
-                <TakeList
-                    takes={this.props.chunk.takes}
-                />
+                <Panel collapsible expanded={this.state.open}>
+                    <TakeList
+                        takes={this.props.chunk.takes}
+                    />
+                </Panel>
             </div>
         );
     }
