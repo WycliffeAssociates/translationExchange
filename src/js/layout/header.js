@@ -23,7 +23,7 @@ class Header extends Component {
                 <Navbar inverse collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <LinkContainer to="/home">
+                            <LinkContainer to="/">
                                 <a>Translation Manager</a>
                             </LinkContainer>
                         </Navbar.Brand>
@@ -38,10 +38,6 @@ class Header extends Component {
 
                             <LinkContainer to="/projects/">
                                 <NavItem eventKey={2}>Projects</NavItem>
-                            </LinkContainer>
-
-                            <LinkContainer to="/testing/">
-                                <NavItem eventKey={3}>Test Audio</NavItem>
                             </LinkContainer>
 
                         </Nav>

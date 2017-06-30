@@ -14,3 +14,7 @@
 Table {
     background-color: red;
 }
+
+tr:hover {
+    cursor: pointer;
+}
