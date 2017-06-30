@@ -24,21 +24,21 @@ class ChapterContainer extends Component {
                                 audioSource: "http://localhost:3001/files/Matthew_1_Arabic_Iraqi.mp3",
                                 author: "Bob the Translator",
                                 rating: 3,
-                                timestamp: "timestamp"
+                                timestamp: "26 June 2017 8:44 pm"
                             },
                             {
                                 id: 2,
                                 audioSource: "http://localhost:3001/files/Matthew_1_Arabic_VanDyke.mp3",
                                 author: "Alice the Translator",
                                 rating: 2,
-                                timestamp: "timestamp"
+                                timestamp: "28 June 2017 10:07 am"
                             },
                             {
                                 id: 5,
                                 audioSource: "http://localhost:3001/files/Matthew_1_Arabic_Sudanese.mp3",
                                 author: "Bob the Translator",
                                 rating: 3,
-                                timestamp: "timestamp"
+                                timestamp: "28 June 2017 10:11 am"
                             }
                         ]
                     },
@@ -52,14 +52,14 @@ class ChapterContainer extends Component {
                                 audioSource: "http://localhost:3001/files/Matthew_2_Arabic_Iraqi.mp3",
                                 author: "Bob the Translator",
                                 rating: 1,
-                                timestamp: "timestamp"
+                                timestamp: "June 3 2017 4:12 pm"
                             },
                             {
                                 id: 10,
                                 audioSource: "http://localhost:3001/files/Matthew_2_Arabic_VanDyke.mp3",
                                 author: "Alice the Translator",
                                 rating: 3,
-                                timestamp: "timestamp"
+                                timestamp: "June 3 2017 4:22 pm"
                             }
                         ]
                     }
@@ -72,7 +72,7 @@ class ChapterContainer extends Component {
 
         return (
             <div>
-                Chapter {this.props.match.params.chid}
+                {/*Chapter {this.props.match.params.chid}*/}
                 <ChunkList
                     segments={this.state.segments}
                     mode={this.state.segments.mode}
