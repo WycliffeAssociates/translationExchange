@@ -1,0 +1,16 @@
+Table {
+    margin-right: 3px;
+}
+
+.jumbotroncustom {
+    margin: 30px;
+}
+
+.center {
+    margin-left:30px;
+}
+
+
+tr:hover {
+    background-color: red;
+}

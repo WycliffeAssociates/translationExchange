@@ -1,7 +1,7 @@
 import React , {Component} from 'react';
 import LanguageButton from './language_button'
 import VersionButton from './version_button'
-
+import './buttons_properties.css'
 
 class SearchButtons extends Component {
 
@@ -12,9 +12,9 @@ class SearchButtons extends Component {
     render (){
 
         return (
-            <div className="search-buttons" style={{paddingTop:'65px'}}>
-                <LanguageButton/>
-                <VersionButton />
+            <div id="outer" style={{paddingTop:'65px'}}>
+                <LanguageButton className="searchbuttons"/>
+                <VersionButton className="searchbuttons"/>
 
             </div>
 
