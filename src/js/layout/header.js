@@ -1,52 +1,50 @@
-import React , {Component} from 'react';
-import {Navbar} from 'react-bootstrap';
-import {Nav, NavItem, NavLink} from "reactstrap";
-
+import React, { Component } from 'react';
+import {
+    Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink} from 'reactstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 class Header extends Component {
-
-
-    constructor(props){
+    constructor(props) {
         super(props);
 
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            isOpen: false
+        };
     }
-    render (){
-
+    toggle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+    render() {
         return (
-            <Navbar inverse collapseOnSelect  fixedTop = {true} >
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <a href="/">Translation Manager</a>
-                    </Navbar.Brand>
-                </Navbar.Header>
+            <div>
 
-                    <Nav className="ml-auto" navbar >
+                <Navbar style={{borderRadius: '0px'}} color="default" inverse fixed>
+                    <LinkContainer to="/home/">
+                        <NavbarBrand>Translation Manager</NavbarBrand>
+                    </LinkContainer>
+                    <Collapse isOpen={this.state.isOpen} navbar>
 
-                        <NavItem >
+                        <Nav className="ml-auto" navbar >
 
-                            <LinkContainer to="/projects/">
-                                <NavLink>Projects</NavLink>
-                            </LinkContainer>
+                            <NavItem  style={{marginLeft: '900px', marginTop: '15px', fontsize:'30px'}}>
+                                <LinkContainer to="/projects/">
+                                    <NavLink>Projects</NavLink>
+                                </LinkContainer>
+                                <LinkContainer to="/about/">
+                                    <NavLink> About</NavLink>
+                                </LinkContainer>
+                            </NavItem>
 
-                            <LinkContainer to="/about/">
-                                <NavLink>About</NavLink>
-                            </LinkContainer>
+                        </Nav>
 
-                            <LinkContainer to="/testing/">
-                                <NavLink>Test Audio</NavLink>
-                            </LinkContainer>
-
-                        </NavItem>
-
-                    </Nav>
-
-            </Navbar>
+                    </Collapse>
+                </Navbar>
+            </div>
         );
-
     }
 }
 
 export default Header;
-
-
