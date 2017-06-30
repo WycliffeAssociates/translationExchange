@@ -7,7 +7,7 @@ router = routers.DefaultRouter()
 router.register(r'languages', views.LanguageViewSet)
 router.register(r'books', views.BookViewSet)
 router.register(r'users', views.UserViewSet)
-router.register(r'files', views.TakeViewSet)
+router.register(r'takes', views.TakeViewSet)
 router.register(r'comments', views.CommentViewSet)
 
 urlpatterns = [

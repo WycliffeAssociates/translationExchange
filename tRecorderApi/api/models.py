@@ -29,11 +29,10 @@ class Take(models.Model):
     rating = models.IntegerField(default=0)
     checked_level = models.IntegerField(default=0)
     language = models.ForeignKey(Language, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True, blank=True)
     anthology = models.CharField(max_length=2, blank=True)
     version = models.CharField(max_length=3, blank=True)
-    #slug = models.CharField(max_length=3)
-    #book_number = models.IntegerField(default=0)
     mode = models.CharField(max_length=10, blank=True)
     chapter = models.IntegerField(default=0)
     startv = models.IntegerField(default=0)
@@ -41,7 +40,7 @@ class Take(models.Model):
     markers = models.TextField(null=True, blank=True)
 
     def __unicode__(self):
-        return '{}-{}-{}'.format(self.language, self.anthology, self.slug)
+        return '{}-{}-{}({})'.format(self.language, self.anthology, self.book, self.id)
 
 class Comment(models.Model):
     location = models.CharField(max_length=250)
