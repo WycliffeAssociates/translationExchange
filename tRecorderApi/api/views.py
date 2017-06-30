@@ -17,6 +17,8 @@ import time
 import uuid
 import os
 from tinytag import TinyTag
+import urllib2
+import pickle
 
 class LanguageViewSet(viewsets.ModelViewSet):
     """This class handles the http GET, PUT and DELETE requests."""
@@ -96,6 +98,11 @@ class FileUploadView(views.APIView):
             zip.extractall(file_name)
             zip.close()
             #extract metadata / get the apsolute path to the file to be stored
+            
+            # Cache langname and langcode to re-use later
+            langname = ''
+            langcode = ''
+
             for root, dirs, files in os.walk(file_name):
                 for f in files:
                     abpath = os.path.join(root, os.path.basename(f))
@@ -104,9 +111,11 @@ class FileUploadView(views.APIView):
                     lastindex = a.rfind("}") + 1
                     substr = a[:lastindex]
                     pls = json.loads(substr)
-                    #print(json.loads(substr))
-                    #print(pls["anthology"])
-                    prepareDataToSave(pls, abpath)
+
+                    if langcode != pls['language']:
+                        langcode = pls['language']
+                        langname = getLanguageByCode(langcode)
+                    prepareDataToSave(pls, abpath, langname)
             return Response({"response": "ok"}, status=200)
         else:
             return Response(status=404)
@@ -124,20 +133,45 @@ class FileStreamView(views.APIView):
 def index(request):
     return render(request, 'index.html')
 
-def prepareDataToSave(meta, abpath):
-    #book = Book(code=meta['slug'], booknum=meta['book_number']).save()
-    #book_id = book.id
-    #language = Language(code=meta['language']).save()
-    #language_id = language.id
+def prepareDataToSave(meta, abpath, langname):
+    book, b_created = Book.objects.get_or_create(
+        code = meta["slug"],
+        defaults={'code': meta['slug'], 'booknum': meta['book_number']},
+    )
+    language, l_created = Language.objects.get_or_create(
+        code = meta["language"],
+        defaults={'code': meta['language'], 'name': langname},
+    )
+    
     take = Take(location=abpath,
-                #book=book_id,
-                #language=language_id,
-                rating=0, checked_level=0,
-                anthology=meta['anthology'],
-                version=meta['version'],
-                mode=meta['mode'],
-                chapter=meta['chapter'],
-                startv=meta['startv'],
-                endv=meta['endv'],
-                markers=meta['markers'])
+                duration = 0,
+                book = book,
+                language = language,
+                rating = 0, checked_level = 0,
+                anthology = meta['anthology'],
+                version = meta['version'],
+                mode = meta['mode'],
+                chapter = meta['chapter'],
+                startv = meta['startv'],
+                endv = meta['endv'],
+                markers = meta['markers'])
     take.save()
+
+def getLanguageByCode(code):
+    # which URL should we cache?
+    url = 'http://td.unfoldingword.org/exports/langnames.json'
+    response = urllib2.urlopen(url)
+    #obtain jsonfile from webscraping
+    webFile = json.loads(response.read())
+    
+    with open("language.json", "wb") as fp:
+        pickle.dump(webFile, fp)
+    with open ("language.json", "rb") as fp:
+        languages = pickle.load(fp)
+    langname = ""
+    for dicti in languages:
+        if dicti["lc"] == code:
+            langname = dicti["ln"]
+        break
+    
+    return langname
