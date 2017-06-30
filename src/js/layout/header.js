@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {
-    Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink} from 'reactstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import {Nav, Navbar, NavDropdown, NavItem} from "react-bootstrap";
+import {LinkContainer} from "react-router-bootstrap";
+
 
 class Header extends Component {
     constructor(props) {
@@ -21,27 +21,38 @@ class Header extends Component {
         return (
             <div>
 
-                <Navbar style={{borderRadius: '0px'}} color="default" inverse fixed>
-                    <LinkContainer to="/home/">
-                        <NavbarBrand>Translation Manager</NavbarBrand>
-                    </LinkContainer>
-                    <Collapse isOpen={this.state.isOpen} navbar>
 
-                        <Nav className="ml-auto" navbar >
+                <Navbar inverse collapseOnSelect>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <a href="/">Translation Manager</a>
+                        </Navbar.Brand>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
+                    <Navbar.Collapse>
 
-                            <NavItem  style={{marginLeft: '900px', marginTop: '15px', fontsize:'30px'}}>
-                                <LinkContainer to="/projects/">
-                                    <NavLink>Projects</NavLink>
-                                </LinkContainer>
-                                <LinkContainer to="/about/">
-                                    <NavLink> About</NavLink>
-                                </LinkContainer>
-                            </NavItem>
+                        <Nav pullRight>
+                            <LinkContainer to="/about/">
+                                <NavItem eventKey={1}>About</NavItem>
+                            </LinkContainer>
+
+                            <LinkContainer to="/projects/">
+                                <NavItem eventKey={2}>Projects</NavItem>
+                            </LinkContainer>
+
+                            <LinkContainer to="/testing/">
+                                <NavItem eventKey={3}>Test Audio</NavItem>
+                            </LinkContainer>
 
                         </Nav>
 
-                    </Collapse>
+
+                    </Navbar.Collapse>
                 </Navbar>
+
+
+
+
             </div>
         );
     }

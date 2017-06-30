@@ -34,20 +34,28 @@ class ProjectsList extends Component {
     /*
         Here's an example of how to create a link using React Router
      */
+    /*{project.percentFinished}*/
     createListItem (project) {
         return (
                  <tr onClick={() => this.setState({redirectToProject: project.id})}>
-                        {/*<th scope="row"> <Link to={'/projects/' + project.id}>{project.language}</Link> </th>*/}
-                        {/*<td><Link to={'/projects/' + project.id}>{project.book}</Link>  </td>*/}
-                        {/*<td><Link to={'/projects/' + project.id}>{project.percentFinished}</Link></td>*/}
-                        {/*<td><Link to={'/projects/' + project.id}>{project.translationType}</Link></td>*/}
-                        {/*<td><Link to={'/projects/' + project.id}>{project.contributors}</Link></td>*/}
-                        {/*<td><Link to={'/projects/' + project.id}>{project.dateModified}</Link></td>*/}
+
 
                     <th scope="row"> {project.language}</th>
                     <td>{project.book} </td>
                     <td>{project.translationType}</td>
-                    <td>{project.percentFinished}</td>
+                    <td>
+                        <div className='progress'>
+                            <div className='progress-bar'
+                                 role='progressbar'
+                                 aria-valuenow={project.percentFinished}
+                                 aria-valuemin='0'
+                                 aria-valuemax='100'
+                                 style={{width: '70%'}}>
+                            </div>
+                        </div>
+
+
+                    </td>
                     <td>{project.contributors}</td>
                     <td>{project.dateModified}</td>
                  </tr>
