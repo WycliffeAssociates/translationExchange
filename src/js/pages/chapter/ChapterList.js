@@ -15,6 +15,15 @@ class ChapterList extends Component {
         return (
             <li key={chapter.number}>
                 <Link to={this.props.path + '/ch' + chapter.number}>Chapter {chapter.number}</Link>
+                <h5>
+                    {chapter.percentFinished}% complete <br />
+                    Checking Level: {chapter.checkingLevel} <br />
+                    Contributors: {chapter.contributors}<br />
+                    Translation type: ULB <br />
+                    Date Modified: {chapter.timestamp} <br />
+                    <br />
+                </h5>
+
             </li>
         );
     }
