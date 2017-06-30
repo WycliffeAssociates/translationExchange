@@ -3,6 +3,12 @@ import AudioPlayer from '../../../shared/AudioPlayer';
 import TakePropTypes from "./TakePropTypes";
 import TakeRating from "./TakeRating.js";
 
+import AudioComponent from './AudioComponent'
+
+var aSrc = 'https://files.freemusicarchive.org/music%2Fno_curator%2FThe_Womb%2FBang_-_An_Introduction_to_The_Womb%2FThe_Womb_-_02_-_Sex_Club.mp3'
+var aName = "Take 'A'"
+
+
 class TakeContainer extends Component {
     onRatingSet (newRating) {
         console.log("new rating for take " + this.props.take.id + ": " + newRating);
@@ -12,12 +18,18 @@ class TakeContainer extends Component {
     //other functions here for dealing with new audio comments recorded, etc
 
     render () {
+
         return (
+
             <div className="take">
+
                 <strong>Take by {this.props.take.author} on {this.props.take.timestamp}</strong>
-                <AudioPlayer audioSource={this.props.take.audioSource}/>
                 <TakeRating rating={this.props.take.rating} onChange={this.onRatingSet.bind(this)}/>
+                <AudioComponent name={this.props.take.author} src={this.props.take.audioSource} />
+                <br />
+                <br />
             </div>
+
         );
     }
 }

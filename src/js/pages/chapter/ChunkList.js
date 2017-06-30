@@ -7,7 +7,7 @@ class ChunkList extends Component {
     render () {
         return (
             <ul>
-                {this.props.segments.map(this.createListItem.bind(this))}
+                {this.props.segments.map(this.createListItem.bind(this))} {/* passes chunks*/}
             </ul>
         );
     }

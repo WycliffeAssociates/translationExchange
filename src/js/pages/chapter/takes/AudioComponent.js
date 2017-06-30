@@ -5,7 +5,7 @@
 import React, {Component} from 'react'
 import Audio from 'react-audioplayer'
 
-var file = [];
+
 
 // requires a name (str) and src (str) when it is called
 // name : name to display on take
@@ -14,6 +14,8 @@ var file = [];
 class AudioComponent extends Component {
 
     render() {
+
+        var file = [];
 
         file[0] = {
             "name": this.props.name,
@@ -30,6 +32,7 @@ class AudioComponent extends Component {
 
         );
     }
+
 }
 
 export default AudioComponent
