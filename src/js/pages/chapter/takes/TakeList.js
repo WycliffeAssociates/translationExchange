@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import Take from "./Take";
+import TakeContainer from "./TakeContainer";
 import TakePropTypes from "./TakePropTypes";
 
 class TakeList extends Component {
     render () {
+
         return (
             <div>
                 {this.props.takes.map(this.createListItem)}
+
             </div>
+
         );
     }
 
     createListItem (take) {
         return (
-            <Take
+            <TakeContainer
                 take={take}
             />
         );
@@ -24,5 +27,6 @@ class TakeList extends Component {
 TakeList.propTypes = {
     takes: PropTypes.arrayOf(TakePropTypes).isRequired
 };
+// fields : id, audioSource, author, rating, timeStamp
 
 export default TakeList;
