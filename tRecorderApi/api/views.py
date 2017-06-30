@@ -93,11 +93,13 @@ class FileUploadView(views.APIView):
                 for f in files:
                     abpath = os.path.join(root, os.path.basename(f))
                     meta = TinyTag.get(abpath)
-                    print(meta.artist)
-
-                    #store the metadata inside the database
-
-
+                    a = meta.artist
+                    lastindex = a.rfind("}") + 1
+                    substr = a[:lastindex]
+                    pls = json.loads(substr)
+                    #print(json.loads(substr))
+                    #print(pls["anthology"])
+                    prepareDataToSave(pls, abpath)
             return Response({"response": "ok"}, status=200)
         else:
             return Response(status=404)
@@ -114,3 +116,21 @@ class FileStreamView(views.APIView):
 
 def index(request):
     return render(request, 'index.html')
+
+def prepareDataToSave(meta, abpath):
+    #book = Book(code=meta['slug'], booknum=meta['book_number']).save()
+    #book_id = book.id
+    #language = Language(code=meta['language']).save()
+    #language_id = language.id
+    take = Take(location=abpath,
+                #book=book_id,
+                #language=language_id,
+                rating=0, checked_level=0,
+                anthology=meta['anthology'],
+                version=meta['version'],
+                mode=meta['mode'],
+                chapter=meta['chapter'],
+                startv=meta['startv'],
+                endv=meta['endv'],
+                markers=meta['markers'])
+    take.save()
