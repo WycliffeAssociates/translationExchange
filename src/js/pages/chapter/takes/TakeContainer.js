@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AudioPlayer from '../../../shared/AudioPlayer';
 import TakePropTypes from "./TakePropTypes";
-import TakeRating from "./TakeRating.js";
 import Star from '../../../shared/Star';
 
 class TakeContainer extends Component {
