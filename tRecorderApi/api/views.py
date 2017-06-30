@@ -99,7 +99,9 @@ class FileUploadView(views.APIView):
             zip.close()
             #extract metadata / get the apsolute path to the file to be stored
 
-            # Cache langname and langcode to re-use later
+            # Cache language and book to re-use later
+            bookname = ''
+            bookcode = ''
             langname = ''
             langcode = ''
 
@@ -112,10 +114,19 @@ class FileUploadView(views.APIView):
                     substr = a[:lastindex]
                     pls = json.loads(substr)
 
+                    if bookcode != pls['slug']:
+                        bookcode = pls['slug']
+                        bookname = getBookByCode(bookcode)
                     if langcode != pls['language']:
                         langcode = pls['language']
                         langname = getLanguageByCode(langcode)
-                    prepareDataToSave(pls, abpath, langname)
+
+                    data = {
+                        "langname": langname,
+                        "bookname": bookname,
+                        "duration": meta.duration
+                        }
+                    prepareDataToSave(pls, abpath, data)
             return Response({"response": "ok"}, status=200)
         else:
             return Response(status=404)
@@ -124,27 +135,27 @@ class FileStreamView(views.APIView):
     parser_classes = (MP3StreamParser,)
 
     def get(self, request, filepath, format='mp3'):
-        filepath = "media/saved/" + filepath + ".wav"
         sound = pydub.AudioSegment.from_wav(filepath)
-        file = sound.export("audio.mp3", format="mp3")
+        file = sound.export()
 
         return StreamingHttpResponse(file)
 
 def index(request):
     return render(request, 'index.html')
 
-def prepareDataToSave(meta, abpath, langname):
+def prepareDataToSave(meta, abpath, data):
     book, b_created = Book.objects.get_or_create(
         code = meta["slug"],
-        defaults={'code': meta['slug'], 'booknum': meta['book_number']},
+        defaults={'code': meta['slug'], 'booknum': meta['book_number'], 'name': data['bookname']},
     )
     language, l_created = Language.objects.get_or_create(
         code = meta["language"],
-        defaults={'code': meta['language'], 'name': langname},
+        defaults={'code': meta['language'], 'name': data['langname']},
     )
-    marker = convertstring(meta['markers'])
+    markers = convertstring(meta['markers'])
+    # TODO get author of file and save it to Take model
     take = Take(location=abpath,
-                duration = 0,
+                duration = data['duration'],
                 book = book,
                 language = language,
                 rating = 0, checked_level = 0,
@@ -154,28 +165,41 @@ def prepareDataToSave(meta, abpath, langname):
                 chapter = meta['chapter'],
                 startv = meta['startv'],
                 endv = meta['endv'],
-                markers = marker)
+                markers = markers)
     take.save()
+
 def convertstring(dictionary):
     if not isinstance(dictionary, dict):
         return dictionary
     return dict((str(k), convertstring(v))
         for k, v in dictionary.items())
-def getLanguageByCode(code):
-    # which URL should we cache?
-    url = 'http://td.unfoldingword.org/exports/langnames.json'
-    response = urllib2.urlopen(url)
-    #obtain jsonfile from webscraping
-    webFile = json.loads(response.read())
 
-    with open("language.json", "wb") as fp:
-        pickle.dump(webFile, fp)
-    with open ("language.json", "rb") as fp:
-        languages = pickle.load(fp)
-    langname = ""
+def getLanguageByCode(code):
+    url = 'http://td.unfoldingword.org/exports/langnames.json'
+    languages = []
+    try:
+        response = urllib2.urlopen(url)
+        languages = json.loads(response.read())
+        with open('language.json', 'wb') as fp:
+            pickle.dump(languages, fp)
+    except urllib2.URLError, e:
+        with open ('language.json', 'rb') as fp:
+            languages = pickle.load(fp)
+        
+    ln = ""
     for dicti in languages:
         if dicti["lc"] == code:
-            langname = dicti["ln"]
-        break
+            ln = dicti["ln"]
+            break
+    return ln
 
-    return langname
+def getBookByCode(code):
+    with open('books.json') as books_file:    
+        books = json.load(books_file) 
+
+    bn = ""
+    for dicti in books:
+        if dicti["slug"] == code:
+            bn = dicti["name"]
+            break
+    return bn
