@@ -66,7 +66,7 @@ class ProjectViewSet(views.APIView):
             dic["book"] = Book.objects.filter(pk=take["book_id"]).values()[0]
             # Include author of file
             dic["user"] = User.objects.filter(pk=take["user_id"]).values()[0]
-            
+
             # Include comments
             dic["comments"] = []
             for cmt in Comment.objects.filter(file=take["id"]).values():
@@ -75,7 +75,7 @@ class ProjectViewSet(views.APIView):
                 # Include author of comment
                 dic2["user"] = User.objects.filter(pk=cmt["user_id"]).values()[0]
                 dic["comments"].append(dic2)
-            
+
             # Parse markers
             if take["markers"]:
                 take["markers"] = json.loads(take["markers"])
@@ -98,7 +98,7 @@ class FileUploadView(views.APIView):
             zip.extractall(file_name)
             zip.close()
             #extract metadata / get the apsolute path to the file to be stored
-            
+
             # Cache langname and langcode to re-use later
             langname = ''
             langcode = ''
@@ -142,7 +142,7 @@ def prepareDataToSave(meta, abpath, langname):
         code = meta["language"],
         defaults={'code': meta['language'], 'name': langname},
     )
-    
+    marker = convertstring(meta['markers'])
     take = Take(location=abpath,
                 duration = 0,
                 book = book,
@@ -154,16 +154,20 @@ def prepareDataToSave(meta, abpath, langname):
                 chapter = meta['chapter'],
                 startv = meta['startv'],
                 endv = meta['endv'],
-                markers = meta['markers'])
+                markers = marker)
     take.save()
-
+def convertstring(dictionary):
+    if not isinstance(dictionary, dict):
+        return dictionary
+    return dict((str(k), convertstring(v))
+        for k, v in dictionary.items())
 def getLanguageByCode(code):
     # which URL should we cache?
     url = 'http://td.unfoldingword.org/exports/langnames.json'
     response = urllib2.urlopen(url)
     #obtain jsonfile from webscraping
     webFile = json.loads(response.read())
-    
+
     with open("language.json", "wb") as fp:
         pickle.dump(webFile, fp)
     with open ("language.json", "rb") as fp:
@@ -173,5 +177,5 @@ def getLanguageByCode(code):
         if dicti["lc"] == code:
             langname = dicti["ln"]
         break
-    
+
     return langname
