@@ -8,7 +8,7 @@ class ChapterContainer extends Component {
     }
 
     componentDidMount () {
-        {/*var chapterID = this.props.match.params.chid;*/}
+        //var chapterID = this.props.match.params.chid;
         //do a web request here for segments (chunks or verses) of chapter...
         //this is just fake data for now
         this.setState(
@@ -76,7 +76,6 @@ class ChapterContainer extends Component {
                 <ChunkList
                     segments={this.state.segments}
                     mode={this.state.segments.mode}
-
                 />
             </div>
         );

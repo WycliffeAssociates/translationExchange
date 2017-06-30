@@ -9,6 +9,7 @@ class Chunk extends Component {
         return (
             <div>
                 Displaying {this.props.chunk.mode} {this.props.chunk.number} <br />
+                <br />
                 <strong>Source Audio for {this.props.chunk.mode} {this.props.chunk.number}</strong>
                 <AudioComponent name="Source Audio" src={this.props.chunk.sourceAudio} />
                 <br />
