@@ -31,7 +31,7 @@ class Chunk extends Component {
                 <Button onClick={this.toggle.bind(this)}>
                     {modeLabel} {this.props.chunk.number}
                 </Button>
-                <strong>Source Audio for {this.props.chunk.mode} {this.props.chunk.number}</strong>
+                <strong> Source Audio for {this.props.chunk.mode} {this.props.chunk.number}</strong>
                 <AudioComponent name="Source Audio" src={this.props.chunk.sourceAudio} />
                 <Panel collapsible expanded={this.state.open}>
                     <TakeList
