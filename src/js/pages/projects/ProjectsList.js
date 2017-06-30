@@ -5,23 +5,28 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {browserHistory} from "react-router";
+import { Redirect } from 'react-router-dom';
 import './projects.css'
 
-function toChapter(proj) {
-
-    window.location = '/projects/'+proj.id;
-
-}
-
 class ProjectsList extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            redirectToProject: null
+        };
+    }
+
     /*
         Render data in props, passed to this component by its parent container component
      */
     render () {
         return (
             <tbody>
-                {this.props.projects.map(this.createListItem)}
+                {this.state.redirectToProject
+                    ? <Redirect push to={{pathname: '/projects/' + this.state.redirectToProject}}/>
+                    : this.props.projects.map(this.createListItem.bind(this))
+                }
             </tbody>
         );
     }
@@ -31,25 +36,22 @@ class ProjectsList extends Component {
         Here's an example of how to create a link using React Router
      */
     createListItem (project) {
-
         return (
+                 <tr onClick={() => this.setState({redirectToProject: project.id})}>
+                        {/*<th scope="row"> <Link to={'/projects/' + project.id}>{project.language}</Link> </th>*/}
+                        {/*<td><Link to={'/projects/' + project.id}>{project.book}</Link>  </td>*/}
+                        {/*<td><Link to={'/projects/' + project.id}>{project.percentFinished}</Link></td>*/}
+                        {/*<td><Link to={'/projects/' + project.id}>{project.translationType}</Link></td>*/}
+                        {/*<td><Link to={'/projects/' + project.id}>{project.contributors}</Link></td>*/}
+                        {/*<td><Link to={'/projects/' + project.id}>{project.dateModified}</Link></td>*/}
 
-        <tr  onClick={() => toChapter(project)}>
-            {/*<th scope="row"> <Link to={'/projects/' + project.id}>{project.language}</Link> </th>*/}
-            {/*<td><Link to={'/projects/' + project.id}>{project.book}</Link>  </td>*/}
-            {/*<td><Link to={'/projects/' + project.id}>{project.percentFinished}</Link></td>*/}
-            {/*<td><Link to={'/projects/' + project.id}>{project.translationType}</Link></td>*/}
-            {/*<td><Link to={'/projects/' + project.id}>{project.contributors}</Link></td>*/}
-            {/*<td><Link to={'/projects/' + project.id}>{project.dateModified}</Link></td>*/}
-
-            <th scope="row"> {project.language}</th>
-            <td>{project.book} </td>
-            <td>{project.translationType}</td>
-            <td>{project.percentFinished}</td>
-            <td>{project.contributors}</td>
-            <td>{project.dateModified}</td>
-
-        </tr>
+                    <th scope="row"> {project.language}</th>
+                    <td>{project.book} </td>
+                    <td>{project.translationType}</td>
+                    <td>{project.percentFinished}</td>
+                    <td>{project.contributors}</td>
+                    <td>{project.dateModified}</td>
+                 </tr>
 
         );
     }
