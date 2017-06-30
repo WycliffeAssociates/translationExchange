@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import playlist from './playlist.json';
 import sourcePlaylist from './playlist.json';
-import Audio from 'react-audioplayer';
+import Audio from 'translation-audio-player';
 import './audioPlayer.css'
 
 const Style = {
