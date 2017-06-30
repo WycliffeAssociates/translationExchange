@@ -18,7 +18,7 @@ class ChapterList extends Component {
 
         <tbody>
         {this.state.redirectToChapter
-            ? <Redirect push to={{pathname: '/ch' + this.state.redirectToChapter}}/>
+            ? <Redirect push to={{pathname: this.props.path + '/ch' + this.state.redirectToChapter}}/>
             : this.props.chapters.map(this.createListItem.bind(this))
         }
         </tbody>
@@ -37,6 +37,9 @@ class ChapterList extends Component {
             <th scope="row"> {chapter.number}</th>
             <td>{chapter.percentFinished} </td>
             <td>{chapter.checkingLevel}</td>
+            <td>{chapter.contributors}</td>
+            <td>ULB</td>
+            <td>{chapter.timestamp}</td>
 
         </tr>
             //

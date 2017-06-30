@@ -38,19 +38,20 @@ class ProjectContainer extends Component {
     render () {
         return (
             <div>
-
+                Hypothetically Book and Language go here
                 <Jumbotron className="jumbotroncustom">
                     <Table hover>
                         <thead>
                         <tr>
                             <th>Chapter</th>
-                            <th>Book</th>
-                            <th>Translation Type</th>
                             <th>Percent Complete</th>
+                            <th>Checking Level</th>
                             <th>Contributors</th>
+                            <th>Translation Type</th>
                             <th>Date Modified</th>
                         </tr>
                         </thead>
+
                         <ChapterList
                             chapters={this.state.chapters}
                             path={this.props.location.pathname}
