@@ -20,12 +20,12 @@ class Header extends Component {
     render() {
         return (
             <div>
-
-
                 <Navbar inverse collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a href="/">Translation Manager</a>
+                            <LinkContainer to="/home">
+                                <a>Translation Manager</a>
+                            </LinkContainer>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
