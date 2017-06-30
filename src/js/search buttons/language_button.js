@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, SplitButton, Modal, ButtonToolbar, MenuItem} from 'react-bootstrap';
+import {Button, SplitButton, Modal, ButtonToolbar, MenuItem, Col} from 'react-bootstrap';
 import ProjectsListContainer from './language_display'
 
 
@@ -11,7 +11,7 @@ class LanguageButton extends Component {
 
 
         this.state = {title : 'Language',
-                      buttonStyle: 'success',
+                      buttonStyle: 'default',
                       show: false
         };
 
@@ -35,9 +35,7 @@ class LanguageButton extends Component {
     }
 
 
-
 render(){
-
 
     return(
 
@@ -53,9 +51,9 @@ render(){
                 onHide={this.hideModal}
                 dialogClassName="custom-modal"
             >
-
-                   <ProjectsListContainer/>
+                <ProjectsListContainer/>
             </Modal>
+
         </ButtonToolbar>
 
 

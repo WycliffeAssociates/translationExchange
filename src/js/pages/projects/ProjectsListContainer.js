@@ -38,7 +38,7 @@ class ProjectsListContainer extends Component {
                     language: "English",
                     translationType: "Unlocked Literal Bible",
                     percentFinished: 7,
-                    contributors: ["Alison ", "Erica"],
+                    contributors: ["Alison ","Erica"],
                     dateModified: "20 June 2017 4:16 pm"
                 },
                 {

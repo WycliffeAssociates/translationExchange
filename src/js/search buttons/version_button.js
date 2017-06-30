@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, SplitButton, Modal, ButtonToolbar, MenuItem} from 'react-bootstrap';
+import {Button, SplitButton, Modal, ButtonToolbar, MenuItem, Col} from 'react-bootstrap';
 import Version from "./version_display";
 
 
@@ -11,7 +11,7 @@ class LanguageButton extends Component {
 
 
         this.state = {title : 'Version',
-            buttonStyle: 'success',
+            buttonStyle: 'default',
             show: false
         };
 
@@ -43,6 +43,7 @@ class LanguageButton extends Component {
 
 
             <ButtonToolbar>
+
                 <Button bsStyle={this.state.buttonStyle} onClick={this.showModal} bsSize="lg">
                     ot/nt
                 </Button>
@@ -53,8 +54,9 @@ class LanguageButton extends Component {
                     onHide={this.hideModal}
                     dialogClassName="custom-modal"
                 >
-
                     <Version/>
+
+
                 </Modal>
             </ButtonToolbar>
 

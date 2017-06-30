@@ -12,7 +12,7 @@ class SearchButtons extends Component {
     render (){
 
         return (
-            <div id="outer" style={{paddingTop:'65px'}}>
+            <div style={{paddingTop:'65px', paddingLeft:'30px', paddingBottom:'20px'}}>
                 <LanguageButton className="searchbuttons"/>
                 <VersionButton className="searchbuttons"/>
 

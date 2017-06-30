@@ -16,7 +16,6 @@ class ProjectsList extends Component {
             redirectToProject: null
         };
     }
-
     /*
         Render data in props, passed to this component by its parent container component
      */
