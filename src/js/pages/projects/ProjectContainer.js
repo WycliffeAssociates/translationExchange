@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ChapterList from "../chapter/ChapterList";
+import Jumbotron from "react-bootstrap/es/Jumbotron";
+import Table from "react-bootstrap/es/Table";
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -36,12 +38,28 @@ class ProjectContainer extends Component {
     render () {
         return (
             <div>
-            <ChapterList
-                chapters={this.state.chapters}
-                path={this.props.location.pathname}
+
+                <Jumbotron className="jumbotroncustom">
+                    <Table hover>
+                        <thead>
+                        <tr>
+                            <th>Chapter</th>
+                            <th>Book</th>
+                            <th>Translation Type</th>
+                            <th>Percent Complete</th>
+                            <th>Contributors</th>
+                            <th>Date Modified</th>
+                        </tr>
+                        </thead>
+                        <ChapterList
+                            chapters={this.state.chapters}
+                            path={this.props.location.pathname}
+                        />
+                    </Table>
+                </Jumbotron>
 
 
-            />
+
             </div>
         );
     }

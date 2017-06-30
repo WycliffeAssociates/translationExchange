@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ChunkList from "./ChunkList";
-
+// this is the page for one chapter
 class ChapterContainer extends Component {
     constructor (props) {
         super(props);

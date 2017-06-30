@@ -1,21 +1,48 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Redirect from "react-router-dom/es/Redirect";
 
 class ChapterList extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            redirectToChapter: null
+        };
+    }
+
+
     render () {
         return (
-            <ul>
-                {this.props.chapters.map(this.createListItem.bind(this))}
-            </ul>
+
+        <tbody>
+        {this.state.redirectToChapter
+            ? <Redirect push to={{pathname: '/ch' + this.state.redirectToChapter}}/>
+            : this.props.chapters.map(this.createListItem.bind(this))
+        }
+        </tbody>
+
+            // <ul>
+            //     {this.props.chapters.map(this.createListItem.bind(this))}
+            // </ul>
         );
     }
 
     createListItem (chapter) {
         return (
-            <li key={chapter.number}>
-                <Link to={this.props.path + '/ch' + chapter.number}>Chapter {chapter.number}</Link>
-            </li>
+        <tr onClick={() => this.setState({redirectToChapter: chapter.number})}>
+
+
+            <th scope="row"> {chapter.number}</th>
+            <td>{chapter.percentFinished} </td>
+            <td>{chapter.checkingLevel}</td>
+
+        </tr>
+            //
+            // <li key={chapter.number}>
+            //     <Link to={this.props.path + '/ch' + chapter.number}>Chapter {chapter.number}</Link>
+            // </li>
         );
     }
 }
