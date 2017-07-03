@@ -38,7 +38,7 @@ class ProjectContainer extends Component {
     render () {
         return (
             <div>
-                Hypothetically Book and Language go here
+                <h1>Matthew (English)</h1>
                 <Jumbotron className="jumbotroncustom">
                     <Table hover>
                         <thead>

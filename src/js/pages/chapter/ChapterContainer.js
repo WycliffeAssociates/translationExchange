@@ -72,7 +72,7 @@ class ChapterContainer extends Component {
 
         return (
             <div>
-                {/*Chapter {this.props.match.params.chid}*/}
+                <h1>Chapter {this.props.match.params.chid}</h1>
                 <ChunkList
                     segments={this.state.segments}
                     mode={this.state.segments.mode}
