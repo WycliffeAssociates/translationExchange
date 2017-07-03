@@ -32,7 +32,7 @@ class Chunk extends Component {
                     {modeLabel} {this.props.chunk.number}
                 </Button>
                 <strong> Source Audio for {this.props.chunk.mode} {this.props.chunk.number}</strong>
-                <AudioComponent name="Source Audio" src={this.props.chunk.sourceAudio} />
+                <AudioComponent src={this.props.chunk.sourceAudio} />
                 <Panel collapsible expanded={this.state.open}>
                     <TakeList
                         takes={this.props.chunk.takes}
