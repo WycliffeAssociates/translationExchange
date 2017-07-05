@@ -9,20 +9,26 @@ import config from '../../../config';
 class ChapterContainer extends Component {
     constructor (props) {
         super(props);
-        this.state = {loaded: false, segments: [], mode: "", source: ""};
+        this.state = {loaded: false, retry: null, segments: [], mode: "", source: ""};
     }
 
     componentDidMount () {
+        this.requestData();
+    }
+
+    requestData () {
         //var chapterID = this.props.match.params.chid;
         //do a web request here for segments (chunks or verses) of chapter...
         var self = this;
         axios.get(config.apiUrl + 'takes')
             .then(function (response) {
+                throw "mewy";
                 console.dir(response.data[0]);
 
                 self.setState(
                     {
                         loaded: true,
+                        retry: null,
                         segments: [
                             {
                                 mode: "chunk",
@@ -78,17 +84,18 @@ class ChapterContainer extends Component {
                 );
             })
             .catch(function (error) {
-                console.dir(error);
-                //some way to retry?
+                console.log(error);
+                self.setState( {retry: self.requestData} );
+                console.log(self.state.retry);
             });
     }
 
     render () {
-
+        console.log("retry: " + this.state.retry);
         return (
             <div>
                 {/*Chapter {this.props.match.params.chid}*/}
-                <LoadingDisplay loaded={this.state.loaded}>
+                <LoadingDisplay loaded={this.state.loaded} retry={this.state.retry}>
                     <ChunkList
                         segments={this.state.segments}
                         mode={this.state.segments.mode}
