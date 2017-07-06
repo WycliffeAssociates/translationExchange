@@ -7,7 +7,7 @@ import axios from 'axios'
 class ChapterContainer extends Component {
     constructor (props) {
         super(props);
-        this.state = {segments: [], mode: "", source: ""};
+        this.state = {segments: [], mode: "", source: "", takeList: []};
     }
 
     componentDidMount () {
@@ -17,19 +17,10 @@ class ChapterContainer extends Component {
 
 
         axios.get('http://172.19.145.91:8000/api/takes/').then((results) => {
-            console.log(results)
-
 
             this.setState(
                 {
-                    segments: [
-                        {
-                            mode: results.mode,
-
-                        }
-
-
-                    ]
+                    takeList: results.data
                 }
 
 
@@ -163,13 +154,14 @@ class ChapterContainer extends Component {
         return (
             <div>
                 <h1>Chapter {this.props.match.params.chid}</h1>
+                {/*
                 <ChunkList
                     segments={this.state.segments}
                     mode={this.state.segments.mode}
                 />
+                */}
 
-                <h3>{this.state.users} {this.state.id}</h3>
-
+                {console.log(this.state.takeList)}
             </div>
         );
     }
