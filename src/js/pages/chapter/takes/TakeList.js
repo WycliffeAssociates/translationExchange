@@ -17,9 +17,11 @@ class TakeList extends Component {
 
     createListItem (take) {
         return (
-            <TakeContainer
-                take={take}
-            />
+            <div>
+                <TakeContainer
+                    take={take}
+                />
+            </div>
         );
     }
 }

@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import ChunkList from "./ChunkList";
+import { Button } from 'react-bootstrap'
+import axios from 'axios'
+
 // this is the page for one chapter
 class ChapterContainer extends Component {
     constructor (props) {
@@ -11,6 +14,34 @@ class ChapterContainer extends Component {
         //var chapterID = this.props.match.params.chid;
         //do a web request here for segments (chunks or verses) of chapter...
         //this is just fake data for now
+
+
+        axios.get('http://172.19.145.91:8000/api/takes/').then((results) => {
+            console.log(results)
+
+
+            this.setState(
+                {
+                    segments: [
+                        {
+                            mode: results.mode,
+
+                        }
+
+
+                    ]
+                }
+
+
+            )
+        })
+
+        this.setState({
+            "users":"nathan",
+            "id": 7085
+        });
+
+        {/*}
         if (this.props.match.params.chid == 1) {
             this.setState(
                 {
@@ -124,6 +155,7 @@ class ChapterContainer extends Component {
                 }
             );
         }
+        */}
     }
 
     render () {
@@ -135,6 +167,9 @@ class ChapterContainer extends Component {
                     segments={this.state.segments}
                     mode={this.state.segments.mode}
                 />
+
+                <h3>{this.state.users} {this.state.id}</h3>
+
             </div>
         );
     }

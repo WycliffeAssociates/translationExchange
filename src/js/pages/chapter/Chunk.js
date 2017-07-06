@@ -31,12 +31,16 @@ class Chunk extends Component {
                 <Button onClick={this.toggle.bind(this)}>
                     {modeLabel} {this.props.chunk.number}
                 </Button>
+
+                {/* Here: send request to server (?) */}
+
                 <strong> Source Audio for {this.props.chunk.mode} {this.props.chunk.number}</strong>
                 <AudioComponent src={this.props.chunk.sourceAudio} />
                 <Panel collapsible expanded={this.state.open}>
                     <TakeList
                         takes={this.props.chunk.takes}
                     />
+
                 </Panel>
             </div>
         );

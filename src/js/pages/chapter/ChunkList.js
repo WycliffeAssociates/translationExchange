@@ -14,9 +14,12 @@ class ChunkList extends Component {
 
     createListItem (segment) {
         return (
-            <Chunk
-                chunk={segment}
-            />
+            <div>
+                <Chunk
+                    chunk={segment}
+                />
+
+            </div>
         );
     }
 }
