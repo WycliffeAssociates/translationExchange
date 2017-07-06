@@ -16,6 +16,9 @@ class AudioComponent extends Component {
         var file = [];
         file[0] = {
             "name": this.props.name,
+
+            // could send request here for audio file url
+
             "src": this.props.src
         }
 
@@ -25,6 +28,7 @@ class AudioComponent extends Component {
                 height={150}
                 autoPlay={false}
                 playlist={file}
+
                 recordButton={() => {
                     alert('Hello');
                 }}

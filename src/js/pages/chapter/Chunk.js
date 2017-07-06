@@ -30,13 +30,13 @@ class Chunk extends Component {
         return (
             <div>
                 <Button onClick={this.toggle.bind(this)}>
-                    {modeLabel} {this.props.chunk.number}
+                    {modeLabel} {this.props.number}
                 </Button>
 
 
                 <Panel collapsible expanded={this.state.open}>
                     <TakeList
-                        takes={this.props./*takes*/chunk.segments}
+                        takes={this.props.chunk.segments}
                     />
 
                 </Panel>

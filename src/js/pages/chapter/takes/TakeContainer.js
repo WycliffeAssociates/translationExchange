@@ -19,15 +19,15 @@ class TakeContainer extends Component {
 
 
             /*
-            <div className="take">
-                <br />
-                <strong>Take by <font color="blue">{this.props.take.author}</font> on {this.props.take.timestamp}</strong>
-                <Star rating={this.props.take.rating} onChange={this.onRatingSet.bind(this)}/>
-                <AudioComponent src={this.props.take.audioSource} />
-                <br />
-                <br />
-            </div>
-            */
+             <div className="take">
+             <br />
+             <strong>Take by <font color="blue">{this.props.take.author}</font> on {this.props.take.timestamp}</strong>
+             <Star rating={this.props.take.rating} onChange={this.onRatingSet.bind(this)}/>
+             <AudioComponent src={this.props.take.audioSource} />
+             <br />
+             <br />
+             </div>
+             */
             <div>
                 <h6>
                     {this.props.take.location}
