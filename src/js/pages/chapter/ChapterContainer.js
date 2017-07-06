@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ChunkList from "./ChunkList";
+import Chunk from './Chunk'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
 
@@ -26,11 +27,6 @@ class ChapterContainer extends Component {
 
             )
         })
-
-        this.setState({
-            "users":"nathan",
-            "id": 7085
-        });
 
         {/*}
         if (this.props.match.params.chid == 1) {
@@ -161,7 +157,12 @@ class ChapterContainer extends Component {
                 />
                 */}
 
-                {console.log(this.state.takeList)}
+
+              <ChunkList
+                segments={this.state.takeList}
+                mode="chunk"
+              />
+
             </div>
         );
     }

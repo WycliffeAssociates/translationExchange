@@ -7,7 +7,11 @@ class ChunkList extends Component {
     render () {
         return (
             <div>
-                {this.props.segments.map(this.createListItem.bind(this))}
+                {/*this.props.segments.map(this.createListItem.bind(this))*/}
+                <Chunk
+                    chunk={this.props}
+                />
+
             </div>
         );
     }
@@ -16,7 +20,7 @@ class ChunkList extends Component {
         return (
             <div>
                 <Chunk
-                    chunk={segment}
+                    chunk={this.props}
                 />
 
             </div>

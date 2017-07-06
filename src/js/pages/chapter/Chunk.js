@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TakeList from "./takes/TakeList";
+import TakeContainer from './takes/TakeContainer'
 import ChunkPropTypes from "./ChunkPropTypes";
 import AudioComponent from './takes/AudioComponent'
 import { Button, Panel } from "react-bootstrap";
@@ -32,16 +33,14 @@ class Chunk extends Component {
                     {modeLabel} {this.props.chunk.number}
                 </Button>
 
-                {/* Here: send request to server (?) */}
 
-                <strong> Source Audio for {this.props.chunk.mode} {this.props.chunk.number}</strong>
-                <AudioComponent src={this.props.chunk.sourceAudio} />
                 <Panel collapsible expanded={this.state.open}>
                     <TakeList
-                        takes={this.props.chunk.takes}
+                        takes={this.props./*takes*/chunk.segments}
                     />
 
                 </Panel>
+
             </div>
         );
     }

@@ -13,8 +13,12 @@ class TakeContainer extends Component {
 
     render () {
 
+
+
         return (
 
+
+            /*
             <div className="take">
                 <br />
                 <strong>Take by <font color="blue">{this.props.take.author}</font> on {this.props.take.timestamp}</strong>
@@ -23,7 +27,17 @@ class TakeContainer extends Component {
                 <br />
                 <br />
             </div>
-
+            */
+            <div>
+                <h6>
+                    {this.props.take.location}
+                </h6>
+                <div>
+                    <AudioComponent
+                        src={this.props.take.location}
+                    />
+                </div>
+            </div>
         );
     }
 }
