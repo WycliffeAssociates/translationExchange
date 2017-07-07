@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import './projects.css'
+import CircularProgressbar from 'react-circular-progressbar';
 
 class ProjectsList extends Component {
 
@@ -43,27 +44,16 @@ class ProjectsList extends Component {
                     <th scope="row"> {project.language}</th>
                     <td>{project.book} </td>
                     <td>{project.translationType}</td>
-                    <td>
-                        <div className='progress'>
-                            <div className='progress-bar'
-                                 role='progressbar'
-                                 aria-valuenow={project.percentFinished}
-                                 aria-valuemin='0'
-                                 aria-valuemax='100'
-                                 style={{width: '70%'}}>
-                            </div>
-                        </div>
-
-
-                    </td>
                     <td>{project.contributors}</td>
                     <td>{project.dateModified}</td>
+                     <td className="col-md-2">
+                         <CircularProgressbar strokeWidth="20" percentage={project.percentFinished} />
+                     </td>
                  </tr>
 
         );
     }
 }
-
 /*
     Use PropTypes to define what props this component expects. If it's passed the wrong props,
     you'll get warnings while you're in development mode

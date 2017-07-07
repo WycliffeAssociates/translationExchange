@@ -110,9 +110,10 @@ class ProjectsListContainer extends Component {
                         <th>Language</th>
                         <th>Book</th>
                         <th>Translation Type</th>
-                        <th>Percent Complete</th>
+
                         <th>Contributors</th>
                         <th>Date Modified</th>
+                        <th>Percent Complete</th>
                     </tr>
                     </thead>
 
