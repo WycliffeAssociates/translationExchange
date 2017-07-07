@@ -12,6 +12,7 @@ import {Table} from "reactstrap";
 import './projects.css'
 import SearchButtons from "../../search buttons/all_buttons";
 import Jumbotron from "react-bootstrap/es/Jumbotron";
+import axios from 'axios'
 
 class ProjectsListContainer extends Component {
     /*
@@ -28,6 +29,12 @@ class ProjectsListContainer extends Component {
         setState to put the data in state
      */
     componentDidMount() {
+        axios.get('http://172.19.145.91:8000/api/languages/').then(results => {
+            this.setState({
+                project:results.data
+            })
+
+        })
         //I would do a web request here...
         //Just going to put fake data in state instead
         this.setState({projects:
