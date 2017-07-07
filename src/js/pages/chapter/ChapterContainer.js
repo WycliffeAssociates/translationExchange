@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import ChunkList from "./ChunkList";
-import Chunk from './Chunk'
-import { Button } from 'react-bootstrap'
 import axios from 'axios'
 
 // this is the page for one chapter
@@ -14,19 +12,22 @@ class ChapterContainer extends Component {
     componentDidMount () {
         //var chapterID = this.props.match.params.chid;
         //do a web request here for segments (chunks or verses) of chapter...
-        //this is just fake data for now
 
 
         axios.get('http://172.19.145.91:8000/api/takes/').then((results) => {
 
             this.setState(
                 {
-                    segments: results.data
+                    segments: results.data,
+                    mode: results.data[0].mode
                 }
             )
-        })
+        });
 
+        {/*FAKE DATA*/}
         {/*}
+
+
          if (this.props.match.params.chid == 1) {
          this.setState(
          {
@@ -143,12 +144,6 @@ class ChapterContainer extends Component {
          */}
     }
 
-    sort() {
-
-        let newArr = [this.state.segments.length]
-
-    }
-
     render () {
 
         return (
@@ -163,7 +158,7 @@ class ChapterContainer extends Component {
 
                 <ChunkList
                     segments={this.state.segments}
-                    mode="chunk"
+                    mode={this.state.mode}
                 />
 
             </div>

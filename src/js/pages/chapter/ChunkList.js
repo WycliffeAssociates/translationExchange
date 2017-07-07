@@ -16,10 +16,8 @@ class ChunkList extends Component {
                     number={1}
                 />
 
-                <Chunk
-                    chunk={this.props}
-                    number={2}
-                />
+
+
 
 
 

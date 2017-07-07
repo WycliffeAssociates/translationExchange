@@ -1,9 +1,6 @@
-/**
- * Created by nathanalbers on 6/29/17.
- */
-
 import React, {Component} from 'react'
 import Audio from 'translation-audio-player'
+import axios from 'axios'
 
 // requires a name (str) and src (str) when it is called
 // name : name to display on take
@@ -11,16 +8,23 @@ import Audio from 'translation-audio-player'
 
 class AudioComponent extends Component {
 
+
+
     render() {
 
         var file = [];
         file[0] = {
             "name": this.props.name,
-
+            "src": this.props.src
             // could send request here for audio file url
 
-            "src": this.props.src
+            // get author via new reques
+
         }
+
+
+
+
 
         return(
             <Audio

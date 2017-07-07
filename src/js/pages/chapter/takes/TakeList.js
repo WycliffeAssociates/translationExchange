@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import TakeContainer from "./TakeContainer";
 import TakePropTypes from "./TakePropTypes";
 
+var iterator;
 class TakeList extends Component {
     render () {
 
+        iterator = 0;
         return (
             <div>
                 {this.props.takes.map(this.createListItem)}
@@ -16,10 +18,12 @@ class TakeList extends Component {
     }
 
     createListItem (take) {
+        iterator += 1;
         return (
             <div>
                 <TakeContainer
                     take={take}
+                    count={iterator}
                 />
             </div>
         );
