@@ -8,14 +8,17 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import './projects.css'
 import CircularProgressbar from 'react-circular-progressbar';
+import {ReadMore} from 'react-read-more';
 
 class ProjectsList extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            redirectToProject: null
+            redirectToProject: null,
+
         };
+
     }
     /*
         Render data in props, passed to this component by its parent container component
@@ -38,16 +41,20 @@ class ProjectsList extends Component {
     /*{project.percentFinished}*/
     createListItem (project) {
         return (
-                 <tr onClick={() => this.setState({redirectToProject: project.id})}>
+                 <tr>
 
+                    <th onClick={() => this.setState({redirectToProject: project.id})} className="col-md-3" scope="row"> {project.language}</th>
+                    <td className="col-md-3" >{project.book} </td>
 
-                    <th scope="row"> {project.language}</th>
-                    <td>{project.book} </td>
-                    <td>{project.translationType}</td>
-                    <td>{project.contributors}</td>
-                    <td>{project.dateModified}</td>
                      <td className="col-md-2">
                          <CircularProgressbar strokeWidth="20" percentage={project.percentFinished} />
+                     </td>
+                     <td className="col-md-4" >
+                         <ReadMore lines={1} onShowMore={this.props.onChange} text="more">
+                             <b>Date Modified</b>: {project.dateModified} <br/>
+                             <b>Translation Type</b>: {project.translationType} <br/>
+                             <b>Contributors</b>: {project.contributors} <br/>
+                         </ReadMore>
                      </td>
                  </tr>
 

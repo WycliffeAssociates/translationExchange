@@ -49,6 +49,6 @@ tr:hover {
 .CircularProgressbar .CircularProgressbar-text {
     fill: #3e98c7;
     font-size: 20px;
-    dominant-baseline: middle;
+    dominant-baseline: central;
     text-anchor: middle;
 }
