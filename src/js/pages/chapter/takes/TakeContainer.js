@@ -5,8 +5,6 @@ import AudioComponent from './AudioComponent'
 import axios from 'axios'
 
 var author = ''
-var currentId = 0
-var strUrl = '';
 class TakeContainer extends Component {
 
     onRatingSet (newRating) {
@@ -19,7 +17,6 @@ class TakeContainer extends Component {
     // Retrieves author information from the database
     findAuthor() {
 
-        if (this.props.take.id != currentId) {
             axios.get('http://172.19.145.91:8000/api/users/').then((results => {
 
                 for (let i = 0; i < results.data.length; i++) {
@@ -28,7 +25,7 @@ class TakeContainer extends Component {
                     }
                 }
             }))
-        }
+
     }
 
     render () {
@@ -46,7 +43,6 @@ class TakeContainer extends Component {
                         src={'http://172.19.145.91:8000/api/stream/' + this.props.take.location}
                         user={this.props.take.user}
                     />
-                    {console.log('http://172.19.145.91:8000/api/stream/' + this.props.take.location)}
                 </div>
             </div>
         );

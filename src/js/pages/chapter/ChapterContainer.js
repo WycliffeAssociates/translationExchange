@@ -13,7 +13,6 @@ class ChapterContainer extends Component {
         //var chapterID = this.props.match.params.chid;
         //do a web request here for segments (chunks or verses) of chapter...
 
-
         axios.get('http://172.19.145.91:8000/api/takes/').then((results) => {
 
             this.setState(
@@ -144,7 +143,54 @@ class ChapterContainer extends Component {
          */}
     }
 
+
     render () {
+
+
+        // Creates array containing one instance of each start verse
+        //////////////
+        var placeHolderArr = this.state.segments
+        var newArr = [];
+
+        for (let i = 0; i < placeHolderArr.length; i++) {
+
+            newArr[newArr.length] = placeHolderArr[i].startv
+        }
+
+        var uniqueArray = newArr.filter(function(item, pos) {
+            return newArr.indexOf(item) === pos;
+        })
+        //////////////
+
+
+        // creates array containing each chunk and array of each take in that chunk - works
+        var finalArr = [];
+        for(let i = 0; i < uniqueArray.length; i++) {
+            var sCounter = 0
+            var chunkArr = []
+
+            for(let j = 0; j < placeHolderArr.length; j++) {
+                if (placeHolderArr[j].startv === uniqueArray[i]) {
+                    console.log('ADDED')
+                    chunkArr[sCounter] = placeHolderArr[j]
+                    sCounter += 1;
+                }
+            }
+
+            finalArr[i] = chunkArr
+
+        }
+
+        console.log(finalArr)
+
+
+        var newString = ''
+        for (let i = 0 ; i < uniqueArray.length; i++) {
+            newString += ' ' + uniqueArray[i]
+
+        }
+        console.log(newString)
+
 
         return (
             <div>
