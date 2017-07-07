@@ -5,10 +5,6 @@ import './buttons_properties.css'
 
 class SearchButtons extends Component {
 
-    constructor(props){
-        super(props);
-    }
-
     render (){
 
         return (

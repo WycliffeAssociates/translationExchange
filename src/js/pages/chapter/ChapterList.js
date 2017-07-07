@@ -12,7 +12,6 @@ class ChapterList extends Component {
         };
     }
 
-
     render () {
         return (
 
@@ -46,6 +45,7 @@ class ChapterList extends Component {
             // <li key={chapter.number}>
             //     <Link to={this.props.path + '/ch' + chapter.number}>Chapter {chapter.number}</Link>
             // </li>
+            //
         );
     }
 }

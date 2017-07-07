@@ -28,8 +28,14 @@ class ProjectsListContainer extends Component {
         setState to put the data in state
      */
     componentDidMount() {
+
+
         //I would do a web request here...
         //Just going to put fake data in state instead
+
+
+
+
         this.setState({projects:
             [
                 {
