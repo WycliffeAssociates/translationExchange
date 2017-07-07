@@ -1,17 +1,23 @@
+/**
+ * Created by ericazhong on 7/7/17.
+ */
 import React, { Component } from 'react';
+import {Button, Col, FormGroup, Input, Jumbotron, Label} from "reactstrap";
 import axios from 'axios';
-import BookDisplay from "./Chapter_Display";
-
-class LanguageDisplay extends Component {
+import ProjectsList from "../pages/projects/ProjectsList";
+class BookDisplay extends Component {
     /*
      In the constructor, set the state to being empty so the component
      can render without errors before the API request finishes
      */
+    //
+
     constructor(props) {
         super(props);
         this.state = {
-            projects:[],
-            value:''};
+            language:props,
+            value:'',
+        chapters: []};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,20 +28,20 @@ class LanguageDisplay extends Component {
     }
 
     handleSubmit(event) {
-        alert('Your selected language is: ' + this.state.value);
-        <BookDisplay lang={this.state.value}/>;
+        alert('Your selected chapter is: ' + this.state.value);
         event.preventDefault();
     }
 
-    componentDidMount() {
-        axios.get('http://172.19.145.91:8000/api/languages/')
-            .then(results => {
-                this.setState({
-                    projects: results.data
-
-                })
-    })}
-
+    componentDidMount(props) {
+        axios.post('http://172.19.145.91:8000/api/get_project/', {
+            "language": props
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })}
 
     /*
      In componentDidMount, do the API request for the data and then use
@@ -57,42 +63,36 @@ class LanguageDisplay extends Component {
         //
         //             <Jumbotron fluid style={{backgroundColor: 'white', padding: '15px', paddingBottom:'30px'}}>
         //                 <FormGroup>
-        //                     <Input type="search" name="search" id="exampleSearch" placeholder="search" />
-        //                 </FormGroup>
-        //
-        //                 <FormGroup onSubmit={this.handleSubmit}>
         //                     <h1 style={{textAlign: 'center', fontSize: '23px'}} className="display-3">select the following</h1>
         //
-        //                     <Label for="exampleSearch">Choose Target Language</Label>
+        //                     <FormGroup>
+        //                         <Input type="search" name="search" id="exampleSearch" placeholder="search" />
+        //                     </FormGroup>
         //
-        //                     <Input value={this.state.value} onChange={this.handleChange} multiple ref="language" type="select" name="selectMulti" id="exampleSelectMulti" style = {{height: '300px', fontSize: '30px' }}>
-        //                         {this.state.projects.map((project) => <option value = {project.name}>{project.name}</option>)}
+        //                     <Label for="exampleSearch">Choose Chapter</Label>
+        //
+        //                     <Input type="select" name="selectMulti" id="exampleSelectMulti" style = {{height: '300px', fontSize: '30px' }} multiple>
+        //                         {this.state.projects.map((project) => <option>{project.name}</option>)}
         //                     </Input>
-        //                     <input type="submit" value="Submit" />
         //
         //                 </FormGroup>
-        //
         //             </Jumbotron>
         //
         //         </Jumbotron>
         //     </div>
         // );
-
         return (
-
-
-        <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}>
                 <label>
-                    Select Target Language
+                    Select Chapter
                     <select className="selectpicker" value={this.state.value} onChange={this.handleChange}>
-                        {this.state.projects.map((project) => <option value = {project.name}>{project.name}</option>)}
+                        {this.state.chapters.map((take) => <option value = {take.chapter}>{take.chapter}</option>)}
                     </select>
                 </label>
                 <input type="submit" value="Submit" />
             </form>
-
-        );
+        )
     }
 }
 
-export default LanguageDisplay;
+export default BookDisplay;

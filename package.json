@@ -21,7 +21,8 @@
     "react-stars": "^2.1.0",
     "react-transition-group": "^1.2.0",
     "reactstrap": "^4.8.0",
-    "translation-audio-player": "latest"
+    "translation-audio-player": "latest",
+    "axios": "latest"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"

@@ -1,16 +1,19 @@
+/**
+ * Created by ericazhong on 7/7/17.
+ */
 import React, {Component} from 'react';
-import {Button, SplitButton, Modal, ButtonToolbar, MenuItem, Col} from 'react-bootstrap';
-import Version from "./version_display";
+import {Button, Modal, ButtonToolbar} from 'react-bootstrap';
+import BookDisplay from "./Chapter_Display";
 
 
-class LanguageButton extends Component {
+class BookButton extends Component {
 
     constructor(props){
         super(props);
 
 
 
-        this.state = {title : 'Version',
+        this.state = {title : 'Language',
             buttonStyle: 'default',
             show: false
         };
@@ -35,17 +38,14 @@ class LanguageButton extends Component {
     }
 
 
-
     render(){
-
 
         return(
 
 
             <ButtonToolbar>
-
                 <Button bsStyle={this.state.buttonStyle} onClick={this.showModal} bsSize="lg">
-                    ot/nt
+                    Chapter
                 </Button>
 
                 <Modal
@@ -54,10 +54,9 @@ class LanguageButton extends Component {
                     onHide={this.hideModal}
                     dialogClassName="custom-modal"
                 >
-                    <Version/>
-
-
+                    <BookDisplay/>
                 </Modal>
+
             </ButtonToolbar>
 
 
@@ -65,5 +64,5 @@ class LanguageButton extends Component {
 }
 
 
-export default LanguageButton;
+export default BookButton;
 

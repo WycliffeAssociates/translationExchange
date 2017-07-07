@@ -11,7 +11,7 @@ class ChapterContainer extends Component {
         //var chapterID = this.props.match.params.chid;
         //do a web request here for segments (chunks or verses) of chapter...
         //this is just fake data for now
-        if (this.props.match.params.chid == 1) {
+        if (this.props.match.params.chid === 1) {
             this.setState(
                 {
                     segments: [
