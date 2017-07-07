@@ -202,12 +202,19 @@ class ChapterContainer extends Component {
                  />
                  */}
 
-                <ChunkList
-                    segments={this.state.segments}
-                    mode={this.state.mode}
-                />
+                {finalArr.map(this.createChunkList)}
 
             </div>
+        );
+    }
+
+    createChunkList(arr) {
+        return(
+            <ChunkList
+                segments={arr}
+                mode={"chunk"}
+                number={arr[0].startv}
+            />
         );
     }
 }

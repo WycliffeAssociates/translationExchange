@@ -13,9 +13,8 @@ class ChunkList extends Component {
 
                 <Chunk
                     chunk={this.props}
-                    number={1}
+                    number={this.props.number}
                 />
-
 
 
 
