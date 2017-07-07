@@ -1,9 +1,6 @@
-/**
- * Created by nathanalbers on 6/29/17.
- */
-
 import React, {Component} from 'react'
 import Audio from 'translation-audio-player'
+import axios from 'axios'
 
 // requires a name (str) and src (str) when it is called
 // name : name to display on take
@@ -27,11 +24,11 @@ class AudioComponent extends Component {
                 playlist={file}
                 recordButton={() => {
                     alert('Hello');
+                    // insert audio recording component here
                 }}
             />
         );
     }
-
 }
 
 export default AudioComponent

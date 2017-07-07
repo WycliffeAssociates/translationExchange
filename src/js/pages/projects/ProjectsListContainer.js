@@ -21,7 +21,7 @@ class ProjectsListContainer extends Component {
     */
     constructor(props) {
         super(props);
-        this.state = {projects:[]};
+        this.state = {projects:[], languages:[]};
     }
 
     /*
@@ -31,12 +31,14 @@ class ProjectsListContainer extends Component {
     componentDidMount() {
         axios.get('http://172.19.145.91:8000/api/languages/').then(results => {
             this.setState({
-                project:results.data
+                languages:results.data
             })
 
-        })
+        });
+
         //I would do a web request here...
         //Just going to put fake data in state instead
+
         this.setState({projects:
             [
                 {
