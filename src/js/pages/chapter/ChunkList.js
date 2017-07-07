@@ -7,9 +7,6 @@ class ChunkList extends Component {
     render () {
         return (
             <div>
-                {/*this.props.segments.map(this.createListItem.bind(this))*/}
-
-                {/*console.log(this.props)*/}
 
                 <Chunk
                     chunk={this.props}
@@ -17,23 +14,10 @@ class ChunkList extends Component {
                 />
 
 
-
-
-
             </div>
         );
     }
 
-    createListItem (segment) {
-        return (
-            <div>
-                <Chunk
-                    chunk={this.props}
-                />
-
-            </div>
-        );
-    }
 }
 
 ChunkList.propTypes = {

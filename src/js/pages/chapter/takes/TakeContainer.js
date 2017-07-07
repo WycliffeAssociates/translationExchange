@@ -4,8 +4,9 @@ import Star from '../../../shared/Star';
 import AudioComponent from './AudioComponent'
 import axios from 'axios'
 
-var author = ''
+var author
 class TakeContainer extends Component {
+
 
     onRatingSet (newRating) {
         console.log("new rating for take " + this.props.take.id + ": " + newRating);
@@ -29,9 +30,6 @@ class TakeContainer extends Component {
     }
 
     render () {
-
-
-
         return (
 
             <div className="take">
@@ -41,7 +39,6 @@ class TakeContainer extends Component {
                     <Star rating={this.props.take.rating} onChange={this.onRatingSet.bind(this)}/>
                     <AudioComponent
                         src={'http://172.19.145.91:8000/api/stream/' + this.props.take.location}
-                        user={this.props.take.user}
                     />
                 </div>
             </div>
