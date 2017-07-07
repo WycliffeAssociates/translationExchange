@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import ChunkList from "./ChunkList";
 import LoadingDisplay from "../../shared/LoadingDisplay.js";
-
-// this is the page for one chapter
 import axios from 'axios';
 import config from '../../../config';
+
+// this is the page for one chapter
 
 class ChapterContainer extends Component {
     constructor (props) {
@@ -18,7 +18,7 @@ class ChapterContainer extends Component {
 
     requestData () {
         //var chapterID = this.props.match.params.chid;
-        //do a web request here for segments (chunks or verses) of chapter...
+
     //     var self = this;
     //     axios.get(config.apiUrl + 'takes')
     //         .then(function (response) {
@@ -101,9 +101,11 @@ class ChapterContainer extends Component {
     //                     mode={this.state.segments.mode}
     //                 />
     //             </LoadingDisplay>
-        axios.get('http://172.19.145.91:8000/api/takes/', {
+
+        //FIXME: need to use get project API instead of takes list
+        axios.get(config.apiUrl + 'takes/', {
             params: {
-                chapter: 6
+                chapter: this.props.match.params.chid
             }
         }).then((results) => {
 
@@ -138,19 +140,19 @@ class ChapterContainer extends Component {
 
     // creates array containing each chunk and array of each take in that chunk
     createChunkTakes(placeHolderArr) {
-        var uniqueArray = this.findChunks(placeHolderArr)
+        var uniqueArray = this.findChunks(placeHolderArr);
         var finalArr = [];
         for(let i = 0; i < uniqueArray.length; i++) {
-            var counter = 0
-            var chunkArr = []
+            var counter = 0;
+            var chunkArr = [];
 
             for(let j = 0; j < placeHolderArr.length; j++) {
                 if (placeHolderArr[j].startv === uniqueArray[i]) {
-                    chunkArr[counter] = placeHolderArr[j]
+                    chunkArr[counter] = placeHolderArr[j];
                     counter += 1;
                 }
             }
-            finalArr[i] = chunkArr
+            finalArr[i] = chunkArr;
         }
 
         return (
@@ -170,8 +172,8 @@ class ChapterContainer extends Component {
 
     render () {
 
-        var segments = this.state.segments
-        var finalArr = this.createChunkTakes(segments)
+        var segments = this.state.segments;
+        var finalArr = this.createChunkTakes(segments);
 
         return (
             <div>
