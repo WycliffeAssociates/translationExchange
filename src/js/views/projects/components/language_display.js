@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Button, Col, FormGroup, Input, Jumbotron, Label} from "reactstrap";
 import axios from 'axios'
-import config from '../../../../config/config';
-import LoadingDisplay from '../../../components/LoadingDisplay';
+import config from 'config/config';
+import LoadingDisplay from 'js/components/LoadingDisplay';
 
 class LanguageDisplay extends Component {
     /*

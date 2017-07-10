@@ -1,7 +1,7 @@
 import React , {Component} from 'react';
 import LanguageButton from './language_button'
 import VersionButton from './version_button'
-import '../../../../css/filter_buttons.css'
+import 'css/filter_buttons.css'
 import BooksButton from './books_button'
 
 class SearchButtons extends Component {

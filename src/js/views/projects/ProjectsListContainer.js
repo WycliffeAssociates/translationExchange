@@ -9,7 +9,7 @@
 import React, { Component } from 'react';
 import ProjectsList from "./components/ProjectsList";
 import {Table} from "reactstrap";
-import '../../../css/projects.css'
+import 'css/projects.css'
 import SearchButtons from "./components/all_buttons";
 import Jumbotron from "react-bootstrap/es/Jumbotron";
 import axios from 'axios'

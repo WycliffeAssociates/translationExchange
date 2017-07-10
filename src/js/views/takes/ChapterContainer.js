@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import ChunkList from "./components/ChunkList";
-import LoadingDisplay from "../../components/LoadingDisplay.js";
+import LoadingDisplay from "js/components/LoadingDisplay.js";
 import axios from 'axios';
-import config from '../../../config/config';
+import config from 'config/config';
 
 // this is the page for one chapter
 
