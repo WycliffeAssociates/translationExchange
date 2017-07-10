@@ -5,16 +5,18 @@
 import React, { Component } from 'react';
 import {Button, Col, FormGroup, Input, Jumbotron, Label} from "reactstrap";
 import axios from 'axios'
+import config from '../../config';
+import LoadingDisplay from '../shared/LoadingDisplay';
 
 
-class Version extends Component {
+class BooksDisplay extends Component {
     /*
      In the constructor, set the state to being empty so the component
      can render without errors before the API request finishes
      */
     constructor(props) {
         super(props);
-        this.state = {projects:[]};
+        this.state = {loaded: false, error: "", projects:[]};
     }
 
     /*
@@ -23,12 +25,16 @@ class Version extends Component {
      */
 
     componentDidMount() {
-        axios.get('http://172.19.145.91:8000/api/books/').then(results => {
+        this.setState({error: ""});
+        axios.get(config.apiUrl + 'books/'
+        ).then(results => {
             this.setState({
+                loaded: true,
                 projects: results.data
             })
-
-        })
+        }).catch(exception => {
+            this.setState({error: exception});
+        });
     }
 
 
@@ -52,10 +58,14 @@ class Version extends Component {
                             </FormGroup>
                             <Label for="exampleSearch">Choose Book</Label>
 
-                            <Input type="select" name="selectMulti" id="exampleSelectMulti" style = {{height: '300px', fontSize: '20px' }} multiple>
-                                {this.state.projects.map((project) => <option>{project.name}</option>)}
+                            <LoadingDisplay loaded={this.state.loaded}
+                                            error={this.state.error}
+                                            retry={this.componentDidMount.bind(this)}>
+                                <Input type="select" name="selectMulti" id="exampleSelectMulti" style = {{height: '300px', fontSize: '20px' }} multiple>
+                                    {this.state.projects.map((project) => <option>{project.name}</option>)}
 
-                            </Input>
+                                </Input>
+                            </LoadingDisplay>
 
                         </FormGroup>
 
@@ -67,4 +77,4 @@ class Version extends Component {
     }
 }
 
-export default Version;
+export default BooksDisplay;

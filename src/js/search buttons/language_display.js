@@ -3,15 +3,17 @@ import ReactDOM from 'react-dom'
 import {Button, Col, FormGroup, Input, Jumbotron, Label} from "reactstrap";
 import List from './List'
 import axios from 'axios'
+import config from '../../config';
+import LoadingDisplay from '../shared/LoadingDisplay';
 
-class ProjectsListContainer extends Component {
+class LanguageDisplay extends Component {
     /*
      In the constructor, set the state to being empty so the component
      can render without errors before the API request finishes
      */
     constructor(props) {
         super(props);
-        this.state = {projects:[]};
+        this.state = {loaded: false, error: "", languages:[]};
     }
 
 
@@ -21,12 +23,17 @@ class ProjectsListContainer extends Component {
      setState to put the data in state
      */
     componentDidMount() {
-        axios.get('http://172.19.145.91:8000/api/languages/').then(results => {
-            this.setState({
-                projects: results.data
-            })
+        this.setState({error: ""});
 
-        })
+        axios.get(config.apiUrl + 'languages/'
+        ).then(results => {
+                this.setState({
+                    loaded: true,
+                    languages: results.data
+                })
+        }).catch(exception => {
+            this.setState({error: exception});
+        });
     }
 
 
@@ -49,9 +56,15 @@ class ProjectsListContainer extends Component {
                             </FormGroup>
                             <Label for="exampleSearch">Choose Target Language</Label>
 
-                            <Input type="select" name="selectMulti" id="exampleSelectMulti" style = {{height: '300px', fontSize: '30px' }} multiple>
-                                {this.state.projects.map((project) => <option>{project.name}</option>)}
+                            <LoadingDisplay loaded={this.state.loaded}
+                                            error={this.state.error}
+                                            retry={this.componentDidMount.bind(this)}>
+                                <Input type="select" name="selectMulti" id="exampleSelectMulti" style = {{height: '300px', fontSize: '30px' }} multiple>
+
+                                        {this.state.languages.map((language) => <option>{language.name}</option>)}
+
                                 </Input>
+                            </LoadingDisplay>
 
                         </FormGroup>
                     </Jumbotron>
@@ -62,10 +75,4 @@ class ProjectsListContainer extends Component {
 
 }
 
-
-
-
-
-
-
-export default ProjectsListContainer;
+export default LanguageDisplay;
