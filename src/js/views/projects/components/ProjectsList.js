@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import './projects.css'
+import '../../../../css/projects.css'
 import CircularProgressbar from 'react-circular-progressbar';
 import {ReadMore} from 'react-read-more';
 

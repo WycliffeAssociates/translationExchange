@@ -7,10 +7,10 @@
 */
 
 import React, { Component } from 'react';
-import ProjectsList from "./ProjectsList";
+import ProjectsList from "./components/ProjectsList";
 import {Table} from "reactstrap";
-import './projects.css'
-import SearchButtons from "../../search buttons/all_buttons";
+import '../../../css/projects.css'
+import SearchButtons from "./components/all_buttons";
 import Jumbotron from "react-bootstrap/es/Jumbotron";
 import axios from 'axios'
 

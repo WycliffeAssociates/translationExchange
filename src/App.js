@@ -4,13 +4,13 @@
 
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import ChapterContainer from "./js/pages/chapter/ChapterContainer";
-import ProjectsListContainer from "./js/pages/projects/ProjectsListContainer";
-import ProjectContainer from "./js/pages/projects/ProjectContainer";
+import ChapterContainer from "./js/views/takes/ChapterContainer";
+import ProjectsListContainer from "./js/views/projects/ProjectsListContainer";
+import ProjectContainer from "./js/views/chapters/ProjectContainer";
 import './App.css';
-import Header from "./js/layout/header";
-import Home from "./js/pages/home";
-import About from "./js/pages/about";
+import Header from "./js/components/header";
+import Home from "./js/views/home/home";
+import About from "./js/views/about/about";
 
 class App extends Component {
 
