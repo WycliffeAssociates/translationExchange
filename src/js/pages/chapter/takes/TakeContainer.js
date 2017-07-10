@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import TakePropTypes from "./TakePropTypes";
 import Star from '../../../shared/Star';
-import AudioComponent from './AudioComponent'
-import { Button } from 'reactstrap';
+
+import AudioComponent from './AudioComponent';
 import axios from 'axios';
+import config from "../../../../config";
+import { Button } from 'reactstrap';
 
 var author
 class TakeContainer extends Component {
@@ -19,7 +21,7 @@ class TakeContainer extends Component {
     // Retrieves author information from the database
     findAuthor() {
 
-            axios.get('http://172.19.145.91:8000/api/users/').then((results => {
+            axios.get(config.apiUrl + 'users/').then((results => {
 
                 for (let i = 0; i < results.data.length; i++) {
                     if (results.data[i].id === this.props.take.user) {
@@ -39,7 +41,7 @@ class TakeContainer extends Component {
                     <strong>Take {this.props.count} by <font color="blue">{author}</font> on [date]</strong>
                     <Star rating={this.props.take.rating} onChange={this.onRatingSet.bind(this)}/>
                     <AudioComponent
-                        src={'http://172.19.145.91:8000/api/stream/' + this.props.take.location}
+                        src={config.streamingUrl + this.props.take.location}
                     />
                     <Delete/>
                 </div>

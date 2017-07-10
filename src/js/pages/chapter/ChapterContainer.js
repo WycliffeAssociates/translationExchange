@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import ChunkList from "./ChunkList";
 import LoadingDisplay from "../../shared/LoadingDisplay.js";
-
-// this is the page for one chapter
 import axios from 'axios';
 import config from '../../../config';
+
+// this is the page for one chapter
 
 class ChapterContainer extends Component {
     constructor (props) {
@@ -19,9 +19,10 @@ class ChapterContainer extends Component {
     requestData () {
         //var chapterID = this.props.match.params.chid;
         this.setState({ error: "" });
-        axios.get('http://172.19.145.91:8000/api/takes/', {
+        //FIXME: need to use get project API instead of takes list
+        axios.get(config.apiUrl + 'takes/', {
             params: {
-                chapter: 6
+                chapter: this.props.match.params.chid
             }
         }).then((results) => {
             this.setState(
@@ -70,7 +71,7 @@ class ChapterContainer extends Component {
                     counter += 1;
                 }
             }
-            finalArr[i] = chunkArr
+            finalArr[i] = chunkArr;
         }
 
         return (
@@ -91,6 +92,7 @@ class ChapterContainer extends Component {
     render () {
         var segments = this.state.segments;
         var finalArr = this.createChunkTakes(segments);
+
         return (
             <div>
                 <h1>Chapter {this.props.match.params.chid}</h1>
