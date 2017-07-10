@@ -12,6 +12,7 @@ import {Table} from "reactstrap";
 import './projects.css'
 import SearchButtons from "../../search buttons/all_buttons";
 import Jumbotron from "react-bootstrap/es/Jumbotron";
+import axios from 'axios'
 
 class ProjectsListContainer extends Component {
     /*
@@ -29,12 +30,8 @@ class ProjectsListContainer extends Component {
      */
     componentDidMount() {
 
-
         //I would do a web request here...
         //Just going to put fake data in state instead
-
-
-
 
         this.setState({projects:
             [
@@ -115,10 +112,8 @@ class ProjectsListContainer extends Component {
                     <tr>
                         <th>Language</th>
                         <th>Book</th>
-                        <th>Translation Type</th>
                         <th>Percent Complete</th>
-                        <th>Contributors</th>
-                        <th>Date Modified</th>
+                        <th>More</th>
                     </tr>
                     </thead>
 

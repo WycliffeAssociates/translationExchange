@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, SplitButton, Modal, ButtonToolbar, MenuItem, Col} from 'react-bootstrap';
+import {Button, Modal, ButtonToolbar} from 'react-bootstrap';
 import ProjectsListContainer from './language_display'
 
 

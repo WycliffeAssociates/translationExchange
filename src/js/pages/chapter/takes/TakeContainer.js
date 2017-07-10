@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import TakePropTypes from "./TakePropTypes";
 import Star from '../../../shared/Star';
+
 import AudioComponent from './AudioComponent';
 import axios from 'axios';
 import config from "../../../../config";
+import { Button } from 'reactstrap';
 
 var author
 class TakeContainer extends Component {
@@ -41,10 +43,22 @@ class TakeContainer extends Component {
                     <AudioComponent
                         src={config.streamingUrl + this.props.take.location}
                     />
+                    <Delete/>
                 </div>
             </div>
         );
     }
+}
+
+class Delete extends React.Component{
+    render(){
+        return <button type="image" id="myimage"  src='./Bitmap' /*href for where I want to go*/>
+
+
+        </button>//href for where I want to go
+
+    }
+
 }
 
 TakeContainer.propTypes = {
