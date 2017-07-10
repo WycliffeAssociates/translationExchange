@@ -5,6 +5,8 @@
 import React, { Component } from 'react';
 import {Button, Col, FormGroup, Input, Jumbotron, Label} from "reactstrap";
 import axios from 'axios'
+import {Dropdown} from "semantic-ui-react";
+import {languageOptions} from "./common";
 
 
 class Version extends Component {
@@ -39,29 +41,15 @@ class Version extends Component {
     render () {
         return (
             <div>
-                <Jumbotron style={{  margin: '10%', marginTop:'7%', padding: '3px', fontSize: '15px', backgroundColor:'#D4D4D4', borderRadius: '25px'}}>
-                    <h1 style={{textAlign: 'center', fontSize: '23px', color:'white', fontWeight:'bold'}} className="display-3">select book</h1>
-
-                    <Jumbotron fluid style={{backgroundColor: 'white', padding: '15px', paddingBottom:'30px'}}>
-                        <FormGroup>
-                            <h1 style={{textAlign: 'center', fontSize: '23px'}} className="display-3">select the following</h1>
-
-                            <FormGroup>
-
-                                <Input type="search" name="search" id="exampleSearch" placeholder="search" />
-                            </FormGroup>
-                            <Label for="exampleSearch">Choose Book</Label>
-
-                            <Input type="select" name="selectMulti" id="exampleSelectMulti" style = {{height: '300px', fontSize: '20px' }} multiple>
-                                {this.state.projects.map((project) => <option>{project.name}</option>)}
-
-                            </Input>
-
-                        </FormGroup>
-
-                    </Jumbotron>
-
-                </Jumbotron>
+                <Dropdown text='Select Book'
+                          search
+                          floating
+                          labeled
+                          button
+                          className='icon'
+                          icon='comments outline'
+                          options={languageOptions}
+                />
             </div>
         );
     }

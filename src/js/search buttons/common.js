@@ -2,7 +2,7 @@
  * Created by ericazhong on 7/10/17.
  */
 
-// this is where we will request data from server to put into buttons
+// this is where we will request data from server to put into buttons, export and use in the displays
 
 import _ from 'lodash'
 
