@@ -21,9 +21,12 @@ class ChapterContainer extends Component {
             "book":"mrk",
             "chapter":6
         }).then((results) => {
-            this.state.segments = results.data;
-            this.state.mode = 'chunk'
-            this.render()
+            this.setState(
+                {
+                    segments: results.data,
+                    mode:results.data[0].mode
+                }
+            )
         })
 
 
@@ -135,7 +138,6 @@ class ChapterContainer extends Component {
 
         console.log('finalArr', tempArr) // returns array containing one array for ever start verse found (22)
 
-        console.log('cc tempArr', tempArr[1])
         return (
             <div>
                 <h1>Chapter {this.props.match.params.chid}</h1>
@@ -154,7 +156,7 @@ class ChapterContainer extends Component {
     }
 
     createChunkList(arr) {
-        console.log('New ChunkList started...')
+        //console.log('New ChunkList started...')
 
         /*
         console.log(arr)
@@ -164,16 +166,15 @@ class ChapterContainer extends Component {
 
 
         return(
-            <div key = 'a'>
+            <div>
 
                 <ChunkList
                     segments={arr} // array of takes
                     mode={arr[0].take.mode}
                     number={arr[0].take.startv}
                 />
-                {console.log('ChunkList finished')}
+                {/*console.log('ChunkList finished')*/}
 
-                <h3>Rendering...</h3>
             </div>
 
         );

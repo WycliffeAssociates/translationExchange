@@ -31,6 +31,7 @@ class TakeContainer extends Component {
 
     render () {
 
+        //console.log('location finder', this.props)
         return (
 
 
@@ -40,7 +41,7 @@ class TakeContainer extends Component {
                     <strong>Take {this.props.count} by <font color="blue">{author}</font> on [date]</strong>
                     <Star rating={this.props.take.rating} onChange={this.onRatingSet.bind(this)}/>
                     <AudioComponent
-                        src={'http://172.19.145.91:8000/api/stream/' + this.props.take.location}
+                        src={'http://172.19.145.91:8000/api/stream/' + this.props.take.take.location}
                     />
                 </div>
             </div>

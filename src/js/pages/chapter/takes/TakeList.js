@@ -10,8 +10,7 @@ class TakeList extends Component {
         iterator = 0;
         return (
             <div>
-                {/*this.props.takes.map(this.createListItem)*/}
-                <h5>hey</h5>
+                {this.props.takes.map(this.createListItem)}
             </div>
 
         );
@@ -24,6 +23,7 @@ class TakeList extends Component {
                 <TakeContainer
                     take={take} // one take
                     count={iterator}
+
                 />
             </div>
         );

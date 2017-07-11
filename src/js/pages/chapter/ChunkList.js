@@ -10,16 +10,13 @@ class ChunkList extends Component {
         return (
             <div>
 
-                {/*
+                {
                 <Chunk
                     segments={this.props.segments} // array of takes
-                    mode='chunkdfjdlkfjdl'
-                    number={5}
+                    mode={this.props.mode}
+                    number={this.props.number}
                 />
-                */}
-
-                <h5>Chunk</h5>
-
+                }
 
             </div>
         );
