@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Redirect from "react-router-dom/es/Redirect";
-
+import {Table} from 'semantic-ui-react'
 class ChapterList extends Component {
 
     constructor(props) {
@@ -15,32 +14,34 @@ class ChapterList extends Component {
     render () {
         return (
 
-        <tbody>
+        <Table.Body>
         {this.state.redirectToChapter
             ? <Redirect push to={{pathname: this.props.path + '/ch' + this.state.redirectToChapter}}/>
             : this.props.chapters.map(this.createListItem.bind(this))
         }
-        </tbody>
+        </Table.Body>
 
             // <ul>
             //     {this.props.chapters.map(this.createListItem.bind(this))}
+       // <tr onClick={() => this.setState({redirectToChapter: chapter.number})}></tr>
             // </ul>
         );
     }
 
     createListItem (chapter) {
         return (
-        <tr onClick={() => this.setState({redirectToChapter: chapter.number})}>
+
+            <Table.Row onClick={() => this.setState({redirectToChapter: chapter.number})}>
+
+            <Table.Cell>{chapter.number}</Table.Cell>
+            <Table.Cell>{chapter.percentFinished}</Table.Cell>
+            <Table.Cell>{chapter.checkingLevel}</Table.Cell>
+                <Table.Cell>{chapter.contributors}</Table.Cell>
+                <Table.Cell>{chapter.translationType}</Table.Cell>
+                <Table.Cell>{chapter.timestamp}</Table.Cell>
+            </Table.Row>
 
 
-            <th scope="row"> {chapter.number}</th>
-            <td>{chapter.percentFinished} </td>
-            <td>{chapter.checkingLevel}</td>
-            <td>{chapter.contributors}</td>
-            <td>ULB</td>
-            <td>{chapter.timestamp}</td>
-
-        </tr>
             //
             // <li key={chapter.number}>
             //     <Link to={this.props.path + '/ch' + chapter.number}>Chapter {chapter.number}</Link>

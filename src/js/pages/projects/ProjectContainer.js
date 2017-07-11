@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import ChapterList from "../chapter/ChapterList";
-import Jumbotron from "react-bootstrap/es/Jumbotron";
-import Table from "react-bootstrap/es/Table";
-import axios from 'axios'
+import {Table} from "semantic-ui-react";
+
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -25,6 +24,7 @@ class ProjectContainer extends Component {
                         percentFinished: 100.0,
                         checkingLevel: 2,
                         contributors: ["Alison"],
+                        translationType: "ULB",
                         timestamp: "20 June 2017 4:16 pm"
                     },
                     {
@@ -32,6 +32,7 @@ class ProjectContainer extends Component {
                         percentFinished: 16.0,
                         checkingLevel: 0,
                         contributors: ["Bob the Translator"],
+                        translationType: "ULB",
                         timestamp: "20 June 2017 6:07 am"
                     }
                 ]
@@ -43,26 +44,24 @@ class ProjectContainer extends Component {
         return (
             <div>
                 <h1>Matthew (English)</h1>
-                <Jumbotron className="jumbotroncustom">
-                    <Table hover>
-                        <thead>
-                        <tr>
-                            <th>Chapter</th>
-                            <th>Percent Complete</th>
-                            <th>Checking Level</th>
-                            <th>Contributors</th>
-                            <th>Translation Type</th>
-                            <th>Date Modified</th>
-                        </tr>
-                        </thead>
 
-                        <ChapterList
-                            chapters={this.state.chapters}
-                            path={this.props.location.pathname}
-                        />
-                    </Table>
-                </Jumbotron>
+                <Table celled selectable>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Chapter</Table.HeaderCell>
+                            <Table.HeaderCell>Percent Complete</Table.HeaderCell>
+                            <Table.HeaderCell>Checking Level</Table.HeaderCell>
+                            <Table.HeaderCell>Contributors</Table.HeaderCell>
+                            <Table.HeaderCell>Translation Type</Table.HeaderCell>
+                            <Table.HeaderCell>Date Modified</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <ChapterList
+                        chapters={this.state.chapters}
+                        path={this.props.location.pathname}
+                    />
 
+                </Table>
 
 
             </div>

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import {Nav, Navbar, NavDropdown, NavItem} from "react-bootstrap";
-import {LinkContainer} from "react-router-bootstrap";
 import {Menu} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 
