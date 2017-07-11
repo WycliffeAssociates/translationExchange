@@ -7,8 +7,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import {Table} from 'semantic-ui-react'
-import './projects.css'
-import CircularProgressbar from 'react-circular-progressbar';
+import CircularProgressbar from 'react-circular-progressbar'
+import 'css/projects.css'
+
 import {ReadMore} from 'react-read-more';
 
 class ProjectsList extends Component {
@@ -48,7 +49,7 @@ class ProjectsList extends Component {
 
             <Table.Cell>{project.book}</Table.Cell>
             <Table.Cell><CircularProgressbar strokeWidth="20" percentage={project.percentFinished} /></Table.Cell>
-            <Table.Cell onClick={}><ReadMore lines={1} onShowMore={this.props.onChange} text="more">
+            <Table.Cell><ReadMore lines={1} onShowMore={this.props.onChange} text="more">
                              <b>Date Modified</b>: {project.dateModified} <br/>
                              <b>Translation Type</b>: {project.translationType} <br/>
                              <b>Contributors</b>: {project.contributors} <br/>

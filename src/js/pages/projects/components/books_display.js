@@ -7,8 +7,7 @@ import {Button, Col, FormGroup, Input, Jumbotron, Label} from "reactstrap";
 import axios from 'axios'
 import {Dropdown} from "semantic-ui-react";
 import {languageOptions} from "./common";
-import config from '../../config';
-import LoadingDisplay from '../shared/LoadingDisplay';
+import config from 'config/config';
 
 
 class BooksDisplay extends Component {

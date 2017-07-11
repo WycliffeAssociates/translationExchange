@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import TakeContainer from "./TakeContainer";
+import TakeContainer from "../TakeContainer";
 import TakePropTypes from "./TakePropTypes";
 
 var iterator;

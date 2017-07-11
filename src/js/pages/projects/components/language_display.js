@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Dropdown } from 'semantic-ui-react'
 import axios from 'axios'
 import {languageOptions} from "./common";
-import config from '../../config';
-import LoadingDisplay from '../shared/LoadingDisplay';
+import config from 'config/config';
 
 class LanguageDropdown extends Component {
     /*

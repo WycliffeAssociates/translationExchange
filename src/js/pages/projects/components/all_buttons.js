@@ -1,5 +1,4 @@
 import React , {Component} from 'react';
-import './buttons_properties.css'
 import LanguageDropdown from './language_display'
 import BooksDropdown from './books_display'
 import VersionDropdown from './version_display'

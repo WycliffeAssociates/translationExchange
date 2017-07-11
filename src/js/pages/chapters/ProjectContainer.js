@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import ChapterList from "../chapter/ChapterList";
 import {Table} from "semantic-ui-react";
 
+import ChapterList from "./components/ChapterList";
+import axios from 'axios'
 
 class ProjectContainer extends Component {
     constructor (props) {

@@ -10,7 +10,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import LoadingGif from './loading.gif';
+import LoadingGif from 'images/loading.gif';
 
 class LoadingDisplay extends Component{
     render(){
