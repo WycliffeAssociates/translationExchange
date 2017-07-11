@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {Table} from "semantic-ui-react";
-
+import {Container, Header, Table} from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
-import axios from 'axios'
+
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -44,9 +43,10 @@ class ProjectContainer extends Component {
     render () {
         return (
             <div>
-                <h1>Matthew (English)</h1>
-
-                <Table celled selectable>
+                <Container fluid>
+                    {/*header will be dynamic later*/}
+                    <Header as='h1'>Matthew (English)</Header>
+                <Table selectable>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Chapter</Table.HeaderCell>
@@ -63,7 +63,7 @@ class ProjectContainer extends Component {
                     />
 
                 </Table>
-
+                </Container>
 
             </div>
         );

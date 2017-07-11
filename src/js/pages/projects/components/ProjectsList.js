@@ -45,10 +45,10 @@ class ProjectsList extends Component {
         return (
 
 
-        <Table.Row onClick={() => this.setState({redirectToProject: project.id})} scope="row"> {project.language}<Table.Row/>
-
-            <Table.Cell>{project.book}</Table.Cell>
-            <Table.Cell><CircularProgressbar strokeWidth="20" percentage={project.percentFinished} /></Table.Cell>
+        <Table.Row >
+            <Table.Cell onClick={() => this.setState({redirectToProject: project.id})}>{project.language}</Table.Cell>
+            <Table.Cell onClick={() => this.setState({redirectToProject: project.id})}>{project.book}</Table.Cell>
+            <Table.Cell onClick={() => this.setState({redirectToProject: project.id})}><CircularProgressbar strokeWidth="20" percentage={project.percentFinished} /></Table.Cell>
             <Table.Cell><ReadMore lines={1} onShowMore={this.props.onChange} text="more">
                              <b>Date Modified</b>: {project.dateModified} <br/>
                              <b>Translation Type</b>: {project.translationType} <br/>
@@ -56,23 +56,6 @@ class ProjectsList extends Component {
                          </ReadMore></Table.Cell>
 
         </Table.Row>
-
-                 // <tr>
-                 //
-                 //    <th onClick={() => this.setState({redirectToProject: project.id})} className="col-md-3" scope="row"> {project.language}</th>
-                 //    <td className="col-md-3" >{project.book} </td>
-                 //
-                 //     <td className="col-md-2">
-                 //         <CircularProgressbar strokeWidth="20" percentage={project.percentFinished} />
-                 //     </td>
-                 //     <td className="col-md-4" >
-                 //         <ReadMore lines={1} onShowMore={this.props.onChange} text="more">
-                 //             <b>Date Modified</b>: {project.dateModified} <br/>
-                 //             <b>Translation Type</b>: {project.translationType} <br/>
-                 //             <b>Contributors</b>: {project.contributors} <br/>
-                 //         </ReadMore>
-                 //     </td>
-                 // </tr>
 
         );
     }

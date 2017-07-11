@@ -21,10 +21,6 @@ class ChapterList extends Component {
         }
         </Table.Body>
 
-            // <ul>
-            //     {this.props.chapters.map(this.createListItem.bind(this))}
-       // <tr onClick={() => this.setState({redirectToChapter: chapter.number})}></tr>
-            // </ul>
         );
     }
 
@@ -41,12 +37,6 @@ class ChapterList extends Component {
                 <Table.Cell>{chapter.timestamp}</Table.Cell>
             </Table.Row>
 
-
-            //
-            // <li key={chapter.number}>
-            //     <Link to={this.props.path + '/ch' + chapter.number}>Chapter {chapter.number}</Link>
-            // </li>
-            //
         );
     }
 }
