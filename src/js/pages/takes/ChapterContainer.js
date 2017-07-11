@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
 import ChunkList from "./ChunkList";
-import LoadingDisplay from "../../shared/LoadingDisplay.js";
+import LoadingDisplay from "js/components/LoadingDisplay.js";
 import axios from 'axios';
-import config from '../../../config';
+import config from 'config/config';
 
 // this is the page for one chapter
 
@@ -21,7 +21,7 @@ class ChapterContainer extends Component {
         //var chapterID = this.props.match.params.chid;
 
         axios.post('http://172.19.145.91:8000/api/get_project/', {
-        "language":"en-x-demo2",
+            "language":"en-x-demo2",
             "version":"ulb",
             "book":"mrk",
             "chapter":6
@@ -129,13 +129,13 @@ class ChapterContainer extends Component {
                 {tempArr.map(this.createChunkList)}
 
                 {/*
-                {console.log('tempArr', tempArr[1])}
-                <ChunkList
-                    segments={tempArr[1]}
-                    mode={'chunk'}
-                    number={5}
-                />
-                */}
+                 {console.log('tempArr', tempArr[1])}
+                 <ChunkList
+                 segments={tempArr[1]}
+                 mode={'chunk'}
+                 number={5}
+                 />
+                 */}
             </div>
         );
     }
@@ -144,10 +144,10 @@ class ChapterContainer extends Component {
         //console.log('New ChunkList started...')
 
         /*
-        console.log(arr)
-        console.log('mode:', arr[0].take.mode)
-        console.log('num:', arr[0].take.startv)
-        */
+         console.log(arr)
+         console.log('mode:', arr[0].take.mode)
+         console.log('num:', arr[0].take.startv)
+         */
 
 
         return(

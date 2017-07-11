@@ -6,8 +6,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import './projects.css'
-import CircularProgressbar from 'react-circular-progressbar';
+import {Table} from 'semantic-ui-react'
+import CircularProgressbar from 'react-circular-progressbar'
+import 'css/projects.css'
+
 import {ReadMore} from 'react-read-more';
 
 class ProjectsList extends Component {
@@ -25,12 +27,12 @@ class ProjectsList extends Component {
      */
     render () {
         return (
-            <tbody>
+            <Table.Body>
                 {this.state.redirectToProject
                     ? <Redirect push to={{pathname: '/projects/' + this.state.redirectToProject}}/>
                     : this.props.projects.map(this.createListItem.bind(this))
                 }
-            </tbody>
+            </Table.Body>
         );
     }
 
@@ -41,22 +43,19 @@ class ProjectsList extends Component {
     /*{project.percentFinished}*/
     createListItem (project) {
         return (
-                 <tr>
 
-                    <th onClick={() => this.setState({redirectToProject: project.id})} className="col-md-3" scope="row"> {project.language}</th>
-                    <td className="col-md-3" >{project.book} </td>
 
-                     <td className="col-md-2">
-                         <CircularProgressbar strokeWidth="20" percentage={project.percentFinished} />
-                     </td>
-                     <td className="col-md-4" >
-                         <ReadMore lines={1} onShowMore={this.props.onChange} text="more">
+        <Table.Row >
+            <Table.Cell onClick={() => this.setState({redirectToProject: project.id})}>{project.language}</Table.Cell>
+            <Table.Cell onClick={() => this.setState({redirectToProject: project.id})}>{project.book}</Table.Cell>
+            <Table.Cell onClick={() => this.setState({redirectToProject: project.id})}><CircularProgressbar strokeWidth="20" percentage={project.percentFinished} /></Table.Cell>
+            <Table.Cell><ReadMore lines={1} onShowMore={this.props.onChange} text="more">
                              <b>Date Modified</b>: {project.dateModified} <br/>
                              <b>Translation Type</b>: {project.translationType} <br/>
                              <b>Contributors</b>: {project.contributors} <br/>
-                         </ReadMore>
-                     </td>
-                 </tr>
+                         </ReadMore></Table.Cell>
+
+        </Table.Row>
 
         );
     }

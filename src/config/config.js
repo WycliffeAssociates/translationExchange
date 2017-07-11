@@ -7,6 +7,6 @@
 var config = {
     apiUrl: "http://172.19.145.91:8000/api/",
     streamingUrl: "http://172.19.145.91:8000/api/stream/"
-}
+};
 
 export default config;

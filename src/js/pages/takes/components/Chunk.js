@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TakeList from "./takes/TakeList";
+import TakeList from "./TakeList";
 import ChunkPropTypes from "./ChunkPropTypes";
 import { Button, Panel } from "react-bootstrap";
 

@@ -7,12 +7,10 @@
 */
 
 import React, { Component } from 'react';
-import ProjectsList from "./ProjectsList";
-import {Table} from "reactstrap";
-import './projects.css'
-import SearchButtons from "../../search buttons/all_buttons";
-import Jumbotron from "react-bootstrap/es/Jumbotron";
-import axios from 'axios'
+import ProjectsList from "./components/ProjectsList";
+import 'css/projects.css'
+import SearchButtons from "./components/all_buttons";
+import {Container, Header, Table} from "semantic-ui-react";
 
 class ProjectsListContainer extends Component {
     /*
@@ -104,25 +102,25 @@ class ProjectsListContainer extends Component {
                 <div className="App-buttons">
                     <SearchButtons/>
                 </div>
+                <Container fluid>
+                    <Header as='h1'>Available Projects</Header>
 
-                <h1 className="center">Available Projects</h1>
-                <Jumbotron className="jumbotroncustom">
-                <Table hover>
-                    <thead>
-                    <tr>
-                        <th>Language</th>
-                        <th>Book</th>
-                        <th>Percent Complete</th>
-                        <th>More</th>
-                    </tr>
-                    </thead>
+                <Table selectable fixed>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Language</Table.HeaderCell>
+                            <Table.HeaderCell>Book</Table.HeaderCell>
+                            <Table.HeaderCell>Percent Complete</Table.HeaderCell>
+                            <Table.HeaderCell>More</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+
 
                     <ProjectsList projects={this.state.projects}/>
 
                 </Table>
-                </Jumbotron>
 
-
+                </Container>
 
             </div>
         );

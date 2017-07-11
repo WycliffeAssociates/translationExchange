@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import TakePropTypes from "./TakePropTypes";
-import Star from '../../../shared/Star';
+import TakePropTypes from "./components/TakePropTypes";
+import Star from './components/Star';
 
-import AudioComponent from './AudioComponent';
+import AudioComponent from './components/AudioComponent';
 import axios from 'axios';
-import config from "../../../../config";
+import config from "config/config";
 import { Button } from 'reactstrap';
 
 var author
