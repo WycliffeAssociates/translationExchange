@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import LanguageDropdown from './language_display'
+import LanguageDropdown from './language_dropdown'
 import BooksDropdown from './books_display'
 import VersionDropdown from './version_display'
 
@@ -10,8 +10,8 @@ class SearchButtons extends Component {
         return (
             <div style={{paddingLeft:'30px', paddingBottom:'20px'}}>
                 <LanguageDropdown/>
-                <BooksDropdown/>
-                <VersionDropdown/>
+                {/*<BooksDropdown/>*/}
+                {/*<VersionDropdown/>*/}
 
             </div>
 

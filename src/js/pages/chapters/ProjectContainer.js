@@ -13,8 +13,6 @@ class ProjectContainer extends Component {
 
     componentDidMount () {
 
-
-
         //request project and chapter info here...
         this.setState(
             {

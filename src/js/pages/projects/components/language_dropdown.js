@@ -38,28 +38,6 @@ class LanguageDropdown extends Component {
     render () {
         return (
             <div>
-                {/*<Jumbotron style={{  margin: '10%', marginTop:'7%', padding: '3px', fontSize: '15px', backgroundColor:'#D4D4D4', borderRadius: '25px'}}>*/}
-                    {/*<h1 style={{textAlign: 'center', fontSize: '23px', color:'white', fontWeight:'bold'}} className="display-3">select language</h1>*/}
-
-                    {/*<Jumbotron fluid style={{backgroundColor: 'white', padding: '15px', paddingBottom:'30px'}}>*/}
-                        {/*<FormGroup>*/}
-                            {/*<h1 style={{textAlign: 'center', fontSize: '23px'}} className="display-3">select the following</h1>*/}
-
-                            {/*<FormGroup>*/}
-
-                                {/*<Input type="search" name="search" id="exampleSearch" placeholder="search" />*/}
-                            {/*</FormGroup>*/}
-                            {/*<Label for="exampleSearch">Choose Target Language</Label>*/}
-
-                            {/*<LoadingDisplay loaded={this.state.loaded}*/}
-                                            {/*error={this.state.error}*/}
-                                            {/*retry={this.componentDidMount.bind(this)}>*/}
-                                {/*<Input type="select" name="selectMulti" id="exampleSelectMulti" style = {{height: '300px', fontSize: '30px' }} multiple>*/}
-
-                                        {/*{this.state.languages.map((language) => <option>{language.name}</option>)}*/}
-
-                                {/*</Input>*/}
-                            {/*</LoadingDisplay>*/}
 
                 <Dropdown text='Select Language'
                           search
@@ -68,6 +46,24 @@ class LanguageDropdown extends Component {
                           button
                           className='icon'
                           icon='world'
+                          options={languageOptions}
+                />
+                <Dropdown text='Select Book'
+                          search
+                          floating
+                          labeled
+                          button
+                          className='icon'
+                          icon='comments outline'
+                          options={languageOptions}
+                />
+                <Dropdown text='Select Version'
+                          search
+                          floating
+                          labeled
+                          button
+                          className='icon'
+                          icon='comments outline'
                           options={languageOptions}
                 />
             </div>

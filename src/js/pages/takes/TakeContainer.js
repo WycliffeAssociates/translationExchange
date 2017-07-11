@@ -54,7 +54,6 @@ class Delete extends React.Component{
     render(){
         return <button type="image" id="myimage"  src='./Bitmap' /*href for where I want to go*/>
 
-
         </button>//href for where I want to go
 
     }
