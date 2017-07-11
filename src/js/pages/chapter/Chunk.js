@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import TakeList from "./takes/TakeList";
-import TakeContainer from './takes/TakeContainer'
 import ChunkPropTypes from "./ChunkPropTypes";
-import AudioComponent from './takes/AudioComponent'
 import { Button, Panel } from "react-bootstrap";
 
 class Chunk extends Component {

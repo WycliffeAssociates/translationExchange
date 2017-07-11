@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Button, Col, FormGroup, Input, Jumbotron, Label} from "reactstrap";
+import axios from 'axios'
+
 
 class Version extends Component {
     /*
@@ -16,42 +18,15 @@ class Version extends Component {
      setState to put the data in state
      */
 
-
     componentDidMount() {
-        //I would do a web request here...
-        //Just going to put fake data in state instead
-        this.setState({projects:
-            [
-                {
-                    id: 16,
-                    book: "Matthew",
-                    language: "English",
-                    translationType: "Unlocked Literal Bible",
-                    percentFinished: 5.6,
-                    contributors: ["Alison"],
-                    dateModified: "20 June 2017 4:16 pm"
-                },
-                {
-                    id: 17,
-                    book: "Mark",
-                    language: "English",
-                    translationType: "Unlocked Literal Bible",
-                    percentFinished: 5.6,
-                    contributors: ["Alison"],
-                    dateModified: "20 June 2017 4:16 pm"
-                },
-                {
-                    id: 18,
-                    book: "Luke",
-                    language: "English",
-                    translationType: "Unlocked Literal Bible",
-                    percentFinished: 5.6,
-                    contributors: ["Alison"],
-                    dateModified: "20 June 2017 4:16 pm"
-                }
-            ]
-        });
+        axios.get('http://172.19.145.91:8000/api/languages/').then(results => {
+            this.setState({
+                projects: results.data
+            })
+
+        })
     }
+
 
     /*
      In render, just render a child presentation component, passing it
@@ -80,10 +55,11 @@ class Version extends Component {
                                 <option>New Testament/Unlocked Dynamic Bible</option>
                                 <option>Old Testament/Regular</option>
                                 <option>New Testament/Regular</option>
+
                             </Input>
 
                         </FormGroup>
-                        {/*<ProjectsList projects={this.state.projects}/>*/}
+
                     </Jumbotron>
 
                 </Jumbotron>

@@ -1,19 +1,24 @@
 import React, {Component} from 'react';
-import ChunkList from './ChunkList';
-import axios from 'axios'
-import TakeContainer from '/Users/nathanalbers/Documents/Programs/Github/8woc2017/src/js/pages/chapter/takes/TakeContainer.js'
+
+import ChunkList from "./ChunkList";
+import LoadingDisplay from "../../shared/LoadingDisplay.js";
+import axios from 'axios';
+import config from '../../../config';
 
 // this is the page for one chapter
+
 class ChapterContainer extends Component {
     constructor (props) {
         super(props);
-        this.state = {segments: [], mode: "", source: "", takeList: []};
+        this.state = {loaded: false, retry: null, segments: [], mode: "", source: "", takeList: []};
     }
 
     componentDidMount () {
-        //var chapterID = this.props.match.params.chid;
-        //do a web request here for segments (chunks or verses) of chapter...
+        this.requestData();
+    }
 
+    requestData () {
+        //var chapterID = this.props.match.params.chid;
 
         axios.post('http://172.19.145.91:8000/api/get_project/', {
         "language":"en-x-demo2",
@@ -27,26 +32,7 @@ class ChapterContainer extends Component {
                     mode:results.data[0].mode
                 }
             )
-        })
-
-
-
-/*
-        // functional
-        axios.get('http://172.19.145.91:8000/api/takes/', {
-            params: {
-                chapter: 6
-            }
-        }).then((results) => {
-            this.setState(
-                {
-                    segments: results.data,
-                    mode: results.data[0].mode
-                }
-            )
         });
-
-*/
 
     }
 
@@ -73,19 +59,19 @@ class ChapterContainer extends Component {
     // creates array containing each chunk and array of each take in that chunk
     // needs to be rewritten
     createChunkTakes(placeHolderArr) {
-        var uniqueArray = this.findChunks(placeHolderArr)
+        var uniqueArray = this.findChunks(placeHolderArr);
         var finalArr = [];
         for(let i = 0; i < uniqueArray.length; i++) {
-            var counter = 0
-            var chunkArr = []
+            var counter = 0;
+            var chunkArr = [];
 
             for(let j = 0; j < placeHolderArr.length; j++) {
                 if (placeHolderArr[j].startv === uniqueArray[i]) {
-                    chunkArr[counter] = placeHolderArr[j]
+                    chunkArr[counter] = placeHolderArr[j];
                     counter += 1;
                 }
             }
-            finalArr[i] = chunkArr
+            finalArr[i] = chunkArr;
         }
 
         console.log('createChunkTakes() finished')
@@ -97,7 +83,6 @@ class ChapterContainer extends Component {
 
 
     render () {
-
         var segments = this.state.segments
         {console.log('segments', segments)} // returns array of 23 objects
 
