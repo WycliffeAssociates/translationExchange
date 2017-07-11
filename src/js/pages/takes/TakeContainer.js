@@ -62,8 +62,6 @@ class TakeContainer extends Component {
                 <Delete/>
                     </Grid.Column >
 
-                    <Divider vertical>Or</Divider>
-
                     <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
                     {this.state.isToggleOn ? '' :
 
