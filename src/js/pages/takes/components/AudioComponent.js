@@ -8,13 +8,15 @@ import axios from 'axios'
 
 class AudioComponent extends Component {
 
+
     render() {
+
 
         var file = [];
         file[0] = {
-            "name": this.props.name,
             "src": this.props.src
         }
+
 
         return(
             <Audio
