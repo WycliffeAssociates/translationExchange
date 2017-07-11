@@ -10,8 +10,8 @@ class TakeList extends Component {
         iterator = 0;
         return (
             <div>
-                {this.props.takes.map(this.createListItem)}
-
+                {/*this.props.takes.map(this.createListItem)*/}
+                <h5>hey</h5>
             </div>
 
         );
@@ -22,17 +22,16 @@ class TakeList extends Component {
         return (
             <div>
                 <TakeContainer
-                    take={take}
+                    take={take} // one take
                     count={iterator}
                 />
             </div>
         );
     }
 }
-
+/*
 TakeList.propTypes = {
     takes: PropTypes.arrayOf(TakePropTypes).isRequired
 };
-// fields : id, audioSource, author, rating, timeStamp
-
+*/
 export default TakeList;

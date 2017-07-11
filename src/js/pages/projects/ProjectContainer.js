@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ChapterList from "../chapter/ChapterList";
 import Jumbotron from "react-bootstrap/es/Jumbotron";
 import Table from "react-bootstrap/es/Table";
-import axios from 'axios'
 
 class ProjectContainer extends Component {
     constructor (props) {

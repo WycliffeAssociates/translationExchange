@@ -30,7 +30,9 @@ class TakeContainer extends Component {
     }
 
     render () {
+
         return (
+
 
             <div className="take">
                 <div>
