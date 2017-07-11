@@ -5,7 +5,7 @@ import Star from './components/Star';
 import AudioComponent from './components/AudioComponent';
 import axios from 'axios';
 import config from "config/config";
-import {Button, Card, Divider, Grid, Segment} from "semantic-ui-react";
+import {Button, Grid, Segment} from "semantic-ui-react";
 
 var author
 class TakeContainer extends Component {

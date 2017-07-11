@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Container, Header, Table} from "semantic-ui-react";
+import {Button, Container, Header, Icon, Input, Label, Table} from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
 
 
@@ -41,9 +41,26 @@ class ProjectContainer extends Component {
     render () {
         return (
             <div>
+                UPLOAD SOURCE AUDIO
+                <input id="upload" ref="upload" type="file" accept=".pdf"
+                       // onChange={(event)=> {
+                       //     this.readFile(event)
+                       // }}
+                       onClick={(e)=> {
+                           e.target.value = null
+                       }}
+
+                />
+                <Button>
+                    Upload
+                </Button>
+
                 <Container fluid>
                     {/*header will be dynamic later*/}
                     <Header as='h1'>Matthew (English)</Header>
+
+
+
                 <Table selectable>
                     <Table.Header>
                         <Table.Row>
