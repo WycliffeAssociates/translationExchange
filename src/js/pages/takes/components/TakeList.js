@@ -18,6 +18,7 @@ class TakeList extends Component {
 
     createListItem (take) {
         iterator += 1;
+
         return (
             <div>
                 <TakeContainer
@@ -29,9 +30,9 @@ class TakeList extends Component {
         );
     }
 }
-/*
+
 TakeList.propTypes = {
     takes: PropTypes.arrayOf(TakePropTypes).isRequired
 };
-*/
+
 export default TakeList;

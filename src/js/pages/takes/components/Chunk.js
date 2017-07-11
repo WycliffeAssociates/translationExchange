@@ -27,7 +27,8 @@ class Chunk extends Component {
                 modeLabel = "Segment";
         }
 
-        {console.log('segments', this.props.segments)}
+
+
         return (
             <div>
                 <Button onClick={this.toggle.bind(this)}>
@@ -45,9 +46,9 @@ class Chunk extends Component {
     }
 
 }
-/*
+
 Chunk.propTypes = {
     chunk: ChunkPropTypes
 };
-*/
+
 export default Chunk;
