@@ -16,7 +16,6 @@
     "react-addons-transition-group": "^15.6.0",
     "react-audio-player": "^0.5.0",
     "react-audioplayer": "^0.3.0",
-    "react-bootstrap": "^0.31.0",
     "react-circular-progressbar": "^0.1.5",
     "react-dom": "^15.6.1",
     "react-howler": "^3.6.2",
@@ -26,7 +25,6 @@
     "react-router-dom": "^4.1.1",
     "react-stars": "^2.1.0",
     "react-transition-group": "^1.2.0",
-    "reactstrap": "^4.8.0",
     "semantic-ui-css": "^2.2.10",
     "semantic-ui-react": "^0.71.0",
     "translation-audio-player": "^1.0.1"

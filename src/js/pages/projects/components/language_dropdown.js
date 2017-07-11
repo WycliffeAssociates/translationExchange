@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Dropdown } from 'semantic-ui-react'
 import axios from 'axios'
-import {languageOptions} from "./common";
+import {bookOptions, languageOptions} from "./common";
 import config from 'config/config';
 
 class LanguageDropdown extends Component {
@@ -39,7 +39,7 @@ class LanguageDropdown extends Component {
         return (
             <div>
 
-                <Dropdown text='Select Language'
+                <Dropdown placeholder='Select Language'
                           search
                           floating
                           labeled
@@ -48,16 +48,17 @@ class LanguageDropdown extends Component {
                           icon='world'
                           options={languageOptions}
                 />
-                <Dropdown text='Select Book'
+                <Dropdown placeholder='Select Book'
                           search
                           floating
                           labeled
                           button
                           className='icon'
                           icon='comments outline'
-                          options={languageOptions}
+                          options={bookOptions}
                 />
-                <Dropdown text='Select Version'
+                <Dropdown
+                    placeholder='Select Version'
                           search
                           floating
                           labeled

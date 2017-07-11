@@ -5,7 +5,6 @@ import Star from './components/Star';
 import AudioComponent from './components/AudioComponent';
 import axios from 'axios';
 import config from "config/config";
-import { Button } from 'reactstrap';
 
 var author
 class TakeContainer extends Component {
