@@ -6,7 +6,8 @@ var TakePropTypes = PropTypes.shape(
         audioSource: PropTypes.string.isRequired,
         author: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
-        timestamp: PropTypes.string.isRequired
+        timestamp: PropTypes.string.isRequired,
+        isExport: PropTypes.bool.isRequired
     }
 ).isRequired;
 

@@ -10,6 +10,18 @@ import { Button } from 'reactstrap';
 var author
 class TakeContainer extends Component {
 
+    toggleMarkedForExport () {
+        var markedForExport = !this.props.take.take.is_export;
+        console.log("id " + this.props.take.take.id + " marked for export as " + markedForExport);
+        console.dir(this.props);
+
+        axios.patch(config.apiUrl + 'takes/' + this.props.take.take.id + '/', {
+            "is_export":markedForExport
+        }).then((results) => {
+            console.log("MARKED FOR EXPORT");
+            console.dir(results);
+        });
+    }
 
     onRatingSet (newRating) {
         console.log("new rating for take " + this.props.take.id + ": " + newRating);
@@ -47,6 +59,7 @@ class TakeContainer extends Component {
                         src={config.streamingUrl + this.props.take.location}
                     />
                     <Delete/>
+                    <button onClick={this.toggleMarkedForExport.bind(this)}>Toggle Export</button>
                 </div>
             </div>
         );
