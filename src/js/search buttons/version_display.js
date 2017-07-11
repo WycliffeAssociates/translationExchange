@@ -20,14 +20,14 @@ class Version extends Component {
      setState to put the data in state
      */
 
-    componentDidMount() {
-        axios.get('http://172.19.145.91:8000/api/languages/').then(results => {
-            this.setState({
-                projects: results.data
-            })
-
-        })
-    }
+    // componentDidMount() {
+    //     axios.get('http://172.19.145.91:8000/api/languages/').then(results => {
+    //         this.setState({
+    //             projects: results.data
+    //         })
+    //
+    //     })
+    // }
 
 
     /*

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Modal, ButtonToolbar} from 'react-bootstrap';
-import ProjectsListContainer from './language_display'
+import LanguageDisplay from './language_display'
 
 
 class LanguageButton extends Component {
@@ -51,7 +51,7 @@ render(){
                 onHide={this.hideModal}
                 dialogClassName="custom-modal"
             >
-                <ProjectsListContainer/>
+                <LanguageDisplay/>
             </Modal>
 
         </ButtonToolbar>

@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import {Button, SplitButton, Modal, ButtonToolbar, MenuItem, Col} from 'react-bootstrap';
-import Books from "./books_display";
+import BooksDisplay from "./books_display";
 
 
 class BooksButton extends Component {
@@ -58,7 +58,7 @@ class BooksButton extends Component {
                     onHide={this.hideModal}
                     dialogClassName="custom-modal"
                 >
-                    <Books/>
+                    <BooksDisplay/>
 
 
                 </Modal>
