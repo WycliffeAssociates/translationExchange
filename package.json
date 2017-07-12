@@ -25,15 +25,9 @@
     "react-router-dom": "^4.1.1",
     "react-stars": "^2.1.0",
     "react-transition-group": "^1.2.0",
-<<<<<<< HEAD
-    "reactstrap": "^4.8.0",
-    "translation-audio-player": "latest",
-    "axios": "latest"
-=======
     "semantic-ui-css": "^2.2.10",
     "semantic-ui-react": "^0.71.0",
     "translation-audio-player": "^1.0.1"
->>>>>>> M&R_Dev
   },
   "devDependencies": {
     "babel-jest": "^20.0.3",
