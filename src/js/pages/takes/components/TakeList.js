@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import TakeContainer from "./TakeContainer";
+import TakeContainer from "../TakeContainer";
 import TakePropTypes from "./TakePropTypes";
 
+var iterator;
 class TakeList extends Component {
     render () {
 
+        iterator = 0;
         return (
             <div>
                 {this.props.takes.map(this.createListItem)}
-
             </div>
 
         );
     }
 
     createListItem (take) {
+        iterator += 1;
+
         return (
-            <TakeContainer
-                take={take}
-            />
+            <div>
+                <TakeContainer
+                    take={take} // one take
+                    count={iterator}
+
+                />
+            </div>
         );
     }
 }
@@ -27,6 +34,5 @@ class TakeList extends Component {
 TakeList.propTypes = {
     takes: PropTypes.arrayOf(TakePropTypes).isRequired
 };
-// fields : id, audioSource, author, rating, timeStamp
 
 export default TakeList;

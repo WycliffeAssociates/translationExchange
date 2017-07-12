@@ -6,27 +6,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import './projects.css'
+import {Table} from 'semantic-ui-react'
+import CircularProgressbar from 'react-circular-progressbar'
+import 'css/projects.css'
+
+import {ReadMore} from 'react-read-more';
 
 class ProjectsList extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            redirectToProject: null
+            redirectToProject: null,
+
         };
+
     }
     /*
         Render data in props, passed to this component by its parent container component
      */
     render () {
         return (
-            <tbody>
+            <Table.Body>
                 {this.state.redirectToProject
                     ? <Redirect push to={{pathname: '/projects/' + this.state.redirectToProject}}/>
                     : this.props.projects.map(this.createListItem.bind(this))
                 }
-            </tbody>
+            </Table.Body>
         );
     }
 
@@ -37,33 +43,23 @@ class ProjectsList extends Component {
     /*{project.percentFinished}*/
     createListItem (project) {
         return (
-                 <tr onClick={() => this.setState({redirectToProject: project.id})}>
 
 
-                    <th scope="row"> {project.language}</th>
-                    <td>{project.book} </td>
-                    <td>{project.translationType}</td>
-                    <td>
-                        <div className='progress'>
-                            <div className='progress-bar'
-                                 role='progressbar'
-                                 aria-valuenow={project.percentFinished}
-                                 aria-valuemin='0'
-                                 aria-valuemax='100'
-                                 style={{width: '70%'}}>
-                            </div>
-                        </div>
+        <Table.Row >
+            <Table.Cell onClick={() => this.setState({redirectToProject: project.id})}>{project.language}</Table.Cell>
+            <Table.Cell onClick={() => this.setState({redirectToProject: project.id})}>{project.book}</Table.Cell>
+            <Table.Cell onClick={() => this.setState({redirectToProject: project.id})}><CircularProgressbar strokeWidth="20" percentage={project.percentFinished} /></Table.Cell>
+            <Table.Cell><ReadMore lines={1} onShowMore={this.props.onChange} text="more">
+                             <b>Date Modified</b>: {project.dateModified} <br/>
+                             <b>Translation Type</b>: {project.translationType} <br/>
+                             <b>Contributors</b>: {project.contributors} <br/>
+                         </ReadMore></Table.Cell>
 
-
-                    </td>
-                    <td>{project.contributors}</td>
-                    <td>{project.dateModified}</td>
-                 </tr>
+        </Table.Row>
 
         );
     }
 }
-
 /*
     Use PropTypes to define what props this component expects. If it's passed the wrong props,
     you'll get warnings while you're in development mode
