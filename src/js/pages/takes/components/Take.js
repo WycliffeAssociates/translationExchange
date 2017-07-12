@@ -59,7 +59,7 @@ class Take extends Component {
             <div className="take">
                 <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate()}</strong>
                 <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
-                <TakeButton/>
+                <TakeButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
 
                 <Grid columns={2} relaxed>
                     <Grid.Column width={9}>
