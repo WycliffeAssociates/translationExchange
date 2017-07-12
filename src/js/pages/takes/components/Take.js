@@ -9,7 +9,7 @@ import RadioTest from './RadioTest'
 import { Form, Radio } from 'semantic-ui-react'
 import { state, handleChange } from './Take'
 import { Icon } from 'semantic-ui-react'
-
+import TakeButton from './SelectTake'
 
 
 
@@ -58,6 +58,7 @@ class Take extends Component {
             <div className="take">
                 <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate()}</strong>
                 <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
+                <TakeButton/>
 
                 <Grid columns={2} relaxed>
                     <Grid.Column width={9}>
@@ -76,31 +77,6 @@ class Take extends Component {
                         <Segment basic>
                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
                         </Segment>
-                        <Form>
-                            <Form.Field>
-                                Selected value: <b>{this.state.value}</b>
-                            </Form.Field>
-                            <Form.Field>
-                                <Radio
-                                    label='val this'
-                                    name='radioGroup'
-                                    value={val}
-                                    checked={this.state.value === val}
-                                    onChange={this.handleChange}
-                                />
-                            </Form.Field>
-
-                            <Form.Field>
-                                <Radio
-                                    label='Or that'
-                                    name='radioGroup'
-                                    value='that'
-                                    checked={this.state.value === 'that'}
-                                    onChange={this.handleChange}
-                                />
-                            </Form.Field>
-                        </Form>
-                        <RadioButton/>
                     </Grid.Column>}
                 </Grid>
             </div>
@@ -165,7 +141,7 @@ class Delete extends React.Component{
     render(){
         return(
             <Button icon>
-                <Icon name='trash' />
+                <Icon name='trash' size="large" />
             </Button>
         )
 
