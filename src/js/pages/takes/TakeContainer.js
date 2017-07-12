@@ -114,7 +114,7 @@ class TakeContainer extends Component {
                 break;
         }
 
-        var hour = parseInt(time[0])
+        var hour = parseInt(time[0]);
         if((hour / 12) > -1)
             {noon = 'pm'}
 
@@ -129,7 +129,7 @@ class TakeContainer extends Component {
 class Delete extends React.Component{
     render(){
         return <button type="image" id="myimage"  src='./Bitmap' /*href for where I want to go*/>
-
+Delete
         </button>//href for where I want to go
 
     }

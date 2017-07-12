@@ -102,10 +102,10 @@ class ProjectsListContainer extends Component {
                 <div className="App-buttons">
                     <SearchButtons/>
                 </div>
-                <Container fluid>
+                <Container fluid >
                     <Header as='h1'>Available Projects</Header>
 
-                <Table selectable fixed>
+                <Table selectable fixed color="blue">
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Language</Table.HeaderCell>
