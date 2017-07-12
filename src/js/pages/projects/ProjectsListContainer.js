@@ -21,114 +21,109 @@ class ProjectsListContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            languages:[],
-            books:[],
-            version:[],
-            projects:[]
+            languages: [],
+            books: [],
+            version: [],
+            projects: []
         };
 
-    }
 
-    /*
-     In componentDidMount, do the API request for the data and then use
-     setState to put the data in state
-     */
-
+        /*
+         In componentDidMount, do the API request for the data and then use
+         setState to put the data in state
+         */
 
 
-    componentDidMount() {
-
-        axios.post('http://172.19.145.91:8000/api/get_project/', {
-            params: {"language": "en-x-demo2", "book":"mark", "version":"reg"}
-
-        }).then(results => {
-            console.log(results.data);
-            this.setState({
-                projects: results.data
-
-            })
-        });
-
-    }
-
+        // componentDidMount() {
+        //
+        //     axios.post('http://172.19.145.91:8000/api/get_project/', {
+        //         params: {"language": "en-x-demo2", "book":"mark", "version":"reg"}
+        //
+        //     }).then(results => {
+        //         this.setState({
+        //             projects: results.data
+        //
+        //         })
+        //     });
+        //
+        // }
 
 
-
-
-    //         .then(results => {
-    //             console.log(results.data);
-    //             this.setState({
-    //                 projects: results.data
-    //             })
-    //         }
-    //
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         });
-    // }
-
-        //I would do a web request here...
-        //Just going to put fake data in state instead
-
-        // this.setState({projects:
-        //     [
-        //         {
-        //             id: 16,
-        //             book: "Matthew",
-        //             language: "English",
-        //             translationType: "Unlocked Literal Bible",
-        //             percentFinished: 7,
-        //             contributors: ["Alison ","Erica"],
-        //             dateModified: "20 June 2017 4:16 pm"
-        //         },
-        //         {
-        //             id: 17,
-        //             book: "Mark",
-        //             language: "English",
-        //             translationType: "Unlocked Dynamic Bible",
-        //             percentFinished: 10,
-        //             contributors: ["Alison"],
-        //             dateModified: "20 March 2016 3:16 pm"
-        //         },
-        //         {
-        //             id: 18,
-        //             book: "Luke",
-        //             language: "English",
-        //             translationType: "Unlocked Dynamic Bible",
-        //             percentFinished: 25,
-        //             contributors: ["Juan"],
-        //             dateModified: "3 June 2015 9:33 pm"
-        //         },
-        //         {
-        //             id: 20,
-        //             book: "Genesis",
-        //             language: "Spanish",
-        //             translationType: "Unlocked Literal Bible",
-        //             percentFinished: 40,
-        //             contributors: ["Michael"],
-        //             dateModified: "20 June 2017 3:30 am"
-        //         },
-        //         {
-        //             id: 18,
-        //             book: "Exodus",
-        //             language: "English",
-        //             translationType: "Unlocked Literal Bible",
-        //             percentFinished: 87,
-        //             contributors: ["Dennis"],
-        //             dateModified: "26 March 2017 12:04 pm"
-        //         },
-        //         {
-        //             id: 18,
-        //             book: "Leviticus",
-        //             language: "Spanish",
-        //             translationType: "Unlocked Literal Bible",
-        //             percentFinished: 12,
-        //             contributors: ["Nathan"],
-        //             dateModified: "28 February  2017 8:35 am"
+        //         .then(results => {
+        //             console.log(results.data);
+        //             this.setState({
+        //                 projects: results.data
+        //             })
         //         }
-        //     ]
-        // });
+        //
+        //         .catch(function (error) {
+        //             console.log(error);
+        //         });
+        // }
+        //
+        //     I would do a web request here...
+        //     Just going to put fake data in state instead
 
+        this.setState({
+            projects: [
+                {
+                    id: 16,
+                    book: "Matthew",
+                    language: "English",
+                    translationType: "Unlocked Literal Bible",
+                    percentFinished: 7,
+                    contributors: ["Alison ", "Erica"],
+                    dateModified: "20 June 2017 4:16 pm"
+                },
+                {
+                    id: 17,
+                    book: "Mark",
+                    language: "English",
+                    translationType: "Unlocked Dynamic Bible",
+                    percentFinished: 10,
+                    contributors: ["Alison"],
+                    dateModified: "20 March 2016 3:16 pm"
+                },
+                {
+                    id: 18,
+                    book: "Luke",
+                    language: "English",
+                    translationType: "Unlocked Dynamic Bible",
+                    percentFinished: 25,
+                    contributors: ["Juan"],
+                    dateModified: "3 June 2015 9:33 pm"
+                },
+                {
+                    id: 20,
+                    book: "Genesis",
+                    language: "Spanish",
+                    translationType: "Unlocked Literal Bible",
+                    percentFinished: 40,
+                    contributors: ["Michael"],
+                    dateModified: "20 June 2017 3:30 am"
+                },
+                {
+                    id: 18,
+                    book: "Exodus",
+                    language: "English",
+                    translationType: "Unlocked Literal Bible",
+                    percentFinished: 87,
+                    contributors: ["Dennis"],
+                    dateModified: "26 March 2017 12:04 pm"
+                },
+                {
+                    id: 18,
+                    book: "Leviticus",
+                    language: "Spanish",
+                    translationType: "Unlocked Literal Bible",
+                    percentFinished: 12,
+                    contributors: ["Nathan"],
+                    dateModified: "28 February  2017 8:35 am"
+                }
+
+            ]
+        });
+    }
 
     /*
         In render, just render a child presentation component, passing it
@@ -137,7 +132,7 @@ class ProjectsListContainer extends Component {
     render () {
         return (
             <div>
-                    <LanguageDropdown languages={this.state.languages} books={this.state.books} version={this.state.version}/>
+                    <LanguageDropdown/>
 
                 <Container fluid>
                     <Header as='h1'>Available Projects</Header>

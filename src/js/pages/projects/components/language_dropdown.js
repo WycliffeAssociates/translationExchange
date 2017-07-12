@@ -26,44 +26,40 @@ class LanguageDropdown extends Component {
     componentDidMount() {
         this.setState({error: ""});
 
-        axios.get(config.apiUrl + 'languages/'
+        axios.post('http://172.19.145.91:8000/api/all_project/', {
+                params: {}
+            }
         ).then(results => {
                 this.setState({
                     loaded: true,
-                    languages: results.data
-                })
-        }).catch(exception => {
-            this.setState({error: exception});
-        });
-
-        axios.get(config.apiUrl + 'books/'
-        ).then(results => {
-            this.setState({
-                loaded: true,
-                books: results.data
-            })
-        }).catch(exception => {
-            this.setState({error: exception});
-        });
-
-        axios.get(config.apiUrl + 'version/'
-        ).then(results => {
-            this.setState({
-                loaded: true,
-                version: results.data
-            })
+                    projects: results.data
+                });
         }).catch(exception => {
             this.setState({error: exception});
         });
     }
 
+
         //I would do a web request here...
         //Just going to put fake data in state instead
 
     render () {
+    if (this.state.projects) {
+
+        const listItems = this.state.projects.map((project) =>
+           <li> RIP</li>
+        );
+
+
+        // var languageOptions = this.state.projects.map(function (user) {
+        //     return {key: user.lang.name.toString, text: user.lang.name.toString, value: user.lang.name.toString}
+        // })
+        // }
+
+        console.log(listItems)
+}
         return (
             <div>
-
                 <Dropdown placeholder='Select Language'
                           selection
                           search
