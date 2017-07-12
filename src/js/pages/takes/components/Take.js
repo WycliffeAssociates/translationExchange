@@ -10,6 +10,7 @@ import { Form, Radio } from 'semantic-ui-react'
 import { state, handleChange } from './Take'
 import { Icon } from 'semantic-ui-react'
 import TakeButton from './SelectTake'
+import Delete from './Delete'
 
 
 
@@ -137,16 +138,6 @@ Take.propTypes = {
     onMarkedForExportToggled: PropTypes.func.isRequired
 };
 
-class Delete extends React.Component{
-    render(){
-        return(
-            <Button icon>
-                <Icon name='trash' size="large" />
-            </Button>
-        )
 
-    }
-
-}
 
 export default Take;
