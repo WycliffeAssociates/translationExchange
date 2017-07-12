@@ -5,7 +5,7 @@ import Star from './components/Star';
 import AudioComponent from './components/AudioComponent';
 import axios from 'axios';
 import config from "config/config";
-import {Button, Grid, Segment} from "semantic-ui-react";
+import {Button, Grid, Message, Segment} from "semantic-ui-react";
 
 var author
 class TakeContainer extends Component {
@@ -67,9 +67,9 @@ class TakeContainer extends Component {
 
                         <Grid.Column width={5}>
                         {/* the segment will be replaced with audio component?*/}
-                        <Segment basic>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
-                        </Segment>
+                            <Message positive>
+                                source audio
+                            </Message>
                     </Grid.Column>}
 
                 </Grid>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Dropdown } from 'semantic-ui-react'
 import axios from 'axios'
-import {bookOptions, languageOptions} from "./common";
+import {bookOptions, languageOptions, versionOptions} from "./common";
 import config from 'config/config';
 
 class LanguageDropdown extends Component {
@@ -65,7 +65,7 @@ class LanguageDropdown extends Component {
                           button
                           className='icon'
                           icon='comments outline'
-                          options={languageOptions}
+                          options={versionOptions}
                 />
             </div>
         );

@@ -65,7 +65,7 @@ class ProjectContainer extends Component {
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Chapter</Table.HeaderCell>
-                            <Table.HeaderCell>Percent Complete</Table.HeaderCell>
+                            <Table.HeaderCell>Finished?</Table.HeaderCell>
                             <Table.HeaderCell>Checking Level</Table.HeaderCell>
                             <Table.HeaderCell>Contributors</Table.HeaderCell>
                             <Table.HeaderCell>Translation Type</Table.HeaderCell>
