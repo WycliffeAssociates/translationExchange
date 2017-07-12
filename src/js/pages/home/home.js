@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import AudioComponent from '../takes/components/AudioComponent';
+import { Button, Header, Image, Modal } from 'semantic-ui-react'
+
 
 class Home extends Component {
     constructor(props) {
@@ -17,7 +20,25 @@ class Home extends Component {
     render() {
         return (
             <div>
-                Welcome Page
+
+
+
+                            <h1>Welcome to Translation Manager</h1>
+
+
+
+
+
+
+               <AudioComponent/>
+
+
+
+
+
+
+
+
             </div>
         );
     }
