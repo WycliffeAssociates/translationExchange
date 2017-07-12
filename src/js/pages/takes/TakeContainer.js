@@ -8,6 +8,8 @@ import Take from "./components/Take";
 
 class TakeContainer extends Component {
 
+
+
     onMarkedForExportToggled () {
         var markedForExport = !this.props.take.take.is_export;
         console.log("id " + this.props.take.take.id + " marked for export as " + markedForExport);

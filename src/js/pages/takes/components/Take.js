@@ -4,14 +4,46 @@ import Star from './Star';
 import AudioComponent from './AudioComponent';
 import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
+import RadioButton from './RadioButton'
+import RadioTest from './RadioTest'
+import { Form, Radio } from 'semantic-ui-react'
+import { state, handleChange } from './Take'
+import { Icon } from 'semantic-ui-react'
+
+
+
+
+var counter = 0;
+var val;
+
 
 class Take extends Component {
+
+
+
+    // constructor (props){
+    //     super(props);
+    //     this.state = {value: ''};
+    //
+    //     this.handleChange = this.handleChange.bind(this);
+    //     this.handleSubmit = this.handleSubmit.bind(this);
+    // }
+    state = {}
+    handleChange = (e, { value }) => this.setState({ value })
+
+    // handleChange(event) {
+    //     this.setState({value: event.target.value});
+    // }
+
 
     constructor(props) {
         super(props);
         this.state = {isToggleOn: true};
+        this.state = {value: ''};
         // This binding is necessary to make `this` work in the callback
-        this.handleClick = this.handleClick.bind(this);
+         this.handleClick = this.handleClick.bind(this);
+         this.handleChange = this.handleChange.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleClick() {
@@ -22,6 +54,7 @@ class Take extends Component {
 
     render () {
         return (
+
             <div className="take">
                 <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate()}</strong>
                 <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
@@ -43,8 +76,32 @@ class Take extends Component {
                         <Segment basic>
                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
                         </Segment>
-                    </Grid.Column>}
+                        <Form>
+                            <Form.Field>
+                                Selected value: <b>{this.state.value}</b>
+                            </Form.Field>
+                            <Form.Field>
+                                <Radio
+                                    label='val this'
+                                    name='radioGroup'
+                                    value={val}
+                                    checked={this.state.value === val}
+                                    onChange={this.handleChange}
+                                />
+                            </Form.Field>
 
+                            <Form.Field>
+                                <Radio
+                                    label='Or that'
+                                    name='radioGroup'
+                                    value='that'
+                                    checked={this.state.value === 'that'}
+                                    onChange={this.handleChange}
+                                />
+                            </Form.Field>
+                        </Form>
+                        <RadioButton/>
+                    </Grid.Column>}
                 </Grid>
             </div>
         );
@@ -106,10 +163,11 @@ Take.propTypes = {
 
 class Delete extends React.Component{
     render(){
-        return <button type="image" id="myimage"  src='./Bitmap' /*href for where I want to go*/>
-
-
-        </button>//href for where I want to go
+        return(
+            <Button icon>
+                <Icon name='trash' />
+            </Button>
+        )
 
     }
 
