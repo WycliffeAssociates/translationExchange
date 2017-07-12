@@ -11,7 +11,6 @@ class TakeList extends Component {
         return (
             <div>
                 {this.props.takes.map(this.createListItem)}
-
             </div>
 
         );
@@ -19,11 +18,13 @@ class TakeList extends Component {
 
     createListItem (take) {
         iterator += 1;
+
         return (
             <div>
                 <TakeContainer
-                    take={take}
+                    take={take} // one take
                     count={iterator}
+
                 />
             </div>
         );
@@ -33,6 +34,5 @@ class TakeList extends Component {
 TakeList.propTypes = {
     takes: PropTypes.arrayOf(TakePropTypes).isRequired
 };
-// fields : id, audioSource, author, rating, timeStamp
 
 export default TakeList;
