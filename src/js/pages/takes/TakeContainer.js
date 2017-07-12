@@ -19,13 +19,9 @@ class TakeContainer extends Component {
     //other functions here for dealing with new audio comments recorded, etc
 
 
-
-
     render () {
 
-
         return (
-
 
             <div className="take">
                 <div>
