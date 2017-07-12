@@ -11,7 +11,7 @@ class ChapterContainer extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {loaded: false, retry: null, segments: [], mode: "", source: "", takeList: []};
+        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", takeList: []};
     }
 
     componentDidMount () {

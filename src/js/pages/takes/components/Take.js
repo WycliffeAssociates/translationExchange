@@ -4,39 +4,20 @@ import Star from './Star';
 import AudioComponent from './AudioComponent';
 import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
-import RadioButton from './RadioButton'
-import RadioTest from './RadioTest'
-import { Form, Radio } from 'semantic-ui-react'
-import { state, handleChange } from './Take'
-import { Icon } from 'semantic-ui-react'
 import TakeExportButton from './SelectTake'
 import Delete from './Delete'
 
-
-
-var counter = 0;
-var val;
-
-
 class Take extends Component {
-
-    state = {}
-    handleChange = (e, { value }) => this.setState({ value })
 
     constructor(props) {
         super(props);
         this.state = {isToggleOn: true};
-        this.state = {value: ''};
         // This binding is necessary to make `this` work in the callback
          this.handleClick = this.handleClick.bind(this);
-         this.handleChange = this.handleChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleClick() {
-        this.setState(prevState => ({
-            isToggleOn: !prevState.isToggleOn
-        }));
+        this.setState({isToggleOn: !this.state.isToggleOn});
     }
 
     render () {
@@ -59,15 +40,15 @@ class Take extends Component {
                 <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
                 {this.state.isToggleOn ? '' :
 
-                <Grid.Column width={5}>
-                    {/* the segment will be replaced with audio component?*/}
-                    <Segment basic>
+                    <Grid.Column width={5}>
+                        {/* the segment will be replaced with audio component?*/}
+                        <Segment basic>
 
-                        <AudioComponent
-                            src={config.streamingUrl + this.props.take.location}
-                        />
-                    </Segment>
-                </Grid.Column>}
+                            <AudioComponent
+                                src={config.streamingUrl + this.props.take.location}
+                            />
+                        </Segment>
+                    </Grid.Column>}
 
             </Grid>
 
