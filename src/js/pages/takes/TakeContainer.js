@@ -7,11 +7,16 @@ import axios from 'axios';
 import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 
+import LoadingDisplay from "../../components/LoadingDisplay";
+
+
 var author
 class TakeContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {isToggleOn: true};
+        this.state = {
+            isToggleOn: true
+        };
 
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
@@ -28,10 +33,12 @@ class TakeContainer extends Component {
         //would do an AJAX request here to update rating on this take using its id...
     }
 
+
     //other functions here for dealing with new audio comments recorded, etc
 
-
     render () {
+
+
 
         return (
 
@@ -46,7 +53,9 @@ class TakeContainer extends Component {
                         <AudioComponent
                             src={config.streamingUrl + this.props.take.take.location}
                         />
-                <Delete/>
+
+
+                        <Delete/>
                     </Grid.Column >
 
                     <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
@@ -55,7 +64,10 @@ class TakeContainer extends Component {
                         <Grid.Column width={5}>
                         {/* the segment will be replaced with audio component?*/}
                         <Segment basic>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
+
+                            <AudioComponent
+                                src={config.streamingUrl + this.props.take.take.location}
+                            />
                         </Segment>
                     </Grid.Column>}
 
