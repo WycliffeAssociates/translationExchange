@@ -10,7 +10,7 @@ class TakeList extends Component {
         iterator = 0;
         return (
             <div>
-                {this.props.takes.map(this.createListItem)}
+                {this.props.takes.map(this.createListItem.bind(this))}
             </div>
 
         );
@@ -24,7 +24,8 @@ class TakeList extends Component {
                 <TakeContainer
                     take={take} // one take
                     count={iterator}
-
+                    updateTakeToExport={this.props.updateTakeToExport}
+                    updateTakeInState={this.props.updateTakeInState}
                 />
             </div>
         );
