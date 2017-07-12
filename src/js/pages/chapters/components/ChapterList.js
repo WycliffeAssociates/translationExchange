@@ -30,7 +30,7 @@ class ChapterList extends Component {
             <Table.Row onClick={() => this.setState({redirectToChapter: chapter.number})}>
 
             <Table.Cell>{chapter.number}</Table.Cell>
-            <Table.Cell>{chapter.percentFinished}</Table.Cell>
+            <Table.Cell>Yes</Table.Cell>
             <Table.Cell>{chapter.checkingLevel}</Table.Cell>
                 <Table.Cell>{chapter.contributors}</Table.Cell>
                 <Table.Cell>{chapter.translationType}</Table.Cell>

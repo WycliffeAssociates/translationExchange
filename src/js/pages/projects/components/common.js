@@ -274,6 +274,25 @@ export const languageOptions = [
     { key: 'Vietnamese', text: 'Vietnamese', value: 'Vietnamese' },
 ]
 
+export const bookOptions = [
+    { key: 'Matthew', text: 'Matthew', value: 'Matthew' },
+    { key: 'Mark', text: 'Mark', value: 'Mark' },
+    { key: 'Luke', text: 'Luke', value: 'Luke' },
+    { key: 'John', text: 'John', value: 'John' },
+    { key: 'Acts', text: 'Acts', value: 'Acts' },
+    { key: 'Romans', text: 'Romans', value: 'Romans' },
+    { key: '1 Corinthians', text: '1 Corinthians', value: '1 Corinthians' },
+    { key: '2 Corinthians', text: '2 Corinthians', value: '2 Corinthians' },
+    { key: 'Galatians', text: 'Galatians', value: 'Galatians' }
+
+]
+
+export const versionOptions =[
+    {key:"ULB",text:"ULB", value:"ULB"},
+    {key:"UDB",text:"UDB", value:"UDB"},
+    {key:"Regular",text:"Regular", value:"Regular"}
+]
+
 export const tagOptions = [
     {
         key: 'Important',
