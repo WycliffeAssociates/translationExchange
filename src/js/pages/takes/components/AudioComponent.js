@@ -19,7 +19,7 @@ class AudioComponent extends Component {
 
         return(
             <Audio
-                width={700}
+                width={200}
                 height={150}
                 autoPlay={false}
                 playlist={file}
