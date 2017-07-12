@@ -7,13 +7,15 @@ import Audio from 'translation-audio-player'
 
 class AudioComponent extends Component {
 
+
     render() {
+
 
         var file = [];
         file[0] = {
-            "name": this.props.name,
             "src": this.props.src
         }
+
 
         return(
             <Audio

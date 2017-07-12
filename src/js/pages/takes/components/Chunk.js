@@ -14,7 +14,8 @@ class Chunk extends Component {
 
     render () {
         var modeLabel = "";
-        switch (this.props.chunk.mode) {
+
+        switch (this.props.mode) {
             case "chunk":
                 modeLabel = "Chunk";
                 break;
@@ -24,6 +25,9 @@ class Chunk extends Component {
             default:
                 modeLabel = "Segment";
         }
+
+
+
         return (
             <div>
 
@@ -36,6 +40,7 @@ class Chunk extends Component {
                 <Accordion.Content>
                     <TakeList
                     takes={this.props.chunk.segments}
+
                     />
                 </Accordion.Content>
                 </Accordion>
