@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Button, Col, FormGroup, Input, Jumbotron, Label} from "reactstrap";
+import axios from 'axios'
 import {Dropdown} from "semantic-ui-react";
 import {languageOptions} from "./common";
 

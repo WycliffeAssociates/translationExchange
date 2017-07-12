@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Audio from 'translation-audio-player'
+import axios from 'axios'
 
 // requires a name (str) and src (str) when it is called
 // name : name to display on take
