@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
 import ChunkList from "./components/ChunkList";
-import LoadingDisplay from "js/components/LoadingDisplay.js";
 import axios from 'axios';
 import config from 'config/config';
+import LoadingDisplay from "../../components/LoadingDisplay";
 
 // this is the page for one chapter
 
@@ -20,8 +20,8 @@ class ChapterContainer extends Component {
 
     requestData () {
         //var chapterID = this.props.match.params.chid;
-
-        axios.post('http://172.19.145.91:8000/api/get_project/', {
+        this.setState({error: ""});
+        axios.post(config.apiUrl + 'get_project/', {
             "language":"en-x-demo2",
             "version":"ulb",
             "book":"mrk",
@@ -29,10 +29,13 @@ class ChapterContainer extends Component {
         }).then((results) => {
             this.setState(
                 {
+                    loaded: true,
                     segments: results.data,
                     mode:results.data[0].mode
                 }
             )
+        }).catch((exception) => {
+            this.setState({error: exception});
         });
 
     }
@@ -87,9 +90,14 @@ class ChapterContainer extends Component {
         return (
             <div>
                 <h1>Chapter {this.props.match.params.chid}</h1>
-                {tempArr.map(this.createChunkList)}
+                <LoadingDisplay loaded={this.state.loaded}
+                                error={this.state.error}
+                                retry={this.requestData.bind(this)}>
+                    {tempArr.map(this.createChunkList)}
+                </LoadingDisplay>
             </div>
         );
+
     }
 
     createChunkList(arr) {

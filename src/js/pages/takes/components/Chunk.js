@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import TakeList from "./TakeList";
 import ChunkPropTypes from "./ChunkPropTypes";
-import { Button, Panel } from "react-bootstrap";
-
+import {Accordion, Icon} from "semantic-ui-react";
 class Chunk extends Component {
     constructor (props) {
         super(props);
@@ -31,16 +30,18 @@ class Chunk extends Component {
 
         return (
             <div>
-                <Button onClick={this.toggle.bind(this)}>
+                <Accordion styled fluid>
+                <Accordion.Title>
+                    <Icon name='dropdown' />
                     {modeLabel} {this.props.number}
-                </Button>
-                <Panel collapsible expanded={this.state.open}>
+                </Accordion.Title>
+
+                <Accordion.Content>
                     <TakeList
-                        takes={this.props.segments} // array of takes
+                    takes={this.props.segments}
                     />
-
-                </Panel>
-
+                </Accordion.Content>
+                </Accordion>
             </div>
         );
     }
