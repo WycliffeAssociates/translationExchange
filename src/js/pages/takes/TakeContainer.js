@@ -3,12 +3,15 @@ import TakePropTypes from "./components/TakePropTypes";
 import axios from 'axios';
 import config from "config/config";
 import _ from 'lodash';
-
 import Take from "./components/Take";
 
 class TakeContainer extends Component {
-
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            isToggleOn: true
+        };
+    }
 
     onMarkedForExportToggled () {
         var markedForExport = !this.props.take.take.is_export;
@@ -39,9 +42,9 @@ class TakeContainer extends Component {
         //would do an AJAX request here to update rating on this take using its id...
     }
 
-    //other functions here for dealing with new audio comments recorded, etc
-
     render () {
+
+
 
         return (
             <Take count={this.props.count}

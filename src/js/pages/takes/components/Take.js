@@ -9,7 +9,7 @@ import RadioTest from './RadioTest'
 import { Form, Radio } from 'semantic-ui-react'
 import { state, handleChange } from './Take'
 import { Icon } from 'semantic-ui-react'
-import TakeButton from './SelectTake'
+import TakeExportButton from './SelectTake'
 import Delete from './Delete'
 
 
@@ -20,22 +20,8 @@ var val;
 
 class Take extends Component {
 
-
-
-    // constructor (props){
-    //     super(props);
-    //     this.state = {value: ''};
-    //
-    //     this.handleChange = this.handleChange.bind(this);
-    //     this.handleSubmit = this.handleSubmit.bind(this);
-    // }
     state = {}
     handleChange = (e, { value }) => this.setState({ value })
-
-    // handleChange(event) {
-    //     this.setState({value: event.target.value});
-    // }
-
 
     constructor(props) {
         super(props);
@@ -56,35 +42,40 @@ class Take extends Component {
     render () {
         return (
 
-            <div className="take">
-                <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate()}</strong>
-                <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
-                <TakeButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
 
-                <Grid columns={2} relaxed>
-                    <Grid.Column width={9}>
+        <div className="take">
+            <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate()}</strong>
+            <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
+            <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
+            <Delete/>
+
+            <Grid columns={2} relaxed>
+                <Grid.Column width={9}>
+                    <AudioComponent
+                        src={config.streamingUrl + this.props.take.location}
+                    />
+                </Grid.Column >
+
+                <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
+                {this.state.isToggleOn ? '' :
+
+                <Grid.Column width={5}>
+                    {/* the segment will be replaced with audio component?*/}
+                    <Segment basic>
 
                         <AudioComponent
                             src={config.streamingUrl + this.props.take.location}
                         />
-                        <Delete/>
-                    </Grid.Column >
+                    </Segment>
+                </Grid.Column>}
 
-                    <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
-                    {this.state.isToggleOn ? '' :
+            </Grid>
 
-                    <Grid.Column width={5}>
-                        {/* the segment will be replaced with audio component?*/}
-                        <Segment basic>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
-                        </Segment>
-                    </Grid.Column>}
-                </Grid>
-            </div>
+        </div>
         );
     }
 
-    parseDate(props) {
+    parseDate() {
         var noon = 'am';
         var dateArr = this.props.take.date_modified.split('T');
         var date = dateArr[0]
