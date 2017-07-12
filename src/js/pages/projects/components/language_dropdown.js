@@ -11,7 +11,12 @@ class LanguageDropdown extends Component {
      */
     constructor(props) {
         super(props);
-        this.state = {loaded: false, error: "", languages:[]};
+        this.state = {
+            loaded: false,
+            error: "",
+            languages:[],
+        books:[],
+        version:[]};
     }
 
     /*
@@ -30,6 +35,26 @@ class LanguageDropdown extends Component {
         }).catch(exception => {
             this.setState({error: exception});
         });
+
+        axios.get(config.apiUrl + 'books/'
+        ).then(results => {
+            this.setState({
+                loaded: true,
+                books: results.data
+            })
+        }).catch(exception => {
+            this.setState({error: exception});
+        });
+
+        axios.get(config.apiUrl + 'version/'
+        ).then(results => {
+            this.setState({
+                loaded: true,
+                version: results.data
+            })
+        }).catch(exception => {
+            this.setState({error: exception});
+        });
     }
 
         //I would do a web request here...
@@ -40,31 +65,19 @@ class LanguageDropdown extends Component {
             <div>
 
                 <Dropdown placeholder='Select Language'
+                          selection
                           search
-                          floating
-                          labeled
-                          button
-                          className='icon'
-                          icon='world'
                           options={languageOptions}
                 />
                 <Dropdown placeholder='Select Book'
+                          selection
                           search
-                          floating
-                          labeled
-                          button
-                          className='icon'
-                          icon='comments outline'
                           options={bookOptions}
                 />
                 <Dropdown
                     placeholder='Select Version'
-                          search
-                          floating
-                          labeled
-                          button
-                          className='icon'
-                          icon='comments outline'
+                    selection
+                    search
                           options={languageOptions}
                 />
             </div>
