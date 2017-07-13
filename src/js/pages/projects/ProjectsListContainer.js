@@ -50,6 +50,7 @@ class ProjectsListContainer extends Component {
 
 
     render () {
+        console.log(this.state.projects);
         return (
             <div>
                     <LanguageDropdown projects={this.state.projects}
