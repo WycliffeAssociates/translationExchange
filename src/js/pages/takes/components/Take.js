@@ -25,7 +25,7 @@ class Take extends Component {
 
 
         <div className="take">
-            <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate()}</strong>
+            <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate(this.props.take.date_modified)}</strong>
             <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
             <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
             <Delete/>
@@ -56,9 +56,10 @@ class Take extends Component {
         );
     }
 
-    parseDate() {
+    parseDate(date) {
+
         var noon = 'am';
-        var dateArr = this.props.take.date_modified.split('T');
+        var dateArr = date.split('T');
         var date = dateArr[0]
 
         var time = dateArr[1].split('.')
