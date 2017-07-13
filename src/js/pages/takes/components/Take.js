@@ -26,7 +26,7 @@ class Take extends Component {
         <Grid columns={4} relaxedclassName="take">
 
             <Grid.Column width={4}>
-                <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate()}</strong>
+                <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate(this.props.take.date_modified)}</strong>
             </Grid.Column>
 
             <Grid.Column width={2}>
@@ -43,6 +43,7 @@ class Take extends Component {
             </Grid.Column>
 
         </Grid>
+
 
             <Grid columns={2} relaxed>
                 <Grid.Column width={9}>
@@ -67,9 +68,10 @@ class Take extends Component {
         );
     }
 
-    parseDate() {
+    parseDate(date) {
+
         var noon = 'am';
-        var dateArr = this.props.take.date_modified.split('T');
+        var dateArr = date.split('T');
         var date = dateArr[0]
 
         var time = dateArr[1].split('.')
