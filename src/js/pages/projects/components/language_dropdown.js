@@ -36,34 +36,32 @@ class LanguageDropdown extends Component {
     }
 
     requestAllFilters() {
-        this.setState({error: ""});
-        axios.get('http://172.19.145.91:8000/api/languages/'
-        ).then(results => {
-            this.setState({
-                loaded: true,
-                languages: results.data.map(function (language) {
-                    return {key: language.slug, text: language.name, value: language.slug}
-                })
-            });
-            console.log("thisstatelang")
-            console.log(this.state.languages)
-        }).catch(exception => {
-            this.setState({error: exception});
-        });
+            this.setState({error: ""});
+            axios.get(config.apiUrl + 'languages/'
+            ).then(results => {
+                this.setState({
+                    loaded: true,
+                    languages: results.data.map(function (language) {
+                        return {key: language.slug, text: language.name, value: language.slug}
+                    })
+                });
 
-
-        this.setState({error: ""});
-        axios.get('http://172.19.145.91:8000/api/books/'
-        ).then(results => {
-            this.setState({
-                loaded: true,
-                books: results.data.map(function (book) {
-                    return {key: book.slug, text: book.name, value: book.slug}
-                })
+            }).catch(exception => {
+                this.setState({error: exception});
             });
-        }).catch(exception => {
-            this.setState({error: exception});
-        });
+
+            this.setState({error: ""});
+            axios.get(config.apiUrl + 'books/'
+            ).then(results => {
+                this.setState({
+                    loaded: true,
+                    books: results.data.map(function (book) {
+                        return {key: book.slug, text: book.name, value: book.slug}
+                    })
+                });
+            }).catch(exception => {
+                this.setState({error: exception})
+            });
     }
 
     //called when page first loads
@@ -77,6 +75,7 @@ class LanguageDropdown extends Component {
 
     //called when just the query string changes and new projects are loaded
     componentWillReceiveProps(nextProps){
+        this.setState({loaded: false});
         this.getFiltersFromProjects(nextProps.projects);
     }
 
@@ -94,12 +93,14 @@ class LanguageDropdown extends Component {
                     <Dropdown placeholder='Select Language'
                               selection
                               search
+                              loading={!this.state.loaded}
                               options={this.state.languages}
                               onChange={this.setLanguage.bind(this)}
                     />
                     <Dropdown placeholder='Select Book'
                               selection
                               search
+                              loading={!this.state.loaded}
                               options={this.state.books}
                               onChange={this.setBook.bind(this)}
                     />
