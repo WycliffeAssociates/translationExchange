@@ -5,26 +5,12 @@ import {Table} from 'semantic-ui-react'
 
 class ChapterList extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            redirectToChapter: null
-        };
-    }
-
     render () {
 
         return (
 
         <Table.Body>
-        {this.state.redirectToChapter
-            /*
-            ? <Redirect push to={{pathname: this.props.path + '/ch' + this.state.redirectToChapter}}/>
-            */
-            ? <Redirect push to="/projects/16/ch1" />
-            : this.props.chapters.map(this.createListItem.bind(this))
-
-        }
+            {this.props.chapters.map(this.createListItem.bind(this))}
         </Table.Body>
 
         );
@@ -33,9 +19,7 @@ class ChapterList extends Component {
     createListItem (chapter) {
         return (
 
-            <Table.Row onClick={() => /*this.setState({redirectToChapter: chapter.number})*/
-            this.props.navigateToChapter(chapter.chapter)
-            }>
+            <Table.Row onClick={() => this.props.navigateToChapter(chapter.chapter)}>
 
             <Table.Cell>{chapter.chapter}</Table.Cell>
             <Table.Cell>{chapter.percent_complete}</Table.Cell>
