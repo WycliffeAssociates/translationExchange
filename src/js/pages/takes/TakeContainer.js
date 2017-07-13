@@ -15,14 +15,10 @@ class TakeContainer extends Component {
 
     onMarkedForExportToggled () {
         var markedForExport = !this.props.take.take.is_export;
-        console.log("marking is_export as " + markedForExport);
 
         axios.patch(config.apiUrl + 'takes/' + this.props.take.take.id + '/', {
             "is_export": markedForExport
         }).then((results) => {
-
-            console.log("marked in database");
-
             //update this take in state using the update method in ChapterContainer
             var updatedTake = _.cloneDeep(this.props.take);
             updatedTake.take = results.data;
@@ -43,9 +39,6 @@ class TakeContainer extends Component {
     }
 
     render () {
-
-
-
         return (
             <Take count={this.props.count}
                   take={this.props.take.take}

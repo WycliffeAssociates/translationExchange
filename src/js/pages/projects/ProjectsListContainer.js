@@ -65,6 +65,24 @@ class ProjectsListContainer extends Component {
         });
     }
 
+    navigateToProject (language, book, version) {
+        //make the query for the right project, using our current query as a base
+        var projectQuery = QueryString.parse(this.state.currentProjectQuery);
+        Object.assign(projectQuery, {
+            language: language,
+            book: book,
+            version: version
+        });
+
+        var queryString = QueryString.stringify(projectQuery);
+        this.props.history.push(
+            {
+                pathname: '/chapters',
+                search: "?" + queryString
+            }
+        )
+    }
+
     render () {
         return (
             <div>
@@ -74,7 +92,8 @@ class ProjectsListContainer extends Component {
                                  setQuery={this.setQuery.bind(this)}
                                  queryString={this.props.location.search}
                                  clearQuery={this.clearQuery.bind(this)}/>
-                <ProjectsList projects={this.state.projects}/>
+                <ProjectsList projects={this.state.projects}
+                              navigateToProject={this.navigateToProject.bind(this)}/>
             </div>
         );
     }

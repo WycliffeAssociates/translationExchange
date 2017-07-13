@@ -62,8 +62,8 @@ class Header extends Component {
         return (
             <Menu inverted size='large'>
                 <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'home'} onClick={this.handleItemClick} />
-                <Menu.Item as={Link} to='/about/' name='About' active={activeItem === 'messages'} onClick={this.handleItemClick} />
-                <Menu.Item as={Link} to='/projects/' name='Projects' active={activeItem === 'friends'} onClick={this.handleItemClick} />
+                <Menu.Item as={Link} to='/about' name='About' active={activeItem === 'messages'} onClick={this.handleItemClick} />
+                <Menu.Item as={Link} to='/projects' name='Projects' active={activeItem === 'friends'} onClick={this.handleItemClick} />
             </Menu>
         )
     }
