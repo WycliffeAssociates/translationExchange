@@ -37,9 +37,8 @@ class LanguageDropdown extends Component {
         }
 
         else {
-            console.log("trying to reach server");
             this.setState({error: ""});
-            axios.get('http://172.19.145.91:8000/api/languages/'
+            axios.get(config.apiUrl + 'languages/'
             ).then(results => {
                 this.setState({
                     loaded: true,
@@ -47,15 +46,14 @@ class LanguageDropdown extends Component {
                         return {key: language.slug, text: language.name, value: language.slug}
                     })
                 });
-                console.log("thisstatelang")
-                console.log(this.state.languages)
+
             }).catch(exception => {
                 this.setState({error: exception});
             });
 
 
             this.setState({error: ""});
-            axios.get('http://172.19.145.91:8000/api/books/'
+            axios.get(config.apiUrl + 'books/'
             ).then(results => {
                 this.setState({
                     loaded: true,
@@ -88,20 +86,19 @@ class LanguageDropdown extends Component {
 
 
     render() {
-            console.log(this.state.languages);
             return (
                 <div>
                     <Dropdown placeholder='Select Language'
                               selection
                               search
+                              loading
                               options={this.state.languages}
-                              // onChange={this.language}
                     />
                     <Dropdown placeholder='Select Book'
                               selection
                               search
+                              loading
                               options={this.state.books}
-                              //onChange={this.book}
                     />
                     {/*<Dropdown*/}
                         {/*placeholder='Select Version'*/}
