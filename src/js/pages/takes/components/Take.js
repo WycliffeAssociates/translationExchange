@@ -67,9 +67,10 @@ class Take extends Component {
         );
     }
 
-    parseDate() {
+    parseDate(date) {
+
         var noon = 'am';
-        var dateArr = this.props.take.date_modified.split('T');
+        var dateArr = date.split('T');
         var date = dateArr[0]
 
         var time = dateArr[1].split('.')

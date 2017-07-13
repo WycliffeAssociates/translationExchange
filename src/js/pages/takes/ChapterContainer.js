@@ -11,21 +11,25 @@ class ChapterContainer extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", takeList: []};
+        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", takeList: [], chapters: []
+        };
     }
 
     componentDidMount () {
         this.requestData();
+
     }
+
 
     requestData () {
         //var chapterID = this.props.match.params.chid;
+        console.log('ChapterContainer props', this.props)
         this.setState({error: ""});
         axios.post(config.apiUrl + 'get_project/', {
             "language":"en-x-demo2",
             "version":"ulb",
             "book":"mrk",
-            "chapter":6
+            "chapter":this.props.match.params.chid
         }).then((results) => {
             this.setState(
                 {
