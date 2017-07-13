@@ -16,7 +16,7 @@ class LanguageDropdown extends Component {
             error: "",
             languages: [],
             books: [],
-            version: [],
+            versions: [],
             projects: []
         }
     }
@@ -32,36 +32,37 @@ class LanguageDropdown extends Component {
             books: projects.map(function (project) {
                 return {key: project.book[0].slug, text: project.book[0].name, value: project.book[0].slug}
             }),
+
+            versions: projects.map(function (project) {
+                return {key: project.version, text: project.version, value: project.version}
+            })
         });
     }
 
     requestAllFilters() {
-            this.setState({error: ""});
-            axios.get(config.apiUrl + 'languages/'
-            ).then(results => {
-                this.setState({
-                    loaded: true,
-                    languages: results.data.map(function (language) {
-                        return {key: language.slug, text: language.name, value: language.slug}
-                    })
-                });
+        var self = this;
+        self.setState({error: ""});
 
-            }).catch(exception => {
-                this.setState({error: exception});
+        axios.all([
+            axios.get(config.apiUrl + 'languages/'),
+            axios.get(config.apiUrl + 'books/'),
+            axios.post(config.apiUrl + 'get_versions/', {}),
+        ]).then(axios.spread(function (languagesResponse, booksResponse, versionsResponse) {
+            self.setState({
+                loaded: true,
+                languages: languagesResponse.data.map(function (language) {
+                    return {key: language.slug, text: language.name, value: language.slug}
+                }),
+                books: booksResponse.data.map(function (book) {
+                    return {key: book.slug, text: book.name, value: book.slug}
+                }),
+                versions: versionsResponse.data.map(function(version) {
+                    return {key: version, text: version, value: version}
+                })
             });
-
-            this.setState({error: ""});
-            axios.get(config.apiUrl + 'books/'
-            ).then(results => {
-                this.setState({
-                    loaded: true,
-                    books: results.data.map(function (book) {
-                        return {key: book.slug, text: book.name, value: book.slug}
-                    })
-                });
-            }).catch(exception => {
-                this.setState({error: exception})
-            });
+        })).catch(exception => {
+            self.setState({error: exception});
+        });
     }
 
     //called when page first loads
@@ -87,33 +88,37 @@ class LanguageDropdown extends Component {
         this.props.setQuery({book: dropdown.value});
     }
 
+    setVersion(event, dropdown) {
+        this.props.setQuery({version: dropdown.value});
+    }
+
     render() {
-            return (
-                <div>
-                    <Dropdown placeholder='Select Language'
-                              selection
-                              search
-                              loading={!this.state.loaded}
-                              options={this.state.languages}
-                              onChange={this.setLanguage.bind(this)}
-                    />
-                    <Dropdown placeholder='Select Book'
-                              selection
-                              search
-                              loading={!this.state.loaded}
-                              options={this.state.books}
-                              onChange={this.setBook.bind(this)}
-                    />
-                    {/*<Dropdown*/}
-                        {/*placeholder='Select Version'*/}
-                        {/*selection*/}
-                        {/*search*/}
-                        {/*options={versionOptions}*/}
-                        {/*onChange={this.version}*/}
-                    {/*/>*/}
-                </div>
-            );
-        }
+        return (
+            <div>
+                <Dropdown placeholder='Select Language'
+                          selection
+                          search
+                          loading={!this.state.loaded}
+                          options={this.state.languages}
+                          onChange={this.setLanguage.bind(this)}
+                />
+                <Dropdown placeholder='Select Book'
+                          selection
+                          search
+                          loading={!this.state.loaded}
+                          options={this.state.books}
+                          onChange={this.setBook.bind(this)}
+                />
+                <Dropdown
+                    placeholder='Select Version'
+                    selection
+                    search
+                    options={this.state.versions}
+                    onChange={this.setVersion.bind(this)}
+                />
+            </div>
+        );
+    }
 }
 
 export default LanguageDropdown;

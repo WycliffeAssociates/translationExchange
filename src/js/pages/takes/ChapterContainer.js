@@ -40,6 +40,20 @@ class ChapterContainer extends Component {
 
     }
 
+    //if a child component does requests to change a take in the database, they have to
+    //call this function to update the take in state.
+    updateTakeInState (updatedTake) {
+        console.log("TAKE TO UPDATE:");
+        console.dir(updatedTake);
+
+        var updatedSegments = this.state.segments.slice();
+        var takeToUpdate = updatedSegments.findIndex(take => take.take.id === updatedTake.take.id);
+        updatedSegments[takeToUpdate] = updatedTake;
+        this.setState({segments: updatedSegments});
+        console.log("SET STATE");
+        console.dir(updatedSegments);
+    }
+
     findStartVerses(paramArr) { // creates array of each start verse
         var returnArr = [];
         for (let i = 0; i < paramArr.length; i++) {
@@ -93,10 +107,11 @@ class ChapterContainer extends Component {
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
-                    {tempArr.map(this.createChunkList)}
+                    {tempArr.map(this.createChunkList.bind(this))}
                 </LoadingDisplay>
             </div>
         );
+
     }
 
     createChunkList(arr) {
@@ -108,6 +123,7 @@ class ChapterContainer extends Component {
                     segments={arr} // array of takes
                     mode={arr[0].take.mode}
                     number={arr[0].take.startv}
+                    updateTakeInState={this.updateTakeInState.bind(this)}
                 />
 
             </div>

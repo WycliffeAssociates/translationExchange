@@ -1,10 +1,15 @@
+
+
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import RecordComment from './RecordComment';
 import './RecordComment.css';
 import { Button, Header, Image, Modal,ModalHeader } from 'semantic-ui-react';
 
-
+// NOTE: (dmarchuk)
+let onClickCancel;
+let onClickSave;
+let Style;
 
 class CommentContainer extends Component {
 
@@ -53,14 +58,14 @@ class CommentContainer extends Component {
         this.hideModal();
         this.setState({SaveButtonState: true})
 
-    }
+    };
 
     onClickSave = () =>{
 
         // save and upload audio comment to the server
         console.log('file saved');
 
-    }
+    };
 
 
 
