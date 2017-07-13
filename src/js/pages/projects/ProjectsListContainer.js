@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import QueryString from 'query-string';
 import ProjectsList from "./components/ProjectsList";
-import 'css/projects.css'
+
+import '../../../css/projects.css'
+import {Container, Header, Table} from "semantic-ui-react";
 import axios from 'axios';
 import config from 'config/config';
 import FilterContainer from "./FilterContainer";
-import {Header} from "semantic-ui-react";
+
+
 
 class ProjectsListContainer extends Component {
 

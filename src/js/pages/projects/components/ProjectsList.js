@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import {Container, Header, Table} from "semantic-ui-react";
 import CircularProgressbar from 'react-circular-progressbar'
-import 'css/projects.css'
+import '../../../../css/projects.css'
 
 import {ReadMore} from 'react-read-more';
 
