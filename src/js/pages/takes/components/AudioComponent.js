@@ -5,6 +5,7 @@ import Audio from 'translation-audio-player'
 // name : name to display on take
 // src  : url of file to be played in audio player
 import CommentContainer from './comments/CommentContainer'
+import * as ReactDOM from "react-dom";
 
 
 
@@ -29,8 +30,8 @@ class AudioComponent extends Component {
 
 
     onClick = () => {                         // used when you click the microphone button in the player
-        this.commentContainer.showModal()
-        this.setState = { pause:true }
+        this.commentContainer.showModal();
+        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-pause'));
 
     }
 
@@ -56,11 +57,14 @@ class AudioComponent extends Component {
                     height={150}
                     autoPlay={false}
                     playlist={file}
-                    audio-pause={pause}
                     recordButton={() => {
                         this.onClick()
 
                     }}
+
+                    // ref to pause the audio
+                    ref={audioComponent => { this.audioComponent = audioComponent; }}
+
                 />
 
                 {/*used ref to call a method in child class and instance*/}

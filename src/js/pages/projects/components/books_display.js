@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import {Dropdown} from "semantic-ui-react";
 import {languageOptions} from "./common";
-import config from 'config/config';
+import config from "../../../../config/config";
 
 
 class BooksDisplay extends Component {

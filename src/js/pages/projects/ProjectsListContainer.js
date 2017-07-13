@@ -8,7 +8,7 @@
 
 import React, { Component } from 'react';
 import ProjectsList from "./components/ProjectsList";
-import 'css/projects.css'
+import '../../../css/projects.css'
 import SearchButtons from "./components/all_buttons";
 import {Container, Header, Table} from "semantic-ui-react";
 

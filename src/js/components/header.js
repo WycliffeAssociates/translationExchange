@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import {Menu} from "semantic-ui-react";
 import {Link} from "react-router-dom";
+import * as ReactDOM from "react-dom";
 
 
 class Header extends Component {
     state = { activeItem: 'home' };
 
-    handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+    handleItemClick = (e, { name }) => {
+        this.setState({ activeItem: name });
+        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-play'));
+    }
 
     //
     // constructor(props) {
