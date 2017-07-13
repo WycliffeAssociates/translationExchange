@@ -9,8 +9,8 @@ import { Icon } from 'semantic-ui-react'
 class Delete extends React.Component{
     render(){
         return(
-            <Button icon>
-                <Icon name='trash' size="large" />
+            <Button icon color="red">
+                <Icon name='trash' size="large"/>
             </Button>
         )
     }
