@@ -20,88 +20,88 @@ class LanguageDropdown extends Component {
             projects: []
         }
     }
-    populateFilters(projects) {
-        if (projects.length > 0) {
-            console.log('there are projects');
-            //put the languages from projects into state
+
+    getFiltersFromProjects(projects) {
+        //put the languages from projects into state
+        this.setState({
+            loaded: true,
+            languages: projects.map(function (project) {
+                return {key: project.lang.slug, text: project.lang.name, value: project.lang.slug}
+            }),
+
+            books: projects.map(function (project) {
+                return {key: project.book[0].slug, text: project.book[0].name, value: project.book[0].slug}
+            }),
+        });
+    }
+
+    requestAllFilters() {
+        this.setState({error: ""});
+        axios.get('http://172.19.145.91:8000/api/languages/'
+        ).then(results => {
             this.setState({
                 loaded: true,
-                languages: projects.map(function (user) {
-                    return {key: user.lang.name, text: user.lang.name, value: user.lang.name}
-                }),
-
-                books: projects.map(function (user) {
-                    return {key: user.book[0].name, text: user.book[0].name, value: user.book[0].name}
-                }),
+                languages: results.data.map(function (language) {
+                    return {key: language.slug, text: language.name, value: language.slug}
+                })
             });
-        }
+            console.log("thisstatelang")
+            console.log(this.state.languages)
+        }).catch(exception => {
+            this.setState({error: exception});
+        });
 
-        else {
-            console.log("trying to reach server");
-            this.setState({error: ""});
-            axios.get('http://172.19.145.91:8000/api/languages/'
-            ).then(results => {
-                this.setState({
-                    loaded: true,
-                    languages: results.data.map(function (language) {
-                        return {key: language.slug, text: language.name, value: language.slug}
-                    })
-                });
-                console.log("thisstatelang")
-                console.log(this.state.languages)
-            }).catch(exception => {
-                this.setState({error: exception});
+
+        this.setState({error: ""});
+        axios.get('http://172.19.145.91:8000/api/books/'
+        ).then(results => {
+            this.setState({
+                loaded: true,
+                books: results.data.map(function (book) {
+                    return {key: book.slug, text: book.name, value: book.slug}
+                })
             });
-
-
-            this.setState({error: ""});
-            axios.get('http://172.19.145.91:8000/api/books/'
-            ).then(results => {
-                this.setState({
-                    loaded: true,
-                    books: results.data.map(function (book) {
-                        return {key: book.slug, text: book.name, value: book.slug}
-                    })
-                });
-            }).catch(exception => {
-                this.setState({error: exception});
-            });
-
-        }
+        }).catch(exception => {
+            this.setState({error: exception});
+        });
     }
 
+    //called when page first loads
     componentDidMount(){
-        this.populateFilters(this.props.projects)
+        if (this.props.queryString) {
+            this.getFiltersFromProjects(this.props.projects);
+        } else {
+            this.requestAllFilters();
+        }
     }
 
+    //called when just the query string changes and new projects are loaded
     componentWillReceiveProps(nextProps){
-        this.populateFilters(nextProps.projects)
+        this.getFiltersFromProjects(nextProps.projects);
     }
-    // }
 
-    /*
-     In componentDidMount, do the API request for the data and then use
-     setState to put the data in state
-     */
+    setLanguage(event, dropdown) {
+        this.props.setQuery({language: dropdown.value});
+    }
 
-
-
+    setBook(event, dropdown) {
+        this.props.setQuery({book: dropdown.value});
+    }
 
     render() {
-            console.log(this.state.languages);
             return (
                 <div>
                     <Dropdown placeholder='Select Language'
                               selection
                               search
                               options={this.state.languages}
-                              // onChange={this.language}
+                              onChange={this.setLanguage.bind(this)}
                     />
                     <Dropdown placeholder='Select Book'
                               selection
                               search
                               options={this.state.books}
-                              //onChange={this.book}
+                              onChange={this.setBook.bind(this)}
                     />
                     {/*<Dropdown*/}
                         {/*placeholder='Select Version'*/}
