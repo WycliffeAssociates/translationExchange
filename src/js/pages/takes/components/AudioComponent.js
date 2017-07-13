@@ -51,7 +51,7 @@ class AudioComponent extends Component {
             <div>
                 <Audio
 
-                    width={700}
+                    width={this.props.width}
                     height={150}
                     autoPlay={false}
                     playlist={file}
