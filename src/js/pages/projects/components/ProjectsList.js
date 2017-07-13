@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import {Table} from 'semantic-ui-react'
+import {Container, Header, Table} from "semantic-ui-react";
 import CircularProgressbar from 'react-circular-progressbar'
 import 'css/projects.css'
 
@@ -27,12 +27,29 @@ class ProjectsList extends Component {
      */
     render () {
         return (
-            <Table.Body>
-                {this.state.redirectToProject
-                    ? <Redirect push to={{pathname: '/projects/' + this.state.redirectToProject}}/>
-                    : this.props.projects.map(this.createListItem.bind(this))
-                }
-            </Table.Body>
+            <Container fluid>
+                <Table selectable fixed>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Language</Table.HeaderCell>
+                            <Table.HeaderCell>Book</Table.HeaderCell>
+                            <Table.HeaderCell>Percent Complete</Table.HeaderCell>
+                            <Table.HeaderCell>More</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+
+
+                    <Table.Body>
+                        {this.state.redirectToProject
+                            ? <Redirect push to={{pathname: '/projects/' + this.state.redirectToProject}}/>
+                            : this.props.projects.map(this.createListItem.bind(this))
+                        }
+                    </Table.Body>
+
+                </Table>
+
+            </Container>
+
         );
     }
 
@@ -46,12 +63,13 @@ class ProjectsList extends Component {
 
 
         <Table.Row >
-            <Table.Cell onClick={() => this.setState({redirectToProject: project.id})}>{project.language}</Table.Cell>
-            <Table.Cell onClick={() => this.setState({redirectToProject: project.id})}>{project.book}</Table.Cell>
-            <Table.Cell onClick={() => this.setState({redirectToProject: project.id})}><CircularProgressbar strokeWidth="20" percentage={project.percentFinished} /></Table.Cell>
+            {/* TODO: project IDs are hardcoded right now; should change when we update URL schema */}
+            <Table.Cell onClick={() => this.setState({redirectToProject: 16})}>{project.lang.name}</Table.Cell>
+            <Table.Cell onClick={() => this.setState({redirectToProject: 16})}>{project.book[0].name}</Table.Cell>
+            <Table.Cell onClick={() => this.setState({redirectToProject: 16})}><CircularProgressbar strokeWidth="20" percentage={project.completed} /></Table.Cell>
             <Table.Cell><ReadMore lines={1} onShowMore={this.props.onChange} text="more">
-                             <b>Date Modified</b>: {project.dateModified} <br/>
-                             <b>Translation Type</b>: {project.translationType} <br/>
+                             <b>Date Modified</b>: {project.timestamp} <br/>
+                             <b>Translation Type</b>: {project.version} <br/>
                              <b>Contributors</b>: {project.contributors} <br/>
                          </ReadMore></Table.Cell>
 
