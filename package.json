@@ -8,6 +8,7 @@
     "howler": "^2.0.4",
     "lodash": "latest",
     "prop-types": "^15.5.10",
+    "query-string": "^4.3.4",
     "react": "^15.6.1",
     "react-addons": "^0.9.1-deprecated",
     "react-addons-create-fragment": "^15.6.0",
