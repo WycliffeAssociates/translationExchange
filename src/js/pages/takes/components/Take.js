@@ -22,32 +22,44 @@ class Take extends Component {
 
     render () {
         return (
+            <div>
+        <Grid columns={4} relaxedclassName="take">
 
+            <Grid.Column width={4}>
+                <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate(this.props.take.date_modified)}</strong>
+            </Grid.Column>
 
-        <div className="take">
-            <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate(this.props.take.date_modified)}</strong>
-            <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
-            <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
-            <Delete/>
+            <Grid.Column width={2}>
+                <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
+            </Grid.Column>
+
+            <Grid.Column width={2}>
+                <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
+                <Delete/>
+            </Grid.Column>
+
+            <Grid.Column>
+                <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
+            </Grid.Column>
+
+        </Grid>
+
 
             <Grid columns={2} relaxed>
                 <Grid.Column width={9}>
                     <AudioComponent
                         src={config.streamingUrl + this.props.take.location}
+                        width="700"
                     />
                 </Grid.Column >
 
-                <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
                 {this.state.isToggleOn ? '' :
 
-                    <Grid.Column width={5}>
-                        {/* the segment will be replaced with audio component?*/}
-                        <Segment basic>
-
+                    <Grid.Column width={4}>
                             <AudioComponent
                                 src={config.streamingUrl + this.props.take.location}
+                                width="200"
                             />
-                        </Segment>
                     </Grid.Column>}
 
             </Grid>
