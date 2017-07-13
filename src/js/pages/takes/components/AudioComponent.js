@@ -5,7 +5,7 @@ import Audio from 'translation-audio-player'
 // name : name to display on take
 // src  : url of file to be played in audio player
 import CommentContainer from './comments/CommentContainer'
-
+import onClick from './comments/CommentContainer'
 
 
 // requires a name (str) and src (str) when it is called
@@ -31,7 +31,6 @@ class AudioComponent extends Component {
     onClick = () => {                         // used when you click the microphone button in the player
         this.commentContainer.showModal()
         this.setState = { pause:true }
-
     }
 
 
