@@ -4,10 +4,8 @@ import './RecordComment.css';
 import mic from './Group.png';
 import stop from './stopButton.png';
 
-
-
-
-
+let startRecording;
+let stopRecording;
 
 export class RecordComment extends Component {
 
