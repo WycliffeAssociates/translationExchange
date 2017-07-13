@@ -41,30 +41,18 @@ class LanguageDropdown extends Component {
 
                 <Dropdown placeholder='Select Language'
                           search
-                          floating
-                          labeled
-                          button
-                          className='icon'
-                          icon='world'
+                          selection
                           options={languageOptions}
                 />
                 <Dropdown placeholder='Select Book'
                           search
-                          floating
-                          labeled
-                          button
-                          className='icon'
-                          icon='comments outline'
+                          selection
                           options={bookOptions}
                 />
                 <Dropdown
                     placeholder='Select Version'
                           search
-                          floating
-                          labeled
-                          button
-                          className='icon'
-                          icon='comments outline'
+                    selection
                           options={languageOptions}
                 />
             </div>

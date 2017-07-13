@@ -1,14 +1,35 @@
 import React, { Component } from 'react';
-import {Button, Container, Header, Icon, Input, Label, Table} from "semantic-ui-react";
+import {Button, Container, Header, Table} from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
-
+import axios from 'axios';
 
 class ProjectContainer extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            chapters: []
+            chapters: [],
+            filesData : null
         };
+        this.getUploadedData = this.getUploadedData.bind(this);
+        this.handleFileChange = this.handleFileChange.bind(this);
+    }
+
+    handleFileChange(event) {
+        this.setState({
+            filesData: event.target.value
+        })
+    }
+    getUploadedData(event) {
+        const context = this;
+        event.preventDefault();
+        axios.post({
+            method: 'POST',
+            url: 'http://localhost:3000/api/upload',
+            data: JSON.stringify(context.state.filesData),
+            success: function(data) {
+                console.log('This is the uploaded data', data);
+            }
+        })
     }
 
     componentDidMount () {
@@ -41,27 +62,27 @@ class ProjectContainer extends Component {
     render () {
         return (
             <div>
-                UPLOAD SOURCE AUDIO
-                <input id="upload" ref="upload" type="file" accept=".pdf"
-                       // onChange={(event)=> {
-                       //     this.readFile(event)
-                       // }}
-                       onClick={(e)=> {
-                           e.target.value = null
-                       }}
 
-                />
-                <Button>
-                    Upload
-                </Button>
+                {/*<input id="upload" ref="upload" type="file" accept=".pdf"*/}
+                       {/*// onChange={(event)=> {*/}
+                       {/*//     this.readFile(event)*/}
+                       {/*// }}*/}
+                       {/*onClick={(e)=> {*/}
+                           {/*e.target.value = null*/}
+                       {/*}}*/}
+
+                {/*/>*/}
+
+                <form onSubmit={this.getUploadedData} method="post" encType="multipart/form-data">
+                    Upload source audio
+                    <input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
+                    <button type="submit"> Submit</button>
+                </form>
 
                 <Container fluid>
                     {/*header will be dynamic later*/}
                     <Header as='h1'>Matthew (English)</Header>
-
-
-
-                <Table selectable>
+                <Table selectable color="blue">
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Chapter</Table.HeaderCell>
