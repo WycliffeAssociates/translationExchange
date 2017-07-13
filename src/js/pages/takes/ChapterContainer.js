@@ -122,8 +122,8 @@ class ChapterContainer extends Component {
 
         return(
             <div>
-
                 <ChunkList
+
                     segments={arr} // array of takes
                     mode={arr[0].take.mode}
                     number={arr[0].take.startv}

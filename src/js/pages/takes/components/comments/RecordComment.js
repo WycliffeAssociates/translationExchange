@@ -121,9 +121,6 @@ export class RecordComment extends Component {
 
         return (
 
-
-
-
             <div>
                 <ReactMic
                     record={this.state.record}

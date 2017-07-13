@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Container, Header, Table} from "semantic-ui-react";
+import {Button, Container, Header, Table, Input, TextArea } from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
 import axios from 'axios';
 import config from 'config/config'
@@ -108,11 +108,6 @@ class ProjectContainer extends Component {
 
                 {/*/>*/}
 
-                <form onSubmit={this.getUploadedData} method="post" encType="multipart/form-data">
-                    Upload source audio
-                    <input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
-                    <button type="submit"> Submit</button>
-                </form>
 
                 <Container fluid>
                     {/*header will be dynamic later*/}
@@ -136,7 +131,15 @@ class ProjectContainer extends Component {
                         navigateToChapter={this.navigateToChapter.bind(this)}
                     />
 
+
                 </Table>
+                    <br></br>
+                    <form onSubmit={this.getUploadedData} method="post" encType="multipart/form-data">
+                        <h4>Upload source audio</h4>
+                        <Input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
+                        <Button type="submit">Submit</Button>
+                    </form>
+
                 </Container>
 
             </div>

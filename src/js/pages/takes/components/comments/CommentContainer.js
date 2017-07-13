@@ -128,11 +128,8 @@ class CommentContainer extends Component {
                     </Modal.Actions>
                 </Modal>
 
-
-
-
-
-        ); }
+        );
+    }
 }
 
 
