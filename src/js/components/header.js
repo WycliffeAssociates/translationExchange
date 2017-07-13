@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import {Menu, state, handleItemClick} from "semantic-ui-react";
 import {Link} from "react-router-dom";
+import * as ReactDOM from "react-dom";
 
 
 class Header extends Component {
     state = { activeItem: 'home' };
 
-    handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+    handleItemClick = (e, { name }) => {
+        this.setState({ activeItem: name });
+        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-play'));
+    }
 
     //
     // constructor(props) {
@@ -62,8 +66,8 @@ class Header extends Component {
         return (
             <Menu inverted size='large'>
                 <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'home'} onClick={this.handleItemClick} />
-                <Menu.Item as={Link} to='/about/' name='About' active={activeItem === 'messages'} onClick={this.handleItemClick} />
-                <Menu.Item as={Link} to='/projects/' name='Projects' active={activeItem === 'friends'} onClick={this.handleItemClick} />
+                <Menu.Item as={Link} to='/about' name='About' active={activeItem === 'messages'} onClick={this.handleItemClick} />
+                <Menu.Item as={Link} to='/projects' name='Projects' active={activeItem === 'friends'} onClick={this.handleItemClick} />
             </Menu>
         )
     }

@@ -61,7 +61,7 @@ class CommentContainer extends Component {
     };
 
     onClickSave = () =>{
-
+        this.hideModal();
         // save and upload audio comment to the server
         console.log('file saved');
 
@@ -80,12 +80,10 @@ class CommentContainer extends Component {
         backgroundColor: "rgba(171,149,149, .4)",
         fontSize: "32",
         textAlign: "center",
-        width:"500px"
+        //width:"500px"
 
 
 };
-
-
 
     render(){
 

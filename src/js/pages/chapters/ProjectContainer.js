@@ -3,14 +3,14 @@ import {Button, Container, Header, Table, Input, TextArea } from "semantic-ui-re
 import ChapterList from "./components/ChapterList";
 import axios from 'axios';
 import config from 'config/config'
+import QueryString from 'query-string';
 
 class ProjectContainer extends Component {
     constructor (props) {
         super(props);
         this.state = {
             chapters: [],
-            filesData : null,
-            version: ''
+            filesData : null
         };
         this.getUploadedData = this.getUploadedData.bind(this);
         this.handleFileChange = this.handleFileChange.bind(this);
@@ -35,66 +35,36 @@ class ProjectContainer extends Component {
     }
 
     getChapterData() {
-        axios.post(config.apiUrl + 'get_chapters/', {
-            "language":"en-x-demo2",
-            "version":"ulb",
-            "book":"mrk"
-        }).then((results) => {
+        var query = QueryString.parse(this.props.location.search);
+
+        axios.post(config.apiUrl + 'get_chapters/', query
+        ).then((results) => {
             this.setState(
                 {
-                    chapters: results.data,
-                    version: "ulb"
+                    chapters: results.data
                 }
             )
         })
     }
 
     navigateToChapter(chNum) {
+        var query = QueryString.parse(this.props.location.search);
+        query.chapter = chNum;
         this.props.history.push(
             {
-            pathname: this.props.location.pathname + '/ch' + chNum
+                pathname: "/takes",
+                search: QueryString.stringify(query)
             }
         )
     }
 
     componentDidMount () {
-
         this.getChapterData()
-
-
-
-
-        /*
-        //request project and chapter info here...
-        this.setState(
-            {
-                chapters: [
-                    {
-                        number: 1,
-                        percentFinished: 100.0,
-                        checkingLevel: 2,
-                        contributors: ["Alison"],
-                        translationType: "ULB",
-                        timestamp: "20 June 2017 4:16 pm"
-                    },
-                    {
-                        number: 16,
-                        percentFinished: 16.0,
-                        checkingLevel: 0,
-                        contributors: ["Bob the Translator"],
-                        translationType: "ULB",
-                        timestamp: "20 June 2017 6:07 am"
-                    }
-                ]
-            }
-        );
-        */
     }
 
     render () {
 
 
-        console.log('path', this.props.location.pathname)
         return (
             <div>
 
@@ -126,8 +96,7 @@ class ProjectContainer extends Component {
 
                     <ChapterList
                         chapters={this.state.chapters}
-                        path={this.props.location.pathname}
-                        version={"ulb"}
+                        version={QueryString.parse(this.props.location.search).version}
                         navigateToChapter={this.navigateToChapter.bind(this)}
                     />
 

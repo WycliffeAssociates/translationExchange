@@ -275,11 +275,11 @@ export const languageOptions = [
 ]
 
 export const bookOptions = [
-    { key: 'Matthew', text: 'Arabic', value: 'Arabic' },
-    { key: 'Mark', text: 'Chinese', value: 'Chinese' },
-    { key: 'Luke', text: 'Danish', value: 'Danish' },
-    { key: 'John', text: 'Dutch', value: 'Dutch' },
-    { key: 'Acts', text: 'English', value: 'English' },
+    { key: 'Matthew', text: 'Matthew', value: 'Matthew'},
+    { key: 'Mark', text: 'Mark', value: 'Mark' },
+    { key: 'Luke', text: 'Luke', value: 'Luke' },
+    { key: 'John', text: 'John', value: 'John' },
+    { key: 'Acts', text: 'Acts', value: 'Acts' },
     { key: 'Romans', text: 'French', value: 'French' },
     { key: '1 Corinthians', text: 'German', value: 'German' },
     { key: '2 Corinthians', text: 'Greek', value: 'Greek' },
