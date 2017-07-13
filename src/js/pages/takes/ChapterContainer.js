@@ -12,21 +12,25 @@ class ChapterContainer extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", takeList: []};
+        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", takeList: [], chapters: []
+        };
     }
 
     componentDidMount () {
         this.requestData();
+
     }
+
 
     requestData () {
         //var chapterID = this.props.match.params.chid;
+        console.log('ChapterContainer props', this.props)
         this.setState({error: ""});
         axios.post(config.apiUrl + 'get_project/', {
             "language":"en-x-demo2",
             "version":"ulb",
             "book":"mrk",
-            "chapter":6
+            "chapter":this.props.match.params.chid
         }).then((results) => {
             this.setState(
                 {
@@ -39,6 +43,20 @@ class ChapterContainer extends Component {
             this.setState({error: exception});
         });
 
+    }
+
+    //if a child component does requests to change a take in the database, they have to
+    //call this function to update the take in state.
+    updateTakeInState (updatedTake) {
+        console.log("TAKE TO UPDATE:");
+        console.dir(updatedTake);
+
+        var updatedSegments = this.state.segments.slice();
+        var takeToUpdate = updatedSegments.findIndex(take => take.take.id === updatedTake.take.id);
+        updatedSegments[takeToUpdate] = updatedTake;
+        this.setState({segments: updatedSegments});
+        console.log("SET STATE");
+        console.dir(updatedSegments);
     }
 
     findStartVerses(paramArr) { // creates array of each start verse
@@ -94,10 +112,11 @@ class ChapterContainer extends Component {
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
-                    {tempArr.map(this.createChunkList)}
+                    {tempArr.map(this.createChunkList.bind(this))}
                 </LoadingDisplay>
             </div>
         );
+
     }
 
     createChunkList(arr) {
@@ -109,6 +128,7 @@ class ChapterContainer extends Component {
                     segments={arr} // array of takes
                     mode={arr[0].take.mode}
                     number={arr[0].take.startv}
+                    updateTakeInState={this.updateTakeInState.bind(this)}
                 />
 
             </div>
