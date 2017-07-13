@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import {Button, Container, Header, Table} from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
 import axios from 'axios';
+import config from 'config/config'
 
 class ProjectContainer extends Component {
     constructor (props) {
         super(props);
         this.state = {
             chapters: [],
-            filesData : null
+            filesData : null,
+            version: ''
         };
         this.getUploadedData = this.getUploadedData.bind(this);
         this.handleFileChange = this.handleFileChange.bind(this);
@@ -32,8 +34,37 @@ class ProjectContainer extends Component {
         })
     }
 
+    getChapterData() {
+        axios.post('http://172.19.145.91:8000/api/get_chapters/', {
+            "language":"en-x-demo2",
+            "version":"ulb",
+            "book":"mrk"
+        }).then((results) => {
+            this.setState(
+                {
+                    chapters: results.data,
+                    version: "ulb"
+                }
+            )
+        })
+    }
+
+    navigateToChapter(chNum) {
+        this.props.history.push(
+            {
+            pathname: this.props.location.pathname + '/ch' + chNum
+            }
+        )
+    }
+
     componentDidMount () {
 
+        this.getChapterData()
+
+
+
+
+        /*
         //request project and chapter info here...
         this.setState(
             {
@@ -57,9 +88,13 @@ class ProjectContainer extends Component {
                 ]
             }
         );
+        */
     }
 
     render () {
+
+
+        console.log('path', this.props.location.pathname)
         return (
             <div>
 
@@ -93,9 +128,12 @@ class ProjectContainer extends Component {
                             <Table.HeaderCell>Date Modified</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
+
                     <ChapterList
                         chapters={this.state.chapters}
                         path={this.props.location.pathname}
+                        version={"ulb"}
+                        navigateToChapter={this.navigateToChapter.bind(this)}
                     />
 
                 </Table>
