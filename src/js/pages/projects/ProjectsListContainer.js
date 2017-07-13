@@ -5,7 +5,8 @@ import ProjectsList from "./components/ProjectsList";
 import 'css/projects.css'
 import axios from 'axios';
 import config from 'config/config';
-import LanguageDropdown from "./components/language_dropdown";
+import FilterContainer from "./FilterContainer";
+import {Header} from "semantic-ui-react";
 
 class ProjectsListContainer extends Component {
 
@@ -58,13 +59,22 @@ class ProjectsListContainer extends Component {
         });
     }
 
+    clearQuery () {
+        this.props.history.push({
+            pathname: this.props.location.pathname
+        });
+    }
+
     render () {
         return (
             <div>
-                    <LanguageDropdown projects={this.state.projects}
-                                      setQuery={this.setQuery.bind(this)}
-                                      queryString={this.props.location.search}/>
-                    <ProjectsList projects={this.state.projects}/>
+                <Header as='h1'>Choose a project</Header>
+
+                <FilterContainer projects={this.state.projects}
+                                 setQuery={this.setQuery.bind(this)}
+                                 queryString={this.props.location.search}
+                                 clearQuery={this.clearQuery.bind(this)}/>
+                <ProjectsList projects={this.state.projects}/>
             </div>
         );
     }

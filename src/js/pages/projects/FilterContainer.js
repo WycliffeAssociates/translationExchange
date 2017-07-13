@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, Button } from 'semantic-ui-react'
 import axios from 'axios'
 import config from 'config/config';
 
 
-class LanguageDropdown extends Component {
+class FilterContainer extends Component {
     /*
      In the constructor, set the state to being empty so the component
      can render without errors before the API request finishes
@@ -116,9 +116,12 @@ class LanguageDropdown extends Component {
                     options={this.state.versions}
                     onChange={this.setVersion.bind(this)}
                 />
+                <Button onClick={this.props.clearQuery}>
+                    Clear
+                </Button>
             </div>
         );
     }
 }
 
-export default LanguageDropdown;
+export default FilterContainer;

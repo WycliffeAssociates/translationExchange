@@ -28,8 +28,6 @@ class ProjectsList extends Component {
     render () {
         return (
             <Container fluid>
-                <Header as='h1'>Available Projects</Header>
-
                 <Table selectable fixed>
                     <Table.Header>
                         <Table.Row>
