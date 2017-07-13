@@ -35,7 +35,7 @@ class ProjectContainer extends Component {
     }
 
     getChapterData() {
-        axios.post('http://172.19.145.91:8000/api/get_chapters/', {
+        axios.post(config.apiUrl + 'get_chapters/', {
             "language":"en-x-demo2",
             "version":"ulb",
             "book":"mrk"
