@@ -33,7 +33,6 @@ class ChapterList extends Component {
     }
 
     parseDate(date) {
-
         var noon = 'am';
         var dateArr = date.split('T');
         var date = dateArr[0]

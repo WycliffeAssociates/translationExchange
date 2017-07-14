@@ -10,8 +10,10 @@ class ProjectContainer extends Component {
         super(props);
         this.state = {
             chapters: [],
+            book: {},
+            language: {},
             filesData : null,
-            version: '',
+            loaded: true
         };
         this.getUploadedData = this.getUploadedData.bind(this);
         this.handleFileChange = this.handleFileChange.bind(this);
@@ -45,9 +47,14 @@ class ProjectContainer extends Component {
 
         axios.post(config.apiUrl + 'get_chapters/', query
         ).then((results) => {
+            console.dir(results.data.slice(0, results.data.length - 2));
+            console.dir(results.data[results.data.length - 2]);
+            console.dir(results.data[results.data.length - 1]);
             this.setState(
                 {
-                    chapters: results.data
+                    chapters: results.data.slice(0, results.data.length - 2),
+                    book: results.data[results.data.length - 2].book[0],
+                    language: results.data[results.data.length - 1].lang[0]
                 }
             )
         })
@@ -74,17 +81,8 @@ class ProjectContainer extends Component {
 
         return (
             <div>
-
-                <form onSubmit={this.getUploadedData} method="post" encType="multipart/form-data">
-                    Upload source audio
-
-                    <input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
-                    <input type="submit" />
-
-                </form>
                 <Container fluid>
-                    {/*header will be dynamic later*/}
-                    <Header as='h1'>Matthew (English)</Header>
+                    <Header as='h1'>{this.state.book.name} ({this.state.language.name})</Header>
                 <Table selectable color="blue">
                     <Table.Header>
                         <Table.Row>
