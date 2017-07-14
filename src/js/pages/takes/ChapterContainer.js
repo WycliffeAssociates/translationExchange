@@ -119,7 +119,7 @@ class ChapterContainer extends Component {
             if (this.state.segments[i].take.is_export) {
                 file[file.length] = {
                     "src": config.streamingUrl + this.state.segments[i].take.location,
-                    "name": this.state.segments[i].take.mode + ' ' + i + ' ' + '(' + (file.length+1) + ' of ' + length + ')'
+                    "name": this.state.segments[i].take.mode + ' ' + this.state.segments[i].take.startv + ' ' + '(' + (file.length+1) + '/' + length + ')'
                 }
             }
         }
@@ -141,7 +141,7 @@ class ChapterContainer extends Component {
                     console.log('Source audio found')
                     file[file.length] = {
                         "src": config.streamingUrl + this.state.segments[i].source.take[0].location,
-                        "name": this.state.segments[i].take.mode + ' ' + i + '(src)'
+                        "name": this.state.segments[i].take.mode + ' ' + this.state.segments[i].take.startv + ' (src)'
                     }
                 }
                 /*
