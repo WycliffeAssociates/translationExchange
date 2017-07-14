@@ -106,11 +106,20 @@ class ChapterContainer extends Component {
     createPlaylist() {
 
         var file = [];
+        var length = 0;
+
+        for(let i = 0; i < this.state.segments.length; i++) {
+            if (this.state.segments[i].take.is_export) {
+                length += 1;
+            }
+        }
+
 
         for(let i = 0; i < this.state.segments.length; i++) {
             if (this.state.segments[i].take.is_export) {
                 file[file.length] = {
-                    "src": config.streamingUrl + this.state.segments[i].take.location
+                    "src": config.streamingUrl + this.state.segments[i].take.location,
+                    "name": this.state.segments[i].take.mode + ' ' + i + ' ' + '(' + (file.length+1) + ' of ' + length + ')'
                 }
             }
         }
@@ -120,16 +129,33 @@ class ChapterContainer extends Component {
 
     createSourcePlaylist() {
         var file = [];
+        var src = ''
+
 
         for(let i = 0; i < this.state.segments.length; i++) {
-            if (this.state.segments[i].take.is_export) {
-                // for now it just takes the take audio
-                // when backend provides source audio we can change this
-                file[file.length] = {
-                    "src": config.streamingUrl + this.state.segments[i].take.location
+
+            if(this.state.segments[i].take.is_export) {
+                console.log('Export take found')
+                console.log(this.state.segments[i].source)
+                if (!(this.state.segments[i].source === undefined)) {
+                    console.log('Source audio found')
+                    file[file.length] = {
+                        "src": config.streamingUrl + this.state.segments[i].source.take[0].location,
+                        "name": this.state.segments[i].take.mode + ' ' + i + '(src)'
+                    }
                 }
+                /*
+                else {
+                    file[file.length] = {
+                        "src": "",
+                        "name": "N/A"
+                    }
+                }
+                */
             }
+
         }
+        console.log('FILE', file)
 
         return file
     }
@@ -147,6 +173,8 @@ class ChapterContainer extends Component {
         tempArr = this.createArray(tempArr, this.state.segments) // create array for ChunkList component
 
 
+        var playlist = this.createPlaylist()
+        var sourcePlaylist = this.createSourcePlaylist()
 
 
         return (
@@ -160,16 +188,10 @@ class ChapterContainer extends Component {
                     <Accordion styled fluid>
                         <Accordion.Title>
                             <Icon name='dropdown' />
-                            Listen to All
+                            Listen to Selected
                         </Accordion.Title>
 
                         <Accordion.Content>
-
-                            {/*
-                            <AudioComponent
-                                playlist={this.createPlaylist()}
-                            />
-                            */}
 
                             <Grid columns={1} relaxed>
                                 <Grid.Column width={4}>
@@ -184,6 +206,7 @@ class ChapterContainer extends Component {
                                 <Grid.Column width={9}>
                                     <AudioComponent
                                         playlist={this.createPlaylist()}
+
                                     />
 
                                 </Grid.Column>
@@ -191,9 +214,14 @@ class ChapterContainer extends Component {
                                 {this.state.isToggleOn ? '' :
 
                                     <Grid.Column width={4}>
+
+
                                         <AudioComponent
-                                            playlist={this.createSourcePlaylist()}
+                                            playlist={sourcePlaylist}
+                                            width={200}
+
                                         />
+
                                     </Grid.Column>}
 
                             </Grid>

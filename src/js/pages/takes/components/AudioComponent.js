@@ -54,8 +54,7 @@ class AudioComponent extends Component {
         }
         */
 
-        var file = this.props.playlist
-        var name = this.props.name
+        var file = this.props.playlist;
         const pause = this.state.pause;
         console.log(pause);
 
@@ -67,7 +66,6 @@ class AudioComponent extends Component {
                     height={150}
                     autoPlay={false}
                     playlist={file}
-                    name={name}
                     recordButton={() => {
                         this.onClick()
 
