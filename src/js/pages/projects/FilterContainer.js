@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Dropdown, Button } from 'semantic-ui-react'
 import axios from 'axios'
 import config from 'config/config';
-import QueryString from 'query-string';
 
 
 class FilterContainer extends Component {
@@ -78,78 +77,44 @@ class FilterContainer extends Component {
     //called when just the query string changes and new projects are loaded
     componentWillReceiveProps(nextProps){
         this.setState({loaded: false});
-        if (nextProps.queryString) {
-            this.getFiltersFromProjects(nextProps.projects);
-        } else {
-            this.requestAllFilters();
-        }
+        this.getFiltersFromProjects(nextProps.projects);
     }
 
     setLanguage(event, dropdown) {
-        if (dropdown.value) {
-            this.props.setQuery({language: dropdown.value});
-        }
+        this.props.setQuery({language: dropdown.value});
     }
 
     setBook(event, dropdown) {
-        if (dropdown.value) {
-            this.props.setQuery({book: dropdown.value});
-        }
+        this.props.setQuery({book: dropdown.value});
     }
 
     setVersion(event, dropdown) {
-        if (dropdown.value) {
-            this.props.setQuery({version: dropdown.value});
-        }
+        this.props.setQuery({version: dropdown.value});
     }
 
     render() {
-        var query = QueryString.parse(this.props.queryString);
-
-        //if there are no options currently selected, put in a blank option
-        var languageOptions = [];
-        if (!query.language) {
-            languageOptions = [{key: "", text: "", value: ""}];
-        }
-        languageOptions = languageOptions.concat(this.state.languages);
-
-        var bookOptions = [];
-        if (!query.book) {
-            bookOptions = [{key: "", text: "", value: ""}];
-        }
-        bookOptions = bookOptions.concat(this.state.books);
-
-        var versionOptions = [];
-        if (!query.version) {
-            versionOptions = [{key: "", text: "", value: ""}];
-        }
-        versionOptions = versionOptions.concat(this.state.versions);
-
         return (
             <div>
                 <Dropdown placeholder='Select Language'
                           selection
                           search
                           loading={!this.state.loaded}
-                          options={languageOptions}
+                          options={this.state.languages}
                           onChange={this.setLanguage.bind(this)}
-                          value={query.language}
                 />
                 <Dropdown placeholder='Select Book'
                           selection
                           search
                           loading={!this.state.loaded}
-                          options={bookOptions}
+                          options={this.state.books}
                           onChange={this.setBook.bind(this)}
-                          value={query.book}
                 />
-                <Dropdown placeholder='Select Version'
-                          selection
-                          search
-                          loading={!this.state.loaded}
-                          options={versionOptions}
-                          onChange={this.setVersion.bind(this)}
-                          value={query.version}
+                <Dropdown
+                    placeholder='Select Version'
+                    selection
+                    search
+                    options={this.state.versions}
+                    onChange={this.setVersion.bind(this)}
                 />
                 <Button onClick={this.props.clearQuery}>
                     Clear

@@ -68,13 +68,8 @@ class ProjectsListContainer extends Component {
     }
 
     clearQuery () {
-        //empty the current query and projects, and after the state has been set, navigate
-        //to a URL without the query
-        this.setState({currentProjectQuery: "", projects: []},
-            function () {
-                this.props.history.push({
-                    pathname: this.props.location.pathname
-                });
+        this.props.history.push({
+            pathname: this.props.location.pathname
         });
     }
 
