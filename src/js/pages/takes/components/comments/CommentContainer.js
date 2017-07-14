@@ -20,7 +20,7 @@ class CommentContainer extends Component {
 
         this.state = {title : 'Record Comment',
             show: false,
-            SaveButtonState: true
+            SaveButtonState: false
 
 
         };
@@ -126,11 +126,8 @@ class CommentContainer extends Component {
                     </Modal.Actions>
                 </Modal>
 
-
-
-
-
-        ); }
+        );
+    }
 }
 
 

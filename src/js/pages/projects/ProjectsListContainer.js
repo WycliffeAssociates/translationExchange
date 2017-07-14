@@ -1,127 +1,102 @@
-/*
-    Here's an example container component that would handle requesting from the API,
-    parsing the data, and then passing it to a child presentation component.
-
-    All the components for the projects screens are grouped together in a "projects"
-    folder
-*/
-
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import QueryString from 'query-string';
 import ProjectsList from "./components/ProjectsList";
-import 'css/projects.css'
-import SearchButtons from "./components/all_buttons";
+
+import '../../../css/projects.css'
 import {Container, Header, Table} from "semantic-ui-react";
+import axios from 'axios';
+import config from 'config/config';
+import FilterContainer from "./FilterContainer";
+
+
 
 class ProjectsListContainer extends Component {
-    /*
-        In the constructor, set the state to being empty so the component
-        can render without errors before the API request finishes
-    */
+
     constructor(props) {
         super(props);
-        this.state = {projects:[]};
+        this.state = {
+            projects: [], //projects gotten from the database
+            currentProjectQuery: "" //what query was used to get those projects from the database
+        };
     }
 
-    /*
-        In componentDidMount, do the API request for the data and then use
-        setState to put the data in state
-     */
-    componentDidMount() {
+     componentDidMount () {
+        //if query string isn't blank, then request projects here to initially populate projects list
+        if (this.props.location.search) {
+            this.requestProjects(this.props.location.search);
+        }
+     }
 
-        //I would do a web request here...
-        //Just going to put fake data in state instead
+     requestProjects (queryString) {
+        var query = QueryString.parse(queryString);
+         axios.post(config.apiUrl + 'all_project/', query)
+         .then((results) => {
+             this.setState({
+                 projects: results.data,
+                 currentProjectQuery: queryString
+             });
+         }).catch((exception) => {
+             console.log("ERROR");
+             console.dir(exception);
+         });
+     }
 
-        this.setState({projects:
-            [
-                {
-                    id: 16,
-                    book: "Matthew",
-                    language: "English",
-                    translationType: "Unlocked Literal Bible",
-                    percentFinished: 7,
-                    contributors: ["Alison ","Erica"],
-                    dateModified: "20 June 2017 4:16 pm"
-                },
-                {
-                    id: 17,
-                    book: "Mark",
-                    language: "English",
-                    translationType: "Unlocked Dynamic Bible",
-                    percentFinished: 10,
-                    contributors: ["Alison"],
-                    dateModified: "20 March 2016 3:16 pm"
-                },
-                {
-                    id: 18,
-                    book: "Luke",
-                    language: "English",
-                    translationType: "Unlocked Dynamic Bible",
-                    percentFinished: 25,
-                    contributors: ["Juan"],
-                    dateModified: "3 June 2015 9:33 pm"
-                },
-                {
-                    id: 20,
-                    book: "Genesis",
-                    language: "Spanish",
-                    translationType: "Unlocked Literal Bible",
-                    percentFinished: 40,
-                    contributors: ["Michael"],
-                    dateModified: "20 June 2017 3:30 am"
-                },
-                {
-                    id: 18,
-                    book: "Exodus",
-                    language: "English",
-                    translationType: "Unlocked Literal Bible",
-                    percentFinished: 87,
-                    contributors: ["Dennis"],
-                    dateModified: "26 March 2017 12:04 pm"
-                },
-                {
-                    id: 18,
-                    book: "Leviticus",
-                    language: "Spanish",
-                    translationType: "Unlocked Literal Bible",
-                    percentFinished: 12,
-                    contributors: ["Nathan"],
-                    dateModified: "28 February  2017 8:35 am"
-                }
-            ]
+    //if the project query string has changed, request projects
+    componentWillReceiveProps (nextProps) {
+        if (this.state.currentProjectQuery !== nextProps.location.search) {
+            this.requestProjects(nextProps.location.search);
+        }
+    }
+
+    setQuery (newQueryElement) {
+        //merge together the current query with the new query element
+        var currentQuery = QueryString.parse(this.state.currentProjectQuery);
+        Object.assign(currentQuery, newQueryElement);
+
+        //now turn the query into a query string and navigate to it
+        var queryString = QueryString.stringify(currentQuery);
+        this.props.history.push({
+            pathname: this.props.location.pathname,
+            search: "?" + queryString
         });
     }
 
-    /*
-        In render, just render a child presentation component, passing it
-        the data as props
-     */
+    clearQuery () {
+        this.props.history.push({
+            pathname: this.props.location.pathname
+        });
+    }
+
+    navigateToProject (language, book, version) {
+        //make the query for the right project, using our current query as a base
+        var projectQuery = QueryString.parse(this.state.currentProjectQuery);
+        Object.assign(projectQuery, {
+            language: language,
+            book: book,
+            version: version
+        });
+
+        var queryString = QueryString.stringify(projectQuery);
+        this.props.history.push(
+            {
+                pathname: '/chapters',
+                search: "?" + queryString
+            }
+        )
+    }
+
     render () {
         return (
             <div>
+                <Header as='h1'>Choose a project</Header>
 
-                <div className="App-buttons">
-                    <SearchButtons/>
-                </div>
-                <Container fluid >
-                    <Header as='h1'>Available Projects</Header>
-
-                <Table selectable fixed color="blue">
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.HeaderCell>Language</Table.HeaderCell>
-                            <Table.HeaderCell>Book</Table.HeaderCell>
-                            <Table.HeaderCell>Percent Complete</Table.HeaderCell>
-                            <Table.HeaderCell>More</Table.HeaderCell>
-                        </Table.Row>
-                    </Table.Header>
-
-
-                    <ProjectsList projects={this.state.projects}/>
-
-                </Table>
-
-                </Container>
-
+                <FilterContainer projects={this.state.projects}
+                                 setQuery={this.setQuery.bind(this)}
+                                 queryString={this.props.location.search}
+                                 clearQuery={this.clearQuery.bind(this)}/>
+                <ProjectsList projects={this.state.projects}
+                              navigateToProject={this.navigateToProject.bind(this)}/>
             </div>
         );
     }

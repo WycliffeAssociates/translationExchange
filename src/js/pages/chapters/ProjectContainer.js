@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {Button, Container, Header, Table} from "semantic-ui-react";
+import {Button, Container, Header, Table, Input, TextArea } from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
 import axios from 'axios';
 import config from 'config/config'
+import QueryString from 'query-string';
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -40,30 +41,30 @@ class ProjectContainer extends Component {
     }
 
     getChapterData() {
-        axios.post(config.apiUrl + 'get_chapters/', {
-            "language":"en-x-demo2",
-            "version":"ulb",
-            "book":"mrk"
-        }).then((results) => {
+        var query = QueryString.parse(this.props.location.search);
+
+        axios.post(config.apiUrl + 'get_chapters/', query
+        ).then((results) => {
             this.setState(
                 {
-                    chapters: results.data,
-                    version: "ulb"
+                    chapters: results.data
                 }
             )
         })
     }
 
     navigateToChapter(chNum) {
+        var query = QueryString.parse(this.props.location.search);
+        query.chapter = chNum;
         this.props.history.push(
             {
-            pathname: this.props.location.pathname + '/ch' + chNum
+                pathname: "/takes",
+                search: QueryString.stringify(query)
             }
         )
     }
 
     componentDidMount () {
-
         this.getChapterData()
 
     }
@@ -71,7 +72,6 @@ class ProjectContainer extends Component {
     render () {
 
 
-        console.log('path', this.props.location.pathname)
         return (
             <div>
 
@@ -99,12 +99,19 @@ class ProjectContainer extends Component {
 
                     <ChapterList
                         chapters={this.state.chapters}
-                        path={this.props.location.pathname}
-                        version={"ulb"}
+                        version={QueryString.parse(this.props.location.search).version}
                         navigateToChapter={this.navigateToChapter.bind(this)}
                     />
 
+
                 </Table>
+                    <br></br>
+                    <form onSubmit={this.getUploadedData} method="post" encType="multipart/form-data">
+                        <h4>Upload source audio</h4>
+                        <Input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
+                        <Button type="submit">Submit</Button>
+                    </form>
+
                 </Container>
 
             </div>
