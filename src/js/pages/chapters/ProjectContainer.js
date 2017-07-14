@@ -18,20 +18,31 @@ class ProjectContainer extends Component {
 
     handleFileChange(event) {
         this.setState({
-            filesData: event.target.value
-        })
+            filesData: JSON.stringify(event)
+        });
     }
+
     getUploadedData(event) {
-        const context = this;
         event.preventDefault();
-        axios.post({
-            method: 'POST',
-            url: 'http://localhost:3000/api/upload',
-            data: JSON.stringify(context.state.filesData),
-            success: function(data) {
-                console.log('This is the uploaded data', data);
-            }
+        console.log(event);
+        axios.post('http://172.19.145.91:8000/api/source/source_filename', {
+            data: this.state.filesData
         })
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
+        //
+        // axios.post({
+        //     method: 'POST',
+        //     url: 'http://172.19.145.91:8000/api/upload/zip',
+        //     data: JSON.stringify(context.state.filesData),
+        // });
+        // console.log(data)
     }
 
     getChapterData() {
@@ -61,34 +72,6 @@ class ProjectContainer extends Component {
 
         this.getChapterData()
 
-
-
-
-        /*
-        //request project and chapter info here...
-        this.setState(
-            {
-                chapters: [
-                    {
-                        number: 1,
-                        percentFinished: 100.0,
-                        checkingLevel: 2,
-                        contributors: ["Alison"],
-                        translationType: "ULB",
-                        timestamp: "20 June 2017 4:16 pm"
-                    },
-                    {
-                        number: 16,
-                        percentFinished: 16.0,
-                        checkingLevel: 0,
-                        contributors: ["Bob the Translator"],
-                        translationType: "ULB",
-                        timestamp: "20 June 2017 6:07 am"
-                    }
-                ]
-            }
-        );
-        */
     }
 
     render () {
@@ -110,8 +93,10 @@ class ProjectContainer extends Component {
 
                 <form onSubmit={this.getUploadedData} method="post" encType="multipart/form-data">
                     Upload source audio
+
                     <input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
-                    <button type="submit"> Submit</button>
+                    {/*<input type="submit"/>*/}
+                    <input type="submit" />
                 </form>
 
                 <Container fluid>
