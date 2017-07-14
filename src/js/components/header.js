@@ -9,7 +9,7 @@ class Header extends Component {
 
     handleItemClick = (e, { name }) => {
         this.setState({ activeItem: name });
-        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-play'));
+        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-pause'));
     }
 
     //
@@ -65,9 +65,17 @@ class Header extends Component {
 
         return (
             <Menu inverted size='large'>
-                <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'home'} onClick={this.handleItemClick} />
-                <Menu.Item as={Link} to='/about' name='About' active={activeItem === 'messages'} onClick={this.handleItemClick} />
-                <Menu.Item as={Link} to='/projects' name='Projects' active={activeItem === 'friends'} onClick={this.handleItemClick} />
+                <Link to="/">
+                <Menu.Item name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
+                </Link>
+
+                <Link to="/about">
+                <Menu.Item  name='About' active={activeItem === 'About'} onClick={this.handleItemClick} />
+                </Link>
+
+                <Link to="/projects">
+                    <Menu.Item  name='Projects' active={activeItem === 'Projects'} onClick={this.handleItemClick} />
+                </Link>
             </Menu>
         )
     }
