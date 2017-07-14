@@ -4,6 +4,8 @@ import ChunkList from "./components/ChunkList";
 import axios from 'axios';
 import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
+import { Accordion, Icon, Grid, Button } from 'semantic-ui-react'
+import AudioComponent from './components/AudioComponent'
 
 
 // this is the page for one chapter
@@ -12,7 +14,7 @@ class ChapterContainer extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", takeList: [], chapters: []
+        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", takeList: [], chapters: [], isToggleOn: true
         };
     }
 
@@ -57,6 +59,9 @@ class ChapterContainer extends Component {
         this.setState({segments: updatedSegments});
         console.log("SET STATE");
         console.dir(updatedSegments);
+
+        this.state.takeList = updatedSegments
+
     }
 
     findStartVerses(paramArr) { // creates array of each start verse
@@ -98,6 +103,41 @@ class ChapterContainer extends Component {
         })
     }
 
+    createPlaylist() {
+
+        var file = [];
+
+        for(let i = 0; i < this.state.segments.length; i++) {
+            if (this.state.segments[i].take.is_export) {
+                file[file.length] = {
+                    "src": config.streamingUrl + this.state.segments[i].take.location
+                }
+            }
+        }
+
+        return file
+    }
+
+    createSourcePlaylist() {
+        var file = [];
+
+        for(let i = 0; i < this.state.segments.length; i++) {
+            if (this.state.segments[i].take.is_export) {
+                // for now it just takes the take audio
+                // when backend provides source audio we can change this
+                file[file.length] = {
+                    "src": config.streamingUrl + this.state.segments[i].take.location
+                }
+            }
+        }
+
+        return file
+    }
+
+    handleClick() {
+        this.setState({isToggleOn: !this.state.isToggleOn});
+    }
+
     render () {
 
         var tempArr = this.findStartVerses(this.state.segments) // find start verses
@@ -106,6 +146,9 @@ class ChapterContainer extends Component {
         tempArr = this.removeDuplicates(tempArr) // remove duplicates
         tempArr = this.createArray(tempArr, this.state.segments) // create array for ChunkList component
 
+
+
+
         return (
             <div>
                 <h1>Chapter {this.props.match.params.chid}</h1>
@@ -113,7 +156,57 @@ class ChapterContainer extends Component {
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
                     {tempArr.map(this.createChunkList.bind(this))}
+
+                    <Accordion styled fluid>
+                        <Accordion.Title>
+                            <Icon name='dropdown' />
+                            Listen to All
+                        </Accordion.Title>
+
+                        <Accordion.Content>
+
+                            {/*
+                            <AudioComponent
+                                playlist={this.createPlaylist()}
+                            />
+                            */}
+
+                            <Grid columns={1} relaxed>
+                                <Grid.Column width={4}>
+                                    <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
+                                </Grid.Column>
+
+                            </Grid>
+
+
+
+                            <Grid columns={2} relaxed>
+                                <Grid.Column width={9}>
+                                    <AudioComponent
+                                        playlist={this.createPlaylist()}
+                                    />
+
+                                </Grid.Column>
+
+                                {this.state.isToggleOn ? '' :
+
+                                    <Grid.Column width={4}>
+                                        <AudioComponent
+                                            playlist={this.createSourcePlaylist()}
+                                        />
+                                    </Grid.Column>}
+
+                            </Grid>
+
+
+
+
+                        </Accordion.Content>
+                    </Accordion>
+
                 </LoadingDisplay>
+
+
             </div>
         );
 
