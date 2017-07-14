@@ -57,7 +57,7 @@ class Take extends Component {
 
                     <Grid.Column width={4}>
                             <AudioComponent
-                                src={config.streamingUrl + this.props.take.location}
+                                src={config.streamingUrl + this.props.source.take[0].location}
                                 width="200"
                             />
                     </Grid.Column>}
