@@ -10,25 +10,25 @@ class ProjectContainer extends Component {
         this.state = {
             chapters: [],
             filesData : null,
-            version: ''
+            version: '',
         };
         this.getUploadedData = this.getUploadedData.bind(this);
         this.handleFileChange = this.handleFileChange.bind(this);
     }
 
     handleFileChange(event) {
+        var data = new FormData();
+        data.append('file', event.target.files[0], event.target.files[0].name);
         this.setState({
-            filesData: JSON.stringify(event)
+            filesData: data
         });
     }
 
     getUploadedData(event) {
         event.preventDefault();
-        console.log(event);
-        axios.post('http://172.19.145.91:8000/api/source/source_filename', {
-            data: JSON.stringify(this.state.filesData),
-            success: function(data) {
-                console.log('This is the uploaded data', data);
+        axios.post('http://172.19.145.91:8000/api/source/source_filename', this.state.filesData,{
+            headers: {
+                'Content-Type' : 'multipart/form-data'
             }
         })
             .then(function(response){
@@ -37,15 +37,6 @@ class ProjectContainer extends Component {
             .catch(function (error) {
                 console.log(error);
             });
-
-
-        //
-        // axios.post({
-        //     method: 'POST',
-        //     url: 'http://172.19.145.91:8000/api/upload/zip',
-        //     data: JSON.stringify(context.state.filesData),
-        // });
-        // console.log(data)
     }
 
     getChapterData() {
@@ -84,24 +75,13 @@ class ProjectContainer extends Component {
         return (
             <div>
 
-                {/*<input id="upload" ref="upload" type="file" accept=".pdf"*/}
-                       {/*// onChange={(event)=> {*/}
-                       {/*//     this.readFile(event)*/}
-                       {/*// }}*/}
-                       {/*onClick={(e)=> {*/}
-                           {/*e.target.value = null*/}
-                       {/*}}*/}
-
-                {/*/>*/}
-
                 <form onSubmit={this.getUploadedData} method="post" encType="multipart/form-data">
                     Upload source audio
 
                     <input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
-                    {/*<input type="submit"/>*/}
                     <input type="submit" />
-                </form>
 
+                </form>
                 <Container fluid>
                     {/*header will be dynamic later*/}
                     <Header as='h1'>Matthew (English)</Header>
