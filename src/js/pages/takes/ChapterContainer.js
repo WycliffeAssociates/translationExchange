@@ -172,7 +172,6 @@ class ChapterContainer extends Component {
         tempArr = this.removeDuplicates(tempArr) // remove duplicates
         tempArr = this.createArray(tempArr, this.state.segments) // create array for ChunkList component
 
-
         var playlist = this.createPlaylist()
         var sourcePlaylist = this.createSourcePlaylist()
 
@@ -188,7 +187,7 @@ class ChapterContainer extends Component {
                     <Accordion styled fluid>
                         <Accordion.Title>
                             <Icon name='dropdown' />
-                            Listen to Selected
+                            Listen to Selected Takes
                         </Accordion.Title>
 
                         <Accordion.Content>
