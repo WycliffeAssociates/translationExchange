@@ -44,8 +44,6 @@ class ProjectsListContainer extends Component {
 
     //if the project query string has changed, request projects
     componentWillReceiveProps (nextProps) {
-        console.log("current project query: " + this.state.currentProjectQuery);
-        console.log("nextProps.location.search: " + nextProps.location.search);
         if (this.state.currentProjectQuery !== nextProps.location.search) {
             this.requestProjects(nextProps.location.search);
         }
