@@ -26,7 +26,10 @@ class ProjectContainer extends Component {
         event.preventDefault();
         console.log(event);
         axios.post('http://172.19.145.91:8000/api/source/source_filename', {
-            data: this.state.filesData
+            data: JSON.stringify(this.state.filesData),
+            success: function(data) {
+                console.log('This is the uploaded data', data);
+            }
         })
             .then(function(response){
                 console.log(response)
