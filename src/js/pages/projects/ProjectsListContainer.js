@@ -44,6 +44,8 @@ class ProjectsListContainer extends Component {
 
     //if the project query string has changed, request projects
     componentWillReceiveProps (nextProps) {
+        console.log("current project query: " + this.state.currentProjectQuery);
+        console.log("nextProps.location.search: " + nextProps.location.search);
         if (this.state.currentProjectQuery !== nextProps.location.search) {
             this.requestProjects(nextProps.location.search);
         }
@@ -63,8 +65,13 @@ class ProjectsListContainer extends Component {
     }
 
     clearQuery () {
-        this.props.history.push({
-            pathname: this.props.location.pathname
+        //empty the current query and projects, and after the state has been set, navigate
+        //to a URL without the query
+        this.setState({currentProjectQuery: "", projects: []},
+            function () {
+                this.props.history.push({
+                    pathname: this.props.location.pathname
+                });
         });
     }
 
