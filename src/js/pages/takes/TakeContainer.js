@@ -53,7 +53,9 @@ class TakeContainer extends Component {
                   take={this.props.take.take}
                   author={this.props.take.user}
                   onRatingSet={this.onRatingSet.bind(this)}
-                  onMarkedForExportToggled={this.onMarkedForExportToggled.bind(this)}/>
+                  onMarkedForExportToggled={this.onMarkedForExportToggled.bind(this)}
+                  source={this.props.source}
+            />
                 //other events that require requesting the server would go here
         );
     }
