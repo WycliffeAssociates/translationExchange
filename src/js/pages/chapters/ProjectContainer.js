@@ -105,12 +105,12 @@ class ProjectContainer extends Component {
 
 
                 </Table>
-                    <br></br>
-                    <form onSubmit={this.getUploadedData} method="post" encType="multipart/form-data">
-                        <h4>Upload source audio</h4>
-                        <Input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
-                        <Button type="submit">Submit</Button>
-                    </form>
+                    <br/>
+                    {/*<form onSubmit={this.getUploadedData} method="post" encType="multipart/form-data">*/}
+                        {/*<h4>Upload source audio</h4>*/}
+                        {/*<Input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>*/}
+                        {/*<Button type="submit">Submit</Button>*/}
+                    {/*</form>*/}
 
                 </Container>
 
