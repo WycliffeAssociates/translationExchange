@@ -87,7 +87,7 @@ class ProjectContainer extends Component {
                                     error={this.state.error}
                                     retry={this.getChapterData.bind(this)}>
                         <Header as='h1'>{this.state.book.name} ({this.state.language.name})</Header>
-                        <Table selectable color="blue">
+                        <Table selectable fixed color="blue">
                             <Table.Header>
                                 <Table.Row>
                                     <Table.HeaderCell>Chapter</Table.HeaderCell>
