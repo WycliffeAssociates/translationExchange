@@ -103,13 +103,13 @@ class ProjectsListContainer extends Component {
             <div>
                 <Header as='h1'>Choose a project</Header>
 
-                <FilterContainer projects={this.state.projects}
-                                 setQuery={this.setQuery.bind(this)}
-                                 queryString={this.props.location.search}
-                                 clearQuery={this.clearQuery.bind(this)}/>
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={retryRequestProjects.bind(this)}>
+                    <FilterContainer projects={this.state.projects}
+                                     setQuery={this.setQuery.bind(this)}
+                                     queryString={this.props.location.search}
+                                     clearQuery={this.clearQuery.bind(this)}/>
                     <ProjectsList projects={this.state.projects}
                                   navigateToProject={this.navigateToProject.bind(this)}/>
                 </LoadingDisplay>
