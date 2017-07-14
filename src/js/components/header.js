@@ -9,23 +9,10 @@ class Header extends Component {
 
     handleItemClick = (e, { name }) => {
         this.setState({ activeItem: name });
-        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-pause'));
+
     }
 
-    //
-    // constructor(props) {
-    //     super(props);
-    //
-    //     this.toggle = this.toggle.bind(this);
-    //     this.state = {
-    //         isOpen: false
-    //     };
-    // }
-    // toggle() {
-    //     this.setState({
-    //         isOpen: !this.state.isOpen
-    //     });
-    // }
+
     render() {
         // return (
         //     <div>
