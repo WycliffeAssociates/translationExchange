@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Menu, state, handleItemClick} from "semantic-ui-react";
 import * as ReactDOM from "react-dom";
 import {LinkContainer} from "react-router-bootstrap";
+import {Link} from "react-router-dom";
 
 class Header extends Component {
     handleItemClick = (e, { name }) => {
