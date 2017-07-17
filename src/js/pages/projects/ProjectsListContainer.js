@@ -8,6 +8,7 @@ import {Container, Header, Table} from "semantic-ui-react";
 import axios from 'axios';
 import config from 'config/config';
 import FilterContainer from "./FilterContainer";
+import LoadingDisplay from "js/components/LoadingDisplay";
 
 
 
@@ -16,6 +17,8 @@ class ProjectsListContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loaded: true,
+            error: "",
             projects: [], //projects gotten from the database
             currentProjectQuery: "" //what query was used to get those projects from the database
         };
@@ -29,16 +32,18 @@ class ProjectsListContainer extends Component {
      }
 
      requestProjects (queryString) {
-        var query = QueryString.parse(queryString);
+         var query = QueryString.parse(queryString);
+         this.setState({loaded: false, error: ""});
+
          axios.post(config.apiUrl + 'all_project/', query)
          .then((results) => {
              this.setState({
+                 loaded: true,
                  projects: results.data,
                  currentProjectQuery: queryString
              });
          }).catch((exception) => {
-             console.log("ERROR");
-             console.dir(exception);
+             this.setState({error: exception});
          });
      }
 
@@ -92,16 +97,22 @@ class ProjectsListContainer extends Component {
     }
 
     render () {
+        var retryRequestProjects = function () {this.requestProjects(this.props.location.search)};
+
         return (
             <div>
                 <Header as='h1'>Choose a project</Header>
 
-                <FilterContainer projects={this.state.projects}
-                                 setQuery={this.setQuery.bind(this)}
-                                 queryString={this.props.location.search}
-                                 clearQuery={this.clearQuery.bind(this)}/>
-                <ProjectsList projects={this.state.projects}
-                              navigateToProject={this.navigateToProject.bind(this)}/>
+                <LoadingDisplay loaded={this.state.loaded}
+                                error={this.state.error}
+                                retry={retryRequestProjects.bind(this)}>
+                    <FilterContainer projects={this.state.projects}
+                                     setQuery={this.setQuery.bind(this)}
+                                     queryString={this.props.location.search}
+                                     clearQuery={this.clearQuery.bind(this)}/>
+                    <ProjectsList projects={this.state.projects}
+                                  navigateToProject={this.navigateToProject.bind(this)}/>
+                </LoadingDisplay>
             </div>
         );
     }

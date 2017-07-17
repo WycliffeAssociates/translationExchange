@@ -6,23 +6,10 @@ import {LinkContainer} from "react-router-bootstrap";
 class Header extends Component {
     handleItemClick = (e, { name }) => {
         this.setState({ activeItem: name });
-        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-play'));
+
     }
 
-    //
-    // constructor(props) {
-    //     super(props);
-    //
-    //     this.toggle = this.toggle.bind(this);
-    //     this.state = {
-    //         isOpen: false
-    //     };
-    // }
-    // toggle() {
-    //     this.setState({
-    //         isOpen: !this.state.isOpen
-    //     });
-    // }
+
     render() {
         // return (
         //     <div>
@@ -61,24 +48,17 @@ class Header extends Component {
 
         return (
             <Menu inverted size='large'>
+                <Link to="/">
+                <Menu.Item name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
+                </Link>
 
-                <LinkContainer to="/">
-                    <Menu.Item header name='Home'>Translation Manager</Menu.Item>
-                </LinkContainer>
+                <Link to="/about">
+                <Menu.Item  name='About' active={activeItem === 'About'} onClick={this.handleItemClick} />
+                </Link>
 
-                <LinkContainer to="/">
-                    <Menu.Item name='Home' />
-                </LinkContainer>
-
-                <LinkContainer to="/about">
-                    <Menu.Item name='About' />
-                </LinkContainer>
-
-                <LinkContainer to="/projects">
-                    <Menu.Item  name='Projects' />
-                </LinkContainer>
-
-
+                <Link to="/projects">
+                    <Menu.Item  name='Projects' active={activeItem === 'Projects'} onClick={this.handleItemClick} />
+                </Link>
             </Menu>
         )
     }
