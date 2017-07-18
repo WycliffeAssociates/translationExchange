@@ -114,7 +114,6 @@ class ChapterContainer extends Component {
             }
         }
 
-
         for(let i = 0; i < this.state.segments.length; i++) {
             if (this.state.segments[i].take.is_export) {
                 file[file.length] = {
@@ -129,33 +128,22 @@ class ChapterContainer extends Component {
 
     createSourcePlaylist() {
         var file = [];
-        var src = ''
+        var src = '';
 
 
         for(let i = 0; i < this.state.segments.length; i++) {
 
             if(this.state.segments[i].take.is_export) {
-                console.log('Export take found')
-                console.log(this.state.segments[i].source)
                 if (!(this.state.segments[i].source === undefined)) {
-                    console.log('Source audio found')
                     file[file.length] = {
                         "src": config.streamingUrl + this.state.segments[i].source.take[0].location,
                         "name": this.state.segments[i].take.mode + ' ' + this.state.segments[i].take.startv + ' (src)'
                     }
                 }
-                /*
-                else {
-                    file[file.length] = {
-                        "src": "",
-                        "name": "N/A"
-                    }
-                }
-                */
+
             }
 
         }
-        console.log('FILE', file)
 
         return file
     }
@@ -166,14 +154,14 @@ class ChapterContainer extends Component {
 
     render () {
 
-        var tempArr = this.findStartVerses(this.state.segments) // find start verses
+        var tempArr = this.findStartVerses(this.state.segments); // find start verses
 
-        tempArr = this.sort(tempArr) // sort by start verse
-        tempArr = this.removeDuplicates(tempArr) // remove duplicates
-        tempArr = this.createArray(tempArr, this.state.segments) // create array for ChunkList component
+        tempArr = this.sort(tempArr); // sort by start verse
+        tempArr = this.removeDuplicates(tempArr); // remove duplicates
+        tempArr = this.createArray(tempArr, this.state.segments); // create array for ChunkList component
 
-        var playlist = this.createPlaylist()
-        var sourcePlaylist = this.createSourcePlaylist()
+        var playlist = this.createPlaylist();
+        var sourcePlaylist = this.createSourcePlaylist();
 
 
         return (
@@ -225,14 +213,11 @@ class ChapterContainer extends Component {
 
                             </Grid>
 
-
-
-
                         </Accordion.Content>
+
                     </Accordion>
 
                 </LoadingDisplay>
-
 
             </div>
         );
