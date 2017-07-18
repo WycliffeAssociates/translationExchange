@@ -15,7 +15,7 @@ class DeleteChunk extends React.Component{
         render()
         {
             return (
-                <Button icon color="red" onClick={this.deleteTake()}>
+                <Button icon color="red" onClick={this.deleteTake}>
                     <Icon name='trash' size="large"/>
                 </Button>
             )

@@ -5,7 +5,7 @@ import AudioComponent from './AudioComponent';
 import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 import TakeExportButton from './SelectTake'
-import DeleteChunk from './Delete'
+import DeleteChunk from './DeleteChunk'
 
 class Take extends Component {
 
