@@ -23,7 +23,7 @@ class ProjectContainer extends Component {
 
     handleFileChange(event) {
         var data = new FormData();
-        data.append('file', event.target.files[0], event.target.files[0].name);
+        data.append('file', event.target.files[0]);
         this.setState({
             filesData: data
         });
