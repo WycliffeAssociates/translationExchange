@@ -29,6 +29,7 @@ class ProjectContainer extends Component {
         });
     }
 
+
     getUploadedData(event) {
         event.preventDefault();
         axios.post('http://172.19.145.91:8000/api/source/source_filename', this.state.filesData,{
@@ -84,7 +85,6 @@ class ProjectContainer extends Component {
 
     render () {
 
-
         return (
             <div>
                 <Container fluid>
@@ -92,7 +92,10 @@ class ProjectContainer extends Component {
                     <LoadingDisplay loaded={this.state.loaded}
                                     error={this.state.error}
                                     retry={this.getChapterData.bind(this)}>
-                        <Header as='h1'>{this.state.book.name} ({this.state.language.name})</Header>
+                        <Header as='h1'>{this.state.book.name} ({this.state.language.name})
+
+                        </Header>
+
                         <Table selectable fixed color="blue">
                             <Table.Header>
                                 <Table.Row>

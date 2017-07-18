@@ -90,9 +90,6 @@ class CommentContainer extends Component {
 
         return(
 
-
-
-
                 <Modal
                        open={this.state.show}
                        size='small'

@@ -31,8 +31,6 @@ class AudioComponent extends Component {
 
     }
 
-
-
     onClick = () => {                         // used when you click the microphone button in the player
 
         this.commentContainer.showModal();
@@ -53,12 +51,12 @@ class AudioComponent extends Component {
         }
 
         const pause = this.state.pause;
-        console.log(pause);
+        console.log(this.props.mic);
 
         return(
             <div>
                 <Audio
-
+                    mic={this.props.mic}
                     width={this.props.width}
                     height={150}
                     autoPlay={false}
