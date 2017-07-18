@@ -56,14 +56,14 @@ class CommentContainer extends Component {
     onClickCancel = () => {                         // used when you click the microphone button in the player
         this.recordComment.deleteBlob();
         this.hideModal();
-        this.setState({SaveButtonState: true})
+        this.setState({SaveButtonState: true});
 
     };
 
     onClickSave = () =>{
         this.hideModal();
         // save and upload audio comment to the server
-        console.log('file saved');
+        this.setState({SaveButtonState: true});
 
     };
 
@@ -126,11 +126,8 @@ class CommentContainer extends Component {
                     </Modal.Actions>
                 </Modal>
 
-
-
-
-
-        ); }
+        );
+    }
 }
 
 

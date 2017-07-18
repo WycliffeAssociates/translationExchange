@@ -44,9 +44,13 @@ class Take extends Component {
                 <Delete/>
             </Grid.Column>
 
-            <Grid.Column>
-                <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
-            </Grid.Column>
+            {this.props.source
+                ? <Grid.Column>
+                    <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
+                  </Grid.Column>
+                : ""
+            }
+
 
         </Grid>
 

@@ -1,30 +1,18 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Redirect from "react-router-dom/es/Redirect";
+import CircularProgressbar from 'react-circular-progressbar'
 import {Table} from 'semantic-ui-react'
+import 'css/chapters.css'
 
 class ChapterList extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            redirectToChapter: null
-        };
-    }
 
     render () {
 
         return (
 
         <Table.Body>
-        {this.state.redirectToChapter
-            /*
-            ? <Redirect push to={{pathname: this.props.path + '/ch' + this.state.redirectToChapter}}/>
-            */
-            ? <Redirect push to="/projects/16/ch1" />
-            : this.props.chapters.map(this.createListItem.bind(this))
-
-        }
+            {this.props.chapters.map(this.createListItem.bind(this))}
         </Table.Body>
 
         );
@@ -33,12 +21,10 @@ class ChapterList extends Component {
     createListItem (chapter) {
         return (
 
-            <Table.Row onClick={() => /*this.setState({redirectToChapter: chapter.number})*/
-            this.props.navigateToChapter(chapter.chapter)
-            }>
+            <Table.Row onClick={() => this.props.navigateToChapter(chapter.chapter)}>
 
             <Table.Cell>{chapter.chapter}</Table.Cell>
-            <Table.Cell>{chapter.percent_complete}</Table.Cell>
+            <Table.Cell><CircularProgressbar strokeWidth="20" percentage={chapter.percent_complete}/></Table.Cell>
             <Table.Cell>{chapter.checked_level}</Table.Cell>
                 <Table.Cell>{chapter.contributors}</Table.Cell>
                 <Table.Cell>{this.props.version}</Table.Cell>
@@ -50,7 +36,6 @@ class ChapterList extends Component {
 
     parseDate(date) {
 
-        return ''
         var noon = 'am';
         var dateArr = date.split('T');
         var date = dateArr[0]

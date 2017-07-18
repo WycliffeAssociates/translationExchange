@@ -13,15 +13,6 @@ import '../../../../css/projects.css'
 import {ReadMore} from 'react-read-more';
 
 class ProjectsList extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            redirectToProject: null,
-
-        };
-
-    }
     /*
         Render data in props, passed to this component by its parent container component
      */
@@ -40,10 +31,7 @@ class ProjectsList extends Component {
 
 
                     <Table.Body>
-                        {this.state.redirectToProject
-                            ? <Redirect push to={{pathname: '/projects/' + this.state.redirectToProject}}/>
-                            : this.props.projects.map(this.createListItem.bind(this))
-                        }
+                        {this.props.projects.map(this.createListItem.bind(this))}
                     </Table.Body>
 
                 </Table>
@@ -59,21 +47,23 @@ class ProjectsList extends Component {
      */
     /*{project.percentFinished}*/
     createListItem (project) {
+        var navigateToProject = (function () {
+            this.props.navigateToProject(project.lang.slug, project.book[0].slug, project.version);
+        }).bind(this);
+
+
         return (
+            <Table.Row >
+                <Table.Cell onClick={navigateToProject}>{project.lang.name}</Table.Cell>
+                <Table.Cell onClick={navigateToProject}>{project.book[0].name}</Table.Cell>
+                <Table.Cell onClick={navigateToProject}><CircularProgressbar strokeWidth="20" percentage={project.completed} /></Table.Cell>
+                <Table.Cell><ReadMore lines={1} onShowMore={this.props.onChange} text="more">
+                                 <b>Date Modified</b>: {this.parseDate(project.timestamp)} <br/>
+                                 <b>Translation Type</b>: {project.version} <br/>
+                                 <b>Contributors</b>: {project.contributors} <br/>
+                             </ReadMore></Table.Cell>
 
-
-        <Table.Row >
-            {/* TODO: project IDs are hardcoded right now; should change when we update URL schema */}
-            <Table.Cell onClick={() => this.setState({redirectToProject: 16})}>{project.lang.name}</Table.Cell>
-            <Table.Cell onClick={() => this.setState({redirectToProject: 16})}>{project.book[0].name}</Table.Cell>
-            <Table.Cell onClick={() => this.setState({redirectToProject: 16})}><CircularProgressbar strokeWidth="20" percentage={project.completed} /></Table.Cell>
-            <Table.Cell><ReadMore lines={1} onShowMore={this.props.onChange} text="more">
-                             <b>Date Modified</b>: {this.parseDate(project.timestamp)} <br/>
-                             <b>Translation Type</b>: {project.version} <br/>
-                             <b>Contributors</b>: {project.contributors} <br/>
-                         </ReadMore></Table.Cell>
-
-        </Table.Row>
+            </Table.Row>
 
         );
     }

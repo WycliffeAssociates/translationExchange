@@ -29,8 +29,8 @@ class App extends Component {
                 <Route exact path='/' component={Home}/>
                 <Route exact path='/about' component={About}/>
                 <Route exact path='/projects' component={ProjectsListContainer}/>
-                <Route exact path='/projects/:projectid' component={ProjectContainer}/>
-                <Route exact path='/projects/:projectid/ch:chid' component={ChapterContainer}/>
+                <Route exact path='/chapters' component={ProjectContainer}/>
+                <Route exact path='/takes' component={ChapterContainer}/>
             </Switch>
 
             {/*<Footer/>*/}

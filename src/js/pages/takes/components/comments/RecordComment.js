@@ -32,7 +32,7 @@ export class RecordComment extends Component {
         this.setState({
             record: true,
             saveButton:false,
-            disableSaveButton:false
+            displayPlayer: false
         });
 
         this.deleteBlob();    // deleted blob object in case the user records a new audio comment
@@ -120,9 +120,6 @@ export class RecordComment extends Component {
 
 
         return (
-
-
-
 
             <div>
                 <ReactMic

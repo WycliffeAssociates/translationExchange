@@ -26,6 +26,7 @@ class TakeList extends Component {
                     count={iterator}
                     updateTakeToExport={this.props.updateTakeToExport}
                     updateTakeInState={this.props.updateTakeInState}
+                    source={take.source}
                 />
             </div>
         );
