@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Redirect from "react-router-dom/es/Redirect";
+import CircularProgressbar from 'react-circular-progressbar'
 import {Table} from 'semantic-ui-react'
+import 'css/chapters.css'
 
 class ChapterList extends Component {
 
@@ -22,7 +24,7 @@ class ChapterList extends Component {
             <Table.Row onClick={() => this.props.navigateToChapter(chapter.chapter)}>
 
             <Table.Cell>{chapter.chapter}</Table.Cell>
-            <Table.Cell>{chapter.percent_complete}</Table.Cell>
+            <Table.Cell><CircularProgressbar strokeWidth="20" percentage={chapter.percent_complete}/></Table.Cell>
             <Table.Cell>{chapter.checked_level}</Table.Cell>
                 <Table.Cell>{chapter.contributors}</Table.Cell>
                 <Table.Cell>{this.props.version}</Table.Cell>
@@ -33,9 +35,6 @@ class ChapterList extends Component {
     }
 
     parseDate(date) {
-
-        return ''
-
         var noon = 'am';
         var dateArr = date.split('T');
         var date = dateArr[0]

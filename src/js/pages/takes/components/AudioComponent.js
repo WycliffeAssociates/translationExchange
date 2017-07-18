@@ -37,11 +37,11 @@ class AudioComponent extends Component {
 
         this.commentContainer.showModal();
         ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-pause'));
-
-
     }
 
-
+    componentWillUnmount() {
+        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-pause'));
+    }
 
 
     render() {
