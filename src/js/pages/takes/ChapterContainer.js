@@ -99,6 +99,13 @@ class ChapterContainer extends Component {
         var file = [];
         var length = 0;
 
+        /////////
+        file[0] = {
+            "src": "a"
+        }
+        return file
+        //////////
+
         for(let i = 0; i < this.state.segments.length; i++) {
             if (this.state.segments[i].take.is_export) {
                 length += 1;
@@ -122,6 +129,14 @@ class ChapterContainer extends Component {
         this.state.exportSource = false;
         var file = [];
         var src = '';
+
+        //////////
+        file[0] = {
+            "src": "a",
+            "name":"source"
+        }
+        return file
+        //////////
 
         for(let i = 0; i < this.state.segments.length; i++) {
 
@@ -165,6 +180,10 @@ class ChapterContainer extends Component {
                         : ""
                     }
                 </h1>
+
+
+
+
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
