@@ -36,6 +36,7 @@ class Chunk extends Component {
 
 
     render () {
+
         var modeLabel = "";
 
         switch (this.props.mode) {
@@ -48,7 +49,6 @@ class Chunk extends Component {
             default:
                 modeLabel = "Segment";
         }
-
 
 
         return (
@@ -73,8 +73,10 @@ class Chunk extends Component {
 
 }
 
-// Chunk.propTypes = {
-//     chunk: ChunkPropTypes
-// };
+/*
+Chunk.propTypes = {
+    chunk: ChunkPropTypes
+};
+*/
 
 export default Chunk;

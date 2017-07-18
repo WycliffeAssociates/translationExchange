@@ -15,15 +15,13 @@ class ChapterContainer extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", takeList: [], chapters: [], isToggleOn: true
+        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", takeList: [], chapters: [], isToggleOn: true, exportSource: true
         };
     }
 
     componentDidMount () {
         this.requestData();
-
     }
-
 
     requestData () {
         var query = QueryString.parse(this.props.location.search);
@@ -55,8 +53,6 @@ class ChapterContainer extends Component {
         console.dir(updatedSegments);
 
         this.state.takeList = updatedSegments
-
-
     }
 
     findStartVerses(paramArr) { // creates array of each start verse
@@ -122,20 +118,21 @@ class ChapterContainer extends Component {
     }
 
     createSourcePlaylist() {
+
+        this.state.exportSource = false;
         var file = [];
         var src = '';
-
 
         for(let i = 0; i < this.state.segments.length; i++) {
 
             if(this.state.segments[i].take.is_export) {
                 if (!(this.state.segments[i].source === undefined)) {
+                    this.state.exportSource = true;
                     file[file.length] = {
                         "src": config.streamingUrl + this.state.segments[i].source.take[0].location,
                         "name": this.state.segments[i].take.mode + ' ' + this.state.segments[i].take.startv + ' (src)'
                     }
                 }
-
             }
 
         }
@@ -159,7 +156,6 @@ class ChapterContainer extends Component {
         var playlist = this.createPlaylist();
         var sourcePlaylist = this.createSourcePlaylist();
 
-
         return (
             <div>
                 <h1>
@@ -182,16 +178,21 @@ class ChapterContainer extends Component {
 
                         <Accordion.Content>
 
-                            <Grid columns={1} relaxed>
-                                <Grid.Column width={4}>
-                                    <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
-                                </Grid.Column>
+                            {this.state.exportSource
+                                ? <Grid columns={1} relaxed>
+                                    <Grid.Column width={4}>
+                                        <Button onClick={(e) => this.handleClick(e)} content='Source Audio'
+                                                icon='right arrow' labelPosition='right'/>
+                                    </Grid.Column>
 
-                            </Grid>
+                                </Grid>
 
+                                : ""
+                            }
 
 
                             <Grid columns={2} relaxed>
+
                                 <Grid.Column width={9}>
                                     <AudioComponent
                                         playlist={this.createPlaylist()}
@@ -203,7 +204,6 @@ class ChapterContainer extends Component {
                                 {this.state.isToggleOn ? '' :
 
                                     <Grid.Column width={4}>
-
 
                                         <AudioComponent
                                             playlist={sourcePlaylist}
@@ -237,7 +237,6 @@ class ChapterContainer extends Component {
                     number={arr[0].take.startv}
                     updateTakeInState={this.updateTakeInState.bind(this)}
                 />
-
             </div>
         );
 
