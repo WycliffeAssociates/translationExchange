@@ -34,6 +34,7 @@ class TakeContainer extends Component {
     }
 
     render () {
+
         return (
             <Take count={this.props.count}
                   take={this.props.take.take}
@@ -41,6 +42,7 @@ class TakeContainer extends Component {
                   onRatingSet={this.onRatingSet.bind(this)}
                   onMarkedForExportToggled={this.onMarkedForExportToggled.bind(this)}
                   source={this.props.source}
+                  deleteTakeFromState={this.props.deleteTakeFromState}
             />
                 //other events that require requesting the server would go here
         );

@@ -155,6 +155,12 @@ class ChapterContainer extends Component {
         return file
     }
 
+    deleteTakeFromState(takeId){
+        //take the take out of state
+        console.log("delete takes from state")
+
+    }
+
     handleClick() {
         this.setState({isToggleOn: !this.state.isToggleOn});
     }
@@ -255,6 +261,7 @@ class ChapterContainer extends Component {
                     mode={arr[0].take.mode}
                     number={arr[0].take.startv}
                     updateTakeInState={this.updateTakeInState.bind(this)}
+                    deleteTakeFromState={this.deleteTakeFromState.bind(this)}
                 />
             </div>
         );
