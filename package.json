@@ -19,6 +19,7 @@
     "react-addons-transition-group": "^15.6.0",
     "react-audio-player": "^0.5.0",
     "react-audioplayer": "^0.3.0",
+    "react-axios": "^1.0.2",
     "react-circular-progressbar": "^0.1.5",
     "react-dom": "^15.6.1",
     "react-file-input": "^0.2.5",

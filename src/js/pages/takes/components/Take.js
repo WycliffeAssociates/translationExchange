@@ -5,7 +5,7 @@ import AudioComponent from './AudioComponent';
 import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 import TakeExportButton from './SelectTake'
-import Delete from './Delete'
+import DeleteChunk from './Delete'
 
 class Take extends Component {
 
@@ -21,6 +21,12 @@ class Take extends Component {
     }
 
     render () {
+
+        var file = [];
+        file[0] = {
+            "src": config.streamingUrl + this.props.take.location
+        }
+
         return (
             <div>
         <Grid columns={4} relaxedclassName="take">
@@ -35,16 +41,17 @@ class Take extends Component {
 
             <Grid.Column width={2}>
                 <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
-                <Delete/>
+                <DeleteChunk takeId={this.props.take.id}/>
             </Grid.Column>
 
             {this.props.source
                 ? <Grid.Column>
-                    <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
-                  </Grid.Column>
+                    <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'
+                            labelPosition='right'/>
+                </Grid.Column>
                 : ""
-            }
 
+            }
 
         </Grid>
 
@@ -53,6 +60,7 @@ class Take extends Component {
                 <Grid.Column width={9}>
                     <AudioComponent
                         src={config.streamingUrl + this.props.take.location}
+                        playlist={file}
                         width="700"
                     />
                 </Grid.Column >
@@ -61,8 +69,10 @@ class Take extends Component {
 
                     <Grid.Column width={4}>
                             <AudioComponent
-                                src={config.streamingUrl + this.props.source.take[0].location}
+                                src={config.streamingUrl + this.props.take.location}
+                                playlist={file}
                                 width="200"
+                                name="Source Audio"
                             />
                     </Grid.Column>}
 
