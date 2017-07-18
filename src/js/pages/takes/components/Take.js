@@ -6,7 +6,6 @@ import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 import TakeExportButton from './SelectTake'
 import Delete from './Delete'
-import CommentsButton from "./CommentsButton";
 
 class Take extends Component {
 
@@ -40,10 +39,9 @@ class Take extends Component {
                 <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
             </Grid.Column>
 
-            <Grid.Column width={3}>
+            <Grid.Column width={2}>
                 <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
                 <Delete/>
-                <CommentsButton/>
             </Grid.Column>
 
             {this.props.source

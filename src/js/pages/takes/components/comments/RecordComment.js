@@ -38,6 +38,8 @@ export class RecordComment extends Component {
         this.deleteBlob();    // deleted blob object in case the user records a new audio comment
 
 
+
+
     }
 
     stopRecording = () => {
@@ -56,7 +58,7 @@ export class RecordComment extends Component {
         this.setState({displayPlayer: true})
 
         this.setState({AudioURL: recordedBlob.blobURL });
-      console.log( 'URL:', this.state.AudioURL);
+
 
 
     }
