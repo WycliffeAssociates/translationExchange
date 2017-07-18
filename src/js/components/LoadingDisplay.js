@@ -10,16 +10,22 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {Button} from "semantic-ui-react";
 import LoadingGif from '../../images/loading.gif';
 
 class LoadingDisplay extends Component{
     render(){
+        // "There was a problem loading the data: " + this.props.error.message
         return (
             <div>
                 {this.props.error
                     ? <div>
-                        There was a problem loading the data: {this.props.error.message}
-                        <button onClick={this.props.retry}>Retry</button>
+                        <Button
+                            label={{as: 'a', basic: true, pointing: 'right', content: "There was a problem loading the data: " + this.props.error.message}}
+                            labelPosition='left'
+                            onClick={this.props.retry}
+                            content='Retry'
+                        />
                       </div>
                     : this.props.loaded
                         ? this.props.children
