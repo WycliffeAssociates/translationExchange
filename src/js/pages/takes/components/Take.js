@@ -21,6 +21,7 @@ class Take extends Component {
     }
 
     render () {
+
         return (
             <div>
         <Grid columns={4} relaxedclassName="take">
@@ -40,11 +41,12 @@ class Take extends Component {
 
             {this.props.source
                 ? <Grid.Column>
-                    <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
-                  </Grid.Column>
+                    <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'
+                            labelPosition='right'/>
+                </Grid.Column>
                 : ""
-            }
 
+            }
 
         </Grid>
 
