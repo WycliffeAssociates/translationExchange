@@ -21,6 +21,12 @@ class Take extends Component {
     }
 
     render () {
+
+        var file = [];
+        file[0] = {
+            "src": config.streamingUrl + this.props.take.location
+        }
+
         return (
             <div>
         <Grid columns={4} relaxedclassName="take">
@@ -53,6 +59,7 @@ class Take extends Component {
                 <Grid.Column width={9}>
                     <AudioComponent
                         src={config.streamingUrl + this.props.take.location}
+                        playlist={file}
                         width="700"
                     />
                 </Grid.Column >
@@ -61,8 +68,10 @@ class Take extends Component {
 
                     <Grid.Column width={4}>
                             <AudioComponent
-                                src={config.streamingUrl + this.props.source.take[0].location}
+                                src={config.streamingUrl + this.props.take.location}
+                                playlist={file}
                                 width="200"
+                                name="Source Audio"
                             />
                     </Grid.Column>}
 

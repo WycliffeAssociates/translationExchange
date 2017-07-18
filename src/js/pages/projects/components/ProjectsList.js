@@ -51,6 +51,7 @@ class ProjectsList extends Component {
             this.props.navigateToProject(project.lang.slug, project.book[0].slug, project.version);
         }).bind(this);
 
+
         return (
             <Table.Row >
                 <Table.Cell onClick={navigateToProject}>{project.lang.name}</Table.Cell>

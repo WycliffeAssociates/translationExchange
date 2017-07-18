@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import TakePropTypes from "./components/TakePropTypes";
-
-import Star from './components/Star';
-import AudioComponent from './components/AudioComponent';
 import axios from 'axios';
 import config from "../../../config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
-
-import LoadingDisplay from "../../components/LoadingDisplay";
-
-
 import _ from 'lodash';
 import Take from "./components/Take";
 
