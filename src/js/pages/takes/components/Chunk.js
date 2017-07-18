@@ -64,6 +64,7 @@ class Chunk extends Component {
                         takes={this.props.segments}
                         updateTakeToExport={this.updateTakeToExport.bind(this)}
                         updateTakeInState={this.props.updateTakeInState}
+                        addToListenList={this.props.addToListenList}
                     />
                 </Accordion.Content>
                 </Accordion>

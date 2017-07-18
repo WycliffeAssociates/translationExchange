@@ -6,6 +6,7 @@ import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 import TakeExportButton from './SelectTake'
 import Delete from './Delete'
+import TakeListenButton from './AddTake'
 
 class Take extends Component {
 
@@ -19,6 +20,13 @@ class Take extends Component {
     handleClick() {
         this.setState({isToggleOn: !this.state.isToggleOn});
     }
+
+
+    addToListen() {
+        this.props.addToListenList(this.props);
+
+    }
+
 
     render () {
 
@@ -39,9 +47,11 @@ class Take extends Component {
                 <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
             </Grid.Column>
 
-            <Grid.Column width={2}>
+            <Grid.Column width={3}>
                 <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
                 <Delete/>
+                <TakeListenButton onClick={this.addToListen.bind(this)}/>
+
             </Grid.Column>
 
             {this.props.source

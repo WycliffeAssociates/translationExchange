@@ -15,12 +15,53 @@ class ChapterContainer extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", takeList: [], chapters: [], isToggleOn: true, exportSource: true
+        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", listenList: [], chapters: [], isToggleOn: true, exportSource: true
         };
     }
 
     componentDidMount () {
         this.requestData();
+    }
+
+    addToListenList(props) {
+
+        var newArr = this.state.listenList
+
+        newArr[newArr.length] = {
+            "src": config.streamingUrl + props.take.location,
+            "name": props.take.mode + ' ' + props.take.startv
+        }
+
+        this.setState(
+            {
+                listenList: newArr
+            }
+        )
+
+    }
+
+    buildListener() {
+
+        if (this.state.listenList.length > 0) {
+            return(
+
+            <Accordion styled fluid>
+                <Accordion.Title>
+                    <Icon name="dropdown" />
+                    Listen to Selected
+                </Accordion.Title>
+
+                <Accordion.Content>
+                    <AudioComponent
+                        playlist={this.state.listenList}
+                    />
+                </Accordion.Content>
+
+            </Accordion>
+
+            );
+        }
+
     }
 
     requestData () {
@@ -52,7 +93,6 @@ class ChapterContainer extends Component {
         console.log("SET STATE");
         console.dir(updatedSegments);
 
-        this.state.takeList = updatedSegments
     }
 
     findStartVerses(paramArr) { // creates array of each start verse
@@ -192,7 +232,7 @@ class ChapterContainer extends Component {
                     <Accordion styled fluid>
                         <Accordion.Title>
                             <Icon name='dropdown' />
-                            Listen to Selected Takes
+                            Listen to Export Takes
                         </Accordion.Title>
 
                         <Accordion.Content>
@@ -237,6 +277,11 @@ class ChapterContainer extends Component {
                         </Accordion.Content>
 
                     </Accordion>
+                    <div>
+                        {this.buildListener()}
+                    </div>
+
+
 
                 </LoadingDisplay>
 
@@ -255,6 +300,7 @@ class ChapterContainer extends Component {
                     mode={arr[0].take.mode}
                     number={arr[0].take.startv}
                     updateTakeInState={this.updateTakeInState.bind(this)}
+                    addToListenList={this.addToListenList.bind(this)}
                 />
             </div>
         );
