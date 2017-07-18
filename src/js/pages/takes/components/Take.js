@@ -48,6 +48,8 @@ class Take extends Component {
                 ? <Grid.Column>
                     <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'
                             labelPosition='right'/>
+
+                    <strong>Language: {this.props.source.language.name}</strong>
                 </Grid.Column>
                 : ""
 
