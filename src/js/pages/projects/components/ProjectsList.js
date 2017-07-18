@@ -20,6 +20,7 @@ class ProjectsList extends Component {
         return (
             <Container fluid>
                 <Table selectable fixed>
+
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Language</Table.HeaderCell>
@@ -29,13 +30,11 @@ class ProjectsList extends Component {
                         </Table.Row>
                     </Table.Header>
 
-
                     <Table.Body>
                         {this.props.projects.map(this.createListItem.bind(this))}
                     </Table.Body>
 
                 </Table>
-
             </Container>
 
         );
@@ -50,6 +49,7 @@ class ProjectsList extends Component {
         var navigateToProject = (function () {
             this.props.navigateToProject(project.lang.slug, project.book[0].slug, project.version);
         }).bind(this);
+
 
         return (
             <Table.Row >

@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import TakePropTypes from "./components/TakePropTypes";
-
-import Star from './components/Star';
-import AudioComponent from './components/AudioComponent';
 import axios from 'axios';
 import config from "../../../config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
-
-import LoadingDisplay from "../../components/LoadingDisplay";
-
-
 import _ from 'lodash';
 import Take from "./components/Take";
 
@@ -32,13 +25,6 @@ class TakeContainer extends Component {
             var updatedTake = _.cloneDeep(this.props.take);
             updatedTake.take = results.data;
             this.props.updateTakeInState(updatedTake);
-
-            //if this one was marked for export, then ask the higher level chunk
-            //to make sure no other takes in this chunk are marked for export
-            if (markedForExport) {
-                this.props.updateTakeToExport(this.props.take.take.id);
-            }
-
         });
     }
 

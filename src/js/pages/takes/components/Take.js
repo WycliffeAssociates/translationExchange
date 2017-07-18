@@ -21,6 +21,12 @@ class Take extends Component {
     }
 
     render () {
+
+        var file = [];
+        file[0] = {
+            "src": config.streamingUrl + this.props.take.location
+        }
+
         return (
             <div>
         <Grid columns={4} relaxedclassName="take">
@@ -40,11 +46,12 @@ class Take extends Component {
 
             {this.props.source
                 ? <Grid.Column>
-                    <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
-                  </Grid.Column>
+                    <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'
+                            labelPosition='right'/>
+                </Grid.Column>
                 : ""
-            }
 
+            }
 
         </Grid>
 
@@ -53,6 +60,7 @@ class Take extends Component {
                 <Grid.Column width={9}>
                     <AudioComponent
                         src={config.streamingUrl + this.props.take.location}
+                        playlist={file}
                         width="700"
                         mic={true}
                     />
@@ -62,9 +70,11 @@ class Take extends Component {
 
                     <Grid.Column width={4}>
                             <AudioComponent
-                                src={config.streamingUrl + this.props.source.take[0].location}
+                                src={config.streamingUrl + this.props.take.location}
+                                playlist={file}
                                 width="200"
                                 mic={false}
+                                name="Source Audio"
                             />
                     </Grid.Column>}
 
