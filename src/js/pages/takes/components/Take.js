@@ -5,13 +5,16 @@ import AudioComponent from './AudioComponent';
 import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 import TakeExportButton from './SelectTake'
-import Delete from './Delete'
+import TakeListenButton from './AddTake'
+import DeleteTake from './DeleteTake'
+import LoadingGif from 'images/loading-tiny.gif'
 
+var listenCounter = 0
 class Take extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {isToggleOn: true};
+        this.state = {isToggleOn: true, addButtonColor: ""}
         // This binding is necessary to make `this` work in the callback
          this.handleClick = this.handleClick.bind(this);
     }
@@ -20,7 +23,29 @@ class Take extends Component {
         this.setState({isToggleOn: !this.state.isToggleOn});
     }
 
+
+    addToListen() {
+        this.props.addToListenList(this.props);
+
+        if (this.state.addButtonColor !== "blue") {
+            this.setState(
+                {
+                    addButtonColor: "blue"
+                }
+            )
+        }
+        else {
+            this.setState(
+                {
+                    addButtonColor: ""
+                }
+            )
+        }
+    }
+
+
     render () {
+
 
         var file = [];
         file[0] = {
@@ -36,20 +61,24 @@ class Take extends Component {
             </Grid.Column>
 
             <Grid.Column width={2}>
-                <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
+                {this.props.ratingLoading
+                    ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                    : <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
+                }
+
             </Grid.Column>
 
-            <Grid.Column width={2}>
+            <Grid.Column width={3}>
                 <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
-                <Delete/>
+                <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
+                <DeleteTake onDeleteTake={this.props.onDeleteTake}/>
             </Grid.Column>
 
             {this.props.source
                 ? <Grid.Column>
                     <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'
                             labelPosition='right'/>
-
-                    <strong>Language: {this.props.source.language.name}</strong>
+                    Language: {this.props.source.language.name}
                 </Grid.Column>
                 : ""
 
@@ -138,7 +167,8 @@ Take.propTypes = {
     take: PropTypes.object.isRequired,
     author: PropTypes.string.isRequired,
     onRatingSet: PropTypes.func.isRequired,
-    onMarkedForExportToggled: PropTypes.func.isRequired
+    onMarkedForExportToggled: PropTypes.func.isRequired,
+    takeId: PropTypes.number.isRequired
 };
 
 
