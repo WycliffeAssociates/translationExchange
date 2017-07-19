@@ -45,7 +45,6 @@ class ChapterContainer extends Component {
 
         for (let i = 0; i < newArr.length; i++) {
             if (newArr[i].props.take.id === id) {
-                console.log('DUPLICATE FOUND')
                 newArr = newArr.splice(i-1, 1)
 
                 this.setState(
@@ -62,7 +61,6 @@ class ChapterContainer extends Component {
             props
         }
 
-        console.log('newArr', newArr)
         this.setState(
             {
                 listenList: newArr
