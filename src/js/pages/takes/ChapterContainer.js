@@ -15,12 +15,84 @@ class ChapterContainer extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", chapters: [], isToggleOn: true, exportSource: true
+        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", listenList: [], chapters: [], isToggleOn: true, exportSource: true
+
         };
     }
 
     componentDidMount () {
         this.requestData();
+    }
+
+
+    createListenPlaylist() {
+        var playlist = [];
+
+        for(let i = 0; i < this.state.listenList.length; i++) {
+            playlist[playlist.length] = {
+                "src": config.streamingUrl + this.state.listenList[i].props.take.location,
+                "name": this.state.listenList[i].props.take.mode + ' ' + this.state.listenList[i].props.take.startv + ' (' +
+                (playlist.length+1) + '/' + this.state.listenList.length + ')'
+            }
+        }
+
+        return playlist
+
+    }
+
+    addToListenList(props) {
+
+        var newArr = this.state.listenList;
+        var id = props.take.id;
+
+        for (let i = 0; i < newArr.length; i++) {
+            if (newArr[i].props.take.id === id) {
+                newArr = newArr.splice(i-1, 1)
+
+                this.setState(
+                    {
+                        listenList: newArr
+                    }
+                )
+
+                return ''
+            }
+        }
+
+        newArr[newArr.length] = {
+            props
+        }
+
+        this.setState(
+            {
+                listenList: newArr
+            }
+        )
+
+    }
+
+    buildListener() {
+
+        if (this.state.listenList.length > 0) {
+            return(
+
+            <Accordion styled fluid>
+                <Accordion.Title>
+                    <Icon name="dropdown" />
+                    Listen to Selected
+                </Accordion.Title>
+
+                <Accordion.Content>
+                    <AudioComponent
+                        playlist={this.createListenPlaylist()}
+                    />
+                </Accordion.Content>
+
+            </Accordion>
+
+            );
+        }
+
     }
 
     requestData () {
@@ -199,7 +271,7 @@ class ChapterContainer extends Component {
                     <Accordion styled fluid>
                         <Accordion.Title>
                             <Icon name='dropdown' />
-                            Listen to Selected Takes
+                            Listen to Export Takes
                         </Accordion.Title>
 
                         <Accordion.Content>
@@ -244,6 +316,11 @@ class ChapterContainer extends Component {
                         </Accordion.Content>
 
                     </Accordion>
+                    <div>
+                        {this.buildListener()}
+                    </div>
+
+
 
                 </LoadingDisplay>
 
@@ -262,6 +339,7 @@ class ChapterContainer extends Component {
                     mode={arr[0].take.mode}
                     number={arr[0].take.startv}
                     updateTakeInState={this.updateTakeInState.bind(this)}
+                    addToListenList={this.addToListenList.bind(this)}
                     deleteTakeFromState={this.deleteTakeFromState.bind(this)}
                 />
             </div>
