@@ -48,7 +48,6 @@ class AudioComponent extends Component {
             "src": this.props.src
         }
         */
-
         var file = this.props.playlist;
         const pause = this.state.pause;
 
@@ -75,7 +74,7 @@ class AudioComponent extends Component {
                 <CommentContainer
                     updateTakeInState={this.props.updateTakeInState}
                     ref={instance => (this.commentContainer = instance)}
-                    // take={this.props.take.take}
+                    take={this.props.take}
                 />
 
 

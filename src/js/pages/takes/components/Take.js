@@ -26,8 +26,7 @@ class Take extends Component {
         var file = [];
         file[0] = {
             "src": config.streamingUrl + this.props.take.location
-        }
-
+        };
         return (
             <div>
         <Grid columns={4} relaxedclassName="take">
@@ -66,7 +65,7 @@ class Take extends Component {
                         playlist={file}
                         width="700"
                         mic={true}
-                        take={this.props.take.take}
+                        take={this.props.take}
                     />
                 </Grid.Column >
 
@@ -79,7 +78,7 @@ class Take extends Component {
                                 width="200"
                                 name="Source Audio"
                                 mic={false}
-                                take={this.props.take.take}
+                                take={this.props.take}
                             />
                     </Grid.Column>}
 

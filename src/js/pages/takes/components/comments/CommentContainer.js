@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import RecordComment from './RecordComment';
 import './RecordComment.css';
 import { Button, Header, Image, Modal,ModalHeader } from 'semantic-ui-react';
+import axios from 'axios';
+import config from "../../../../../config/config";
 
 // NOTE: (dmarchuk)
 let onClickCancel;
@@ -20,7 +22,8 @@ class CommentContainer extends Component {
 
         this.state = {title : 'Record Comment',
             show: false,
-            SaveButtonState: true
+            SaveButtonState: true,
+            AudioURL: null,
 
 
         };
@@ -31,6 +34,7 @@ class CommentContainer extends Component {
         this.getInitialState = this.getInitialState.bind(this);
         this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
         this.getComment=this.getComment.bind(this);
+        this.onClickSave = this.onClickSave.bind(this);
 
     }
 
@@ -38,8 +42,6 @@ class CommentContainer extends Component {
 
         this.setState({disabled:false});
     }
-
-
 
 
     getInitialState() {
@@ -61,15 +63,26 @@ class CommentContainer extends Component {
 
     };
 
-    onClickSave() {
+    onClickSave = ()=> {
         this.hideModal();
         // save and upload audio comment to the server
+
+        axios.post(config.apiUrl + 'comments/', {
+                "location": this.state.AudioURL,
+                "user": 3,
+                "file": this.props.take.id
+
+            }).then((results) => {
+                //update this take in state using the update method in ChapterContainer
+              console.log('uploaded successfully')
+            });
+
         this.setState({SaveButtonState: true});
 
     };
 
     getComment(comment) {
-        console.log(comment)
+        this.setState({AudioURL: comment});
     }
 
     changeSaveButtonState (newState) {
@@ -89,12 +102,7 @@ class CommentContainer extends Component {
 };
 
     render(){
-
-
         return(
-
-
-
 
                 <Modal
                        open={this.state.show}

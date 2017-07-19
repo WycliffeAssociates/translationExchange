@@ -22,9 +22,6 @@ export class RecordComment extends Component {
 
         this.onStop = this.onStop.bind(this);
         this.deleteBlob = this.deleteBlob.bind(this);
-        this.sendFile = this.sendFile.bind(this);
-
-
 
     }
 
@@ -57,32 +54,14 @@ export class RecordComment extends Component {
 
         this.setState({AudioURL: recordedBlob.blobURL });
 
-        this.props.sendComment(this.state.AudioURL);
+        {this.props.sendComment(this.state.AudioURL)}
 
     }
 
     deleteBlob(){
 
         window.URL.revokeObjectURL(this.state.AudioURL);   // deletes an audio object
-
-
-
-    }
-//this.props.take.take.id
-    sendFile(){
-
-        // axios.post(config.apiUrl + 'comments/', {
-        //     "location": this.state.AudioURL,
-        //     "user": 2,
-        //     "file": this.props.take.take.id
-        //
-        // }).then((results) => {
-        //     //update this take in state using the update method in ChapterContainer
-        //     var updatedTake = _.cloneDeep(this.props.take);
-        //     updatedTake.take = results.data;
-        //     this.props.updateTakeInState(updatedTake);
-        // });
-
+        
 
     }
 
@@ -100,6 +79,7 @@ export class RecordComment extends Component {
         const AudioURL = this.state.AudioURL;
 
 
+
         let button = <StopButton  onClick={this.stopRecording} />;
 
         let startButton=  <button className="start" onClick={this.startRecording} type="button"> <img className="mic" src={mic}/> </button>;
@@ -107,7 +87,6 @@ export class RecordComment extends Component {
         let AudioPlayer = null;
 
         let MainButton = null;
-
 
         if (displayPlayer) {
             AudioPlayer =  <DisplayAudioPlayer displayPlayer={displayPlayer} AudioURL = {AudioURL} />;
@@ -120,8 +99,6 @@ export class RecordComment extends Component {
 
             MainButton= <button className="start" onClick={this.startRecording} type="button"> <img className="mic" src={mic} /> </button>;
         }
-
-
 
         return (
 
