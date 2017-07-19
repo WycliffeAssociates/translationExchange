@@ -23,20 +23,34 @@ class ChapterContainer extends Component {
         this.requestData();
     }
 
-    addToListenList(props) {
+    createListenPlaylist() {
+
+    }
+
+    addToListenList(props, id) {
 
         var newArr = this.state.listenList
 
+        console.log('ID', id)
+
+        //////////
         newArr[newArr.length] = {
             "src": config.streamingUrl + props.take.location,
-            "name": props.take.mode + ' ' + props.take.startv
+            "name": props.take.mode + ' ' + props.take.startv + ' ' + id + '/' + (this.state.listenList.length+1)
         }
-
+        //////////
         this.setState(
             {
                 listenList: newArr
             }
         )
+
+
+        ///// FOR 7/19... /////
+        /*
+         -Keep track of number of takes in playlist and display ex. '1/5'
+         -Be able to remove a take from the selected playlist
+         */
 
     }
 

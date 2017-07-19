@@ -8,11 +8,12 @@ import TakeExportButton from './SelectTake'
 import Delete from './Delete'
 import TakeListenButton from './AddTake'
 
+var listenCounter = 0
 class Take extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {isToggleOn: true};
+        this.state = {isToggleOn: true, addButtonColor: ""}
         // This binding is necessary to make `this` work in the callback
          this.handleClick = this.handleClick.bind(this);
     }
@@ -23,12 +24,28 @@ class Take extends Component {
 
 
     addToListen() {
-        this.props.addToListenList(this.props);
+        listenCounter += 1
+        this.props.addToListenList(this.props, listenCounter);
 
+        if (this.state.addButtonColor !== "blue") {
+            this.setState(
+                {
+                    addButtonColor: "blue"
+                }
+            )
+        }
+        else {
+            this.setState(
+                {
+                    addButtonColor: ""
+                }
+            )
+        }
     }
 
 
     render () {
+
 
         var file = [];
         file[0] = {
@@ -50,7 +67,7 @@ class Take extends Component {
             <Grid.Column width={3}>
                 <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
                 <Delete/>
-                <TakeListenButton onClick={this.addToListen.bind(this)}/>
+                <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
 
             </Grid.Column>
 
