@@ -43,7 +43,7 @@ class Take extends Component {
             <Grid.Column width={3}>
                 <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
                 <Delete/>
-                <CommentsButton/>
+                <CommentsButton />
             </Grid.Column>
 
             {this.props.source

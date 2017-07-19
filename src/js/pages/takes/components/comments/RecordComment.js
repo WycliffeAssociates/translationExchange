@@ -71,7 +71,14 @@ export class RecordComment extends Component {
 
     sendFile(){
 
-
+        axios.patch(config.apiUrl + 'takes/' + this.props.take.take.id + '/', {
+            "comments": this.state.AudioURL
+        }).then((results) => {
+            //update this take in state using the update method in ChapterContainer
+            var updatedTake = _.cloneDeep(this.props.take);
+            updatedTake.take = results.data;
+            this.props.updateTakeInState(updatedTake);
+        });
 
     }
 
@@ -80,7 +87,6 @@ export class RecordComment extends Component {
         this.commentContainer.saveButton();
 
     }
-
 
 
 
