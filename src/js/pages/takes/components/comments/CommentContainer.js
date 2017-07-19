@@ -30,6 +30,7 @@ class CommentContainer extends Component {
         this.hideModal = this.hideModal.bind(this);
         this.getInitialState = this.getInitialState.bind(this);
         this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
+        this.getComment=this.getComment.bind(this);
 
     }
 
@@ -60,14 +61,16 @@ class CommentContainer extends Component {
 
     };
 
-    onClickSave = () =>{
+    onClickSave() {
         this.hideModal();
         // save and upload audio comment to the server
         this.setState({SaveButtonState: true});
 
     };
 
-
+    getComment(comment) {
+        console.log(comment)
+    }
 
     changeSaveButtonState (newState) {
         this.setState({SaveButtonState: newState});
@@ -103,6 +106,8 @@ class CommentContainer extends Component {
                     <div>
                         <RecordComment ref={instance => (this.recordComment = instance) }
                                        changeSaveButtonState = {this.changeSaveButtonState}
+                                       updateTakeInState={this.props.updateTakeInState}
+                                       sendComment={this.getComment}
 
                         />
                     </div>

@@ -56,8 +56,8 @@ export class RecordComment extends Component {
         this.setState({displayPlayer: true})
 
         this.setState({AudioURL: recordedBlob.blobURL });
-      console.log( 'URL:', this.state.AudioURL);
 
+        this.props.sendComment(this.state.AudioURL);
 
     }
 
@@ -68,17 +68,21 @@ export class RecordComment extends Component {
 
 
     }
-
+//this.props.take.take.id
     sendFile(){
 
-        axios.patch(config.apiUrl + 'takes/' + this.props.take.take.id + '/', {
-            "comments": this.state.AudioURL
-        }).then((results) => {
-            //update this take in state using the update method in ChapterContainer
-            var updatedTake = _.cloneDeep(this.props.take);
-            updatedTake.take = results.data;
-            this.props.updateTakeInState(updatedTake);
-        });
+        // axios.post(config.apiUrl + 'comments/', {
+        //     "location": this.state.AudioURL,
+        //     "user": 2,
+        //     "file": this.props.take.take.id
+        //
+        // }).then((results) => {
+        //     //update this take in state using the update method in ChapterContainer
+        //     var updatedTake = _.cloneDeep(this.props.take);
+        //     updatedTake.take = results.data;
+        //     this.props.updateTakeInState(updatedTake);
+        // });
+
 
     }
 
@@ -88,11 +92,7 @@ export class RecordComment extends Component {
 
     }
 
-
-
-
     render() {
-
 
         const displayPlayer = this.state.displayPlayer;
         const displayButton = this.state.record;

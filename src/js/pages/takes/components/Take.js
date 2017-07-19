@@ -43,7 +43,7 @@ class Take extends Component {
             <Grid.Column width={3}>
                 <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
                 <Delete/>
-                <CommentsButton />
+                <CommentsButton take ={this.props.take}/>
             </Grid.Column>
 
             {this.props.source
@@ -66,6 +66,7 @@ class Take extends Component {
                         playlist={file}
                         width="700"
                         mic={true}
+                        take={this.props.take.take}
                     />
                 </Grid.Column >
 
@@ -78,6 +79,7 @@ class Take extends Component {
                                 width="200"
                                 name="Source Audio"
                                 mic={false}
+                                take={this.props.take.take}
                             />
                     </Grid.Column>}
 

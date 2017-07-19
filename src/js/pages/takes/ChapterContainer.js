@@ -215,6 +215,7 @@ class ChapterContainer extends Component {
                                 <Grid.Column width={9}>
                                     <AudioComponent
                                         playlist={this.createPlaylist()}
+                                        updateTakeInState={this.updateTakeInState.bind(this)}
 
                                     />
 
@@ -227,6 +228,7 @@ class ChapterContainer extends Component {
                                         <AudioComponent
                                             playlist={sourcePlaylist}
                                             width={200}
+                                            updateTakeInState={this.updateTakeInState.bind(this)}
 
                                         />
 

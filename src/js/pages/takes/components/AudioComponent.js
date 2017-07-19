@@ -51,7 +51,6 @@ class AudioComponent extends Component {
 
         var file = this.props.playlist;
         const pause = this.state.pause;
-        console.log(this.props.mic);
 
         return(
             <div>
@@ -73,7 +72,12 @@ class AudioComponent extends Component {
                 />
 
                 {/*used ref to call a method in child class and instance*/}
-                <CommentContainer ref={instance => (this.commentContainer = instance)}/>
+                <CommentContainer
+                    updateTakeInState={this.props.updateTakeInState}
+                    ref={instance => (this.commentContainer = instance)}
+                    // take={this.props.take.take}
+                />
+
 
 
 
