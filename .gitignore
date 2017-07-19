@@ -10,7 +10,7 @@
 /build
 
 # misc
-.DS_Store
+*.DS_Store
 .env.local
 .env.development.local
 .env.test.local
@@ -20,4 +20,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-.idea/workspace.xml
+# ignore large files
+.idea/
+*.mp3
+*.wav
+*.lock
