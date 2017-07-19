@@ -24,8 +24,7 @@ class Take extends Component {
 
 
     addToListen() {
-        listenCounter += 1
-        this.props.addToListenList(this.props, listenCounter);
+        this.props.addToListenList(this.props);
 
         if (this.state.addButtonColor !== "blue") {
             this.setState(

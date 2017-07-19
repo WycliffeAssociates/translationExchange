@@ -24,33 +24,50 @@ class ChapterContainer extends Component {
     }
 
     createListenPlaylist() {
+        var playlist = [];
+
+        for(let i = 0; i < this.state.listenList.length; i++) {
+            playlist[playlist.length] = {
+                "src": config.streamingUrl + this.state.listenList[i].props.take.location,
+                "name": this.state.listenList[i].props.take.mode + ' ' + this.state.listenList[i].props.take.startv + ' (' +
+                (playlist.length+1) + '/' + this.state.listenList.length + ')'
+            }
+        }
+
+        return playlist
 
     }
 
-    addToListenList(props, id) {
+    addToListenList(props) {
 
-        var newArr = this.state.listenList
+        var newArr = this.state.listenList;
+        var id = props.take.id;
 
-        console.log('ID', id)
+        for (let i = 0; i < newArr.length; i++) {
+            if (newArr[i].props.take.id === id) {
+                console.log('DUPLICATE FOUND')
+                newArr = newArr.splice(i-1, 1)
 
-        //////////
-        newArr[newArr.length] = {
-            "src": config.streamingUrl + props.take.location,
-            "name": props.take.mode + ' ' + props.take.startv + ' ' + id + '/' + (this.state.listenList.length+1)
+                this.setState(
+                    {
+                        listenList: newArr
+                    }
+                )
+
+                return ''
+            }
         }
-        //////////
+
+        newArr[newArr.length] = {
+            props
+        }
+
+        console.log('newArr', newArr)
         this.setState(
             {
                 listenList: newArr
             }
         )
-
-
-        ///// FOR 7/19... /////
-        /*
-         -Keep track of number of takes in playlist and display ex. '1/5'
-         -Be able to remove a take from the selected playlist
-         */
 
     }
 
@@ -67,7 +84,7 @@ class ChapterContainer extends Component {
 
                 <Accordion.Content>
                     <AudioComponent
-                        playlist={this.state.listenList}
+                        playlist={this.createListenPlaylist()}
                     />
                 </Accordion.Content>
 
