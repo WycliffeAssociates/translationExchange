@@ -54,7 +54,6 @@ class AudioComponent extends Component {
         return(
             <div>
                 <Audio
-
                     width={this.props.width}
                     height={150}
                     autoPlay={false}

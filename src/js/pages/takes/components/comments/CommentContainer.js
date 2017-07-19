@@ -65,17 +65,27 @@ class CommentContainer extends Component {
 
     onClickSave = ()=> {
         this.hideModal();
+        console.log('blob', this.state.AudioURL);
         // save and upload audio comment to the server
+        var formData = new FormData();
+        formData.append("file", this.props.take.id);
+        formData.append("location", this.state.AudioURL.toString);
+        formData.append("user",3);
 
-        axios.post(config.apiUrl + 'comments/', {
-                "location": this.state.AudioURL,
-                "user": 3,
-                "file": this.props.take.id
 
-            }).then((results) => {
-                //update this take in state using the update method in ChapterContainer
-              console.log('uploaded successfully')
-            });
+        var request = new XMLHttpRequest();
+        request.open("POST", config.apiUrl + 'comments/');
+        request.send(formData);
+
+        // axios.post(config.apiUrl + 'comments/', {
+        //         "location": this.state.AudioURL,
+        //         "user": 3,
+        //         "file": this.props.take.id
+        //
+        //     }).then((results) => {
+        //         //update this take in state using the update method in ChapterContainer
+        //       console.log('uploaded successfully')
+        //     });
 
         this.setState({SaveButtonState: true});
 
@@ -90,14 +100,11 @@ class CommentContainer extends Component {
 
     }
 
-
-
     Style = {
         backgroundColor: "rgba(171,149,149, .4)",
         fontSize: "32",
         textAlign: "center",
         //width:"500px"
-
 
 };
 

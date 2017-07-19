@@ -50,19 +50,24 @@ export class RecordComment extends Component {
 
     onStop(recordedBlob) {
 
-        this.setState({displayPlayer: true})
+        this.setState({displayPlayer: true});
+//change this to the real url so that it can playback
+        this.setState({AudioURL: recordedBlob.blob});
 
-        this.setState({AudioURL: recordedBlob.blobURL });
-
-        {this.props.sendComment(this.state.AudioURL)}
+        if (this.state.AudioURL !== ''){
+            {console.log('comment', this.state.AudioURL);
+                this.props.sendComment(this.state.AudioURL)}
+        }
 
     }
+
+    // componentDidUpdate() {
+    //     {this.props.sendComment(this.state.AudioURL)}
+    // }
 
     deleteBlob(){
 
         window.URL.revokeObjectURL(this.state.AudioURL);   // deletes an audio object
-        
-
     }
 
 

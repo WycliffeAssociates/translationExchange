@@ -6,7 +6,7 @@ import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 import TakeExportButton from './SelectTake'
 import Delete from './Delete'
-import CommentsButton from "./CommentsButton";
+import CommentsButton from "./ListentoCommentsButton";
 
 class Take extends Component {
 
@@ -22,7 +22,6 @@ class Take extends Component {
     }
 
     render () {
-
         var file = [];
         file[0] = {
             "src": config.streamingUrl + this.props.take.location
@@ -42,7 +41,7 @@ class Take extends Component {
             <Grid.Column width={3}>
                 <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
                 <Delete/>
-                <CommentsButton take ={this.props.take}/>
+                <CommentsButton comments = {this.props.comments}/>
             </Grid.Column>
 
             {this.props.source
