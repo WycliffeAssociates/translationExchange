@@ -16,6 +16,7 @@ class ChapterContainer extends Component {
     constructor (props) {
         super(props);
         this.state = {loaded: false, error: "", segments: [], mode: "", source: "", listenList: [], chapters: [], isToggleOn: true, exportSource: true
+
         };
     }
 
@@ -122,7 +123,6 @@ class ChapterContainer extends Component {
         this.setState({segments: updatedSegments});
         console.log("SET STATE");
         console.dir(updatedSegments);
-
     }
 
     findStartVerses(paramArr) { // creates array of each start verse
@@ -223,6 +223,15 @@ class ChapterContainer extends Component {
         }
 
         return file
+    }
+
+    //if a child component deletes a take, they have to call this function to update our representation
+    //of all the takes in state
+    deleteTakeFromState(takeIdToDelete){
+        var updatedSegments = this.state.segments.slice();
+        var deleteIndex = updatedSegments.findIndex(take => take.take.id === takeIdToDelete);
+        updatedSegments.splice(deleteIndex, 1);
+        this.setState({segments: updatedSegments});
     }
 
     handleClick() {
@@ -331,6 +340,7 @@ class ChapterContainer extends Component {
                     number={arr[0].take.startv}
                     updateTakeInState={this.updateTakeInState.bind(this)}
                     addToListenList={this.addToListenList.bind(this)}
+                    deleteTakeFromState={this.deleteTakeFromState.bind(this)}
                 />
             </div>
         );

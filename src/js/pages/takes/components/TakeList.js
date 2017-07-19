@@ -28,7 +28,7 @@ class TakeList extends Component {
                     updateTakeInState={this.props.updateTakeInState}
                     source={take.source}
                     addToListenList={this.props.addToListenList}
-
+                    deleteTakeFromState={this.props.deleteTakeFromState}
                 />
             </div>
         );
