@@ -5,7 +5,9 @@ import AudioComponent from './AudioComponent';
 import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 import TakeExportButton from './SelectTake'
-import Delete from './Delete'
+import DeleteTake from './DeleteTake'
+import axios from 'axios'
+
 
 class Take extends Component {
 
@@ -41,7 +43,7 @@ class Take extends Component {
 
             <Grid.Column width={2}>
                 <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
-                <Delete/>
+                <DeleteTake onDeleteTake={this.props.onDeleteTake}/>
             </Grid.Column>
 
             {this.props.source
@@ -137,7 +139,8 @@ Take.propTypes = {
     take: PropTypes.object.isRequired,
     author: PropTypes.string.isRequired,
     onRatingSet: PropTypes.func.isRequired,
-    onMarkedForExportToggled: PropTypes.func.isRequired
+    onMarkedForExportToggled: PropTypes.func.isRequired,
+    takeId: PropTypes.number.isRequired
 };
 
 
