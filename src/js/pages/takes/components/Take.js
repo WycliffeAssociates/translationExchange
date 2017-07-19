@@ -5,7 +5,7 @@ import AudioComponent from './AudioComponent';
 import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 import TakeExportButton from './SelectTake'
-import DeleteChunk from './DeleteChunk'
+import DeleteTake from './DeleteTake'
 import axios from 'axios'
 
 
@@ -43,7 +43,7 @@ class Take extends Component {
 
             <Grid.Column width={2}>
                 <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
-                <DeleteChunk takeId={this.props.take.id} deleteTakeFromState={this.props.deleteTakeFromState}/>
+                <DeleteTake onDeleteTake={this.props.onDeleteTake}/>
             </Grid.Column>
 
             {this.props.source

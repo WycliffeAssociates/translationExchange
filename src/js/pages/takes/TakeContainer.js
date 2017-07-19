@@ -33,6 +33,18 @@ class TakeContainer extends Component {
         //would do an AJAX request here to update rating on this take using its id...
     }
 
+    onDeleteTake () {
+        console.log("onDeleteTake");
+        var self = this;
+        axios.delete(config.apiUrl + 'takes/' + this.props.take.take.id + '/')
+            .then(function(result) {
+                self.props.deleteTakeFromState(self.props.take.take.id);
+            }).catch(function(exception) {
+                console.log(exception);
+        });
+
+    }
+
     render () {
 
         return (
@@ -42,7 +54,7 @@ class TakeContainer extends Component {
                   onRatingSet={this.onRatingSet.bind(this)}
                   onMarkedForExportToggled={this.onMarkedForExportToggled.bind(this)}
                   source={this.props.source}
-                  deleteTakeFromState={this.props.deleteTakeFromState}
+                  onDeleteTake={this.onDeleteTake.bind(this)}
             />
                 //other events that require requesting the server would go here
         );
