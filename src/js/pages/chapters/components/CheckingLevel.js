@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { Dropdown, Menu } from 'semantic-ui-react'
 
 
-export class CheckingLevel extends Component {
+export class CheckingLevel extends React.Component {
 
     options = [
         {key: 0, text: '0', value: 0},
@@ -21,6 +21,7 @@ export class CheckingLevel extends Component {
         return(
             (
                 <Menu compact>
+                    {/*<Dropdown text={props.value} options={props.value} simple item/>*/}
                     <Dropdown text={this.options} options={this.options} simple item/>
                 </Menu>
             )
@@ -29,3 +30,5 @@ export class CheckingLevel extends Component {
 }
 
 export default CheckingLevel
+
+// <Dropdown text={this.options} options={this.options} simple item/>

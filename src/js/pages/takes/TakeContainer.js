@@ -39,14 +39,31 @@ class TakeContainer extends Component {
         this.setState({ratingLoading: true});
         axios.patch(config.apiUrl + 'takes/' + this.props.take.take.id + '/',
             {"rating": newRating}
-        ).then((results) => {
+        )  .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
+            console.log(error.config);
+        }).then((results) => {
             //update this take in state using the update method in ChapterContainer
             var updatedTake = _.cloneDeep(this.props.take);
             updatedTake.take = results.data;
             this.props.updateTakeInState(updatedTake);
             this.setState({ratingLoading: false});
         });
-    }
+    }//TODO catch error with axios
 
     onDeleteTake () {
         console.log("onDeleteTake");
@@ -57,7 +74,6 @@ class TakeContainer extends Component {
             }).catch(function(exception) {
                 console.log(exception);
         });
-
     }
 
     render () {

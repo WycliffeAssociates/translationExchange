@@ -35,7 +35,7 @@ class ChapterList extends Component {
         );
     }
 
-//{chapter.checked_level /*this is the checking level*/}
+//{chapter.checked_level /*this is the checking level*/}        //{chapter.checked_level}
 
     parseDate(date) {
 

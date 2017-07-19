@@ -16,11 +16,6 @@ export class Star extends Component{
             </Segment>
         );
     }
-
-    //npm install react-stars --save
-    //if it does not work run this. Run npm first, only run yarn if npm does not work
-    //yarn add react-stars-ie
-    //https://www.npmjs.com/package/react-stars-ie
 }
 
 Star.propTypes = {
