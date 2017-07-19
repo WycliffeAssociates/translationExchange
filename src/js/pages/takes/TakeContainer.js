@@ -26,6 +26,12 @@ class TakeContainer extends Component {
             updatedTake.take = results.data;
             this.props.updateTakeInState(updatedTake);
         });
+
+        //if this one was marked for export, then ask the higher level chunk
+        //to make sure no other takes in this chunk are marked for export
+          if (markedForExport) {
+            this.props.updateTakeToExport(this.props.take.take.id);
+          }
     }
 
     onRatingSet (newRating) {
