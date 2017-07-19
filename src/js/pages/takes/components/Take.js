@@ -50,6 +50,7 @@ class Take extends Component {
                 ? <Grid.Column>
                     <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'
                             labelPosition='right'/>
+                    Language: {this.props.source.language.name}
                 </Grid.Column>
                 : ""
 
@@ -64,6 +65,7 @@ class Take extends Component {
                         src={config.streamingUrl + this.props.take.location}
                         playlist={file}
                         width="700"
+                        mic={true}
                     />
                 </Grid.Column >
 
@@ -75,6 +77,7 @@ class Take extends Component {
                                 playlist={file}
                                 width="200"
                                 name="Source Audio"
+                                mic={false}
                             />
                     </Grid.Column>}
 

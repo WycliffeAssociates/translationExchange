@@ -51,7 +51,7 @@ class AudioComponent extends Component {
 
         var file = this.props.playlist;
         const pause = this.state.pause;
-        console.log(pause);
+        console.log(this.props.mic);
 
         return(
             <div>
@@ -65,6 +65,7 @@ class AudioComponent extends Component {
                         this.onClick()
 
                     }}
+                    mic={this.props.mic}
 
                     // ref to pause the audio
                     ref={audioComponent => { this.audioComponent = audioComponent; }}
