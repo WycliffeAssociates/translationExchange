@@ -30,7 +30,19 @@ class TakeContainer extends Component {
 
     onRatingSet (newRating) {
         console.log("new rating for take " + this.props.take.take.id + ": " + newRating);
-        //would do an AJAX request here to update rating on this take using its id...
+        // var markedForExport = !this.props.take.take.is_export;
+        //
+        // axios.patch(config.apiUrl + 'takes/' + this.props.take.take.id + '/', {
+        //     "is_export": markedForExport
+        // }).then((results) => {
+        //     //update this take in state using the update method in ChapterContainer
+        //     var updatedRating = _.cloneDeep(this.props.take);
+        //     updatedRating.take = results.data;
+        //     this.props.updateTakeInState(updatedRating);
+        // });
+
+        axios.patch(config.apiUrl + '/takes/' + this.props.take.take.id + '/', newRating, {"rating": newRating})
+        //ld do an AJAX request here to update rating on this take using its id...
     }
 
     render () {
