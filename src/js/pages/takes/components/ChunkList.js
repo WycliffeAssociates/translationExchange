@@ -16,6 +16,8 @@ class ChunkList extends Component {
                     mode={this.props.mode}
                     number={this.props.number}
                     updateTakeInState={this.props.updateTakeInState}
+                    deleteTakeFromState={this.props.deleteTakeFromState}
+                    addToListenList={this.props.addToListenList}
                 />
                 }
 
