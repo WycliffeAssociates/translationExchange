@@ -4,7 +4,7 @@ import ChunkList from "./components/ChunkList";
 import axios from 'axios';
 import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
-import { Accordion, Icon, Grid, Button } from 'semantic-ui-react'
+import { Accordion, Icon, Grid, Button, Modal } from 'semantic-ui-react'
 import AudioComponent from './components/AudioComponent'
 import QueryString from "query-string";
 
@@ -15,7 +15,8 @@ class ChapterContainer extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", listenList: [], chapters: [], isToggleOn: true, exportSource: true
+        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", listenList: [], chapters: [], isToggleOn: true, exportSource: true,
+            readyForExport: false, numChunks: 0
         };
     }
 
@@ -23,79 +24,10 @@ class ChapterContainer extends Component {
         this.requestData();
     }
 
-
-    createListenPlaylist() {
-        var playlist = [];
-
-        for(let i = 0; i < this.state.listenList.length; i++) {
-            playlist[playlist.length] = {
-                "src": config.streamingUrl + this.state.listenList[i].props.take.location,
-                "name": this.state.listenList[i].props.take.mode + ' ' + this.state.listenList[i].props.take.startv + ' (' +
-                (playlist.length+1) + '/' + this.state.listenList.length + ')'
-            }
-        }
-
-        return playlist
-
-    }
-
-    addToListenList(props) {
-
-        var newArr = this.state.listenList;
-        var id = props.take.id;
-
-        for (let i = 0; i < newArr.length; i++) {
-            if (newArr[i].props.take.id === id) {
-                newArr = newArr.splice(i-1, 1)
-
-                this.setState(
-                    {
-                        listenList: newArr
-                    }
-                )
-
-                return ''
-            }
-        }
-
-        newArr[newArr.length] = {
-            props
-        }
-
-        this.setState(
-            {
-                listenList: newArr
-            }
-        )
-
-    }
-
-    buildListener() {
-
-        if (this.state.listenList.length > 0) {
-            return(
-
-            <Accordion styled fluid>
-                <Accordion.Title>
-                    <Icon name="dropdown" />
-                    Listen to Selected
-                </Accordion.Title>
-
-                <Accordion.Content>
-                    <AudioComponent
-                        playlist={this.createListenPlaylist()}
-                    />
-                </Accordion.Content>
-
-            </Accordion>
-
-            );
-        }
-
-    }
-
     requestData () {
         var query = QueryString.parse(this.props.location.search);
+
+
 
         this.setState({error: ""});
         axios.post(config.apiUrl + 'get_project/', query
@@ -111,6 +43,7 @@ class ChapterContainer extends Component {
             this.setState({error: exception});
         });
 
+        this.checkReadyForExport();
     }
 
     //if a child component does requests to change a take in the database, they have to
@@ -123,7 +56,29 @@ class ChapterContainer extends Component {
         console.log("SET STATE");
         console.dir(updatedSegments);
 
+        this.checkReadyForExport();
+
     }
+
+    // not quite ready
+    checkReadyForExport() {
+        var counter = 0;
+        for (let i = 0; i < this.state.segments.length; i++) {
+            if (this.state.segments[i].take.is_export) {
+                counter += 1
+            }
+        }
+
+        if (this.state.numChunks === counter) {
+            this.setState({readyForExport: true})
+        }
+        else {
+            this.setState({readyForExport: false})
+        }
+
+
+    }
+
 
     findStartVerses(paramArr) { // creates array of each start verse
         var returnArr = [];
@@ -170,10 +125,12 @@ class ChapterContainer extends Component {
         var length = 0;
 
         /////////
+        /*
         file[0] = {
             "src": "a"
         }
         return file
+        */
         //////////
 
         for(let i = 0; i < this.state.segments.length; i++) {
@@ -188,6 +145,7 @@ class ChapterContainer extends Component {
                     "src": config.streamingUrl + this.state.segments[i].take.location,
                     "name": this.state.segments[i].take.mode + ' ' + this.state.segments[i].take.startv + ' ' + '(' + (file.length+1) + '/' + length + ')'
                 }
+                //console.log('Location URL', config.streamingUrl + this.state.segments[i].take.location)
             }
         }
 
@@ -201,11 +159,13 @@ class ChapterContainer extends Component {
         var src = '';
 
         //////////
+        /*
         file[0] = {
             "src": "a",
             "name":"source"
         }
         return file
+        */
         //////////
 
         for(let i = 0; i < this.state.segments.length; i++) {
@@ -225,17 +185,90 @@ class ChapterContainer extends Component {
         return file
     }
 
+    addToListenList(props) {
+
+        var newArr = this.state.listenList;
+        var id = props.take.id;
+
+        for (let i = 0; i < newArr.length; i++) {
+            if (newArr[i].props.take.id === id) {
+                newArr = newArr.splice(i-1, 1)
+
+                this.setState(
+                    {
+                        listenList: newArr
+                    }
+                )
+
+                return ''
+            }
+        }
+
+        newArr[newArr.length] = {
+            props
+        }
+
+        this.setState(
+            {
+                listenList: newArr
+            }
+        )
+
+    }
+
+    buildListener() {
+
+        if (this.state.listenList.length > 0) {
+            return(
+
+                <Accordion styled fluid>
+                    <Accordion.Title>
+                        <Icon name="dropdown" />
+                        Listen to Selected
+                    </Accordion.Title>
+
+                    <Accordion.Content>
+                        <AudioComponent
+                            playlist={this.createListenPlaylist()}
+                        />
+                    </Accordion.Content>
+
+                </Accordion>
+
+            );
+        }
+
+    }
+
+    createListenPlaylist() {
+        var playlist = [];
+
+        for(let i = 0; i < this.state.listenList.length; i++) {
+            playlist[playlist.length] = {
+                "src": config.streamingUrl + this.state.listenList[i].props.take.location,
+                "name": this.state.listenList[i].props.take.mode + ' ' + this.state.listenList[i].props.take.startv + ' (' +
+                (playlist.length+1) + '/' + this.state.listenList.length + ')'
+            }
+        }
+
+        return playlist
+
+    }
+
     handleClick() {
         this.setState({isToggleOn: !this.state.isToggleOn});
     }
 
     render () {
+
+
         var query = QueryString.parse(this.props.location.search);
 
         var tempArr = this.findStartVerses(this.state.segments); // find start verses
 
         tempArr = this.sort(tempArr); // sort by start verse
         tempArr = this.removeDuplicates(tempArr); // remove duplicates
+        this.state.numChunks = tempArr.length;
         tempArr = this.createArray(tempArr, this.state.segments); // create array for ChunkList component
 
         var playlist = this.createPlaylist();
@@ -249,9 +282,24 @@ class ChapterContainer extends Component {
                         ? " (" + this.state.segments[0].book.name + ", " + this.state.segments[0].language.name + ")"
                         : ""
                     }
+
+                    <Modal trigger={<Button disabled={!this.state.readyForExport} content="Export" icon="share" floated="right" labelPosition="right"/>} closeIcon="close">
+                        <Modal.Header>Export Chapter {query.chapter}</Modal.Header>
+                        <Modal.Content>
+                            <Modal.Description>
+                                <p>Here is a preview of the takes you have selected to export</p>
+                                <p>This may take a few seconds to load</p>
+
+                                <AudioComponent
+                                    playlist={this.createPlaylist()}
+                                />
+                            </Modal.Description>
+                        </Modal.Content>
+                    </Modal>
+
+
+
                 </h1>
-
-
 
 
                 <LoadingDisplay loaded={this.state.loaded}
@@ -259,12 +307,13 @@ class ChapterContainer extends Component {
                                 retry={this.requestData.bind(this)}>
                     {tempArr.map(this.createChunkList.bind(this))}
 
+
+                    {/*
                     <Accordion styled fluid>
                         <Accordion.Title>
                             <Icon name='dropdown' />
                             Listen to Export Takes
                         </Accordion.Title>
-
                         <Accordion.Content>
 
                             {this.state.exportSource
@@ -305,13 +354,12 @@ class ChapterContainer extends Component {
                             </Grid>
 
                         </Accordion.Content>
-
                     </Accordion>
+                    */}
+
                     <div>
                         {this.buildListener()}
                     </div>
-
-
 
                 </LoadingDisplay>
 
