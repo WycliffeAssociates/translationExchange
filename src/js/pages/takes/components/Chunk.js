@@ -12,29 +12,6 @@ class Chunk extends Component {
         this.state = {open: false};
     }
 
-    //when takeId is marked as the one to export, update all other chunks
-    //in the take so that they are NOT marked as ones to export
-    updateTakeToExport (markedTakeId) {
-        for (var i = 0; i < this.props.segments.length; i++) {
-            var take = this.props.segments[i];
-
-            //if a take is marked for export other than the just-marked one...
-            if ((take.take.is_export) && (take.take.id !== markedTakeId)) {
-                console.log("marking as not to export");
-                //send a request to update it as not marked for export
-                axios.patch(config.apiUrl + 'takes/' + take.take.id + '/', {
-                    "is_export": false
-                }).then((results) => {
-                    console.log("marked in database");
-                    var updatedTake = _.cloneDeep(take);
-                    updatedTake.take = results.data;
-                    this.props.updateTakeInState(updatedTake);
-                });
-            }
-        }
-    }
-
-
     render () {
 
         var modeLabel = "";
@@ -62,7 +39,6 @@ class Chunk extends Component {
                 <Accordion.Content>
                     <TakeList
                         takes={this.props.segments}
-                        updateTakeToExport={this.updateTakeToExport.bind(this)}
                         updateTakeInState={this.props.updateTakeInState}
                         addToListenList={this.props.addToListenList}
                     />
