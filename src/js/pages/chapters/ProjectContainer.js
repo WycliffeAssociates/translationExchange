@@ -5,6 +5,7 @@ import axios from 'axios';
 import config from 'config/config'
 import QueryString from 'query-string';
 import LoadingDisplay from "js/components/LoadingDisplay";
+import CheckingLevel from './components/CheckingLevel'
 
 class ProjectContainer extends Component {
     constructor (props) {

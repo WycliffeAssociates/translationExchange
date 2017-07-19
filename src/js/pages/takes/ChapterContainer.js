@@ -7,6 +7,8 @@ import LoadingDisplay from "../../components/LoadingDisplay";
 import { Accordion, Icon, Grid, Button } from 'semantic-ui-react'
 import AudioComponent from './components/AudioComponent'
 import QueryString from "query-string";
+//import CheckingLevel from './components/CheckingLevel'
+
 
 
 // this is the page for one chapter
@@ -334,7 +336,6 @@ class ChapterContainer extends Component {
         return(
             <div>
                 <ChunkList
-
                     segments={arr} // array of takes
                     mode={arr[0].take.mode}
                     number={arr[0].take.startv}

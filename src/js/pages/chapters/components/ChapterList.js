@@ -4,6 +4,7 @@ import Redirect from "react-router-dom/es/Redirect";
 import CircularProgressbar from 'react-circular-progressbar'
 import {Table} from 'semantic-ui-react'
 import 'css/chapters.css'
+import CheckingLevel from "./CheckingLevel"
 
 class ChapterList extends Component {
 
@@ -34,7 +35,7 @@ class ChapterList extends Component {
         );
     }
 
-
+//{chapter.checked_level /*this is the checking level*/}
 
     parseDate(date) {
 
