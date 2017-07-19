@@ -33,6 +33,7 @@ class TakeContainer extends Component {
 
         axios.patch(config.apiUrl + 'takes/' + this.props.take.take.id + '/',
             {"rating": newRating})
+
     }
 
     onDeleteTake () {
