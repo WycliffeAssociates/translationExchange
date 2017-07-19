@@ -7,6 +7,7 @@ import {Button, Grid, Segment} from "semantic-ui-react";
 import TakeExportButton from './SelectTake'
 import TakeListenButton from './AddTake'
 import DeleteTake from './DeleteTake'
+import LoadingGif from 'images/loading-tiny.gif'
 
 var listenCounter = 0
 class Take extends Component {
@@ -60,7 +61,11 @@ class Take extends Component {
             </Grid.Column>
 
             <Grid.Column width={2}>
-                <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
+                {this.props.ratingLoading
+                    ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                    : <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
+                }
+
             </Grid.Column>
 
             <Grid.Column width={3}>
