@@ -25,3 +25,4 @@ yarn-error.log*
 *.mp3
 *.wav
 *.lock
+package-lock.json
