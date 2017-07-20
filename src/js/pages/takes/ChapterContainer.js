@@ -132,28 +132,7 @@ class ChapterContainer extends Component {
         return file
     }
 
-    createSourcePlaylist() {
 
-        this.state.exportSource = false;
-        var file = [];
-        var src = '';
-
-        for(let i = 0; i < this.state.segments.length; i++) {
-
-            if(this.state.segments[i].take.is_export) {
-                if (!(this.state.segments[i].source === undefined)) {
-                    this.state.exportSource = true;
-                    file[file.length] = {
-                        "src": config.streamingUrl + this.state.segments[i].source.take[0].location,
-                        "name": this.state.segments[i].take.mode + ' ' + this.state.segments[i].take.startv + ' (src)'
-                    }
-                }
-            }
-
-        }
-
-        return file
-    }
 
     addToListenList(props) {
 
@@ -162,15 +141,13 @@ class ChapterContainer extends Component {
 
         for (let i = 0; i < newArr.length; i++) {
             if (newArr[i].props.take.id === id) {
-                newArr = newArr.splice(i-1, 1)
+                newArr.splice(i, 1)
 
-                this.setState(
-                    {
-                        listenList: newArr
-                    }
-                )
+                this.setState({
+                    listenList: newArr
+                })
 
-                return ''
+            return ''
             }
         }
 
@@ -178,11 +155,9 @@ class ChapterContainer extends Component {
             props
         }
 
-        this.setState(
-            {
-                listenList: newArr
-            }
-        )
+        this.setState({
+            listenList: newArr
+        })
 
     }
 
@@ -196,13 +171,11 @@ class ChapterContainer extends Component {
                         <Icon name="dropdown" />
                         Listen to Selected
                     </Accordion.Title>
-
                     <Accordion.Content>
                         <AudioComponent
                             playlist={this.createListenPlaylist()}
                         />
                     </Accordion.Content>
-
                 </Accordion>
 
             );
@@ -219,6 +192,7 @@ class ChapterContainer extends Component {
                 (playlist.length + 1) + '/' + this.state.listenList.length + ')'
             }
         }
+
 
         return playlist
 
@@ -238,7 +212,6 @@ class ChapterContainer extends Component {
     }
 
     render () {
-
 
         var query = QueryString.parse(this.props.location.search);
 
