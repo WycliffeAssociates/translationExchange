@@ -6,6 +6,9 @@ import LoadingDisplay from "../../components/LoadingDisplay";
 import { Accordion, Icon, Grid, Button, Modal } from 'semantic-ui-react'
 import AudioComponent from './components/AudioComponent'
 import QueryString from "query-string";
+import CommentContainer from "./components/comments/CommentContainer";
+import {Audio, RecordBtn} from "translation-audio-player";
+import * as ReactDOM from "react-dom";
 
 
 class ChapterContainer extends Component {
@@ -13,7 +16,8 @@ class ChapterContainer extends Component {
     constructor (props) {
         super(props);
 
-        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", listenList: [], chapters: [], isToggleOn: true, exportSource: true,
+        this.state = {loaded: false, open: false, error: "", segments: [], mode: "", source: "", listenList: [], chapters: [], isToggleOn: true, exportSource: true,
+
             readyForExport: false, numChunks: 0
         };
     }
@@ -236,6 +240,12 @@ class ChapterContainer extends Component {
         this.setState({isToggleOn: !this.state.isToggleOn});
     }
 
+    onClick = () => {// used when you click the microphone button in the player
+        this.setState({
+            open: true
+        });
+    }
+
     render () {
 
         var query = QueryString.parse(this.props.location.search);
@@ -251,12 +261,26 @@ class ChapterContainer extends Component {
 
         return (
             <div>
-                <h1>
+                <h1 marginWidth={25}>
+
+
                     Chapter {query.chapter}
                     {this.state.loaded
                         ? " (" + this.state.segments[0].book.name + ", " + this.state.segments[0].language.name + ")"
                         : ""
                     }
+                    <Button
+                        onClick={this.onClick}
+                        color="pink"
+                        floated='right'
+                        ref={audioComponent => { this.audioComponent = audioComponent; }}
+                        icon="microphone"/>
+
+                    <CommentContainer
+                        open={this.state.open}
+                        ref={instance => (this.commentContainer = instance)}/>
+
+
 
                     <Modal trigger={<Button disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>} closeIcon="close">
                         <Modal.Header>Review and Finish</Modal.Header>

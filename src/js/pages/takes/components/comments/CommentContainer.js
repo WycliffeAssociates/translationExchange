@@ -21,7 +21,8 @@ class CommentContainer extends Component {
 
 
         this.state = {title : 'Record Comment',
-            show: false,
+
+            show: this.props.open,
             SaveButtonState: true,
             blob: null,
             wholeblob: null,
@@ -38,13 +39,10 @@ class CommentContainer extends Component {
         this.onClickSave = this.onClickSave.bind(this);
 
     }
-
     saveButton() {
 
         this.setState({disabled:false});
     }
-
-
     getInitialState() {
         return {show: false};
     }
@@ -110,9 +108,10 @@ class CommentContainer extends Component {
 
     };
 
+    changeSaveButtonState (newState) {
+        this.setState({SaveButtonState: newState});
 
-
-
+    }
     getComment(comment) {
         this.setState({
             wholeblob: comment,
@@ -120,8 +119,10 @@ class CommentContainer extends Component {
         });
     }
 
-    changeSaveButtonState (newState) {
-        this.setState({SaveButtonState: newState});
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.open !== this.state.show) {
+            this.setState({show: true});
+        }
 
     }
 
@@ -134,6 +135,7 @@ class CommentContainer extends Component {
 };
 
     render(){
+
         return(
 
                 <Modal
