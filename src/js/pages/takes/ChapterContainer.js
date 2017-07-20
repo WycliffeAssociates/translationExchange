@@ -121,8 +121,6 @@ class ChapterContainer extends Component {
         return playlist
     }
 
-
-
     addToListenList(props) {
 
         var newArr = this.state.listenList;
