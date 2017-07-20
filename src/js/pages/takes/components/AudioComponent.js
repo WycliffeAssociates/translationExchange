@@ -48,14 +48,12 @@ class AudioComponent extends Component {
             "src": this.props.src
         }
         */
-
         var file = this.props.playlist;
         const pause = this.state.pause;
 
         return(
             <div>
                 <Audio
-
                     width={this.props.width}
                     height={150}
                     autoPlay={false}
@@ -72,7 +70,12 @@ class AudioComponent extends Component {
                 />
 
                 {/*used ref to call a method in child class and instance*/}
-                <CommentContainer ref={instance => (this.commentContainer = instance)}/>
+                <CommentContainer
+                    updateTakeInState={this.props.updateTakeInState}
+                    ref={instance => (this.commentContainer = instance)}
+                    take={this.props.take}
+                />
+
 
 
 

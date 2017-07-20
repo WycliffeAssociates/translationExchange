@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import RecordComment from './RecordComment';
 import './RecordComment.css';
 import { Button, Header, Image, Modal,ModalHeader } from 'semantic-ui-react';
+import axios from 'axios';
+import config from "../../../../../config/config";
 
 // NOTE: (dmarchuk)
 let onClickCancel;
@@ -19,8 +21,11 @@ class CommentContainer extends Component {
 
 
         this.state = {title : 'Record Comment',
+
             show: this.props.open,
-            SaveButtonState: true
+            SaveButtonState: true,
+            blob: null,
+            wholeblob: null,
 
 
         };
@@ -30,13 +35,14 @@ class CommentContainer extends Component {
         this.hideModal = this.hideModal.bind(this);
         this.getInitialState = this.getInitialState.bind(this);
         this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
+        this.getComment=this.getComment.bind(this);
+        this.onClickSave = this.onClickSave.bind(this);
 
     }
     saveButton() {
 
         this.setState({disabled:false});
     }
-
     getInitialState() {
         return {show: false};
     }
@@ -56,9 +62,48 @@ class CommentContainer extends Component {
 
     };
 
-    onClickSave = () =>{
+
+    onClickSave = () => {
         this.hideModal();
-        // save and upload audio comment to the server
+        var reader  = new FileReader();
+
+        reader.addEventListener("load", () => {
+            console.log('reader', reader);
+            console.log('y', reader.result);
+
+            axios.post(config.apiUrl + 'comments/', {
+                "location": reader.result,
+                "user": 3,
+                "file": this.props.take.id,
+
+            }).then((results) => {
+                //console.log(JSON.stringify(this.state.blob));
+                //update this take in state using the update method in ChapterContainer
+                console.log('uploaded successfully')
+            });
+
+
+        }, false);
+
+        if (this.state.blob) {
+            reader.readAsDataURL(this.state.blob);
+
+
+
+        }
+       // reader.readAsDataURL(this.state.blob);
+        // this.state.wholeblob.blob = reader.result;
+        // axios.post(config.apiUrl + 'comments/', {
+        //         "location": reader.result,
+        //         "user": 3,
+        //         "file": this.props.take.id
+        //
+        //     }).then((results) => {
+        //     console.log(JSON.stringify(this.state.blob));
+        //         //update this take in state using the update method in ChapterContainer
+        //       console.log('uploaded successfully')
+        //     });
+
         this.setState({SaveButtonState: true});
 
     };
@@ -67,11 +112,18 @@ class CommentContainer extends Component {
         this.setState({SaveButtonState: newState});
 
     }
+    getComment(comment) {
+        this.setState({
+            wholeblob: comment,
+            blob: comment.blob
+        });
+    }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.open !== this.state.show) {
             this.setState({show: true});
         }
+
     }
 
     Style = {
@@ -96,6 +148,8 @@ class CommentContainer extends Component {
                     <div>
                         <RecordComment ref={instance => (this.recordComment = instance) }
                                        changeSaveButtonState = {this.changeSaveButtonState}
+                                       updateTakeInState={this.props.updateTakeInState}
+                                       sendComment={this.getComment}
 
                         />
                     </div>
@@ -107,7 +161,7 @@ class CommentContainer extends Component {
                                     positive icon='checkmark'
                                     labelPosition='right'
                                     content="Save"
-                                    onClick={this.onClickSave} />
+                                    onClick={this.onClickSave.bind(this)} />
 
                             <Button  className="CancelButton"
                                      negative icon='remove'
