@@ -17,7 +17,6 @@ class ChapterContainer extends Component {
         super(props);
         this.state = {loaded: false, error: "", segments: [], mode: "", source: "", listenList: [], chapters: [], isToggleOn: false, exportSource: true,
             readyForExport: false, numChunks: 0
-
         };
     }
 
@@ -41,12 +40,9 @@ class ChapterContainer extends Component {
         }).catch((exception) => {
             this.setState({error: exception});
         });
-
-
     }
 
-    //if a child component does requests to change a take in the database, they have to
-    //call this function to update the take in state.
+    //if a child component does requests to change a take in the database, they have to call this function to update the take in state.
     updateTakeInState (updatedTake) {
         var updatedSegments = this.state.segments.slice();
         var takeToUpdate = updatedSegments.findIndex(take => take.take.id === updatedTake.take.id);
@@ -58,29 +54,27 @@ class ChapterContainer extends Component {
 
     checkReadyForExport() {
         var counter = 0;
-        for (let i = 0; i < this.state.segments.length; i++) {
-            if (this.state.segments[i].take.is_export) {
-                counter += 1
-            }
-        }
-        if ((this.state.numChunks === counter) && counter !== 0) {
+        this.state.segments.map((i) => {
+            if (i.take.is_export) {counter+=1}
+        })
 
+        if ((this.state.numChunks === counter) && counter !== 0) {
             return true
         }
-        return false
+        else {return false}
     }
 
     findStartVerses(paramArr) { // creates array of each start verse
         var returnArr = [];
-        for (let i = 0; i < paramArr.length; i++) {
-            returnArr[returnArr.length] = paramArr[i].take.startv
-        }
+        paramArr.map((i) => {
+            returnArr[returnArr.length] = i.take.startv
+        })
         return (returnArr);
     }
 
     removeDuplicates(paramArr) { // removes duplicates from an array
         var returnArr = [];
-        returnArr = paramArr.filter(function(item, pos) {
+        returnArr = paramArr.filter((item, pos) => {
             return paramArr.indexOf(item) === pos;
         })
 
@@ -88,7 +82,6 @@ class ChapterContainer extends Component {
     }
 
     createArray(paramArr, segments) { // returns an array containing one array of takes for each segment
-
         var newArr = [];
         for (let i = 0; i < paramArr.length; i++) {
             var int = paramArr[i];
@@ -111,26 +104,24 @@ class ChapterContainer extends Component {
 
     createExportPlaylist() {
 
-        var file = [];
         var length = 0;
+        this.state.segments.map((i) => {
+            if(i.take.is_export) {length += 1}
+        })
 
-        for(let i = 0; i < this.state.segments.length; i++) {
-            if (this.state.segments[i].take.is_export) {
-                length += 1;
-            }
-        }
-
-        for(let i = 0; i < this.state.segments.length; i++) {
-            if (this.state.segments[i].take.is_export) {
-                file[file.length] = {
-                    "src": config.streamingUrl + this.state.segments[i].take.location,
-                    "name": this.state.segments[i].take.mode + ' ' + this.state.segments[i].take.startv + ' ' + '(' + (file.length+1) + '/' + length + ')'
+        var playlist = [];
+        this.state.segments.map((i) => {
+            if (i.take.is_export) {
+                playlist[playlist.length] = {
+                    "src": config.streamingUrl + i.take.location,
+                    "name": i.take.mode + ' ' + i.take.startv + ' (' + (playlist.length+1) + '/' + length + ')'
                 }
             }
-        }
-
-        return file
+        })
+        return playlist
     }
+
+
 
     addToListenList(props) {
 
@@ -140,69 +131,28 @@ class ChapterContainer extends Component {
         for (let i = 0; i < newArr.length; i++) {
             if (newArr[i].props.take.id === id) {
                 newArr.splice(i, 1)
-
-
-                this.setState({
-                    listenList: newArr
-                })
-
-            return ''
-
+                this.setState({listenList: newArr})
+                return ''
             }
         }
 
-        console.log('New file')
-
-        newArr[newArr.length] = {
-            props
-        }
-
-        this.setState({
-            listenList: newArr
-        })
-
+        newArr[newArr.length] = {props}
+        this.setState({listenList: newArr})
     }
 
     buildTempListener() {
 
         if (this.state.listenList.length > 0) {
             return(
-
                 <Accordion styled fluid>
                     <Accordion.Title>
                         <Icon name="dropdown" />
-                        Listen to Selected }
+                        Listen to Selected
                     </Accordion.Title>
                     <Accordion.Content>
-
-                        <Grid columns={1} relaxedclassName="take">
-
-                            <Grid.Column width={9}>
-                                <Button content='Source Audio' icon='right arrow'
-                                        labelPosition='right' floated="right"/>
-                            </Grid.Column>
-                        </Grid>
-
-                        <Grid relaxedclassName="take">
-                            <Grid.Column width={9}>
-                                <AudioComponent
-                                    playlist={this.createListenPlaylist()}
-                                />
-                            </Grid.Column>
-
-                            {/*
-                            < Grid.Column width={4}>
-                                <AudioComponent width={150}
-                                playlist={this.createListenPlaylist()}
-                                />
-                            </Grid.Column>
-                            */}
-
-                        </Grid>
-
+                        <AudioComponent playlist={this.createListenPlaylist()} />
                     </Accordion.Content>
                 </Accordion>
-
             );
         }
     }
@@ -210,21 +160,17 @@ class ChapterContainer extends Component {
     createListenPlaylist() {
 
         var playlist = [];
-
-        for (let i = 0; i < this.state.listenList.length; i++) {
+        this.state.listenList.map((i) => {
             playlist[playlist.length] = {
-                "src": config.streamingUrl + this.state.listenList[i].props.take.location,
-                "name": this.state.listenList[i].props.take.mode + ' ' + this.state.listenList[i].props.take.startv + ' (' +
-                    (playlist.length + 1) + '/' + this.state.listenList.length + ')'
+                "src": config.streamingUrl + i.props.take.location,
+                "name": i.props.take.mode + ' ' + i.props.take.startv + ' (' + (playlist.length+1) + '/' + this.state.listenList.length + ')'
             }
-        }
-
+        })
         return playlist
 
     }
 
-    //if a child component deletes a take, they have to call this function to update our representation
-    //of all the takes in state
+    //if a child component deletes a take, they have to call this function to update our representation of all the takes in state
     deleteTakeFromState(takeIdToDelete){
         var updatedSegments = this.state.segments.slice();
         var deleteIndex = updatedSegments.findIndex(take => take.take.id === takeIdToDelete);
@@ -256,22 +202,16 @@ class ChapterContainer extends Component {
                         ? " (" + this.state.segments[0].book.name + ", " + this.state.segments[0].language.name + ")"
                         : ""
                     }
-
                     <ExportModal playlist={this.createExportPlaylist()} chapter={query.chapter} disabled={!readyForExport}/>
-
                 </h1>
-
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
                     {tempArr.map(this.createChunkList.bind(this))}
-
                     <div>
                         {this.buildTempListener()}
                     </div>
-
                 </LoadingDisplay>
-
             </div>
         );
 
