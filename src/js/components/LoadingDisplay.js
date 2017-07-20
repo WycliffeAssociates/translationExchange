@@ -15,24 +15,29 @@ import LoadingGif from '../../images/loading.gif';
 
 class LoadingDisplay extends Component{
     render(){
-        // "There was a problem loading the data: " + this.props.error.message
-        return (
-            <div>
-                {this.props.error
-                    ? <div>
-                        <Button
-                            label={{as: 'a', basic: true, pointing: 'right', content: "There was a problem loading the data: " + this.props.error.message}}
-                            labelPosition='left'
-                            onClick={this.props.retry}
-                            content='Retry'
-                        />
-                      </div>
-                    : this.props.loaded
-                        ? this.props.children
-                        : <img src={LoadingGif} alt="Loading..." width="66" height="66"/>
+        if (this.props.error) {
+            return (
+                <Button
+                    label={{as: 'a', basic: true, pointing: 'right', content: "There was a problem loading the data: " + this.props.error.message}}
+                    labelPosition='left'
+                    onClick={this.props.retry}
+                    content='Retry'
+                />
+            );
+        } else {
+            if (this.props.loaded) {
+                //if there's only one child, then you don't have to put the extra div around it
+                if (this.props.children.length > 1) {
+                    return (
+                        <div>{this.props.children}</div>
+                    );
+                } else {
+                    return React.Children.only(this.props.children);
                 }
-            </div>
-        );
+            } else {
+                return (<img src={LoadingGif} alt="Loading..." width="66" height="66"/>);
+            }
+        }
     }
 }
 
