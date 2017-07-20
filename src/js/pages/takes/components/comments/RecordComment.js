@@ -15,7 +15,8 @@ export class RecordComment extends Component {
             record: false,
             displayPlayer: false,
             AudioURL: "",
-            DisableSaveButton: true
+            DisableSaveButton: true,
+            blob: ''
         }
 
 
@@ -51,12 +52,14 @@ export class RecordComment extends Component {
     onStop(recordedBlob) {
 
         this.setState({displayPlayer: true});
-//change this to the real url so that it can playback
-        this.setState({AudioURL: recordedBlob.blob});
+        //change this to the real url so that it can playback
+        this.setState({
+            AudioURL: recordedBlob.blobURL,
+            blob: recordedBlob,
+        });
 
         if (this.state.AudioURL !== ''){
-            {console.log('comment', this.state.AudioURL);
-                this.props.sendComment(this.state.AudioURL)}
+            {this.props.sendComment(this.state.blob)}
         }
 
     }

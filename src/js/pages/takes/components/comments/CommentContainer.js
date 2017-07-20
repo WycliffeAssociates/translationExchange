@@ -23,7 +23,8 @@ class CommentContainer extends Component {
         this.state = {title : 'Record Comment',
             show: false,
             SaveButtonState: true,
-            AudioURL: null,
+            blob: null,
+            wholeblob: null,
 
 
         };
@@ -63,26 +64,44 @@ class CommentContainer extends Component {
 
     };
 
-    onClickSave = ()=> {
+
+    onClickSave = () => {
         this.hideModal();
-        console.log('blob', this.state.AudioURL);
-        // save and upload audio comment to the server
-        var formData = new FormData();
-        formData.append("file", this.props.take.id);
-        formData.append("location", this.state.AudioURL.toString);
-        formData.append("user",3);
+        var reader  = new FileReader();
+
+        reader.addEventListener("load", () => {
+            console.log('reader', reader);
+            console.log('y', reader.result);
+
+            axios.post(config.apiUrl + 'comments/', {
+                "location": reader.result,
+                "user": 3,
+                "file": this.props.take.id,
+
+            }).then((results) => {
+                //console.log(JSON.stringify(this.state.blob));
+                //update this take in state using the update method in ChapterContainer
+                console.log('uploaded successfully')
+            });
 
 
-        var request = new XMLHttpRequest();
-        request.open("POST", config.apiUrl + 'comments/');
-        request.send(formData);
+        }, false);
 
+        if (this.state.blob) {
+            reader.readAsDataURL(this.state.blob);
+
+
+
+        }
+       // reader.readAsDataURL(this.state.blob);
+        // this.state.wholeblob.blob = reader.result;
         // axios.post(config.apiUrl + 'comments/', {
-        //         "location": this.state.AudioURL,
+        //         "location": reader.result,
         //         "user": 3,
         //         "file": this.props.take.id
         //
         //     }).then((results) => {
+        //     console.log(JSON.stringify(this.state.blob));
         //         //update this take in state using the update method in ChapterContainer
         //       console.log('uploaded successfully')
         //     });
@@ -91,8 +110,14 @@ class CommentContainer extends Component {
 
     };
 
+
+
+
     getComment(comment) {
-        this.setState({AudioURL: comment});
+        this.setState({
+            wholeblob: comment,
+            blob: comment.blob
+        });
     }
 
     changeSaveButtonState (newState) {
@@ -134,7 +159,7 @@ class CommentContainer extends Component {
                                     positive icon='checkmark'
                                     labelPosition='right'
                                     content="Save"
-                                    onClick={this.onClickSave} />
+                                    onClick={this.onClickSave.bind(this)} />
 
                             <Button  className="CancelButton"
                                      negative icon='remove'
