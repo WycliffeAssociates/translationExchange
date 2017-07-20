@@ -27,6 +27,12 @@ class TakeContainer extends Component {
             updatedTake.take = results.data;
             this.props.updateTakeInState(updatedTake);
         });
+
+        //if this one was marked for export, then ask the higher level chunk
+        //to make sure no other takes in this chunk are marked for export
+          if (markedForExport) {
+            this.props.updateTakeToExport(this.props.take.take.id);
+          }
     }
 
     onRatingSet (newRating) {
@@ -44,11 +50,10 @@ class TakeContainer extends Component {
 
     onDeleteTake () {
         console.log("onDeleteTake");
-        var self = this;
         axios.delete(config.apiUrl + 'takes/' + this.props.take.take.id + '/')
-            .then(function(result) {
-                self.props.deleteTakeFromState(self.props.take.take.id);
-            }).catch(function(exception) {
+            .then((result) => {
+                this.props.deleteTakeFromState(this.props.take.take.id);
+            }).catch((exception) => {
                 console.log(exception);
         });
 
