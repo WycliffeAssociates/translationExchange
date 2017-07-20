@@ -134,7 +134,7 @@ class CommentContainer extends Component {
         return(
 
                 <Modal
-                       // open={this.state.show}
+                       open={this.state.show}
                        size='small'
                        style= {this.Style}
                        dimmer= "inverted"
