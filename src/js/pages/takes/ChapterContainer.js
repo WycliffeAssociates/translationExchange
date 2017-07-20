@@ -70,6 +70,7 @@ class ChapterContainer extends Component {
         return false
     }
 
+
     findStartVerses(paramArr) { // creates array of each start verse
         var returnArr = [];
         for (let i = 0; i < paramArr.length; i++) {
