@@ -19,7 +19,7 @@ class CommentContainer extends Component {
 
 
         this.state = {title : 'Record Comment',
-            show: false,
+            show: this.props.open,
             SaveButtonState: true
 
 
@@ -32,14 +32,10 @@ class CommentContainer extends Component {
         this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
 
     }
-
     saveButton() {
 
         this.setState({disabled:false});
     }
-
-
-
 
     getInitialState() {
         return {show: false};
@@ -67,11 +63,15 @@ class CommentContainer extends Component {
 
     };
 
-
-
     changeSaveButtonState (newState) {
         this.setState({SaveButtonState: newState});
 
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.open !== this.state.show) {
+            this.setState({show: true});
+        }
     }
 
     Style = {
@@ -80,15 +80,14 @@ class CommentContainer extends Component {
         textAlign: "center",
         //width:"500px"
 
-
 };
 
     render(){
-        console.log('comment container called', this.props.open);
+
         return(
 
                 <Modal
-                       open={this.props.open}
+                       open={this.state.show}
                        size='small'
                        style= {this.Style}
                        dimmer= "inverted"

@@ -263,7 +263,7 @@ class ChapterContainer extends Component {
 
         return (
             <div>
-                <h1>
+                <h1 marginWidth={25}>
 
 
                     Chapter {query.chapter}
@@ -273,11 +273,11 @@ class ChapterContainer extends Component {
                     }
                     <Button
                         onClick={this.onClick}
-                        color="red"
-                        ref={audioComponent => { this.audioComponent = audioComponent; }}>
-                        button
-                    </Button>
-                    {console.log(this.state.open)}
+                        color="pink"
+                        floated='right'
+                        ref={audioComponent => { this.audioComponent = audioComponent; }}
+                        icon="microphone"/>
+
                     <CommentContainer
                         open={this.state.open}
                         ref={instance => (this.commentContainer = instance)}/>
