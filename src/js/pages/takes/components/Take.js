@@ -104,8 +104,8 @@ class Take extends Component {
                                 src={config.streamingUrl + this.props.take.location}
                                 playlist={file}
                                 width="200"
-                                mic={false}
                                 name="Source Audio"
+                                mic={false}
                             />
                     </Grid.Column>}
 
