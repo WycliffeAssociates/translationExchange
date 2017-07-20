@@ -17,6 +17,7 @@ class ChapterContainer extends Component {
         super(props);
         this.state = {loaded: false, error: "", segments: [], mode: "", source: "", listenList: [], chapters: [], isToggleOn: true, exportSource: true,
             readyForExport: false, numChunks: 0
+
         };
     }
 
@@ -53,7 +54,6 @@ class ChapterContainer extends Component {
         this.setState({segments: updatedSegments});
         console.log("SET STATE");
         console.dir(updatedSegments);
-
     }
 
     checkReadyForExport() {
@@ -165,6 +165,7 @@ class ChapterContainer extends Component {
         return file
     }
 
+
     addToListenList(props) {
 
         var newArr = this.state.listenList;
@@ -222,16 +223,25 @@ class ChapterContainer extends Component {
     createListenPlaylist() {
         var playlist = [];
 
-        for(let i = 0; i < this.state.listenList.length; i++) {
+        for (let i = 0; i < this.state.listenList.length; i++) {
             playlist[playlist.length] = {
                 "src": config.streamingUrl + this.state.listenList[i].props.take.location,
                 "name": this.state.listenList[i].props.take.mode + ' ' + this.state.listenList[i].props.take.startv + ' (' +
-                (playlist.length+1) + '/' + this.state.listenList.length + ')'
+                (playlist.length + 1) + '/' + this.state.listenList.length + ')'
             }
         }
 
         return playlist
 
+    }
+
+    //if a child component deletes a take, they have to call this function to update our representation
+    //of all the takes in state
+    deleteTakeFromState(takeIdToDelete){
+        var updatedSegments = this.state.segments.slice();
+        var deleteIndex = updatedSegments.findIndex(take => take.take.id === takeIdToDelete);
+        updatedSegments.splice(deleteIndex, 1);
+        this.setState({segments: updatedSegments});
     }
 
     handleClick() {
@@ -317,6 +327,7 @@ class ChapterContainer extends Component {
                     number={arr[0].take.startv}
                     updateTakeInState={this.updateTakeInState.bind(this)}
                     addToListenList={this.addToListenList.bind(this)}
+                    deleteTakeFromState={this.deleteTakeFromState.bind(this)}
                 />
             </div>
         );

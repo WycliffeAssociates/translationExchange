@@ -5,8 +5,9 @@ import AudioComponent from './AudioComponent';
 import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 import TakeExportButton from './SelectTake'
-import Delete from './Delete'
 import TakeListenButton from './AddTake'
+import DeleteTake from './DeleteTake'
+import LoadingGif from 'images/loading-tiny.gif'
 
 var listenCounter = 0
 class Take extends Component {
@@ -60,20 +61,24 @@ class Take extends Component {
             </Grid.Column>
 
             <Grid.Column width={2}>
-                <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
+                {this.props.ratingLoading
+                    ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                    : <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
+                }
+
             </Grid.Column>
 
             <Grid.Column width={3}>
                 <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
-                <Delete/>
                 <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
-
+                <DeleteTake onDeleteTake={this.props.onDeleteTake}/>
             </Grid.Column>
 
             {this.props.source
                 ? <Grid.Column>
                     <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'
                             labelPosition='right'/>
+                    Language: {this.props.source.language.name}
                 </Grid.Column>
                 : ""
 
@@ -88,6 +93,7 @@ class Take extends Component {
                         src={config.streamingUrl + this.props.take.location}
                         playlist={file}
                         width="700"
+                        mic={true}
                     />
                 </Grid.Column >
 
@@ -99,6 +105,7 @@ class Take extends Component {
                                 playlist={file}
                                 width="200"
                                 name="Source Audio"
+                                mic={false}
                             />
                     </Grid.Column>}
 
@@ -160,7 +167,8 @@ Take.propTypes = {
     take: PropTypes.object.isRequired,
     author: PropTypes.string.isRequired,
     onRatingSet: PropTypes.func.isRequired,
-    onMarkedForExportToggled: PropTypes.func.isRequired
+    onMarkedForExportToggled: PropTypes.func.isRequired,
+    takeId: PropTypes.number.isRequired
 };
 
 
