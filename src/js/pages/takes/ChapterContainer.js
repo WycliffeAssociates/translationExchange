@@ -63,7 +63,7 @@ class ChapterContainer extends Component {
                 counter += 1
             }
         }
-        if (this.state.numChunks === counter) {
+        if ((this.state.numChunks === counter) && counter !== 0) {
             return true
         }
         return false
@@ -157,12 +157,16 @@ class ChapterContainer extends Component {
 
     addToListenList(props) {
 
+        console.log('addToListenList()')
+        console.log('props', props)
+
         var newArr = this.state.listenList;
         var id = props.take.id;
 
         for (let i = 0; i < newArr.length; i++) {
             if (newArr[i].props.take.id === id) {
                 newArr = newArr.splice(i-1, 1)
+                console.log('This file already exists in the playlist')
 
                 this.setState(
                     {
@@ -170,9 +174,13 @@ class ChapterContainer extends Component {
                     }
                 )
 
+                console.log('listenList', this.state.listenList)
+
                 return ''
             }
         }
+
+        console.log('New file')
 
         newArr[newArr.length] = {
             props
@@ -184,9 +192,12 @@ class ChapterContainer extends Component {
             }
         )
 
+        console.log('this shouldnt run if duplicate is found', this.state.listenList)
+
     }
 
     buildTempListener() {
+
 
         if (this.state.listenList.length > 0) {
             return(
@@ -210,6 +221,8 @@ class ChapterContainer extends Component {
     }
 
     createListenPlaylist() {
+        console.log('createListenPlaylist()')
+        console.log(this.state.listenList)
         var playlist = [];
 
         for (let i = 0; i < this.state.listenList.length; i++) {
@@ -219,6 +232,8 @@ class ChapterContainer extends Component {
                 (playlist.length + 1) + '/' + this.state.listenList.length + ')'
             }
         }
+
+        console.log('playlist', playlist)
 
         return playlist
 
@@ -260,12 +275,12 @@ class ChapterContainer extends Component {
                         : ""
                     }
 
-                    <Modal trigger={<Button disabled={!readyForExport} content="Export" icon="share" floated="right" labelPosition="right"/>} closeIcon="close">
-                        <Modal.Header>Export Chapter {query.chapter}</Modal.Header>
+                    <Modal trigger={<Button disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>} closeIcon="close">
+                        <Modal.Header>Chapter {query.chapter}</Modal.Header>
                         <Modal.Content>
                             <Modal.Description>
-                                <p>Here is a preview of the takes you have selected to export. This may take a few minutes to load</p>
-
+                                <p>Below is an audioplayer to preview the chapter. This may take a few minutes to load</p>
+                                <p>Click on "Send" to finish</p>
                                 <AudioComponent
                                 playlist={this.createExportPlaylist()}
                             />
@@ -273,7 +288,7 @@ class ChapterContainer extends Component {
 
                         </Modal.Content>
                         <Modal.Actions>
-                            <Button content="Export Chapter" onClick={() => alert('insert function to export here')}/>
+                            <Button content="Send" onClick={() => alert('insert function to export here')}/>
                         </Modal.Actions>
                     </Modal>
 
