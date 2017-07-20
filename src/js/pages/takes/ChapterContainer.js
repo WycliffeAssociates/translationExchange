@@ -7,6 +7,9 @@ import LoadingDisplay from "../../components/LoadingDisplay";
 import { Accordion, Icon, Grid, Button } from 'semantic-ui-react'
 import AudioComponent from './components/AudioComponent'
 import QueryString from "query-string";
+import CommentContainer from "./components/comments/CommentContainer";
+import {Audio, RecordBtn} from "translation-audio-player";
+import * as ReactDOM from "react-dom";
 
 
 // this is the page for one chapter
@@ -15,7 +18,9 @@ class ChapterContainer extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {loaded: false, error: "", segments: [], mode: "", source: "", listenList: [], chapters: [], isToggleOn: true, exportSource: true
+        this.state = {loaded: false,
+            open: false,
+            error: "", segments: [], mode: "", source: "", listenList: [], chapters: [], isToggleOn: true, exportSource: true
 
         };
     }
@@ -238,6 +243,12 @@ class ChapterContainer extends Component {
         this.setState({isToggleOn: !this.state.isToggleOn});
     }
 
+    onClick = () => {// used when you click the microphone button in the player
+        this.setState({
+            open: true
+        });
+    }
+
     render () {
         var query = QueryString.parse(this.props.location.search);
 
@@ -253,11 +264,24 @@ class ChapterContainer extends Component {
         return (
             <div>
                 <h1>
+
+
                     Chapter {query.chapter}
                     {this.state.loaded
                         ? " (" + this.state.segments[0].book.name + ", " + this.state.segments[0].language.name + ")"
                         : ""
                     }
+                    <Button
+                        onClick={this.onClick}
+                        color="red"
+                        ref={audioComponent => { this.audioComponent = audioComponent; }}>
+                        button
+                    </Button>
+                    {console.log(this.state.open)}
+                    <CommentContainer
+                        open={this.state.open}
+                        ref={instance => (this.commentContainer = instance)}/>
+
                 </h1>
 
 

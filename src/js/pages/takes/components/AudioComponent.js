@@ -51,7 +51,6 @@ class AudioComponent extends Component {
 
         var file = this.props.playlist;
         const pause = this.state.pause;
-        console.log(this.props.mic);
 
         return(
             <div>

@@ -74,8 +74,6 @@ class CommentContainer extends Component {
 
     }
 
-
-
     Style = {
         backgroundColor: "rgba(171,149,149, .4)",
         fontSize: "32",
@@ -86,15 +84,11 @@ class CommentContainer extends Component {
 };
 
     render(){
-
-
+        console.log('comment container called', this.props.open);
         return(
 
-
-
-
                 <Modal
-                       open={this.state.show}
+                       open={this.props.open}
                        size='small'
                        style= {this.Style}
                        dimmer= "inverted"
