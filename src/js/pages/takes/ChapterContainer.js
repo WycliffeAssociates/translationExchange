@@ -3,22 +3,26 @@ import ChunkList from "./components/ChunkList";
 import axios from 'axios';
 import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
-import { Accordion, Icon, Grid, Button, Modal } from 'semantic-ui-react'
-import AudioComponent from './components/AudioComponent'
 import QueryString from "query-string";
+import { Button } from 'semantic-ui-react';
 import CommentContainer from "./components/comments/CommentContainer";
 import {Audio, RecordBtn} from "translation-audio-player";
-import * as ReactDOM from "react-dom";
-
+import ChapterHeader from "./components/ChapterHeader.js";
+import StitchTakes from "./components/StitchTakes";
 
 class ChapterContainer extends Component {
 
     constructor (props) {
         super(props);
-
-        this.state = {loaded: false, open: false, error: "", segments: [], mode: "", source: "", listenList: [], chapters: [], isToggleOn: true, exportSource: true,
-
-            readyForExport: false, numChunks: 0
+        this.state = {
+            loaded: false,
+            open: false,
+            error: "",
+            takes: [],
+            book: "",
+            language: "",
+            mode: "",
+            listenList: []
         };
     }
 
@@ -35,7 +39,9 @@ class ChapterContainer extends Component {
             this.setState(
                 {
                     loaded: true,
-                    segments: results.data,
+                    takes: results.data,
+                    book: results.data[0].book.name,
+                    language: results.data[0].language.name,
                     mode:results.data[0].mode
                 }
             )
@@ -46,10 +52,14 @@ class ChapterContainer extends Component {
 
     }
 
+    /*
+        Functions for updating state
+     */
+
     //if a child component does requests to change a take in the database, they have to
     //call this function to update the take in state.
     updateTakeInState (updatedTake) {
-        var updatedSegments = this.state.segments.slice();
+        var updatedSegments = this.state.takes.slice();
         var takeToUpdate = updatedSegments.findIndex(take => take.take.id === updatedTake.take.id);
         updatedSegments[takeToUpdate] = updatedTake;
         this.setState({
@@ -57,105 +67,6 @@ class ChapterContainer extends Component {
         });
         console.log("SET STATE");
         console.dir(updatedSegments);
-    }
-
-    checkReadyForExport() {
-        var counter = 0;
-        for (let i = 0; i < this.state.segments.length; i++) {
-            if (this.state.segments[i].take.is_export) {
-                counter += 1
-            }
-        }
-        if ((this.state.numChunks === counter) && counter !== 0)  {
-            return true
-        }
-        return false
-    }
-
-    findStartVerses(paramArr) { // creates array of each start verse
-        var returnArr = [];
-        for (let i = 0; i < paramArr.length; i++) {
-            returnArr[returnArr.length] = paramArr[i].take.startv
-        }
-        return (returnArr);
-    }
-
-    removeDuplicates(paramArr) { // removes duplicates from an array
-        var returnArr = [];
-        returnArr = paramArr.filter(function(item, pos) {
-            return paramArr.indexOf(item) === pos;
-        })
-
-        return (returnArr);
-    }
-
-    createArray(paramArr, segments) { // returns an array containing one array of takes for each segment
-
-        var newArr = [];
-        for (let i = 0; i < paramArr.length; i++) {
-            var int = paramArr[i];
-            var placeHolderArr = [];
-            for (let j = 0; j < segments.length; j++) {
-                if (int === segments[j].take.startv) {
-                    placeHolderArr[placeHolderArr.length] = segments[j]
-                }
-            }
-            newArr[i] = placeHolderArr
-        }
-        return (newArr);
-    }
-
-    sort(arr) { // simple sort function
-        return arr.sort(function(a, b) {
-            return a - b
-        })
-    }
-
-    createExportPlaylist() {
-
-        var file = [];
-        var length = 0;
-
-
-        for(let i = 0; i < this.state.segments.length; i++) {
-            if (this.state.segments[i].take.is_export) {
-                length += 1;
-            }
-        }
-
-        for(let i = 0; i < this.state.segments.length; i++) {
-            if (this.state.segments[i].take.is_export) {
-                file[file.length] = {
-                    "src": config.streamingUrl + this.state.segments[i].take.location,
-                    "name": this.state.segments[i].take.mode + ' ' + this.state.segments[i].take.startv + ' ' + '(' + (file.length+1) + '/' + length + ')'
-                }
-            }
-        }
-
-        return file
-    }
-
-    createSourcePlaylist() {
-
-        this.state.exportSource = false;
-        var file = [];
-        var src = '';
-
-        for(let i = 0; i < this.state.segments.length; i++) {
-
-            if(this.state.segments[i].take.is_export) {
-                if (!(this.state.segments[i].source === undefined)) {
-                    this.state.exportSource = true;
-                    file[file.length] = {
-                        "src": config.streamingUrl + this.state.segments[i].source.take[0].location,
-                        "name": this.state.segments[i].take.mode + ' ' + this.state.segments[i].take.startv + ' (src)'
-                    }
-                }
-            }
-
-        }
-
-        return file
     }
 
     addToListenList(props) {
@@ -189,55 +100,13 @@ class ChapterContainer extends Component {
 
     }
 
-    buildTempListener() {
-
-        if (this.state.listenList.length > 0) {
-            return(
-
-                <Accordion styled fluid>
-                    <Accordion.Title>
-                        <Icon name="dropdown" />
-                        Listen to Selected
-                    </Accordion.Title>
-
-                    <Accordion.Content>
-                        <AudioComponent
-                            playlist={this.createListenPlaylist()}
-                        />
-                    </Accordion.Content>
-
-                </Accordion>
-
-            );
-        }
-    }
-
-    createListenPlaylist() {
-        var playlist = [];
-
-        for (let i = 0; i < this.state.listenList.length; i++) {
-            playlist[playlist.length] = {
-                "src": config.streamingUrl + this.state.listenList[i].props.take.location,
-                "name": this.state.listenList[i].props.take.mode + ' ' + this.state.listenList[i].props.take.startv + ' (' +
-                (playlist.length + 1) + '/' + this.state.listenList.length + ')'
-            }
-        }
-
-        return playlist
-
-    }
-
     //if a child component deletes a take, they have to call this function to update our representation
     //of all the takes in state
     deleteTakeFromState(takeIdToDelete){
-        var updatedSegments = this.state.segments.slice();
+        var updatedSegments = this.state.takes.slice();
         var deleteIndex = updatedSegments.findIndex(take => take.take.id === takeIdToDelete);
         updatedSegments.splice(deleteIndex, 1);
-        this.setState({segments: updatedSegments});
-    }
-
-    handleClick() {
-        this.setState({isToggleOn: !this.state.isToggleOn});
+        this.setState({takes: updatedSegments});
     }
 
     onClick = () => {// used when you click the microphone button in the player
@@ -246,89 +115,99 @@ class ChapterContainer extends Component {
         });
     }
 
+    /*
+        Functions for grouping takes into chunks
+     */
+    findStartVerses(paramArr) { // creates array of each start verse
+        var returnArr = [];
+        for (let i = 0; i < paramArr.length; i++) {
+            returnArr[returnArr.length] = paramArr[i].take.startv
+        }
+        return (returnArr);
+    }
+
+    removeDuplicates(paramArr) { // removes duplicates from an array
+        var returnArr = [];
+        returnArr = paramArr.filter(function(item, pos) {
+            return paramArr.indexOf(item) === pos;
+        })
+
+        return (returnArr);
+    }
+
+    createArray(paramArr, segments) { // returns an array containing one array of takes for each segment
+
+        var newArr = [];
+        for (let i = 0; i < paramArr.length; i++) {
+            var int = paramArr[i];
+            var placeHolderArr = [];
+            for (let j = 0; j < segments.length; j++) {
+                if (int === segments[j].take.startv) {
+                    placeHolderArr[placeHolderArr.length] = segments[j]
+                }
+            }
+            newArr[i] = placeHolderArr
+        }
+        return (newArr);
+    }
+
+    getChunksFromTakes(takes) {
+        let chunks = this.findStartVerses(this.state.takes); // find start verses
+        chunks = chunks.sort(function(a, b) { // sort by start verse
+                return a - b
+            });
+        chunks = this.removeDuplicates(chunks); // remove duplicates
+        chunks = this.createArray(chunks, this.state.takes);
+        return chunks;
+    }
+
+    /*
+        Rendering functions
+     */
+
     render () {
-
         var query = QueryString.parse(this.props.location.search);
-
-        var tempArr = this.findStartVerses(this.state.segments); // find start verses
-        tempArr = this.sort(tempArr); // sort by start verse
-        tempArr = this.removeDuplicates(tempArr); // remove duplicates
-        this.state.numChunks = tempArr.length;
-        tempArr = this.createArray(tempArr, this.state.segments); // create array for ChunkList component
-
-        var readyForExport = this.checkReadyForExport()
-
+        let chunks = this.getChunksFromTakes(this.state.takes);
 
         return (
             <div>
-                <h1 marginWidth={25}>
+                <ChapterHeader loaded={this.state.loaded}
+                               chapter={query.chapter}
+                               book={this.state.book}
+                               language={this.state.language}
+                               takes={this.state.takes}
+                               chunks={chunks}
+                />
+                <Button
+                    onClick={this.onClick}
+                    color="pink"
+                    floated='right'
+                    ref={audioComponent => { this.audioComponent = audioComponent; }}
+                    icon="microphone"/>
 
-
-                    Chapter {query.chapter}
-                    {this.state.loaded
-                        ? " (" + this.state.segments[0].book.name + ", " + this.state.segments[0].language.name + ")"
-                        : ""
-                    }
-                    <Button
-                        onClick={this.onClick}
-                        color="pink"
-                        floated='right'
-                        ref={audioComponent => { this.audioComponent = audioComponent; }}
-                        icon="microphone"/>
-
-                    <CommentContainer
-                        open={this.state.open}
-                        ref={instance => (this.commentContainer = instance)}/>
-
-
-
-                    <Modal trigger={<Button disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>} closeIcon="close">
-                        <Modal.Header>Review and Finish</Modal.Header>
-                        <Modal.Content>
-                            <Modal.Description>
-                                <p>You are ready to mark Chapter {query.chapter} of {query.book} as finished!</p>
-                                <p>Here is a preview of the takes you have selected to export. This may take a few minutes to load</p>
-                                <p>To mark as done, click on 'Finish'</p>
-
-                                <AudioComponent
-                                playlist={this.createExportPlaylist()}
-                            />
-                            </Modal.Description>
-
-                        </Modal.Content>
-                        <Modal.Actions>
-                            <Button content="Finish" onClick={() => alert('insert function to export here')}/>
-                        </Modal.Actions>
-                    </Modal>
-
-                </h1>
+                <CommentContainer
+                    open={this.state.open}
+                    ref={instance => (this.commentContainer = instance)}/>
 
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
-                    {tempArr.map(this.createChunkList.bind(this))}
-
-
-                    <div>
-                        {this.buildTempListener()}
-                    </div>
-
+                    {chunks.map(this.createChunkList.bind(this))}
+                    <StitchTakes listenList={this.state.listenList}/>
                 </LoadingDisplay>
-
             </div>
         );
-
     }
 
-    createChunkList(arr) {
+    createChunkList(takes) {
 
         return(
             <div>
                 <ChunkList
 
-                    segments={arr} // array of takes
-                    mode={arr[0].take.mode}
-                    number={arr[0].take.startv}
+                    segments={takes} // array of takes
+                    mode={takes[0].take.mode}
+                    number={takes[0].take.startv}
                     updateTakeInState={this.updateTakeInState.bind(this)}
                     addToListenList={this.addToListenList.bind(this)}
                     deleteTakeFromState={this.deleteTakeFromState.bind(this)}
@@ -337,7 +216,6 @@ class ChapterContainer extends Component {
         );
 
     }
-
 }
 
 export default ChapterContainer;
