@@ -16,7 +16,7 @@ class ChapterContainer extends Component {
     constructor (props) {
         super(props);
 
-        this.state = {loaded: false, open: false, error: "", segments: [], mode: "", source: "", listenList: [], chapters: [], isToggleOn: true, exportSource: true,
+        this.state = {loaded: false,error: "", segments: [], mode: "", source: "", listenList: [], chapters: [], isToggleOn: true, exportSource: true,
 
             readyForExport: false, numChunks: 0
         };
@@ -269,18 +269,15 @@ class ChapterContainer extends Component {
                         ? " (" + this.state.segments[0].book.name + ", " + this.state.segments[0].language.name + ")"
                         : ""
                     }
-                    <Button
-                        onClick={this.onClick}
-                        color="pink"
-                        floated='right'
-                        ref={audioComponent => { this.audioComponent = audioComponent; }}
-                        icon="microphone"/>
+                    {/*<Button*/}
+                        {/*onClick={this.onClick}*/}
+                        {/*color="pink"*/}
+                        {/*floated='right'*/}
+                        {/*ref={audioComponent => { this.audioComponent = audioComponent; }}*/}
+                        {/*icon="microphone"/>*/}
 
                     <CommentContainer
-                        open={this.state.open}
                         ref={instance => (this.commentContainer = instance)}/>
-
-
 
                     <Modal trigger={<Button disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>} closeIcon="close">
                         <Modal.Header>Review and Finish</Modal.Header>

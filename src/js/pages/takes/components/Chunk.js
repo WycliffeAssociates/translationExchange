@@ -10,8 +10,7 @@ import CommentContainer from "./comments/CommentContainer";
 class Chunk extends Component {
     constructor (props) {
         super(props);
-        this.state = {open: false,
-        modalopen:false};
+        this.state = {open: false};
     }
 
     //when takeId is marked as the one to export, update all other chunks
@@ -66,17 +65,15 @@ class Chunk extends Component {
                 </Accordion.Title>
 
                 <Accordion.Content>
-                    <Button
-                        onClick={this.onClick}
-                        color="pink"
-                        floated='right'
-                        ref={audioComponent => { this.audioComponent = audioComponent; }}
-                        icon="microphone"/>
+                    {/*<Button*/}
+                        {/*onClick={this.onClick}*/}
+                        {/*color="pink"*/}
+                        {/*floated='right'*/}
+                        {/*ref={audioComponent => { this.audioComponent = audioComponent; }}*/}
+                        {/*icon="microphone"/>*/}
 
                     <CommentContainer
-                        open={this.state.modalopen}
                         ref={instance => (this.commentContainer = instance)}/>
-
 
                     <TakeList
                         takes={this.props.segments}
