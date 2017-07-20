@@ -63,7 +63,8 @@ class ChapterContainer extends Component {
                 counter += 1
             }
         }
-        if ((this.state.numChunks === counter) && counter !== 0)  {
+        if ((this.state.numChunks === counter) && counter !== 0) {
+
             return true
         }
         return false
@@ -136,6 +137,9 @@ class ChapterContainer extends Component {
 
     addToListenList(props) {
 
+        console.log('addToListenList()')
+        console.log('props', props)
+
         var newArr = this.state.listenList;
         var id = props.take.id;
 
@@ -143,13 +147,17 @@ class ChapterContainer extends Component {
             if (newArr[i].props.take.id === id) {
                 newArr.splice(i, 1)
 
+
                 this.setState({
                     listenList: newArr
                 })
 
             return ''
+
             }
         }
+
+        console.log('New file')
 
         newArr[newArr.length] = {
             props
@@ -159,9 +167,12 @@ class ChapterContainer extends Component {
             listenList: newArr
         })
 
+        console.log('this shouldnt run if duplicate is found', this.state.listenList)
+
     }
 
     buildTempListener() {
+
 
         if (this.state.listenList.length > 0) {
             return(
@@ -183,6 +194,8 @@ class ChapterContainer extends Component {
     }
 
     createListenPlaylist() {
+        console.log('createListenPlaylist()')
+        console.log(this.state.listenList)
         var playlist = [];
 
         for (let i = 0; i < this.state.listenList.length; i++) {
@@ -192,7 +205,6 @@ class ChapterContainer extends Component {
                 (playlist.length + 1) + '/' + this.state.listenList.length + ')'
             }
         }
-
 
         return playlist
 
@@ -241,6 +253,7 @@ class ChapterContainer extends Component {
                                 <p>Here is a preview of the takes you have selected to export. This may take a few minutes to load</p>
                                 <p>To mark as done, click on 'Finish'</p>
 
+
                                 <AudioComponent
                                 playlist={this.createExportPlaylist()}
                             />
@@ -249,6 +262,7 @@ class ChapterContainer extends Component {
                         </Modal.Content>
                         <Modal.Actions>
                             <Button content="Finish" onClick={() => alert('insert function to export here')}/>
+
                         </Modal.Actions>
                     </Modal>
 
