@@ -8,7 +8,6 @@ import { Accordion, Icon, Grid, Button, Modal } from 'semantic-ui-react'
 import AudioComponent from './components/AudioComponent'
 import QueryString from "query-string";
 
-
 // this is the page for one chapter
 
 class ChapterContainer extends Component {
@@ -69,7 +68,6 @@ class ChapterContainer extends Component {
         }
         return false
     }
-
 
     findStartVerses(paramArr) { // creates array of each start verse
         var returnArr = [];
@@ -247,17 +245,14 @@ class ChapterContainer extends Component {
                     }
 
                     <Modal trigger={<Button disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>} closeIcon="close">
-                        <Modal.Header>Review and Finish</Modal.Header>
+                        <Modal.Header>You are ready to mark Chapter {query.chapter} of as finished!</Modal.Header>
                         <Modal.Content>
                             <Modal.Description>
-                                <p>You are ready to mark Chapter {query.chapter} of {query.book} as finished!</p>
-                                <p>Here is a preview of the takes you have selected to export. This may take a few minutes to load</p>
-                                <p>To mark as done, click on 'Finish'</p>
-
-
+                                <p>Here is a preview of the takes you have selected to export. This may take a few seconds to load.</p>
+                                <p>To mark as done, click on 'Finish'.</p>
                                 <AudioComponent
                                 playlist={this.createExportPlaylist()}
-                            />
+                                />
                             </Modal.Description>
 
                         </Modal.Content>
