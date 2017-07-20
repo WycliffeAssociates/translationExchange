@@ -63,7 +63,7 @@ class ChapterContainer extends Component {
                 counter += 1
             }
         }
-        if (this.state.numChunks === counter) {
+        if ((this.state.numChunks === counter) && counter !== 0)  {
             return true
         }
         return false
@@ -260,11 +260,13 @@ class ChapterContainer extends Component {
                         : ""
                     }
 
-                    <Modal trigger={<Button disabled={!readyForExport} content="Export" icon="share" floated="right" labelPosition="right"/>} closeIcon="close">
-                        <Modal.Header>Export Chapter {query.chapter}</Modal.Header>
+                    <Modal trigger={<Button disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>} closeIcon="close">
+                        <Modal.Header>Review and Finish</Modal.Header>
                         <Modal.Content>
                             <Modal.Description>
+                                <p>You are ready to mark Chapter {query.chapter} of {query.book} as finished!</p>
                                 <p>Here is a preview of the takes you have selected to export. This may take a few minutes to load</p>
+                                <p>To mark as done, click on 'Finish'</p>
 
                                 <AudioComponent
                                 playlist={this.createExportPlaylist()}
@@ -273,7 +275,7 @@ class ChapterContainer extends Component {
 
                         </Modal.Content>
                         <Modal.Actions>
-                            <Button content="Export Chapter" onClick={() => alert('insert function to export here')}/>
+                            <Button content="Finish" onClick={() => alert('insert function to export here')}/>
                         </Modal.Actions>
                     </Modal>
 
