@@ -36,6 +36,8 @@ export class RecordComment extends Component {
         this.deleteBlob();    // deleted blob object in case the user records a new audio comment
 
 
+
+
     }
 
     stopRecording = () => {
@@ -56,7 +58,9 @@ export class RecordComment extends Component {
         this.setState({
             AudioURL: recordedBlob.blobURL,
             blob: recordedBlob,
+            displayPlayer: true
         });
+
 
         if (this.state.AudioURL !== ''){
             {this.props.sendComment(this.state.blob)}
@@ -71,6 +75,11 @@ export class RecordComment extends Component {
     deleteBlob(){
 
         window.URL.revokeObjectURL(this.state.AudioURL);   // deletes an audio object
+
+
+    }
+
+    sendFile(){
     }
 
 
