@@ -83,7 +83,7 @@ class CommentsButton extends React.Component {
                 </Button>
 
 
-                <Modal size={size} open={open} onClose={this.close}>
+                <Modal size={size} open={open} onClose={this.close} closeIcon="close">
                     <Modal.Header>
                         Comments
                     </Modal.Header>
@@ -100,10 +100,6 @@ class CommentsButton extends React.Component {
 
 
                     </Modal.Content>
-
-                    <Modal.Actions>
-                        <Button positive icon='checkmark' labelPosition='right' content='Done' onClick={this.close}/>
-                    </Modal.Actions>
                 </Modal>
             </div>
         )
