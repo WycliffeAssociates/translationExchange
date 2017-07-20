@@ -6,11 +6,11 @@ class ExportModal extends Component {
 
     render() {
 
-        var ExportButton = <Button disabled={false} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
+        var ExportButton = <Button disabled={this.props.disabled} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
 
         return(
             <Modal trigger={ExportButton} closeIcon="close">
-                <Modal.Header>You are ready to mark Chapter 6 as finished!</Modal.Header>
+                <Modal.Header>You are ready to mark Chapter {this.props.chapter} as finished!</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
                         <p>Here is a preview of the takes you have selected to export. This may take a few seconds to

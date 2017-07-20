@@ -247,7 +247,7 @@ class ChapterContainer extends Component {
         tempArr = this.createArray(tempArr, this.state.segments); // create array for ChunkList component
 
         var readyForExport = this.checkReadyForExport()
-        
+
         return (
             <div>
                 <h1>
@@ -257,7 +257,7 @@ class ChapterContainer extends Component {
                         : ""
                     }
 
-                    <ExportModal playlist={this.createExportPlaylist()}/>
+                    <ExportModal playlist={this.createExportPlaylist()} chapter={query.chapter} disabled={!readyForExport}/>
 
                 </h1>
 
