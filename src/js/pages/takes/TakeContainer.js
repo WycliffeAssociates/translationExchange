@@ -50,11 +50,10 @@ class TakeContainer extends Component {
 
     onDeleteTake () {
         console.log("onDeleteTake");
-        var self = this;
         axios.delete(config.apiUrl + 'takes/' + this.props.take.take.id + '/')
-            .then(function(result) {
-                self.props.deleteTakeFromState(self.props.take.take.id);
-            }).catch(function(exception) {
+            .then((result) => {
+                this.props.deleteTakeFromState(this.props.take.take.id);
+            }).catch((exception) => {
                 console.log(exception);
         });
 
