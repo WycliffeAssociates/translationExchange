@@ -138,16 +138,6 @@ class ChapterContainer extends Component {
         var file = [];
         var src = '';
 
-        //////////
-        /*
-        file[0] = {
-            "src": "a",
-            "name":"source"
-        }
-        return file
-        */
-        //////////
-
         for(let i = 0; i < this.state.segments.length; i++) {
 
             if(this.state.segments[i].take.is_export) {
@@ -164,7 +154,6 @@ class ChapterContainer extends Component {
 
         return file
     }
-
 
     addToListenList(props) {
 
@@ -197,7 +186,7 @@ class ChapterContainer extends Component {
 
     }
 
-    buildListener() {
+    buildTempListener() {
 
         if (this.state.listenList.length > 0) {
             return(
@@ -246,15 +235,6 @@ class ChapterContainer extends Component {
 
     handleClick() {
         this.setState({isToggleOn: !this.state.isToggleOn});
-    }
-
-    updateNumExport() {
-        var counter = 0;
-        for (let i = 0; i < this.state.segments.length; i++) {
-            if (this.state.segments[i].take.is_export) {
-                counter += 1
-            }
-        }
     }
 
     render () {
@@ -306,7 +286,7 @@ class ChapterContainer extends Component {
                     {tempArr.map(this.createChunkList.bind(this))}
 
                     <div>
-                        {this.buildListener()}
+                        {this.buildTempListener()}
                     </div>
 
                 </LoadingDisplay>
