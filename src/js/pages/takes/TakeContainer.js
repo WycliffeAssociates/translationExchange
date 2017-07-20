@@ -69,8 +69,11 @@ class TakeContainer extends Component {
                   onRatingSet={this.onRatingSet.bind(this)}
                   onMarkedForExportToggled={this.onMarkedForExportToggled.bind(this)}
                   source={this.props.source}
+                  comments={this.props.take.comments}
+
                   addToListenList={this.props.addToListenList}
                   onDeleteTake={this.onDeleteTake.bind(this)}
+
             />
                 //other events that require requesting the server would go here
         );

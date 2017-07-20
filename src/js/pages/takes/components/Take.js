@@ -5,6 +5,7 @@ import AudioComponent from './AudioComponent';
 import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 import TakeExportButton from './SelectTake'
+import CommentsButton from "./CommentsButton";
 import TakeListenButton from './AddTake'
 import DeleteTake from './DeleteTake'
 import LoadingGif from 'images/loading-tiny.gif'
@@ -45,13 +46,10 @@ class Take extends Component {
 
 
     render () {
-
-
         var file = [];
         file[0] = {
             "src": config.streamingUrl + this.props.take.location
-        }
-
+        };
         return (
             <div>
         <Grid columns={4} relaxedclassName="take">
@@ -68,10 +66,11 @@ class Take extends Component {
 
             </Grid.Column>
 
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
                 <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
                 <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
                 <DeleteTake onDeleteTake={this.props.onDeleteTake}/>
+                <CommentsButton comments = {this.props.comments}/>
             </Grid.Column>
 
             {this.props.source
@@ -94,6 +93,7 @@ class Take extends Component {
                         playlist={file}
                         width="700"
                         mic={true}
+                        take={this.props.take}
                     />
                 </Grid.Column >
 
@@ -106,6 +106,7 @@ class Take extends Component {
                                 width="200"
                                 name="Source Audio"
                                 mic={false}
+                                take={this.props.take}
                             />
                     </Grid.Column>}
 
