@@ -6,11 +6,15 @@ import {Button, Modal} from "semantic-ui-react";
 import { Icon } from 'semantic-ui-react'
 import Audio from 'translation-audio-player'
 import playlist from './songs/playlist.json'
+
+var iterator;
 class CommentsButton extends React.Component {
     state = {open: false};
+    //get the comments for a take
 
+    //make a playlist of song objects here of comments for that take
 
-    //make a playlist here of comments for that take
+    //map song objects to Audio components, and display those song objects
     createPlaylist() {
         var playlist = [];
         for (let i=0; i<this.props.comments.length; i++){
@@ -42,18 +46,38 @@ class CommentsButton extends React.Component {
    //      return file
    //  }
 
+    createListItem (take) {
+        iterator += 1;
+
+        return (
+            <div>
+                <Audio
+                    width={600}
+                    height={300}
+                    playlist={take}
+
+                    // store a reference of the audio component
+                    ref={audioComponent => { this.audioComponent = audioComponent; }}
+                />
+            </div>
+        );
+    }
+
 
     show = (size) => () => this.setState({ size, open: true });
     close = () => this.setState({ open: false });
 
     render() {
-        //console.log(this.props.comments[0].comment.location);
-        console.log('playlist', this.createPlaylist());
-
         const { open, size } = this.state;
-
+        iterator = 0;
         return (
             <div>
+
+                {/*<div>*/}
+                    {/*{listOfComments.map(this.createListItem.bind(this))}*/}
+                {/*</div>*/}
+
+
                 <Button icon color="blue" onClick={this.show('mini')}>
                     <Icon name='announcement' size="large"/>
                 </Button>
@@ -64,7 +88,7 @@ class CommentsButton extends React.Component {
                         Comments
                     </Modal.Header>
                     <Modal.Content>
-
+                        {/*this should be replaced with listOfComments, a list of Audio components*/}
                         <Audio
                             width={600}
                             height={300}
@@ -73,6 +97,7 @@ class CommentsButton extends React.Component {
                             // store a reference of the audio component
                             ref={audioComponent => { this.audioComponent = audioComponent; }}
                         />
+
 
                     </Modal.Content>
 
