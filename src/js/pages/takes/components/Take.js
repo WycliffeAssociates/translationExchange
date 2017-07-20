@@ -5,7 +5,7 @@ import AudioComponent from './AudioComponent';
 import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 import TakeExportButton from './SelectTake'
-import CommentsButton from "./ListentoCommentsButton";
+import CommentsButton from "./CommentsButton";
 import TakeListenButton from './AddTake'
 import DeleteTake from './DeleteTake'
 import LoadingGif from 'images/loading-tiny.gif'

@@ -5,12 +5,12 @@ import React from 'react';
 import {Button, Modal} from "semantic-ui-react";
 import { Icon } from 'semantic-ui-react'
 import Audio from 'translation-audio-player'
-import config from "../../../../config/config";
-import axios from 'axios';
-
+import playlist from './songs/playlist.json'
 class CommentsButton extends React.Component {
     state = {open: false};
 
+
+    //make a playlist here of comments for that take
     createPlaylist() {
         var playlist = [];
         for (let i=0; i<this.props.comments.length; i++){
@@ -68,7 +68,7 @@ class CommentsButton extends React.Component {
                         <Audio
                             width={600}
                             height={300}
-                            playlist={this.createPlaylist()}
+                            playlist={playlist.playlist}
 
                             // store a reference of the audio component
                             ref={audioComponent => { this.audioComponent = audioComponent; }}
