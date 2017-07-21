@@ -1,6 +1,7 @@
 /**
  * Created by ericazhong on 7/18/17.
  */
+/* global state show */
 import React from 'react';
 import {Button, Modal} from "semantic-ui-react";
 import { Icon } from 'semantic-ui-react'
@@ -11,6 +12,7 @@ let state;
 let show;
 let close;
 var iterator;
+let close;
 
 class CommentsButton extends React.Component {
     state = {open: false};
@@ -71,7 +73,8 @@ class CommentsButton extends React.Component {
     show = (size) => () => this.setState({ size, open: true });
     close = () => this.setState({ open: false });
 
-    render() {
+    render()
+    {
         const { open, size } = this.state;
         iterator = 0;
         return (

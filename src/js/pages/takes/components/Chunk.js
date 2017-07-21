@@ -8,6 +8,8 @@ import _ from 'lodash';
 import CommentContainer from "./comments/CommentContainer";
 let onClick;
 
+let onClick;
+
 class Chunk extends Component {
     constructor (props) {
         super(props);
