@@ -124,7 +124,7 @@ export class RecordComment extends Component {
                     record={this.state.record}
                     className="sound-wave"
                     onStop={this.onStop}
-                    strokeColor="#42adf4"
+                    strokeColor="#039BE5"
                     backgroundColor="#000000"
 
 
