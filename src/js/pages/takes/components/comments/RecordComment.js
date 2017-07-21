@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import { ReactMic } from 'react-mic';
 import './RecordComment.css';
-import mic from './Group.png';
-import stop from './stopButton.png';
+import {Icon} from "semantic-ui-react";
 
 let startRecording;
 let stopRecording;
@@ -99,8 +98,6 @@ export class RecordComment extends Component {
 
         let button = <StopButton  onClick={this.stopRecording} />;
 
-        let startButton=  <button className="start" onClick={this.startRecording} type="button"> <img className="mic" src={mic}/> </button>;
-
         let AudioPlayer = null;
 
         let MainButton = null;
@@ -114,7 +111,12 @@ export class RecordComment extends Component {
             MainButton = <StopButton  onClick={this.stopRecording} />;
         }else{
 
-            MainButton= <button className="start" onClick={this.startRecording} type="button"> <img className="mic" src={mic} /> </button>;
+            MainButton= <button
+                className="start"
+                onClick={this.startRecording}
+                type="button">
+                <Icon size='small' name='microphone' inverted />
+            </button>;
         }
 
         return (
@@ -150,7 +152,7 @@ export class RecordComment extends Component {
 function StopButton(props) {
     return (
         <button className="stop" onClick={props.onClick}>
-            <img className="mic" src={stop}/>
+            <Icon name="stop" size='small' inverted/>
         </button>
     );
 }

@@ -3,25 +3,21 @@
 
 .sound-wave{
 
-    height: 30px;
-    width: 715px;
+    height: 100px;
+    width: 100%;
     border-radius: 5px;
-    margin-top: 30px;
-
-
-
 
 }
 
 
 .start{
 
-    height: 110px;
-    width: 110px;
+    height: 50px;
+    width: 50px;
     border-radius: 60px;
-    background-color: #21BA45;
-    border: none;
-    margin-bottom: 20px;
+    background-color: black;
+    border: none #3e98c7;
+    margin-bottom: 10px;
     margin-top: 10px;
 
 
@@ -32,7 +28,7 @@
 
 .start:hover {
     cursor: pointer;
-    background-color: #3ADF51;
+    background-color: #222222;
 }
 
 .start:focus{
@@ -40,20 +36,15 @@
 
 }
 
-
-
 .stop{
 
-    height: 110px;
-    width: 110px;
+    height: 50px;
+    width: 50px;
     border-radius: 60px;
-    background-color: #FF4B00;
-    border: none;
-    margin-bottom: 20px;
+    background-color: black;
+    border: none #3e98c7;
+    margin-bottom: 10px;
     margin-top: 10px;
-
-
-
 
 }
 
@@ -61,6 +52,7 @@
 
 .stop:hover {
     cursor: pointer;
+    background-color: #222222;
     /*background-color: #F69C76;*/
 
 }
@@ -72,12 +64,8 @@
 
 .mic{
     margin-left: 10px;
-
-
-
+    color: white;
 }
-
-
 
 
 .audioPlayer{
@@ -85,10 +73,6 @@
     -webkit-box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.54);
     -moz-box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.54);
     box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.54);
-
-
-
-
 }
 
 
