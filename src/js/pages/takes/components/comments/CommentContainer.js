@@ -18,8 +18,6 @@ class CommentContainer extends Component {
     constructor(props){
         super(props);
 
-
-
         this.state = {title : 'Record Comment',
 
             show: this.props.open,
@@ -29,7 +27,6 @@ class CommentContainer extends Component {
 
 
         };
-
 
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
@@ -67,30 +64,28 @@ class CommentContainer extends Component {
         this.hideModal();
         var reader  = new FileReader();
 
-        reader.addEventListener("load", () => {
-            console.log('reader', reader);
-            console.log('y', reader.result);
-
-            axios.post(config.apiUrl + 'comments/', {
-                "location": reader.result,
-                "user": 3,
-                "file": this.props.take.id,
-
-            }).then((results) => {
-                //console.log(JSON.stringify(this.state.blob));
-                //update this take in state using the update method in ChapterContainer
-                console.log('uploaded successfully')
-            });
-
-
-        }, false);
-
-        if (this.state.blob) {
-            reader.readAsDataURL(this.state.blob);
-
-
-
-        }
+        // reader.addEventListener("load", () => {
+        //     console.log('reader', reader);
+        //     console.log('y', reader.result);
+        //
+        //     axios.post(config.apiUrl + 'comments/', {
+        //         "location": reader.result,
+        //         "user": 3,
+        //         "file": this.props.take.id,
+        //
+        //     }).then((results) => {
+        //         //console.log(JSON.stringify(this.state.blob));
+        //         //update this take in state using the update method in ChapterContainer
+        //         console.log('uploaded successfully')
+        //     });
+        //
+        //
+        // }, false);
+        //
+        // if (this.state.blob) {
+        //     reader.readAsDataURL(this.state.blob);
+        //
+        // }
        // reader.readAsDataURL(this.state.blob);
         // this.state.wholeblob.blob = reader.result;
         // axios.post(config.apiUrl + 'comments/', {
@@ -135,7 +130,7 @@ class CommentContainer extends Component {
 };
 
     render(){
-
+        // console.log('fml', this.state.show);
         return(
 
                 <Modal
@@ -143,6 +138,13 @@ class CommentContainer extends Component {
                        size='small'
                        style= {this.Style}
                        dimmer= "inverted"
+
+                       trigger = {<Button
+                           color="pink"
+                           floated='right'
+                           ref={audioComponent => { this.audioComponent = audioComponent; }}
+                           icon="microphone"
+                       onClick={this.showModal}/>}
                 >
                     <Modal.Header style = {this.Style}>Record Audio Comment</Modal.Header>
                     <div>
@@ -152,6 +154,8 @@ class CommentContainer extends Component {
                                        sendComment={this.getComment}
 
                         />
+
+
                     </div>
 
                     <Modal.Actions style = {this.Style}>
@@ -167,12 +171,11 @@ class CommentContainer extends Component {
                                      negative icon='remove'
                                      labelPosition='right'
                                      content="Cancel"
-                                     onClick={this.onClickCancel}/>
+                                     onClick={this.hideModal}/>
                         </div>
 
                     </Modal.Actions>
                 </Modal>
-
         );
     }
 }
