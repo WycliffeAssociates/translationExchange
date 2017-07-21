@@ -5,6 +5,7 @@ import axios from 'axios';
 import config from 'config/config'
 import QueryString from 'query-string';
 import LoadingDisplay from "js/components/LoadingDisplay";
+import CheckingLevel from './components/CheckingLevel'
 import LoadingGif from 'images/loading-tiny.gif'
 
 class ProjectContainer extends Component {
@@ -19,7 +20,9 @@ class ProjectContainer extends Component {
             error: "",
             uploadSourceLoading: false,
             uploadSourceError: "",
-            uploadSourceSuccess: ""
+            uploadSourceSuccess: "",
+            anthology: {},
+            version: {}
         };
         this.uploadSourceFile = this.uploadSourceFile.bind(this);
         this.handleFileChange = this.handleFileChange.bind(this);
@@ -60,15 +63,33 @@ class ProjectContainer extends Component {
 
     }
 
+    setCheckingLevel(level){
+
+        let params = {
+            filter: {
+                language: this.state.language.slug,
+                book: this.state.book.slug,
+                chapter: this.state.chapters.name,
+                anthology: this.state.anthology.name,
+                version: this.state.version.name
+            },
+            fields: {
+                checked_level: level
+            }
+        };
+
+        axios.post("http://172.19.145.91:8000/api/update_project/", params);
+    }
+
     getChapterData() {
         var query = QueryString.parse(this.props.location.search);
 
         this.setState({error: ""});
         axios.post(config.apiUrl + 'get_chapters/', query
         ).then((results) => {
-            console.dir(results.data.slice(0, results.data.length - 2));
-            console.dir(results.data[results.data.length - 2]);
-            console.dir(results.data[results.data.length - 1]);
+            // console.dir(results.data.slice(0, results.data.length - 2));
+            // console.dir(results.data[results.data.length - 2]);
+            // console.dir(results.data[results.data.length - 1]);
             this.setState(
                 {
                     chapters: results.data.slice(0, results.data.length - 2),
@@ -127,6 +148,7 @@ class ProjectContainer extends Component {
                                 chapters={this.state.chapters}
                                 version={QueryString.parse(this.props.location.search).version}
                                 navigateToChapter={this.navigateToChapter.bind(this)}
+                                setCheckingLevel={this.setCheckingLevel.bind(this)}
                             />
                         </Table>
                     </LoadingDisplay>

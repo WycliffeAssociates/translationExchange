@@ -16,8 +16,6 @@ export class DeleteTake extends Component{
                 <Button icon color="red" onClick={this.props.onDeleteTake}>
                     <Icon name='trash' size="large"/>
                 </Button>
-
-
             );
         }
 }
