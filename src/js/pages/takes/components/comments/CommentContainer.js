@@ -154,6 +154,8 @@ class CommentContainer extends Component {
                                        sendComment={this.getComment}
 
                         />
+
+
                     </div>
 
                     <Modal.Actions style = {this.Style}>
