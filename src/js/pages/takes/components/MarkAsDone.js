@@ -82,6 +82,7 @@ class MarkAsDone extends Component {
 
                 </Modal.Content>
                 <Modal.Actions>
+                    {/*this button will do a call to database to change chapter.exportready to true */}
                     <Button content="Finish" onClick={this.changeColor.bind(this)}/>
 
                 </Modal.Actions>

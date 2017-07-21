@@ -10,9 +10,8 @@ import playlist from './songs/playlist.json'
 
 let state;
 let show;
-let close;
 var iterator;
-let close;
+
 
 class CommentsButton extends React.Component {
     state = {open: false};
