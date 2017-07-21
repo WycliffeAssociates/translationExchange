@@ -6,6 +6,9 @@ import axios from 'axios';
 import config from "config/config";
 import _ from 'lodash';
 import CommentContainer from "./comments/CommentContainer";
+let onClick;
+
+let onClick;
 
 class Chunk extends Component {
     constructor (props) {
