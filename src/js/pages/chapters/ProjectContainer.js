@@ -8,6 +8,7 @@ import QueryString from 'query-string';
 import LoadingDisplay from "js/components/LoadingDisplay";
 import CheckingLevel from './components/CheckingLevel'
 import LoadingGif from 'images/loading-tiny.gif'
+import 'css/chapters.css'
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -115,11 +116,32 @@ class ProjectContainer extends Component {
         )
     }
 
-    onDownloadProject () {
-        console.log("downloading");
+    onDownloadProject() {
+
+        // let params = {
+        //     filter: {
+        //         language: this.state.language.slug,
+        //         book: this.state.book.slug,
+        //         chapter: this.state.chapters.name,
+        //         anthology: this.state.anthology.name,
+        //         version: this.state.version.name
+        //     }
+        // }
+
+        //Post to API with correct params
+        // {
+        //         "language": "en-x-demo2",
+        //         "version": "ulb",
+        //         "book": "mrk"
+        // }
+
+        alert("Contacting API...");
+        //let downladEndpoint = "http://172.19.145.91:8000/api/zipFiles/"
+        // console.log("downloading");
+        //axios.post(downladEndpoint, params);
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.getChapterData()
 
     }
@@ -160,29 +182,31 @@ class ProjectContainer extends Component {
 
                     <br></br>
 
-                    {!this.state.uploadSourceLoading && this.state.uploadSourceSuccess
-                        ? <div>Successfully uploaded {this.state.uploadSourceSuccess} and set it as source audio</div>
-                        : <form onSubmit={this.uploadSourceFile} method="post" encType="multipart/form-data">
-                            <h4>Upload source audio</h4>
-                            <Input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
-                            {this.state.uploadSourceLoading
-                                ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
-                                : <Button type="submit">Submit</Button>
-                            }
-                            {this.state.uploadSourceError
-                                ? "There was an error uploading the file: " + this.state.uploadSourceError
-                                : ""
-                            }
-                        </form>
-                    }
 
-                    <DownloadProjects
-                        onDownloadProject={this.onDownloadProject.bind(this)}
-                    />
+                            <DownloadProjects
+                                onDownloadProject={this.onDownloadProject.bind(this)}
+                            />
+
+                            {!this.state.uploadSourceLoading && this.state.uploadSourceSuccess
+                                ? <div>Successfully uploaded {this.state.uploadSourceSuccess} and set it as source audio</div>
+                                : <form  onSubmit={this.uploadSourceFile} method="post" encType="multipart/form-data">
+                                    <h4>Upload source audio</h4>
+                                    <Input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
+                                    {this.state.uploadSourceLoading
+                                        ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                                        : <Button type="submit">Submit</Button>
+                                    }
+                                    {this.state.uploadSourceError
+                                        ? "There was an error uploading the file: " + this.state.uploadSourceError
+                                        : ""
+                                    }
+                                </form>
+                            }
 
                 </Container>
 
             </div>
+
         );
     }
 }
