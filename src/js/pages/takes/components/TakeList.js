@@ -24,12 +24,10 @@ class TakeList extends Component {
                 <TakeContainer
                     take={take} // one take
                     count={iterator}
-                    updateTakeToExport={this.props.updateTakeToExport}
-                    updateTakeInState={this.props.updateTakeInState}
                     source={take.source}
                     addToListenList={this.props.addToListenList}
-                    deleteTakeFromState={this.props.deleteTakeFromState}
                     patchTake={this.props.patchTake}
+                    deleteTake={this.props.deleteTake}
                     updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                 />
             </div>

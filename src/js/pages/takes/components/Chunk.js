@@ -50,10 +50,9 @@ class Chunk extends Component {
 
                     <TakeList
                         takes={this.props.segments}
-                        deleteTakeFromState={this.props.deleteTakeFromState}
-                        updateTakeInState={this.props.updateTakeInState}
                         addToListenList={this.props.addToListenList}
                         patchTake={this.props.patchTake}
+                        deleteTake={this.props.deleteTake}
                         updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                     />
                 </Accordion.Content>

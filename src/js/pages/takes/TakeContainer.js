@@ -29,26 +29,15 @@ class TakeContainer extends Component {
 
     onRatingSet (newRating) {
         this.setState({ratingLoading: true});
-        axios.patch(config.apiUrl + 'takes/' + this.props.take.take.id + '/',
-            {"rating": newRating}
-        ).then((results) => {
-            //update this take in state using the update method in ChapterContainer
-            var updatedTake = _.cloneDeep(this.props.take);
-            updatedTake.take = results.data;
-            this.props.updateTakeInState(updatedTake);
-            this.setState({ratingLoading: false});
+        this.props.patchTake(this.props.take.take.id,
+            {rating: newRating},
+            () => {
+                this.setState({ratingLoading: false});
         });
     }
 
     onDeleteTake () {
-        console.log("onDeleteTake");
-        axios.delete(config.apiUrl + 'takes/' + this.props.take.take.id + '/')
-            .then((result) => {
-                this.props.deleteTakeFromState(this.props.take.take.id);
-            }).catch((exception) => {
-                console.log(exception);
-        });
-
+        this.props.deleteTake(this.props.take.take.id);
     }
 
     render () {

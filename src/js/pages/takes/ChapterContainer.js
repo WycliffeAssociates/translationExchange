@@ -4,8 +4,6 @@ import axios from 'axios';
 import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
-import { Button } from 'semantic-ui-react';
-import CommentContainer from "./components/comments/CommentContainer";
 import {Audio, RecordBtn} from "translation-audio-player";
 import ChapterHeader from "./components/ChapterHeader.js";
 import StitchTakes from "./components/StitchTakes";
@@ -69,6 +67,18 @@ class ChapterContainer extends Component {
         });
     }
 
+    deleteTake(takeId, success) {
+        axios.delete(config.apiUrl + 'takes/' + takeId + '/'
+        ).then((results) => {
+            //make a new array of all the takes except the deleted one
+            let updatedTakes = this.state.takes.filter(
+                take => take.take.id !== takeId
+            );
+            this.setState({takes: updatedTakes});
+            if (success) { success(); }
+        });
+    }
+
     updateChosenTakeForChunk(takeId) {
         let chosenTake = this.state.takes.find(take => take.take.id === takeId);
         //look through all the takes in this chapter...
@@ -83,28 +93,6 @@ class ChapterContainer extends Component {
                 this.patchTake(take.take.id, {is_export: false});
             }
         }
-    }
-
-    //if a child component does requests to change a take in the database, they have to
-    //call this function to update the take in state.
-    updateTakeInState (updatedTake) {
-        var updatedSegments = this.state.takes.slice();
-        var takeToUpdate = updatedSegments.findIndex(take => take.take.id === updatedTake.id);
-        updatedSegments[takeToUpdate].take = updatedTake;
-        this.setState({
-            takes: updatedSegments
-        });
-        console.log("SET STATE");
-        console.dir(updatedSegments);
-    }
-
-    //if a child component deletes a take, they have to call this function to update our representation
-    //of all the takes in state
-    deleteTakeFromState(takeIdToDelete){
-        var updatedSegments = this.state.takes.slice();
-        var deleteIndex = updatedSegments.findIndex(take => take.take.id === takeIdToDelete);
-        updatedSegments.splice(deleteIndex, 1);
-        this.setState({takes: updatedSegments});
     }
 
     addToListenList(props) {
@@ -136,12 +124,6 @@ class ChapterContainer extends Component {
             }
         )
 
-    }
-
-    onClick = () => {// used when you click the microphone button in the player
-        this.setState({
-            open: true
-        });
     }
 
     /*
@@ -223,14 +205,12 @@ class ChapterContainer extends Component {
         return(
             <div>
                 <ChunkList
-
                     segments={takes} // array of takes
                     mode={takes[0].take.mode}
                     number={takes[0].take.startv}
-                    updateTakeInState={this.updateTakeInState.bind(this)}
                     addToListenList={this.addToListenList.bind(this)}
-                    deleteTakeFromState={this.deleteTakeFromState.bind(this)}
                     patchTake={this.patchTake.bind(this)}
+                    deleteTake={this.deleteTake.bind(this)}
                     updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
                 />
             </div>
