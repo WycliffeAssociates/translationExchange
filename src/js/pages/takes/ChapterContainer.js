@@ -148,7 +148,34 @@ class ChapterContainer extends Component {
                         Listen to Selected
                     </Accordion.Title>
                     <Accordion.Content>
-                        <AudioComponent playlist={this.createListenPlaylist()} />
+                        <Grid relaxedclassName="take" columns={2} >
+
+                            <Grid.Column width={6}>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Button content='Source Audio' onClick={(e) => this.handleClick()} icon='right arrow' labelPosition='right'/>
+                                Language {this.state.listenList[0].props.source.language.name}
+                            </Grid.Column>
+
+                        </Grid>
+
+                        <Grid relaxedclassName="take" columns={2}>
+
+                            <Grid.Column width={9}>
+                            <AudioComponent playlist={this.createListenPlaylist()} width={700}/>
+                            </Grid.Column>
+
+                            {this.state.isToggleOn
+                                ?
+                                <Grid.Column width={4}>
+                                    <AudioComponent playlist={this.createSourcePlaylist()} width={200}/>
+                                </Grid.Column>
+                                : ""
+                            }
+
+                        </Grid>
+
+
                     </Accordion.Content>
                 </Accordion>
             );
@@ -165,7 +192,20 @@ class ChapterContainer extends Component {
             }
         })
         return playlist
+    }
 
+    createSourcePlaylist() { // works
+        let sourcePlaylist = []
+        this.state.listenList.map((i) => {
+            if(i.props.take.source_language_id !== null) {
+                sourcePlaylist[sourcePlaylist.length] = {
+                    "src": config.streamingUrl + i.props.source.take[0].location,
+                    "name": i.props.take.mode + ' ' + i.props.take.startv + ' (' + (sourcePlaylist.length+1) + '/' + this.state.listenList.length + ')'
+                }
+            }
+        })
+
+        return sourcePlaylist
     }
 
     //if a child component deletes a take, they have to call this function to update our representation of all the takes in state
@@ -179,6 +219,8 @@ class ChapterContainer extends Component {
     handleClick() {
         this.setState({isToggleOn: !this.state.isToggleOn});
     }
+
+
 
     render () {
 
