@@ -53,11 +53,11 @@ class Header extends Component {
         return (
             <Menu inverted size='large'>
                 <Link to="/">
-                <Menu.Item name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
+                    <Menu.Item name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
                 </Link>
 
                 <Link to="/about">
-                <Menu.Item  name='About' active={activeItem === 'About'} onClick={this.handleItemClick} />
+                    <Menu.Item  name='About' active={activeItem === 'About'} onClick={this.handleItemClick} />
                 </Link>
 
                 <Link to="/projects">

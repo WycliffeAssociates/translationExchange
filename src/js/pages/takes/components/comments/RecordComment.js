@@ -15,16 +15,14 @@ export class RecordComment extends Component {
             record: false,
             displayPlayer: false,
             AudioURL: "",
-            DisableSaveButton: true
+            DisableSaveButton: true,
+            blob: ''
         }
 
 
 
         this.onStop = this.onStop.bind(this);
         this.deleteBlob = this.deleteBlob.bind(this);
-        this.sendFile = this.sendFile.bind(this);
-
-
 
     }
 
@@ -55,26 +53,33 @@ export class RecordComment extends Component {
 
     onStop(recordedBlob) {
 
-        this.setState({displayPlayer: true})
+        this.setState({displayPlayer: true});
+        //change this to the real url so that it can playback
+        this.setState({
+            AudioURL: recordedBlob.blobURL,
+            blob: recordedBlob,
+            displayPlayer: true
+        });
 
-        this.setState({AudioURL: recordedBlob.blobURL });
 
-
+        if (this.state.AudioURL !== ''){
+            {this.props.sendComment(this.state.blob)}
+        }
 
     }
+
+    // componentDidUpdate() {
+    //     {this.props.sendComment(this.state.AudioURL)}
+    // }
 
     deleteBlob(){
 
         window.URL.revokeObjectURL(this.state.AudioURL);   // deletes an audio object
 
 
-
     }
 
     sendFile(){
-
-
-
     }
 
 
@@ -83,17 +88,13 @@ export class RecordComment extends Component {
 
     }
 
-
-
-
-
     render() {
-
 
         const displayPlayer = this.state.displayPlayer;
         const displayButton = this.state.record;
 
         const AudioURL = this.state.AudioURL;
+
 
 
         let button = <StopButton  onClick={this.stopRecording} />;
@@ -103,7 +104,6 @@ export class RecordComment extends Component {
         let AudioPlayer = null;
 
         let MainButton = null;
-
 
         if (displayPlayer) {
             AudioPlayer =  <DisplayAudioPlayer displayPlayer={displayPlayer} AudioURL = {AudioURL} />;
@@ -116,8 +116,6 @@ export class RecordComment extends Component {
 
             MainButton= <button className="start" onClick={this.startRecording} type="button"> <img className="mic" src={mic} /> </button>;
         }
-
-
 
         return (
 

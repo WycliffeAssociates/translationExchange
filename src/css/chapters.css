@@ -30,3 +30,7 @@
     dominant-baseline: central;
     text-anchor: middle;
 }
+
+.ui.fixed.table td.dont-hide-overflow {
+    overflow: visible;
+}

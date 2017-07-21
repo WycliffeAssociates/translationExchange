@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AudioComponent from '../takes/components/AudioComponent';
 import { Button, Header, Image, Modal } from 'semantic-ui-react'
 
 
