@@ -14,7 +14,7 @@ let onClickCancel;
 let onClickSave;
 let Style;
 
-class CommentContainer extends Component {
+class MicButton extends Component {
 
     constructor(props){
         super(props);
@@ -179,4 +179,4 @@ class CommentContainer extends Component {
 }
 
 
-export default CommentContainer;
+export default MicButton;

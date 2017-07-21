@@ -9,6 +9,7 @@ import LoadingDisplay from "js/components/LoadingDisplay";
 import CheckingLevel from './components/CheckingLevel'
 import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
+import ExportButton from "../takes/components/ExportButton";
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -156,7 +157,7 @@ class ProjectContainer extends Component {
                                     error={this.state.error}
                                     retry={this.getChapterData.bind(this)}>
                         <Header as='h1'>{this.state.book.name} ({this.state.language.name})
-
+                <ExportButton chapters={this.state.chapters}/>
                         </Header>
 
                         <Table selectable fixed color="blue">
@@ -165,6 +166,7 @@ class ProjectContainer extends Component {
                                     <Table.HeaderCell>Chapter</Table.HeaderCell>
                                     <Table.HeaderCell>Percent Complete</Table.HeaderCell>
                                     <Table.HeaderCell>Checking Level</Table.HeaderCell>
+                                    <Table.HeaderCell>Ready to Export</Table.HeaderCell>
                                     <Table.HeaderCell>Contributors</Table.HeaderCell>
                                     <Table.HeaderCell>Translation Type</Table.HeaderCell>
                                     <Table.HeaderCell>Date Modified</Table.HeaderCell>
