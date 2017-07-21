@@ -40,24 +40,24 @@ class MarkAsDone extends Component {
 
     render () {
         let readyForExport = this.checkReadyForExport();
-
-        return (
-            <Modal trigger={<Button disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>} closeIcon="close">
-                <Modal.Header>Review and Finish</Modal.Header>
+        var ExportButton = <Button disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
+        return(
+            <Modal trigger={ExportButton} closeIcon="close">
+                <Modal.Header>You are ready to mark Chapter {this.props.chapter} as finished!</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
-                        <p>You are ready to mark Chapter {this.props.chapter} of {this.props.book} as finished!</p>
-                        <p>Here is a preview of the takes you have selected to export. This may take a few minutes to load</p>
-                        <p>To mark as done, click on 'Finish'</p>
-
+                        <p>Here is a preview of the takes you have selected to export. This may take a few seconds to
+                            load.</p>
+                        <p>To mark as done, click on 'Finish'.</p>
                         <AudioComponent
-                            playlist={this.createExportPlaylist()}
+                            width={850} playlist={this.createExportPlaylist()}
                         />
                     </Modal.Description>
 
                 </Modal.Content>
                 <Modal.Actions>
                     <Button content="Finish" onClick={() => alert('insert function to export here')}/>
+
                 </Modal.Actions>
             </Modal>
         );
