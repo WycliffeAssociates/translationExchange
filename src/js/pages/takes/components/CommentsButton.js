@@ -7,7 +7,11 @@ import { Icon } from 'semantic-ui-react'
 import Audio from 'translation-audio-player'
 import playlist from './songs/playlist.json'
 
+let state;
+let show;
+let close;
 var iterator;
+
 class CommentsButton extends React.Component {
     state = {open: false};
     //get the comments for a take
