@@ -152,10 +152,14 @@ class ChapterContainer extends Component {
 
                             <Grid.Column width={6}>
                             </Grid.Column>
-                            <Grid.Column>
-                                <Button content='Source Audio' onClick={(e) => this.handleClick()} icon='right arrow' labelPosition='right'/>
-                                Language {this.state.listenList[0].props.source.language.name}
-                            </Grid.Column>
+                            {this.state.listenList[0].props.source
+                                ?
+                                <Grid.Column>
+                                    <Button content='Source Audio' onClick={(e) => this.handleClick()}
+                                            icon='right arrow' labelPosition='right'/>
+                                </Grid.Column>
+                                : ""
+                            }
 
                         </Grid>
 
@@ -262,7 +266,6 @@ class ChapterContainer extends Component {
         return(
             <div>
                 <ChunkList
-
                     segments={arr} // array of takes
                     mode={arr[0].take.mode}
                     number={arr[0].take.startv}
