@@ -7,6 +7,7 @@ import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
+import 'css/takes.css'
 
 import ChapterHeader from "./components/ChapterHeader.js";
 import StitchTakes from "./components/StitchTakes"
