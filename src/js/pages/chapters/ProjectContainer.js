@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Button, Container, Header, Table, Input, TextArea } from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
+import DownloadProjects from "./components/DownloadProjects";
 import axios from 'axios';
 import config from 'config/config'
 import QueryString from 'query-string';
@@ -114,6 +115,10 @@ class ProjectContainer extends Component {
         )
     }
 
+    onDownloadProject () {
+        console.log("downloading");
+    }
+
     componentDidMount () {
         this.getChapterData()
 
@@ -170,6 +175,10 @@ class ProjectContainer extends Component {
                             }
                         </form>
                     }
+
+                    <DownloadProjects
+                        onDownloadProject={this.onDownloadProject.bind(this)}
+                    />
 
                 </Container>
 
