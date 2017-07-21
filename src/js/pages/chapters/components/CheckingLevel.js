@@ -6,8 +6,12 @@
 import { Icon } from 'semantic-ui-react'
 import React, { Component } from 'react';
 import { Dropdown, Menu } from 'semantic-ui-react'
+import axios from 'axios';
+import config from "../../../../config/config";
+import ProjectContainer from "../ProjectContainer"
 
 
+var checkNum;
 export class CheckingLevel extends React.Component {
 
     options = [
@@ -17,17 +21,38 @@ export class CheckingLevel extends React.Component {
         {key: 3, text: '3', value: 3},
     ];
 
-    render(){
-        return(
+    setValue(event, data){
+        console.log(data.value)
+        this.props.setCheckingLevel(data.value);
+    }
+
+    render() {
+
+
+        //console.log(this.props.num)
+
+        return (
             (
                 <Menu compact>
-                    {/*<Dropdown text={props.value} options={props.value} simple item/>*/}
-                    <Dropdown text={this.options} options={this.options} simple item/>
+                    <Dropdown options={this.options} value={this.props.num} onChange={this.setValue.bind(this)} simple item/>
                 </Menu>
             )
         );
     }
+}//you can use value too
+
+class ServerAns extends React.Component{
+    render() {
+        return (
+            <button className="square">
+                {this.props.value}
+            </button>
+        );
+    }
 }
+
+
+
 
 export default CheckingLevel
 

@@ -40,15 +40,33 @@ class ProjectContainer extends Component {
         })
     }
 
+    setCheckingLevel(level){
+
+        let params = {
+            filter: {
+                language: this.state.language.slug,
+                book: this.state.book.slug,
+                chapter: this.state.chapters.name
+                //anthology
+                //version
+            },
+            fields: {
+                checked_level: level
+            }
+        };
+
+        axios.post("http://172.19.145.91:8000/api/update_project/", params);
+    }
+
     getChapterData() {
         var query = QueryString.parse(this.props.location.search);
 
         this.setState({error: ""});
         axios.post(config.apiUrl + 'get_chapters/', query
         ).then((results) => {
-            console.dir(results.data.slice(0, results.data.length - 2));
-            console.dir(results.data[results.data.length - 2]);
-            console.dir(results.data[results.data.length - 1]);
+            // console.dir(results.data.slice(0, results.data.length - 2));
+            // console.dir(results.data[results.data.length - 2]);
+            // console.dir(results.data[results.data.length - 1]);
             this.setState(
                 {
                     chapters: results.data.slice(0, results.data.length - 2),
@@ -104,6 +122,7 @@ class ProjectContainer extends Component {
                                 chapters={this.state.chapters}
                                 version={QueryString.parse(this.props.location.search).version}
                                 navigateToChapter={this.navigateToChapter.bind(this)}
+                                setCheckingLevel={this.setCheckingLevel.bind(this)}
                             />
                         </Table>
                     </LoadingDisplay>

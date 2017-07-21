@@ -5,6 +5,9 @@ import CircularProgressbar from 'react-circular-progressbar'
 import {Table} from 'semantic-ui-react'
 import 'css/chapters.css'
 import CheckingLevel from "./CheckingLevel"
+import ProjectContainer from "../ProjectContainer";
+import axios from 'axios';
+var bookTest;
 
 class ChapterList extends Component {
 
@@ -22,11 +25,12 @@ class ChapterList extends Component {
     createListItem (chapter) {
         return (
 
-            <Table.Row onClick={() => this.props.navigateToChapter(chapter.chapter)}>
+                <Table.Row onClick={() => this.props.navigateToChapter(chapter.chapter)} >
 
             <Table.Cell>{chapter.chapter}</Table.Cell>
             <Table.Cell><CircularProgressbar strokeWidth="20" percentage={chapter.percent_complete}/></Table.Cell>
-            <Table.Cell>{chapter.checked_level}</Table.Cell>
+            <Table.Cell className="dont-hide-overflow"><CheckingLevel num={chapter.checked_level}
+                                                                      setCheckingLevel={this.props.setCheckingLevel}/></Table.Cell>
                 <Table.Cell>{chapter.contributors}</Table.Cell>
                 <Table.Cell>{this.props.version}</Table.Cell>
                 <Table.Cell>{this.parseDate(chapter.timestamp)}</Table.Cell>
@@ -34,6 +38,24 @@ class ChapterList extends Component {
 
         );
     }
+
+    // getCheckingLevel(level){
+    //     let params = {
+    //         filter: {
+    //             language: this.props.language,
+    //             book: this.props.book,
+    //             version: this.props.version,
+    //             chapter: this.props.chapters
+    //         },
+    //         fields: {
+    //             checked_level: level
+    //         }
+    //     };
+    //
+    //     axios.post("http://172.19.145.91:8000/api/update_project/", params);
+    // }
+
+
 
 //{chapter.checked_level /*this is the checking level*/}        //{chapter.checked_level}
 
@@ -86,6 +108,9 @@ class ChapterList extends Component {
 }
 
 ChapterList.propTypes = {
+    book: PropTypes.arrayOf(PropTypes.shape()),
+    language: PropTypes.arrayOf(PropTypes.shape()),
+    version: PropTypes.arrayOf(PropTypes.shape()),
     chapters: PropTypes.arrayOf(PropTypes.shape({
         number: PropTypes.number.isRequired,
         percentFinished: PropTypes.number.isRequired,
