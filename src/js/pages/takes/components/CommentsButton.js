@@ -1,6 +1,7 @@
 /**
  * Created by ericazhong on 7/18/17.
  */
+/* global state show */
 import React from 'react';
 import {Button, Modal} from "semantic-ui-react";
 import { Icon } from 'semantic-ui-react'
@@ -8,6 +9,7 @@ import Audio from 'translation-audio-player'
 import playlist from './songs/playlist.json'
 
 var iterator;
+let close;
 class CommentsButton extends React.Component {
     state = {open: false};
     //get the comments for a take
@@ -67,7 +69,8 @@ class CommentsButton extends React.Component {
     show = (size) => () => this.setState({ size, open: true });
     close = () => this.setState({ open: false });
 
-    render() {
+    render()
+    {
         const { open, size } = this.state;
         iterator = 0;
         return (
