@@ -6,8 +6,6 @@ import axios from 'axios';
 import config from "config/config";
 import _ from 'lodash';
 import CommentContainer from "./comments/CommentContainer";
-let onClick;
-
 
 class Chunk extends Component {
     constructor (props) {
@@ -15,27 +13,6 @@ class Chunk extends Component {
         this.state = {open: false};
     }
 
-    //when takeId is marked as the one to export, update all other chunks
-    //in the take so that they are NOT marked as ones to export
-    updateTakeToExport (markedTakeId) {
-        for (var i = 0; i < this.props.segments.length; i++) {
-            var take = this.props.segments[i];
-
-            //if a take is marked for export other than the just-marked one...
-            if ((take.take.is_export) && (take.take.id !== markedTakeId)) {
-                console.log("marking as not to export");
-                //send a request to update it as not marked for export
-                axios.patch(config.apiUrl + 'takes/' + take.take.id + '/', {
-                    "is_export": false
-                }).then((results) => {
-                    console.log("marked in database");
-                    var updatedTake = _.cloneDeep(take);
-                    updatedTake.take = results.data;
-                    this.props.updateTakeInState(updatedTake);
-                });
-            }
-        }
-    }
     onClick = () => {// used when you click the microphone button in the player
         this.setState({
             modalopen: true
@@ -73,10 +50,10 @@ class Chunk extends Component {
 
                     <TakeList
                         takes={this.props.segments}
-                        deleteTakeFromState={this.props.deleteTakeFromState}
-                        updateTakeToExport={this.updateTakeToExport.bind(this)}
-                        updateTakeInState={this.props.updateTakeInState}
                         addToListenList={this.props.addToListenList}
+                        patchTake={this.props.patchTake}
+                        deleteTake={this.props.deleteTake}
+                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                     />
                 </Accordion.Content>
                 </Accordion>

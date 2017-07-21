@@ -36,17 +36,4 @@ export class CheckingLevel extends React.Component {
     }
 }
 
-class ServerAns extends React.Component{
-    render() {
-        return (
-            <button className="square">
-                {this.props.value}
-            </button>
-        );
-    }
-}
-
-
-
-
 export default CheckingLevel
