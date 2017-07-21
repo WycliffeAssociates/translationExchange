@@ -5,6 +5,7 @@ import * as ReactDOM from "react-dom";
 
 
 import onClick from './comments/CommentContainer'
+import MicButton from "./comments/MicButton";
 
 
 
@@ -70,7 +71,7 @@ class AudioComponent extends Component {
                 />
 
                 {/*used ref to call a method in child class and instance*/}
-                <CommentContainer
+                <MicButton
                     updateTakeInState={this.props.updateTakeInState}
                     ref={instance => (this.commentContainer = instance)}
                     take={this.props.take}
