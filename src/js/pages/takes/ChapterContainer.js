@@ -11,7 +11,7 @@ import {Audio, RecordBtn} from "translation-audio-player";
 import ChapterHeader from "./components/ChapterHeader.js";
 import StitchTakes from "./components/StitchTakes"
 
-// this is the page for one chapter
+let onClick;
 
 class ChapterContainer extends Component {
 
