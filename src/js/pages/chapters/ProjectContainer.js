@@ -20,7 +20,9 @@ class ProjectContainer extends Component {
             error: "",
             uploadSourceLoading: false,
             uploadSourceError: "",
-            uploadSourceSuccess: ""
+            uploadSourceSuccess: "",
+            anthology: {},
+            version: {}
         };
         this.uploadSourceFile = this.uploadSourceFile.bind(this);
         this.handleFileChange = this.handleFileChange.bind(this);
@@ -67,9 +69,9 @@ class ProjectContainer extends Component {
             filter: {
                 language: this.state.language.slug,
                 book: this.state.book.slug,
-                chapter: this.state.chapters.name
-                //anthology
-                //version
+                chapter: this.state.chapters.name,
+                anthology: this.state.anthology.name,
+                version: this.state.version.name
             },
             fields: {
                 checked_level: level

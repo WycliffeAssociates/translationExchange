@@ -26,19 +26,15 @@ export class CheckingLevel extends React.Component {
     }
 
     render() {
-
-
-        //console.log(this.props.num)
-
         return (
             (
                 <Menu compact>
-                    <Dropdown options={this.options} value={this.props.num} onChange={this.setValue.bind(this)} simple item/>
+                    <Dropdown options={this.options} defaultValue={this.props.num} onChange={this.setValue.bind(this)} simple item/>
                 </Menu>
             )
         );
     }
-}//you can use value too
+}
 
 class ServerAns extends React.Component{
     render() {
@@ -54,5 +50,3 @@ class ServerAns extends React.Component{
 
 
 export default CheckingLevel
-
-// <Dropdown text={this.options} options={this.options} simple item/>
