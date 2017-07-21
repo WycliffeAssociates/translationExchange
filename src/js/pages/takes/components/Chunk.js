@@ -6,7 +6,6 @@ import axios from 'axios';
 import config from "config/config";
 import _ from 'lodash';
 import CommentContainer from "./comments/CommentContainer";
-let onClick;
 
 class Chunk extends Component {
     constructor (props) {
@@ -46,8 +45,7 @@ class Chunk extends Component {
 
                 <Accordion.Content>
 
-                    <CommentContainer
-                        ref={instance => (this.commentContainer = instance)}/>
+
 
                     <TakeList
                         takes={this.props.segments}

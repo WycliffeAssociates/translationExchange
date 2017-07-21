@@ -7,6 +7,15 @@ import config from "config/config";
 // this is the page for one chapter
 
 class MarkAsDone extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            color: null,
+            modalOpen: false,
+        }
+
+    }
     checkReadyForExport() {
         var counter = 0;
         this.props.takes.map((i) => {
@@ -34,15 +43,32 @@ class MarkAsDone extends Component {
                     "name": i.take.mode + ' ' + i.take.startv + ' (' + (playlist.length+1) + '/' + length + ')'
                 }
             }
-        })
+        });
         return playlist
     }
+    changeColor(){
+        this.setState({
+            color: 'green'
+        });
+        this.handleClose();
+    }
+    handleOpen = (e) => this.setState({
+        modalOpen: true,
+    });
+
+    handleClose = (e) => this.setState({
+        modalOpen: false,
+    })
 
     render () {
         let readyForExport = this.checkReadyForExport();
-        var ExportButton = <Button disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
+        var ExportButton = <Button onClick={this.handleOpen} color={this.state.color} disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
+
         return(
-            <Modal trigger={ExportButton} closeIcon="close">
+            <Modal trigger={ExportButton}
+                   open={this.state.modalOpen}
+                   onClose={this.handleClose}
+                   closeIcon="close">
                 <Modal.Header>You are ready to mark Chapter {this.props.chapter} as finished!</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
@@ -56,7 +82,8 @@ class MarkAsDone extends Component {
 
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button content="Finish" onClick={() => alert('insert function to export here')}/>
+                    {/*this button will do a call to database to change chapter.exportready to true */}
+                    <Button content="Finish" onClick={this.changeColor.bind(this)}/>
 
                 </Modal.Actions>
             </Modal>
