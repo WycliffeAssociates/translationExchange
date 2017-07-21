@@ -11,7 +11,6 @@ import config from "../../../../config/config";
 import ProjectContainer from "../ProjectContainer"
 
 
-var checkNum;
 export class CheckingLevel extends React.Component {
 
     options = [

@@ -39,26 +39,6 @@ class ChapterList extends Component {
         );
     }
 
-    // getCheckingLevel(level){
-    //     let params = {
-    //         filter: {
-    //             language: this.props.language,
-    //             book: this.props.book,
-    //             version: this.props.version,
-    //             chapter: this.props.chapters
-    //         },
-    //         fields: {
-    //             checked_level: level
-    //         }
-    //     };
-    //
-    //     axios.post("http://172.19.145.91:8000/api/update_project/", params);
-    // }
-
-
-
-//{chapter.checked_level /*this is the checking level*/}        //{chapter.checked_level}
-
     parseDate(date) {
 
         var noon = 'am';

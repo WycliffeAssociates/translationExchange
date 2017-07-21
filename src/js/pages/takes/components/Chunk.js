@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import TakeList from "./TakeList";
 import ChunkPropTypes from "./ChunkPropTypes";
-import {Accordion, Icon} from "semantic-ui-react";
+import {Accordion, Button, Icon} from "semantic-ui-react";
 import axios from 'axios';
 import config from "config/config";
 import _ from 'lodash';
+import CommentContainer from "./comments/CommentContainer";
+let onClick;
+
 
 class Chunk extends Component {
     constructor (props) {
         super(props);
-        this.state = {open: false};
+        this.state = {open: false,
+        modalopen:false};
     }
 
     //when takeId is marked as the one to export, update all other chunks
@@ -32,6 +36,11 @@ class Chunk extends Component {
                 });
             }
         }
+    }
+    onClick = () => {// used when you click the microphone button in the player
+        this.setState({
+            modalopen: true
+        });
     }
 
     render () {
@@ -59,6 +68,18 @@ class Chunk extends Component {
                 </Accordion.Title>
 
                 <Accordion.Content>
+                    <Button
+                        onClick={this.onClick}
+                        color="pink"
+                        floated='right'
+                        ref={audioComponent => { this.audioComponent = audioComponent; }}
+                        icon="microphone"/>
+
+                    <CommentContainer
+                        open={this.state.modalopen}
+                        ref={instance => (this.commentContainer = instance)}/>
+
+
                     <TakeList
                         takes={this.props.segments}
                         deleteTakeFromState={this.props.deleteTakeFromState}
