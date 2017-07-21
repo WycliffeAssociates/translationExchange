@@ -65,12 +65,6 @@ class Chunk extends Component {
                 </Accordion.Title>
 
                 <Accordion.Content>
-                    {/*<Button*/}
-                        {/*onClick={this.onClick}*/}
-                        {/*color="pink"*/}
-                        {/*floated='right'*/}
-                        {/*ref={audioComponent => { this.audioComponent = audioComponent; }}*/}
-                        {/*icon="microphone"/>*/}
 
                     <CommentContainer
                         ref={instance => (this.commentContainer = instance)}/>
