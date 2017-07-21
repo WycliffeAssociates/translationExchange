@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import TakeList from "./TakeList";
 import ChunkPropTypes from "./ChunkPropTypes";
-import {Accordion, Icon} from "semantic-ui-react";
+import {Accordion, Button, Icon} from "semantic-ui-react";
 import axios from 'axios';
 import config from "config/config";
 import _ from 'lodash';
+import CommentContainer from "./comments/CommentContainer";
+let onClick;
+
+let onClick;
 
 class Chunk extends Component {
     constructor (props) {
@@ -12,7 +16,14 @@ class Chunk extends Component {
         this.state = {open: false};
     }
 
+    onClick = () => {// used when you click the microphone button in the player
+        this.setState({
+            modalopen: true
+        });
+    }
+
     render () {
+
         var modeLabel = "";
 
         switch (this.props.mode) {
@@ -27,7 +38,6 @@ class Chunk extends Component {
         }
 
 
-
         return (
             <div>
                 <Accordion styled fluid>
@@ -37,9 +47,16 @@ class Chunk extends Component {
                 </Accordion.Title>
 
                 <Accordion.Content>
+
+                    <CommentContainer
+                        ref={instance => (this.commentContainer = instance)}/>
+
                     <TakeList
                         takes={this.props.segments}
-                        updateTakeInState={this.props.updateTakeInState}
+                        addToListenList={this.props.addToListenList}
+                        patchTake={this.props.patchTake}
+                        deleteTake={this.props.deleteTake}
+                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                     />
                 </Accordion.Content>
                 </Accordion>
@@ -49,8 +66,10 @@ class Chunk extends Component {
 
 }
 
-// Chunk.propTypes = {
-//     chunk: ChunkPropTypes
-// };
+/*
+Chunk.propTypes = {
+    chunk: ChunkPropTypes
+};
+*/
 
 export default Chunk;
