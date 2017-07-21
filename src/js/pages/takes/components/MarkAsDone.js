@@ -8,40 +8,34 @@ import config from "config/config";
 
 class MarkAsDone extends Component {
     checkReadyForExport() {
-        let counter = 0;
-        for (let i = 0; i < this.props.takes.length; i++) {
-            if (this.props.takes[i].take.is_export) {
-                counter += 1;
-            }
+        var counter = 0;
+        this.props.takes.map((i) => {
+            if (i.take.is_export) {counter+=1}
+        })
+
+        if ((this.props.numChunks === counter) && counter !== 0) {
+            return true
         }
-        if ((this.props.numChunks === counter) && counter !== 0)  {
-            return true;
-        }
-        return false;
+        else {return false}
     }
 
     createExportPlaylist() {
 
-        var file = [];
         var length = 0;
+        this.props.takes.map((i) => {
+            if(i.take.is_export) {length += 1}
+        })
 
-
-        for(let i = 0; i < this.props.takes.length; i++) {
-            if (this.props.takes[i].take.is_export) {
-                length += 1;
-            }
-        }
-
-        for(let i = 0; i < this.props.takes.length; i++) {
-            if (this.props.takes[i].take.is_export) {
-                file[file.length] = {
-                    "src": config.streamingUrl + this.props.takes[i].take.location,
-                    "name": this.props.takes[i].take.mode + ' ' + this.props.takes[i].take.startv + ' ' + '(' + (file.length+1) + '/' + length + ')'
+        var playlist = [];
+        this.props.takes.map((i) => {
+            if (i.take.is_export) {
+                playlist[playlist.length] = {
+                    "src": config.streamingUrl + i.take.location,
+                    "name": i.take.mode + ' ' + i.take.startv + ' (' + (playlist.length+1) + '/' + length + ')'
                 }
             }
-        }
-
-        return file
+        })
+        return playlist
     }
 
     render () {

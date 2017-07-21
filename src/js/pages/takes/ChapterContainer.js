@@ -6,7 +6,9 @@ import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import ChapterHeader from "./components/ChapterHeader.js";
-import StitchTakes from "./components/StitchTakes";
+import StitchTakes from "./components/StitchTakes"
+
+// this is the page for one chapter
 
 class ChapterContainer extends Component {
 
@@ -45,8 +47,6 @@ class ChapterContainer extends Component {
         }).catch((exception) => {
             this.setState({error: exception});
         });
-
-
     }
 
     /*
@@ -102,28 +102,14 @@ class ChapterContainer extends Component {
 
         for (let i = 0; i < newArr.length; i++) {
             if (newArr[i].props.take.id === id) {
-                newArr = newArr.splice(i-1, 1)
-
-                this.setState(
-                    {
-                        listenList: newArr
-                    }
-                )
-
+                newArr.splice(i, 1)
+                this.setState({listenList: newArr})
                 return ''
             }
         }
 
-        newArr[newArr.length] = {
-            props
-        }
-
-        this.setState(
-            {
-                listenList: newArr
-            }
-        )
-
+        newArr[newArr.length] = {props}
+        this.setState({listenList: newArr})
     }
 
     /*
@@ -131,15 +117,15 @@ class ChapterContainer extends Component {
      */
     findStartVerses(paramArr) { // creates array of each start verse
         var returnArr = [];
-        for (let i = 0; i < paramArr.length; i++) {
-            returnArr[returnArr.length] = paramArr[i].take.startv
-        }
+        paramArr.map((i) => {
+        returnArr[returnArr.length] = i.take.startv
+    })
         return (returnArr);
     }
 
     removeDuplicates(paramArr) { // removes duplicates from an array
         var returnArr = [];
-        returnArr = paramArr.filter(function(item, pos) {
+        returnArr = paramArr.filter((item, pos) => {
             return paramArr.indexOf(item) === pos;
         })
 
@@ -147,7 +133,6 @@ class ChapterContainer extends Component {
     }
 
     createArray(paramArr, segments) { // returns an array containing one array of takes for each segment
-
         var newArr = [];
         for (let i = 0; i < paramArr.length; i++) {
             var int = paramArr[i];
@@ -164,18 +149,18 @@ class ChapterContainer extends Component {
 
     getChunksFromTakes(takes) {
         let chunks = this.findStartVerses(this.state.takes); // find start verses
-        chunks = chunks.sort(function(a, b) { // sort by start verse
-                return a - b
-            });
+        chunks = chunks.sort(function (a, b) { // sort by start verse
+            return a - b
+        });
         chunks = this.removeDuplicates(chunks); // remove duplicates
         chunks = this.createArray(chunks, this.state.takes);
         return chunks;
+
     }
 
     /*
         Rendering functions
      */
-
     render () {
         var query = QueryString.parse(this.props.location.search);
         let chunks = this.getChunksFromTakes(this.state.takes);

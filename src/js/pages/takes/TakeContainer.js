@@ -51,7 +51,6 @@ class TakeContainer extends Component {
                   onMarkedForExportToggled={this.onMarkedForExportToggled.bind(this)}
                   source={this.props.source}
                   comments={this.props.take.comments}
-
                   addToListenList={this.props.addToListenList}
                   onDeleteTake={this.onDeleteTake.bind(this)}
 
