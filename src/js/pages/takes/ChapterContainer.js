@@ -16,7 +16,6 @@ class ChapterContainer extends Component {
         super(props);
         this.state = {
             loaded: false,
-            open: false,
             error: "",
             takes: [],
             book: "",
@@ -208,16 +207,6 @@ class ChapterContainer extends Component {
                                takes={this.state.takes}
                                chunks={chunks}
                 />
-                <Button
-                    onClick={this.onClick}
-                    color="pink"
-                    floated='right'
-                    ref={audioComponent => { this.audioComponent = audioComponent; }}
-                    icon="microphone"/>
-
-                <CommentContainer
-                    open={this.state.open}
-                    ref={instance => (this.commentContainer = instance)}/>
 
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}

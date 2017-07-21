@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from "prop-types";
 import MarkAsDone from "./MarkAsDone";
+import CommentContainer from "./comments/CommentContainer"
 
 class ChapterHeader extends Component {
     render () {
@@ -11,7 +12,8 @@ class ChapterHeader extends Component {
                     ? " (" + this.props.book + ", " + this.props.language + ")"
                     : ""
                 }
-                {/* CommentContainer can go here */}
+                <CommentContainer
+                    ref={instance => (this.commentContainer = instance)}/>
                 <MarkAsDone chapter={this.props.chapter}
                             book={this.props.book}
                             language={this.props.language}
