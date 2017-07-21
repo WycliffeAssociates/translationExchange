@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Menu, state, handleItemClick} from "semantic-ui-react";
+import {Menu, state, handleItemClick, Container} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import * as ReactDOM from "react-dom";
+import 'css/home.css'
 
 
 class Header extends Component {
@@ -51,9 +52,10 @@ class Header extends Component {
         const { activeItem } = this.state;
 
         return (
+
             <Menu inverted size='large'>
                 <Link to="/">
-                    <Menu.Item name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
+                    <Menu.Item position="right" name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
                 </Link>
 
                 <Link to="/about">
@@ -63,7 +65,9 @@ class Header extends Component {
                 <Link to="/projects">
                     <Menu.Item  name='Projects' active={activeItem === 'Projects'} onClick={this.handleItemClick} />
                 </Link>
+
             </Menu>
+
         )
     }
 }
