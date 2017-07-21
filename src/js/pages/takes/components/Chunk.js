@@ -7,7 +7,6 @@ import config from "config/config";
 import _ from 'lodash';
 import CommentContainer from "./comments/CommentContainer";
 
-
 class Chunk extends Component {
     constructor (props) {
         super(props);
@@ -46,8 +45,7 @@ class Chunk extends Component {
 
                 <Accordion.Content>
 
-                    <CommentContainer
-                        ref={instance => (this.commentContainer = instance)}/>
+
 
                     <TakeList
                         takes={this.props.segments}

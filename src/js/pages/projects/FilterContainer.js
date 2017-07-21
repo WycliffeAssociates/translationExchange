@@ -45,8 +45,8 @@ class FilterContainer extends Component {
         self.setState({error: ""});
 
         axios.all([
-            axios.get(config.apiUrl + 'languages/'),
-            axios.get(config.apiUrl + 'books/'),
+            axios.post(config.apiUrl + 'get_langs/', {}),
+            axios.post(config.apiUrl + 'get_books/', {}),
             axios.post(config.apiUrl + 'get_versions/', {}),
         ]).then(axios.spread(function (languagesResponse, booksResponse, versionsResponse) {
             self.setState({
