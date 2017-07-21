@@ -5,7 +5,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactStars from 'react-stars';
-import ReactRating from 'react-rating';
 import {Segment} from "semantic-ui-react";
 
 export class Star extends Component{
