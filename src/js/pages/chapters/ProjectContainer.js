@@ -19,7 +19,8 @@ class ProjectContainer extends Component {
             error: "",
             uploadSourceLoading: false,
             uploadSourceError: "",
-            uploadSourceSuccess: ""
+            uploadSourceSuccess: "",
+            readyForExport: false
         };
         this.uploadSourceFile = this.uploadSourceFile.bind(this);
         this.handleFileChange = this.handleFileChange.bind(this);
@@ -98,6 +99,10 @@ class ProjectContainer extends Component {
 
     }
 
+    onExportClick() {
+        alert('Insert function for exporting chapter here')
+    }
+
     render () {
 
         return (
@@ -108,6 +113,12 @@ class ProjectContainer extends Component {
                                     error={this.state.error}
                                     retry={this.getChapterData.bind(this)}>
                         <Header as='h1'>{this.state.book.name} ({this.state.language.name})
+
+                            {this.state.readyForExport
+                                ?
+                                <Button content="Export" icon="archive" floated="right" onClick={this.onExportClick}/>
+                                : ""
+                            }
 
                         </Header>
 
