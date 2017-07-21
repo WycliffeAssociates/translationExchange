@@ -46,6 +46,7 @@ class Take extends Component {
 
 
     render () {
+        const markers = this.props.take.markers ;
         var file = [];
         file[0] = {
             "src": config.streamingUrl + this.props.take.location
@@ -94,6 +95,7 @@ class Take extends Component {
                         width="700"
                         mic={true}
                         take={this.props.take}
+                        markers = {markers}
                     />
                 </Grid.Column >
 
