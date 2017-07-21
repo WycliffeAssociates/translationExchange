@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Redirect from "react-router-dom/es/Redirect";
 import CircularProgressbar from 'react-circular-progressbar'
 import {Table} from 'semantic-ui-react'
 import 'css/chapters.css'
 import CheckingLevel from "./CheckingLevel"
-import ProjectContainer from "../ProjectContainer";
-import axios from 'axios';
 var bookTest;
 
 class ChapterList extends Component {
