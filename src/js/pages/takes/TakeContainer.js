@@ -18,21 +18,13 @@ class TakeContainer extends Component {
 
     onMarkedForExportToggled () {
         var markedForExport = !this.props.take.take.is_export;
-
-        axios.patch(config.apiUrl + 'takes/' + this.props.take.take.id + '/', {
-            "is_export": markedForExport
-        }).then((results) => {
-            //update this take in state using the update method in ChapterContainer
-            var updatedTake = _.cloneDeep(this.props.take);
-            updatedTake.take = results.data;
-            this.props.updateTakeInState(updatedTake);
+        this.props.patchTake(this.props.take.take.id,
+            {is_export: markedForExport},
+            () => { //success callback
+                if (markedForExport) {
+                    this.props.updateChosenTakeForChunk(this.props.take.take.id);
+                }
         });
-
-        //if this one was marked for export, then ask the higher level chunk
-        //to make sure no other takes in this chunk are marked for export
-          if (markedForExport) {
-            this.props.updateTakeToExport(this.props.take.take.id);
-          }
     }
 
     onRatingSet (newRating) {
@@ -73,6 +65,7 @@ class TakeContainer extends Component {
 
                   addToListenList={this.props.addToListenList}
                   onDeleteTake={this.onDeleteTake.bind(this)}
+
 
             />
                 //other events that require requesting the server would go here

@@ -53,20 +53,59 @@ class ChapterContainer extends Component {
     }
 
     /*
-        Functions for updating state
+        Functions for making requests and updating state
      */
+
+    patchTake(takeId, patch, success) {
+        axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch
+         ).then((results) => {
+            //find the take in state that this one corresponds to
+            let updatedTakes = this.state.takes.slice();
+            let takeToUpdate = updatedTakes.findIndex(take => take.take.id === takeId);
+            updatedTakes[takeToUpdate].take = results.data;
+            this.setState({
+                takes: updatedTakes
+            });
+            if (success) { success(); }
+        });
+    }
+
+    updateChosenTakeForChunk(takeId) {
+        let chosenTake = this.state.takes.find(take => take.take.id === takeId);
+        //look through all the takes in this chapter...
+        for (let i = 0; i < this.state.takes.length; i++) {
+            let take = this.state.takes[i];
+
+            //if there's one besides the chosen one that's in the same chunk
+            //and is marked as done, then patch it to not be marked as done
+            if (take.take.id !== chosenTake.take.id
+                && take.take.startv === chosenTake.take.startv
+                && take.take.is_export) {
+                this.patchTake(take.take.id, {is_export: false});
+            }
+        }
+    }
 
     //if a child component does requests to change a take in the database, they have to
     //call this function to update the take in state.
     updateTakeInState (updatedTake) {
         var updatedSegments = this.state.takes.slice();
-        var takeToUpdate = updatedSegments.findIndex(take => take.take.id === updatedTake.take.id);
-        updatedSegments[takeToUpdate] = updatedTake;
+        var takeToUpdate = updatedSegments.findIndex(take => take.take.id === updatedTake.id);
+        updatedSegments[takeToUpdate].take = updatedTake;
         this.setState({
-            segments: updatedSegments
+            takes: updatedSegments
         });
         console.log("SET STATE");
         console.dir(updatedSegments);
+    }
+
+    //if a child component deletes a take, they have to call this function to update our representation
+    //of all the takes in state
+    deleteTakeFromState(takeIdToDelete){
+        var updatedSegments = this.state.takes.slice();
+        var deleteIndex = updatedSegments.findIndex(take => take.take.id === takeIdToDelete);
+        updatedSegments.splice(deleteIndex, 1);
+        this.setState({takes: updatedSegments});
     }
 
     addToListenList(props) {
@@ -98,15 +137,6 @@ class ChapterContainer extends Component {
             }
         )
 
-    }
-
-    //if a child component deletes a take, they have to call this function to update our representation
-    //of all the takes in state
-    deleteTakeFromState(takeIdToDelete){
-        var updatedSegments = this.state.takes.slice();
-        var deleteIndex = updatedSegments.findIndex(take => take.take.id === takeIdToDelete);
-        updatedSegments.splice(deleteIndex, 1);
-        this.setState({takes: updatedSegments});
     }
 
     onClick = () => {// used when you click the microphone button in the player
@@ -211,6 +241,8 @@ class ChapterContainer extends Component {
                     updateTakeInState={this.updateTakeInState.bind(this)}
                     addToListenList={this.addToListenList.bind(this)}
                     deleteTakeFromState={this.deleteTakeFromState.bind(this)}
+                    patchTake={this.patchTake.bind(this)}
+                    updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
                 />
             </div>
         );
