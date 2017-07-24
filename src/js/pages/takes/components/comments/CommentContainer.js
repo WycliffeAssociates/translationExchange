@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import RecordComment from './RecordComment';
 import './RecordComment.css';
-import {Button, Container, Header, Image, Modal, ModalHeader} from 'semantic-ui-react';
+import {Button, Container, Grid, Header, Icon, Image, Modal, ModalHeader} from 'semantic-ui-react';
 import Audio from "translation-audio-player";
 
 import playlist from '/Users/ericazhong/Documents/8woc2017/src/js/pages/takes/components/songs/playlist.json'
@@ -122,8 +122,9 @@ class CommentContainer extends Component {
     }
 
     Style = {
-        backgroundColor: '#333131',
+        backgroundColor: 'black',
         fontSize: "32",
+        color: 'white',
         textAlign: "center",
         //width:"500px"
 
@@ -156,6 +157,9 @@ class CommentContainer extends Component {
 
                     </div>
                     <Container className="commentsList">
+                        <Grid columns={2}>
+
+                            <Grid.Column width={13}>
                         <Audio
                             width={600}
                             height={300}
@@ -164,24 +168,14 @@ class CommentContainer extends Component {
                             // store a reference of the audio component
                             ref={audioComponent => { this.audioComponent = audioComponent; }}
                         />
-                        <Audio
-                            width={600}
-                            height={300}
-                            playlist={playlist.playlist}
+                            </Grid.Column>
 
-                            // store a reference of the audio component
-                            ref={audioComponent => { this.audioComponent = audioComponent; }}
-                        />
-                        <Audio
-                            width={600}
-                            height={300}
-                            playlist={playlist.playlist}
-
-                            // store a reference of the audio component
-                            ref={audioComponent => { this.audioComponent = audioComponent; }}
-                        />
-
-
+                            <Grid.Column width={3}>
+                        <Button icon negative>
+                            <Icon name="trash"/>
+                        </Button>
+                            </Grid.Column>
+                        </Grid>
 
                     </Container>
 
