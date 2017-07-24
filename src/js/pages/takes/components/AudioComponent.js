@@ -51,7 +51,6 @@ class AudioComponent extends Component {
         var file = this.props.playlist;
         const pause = this.state.pause;
         const markers = this.props.markers;
-        console.log('markers :', markers);
 
         return(
             <div>
