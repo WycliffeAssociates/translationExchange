@@ -112,8 +112,11 @@ class ProjectsListContainer extends Component {
                                      setQuery={this.setQuery.bind(this)}
                                      queryString={this.props.location.search}
                                      clearQuery={this.clearQuery.bind(this)}/>
-                    <ProjectsList projects={this.state.projects}
-                                  navigateToProject={this.navigateToProject.bind(this)}/>
+                    {this.state.projects.length > 0
+                        ? <ProjectsList projects={this.state.projects}
+                                        navigateToProject={this.navigateToProject.bind(this)}/>
+                        : ""
+                    }
                 </LoadingDisplay>
             </div>
         );
