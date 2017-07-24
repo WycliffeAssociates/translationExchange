@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Button, Header, Image, Modal, Container, Segment, Grid, Form, Table, Divider } from 'semantic-ui-react'
 import 'css/home.css'
 import hands from 'images/hands.png'
+import axios from 'axios'
+import config from 'config/config'
+import QueryString from 'query-string';
+
 
 class Home extends Component {
     constructor(props) {
@@ -9,8 +13,11 @@ class Home extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            projects: []
         };
+
+        this.getRecentProjects()
     }
     toggle() {
         this.setState({
@@ -18,11 +25,39 @@ class Home extends Component {
         });
     }
 
-    onClick() {
-        alert('clicked')
+    getRecentProjects() {
+        axios.post(config.apiUrl + 'all_projects/', {}
+        ).then((results) => {
+            this.setState({projects: results.data})
+        }).catch((exception) => {
+            this.setState({error: exception});
+        });
     }
 
+    navigateToProject (language, book, version) {
+        //make the query for the right project, using our current query as a base
+        var projectQuery = QueryString.parse(this.state.currentProjectQuery);
+        Object.assign(projectQuery, {
+            language: language,
+            book: book,
+            version: version
+        });
+
+        var queryString = QueryString.stringify(projectQuery);
+        this.props.history.push(
+            {
+                pathname: '/chapters',
+                search: "?" + queryString
+            }
+        )
+    }
+
+
+
     render() {
+
+        //this.buildProjectsList()
+
         return (
 
             <div>
@@ -62,24 +97,40 @@ class Home extends Component {
                                 <h2>Recent Projects</h2>
                             </Grid.Row>
                             <Divider />
-                            <Grid.Row onClick={this.onClick} className="project">
-                                <h4>Mark - en-x-demo2 - ULB</h4>
-                            </Grid.Row>
-                                <Divider />
-                            <Grid.Row onClick={this.onClick} >
-                                <h4>Romans - Español Latin America - UDB</h4>
-                            </Grid.Row>
-                                <Divider />
-                            <Grid.Row onClick={this.onClick}>
-                                <h4>Psalms - Mandarin - ULB</h4>
-                            </Grid.Row>
-                                <Divider />
+                            {this.state.projects.map(this.createListItem.bind(this))}
                         </Grid.Column>
                     </Grid>
                 </Container>
 
             </div>
         );
+    }
+
+    createListItem(projects) {
+
+        var navigateToProject = (function () {
+            this.navigateToProject(projects.language.slug, projects.book.slug, projects.version);
+        }).bind(this);
+
+
+        console.log(projects)
+
+        var str = ''
+        str += projects.book.name + ' '
+        str += projects.language.name + ' '
+        str += projects.version
+
+        return(
+            <div>
+                <Grid.Row onClick={navigateToProject} style="stop:hover" className="hoverButton">
+                    <h4>{str}</h4>
+                </Grid.Row>
+                <Divider />
+            </div>
+
+        );
+
+
     }
 }
 
