@@ -27,8 +27,18 @@ class Header extends Component {
             <Container fluid className="gray">
 
                 <Menu  fluid secondary size='huge' compact inverted >
-                    <Menu.Item content={logo} />
-                    <Menu.Item content={text} />
+
+                    <Menu.Item>
+                        <Link fluid to="/">
+                            {logo}
+                        </Link>
+                    </Menu.Item>
+
+                    <Menu.Item>
+                        <Link fluid to="/">
+                            {text}
+                        </Link>
+                    </Menu.Item>
 
                     <Menu.Item position="right">
                         <Link position="right" to="/">

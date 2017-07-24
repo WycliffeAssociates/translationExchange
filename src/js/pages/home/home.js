@@ -5,6 +5,7 @@ import hands from 'images/hands.png'
 import axios from 'axios'
 import config from 'config/config'
 import QueryString from 'query-string';
+import combinedShape from 'images/combined-shape.png'
 
 
 class Home extends Component {
@@ -95,13 +96,14 @@ class Home extends Component {
 
                 </Container>
 
+
                 <Container fluid className="bottom">
                     <Container fluid className="yellowBar" />
 
                     <Grid padded textAlign="center" >
-                        <Grid.Column width={3}>
+                        <Grid.Column width={5}>
                             <Grid.Row height={1}>
-                                <h2>Recent Projects</h2>
+                                <h1>Recent Projects</h1>
                             </Grid.Row>
                             <Divider />
                             {this.state.projects.map(this.createListItem.bind(this))}
@@ -130,7 +132,7 @@ class Home extends Component {
         return(
             <div>
                 <Grid.Row divided onClick={navigateToProject} className="hoverButton">
-                    <h4>> {str}</h4>
+                    <h2> <Image verticalAlign="middle" src={combinedShape} size="mini"/> {str}</h2>
                 </Grid.Row>
             </div>
 
