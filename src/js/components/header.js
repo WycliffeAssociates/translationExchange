@@ -19,7 +19,7 @@ class Header extends Component {
 
         var logo = <Image src="https://files.slack.com/files-pri/T5RBHJC4T-F6CTSP6MT/combined_shape.png" size="tiny"/>
 
-        var text = <h1><font color="#F5A623">This is our title</font></h1>
+        var text = <h1><font color="#F5A623">Our Translation Project</font></h1>
 
         const { activeItem } = this.state;
 

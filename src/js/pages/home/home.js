@@ -27,19 +27,18 @@ class Home extends Component {
 
             <div>
 
+
                 <Container className="yellowBarHome" fluid />
-
-
                 <Container className="top" fluid >
 
                     <Grid columns={2} className="middle">
+                        <Grid.Row height={3}/>
                         <Grid.Column width={5} verticalAlign="middle">
                             <Image src="https://files.slack.com/files-pri/T5RBHJC4T-F6BJNKZ7T/hands.png" alt="image goes here" />
-
                         </Grid.Column>
                         <Grid.Column verticalAlign="middle">
 
-                            <h1>Welcome to Translation Manager! </h1>
+                            <h1>Welcome to the Website!</h1>
                             <Segment className="login">
                                 <Form>
                                     <Form.Field>
@@ -53,7 +52,6 @@ class Home extends Component {
                     </Grid>
 
                 </Container>
-
 
                 <Container fluid className="bottom">
                     <Container fluid className="yellowBar" />
