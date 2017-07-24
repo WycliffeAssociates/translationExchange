@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import {Menu, state, handleItemClick} from "semantic-ui-react";
+import {Menu, state, handleItemClick, Container, Image} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import * as ReactDOM from "react-dom";
+import 'css/home.css'
+import combinedShape from 'images/combined-shape.png'
 
 
 class Header extends Component {
     state = { activeItem: 'home' };
+
 
     handleItemClick = (e, { name }) => {
         this.setState({ activeItem: name });
@@ -14,56 +17,39 @@ class Header extends Component {
 
 
     render() {
-        // return (
-        //     <div>
-        //         <Navbar inverse collapseOnSelect>
-        //             <Navbar.Header>
-        //                 <Navbar.Brand>
-        //                     <LinkContainer to="/">
-        //                         <a>Translation Manager</a>
-        //                     </LinkContainer>
-        //                 </Navbar.Brand>
-        //                 <Navbar.Toggle />
-        //             </Navbar.Header>
-        //             <Navbar.Collapse>
-        //
-        //                 <Nav pullRight>
-        //                     <LinkContainer to="/about/">
-        //                         <NavItem eventKey={1}>About</NavItem>
-        //                     </LinkContainer>
-        //
-        //                     <LinkContainer to="/projects/">
-        //                         <NavItem eventKey={2}>Projects</NavItem>
-        //                     </LinkContainer>
-        //
-        //                 </Nav>
-        //
-        //
-        //             </Navbar.Collapse>
-        //         </Navbar>
-        //
-        //
-        //
-        //
-        //     </div>
-        // );
+
+        var logo = <Image src={combinedShape} size="tiny"/>
+        var text = <h1><font color="#F5A623">Our Translation Project</font></h1>
 
         const { activeItem } = this.state;
 
         return (
-            <Menu inverted size='large'>
-                <Link to="/">
-                    <Menu.Item name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
-                </Link>
+            <Container fluid className="gray">
 
-                <Link to="/about">
-                    <Menu.Item  name='About' active={activeItem === 'About'} onClick={this.handleItemClick} />
-                </Link>
+                <Menu  fluid secondary size='huge' compact inverted >
+                    <Menu.Item content={logo} />
+                    <Menu.Item content={text} />
 
-                <Link to="/projects">
-                    <Menu.Item  name='Projects' active={activeItem === 'Projects'} onClick={this.handleItemClick} />
-                </Link>
-            </Menu>
+                    <Menu.Item position="right">
+                        <Link position="right" to="/">
+                            <Menu.Item position="right" name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
+                        </Link>
+
+                        <Link to="/about">
+                            <Menu.Item  name='About' active={activeItem === 'About'} onClick={this.handleItemClick} />
+                        </Link>
+
+                        <Link to="/projects">
+                            <Menu.Item  name='Projects' active={activeItem === 'Projects'} onClick={this.handleItemClick} />
+                        </Link>
+                    </Menu.Item>
+
+                </Menu>
+
+                <Container className="yellowBar" fluid></Container>
+
+            </Container>
+
         )
     }
 }

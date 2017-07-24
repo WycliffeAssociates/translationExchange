@@ -47,14 +47,15 @@ class Take extends Component {
 
 
     render () {
+
         var file = [];
         file[0] = {
             "src": config.streamingUrl + this.props.take.location
         };
+
         return (
             <div>
-        <Grid columns={5} relaxedclassName="take">
-
+                <Grid columns={5} >
             <Grid.Column width={4}>
                 <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {/*this.parseDate(this.props.take.date_modified)*/}</strong>
             </Grid.Column>
@@ -101,21 +102,20 @@ class Take extends Component {
                 </Grid.Column >
 
                 {this.state.isToggleOn ? '' :
+                        <Grid.Column width={4}>
+                                <AudioComponent
+                                    src={config.streamingUrl + this.props.take.location}
+                                    playlist={file}
+                                    width="200"
+                                    name="Source Audio"
+                                    mic={false}
+                                    take={this.props.take}
+                                />
+                        </Grid.Column>}
 
-                    <Grid.Column width={4}>
-                            <AudioComponent
-                                src={config.streamingUrl + this.props.take.location}
-                                playlist={file}
-                                width="200"
-                                name="Source Audio"
-                                mic={false}
-                                take={this.props.take}
-                            />
-                    </Grid.Column>}
+                </Grid>
 
-            </Grid>
-
-        </div>
+            </div>
         );
     }
 

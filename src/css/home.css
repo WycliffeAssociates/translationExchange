@@ -1,0 +1,47 @@
+.top {
+    background-color: #FFFFFF;
+    height: 350px;
+}
+
+.bottom {
+    background-color: #3E4453;
+    height: 350px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.middle {
+    height: 250px;
+}
+
+.gray {
+    background-color: #3E4453;
+    color: #F5A623
+}
+
+.login {
+    width: 500px;
+    height: 150px;
+}
+
+.image {
+    width: 370px;
+    /height: 250px;
+}
+
+.yellowBar {
+    background-color: #F5A623;
+    color: #FFFFFF;
+    height: 5px
+}
+
+.yellowBarHome {
+    background-color: #F5A623;
+    color: #FFFFFF;
+    height: 14px
+}
+
+.hoverButton:hover {
+    cursor: pointer;
+    background-color: #4F5669
+}
