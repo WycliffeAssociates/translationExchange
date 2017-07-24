@@ -68,7 +68,7 @@ class Take extends Component {
             </Grid.Column>
 
             <Grid.Column width={3}>
-                {/*<TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>*/}
+                {<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>}
                 <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
                 <DeleteTake onDeleteTake={this.props.onDeleteTake}/>
             </Grid.Column>

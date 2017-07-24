@@ -98,8 +98,8 @@ class ChapterContainer extends Component {
             //and is marked as done, then patch it to not be marked as done
             if (take.take.id !== chosenTake.take.id
                 && take.take.startv === chosenTake.take.startv
-                && take.take.is_export) {
-                this.patchTake(take.take.id, {is_export: false});
+                && take.take.is_publish) {
+                this.patchTake(take.take.id, {is_publish: false});
             }
         }
     }
