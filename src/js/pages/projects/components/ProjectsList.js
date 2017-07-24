@@ -47,24 +47,33 @@ class ProjectsList extends Component {
     /*{project.percentFinished}*/
     createListItem (project) {
         var navigateToProject = (function () {
-            this.props.navigateToProject(project.lang.slug, project.book[0].slug, project.version);
+            this.props.navigateToProject(project.language.slug, project.book.slug, project.version);
         }).bind(this);
 
 
         return (
             <Table.Row >
-                <Table.Cell onClick={navigateToProject}>{project.lang.name}</Table.Cell>
-                <Table.Cell onClick={navigateToProject}>{project.book[0].name}</Table.Cell>
+                <Table.Cell onClick={navigateToProject}>{project.language.name}</Table.Cell>
+                <Table.Cell onClick={navigateToProject}>{project.book.name}</Table.Cell>
                 <Table.Cell onClick={navigateToProject}><CircularProgressbar strokeWidth="20" percentage={project.completed} /></Table.Cell>
                 <Table.Cell><ReadMore lines={1} onShowMore={this.props.onChange} text="more">
-                                 <b>Date Modified</b>: {this.parseDate(project.timestamp)} <br/>
+                                 {/*<b>Date Modified</b>: {this.parseDate(project.timestamp)} <br/>*/}
                                  <b>Translation Type</b>: {project.version} <br/>
-                                 <b>Contributors</b>: {project.contributors} <br/>
+                                 <b>Contributors</b>: {this.getContributorText(project.contributors)} <br/>
                              </ReadMore></Table.Cell>
 
             </Table.Row>
 
         );
+    }
+
+    getContributorText (contributors) {
+        let contribText = "";
+        for (let i = 0; i < contributors.length - 1; i++) {
+            contribText += contributors[i] + ", ";
+        }
+        contribText += contributors[contributors.length - 1];
+        return contribText;
     }
 
     parseDate(date) {

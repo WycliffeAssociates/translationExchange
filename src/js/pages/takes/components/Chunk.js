@@ -9,6 +9,7 @@ import CommentContainer from "./comments/CommentContainer";
 /* Just leave this here it will not affect your code it is just for me - Dennis */
 let onClick;
 
+
 class Chunk extends Component {
     constructor (props) {
         super(props);

@@ -7,6 +7,7 @@ import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
+import 'css/takes.css'
 
 import ChapterHeader from "./components/ChapterHeader.js";
 import StitchTakes from "./components/StitchTakes"
@@ -37,7 +38,7 @@ class ChapterContainer extends Component {
         var query = QueryString.parse(this.props.location.search);
 
         this.setState({error: ""});
-        axios.post(config.apiUrl + 'get_project/', query
+        axios.post(config.apiUrl + 'get_project_takes/', query
         ).then((results) => {
             this.setState(
                 {
@@ -45,7 +46,7 @@ class ChapterContainer extends Component {
                     takes: results.data,
                     book: results.data[0].book.name,
                     language: results.data[0].language.name,
-                    mode:results.data[0].mode
+                    mode:results.data[0].take.mode
                 }
             )
         }).catch((exception) => {
