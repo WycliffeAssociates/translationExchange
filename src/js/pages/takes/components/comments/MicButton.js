@@ -24,6 +24,7 @@ class MicButton extends Component {
             show: this.props.open,
             SaveButtonState: true,
             blob: null,
+            comments: this.props.comments
         };
 
 
@@ -32,6 +33,7 @@ class MicButton extends Component {
         this.getInitialState = this.getInitialState.bind(this);
         this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
         this.onClickSave = this.onClickSave.bind(this);
+        this.createPlaylist = this.createPlaylist.bind(this);
 
     }
     saveButton() {
@@ -70,33 +72,37 @@ class MicButton extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.open !== this.state.show) {
-            this.setState({show: true});
+        if (nextProps.comments !== this.props.comments) {
+            console.log('ADD A COMMENT GDI')
         }
 
     }
 
-    createPlaylist() {
-        // var files = this.props.comments;
-        // files.map((file)=> file.comment.location);
-        // var comments = [];
-        // var playlist = [];
-        //
-        // for (var i=0;i<files.length; i++) {
-        //     playlist.append({
-        //         "src": files[i]
-        //     });
-        // }
-        // comments["playlist"]=playlist;
-        // comments.map((comment)=> <Audio
-        //     width={600}
-        //     height={300}
-        //     playlist={playlist.playlist}
-        //
-        //     // store a reference of the audio component
-        //     ref={audioComponent => { this.audioComponent = audioComponent; }}
-        // />);
-        // return comments
+    createPlaylist(comment) {
+
+        var file = [];
+        file[0] = {
+            "src": comment.comment.location
+        };
+
+        return(
+            <Grid columns={2}>
+                <Grid.Column width={12}>
+            <Audio
+                width={600}
+                height={300}
+                playlist={file}
+                ref={audioComponent => { this.audioComponent = audioComponent; }}
+            />
+                </Grid.Column>
+                <Grid.Column width={2}>
+            <Button icon negative onClick={this.props.deleteComment}>
+                <Icon name="trash"/>
+            </Button>
+                </Grid.Column>
+            </Grid>
+        );
+
     }
 
     Style = {
@@ -109,6 +115,7 @@ class MicButton extends Component {
     };
 
     render(){
+
         return(
 
             <Modal
@@ -132,21 +139,13 @@ class MicButton extends Component {
                     <Grid columns={2}>
 
                         <Grid.Column width={13}>
-                            <Audio
-                                 width={600}
-                                 height={300}
-                                 playlist={playlist.playlist}
 
-                                 // store a reference of the audio component
-                                 ref={audioComponent => { this.audioComponent = audioComponent; }}
-                             />
+                            {this.props.comments.map(this.createPlaylist)}
 
                         </Grid.Column>
 
                         <Grid.Column width={3}>
-                            <Button icon negative>
-                                <Icon name="trash"/>
-                            </Button>
+
                             <Button onClick={this.hideModal} content="close"/>
                         </Grid.Column>
                     </Grid>

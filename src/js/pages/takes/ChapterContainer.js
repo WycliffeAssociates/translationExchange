@@ -84,6 +84,18 @@ class ChapterContainer extends Component {
         });
     }
 
+    
+    deleteComment(commentId) {
+        axios.delete(config.apiUrl + 'comments/'+commentId+'/'
+        ).then((results)=>
+            let updatedTakes = this.state.takes.filter(
+            take => take.take.id !== takeId
+        );
+        this.setState({takes: updatedTakes})
+    )
+    }
+
+
     updateChosenTakeForChunk(takeId) {
         let chosenTake = this.state.takes.find(take => take.take.id === takeId);
         //look through all the takes in this chapter...
@@ -127,6 +139,8 @@ class ChapterContainer extends Component {
     })
         return (returnArr);
     }
+
+
 
     removeDuplicates(paramArr) { // removes duplicates from an array
         var returnArr = [];
@@ -202,6 +216,7 @@ class ChapterContainer extends Component {
                     patchTake={this.patchTake.bind(this)}
                     deleteTake={this.deleteTake.bind(this)}
                     updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
+                    deleteComment={this.deleteComment.bind(this)}
                 />
             </div>
         );
