@@ -130,7 +130,7 @@ class ProjectContainer extends Component {
         //  {"language": "en-x-demo2", "version": "ulb", "book": "mrk"}
 
         alert("Contacting API...");
-        axios.get(config.apiUrl + "/zip_files/", params, {timeout: 0})
+        axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
                 console.log("done");
                 FileDownload(download_results.data, "project.zip");
