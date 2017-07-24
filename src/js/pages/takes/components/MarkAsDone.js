@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { Button, Modal } from 'semantic-ui-react'
 import AudioComponent from './AudioComponent';
 import config from "config/config";
-
+let handleOpen;
+let handleClose;
 // this is the page for one chapter
 
 class MarkAsDone extends Component {
@@ -19,7 +20,7 @@ class MarkAsDone extends Component {
     checkReadyForExport() {
         var counter = 0;
         this.props.takes.map((i) => {
-            if (i.take.is_export) {counter+=1}
+            if (i.take.is_publish) {counter+=1}
         })
 
         if ((this.props.numChunks === counter) && counter !== 0) {
@@ -32,12 +33,12 @@ class MarkAsDone extends Component {
 
         var length = 0;
         this.props.takes.map((i) => {
-            if(i.take.is_export) {length += 1}
+            if(i.take.is_publish) {length += 1}
         })
 
         var playlist = [];
         this.props.takes.map((i) => {
-            if (i.take.is_export) {
+            if (i.take.is_publish) {
                 playlist[playlist.length] = {
                     "src": config.streamingUrl + i.take.location,
                     "name": i.take.mode + ' ' + i.take.startv + ' (' + (playlist.length+1) + '/' + length + ')'

@@ -82,7 +82,7 @@ class ProjectContainer extends Component {
             }
         };
 
-        axios.post("http://172.19.145.91:8000/api/update_project/", params);
+        axios.post(config.apiUrl + "update_project/", params);
     }
 
     getChapterData() {
@@ -96,9 +96,9 @@ class ProjectContainer extends Component {
             // console.dir(results.data[results.data.length - 1]);
             this.setState(
                 {
-                    chapters: results.data.slice(0, results.data.length - 2),
-                    book: results.data[results.data.length - 2].book[0],
-                    language: results.data[results.data.length - 1].lang[0],
+                    chapters: results.data.chapters,
+                    book: results.data.book,
+                    language: results.data.language,
                     loaded: true
                 }
             )
