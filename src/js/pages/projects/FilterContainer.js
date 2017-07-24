@@ -27,11 +27,11 @@ class FilterContainer extends Component {
         this.setState({
             loaded: true,
             languages: projects.map(function (project) {
-                return {key: project.lang.slug, text: project.lang.name, value: project.lang.slug}
+                return {key: project.language.slug, text: project.language.name, value: project.language.slug}
             }),
 
             books: projects.map(function (project) {
-                return {key: project.book[0].slug, text: project.book[0].name, value: project.book[0].slug}
+                return {key: project.book.slug, text: project.book.name, value: project.book.slug}
             }),
 
             versions: projects.map(function (project) {
@@ -45,9 +45,9 @@ class FilterContainer extends Component {
         self.setState({error: ""});
 
         axios.all([
-            axios.post(config.apiUrl + 'get_langs/', {}),
-            axios.post(config.apiUrl + 'get_books/', {}),
-            axios.post(config.apiUrl + 'get_versions/', {}),
+            axios.get(config.apiUrl + 'get_langs/'),
+            axios.get(config.apiUrl + 'get_books/'),
+            axios.get(config.apiUrl + 'get_versions/'),
         ]).then(axios.spread(function (languagesResponse, booksResponse, versionsResponse) {
             self.setState({
                 loaded: true,

@@ -81,7 +81,7 @@ class StitchTakes extends Component {
         this.props.listenList.map((i) => {
             if(i.props.take.source_language_id !== null) {
                 sourcePlaylist[sourcePlaylist.length] = {
-                    "src": config.streamingUrl + i.props.source.take[0].location,
+                    "src": config.streamingUrl + i.props.source.take.location,
                     "name": i.props.take.mode + ' ' + i.props.take.startv + ' (' + (sourcePlaylist.length+1) + '/' + this.props.listenList.length + ')'
                 }
             }
