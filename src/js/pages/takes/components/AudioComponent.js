@@ -76,7 +76,7 @@ class AudioComponent extends Component {
                     ref={instance => (this.commentContainer = instance)}
                     take={this.props.take}
                     comments={this.props.comments}
-                    deleteComment={this.props.deleteComment}
+                    // deleteComment={this.props.deleteComment}
                 />
 
 

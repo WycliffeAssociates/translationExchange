@@ -84,16 +84,16 @@ class ChapterContainer extends Component {
         });
     }
 
-    
-    deleteComment(commentId) {
-        axios.delete(config.apiUrl + 'comments/'+commentId+'/'
-        ).then((results)=>
-            let updatedTakes = this.state.takes.filter(
-            take => take.take.id !== takeId
-        );
-        this.setState({takes: updatedTakes})
-    )
-    }
+
+    // deleteComment(commentId) {
+    //     axios.delete(config.apiUrl + 'comments/'+commentId+'/'
+    //     ).then((results)=> {
+    //         let updatedComments = this.state.comments.filter(
+    //             comment => take.comment.id !== takeId
+    //         );
+    //         this.setState({takes: updatedTakes})
+    //     })
+    // }
 
 
     updateChosenTakeForChunk(takeId) {
@@ -216,7 +216,7 @@ class ChapterContainer extends Component {
                     patchTake={this.patchTake.bind(this)}
                     deleteTake={this.deleteTake.bind(this)}
                     updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
-                    deleteComment={this.deleteComment.bind(this)}
+                    // deleteComment={this.deleteComment.bind(this)}
                 />
             </div>
         );

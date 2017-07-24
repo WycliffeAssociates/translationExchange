@@ -96,7 +96,7 @@ class Take extends Component {
                         mic={true}
                         take={this.props.take}
                         comments={this.props.comments}
-                        deleteComment={this.props.deleteComment}
+                        // deleteComment={this.props.deleteComment}
                     />
                 </Grid.Column >
 

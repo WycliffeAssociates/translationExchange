@@ -78,8 +78,14 @@ class MicButton extends Component {
 
     }
 
-    createPlaylist(comment) {
+    deleteComment(id){
+        axios.delete(config.apiUrl + 'comments/' + id + '/'
+        ).then((results) => {
+        alert('dleeteed') })
+    }
 
+    createPlaylist(comment) {
+        console.log('lel', comment);
         var file = [];
         file[0] = {
             "src": comment.comment.location
@@ -96,7 +102,7 @@ class MicButton extends Component {
             />
                 </Grid.Column>
                 <Grid.Column width={2}>
-            <Button icon negative onClick={this.props.deleteComment}>
+            <Button icon negative onClick={this.deleteComment(comment.id)}>
                 <Icon name="trash"/>
             </Button>
                 </Grid.Column>
