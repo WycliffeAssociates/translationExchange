@@ -40,3 +40,8 @@
     color: #FFFFFF;
     height: 14px
 }
+
+.hoverButton:hover {
+    cursor: pointer;
+    background-color: #4F5669
+}
