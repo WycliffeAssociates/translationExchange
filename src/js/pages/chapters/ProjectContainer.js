@@ -119,15 +119,11 @@ class ProjectContainer extends Component {
 
     onDownloadProject() {
 
-        // let params = {
-        //     filter: {
-        //         language: this.state.language.slug,
-        //         book: this.state.book.slug,
-        //         chapter: this.state.chapters.name,
-        //         anthology: this.state.anthology.name,
-        //         version: this.state.version.name
-        //     }
-        // }
+        let params = {
+            language: "en-x-demo2",
+            version: "ulb",
+            book: "mrk"
+        }
 
         //Post to API with correct params
         // {
@@ -137,9 +133,18 @@ class ProjectContainer extends Component {
         // }
 
         alert("Contacting API...");
-        //let downladEndpoint = "http://172.19.145.91:8000/api/zipFiles/"
+        let downladEndpoint = "http://172.19.145.91:8000/api/zipFiles/"
+
         // console.log("downloading");
-        //axios.post(downladEndpoint, params);
+        axios.get(downladEndpoint, params, {timeout: 0})
+            .then((download_results) => {
+                // console.log(download_results.data);
+                console.log("done");
+                // window.open(download_results.data);
+
+            }).catch((exception) => {
+            this.setState({error: exception});
+        });
     }
 
     componentDidMount() {
