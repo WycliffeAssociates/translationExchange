@@ -1,15 +1,17 @@
 /**
  * Created by ericazhong on 7/18/17.
  */
-/* global state show */
+/* global state show close */
 import React from 'react';
 import {Button, Modal} from "semantic-ui-react";
 import { Icon } from 'semantic-ui-react'
 import Audio from 'translation-audio-player'
 import playlist from './songs/playlist.json'
+import 'css/takes.css'
 
 let state;
 let show;
+let close;
 var iterator;
 
 

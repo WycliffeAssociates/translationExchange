@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown, Button } from 'semantic-ui-react'
+import { Dropdown, Button, Message } from 'semantic-ui-react'
 import axios from 'axios'
 import config from 'config/config';
 import QueryString from 'query-string';
@@ -27,11 +27,11 @@ class FilterContainer extends Component {
         this.setState({
             loaded: true,
             languages: projects.map(function (project) {
-                return {key: project.lang.slug, text: project.lang.name, value: project.lang.slug}
+                return {key: project.language.slug, text: project.language.name, value: project.language.slug}
             }),
 
             books: projects.map(function (project) {
-                return {key: project.book[0].slug, text: project.book[0].name, value: project.book[0].slug}
+                return {key: project.book.slug, text: project.book.name, value: project.book.slug}
             }),
 
             versions: projects.map(function (project) {
@@ -45,9 +45,9 @@ class FilterContainer extends Component {
         self.setState({error: ""});
 
         axios.all([
-            axios.post(config.apiUrl + 'get_langs/', {}),
-            axios.post(config.apiUrl + 'get_books/', {}),
-            axios.post(config.apiUrl + 'get_versions/', {}),
+            axios.get(config.apiUrl + 'get_langs/'),
+            axios.get(config.apiUrl + 'get_books/'),
+            axios.get(config.apiUrl + 'get_versions/'),
         ]).then(axios.spread(function (languagesResponse, booksResponse, versionsResponse) {
             self.setState({
                 loaded: true,
@@ -130,7 +130,7 @@ class FilterContainer extends Component {
                 <Dropdown placeholder='Select Language'
                           selection
                           search
-                          loading={!this.state.loaded}
+                          loading={!this.state.loaded && !this.state.error}
                           options={languageOptions}
                           onChange={this.setLanguage.bind(this)}
                           value={query.language}
@@ -138,7 +138,7 @@ class FilterContainer extends Component {
                 <Dropdown placeholder='Select Book'
                           selection
                           search
-                          loading={!this.state.loaded}
+                          loading={!this.state.loaded && !this.state.error}
                           options={bookOptions}
                           onChange={this.setBook.bind(this)}
                           value={query.book}
@@ -146,7 +146,7 @@ class FilterContainer extends Component {
                 <Dropdown placeholder='Select Version'
                           selection
                           search
-                          loading={!this.state.loaded}
+                          loading={!this.state.loaded && !this.state.error}
                           options={versionOptions}
                           onChange={this.setVersion.bind(this)}
                           value={query.version}
@@ -154,6 +154,12 @@ class FilterContainer extends Component {
                 <Button onClick={this.props.clearQuery}>
                     Clear
                 </Button>
+                {this.state.error
+                    ? <Message negative>
+                        {this.state.error.message} <Button onClick={this.requestAllFilters.bind(this)}>Retry</Button>
+                      </Message>
+                    : ""
+                }
             </div>
         );
     }
