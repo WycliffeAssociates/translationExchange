@@ -6,6 +6,8 @@ import axios from 'axios';
 import config from "config/config";
 import _ from 'lodash';
 import CommentContainer from "./comments/CommentContainer";
+/* Just leave this here it will not affect your code it is just for me - Dennis */
+let onClick;
 
 class Chunk extends Component {
     constructor (props) {

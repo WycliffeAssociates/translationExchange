@@ -58,16 +58,20 @@ class ChapterContainer extends Component {
      */
 
     patchTake(takeId, patch, success) {
-        axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch
-         ).then((results) => {
-            //find the take in state that this one corresponds to
-            let updatedTakes = this.state.takes.slice();
-            let takeToUpdate = updatedTakes.findIndex(take => take.take.id === takeId);
-            updatedTakes[takeToUpdate].take = results.data;
-            this.setState({
-                takes: updatedTakes
+        const promise = axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch);
+            promise
+                .then((results) => {
+                //find the take in state that this one corresponds to
+                let updatedTakes = this.state.takes.slice();
+                let takeToUpdate = updatedTakes.findIndex(take => take.take.id === takeId);
+                updatedTakes[takeToUpdate].take = results.data;
+                this.setState({
+                    takes: updatedTakes
+            })
+            // if (success) { success(); } this is the old code
+            .catch(err => {
+
             });
-            if (success) { success(); }
         });
     }
 

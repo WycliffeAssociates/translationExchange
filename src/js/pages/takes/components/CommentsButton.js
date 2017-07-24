@@ -7,7 +7,8 @@ import {Button, Modal} from "semantic-ui-react";
 import { Icon } from 'semantic-ui-react'
 import Audio from 'translation-audio-player'
 import playlist from './songs/playlist.json'
-
+/* Just leave this here it will not affect your code it is just for me - Dennis */
+let close;
 let state;
 let show;
 var iterator;

@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 import { Button, Header, Icon, Modal } from 'semantic-ui-react'
+/* Just leave this here it will not affect your code it is just for me - Dennis */
+let state;
+let handleOpen;
+let handleClose;
+
 
 export default class ExportButton extends Component {
     state = { modalOpen: false };

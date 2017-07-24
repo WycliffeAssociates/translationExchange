@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import { Button, Modal } from 'semantic-ui-react'
 import AudioComponent from './AudioComponent';
 import config from "config/config";
-
+/* Just leave this here it will not affect your code it is just for me - Dennis */
+let handleOpen;
+let handleClose;
 // this is the page for one chapter
 
 class MarkAsDone extends Component {

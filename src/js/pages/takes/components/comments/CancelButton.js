@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Button} from 'semantic-ui-react';
@@ -15,7 +16,6 @@ class CancelButton extends Component{
 
     onButtonClicked(){
         console.log('Cancel button clicked');
-
 
     }
 
