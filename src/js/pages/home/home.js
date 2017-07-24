@@ -26,17 +26,20 @@ class Home extends Component {
         return (
 
             <div>
-                {<Container className="yellowBar" fluid>.</Container>}
+
+                <Container className="yellowBarHome" fluid />
+
 
                 <Container className="top" fluid >
 
                     <Grid columns={2} className="grid">
                         <Grid.Column width={5} verticalAlign="middle">
-                            <Image src="/Users/Downloads/nathan.jpeg" alt="image goes here" />
+                            <Image src="https://files.slack.com/files-pri/T5RBHJC4T-F6BJNKZ7T/hands.png" alt="image goes here" />
 
                         </Grid.Column>
-
                         <Grid.Column verticalAlign="middle">
+
+                            <h1>Welcome to Translation Manager! </h1>
                             <Segment className="login">
                                 <Form>
                                     <Form.Field>
@@ -49,8 +52,9 @@ class Home extends Component {
                         </Grid.Column>
                     </Grid>
 
-
                 </Container>
+
+
                 <Container fluid className="bottom">
 
                     <Grid padded textAlign="center" >
@@ -59,21 +63,22 @@ class Home extends Component {
                                 <h2>Recent Projects</h2>
                             </Grid.Row>
                             <Divider />
-                            <Grid.Row onClick={this.onClick}>
-                                <h4>Project 1</h4>
+                            <Grid.Row onClick={this.onClick} className="project">
+                                <h4>Mark - en-x-demo2 - ULB</h4>
                             </Grid.Row>
                                 <Divider />
                             <Grid.Row onClick={this.onClick} >
-                                <h4>Project 2</h4>
+                                <h4>Romans - Español Latin America - UDB</h4>
                             </Grid.Row>
                                 <Divider />
                             <Grid.Row onClick={this.onClick}>
-                                <h4>Project 3</h4>
+                                <h4>Psalms - Mandarin - ULB</h4>
                             </Grid.Row>
                                 <Divider />
                         </Grid.Column>
                     </Grid>
                 </Container>
+
             </div>
         );
     }
