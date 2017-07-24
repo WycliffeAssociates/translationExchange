@@ -75,6 +75,7 @@ class AudioComponent extends Component {
                     updateTakeInState={this.props.updateTakeInState}
                     ref={instance => (this.commentContainer = instance)}
                     take={this.props.take}
+                    comments={this.props.comments}
                 />
 
 

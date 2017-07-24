@@ -36,10 +36,10 @@ class ChapterContainer extends Component {
 
     requestData () {
         var query = QueryString.parse(this.props.location.search);
-
         this.setState({error: ""});
         axios.post(config.apiUrl + 'get_project_takes/', query
         ).then((results) => {
+            console.log('r', results);
             this.setState(
                 {
                     loaded: true,

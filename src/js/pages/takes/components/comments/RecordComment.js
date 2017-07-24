@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { ReactMic } from 'react-mic';
 import './RecordComment.css';
 import {Button, Grid, Icon} from "semantic-ui-react";
+import axios from 'axios';
 
 let startRecording;
 let stopRecording;
@@ -15,7 +16,8 @@ export class RecordComment extends Component {
             displayPlayer: false,
             AudioURL: "",
             DisableSaveButton: true,
-            blob: ''
+            blob: '',
+            jsonblob: null
         }
 
 
@@ -56,14 +58,24 @@ export class RecordComment extends Component {
         //change this to the real url so that it can playback
         this.setState({
             AudioURL: recordedBlob.blobURL,
-            blob: recordedBlob,
+            blob: recordedBlob.blob,
             displayPlayer: true
         });
 
+        var reader  = new FileReader();
+        reader.addEventListener("load", () => {
+            this.setState({
+                jsonblob: reader.result
+            });
 
-        if (this.state.AudioURL !== ''){
-            {this.props.sendComment(this.state.blob)}
-        }
+        }, false);
+
+        reader.readAsDataURL(this.state.blob);
+
+        //
+        // if (this.state.AudioURL !== ''){
+        //     {this.props.sendComment(this.state.blob)}
+        // }
 
     }
 
@@ -93,6 +105,7 @@ export class RecordComment extends Component {
         const displayButton = this.state.record;
 
         const AudioURL = this.state.AudioURL;
+        const jsonblob = this.state.jsonblob;
 
 
 
@@ -103,7 +116,7 @@ export class RecordComment extends Component {
         let MainButton = null;
 
         if (displayPlayer) {
-            AudioPlayer =  <DisplayAudioPlayer displayPlayer={displayPlayer} AudioURL = {AudioURL} />;
+            AudioPlayer =  <DisplayAudioPlayer displayPlayer={displayPlayer} type = {this.props.type} id={this.props.id} jsonblob ={jsonblob} AudioURL = {AudioURL} />;
 
         }
 
@@ -159,6 +172,17 @@ function StopButton(props) {
 
 
 
+function onClickSave(blobx, type, id) {
+    axios.post('http://172.19.145.91/api/comments/', {
+        "comment": blobx,
+        "user": 2,
+        "object": id,
+        "type": type
+
+    }).then((results) => {
+        alert('uploaded successfully')
+    });
+}
 
 
 
@@ -166,6 +190,10 @@ function DisplayAudioPlayer(props) {
     const displayPlayer = props.displayPlayer;
 
     const AudioURL = props.AudioURL;
+
+    const jsonblob = props.jsonblob;
+    const type = props.type;
+    const id = props.id;
 
 
     if (displayPlayer) {
@@ -180,7 +208,7 @@ function DisplayAudioPlayer(props) {
     </Grid.Column>
 
     <Grid.Column width={3}>
-    <Button positive size="small">Save</Button>
+        {jsonblob ? <Button positive size="small" onClick={() => {onClickSave(jsonblob, type, id)}}>Save</Button> : ''}
     </Grid.Column>
             </Grid>
         );

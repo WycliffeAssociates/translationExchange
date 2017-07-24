@@ -4,8 +4,6 @@ import Star from './Star';
 import AudioComponent from './AudioComponent';
 import config from "config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
-import TakeExportButton from './SelectTake'
-import CommentsButton from "./CommentsButton";
 import TakeListenButton from './AddTake'
 import DeleteTake from './DeleteTake'
 import LoadingGif from 'images/loading-tiny.gif'
@@ -97,6 +95,7 @@ class Take extends Component {
                         width="700"
                         mic={true}
                         take={this.props.take}
+                        comments={this.props.comments}
                     />
                 </Grid.Column >
 

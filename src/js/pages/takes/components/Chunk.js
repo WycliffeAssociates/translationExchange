@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import TakeList from "./TakeList";
 import ChunkPropTypes from "./ChunkPropTypes";
 import {Accordion, Button, Icon} from "semantic-ui-react";
-import axios from 'axios';
-import config from "config/config";
-import _ from 'lodash';
-import CommentContainer from "./comments/CommentContainer";
 let onClick;
 
 

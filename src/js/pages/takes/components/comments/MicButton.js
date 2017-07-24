@@ -1,14 +1,16 @@
 /**
  * Created by ericazhong on 7/21/17.
  */
+
+
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import RecordComment from './RecordComment';
 import './RecordComment.css';
-import { Button, Header, Image, Modal,ModalHeader } from 'semantic-ui-react';
-import axios from 'axios';
+import {Button, Container, Grid, Header, Icon, Image, Modal, ModalHeader} from 'semantic-ui-react';
+import Audio from "translation-audio-player";
+import playlist from "/Users/ericazhong/Documents/8woc2017/src/js/pages/takes/components/songs/playlist.json"
 import config from "../../../../../config/config";
-
+import axios from "axios"
 // NOTE: (dmarchuk)
 let onClickCancel;
 let onClickSave;
@@ -26,7 +28,6 @@ class MicButton extends Component {
             show: this.props.open,
             SaveButtonState: true,
             blob: null,
-            wholeblob: null,
 
 
         };
@@ -36,7 +37,6 @@ class MicButton extends Component {
         this.hideModal = this.hideModal.bind(this);
         this.getInitialState = this.getInitialState.bind(this);
         this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
-        this.getComment=this.getComment.bind(this);
         this.onClickSave = this.onClickSave.bind(this);
 
     }
@@ -66,45 +66,6 @@ class MicButton extends Component {
 
     onClickSave = () => {
         this.hideModal();
-        var reader  = new FileReader();
-
-        reader.addEventListener("load", () => {
-            console.log('reader', reader);
-            console.log('y', reader.result);
-
-            axios.post(config.apiUrl + 'comments/', {
-                "location": reader.result,
-                "user": 3,
-                "file": this.props.take.id,
-
-            }).then((results) => {
-                //console.log(JSON.stringify(this.state.blob));
-                //update this take in state using the update method in ChapterContainer
-                console.log('uploaded successfully')
-            });
-
-
-        }, false);
-
-        if (this.state.blob) {
-            reader.readAsDataURL(this.state.blob);
-
-
-
-        }
-        // reader.readAsDataURL(this.state.blob);
-        // this.state.wholeblob.blob = reader.result;
-        // axios.post(config.apiUrl + 'comments/', {
-        //         "location": reader.result,
-        //         "user": 3,
-        //         "file": this.props.take.id
-        //
-        //     }).then((results) => {
-        //     console.log(JSON.stringify(this.state.blob));
-        //         //update this take in state using the update method in ChapterContainer
-        //       console.log('uploaded successfully')
-        //     });
-
         this.setState({SaveButtonState: true});
 
     };
@@ -112,12 +73,6 @@ class MicButton extends Component {
     changeSaveButtonState (newState) {
         this.setState({SaveButtonState: newState});
 
-    }
-    getComment(comment) {
-        this.setState({
-            wholeblob: comment,
-            blob: comment.blob
-        });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -127,16 +82,20 @@ class MicButton extends Component {
 
     }
 
+    createPlaylist() {
+
+    }
+
     Style = {
         backgroundColor: "black",
         fontSize: "32",
         textAlign: "center",
+        color: 'white',
         //width:"500px"
 
     };
 
     render(){
-
         return(
 
             <Modal
@@ -145,35 +104,43 @@ class MicButton extends Component {
                 style= {this.Style}
                 dimmer= "inverted"
             >
-                <Modal.Header style = {this.Style}>Record Audio Comment</Modal.Header>
+                <Modal.Header style = {this.Style}>Comments</Modal.Header>
                 <div>
                     <RecordComment ref={instance => (this.recordComment = instance) }
                                    changeSaveButtonState = {this.changeSaveButtonState}
                                    updateTakeInState={this.props.updateTakeInState}
-                                   sendComment={this.getComment}
+                                   type="take"
+                                   id = {this.props.take.id}
+
 
                     />
+
                 </div>
+                <Container className="commentsList">
+                    <Grid columns={2}>
 
-                <Modal.Actions style = {this.Style}>
-                    <div className="buttons-container">
-                        <Button className="SaveButton"
-                                disabled={this.state.SaveButtonState}
-                                positive icon='checkmark'
-                                labelPosition='right'
-                                content="Save"
-                                onClick={this.onClickSave.bind(this)} />
+                        <Grid.Column width={13}>
+                            <Audio
+                                width={600}
+                                height={300}
+                                playlist={playlist.playlist}
 
-                        <Button  className="CancelButton"
-                                 negative icon='remove'
-                                 labelPosition='right'
-                                 content="Cancel"
-                                 onClick={this.onClickCancel}/>
-                    </div>
+                                // store a reference of the audio component
+                                ref={audioComponent => { this.audioComponent = audioComponent; }}
+                            />
+                        </Grid.Column>
 
-                </Modal.Actions>
+                        <Grid.Column width={3}>
+                            <Button icon negative>
+                                <Icon name="trash"/>
+                            </Button>
+                            <Button onClick={this.hideModal} content="close"/>
+                        </Grid.Column>
+                    </Grid>
+
+                </Container>
+
             </Modal>
-
         );
     }
 }
