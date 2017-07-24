@@ -29,9 +29,18 @@ class Home extends Component {
         axios.post(config.apiUrl + 'all_projects/', {}
         ).then((results) => {
             this.setState({projects: results.data})
+            this.reduceState()
         }).catch((exception) => {
             this.setState({error: exception});
         });
+    }
+
+    reduceState() {
+        if (this.state.projects.length > 4) {
+            this.setState({
+                projects: this.state.projects.splice(0, 5)
+            })
+        }
     }
 
     navigateToProject (language, book, version) {
@@ -51,8 +60,6 @@ class Home extends Component {
             }
         )
     }
-
-
 
     render() {
 
@@ -92,8 +99,8 @@ class Home extends Component {
                     <Container fluid className="yellowBar" />
 
                     <Grid padded textAlign="center" >
-                        <Grid.Column>
-                            <Grid.Row>
+                        <Grid.Column width={3}>
+                            <Grid.Row height={1}>
                                 <h2>Recent Projects</h2>
                             </Grid.Row>
                             <Divider />
@@ -122,10 +129,9 @@ class Home extends Component {
 
         return(
             <div>
-                <Grid.Row onClick={navigateToProject} className="hoverButton">
-                    <h4>{str}</h4>
+                <Grid.Row divided onClick={navigateToProject} className="hoverButton">
+                    <h4>> {str}</h4>
                 </Grid.Row>
-                <Divider />
             </div>
 
         );

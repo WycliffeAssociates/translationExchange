@@ -41,7 +41,7 @@
     height: 14px
 }
 
-.hoverButton {
+.hoverButton:hover {
     cursor: pointer;
-    /*background-color: #F69C76;*/
+    background-color: #4F5669
 }
