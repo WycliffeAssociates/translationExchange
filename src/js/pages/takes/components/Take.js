@@ -9,6 +9,7 @@ import CommentsButton from "./CommentsButton";
 import TakeListenButton from './AddTake'
 import DeleteTake from './DeleteTake'
 import LoadingGif from 'images/loading-tiny.gif'
+import CommentContainer from "./comments/CommentContainer";
 
 var listenCounter = 0
 class Take extends Component {
@@ -53,10 +54,10 @@ class Take extends Component {
         };
         return (
             <div>
-        <Grid columns={4} relaxedclassName="take">
+        <Grid columns={5} relaxedclassName="take">
 
             <Grid.Column width={4}>
-                <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate(this.props.take.date_modified)}</strong>
+                <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {/*this.parseDate(this.props.take.date_modified)*/}</strong>
             </Grid.Column>
 
             <Grid.Column width={2}>
@@ -67,15 +68,14 @@ class Take extends Component {
 
             </Grid.Column>
 
-            <Grid.Column width={4}>
-                <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
+            <Grid.Column width={3}>
+                {/*<TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>*/}
                 <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
                 <DeleteTake onDeleteTake={this.props.onDeleteTake}/>
-                <CommentsButton comments = {this.props.comments}/>
             </Grid.Column>
 
             {this.props.source
-                ? <Grid.Column>
+                ? <Grid.Column width={5}>
                     <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'
                             labelPosition='right'/>
                     Language: {this.props.source.language.name}
@@ -83,6 +83,9 @@ class Take extends Component {
                 : ""
 
             }
+
+            <Grid.Column width={1}> <CommentContainer
+                ref={instance => (this.commentContainer = instance)}/> </Grid.Column>
 
         </Grid>
 

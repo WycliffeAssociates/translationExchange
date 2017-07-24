@@ -7,6 +7,7 @@ import QueryString from 'query-string';
 import LoadingDisplay from "js/components/LoadingDisplay";
 import CheckingLevel from './components/CheckingLevel'
 import LoadingGif from 'images/loading-tiny.gif'
+import ExportButton from "../takes/components/ExportButton";
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -78,7 +79,7 @@ class ProjectContainer extends Component {
             }
         };
 
-        axios.post("http://172.19.145.91:8000/api/update_project/", params);
+        axios.post(config.apiUrl + "update_project/", params);
     }
 
     getChapterData() {
@@ -92,9 +93,9 @@ class ProjectContainer extends Component {
             // console.dir(results.data[results.data.length - 1]);
             this.setState(
                 {
-                    chapters: results.data.slice(0, results.data.length - 2),
-                    book: results.data[results.data.length - 2].book[0],
-                    language: results.data[results.data.length - 1].lang[0],
+                    chapters: results.data.chapters,
+                    book: results.data.book,
+                    language: results.data.language,
                     loaded: true
                 }
             )
@@ -129,7 +130,7 @@ class ProjectContainer extends Component {
                                     error={this.state.error}
                                     retry={this.getChapterData.bind(this)}>
                         <Header as='h1'>{this.state.book.name} ({this.state.language.name})
-
+                <ExportButton chapters={this.state.chapters}/>
                         </Header>
 
                         <Table selectable fixed color="blue">
@@ -138,6 +139,7 @@ class ProjectContainer extends Component {
                                     <Table.HeaderCell>Chapter</Table.HeaderCell>
                                     <Table.HeaderCell>Percent Complete</Table.HeaderCell>
                                     <Table.HeaderCell>Checking Level</Table.HeaderCell>
+                                    <Table.HeaderCell>Ready to Export</Table.HeaderCell>
                                     <Table.HeaderCell>Contributors</Table.HeaderCell>
                                     <Table.HeaderCell>Translation Type</Table.HeaderCell>
                                     <Table.HeaderCell>Date Modified</Table.HeaderCell>

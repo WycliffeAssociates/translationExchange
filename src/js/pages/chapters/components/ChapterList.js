@@ -28,12 +28,23 @@ class ChapterList extends Component {
             <Table.Cell><CircularProgressbar strokeWidth="20" percentage={chapter.percent_complete}/></Table.Cell>
             <Table.Cell className="dont-hide-overflow"><CheckingLevel num={chapter.checked_level}
                                                                       setCheckingLevel={this.props.setCheckingLevel}/></Table.Cell>
-                <Table.Cell>{chapter.contributors}</Table.Cell>
+                        {/*this will get info from database chapter.exportready or smth like that*/}
+                    <Table.Cell>na</Table.Cell>
+                    <Table.Cell>{this.getContributorText(chapter.contributors)}</Table.Cell>
                 <Table.Cell>{this.props.version}</Table.Cell>
-                <Table.Cell>{this.parseDate(chapter.timestamp)}</Table.Cell>
+                {/*<Table.Cell>{this.parseDate(chapter.timestamp)}</Table.Cell>*/}
             </Table.Row>
 
         );
+    }
+
+    getContributorText (contributors) {
+        let contribText = "";
+        for (let i = 0; i < contributors.length - 1; i++) {
+            contribText += contributors[i] + ", ";
+        }
+        contribText += contributors[contributors.length - 1];
+        return contribText;
     }
 
     parseDate(date) {
