@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Header, Icon, Modal } from 'semantic-ui-react'
+let state;
+let handleOpen;
+let handleClose;
 
 export default class ExportButton extends Component {
     state = { modalOpen: false };
@@ -17,7 +20,7 @@ export default class ExportButton extends Component {
         this.props.chapters.map((i) => {
             if (i.exportReady) {counter+=1}
         });
-
+        
         return counter > 0;
     }
 
@@ -35,9 +38,9 @@ export default class ExportButton extends Component {
                 size='small'
 
             >
-                <Header icon='browser' content='Export Project' />
+                <Header icon='browser' content='Publish Project' />
                 <Modal.Content>
-                    <h3>Are you ready to export your project?</h3>
+                    <h3>Are you ready to publish this project?</h3>
                 </Modal.Content>
                 <Modal.Actions>
                     <Button color='green' onClick={this.handleClose} inverted>
