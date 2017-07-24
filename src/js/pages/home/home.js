@@ -122,7 +122,7 @@ class Home extends Component {
 
         return(
             <div>
-                <Grid.Row onClick={navigateToProject} style="stop:hover" className="hoverButton">
+                <Grid.Row onClick={navigateToProject} className="hoverButton">
                     <h4>{str}</h4>
                 </Grid.Row>
                 <Divider />
