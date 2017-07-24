@@ -17,9 +17,9 @@ class TakeContainer extends Component {
     }
 
     onMarkedForExportToggled () {
-        var markedForExport = !this.props.take.take.is_export;
+        var markedForExport = !this.props.take.take.is_publish;
         this.props.patchTake(this.props.take.take.id,
-            {is_export: markedForExport},
+            {is_publish: markedForExport},
             () => { //success callback
                 if (markedForExport) {
                     this.props.updateChosenTakeForChunk(this.props.take.take.id);
