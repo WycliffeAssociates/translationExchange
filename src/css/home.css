@@ -10,7 +10,7 @@
     color: #FFFFFF;
 }
 
-.grid {
+.middle {
     height: 350px;
 }
 
@@ -40,9 +40,3 @@
     color: #FFFFFF;
     height: 14px
 }
-
-.blackBar {
-    background-color: #000000;
-    width: 3px
-}
-

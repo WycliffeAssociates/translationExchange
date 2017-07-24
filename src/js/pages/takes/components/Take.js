@@ -47,75 +47,77 @@ class Take extends Component {
 
 
     render () {
+
         var file = [];
         file[0] = {
             "src": config.streamingUrl + this.props.take.location
         };
+
         return (
             <div>
-        <Grid columns={5} relaxedclassName="take">
-
-            <Grid.Column width={4}>
-                <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {/*this.parseDate(this.props.take.date_modified)*/}</strong>
-            </Grid.Column>
-
-            <Grid.Column width={2}>
-                {this.props.ratingLoading
-                    ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
-                    : <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
-                }
-
-            </Grid.Column>
-
-            <Grid.Column width={3}>
-                {/*<TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>*/}
-                <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
-                <DeleteTake onDeleteTake={this.props.onDeleteTake}/>
-            </Grid.Column>
-
-            {this.props.source
-                ? <Grid.Column width={5}>
-                    <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'
-                            labelPosition='right'/>
-                    Language: {this.props.source.language.name}
-                </Grid.Column>
-                : ""
-
-            }
-
-            <Grid.Column width={1}> <CommentContainer
-                ref={instance => (this.commentContainer = instance)}/> </Grid.Column>
-
-        </Grid>
-
-
-            <Grid columns={2} relaxed>
-                <Grid.Column width={9}>
-                    <AudioComponent
-                        src={config.streamingUrl + this.props.take.location}
-                        playlist={file}
-                        width="700"
-                        mic={true}
-                        take={this.props.take}
-                    />
-                </Grid.Column >
-
-                {this.state.isToggleOn ? '' :
+                <Grid columns={5} >
 
                     <Grid.Column width={4}>
-                            <AudioComponent
-                                src={config.streamingUrl + this.props.take.location}
-                                playlist={file}
-                                width="200"
-                                name="Source Audio"
-                                mic={false}
-                                take={this.props.take}
-                            />
-                    </Grid.Column>}
+                        <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {/*this.parseDate(this.props.take.date_modified)*/}</strong>
+                    </Grid.Column>
 
-            </Grid>
+                    <Grid.Column width={2}>
+                        {this.props.ratingLoading
+                            ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                            : <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
+                        }
 
-        </div>
+                    </Grid.Column>
+
+                    <Grid.Column width={3}>
+                        {/*<TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>*/}
+                        <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
+                        <DeleteTake onDeleteTake={this.props.onDeleteTake}/>
+                    </Grid.Column>
+
+                    {this.props.source
+                        ? <Grid.Column width={5}>
+                            <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'
+                                    labelPosition='right'/>
+                            Language: {this.props.source.language.name}
+                        </Grid.Column>
+                        : ""
+
+                    }
+
+                    <Grid.Column width={1}> <CommentContainer
+                        ref={instance => (this.commentContainer = instance)}/> </Grid.Column>
+
+                </Grid>
+
+
+                <Grid columns={2} relaxed>
+                    <Grid.Column width={9}>
+                        <AudioComponent
+                            src={config.streamingUrl + this.props.take.location}
+                            playlist={file}
+                            width="700"
+                            mic={true}
+                            take={this.props.take}
+                        />
+                    </Grid.Column >
+
+                    {this.state.isToggleOn ? '' :
+
+                        <Grid.Column width={4}>
+                                <AudioComponent
+                                    src={config.streamingUrl + this.props.take.location}
+                                    playlist={file}
+                                    width="200"
+                                    name="Source Audio"
+                                    mic={false}
+                                    take={this.props.take}
+                                />
+                        </Grid.Column>}
+
+                </Grid>
+
+            </div>
         );
     }
 

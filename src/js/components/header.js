@@ -19,7 +19,7 @@ class Header extends Component {
 
         var logo = <Image src="https://files.slack.com/files-pri/T5RBHJC4T-F6CTSP6MT/combined_shape.png" size="tiny"/>
 
-        var text = <Image src="" />
+        var text = <h1><font color="#F5A623">This is our title</font></h1>
 
         const { activeItem } = this.state;
 
@@ -28,8 +28,7 @@ class Header extends Component {
 
                 <Menu  fluid secondary size='huge' compact inverted >
                     <Menu.Item content={logo} />
-
-                    {/*<Menu.Item content={text} />*/}
+                    <Menu.Item content={text} />
 
                     <Menu.Item position="right">
                         <Link position="right" to="/">

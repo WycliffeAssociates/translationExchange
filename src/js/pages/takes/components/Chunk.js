@@ -40,23 +40,20 @@ class Chunk extends Component {
         return (
             <div>
                 <Accordion styled fluid>
-                <Accordion.Title>
-                    <Icon name='dropdown' />
-                    {modeLabel} {this.props.number}
-                </Accordion.Title>
+                    <Accordion.Title>
+                        <Icon name='dropdown' />
+                        {modeLabel} {this.props.number}
+                    </Accordion.Title>
 
-                <Accordion.Content>
-
-
-
-                    <TakeList
-                        takes={this.props.segments}
-                        addToListenList={this.props.addToListenList}
-                        patchTake={this.props.patchTake}
-                        deleteTake={this.props.deleteTake}
-                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                    />
-                </Accordion.Content>
+                    <Accordion.Content>
+                        <TakeList
+                            takes={this.props.segments}
+                            addToListenList={this.props.addToListenList}
+                            patchTake={this.props.patchTake}
+                            deleteTake={this.props.deleteTake}
+                            updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                        />
+                    </Accordion.Content>
                 </Accordion>
             </div>
         );

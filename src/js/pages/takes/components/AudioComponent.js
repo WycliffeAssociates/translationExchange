@@ -28,7 +28,6 @@ class AudioComponent extends Component {
     }
 
 
-
     onClick = () => {                         // used when you click the microphone button in the player
 
         this.commentContainer.showModal();
@@ -71,6 +70,7 @@ class AudioComponent extends Component {
                 />
 
                 {/*used ref to call a method in child class and instance*/}
+
                 <MicButton
                     updateTakeInState={this.props.updateTakeInState}
                     ref={instance => (this.commentContainer = instance)}

@@ -32,7 +32,7 @@ class Home extends Component {
 
                 <Container className="top" fluid >
 
-                    <Grid columns={2} className="grid">
+                    <Grid columns={2} className="middle">
                         <Grid.Column width={5} verticalAlign="middle">
                             <Image src="https://files.slack.com/files-pri/T5RBHJC4T-F6BJNKZ7T/hands.png" alt="image goes here" />
 
@@ -56,6 +56,7 @@ class Home extends Component {
 
 
                 <Container fluid className="bottom">
+                    <Container fluid className="yellowBar" />
 
                     <Grid padded textAlign="center" >
                         <Grid.Column>
