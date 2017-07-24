@@ -129,7 +129,6 @@ class ProjectContainer extends Component {
         /// {language: "en-x-demo2", version: "ulb", book: "mrk"}, files_list: {}}
         //  {"language": "en-x-demo2", "version": "ulb", "book": "mrk"}
 
-        alert("Contacting API...");
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
                 console.log("done");
@@ -154,7 +153,7 @@ class ProjectContainer extends Component {
                                     error={this.state.error}
                                     retry={this.getChapterData.bind(this)}>
                         <Header as='h1'>{this.state.book.name} ({this.state.language.name})
-                <ExportButton chapters={this.state.chapters}/>
+                            <ExportButton chapters={this.state.chapters}/>
                         </Header>
 
                         <Table selectable fixed color="blue">
@@ -182,25 +181,25 @@ class ProjectContainer extends Component {
                     <br></br>
 
 
-                            <DownloadProjects
-                                onDownloadProject={this.onDownloadProject.bind(this)}
-                            />
+                    <DownloadProjects
+                        onDownloadProject={this.onDownloadProject.bind(this)}
+                    />
 
-                            {!this.state.uploadSourceLoading && this.state.uploadSourceSuccess
-                                ? <div>Successfully uploaded {this.state.uploadSourceSuccess} and set it as source audio</div>
-                                : <form  onSubmit={this.uploadSourceFile} method="post" encType="multipart/form-data">
-                                    <h4>Upload source audio</h4>
-                                    <Input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
-                                    {this.state.uploadSourceLoading
-                                        ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
-                                        : <Button type="submit">Submit</Button>
-                                    }
-                                    {this.state.uploadSourceError
-                                        ? "There was an error uploading the file: " + this.state.uploadSourceError
-                                        : ""
-                                    }
-                                </form>
+                    {!this.state.uploadSourceLoading && this.state.uploadSourceSuccess
+                        ? <div>Successfully uploaded {this.state.uploadSourceSuccess} and set it as source audio</div>
+                        : <form onSubmit={this.uploadSourceFile} method="post" encType="multipart/form-data">
+                            <h4>Upload source audio</h4>
+                            <Input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
+                            {this.state.uploadSourceLoading
+                                ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                                : <Button type="submit">Submit</Button>
                             }
+                            {this.state.uploadSourceError
+                                ? "There was an error uploading the file: " + this.state.uploadSourceError
+                                : ""
+                            }
+                        </form>
+                    }
 
                 </Container>
 

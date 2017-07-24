@@ -7,14 +7,13 @@ class DownloadProjects extends Component {
     render () {
 
         return (
-            <div id="download_chapter_audio">
-                <Button
-                    content='Download'
-                    icon='download'
-                    labelPosition='right'
-                    onClick={this.props.onDownloadProject}
-                />
-            </div>
+            <Button
+                content='Download'
+                icon='download'
+                labelPosition='right'
+                size='small'
+                onClick={this.props.onDownloadProject}
+            />
 
         );
     }
