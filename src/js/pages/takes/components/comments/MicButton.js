@@ -1,15 +1,13 @@
 /**
  * Created by ericazhong on 7/21/17.
  */
-
-
 import React, {Component} from 'react';
 import RecordComment from './RecordComment';
 import './RecordComment.css';
 import {Button, Container, Grid, Header, Icon, Image, Modal, ModalHeader} from 'semantic-ui-react';
 import Audio from "translation-audio-player";
-import playlist from "/Users/ericazhong/Documents/8woc2017/src/js/pages/takes/components/songs/playlist.json"
 import config from "../../../../../config/config";
+import playlist from "/Users/ericazhong/Documents/8woc2017/src/js/pages/takes/components/songs/playlist.json"
 import axios from "axios"
 // NOTE: (dmarchuk)
 let onClickCancel;
@@ -21,15 +19,11 @@ class MicButton extends Component {
     constructor(props){
         super(props);
 
-
-
         this.state = {title : 'Record Comment',
 
             show: this.props.open,
             SaveButtonState: true,
             blob: null,
-
-
         };
 
 
@@ -83,7 +77,26 @@ class MicButton extends Component {
     }
 
     createPlaylist() {
-
+        // var files = this.props.comments;
+        // files.map((file)=> file.comment.location);
+        // var comments = [];
+        // var playlist = [];
+        //
+        // for (var i=0;i<files.length; i++) {
+        //     playlist.append({
+        //         "src": files[i]
+        //     });
+        // }
+        // comments["playlist"]=playlist;
+        // comments.map((comment)=> <Audio
+        //     width={600}
+        //     height={300}
+        //     playlist={playlist.playlist}
+        //
+        //     // store a reference of the audio component
+        //     ref={audioComponent => { this.audioComponent = audioComponent; }}
+        // />);
+        // return comments
     }
 
     Style = {
@@ -112,7 +125,6 @@ class MicButton extends Component {
                                    type="take"
                                    id = {this.props.take.id}
 
-
                     />
 
                 </div>
@@ -121,13 +133,14 @@ class MicButton extends Component {
 
                         <Grid.Column width={13}>
                             <Audio
-                                width={600}
-                                height={300}
-                                playlist={playlist.playlist}
+                                 width={600}
+                                 height={300}
+                                 playlist={playlist.playlist}
 
-                                // store a reference of the audio component
-                                ref={audioComponent => { this.audioComponent = audioComponent; }}
-                            />
+                                 // store a reference of the audio component
+                                 ref={audioComponent => { this.audioComponent = audioComponent; }}
+                             />
+
                         </Grid.Column>
 
                         <Grid.Column width={3}>

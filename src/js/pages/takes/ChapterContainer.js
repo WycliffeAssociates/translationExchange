@@ -49,8 +49,6 @@ class ChapterContainer extends Component {
                     mode:results.data[0].take.mode
                 }
             )
-        }).catch((exception) => {
-            this.setState({error: exception});
         });
     }
 

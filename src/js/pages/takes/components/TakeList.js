@@ -5,8 +5,8 @@ import TakePropTypes from "./TakePropTypes";
 
 var iterator;
 class TakeList extends Component {
-    render () {
 
+    render () {
         iterator = 0;
         return (
             <div>
