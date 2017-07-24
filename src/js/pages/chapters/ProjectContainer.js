@@ -10,6 +10,7 @@ import CheckingLevel from './components/CheckingLevel'
 import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
 import ExportButton from "../takes/components/ExportButton";
+import FileDownload from 'react-file-download';
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -141,6 +142,7 @@ class ProjectContainer extends Component {
                 // console.log(download_results.data);
                 console.log("done");
                 // window.open(download_results.data);
+                FileDownload(download_results.data, "project.zip");
 
             }).catch((exception) => {
             this.setState({error: exception});
