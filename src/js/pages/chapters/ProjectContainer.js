@@ -126,24 +126,14 @@ class ProjectContainer extends Component {
             book: "mrk"
         }
 
-        //Post to API with correct params
-        // {
-        //         "language": "en-x-demo2",
-        //         "version": "ulb",
-        //         "book": "mrk"
-        // }
+        /// {language: "en-x-demo2", version: "ulb", book: "mrk"}, files_list: {}}
+        //  {"language": "en-x-demo2", "version": "ulb", "book": "mrk"}
 
         alert("Contacting API...");
-        let downladEndpoint = "http://172.19.145.91:8000/api/zipFiles/"
-
-        // console.log("downloading");
-        axios.get(downladEndpoint, params, {timeout: 0})
+        axios.get(config.apiUrl + "/zip_files/", params, {timeout: 0})
             .then((download_results) => {
-                // console.log(download_results.data);
                 console.log("done");
-                // window.open(download_results.data);
                 FileDownload(download_results.data, "project.zip");
-
             }).catch((exception) => {
             this.setState({error: exception});
         });
