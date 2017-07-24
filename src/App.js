@@ -11,8 +11,16 @@ import './App.css';
 import Header from "./js/components/header";
 import Home from "./js/pages/home/home";
 import About from "./js/pages/about/about";
+import axios from 'axios'
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+
+        //configuration for web requests
+        axios.defaults.timeout = 20000;
+    }
 
     render() {
         return (
