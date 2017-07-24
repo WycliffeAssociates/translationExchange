@@ -3,6 +3,7 @@ import {Menu, state, handleItemClick, Container, Image} from "semantic-ui-react"
 import {Link} from "react-router-dom";
 import * as ReactDOM from "react-dom";
 import 'css/home.css'
+import combinedShape from 'images/combined-shape.png'
 
 
 class Header extends Component {
@@ -17,8 +18,7 @@ class Header extends Component {
 
     render() {
 
-        var logo = <Image src="https://files.slack.com/files-pri/T5RBHJC4T-F6CTSP6MT/combined_shape.png" size="tiny"/>
-
+        var logo = <Image src={combinedShape} size="tiny"/>
         var text = <h1><font color="#F5A623">Our Translation Project</font></h1>
 
         const { activeItem } = this.state;

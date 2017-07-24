@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Header, Image, Modal, Container, Segment, Grid, Form, Table, Divider } from 'semantic-ui-react'
 import 'css/home.css'
-
+import hands from 'images/hands.png'
 
 class Home extends Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class Home extends Component {
                     <Grid columns={2} className="middle">
                         <Grid.Row height={3}/>
                         <Grid.Column width={5} verticalAlign="middle">
-                            <Image src="https://files.slack.com/files-pri/T5RBHJC4T-F6BJNKZ7T/hands.png" alt="image goes here" />
+                            <Image src={hands} alt="image goes here" />
                         </Grid.Column>
                         <Grid.Column verticalAlign="middle">
 
