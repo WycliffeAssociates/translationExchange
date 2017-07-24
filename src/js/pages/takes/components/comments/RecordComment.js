@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { ReactMic } from 'react-mic';
 import './RecordComment.css';
-import {Icon} from "semantic-ui-react";
+import {Button, Grid, Icon} from "semantic-ui-react";
 
 let startRecording;
 let stopRecording;
@@ -172,9 +172,17 @@ function DisplayAudioPlayer(props) {
 
         return (
 
-            <audio className="audiPlayer" controls name="media"  >
+<Grid columns={2}>
+    <Grid.Column width={13}>
+            <audio className="audioPlayer" controls name="media"  >
                 <source src= {AudioURL} type = "audio/webm" />
             </audio>
+    </Grid.Column>
+
+    <Grid.Column width={3}>
+    <Button positive size="small">Save</Button>
+    </Grid.Column>
+            </Grid>
         );
     }
     return null;

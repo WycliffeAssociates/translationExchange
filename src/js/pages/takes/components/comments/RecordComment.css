@@ -3,7 +3,7 @@
 
 .sound-wave{
 
-    height: 100px;
+    height: 60px;
     width: 100%;
     border-radius: 5px;
 
@@ -75,13 +75,12 @@
     -webkit-box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.54);
     -moz-box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.54);
     box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.54);
+    width: 80%;
 }
 
-
-
-
-
-
+.commentsList{
+    background-color: black;
+}
 
 
 

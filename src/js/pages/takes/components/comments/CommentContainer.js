@@ -1,12 +1,12 @@
 
 
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import RecordComment from './RecordComment';
 import './RecordComment.css';
-import { Button, Header, Image, Modal,ModalHeader } from 'semantic-ui-react';
-import axios from 'axios';
-import config from "../../../../../config/config";
+import {Button, Container, Grid, Header, Icon, Image, Modal, ModalHeader} from 'semantic-ui-react';
+import Audio from "translation-audio-player";
+
+import playlist from '/Users/ericazhong/Documents/8woc2017/src/js/pages/takes/components/songs/playlist.json'
 
 // NOTE: (dmarchuk)
 let onClickCancel;
@@ -124,6 +124,7 @@ class CommentContainer extends Component {
     Style = {
         backgroundColor: 'black',
         fontSize: "32",
+        color: 'white',
         textAlign: "center",
         //width:"500px"
 
@@ -134,11 +135,9 @@ class CommentContainer extends Component {
         return(
 
                 <Modal
-                       open={this.state.show}
                        size='small'
                        style= {this.Style}
-                       dimmer= "inverted"
-
+                       closeIcon='close'
                        trigger = {<Button
                            color="pink"
                            floated='right'
@@ -146,7 +145,7 @@ class CommentContainer extends Component {
                            icon="microphone"
                        onClick={this.showModal}/>}
                 >
-                    <Modal.Header style = {this.Style}>Record Audio Comment</Modal.Header>
+                    <Modal.Header style = {this.Style}>Comments</Modal.Header>
                     <div>
                         <RecordComment ref={instance => (this.recordComment = instance) }
                                        changeSaveButtonState = {this.changeSaveButtonState}
@@ -157,24 +156,47 @@ class CommentContainer extends Component {
 
 
                     </div>
+                    <Container className="commentsList">
+                        <Grid columns={2}>
 
-                    <Modal.Actions style = {this.Style}>
-                        <div className="buttons-container">
-                            <Button className="SaveButton"
-                                    disabled={this.state.SaveButtonState}
-                                    positive icon='checkmark'
-                                    labelPosition='right'
-                                    content="Save"
-                                    onClick={this.onClickSave.bind(this)} />
+                            <Grid.Column width={13}>
+                        <Audio
+                            width={600}
+                            height={300}
+                            playlist={playlist.playlist}
 
-                            <Button  className="CancelButton"
-                                     negative icon='remove'
-                                     labelPosition='right'
-                                     content="Cancel"
-                                     onClick={this.hideModal}/>
-                        </div>
+                            // store a reference of the audio component
+                            ref={audioComponent => { this.audioComponent = audioComponent; }}
+                        />
+                            </Grid.Column>
 
-                    </Modal.Actions>
+                            <Grid.Column width={3}>
+                        <Button icon negative>
+                            <Icon name="trash"/>
+                        </Button>
+                            </Grid.Column>
+                        </Grid>
+
+                    </Container>
+
+
+                    {/*<Modal.Actions style = {this.Style}>*/}
+                        {/*<div className="buttons-container">*/}
+                            {/*<Button className="SaveButton"*/}
+                                    {/*disabled={this.state.SaveButtonState}*/}
+                                    {/*positive icon='checkmark'*/}
+                                    {/*labelPosition='right'*/}
+                                    {/*content="Save"*/}
+                                    {/*onClick={this.onClickSave.bind(this)} />*/}
+
+                            {/*<Button  className="CancelButton"*/}
+                                     {/*negative icon='remove'*/}
+                                     {/*labelPosition='right'*/}
+                                     {/*content="Cancel"*/}
+                                     {/*onClick={this.hideModal}/>*/}
+                        {/*</div>*/}
+
+                    {/*</Modal.Actions>*/}
                 </Modal>
         );
     }
