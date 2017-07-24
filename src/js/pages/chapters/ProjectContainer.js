@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Container, Header, Table, Input, TextArea } from "semantic-ui-react";
+import {Button, Container, Header, Table, Input, TextArea, Loader } from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
 import DownloadProjects from "./components/DownloadProjects";
 import axios from 'axios';
@@ -119,6 +119,8 @@ class ProjectContainer extends Component {
     }
 
     onDownloadProject() {
+        let zipPileName = this.state.language.slug + "_" + this.state.version.name + "_" + this.state.book.slug + ".zip"
+
 
         let params = {
             language: "en-x-demo2",
@@ -126,21 +128,22 @@ class ProjectContainer extends Component {
             book: "mrk"
         }
 
-        /// {language: "en-x-demo2", version: "ulb", book: "mrk"}, files_list: {}}
         //  {"language": "en-x-demo2", "version": "ulb", "book": "mrk"}
 
+        //start spinner
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
                 console.log("done");
-                FileDownload(download_results.data, "project.zip");
+                FileDownload(download_results.data, zipPileName);
+                //make spinner stop
             }).catch((exception) => {
             this.setState({error: exception});
         });
+
     }
 
     componentDidMount() {
         this.getChapterData()
-
     }
 
     render () {
@@ -184,6 +187,9 @@ class ProjectContainer extends Component {
                     <DownloadProjects
                         onDownloadProject={this.onDownloadProject.bind(this)}
                     />
+                    <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+
+
 
                     {!this.state.uploadSourceLoading && this.state.uploadSourceSuccess
                         ? <div>Successfully uploaded {this.state.uploadSourceSuccess} and set it as source audio</div>
