@@ -4,7 +4,7 @@ let state;
 let handleOpen;
 let handleClose;
 
-export default class ExportButton extends Component {
+export default class PublishButton extends Component {
     state = { modalOpen: false };
 
     handleOpen = (e) => this.setState({
@@ -15,7 +15,13 @@ export default class ExportButton extends Component {
         modalOpen: false,
     });
 
-    checkReadyForExport() {
+    // called when the user clicks yes inside the modal
+    publishFiles () {
+        this.props.onPublish()
+        this.handleClose()
+    }
+
+    checkReadyForPublish() {
         var counter = 0;
         this.props.chapters.map((i) => {
             if (i.exportReady) {counter+=1}
@@ -25,13 +31,14 @@ export default class ExportButton extends Component {
     }
 
     render() {
-        let readyForExport = this.checkReadyForExport();
+        let readyForPublish = this.checkReadyForPublish();
+        // disabled={!readyForExport}>Publish</Button>}
 
         return (
             <Modal
                 trigger={<Button onClick={this.handleOpen}
                                  floated="right"
-                                 disabled={!readyForExport}>Publish</Button>}
+                                 disabled={false}>Publish</Button>}
                 open={this.state.modalOpen}
                 onClose={this.handleClose}
                 closeIcon='close'
@@ -43,9 +50,8 @@ export default class ExportButton extends Component {
                     <h3>Are you ready to publish this project?</h3>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button color='green' onClick={this.handleClose} inverted>
-                        <Icon name='checkmark' /> Yes
-                        {/*this button should trigger a call to the database to publish*/}
+                    <Button color='green' onClick={this.publishFiles.bind(this)} inverted>
+                        <Icon name='checkmark' />Yes
                     </Button>
                 </Modal.Actions>
             </Modal>

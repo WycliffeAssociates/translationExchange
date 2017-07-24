@@ -7,7 +7,9 @@ import QueryString from 'query-string';
 import LoadingDisplay from "js/components/LoadingDisplay";
 import CheckingLevel from './components/CheckingLevel'
 import LoadingGif from 'images/loading-tiny.gif'
-import ExportButton from "../takes/components/ExportButton";
+import 'css/chapters.css'
+import PublishButton from "../takes/components/PublishButton";
+import FileDownload from 'react-file-download';
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -35,6 +37,12 @@ class ProjectContainer extends Component {
         this.setState({
             filesData: data
         });
+    }
+
+    publishFiles() {
+        console.log("did that work?")
+
+
     }
 
 
@@ -130,7 +138,11 @@ class ProjectContainer extends Component {
                                     error={this.state.error}
                                     retry={this.getChapterData.bind(this)}>
                         <Header as='h1'>{this.state.book.name} ({this.state.language.name})
-                <ExportButton chapters={this.state.chapters}/>
+                        <PublishButton
+                            chapters={this.state.chapters}
+                            onPublish={this.publishFiles.bind(this)}
+                        />
+
                         </Header>
 
                         <Table selectable fixed color="blue">
