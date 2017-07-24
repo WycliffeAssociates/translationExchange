@@ -71,7 +71,6 @@ class Take extends Component {
                 {/*<TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>*/}
                 <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
                 <DeleteTake onDeleteTake={this.props.onDeleteTake}/>
-                <CommentsButton comments = {this.props.comments}/>
             </Grid.Column>
 
             {this.props.source
