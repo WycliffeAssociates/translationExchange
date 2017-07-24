@@ -122,7 +122,7 @@ class CommentContainer extends Component {
     }
 
     Style = {
-        backgroundColor: '#333131',
+        backgroundColor: 'black',
         fontSize: "32",
         textAlign: "center",
         //width:"500px"

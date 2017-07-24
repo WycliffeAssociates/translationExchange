@@ -172,7 +172,7 @@ function DisplayAudioPlayer(props) {
 
         return (
 
-            <audio className="audioPlayer" controls name="media"  >
+            <audio className="audiPlayer" controls name="media"  >
                 <source src= {AudioURL} type = "audio/webm" />
             </audio>
         );

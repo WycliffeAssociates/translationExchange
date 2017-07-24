@@ -15,8 +15,10 @@
     height: 50px;
     width: 50px;
     border-radius: 60px;
-    background-color: black;
+    background-color: none;
     border: none #3e98c7;
+    border-style: solid;
+    border-color: deepskyblue;
     margin-bottom: 10px;
     margin-top: 10px;
 
@@ -28,7 +30,7 @@
 
 .start:hover {
     cursor: pointer;
-    background-color: #222222;
+    background-color: none;
 }
 
 .start:focus{
@@ -52,7 +54,7 @@
 
 .stop:hover {
     cursor: pointer;
-    background-color: #222222;
+    background-color: deepskyblue;
     /*background-color: #F69C76;*/
 
 }
@@ -63,7 +65,7 @@
 }
 
 .mic{
-    margin-left: 10px;
+    margin-left: 15px;
     color: white;
 }
 
