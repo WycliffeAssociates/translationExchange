@@ -6,7 +6,6 @@ import './RecordComment.css';
 import {Button, Container, Grid, Header, Icon, Image, Modal, ModalHeader} from 'semantic-ui-react';
 import Audio from "translation-audio-player";
 
-import playlist from '/Users/ericazhong/Documents/8woc2017/src/js/pages/takes/components/songs/playlist.json'
 
 // NOTE: (dmarchuk)
 let onClickCancel;
@@ -122,7 +121,9 @@ class CommentContainer extends Component {
     }
 
     Style = {
+
         backgroundColor: 'black',
+
         fontSize: "32",
         color: 'white',
         textAlign: "center",
@@ -163,7 +164,7 @@ class CommentContainer extends Component {
                         <Audio
                             width={600}
                             height={300}
-                            playlist={playlist.playlist}
+                            playlist={[]}
 
                             // store a reference of the audio component
                             ref={audioComponent => { this.audioComponent = audioComponent; }}
