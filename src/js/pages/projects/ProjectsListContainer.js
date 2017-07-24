@@ -35,7 +35,7 @@ class ProjectsListContainer extends Component {
          var query = QueryString.parse(queryString);
          this.setState({loaded: false, error: ""});
 
-         axios.post(config.apiUrl + 'all_project/', query)
+         axios.post(config.apiUrl + 'all_projects/', query)
          .then((results) => {
              this.setState({
                  loaded: true,
