@@ -118,9 +118,9 @@ class ProjectContainer extends Component {
         )
     }
 
+
     onDownloadProject() {
         let zipPileName = this.state.language.slug + "_" + this.state.version.name + "_" + this.state.book.slug + ".zip"
-
 
         let params = {
             language: "en-x-demo2",
@@ -130,16 +130,14 @@ class ProjectContainer extends Component {
 
         //  {"language": "en-x-demo2", "version": "ulb", "book": "mrk"}
 
-        //start spinner
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
                 console.log("done");
                 FileDownload(download_results.data, zipPileName);
-                //make spinner stop
+
             }).catch((exception) => {
             this.setState({error: exception});
         });
-
     }
 
     componentDidMount() {
@@ -187,9 +185,6 @@ class ProjectContainer extends Component {
                     <DownloadProjects
                         onDownloadProject={this.onDownloadProject.bind(this)}
                     />
-                    <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
-
-
 
                     {!this.state.uploadSourceLoading && this.state.uploadSourceSuccess
                         ? <div>Successfully uploaded {this.state.uploadSourceSuccess} and set it as source audio</div>

@@ -1,8 +1,21 @@
 import React, {Component} from 'react';
-import {Button, Icon} from 'semantic-ui-react'
+import {Button, Icon, Loader} from 'semantic-ui-react'
 import 'css/chapters.css'
 
 class DownloadProjects extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            loading: false
+        };
+    }
+
+    downloadProject() {
+        this.props.onDownloadProject();
+        this.setState({loading: true});
+
+    }
 
     render () {
 
@@ -12,7 +25,7 @@ class DownloadProjects extends Component {
                 icon='download'
                 labelPosition='right'
                 size='small'
-                onClick={this.props.onDownloadProject}
+                onClick={this.downloadProject.bind(this)}
             />
 
         );
