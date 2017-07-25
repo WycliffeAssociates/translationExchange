@@ -130,7 +130,6 @@ class MicButton extends Component {
                 <div>
                     <RecordComment ref={instance => (this.recordComment = instance) }
                                    changeSaveButtonState={this.changeSaveButtonState}
-                                   updateTakeInState={this.props.updateTakeInState}
                                    type="take"
                                    id={this.props.take.id}
                                    onClickSave={this.props.onClickSave}

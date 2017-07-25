@@ -98,7 +98,6 @@ class Take extends Component {
                             mic={true}
                             take={this.props.take}
                             comments={this.props.comments}
-                            updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                             onClickSave={this.props.onClickSave}
                         />
                     </Grid.Column >

@@ -72,7 +72,6 @@ class AudioComponent extends Component {
                 {/*used ref to call a method in child class and instance*/}
                 {this.props.mic ? <MicButton
 
-                    updateTakeInState={this.props.updateTakeInState}
                     ref={instance => (this.commentContainer = instance)}
                     take={this.props.take}
                     comments={this.props.comments}
