@@ -64,9 +64,11 @@ class ChapterContainer extends Component {
             console.dir(results.data);
             //find the take in state that this one corresponds to
             let updatedChunks = this.state.chunks.slice();
-            let chunkToUpdate = updatedChunks.findIndex(chunk => chunk.startv === results.data.startv);
+            let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+                return chunk.takes.find(take => take.take.id === takeId)
+            });
             let takeToUpdate = updatedChunks[chunkToUpdate].takes
-                .findIndex(take => take.take.id === results.data.id);
+                .findIndex(take => take.take.id === takeId);
             updatedChunks[chunkToUpdate].takes[takeToUpdate].take = results.data;
             this.setState({
                 chunks: updatedChunks
@@ -156,7 +158,6 @@ class ChapterContainer extends Component {
             }
         }
 
-
         //find the chunk that this take was from, and add chunk info
         let chunk = this.state.chunks.find((chunk) => {
             return chunk.takes.find(take => take.take.id === id)
@@ -183,6 +184,7 @@ class ChapterContainer extends Component {
                                book={this.state.book.name}
                                language={this.state.language.name}
                                chunks={this.state.chunks}
+                               mode={this.state.mode}
                 />
 
                 <LoadingDisplay loaded={this.state.loaded}
