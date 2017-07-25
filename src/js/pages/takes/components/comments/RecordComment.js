@@ -68,11 +68,6 @@ export class RecordComment extends Component {
 
         reader.readAsDataURL(this.state.blob);
 
-        //
-        // if (this.state.AudioURL !== ''){
-        //     {this.props.sendComment(this.state.blob)}
-        // }
-
     }
 
     // componentDidUpdate() {

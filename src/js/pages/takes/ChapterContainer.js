@@ -61,10 +61,6 @@ class ChapterContainer extends Component {
             //find the take in state that this one corresponds to
             let updatedTakes = this.state.takes.slice();
             let takeToUpdate = updatedTakes.findIndex(take => take.take.id === takeId);
-
-            console.log('1', updatedTakes[takeToUpdate].take);
-            console.log('2', results.data);
-
             updatedTakes[takeToUpdate].take = results.data;
             this.setState({
                 takes: updatedTakes
@@ -88,7 +84,7 @@ class ChapterContainer extends Component {
             }
         });
     }
-
+        // CHANGE THIS FUNCTION TO UPDATE STATE. also should probably disable save button/hide player
     onClickSave(blobx, type, id) {
         axios.post(config.apiUrl + 'comments/', {
             "comment": blobx,
@@ -97,27 +93,11 @@ class ChapterContainer extends Component {
             "type": type
 
         }).then((results) => {
-            console.log('uploaded successfully');
-
-            axios.get(config.apiUrl +'takes/'+id+'/'
-            ).then((results) =>{
-                let updatedTakes = this.state.takes.slice();
-                let takeToUpdate = updatedTakes.findIndex(take => take.take.id === id);
-                console.log('3', updatedTakes[takeToUpdate].take);
-                console.log('4', results.data);
-                // updatedTakes[takeToUpdate].take = results.data;
-                // this.setState({
-                //     takes: updatedTakes
-                // });
-                // console.log('changed');
-
-            })
-            // let updatedTakes = this.state.takes.slice();
-            // let takeToUpdate = updatedTakes.findIndex(take => take.take.id === id);
-            //
+            alert('uploaded successfully');
 
         });
     }
+    // CHANGE THIS FUNCTION TO UPDATE STATE
 
     updateChosenTakeForChunk(takeId) {
         let chosenTake = this.state.takes.find(take => take.take.id === takeId);
