@@ -64,8 +64,6 @@ class Home extends Component {
 
     render() {
 
-        //this.buildProjectsList()
-
         return (
 
             <div>
@@ -96,10 +94,8 @@ class Home extends Component {
 
                 </Container>
 
-
                 <Container fluid className="bottom">
                     <Container fluid className="yellowBar" />
-
                     <Grid padded textAlign="center" >
                         <Grid.Column width={5}>
                             <Grid.Row height={1}>
@@ -120,7 +116,6 @@ class Home extends Component {
         var navigateToProject = (function () {
             this.navigateToProject(projects.language.slug, projects.book.slug, projects.version);
         }).bind(this);
-
 
         console.log(projects)
 
