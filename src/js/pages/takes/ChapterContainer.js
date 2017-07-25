@@ -111,7 +111,17 @@ class ChapterContainer extends Component {
             "type": type
 
         }).then((results) => {
-            alert('uploaded successfully');
+            var map = {"comment":results.data};
+            let updatedChunks = this.state.chunks.slice();
+            let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+                return chunk.takes.find(take => take.take.id === id)
+            });
+            let takeToUpdate = updatedChunks[chunkToUpdate].takes
+                .findIndex(take => take.take.id === id);
+            updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.push(map);
+            this.setState({
+                chunks: updatedChunks
+            });
 
         });
     }

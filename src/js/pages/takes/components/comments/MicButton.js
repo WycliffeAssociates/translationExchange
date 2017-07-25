@@ -73,12 +73,6 @@ class MicButton extends Component {
 
     }
 
-    // deleteComment(id){
-    //     axios.delete(config.apiUrl + 'comments/' + id + '/'
-    //     ).then((results) => {
-    //     alert('dleeteed') })
-    // }
-
     createPlaylist(comment) {
         var file = [];
         file[0] = {
@@ -142,7 +136,6 @@ class MicButton extends Component {
                     <Grid columns={2}>
 
                         <Grid.Column width={13}>
-
                             {this.props.comments
                                 ? this.props.comments.map(this.createPlaylist)
                                 : ""
