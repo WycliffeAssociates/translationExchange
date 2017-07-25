@@ -8,7 +8,7 @@ import LoadingDisplay from "js/components/LoadingDisplay";
 import CheckingLevel from './components/CheckingLevel'
 import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
-import PublishButton from "../takes/components/PublishButton";
+import PublishButton from "./components/PublishButton";
 import FileDownload from 'react-file-download';
 
 class ProjectContainer extends Component {
@@ -18,6 +18,8 @@ class ProjectContainer extends Component {
             chapters: [],
             book: {},
             language: {},
+            project_id: -1,
+            is_publish: false,
             filesData : null,
             loaded: false,
             error: "",
@@ -149,6 +151,7 @@ class ProjectContainer extends Component {
                         <Header as='h1'>{this.state.book.name} ({this.state.language.name})
                         <PublishButton
                             chapters={this.state.chapters}
+                            isPublish={this.state.is_publish}
                             onPublish={this.publishFiles.bind(this)}
                         />
 
