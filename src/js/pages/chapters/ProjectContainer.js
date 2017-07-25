@@ -9,7 +9,7 @@ import LoadingDisplay from "js/components/LoadingDisplay";
 import CheckingLevel from './components/CheckingLevel'
 import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
-import ExportButton from "../takes/components/ExportButton";
+import PublishButton from "../takes/components/PublishButton";
 import FileDownload from 'react-file-download';
 
 class ProjectContainer extends Component {
