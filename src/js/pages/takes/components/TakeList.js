@@ -29,6 +29,7 @@ class TakeList extends Component {
                     patchTake={this.props.patchTake}
                     deleteTake={this.props.deleteTake}
                     updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                    onClickSave={this.props.onClickSave}
                     // deleteComment={this.props.deleteComment}
                 />
             </div>

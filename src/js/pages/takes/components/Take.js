@@ -98,7 +98,7 @@ class Take extends Component {
                             take={this.props.take}
                             comments={this.props.comments}
                             updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                            // deleteComment={this.props.deleteComment}
+                            onClickSave={this.props.onClickSave}
                         />
                     </Grid.Column >
 

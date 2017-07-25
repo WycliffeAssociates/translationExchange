@@ -74,13 +74,6 @@ class MicButton extends Component {
 
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.comments !== this.props.comments) {
-            console.log('ADD A COMMENT')
-        }
-
-    }
-
     // deleteComment(id){
     //     axios.delete(config.apiUrl + 'comments/' + id + '/'
     //     ).then((results) => {
@@ -141,6 +134,7 @@ class MicButton extends Component {
                                    updateTakeInState={this.props.updateTakeInState}
                                    type="take"
                                    id={this.props.take.id}
+                                   onClickSave={this.props.onClickSave}
 
 
                     />

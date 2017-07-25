@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { ReactMic } from 'react-mic';
+import {ReactMic} from 'react-mic';
 import './RecordComment.css';
 import {Button, Grid, Icon} from "semantic-ui-react";
 import axios from 'axios';
@@ -21,7 +21,6 @@ export class RecordComment extends Component {
         }
 
 
-
         this.onStop = this.onStop.bind(this);
         this.deleteBlob = this.deleteBlob.bind(this);
 
@@ -30,13 +29,11 @@ export class RecordComment extends Component {
     startRecording = () => {
         this.setState({
             record: true,
-            saveButton:false,
+            saveButton: false,
             displayPlayer: false
         });
 
         this.deleteBlob();    // deleted blob object in case the user records a new audio comment
-
-
 
 
     }
@@ -47,7 +44,6 @@ export class RecordComment extends Component {
         });
 
         this.props.changeSaveButtonState(false);
-
 
 
     }
@@ -62,7 +58,7 @@ export class RecordComment extends Component {
             displayPlayer: true
         });
 
-        var reader  = new FileReader();
+        var reader = new FileReader();
         reader.addEventListener("load", () => {
             this.setState({
                 jsonblob: reader.result
@@ -83,7 +79,7 @@ export class RecordComment extends Component {
     //     {this.props.sendComment(this.state.AudioURL)}
     // }
 
-    deleteBlob(){
+    deleteBlob() {
 
         window.URL.revokeObjectURL(this.state.AudioURL);   // deletes an audio object
 
@@ -104,27 +100,27 @@ export class RecordComment extends Component {
         const jsonblob = this.state.jsonblob;
 
 
-
-        let button = <StopButton  onClick={this.stopRecording} />;
+        let button = <StopButton onClick={this.stopRecording}/>;
 
         let AudioPlayer = null;
 
         let MainButton = null;
 
         if (displayPlayer) {
-            AudioPlayer =  <DisplayAudioPlayer displayPlayer={displayPlayer} type = {this.props.type} id={this.props.id} jsonblob ={jsonblob} AudioURL = {AudioURL} />;
+            AudioPlayer = <DisplayAudioPlayer displayPlayer={displayPlayer} type={this.props.type} id={this.props.id}
+                                              jsonblob={jsonblob} AudioURL={AudioURL} onClickSave={this.props.onClickSave}/>;
 
         }
 
-        if(displayButton){
-            MainButton = <StopButton  onClick={this.stopRecording} />;
-        }else{
+        if (displayButton) {
+            MainButton = <StopButton onClick={this.stopRecording}/>;
+        } else {
 
-            MainButton= <button
+            MainButton = <button
                 className="start"
                 onClick={this.startRecording}
                 type="button">
-                <Icon size='small' name='microphone' inverted />
+                <Icon size='small' name='microphone' inverted/>
             </button>;
         }
 
@@ -148,14 +144,10 @@ export class RecordComment extends Component {
                     {AudioPlayer}
                 </div>
 
-
-
-
             </div>
         );
     }
 }
-
 
 
 function StopButton(props) {
@@ -166,20 +158,6 @@ function StopButton(props) {
     );
 }
 
-
-
-function onClickSave(blobx, type, id) {
-    axios.post('http://172.19.145.91/api/comments/', {
-        "comment": blobx,
-        "user": 2,
-        "object": id,
-        "type": type
-
-    }).then((results) => {
-        console.log('here', results);
-
-    });
-}
 
 function DisplayAudioPlayer(props) {
     const displayPlayer = props.displayPlayer;
@@ -195,16 +173,18 @@ function DisplayAudioPlayer(props) {
 
         return (
 
-<Grid columns={2}>
-    <Grid.Column width={13}>
-            <audio className="audioPlayer" controls name="media"  >
-                <source src= {AudioURL} type = "audio/webm" />
-            </audio>
-    </Grid.Column>
+            <Grid columns={2}>
+                <Grid.Column width={13}>
+                    <audio className="audioPlayer" controls name="media">
+                        <source src={AudioURL} type="audio/webm"/>
+                    </audio>
+                </Grid.Column>
 
-    <Grid.Column width={3}>
-        {jsonblob ? <Button positive size="small" onClick={() => {onClickSave(jsonblob, type, id)}}>Save</Button> : ''}
-    </Grid.Column>
+                <Grid.Column width={3}>
+                    {jsonblob ? <Button positive size="small" onClick={() => {
+                        props.onClickSave(jsonblob, type, id)
+                    }}>Save</Button> : ''}
+                </Grid.Column>
             </Grid>
         );
     }

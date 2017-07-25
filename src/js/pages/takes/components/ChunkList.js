@@ -19,7 +19,7 @@ class ChunkList extends Component {
                     patchTake={this.props.patchTake}
                     deleteTake={this.props.deleteTake}
                     updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                    deleteComment={this.props.deleteComment}
+                    onClickSave={this.props.onClickSave}
                 />
                 }
 
