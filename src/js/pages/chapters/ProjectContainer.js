@@ -21,6 +21,7 @@ class ProjectContainer extends Component {
             filesData : null,
             loaded: false,
             error: "",
+            publishError: "",
             uploadSourceLoading: false,
             uploadSourceError: "",
             uploadSourceSuccess: "",
@@ -50,7 +51,7 @@ class ProjectContainer extends Component {
                 this.setState({is_publish: true})
             }).catch((exception) => {
             // modify for the error that occurs if the patch fails
-            this.setState({error: exception});
+            this.setState({publishError: exception});
         });
 }
 
