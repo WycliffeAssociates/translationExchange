@@ -24,7 +24,7 @@ export default class PublishButton extends Component {
     checkReadyForPublish() {
         var counter = 0;
         this.props.chapters.map((i) => {
-            if (i.exportReady) {counter+=1}
+            if (i.is_publish) {counter+=1}
         });
         
         return counter > 0;
@@ -32,14 +32,19 @@ export default class PublishButton extends Component {
 
     render() {
         let readyForPublish = this.checkReadyForPublish();
-        //Add this comment back when adding for checking if the project is already published
-        // disabled={!readyForExport}>Publish</Button>}
+
+        let publishButton =
+            <Button onClick={this.handleOpen}
+                    floated="right"
+                    disabled={!readyForPublish || this.props.isPublish}
+                    color={this.props.isPublish ? "green" : ""}
+            >
+                {this.props.isPublish ? "Published" : "Publish"}
+            </Button>;
 
         return (
             <Modal
-                trigger={<Button onClick={this.handleOpen}
-                                 floated="right"
-                                 disabled={false}>Publish</Button>}
+                trigger={publishButton}
                 open={this.state.modalOpen}
                 onClose={this.handleClose}
                 closeIcon='close'
