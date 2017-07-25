@@ -18,6 +18,7 @@ class ChapterHeader extends Component {
                             book={this.props.book}
                             language={this.props.language}
                             chunks={this.props.chunks}
+                            mode={this.props.mode}
                 />
             </h1>
         );

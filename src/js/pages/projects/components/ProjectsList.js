@@ -19,7 +19,7 @@ class ProjectsList extends Component {
     render () {
         return (
             <Container fluid>
-                <Table selectable fixed>
+                <Table selectable fixed color="grey">
 
                     <Table.Header>
                         <Table.Row>
@@ -57,7 +57,7 @@ class ProjectsList extends Component {
                 <Table.Cell onClick={navigateToProject}>{project.book.name}</Table.Cell>
                 <Table.Cell onClick={navigateToProject}><CircularProgressbar strokeWidth="20" percentage={project.completed} /></Table.Cell>
                 <Table.Cell><ReadMore lines={1} onShowMore={this.props.onChange} text="more">
-                                 {/*<b>Date Modified</b>: {this.parseDate(project.timestamp)} <br/>*/}
+                                 <b>Date Modified</b>: {this.parseDate(project.date_modified)} <br/>
                                  <b>Translation Type</b>: {project.version} <br/>
                                  <b>Contributors</b>: {this.getContributorText(project.contributors)} <br/>
                                  <b>Published</b>:

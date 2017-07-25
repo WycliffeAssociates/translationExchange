@@ -1,3 +1,14 @@
 .ChapterHeader{
     color: #434;
 }
+
+.takes {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.StickyFooter {
+    position: sticky;
+    bottom: 0;
+    padding: 0;
+}
