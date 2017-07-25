@@ -40,10 +40,18 @@ class ProjectContainer extends Component {
     }
 
     publishFiles() {
-        console.log("did that work?")
 
+        let parameters = {
+            "is_publish": true
+        }
 
-    }
+        axios.put(config.apiUrl + 'projects/5/', parameters)
+            .then((response) => {
+                console.log(response.data)
+            }).catch((exception) => {
+            this.setState({error: exception});
+        });
+}
 
 
     uploadSourceFile(event) {
