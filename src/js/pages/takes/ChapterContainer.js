@@ -20,9 +20,11 @@ class ChapterContainer extends Component {
         this.state = {
             loaded: false,
             error: "",
-            takes: [],
-            book: "",
-            language: "",
+            chunks: [],
+            project: {},
+            book: {},
+            chapter: {},
+            language: {},
             mode: "",
             listenList: []
         };
@@ -40,10 +42,12 @@ class ChapterContainer extends Component {
             this.setState(
                 {
                     loaded: true,
-                    takes: results.data,
-                    book: results.data[0].book.name,
-                    language: results.data[0].language.name,
-                    mode: results.data[0].take.mode
+                    chunks: results.data.chunks,
+                    project: results.data.project,
+                    book: results.data.book,
+                    chapter: results.data.chapter,
+                    language: results.data.language,
+                    mode: results.data.project.mode
                 }
             )
         });
@@ -59,12 +63,15 @@ class ChapterContainer extends Component {
             console.log("patch take");
             console.dir(results.data);
             //find the take in state that this one corresponds to
-            let updatedTakes = this.state.takes.slice();
-            let takeToUpdate = updatedTakes.findIndex(take => take.take.id === takeId);
-            updatedTakes[takeToUpdate].take = results.data;
+            let updatedChunks = this.state.chunks.slice();
+            let chunkToUpdate = updatedChunks.findIndex(chunk => chunk.startv === results.data.startv);
+            let takeToUpdate = updatedChunks[chunkToUpdate].takes
+                .findIndex(take => take.take.id === results.data.id);
+            updatedChunks[chunkToUpdate].takes[takeToUpdate].take = results.data;
             this.setState({
-                takes: updatedTakes
+                chunks: updatedChunks
             });
+
             if (success) {
                 success();
             }
@@ -74,14 +81,24 @@ class ChapterContainer extends Component {
     deleteTake(takeId, success) {
         axios.delete(config.apiUrl + 'takes/' + takeId + '/'
         ).then((results) => {
-            //make a new array of all the takes except the deleted one
-            let updatedTakes = this.state.takes.filter(
-                take => take.take.id !== takeId
-            );
-            this.setState({takes: updatedTakes});
-            if (success) {
-                success();
+            //find the chunk with the take just deleted
+            let updatedChunks = this.state.chunks.slice();
+            let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+                return chunk.takes.find(take => take.take.id === takeId)
+            });
+
+            //give it a new array of all its takes except the one to delete
+            updatedChunks[chunkToUpdate].takes =
+                updatedChunks[chunkToUpdate].takes.filter(take => take.take.id !== takeId);
+
+            //if the chunk now has no takes, remove it from state
+            if (!(updatedChunks[chunkToUpdate].takes.length > 0)) {
+                updatedChunks.splice(chunkToUpdate, 1);
             }
+
+            this.setState({
+                chunks: updatedChunks
+            });
         });
     }
         // CHANGE THIS FUNCTION TO UPDATE STATE. also should probably disable save button/hide player
@@ -100,17 +117,16 @@ class ChapterContainer extends Component {
     // CHANGE THIS FUNCTION TO UPDATE STATE
 
     updateChosenTakeForChunk(takeId) {
-        let chosenTake = this.state.takes.find(take => take.take.id === takeId);
-        //look through all the takes in this chapter...
-        for (let i = 0; i < this.state.takes.length; i++) {
-            let take = this.state.takes[i];
+        let updatedChunk = this.state.chunks.find((chunk) => {
+            return chunk.takes.find(take => take.take.id === takeId)
+        });
 
-            //if there's one besides the chosen one that's in the same chunk
-            //and is marked as done, then patch it to not be marked as done
-            if (take.take.id !== chosenTake.take.id
-                && take.take.startv === chosenTake.take.startv
-                && take.take.is_publish) {
-                this.patchTake(take.take.id, {is_publish: false});
+        for (let i = 0; i < updatedChunk.takes.length; i++) {
+            let currentTake = updatedChunk.takes[i];
+            //if there's one besides the chosen one in the same chunk
+            //that is marked is_publish, then patch it to not be marked is_publish
+            if (currentTake.take.is_publish && currentTake.take.id !== takeId) {
+                this.patchTake(currentTake.take.id, {is_publish: false});
             }
         }
     }
@@ -128,54 +144,19 @@ class ChapterContainer extends Component {
             }
         }
 
-        newArr[newArr.length] = {props};
+
+
+        //find the chunk that this take was from, and add chunk info
+        let chunk = this.state.chunks.find((chunk) => {
+            return chunk.takes.find(take => take.take.id === id)
+        });
+        let newListenItem = {
+            props: props,
+            chunk: chunk
+        };
+
+        newArr.push(newListenItem);
         this.setState({listenList: newArr})
-    }
-
-    /*
-     Functions for grouping takes into chunks
-     */
-    findStartVerses(paramArr) { // creates array of each start verse
-        var returnArr = [];
-        paramArr.map((i) => {
-            returnArr[returnArr.length] = i.take.startv
-        });
-        return (returnArr);
-    }
-
-    removeDuplicates(paramArr) { // removes duplicates from an array
-        var returnArr = [];
-        returnArr = paramArr.filter((item, pos) => {
-            return paramArr.indexOf(item) === pos;
-        });
-
-        return (returnArr);
-    }
-
-    createArray(paramArr, segments) { // returns an array containing one array of takes for each segment
-        var newArr = [];
-        for (let i = 0; i < paramArr.length; i++) {
-            var int = paramArr[i];
-            var placeHolderArr = [];
-            for (let j = 0; j < segments.length; j++) {
-                if (int === segments[j].take.startv) {
-                    placeHolderArr[placeHolderArr.length] = segments[j]
-                }
-            }
-            newArr[i] = placeHolderArr
-        }
-        return (newArr);
-    }
-
-    getChunksFromTakes(takes) {
-        let chunks = this.findStartVerses(this.state.takes); // find start verses
-        chunks = chunks.sort(function (a, b) { // sort by start verse
-            return a - b
-        });
-        chunks = this.removeDuplicates(chunks); // remove duplicates
-        chunks = this.createArray(chunks, this.state.takes);
-        return chunks;
-
     }
 
     /*
@@ -183,36 +164,33 @@ class ChapterContainer extends Component {
      */
     render() {
         var query = QueryString.parse(this.props.location.search);
-        let chunks = this.getChunksFromTakes(this.state.takes);
 
         return (
             <div>
                 <ChapterHeader loaded={this.state.loaded}
                                chapter={query.chapter}
-                               book={this.state.book}
-                               language={this.state.language}
-                               takes={this.state.takes}
-                               chunks={chunks}
+                               book={this.state.book.name}
+                               language={this.state.language.name}
+                               chunks={this.state.chunks}
                 />
 
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
-                    {chunks.map(this.createChunkList.bind(this))}
-                    <StitchTakes listenList={this.state.listenList}/>
+                    {this.state.chunks.map(this.createChunkList.bind(this))}
+                    <StitchTakes listenList={this.state.listenList} mode={this.state.mode}/>
                 </LoadingDisplay>
             </div>
         );
     }
 
-    createChunkList(takes) {
-        console.log("takes", takes);
+    createChunkList(chunk) {
         return (
             <div>
                 <ChunkList
-                    segments={takes} // array of takes
-                    mode={takes[0].take.mode}
-                    number={takes[0].take.startv}
+                    segments={chunk.takes} // array of takes
+                    mode={this.state.mode}
+                    number={chunk.startv}
                     addToListenList={this.addToListenList.bind(this)}
                     patchTake={this.patchTake.bind(this)}
                     deleteTake={this.deleteTake.bind(this)}

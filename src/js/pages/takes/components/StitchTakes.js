@@ -70,7 +70,7 @@ class StitchTakes extends Component {
         this.props.listenList.map((i) => {
             playlist[playlist.length] = {
                 "src": config.streamingUrl + i.props.take.location,
-                "name": i.props.take.mode + ' ' + i.props.take.startv + ' (' + (playlist.length+1) + '/' + this.props.listenList.length + ')'
+                "name": this.props.mode + ' ' + i.chunk.startv + ' (' + (playlist.length+1) + '/' + this.props.listenList.length + ')'
             }
         })
         return playlist
@@ -82,7 +82,7 @@ class StitchTakes extends Component {
             if(i.props.take.source_language_id !== null) {
                 sourcePlaylist[sourcePlaylist.length] = {
                     "src": config.streamingUrl + i.props.source.take.location,
-                    "name": i.props.take.mode + ' ' + i.props.take.startv + ' (' + (sourcePlaylist.length+1) + '/' + this.props.listenList.length + ')'
+                    "name": this.props.mode + ' ' + i.chunk.startv + ' (' + (sourcePlaylist.length+1) + '/' + this.props.listenList.length + ')'
                 }
             }
         })
