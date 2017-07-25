@@ -1,5 +1,3 @@
-
-
 import React, {Component} from 'react';
 import ChunkList from "./components/ChunkList";
 import axios from 'axios';
@@ -8,7 +6,7 @@ import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
-
+import {Container, Segment, Label} from 'semantic-ui-react'
 import ChapterHeader from "./components/ChapterHeader.js";
 import StitchTakes from "./components/StitchTakes"
 
@@ -173,7 +171,16 @@ class ChapterContainer extends Component {
         let chunks = this.getChunksFromTakes(this.state.takes);
 
         return (
-            <div>
+            <div className="ChapterContainer">
+
+                {/*
+                <Segment color="grey" inverted  compact>
+                    <h3>Chapter {query.chapter + this.state.book + this.state.language}</h3>
+                </Segment>
+                */}
+
+
+                {/*
                 <ChapterHeader loaded={this.state.loaded}
                                chapter={query.chapter}
                                book={this.state.book}
@@ -181,13 +188,34 @@ class ChapterContainer extends Component {
                                takes={this.state.takes}
                                chunks={chunks}
                 />
+                */}
 
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
-                    {chunks.map(this.createChunkList.bind(this))}
-                    <StitchTakes listenList={this.state.listenList}/>
+
+                    <Label color="grey" >
+                        <h3>Chapter {query.chapter + this.state.book + this.state.language}</h3>
+                    </Label>
+                    <Container text>
+                        {chunks.map(this.createChunkList.bind(this))}
+                    </Container>
+
+                    <Container fluid className="StickyFooter">
+                        <StitchTakes
+                            listenList={this.state.listenList}
+                            loaded={this.state.loaded}
+                            chapter={query.chapter}
+                            book={this.state.book}
+                            language={this.state.language}
+                            takes={this.state.takes}
+                            chunks={chunks}
+                        />
+                    </Container>
+
                 </LoadingDisplay>
+
+
             </div>
         );
     }
