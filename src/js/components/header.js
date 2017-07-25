@@ -29,14 +29,22 @@ class Header extends Component {
 
             <div>
 
-                <Menu  fluid secondary size='huge' compact >
-                    <Menu.Item>
-                        <Image src={dots} width="120" height="30"/>
+                <Menu  verticalAlign="center" fluid secondary size='huge' compact >
+
+                    <Menu.Item position="left">
+                        <Link to="/">
+                        <Menu.Item>
+                            <Image src={dots} width="120" height="30"/>
+                        </Menu.Item>
+                        </Link>
+                        <Link to="/">
+                        <Menu.Item content={text} />
+                        </Link>
                     </Menu.Item>
-                    <Menu.Item content={text} />
+
 
                     <Menu.Item position="right">
-                        <Link position="right" to="/">
+                        <Link to="/">
                             <Menu.Item position="right" name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
                         </Link>
 
