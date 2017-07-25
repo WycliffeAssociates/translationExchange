@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import TakeList from "./TakeList";
 import ChunkPropTypes from "./ChunkPropTypes";
 import {Accordion, Button, Icon} from "semantic-ui-react";
-import axios from 'axios';
-import config from "config/config";
-import _ from 'lodash';
-import CommentContainer from "./comments/CommentContainer";
 let onClick;
 
 
@@ -45,15 +41,21 @@ class Chunk extends Component {
                         {modeLabel} {this.props.number}
                     </Accordion.Title>
 
-                    <Accordion.Content>
-                        <TakeList
-                            takes={this.props.segments}
-                            addToListenList={this.props.addToListenList}
-                            patchTake={this.props.patchTake}
-                            deleteTake={this.props.deleteTake}
-                            updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                        />
-                    </Accordion.Content>
+                <Accordion.Content>
+
+
+
+                    <TakeList
+                        takes={this.props.segments}
+                        addToListenList={this.props.addToListenList}
+                        patchTake={this.props.patchTake}
+                        deleteTake={this.props.deleteTake}
+                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                        onClickSave={this.props.onClickSave}
+                        // deleteComment={this.props.deleteComment}
+                    />
+                </Accordion.Content>
+
                 </Accordion>
             </div>
         );
