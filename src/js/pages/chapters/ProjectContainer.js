@@ -128,6 +128,7 @@ class ProjectContainer extends Component {
             book: "mrk"
         }
 
+        // Double check that these are the correct args
         //  {"language": "en-x-demo2", "version": "ulb", "book": "mrk"}
 
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
