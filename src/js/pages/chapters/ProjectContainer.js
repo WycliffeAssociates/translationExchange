@@ -88,9 +88,6 @@ class ProjectContainer extends Component {
         this.setState({error: ""});
         axios.post(config.apiUrl + 'get_chapters/', query
         ).then((results) => {
-            // console.dir(results.data.slice(0, results.data.length - 2));
-            // console.dir(results.data[results.data.length - 2]);
-            // console.dir(results.data[results.data.length - 1]);
             this.setState(
                 {
                     chapters: results.data.chapters,
@@ -139,7 +136,7 @@ class ProjectContainer extends Component {
                                     <Table.HeaderCell>Chapter</Table.HeaderCell>
                                     <Table.HeaderCell>Percent Complete</Table.HeaderCell>
                                     <Table.HeaderCell>Checking Level</Table.HeaderCell>
-                                    <Table.HeaderCell>Ready to Export</Table.HeaderCell>
+                                    <Table.HeaderCell>Ready to Publish</Table.HeaderCell>
                                     <Table.HeaderCell>Contributors</Table.HeaderCell>
                                     <Table.HeaderCell>Translation Type</Table.HeaderCell>
                                     <Table.HeaderCell>Date Modified</Table.HeaderCell>

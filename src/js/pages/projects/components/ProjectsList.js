@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import {Container, Header, Table} from "semantic-ui-react";
+import {Container, Header, Table, Icon} from "semantic-ui-react";
 import CircularProgressbar from 'react-circular-progressbar'
 import '../../../../css/projects.css'
 
@@ -60,6 +60,11 @@ class ProjectsList extends Component {
                                  {/*<b>Date Modified</b>: {this.parseDate(project.timestamp)} <br/>*/}
                                  <b>Translation Type</b>: {project.version} <br/>
                                  <b>Contributors</b>: {this.getContributorText(project.contributors)} <br/>
+                                 <b>Published</b>:
+                                    {project.is_publish
+                                        ? <Icon name="checkmark" color="green"/>
+                                        : <Icon name="remove"/>
+                                    }
                              </ReadMore></Table.Cell>
 
             </Table.Row>
