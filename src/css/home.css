@@ -1,44 +1,30 @@
-.top {
-    background-color: #FFFFFF;
-    height: 350px;
-}
-
-.bottom {
+.background {
     background-color: #3E4453;
-    height: 350px;
-    text-align: center;
-    color: #FFFFFF;
+    height: 700px;
 }
 
-.middle {
-    height: 250px;
+.title {
+    position: absolute;
+    left: 450px;
+    top: 270px;
 }
 
-.gray {
-    background-color: #3E4453;
-    color: #F5A623
+.start-here {
+    position: absolute;
+    left: 800px;
+    top: 320px;
 }
 
-.login {
-    width: 500px;
-    height: 150px;
-}
-
-.image {
-    width: 370px;
-    /height: 250px;
+.logo {
+    position: absolute;
+    left: 50px;
+    top: 150px;
 }
 
 .redBar {
     background-color: #B65459;
     color: #FFFFFF;
     height: 5px
-}
-
-.yellowBarHome {
-    background-color: #F5A623;
-    color: #FFFFFF;
-    height: 14px
 }
 
 .hoverButton:hover {

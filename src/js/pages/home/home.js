@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { Button, Header, Image, Modal, Container, Segment, Grid, Form, Table, Divider } from 'semantic-ui-react'
+import { Button, Header, Image, Modal, Container, Segment, Grid, Form, Table, Divider, Label } from 'semantic-ui-react'
 import 'css/home.css'
-import hands from 'images/hands.png'
 import axios from 'axios'
 import config from 'config/config'
 import QueryString from 'query-string';
-
+import trap from 'images/trap.svg'
+import logo from 'images/logo.png'
+import {Link} from 'react-router-dom'
 
 class Home extends Component {
     constructor(props) {
+
+
         super(props);
 
         this.toggle = this.toggle.bind(this);
@@ -61,55 +64,59 @@ class Home extends Component {
         )
     }
 
+
+
     render() {
 
-        //this.buildProjectsList()
+
 
         return (
 
-            <div>
+            <Container fluid className="background">
 
 
-                <Container className="yellowBarHome" fluid />
-                <Container className="top" fluid >
 
-                    <Grid columns={2} className="middle">
-                        <Grid.Row height={3}/>
-                        <Grid.Column width={5} verticalAlign="middle">
-                            <Image src={hands} alt="image goes here" />
-                        </Grid.Column>
-                        <Grid.Column verticalAlign="middle">
+                <Container fluid>
+                    <br />
+                    <Image fluid src={trap} />
+                    <div className="title"><font size="50">Translation made available </font></div>
 
-                            <h1>Welcome to the Website!</h1>
-                            <Segment className="login">
-                                <Form>
-                                    <Form.Field>
-                                        <label>What is your name?</label>
-                                        <input placeholder="username" />
-                                    </Form.Field>
-                                    <Button floated="right" content="submit" />
-                                </Form>
-                            </Segment>
-                        </Grid.Column>
-                    </Grid>
+                    <div className="logo">
+                        <Image src={logo} className="logoterra" />
+                    </div>
+                    <div className="start-here">
+                        <Link to="/projects">
+                            <Button icon="right arrow" content='Start here' labelPosition="right"/>
+                        </Link>
+                    </div>
 
                 </Container>
 
-                <Container fluid className="bottom">
-                    <Container fluid className="yellowBar" />
+
+
+
+
+
+
+
+
+
+                <Container fluid >
 
                     <Grid padded textAlign="center" >
                         <Grid.Column width={3}>
                             <Grid.Row height={1}>
-                                <h2>Recent Projects</h2>
+                                <h2><font color="white">Recent Projects</font></h2>
                             </Grid.Row>
                             <Divider />
+
                             {this.state.projects.map(this.createListItem.bind(this))}
                         </Grid.Column>
                     </Grid>
                 </Container>
 
-            </div>
+
+            </Container>
         );
     }
 
@@ -130,7 +137,7 @@ class Home extends Component {
         return(
             <div>
                 <Grid.Row divided onClick={navigateToProject} className="hoverButton">
-                    <h4>> {str}</h4>
+                    <h4><font color="white"> {str}</font></h4>
                 </Grid.Row>
             </div>
 
