@@ -6,7 +6,7 @@ import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
-
+import {Container, Segment, Label} from 'semantic-ui-react'
 import ChapterHeader from "./components/ChapterHeader.js";
 import StitchTakes from "./components/StitchTakes"
 
@@ -166,21 +166,32 @@ class ChapterContainer extends Component {
         var query = QueryString.parse(this.props.location.search);
 
         return (
-            <div>
-                <ChapterHeader loaded={this.state.loaded}
-                               chapter={query.chapter}
-                               book={this.state.book.name}
-                               language={this.state.language.name}
-                               chunks={this.state.chunks}
-                               mode={this.state.mode}
-                />
+            <div className="ChapterContainer">
+
+
+
 
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
+
+                    <ChapterHeader loaded={this.state.loaded}
+                                   chapter={query.chapter}
+                                   book={this.state.book.name}
+                                   language={this.state.language.name}
+                                   chunks={this.state.chunks}
+                                   mode={this.state.mode}
+                    />
+
+
                     {this.state.chunks.map(this.createChunkList.bind(this))}
-                    <StitchTakes listenList={this.state.listenList} mode={this.state.mode}/>
+
+                    <Container fluid className="StickyFooter" >
+                        <StitchTakes listenList={this.state.listenList} mode={this.state.mode}/>
+                    </Container>
                 </LoadingDisplay>
+
+
             </div>
         );
     }
