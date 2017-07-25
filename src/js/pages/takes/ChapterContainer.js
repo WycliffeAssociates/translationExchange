@@ -168,29 +168,34 @@ class ChapterContainer extends Component {
         return (
             <div className="ChapterContainer">
 
-                {/*
-                <Segment color="grey" inverted  compact>
-                    <h3>Chapter {query.chapter + this.state.book + this.state.language}</h3>
-                </Segment>
-                */}
 
 
-                {/*
-                <ChapterHeader loaded={this.state.loaded}
-                               chapter={query.chapter}
-                               book={this.state.book.name}
-                               language={this.state.language.name}
-                               chunks={this.state.chunks}
-                               mode={this.state.mode}
-                />
-                */}
 
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
 
+                    <Segment color="grey" inverted  compact>
+                        <h3>Chapter {query.chapter + this.state.book + this.state.language}</h3>
+                    </Segment>
+
+
+
+
+                    <ChapterHeader loaded={this.state.loaded}
+                                   chapter={query.chapter}
+                                   book={this.state.book.name}
+                                   language={this.state.language.name}
+                                   chunks={this.state.chunks}
+                                   mode={this.state.mode}
+                    />
+
+
                     {this.state.chunks.map(this.createChunkList.bind(this))}
-                    <StitchTakes listenList={this.state.listenList} mode={this.state.mode}/>
+
+                    <Container fluid className="StickyFooter" >
+                        <StitchTakes listenList={this.state.listenList} mode={this.state.mode}/>
+                    </Container>
                 </LoadingDisplay>
 
 
