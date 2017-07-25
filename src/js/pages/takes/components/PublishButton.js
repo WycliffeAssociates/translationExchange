@@ -32,6 +32,7 @@ export default class PublishButton extends Component {
 
     render() {
         let readyForPublish = this.checkReadyForPublish();
+        //Add this comment back when adding for checking if the project is already published
         // disabled={!readyForExport}>Publish</Button>}
 
         return (
