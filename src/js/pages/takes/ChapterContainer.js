@@ -175,13 +175,6 @@ class ChapterContainer extends Component {
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
 
-                    <Segment color="grey" inverted  compact>
-                        <h3>Chapter {query.chapter + this.state.book + this.state.language}</h3>
-                    </Segment>
-
-
-
-
                     <ChapterHeader loaded={this.state.loaded}
                                    chapter={query.chapter}
                                    book={this.state.book.name}
