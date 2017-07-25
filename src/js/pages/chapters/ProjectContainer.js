@@ -23,6 +23,7 @@ class ProjectContainer extends Component {
             loaded: false,
             error: "",
             publishError: "",
+            loadingError: "",
             uploadSourceLoading: false,
             uploadSourceError: "",
             uploadSourceSuccess: "",
@@ -138,9 +139,9 @@ class ProjectContainer extends Component {
         let zipPileName = this.state.language.slug + "_" + this.state.version.name + "_" + this.state.book.slug + ".zip"
 
         let params = {
-            language: "en-x-demo2",
-            version: "ulb",
-            book: "mrk"
+            language: this.state.language.slug,
+            version: this.state.version.name,
+            book: this.state.book.slug
         }
 
         // Double check that these are the correct args
@@ -152,7 +153,7 @@ class ProjectContainer extends Component {
                 FileDownload(download_results.data, zipPileName);
 
             }).catch((exception) => {
-            this.setState({error: exception});
+            this.setState({loadingError: exception});
         });
     }
 
