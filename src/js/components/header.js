@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Menu, state, handleItemClick, Container, Image} from "semantic-ui-react";
 import {Link} from "react-router-dom";
-import * as ReactDOM from "react-dom";
 import 'css/home.css'
 import combinedShape from 'images/combined-shape.png'
 

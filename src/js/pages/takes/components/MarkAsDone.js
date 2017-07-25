@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from "prop-types";
-import { Button, Modal } from 'semantic-ui-react'
+import {Button, Modal} from 'semantic-ui-react'
 import AudioComponent from './AudioComponent';
 import config from "config/config";
 let handleOpen;
@@ -9,7 +9,7 @@ let handleClose;
 
 class MarkAsDone extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             color: null,
@@ -17,23 +17,30 @@ class MarkAsDone extends Component {
         }
 
     }
+
     checkReadyForExport() {
         var counter = 0;
         this.props.takes.map((i) => {
-            if (i.take.is_publish) {counter+=1}
+            if (i.take.is_publish) {
+                counter += 1
+            }
         })
 
         if ((this.props.numChunks === counter) && counter !== 0) {
             return true
         }
-        else {return false}
+        else {
+            return false
+        }
     }
 
     createExportPlaylist() {
 
         var length = 0;
         this.props.takes.map((i) => {
-            if(i.take.is_publish) {length += 1}
+            if (i.take.is_publish) {
+                length += 1
+            }
         })
 
         var playlist = [];
@@ -41,18 +48,20 @@ class MarkAsDone extends Component {
             if (i.take.is_publish) {
                 playlist[playlist.length] = {
                     "src": config.streamingUrl + i.take.location,
-                    "name": i.take.mode + ' ' + i.take.startv + ' (' + (playlist.length+1) + '/' + length + ')'
+                    "name": i.take.mode + ' ' + i.take.startv + ' (' + (playlist.length + 1) + '/' + length + ')'
                 }
             }
         });
         return playlist
     }
-    changeColor(){
+
+    changeColor() {
         this.setState({
             color: 'green'
         });
         this.handleClose();
     }
+
     handleOpen = (e) => this.setState({
         modalOpen: true,
     });
@@ -61,11 +70,12 @@ class MarkAsDone extends Component {
         modalOpen: false,
     })
 
-    render () {
+    render() {
         let readyForExport = false; //this.checkReadyForExport();
-        var ExportButton = <Button onClick={this.handleOpen} color={this.state.color} disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
+        var ExportButton = <Button onClick={this.handleOpen} color={this.state.color} disabled={!readyForExport}
+                                   content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
 
-        return(
+        return (
             <Modal trigger={ExportButton}
                    open={this.state.modalOpen}
                    onClose={this.handleClose}
@@ -77,7 +87,7 @@ class MarkAsDone extends Component {
                             load.</p>
                         <p>To mark as done, click on 'Finish'.</p>
                         {/*<AudioComponent*/}
-                            {/*width={850} playlist={this.createExportPlaylist()}*/}
+                        {/*width={850} playlist={this.createExportPlaylist()}*/}
                         {/*/>*/}
                     </Modal.Description>
 

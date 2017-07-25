@@ -19,7 +19,7 @@ class ProjectsList extends Component {
     render () {
         return (
             <Container fluid>
-                <Table selectable fixed>
+                <Table selectable fixed color="grey">
 
                     <Table.Header>
                         <Table.Row>
