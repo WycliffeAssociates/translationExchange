@@ -8,6 +8,7 @@ import ChapterContainer from "./js/pages/takes/ChapterContainer";
 import ProjectsListContainer from "./js/pages/projects/ProjectsListContainer";
 import ProjectContainer from "./js/pages/chapters/ProjectContainer";
 import './App.css';
+import NotFound from "./js/pages/404Error";
 import Header from "./js/components/header";
 import Home from "./js/pages/home/home";
 import About from "./js/pages/about/about";
@@ -41,6 +42,8 @@ class App extends Component {
                 <Route exact path='/chapters' component={ProjectContainer}/>
                 <Route exact path='/takes' component={ChapterContainer}/>
                 <Route exact path='/user' component={User} />
+                <Route path='*' component={NotFound} />
+
             </Switch>
 
             {/*<Footer/>*/}

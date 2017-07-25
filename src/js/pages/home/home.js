@@ -79,7 +79,7 @@ class Home extends Component {
                 <Container fluid>
                     <br />
                     <Image fluid src={trap} />
-                    <div className="title"><font size="50">Translation made available </font></div>
+                    <div className="pageTitle"><font size="50">Translation made available </font></div>
 
                     <div className="logo">
                         <Image src={logo} className="logoterra" />

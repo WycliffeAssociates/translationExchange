@@ -22,6 +22,7 @@
     "react-axios": "^1.0.2",
     "react-circular-progressbar": "^0.1.5",
     "react-dom": "^15.6.1",
+    "react-file-download": "^0.3.4",
     "react-file-input": "^0.2.5",
     "react-howler": "^3.6.2",
     "react-mic": "^7.1.6",
@@ -34,7 +35,7 @@
     "react-transition-group": "^1.2.0",
     "semantic-ui-css": "^2.2.11",
     "semantic-ui-react": "^0.71.0",
-    "translation-audio-player": "^1.0.2"
+    "translation-audio-player": "^1.1.0"
   },
   "devDependencies": {
     "babel-jest": "^20.0.3",

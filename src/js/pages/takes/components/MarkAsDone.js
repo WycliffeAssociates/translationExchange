@@ -18,33 +18,32 @@ class MarkAsDone extends Component {
 
     }
     checkReadyForExport() {
-        var counter = 0;
-        this.props.takes.map((i) => {
-            if (i.take.is_publish) {counter+=1}
-        })
-
-        if ((this.props.numChunks === counter) && counter !== 0) {
-            return true
+        if (this.props.chunks.length === 0) {
+            return false;
+        } else {
+            //true if every chunk has at least 1 take marked is_publish
+            return this.props.chunks.every((chunk) => {
+                return chunk.takes.some(take => take.take.is_publish);
+            });
         }
-        else {return false}
     }
 
     createExportPlaylist() {
 
-        var length = 0;
-        this.props.takes.map((i) => {
-            if(i.take.is_publish) {length += 1}
-        })
+        let length = this.props.chunks.length;
 
         var playlist = [];
-        this.props.takes.map((i) => {
-            if (i.take.is_publish) {
-                playlist[playlist.length] = {
-                    "src": config.streamingUrl + i.take.location,
-                    "name": i.take.mode + ' ' + i.take.startv + ' (' + (playlist.length+1) + '/' + length + ')'
+        this.props.chunks.map((chunk) => {
+            chunk.takes.map((take) => {
+                if (take.take.is_publish) {
+                    playlist.push({
+                        "src": config.streamingUrl + take.take.location,
+                        "name": this.props.mode + ' ' + chunk.startv + ' (' + (playlist.length+1) + '/' + length + ')'
+                    });
                 }
-            }
+            })
         });
+
         return playlist
     }
     changeColor(){
@@ -96,8 +95,7 @@ MarkAsDone.propTypes = {
     chapter: PropTypes.number.isRequired,
     book: PropTypes.string.isRequired,
     language: PropTypes.string.isRequired,
-    takes: PropTypes.array.isRequired,
-    numChunks: PropTypes.number.isRequired
+    chunks: PropTypes.array.isRequired
 };
 
 export default MarkAsDone;
