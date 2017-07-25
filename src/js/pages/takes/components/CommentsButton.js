@@ -5,8 +5,6 @@
 import React from 'react';
 import {Button, Modal} from "semantic-ui-react";
 import { Icon } from 'semantic-ui-react'
-import Audio from 'translation-audio-player'
-import playlist from './songs/playlist.json'
 import 'css/takes.css'
 
 let state;
@@ -58,14 +56,14 @@ class CommentsButton extends React.Component {
 
         return (
             <div>
-                <Audio
-                    width={600}
-                    height={300}
-                    playlist={take}
+                {/*<Audio*/}
+                    {/*width={600}*/}
+                    {/*height={300}*/}
+                    {/*playlist={take}*/}
 
-                    // store a reference of the audio component
-                    ref={audioComponent => { this.audioComponent = audioComponent; }}
-                />
+                    {/*// store a reference of the audio component*/}
+                    {/*ref={audioComponent => { this.audioComponent = audioComponent; }}*/}
+                {/*/>*/}
             </div>
         );
     }
@@ -96,15 +94,16 @@ class CommentsButton extends React.Component {
                         Comments
                     </Modal.Header>
                     <Modal.Content>
-                        {/*this should be replaced with listOfComments, a list of Audio components*/}
-                        <Audio
-                            width={600}
-                            height={300}
-                            playlist={playlist.playlist}
 
-                            // store a reference of the audio component
-                            ref={audioComponent => { this.audioComponent = audioComponent; }}
-                        />
+                        {/*this should be replaced with listOfComments, a list of Audio components*/}
+                        {/*<Audio*/}
+                            {/*width={600}*/}
+                            {/*height={300}*/}
+                            {/*playlist={playlist.playlist}*/}
+
+                            {/*// store a reference of the audio component*/}
+                            {/*ref={audioComponent => { this.audioComponent = audioComponent; }}*/}
+                        {/*/>*/}
 
 
                     </Modal.Content>

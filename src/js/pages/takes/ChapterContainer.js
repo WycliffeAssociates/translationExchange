@@ -1,5 +1,3 @@
-
-
 import React, {Component} from 'react';
 import ChunkList from "./components/ChunkList";
 import axios from 'axios';
@@ -17,7 +15,7 @@ let onClick;
 
 class ChapterContainer extends Component {
 
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
             loaded: false,
@@ -30,13 +28,12 @@ class ChapterContainer extends Component {
         };
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.requestData();
     }
 
-    requestData () {
+    requestData() {
         var query = QueryString.parse(this.props.location.search);
-
         this.setState({error: ""});
         axios.post(config.apiUrl + 'get_project_takes/', query
         ).then((results) => {
@@ -46,21 +43,19 @@ class ChapterContainer extends Component {
                     takes: results.data,
                     book: results.data[0].book.name,
                     language: results.data[0].language.name,
-                    mode:results.data[0].take.mode
+                    mode: results.data[0].take.mode
                 }
             )
-        }).catch((exception) => {
-            this.setState({error: exception});
         });
     }
 
     /*
-        Functions for making requests and updating state
+     Functions for making requests and updating state
      */
 
     patchTake(takeId, patch, success) {
         axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch
-         ).then((results) => {
+        ).then((results) => {
             console.log("patch take");
             console.dir(results.data);
             //find the take in state that this one corresponds to
@@ -70,7 +65,9 @@ class ChapterContainer extends Component {
             this.setState({
                 takes: updatedTakes
             });
-            if (success) { success(); }
+            if (success) {
+                success();
+            }
         });
     }
 
@@ -82,9 +79,25 @@ class ChapterContainer extends Component {
                 take => take.take.id !== takeId
             );
             this.setState({takes: updatedTakes});
-            if (success) { success(); }
+            if (success) {
+                success();
+            }
         });
     }
+        // CHANGE THIS FUNCTION TO UPDATE STATE. also should probably disable save button/hide player
+    onClickSave(blobx, type, id) {
+        axios.post(config.apiUrl + 'comments/', {
+            "comment": blobx,
+            "user": 2,
+            "object": id,
+            "type": type
+
+        }).then((results) => {
+            alert('uploaded successfully');
+
+        });
+    }
+    // CHANGE THIS FUNCTION TO UPDATE STATE
 
     updateChosenTakeForChunk(takeId) {
         let chosenTake = this.state.takes.find(take => take.take.id === takeId);
@@ -110,23 +123,23 @@ class ChapterContainer extends Component {
         for (let i = 0; i < newArr.length; i++) {
             if (newArr[i].props.take.id === id) {
                 newArr.splice(i, 1)
-                this.setState({listenList: newArr})
+                this.setState({listenList: newArr});
                 return ''
             }
         }
 
-        newArr[newArr.length] = {props}
+        newArr[newArr.length] = {props};
         this.setState({listenList: newArr})
     }
 
     /*
-        Functions for grouping takes into chunks
+     Functions for grouping takes into chunks
      */
     findStartVerses(paramArr) { // creates array of each start verse
         var returnArr = [];
         paramArr.map((i) => {
-        returnArr[returnArr.length] = i.take.startv
-    })
+            returnArr[returnArr.length] = i.take.startv
+        });
         return (returnArr);
     }
 
@@ -134,7 +147,7 @@ class ChapterContainer extends Component {
         var returnArr = [];
         returnArr = paramArr.filter((item, pos) => {
             return paramArr.indexOf(item) === pos;
-        })
+        });
 
         return (returnArr);
     }
@@ -166,9 +179,9 @@ class ChapterContainer extends Component {
     }
 
     /*
-        Rendering functions
+     Rendering functions
      */
-    render () {
+    render() {
         var query = QueryString.parse(this.props.location.search);
         let chunks = this.getChunksFromTakes(this.state.takes);
 
@@ -193,8 +206,8 @@ class ChapterContainer extends Component {
     }
 
     createChunkList(takes) {
-
-        return(
+        console.log("takes", takes);
+        return (
             <div>
                 <ChunkList
                     segments={takes} // array of takes
@@ -204,6 +217,8 @@ class ChapterContainer extends Component {
                     patchTake={this.patchTake.bind(this)}
                     deleteTake={this.deleteTake.bind(this)}
                     updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
+                    onClickSave={this.onClickSave.bind(this)}
+                    // deleteComment={this.deleteComment.bind(this)}
                 />
             </div>
         );
