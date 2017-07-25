@@ -5,7 +5,6 @@ import RecordComment from './RecordComment';
 import './RecordComment.css';
 import {Button, Container, Grid, Header, Icon, Image, Modal, ModalHeader} from 'semantic-ui-react';
 import Audio from "translation-audio-player";
-import playlist from "/Users/ericazhong/Documents/8woc2017/src/js/pages/takes/components/songs/playlist.json"
 
 
 // NOTE: (dmarchuk)
@@ -126,14 +125,14 @@ class CommentContainer extends Component {
                         <Grid columns={2}>
 
                             <Grid.Column width={13}>
-                        <Audio
-                            width={600}
-                            height={300}
-                            playlist={playlist.playlist}
+                        {/*<Audio*/}
+                            {/*width={600}*/}
+                            {/*height={300}*/}
+                            {/*playlist={playlist.playlist}*/}
 
-                            // store a reference of the audio component
-                            ref={audioComponent => { this.audioComponent = audioComponent; }}
-                        />
+                            {/*// store a reference of the audio component*/}
+                            {/*ref={audioComponent => { this.audioComponent = audioComponent; }}*/}
+                        {/*/>*/}
                             </Grid.Column>
 
                             <Grid.Column width={3}>

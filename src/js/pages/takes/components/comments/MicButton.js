@@ -7,7 +7,6 @@ import './RecordComment.css';
 import {Button, Container, Grid, Header, Icon, Image, Modal, ModalHeader} from 'semantic-ui-react';
 import Audio from "translation-audio-player";
 import config from "../../../../../config/config";
-import playlist from "/Users/ericazhong/Documents/8woc2017/src/js/pages/takes/components/songs/playlist.json"
 import axios from "axios"
 // NOTE: (dmarchuk)
 let onClickCancel;
