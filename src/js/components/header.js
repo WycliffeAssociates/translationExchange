@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import {Menu, state, handleItemClick, Container, Image} from "semantic-ui-react";
+import {Menu, state, handleItemClick, Container, Image, Icon} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import 'css/home.css'
 import combinedShape from 'images/combined-shape.png'
+import user from 'images/user.png'
+import dots from 'images/dots.png'
 
 
 class Header extends Component {
@@ -14,23 +16,34 @@ class Header extends Component {
 
     }
 
-
     render() {
 
+
         var logo = <Image src={combinedShape} size="tiny"/>
-        var text = <h1><font color="#F5A623">Our Translation Project</font></h1>
+        var text = <h1><font color="#A8A8A8">Terra</font></h1>
 
         const { activeItem } = this.state;
 
         return (
-            <Container fluid className="gray">
 
-                <Menu  fluid secondary size='huge' compact inverted >
-                    <Menu.Item content={logo} />
-                    <Menu.Item content={text} />
+            <div>
+
+                <Menu  verticalAlign="center" fluid secondary size='huge' compact >
+
+                    <Menu.Item position="left">
+                        <Link to="/">
+                        <Menu.Item>
+                            <Image src={dots} width="120" height="30"/>
+                        </Menu.Item>
+                        </Link>
+                        <Link to="/">
+                        <Menu.Item content={text} />
+                        </Link>
+                    </Menu.Item>
+
 
                     <Menu.Item position="right">
-                        <Link position="right" to="/">
+                        <Link to="/">
                             <Menu.Item position="right" name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
                         </Link>
 
@@ -41,13 +54,19 @@ class Header extends Component {
                         <Link to="/projects">
                             <Menu.Item  name='Projects' active={activeItem === 'Projects'} onClick={this.handleItemClick} />
                         </Link>
+
+                        <Link to="/user">
+                            <Menu.Item>
+                                <Image src={user} size="mini"/>
+                            </Menu.Item>
+                        </Link>
                     </Menu.Item>
 
                 </Menu>
 
-                <Container className="yellowBar" fluid></Container>
+                <Container className="redBar" fluid></Container>
+            </div>
 
-            </Container>
 
         )
     }
