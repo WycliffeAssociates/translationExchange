@@ -40,14 +40,14 @@ class ProjectContainer extends Component {
     }
 
     publishFiles() {
-
+        let chapterID = this.state.project_id
         let parameters = {
             "is_publish": true
         }
 
-        axios.put(config.apiUrl + 'projects/5/', parameters)
+        axios.patch(config.apiUrl + 'projects/' + chapterID +"/", parameters)
             .then((response) => {
-                console.log(response.data)
+                this.setState({is_publish: true})
             }).catch((exception) => {
             this.setState({error: exception});
         });
@@ -56,7 +56,7 @@ class ProjectContainer extends Component {
 
     uploadSourceFile(event) {
         event.preventDefault();
-        this.setState({uploadSourceLoading: true, uploadSourceError: ""});
+        this.setState({uploadSourceLoading: true, uploadSourceEarror: ""});
         let uploadedLanguage = "";
 
         axios.post(config.apiUrl + 'source/source_filename', this.state.filesData, {
@@ -111,6 +111,8 @@ class ProjectContainer extends Component {
                 {
                     chapters: results.data.chapters,
                     book: results.data.book,
+                    project_id: results.data.project_id,
+                    is_publish: results.data.is_publish,
                     language: results.data.language,
                     loaded: true
                 }
