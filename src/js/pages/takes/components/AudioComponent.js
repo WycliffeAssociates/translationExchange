@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import Audio from 'translation-audio-player'
 import CommentContainer from './comments/CommentContainer'
 import * as ReactDOM from "react-dom";
-
-
 import onClick from './comments/CommentContainer'
 import MicButton from "./comments/MicButton";
 
@@ -49,6 +47,8 @@ class AudioComponent extends Component {
          */
         var file = this.props.playlist;
         const pause = this.state.pause;
+        const markers = this.props.markers;
+        const showMarkers = this.props.showMarkers;
 
         return (
             <div>
@@ -61,6 +61,8 @@ class AudioComponent extends Component {
                         this.onClick()
                     }}
                     mic={this.props.mic}
+                    markers={markers}
+                    showMarkers={showMarkers}
 
                     // ref to pause the audio
                     ref={audioComponent => {
