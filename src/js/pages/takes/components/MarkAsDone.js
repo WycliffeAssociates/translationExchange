@@ -62,7 +62,7 @@ class MarkAsDone extends Component {
     })
 
     render () {
-        let readyForExport = this.checkReadyForExport();
+        let readyForExport = false; //this.checkReadyForExport();
         var ExportButton = <Button onClick={this.handleOpen} color={this.state.color} disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
 
         return(
@@ -76,9 +76,9 @@ class MarkAsDone extends Component {
                         <p>Here is a preview of the takes you have selected to export. This may take a few seconds to
                             load.</p>
                         <p>To mark as done, click on 'Finish'.</p>
-                        <AudioComponent
-                            width={850} playlist={this.createExportPlaylist()}
-                        />
+                        {/*<AudioComponent*/}
+                            {/*width={850} playlist={this.createExportPlaylist()}*/}
+                        {/*/>*/}
                     </Modal.Description>
 
                 </Modal.Content>
