@@ -12,6 +12,7 @@ import Header from "./js/components/header";
 import Home from "./js/pages/home/home";
 import About from "./js/pages/about/about";
 import axios from 'axios'
+import User from "./js/pages/user/user";
 
 class App extends Component {
 
@@ -39,6 +40,7 @@ class App extends Component {
                 <Route exact path='/projects' component={ProjectsListContainer}/>
                 <Route exact path='/chapters' component={ProjectContainer}/>
                 <Route exact path='/takes' component={ChapterContainer}/>
+                <Route exact path='/user' component={User} />
             </Switch>
 
             {/*<Footer/>*/}
