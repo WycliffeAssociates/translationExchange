@@ -49,6 +49,7 @@ class ProjectContainer extends Component {
             .then((response) => {
                 this.setState({is_publish: true})
             }).catch((exception) => {
+            // modify for the error that occurs if the patch fails
             this.setState({error: exception});
         });
 }
@@ -56,7 +57,7 @@ class ProjectContainer extends Component {
 
     uploadSourceFile(event) {
         event.preventDefault();
-        this.setState({uploadSourceLoading: true, uploadSourceEarror: ""});
+        this.setState({uploadSourceLoading: true, uploadSourceError: ""});
         let uploadedLanguage = "";
 
         axios.post(config.apiUrl + 'source/source_filename', this.state.filesData, {
