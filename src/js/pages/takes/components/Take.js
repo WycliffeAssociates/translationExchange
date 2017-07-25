@@ -8,6 +8,7 @@ import TakeListenButton from './AddTake'
 import DeleteTake from './DeleteTake'
 import LoadingGif from 'images/loading-tiny.gif'
 import CommentContainer from "./comments/CommentContainer";
+import TakeExportButton from "./SelectTake";
 
 var listenCounter = 0
 class Take extends Component {
