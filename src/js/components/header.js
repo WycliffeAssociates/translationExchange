@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import * as ReactDOM from "react-dom";
 import 'css/home.css'
 import combinedShape from 'images/combined-shape.png'
+import user from 'images/user.png'
+import dots from 'images/dots.png'
 
 
 class Header extends Component {
@@ -15,24 +17,11 @@ class Header extends Component {
 
     }
 
-
-    buildLogo() {
-
-        return(
-            <div>
-                <Icon name="circle" color="red" />
-                <Icon name="circle" color="green" />
-                <Icon name="circle" color="yellow" />
-                <Icon name="circle" color="purple" />
-            </div>
-        );
-    }
-
     render() {
 
 
         var logo = <Image src={combinedShape} size="tiny"/>
-        var text = <h1><font color="#F5A623">Our Translation Project</font></h1>
+        var text = <h1><font color="#A8A8A8">Terra</font></h1>
 
         const { activeItem } = this.state;
 
@@ -41,7 +30,9 @@ class Header extends Component {
             <div>
 
                 <Menu  fluid secondary size='huge' compact >
-                    <Menu.Item content={this.buildLogo()} />
+                    <Menu.Item>
+                        <Image src={dots} width="120" height="30"/>
+                    </Menu.Item>
                     <Menu.Item content={text} />
 
                     <Menu.Item position="right">
@@ -55,6 +46,12 @@ class Header extends Component {
 
                         <Link to="/projects">
                             <Menu.Item  name='Projects' active={activeItem === 'Projects'} onClick={this.handleItemClick} />
+                        </Link>
+
+                        <Link to="/user">
+                            <Menu.Item>
+                                <Image src={user} size="mini"/>
+                            </Menu.Item>
                         </Link>
                     </Menu.Item>
 
