@@ -90,10 +90,6 @@ export class RecordComment extends Component {
 
     }
 
-    sendFile(){
-    }
-
-
     enableButton() {                         // used when you click the microphone button in the player
         this.commentContainer.saveButton();
 
@@ -180,11 +176,10 @@ function onClickSave(blobx, type, id) {
         "type": type
 
     }).then((results) => {
-        alert('uploaded successfully')
+        console.log('here', results);
+
     });
 }
-
-
 
 function DisplayAudioPlayer(props) {
     const displayPlayer = props.displayPlayer;

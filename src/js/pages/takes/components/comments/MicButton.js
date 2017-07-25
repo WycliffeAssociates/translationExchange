@@ -16,10 +16,11 @@ let Style;
 
 class MicButton extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
-        this.state = {title : 'Record Comment',
+        this.state = {
+            title: 'Record Comment',
 
             show: this.props.open,
             SaveButtonState: true,
@@ -36,10 +37,12 @@ class MicButton extends Component {
         this.createPlaylist = this.createPlaylist.bind(this);
 
     }
+
     saveButton() {
 
-        this.setState({disabled:false});
+        this.setState({disabled: false});
     }
+
     getInitialState() {
         return {show: false};
     }
@@ -66,45 +69,46 @@ class MicButton extends Component {
 
     };
 
-    changeSaveButtonState (newState) {
+    changeSaveButtonState(newState) {
         this.setState({SaveButtonState: newState});
 
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.comments !== this.props.comments) {
-            console.log('ADD A COMMENT GDI')
+            console.log('ADD A COMMENT')
         }
 
     }
 
-    deleteComment(id){
-        axios.delete(config.apiUrl + 'comments/' + id + '/'
-        ).then((results) => {
-        alert('dleeteed') })
-    }
+    // deleteComment(id){
+    //     axios.delete(config.apiUrl + 'comments/' + id + '/'
+    //     ).then((results) => {
+    //     alert('dleeteed') })
+    // }
 
     createPlaylist(comment) {
-        console.log('lel', comment);
         var file = [];
         file[0] = {
             "src": comment.comment.location
         };
 
-        return(
+        return (
             <Grid columns={2}>
                 <Grid.Column width={12}>
-            <Audio
-                width={600}
-                height={300}
-                playlist={file}
-                ref={audioComponent => { this.audioComponent = audioComponent; }}
-            />
+                    <Audio
+                        width={600}
+                        height={300}
+                        playlist={file}
+                        ref={audioComponent => {
+                            this.audioComponent = audioComponent;
+                        }}
+                    />
                 </Grid.Column>
                 <Grid.Column width={2}>
-            <Button icon negative onClick={this.deleteComment(comment.id)}>
-                <Icon name="trash"/>
-            </Button>
+                    <Button icon negative>
+                        <Icon name="trash"/>
+                    </Button>
                 </Grid.Column>
             </Grid>
         );
@@ -120,23 +124,24 @@ class MicButton extends Component {
 
     };
 
-    render(){
+    render() {
 
-        return(
+        return (
 
             <Modal
                 open={this.state.show}
                 size='small'
-                style= {this.Style}
-                dimmer= "inverted"
+                style={this.Style}
+                dimmer="inverted"
             >
-                <Modal.Header style = {this.Style}>Comments</Modal.Header>
+                <Modal.Header style={this.Style}>Comments</Modal.Header>
                 <div>
                     <RecordComment ref={instance => (this.recordComment = instance) }
-                                   changeSaveButtonState = {this.changeSaveButtonState}
+                                   changeSaveButtonState={this.changeSaveButtonState}
                                    updateTakeInState={this.props.updateTakeInState}
                                    type="take"
-                                   id = {this.props.take.id}
+                                   id={this.props.take.id}
+
 
                     />
 

@@ -39,7 +39,6 @@ class ChapterContainer extends Component {
         this.setState({error: ""});
         axios.post(config.apiUrl + 'get_project_takes/', query
         ).then((results) => {
-            console.log('r', results);
             this.setState(
                 {
                     loaded: true,
@@ -94,6 +93,7 @@ class ChapterContainer extends Component {
     //         this.setState({takes: updatedTakes})
     //     })
     // }
+
 
 
     updateChosenTakeForChunk(takeId) {
@@ -205,7 +205,7 @@ class ChapterContainer extends Component {
     }
 
     createChunkList(takes) {
-
+        console.log("takes", takes);
         return(
             <div>
                 <ChunkList

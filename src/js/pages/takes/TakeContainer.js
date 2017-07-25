@@ -53,6 +53,7 @@ class TakeContainer extends Component {
                   comments={this.props.take.comments}
                   addToListenList={this.props.addToListenList}
                   onDeleteTake={this.onDeleteTake.bind(this)}
+                  updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                   // deleteComment={this.props.deleteComment}
 
 
