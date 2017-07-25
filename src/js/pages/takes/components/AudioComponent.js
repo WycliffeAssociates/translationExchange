@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import Audio from 'translation-audio-player'
-import CommentContainer from './comments/CommentContainer'
 import * as ReactDOM from "react-dom";
-import onClick from './comments/CommentContainer'
 import MicButton from "./comments/MicButton";
 
 
@@ -79,7 +77,7 @@ class AudioComponent extends Component {
                     comments={this.props.comments}
                     onClickSave={this.props.onClickSave}
                     // deleteComment={this.props.deleteComment}
-                /> :''}
+                /> : ''}
 
 
             </div>

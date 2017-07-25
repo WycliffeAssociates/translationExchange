@@ -156,9 +156,7 @@ function StopButton(props) {
 
 function DisplayAudioPlayer(props) {
     const displayPlayer = props.displayPlayer;
-
     const AudioURL = props.AudioURL;
-
     const jsonblob = props.jsonblob;
     const type = props.type;
     const id = props.id;

@@ -1,10 +1,9 @@
-
-
 import React, {Component} from 'react';
 import RecordComment from './RecordComment';
 import './RecordComment.css';
 import {Button, Container, Grid, Header, Icon, Image, Modal, ModalHeader} from 'semantic-ui-react';
 import Audio from "translation-audio-player";
+import config from "../../../../../config/config";
 
 
 // NOTE: (dmarchuk)
@@ -14,10 +13,11 @@ let Style;
 
 class CommentContainer extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
-        this.state = {title : 'Record Comment',
+        this.state = {
+            title: 'Record Comment',
 
             show: this.props.open,
             SaveButtonState: true,
@@ -34,10 +34,12 @@ class CommentContainer extends Component {
         this.onClickSave = this.onClickSave.bind(this);
 
     }
+
     saveButton() {
 
-        this.setState({disabled:false});
+        this.setState({disabled: false});
     }
+
     getInitialState() {
         return {show: false};
     }
@@ -64,10 +66,11 @@ class CommentContainer extends Component {
 
     };
 
-    changeSaveButtonState (newState) {
+    changeSaveButtonState(newState) {
         this.setState({SaveButtonState: newState});
 
     }
+
     // getComment(comment) {
     //     this.setState({
     //         wholeblob: comment
@@ -81,8 +84,29 @@ class CommentContainer extends Component {
 
     }
 
-    createPlaylist() {
-        
+    createPlaylist(comment) {
+        var file = [];
+        file[0] = {
+            "src": config.streamingUrl + comment.comment.location
+        };
+
+        return (
+            <Grid columns={2}>
+                <Grid.Column width={12}>
+                    <Audio
+                        width={600}
+                        height={300}
+                        playlist={file}
+                    />
+                </Grid.Column>
+                <Grid.Column width={2}>
+                    <Button icon negative>
+                        <Icon name="trash"/>
+                    </Button>
+                </Grid.Column>
+            </Grid>
+        );
+
     }
 
     Style = {
@@ -94,57 +118,56 @@ class CommentContainer extends Component {
         textAlign: "center",
         //width:"500px"
 
-};
+    };
 
-    render(){
-        // console.log('fml', this.state.show);
-        return(
+    render() {
+        return (
 
-                <Modal
-                       size='small'
-                       style= {this.Style}
-                       closeIcon='close'
-                       trigger = {<Button
-                           color="pink"
-                           floated='right'
-                           ref={audioComponent => { this.audioComponent = audioComponent; }}
-                           icon="microphone"
-                       onClick={this.showModal}/>}
-                >
-                    <Modal.Header style = {this.Style}>Comments</Modal.Header>
-                    <div>
-                        <RecordComment ref={instance => (this.recordComment = instance) }
-                                       changeSaveButtonState = {this.changeSaveButtonState}
-                                       updateTakeInState={this.props.updateTakeInState}
-                                       sendComment={this.getComment}
+            <Modal
+                size='small'
+                style={this.Style}
+                closeIcon='close'
+                trigger={<Button
+                    color="pink"
+                    floated='right'
+                    ref={audioComponent => {
+                        this.audioComponent = audioComponent;
+                    }}
+                    icon="microphone"
+                    onClick={this.showModal}/>}
+            >
+                <Modal.Header style={this.Style}>Comments</Modal.Header>
+                <div>
+                    <RecordComment ref={instance => (this.recordComment = instance) }
+                                   changeSaveButtonState={this.changeSaveButtonState}
+                                   updateTakeInState={this.props.updateTakeInState}
+                                   sendComment={this.getComment}
+                                   onClickSave={this.props.onClickSave}
+                                   type="chunk"
+                                   id={this.props.id}
 
-                        />
+                    />
 
-                    </div>
-                    <Container className="commentsList">
-                        <Grid columns={2}>
+                </div>
+                <Container className="commentsList">
+                    <Grid columns={2}>
 
-                            <Grid.Column width={13}>
-                        {/*<Audio*/}
-                            {/*width={600}*/}
-                            {/*height={300}*/}
-                            {/*playlist={playlist.playlist}*/}
+                        <Grid.Column width={13}>
+                            {this.props.comments
+                                ? this.props.comments.map(this.createPlaylist)
+                                : ""
+                            }
+                        </Grid.Column>
 
-                            {/*// store a reference of the audio component*/}
-                            {/*ref={audioComponent => { this.audioComponent = audioComponent; }}*/}
-                        {/*/>*/}
-                            </Grid.Column>
+                        <Grid.Column width={3}>
 
-                            <Grid.Column width={3}>
-                        <Button icon negative>
-                            <Icon name="trash"/>
-                        </Button>
-                            </Grid.Column>
-                        </Grid>
+                            <Button onClick={this.hideModal} content="close"/>
+                        </Grid.Column>
+                    </Grid>
 
-                    </Container>
+                </Container>
 
-                </Modal>
+            </Modal>
         );
     }
 }

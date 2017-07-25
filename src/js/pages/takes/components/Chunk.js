@@ -44,7 +44,10 @@ class Chunk extends Component {
 
                 <Accordion.Content>
 
-<CommentContainer/>
+                <CommentContainer comments={this.props.comments}
+                onClickSave={this.props.onClickSave}
+                                  id={this.props.number}
+                />
                     <TakeList
                         takes={this.props.segments}
                         addToListenList={this.props.addToListenList}

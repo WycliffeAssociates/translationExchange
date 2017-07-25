@@ -4,7 +4,8 @@ import MarkAsDone from "./MarkAsDone";
 import CommentContainer from "./comments/CommentContainer"
 
 class ChapterHeader extends Component {
-    render () {
+    render() {
+
         return (
             <h1 marginWidth={25}>
                 Chapter {this.props.chapter}
@@ -13,7 +14,11 @@ class ChapterHeader extends Component {
                     : ""
                 }
                 <CommentContainer
-                    ref={instance => (this.commentContainer = instance)}/>
+                    ref={instance => (this.commentContainer = instance)}
+                    comments={this.props.comments}
+                    id={this.props.id}
+                    onClickSave={this.props.onClickSave}
+                />
                 <MarkAsDone chapter={this.props.chapter}
                             book={this.props.book}
                             language={this.props.language}

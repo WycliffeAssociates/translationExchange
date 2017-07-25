@@ -76,7 +76,7 @@ class MicButton extends Component {
     createPlaylist(comment) {
         var file = [];
         file[0] = {
-            "src": comment.comment.location
+            "src": config.streamingUrl + comment.comment.location
         };
 
         return (
