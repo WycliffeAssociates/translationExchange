@@ -141,9 +141,9 @@ class ProjectContainer extends Component {
         let zipPileName = this.state.language.slug + "_" + this.state.version.name + "_" + this.state.book.slug + ".zip"
 
         let params = {
-            language: this.state.language.slug,
-            version: this.state.version.name,
-            book: this.state.book.slug
+            language: "en-x-demo2",
+            version: "ulb",
+            book: "mrk"
         }
 
         // Double check that these are the correct args
