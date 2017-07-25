@@ -143,8 +143,10 @@ class MicButton extends Component {
 
                         <Grid.Column width={13}>
 
-                            {this.props.comments.map(this.createPlaylist)}
-
+                            {this.props.comments
+                                ? this.props.comments.map(this.createPlaylist)
+                                : ""
+                            }
                         </Grid.Column>
 
                         <Grid.Column width={3}>

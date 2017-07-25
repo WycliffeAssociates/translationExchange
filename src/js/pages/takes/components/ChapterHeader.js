@@ -17,8 +17,7 @@ class ChapterHeader extends Component {
                 <MarkAsDone chapter={this.props.chapter}
                             book={this.props.book}
                             language={this.props.language}
-                            takes={this.props.takes}
-                            numChunks={this.props.chunks.length}
+                            chunks={this.props.chunks}
                 />
             </h1>
         );
@@ -30,7 +29,6 @@ ChapterHeader.propTypes = {
     chapter: PropTypes.number.isRequired,
     book: PropTypes.string.isRequired,
     language: PropTypes.string.isRequired,
-    takes: PropTypes.array.isRequired,
     chunks: PropTypes.array.isRequired
 };
 

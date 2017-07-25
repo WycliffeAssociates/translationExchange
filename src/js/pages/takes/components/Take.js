@@ -9,22 +9,33 @@ import DeleteTake from './DeleteTake'
 import LoadingGif from 'images/loading-tiny.gif'
 import CommentContainer from "./comments/CommentContainer";
 import TakeExportButton from "./SelectTake";
+import ShowMarkers from './ShowMarkers';
 
 var listenCounter = 0
 class Take extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {isToggleOn: true, addButtonColor: ""}
+        this.state = {isToggleOn: true, addButtonColor: "", showMarkers: false, showMarkersColor:""}
         // This binding is necessary to make `this` work in the callback
-        this.handleClick = this.handleClick.bind(this);
+         this.handleClick = this.handleClick.bind(this);
+         this.showMarker = this.showMarker.bind(this);
     }
 
     handleClick() {
         this.setState({isToggleOn: !this.state.isToggleOn});
     }
+    showMarker(){
 
+        if(!this.state.showMarkers){
+            this.setState({showMarkersColor:'yellow', showMarkers:true});
+            console.log('here', this.state.showMarkers);
 
+        }else{
+            this.setState({showMarkersColor:'', showMarkers:false});
+        }
+
+    }
     addToListen() {
         this.props.addToListenList(this.props);
 
@@ -46,7 +57,8 @@ class Take extends Component {
 
 
     render () {
-
+        const markers = this.props.take.markers ;
+        let showMarkers = this.state.showMarkers;
         var file = [];
         file[0] = {
             "src": config.streamingUrl + this.props.take.location
@@ -54,7 +66,8 @@ class Take extends Component {
 
         return (
             <div>
-                <Grid columns={5} >
+        <Grid columns={5}>
+
             <Grid.Column width={4}>
                 <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate(this.props.take.date_modified)}</strong>
             </Grid.Column>
@@ -71,6 +84,7 @@ class Take extends Component {
                 {<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>}
                 <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
                 <DeleteTake onDeleteTake={this.props.onDeleteTake}/>
+                <ShowMarkers onClick = {this.showMarker} showMarkersColor={this.state.showMarkersColor} />
             </Grid.Column>
 
                     {this.props.source
@@ -97,14 +111,13 @@ class Take extends Component {
                             width="700"
                             mic={true}
                             take={this.props.take}
-                            comments={this.props.comments}
-                            onClickSave={this.props.onClickSave}
+                            markers = {markers}
+                            showMarkers={showMarkers}
                         />
                     </Grid.Column >
 
-                    {this.state.isToggleOn ? '' :
-
-                        <Grid.Column width={4}>
+                {this.state.isToggleOn ? '' :
+                    <Grid.Column width={4}>
                             <AudioComponent
                                 src={config.streamingUrl + this.props.take.location}
                                 playlist={file}
@@ -117,7 +130,7 @@ class Take extends Component {
 
                 </Grid>
 
-            </div>
+        </div>
         );
     }
 
