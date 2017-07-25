@@ -146,6 +146,11 @@ class ProjectContainer extends Component {
             book: "mrk"
         }
 
+        console.log("lang: " + this.state.language.slug);
+        // ver = undefined --> throws error
+        console.log("ver: " + this.state.version.name);
+        console.log("book: " + this.state.book.slug);
+
         // Double check that these are the correct args
         //  {"language": "en-x-demo2", "version": "ulb", "book": "mrk"}
 
