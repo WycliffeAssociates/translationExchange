@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TakeList from "./TakeList";
 import ChunkPropTypes from "./ChunkPropTypes";
 import {Accordion, Button, Icon} from "semantic-ui-react";
+import CommentContainer from "./comments/CommentContainer";
 let onClick;
 
 
@@ -43,8 +44,7 @@ class Chunk extends Component {
 
                 <Accordion.Content>
 
-
-
+<CommentContainer/>
                     <TakeList
                         takes={this.props.segments}
                         addToListenList={this.props.addToListenList}

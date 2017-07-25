@@ -8,6 +8,12 @@
     top: 270px;
 }
 
+.gray {
+    background-color: #3E4453;
+    color: #F5A623;
+    margin-bottom: 10px;
+}
+
 .start-here {
     position: absolute;
     left: 800px;

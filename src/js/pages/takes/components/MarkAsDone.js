@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from "prop-types";
-import { Button, Modal } from 'semantic-ui-react'
+import {Button, Modal} from 'semantic-ui-react'
 import AudioComponent from './AudioComponent';
 import config from "config/config";
 let handleOpen;
@@ -9,7 +9,7 @@ let handleClose;
 
 class MarkAsDone extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             color: null,
@@ -17,6 +17,7 @@ class MarkAsDone extends Component {
         }
 
     }
+
     checkReadyForExport() {
         if (this.props.chunks.length === 0) {
             return false;
@@ -46,12 +47,14 @@ class MarkAsDone extends Component {
 
         return playlist
     }
-    changeColor(){
+
+    changeColor() {
         this.setState({
             color: 'green'
         });
         this.handleClose();
     }
+
     handleOpen = (e) => this.setState({
         modalOpen: true,
     });
@@ -64,7 +67,7 @@ class MarkAsDone extends Component {
         let readyForExport = this.checkReadyForExport();
         var ExportButton = <Button onClick={this.handleOpen} color={this.state.color} disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
 
-        return(
+        return (
             <Modal trigger={ExportButton}
                    open={this.state.modalOpen}
                    onClose={this.handleClose}
