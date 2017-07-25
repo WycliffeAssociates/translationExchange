@@ -171,7 +171,7 @@ class ProjectContainer extends Component {
     render () {
 
         return (
-            <div>
+            <div className="chapters">
                 <Container fluid>
 
                     <LoadingDisplay loaded={this.state.loaded}
@@ -186,7 +186,7 @@ class ProjectContainer extends Component {
 
                         </Header>
 
-                        <Table selectable fixed color="blue">
+                        <Table selectable fixed color="grey">
                             <Table.Header>
                                 <Table.Row>
                                     <Table.HeaderCell>Chapter</Table.HeaderCell>
