@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Menu, state, handleItemClick, Container, Image} from "semantic-ui-react";
+import {Menu, state, handleItemClick, Container, Image, Icon} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import * as ReactDOM from "react-dom";
 import 'css/home.css'
@@ -16,7 +16,20 @@ class Header extends Component {
     }
 
 
+    buildLogo() {
+
+        return(
+            <div>
+                <Icon name="circle" color="red" />
+                <Icon name="circle" color="green" />
+                <Icon name="circle" color="yellow" />
+                <Icon name="circle" color="purple" />
+            </div>
+        );
+    }
+
     render() {
+
 
         var logo = <Image src={combinedShape} size="tiny"/>
         var text = <h1><font color="#F5A623">Our Translation Project</font></h1>
@@ -24,10 +37,11 @@ class Header extends Component {
         const { activeItem } = this.state;
 
         return (
-            <Container fluid className="gray">
 
-                <Menu  fluid secondary size='huge' compact inverted >
-                    <Menu.Item content={logo} />
+            <div>
+
+                <Menu  fluid secondary size='huge' compact >
+                    <Menu.Item content={this.buildLogo()} />
                     <Menu.Item content={text} />
 
                     <Menu.Item position="right">
@@ -46,9 +60,9 @@ class Header extends Component {
 
                 </Menu>
 
-                <Container className="yellowBar" fluid></Container>
+                <Container className="redBar" fluid></Container>
+            </div>
 
-            </Container>
 
         )
     }
