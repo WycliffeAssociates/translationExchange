@@ -36,10 +36,10 @@ class Chunk extends Component {
         return (
             <div>
                 <Accordion styled fluid>
-                <Accordion.Title>
-                    <Icon name='dropdown' />
-                    {modeLabel} {this.props.number}
-                </Accordion.Title>
+                    <Accordion.Title>
+                        <Icon name='dropdown' />
+                        {modeLabel} {this.props.number}
+                    </Accordion.Title>
 
                 <Accordion.Content>
 
@@ -55,6 +55,7 @@ class Chunk extends Component {
                         // deleteComment={this.props.deleteComment}
                     />
                 </Accordion.Content>
+
                 </Accordion>
             </div>
         );
