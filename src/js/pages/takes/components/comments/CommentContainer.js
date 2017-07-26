@@ -1,12 +1,11 @@
 
 
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import RecordComment from './RecordComment';
 import './RecordComment.css';
-import { Button, Header, Image, Modal,ModalHeader } from 'semantic-ui-react';
-import axios from 'axios';
-import config from "../../../../../config/config";
+import {Button, Container, Grid, Header, Icon, Image, Modal, ModalHeader} from 'semantic-ui-react';
+import Audio from "translation-audio-player";
+
 
 // NOTE: (dmarchuk)
 let onClickCancel;
@@ -23,7 +22,6 @@ class CommentContainer extends Component {
             show: this.props.open,
             SaveButtonState: true,
             blob: null,
-            wholeblob: null,
 
 
         };
@@ -32,7 +30,7 @@ class CommentContainer extends Component {
         this.hideModal = this.hideModal.bind(this);
         this.getInitialState = this.getInitialState.bind(this);
         this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
-        this.getComment=this.getComment.bind(this);
+        // this.getComment=this.getComment.bind(this);
         this.onClickSave = this.onClickSave.bind(this);
 
     }
@@ -62,43 +60,6 @@ class CommentContainer extends Component {
 
     onClickSave = () => {
         this.hideModal();
-        var reader  = new FileReader();
-
-        // reader.addEventListener("load", () => {
-        //     console.log('reader', reader);
-        //     console.log('y', reader.result);
-        //
-        //     axios.post(config.apiUrl + 'comments/', {
-        //         "location": reader.result,
-        //         "user": 3,
-        //         "file": this.props.take.id,
-        //
-        //     }).then((results) => {
-        //         //console.log(JSON.stringify(this.state.blob));
-        //         //update this take in state using the update method in ChapterContainer
-        //         console.log('uploaded successfully')
-        //     });
-        //
-        //
-        // }, false);
-        //
-        // if (this.state.blob) {
-        //     reader.readAsDataURL(this.state.blob);
-        //
-        // }
-       // reader.readAsDataURL(this.state.blob);
-        // this.state.wholeblob.blob = reader.result;
-        // axios.post(config.apiUrl + 'comments/', {
-        //         "location": reader.result,
-        //         "user": 3,
-        //         "file": this.props.take.id
-        //
-        //     }).then((results) => {
-        //     console.log(JSON.stringify(this.state.blob));
-        //         //update this take in state using the update method in ChapterContainer
-        //       console.log('uploaded successfully')
-        //     });
-
         this.setState({SaveButtonState: true});
 
     };
@@ -107,12 +68,11 @@ class CommentContainer extends Component {
         this.setState({SaveButtonState: newState});
 
     }
-    getComment(comment) {
-        this.setState({
-            wholeblob: comment,
-            blob: comment.blob
-        });
-    }
+    // getComment(comment) {
+    //     this.setState({
+    //         wholeblob: comment
+    //     });
+    // }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.open !== this.state.show) {
@@ -121,9 +81,16 @@ class CommentContainer extends Component {
 
     }
 
+    createPlaylist() {
+        
+    }
+
     Style = {
-        backgroundColor: "rgba(255, 255, 255, .4)",
+
+        backgroundColor: 'black',
+
         fontSize: "32",
+        color: 'white',
         textAlign: "center",
         //width:"500px"
 
@@ -134,11 +101,9 @@ class CommentContainer extends Component {
         return(
 
                 <Modal
-                       open={this.state.show}
                        size='small'
                        style= {this.Style}
-                       dimmer= "inverted"
-
+                       closeIcon='close'
                        trigger = {<Button
                            color="pink"
                            floated='right'
@@ -146,7 +111,7 @@ class CommentContainer extends Component {
                            icon="microphone"
                        onClick={this.showModal}/>}
                 >
-                    <Modal.Header style = {this.Style}>Record Audio Comment</Modal.Header>
+                    <Modal.Header style = {this.Style}>Comments</Modal.Header>
                     <div>
                         <RecordComment ref={instance => (this.recordComment = instance) }
                                        changeSaveButtonState = {this.changeSaveButtonState}
@@ -155,26 +120,30 @@ class CommentContainer extends Component {
 
                         />
 
-
                     </div>
+                    <Container className="commentsList">
+                        <Grid columns={2}>
 
-                    <Modal.Actions style = {this.Style}>
-                        <div className="buttons-container">
-                            <Button className="SaveButton"
-                                    disabled={this.state.SaveButtonState}
-                                    positive icon='checkmark'
-                                    labelPosition='right'
-                                    content="Save"
-                                    onClick={this.onClickSave.bind(this)} />
+                            <Grid.Column width={13}>
+                        {/*<Audio*/}
+                            {/*width={600}*/}
+                            {/*height={300}*/}
+                            {/*playlist={playlist.playlist}*/}
 
-                            <Button  className="CancelButton"
-                                     negative icon='remove'
-                                     labelPosition='right'
-                                     content="Cancel"
-                                     onClick={this.hideModal}/>
-                        </div>
+                            {/*// store a reference of the audio component*/}
+                            {/*ref={audioComponent => { this.audioComponent = audioComponent; }}*/}
+                        {/*/>*/}
+                            </Grid.Column>
 
-                    </Modal.Actions>
+                            <Grid.Column width={3}>
+                        <Button icon negative>
+                            <Icon name="trash"/>
+                        </Button>
+                            </Grid.Column>
+                        </Grid>
+
+                    </Container>
+
                 </Modal>
         );
     }
