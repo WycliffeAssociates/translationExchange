@@ -153,12 +153,15 @@ class ProjectContainer extends Component {
 
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
+                FileDownload(download_results.data, 'file.zip');
+
                 this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
-                //Returns a corrupt file - The API returns an openable file. Is it the Lib
-                FileDownload(download_results.data, zipPileName);
+                //Returns a corrupt file - The API returns an open-able file. Is it the Lib
+                // FileDownload(download_results.data, zipPileName);
                 console.log(download_results.data);
-                return(download_results.data);
-                console.log("returned");
+                // return(download_results.data);
+                // console.log("returned");
+
             }).catch((exception) => {
                 this.setState({downloadError: exception});
             }).catch((error) => {
@@ -222,7 +225,7 @@ class ProjectContainer extends Component {
                         : ""
                     }
                     {this.state.downloadError
-                        ? "There was an error: " + this.state.downloadError
+                        ? "There was an error. Please try again"
                         : ""
                     }
 
