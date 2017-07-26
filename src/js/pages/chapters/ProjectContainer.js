@@ -153,9 +153,8 @@ class ProjectContainer extends Component {
 
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
-                console.log("done");
-                FileDownload(download_results.data, zipPileName);
                 this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
+                FileDownload(download_results.data, zipPileName);
             }).catch((exception) => {
                 this.setState({downloadError: exception});
             }).catch((error) => {
@@ -213,8 +212,15 @@ class ProjectContainer extends Component {
                     <DownloadProjects
                         onDownloadProject={this.onDownloadProject.bind(this)}
                     />
-                    {/*<img src={LoadingGif} alt="Loading..." width="16" height="16"/>*/}
 
+                    {this.state.downloadLoading
+                        ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                        : ""
+                    }
+                    {this.state.downloadError
+                        ? "There was an error: " + this.state.downloadError
+                        : ""
+                    }
 
 
                     {!this.state.uploadSourceLoading && this.state.uploadSourceSuccess

@@ -9,18 +9,14 @@ class DownloadProjects extends Component {
         this.state = {
             loading: false
         };
+        this.downloadProject = this.downloadProject.bind(this)
     }
 
-    downloadProject =() => {
+    downloadProject() {
         this.setState({loading: true});
         this.props.onDownloadProject();
-        this.stopLoading();
     }
-
-    stopLoading() {
-        this.setState({loading: false});
-    }
-
+    
     render () {
 
         return (
@@ -29,7 +25,7 @@ class DownloadProjects extends Component {
                 icon='download'
                 labelPosition='right'
                 size='small'
-                onClick={this.downloadProject.bind(this)}
+                onClick={this.downloadProject}
             />
         );
     }
