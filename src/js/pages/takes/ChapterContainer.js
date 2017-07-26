@@ -6,7 +6,7 @@ import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
-
+import {Container, Segment, Label} from 'semantic-ui-react'
 import ChapterHeader from "./components/ChapterHeader.js";
 import StitchTakes from "./components/StitchTakes"
 
@@ -107,7 +107,7 @@ class ChapterContainer extends Component {
     onClickSave(blobx, type, id) {
         axios.post(config.apiUrl + 'comments/', {
             "comment": blobx,
-            "user": 1,
+            "user": 3,
             "object": id,
             "type": type
 
@@ -213,9 +213,15 @@ class ChapterContainer extends Component {
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
+
                     {this.state.chunks.map(this.createChunkList.bind(this))}
-                    <StitchTakes listenList={this.state.listenList} mode={this.state.mode}/>
+
+                    <Container fluid className="StickyFooter" >
+                        <StitchTakes listenList={this.state.listenList} mode={this.state.mode}/>
+                    </Container>
                 </LoadingDisplay>
+
+
             </div>
         );
     }
