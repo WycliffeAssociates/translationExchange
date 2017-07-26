@@ -9,7 +9,7 @@ class ButtonToggle extends Component {
     render() {
         return (
             <Button icon color={this.props.color} toggle active={this.props.active} onClick={this.props.onClick}>
-                <Icon name='sound' size='large'/>
+                <Icon name='play' size='large'/>
             </Button>
         )
     }

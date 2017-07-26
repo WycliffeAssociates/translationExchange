@@ -13,11 +13,16 @@ export class DeleteTake extends Component{
 
         render(){
             return (
-                <Button icon color="red" onClick={this.props.onDeleteTake}>
+                <Button icon onClick={this.changeColor.bind(this)}>
                     <Icon name='trash' size="large"/>
                 </Button>
             );
         }
+    changeColor() {
+        this.setState({
+            color: 'red'
+        });
+    }
 }
 
 DeleteTake.propTypes = {
@@ -25,3 +30,5 @@ DeleteTake.propTypes = {
 };
 
 export default DeleteTake
+
+//this.props.onDeleteTake
