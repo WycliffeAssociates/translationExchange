@@ -6,7 +6,7 @@ import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
-import {Container, Segment, Label} from 'semantic-ui-react'
+import {Container, Segment, Label, Sidebar, Grid} from 'semantic-ui-react'
 import Footer from './components/Footer'
 
 
@@ -26,7 +26,8 @@ class ChapterContainer extends Component {
             chapter: {},
             language: {},
             mode: "",
-            listenList: []
+            listenList: [],
+            query: ''
         };
     }
 
@@ -194,28 +195,19 @@ class ChapterContainer extends Component {
     render() {
 
         var query = QueryString.parse(this.props.location.search);
+        this.state.query = query;
 
         return (
-            <div className="ChapterContainer">
-                <h1>Chapter {query.chapter} </h1>
+            <div>
 
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
 
+                    <h1>Chapter {query.chapter} </h1>
+
                     {this.state.chunks.map(this.createChunkList.bind(this))}
 
-                    <Container fluid className="StickyFooter" >
-                        <Footer loaded={this.state.loaded}
-                                chapter={query.chapter}
-                                book={this.state.book.name}
-                                language={this.state.language.name}
-                                chunks={this.state.chunks}
-                                mode={this.state.mode}
-                                listenList={this.state.listenList}
-                                /*playlist={this.createListenPlaylist()}*/
-                        />
-                    </Container>
                 </LoadingDisplay>
             </div>
         );
@@ -233,6 +225,12 @@ class ChapterContainer extends Component {
                     deleteTake={this.deleteTake.bind(this)}
                     updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
                     onClickSave={this.onClickSave.bind(this)}
+                    loaded={this.state.loaded}
+                    chapter={this.state.query.chapter}
+                    book={this.state.book.name}
+                    language={this.state.language.name}
+                    chunks={this.state.chunks}
+                    listenList={this.state.listenList}
                     // deleteComment={this.deleteComment.bind(this)}
                 />
             </div>

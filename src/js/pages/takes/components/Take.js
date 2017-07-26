@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Star from './Star';
 import AudioComponent from './AudioComponent';
 import config from "config/config";
-import {Button, Grid, Segment} from "semantic-ui-react";
+import {Button, Grid, Segment, Card, Modal} from "semantic-ui-react";
 import TakeListenButton from './AddTake'
 import DeleteTake from './DeleteTake'
 import LoadingGif from 'images/loading-tiny.gif'
@@ -64,72 +64,57 @@ class Take extends Component {
             "src": config.streamingUrl + this.props.take.location
         };
 
+        var button = <Button content="lalala" />
+
         return (
+
             <div>
-        <Grid columns={4}>
 
-            <Grid.Column width={4}>
+            <Card fluid>
+                <Card.Content>
+
                 <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate(this.props.take.date_modified)}</strong>
-            </Grid.Column>
 
-                    <Grid.Column width={2}>
                         {this.props.ratingLoading
                             ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
                             : <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
                         }
 
-                    </Grid.Column>
-
-            <Grid.Column width={3}>
-                {<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>}
+                {/*<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>*/}
                 <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
-                <DeleteTake onDeleteTake={this.props.onDeleteTake}/>
+                {/*<DeleteTake onDeleteTake={this.props.onDeleteTake}/>*/}
                 <ShowMarkers onClick = {this.showMarker} showMarkersColor={this.state.showMarkersColor} />
-            </Grid.Column>
 
                     {this.props.source
-                        ? <Grid.Column width={5}>
+                        ? <div>
                             <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'
                                     labelPosition='right'/>
                             Language: {this.props.source.language.name}
-                        </Grid.Column>
+                        </div>
                         : ""
 
                     }
 
-                </Grid>
-
-
-                <Grid columns={2} relaxed>
-                    <Grid.Column width={9}>
+                    {this.state.isToggleOn ? '' :
                         <AudioComponent
                             src={config.streamingUrl + this.props.take.location}
                             playlist={file}
-                            width="700"
-                            mic={true}
+                            width="200"
+                            name="Source Audio"
+                            mic={false}
                             take={this.props.take}
-                            markers = {markers}
-                            showMarkers={showMarkers}
-                            onClickSave={this.props.onClickSave}
-                            comments={this.props.comments}
                         />
-                    </Grid.Column >
 
-                {this.state.isToggleOn ? '' :
-                    <Grid.Column width={4}>
-                            <AudioComponent
-                                src={config.streamingUrl + this.props.take.location}
-                                playlist={file}
-                                width="200"
-                                name="Source Audio"
-                                mic={false}
-                                take={this.props.take}
-                            />
-                        </Grid.Column>}
+                    }
 
-                </Grid>
 
+                </Card.Content>
+            </Card>
         </div>
+
+
+
+
         );
     }
 
