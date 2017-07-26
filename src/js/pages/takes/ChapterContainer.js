@@ -181,9 +181,6 @@ class ChapterContainer extends Component {
      */
     render() {
 
-
-        console.log('STATE', this.state.listenList)
-
         var query = QueryString.parse(this.props.location.search);
 
         return (
