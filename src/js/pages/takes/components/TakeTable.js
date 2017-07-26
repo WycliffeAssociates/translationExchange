@@ -10,14 +10,17 @@ class TakeTable extends Component {
     constructor(props) {
         super(props);
 
-        this.setState(
-            {
-                column: this.props.column
-            }
-        )
+
+
+        this.state = {
+            rating: this.props.column
+
+        }
+
     }
 
     render () {
+
         iterator = 0;
         return (
             <div>
@@ -39,6 +42,7 @@ class TakeTable extends Component {
                     deleteTake={this.props.deleteTake}
                     updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                     onClickSave={this.props.onClickSave}
+                    ratingToGet={this.state.rating}
                     // deleteComment={this.props.deleteComment}
                 />
             </div>

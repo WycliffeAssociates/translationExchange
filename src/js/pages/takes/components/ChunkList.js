@@ -7,8 +7,6 @@ class ChunkList extends Component {
 
     render () {
 
-        console.log('ChunkList Props')
-
         return (
             <div>
 

@@ -20,9 +20,80 @@ class Chunk extends Component {
         });
     }
 
-    render () {
+    createTakeTables() {
 
-        console.log('Chunk Props', this.props)
+        var cells = [];
+
+        for (var i = 0; i < 4; i++) {
+
+            var name;
+            var img;
+
+            switch(i) {
+                case 0:
+                    name = "Garbage";
+                    img = <Icon name="star" color="red" size="big"/>
+                    break;
+                case 1:
+                    name = "2 stars";
+                    img =
+                        <div>
+                            <Icon name="star" color="yellow" size="big"/>
+                            <Icon name="star" color="yellow" size="big"/>
+                        </div>
+                    break;
+                case 2:
+                    name = "3 stars";
+                    img =
+                        <div>
+                            <Icon name="star" color="green" size="big"/>
+                            <Icon name="star" color="green" size="big"/>
+                            <Icon name="star" color="green" size="big"/>
+                        </div>
+                    break;
+                case 3:
+                    name = "Check";
+                    img = <Icon name="check" color="pink" size="big"/>
+                    break;
+            }
+
+            cells[i] =
+
+                <Grid.Column>
+
+                    <Table textAlign="center">
+                        <Table.Header>
+                            <Table.Row>
+
+                            <Table.HeaderCell>{img}</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+
+
+                                <Table.Cell>
+                                    <TakeTable
+                                        takes={this.props.segments}
+                                        addToListenList={this.props.addToListenList}
+                                        patchTake={this.props.patchTake}
+                                        deleteTake={this.props.deleteTake}
+                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                        onClickSave={this.props.onClickSave}
+                                        column={i}
+                                        // deleteComment={this.props.deleteComment}
+                                    />
+                                    <br />
+                                </Table.Cell>
+
+
+                    </Table>
+
+                </Grid.Column>
+        }
+
+        return cells
+    }
+
+    render () {
 
         var modeLabel = "";
 
@@ -54,73 +125,11 @@ class Chunk extends Component {
                 <Accordion.Content className="ChunkBody">
                     <CommentContainer />
 
-                    <Container className="Four Tables">
 
-                        <Table textAlign="center">
-                            <Table.Header>
-                                <Table.Row>
-                                    <Table.HeaderCell>Garbage</Table.HeaderCell>
-                                    <Table.HeaderCell>2 Stars</Table.HeaderCell>
-                                    <Table.HeaderCell>3 Stars</Table.HeaderCell>
-                                    <Table.HeaderCell>Check</Table.HeaderCell>
-                                </Table.Row>
-                            </Table.Header>
 
-                            <Table.Row>
-                                <Table.Cell>
-                                    <TakeTable
-                                        takes={this.props.segments}
-                                        addToListenList={this.props.addToListenList}
-                                        patchTake={this.props.patchTake}
-                                        deleteTake={this.props.deleteTake}
-                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                                        onClickSave={this.props.onClickSave}
-
-                                        // deleteComment={this.props.deleteComment}
-                                    />
-                                    <br />
-                                </Table.Cell>
-                                <Table.Cell>
-                                    <TakeTable
-                                        takes={this.props.segments}
-                                        addToListenList={this.props.addToListenList}
-                                        patchTake={this.props.patchTake}
-                                        deleteTake={this.props.deleteTake}
-                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                                        onClickSave={this.props.onClickSave}
-                                        // deleteComment={this.props.deleteComment}
-                                    />
-                                    <br />
-                                </Table.Cell>
-                                <Table.Cell>
-                                    <TakeTable
-                                        takes={this.props.segments}
-                                        addToListenList={this.props.addToListenList}
-                                        patchTake={this.props.patchTake}
-                                        deleteTake={this.props.deleteTake}
-                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                                        onClickSave={this.props.onClickSave}
-                                        // deleteComment={this.props.deleteComment}
-                                    />
-                                    <br />
-                                </Table.Cell>
-                                <Table.Cell>
-                                    <TakeTable
-                                        takes={this.props.segments}
-                                        addToListenList={this.props.addToListenList}
-                                        patchTake={this.props.patchTake}
-                                        deleteTake={this.props.deleteTake}
-                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                                        onClickSave={this.props.onClickSave}
-                                        // deleteComment={this.props.deleteComment}
-                                    />
-                                    <br />
-                                </Table.Cell>
-                            </Table.Row>
-
-                        </Table>
-
-                    </Container>
+                        <Grid padded fluid columns={4}>
+                            {this.createTakeTables()}
+                        </Grid>
 
 
 

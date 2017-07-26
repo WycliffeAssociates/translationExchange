@@ -47,3 +47,11 @@
     background-color: white;
     text-align: center;
 }
+
+.MoveButtons {
+    vertical-align: middle
+}
+
+.hoverButton:hover {
+    cursor: pointer;
+}
