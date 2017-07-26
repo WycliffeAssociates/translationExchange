@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Icon, Loader} from 'semantic-ui-react'
+import {Button} from 'semantic-ui-react'
 import 'css/chapters.css'
 
 class DownloadProjects extends Component {
@@ -14,7 +14,6 @@ class DownloadProjects extends Component {
     downloadProject() {
         this.props.onDownloadProject();
         this.setState({loading: true});
-
     }
 
     render () {
@@ -27,7 +26,6 @@ class DownloadProjects extends Component {
                 size='small'
                 onClick={this.downloadProject.bind(this)}
             />
-
         );
     }
 }

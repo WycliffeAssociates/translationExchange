@@ -21,7 +21,7 @@ class ProjectContainer extends Component {
             language: {},
             project_id: -1,
             is_publish: false,
-            filesData : null,
+            filesData: null,
             loaded: false,
             error: "",
             publishError: "",
@@ -94,14 +94,15 @@ class ProjectContainer extends Component {
                 book: this.state.book.slug,
                 chapter: this.state.chapters.name,
                 anthology: this.state.anthology.name,
-                version: this.state.version.name
+                version: QueryString.parse(this.props.location.search).version
             },
             fields: {
                 checked_level: level
             }
         };
 
-        axios.post(config.apiUrl + "update_project/", params);
+        // Endpoint had been renamed to projects/
+        // axios.post(config.apiUrl + "update_project/", params);
     }
 
     getChapterData() {
@@ -117,7 +118,8 @@ class ProjectContainer extends Component {
                     project_id: results.data.project_id,
                     is_publish: results.data.is_publish,
                     language: results.data.language,
-                    loaded: true
+                    loaded: true,
+                    version: results.data.version
                 }
             )
         }).catch((exception) => {
@@ -138,18 +140,13 @@ class ProjectContainer extends Component {
 
 
     onDownloadProject() {
-        let zipPileName = this.state.language.slug + "_" + this.state.version.name + "_" + this.state.book.slug + ".zip"
+        let zipPileName = this.state.language.slug + "_" + QueryString.parse(this.props.location.search).version + "_" + this.state.book.slug + ".zip"
 
         let params = {
-            language: "en-x-demo2",
-            version: "ulb",
-            book: "mrk"
+            language: this.state.language.slug,
+            version: QueryString.parse(this.props.location.search).version,
+            book: this.state.book.slug
         }
-
-        console.log("lang: " + this.state.language.slug);
-        // ver = undefined --> throws error
-        console.log("ver: " + this.state.version.name);
-        console.log("book: " + this.state.book.slug);
 
         // Double check that these are the correct args
         //  {"language": "en-x-demo2", "version": "ulb", "book": "mrk"}
@@ -214,6 +211,7 @@ class ProjectContainer extends Component {
                     <DownloadProjects
                         onDownloadProject={this.onDownloadProject.bind(this)}
                     />
+                    {/*<img src={LoadingGif} alt="Loading..." width="16" height="16"/>*/}
 
                     {!this.state.uploadSourceLoading && this.state.uploadSourceSuccess
                         ? <div>Successfully uploaded {this.state.uploadSourceSuccess} and set it as source audio</div>
