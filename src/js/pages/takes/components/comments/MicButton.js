@@ -6,7 +6,7 @@ import RecordComment from './RecordComment';
 import './RecordComment.css';
 import {Button, Container, Grid, Header, Icon, Image, Modal, ModalHeader} from 'semantic-ui-react';
 import Audio from "translation-audio-player";
-import config from "../../../../../config/config";
+import config from "config/config";
 import axios from "axios"
 // NOTE: (dmarchuk)
 let onClickCancel;
@@ -73,16 +73,10 @@ class MicButton extends Component {
 
     }
 
-    // deleteComment(id){
-    //     axios.delete(config.apiUrl + 'comments/' + id + '/'
-    //     ).then((results) => {
-    //     alert('dleeteed') })
-    // }
-
     createPlaylist(comment) {
         var file = [];
         file[0] = {
-            "src": comment.comment.location
+            "src": config.streamingUrl + comment.comment.location
         };
 
         return (
@@ -142,7 +136,6 @@ class MicButton extends Component {
                     <Grid columns={2}>
 
                         <Grid.Column width={13}>
-
                             {this.props.comments
                                 ? this.props.comments.map(this.createPlaylist)
                                 : ""

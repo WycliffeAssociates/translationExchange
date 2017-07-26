@@ -102,8 +102,8 @@ class ProjectsListContainer extends Component {
         var retryRequestProjects = function () {this.requestProjects(this.props.location.search)};
 
         return (
-            <div>
-                <Header as='h1'>Choose a project</Header>
+            <div className="projects">
+                <Header as='h1'>Choose a Project</Header>
 
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}

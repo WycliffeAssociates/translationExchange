@@ -103,19 +103,31 @@ class ChapterContainer extends Component {
             });
         });
     }
-        // CHANGE THIS FUNCTION TO UPDATE STATE. also should probably disable save button/hide player
+
+    // CHANGE THIS FUNCTION TO UPDATE STATE. also should probably disable save button/hide player
     onClickSave(blobx, type, id) {
         axios.post(config.apiUrl + 'comments/', {
             "comment": blobx,
-            "user": 2,
+            "user": 3,
             "object": id,
             "type": type
 
         }).then((results) => {
-            alert('uploaded successfully');
+            var map = {"comment":results.data};
+            let updatedChunks = this.state.chunks.slice();
+            let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+                return chunk.takes.find(take => take.take.id === id)
+            });
+            let takeToUpdate = updatedChunks[chunkToUpdate].takes
+                .findIndex(take => take.take.id === id);
+            updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.push(map);
+            this.setState({
+                chunks: updatedChunks
+            });
 
         });
     }
+
     // CHANGE THIS FUNCTION TO UPDATE STATE
 
     updateChosenTakeForChunk(takeId) {
@@ -186,6 +198,7 @@ class ChapterContainer extends Component {
         return (
             <div className="ChapterContainer">
                 <h1>Chapter {query.chapter} </h1>
+
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
