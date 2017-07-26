@@ -51,14 +51,6 @@ class CommentContainer extends Component {
         this.setState({show: false});
     }
 
-    onClickCancel = () => {                         // used when you click the microphone button in the player
-        this.recordComment.deleteBlob();
-        this.hideModal();
-        this.setState({SaveButtonState: true});
-
-    };
-
-
     onClickSave = () => {
         this.hideModal();
         this.setState({SaveButtonState: true});
@@ -145,7 +137,7 @@ class CommentContainer extends Component {
 
                 </div>
                 <Container className="commentsList">
-                    <Grid columns={2}>
+                    <Grid columns={1}>
 
                         <Grid.Column width={13}>
                             {this.props.comments
@@ -154,10 +146,6 @@ class CommentContainer extends Component {
                             }
                         </Grid.Column>
 
-                        <Grid.Column width={3}>
-
-                            <Button onClick={this.hideModal} content="close"/>
-                        </Grid.Column>
                     </Grid>
 
                 </Container>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from "prop-types";
 import MarkAsDone from "./MarkAsDone";
-import CommentContainer from "./comments/CommentContainer"
+import CommentContainer from "./comments/PinkButton"
 
 class ChapterHeader extends Component {
     render() {
@@ -22,7 +22,7 @@ class ChapterHeader extends Component {
                     deleteComment={this.props.deleteComment}
                 />
                 <MarkAsDone chapter={this.props.chapter}
-                            book={this.props.book}
+
                             language={this.props.language}
                             chunks={this.props.chunks}
                             mode={this.props.mode}
@@ -34,8 +34,6 @@ class ChapterHeader extends Component {
 
 ChapterHeader.propTypes = {
     loaded: PropTypes.bool.isRequired,
-    chapter: PropTypes.number.isRequired,
-    book: PropTypes.string.isRequired,
     language: PropTypes.string.isRequired,
     chunks: PropTypes.array.isRequired
 };

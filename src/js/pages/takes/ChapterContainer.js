@@ -11,7 +11,6 @@ import ChapterHeader from "./components/ChapterHeader.js";
 import StitchTakes from "./components/StitchTakes"
 
 let onClick;
-// this is the page for one chapter
 
 class ChapterContainer extends Component {
 
@@ -156,6 +155,7 @@ class ChapterContainer extends Component {
             "type": type
 
         }).then((results) => {
+            console.log('data', results.data);
             var map = {"comment": results.data};
             let updatedChunks = this.state.chunks.slice();
 

@@ -96,7 +96,6 @@ class MarkAsDone extends Component {
 
 MarkAsDone.propTypes = {
     chapter: PropTypes.number.isRequired,
-    book: PropTypes.string.isRequired,
     language: PropTypes.string.isRequired,
     chunks: PropTypes.array.isRequired
 };

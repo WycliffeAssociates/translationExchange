@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {ReactMic} from 'react-mic';
-import './RecordComment.css';
 import {Button, Grid, Icon} from "semantic-ui-react";
-import axios from 'axios';
-
+import "./RecordComment.css"
 let startRecording;
 let stopRecording;
 
@@ -18,7 +16,7 @@ export class RecordComment extends Component {
             DisableSaveButton: true,
             blob: '',
             jsonblob: null
-        }
+        };
 
 
         this.onStop = this.onStop.bind(this);
@@ -34,9 +32,7 @@ export class RecordComment extends Component {
         });
 
         this.deleteBlob();    // deleted blob object in case the user records a new audio comment
-
-
-    }
+    };
 
     stopRecording = () => {
         this.setState({
@@ -46,6 +42,14 @@ export class RecordComment extends Component {
         this.props.changeSaveButtonState(false);
 
 
+    };
+
+    onSave(type, id, jsonblob, func) {
+
+        func(jsonblob, type, id);
+        this.setState({
+            displayPlayer:false
+        });
     }
 
     onStop(recordedBlob) {
@@ -70,20 +74,9 @@ export class RecordComment extends Component {
 
     }
 
-    // componentDidUpdate() {
-    //     {this.props.sendComment(this.state.AudioURL)}
-    // }
 
     deleteBlob() {
-
         window.URL.revokeObjectURL(this.state.AudioURL);   // deletes an audio object
-
-
-    }
-
-    enableButton() {                         // used when you click the microphone button in the player
-        this.commentContainer.saveButton();
-
     }
 
     render() {
@@ -102,8 +95,13 @@ export class RecordComment extends Component {
         let MainButton = null;
 
         if (displayPlayer) {
-            AudioPlayer = <DisplayAudioPlayer displayPlayer={displayPlayer} type={this.props.type} id={this.props.id}
-                                              jsonblob={jsonblob} AudioURL={AudioURL} onClickSave={this.props.onClickSave}/>;
+            AudioPlayer = <DisplayAudioPlayer displayPlayer={displayPlayer}
+                                              type={this.props.type}
+                                              id={this.props.id}
+                                              jsonblob={jsonblob}
+                                              AudioURL={AudioURL}
+                                              onClickSave={this.props.onClickSave}
+                                            onSave={this.onSave.bind(this)}/>;
 
         }
 
@@ -154,13 +152,13 @@ function StopButton(props) {
 }
 
 
+
 function DisplayAudioPlayer(props) {
     const displayPlayer = props.displayPlayer;
     const AudioURL = props.AudioURL;
     const jsonblob = props.jsonblob;
     const type = props.type;
     const id = props.id;
-
 
     if (displayPlayer) {
 
@@ -175,8 +173,7 @@ function DisplayAudioPlayer(props) {
 
                 <Grid.Column width={3}>
                     {jsonblob ? <Button positive size="small" onClick={() => {
-                        props.onClickSave(jsonblob, type, id)
-                    }}>Save</Button> : ''}
+                        props.onSave(type,id, jsonblob, props.onClickSave) }}>Save</Button> : ''}
                 </Grid.Column>
             </Grid>
         );
