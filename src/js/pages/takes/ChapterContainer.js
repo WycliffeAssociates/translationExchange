@@ -26,7 +26,6 @@ class ChapterContainer extends Component {
             chapter: {},
             language: {},
             mode: "",
-            listenList: [],
             query: ''
         };
     }
@@ -146,49 +145,6 @@ class ChapterContainer extends Component {
         }
     }
 
-    addToListenList(props) {
-
-        var newArr = this.state.listenList;
-        var id = props.take.id;
-
-        for (let i = 0; i < newArr.length; i++) {
-            if (newArr[i].props.take.id === id) {
-                newArr.splice(i, 1)
-                this.setState({listenList: newArr});
-                return ''
-            }
-        }
-
-        //find the chunk that this take was from, and add chunk info
-        let chunk = this.state.chunks.find((chunk) => {
-            return chunk.takes.find(take => take.take.id === id)
-        });
-        let newListenItem = {
-            props: props,
-            chunk: chunk
-        };
-
-        newArr.push(newListenItem);
-        this.setState({listenList: newArr})
-    }
-
-    createListenPlaylist() {
-
-        if (this.state.listenList.length > 0) {
-            var playlist = [];
-            this.state.listenList.map((i) => {
-                playlist[playlist.length] = {
-                    "src": config.streamingUrl + i.props.take.location,
-                    "name": this.state.mode + ' ' + i.chunk.startv + ' (' + (playlist.length + 1) + '/' + this.state.listenList.length + ')'
-                }
-            })
-            return playlist
-        }
-
-        else {return[{"src":"a"}]}
-
-    }
-
     /*
      Rendering functions
      */
@@ -220,7 +176,6 @@ class ChapterContainer extends Component {
                     segments={chunk.takes} // array of takes
                     mode={this.state.mode}
                     number={chunk.startv}
-                    addToListenList={this.addToListenList.bind(this)}
                     patchTake={this.patchTake.bind(this)}
                     deleteTake={this.deleteTake.bind(this)}
                     updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
@@ -230,7 +185,6 @@ class ChapterContainer extends Component {
                     book={this.state.book.name}
                     language={this.state.language.name}
                     chunks={this.state.chunks}
-                    listenList={this.state.listenList}
                     // deleteComment={this.deleteComment.bind(this)}
                 />
             </div>

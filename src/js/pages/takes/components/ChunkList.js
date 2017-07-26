@@ -15,7 +15,6 @@ class ChunkList extends Component {
                     segments={this.props.segments} // array of takes
                     mode={this.props.mode}
                     number={this.props.number}
-                    addToListenList={this.props.addToListenList}
                     patchTake={this.props.patchTake}
                     deleteTake={this.props.deleteTake}
                     updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
@@ -25,7 +24,6 @@ class ChunkList extends Component {
                     book={this.props.book}
                     language={this.props.language}
                     chunks={this.props.chunks}
-                    listenList={this.props.listenList}
                 />
                 }
 

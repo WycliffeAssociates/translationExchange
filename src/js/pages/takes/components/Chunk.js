@@ -5,13 +5,17 @@ import {Accordion, Button, Icon, Container, Grid, Table} from "semantic-ui-react
 import CommentContainer from "./comments/CommentContainer";
 import Footer from './Footer'
 import TakeTable from './TakeTable'
+import config from 'config/config'
 let onClick;
 
 
 class Chunk extends Component {
     constructor (props) {
         super(props);
-        this.state = {open: false};
+        this.state = {
+            open: false,
+            currentPlaylist: []
+        };
     }
 
     onClick = () => {// used when you click the microphone button in the player
@@ -73,7 +77,7 @@ class Chunk extends Component {
                                 <Table.Cell>
                                     <TakeTable
                                         takes={this.props.segments}
-                                        addToListenList={this.props.addToListenList}
+                                        addToListenList={/*this.props.addToListenList*/this.makePlaylist}
                                         patchTake={this.props.patchTake}
                                         deleteTake={this.props.deleteTake}
                                         updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
@@ -91,6 +95,17 @@ class Chunk extends Component {
         }
 
         return cells
+    }
+
+    makePlaylist = (props) => {
+
+        var file = [{
+            "src": config.streamingUrl + props.take.location
+        }]
+
+        this.setState({
+            currentPlaylist: file
+        })
     }
 
     render () {
@@ -140,7 +155,7 @@ class Chunk extends Component {
                                 language={this.props.language.name}
                                 chunks={this.props.chunks}
                                 mode={this.props.mode}
-                                listenList={this.props.listenList}
+                                listenList={/*this.props.listenList*/this.state.currentPlaylist}
                         />
                     </Container>
                 </Accordion.Content>

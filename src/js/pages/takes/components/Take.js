@@ -40,6 +40,7 @@ class Take extends Component {
     addToListen() {
         this.props.addToListenList(this.props);
 
+        /*
         if (this.state.addButtonColor !== "blue") {
             this.setState(
                 {
@@ -54,6 +55,7 @@ class Take extends Component {
                 }
             )
         }
+        */
     }
 
     moveLeft () {
@@ -95,7 +97,7 @@ class Take extends Component {
                         */}
 
                 {/*<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>*/}
-                <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
+                <TakeListenButton onClick={this.addToListen.bind(this)} color="blue"/>
                 {/*<DeleteTake onDeleteTake={this.props.onDeleteTake}/>*/}
 
                 <ShowMarkers onClick = {this.showMarker} showMarkersColor={this.state.showMarkersColor} />

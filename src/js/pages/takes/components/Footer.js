@@ -11,13 +11,14 @@ class Footer extends Component {
     createListenPlaylist() {
 
         if (this.props.listenList.length > 0) {
-            var playlist = [];
-            this.props.listenList.map((i) => {
-                playlist[playlist.length] = {
+            /*
+            var playlist = [{
                     "src": config.streamingUrl + i.props.take.location,
                     "name": this.props.mode + ' ' + i.chunk.startv + ' (' + (playlist.length + 1) + '/' + this.props.listenList.length + ')'
-                }
-            })
+                }]
+                */
+            var playlist = this.props.listenList
+
             return (
                 <Card fluid>
                     <AudioComponent playlist={playlist} width={700}/>
