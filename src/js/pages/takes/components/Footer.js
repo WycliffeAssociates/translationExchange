@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import MarkAsDone from "./MarkAsDone";
 import CommentContainer from "./comments/CommentContainer"
-import {Menu} from 'semantic-ui-react'
+import {Menu, Container, Card} from 'semantic-ui-react'
 import AudioComponent from "./AudioComponent"
 import config from 'config/config'
+import 'css/takes.css'
 
 class Footer extends Component {
 
@@ -18,7 +19,15 @@ class Footer extends Component {
                 }
             })
             return (
-                <AudioComponent playlist={playlist} width={700}/>
+                <Card fluid>
+                    <AudioComponent playlist={playlist} width={700}/>
+                </Card>
+            );
+        }
+
+        else {
+            return (
+                <h2>Select a chunk to play</h2>
             );
         }
 
@@ -26,25 +35,29 @@ class Footer extends Component {
 
     render () {
         return (
+            <div>
+                <Menu compact secondary>
 
-            <Menu>
+                    <Menu.Item>
+                        {this.createListenPlaylist()}
+                    </Menu.Item>
+                </Menu>
 
-                    {this.createListenPlaylist()}
-
-
-
-                <Menu.Item position="right">
-                    <CommentContainer
-                        ref={instance => (this.commentContainer = instance)}/>
-                    <MarkAsDone chapter={this.props.chapter}
-                                book={this.props.book}
-                                language={this.props.language}
-                                chunks={this.props.chunks}
-                                mode={this.props.mode}
-                    />
-                </Menu.Item>
-
-            </Menu>
+                {/*
+                <Menu secondary>
+                    <Menu.Item position="right">
+                        <CommentContainer
+                            ref={instance => (this.commentContainer = instance)}/>
+                        <MarkAsDone chapter={this.props.chapter}
+                                    book={this.props.book}
+                                    language={this.props.language}
+                                    chunks={this.props.chunks}
+                                    mode={this.props.mode}
+                        />
+                    </Menu.Item>
+                 </Menu>
+                 */}
+            </div>
         );
     }
 }

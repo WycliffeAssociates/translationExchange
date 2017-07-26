@@ -2,27 +2,29 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import TakeContainer from "../TakeContainer";
 import TakePropTypes from "./TakePropTypes";
+import TakeList from './TakeList'
 
 var iterator;
-class TakeList extends Component {
+class TakeTable extends Component {
+
+    constructor(props) {
+        super(props);
+
+
+
+        this.state = {
+            rating: this.props.column
+
+        }
+
+    }
 
     render () {
-
-        var list = [];
-
-            this.props.takes.map((i) => {
-                if((i.take.rating) === (this.props.ratingToGet)) {
-                    list[list.length] = i;
-                }
-            })
-
-
 
         iterator = 0;
         return (
             <div>
-                {list.map(this.createListItem.bind(this))}
-                {/*this.props.takes.map(this.createListItem.bind(this))*/}
+                {this.props.takes.map(this.createListItem.bind(this))}
             </div>
 
         );
@@ -33,15 +35,14 @@ class TakeList extends Component {
 
         return (
             <div>
-                <TakeContainer
-                    take={take} // one take
-                    count={iterator}
-                    source={take.source}
+                <TakeList
+                    takes={this.props.takes}
                     addToListenList={this.props.addToListenList}
                     patchTake={this.props.patchTake}
                     deleteTake={this.props.deleteTake}
                     updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                     onClickSave={this.props.onClickSave}
+                    ratingToGet={this.state.rating}
                     // deleteComment={this.props.deleteComment}
                 />
             </div>
@@ -49,8 +50,4 @@ class TakeList extends Component {
     }
 }
 
-TakeList.propTypes = {
-    takes: PropTypes.arrayOf(TakePropTypes).isRequired
-};
-
-export default TakeList;
+export default TakeTable;
