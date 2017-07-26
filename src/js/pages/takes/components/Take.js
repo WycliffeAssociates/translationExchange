@@ -114,6 +114,7 @@ class Take extends Component {
                             markers={markers}
                             showMarkers={showMarkers}
                             onClickSave={this.props.onClickSave}
+                            deleteComment={this.props.deleteComment}
                             comments={this.props.comments}
                         />
                     </Grid.Column >

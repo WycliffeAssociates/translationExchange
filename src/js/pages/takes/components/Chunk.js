@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import TakeList from "./TakeList";
 import ChunkPropTypes from "./ChunkPropTypes";
 import {Accordion, Button, Icon} from "semantic-ui-react";
@@ -7,7 +7,7 @@ let onClick;
 
 
 class Chunk extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {open: false};
     }
@@ -18,7 +18,7 @@ class Chunk extends Component {
         });
     }
 
-    render () {
+    render() {
         var modeLabel = "";
 
         switch (this.props.mode) {
@@ -37,26 +37,29 @@ class Chunk extends Component {
             <div>
                 <Accordion styled fluid>
                     <Accordion.Title>
-                        <Icon name='dropdown' />
+                        <Icon name='dropdown'/>
                         {modeLabel} {this.props.number}
                     </Accordion.Title>
 
-                <Accordion.Content>
+                    <Accordion.Content>
 
-                <CommentContainer comments={this.props.comments}
-                                  onClickSave={this.props.onClickSave}
-                                  id={this.props.id}
-                                  type={"chunk"}
-                />
-                    <TakeList
-                        takes={this.props.segments}
-                        addToListenList={this.props.addToListenList}
-                        patchTake={this.props.patchTake}
-                        deleteTake={this.props.deleteTake}
-                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                        onClickSave={this.props.onClickSave}
-                    />
-                </Accordion.Content>
+                        <CommentContainer comments={this.props.comments}
+                                          onClickSave={this.props.onClickSave}
+                                          id={this.props.id}
+                                          type={"chunk"}
+                                          deleteComment={this.props.deleteComment}
+
+                        />
+                        <TakeList
+                            takes={this.props.segments}
+                            addToListenList={this.props.addToListenList}
+                            patchTake={this.props.patchTake}
+                            deleteTake={this.props.deleteTake}
+                            updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                            onClickSave={this.props.onClickSave}
+                            deleteComment={this.props.deleteComment}
+                        />
+                    </Accordion.Content>
 
                 </Accordion>
             </div>
@@ -66,9 +69,9 @@ class Chunk extends Component {
 }
 
 /*
-Chunk.propTypes = {
-    chunk: ChunkPropTypes
-};
-*/
+ Chunk.propTypes = {
+ chunk: ChunkPropTypes
+ };
+ */
 
 export default Chunk;

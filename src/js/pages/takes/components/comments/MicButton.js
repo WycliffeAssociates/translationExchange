@@ -73,6 +73,10 @@ class MicButton extends Component {
 
     }
 
+    onClickDelete(commentid, takeid) {
+        this.props.deleteComment("take", commentid, takeid)
+    }
+
     createPlaylist(comment) {
         var file = [];
         file[0] = {
@@ -92,7 +96,9 @@ class MicButton extends Component {
                     />
                 </Grid.Column>
                 <Grid.Column width={2}>
-                    <Button icon negative>
+                    <Button icon negative onClick={() => {
+                        this.onClickDelete(comment.comment.id, this.props.take.id)
+                    }}>
                         <Icon name="trash"/>
                     </Button>
                 </Grid.Column>
@@ -128,7 +134,6 @@ class MicButton extends Component {
                                    id={this.props.take.id}
                                    onClickSave={this.props.onClickSave}
 
-
                     />
 
                 </div>
@@ -137,7 +142,7 @@ class MicButton extends Component {
 
                         <Grid.Column width={13}>
                             {this.props.comments
-                                ? this.props.comments.map(this.createPlaylist)
+                                ? this.props.comments.map(this.createPlaylist.bind(this))
                                 : ""
                             }
                         </Grid.Column>

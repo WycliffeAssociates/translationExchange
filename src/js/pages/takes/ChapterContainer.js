@@ -60,7 +60,6 @@ class ChapterContainer extends Component {
     patchTake(takeId, patch, success) {
         axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch
         ).then((results) => {
-            console.log("patch take");
             console.dir(results.data);
             //find the take in state that this one corresponds to
             let updatedChunks = this.state.chunks.slice();
@@ -101,7 +100,52 @@ class ChapterContainer extends Component {
             this.setState({
                 chunks: updatedChunks
             });
+            if (success) {
+                success();
+            }
         });
+    }
+
+    deleteComment(type, commentid, takeid) {
+        axios.delete('http://172.19.145.91/api/comments/' + commentid + '/'
+        ).then((results) => {
+            let updatedChunks = this.state.chunks.slice();
+            if (type === "take") {
+                let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+                    return chunk.takes.find(take => take.take.id === takeid)
+                });
+                let takeToUpdate = updatedChunks[chunkToUpdate].takes
+                    .findIndex(take => take.take.id === takeid);
+
+                updatedChunks[chunkToUpdate].takes[takeToUpdate].comments =
+                    updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.filter(comment => comment.comment.id !== commentid);
+                this.setState({
+                    chunks: updatedChunks
+                });
+            }
+
+            else if (type === "chunk") {
+                for (var i = 0; i < updatedChunks.length; i++) {
+                    if (updatedChunks[i].id === takeid) {
+                        var chunkToUpdate = i;
+                    }
+                }
+                updatedChunks[chunkToUpdate].comments = updatedChunks[chunkToUpdate].comments.filter(comment => comment.comment.id !== commentid);
+                this.setState({
+                    chunks: updatedChunks
+                });
+
+            }
+            else if (type === "chapter") {
+                let updatedChapter = Object.assign({}, this.state.chapter);
+
+                updatedChapter.comments = updatedChapter.comments.filter(comment => comment.comment.id !== commentid);
+                this.setState({
+                    chapter: updatedChapter
+                });
+            }
+
+        })
     }
 
     onClickSave(blobx, type, id) {
@@ -115,7 +159,7 @@ class ChapterContainer extends Component {
             var map = {"comment": results.data};
             let updatedChunks = this.state.chunks.slice();
 
-            if (type==="take") {
+            if (type === "take") {
                 let chunkToUpdate = updatedChunks.findIndex((chunk) => {
                     return chunk.takes.find(take => take.take.id === id)
                 });
@@ -126,20 +170,19 @@ class ChapterContainer extends Component {
                     chunks: updatedChunks
                 });
             }
-            else if (type==="chunk") {
-                for (var i=0;i<updatedChunks.length; i++){
-                    if (updatedChunks[i].id ===id){
-                        var chunkToUpdate=i;
+            else if (type === "chunk") {
+                for (var i = 0; i < updatedChunks.length; i++) {
+                    if (updatedChunks[i].id === id) {
+                        var chunkToUpdate = i;
                     }
                 }
                 updatedChunks[chunkToUpdate].comments.push(map);
                 this.setState({
-                    chunks:updatedChunks
+                    chunks: updatedChunks
                 });
             }
 
             else {
-                var map = {"comment": results.data};
                 let updatedChapter = Object.assign({}, this.state.chapter);
                 updatedChapter.comments.push(map);
                 this.setState({
@@ -208,6 +251,7 @@ class ChapterContainer extends Component {
                                chunks={this.state.chunks}
                                mode={this.state.mode}
                                onClickSave={this.onClickSave.bind(this)}
+                               deleteComment={this.deleteComment.bind(this)}
                 />
 
                 <LoadingDisplay loaded={this.state.loaded}
@@ -216,7 +260,7 @@ class ChapterContainer extends Component {
 
                     {this.state.chunks.map(this.createChunkList.bind(this))}
 
-                    <Container fluid className="StickyFooter" >
+                    <Container fluid className="StickyFooter">
                         <StitchTakes listenList={this.state.listenList} mode={this.state.mode}/>
                     </Container>
                 </LoadingDisplay>
@@ -240,7 +284,7 @@ class ChapterContainer extends Component {
                     updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
                     onClickSave={this.onClickSave.bind(this)}
                     id={chunk.id}
-                    // deleteComment={this.deleteComment.bind(this)}
+                    deleteComment={this.deleteComment.bind(this)}
                 />
             </div>
         );

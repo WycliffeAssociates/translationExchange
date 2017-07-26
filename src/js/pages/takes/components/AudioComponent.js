@@ -76,7 +76,7 @@ class AudioComponent extends Component {
                     take={this.props.take}
                     comments={this.props.comments}
                     onClickSave={this.props.onClickSave}
-                    // deleteComment={this.props.deleteComment}
+                    deleteComment={this.props.deleteComment}
                 /> : ''}
 
 

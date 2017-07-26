@@ -30,7 +30,6 @@ class CommentContainer extends Component {
         this.hideModal = this.hideModal.bind(this);
         this.getInitialState = this.getInitialState.bind(this);
         this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
-        // this.getComment=this.getComment.bind(this);
         this.onClickSave = this.onClickSave.bind(this);
 
     }
@@ -71,12 +70,6 @@ class CommentContainer extends Component {
 
     }
 
-    // getComment(comment) {
-    //     this.setState({
-    //         wholeblob: comment
-    //     });
-    // }
-
     componentWillReceiveProps(nextProps) {
         if (nextProps.open !== this.state.show) {
             this.setState({show: true});
@@ -100,7 +93,9 @@ class CommentContainer extends Component {
                     />
                 </Grid.Column>
                 <Grid.Column width={2}>
-                    <Button icon negative>
+                    <Button icon negative onClick={() => {
+                        this.props.deleteComment(this.props.type, comment.comment.id, this.props.id)
+                    }}>
                         <Icon name="trash"/>
                     </Button>
                 </Grid.Column>
@@ -154,7 +149,7 @@ class CommentContainer extends Component {
 
                         <Grid.Column width={13}>
                             {this.props.comments
-                                ? this.props.comments.map(this.createPlaylist)
+                                ? this.props.comments.map(this.createPlaylist.bind(this))
                                 : ""
                             }
                         </Grid.Column>
