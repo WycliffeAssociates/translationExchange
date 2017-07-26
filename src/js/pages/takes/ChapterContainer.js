@@ -6,9 +6,9 @@ import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
-import {Container, Segment, Label} from 'semantic-ui-react'
-import ChapterHeader from "./components/ChapterHeader.js";
-import StitchTakes from "./components/StitchTakes"
+
+import {Container, Segment, Label, Sidebar, Grid} from 'semantic-ui-react'
+import Footer from './components/Footer'
 
 let onClick;
 
@@ -25,7 +25,8 @@ class ChapterContainer extends Component {
             chapter: {},
             language: {},
             mode: "",
-            listenList: []
+            listenList: [],
+            query: ''
         };
     }
 
@@ -171,6 +172,7 @@ class ChapterContainer extends Component {
                 });
             }
             else if (type === "chunk") {
+
                 for (var i = 0; i < updatedChunks.length; i++) {
                     if (updatedChunks[i].id === id) {
                         var chunkToUpdate = i;
@@ -240,29 +242,19 @@ class ChapterContainer extends Component {
      */
     render() {
         var query = QueryString.parse(this.props.location.search);
+
+        this.state.query = query;
+
         return (
-            <div className="takes">
-                <ChapterHeader loaded={this.state.loaded}
-                               chapter={query.chapter}
-                               comments={this.state.chapter.comments}
-                               id={this.state.chapter.id}
-                               book={this.state.book.name}
-                               language={this.state.language.name}
-                               chunks={this.state.chunks}
-                               mode={this.state.mode}
-                               onClickSave={this.onClickSave.bind(this)}
-                               deleteComment={this.deleteComment.bind(this)}
-                />
+            <div>
 
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
 
-                    {this.state.chunks.map(this.createChunkList.bind(this))}
+                    <h1>Chapter {query.chapter} </h1>
 
-                    <Container fluid className="StickyFooter">
-                        <StitchTakes listenList={this.state.listenList} mode={this.state.mode}/>
-                    </Container>
+                    {this.state.chunks.map(this.createChunkList.bind(this))}
                 </LoadingDisplay>
 
 
@@ -285,6 +277,13 @@ class ChapterContainer extends Component {
                     onClickSave={this.onClickSave.bind(this)}
                     id={chunk.id}
                     deleteComment={this.deleteComment.bind(this)}
+                    loaded={this.state.loaded}
+                    chapter={this.state.query.chapter}
+                    book={this.state.book.name}
+                    language={this.state.language.name}
+                    chunks={this.state.chunks}
+                    listenList={this.state.listenList}
+
                 />
             </div>
         );

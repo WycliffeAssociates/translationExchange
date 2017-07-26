@@ -101,7 +101,7 @@ export class RecordComment extends Component {
                                               jsonblob={jsonblob}
                                               AudioURL={AudioURL}
                                               onClickSave={this.props.onClickSave}
-                                            onSave={this.onSave.bind(this)}/>;
+                                                onSave={this.onSave.bind(this)}/>;
 
         }
 
@@ -173,7 +173,7 @@ function DisplayAudioPlayer(props) {
 
                 <Grid.Column width={3}>
                     {jsonblob ? <Button positive size="small" onClick={() => {
-                        props.onSave(type,id, jsonblob, props.onClickSave) }}>Save</Button> : ''}
+                        props.onSave(type, id, jsonblob, props.onClickSave) }}>Save</Button> : ''}
                 </Grid.Column>
             </Grid>
         );

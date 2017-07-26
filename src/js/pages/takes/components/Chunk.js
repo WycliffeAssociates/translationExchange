@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import TakeList from "./TakeList";
 import ChunkPropTypes from "./ChunkPropTypes";
-import {Accordion, Button, Icon} from "semantic-ui-react";
-import CommentContainer from "./comments/PinkButton";
+
+import {Accordion, Button, Icon, Container, Grid, Table} from "semantic-ui-react";
+import Footer from './Footer'
+import TakeTable from './TakeTable'
+import PinkButton from "./comments/PinkButton";
 let onClick;
 
 
@@ -18,7 +21,81 @@ class Chunk extends Component {
         });
     }
 
-    render() {
+    createTakeTables() {
+
+        var cells = [];
+
+        for (var i = 0; i < 4; i++) {
+
+            var name;
+            var img;
+
+            switch(i) {
+                case 0:
+                    name = "Garbage";
+                    img = <Icon name="star" color="red" size="big"/>
+                    break;
+                case 1:
+                    name = "2 stars";
+                    img =
+                        <div>
+                            <Icon name="star" color="yellow" size="big"/>
+                            <Icon name="star" color="yellow" size="big"/>
+                        </div>
+                    break;
+                case 2:
+                    name = "3 stars";
+                    img =
+                        <div>
+                            <Icon name="star" color="green" size="big"/>
+                            <Icon name="star" color="green" size="big"/>
+                            <Icon name="star" color="green" size="big"/>
+                        </div>
+                    break;
+                case 3:
+                    name = "Check";
+                    img = <Icon name="check" color="pink" size="big"/>
+                    break;
+            }
+
+            cells[i] =
+
+                <Grid.Column>
+
+                    <Table textAlign="center">
+                        <Table.Header>
+                            <Table.Row>
+
+                            <Table.HeaderCell>{img}</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+
+
+                                <Table.Cell>
+                                    <TakeTable
+                                        takes={this.props.segments}
+                                        addToListenList={this.props.addToListenList}
+                                        patchTake={this.props.patchTake}
+                                        deleteTake={this.props.deleteTake}
+                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                        onClickSave={this.props.onClickSave}
+                                        column={i}
+                                        // deleteComment={this.props.deleteComment}
+                                    />
+                                    <br />
+                                </Table.Cell>
+
+
+                    </Table>
+
+                </Grid.Column>
+        }
+
+        return cells
+    }
+
+    render () {
+
         var modeLabel = "";
 
         switch (this.props.mode) {
@@ -35,33 +112,46 @@ class Chunk extends Component {
 
         return (
             <div>
-                <Accordion styled fluid>
-                    <Accordion.Title>
-                        <Icon name='dropdown'/>
-                        {modeLabel} {this.props.number}
+                <Accordion fluid styled>
+                    <Accordion.Title className="ChunkTitle">
+                        <center>
+                            <Icon name='dropdown' />
+                            <font color="black">
+                            {modeLabel} {this.props.number}
+                            </font>
+                        </center>
+
                     </Accordion.Title>
 
-                    <Accordion.Content>
+                <Accordion.Content className="ChunkBody">
+                    <PinkButton
+                        comments={this.props.comments}
+                        onClickSave={this.props.onClickSave}
+                        id={this.props.id}
+                        type={"chunk"}
+                        deleteComment={this.props.deleteComment}/>
 
-                        <CommentContainer comments={this.props.comments}
-                                          onClickSave={this.props.onClickSave}
-                                          id={this.props.id}
-                                          type={"chunk"}
-                                          deleteComment={this.props.deleteComment}
+                        <Grid padded fluid columns={4}>
+                            {this.createTakeTables()}
+                        </Grid>
 
+
+
+                    <Container fluid className="ChunkFooter">
+                        <Footer loaded={this.props.loaded}
+                                chapter={this.props.chapter}
+                                book={this.props.book.name}
+                                language={this.props.language.name}
+                                chunks={this.props.chunks}
+                                mode={this.props.mode}
+                                listenList={this.props.listenList}
                         />
-                        <TakeList
-                            takes={this.props.segments}
-                            addToListenList={this.props.addToListenList}
-                            patchTake={this.props.patchTake}
-                            deleteTake={this.props.deleteTake}
-                            updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                            onClickSave={this.props.onClickSave}
-                            deleteComment={this.props.deleteComment}
-                        />
-                    </Accordion.Content>
+                    </Container>
+                </Accordion.Content>
 
                 </Accordion>
+
+
             </div>
         );
     }
