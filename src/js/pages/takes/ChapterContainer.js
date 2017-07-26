@@ -114,15 +114,39 @@ class ChapterContainer extends Component {
         }).then((results) => {
             var map = {"comment": results.data};
             let updatedChunks = this.state.chunks.slice();
-            let chunkToUpdate = updatedChunks.findIndex((chunk) => {
-                return chunk.takes.find(take => take.take.id === id)
-            });
-            let takeToUpdate = updatedChunks[chunkToUpdate].takes
-                .findIndex(take => take.take.id === id);
-            updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.push(map);
-            this.setState({
-                chunks: updatedChunks
-            });
+
+            if (type==="take") {
+                let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+                    return chunk.takes.find(take => take.take.id === id)
+                });
+                let takeToUpdate = updatedChunks[chunkToUpdate].takes
+                    .findIndex(take => take.take.id === id);
+                updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.push(map);
+                this.setState({
+                    chunks: updatedChunks
+                });
+            }
+            else if (type==="chunk") {
+                for (var i=0;i<updatedChunks.length; i++){
+                    if (updatedChunks[i].id ===id){
+                        var chunkToUpdate=i;
+                    }
+                }
+                updatedChunks[chunkToUpdate].comments.push(map);
+                this.setState({
+                    chunks:updatedChunks
+                });
+            }
+
+            else {
+                var map = {"comment": results.data};
+                let updatedChapter = Object.assign({}, this.state.chapter);
+                updatedChapter.comments.push(map);
+                this.setState({
+                    chapter: updatedChapter
+                });
+
+            }
 
         });
     }
@@ -183,7 +207,7 @@ class ChapterContainer extends Component {
                                language={this.state.language.name}
                                chunks={this.state.chunks}
                                mode={this.state.mode}
-                               onClickSave={this.onClickSave}
+                               onClickSave={this.onClickSave.bind(this)}
                 />
 
                 <LoadingDisplay loaded={this.state.loaded}
@@ -209,6 +233,7 @@ class ChapterContainer extends Component {
                     deleteTake={this.deleteTake.bind(this)}
                     updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
                     onClickSave={this.onClickSave.bind(this)}
+                    id={chunk.id}
                     // deleteComment={this.deleteComment.bind(this)}
                 />
             </div>

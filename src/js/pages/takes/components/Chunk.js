@@ -19,7 +19,6 @@ class Chunk extends Component {
     }
 
     render () {
-
         var modeLabel = "";
 
         switch (this.props.mode) {
@@ -45,8 +44,9 @@ class Chunk extends Component {
                 <Accordion.Content>
 
                 <CommentContainer comments={this.props.comments}
-                onClickSave={this.props.onClickSave}
-                                  id={this.props.number}
+                                  onClickSave={this.props.onClickSave}
+                                  id={this.props.id}
+                                  type={"chunk"}
                 />
                     <TakeList
                         takes={this.props.segments}
@@ -55,7 +55,6 @@ class Chunk extends Component {
                         deleteTake={this.props.deleteTake}
                         updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                         onClickSave={this.props.onClickSave}
-                        // deleteComment={this.props.deleteComment}
                     />
                 </Accordion.Content>
 

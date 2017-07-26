@@ -18,6 +18,7 @@ class ChapterHeader extends Component {
                     comments={this.props.comments}
                     id={this.props.id}
                     onClickSave={this.props.onClickSave}
+                    type={"chapter"}
                 />
                 <MarkAsDone chapter={this.props.chapter}
                             book={this.props.book}

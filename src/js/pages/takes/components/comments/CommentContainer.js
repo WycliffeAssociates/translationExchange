@@ -143,7 +143,7 @@ class CommentContainer extends Component {
                                    updateTakeInState={this.props.updateTakeInState}
                                    sendComment={this.getComment}
                                    onClickSave={this.props.onClickSave}
-                                   type="chunk"
+                                   type={this.props.type}
                                    id={this.props.id}
 
                     />
