@@ -8,8 +8,6 @@ import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
 import {Container, Segment, Label} from 'semantic-ui-react'
 import Footer from './components/Footer'
-import StitchTakes from "./components/StitchTakes"
-import AudioComponent from './components/AudioComponent'
 
 
 let onClick;
@@ -182,9 +180,6 @@ class ChapterContainer extends Component {
      Rendering functions
      */
     render() {
-
-
-        console.log('STATE', this.state.listenList)
 
         var query = QueryString.parse(this.props.location.search);
 
