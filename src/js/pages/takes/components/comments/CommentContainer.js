@@ -1,10 +1,11 @@
 
 
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import RecordComment from './RecordComment';
 import './RecordComment.css';
-import { Button, Header, Image, Modal,ModalHeader } from 'semantic-ui-react';
+import {Button, Container, Grid, Header, Icon, Image, Modal, ModalHeader} from 'semantic-ui-react';
+import Audio from "translation-audio-player";
+
 
 // NOTE: (dmarchuk)
 let onClickCancel;
@@ -16,31 +17,27 @@ class CommentContainer extends Component {
     constructor(props){
         super(props);
 
-
-
         this.state = {title : 'Record Comment',
-            show: false,
-            SaveButtonState: true
+
+            show: this.props.open,
+            SaveButtonState: true,
+            blob: null,
 
 
         };
-
 
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
         this.getInitialState = this.getInitialState.bind(this);
         this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
+        // this.getComment=this.getComment.bind(this);
+        this.onClickSave = this.onClickSave.bind(this);
 
     }
-
     saveButton() {
 
         this.setState({disabled:false});
     }
-
-
-
-
     getInitialState() {
         return {show: false};
     }
@@ -60,72 +57,94 @@ class CommentContainer extends Component {
 
     };
 
-    onClickSave = () =>{
+
+    onClickSave = () => {
         this.hideModal();
-        // save and upload audio comment to the server
         this.setState({SaveButtonState: true});
 
     };
-
-
 
     changeSaveButtonState (newState) {
         this.setState({SaveButtonState: newState});
 
     }
+    // getComment(comment) {
+    //     this.setState({
+    //         wholeblob: comment
+    //     });
+    // }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.open !== this.state.show) {
+            this.setState({show: true});
+        }
 
+    }
+
+    createPlaylist() {
+        
+    }
 
     Style = {
-        backgroundColor: "rgba(171,149,149, .4)",
+
+        backgroundColor: 'black',
+
         fontSize: "32",
+        color: 'white',
         textAlign: "center",
         //width:"500px"
-
 
 };
 
     render(){
-
-
+        // console.log('fml', this.state.show);
         return(
 
-
-
-
                 <Modal
-                       open={this.state.show}
                        size='small'
                        style= {this.Style}
-                       dimmer= "inverted"
+                       closeIcon='close'
+                       trigger = {<Button
+                           color="pink"
+                           floated='right'
+                           ref={audioComponent => { this.audioComponent = audioComponent; }}
+                           icon="microphone"
+                       onClick={this.showModal}/>}
                 >
-                    <Modal.Header style = {this.Style}>Record Audio Comment</Modal.Header>
+                    <Modal.Header style = {this.Style}>Comments</Modal.Header>
                     <div>
                         <RecordComment ref={instance => (this.recordComment = instance) }
                                        changeSaveButtonState = {this.changeSaveButtonState}
+                                       updateTakeInState={this.props.updateTakeInState}
+                                       sendComment={this.getComment}
 
                         />
+
                     </div>
+                    <Container className="commentsList">
+                        <Grid columns={2}>
 
-                    <Modal.Actions style = {this.Style}>
-                        <div className="buttons-container">
-                            <Button className="SaveButton"
-                                    disabled={this.state.SaveButtonState}
-                                    positive icon='checkmark'
-                                    labelPosition='right'
-                                    content="Save"
-                                    onClick={this.onClickSave} />
+                            <Grid.Column width={13}>
+                        {/*<Audio*/}
+                            {/*width={600}*/}
+                            {/*height={300}*/}
+                            {/*playlist={playlist.playlist}*/}
 
-                            <Button  className="CancelButton"
-                                     negative icon='remove'
-                                     labelPosition='right'
-                                     content="Cancel"
-                                     onClick={this.onClickCancel}/>
-                        </div>
+                            {/*// store a reference of the audio component*/}
+                            {/*ref={audioComponent => { this.audioComponent = audioComponent; }}*/}
+                        {/*/>*/}
+                            </Grid.Column>
 
-                    </Modal.Actions>
+                            <Grid.Column width={3}>
+                        <Button icon negative>
+                            <Icon name="trash"/>
+                        </Button>
+                            </Grid.Column>
+                        </Grid>
+
+                    </Container>
+
                 </Modal>
-
         );
     }
 }

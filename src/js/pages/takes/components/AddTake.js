@@ -8,8 +8,8 @@ import { Button, Icon } from 'semantic-ui-react'
 class ButtonToggle extends Component {
     render() {
         return (
-            <Button icon toggle active={this.props.active} onClick={this.props.onClick}>
-                <Icon name='save' size='large'/>
+            <Button icon color={this.props.color} toggle active={this.props.active} onClick={this.props.onClick}>
+                <Icon name='play' size='large'/>
             </Button>
         )
     }
