@@ -12,6 +12,8 @@ import StitchTakes from "./components/StitchTakes"
 
 let onClick;
 let results;
+let updatedChunks;
+let chunkToUpdate;
 // this is the page for one chapter
 
 class ChapterContainer extends Component {
@@ -82,26 +84,27 @@ class ChapterContainer extends Component {
 
 
     patchTake(takeId, patch, success) {
+        axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch
+        ).then((results) => {
+            console.log("patch take");
+            console.dir(results.data);
+            //find the take in state that this one corresponds to
+            let updatedChunks = this.state.chunks.slice();
+            let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+                return chunk.takes.find(take => take.take.id === takeId)
+            });
+            let takeToUpdate = updatedChunks[chunkToUpdate].takes
+                .findIndex(take => take.take.id === takeId);
+            updatedChunks[chunkToUpdate].takes[takeToUpdate].take = results.data;
+            this.setState({
+                chunks: updatedChunks
+            });
 
-        const promise = axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch)
-            .then((results) => {
-                //find the take in state that this one corresponds to
-                this.TakesFunc();
-            })
-
-            .catch(error => {
-                if (error.response){
-                    console.log("error with patchTake")
-                }
+            if (success) {
+                success();
+            }
         });
-
-
-        function TakesFunc(){
-            let updatedTakes = this.state.takes.slice();
-            let takeToUpdate = updatedTakes.findIndex(take => take.take.id === takeId);
-            updatedTakes[takeToUpdate].take = results.data;
-        }
-    };
+    }
 
 
     //patchTake(takeId, patch, success) {
