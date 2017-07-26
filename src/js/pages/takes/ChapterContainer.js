@@ -8,8 +8,6 @@ import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
 import {Container, Segment, Label} from 'semantic-ui-react'
 import Footer from './components/Footer'
-import StitchTakes from "./components/StitchTakes"
-import AudioComponent from './components/AudioComponent'
 
 
 let onClick;
@@ -204,7 +202,7 @@ class ChapterContainer extends Component {
                                 chunks={this.state.chunks}
                                 mode={this.state.mode}
                                 listenList={this.state.listenList}
-                                playlist={this.createListenPlaylist()}
+                                /*playlist={this.createListenPlaylist()}*/
                         />
                     </Container>
                 </LoadingDisplay>
