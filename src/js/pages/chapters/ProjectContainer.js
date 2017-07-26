@@ -142,7 +142,7 @@ class ProjectContainer extends Component {
     }
 
     onDownloadProject() {
-        let zipPileName = this.state.language.slug + "_" + QueryString.parse(this.props.location.search).version + "_" + this.state.book.slug + ".zip"
+        let zipFileName = this.state.language.slug + "_" + QueryString.parse(this.props.location.search).version + "_" + this.state.book.slug + ".zip"
         this.setState({downloadLoading: true, downloadError: ""});
 
         let params = {
@@ -153,11 +153,11 @@ class ProjectContainer extends Component {
 
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
-                FileDownload(download_results.data, 'file.zip');
+                //FileDownload(download_results.data, 'file.zip');
 
                 this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
                 //Returns a corrupt file - The API returns an open-able file. Is it the Lib
-                // FileDownload(download_results.data, zipPileName);
+                FileDownload(download_results.data, zipFileName);
                 console.log(download_results.data);
                 // return(download_results.data);
                 // console.log("returned");
