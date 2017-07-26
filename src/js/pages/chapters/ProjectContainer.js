@@ -222,7 +222,6 @@ class ProjectContainer extends Component {
                         : ""
                     }
 
-
                     {!this.state.uploadSourceLoading && this.state.uploadSourceSuccess
                         ? <div>Successfully uploaded {this.state.uploadSourceSuccess} and set it as source audio</div>
                         : <form onSubmit={this.uploadSourceFile} method="post" encType="multipart/form-data">
