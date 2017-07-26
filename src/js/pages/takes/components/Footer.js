@@ -42,10 +42,7 @@ class Footer extends Component {
                     <Menu.Item>
                         {this.createListenPlaylist()}
                     </Menu.Item>
-                </Menu>
 
-                {/*
-                <Menu secondary>
                     <Menu.Item position="right">
                         <CommentContainer
                             ref={instance => (this.commentContainer = instance)}/>
@@ -57,7 +54,7 @@ class Footer extends Component {
                         />
                     </Menu.Item>
                  </Menu>
-                 */}
+
             </div>
         );
     }

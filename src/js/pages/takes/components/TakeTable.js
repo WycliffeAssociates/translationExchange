@@ -10,8 +10,6 @@ class TakeTable extends Component {
     constructor(props) {
         super(props);
 
-
-
         this.state = {
             rating: this.props.column
 
@@ -20,6 +18,7 @@ class TakeTable extends Component {
     }
 
     render () {
+
 
         iterator = 0;
         return (
@@ -32,6 +31,7 @@ class TakeTable extends Component {
 
     createListItem (take) {
         iterator += 1;
+
 
         return (
             <div>

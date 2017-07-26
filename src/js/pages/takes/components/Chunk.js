@@ -110,6 +110,8 @@ class Chunk extends Component {
 
     render () {
 
+        console.log('Chunk', )
+
         var modeLabel = "";
 
         switch (this.props.mode) {
@@ -137,30 +139,37 @@ class Chunk extends Component {
 
                     </Accordion.Title>
 
-                <Accordion.Content className="ChunkBody">
-                    <CommentContainer />
+                    <Accordion.Content className="ChunkBody">
+                        <CommentContainer />
 
 
 
-                        <Grid padded fluid columns={4}>
-                            {this.createTakeTables()}
-                        </Grid>
+                            <Grid padded fluid columns={4}>
+                                {this.createTakeTables()}
+                            </Grid>
 
 
 
-                    <Container fluid className="ChunkFooter">
-                        <Footer loaded={this.props.loaded}
-                                chapter={this.props.chapter}
-                                book={this.props.book.name}
-                                language={this.props.language.name}
-                                chunks={this.props.chunks}
-                                mode={this.props.mode}
-                                listenList={/*this.props.listenList*/this.state.currentPlaylist}
-                        />
-                    </Container>
-                </Accordion.Content>
+
+
+
+
+                        <Container fluid className="ChunkFooter">
+                            <Footer loaded={this.props.loaded}
+                                    chapter={this.props.chapter}
+                                    book={this.props.book.name}
+                                    language={this.props.language.name}
+                                    chunks={this.props.chunks}
+                                    mode={this.props.mode}
+                                    listenList={/*this.props.listenList*/this.state.currentPlaylist}
+                            />
+                        </Container>
+
+                    </Accordion.Content>
 
                 </Accordion>
+
+
 
 
             </div>

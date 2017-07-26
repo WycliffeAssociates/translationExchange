@@ -7,6 +7,8 @@ class ChunkList extends Component {
 
     render () {
 
+        console.log('ChunkList', this.props.segments)
+
         return (
             <div>
 

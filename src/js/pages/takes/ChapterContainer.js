@@ -26,6 +26,7 @@ class ChapterContainer extends Component {
             chapter: {},
             language: {},
             mode: "",
+            listenList: [],
             query: ''
         };
     }
@@ -146,9 +147,57 @@ class ChapterContainer extends Component {
     }
 
     /*
+    addToListenList(props) {
+
+        var newArr = this.state.listenList;
+        var id = props.take.id;
+
+        for (let i = 0; i < newArr.length; i++) {
+            if (newArr[i].props.take.id === id) {
+                newArr.splice(i, 1)
+                this.setState({listenList: newArr});
+                return ''
+            }
+        }
+
+        //find the chunk that this take was from, and add chunk info
+        let chunk = this.state.chunks.find((chunk) => {
+            return chunk.takes.find(take => take.take.id === id)
+        });
+        let newListenItem = {
+            props: props,
+            chunk: chunk
+        };
+
+        newArr.push(newListenItem);
+        this.setState({listenList: newArr})
+    }
+
+
+    createListenPlaylist() {
+
+        if (this.state.listenList.length > 0) {
+            var playlist = [];
+            this.state.listenList.map((i) => {
+                playlist[playlist.length] = {
+                    "src": config.streamingUrl + i.props.take.location,
+                    "name": this.state.mode + ' ' + i.chunk.startv + ' (' + (playlist.length + 1) + '/' + this.state.listenList.length + ')'
+                }
+            })
+            return playlist
+        }
+
+        else {return[{"src":"a"}]}
+
+    }
+    */
+
+    /*
      Rendering functions
      */
     render() {
+
+        console.log('ChapterContainer', this.state.chunks)
 
         var query = QueryString.parse(this.props.location.search);
         this.state.query = query;
@@ -170,6 +219,7 @@ class ChapterContainer extends Component {
     }
 
     createChunkList(chunk) {
+        console.log('createChunkList', chunk.takes)
         return (
             <div>
                 <ChunkList
