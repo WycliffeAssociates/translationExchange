@@ -185,6 +185,7 @@ class ChapterContainer extends Component {
 
         return (
             <div className="ChapterContainer">
+                <h1>Chapter {query.chapter} </h1>
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
