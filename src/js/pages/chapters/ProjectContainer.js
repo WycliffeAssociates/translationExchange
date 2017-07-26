@@ -25,11 +25,13 @@ class ProjectContainer extends Component {
             loaded: false,
             error: "",
             publishError: "",
-            loadingError: "",
+            downloadError: "",
+            downloadSuccess: "",
             uploadSourceLoading: false,
             uploadSourceError: "",
             uploadSourceSuccess: "",
             anthology: {},
+            downloadLoading: false,
             version: {}
         };
         this.uploadSourceFile = this.uploadSourceFile.bind(this);
@@ -101,6 +103,7 @@ class ProjectContainer extends Component {
             }
         };
 
+        alert("This needs to get fixed - it crashes");
         // Endpoint had been renamed to projects/
         // axios.post(config.apiUrl + "update_project/", params);
     }
@@ -138,9 +141,9 @@ class ProjectContainer extends Component {
         )
     }
 
-
     onDownloadProject() {
         let zipPileName = this.state.language.slug + "_" + QueryString.parse(this.props.location.search).version + "_" + this.state.book.slug + ".zip"
+        this.setState({downloadLoading: true, downloadError: ""});
 
         let params = {
             language: this.state.language.slug,
@@ -148,16 +151,15 @@ class ProjectContainer extends Component {
             book: this.state.book.slug
         }
 
-        // Double check that these are the correct args
-        //  {"language": "en-x-demo2", "version": "ulb", "book": "mrk"}
-
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
                 console.log("done");
                 FileDownload(download_results.data, zipPileName);
-
+                this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
             }).catch((exception) => {
-            this.setState({loadingError: exception});
+                this.setState({downloadError: exception});
+            }).catch((error) => {
+                this.setState({downloadLoading: false, downloadError: error});
         });
     }
 
@@ -208,10 +210,10 @@ class ProjectContainer extends Component {
                     <br></br>
 
 
-                    <DownloadProjects
-                        onDownloadProject={this.onDownloadProject.bind(this)}
-                    />
-                    {/*<img src={LoadingGif} alt="Loading..." width="16" height="16"/>*/}
+                    <DownloadProjects onDownloadProject={this.onDownloadProject.bind(this)} />
+                    <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+
+
 
                     {!this.state.uploadSourceLoading && this.state.uploadSourceSuccess
                         ? <div>Successfully uploaded {this.state.uploadSourceSuccess} and set it as source audio</div>
