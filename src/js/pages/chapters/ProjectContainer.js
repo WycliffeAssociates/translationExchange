@@ -210,8 +210,10 @@ class ProjectContainer extends Component {
                     <br></br>
 
 
-                    <DownloadProjects onDownloadProject={this.onDownloadProject.bind(this)} />
-                    <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                    <DownloadProjects
+                        onDownloadProject={this.onDownloadProject.bind(this)}
+                    />
+                    {/*<img src={LoadingGif} alt="Loading..." width="16" height="16"/>*/}
 
 
 

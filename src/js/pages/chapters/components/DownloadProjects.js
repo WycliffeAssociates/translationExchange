@@ -11,9 +11,14 @@ class DownloadProjects extends Component {
         };
     }
 
-    downloadProject() {
-        this.props.onDownloadProject();
+    downloadProject =() => {
         this.setState({loading: true});
+        this.props.onDownloadProject();
+        this.stopLoading();
+    }
+
+    stopLoading() {
+        this.setState({loading: false});
     }
 
     render () {
