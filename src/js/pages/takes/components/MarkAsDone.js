@@ -15,6 +15,8 @@ class MarkAsDone extends Component {
         this.state = {
             color: null,
             modalOpen: false,
+            is_published : this.props.chapter.is_publish,
+            disable:false,
         }
 
     }
@@ -53,18 +55,19 @@ class MarkAsDone extends Component {
         this.setState({
             color: 'green'
         });
-        
+   
         let parameters={"is_publish":true}
         //make patch request to confirm that the chapter is ready to be published
-        
         axios.patch(config.apiUrl + 'chapters/' + this.props.chapter.id +"/", parameters)
             .then((response) => {
+             this.changeColor();
                console.log(response)
             }).catch((exception) => {
                console.log(exception);
         });
         this.handleClose();
     }
+   
 
     handleOpen = (e) => this.setState({
             modalOpen: true,
@@ -76,9 +79,10 @@ class MarkAsDone extends Component {
         )
 
     render() {
-        let readyForExport = true; //this.checkReadyForExport();
-        var ExportButton = <Button onClick={this.handleOpen} color={this.state.color} disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
-
+        let disableBtn=this.state.is_published==true?true:false;
+       
+        var ExportButton = <Button onClick={this.handleOpen} color={disableBtn==true?"green":this.state.color} disabled={disableBtn} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
+       
         return (
                 <Modal trigger={ExportButton}
                        open={this.state.modalOpen}
@@ -98,7 +102,7 @@ class MarkAsDone extends Component {
                     </Modal.Content>
                     <Modal.Actions>
                         {/*this button will do a call to database to change chapter.exportready to true */}
-                        <Button content="Finish" onClick={this.changeColor.bind(this)}/>
+                        <Button content="Finish" onClick={this.changeColor.bind(this)} />
                 
                     </Modal.Actions>
                 </Modal>
