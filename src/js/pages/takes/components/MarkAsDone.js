@@ -16,7 +16,6 @@ class MarkAsDone extends Component {
             color: null,
             modalOpen: false,
             is_published : this.props.chapter.is_publish,
-            disable:false,
         }
 
     }
@@ -55,12 +54,13 @@ class MarkAsDone extends Component {
         this.setState({
             color: 'green'
         });
-   
+    
         let parameters={"is_publish":true}
         //make patch request to confirm that the chapter is ready to be published
         axios.patch(config.apiUrl + 'chapters/' + this.props.chapter.id +"/", parameters)
             .then((response) => {
              this.changeColor();
+             this.setState({is_published:true});
                console.log(response)
             }).catch((exception) => {
                console.log(exception);
