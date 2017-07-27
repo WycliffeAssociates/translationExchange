@@ -7,7 +7,7 @@ import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
 import ChapterHeader from "./components/ChapterHeader"
 import ChunkList from "./components/ChunkList"
-
+import Footer from './components/Footer'
 import MarkAsDone from "./components/MarkAsDone"
 
 let onClick;
@@ -49,7 +49,7 @@ class ChapterContainer extends Component {
                     book: results.data.book,
                     chapter: results.data.chapter,
                     language: results.data.language,
-                    mode: results.data.project.mode
+                    mode: results.data.project.mode,
                 }
             )
         });
@@ -249,7 +249,9 @@ class ChapterContainer extends Component {
         };
 
         newArr.push(newListenItem);
-        this.setState({listenList: newArr})
+        this.setState({
+            listenList: newArr
+        })
     }
 
     getSourceAudioLocationForChunk(startv) {
@@ -284,6 +286,18 @@ class ChapterContainer extends Component {
                                     setSourceProject={this.setSourceProject.bind(this)}/>
 
                     {this.state.chunks.map(this.createChunkList.bind(this))}
+
+
+                    <div fluid className="StickyFooter">
+                        <Footer loaded={this.state.loaded}
+                                chapter={this.state.query.chapter}
+                                book={this.state.book.name}
+                                language={this.state.language.name}
+                                chunks={this.state.chunks}
+                                mode={this.state.mode}
+                                listenList={this.state.listenList}
+                        />
+                    </div>
                 </LoadingDisplay>
 
             </div>

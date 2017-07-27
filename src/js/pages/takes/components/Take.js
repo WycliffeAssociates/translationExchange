@@ -97,7 +97,7 @@ class Take extends Component {
                         }
                         */}
 
-                {/*<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>*/}
+                {<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>}
                 <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
                 {/*<DeleteTake onDeleteTake={this.props.onDeleteTake}/>*/}
 

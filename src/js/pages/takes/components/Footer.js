@@ -10,6 +10,7 @@ class Footer extends Component {
 
     createListenPlaylist() {
 
+
         if (this.props.listenList.length > 0) {
             var playlist = [];
             this.props.listenList.map((i) => {
@@ -20,7 +21,7 @@ class Footer extends Component {
             })
             return (
                 <Card fluid>
-                    <AudioComponent playlist={playlist} width={700}/>
+                    <AudioComponent playlist={playlist} width={500}/>
                 </Card>
             );
         }
@@ -31,6 +32,7 @@ class Footer extends Component {
             );
         }
 
+
     }
 
     render () {
@@ -38,6 +40,9 @@ class Footer extends Component {
             <div>
                 <Menu compact secondary>
 
+                    <Menu.Item>
+                        {this.createListenPlaylist()}
+                    </Menu.Item>
                     <Menu.Item>
                         {this.createListenPlaylist()}
                     </Menu.Item>

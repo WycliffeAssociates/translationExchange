@@ -135,18 +135,6 @@ class Chunk extends Component {
                             {this.createTakeTables()}
                         </Grid>
 
-
-
-                    <Container fluid className="ChunkFooter">
-                        <Footer loaded={this.props.loaded}
-                                chapter={this.props.chapter}
-                                book={this.props.book.name}
-                                language={this.props.language.name}
-                                chunks={this.props.chunks}
-                                mode={this.props.mode}
-                                listenList={this.props.listenList}
-                        />
-                    </Container>
                 </Accordion.Content>
 
                 </Accordion>
