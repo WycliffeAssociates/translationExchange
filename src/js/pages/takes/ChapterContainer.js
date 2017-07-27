@@ -25,7 +25,7 @@ class ChapterContainer extends Component {
             chapter: {},
             language: {},
             mode: "",
-            selectedSourceProjectId: -1,
+            selectedSourceProjectQuery: -1,
             selectedSourceProject: {},
             listenList: [],
             query: ''
@@ -212,13 +212,14 @@ class ChapterContainer extends Component {
         }
     }
 
-    setSourceProject(projectId) {
-        var query = {language:"en-x-demo2", version:"ulb", book:"mrk", chapter:6};
-        axios.post(config.apiUrl + 'get_project_takes/', query
-        ).then((results) => {
+    setSourceProject(projectQuery) {
+        axios.post(config.apiUrl + 'get_project_takes/', {
+            ...projectQuery,
+            chapter: this.state.chapter.number
+        }).then((results) => {
             this.setState(
                 {
-                    selectedSourceProjectId: projectId,
+                    selectedSourceProjectQuery: projectQuery,
                     selectedSourceProject: results.data
                 }
             );
@@ -277,7 +278,7 @@ class ChapterContainer extends Component {
                                     language={this.state.language.name}
                                     chunks={this.state.chunks}
                                     mode={this.state.mode}
-                                    selectedSourceProject={this.state.selectedSourceProjectId}
+                                    selectedSourceProject={this.state.selectedSourceProjectQuery}
                                     onClickSave={this.onClickSave.bind(this)}
                                     deleteComment={this.deleteComment.bind(this)}
                                     setSourceProject={this.setSourceProject.bind(this)}/>

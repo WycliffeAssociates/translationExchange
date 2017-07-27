@@ -25,12 +25,17 @@ export default class SetSourceAudio extends Component {
             .then((results) => {
                 let projects = [];
                 results.data.map((project) => {
-                    projects.push({key: project.id, value: project.id, text: project.language.name + " (" + project.version + ")"});
+                    let projectQuery = {
+                        language: project.language.slug,
+                        book: project.book.slug,
+                        version: project.version
+                    };
+                    projects.push({key: project.id, value: projectQuery, text: project.language.name + " (" + project.version + ")"});
                 });
                 this.setState({
                     loaded: true,
                     projects: projects
-                }, () => { //by default, set source to first available project
+                }, () => { //by default, initially set source to first available project
                     this.setSource(projects[0].value)
                 });
             }).catch((exception) => {
