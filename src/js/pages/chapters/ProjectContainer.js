@@ -142,8 +142,16 @@ class ProjectContainer extends Component {
         )
     }
 
-    saveFile(args) {
-        console.log(args);
+    saveFile() {
+        console.log("Is this gonna work?");
+
+
+        let filePath = 'C:/Users/wyatt/Downloads/en-x-demo2_ulb_mrk-WORKING.zip'
+
+        var file = new Blob([filePath.blob], {type: 'application/zip'}, true);
+        FileSaver.saveAs(file);
+
+        console.log("Did this work?");
     }
 
     onDownloadProject() {
@@ -168,11 +176,11 @@ class ProjectContainer extends Component {
                 // console.log("returned");
 
                 // Lets test something - I pray this works
-                var blob = new Blob([download_results.data], {type: 'application/zip'});
-                FileSaver.saveAs(blob, zipFileName);
+                //var blob = new Blob([download_results.data], {type: 'application/zip'});
+                //FileSaver.saveAs(blob, zipFileName);
 
 
-                this.saveFile("this data is sent");
+                //this.saveFile("this data is sent");
 
 
             }).catch((exception) => {
@@ -233,7 +241,8 @@ class ProjectContainer extends Component {
 
 
                     <DownloadProjects
-                        onDownloadProject={this.onDownloadProject.bind(this)}
+                        //onDownloadProject={this.onDownloadProject.bind(this)}
+                        saveFile={this.saveFile.bind(this)}
                     />
 
                     {this.state.downloadLoading
