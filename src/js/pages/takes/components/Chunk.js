@@ -68,7 +68,9 @@ class Chunk extends Component {
                             <Table.Row>
 
                             <Table.HeaderCell>{img}</Table.HeaderCell>
+
                             </Table.Row>
+
                         </Table.Header>
 
 
@@ -83,7 +85,9 @@ class Chunk extends Component {
                                         column={i}
                                         // deleteComment={this.props.deleteComment}
                                     />
+
                                     <br />
+
                                 </Table.Cell>
 
                     </Table>
@@ -124,31 +128,29 @@ class Chunk extends Component {
                     </Accordion.Title>
 
                 <Accordion.Content className="ChunkBody">
+                    <SideBar className="commentBar">
 
-                    <CommentContainer />
-
-
-
-                    <Grid padded fluid columns={4}>
-                        {this.createTakeTables()}
-                        <SideBar className="commentBar"/>
-
-                    </Grid>
+                        <CommentContainer />
 
 
+                        <Grid padded fluid columns={4}>
+                            {this.createTakeTables()}
 
-                    <Container fluid className="ChunkFooter">
-                        <Footer loaded={this.props.loaded}
-                                chapter={this.props.chapter}
-                                book={this.props.book.name}
-                                language={this.props.language.name}
-                                chunks={this.props.chunks}
-                                mode={this.props.mode}
-                                listenList={this.props.listenList}
+                        </Grid>
+
+                        <Container fluid className="ChunkFooter">
+                            <Footer loaded={this.props.loaded}
+                                    chapter={this.props.chapter}
+                                    book={this.props.book.name}
+                                    language={this.props.language.name}
+                                    chunks={this.props.chunks}
+                                    mode={this.props.mode}
+                                    listenList={this.props.listenList}
                             />
 
-                    </Container>
+                        </Container>
 
+                    </SideBar>
 
 
                 </Accordion.Content>
@@ -167,6 +169,9 @@ class Chunk extends Component {
 Chunk.propTypes = {
     chunk: ChunkPropTypes
 };
+
+ <SideBar className="commentBar"/>
+
 */
 
 export default Chunk;

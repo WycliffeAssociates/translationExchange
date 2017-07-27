@@ -40,7 +40,7 @@ class SidebarRightOverlay extends Component {
                     </Sidebar>
                     <Sidebar.Pusher>
                         <Segment basic>
-                            <Header as='h1'>Application Content</Header>
+                            { this.props.children }
                         </Segment>
                     </Sidebar.Pusher>
                 </Sidebar.Pushable>
