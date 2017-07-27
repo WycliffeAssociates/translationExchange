@@ -64,8 +64,15 @@
     box-shadow: 5px 5px 5px #888888;
     font-size: 22px;
     font-family: 'Roboto', sans-serif;
+    display: inline-block;
 }
 
 .verticalLine {
     border-left: thin solid white;
+}
+
+.source {
+    float: right;
+    display: inline-block;
+    margin-top: 25px;
 }
