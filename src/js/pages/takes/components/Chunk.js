@@ -12,10 +12,13 @@ let onClick;
 class Chunk extends Component {
     constructor(props) {
         super(props);
-        this.state = {open: false};
+        this.state = {open: false, segments: this.props.segments};
     }
 
     render () {
+
+
+        console.log('CHUNK', this.state.segments)
 
         var publish = [];
         var onestar = [];
@@ -26,6 +29,7 @@ class Chunk extends Component {
         /*
         rating, is_publish
          */
+
         this.props.segments.map((i) => {
 
             if (i.take.is_publish) {
@@ -44,10 +48,15 @@ class Chunk extends Component {
 
         })
 
+
+        /*
         console.log('Publish', publish)
         console.log('One Stars', onestar)
         console.log('Two Stars', twostar)
         console.log('Three Stars', threestar)
+        */
+
+
         /*
         Segments is an array of takes for each chunk - good
          */
@@ -81,7 +90,9 @@ class Chunk extends Component {
 
 
         return (
+
             <div>
+
                 <Accordion fluid styled>
                     <Accordion.Title className="ChunkTitle">
                         <center>
@@ -110,6 +121,7 @@ class Chunk extends Component {
                                 updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                                 onClickSave={this.props.onClickSave}
                                 column={0}
+                                PLAYLIST={onestar}
                             />
                             <TakeTable
                                 icon={icon2}
@@ -120,6 +132,7 @@ class Chunk extends Component {
                                 updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                                 onClickSave={this.props.onClickSave}
                                 column={1}
+                                PLAYLIST={twostar}
                             />
                             <TakeTable
                                 icon={icon3}
@@ -130,6 +143,7 @@ class Chunk extends Component {
                                 updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                                 onClickSave={this.props.onClickSave}
                                 column={2}
+                                PLAYLIST={threestar}
                             />
                             <TakeTable
                                 icon={icon4}
@@ -140,11 +154,15 @@ class Chunk extends Component {
                                 updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                                 onClickSave={this.props.onClickSave}
                                 column={3}
+                                PLAYLIST={publish}
                             />
                         </Grid>
                     </Accordion.Content>
                 </Accordion>
+
             </div>
+
+
         );
     }
 

@@ -265,6 +265,8 @@ class ChapterContainer extends Component {
      Rendering functions
      */
     render() {
+
+        console.log('-------RENDER-------')
         var query = QueryString.parse(this.props.location.search);
 
         this.state.query = query;
@@ -311,28 +313,6 @@ class ChapterContainer extends Component {
          */
         return (
             <div>
-                {/*
-                <ChunkList
-                    comments={chunk.comments}
-                    segments={chunk.takes} // array of takes
-                    mode={this.state.mode}
-                    number={chunk.startv}
-                    addToListenList={this.addToListenList.bind(this)}
-                    patchTake={this.patchTake.bind(this)}
-                    deleteTake={this.deleteTake.bind(this)}
-                    updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
-                    onClickSave={this.onClickSave.bind(this)}
-                    id={chunk.id}
-                    deleteComment={this.deleteComment.bind(this)}
-
-                    loaded={this.state.loaded}
-                    chapter={this.state.query.chapter}
-                    book={this.state.book.name}
-                    language={this.state.language.name}
-                    chunks={this.state.chunks}
-                    listenList={this.state.listenList}
-                />
-                */}
 
                 <Chunk
                     comments={chunk.comments}
