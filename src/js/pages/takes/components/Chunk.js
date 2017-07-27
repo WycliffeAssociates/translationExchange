@@ -9,6 +9,7 @@ import 'css/takes.css'
 import PinkButton from "./comments/PinkButton";
 import SourceAudioButton from "./SourceAudioButton"
 let onClick;
+let CommentContainer
 
 
 class Chunk extends Component {
@@ -139,7 +140,7 @@ class Chunk extends Component {
                     <SourceAudioButton startv={this.props.number}
                                        onSourceClicked={this.props.onSourceClicked}/>
 
-                        <CommentContainer />
+                        {/*<CommentContainer />  */} {/* this joint don't work man*/}
 
 
                         <Grid padded fluid columns={4}>
@@ -185,6 +186,6 @@ Chunk.propTypes = {
  Chunk.propTypes = {
  chunk: ChunkPropTypes
  };
- */
+
 
 export default Chunk;
