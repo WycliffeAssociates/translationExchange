@@ -34,16 +34,6 @@ class ProjectContainer extends Component {
             downloadLoading: false,
             version: {}
         };
-        this.uploadSourceFile = this.uploadSourceFile.bind(this);
-        this.handleFileChange = this.handleFileChange.bind(this);
-    }
-
-    handleFileChange(event) {
-        var data = new FormData();
-        data.append('file', event.target.files[0]);
-        this.setState({
-            filesData: data
-        });
     }
 
     publishFiles() {
@@ -60,33 +50,6 @@ class ProjectContainer extends Component {
             this.setState({publishError: exception});
         });
 }
-
-
-    uploadSourceFile(event) {
-        event.preventDefault();
-        this.setState({uploadSourceLoading: true, uploadSourceError: ""});
-        let uploadedLanguage = "";
-
-        axios.post(config.apiUrl + 'source/source_filename', this.state.filesData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        }).then((response) => {
-            uploadedLanguage = response.data.language.name;
-            let updateProjectParams = {
-                filter: QueryString.parse(this.props.location.search),
-                fields: {
-                    source_language: response.data.language.id
-                }
-            };
-            return axios.post(config.apiUrl + 'update_project/', updateProjectParams);
-        }).then((response) => {
-            this.setState({uploadSourceLoading: false, uploadSourceSuccess: uploadedLanguage});
-        }).catch((error) => {
-            this.setState({uploadSourceLoading: false, uploadSourceError: error});
-        });
-
-    }
 
     setCheckingLevel(level){
 
@@ -211,6 +174,7 @@ class ProjectContainer extends Component {
                                 setCheckingLevel={this.setCheckingLevel.bind(this)}
                             />
                         </Table>
+
                     </LoadingDisplay>
 
                     <br></br>

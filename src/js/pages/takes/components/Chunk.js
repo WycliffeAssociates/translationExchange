@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
-import TakeList from "./TakeList";
 import ChunkPropTypes from "./ChunkPropTypes";
 
 import {Accordion, Button, Icon, Container, Grid, Table} from "semantic-ui-react";
 import Footer from './Footer'
 import TakeTable from './TakeTable'
+import SideBar from './SideBar'
+import 'css/takes.css'
 import PinkButton from "./comments/PinkButton";
+import SourceAudioButton from "./SourceAudioButton"
 let onClick;
+let CommentContainer
 
 
 class Chunk extends Component {
@@ -67,24 +70,29 @@ class Chunk extends Component {
                             <Table.Row>
 
                             <Table.HeaderCell>{img}</Table.HeaderCell>
+
                             </Table.Row>
+
                         </Table.Header>
 
 
                                 <Table.Cell>
                                     <TakeTable
                                         takes={this.props.segments}
+                                        chunkNumber={this.props.number}
                                         addToListenList={this.props.addToListenList}
                                         patchTake={this.props.patchTake}
                                         deleteTake={this.props.deleteTake}
                                         updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                                         onClickSave={this.props.onClickSave}
+                                        playTake={this.props.playTake}
                                         column={i}
                                         // deleteComment={this.props.deleteComment}
                                     />
-                                    <br />
-                                </Table.Cell>
 
+                                    <br />
+
+                                </Table.Cell>
 
                     </Table>
 
@@ -124,30 +132,23 @@ class Chunk extends Component {
                     </Accordion.Title>
 
                 <Accordion.Content className="ChunkBody">
-                    <PinkButton
-                        comments={this.props.comments}
-                        onClickSave={this.props.onClickSave}
-                        id={this.props.id}
-                        type={"chunk"}
-                        deleteComment={this.props.deleteComment}/>
+                    <SideBar className="commentBar"
+                             comments={this.props.comments}
+                             onClickSave={this.props.onClickSave}
+                             chunkId={this.props.id}
+                             deleteComment={this.props.deleteComment}
+                             chunkNumber={this.props.number}
+                             onSourceClicked={this.props.onSourceClicked}
+                    >
 
                         <Grid padded fluid columns={4}>
                             {this.createTakeTables()}
+
                         </Grid>
+                    </SideBar>
 
-
-
-                    <Container fluid className="ChunkFooter">
-                        <Footer loaded={this.props.loaded}
-                                chapter={this.props.chapter}
-                                book={this.props.book.name}
-                                language={this.props.language.name}
-                                chunks={this.props.chunks}
-                                mode={this.props.mode}
-                                listenList={this.props.listenList}
-                        />
-                    </Container>
                 </Accordion.Content>
+
 
                 </Accordion>
 
@@ -159,9 +160,16 @@ class Chunk extends Component {
 }
 
 /*
+Chunk.propTypes = {
+    chunk: ChunkPropTypes
+};
+
+ <SideBar className="commentBar"/>
+
+*/
  Chunk.propTypes = {
  chunk: ChunkPropTypes
  };
- */
+
 
 export default Chunk;

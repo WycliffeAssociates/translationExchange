@@ -10,6 +10,7 @@ class Footer extends Component {
 
     createListenPlaylist() {
 
+
         if (this.props.listenList.length > 0) {
             var playlist = [];
             this.props.listenList.map((i) => {
@@ -20,7 +21,7 @@ class Footer extends Component {
             })
             return (
                 <Card fluid>
-                    <AudioComponent playlist={playlist} width={700}/>
+                    <AudioComponent playlist={playlist} width={500}/>
                 </Card>
             );
         }
@@ -31,32 +32,26 @@ class Footer extends Component {
             );
         }
 
+
     }
 
     render () {
         return (
             <div>
                 <Menu compact secondary>
+                    {this.props.currentPlaylist.length > 0
+                        ? <Menu.Item>
+                            <Card fluid>
+                                <AudioComponent playlist={this.props.currentPlaylist} width={800}/>
+                            </Card>
+                          </Menu.Item>
+                        : ""
+                    }
 
-                    <Menu.Item>
-                        {this.createListenPlaylist()}
-                    </Menu.Item>
+                    {/*<Menu.Item>*/}
+                        {/*{this.createListenPlaylist()}*/}
+                    {/*</Menu.Item>*/}
                 </Menu>
-
-                {/*
-                <Menu secondary>
-                    <Menu.Item position="right">
-                        <CommentContainer
-                            ref={instance => (this.commentContainer = instance)}/>
-                        <MarkAsDone chapter={this.props.chapter}
-                                    book={this.props.book}
-                                    language={this.props.language}
-                                    chunks={this.props.chunks}
-                                    mode={this.props.mode}
-                        />
-                    </Menu.Item>
-                 </Menu>
-                 */}
             </div>
         );
     }
