@@ -6,6 +6,7 @@ import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
+import MarkAsDone from "./components/MarkAsDone"
 
 import {Container, Segment, Label, Sidebar, Grid} from 'semantic-ui-react'
 import Footer from './components/Footer'
@@ -252,6 +253,9 @@ class ChapterContainer extends Component {
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
 
+                    <MarkAsDone chapter={this.state.chapter}
+                                chunks={this.state.chunks}
+                                mode={this.state.mode}/>
                     <h1>Chapter {query.chapter} </h1>
 
                     {this.state.chunks.map(this.createChunkList.bind(this))}
