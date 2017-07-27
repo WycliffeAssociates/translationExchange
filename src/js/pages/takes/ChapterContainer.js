@@ -25,7 +25,8 @@ class ChapterContainer extends Component {
             chapter: {},
             language: {},
             mode: "",
-            selectedSourceProject: -1,
+            selectedSourceProjectId: -1,
+            selectedSourceProject: {},
             listenList: [],
             query: ''
         };
@@ -212,9 +213,16 @@ class ChapterContainer extends Component {
     }
 
     setSourceProject(projectId) {
-        //make a request for source project info...
-        this.setState({selectedSourceProject: projectId});
-        console.log("set source project: " + projectId);
+        var query = {language:"en-x-demo2", version:"ulb", book:"mrk", chapter:6};
+        axios.post(config.apiUrl + 'get_project_takes/', query
+        ).then((results) => {
+            this.setState(
+                {
+                    selectedSourceProjectId: projectId,
+                    selectedSourceProject: results.data
+                }
+            );
+        });
     }
 
     addToListenList(props) {
@@ -243,6 +251,13 @@ class ChapterContainer extends Component {
         this.setState({listenList: newArr})
     }
 
+    getSourceAudioLocationForChunk(startv) {
+        if (!this.state.selectedSourceProject ) { return undefined; }
+        let chunk = this.state.selectedSourceProject.chunks.find((chunk) => (chunk.startv === startv));
+        let take = chunk.takes.find((take) => (take.take.is_publish));
+        return take.take.location;
+    }
+
     /*
      Rendering functions
      */
@@ -257,32 +272,18 @@ class ChapterContainer extends Component {
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
 
-                    {/*<ChapterHeader chapter={this.state.chapter}*/}
-                                   {/*loaded={this.state.loaded}*/}
-                                   {/*book={this.state.book.name}*/}
-                                   {/*language={this.state.language.name}*/}
-                                   {/*onClickSave={this.onClickSave.bind(this)}*/}
-                                   {/*deleteComment={this.deleteComment.bind(this)}*/}
-                                   {/*chunks={this.state.chunks}*/}
-                                   {/*mode={this.state.mode}*/}
-                    {/*/>*/}
-
                     <ChapterHeader  book={this.state.book.name}
                                     chapter={this.state.chapter}
                                     language={this.state.language.name}
                                     chunks={this.state.chunks}
                                     mode={this.state.mode}
-                                    selectedSourceProject={this.state.selectedSourceProject}
+                                    selectedSourceProject={this.state.selectedSourceProjectId}
                                     onClickSave={this.onClickSave.bind(this)}
                                     deleteComment={this.deleteComment.bind(this)}
                                     setSourceProject={this.setSourceProject.bind(this)}/>
-                    <MarkAsDone chapter={this.state.chapter}
-                                chunks={this.state.chunks}
-                                mode={this.state.mode}/>
 
                     {this.state.chunks.map(this.createChunkList.bind(this))}
                 </LoadingDisplay>
-
 
             </div>
         );
