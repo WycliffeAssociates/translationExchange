@@ -25,6 +25,7 @@ class ChapterContainer extends Component {
             chapter: {},
             language: {},
             mode: "",
+            selectedSourceProject: -1,
             listenList: [],
             query: ''
         };
@@ -210,6 +211,12 @@ class ChapterContainer extends Component {
         }
     }
 
+    setSourceProject(projectId) {
+        //make a request for source project info...
+        this.setState({selectedSourceProject: projectId});
+        console.log("set source project: " + projectId);
+    }
+
     addToListenList(props) {
 
         var newArr = this.state.listenList;
@@ -265,8 +272,10 @@ class ChapterContainer extends Component {
                                     language={this.state.language.name}
                                     chunks={this.state.chunks}
                                     mode={this.state.mode}
+                                    selectedSourceProject={this.state.selectedSourceProject}
                                     onClickSave={this.onClickSave.bind(this)}
-                                    deleteComment={this.deleteComment.bind(this)}/>
+                                    deleteComment={this.deleteComment.bind(this)}
+                                    setSourceProject={this.setSourceProject.bind(this)}/>
                     <MarkAsDone chapter={this.state.chapter}
                                 chunks={this.state.chunks}
                                 mode={this.state.mode}/>

@@ -51,7 +51,8 @@ class ChapterHeader extends Component {
                         {/*<Button style={{marginLeft: 5, marginRight: 7}} icon color="black" onClick={()=> alert("source audio")}>*/}
                             {/*<Icon color="white" name="als"/>*/}
                         {/*</Button>*/}
-                        <SetSourceAudio/>
+                        <SetSourceAudio selectedSourceProject={this.props.selectedSourceProject}
+                                        setSourceProject={this.props.setSourceProject}/>
 
                         <PinkButton comments={this.props.chapter.comments}
                                     onClickSave={this.props.onClickSave}
