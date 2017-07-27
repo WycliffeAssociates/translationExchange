@@ -4,9 +4,12 @@ import ChunkPropTypes from "./ChunkPropTypes";
 import {Accordion, Button, Icon, Container, Grid, Table} from "semantic-ui-react";
 import Footer from './Footer'
 import TakeTable from './TakeTable'
+import SideBar from './SideBar'
+import 'css/takes.css'
 import PinkButton from "./comments/PinkButton";
 import SourceAudioButton from "./SourceAudioButton"
 let onClick;
+let CommentContainer
 
 
 class Chunk extends Component {
@@ -67,7 +70,9 @@ class Chunk extends Component {
                             <Table.Row>
 
                             <Table.HeaderCell>{img}</Table.HeaderCell>
+
                             </Table.Row>
+
                         </Table.Header>
 
 
@@ -84,9 +89,10 @@ class Chunk extends Component {
                                         column={i}
                                         // deleteComment={this.props.deleteComment}
                                     />
-                                    <br />
-                                </Table.Cell>
 
+                                    <br />
+
+                                </Table.Cell>
 
                     </Table>
 
@@ -126,20 +132,23 @@ class Chunk extends Component {
                     </Accordion.Title>
 
                 <Accordion.Content className="ChunkBody">
-                    <PinkButton
-                        comments={this.props.comments}
-                        onClickSave={this.props.onClickSave}
-                        id={this.props.id}
-                        type={"chunk"}
-                        deleteComment={this.props.deleteComment}/>
-                    <SourceAudioButton startv={this.props.number}
-                                       onSourceClicked={this.props.onSourceClicked}/>
+                    <SideBar className="commentBar"
+                             comments={this.props.comments}
+                             onClickSave={this.props.onClickSave}
+                             chunkId={this.props.id}
+                             deleteComment={this.props.deleteComment}
+                             chunkNumber={this.props.number}
+                             onSourceClicked={this.props.onSourceClicked}
+                    >
 
                         <Grid padded fluid columns={4}>
                             {this.createTakeTables()}
+
                         </Grid>
+                    </SideBar>
 
                 </Accordion.Content>
+
 
                 </Accordion>
 
@@ -151,9 +160,16 @@ class Chunk extends Component {
 }
 
 /*
+Chunk.propTypes = {
+    chunk: ChunkPropTypes
+};
+
+ <SideBar className="commentBar"/>
+
+*/
  Chunk.propTypes = {
  chunk: ChunkPropTypes
  };
- */
+
 
 export default Chunk;

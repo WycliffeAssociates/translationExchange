@@ -12,6 +12,11 @@
 
 .ChunkBody {
     background-color: #FFFFFF;
+    position: relative;
+}
+
+.ui.styled.accordion .content.ChunkBody{
+    padding: 0;
 }
 
 .ChapterTitle {
@@ -46,6 +51,7 @@
 .ChunkFooter {
     background-color: white;
     text-align: center;
+    position: relative;
 }
 
 .MoveButtons {
@@ -76,3 +82,19 @@
     display: inline-block;
     margin-top: 25px;
 }
+
+.ChunkBody .ui.visible.right.overlay.sidebar{
+    height: auto !important;
+    width: auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* {*/
+    /*height: auto !important;*/
+    /*width: auto;*/
+    /*top: 50%;*/
+    /*transform: translateY(-50%);*/
+    /*position: absolute;*/
+/*}*/
+/*ui inverted vertical labeled icon ui overlay right thin visible sidebar menu*/

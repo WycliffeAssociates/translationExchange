@@ -5,6 +5,7 @@ import config from "../../../config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 import _ from 'lodash';
 import Take from "./components/Take";
+import SideBar from './components/SideBar'
 
 
 class TakeContainer extends Component {
