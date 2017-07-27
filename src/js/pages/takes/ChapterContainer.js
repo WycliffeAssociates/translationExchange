@@ -6,6 +6,7 @@ import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
+import MarkAsDone from "./components/MarkAsDone"
 import {Button, Divider} from "semantic-ui-react";
 import Grid from "semantic-ui-react/dist/es/collections/Grid/Grid";
 import Icon from "semantic-ui-react/dist/es/elements/Icon/Icon";
@@ -252,6 +253,7 @@ class ChapterContainer extends Component {
                                 retry={this.requestData.bind(this)}>
                     <div className="headerStyle">
 
+
                         <Grid padded columns={2} >
                         <Grid.Column width={11}>
                             {this.state.book.name} Chapter {query.chapter} ({this.state.language.name})
@@ -276,7 +278,9 @@ class ChapterContainer extends Component {
                         </Grid.Column>
                     </Grid>
                     </div>
-
+                    <MarkAsDone chapter={this.state.chapter}
+                                chunks={this.state.chunks}
+                                mode={this.state.mode}/>
                     {this.state.chunks.map(this.createChunkList.bind(this))}
                 </LoadingDisplay>
 
