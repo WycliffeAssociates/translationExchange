@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from "prop-types";
-import {Button, Modal} from 'semantic-ui-react'
-        import AudioComponent from './AudioComponent';
+import {Button, Icon, Modal} from 'semantic-ui-react'
+import AudioComponent from './AudioComponent';
+
 import config from "config/config";
 import axios from 'axios';
 let handleOpen;
@@ -80,7 +81,15 @@ class MarkAsDone extends Component {
 
     render() {
         let disableBtn=this.state.is_published;
-        var ExportButton = <Button onClick={this.handleOpen} color={disableBtn==true?"green":this.state.color} disabled={disableBtn} content={disableBtn==true?"Chapter ready to be Published":"Mark Chapter as Done"} icon="share" floated="right" labelPosition="right"/>
+        var ExportButton = <Button onClick={this.handleOpen}
+                                color={disableBtn===true?"green":this.state.color}
+                                disabled={disableBtn}
+                                content={disableBtn===true?"Chapter ready to be Published":"Mark Chapter as Done"}
+                                className="icon"
+                                   icon="share"
+                                floated="right">
+        <Icon color="white" name="sidebar"/>
+        </Button>;
        
         return (
                 <Modal trigger={ExportButton}
