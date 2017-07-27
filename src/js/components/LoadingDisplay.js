@@ -43,7 +43,7 @@ class LoadingDisplay extends Component{
 
 LoadingDisplay.propTypes = {
     loaded: PropTypes.bool.isRequired, //is the data loaded and ready to display?
-    error: PropTypes.string, //empty if there is no error, error message if there is a problem
+    error: PropTypes.object.isRequired, //empty if there is no error, error message if there is a problem
     retry: PropTypes.func.isRequired //function to call when retrying data request
 };
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import MarkAsDone from "./MarkAsDone";
-import CommentContainer from "./comments/CommentContainer"
+import CommentContainer from "./comments/PinkButton"
 import {Menu, Container, Card} from 'semantic-ui-react'
 import AudioComponent from "./AudioComponent"
 import config from 'config/config'

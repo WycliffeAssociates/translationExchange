@@ -55,7 +55,7 @@ class TakeContainer extends Component {
                   addToListenList={this.props.addToListenList}
                   onDeleteTake={this.onDeleteTake.bind(this)}
                   onClickSave={this.props.onClickSave}
-                  // deleteComment={this.props.deleteComment}
+                  deleteComment={this.props.deleteComment}
 
             />
             //other events that require requesting the server would go here

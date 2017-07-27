@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from "prop-types";
-import {Button, Modal} from 'semantic-ui-react'
+import {Button, Icon, Modal} from 'semantic-ui-react'
 import AudioComponent from './AudioComponent';
+
 import config from "config/config";
+import axios from 'axios';
 let handleOpen;
 let handleClose;
 // this is the page for one chapter
@@ -14,6 +16,7 @@ class MarkAsDone extends Component {
         this.state = {
             color: null,
             modalOpen: false,
+            is_published : this.props.chapter.is_publish,
         }
 
     }
@@ -39,7 +42,7 @@ class MarkAsDone extends Component {
                 if (take.take.is_publish) {
                     playlist.push({
                         "src": config.streamingUrl + take.take.location,
-                        "name": this.props.mode + ' ' + chunk.startv + ' (' + (playlist.length+1) + '/' + length + ')'
+                        "name": this.props.mode + ' ' + chunk.startv + ' (' + (playlist.length + 1) + '/' + length + ')'
                     });
                 }
             })
@@ -52,53 +55,73 @@ class MarkAsDone extends Component {
         this.setState({
             color: 'green'
         });
+    
+        let parameters={"is_publish":true}
+        //make patch request to confirm that the chapter is ready to be published
+        axios.patch(config.apiUrl + 'chapters/' + this.props.chapter.id +"/", parameters)
+            .then((response) => {
+             this.setState({is_published:true});
+             this.changeColor();
+               console.log(response)
+            }).catch((exception) => {
+               console.log(exception);
+        });
         this.handleClose();
     }
+   
 
     handleOpen = (e) => this.setState({
-        modalOpen: true,
-    });
-
-    handleClose = (e) => this.setState({
-        modalOpen: false,
-    })
-
-    render () {
-        let readyForExport = this.checkReadyForExport();
-        var ExportButton = <Button onClick={this.handleOpen} color={this.state.color} disabled={!readyForExport} content="Compile" icon="bars" floated="right" labelPosition="right"/>
-
-        return (
-            <Modal trigger={ExportButton}
-                   open={this.state.modalOpen}
-                   onClose={this.handleClose}
-                   closeIcon="close">
-                <Modal.Header>You are ready to mark Chapter {this.props.chapter} as finished!</Modal.Header>
-                <Modal.Content>
-                    <Modal.Description>
-                        <p>Here is a preview of the takes you have selected to export. This may take a few seconds to
-                            load.</p>
-                        <p>To mark as done, click on 'Finish'.</p>
-                        <AudioComponent
-                            width={850} playlist={this.createExportPlaylist()}
-                        />
-                    </Modal.Description>
-
-                </Modal.Content>
-                <Modal.Actions>
-                    {/*this button will do a call to database to change chapter.exportready to true */}
-                    <Button content="Finish" onClick={this.changeColor.bind(this)}/>
-
-                </Modal.Actions>
-            </Modal>
+            modalOpen: true,
+        }
         );
+            handleClose = (e) => this.setState({
+            modalOpen: false,
+        }
+        )
+
+    render() {
+        let disableBtn=this.state.is_published;
+        var ExportButton = <Button onClick={this.handleOpen}
+                                color={disableBtn===true?"green":this.state.color}
+                                disabled={disableBtn}
+                                content={disableBtn===true?"Chapter ready to be Published":"Mark Chapter as Done"}
+                                className="icon"
+                                   icon="share"
+                                floated="right">
+        <Icon color="white" name="sidebar"/>
+        </Button>;
+       
+        return (
+                <Modal trigger={ExportButton}
+                       open={this.state.modalOpen}
+                       onClose={this.handleClose}
+                       closeIcon="close">
+                    <Modal.Header>You are ready to mark Chapter {this.props.chapter.number} as finished!</Modal.Header>
+                    <Modal.Content>
+                        <Modal.Description>
+                            <p>Here is a preview of the takes you have selected to export. This may take a few seconds to
+                                load.</p>
+                            <p>To mark as done, click on 'Finish'.</p>
+                            <AudioComponent
+                                width={850} playlist={this.createExportPlaylist()}
+                                />
+                        </Modal.Description>
+                
+                    </Modal.Content>
+                    <Modal.Actions>
+                        {/*this button will do a call to database to change chapter.exportready to true */}
+                        <Button content="Finish" onClick={this.changeColor.bind(this)} />
+                
+                    </Modal.Actions>
+                </Modal>
+                );
     }
 }
 
 MarkAsDone.propTypes = {
     chapter: PropTypes.number.isRequired,
-    book: PropTypes.string.isRequired,
-    language: PropTypes.string.isRequired,
-    chunks: PropTypes.array.isRequired
+    chunks: PropTypes.array.isRequired,
+    mode: PropTypes.string.isRequired
 };
 
 export default MarkAsDone;

@@ -28,7 +28,7 @@ class Header extends Component {
 
             <div>
 
-                <Menu  verticalAlign="center" fluid secondary size='huge' compact >
+                <Menu fluid secondary size='huge' compact >
 
                     <Menu.Item position="left">
                         <Link to="/">

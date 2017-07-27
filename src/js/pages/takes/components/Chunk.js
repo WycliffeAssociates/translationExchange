@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
-import TakeList from "./TakeList";
+import React, {Component} from 'react';
 import ChunkPropTypes from "./ChunkPropTypes";
+
 import {Accordion, Button, Icon, Container, Grid, Table} from "semantic-ui-react";
-import CommentContainer from "./comments/CommentContainer";
 import Footer from './Footer'
 import TakeTable from './TakeTable'
 import SideBar from './SideBar'
 import 'css/takes.css'
+import PinkButton from "./comments/PinkButton";
+import SourceAudioButton from "./SourceAudioButton"
 let onClick;
 
 
 class Chunk extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {open: false};
     }
@@ -129,6 +130,14 @@ class Chunk extends Component {
 
                 <Accordion.Content className="ChunkBody">
                     <SideBar className="commentBar">
+                    <PinkButton
+                        comments={this.props.comments}
+                        onClickSave={this.props.onClickSave}
+                        id={this.props.id}
+                        type={"chunk"}
+                        deleteComment={this.props.deleteComment}/>
+                    <SourceAudioButton startv={this.props.number}
+                                       onSourceClicked={this.props.onSourceClicked}/>
 
                         <CommentContainer />
 
@@ -173,5 +182,9 @@ Chunk.propTypes = {
  <SideBar className="commentBar"/>
 
 */
+ Chunk.propTypes = {
+ chunk: ChunkPropTypes
+ };
+ */
 
 export default Chunk;

@@ -62,6 +62,27 @@
     cursor: pointer;
 }
 
+.headerStyle {
+    background-color: black;
+    color: white;
+    width: 42%;
+    margin: 10px  0;
+    box-shadow: 5px 5px 5px #888888;
+    font-size: 22px;
+    font-family: 'Roboto', sans-serif;
+    display: inline-block;
+}
+
+.verticalLine {
+    border-left: thin solid white;
+}
+
+.source {
+    float: right;
+    display: inline-block;
+    margin-top: 25px;
+}
+
 .ChunkBody .ui.visible.right.overlay.sidebar{
     height: auto !important;
     width: auto;
