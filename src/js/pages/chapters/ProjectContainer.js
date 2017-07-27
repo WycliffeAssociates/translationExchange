@@ -162,11 +162,15 @@ class ProjectContainer extends Component {
                 // return(download_results.data);
                 // console.log("returned");
 
-                return {
-                    mime: 'application/zip',
-                    filename: zipFileName,
-                    contents: results,
-                }
+                // Lets test something
+                var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+                saveAs(blob, "hello world.txt");
+
+                // return {
+                //     mime: 'application/zip',
+                //     filename: zipFileName,
+                //     contents: results,
+                // }
 
             }).catch((exception) => {
                 this.setState({downloadError: exception});
