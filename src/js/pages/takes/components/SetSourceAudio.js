@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Form, Label, Dropdown, Image } from 'semantic-ui-react'
 import axios from 'axios';
 import config from 'config/config';
-import SourceEar from 'images/source-ear.png'
 
 export default class SetSourceAudio extends Component {
 
@@ -50,6 +49,10 @@ export default class SetSourceAudio extends Component {
     render() {
 
         return (
+
+
+
+
             <Dropdown
                       search
                       selection
@@ -62,6 +65,16 @@ export default class SetSourceAudio extends Component {
                       options={this.state.projects}
                       onChange={(event, dropdown) => {this.setSource(dropdown.value)}}
             />
+
+    //         <Dropdown
+    //     search
+    //     selection
+    //     placeholder='Source Audio'
+    //     loading={!this.state.loaded}
+    //     options={this.state.projects}
+    //     onChange={(event, dropdown) => {this.setSource(dropdown.value)}}
+    //     value={this.props.selectedSourceProject}
+    // />
         );
 
     }

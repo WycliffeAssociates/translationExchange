@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from "prop-types";
-import {Button, Modal} from 'semantic-ui-react'
+import {Button, Icon, Modal} from 'semantic-ui-react'
 import AudioComponent from './AudioComponent';
 import config from "config/config";
 let handleOpen;
@@ -61,11 +61,17 @@ class MarkAsDone extends Component {
 
     handleClose = (e) => this.setState({
         modalOpen: false,
-    })
+    });
 
     render () {
         let readyForExport = true; //this.checkReadyForExport();
-        var ExportButton = <Button onClick={this.handleOpen} color={this.state.color} disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
+        var ExportButton = <Button onClick={this.handleOpen}
+                                   color={this.state.color}
+                                   disabled={!readyForExport}
+                                   icon
+                                    >
+            <Icon color="white" name="sidebar"/>
+        </Button>;
 
         return (
             <Modal trigger={ExportButton}
