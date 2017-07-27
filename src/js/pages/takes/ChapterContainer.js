@@ -255,7 +255,7 @@ class ChapterContainer extends Component {
 
 
                         <Grid padded columns={2} >
-                        <Grid.Column width={11}>
+                        <Grid.Column width={11} style={{paddingTop: 23}}>
                             {this.state.book.name} Chapter {query.chapter} ({this.state.language.name})
                         </Grid.Column>
 
@@ -265,7 +265,7 @@ class ChapterContainer extends Component {
                                 <Icon color="white" name="sidebar"/>
                             </Button>
 
-                            <Button icon color="black" onClick={()=> alert("source audio")}>
+                            <Button style={{marginLeft: 5, marginRight: 7}} icon color="black" onClick={()=> alert("source audio")}>
                                 <Icon color="white" name="als"/>
                             </Button>
 
