@@ -46,7 +46,7 @@ class ProjectContainer extends Component {
             .then((response) => {
                 this.setState({is_publish: true})
             }).catch((exception) => {
-            // modify for the error that occurs if the patch fails
+            // TODO: modify for the error that occurs if the patch fails
             this.setState({publishError: exception});
         });
 }
@@ -67,7 +67,7 @@ class ProjectContainer extends Component {
         };
 
         alert("This needs to get fixed - it crashes");
-        // Endpoint had been renamed to projects/
+        // TODO: Endpoint had been renamed to projects/
         // axios.post(config.apiUrl + "update_project/", params);
     }
 
@@ -104,6 +104,7 @@ class ProjectContainer extends Component {
         )
     }
 
+    // TODO: Fix all this
     onDownloadProject() {
         let zipFileName = this.state.language.slug + "_" + QueryString.parse(this.props.location.search).version + "_" + this.state.book.slug + ".zip"
         this.setState({downloadLoading: true, downloadError: "", downloadSuccess: ""});
@@ -182,7 +183,6 @@ class ProjectContainer extends Component {
 
                     <DownloadProjects
                         onDownloadProject={this.onDownloadProject.bind(this)}
-                        //saveFile={this.saveFile.bind(this)}
                     />
 
                     {this.state.downloadLoading
