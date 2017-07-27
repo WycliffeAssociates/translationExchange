@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import TakePropTypes from "./components/TakePropTypes";
 import axios from 'axios';
 import config from "../../../config/config";
@@ -16,31 +16,31 @@ class TakeContainer extends Component {
         };
     }
 
-    onMarkedForExportToggled () {
-        var markedForExport = !this.props.take.take.is_export;
+    onMarkedForExportToggled() {
+        var markedForExport = !this.props.take.take.is_publish;
         this.props.patchTake(this.props.take.take.id,
-            {is_export: markedForExport},
+            {is_publish: markedForExport},
             () => { //success callback
                 if (markedForExport) {
                     this.props.updateChosenTakeForChunk(this.props.take.take.id);
                 }
-        });
+            });
     }
 
-    onRatingSet (newRating) {
+    onRatingSet(newRating) {
         this.setState({ratingLoading: true});
         this.props.patchTake(this.props.take.take.id,
             {rating: newRating},
             () => {
                 this.setState({ratingLoading: false});
-        });
+            });
     }
 
-    onDeleteTake () {
+    onDeleteTake() {
         this.props.deleteTake(this.props.take.take.id);
     }
 
-    render () {
+    render() {
 
         return (
             <Take count={this.props.count}
@@ -53,10 +53,11 @@ class TakeContainer extends Component {
                   comments={this.props.take.comments}
                   addToListenList={this.props.addToListenList}
                   onDeleteTake={this.onDeleteTake.bind(this)}
-
+                  onClickSave={this.props.onClickSave}
+                  deleteComment={this.props.deleteComment}
 
             />
-                //other events that require requesting the server would go here
+            //other events that require requesting the server would go here
         );
     }
 }

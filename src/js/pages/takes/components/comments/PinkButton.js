@@ -1,19 +1,17 @@
-/**
- * Created by ericazhong on 7/21/17.
- */
 import React, {Component} from 'react';
 import RecordComment from './RecordComment';
 import './RecordComment.css';
 import {Button, Container, Grid, Header, Icon, Image, Modal, ModalHeader} from 'semantic-ui-react';
 import Audio from "translation-audio-player";
-import config from "config/config";
-import axios from "axios"
+import config from "../../../../../config/config";
+
+
 // NOTE: (dmarchuk)
 let onClickCancel;
 let onClickSave;
 let Style;
 
-class MicButton extends Component {
+class PinkButton extends Component {
 
     constructor(props) {
         super(props);
@@ -24,16 +22,15 @@ class MicButton extends Component {
             show: this.props.open,
             SaveButtonState: true,
             blob: null,
-            comments: this.props.comments
-        };
 
+
+        };
 
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
         this.getInitialState = this.getInitialState.bind(this);
         this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
         this.onClickSave = this.onClickSave.bind(this);
-        this.createPlaylist = this.createPlaylist.bind(this);
 
     }
 
@@ -54,14 +51,6 @@ class MicButton extends Component {
         this.setState({show: false});
     }
 
-    onClickCancel = () => {                         // used when you click the microphone button in the player
-        this.recordComment.deleteBlob();
-        this.hideModal();
-        this.setState({SaveButtonState: true});
-
-    };
-
-
     onClickSave = () => {
         this.hideModal();
         this.setState({SaveButtonState: true});
@@ -73,8 +62,11 @@ class MicButton extends Component {
 
     }
 
-    onClickDelete(commentid, takeid) {
-        this.props.deleteComment("take", commentid, takeid)
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.open !== this.state.show) {
+            this.setState({show: true});
+        }
+
     }
 
     createPlaylist(comment) {
@@ -90,14 +82,11 @@ class MicButton extends Component {
                         width={600}
                         height={300}
                         playlist={file}
-                        ref={audioComponent => {
-                            this.audioComponent = audioComponent;
-                        }}
                     />
                 </Grid.Column>
                 <Grid.Column width={2}>
                     <Button icon negative onClick={() => {
-                        this.onClickDelete(comment.comment.id, this.props.take.id)
+                        this.props.deleteComment(this.props.type, comment.comment.id, this.props.id)
                     }}>
                         <Icon name="trash"/>
                     </Button>
@@ -108,32 +97,40 @@ class MicButton extends Component {
     }
 
     Style = {
-        backgroundColor: "black",
+
+        backgroundColor: 'black',
+
         fontSize: "32",
-        textAlign: "center",
         color: 'white',
+        textAlign: "center",
         //width:"500px"
 
     };
 
     render() {
-
         return (
 
             <Modal
-                open={this.state.show}
                 size='small'
                 style={this.Style}
                 closeIcon='close'
-                onClose={this.hideModal}
+                trigger={<Button
+                    color="pink"
+                    ref={audioComponent => {
+                        this.audioComponent = audioComponent;
+                    }}
+                    icon="microphone"
+                    onClick={this.showModal}/>}
             >
                 <Modal.Header style={this.Style}>Comments</Modal.Header>
                 <div>
                     <RecordComment ref={instance => (this.recordComment = instance) }
                                    changeSaveButtonState={this.changeSaveButtonState}
-                                   type="take"
-                                   id={this.props.take.id}
+                                   updateTakeInState={this.props.updateTakeInState}
+                                   sendComment={this.getComment}
                                    onClickSave={this.props.onClickSave}
+                                   type={this.props.type}
+                                   id={this.props.id}
 
                     />
 
@@ -157,5 +154,17 @@ class MicButton extends Component {
     }
 }
 
+// PinkButton.propTypes = {
+//     open
+//    comments
+// id
+// type
+// onClickSave
+// updateTakeInState
 
-export default MicButton;
+// };
+
+
+export default PinkButton;
+
+

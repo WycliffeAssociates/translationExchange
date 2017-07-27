@@ -5,9 +5,9 @@ import axios from 'axios';
 import config from 'config/config'
 import QueryString from 'query-string';
 import LoadingDisplay from "js/components/LoadingDisplay";
-import CheckingLevel from './components/CheckingLevel'
 import LoadingGif from 'images/loading-tiny.gif'
-import ExportButton from "../takes/components/ExportButton";
+import 'css/chapters.css'
+import PublishButton from "./components/PublishButton";
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -16,9 +16,12 @@ class ProjectContainer extends Component {
             chapters: [],
             book: {},
             language: {},
+            project_id: -1,
+            is_publish: false,
             filesData : null,
             loaded: false,
             error: "",
+            publishError: "",
             uploadSourceLoading: false,
             uploadSourceError: "",
             uploadSourceSuccess: "",
@@ -36,6 +39,21 @@ class ProjectContainer extends Component {
             filesData: data
         });
     }
+
+    publishFiles() {
+        let chapterID = this.state.project_id
+        let parameters = {
+            "is_publish": true
+        }
+
+        axios.patch(config.apiUrl + 'projects/' + chapterID +"/", parameters)
+            .then((response) => {
+                this.setState({is_publish: true})
+            }).catch((exception) => {
+            // modify for the error that occurs if the patch fails
+            this.setState({publishError: exception});
+        });
+}
 
 
     uploadSourceFile(event) {
@@ -88,13 +106,12 @@ class ProjectContainer extends Component {
         this.setState({error: ""});
         axios.post(config.apiUrl + 'get_chapters/', query
         ).then((results) => {
-            // console.dir(results.data.slice(0, results.data.length - 2));
-            // console.dir(results.data[results.data.length - 2]);
-            // console.dir(results.data[results.data.length - 1]);
             this.setState(
                 {
                     chapters: results.data.chapters,
                     book: results.data.book,
+                    project_id: results.data.project_id,
+                    is_publish: results.data.is_publish,
                     language: results.data.language,
                     loaded: true
                 }
@@ -123,23 +140,31 @@ class ProjectContainer extends Component {
     render () {
 
         return (
-            <div>
+            <div className="chapters">
                 <Container fluid>
 
                     <LoadingDisplay loaded={this.state.loaded}
                                     error={this.state.error}
                                     retry={this.getChapterData.bind(this)}>
-                        <Header as='h1'>{this.state.book.name} ({this.state.language.name})
-                <ExportButton chapters={this.state.chapters}/>
+
+                        <Header as='h1' >{this.state.book.name} ({this.state.language.name})
+
+
+                            <PublishButton
+                            chapters={this.state.chapters}
+                            isPublish={this.state.is_publish}
+                            onPublish={this.publishFiles.bind(this)}
+                        />
                         </Header>
 
-                        <Table selectable fixed color="blue">
+
+                        <Table selectable fixed color="grey">
                             <Table.Header>
                                 <Table.Row>
                                     <Table.HeaderCell>Chapter</Table.HeaderCell>
                                     <Table.HeaderCell>Percent Complete</Table.HeaderCell>
                                     <Table.HeaderCell>Checking Level</Table.HeaderCell>
-                                    <Table.HeaderCell>Ready to Export</Table.HeaderCell>
+                                    <Table.HeaderCell>Ready to Publish</Table.HeaderCell>
                                     <Table.HeaderCell>Contributors</Table.HeaderCell>
                                     <Table.HeaderCell>Translation Type</Table.HeaderCell>
                                     <Table.HeaderCell>Date Modified</Table.HeaderCell>

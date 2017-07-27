@@ -1,37 +1,43 @@
 import React, {Component} from 'react';
-import PropTypes from "prop-types";
-import MarkAsDone from "./MarkAsDone";
-import CommentContainer from "./comments/CommentContainer"
+import PinkButton from "./comments/PinkButton";
+import {Button, Grid, Icon} from "semantic-ui-react";
+import 'css/takes.css'
 
 class ChapterHeader extends Component {
-    render () {
+    render() {
+
         return (
-            <h1 marginWidth={25}>
-                Chapter {this.props.chapter}
-                {this.props.loaded
-                    ? " (" + this.props.book + ", " + this.props.language + ")"
-                    : ""
-                }
-                <CommentContainer
-                    ref={instance => (this.commentContainer = instance)}/>
-                <MarkAsDone chapter={this.props.chapter}
-                            book={this.props.book}
-                            language={this.props.language}
-                            takes={this.props.takes}
-                            numChunks={this.props.chunks.length}
-                />
-            </h1>
+            <div className="headerStyle">
+
+                <Grid padded columns={2} >
+                    <Grid.Column width={11} style={{paddingTop: 23}}>
+                        {this.props.book} Chapter {this.props.number} ({this.props.language})
+                    </Grid.Column>
+
+                    <Grid.Column width={5} className="verticalLine">
+
+                        <Button icon color="black" onClick={()=> alert("compile and publish")}>
+                            <Icon color="white" name="sidebar"/>
+                        </Button>
+
+                        <Button style={{marginLeft: 5, marginRight: 7}} icon color="black" onClick={()=> alert("source audio")}>
+                            <Icon color="white" name="als"/>
+                        </Button>
+
+                        <PinkButton comments={this.props.comments}
+                                    onClickSave={this.props.onClickSave}
+                                    id={this.props.id}
+                                    type={"chapter"}
+                                    deleteComment={this.props.deleteComment}/>
+
+                    </Grid.Column>
+                </Grid>
+            </div>
+
         );
     }
 }
 
-ChapterHeader.propTypes = {
-    loaded: PropTypes.bool.isRequired,
-    chapter: PropTypes.number.isRequired,
-    book: PropTypes.string.isRequired,
-    language: PropTypes.string.isRequired,
-    takes: PropTypes.array.isRequired,
-    chunks: PropTypes.array.isRequired
-};
+
 
 export default ChapterHeader;

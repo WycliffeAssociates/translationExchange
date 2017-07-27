@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from "prop-types";
-import { Button, Modal } from 'semantic-ui-react'
+import {Button, Modal} from 'semantic-ui-react'
 import AudioComponent from './AudioComponent';
 import config from "config/config";
 let handleOpen;
@@ -9,7 +9,7 @@ let handleClose;
 
 class MarkAsDone extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             color: null,
@@ -17,42 +17,44 @@ class MarkAsDone extends Component {
         }
 
     }
-    checkReadyForExport() {
-        var counter = 0;
-        this.props.takes.map((i) => {
-            if (i.take.is_export) {counter+=1}
-        })
 
-        if ((this.props.numChunks === counter) && counter !== 0) {
-            return true
+    checkReadyForExport() {
+        if (this.props.chunks.length === 0) {
+            return false;
+        } else {
+            //true if every chunk has at least 1 take marked is_publish
+            return this.props.chunks.every((chunk) => {
+                return chunk.takes.some(take => take.take.is_publish);
+            });
         }
-        else {return false}
     }
 
     createExportPlaylist() {
 
-        var length = 0;
-        this.props.takes.map((i) => {
-            if(i.take.is_export) {length += 1}
-        })
+        let length = this.props.chunks.length;
 
         var playlist = [];
-        this.props.takes.map((i) => {
-            if (i.take.is_export) {
-                playlist[playlist.length] = {
-                    "src": config.streamingUrl + i.take.location,
-                    "name": i.take.mode + ' ' + i.take.startv + ' (' + (playlist.length+1) + '/' + length + ')'
+        this.props.chunks.map((chunk) => {
+            chunk.takes.map((take) => {
+                if (take.take.is_publish) {
+                    playlist.push({
+                        "src": config.streamingUrl + take.take.location,
+                        "name": this.props.mode + ' ' + chunk.startv + ' (' + (playlist.length+1) + '/' + length + ')'
+                    });
                 }
-            }
+            })
         });
+
         return playlist
     }
-    changeColor(){
+
+    changeColor() {
         this.setState({
             color: 'green'
         });
         this.handleClose();
     }
+
     handleOpen = (e) => this.setState({
         modalOpen: true,
     });
@@ -62,15 +64,15 @@ class MarkAsDone extends Component {
     })
 
     render () {
-        let readyForExport = this.checkReadyForExport();
+        let readyForExport = true; //this.checkReadyForExport();
         var ExportButton = <Button onClick={this.handleOpen} color={this.state.color} disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
 
-        return(
+        return (
             <Modal trigger={ExportButton}
                    open={this.state.modalOpen}
                    onClose={this.handleClose}
                    closeIcon="close">
-                <Modal.Header>You are ready to mark Chapter {this.props.chapter} as finished!</Modal.Header>
+                <Modal.Header>You are ready to mark Chapter {this.props.chapter.number} as finished!</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
                         <p>Here is a preview of the takes you have selected to export. This may take a few seconds to
@@ -94,10 +96,8 @@ class MarkAsDone extends Component {
 
 MarkAsDone.propTypes = {
     chapter: PropTypes.number.isRequired,
-    book: PropTypes.string.isRequired,
-    language: PropTypes.string.isRequired,
-    takes: PropTypes.array.isRequired,
-    numChunks: PropTypes.number.isRequired
+    chunks: PropTypes.array.isRequired,
+    mode: PropTypes.string.isRequired
 };
 
 export default MarkAsDone;
