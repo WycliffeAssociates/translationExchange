@@ -7,9 +7,11 @@ import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
 import MarkAsDone from "./components/MarkAsDone"
-
-import {Container, Segment, Label, Sidebar, Grid} from 'semantic-ui-react'
-import Footer from './components/Footer'
+import {Button, Divider} from "semantic-ui-react";
+import Grid from "semantic-ui-react/dist/es/collections/Grid/Grid";
+import Icon from "semantic-ui-react/dist/es/elements/Icon/Icon";
+import PinkButton from "./components/comments/PinkButton";
+import ChapterHeader from "./components/ChapterHeader";
 
 let onClick;
 
@@ -157,7 +159,6 @@ class ChapterContainer extends Component {
             "type": type
 
         }).then((results) => {
-            console.log('data', results.data);
             var map = {"comment": results.data};
             let updatedChunks = this.state.chunks.slice();
 
@@ -245,19 +246,22 @@ class ChapterContainer extends Component {
         var query = QueryString.parse(this.props.location.search);
 
         this.state.query = query;
-
         return (
             <div>
 
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
-
+                    <ChapterHeader  book={this.state.book.name}
+                                    number={this.state.chapter.number}
+                                    language={this.state.language.name}
+                                    comments={this.state.chapter.comments}
+                                    onClickSave={this.onClickSave.bind(this)}
+                                    id={this.state.chapter.id}
+                                    deleteComment={this.deleteComment.bind(this)}/>
                     <MarkAsDone chapter={this.state.chapter}
                                 chunks={this.state.chunks}
                                 mode={this.state.mode}/>
-                    <h1>Chapter {query.chapter} </h1>
-
                     {this.state.chunks.map(this.createChunkList.bind(this))}
                 </LoadingDisplay>
 
