@@ -59,8 +59,8 @@ class MarkAsDone extends Component {
         //make patch request to confirm that the chapter is ready to be published
         axios.patch(config.apiUrl + 'chapters/' + this.props.chapter.id +"/", parameters)
             .then((response) => {
-             this.changeColor();
              this.setState({is_published:true});
+             this.changeColor();
                console.log(response)
             }).catch((exception) => {
                console.log(exception);
@@ -79,9 +79,8 @@ class MarkAsDone extends Component {
         )
 
     render() {
-        let disableBtn=this.state.is_published==true?true:false;
-       
-        var ExportButton = <Button onClick={this.handleOpen} color={disableBtn==true?"green":this.state.color} disabled={disableBtn} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
+        let disableBtn=this.state.is_published;
+        var ExportButton = <Button onClick={this.handleOpen} color={disableBtn==true?"green":this.state.color} disabled={disableBtn} content={disableBtn==true?"Chapter ready to be Published":"Mark Chapter as Done"} icon="share" floated="right" labelPosition="right"/>
        
         return (
                 <Modal trigger={ExportButton}
