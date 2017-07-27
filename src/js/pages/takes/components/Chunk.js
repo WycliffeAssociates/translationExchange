@@ -15,86 +15,42 @@ class Chunk extends Component {
         this.state = {open: false};
     }
 
-    onClick = () => {// used when you click the microphone button in the player
-        this.setState({
-            modalopen: true
-        });
-    }
+    render () {
 
-    createTakeTables() {
+        var publish = [];
+        var onestar = [];
+        var twostar = [];
+        var threestar = [];
 
-        var cells = [];
 
-        for (var i = 0; i < 4; i++) {
+        /*
+        rating, is_publish
+         */
+        this.props.segments.map((i) => {
 
-            var name;
-            var img;
-
-            switch(i) {
-                case 0:
-                    name = "Garbage";
-                    img = <Icon name="star" color="red" size="big"/>
-                    break;
-                case 1:
-                    name = "2 stars";
-                    img =
-                        <div>
-                            <Icon name="star" color="yellow" size="big"/>
-                            <Icon name="star" color="yellow" size="big"/>
-                        </div>
-                    break;
-                case 2:
-                    name = "3 stars";
-                    img =
-                        <div>
-                            <Icon name="star" color="green" size="big"/>
-                            <Icon name="star" color="green" size="big"/>
-                            <Icon name="star" color="green" size="big"/>
-                        </div>
-                    break;
-                case 3:
-                    name = "Check";
-                    img = <Icon name="check" color="pink" size="big"/>
-                    break;
+            if (i.take.is_publish) {
+                publish[publish.length] = i
             }
 
-            cells[i] =
+            else if(i.take.rating < 2) {
+                onestar[onestar.length] = i
+            }
+            else if(i.take.rating === 2) {
+                twostar[twostar.length] = i
+            }
+            else if(i.take.rating === 3) {
+                   threestar[threestar.length] = i
+            }
 
-                <Grid.Column>
+        })
 
-                    <Table textAlign="center">
-                        <Table.Header>
-                            <Table.Row>
-
-                            <Table.HeaderCell>{img}</Table.HeaderCell>
-                            </Table.Row>
-                        </Table.Header>
-
-
-                                <Table.Cell>
-                                    <TakeTable
-                                        takes={this.props.segments}
-                                        addToListenList={this.props.addToListenList}
-                                        patchTake={this.props.patchTake}
-                                        deleteTake={this.props.deleteTake}
-                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                                        onClickSave={this.props.onClickSave}
-                                        column={i}
-                                        // deleteComment={this.props.deleteComment}
-                                    />
-                                    <br />
-                                </Table.Cell>
-
-
-                    </Table>
-
-                </Grid.Column>
-        }
-
-        return cells
-    }
-
-    render () {
+        console.log('Publish', publish)
+        console.log('One Stars', onestar)
+        console.log('Two Stars', twostar)
+        console.log('Three Stars', threestar)
+        /*
+        Segments is an array of takes for each chunk - good
+         */
 
         var modeLabel = "";
 
@@ -109,6 +65,20 @@ class Chunk extends Component {
                 modeLabel = "Segment";
         }
 
+        var icon1 = <Icon name="star" color="red" size="big"/>
+        var icon2 =
+            <div>
+                <Icon name="star" color="yellow" size="big"/>
+                <Icon name="star" color="yellow" size="big"/>
+            </div>
+        var icon3 =
+            <div>
+                <Icon name="star" color="green" size="big"/>
+                <Icon name="star" color="green" size="big"/>
+                <Icon name="star" color="green" size="big"/>
+            </div>
+        var icon4 = <Icon name="check" color="pink" size="big"/>
+
 
         return (
             <div>
@@ -122,24 +92,58 @@ class Chunk extends Component {
                         </center>
 
                     </Accordion.Title>
+                    <Accordion.Content className="ChunkBody">
+                        <PinkButton
+                            comments={this.props.comments}
+                            onClickSave={this.props.onClickSave}
+                            id={this.props.id}
+                            type={"chunk"}
+                            deleteComment={this.props.deleteComment}/>
 
-                <Accordion.Content className="ChunkBody">
-                    <PinkButton
-                        comments={this.props.comments}
-                        onClickSave={this.props.onClickSave}
-                        id={this.props.id}
-                        type={"chunk"}
-                        deleteComment={this.props.deleteComment}/>
-
-                        <Grid padded fluid columns={4}>
-                            {this.createTakeTables()}
+                        <Grid fixed padded fluid columns={4}>
+                            <TakeTable
+                                icon={icon1}
+                                takes={this.props.segments}
+                                addToListenList={this.props.addToListenList}
+                                patchTake={this.props.patchTake}
+                                deleteTake={this.props.deleteTake}
+                                updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                onClickSave={this.props.onClickSave}
+                                column={0}
+                            />
+                            <TakeTable
+                                icon={icon2}
+                                takes={this.props.segments}
+                                addToListenList={this.props.addToListenList}
+                                patchTake={this.props.patchTake}
+                                deleteTake={this.props.deleteTake}
+                                updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                onClickSave={this.props.onClickSave}
+                                column={1}
+                            />
+                            <TakeTable
+                                icon={icon3}
+                                takes={this.props.segments}
+                                addToListenList={this.props.addToListenList}
+                                patchTake={this.props.patchTake}
+                                deleteTake={this.props.deleteTake}
+                                updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                onClickSave={this.props.onClickSave}
+                                column={2}
+                            />
+                            <TakeTable
+                                icon={icon4}
+                                takes={this.props.segments}
+                                addToListenList={this.props.addToListenList}
+                                patchTake={this.props.patchTake}
+                                deleteTake={this.props.deleteTake}
+                                updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                onClickSave={this.props.onClickSave}
+                                column={3}
+                            />
                         </Grid>
-
-                </Accordion.Content>
-
+                    </Accordion.Content>
                 </Accordion>
-
-
             </div>
         );
     }

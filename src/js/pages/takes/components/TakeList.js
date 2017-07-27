@@ -8,6 +8,8 @@ class TakeList extends Component {
 
     render () {
 
+
+        // only display the takes with the correct rating
         var list = [];
 
             this.props.takes.map((i) => {
@@ -15,6 +17,7 @@ class TakeList extends Component {
                     list[list.length] = i;
                 }
             })
+
 
 
 

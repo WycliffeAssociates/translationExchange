@@ -6,7 +6,7 @@ import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
 import ChapterHeader from "./components/ChapterHeader"
-import ChunkList from "./components/ChunkList"
+import Chunk from './components/Chunk'
 import Footer from './components/Footer'
 import MarkAsDone from "./components/MarkAsDone"
 
@@ -305,13 +305,40 @@ class ChapterContainer extends Component {
     }
 
     createChunkList(chunk) {
+
+        /*
+        segments is an array of takes for each chunk
+         */
         return (
             <div>
+                {/*
                 <ChunkList
                     comments={chunk.comments}
                     segments={chunk.takes} // array of takes
                     mode={this.state.mode}
                     number={chunk.startv}
+                    addToListenList={this.addToListenList.bind(this)}
+                    patchTake={this.patchTake.bind(this)}
+                    deleteTake={this.deleteTake.bind(this)}
+                    updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
+                    onClickSave={this.onClickSave.bind(this)}
+                    id={chunk.id}
+                    deleteComment={this.deleteComment.bind(this)}
+
+                    loaded={this.state.loaded}
+                    chapter={this.state.query.chapter}
+                    book={this.state.book.name}
+                    language={this.state.language.name}
+                    chunks={this.state.chunks}
+                    listenList={this.state.listenList}
+                />
+                */}
+
+                <Chunk
+                    comments={chunk.comments}
+                    segments={chunk.takes} // array of takes
+                    mode={this.state.mode}
+                    number={chunk.number}
                     addToListenList={this.addToListenList.bind(this)}
                     patchTake={this.patchTake.bind(this)}
                     deleteTake={this.deleteTake.bind(this)}
@@ -325,8 +352,11 @@ class ChapterContainer extends Component {
                     language={this.state.language.name}
                     chunks={this.state.chunks}
                     listenList={this.state.listenList}
-
                 />
+
+
+
+
             </div>
         );
 
