@@ -17,18 +17,10 @@ class Chunk extends Component {
 
     render () {
 
-
-        console.log('CHUNK', this.state.segments)
-
         var publish = [];
         var onestar = [];
         var twostar = [];
         var threestar = [];
-
-
-        /*
-        rating, is_publish
-         */
 
         this.props.segments.map((i) => {
 
@@ -47,19 +39,6 @@ class Chunk extends Component {
             }
 
         })
-
-
-        /*
-        console.log('Publish', publish)
-        console.log('One Stars', onestar)
-        console.log('Two Stars', twostar)
-        console.log('Three Stars', threestar)
-        */
-
-
-        /*
-        Segments is an array of takes for each chunk - good
-         */
 
         var modeLabel = "";
 

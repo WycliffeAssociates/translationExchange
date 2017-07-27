@@ -15,8 +15,6 @@ class TakeTable extends Component {
 
     render () {
 
-        //console.log(this.props.PLAYLIST)
-
         iterator = 0;
         return (
             <Grid.Column>
@@ -28,7 +26,6 @@ class TakeTable extends Component {
                     </Table.Header>
 
                     <Table.Cell>
-                        {/*this.props.takes.map(this.createListItem.bind(this))*/}
                         <TakeList
                             takes={this.props.PLAYLIST}
                             addToListenList={this.props.addToListenList}
@@ -47,24 +44,6 @@ class TakeTable extends Component {
         );
     }
 
-    createListItem (take) {
-        iterator += 1;
-
-        return (
-            <div>
-                <TakeList
-                    takes={this.props.PLAYLIST}
-                    addToListenList={this.props.addToListenList}
-                    patchTake={this.props.patchTake}
-                    deleteTake={this.props.deleteTake}
-                    updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                    onClickSave={this.props.onClickSave}
-                    ratingToGet={this.state.rating}
-                    // deleteComment={this.props.deleteComment}
-                />
-            </div>
-        );
-    }
 }
 
 export default TakeTable;
