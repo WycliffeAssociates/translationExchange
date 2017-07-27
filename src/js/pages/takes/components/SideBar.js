@@ -3,7 +3,9 @@
  */
 
 import React, { Component } from 'react'
-import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui-react'
+import { Sidebar, Segment, Menu } from 'semantic-ui-react'
+import PinkButton from "./comments/PinkButton";
+import SourceAudioButton from "./SourceAudioButton"
 let state;
 let toggleVisibility;
 
@@ -24,17 +26,21 @@ class SidebarRightOverlay extends Component {
                         width='thin'
                         direction='right'
                         visible={visible}
-                        icon='labeled'
                         vertical
                         inverted
                     >
-                        <Menu.Item name='home'>
-                            <Icon name='commenting outline' />
-                            Comment
+
+                        <Menu.Item>
+                            <PinkButton
+                                comments={this.props.comments}
+                                onClickSave={this.props.onClickSave}
+                                id={this.props.chunkId}
+                                type={"chunk"}
+                                deleteComment={this.props.deleteComment}/>
                         </Menu.Item>
-                        <Menu.Item name='listen'>
-                            <Icon name='assistive listening systems' />
-                            Listen
+                        <Menu.Item>
+                            <SourceAudioButton startv={this.props.chunkNumber}
+                                               onSourceClicked={this.props.onSourceClicked}/>
                         </Menu.Item>
 
                     </Sidebar>

@@ -79,11 +79,13 @@ class Chunk extends Component {
                                 <Table.Cell>
                                     <TakeTable
                                         takes={this.props.segments}
+                                        chunkNumber={this.props.number}
                                         addToListenList={this.props.addToListenList}
                                         patchTake={this.props.patchTake}
                                         deleteTake={this.props.deleteTake}
                                         updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                                         onClickSave={this.props.onClickSave}
+                                        playTake={this.props.playTake}
                                         column={i}
                                         // deleteComment={this.props.deleteComment}
                                     />
@@ -130,38 +132,20 @@ class Chunk extends Component {
                     </Accordion.Title>
 
                 <Accordion.Content className="ChunkBody">
-                    <SideBar className="commentBar">
-                    <PinkButton
-                        comments={this.props.comments}
-                        onClickSave={this.props.onClickSave}
-                        id={this.props.id}
-                        type={"chunk"}
-                        deleteComment={this.props.deleteComment}/>
-                    <SourceAudioButton startv={this.props.number}
-                                       onSourceClicked={this.props.onSourceClicked}/>
-
-                        {/*<CommentContainer />  */} {/* this joint don't work man*/}
-
+                    <SideBar className="commentBar"
+                             comments={this.props.comments}
+                             onClickSave={this.props.onClickSave}
+                             chunkId={this.props.id}
+                             deleteComment={this.props.deleteComment}
+                             chunkNumber={this.props.number}
+                             onSourceClicked={this.props.onSourceClicked}
+                    >
 
                         <Grid padded fluid columns={4}>
                             {this.createTakeTables()}
 
                         </Grid>
-
-                        <Container fluid className="ChunkFooter">
-                            <Footer loaded={this.props.loaded}
-                                    chapter={this.props.chapter}
-                                    book={this.props.book.name}
-                                    language={this.props.language.name}
-                                    chunks={this.props.chunks}
-                                    mode={this.props.mode}
-                                    listenList={this.props.listenList}
-                            />
-
-                        </Container>
-
                     </SideBar>
-
 
                 </Accordion.Content>
 
