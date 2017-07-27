@@ -12,6 +12,7 @@ import 'css/chapters.css'
 import PublishButton from "./components/PublishButton";
 // import FileDownload from 'react-file-download';
 import FileSaver from 'file-saver'
+import JSZip from 'jszip'
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -145,11 +146,55 @@ class ProjectContainer extends Component {
     saveFile() {
         console.log("Is this gonna work?");
 
+        let params = {
+            language: this.state.language.slug,
+            version: QueryString.parse(this.props.location.search).version,
+            book: this.state.book.slug
+        }
 
         let filePath = 'C:/Users/wyatt/Downloads/en-x-demo2_ulb_mrk-WORKING.zip'
 
-        var file = new Blob([filePath.blob], {type: 'application/zip'}, true);
-        FileSaver.saveAs(file);
+        // var file = new Blob([filePath.blob], {type: 'application/zip'}, true);
+        // FileSaver.saveAs(file);
+
+        //Just wanna see if this thing can work like I hope it will...
+        axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
+            .then((download_results) => {
+                console.log(download_results.data);
+
+                var zip = new JSZip();
+                zip.file("zip_data.zip", download_results.data);
+                zip.generateAsync({type:"uint8array"})
+                    .then(function(data) {
+                        FileSaver.saveAs(data, "example.zip");
+                    });
+
+            }).catch((exception) => {
+            this.setState({downloadError: exception});
+        }).catch((error) => {
+            this.setState({downloadLoading: false, downloadError: error});
+        });
+
+
+        // zip.file("Hello.txt", "Hello World\n");
+        // var img = zip.folder("images");
+        // img.file("smile.gif", imgData, {base64: true});
+        // zip.generateAsync({type:"blob"})
+        //     .then(function(content) {
+        //         // see FileSaver.js
+        //         saveAs(content, "example.zip");
+        //     });
+
+        // well this works
+        // var zip = new JSZip();
+        // zip.file("Example_File_In_ZIP.txt", "What the text?");
+        // zip.generateAsync({type:"blob"})
+        //     .then(function(blob) {
+        //         FileSaver.saveAs(blob, "example.zip");
+        //     });
+
+        // What does this do?
+        //bindEvent(blobLink, 'click', downloadWithBlob);
 
         console.log("Did this work?");
     }

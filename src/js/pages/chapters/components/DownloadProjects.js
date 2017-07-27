@@ -9,12 +9,12 @@ class DownloadProjects extends Component {
         this.state = {
             loading: false
         };
-        this.downloadProject = this.downloadProject.bind(this)
+        this.saveFile = this.saveFile.bind(this)
     }
 
-    downloadProject() {
+    saveFile() {
         this.setState({loading: true});
-        this.props.onDownloadProject();
+        this.props.saveFile();
     }
 
     render () {
@@ -25,7 +25,7 @@ class DownloadProjects extends Component {
                 icon='download'
                 labelPosition='right'
                 size='small'
-                onClick={this.downloadProject}
+                onClick={this.saveFile}
             />
         );
     }
