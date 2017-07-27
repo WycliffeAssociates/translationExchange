@@ -10,8 +10,6 @@ import ChapterHeader from "./components/ChapterHeader"
 import Footer from './components/Footer'
 import Chunk from "./components/Chunk"
 
-import MarkAsDone from "./components/MarkAsDone"
-
 let onClick;
 
 class ChapterContainer extends Component {
@@ -30,7 +28,8 @@ class ChapterContainer extends Component {
             selectedSourceProjectQuery: -1,
             selectedSourceProject: {},
             listenList: [],
-            query: ''
+            query: '',
+            currentPlaylist: []
         };
     }
 
@@ -265,8 +264,25 @@ class ChapterContainer extends Component {
 
     onSourceClicked(startv) {
         let sourceLoc = this.getSourceAudioLocationForChunk(startv);
-        //set audio component to be playing this file...
-        console.log("playing source from " + sourceLoc);
+
+        let playlist = [{
+            "src": config.streamingUrl + sourceLoc,
+            "name": this.state.mode + " " + startv + " (source)"
+        }];
+        this.setState({
+            currentPlaylist: playlist
+        });
+
+    }
+
+    playTake(takeLoc, startv, author, date) {
+        let playlist = [{
+            "src": config.streamingUrl + takeLoc,
+            "name": this.state.mode + " " + startv + " (" + author + " on " + date + ")"
+        }];
+        this.setState({
+            currentPlaylist: playlist
+        });
     }
 
     /*
@@ -295,13 +311,9 @@ class ChapterContainer extends Component {
                     {this.state.chunks.map(this.createChunk.bind(this))}
 
                     <div fluid className="StickyFooter">
-                        <Footer loaded={this.state.loaded}
-                                chapter={this.state.query.chapter}
-                                book={this.state.book.name}
-                                language={this.state.language.name}
-                                chunks={this.state.chunks}
-                                mode={this.state.mode}
+                        <Footer mode={this.state.mode}
                                 listenList={this.state.listenList}
+                                currentPlaylist={this.state.currentPlaylist}
                         />
                     </div>
                 </LoadingDisplay>
@@ -322,6 +334,7 @@ class ChapterContainer extends Component {
                 deleteTake={this.deleteTake.bind(this)}
                 updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
                 onClickSave={this.onClickSave.bind(this)}
+                playTake={this.playTake.bind(this)}
                 loaded={this.state.loaded}
                 chapter={this.state.query.chapter}
                 book={this.state.book.name}

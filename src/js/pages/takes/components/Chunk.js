@@ -74,11 +74,13 @@ class Chunk extends Component {
                                 <Table.Cell>
                                     <TakeTable
                                         takes={this.props.segments}
+                                        chunkNumber={this.props.number}
                                         addToListenList={this.props.addToListenList}
                                         patchTake={this.props.patchTake}
                                         deleteTake={this.props.deleteTake}
                                         updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                                         onClickSave={this.props.onClickSave}
+                                        playTake={this.props.playTake}
                                         column={i}
                                         // deleteComment={this.props.deleteComment}
                                     />

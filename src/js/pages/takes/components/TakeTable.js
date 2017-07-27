@@ -37,12 +37,14 @@ class TakeTable extends Component {
             <div>
                 <TakeList
                     takes={this.props.takes}
+                    chunkNumber={this.props.chunkNumber}
                     addToListenList={this.props.addToListenList}
                     patchTake={this.props.patchTake}
                     deleteTake={this.props.deleteTake}
                     updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                     onClickSave={this.props.onClickSave}
                     ratingToGet={this.state.rating}
+                    playTake={this.props.playTake}
                     // deleteComment={this.props.deleteComment}
                 />
             </div>
