@@ -259,11 +259,11 @@ class ChapterContainer extends Component {
 
                         <Grid.Column width={5} className="verticalLine">
 
-                            <Button icon color="black">
+                            <Button icon color="black" onClick={()=> alert("compile and publish")}>
                                 <Icon color="white" name="sidebar"/>
                             </Button>
 
-                            <Button icon color="black">
+                            <Button icon color="black" onClick={()=> alert("source audio")}>
                                 <Icon color="white" name="als"/>
                             </Button>
 
