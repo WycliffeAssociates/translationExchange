@@ -5,6 +5,7 @@ import {Accordion, Button, Icon, Container, Grid, Table} from "semantic-ui-react
 import Footer from './Footer'
 import TakeTable from './TakeTable'
 import PinkButton from "./comments/PinkButton";
+import SourceAudioButton from "./SourceAudioButton"
 let onClick;
 
 
@@ -129,6 +130,8 @@ class Chunk extends Component {
                         id={this.props.id}
                         type={"chunk"}
                         deleteComment={this.props.deleteComment}/>
+                    <SourceAudioButton startv={this.props.number}
+                                       onSourceClicked={this.props.onSourceClicked}/>
 
                         <Grid padded fluid columns={4}>
                             {this.createTakeTables()}
