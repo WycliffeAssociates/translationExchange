@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Form, Label, Dropdown, Image } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
 import axios from 'axios';
 import config from 'config/config';
-import SourceEar from 'images/source-ear.png'
 
 export default class SetSourceAudio extends Component {
 
@@ -43,8 +42,8 @@ export default class SetSourceAudio extends Component {
         });
     }
 
-    setSource(projectId) {
-        this.props.setSourceProject(projectId);
+    setSource(project) {
+        this.props.setSourceProject(project);
     }
 
     render() {
