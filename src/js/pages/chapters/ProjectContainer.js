@@ -157,10 +157,16 @@ class ProjectContainer extends Component {
 
                 this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
                 //Returns a corrupt file - The API returns an open-able file. Is it the Lib
-                FileDownload(download_results.data, zipFileName);
+                var results = download_results.data;
                 console.log(download_results.data);
                 // return(download_results.data);
                 // console.log("returned");
+
+                return {
+                    mime: 'application/zip',
+                    filename: zipFileName,
+                    contents: results,
+                }
 
             }).catch((exception) => {
                 this.setState({downloadError: exception});
