@@ -5,6 +5,8 @@ import {Accordion, Button, Icon, Container, Grid, Table} from "semantic-ui-react
 import CommentContainer from "./comments/CommentContainer";
 import Footer from './Footer'
 import TakeTable from './TakeTable'
+import SideBar from './SideBar'
+import 'css/takes.css'
 let onClick;
 
 
@@ -84,7 +86,6 @@ class Chunk extends Component {
                                     <br />
                                 </Table.Cell>
 
-
                     </Table>
 
                 </Grid.Column>
@@ -123,13 +124,16 @@ class Chunk extends Component {
                     </Accordion.Title>
 
                 <Accordion.Content className="ChunkBody">
+
                     <CommentContainer />
 
 
 
-                        <Grid padded fluid columns={4}>
-                            {this.createTakeTables()}
-                        </Grid>
+                    <Grid padded fluid columns={4}>
+                        {this.createTakeTables()}
+                        <SideBar className="commentBar"/>
+
+                    </Grid>
 
 
 
@@ -141,9 +145,14 @@ class Chunk extends Component {
                                 chunks={this.props.chunks}
                                 mode={this.props.mode}
                                 listenList={this.props.listenList}
-                        />
+                            />
+
                     </Container>
+
+
+
                 </Accordion.Content>
+
 
                 </Accordion>
 

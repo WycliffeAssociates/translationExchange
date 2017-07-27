@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import Chunk from "./Chunk";
 import ChunkPropTypes from "./ChunkPropTypes";
+import SideBar from './SideBar'
 
 class ChunkList extends Component {
 
@@ -26,9 +27,8 @@ class ChunkList extends Component {
                     language={this.props.language}
                     chunks={this.props.chunks}
                     listenList={this.props.listenList}
-                />
+                    />
                 }
-
             </div>
         );
     }

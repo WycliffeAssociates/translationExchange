@@ -207,7 +207,6 @@ class ChapterContainer extends Component {
                     <h1>Chapter {query.chapter} </h1>
 
                     {this.state.chunks.map(this.createChunkList.bind(this))}
-
                 </LoadingDisplay>
             </div>
         );
@@ -231,6 +230,7 @@ class ChapterContainer extends Component {
                     language={this.state.language.name}
                     chunks={this.state.chunks}
                     listenList={this.state.listenList}
+
                     // deleteComment={this.deleteComment.bind(this)}
                 />
             </div>

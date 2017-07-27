@@ -11,6 +11,7 @@ import CommentContainer from "./comments/CommentContainer";
 import TakeExportButton from "./SelectTake";
 import ShowMarkers from './ShowMarkers';
 import 'css/takes.css'
+import SideBar from './SideBar'
 
 var listenCounter = 0
 class Take extends Component {
@@ -110,11 +111,12 @@ class Take extends Component {
 
                     }
                     </Segment>
+
                     <Segment onClick={this.moveRight.bind(this)} className="hoverButton"> <Icon name="chevron right" /></Segment>
 
                 </Segment.Group>
 
-        </div>
+            </div>
 
 
 

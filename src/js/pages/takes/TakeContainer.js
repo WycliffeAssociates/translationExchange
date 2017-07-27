@@ -5,6 +5,7 @@ import config from "../../../config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 import _ from 'lodash';
 import Take from "./components/Take";
+import SideBar from './components/SideBar'
 
 
 class TakeContainer extends Component {
@@ -54,7 +55,7 @@ class TakeContainer extends Component {
                   addToListenList={this.props.addToListenList}
                   onDeleteTake={this.onDeleteTake.bind(this)}
                   onClickSave={this.props.onClickSave}
-                // deleteComment={this.props.deleteComment}
+                  // deleteComment={this.props.deleteComment}
 
             />
             //other events that require requesting the server would go here
