@@ -5,11 +5,9 @@ import axios from 'axios';
 import config from 'config/config'
 import QueryString from 'query-string';
 import LoadingDisplay from "js/components/LoadingDisplay";
-import CheckingLevel from './components/CheckingLevel'
 import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
 import PublishButton from "./components/PublishButton";
-import FileDownload from 'react-file-download';
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -177,25 +175,24 @@ class ProjectContainer extends Component {
                                 setCheckingLevel={this.setCheckingLevel.bind(this)}
                             />
                         </Table>
+
+                        {!this.state.uploadSourceLoading && this.state.uploadSourceSuccess
+                            ? <div>Successfully uploaded {this.state.uploadSourceSuccess} and set it as source audio</div>
+                            : <form onSubmit={this.uploadSourceFile} method="post" encType="multipart/form-data">
+                                <h4>Upload source audio</h4>
+                                <Input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
+                                {this.state.uploadSourceLoading
+                                    ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                                    : <Button type="submit">Submit</Button>
+                                }
+                                {this.state.uploadSourceError
+                                    ? "There was an error uploading the file: " + this.state.uploadSourceError
+                                    : ""
+                                }
+                            </form>
+                        }
+
                     </LoadingDisplay>
-
-                    <br></br>
-
-                    {!this.state.uploadSourceLoading && this.state.uploadSourceSuccess
-                        ? <div>Successfully uploaded {this.state.uploadSourceSuccess} and set it as source audio</div>
-                        : <form onSubmit={this.uploadSourceFile} method="post" encType="multipart/form-data">
-                            <h4>Upload source audio</h4>
-                            <Input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
-                            {this.state.uploadSourceLoading
-                                ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
-                                : <Button type="submit">Submit</Button>
-                            }
-                            {this.state.uploadSourceError
-                                ? "There was an error uploading the file: " + this.state.uploadSourceError
-                                : ""
-                            }
-                        </form>
-                    }
 
                 </Container>
 

@@ -2,21 +2,23 @@ import React, {Component} from 'react';
 import PropTypes from "prop-types";
 import MarkAsDone from "./MarkAsDone";
 import CommentContainer from "./comments/PinkButton"
+import SetSourceAudio from "./SetSourceAudio"
 
 class ChapterHeader extends Component {
     render() {
 
         return (
             <h1 marginWidth={25}>
-                Chapter {this.props.chapter}
-                {this.props.loaded
-                    ? " (" + this.props.book + ", " + this.props.language + ")"
-                    : ""
-                }
+                    Chapter {this.props.chapter.number}
+                    {this.props.loaded
+                        ? " (" + this.props.book + ", " + this.props.language + ")"
+                        : ""
+                    }
+
                 <CommentContainer
                     ref={instance => (this.commentContainer = instance)}
-                    comments={this.props.comments}
-                    id={this.props.id}
+                    comments={this.props.chapter.comments}
+                    id={this.props.chapter.id}
                     onClickSave={this.props.onClickSave}
                     type={"chapter"}
                     deleteComment={this.props.deleteComment}
@@ -27,6 +29,7 @@ class ChapterHeader extends Component {
                             chunks={this.props.chunks}
                             mode={this.props.mode}
                 />
+                <SetSourceAudio/>
             </h1>
         );
     }
