@@ -10,7 +10,8 @@ import CheckingLevel from './components/CheckingLevel'
 import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
 import PublishButton from "./components/PublishButton";
-import FileDownload from 'react-file-download';
+// import FileDownload from 'react-file-download';
+import FileSaver from 'file-saver'
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -141,6 +142,10 @@ class ProjectContainer extends Component {
         )
     }
 
+    saveFile(args) {
+        console.log(args);
+    }
+
     onDownloadProject() {
         let zipFileName = this.state.language.slug + "_" + QueryString.parse(this.props.location.search).version + "_" + this.state.book.slug + ".zip"
         this.setState({downloadLoading: true, downloadError: ""});
@@ -162,15 +167,13 @@ class ProjectContainer extends Component {
                 // return(download_results.data);
                 // console.log("returned");
 
-                // Lets test something
-                var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
-                saveAs(blob, "hello world.txt");
+                // Lets test something - I pray this works
+                var blob = new Blob([download_results.data], {type: 'application/zip'});
+                FileSaver.saveAs(blob, zipFileName);
 
-                // return {
-                //     mime: 'application/zip',
-                //     filename: zipFileName,
-                //     contents: results,
-                // }
+
+                this.saveFile("this data is sent");
+
 
             }).catch((exception) => {
                 this.setState({downloadError: exception});
@@ -178,6 +181,9 @@ class ProjectContainer extends Component {
                 this.setState({downloadLoading: false, downloadError: error});
         });
     }
+
+
+
 
     componentDidMount() {
         this.getChapterData()
