@@ -11,7 +11,7 @@ let onClickCancel;
 let onClickSave;
 let Style;
 
-class CommentContainer extends Component {
+class PinkButton extends Component {
 
     constructor(props) {
         super(props);
@@ -116,7 +116,6 @@ class CommentContainer extends Component {
                 closeIcon='close'
                 trigger={<Button
                     color="pink"
-                    floated='right'
                     ref={audioComponent => {
                         this.audioComponent = audioComponent;
                     }}
@@ -155,7 +154,17 @@ class CommentContainer extends Component {
     }
 }
 
+// PinkButton.propTypes = {
+//     open
+//    comments
+// id
+// type
+// onClickSave
+// updateTakeInState
 
-export default CommentContainer;
+// };
+
+
+export default PinkButton;
 
 

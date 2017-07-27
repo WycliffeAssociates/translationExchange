@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ChunkList from "./components/ChunkList";
 import axios from 'axios';
 import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
@@ -7,9 +6,9 @@ import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
 import ChapterHeader from "./components/ChapterHeader"
+import ChunkList from "./components/ChunkList"
 
-import {Container, Segment, Label, Sidebar, Grid} from 'semantic-ui-react'
-import Footer from './components/Footer'
+import MarkAsDone from "./components/MarkAsDone"
 
 let onClick;
 
@@ -157,7 +156,6 @@ class ChapterContainer extends Component {
             "type": type
 
         }).then((results) => {
-            console.log('data', results.data);
             var map = {"comment": results.data};
             let updatedChunks = this.state.chunks.slice();
 
@@ -245,7 +243,6 @@ class ChapterContainer extends Component {
         var query = QueryString.parse(this.props.location.search);
 
         this.state.query = query;
-
         return (
             <div>
 
@@ -253,15 +250,26 @@ class ChapterContainer extends Component {
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
 
-                    <ChapterHeader chapter={this.state.chapter}
-                                   loaded={this.state.loaded}
-                                   book={this.state.book.name}
-                                   language={this.state.language.name}
-                                   onClickSave={this.onClickSave.bind(this)}
-                                   deleteComment={this.deleteComment.bind(this)}
-                                   chunks={this.state.chunks}
-                                   mode={this.state.mode}
-                    />
+                    {/*<ChapterHeader chapter={this.state.chapter}*/}
+                                   {/*loaded={this.state.loaded}*/}
+                                   {/*book={this.state.book.name}*/}
+                                   {/*language={this.state.language.name}*/}
+                                   {/*onClickSave={this.onClickSave.bind(this)}*/}
+                                   {/*deleteComment={this.deleteComment.bind(this)}*/}
+                                   {/*chunks={this.state.chunks}*/}
+                                   {/*mode={this.state.mode}*/}
+                    {/*/>*/}
+
+                    <ChapterHeader  book={this.state.book.name}
+                                    chapter={this.state.chapter}
+                                    language={this.state.language.name}
+                                    chunks={this.state.chunks}
+                                    mode={this.state.mode}
+                                    onClickSave={this.onClickSave.bind(this)}
+                                    deleteComment={this.deleteComment.bind(this)}/>
+                    <MarkAsDone chapter={this.state.chapter}
+                                chunks={this.state.chunks}
+                                mode={this.state.mode}/>
 
                     {this.state.chunks.map(this.createChunkList.bind(this))}
                 </LoadingDisplay>
