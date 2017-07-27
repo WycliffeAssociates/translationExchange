@@ -11,6 +11,7 @@ import {Button, Divider} from "semantic-ui-react";
 import Grid from "semantic-ui-react/dist/es/collections/Grid/Grid";
 import Icon from "semantic-ui-react/dist/es/elements/Icon/Icon";
 import PinkButton from "./components/comments/PinkButton";
+import ChapterHeader from "./components/ChapterHeader";
 
 let onClick;
 
@@ -251,33 +252,13 @@ class ChapterContainer extends Component {
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
-                    <div className="headerStyle">
-
-
-                        <Grid padded columns={2} >
-                        <Grid.Column width={11} style={{paddingTop: 23}}>
-                            {this.state.book.name} Chapter {query.chapter} ({this.state.language.name})
-                        </Grid.Column>
-
-                        <Grid.Column width={5} className="verticalLine">
-
-                            <Button icon color="black" onClick={()=> alert("compile and publish")}>
-                                <Icon color="white" name="sidebar"/>
-                            </Button>
-
-                            <Button style={{marginLeft: 5, marginRight: 7}} icon color="black" onClick={()=> alert("source audio")}>
-                                <Icon color="white" name="als"/>
-                            </Button>
-
-                            <PinkButton comments={this.state.chapter.comments}
-                                        onClickSave={this.onClickSave.bind(this)}
-                                        id={this.state.chapter.id}
-                                        type={"chapter"}
-                                        deleteComment={this.deleteComment.bind(this)}/>
-
-                        </Grid.Column>
-                    </Grid>
-                    </div>
+                    <ChapterHeader  book={this.state.book.name}
+                                    number={this.state.chapter.number}
+                                    language={this.state.language.name}
+                                    comments={this.state.chapter.comments}
+                                    onClickSave={this.onClickSave.bind(this)}
+                                    id={this.state.chapter.id}
+                                    deleteComment={this.deleteComment.bind(this)}/>
                     <MarkAsDone chapter={this.state.chapter}
                                 chunks={this.state.chunks}
                                 mode={this.state.mode}/>
