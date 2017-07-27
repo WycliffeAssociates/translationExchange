@@ -6,7 +6,6 @@ import axios from 'axios';
 import config from 'config/config'
 import QueryString from 'query-string';
 import LoadingDisplay from "js/components/LoadingDisplay";
-import CheckingLevel from './components/CheckingLevel'
 import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
 import PublishButton from "./components/PublishButton";
@@ -251,14 +250,17 @@ class ProjectContainer extends Component {
                     <LoadingDisplay loaded={this.state.loaded}
                                     error={this.state.error}
                                     retry={this.getChapterData.bind(this)}>
-                        <Header as='h1'>{this.state.book.name} ({this.state.language.name})
-                        <PublishButton
+
+                        <Header as='h1' >{this.state.book.name} ({this.state.language.name})
+
+
+                            <PublishButton
                             chapters={this.state.chapters}
                             isPublish={this.state.is_publish}
                             onPublish={this.publishFiles.bind(this)}
                         />
-
                         </Header>
+
 
                         <Table selectable fixed color="grey">
                             <Table.Header>

@@ -64,15 +64,15 @@ class MarkAsDone extends Component {
     })
 
     render () {
-        let readyForExport = this.checkReadyForExport();
-        var ExportButton = <Button onClick={this.handleOpen} color={this.state.color} disabled={!readyForExport} content="Compile" icon="bars" floated="right" labelPosition="right"/>
+        let readyForExport = true; //this.checkReadyForExport();
+        var ExportButton = <Button onClick={this.handleOpen} color={this.state.color} disabled={!readyForExport} content="Mark Chapter as Done" icon="share" floated="right" labelPosition="right"/>
 
         return (
             <Modal trigger={ExportButton}
                    open={this.state.modalOpen}
                    onClose={this.handleClose}
                    closeIcon="close">
-                <Modal.Header>You are ready to mark Chapter {this.props.chapter} as finished!</Modal.Header>
+                <Modal.Header>You are ready to mark Chapter {this.props.chapter.number} as finished!</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
                         <p>Here is a preview of the takes you have selected to export. This may take a few seconds to
@@ -96,9 +96,8 @@ class MarkAsDone extends Component {
 
 MarkAsDone.propTypes = {
     chapter: PropTypes.number.isRequired,
-    book: PropTypes.string.isRequired,
-    language: PropTypes.string.isRequired,
-    chunks: PropTypes.array.isRequired
+    chunks: PropTypes.array.isRequired,
+    mode: PropTypes.string.isRequired
 };
 
 export default MarkAsDone;

@@ -6,12 +6,14 @@ import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
-import {Container, Segment, Label, Sidebar, Grid} from 'semantic-ui-react'
-import Footer from './components/Footer'
-
+import MarkAsDone from "./components/MarkAsDone"
+import {Button, Divider} from "semantic-ui-react";
+import Grid from "semantic-ui-react/dist/es/collections/Grid/Grid";
+import Icon from "semantic-ui-react/dist/es/elements/Icon/Icon";
+import PinkButton from "./components/comments/PinkButton";
+import ChapterHeader from "./components/ChapterHeader";
 
 let onClick;
-// this is the page for one chapter
 
 class ChapterContainer extends Component {
 
@@ -61,7 +63,6 @@ class ChapterContainer extends Component {
     patchTake(takeId, patch, success) {
         axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch
         ).then((results) => {
-            console.log("patch take");
             console.dir(results.data);
             //find the take in state that this one corresponds to
             let updatedChunks = this.state.chunks.slice();
@@ -102,10 +103,54 @@ class ChapterContainer extends Component {
             this.setState({
                 chunks: updatedChunks
             });
+            if (success) {
+                success();
+            }
         });
     }
 
-    // CHANGE THIS FUNCTION TO UPDATE STATE. also should probably disable save button/hide player
+    deleteComment(type, commentid, takeid) {
+        axios.delete('http://172.19.145.91/api/comments/' + commentid + '/'
+        ).then((results) => {
+            let updatedChunks = this.state.chunks.slice();
+            if (type === "take") {
+                let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+                    return chunk.takes.find(take => take.take.id === takeid)
+                });
+                let takeToUpdate = updatedChunks[chunkToUpdate].takes
+                    .findIndex(take => take.take.id === takeid);
+
+                updatedChunks[chunkToUpdate].takes[takeToUpdate].comments =
+                    updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.filter(comment => comment.comment.id !== commentid);
+                this.setState({
+                    chunks: updatedChunks
+                });
+            }
+
+            else if (type === "chunk") {
+                for (var i = 0; i < updatedChunks.length; i++) {
+                    if (updatedChunks[i].id === takeid) {
+                        var chunkToUpdate = i;
+                    }
+                }
+                updatedChunks[chunkToUpdate].comments = updatedChunks[chunkToUpdate].comments.filter(comment => comment.comment.id !== commentid);
+                this.setState({
+                    chunks: updatedChunks
+                });
+
+            }
+            else if (type === "chapter") {
+                let updatedChapter = Object.assign({}, this.state.chapter);
+
+                updatedChapter.comments = updatedChapter.comments.filter(comment => comment.comment.id !== commentid);
+                this.setState({
+                    chapter: updatedChapter
+                });
+            }
+
+        })
+    }
+
     onClickSave(blobx, type, id) {
         axios.post(config.apiUrl + 'comments/', {
             "comment": blobx,
@@ -114,22 +159,44 @@ class ChapterContainer extends Component {
             "type": type
 
         }).then((results) => {
-            var map = {"comment":results.data};
+            var map = {"comment": results.data};
             let updatedChunks = this.state.chunks.slice();
-            let chunkToUpdate = updatedChunks.findIndex((chunk) => {
-                return chunk.takes.find(take => take.take.id === id)
-            });
-            let takeToUpdate = updatedChunks[chunkToUpdate].takes
-                .findIndex(take => take.take.id === id);
-            updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.push(map);
-            this.setState({
-                chunks: updatedChunks
-            });
+
+            if (type === "take") {
+                let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+                    return chunk.takes.find(take => take.take.id === id)
+                });
+                let takeToUpdate = updatedChunks[chunkToUpdate].takes
+                    .findIndex(take => take.take.id === id);
+                updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.push(map);
+                this.setState({
+                    chunks: updatedChunks
+                });
+            }
+            else if (type === "chunk") {
+
+                for (var i = 0; i < updatedChunks.length; i++) {
+                    if (updatedChunks[i].id === id) {
+                        var chunkToUpdate = i;
+                    }
+                }
+                updatedChunks[chunkToUpdate].comments.push(map);
+                this.setState({
+                    chunks: updatedChunks
+                });
+            }
+
+            else {
+                let updatedChapter = Object.assign({}, this.state.chapter);
+                updatedChapter.comments.push(map);
+                this.setState({
+                    chapter: updatedChapter
+                });
+
+            }
 
         });
     }
-
-    // CHANGE THIS FUNCTION TO UPDATE STATE
 
     updateChosenTakeForChunk(takeId) {
         let updatedChunk = this.state.chunks.find((chunk) => {
@@ -172,43 +239,33 @@ class ChapterContainer extends Component {
         this.setState({listenList: newArr})
     }
 
-    createListenPlaylist() {
-
-        if (this.state.listenList.length > 0) {
-            var playlist = [];
-            this.state.listenList.map((i) => {
-                playlist[playlist.length] = {
-                    "src": config.streamingUrl + i.props.take.location,
-                    "name": this.state.mode + ' ' + i.chunk.startv + ' (' + (playlist.length + 1) + '/' + this.state.listenList.length + ')'
-                }
-            })
-            return playlist
-        }
-
-        else {return[{"src":"a"}]}
-
-    }
-
     /*
      Rendering functions
      */
     render() {
-
         var query = QueryString.parse(this.props.location.search);
-        this.state.query = query;
 
+        this.state.query = query;
         return (
             <div>
 
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
-
-                    <h1>Chapter {query.chapter} </h1>
-
+                    <ChapterHeader  book={this.state.book.name}
+                                    number={this.state.chapter.number}
+                                    language={this.state.language.name}
+                                    comments={this.state.chapter.comments}
+                                    onClickSave={this.onClickSave.bind(this)}
+                                    id={this.state.chapter.id}
+                                    deleteComment={this.deleteComment.bind(this)}/>
+                    <MarkAsDone chapter={this.state.chapter}
+                                chunks={this.state.chunks}
+                                mode={this.state.mode}/>
                     {this.state.chunks.map(this.createChunkList.bind(this))}
-
                 </LoadingDisplay>
+
+
             </div>
         );
     }
@@ -217,6 +274,7 @@ class ChapterContainer extends Component {
         return (
             <div>
                 <ChunkList
+                    comments={chunk.comments}
                     segments={chunk.takes} // array of takes
                     mode={this.state.mode}
                     number={chunk.startv}
@@ -225,13 +283,15 @@ class ChapterContainer extends Component {
                     deleteTake={this.deleteTake.bind(this)}
                     updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
                     onClickSave={this.onClickSave.bind(this)}
+                    id={chunk.id}
+                    deleteComment={this.deleteComment.bind(this)}
                     loaded={this.state.loaded}
                     chapter={this.state.query.chapter}
                     book={this.state.book.name}
                     language={this.state.language.name}
                     chunks={this.state.chunks}
                     listenList={this.state.listenList}
-                    // deleteComment={this.deleteComment.bind(this)}
+
                 />
             </div>
         );

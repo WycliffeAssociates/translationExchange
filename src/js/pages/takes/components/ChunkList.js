@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from "prop-types";
 import Chunk from "./Chunk";
 import ChunkPropTypes from "./ChunkPropTypes";
 
 class ChunkList extends Component {
 
-    render () {
+    render() {
 
         return (
             <div>
 
                 {
+
                 <Chunk
+                    comments={this.props.comments}
                     segments={this.props.segments} // array of takes
                     mode={this.props.mode}
                     number={this.props.number}
@@ -26,6 +28,8 @@ class ChunkList extends Component {
                     language={this.props.language}
                     chunks={this.props.chunks}
                     listenList={this.props.listenList}
+                    id={this.props.id}
+                    deleteComment={this.props.deleteComment}
                 />
                 }
 
@@ -35,9 +39,9 @@ class ChunkList extends Component {
 
 }
 /*
-ChunkList.propTypes = {
-    segments: PropTypes.arrayOf(ChunkPropTypes)
-};
-*/
+ ChunkList.propTypes = {
+ segments: PropTypes.arrayOf(ChunkPropTypes)
+ };
+ */
 
 export default ChunkList;
