@@ -1,17 +1,14 @@
 import React, {Component} from 'react';
-import ChunkList from "./components/ChunkList";
 import axios from 'axios';
 import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
+import ChapterHeader from "./components/ChapterHeader"
+import ChunkList from "./components/ChunkList"
+
 import MarkAsDone from "./components/MarkAsDone"
-import {Button, Divider} from "semantic-ui-react";
-import Grid from "semantic-ui-react/dist/es/collections/Grid/Grid";
-import Icon from "semantic-ui-react/dist/es/elements/Icon/Icon";
-import PinkButton from "./components/comments/PinkButton";
-import ChapterHeader from "./components/ChapterHeader";
 
 let onClick;
 
@@ -28,6 +25,8 @@ class ChapterContainer extends Component {
             chapter: {},
             language: {},
             mode: "",
+            selectedSourceProjectQuery: -1,
+            selectedSourceProject: {},
             listenList: [],
             query: ''
         };
@@ -213,6 +212,20 @@ class ChapterContainer extends Component {
         }
     }
 
+    setSourceProject(projectQuery) {
+        axios.post(config.apiUrl + 'get_project_takes/', {
+            ...projectQuery,
+            chapter: this.state.chapter.number
+        }).then((results) => {
+            this.setState(
+                {
+                    selectedSourceProjectQuery: projectQuery,
+                    selectedSourceProject: results.data
+                }
+            );
+        });
+    }
+
     addToListenList(props) {
 
         var newArr = this.state.listenList;
@@ -239,6 +252,13 @@ class ChapterContainer extends Component {
         this.setState({listenList: newArr})
     }
 
+    getSourceAudioLocationForChunk(startv) {
+        if (!this.state.selectedSourceProject ) { return undefined; }
+        let chunk = this.state.selectedSourceProject.chunks.find((chunk) => (chunk.startv === startv));
+        let take = chunk.takes.find((take) => (take.take.is_publish));
+        return take.take.location;
+    }
+
     /*
      Rendering functions
      */
@@ -252,19 +272,19 @@ class ChapterContainer extends Component {
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
+
                     <ChapterHeader  book={this.state.book.name}
-                                    number={this.state.chapter.number}
+                                    chapter={this.state.chapter}
                                     language={this.state.language.name}
-                                    comments={this.state.chapter.comments}
+                                    chunks={this.state.chunks}
+                                    mode={this.state.mode}
+                                    selectedSourceProject={this.state.selectedSourceProjectQuery}
                                     onClickSave={this.onClickSave.bind(this)}
-                                    id={this.state.chapter.id}
-                                    deleteComment={this.deleteComment.bind(this)}/>
-                    <MarkAsDone chapter={this.state.chapter}
-                                chunks={this.state.chunks}
-                                mode={this.state.mode}/>
+                                    deleteComment={this.deleteComment.bind(this)}
+                                    setSourceProject={this.setSourceProject.bind(this)}/>
+
                     {this.state.chunks.map(this.createChunkList.bind(this))}
                 </LoadingDisplay>
-
 
             </div>
         );
