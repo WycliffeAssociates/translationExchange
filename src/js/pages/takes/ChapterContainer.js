@@ -25,7 +25,7 @@ class ChapterContainer extends Component {
             chapter: {},
             language: {},
             mode: "",
-            selectedSourceProjectQuery: -1,
+            selectedSourceProjectId: -1,
             selectedSourceProject: {},
             listenList: [],
             query: '',
@@ -34,17 +34,24 @@ class ChapterContainer extends Component {
     }
 
     componentDidMount() {
-        this.requestData();
+        this.getInitialData();
+    }
+
+    getInitialData() {
+        //get chapter info, set an initial source project, and then set loaded to true
+        this.requestData()
+            .then(() => this.setSourceProject(8)) //hardcoded now, will later get from user preferences (?)
+            .then(() => this.setState({loaded: true}))
+            .catch((error) => this.setState({error: error}));
     }
 
     requestData() {
-        var query = QueryString.parse(this.props.location.search);
+        let query = QueryString.parse(this.props.location.search);
         this.setState({error: ""});
-        axios.post(config.apiUrl + 'get_project_takes/', query
+        return axios.post(config.apiUrl + 'get_project_takes/', query
         ).then((results) => {
             this.setState(
                 {
-                    loaded: true,
                     chunks: results.data.chunks,
                     project: results.data.project,
                     book: results.data.book,
@@ -52,7 +59,7 @@ class ChapterContainer extends Component {
                     language: results.data.language,
                     mode: results.data.project.mode,
                 }
-            )
+            );
         });
     }
 
@@ -213,14 +220,14 @@ class ChapterContainer extends Component {
         }
     }
 
-    setSourceProject(projectQuery) {
-        axios.post(config.apiUrl + 'get_project_takes/', {
-            ...projectQuery,
+    setSourceProject(projectId) {
+        return axios.post(config.apiUrl + 'get_project_takes/', {
+            project: projectId,
             chapter: this.state.chapter.number
         }).then((results) => {
             this.setState(
                 {
-                    selectedSourceProjectQuery: projectQuery,
+                    selectedSourceProjectId: projectId,
                     selectedSourceProject: results.data
                 }
             );
@@ -297,14 +304,14 @@ class ChapterContainer extends Component {
 
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
-                                retry={this.requestData.bind(this)}>
+                                retry={this.getInitialData.bind(this)}>
 
                     <ChapterHeader  book={this.state.book.name}
                                     chapter={this.state.chapter}
                                     language={this.state.language.name}
                                     chunks={this.state.chunks}
                                     mode={this.state.mode}
-                                    selectedSourceProject={this.state.selectedSourceProjectQuery}
+                                    selectedSourceProject={this.state.selectedSourceProjectId}
                                     onClickSave={this.onClickSave.bind(this)}
                                     deleteComment={this.deleteComment.bind(this)}
                                     setSourceProject={this.setSourceProject.bind(this)}/>
