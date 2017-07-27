@@ -10,6 +10,7 @@ import LoadingGif from 'images/loading-tiny.gif'
 import TakeExportButton from "./SelectTake";
 import ShowMarkers from './ShowMarkers';
 import 'css/takes.css'
+import SideBar from './SideBar'
 
 var listenCounter = 0
 class Take extends Component {
@@ -76,8 +77,6 @@ class Take extends Component {
             "src": config.streamingUrl + this.props.take.location
         };
 
-        var button = <Button content="lalala" />
-
         return (
 
             <div>
@@ -89,36 +88,36 @@ class Take extends Component {
                     <Segment>
                 <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate(this.props.take.date_modified)}</strong>
 
-
-                        {/*
-                        {this.props.ratingLoading
-                            ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
-                            : <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
-                        }
-                        */}
-
                 {<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>}
-                <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
+                <TakeListenButton onClick={ () =>
+                                      this.props.playTake(this.props.take.location,
+                                          this.props.chunkNumber,
+                                          this.props.author.name,
+                                          this.parseDate(this.props.take.date_modified))
+                                  }
+                />
+                {/*<TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>*/}
                 {/*<DeleteTake onDeleteTake={this.props.onDeleteTake}/>*/}
 
-                <ShowMarkers onClick = {this.showMarker} showMarkersColor={this.state.showMarkersColor} />
+                {/*<ShowMarkers onClick = {this.showMarker} showMarkersColor={this.state.showMarkersColor} />*/}
 
-                    {this.props.source
-                        ? <div>
-                            <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'
-                                    labelPosition='right'/>
-                            Language: {this.props.source.language.name}
-                        </div>
-                        : ""
+                    {/*{this.props.source*/}
+                        {/*? <div>*/}
+                            {/*<Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'*/}
+                                    {/*labelPosition='right'/>*/}
+                            {/*Language: {this.props.source.language.name}*/}
+                        {/*</div>*/}
+                        {/*: ""*/}
 
-                    }
+                    {/*}*/}
                     </Segment>
+
                     <Segment onClick={this.moveRight.bind(this)} className="hoverButton"> <Icon name="chevron right" /></Segment>
 
 
                 </Segment.Group>
 
-        </div>
+            </div>
 
         );
     }

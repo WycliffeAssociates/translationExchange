@@ -9,6 +9,7 @@ class User extends Component {
 
             <div>
                 This is the user page.
+
             </div>
 
         );

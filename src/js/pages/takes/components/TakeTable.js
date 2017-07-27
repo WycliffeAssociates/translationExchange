@@ -44,6 +44,7 @@ class TakeTable extends Component {
         );
     }
 
+
 }
 
 export default TakeTable;

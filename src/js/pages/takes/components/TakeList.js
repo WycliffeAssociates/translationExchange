@@ -26,12 +26,14 @@ class TakeList extends Component {
                     take={take} // one take
                     count={iterator}
                     source={take.source}
+                    chunkNumber={this.props.chunkNumber}
                     addToListenList={this.props.addToListenList}
                     patchTake={this.props.patchTake}
                     deleteTake={this.props.deleteTake}
                     updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                     onClickSave={this.props.onClickSave}
                     deleteComment={this.props.deleteComment}
+                    playTake={this.props.playTake}
                 />
             </div>
         );

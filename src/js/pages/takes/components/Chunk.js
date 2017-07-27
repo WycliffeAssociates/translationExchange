@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
-import TakeList from "./TakeList";
 import ChunkPropTypes from "./ChunkPropTypes";
 
 import {Accordion, Button, Icon, Container, Grid, Table} from "semantic-ui-react";
 import Footer from './Footer'
 import TakeTable from './TakeTable'
+import SideBar from './SideBar'
+import 'css/takes.css'
 import PinkButton from "./comments/PinkButton";
+import SourceAudioButton from "./SourceAudioButton"
 let onClick;
+let CommentContainer
 
 
 class Chunk extends Component {
@@ -23,6 +26,7 @@ class Chunk extends Component {
         var threestar = [];
 
         this.props.segments.map((i) => {
+
 
             if (i.take.is_publish) {
                 publish[publish.length] = i
@@ -137,6 +141,7 @@ class Chunk extends Component {
                             />
                         </Grid>
                     </Accordion.Content>
+
                 </Accordion>
 
             </div>
@@ -148,9 +153,16 @@ class Chunk extends Component {
 }
 
 /*
+Chunk.propTypes = {
+    chunk: ChunkPropTypes
+};
+
+ <SideBar className="commentBar"/>
+
+*/
  Chunk.propTypes = {
  chunk: ChunkPropTypes
  };
- */
+
 
 export default Chunk;

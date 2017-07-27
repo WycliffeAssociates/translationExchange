@@ -5,7 +5,6 @@ import {Button, Container, Grid, Header, Icon, Image, Modal, ModalHeader} from '
 import Audio from "translation-audio-player";
 import config from "../../../../../config/config";
 
-
 // NOTE: (dmarchuk)
 let onClickCancel;
 let onClickSave;

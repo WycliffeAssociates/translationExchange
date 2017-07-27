@@ -6,9 +6,8 @@ import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
 import ChapterHeader from "./components/ChapterHeader"
-import Chunk from './components/Chunk'
 import Footer from './components/Footer'
-import MarkAsDone from "./components/MarkAsDone"
+import Chunk from "./components/Chunk"
 
 let onClick;
 
@@ -28,7 +27,8 @@ class ChapterContainer extends Component {
             selectedSourceProjectQuery: -1,
             selectedSourceProject: {},
             listenList: [],
-            query: ''
+            query: '',
+            currentPlaylist: []
         };
     }
 
@@ -261,6 +261,29 @@ class ChapterContainer extends Component {
         return take.take.location;
     }
 
+    onSourceClicked(startv) {
+        let sourceLoc = this.getSourceAudioLocationForChunk(startv);
+
+        let playlist = [{
+            "src": config.streamingUrl + sourceLoc,
+            "name": this.state.mode + " " + startv + " (source)"
+        }];
+        this.setState({
+            currentPlaylist: playlist
+        });
+
+    }
+
+    playTake(takeLoc, startv, author, date) {
+        let playlist = [{
+            "src": config.streamingUrl + takeLoc,
+            "name": this.state.mode + " " + startv + " (" + author + " on " + date + ")"
+        }];
+        this.setState({
+            currentPlaylist: playlist
+        });
+    }
+
     /*
      Rendering functions
      */
@@ -288,15 +311,10 @@ class ChapterContainer extends Component {
 
                     {this.state.chunks.map(this.createChunkList.bind(this))}
 
-
                     <div fluid className="StickyFooter">
-                        <Footer loaded={this.state.loaded}
-                                chapter={this.state.query.chapter}
-                                book={this.state.book.name}
-                                language={this.state.language.name}
-                                chunks={this.state.chunks}
-                                mode={this.state.mode}
+                        <Footer mode={this.state.mode}
                                 listenList={this.state.listenList}
+                                currentPlaylist={this.state.currentPlaylist}
                         />
                     </div>
                 </LoadingDisplay>
@@ -337,6 +355,7 @@ class ChapterContainer extends Component {
 
 
             </div>
+
         );
 
     }
