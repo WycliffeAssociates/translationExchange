@@ -9,9 +9,8 @@ import LoadingDisplay from "js/components/LoadingDisplay";
 import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
 import PublishButton from "./components/PublishButton";
-// import FileDownload from 'react-file-download';
+import FileDownload from 'react-file-download';
 import FileSaver from 'file-saver'
-import JSZip from 'jszip'
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -142,100 +141,30 @@ class ProjectContainer extends Component {
         )
     }
 
-    saveFile() {
-        console.log("Is this gonna work?");
+    onDownloadProject() {
+        let zipFileName = this.state.language.slug + "_" + QueryString.parse(this.props.location.search).version + "_" + this.state.book.slug + ".zip"
+        this.setState({downloadLoading: true, downloadError: "", downloadSuccess: ""});
 
         let params = {
             language: this.state.language.slug,
             version: QueryString.parse(this.props.location.search).version,
             book: this.state.book.slug
         }
-
-        let filePath = 'C:/Users/wyatt/Downloads/en-x-demo2_ulb_mrk-WORKING.zip'
-
         // var file = new Blob([filePath.blob], {type: 'application/zip'}, true);
         // FileSaver.saveAs(file);
 
-        //Just wanna see if this thing can work like I hope it will...
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
-                console.log(download_results.data);
-
-                var zip = new JSZip();
-                zip.file("zip_data.zip", download_results.data);
-                zip.generateAsync({type:"uint8array"})
-                    .then(function(data) {
-                        FileSaver.saveAs(data, "example.zip");
-                    });
-
-            }).catch((exception) => {
-            this.setState({downloadError: exception});
-        }).catch((error) => {
-            this.setState({downloadLoading: false, downloadError: error});
-        });
-
-
-        // zip.file("Hello.txt", "Hello World\n");
-        // var img = zip.folder("images");
-        // img.file("smile.gif", imgData, {base64: true});
-        // zip.generateAsync({type:"blob"})
-        //     .then(function(content) {
-        //         // see FileSaver.js
-        //         saveAs(content, "example.zip");
-        //     });
-
-        // well this works
-        // var zip = new JSZip();
-        // zip.file("Example_File_In_ZIP.txt", "What the text?");
-        // zip.generateAsync({type:"blob"})
-        //     .then(function(blob) {
-        //         FileSaver.saveAs(blob, "example.zip");
-        //     });
-
-        // What does this do?
-        //bindEvent(blobLink, 'click', downloadWithBlob);
-
-        console.log("Did this work?");
-    }
-
-    onDownloadProject() {
-        let zipFileName = this.state.language.slug + "_" + QueryString.parse(this.props.location.search).version + "_" + this.state.book.slug + ".zip"
-        this.setState({downloadLoading: true, downloadError: ""});
-
-        let params = {
-            language: this.state.language.slug,
-            version: QueryString.parse(this.props.location.search).version,
-            book: this.state.book.slug
-        }
-
-        axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
-            .then((download_results) => {
-                //FileDownload(download_results.data, 'file.zip');
-
+                FileDownload(download_results.data, zipFileName);
                 this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
-                //Returns a corrupt file - The API returns an open-able file. Is it the Lib
-                var results = download_results.data;
-                console.log(download_results.data);
-                // return(download_results.data);
-                // console.log("returned");
-
-                // Lets test something - I pray this works
-                //var blob = new Blob([download_results.data], {type: 'application/zip'});
-                //FileSaver.saveAs(blob, zipFileName);
-
-
+                //console.log(download_results.data);
                 //this.saveFile("this data is sent");
-
-
             }).catch((exception) => {
                 this.setState({downloadError: exception});
             }).catch((error) => {
                 this.setState({downloadLoading: false, downloadError: error});
         });
     }
-
-
-
 
     componentDidMount() {
         this.getChapterData()
@@ -288,8 +217,8 @@ class ProjectContainer extends Component {
 
 
                     <DownloadProjects
-                        //onDownloadProject={this.onDownloadProject.bind(this)}
-                        saveFile={this.saveFile.bind(this)}
+                        onDownloadProject={this.onDownloadProject.bind(this)}
+                        //saveFile={this.saveFile.bind(this)}
                     />
 
                     {this.state.downloadLoading
