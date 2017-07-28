@@ -99,7 +99,7 @@ class Take extends Component {
                                 <Grid>
                                     <Grid.Column width={11} floated="left">
                                         <font size="3"><strong>Take {this.props.count} -  </strong></font>
-                                        <font size="3" color="grey"> {this.props.author.name}</font>
+                                        <font size="2" color="grey"> {this.props.author.name}</font>
                                     </Grid.Column>
                                     <Grid.Column floated="right">
                                         <StitchTakesButton onClick={this.addToListen.bind(this)} size="huge" color="blue"/>
@@ -139,63 +139,6 @@ class Take extends Component {
 
                     </Grid.Row>
                 </Grid>
-
-                {/*
-                <Segment.Group horizontal textAlign="left"  >
-                    {this.props.take.rating > 1
-                        ? <Segment className="hoverButton" onClick={this.moveLeft.bind(this)}>
-                            <Icon name="chevron left" />
-                        </Segment>
-                        : <Segment className="hoverButton" onClick={this.props.onDeleteTake}>
-                            <Icon name="trash" color="red" />
-                        </Segment>
-                    }
-
-                    <Segment compact vertical textAlign="left">
-                        <Segment vertical>
-                            <Grid columns={2}>
-                                <Grid.Column>
-                                    <font size="4"><strong>{this.props.author.name} Take {this.props.count}</strong></font>
-                                </Grid.Column>
-                                <Grid.Column textAlign="right">
-                                    <StitchTakesButton onClick={this.addToListen.bind(this)} color="blue"/>
-                                </Grid.Column>
-                            </Grid>
-                        {this.parseDate(this.props.take.date_modified)}
-                        </Segment>
-
-                        <Segment vertical textAlign="center">
-                            <TakeListenButton onClick={ () =>
-                                          this.props.playTake(this.props.take.location,
-                                              this.props.chunkNumber,
-                                              this.props.author.name,
-                                              this.parseDate(this.props.take.date_modified))
-
-                                      }
-                            />
-                        </Segment>
-
-                        <Segment vertical className="nopadding">
-                            <TakeCommentsButton  take={this.props.take}
-                                                 comments={this.props.comments}
-                                                 onClickSave={this.props.onClickSave}
-                                                 deleteComment={this.props.deleteComment}
-                            />
-                        </Segment>
-
-                    </Segment>
-
-
-
-                    {this.props.take.is_publish
-                        ? ""
-                        : <Segment onClick={this.moveRight.bind(this)} className="hoverButton">
-                            <Icon name="chevron right"/>
-                        </Segment>
-                    }
-
-                </Segment.Group>
-                */}
 
             </Segment>
 

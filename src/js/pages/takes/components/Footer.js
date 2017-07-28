@@ -53,9 +53,9 @@ class Footer extends Component {
 
         this.createArray()
         return (
-            <div>
-                <Container fluid className="blackBar" />
-                <Menu compact secondary>
+
+            <div className="footerStyle">
+                <Menu inverted compact secondary>
                     {this.props.currentPlaylist.length > 0
                         ? <Menu.Item>
                             <Card fluid>
