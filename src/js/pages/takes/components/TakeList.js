@@ -8,7 +8,6 @@ class TakeList extends Component {
 
     render () {
 
-        iterator = 0;
         return (
             <div>
                 {this.props.takes.map(this.createListItem.bind(this))}
@@ -18,13 +17,12 @@ class TakeList extends Component {
     }
 
     createListItem (take) {
-        iterator += 1;
 
         return (
             <div>
                 <TakeContainer
                     take={take} // one take
-                    count={iterator}
+                    count={take.order}
                     source={take.source}
                     chunkNumber={this.props.chunkNumber}
                     addToListenList={this.props.addToListenList}
@@ -34,6 +32,8 @@ class TakeList extends Component {
                     onClickSave={this.props.onClickSave}
                     deleteComment={this.props.deleteComment}
                     playTake={this.props.playTake}
+                    mode={this.props.mode}
+
                 />
             </div>
         );
