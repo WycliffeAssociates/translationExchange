@@ -125,7 +125,7 @@ class PinkButton extends Component {
                     ref={audioComponent => {
                         this.audioComponent = audioComponent;
                     }}
-                    icon="microphone"
+                    icon="comment outline"
                     onClick={this.showModal}/>}
             >
                 <Modal.Header style={this.Style}>Comments</Modal.Header>
