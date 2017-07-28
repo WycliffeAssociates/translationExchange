@@ -82,6 +82,10 @@ class Chunk extends Component {
                             <Icon name='dropdown' />
                             <font color="black">
                             {modeLabel} {this.props.number}
+                            {this.props.comments.length > 0
+                                ? <Icon name="circle" color="yellow"/>
+                                : ""
+                            }
                             </font>
                         </center>
 
@@ -104,6 +108,7 @@ class Chunk extends Component {
                                         playTake={this.props.playTake}
                                         chunkNumber={this.props.number}
                                         deleteComment={this.props.deleteComment}
+                                        deleteButton={true}
                                         active={this.props.active}
                                     />
                                     <TakeTable

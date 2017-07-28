@@ -96,11 +96,6 @@ class ChapterContainer extends Component {
             updatedChunks[chunkToUpdate].takes =
                 updatedChunks[chunkToUpdate].takes.filter(take => take.take.id !== takeId);
 
-            //if the chunk now has no takes, remove it from state
-            if (!(updatedChunks[chunkToUpdate].takes.length > 0)) {
-                updatedChunks.splice(chunkToUpdate, 1);
-            }
-
             this.setState({
                 chunks: updatedChunks
             });
@@ -310,10 +305,10 @@ class ChapterContainer extends Component {
 
     }
 
-    playTake(takeLoc, startv, author, date) {
+    playTake(takeLoc, takeNum, startv, author, date) {
         let playlist = [{
             "src": config.streamingUrl + takeLoc,
-            "name": this.state.mode + " " + startv + " (" + author + " on " + date + ")"
+            "name": "take " + takeNum + ", " + this.state.mode + " " + startv + " (" + author + " on " + date + ")"
         }];
         this.setState({
             currentPlaylist: playlist

@@ -51,7 +51,9 @@ class Take extends Component {
     }
 
     moveRight() {
-        if (this.props.take.rating < 3) {
+        if (this.props.take.rating < 1) {
+            this.props.onRatingSet(2);
+        } else if (this.props.take.rating < 3) {
             this.props.onRatingSet(this.props.take.rating + 1)
         } else {
             this.props.onMarkedForExportToggled();
@@ -77,7 +79,7 @@ class Take extends Component {
                         <Grid.Column verticalAlign="middle">
                             {this.props.take.rating > 1
                                 ? <Icon className="hoverButton" name="chevron left" onClick={this.moveLeft.bind(this)}/>
-                                : <Icon className="hoverButton" name="trash" color="red" onClick={this.props.onDeleteTake}/>
+                                : ""
                             }
                         </Grid.Column>
 
@@ -102,6 +104,7 @@ class Take extends Component {
                                 <br />
                                 <TakeListenButton onClick={ () =>
                                     this.props.playTake(this.props.take.location,
+                                        this.props.count,
                                         this.props.chunkNumber,
                                         this.props.author.name,
                                         this.parseDate(this.props.take.date_modified))
