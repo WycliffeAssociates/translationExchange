@@ -9,6 +9,7 @@ import LoadingDisplay from "js/components/LoadingDisplay";
 import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
 import PublishButton from "./components/PublishButton";
+import DownloadTR from "./components/DownloadTR"
 
 
 class ProjectContainer extends Component {
@@ -95,7 +96,7 @@ class ProjectContainer extends Component {
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
 
-                window.open(config.streamingUrl + download_results.data.location);
+                window.location = config.streamingUrl + download_results.data.location;
                 this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
 
             }).catch((exception) => {
@@ -121,12 +122,19 @@ class ProjectContainer extends Component {
 
                         <Header as='h1' >{this.state.book.name} ({this.state.language.name})
 
+                            <DownloadTR
+                                chapters={this.state.chapters}
+                                isPublish={this.state.is_publish}
+                                onPublish={this.publishFiles.bind(this)}
+                                project_id={this.state.project_id}
+                            />
 
                             <PublishButton
                             chapters={this.state.chapters}
                             isPublish={this.state.is_publish}
                             onPublish={this.publishFiles.bind(this)}
-                        />
+                            />
+
                         </Header>
 
 
