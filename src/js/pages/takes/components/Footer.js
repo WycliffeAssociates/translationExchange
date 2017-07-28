@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import MarkAsDone from "./MarkAsDone";
 import CommentContainer from "./comments/PinkButton"
-import {Menu, Container, Card, Button} from 'semantic-ui-react'
+import {Menu, Container, Card, Button, Icon, Label} from 'semantic-ui-react'
 import AudioComponent from "./AudioComponent"
 import config from 'config/config'
 import 'css/takes.css'
@@ -15,6 +15,9 @@ class Footer extends Component {
                 takeList[takeList.length] = i.mode + ' ' + i.chunk.startv + ' take ' + i.count
             })
             return takeList
+        }
+        else {
+            return []
         }
     }
 
@@ -31,7 +34,7 @@ class Footer extends Component {
             })
             return (
                 <Card fluid>
-                    <AudioComponent playlist={playlist} width={500}/>
+                    <AudioComponent playlist={playlist} width={700}/>
                 </Card>
             );
         }
@@ -51,6 +54,8 @@ class Footer extends Component {
 
     render () {
 
+        var icon = <Icon name="plus" size="huge" color="blue" onClick={this.onClick} />
+
         this.createArray()
         return (
 
@@ -65,13 +70,19 @@ class Footer extends Component {
                         : ""
                     }
 
+                    {/*
                     <Menu.Item>
                         {this.createListenPlaylist()}
                     </Menu.Item>
+                    */}
 
-                    <Menu.Item>
-                        <Button content="expand" icon="unhide" onClick={this.onClick} />
-                    </Menu.Item>
+                    {this.createArray().length > 0
+                        ? <Menu.Item>
+                            <Label pointing="right" size="huge" basic color="black">Click here to see your stitched takes</Label>
+                            <Button icon={icon} basic onClick={this.onClick}/>
+                        </Menu.Item>
+                        : ""
+                    }
                 </Menu>
             </div>
         );
