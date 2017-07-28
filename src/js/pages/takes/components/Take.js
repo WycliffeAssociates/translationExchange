@@ -107,7 +107,10 @@ class Take extends Component {
                             <TakeCommentsButton  take={this.props.take}
                                                  comments={this.props.comments}
                                                  onClickSave={this.props.onClickSave}
-                                                 deleteComment={this.props.deleteComment}/>
+                                                 deleteComment={this.props.deleteComment}
+                                                 loadingActive={this.props.active}
+
+                            />
                         </Segment>
 
 

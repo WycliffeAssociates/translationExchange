@@ -142,6 +142,7 @@ class TakeCommentsButton extends Component {
                                    type="take"
                                    id={this.props.take.id}
                                    onClickSave={this.props.onClickSave}
+                                   loadingActive={this.props.loadingActive}
 
                     />
 

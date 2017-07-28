@@ -1,9 +1,5 @@
 import React, {Component} from 'react';
 import TakePropTypes from "./components/TakePropTypes";
-import axios from 'axios';
-import config from "../../../config/config";
-import {Button, Grid, Segment} from "semantic-ui-react";
-import _ from 'lodash';
 import Take from "./components/Take";
 import SideBar from './components/SideBar'
 
@@ -58,6 +54,7 @@ class TakeContainer extends Component {
                   onClickSave={this.props.onClickSave}
                   deleteComment={this.props.deleteComment}
                   playTake={this.props.playTake}
+                  active={this.props.active}
 
             />
             //other events that require requesting the server would go here
