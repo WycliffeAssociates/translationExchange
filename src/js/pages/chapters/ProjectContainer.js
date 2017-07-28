@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import {Button, Container, Header, Table, Input, TextArea } from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
+import DownloadProjects from "./components/DownloadProjects";
 import axios from 'axios';
 import config from 'config/config'
 import QueryString from 'query-string';
 import LoadingDisplay from "js/components/LoadingDisplay";
+import LoadingGif from 'images/loading-tiny.gif'
+import 'css/chapters.css'
+import PublishButton from "./components/PublishButton";
+import DownloadTR from "./components/DownloadTR"
+
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -13,30 +19,37 @@ class ProjectContainer extends Component {
             chapters: [],
             book: {},
             language: {},
-            filesData : null,
+            project_id: -1,
+            is_publish: false,
+            filesData: null,
             loaded: false,
-            error: ""
+            error: "",
+            publishError: "",
+            downloadError: "",
+            downloadSuccess: "",
+            anthology: {},
+            downloadLoading: false,
+            version: {}
         };
-        this.getUploadedData = this.getUploadedData.bind(this);
-        this.handleFileChange = this.handleFileChange.bind(this);
     }
 
-    handleFileChange(event) {
-        this.setState({
-            filesData: event.target.value
-        })
-    }
-    getUploadedData(event) {
-        const context = this;
-        event.preventDefault();
-        axios.post({
-            method: 'POST',
-            url: 'http://localhost:3000/api/upload',
-            data: JSON.stringify(context.state.filesData),
-            success: function(data) {
-                console.log('This is the uploaded data', data);
-            }
-        })
+    publishFiles() {
+        let chapterID = this.state.project_id
+        let parameters = {
+            "is_publish": true
+        }
+
+        axios.patch(config.apiUrl + 'projects/' + chapterID +"/", parameters)
+            .then((response) => {
+                this.setState({is_publish: true})
+            }).catch((exception) => {
+            // TODO: modify for the error that occurs if the patch fails
+            this.setState({publishError: exception});
+        });
+}
+
+    setCheckingLevel(chapterId, level){
+        axios.patch(config.apiUrl + "chapters/" + chapterId + "/", {checked_level: level});
     }
 
     getChapterData() {
@@ -45,15 +58,15 @@ class ProjectContainer extends Component {
         this.setState({error: ""});
         axios.post(config.apiUrl + 'get_chapters/', query
         ).then((results) => {
-            console.dir(results.data.slice(0, results.data.length - 2));
-            console.dir(results.data[results.data.length - 2]);
-            console.dir(results.data[results.data.length - 1]);
             this.setState(
                 {
-                    chapters: results.data.slice(0, results.data.length - 2),
-                    book: results.data[results.data.length - 2].book[0],
-                    language: results.data[results.data.length - 1].lang[0],
-                    loaded: true
+                    chapters: results.data.chapters,
+                    book: results.data.book,
+                    project_id: results.data.project_id,
+                    is_publish: results.data.is_publish,
+                    language: results.data.language,
+                    loaded: true,
+                    version: results.data.version
                 }
             )
         }).catch((exception) => {
@@ -72,27 +85,66 @@ class ProjectContainer extends Component {
         )
     }
 
-    componentDidMount () {
+    // Minimal parameters saves on server query time
+    onDownloadProject() {
+        this.setState({downloadLoading: true, downloadError: "", downloadSuccess: ""});
+
+        let params = {
+            project: this.state.project_id
+        }
+
+        axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
+            .then((download_results) => {
+
+                window.open(config.streamingUrl + download_results.data.location);
+                this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
+
+            }).catch((exception) => {
+                this.setState({downloadError: exception});
+            }).catch((error) => {
+                this.setState({downloadLoading: false, downloadError: error});
+        });
+    }
+
+    componentDidMount() {
         this.getChapterData()
     }
 
     render () {
 
-
         return (
-            <div>
+            <div className="chapters">
                 <Container fluid>
 
                     <LoadingDisplay loaded={this.state.loaded}
                                     error={this.state.error}
                                     retry={this.getChapterData.bind(this)}>
-                        <Header as='h1'>{this.state.book.name} ({this.state.language.name})</Header>
-                        <Table selectable fixed color="blue">
+
+                        <Header as='h1' >{this.state.book.name} ({this.state.language.name})
+
+                            <DownloadTR
+                                chapters={this.state.chapters}
+                                isPublish={this.state.is_publish}
+                                onPublish={this.publishFiles.bind(this)}
+                                project_id={this.state.project_id}
+                            />
+
+                            <PublishButton
+                            chapters={this.state.chapters}
+                            isPublish={this.state.is_publish}
+                            onPublish={this.publishFiles.bind(this)}
+                            />
+
+                        </Header>
+
+
+                        <Table selectable fixed color="grey">
                             <Table.Header>
                                 <Table.Row>
                                     <Table.HeaderCell>Chapter</Table.HeaderCell>
                                     <Table.HeaderCell>Percent Complete</Table.HeaderCell>
                                     <Table.HeaderCell>Checking Level</Table.HeaderCell>
+                                    <Table.HeaderCell>Ready to Publish</Table.HeaderCell>
                                     <Table.HeaderCell>Contributors</Table.HeaderCell>
                                     <Table.HeaderCell>Translation Type</Table.HeaderCell>
                                     <Table.HeaderCell>Date Modified</Table.HeaderCell>
@@ -103,21 +155,32 @@ class ProjectContainer extends Component {
                                 chapters={this.state.chapters}
                                 version={QueryString.parse(this.props.location.search).version}
                                 navigateToChapter={this.navigateToChapter.bind(this)}
+                                setCheckingLevel={this.setCheckingLevel.bind(this)}
+                                projectIsPublish={this.state.is_publish}
                             />
                         </Table>
+
+                        <DownloadProjects
+                            onDownloadProject={this.onDownloadProject.bind(this)}
+                        />
+
+                        {this.state.downloadLoading
+                            ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                            : ""
+                        }
+                        {this.state.downloadError
+                            ? "There was an error. Please try again"
+                            : ""
+                        }
+
                     </LoadingDisplay>
 
                     <br></br>
 
-                    <form onSubmit={this.getUploadedData} method="post" encType="multipart/form-data">
-                        <h4>Upload source audio</h4>
-                        <Input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
-                        <Button type="submit">Submit</Button>
-                    </form>
-
                 </Container>
 
             </div>
+
         );
     }
 }

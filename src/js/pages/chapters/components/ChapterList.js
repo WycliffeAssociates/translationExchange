@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Redirect from "react-router-dom/es/Redirect";
 import CircularProgressbar from 'react-circular-progressbar'
-import {Table} from 'semantic-ui-react'
+import {Table, Icon} from 'semantic-ui-react'
 import 'css/chapters.css'
+import CheckingLevel from "./CheckingLevel"
+var bookTest;
 
 class ChapterList extends Component {
 
@@ -21,22 +22,46 @@ class ChapterList extends Component {
     createListItem (chapter) {
         return (
 
-            <Table.Row onClick={() => this.props.navigateToChapter(chapter.chapter)}>
+                <Table.Row onClick={() => this.props.navigateToChapter(chapter.chapter)} >
 
             <Table.Cell>{chapter.chapter}</Table.Cell>
             <Table.Cell><CircularProgressbar strokeWidth="20" percentage={chapter.percent_complete}/></Table.Cell>
-            <Table.Cell>{chapter.checked_level}</Table.Cell>
-                <Table.Cell>{chapter.contributors}</Table.Cell>
+            <Table.Cell className="dont-hide-overflow">
+                {/*only allow checking level to be set if project is published*/}
+                {this.props.projectIsPublish
+                    ? <CheckingLevel num={chapter.checked_level}
+                                     setCheckingLevel={this.props.setCheckingLevel}
+                                     chapterId={chapter.id}
+                      />
+                    : chapter.checked_level
+                }
+
+            </Table.Cell>
+                    <Table.Cell>
+                        {chapter.is_publish
+                            ? <Icon name="checkmark" color="green"/>
+                            : <Icon name="remove"/>
+                        }
+                    </Table.Cell>
+                    <Table.Cell>{this.getContributorText(chapter.contributors)}</Table.Cell>
                 <Table.Cell>{this.props.version}</Table.Cell>
-                <Table.Cell>{this.parseDate(chapter.timestamp)}</Table.Cell>
+                <Table.Cell>{this.parseDate(chapter.date_modified)}</Table.Cell>
             </Table.Row>
 
         );
     }
 
-
+    getContributorText (contributors) {
+        let contribText = "";
+        for (let i = 0; i < contributors.length - 1; i++) {
+            contribText += contributors[i] + ", ";
+        }
+        contribText += contributors[contributors.length - 1];
+        return contribText;
+    }
 
     parseDate(date) {
+
         var noon = 'am';
         var dateArr = date.split('T');
         var date = dateArr[0]
@@ -84,6 +109,9 @@ class ChapterList extends Component {
 }
 
 ChapterList.propTypes = {
+    book: PropTypes.arrayOf(PropTypes.shape()),
+    language: PropTypes.arrayOf(PropTypes.shape()),
+    version: PropTypes.arrayOf(PropTypes.shape()),
     chapters: PropTypes.arrayOf(PropTypes.shape({
         number: PropTypes.number.isRequired,
         percentFinished: PropTypes.number.isRequired,

@@ -11,11 +11,11 @@
      *
      * If you're not using "display: flex", you can remove this style.
      */
-    width:15%;
+    width:50px;
 }
 
 .CircularProgressbar .CircularProgressbar-path {
-    stroke: #3e98c7;
+    stroke: orange;
     stroke-linecap: square;
     transition: stroke-dashoffset 0.5s ease 0s;
 }
@@ -25,8 +25,24 @@
 }
 
 .CircularProgressbar .CircularProgressbar-text {
-    fill: #3e98c7;
+    fill: orange;
     font-size: 20px;
     dominant-baseline: central;
     text-anchor: middle;
+}
+
+.ui.fixed.table td.dont-hide-overflow {
+    overflow: visible;
+}
+
+.chapters {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.bookHeader {
+    background-color: black;
+    width:40%;
+    color: white;
+
 }

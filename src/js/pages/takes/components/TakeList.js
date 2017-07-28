@@ -5,6 +5,7 @@ import TakePropTypes from "./TakePropTypes";
 
 var iterator;
 class TakeList extends Component {
+
     render () {
 
         iterator = 0;
@@ -24,9 +25,15 @@ class TakeList extends Component {
                 <TakeContainer
                     take={take} // one take
                     count={iterator}
-                    updateTakeToExport={this.props.updateTakeToExport}
-                    updateTakeInState={this.props.updateTakeInState}
                     source={take.source}
+                    chunkNumber={this.props.chunkNumber}
+                    addToListenList={this.props.addToListenList}
+                    patchTake={this.props.patchTake}
+                    deleteTake={this.props.deleteTake}
+                    updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                    onClickSave={this.props.onClickSave}
+                    deleteComment={this.props.deleteComment}
+                    playTake={this.props.playTake}
                 />
             </div>
         );

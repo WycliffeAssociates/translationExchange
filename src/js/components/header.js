@@ -1,69 +1,73 @@
 import React, { Component } from 'react';
-import {Menu, state, handleItemClick} from "semantic-ui-react";
+import {Menu, state, handleItemClick, Container, Image, Icon} from "semantic-ui-react";
 import {Link} from "react-router-dom";
-import * as ReactDOM from "react-dom";
+import 'css/home.css'
+import combinedShape from 'images/combined-shape.png'
+import user from 'images/user.png'
+import dots from 'images/dots.png'
 
 
 class Header extends Component {
     state = { activeItem: 'home' };
+
 
     handleItemClick = (e, { name }) => {
         this.setState({ activeItem: name });
 
     }
 
-
     render() {
-        // return (
-        //     <div>
-        //         <Navbar inverse collapseOnSelect>
-        //             <Navbar.Header>
-        //                 <Navbar.Brand>
-        //                     <LinkContainer to="/">
-        //                         <a>Translation Manager</a>
-        //                     </LinkContainer>
-        //                 </Navbar.Brand>
-        //                 <Navbar.Toggle />
-        //             </Navbar.Header>
-        //             <Navbar.Collapse>
-        //
-        //                 <Nav pullRight>
-        //                     <LinkContainer to="/about/">
-        //                         <NavItem eventKey={1}>About</NavItem>
-        //                     </LinkContainer>
-        //
-        //                     <LinkContainer to="/projects/">
-        //                         <NavItem eventKey={2}>Projects</NavItem>
-        //                     </LinkContainer>
-        //
-        //                 </Nav>
-        //
-        //
-        //             </Navbar.Collapse>
-        //         </Navbar>
-        //
-        //
-        //
-        //
-        //     </div>
-        // );
+
+
+        var logo = <Image src={combinedShape} size="tiny"/>
+        var text = <h1><font color="#A8A8A8">Terra</font></h1>
 
         const { activeItem } = this.state;
 
         return (
-            <Menu inverted size='large'>
-                <Link to="/">
-                <Menu.Item name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
-                </Link>
 
-                <Link to="/about">
-                <Menu.Item  name='About' active={activeItem === 'About'} onClick={this.handleItemClick} />
-                </Link>
+            <div>
 
-                <Link to="/projects">
-                    <Menu.Item  name='Projects' active={activeItem === 'Projects'} onClick={this.handleItemClick} />
-                </Link>
-            </Menu>
+                <Menu fluid secondary size='huge' compact >
+
+                    <Menu.Item position="left">
+                        <Link to="/">
+                        <Menu.Item>
+                            <Image src={dots} width="120" height="30"/>
+                        </Menu.Item>
+                        </Link>
+                        <Link to="/">
+                        <Menu.Item content={text} />
+                        </Link>
+                    </Menu.Item>
+
+
+                    <Menu.Item position="right">
+                        <Link to="/">
+                            <Menu.Item position="right" name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
+                        </Link>
+
+                        <Link to="/about">
+                            <Menu.Item  name='About' active={activeItem === 'About'} onClick={this.handleItemClick} />
+                        </Link>
+
+                        <Link to="/projects">
+                            <Menu.Item  name='Projects' active={activeItem === 'Projects'} onClick={this.handleItemClick} />
+                        </Link>
+
+                        <Link to="/user">
+                            <Menu.Item>
+                                <Image src={user} size="mini"/>
+                            </Menu.Item>
+                        </Link>
+                    </Menu.Item>
+
+                </Menu>
+
+                <Container className="redBar" fluid></Container>
+            </div>
+
+
         )
     }
 }
