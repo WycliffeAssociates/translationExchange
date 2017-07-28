@@ -20,24 +20,24 @@ class Take extends Component {
         this.state = {isToggleOn: true, addButtonColor: "", showMarkers: false, showMarkersColor: ""}
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
-        this.showMarker = this.showMarker.bind(this);
+        // this.showMarker = this.showMarker.bind(this);
     }
 
     handleClick() {
         this.setState({isToggleOn: !this.state.isToggleOn});
     }
 
-    showMarker() {
-
-        if (!this.state.showMarkers) {
-            this.setState({showMarkersColor: 'yellow', showMarkers: true});
-            console.log('here', this.state.showMarkers);
-
-        } else {
-            this.setState({showMarkersColor: '', showMarkers: false});
-        }
-
-    }
+    // showMarker() {
+    //
+    //     if (!this.state.showMarkers) {
+    //         this.setState({showMarkersColor: 'yellow', showMarkers: true});
+    //         console.log('here', this.state.showMarkers);
+    //
+    //     } else {
+    //         this.setState({showMarkersColor: '', showMarkers: false});
+    //     }
+    //
+    // }
 
     addToListen() {
         this.props.addToListenList(this.props);
@@ -59,13 +59,19 @@ class Take extends Component {
     }
 
     moveLeft () {
-        //alert(this.props.take.rating)
-        //alert('I wish to move this card')
-        this.props.onRatingSet(this.props.take.rating-1)
+        if (this.props.take.is_publish) {
+            this.props.onMarkedForExportToggled();
+        } else if (this.props.take.rating > 1) {
+            this.props.onRatingSet(this.props.take.rating - 1)
+        }
     }
 
     moveRight() {
-        this.props.onRatingSet(this.props.take.rating+1)
+        if (this.props.take.rating < 3) {
+            this.props.onRatingSet(this.props.take.rating + 1)
+        } else {
+            this.props.onMarkedForExportToggled();
+        }
     }
 
 
@@ -83,12 +89,15 @@ class Take extends Component {
 
 
                 <Segment.Group horizontal textAlign="center"  >
-                    <Segment className="hoverButton" onClick={this.moveLeft.bind(this)}> <Icon name="chevron left" /></Segment>
+                    {this.props.take.rating > 1
+                        ? <Segment className="hoverButton" onClick={this.moveLeft.bind(this)}> <Icon name="chevron left" /></Segment>
+                        : ""
+                    }
 
                     <Segment>
-                <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate(this.props.take.date_modified)}</strong>
+                <strong><font color="blue">{this.props.author.name}</font> on {this.parseDate(this.props.take.date_modified)}</strong>
 
-                {<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>}
+                {/*{<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>}*/}
                 <TakeListenButton onClick={ () =>
                                       this.props.playTake(this.props.take.location,
                                           this.props.chunkNumber,
@@ -112,8 +121,10 @@ class Take extends Component {
                     {/*}*/}
                     </Segment>
 
-                    <Segment onClick={this.moveRight.bind(this)} className="hoverButton"> <Icon name="chevron right" /></Segment>
-
+                    {this.props.take.is_publish
+                        ? ""
+                        : <Segment onClick={this.moveRight.bind(this)} className="hoverButton"> <Icon name="chevron right" /></Segment>
+                    }
 
                 </Segment.Group>
 

@@ -6,7 +6,6 @@ import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
 import 'css/takes.css'
 import ChapterHeader from "./components/ChapterHeader"
-
 import Footer from './components/Footer'
 import Chunk from "./components/Chunk"
 
@@ -289,6 +288,7 @@ class ChapterContainer extends Component {
      Rendering functions
      */
     render() {
+
         var query = QueryString.parse(this.props.location.search);
 
         this.state.query = query;
@@ -308,7 +308,8 @@ class ChapterContainer extends Component {
                                     onClickSave={this.onClickSave.bind(this)}
                                     deleteComment={this.deleteComment.bind(this)}
                                     setSourceProject={this.setSourceProject.bind(this)}/>
-                    {this.state.chunks.map(this.createChunk.bind(this))}
+
+                    {this.state.chunks.map(this.createChunkList.bind(this))}
 
                     <div fluid className="StickyFooter">
                         <Footer mode={this.state.mode}
@@ -322,29 +323,41 @@ class ChapterContainer extends Component {
         );
     }
 
-    createChunk(chunk) {
+    createChunkList(chunk) {
+
+        /*
+        segments is an array of takes for each chunk
+         */
         return (
-            <Chunk
-                comments={chunk.comments}
-                segments={chunk.takes} // array of takes
-                mode={this.state.mode}
-                number={chunk.startv}
-                addToListenList={this.addToListenList.bind(this)}
-                patchTake={this.patchTake.bind(this)}
-                deleteTake={this.deleteTake.bind(this)}
-                updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
-                onClickSave={this.onClickSave.bind(this)}
-                playTake={this.playTake.bind(this)}
-                loaded={this.state.loaded}
-                chapter={this.state.query.chapter}
-                book={this.state.book.name}
-                language={this.state.language.name}
-                chunks={this.state.chunks}
-                listenList={this.state.listenList}
-                id={chunk.id}
-                deleteComment={this.deleteComment.bind(this)}
-                onSourceClicked={this.onSourceClicked.bind(this)}
-            />
+            <div>
+
+                <Chunk
+                    comments={chunk.comments}
+                    segments={chunk.takes} // array of takes
+                    mode={this.state.mode}
+                    number={chunk.startv}
+                    addToListenList={this.addToListenList.bind(this)}
+                    patchTake={this.patchTake.bind(this)}
+                    deleteTake={this.deleteTake.bind(this)}
+                    updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
+                    onClickSave={this.onClickSave.bind(this)}
+                    id={chunk.id}
+                    deleteComment={this.deleteComment.bind(this)}
+                    loaded={this.state.loaded}
+                    chapter={this.state.query.chapter}
+                    book={this.state.book.name}
+                    language={this.state.language.name}
+                    chunks={this.state.chunks}
+                    listenList={this.state.listenList}
+                    playTake={this.playTake.bind(this)}
+                    onSourceClicked={this.onSourceClicked.bind(this)}
+                />
+
+
+
+
+            </div>
+
         );
 
     }
