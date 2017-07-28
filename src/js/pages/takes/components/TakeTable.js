@@ -8,7 +8,6 @@ class TakeTable extends Component {
 
     render () {
 
-        iterator = 0;
         return (
             <Grid.Column>
                 <Table textAlign="center">

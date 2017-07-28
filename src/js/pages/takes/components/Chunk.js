@@ -19,8 +19,12 @@ class Chunk extends Component {
         var twostar = [];
         var threestar = [];
 
+        var counter = 0;
+
         this.props.segments.map((i) => {
 
+            counter+= 1
+            i.order= counter
 
             if (i.take.is_publish) {
                 publish[publish.length] = i
