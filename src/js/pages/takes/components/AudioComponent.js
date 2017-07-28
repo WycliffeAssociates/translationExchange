@@ -61,6 +61,7 @@ class AudioComponent extends Component {
                         this.onClick()
                     }}
                     mic={this.props.mic}
+                    loop={this.props.loop}
                     markers={markers}
                     showMarkers={showMarkers}
 
