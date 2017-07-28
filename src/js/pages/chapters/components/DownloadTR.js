@@ -48,7 +48,7 @@ export default class DownloadTR extends Component{
         //download everything as .tr file
         console.log(projID);
         parameters={"project":projID};
-        axios.post(config.apiUrl + 'get_source/' , parameters)
+        axios.post(config.apiUrl + 'get_source/' , parameters, {timeout:0})
             .then((response) => {
 
                 console.log(response)
