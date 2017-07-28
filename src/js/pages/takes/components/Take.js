@@ -11,6 +11,7 @@ import TakeExportButton from "./SelectTake";
 import ShowMarkers from './ShowMarkers';
 import 'css/takes.css'
 import SideBar from './SideBar'
+import StitchTakesButton from "./StitchTakesButton";
 
 var listenCounter = 0
 class Take extends Component {
@@ -88,42 +89,55 @@ class Take extends Component {
             <div>
 
 
-                <Segment.Group horizontal textAlign="center"  >
+                <Segment.Group horizontal textAlign="left"  >
                     {this.props.take.rating > 1
-                        ? <Segment className="hoverButton" onClick={this.moveLeft.bind(this)}> <Icon name="chevron left" /></Segment>
+                        ? <Segment className="hoverButton" onClick={this.moveLeft.bind(this)}> <Icon name="chevron left" size="small"/></Segment>
                         : ""
                     }
 
-                    <Segment>
-                <strong><font color="blue">{this.props.author.name}</font> on {this.parseDate(this.props.take.date_modified)}</strong>
 
-                {/*{<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>}*/}
-                <TakeListenButton onClick={ () =>
-                                      this.props.playTake(this.props.take.location,
-                                          this.props.chunkNumber,
-                                          this.props.author.name,
-                                          this.parseDate(this.props.take.date_modified))
-                                  }
-                />
-                {/*<TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>*/}
-                {/*<DeleteTake onDeleteTake={this.props.onDeleteTake}/>*/}
+                    <Segment vertical textAlign="left">
+                        <Grid columns={2}>
+                            <Grid.Column>
+                                <font size="4"><strong>{this.props.author.name}</strong></font>
+                            </Grid.Column>
+                            <Grid.Column textAlign="right">
+                                <StitchTakesButton color="blue"/>
+                            </Grid.Column>
+                        </Grid>
+                        {this.parseDate(this.props.take.date_modified)}
 
-                {/*<ShowMarkers onClick = {this.showMarker} showMarkersColor={this.state.showMarkersColor} />*/}
+                        <Segment vertical textAlign="center">
+                            <TakeListenButton onClick={ () =>
+                                          this.props.playTake(this.props.take.location,
+                                              this.props.chunkNumber,
+                                              this.props.author.name,
+                                              this.parseDate(this.props.take.date_modified))
+                                      }
+                            />
+                        </Segment>
 
-                    {/*{this.props.source*/}
-                        {/*? <div>*/}
-                            {/*<Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'*/}
-                                    {/*labelPosition='right'/>*/}
-                            {/*Language: {this.props.source.language.name}*/}
-                        {/*</div>*/}
-                        {/*: ""*/}
+
+                        {/*{<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>}*/}
+                        {/*<TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>*/}
+                        {/*<DeleteTake onDeleteTake={this.props.onDeleteTake}/>*/}
+
+                        {/*<ShowMarkers onClick = {this.showMarker} showMarkersColor={this.state.showMarkersColor} />*/}
+
+                        {/*{this.props.source*/}
+                            {/*? <div>*/}
+                                {/*<Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'*/}
+                                        {/*labelPosition='right'/>*/}
+                                {/*Language: {this.props.source.language.name}*/}
+                            {/*</div>*/}
+                            {/*: ""*/}
 
                     {/*}*/}
                     </Segment>
 
                     {this.props.take.is_publish
                         ? ""
-                        : <Segment onClick={this.moveRight.bind(this)} className="hoverButton"> <Icon name="chevron right" /></Segment>
+                        : <Segment onClick={this.moveRight.bind(this)} className="hoverButton"> <Icon name="chevron right" size="small"/></Segment>
                     }
 
                 </Segment.Group>

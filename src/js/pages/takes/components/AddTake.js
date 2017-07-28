@@ -7,11 +7,12 @@ import { Button, Icon } from 'semantic-ui-react'
 
 class ButtonToggle extends Component {
     render() {
+
         return (
-            <Button icon color={this.props.color} toggle active={this.props.active} onClick={this.props.onClick}>
-                <Icon name='play' size='large'/>
-            </Button>
-        )
+
+            <Button circular basic icon color="black" toggle active={this.props.active} onClick={this.props.onClick}>
+                <Icon name='play' size='large' color="blue"/>
+            </Button>        )
     }
 }
 
