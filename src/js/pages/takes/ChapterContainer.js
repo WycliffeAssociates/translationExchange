@@ -331,7 +331,10 @@ class ChapterContainer extends Component {
                                     onClickSave={this.onClickSave.bind(this)}
                                     deleteComment={this.deleteComment.bind(this)}
                                     setSourceProject={this.setSourceProject.bind(this)}
-                                    onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}/>
+                                    onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}
+                                    active={this.state.active}
+
+                    />
 
                     {this.state.chunks.map(this.createChunkList.bind(this))}
 

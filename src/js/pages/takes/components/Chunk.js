@@ -4,7 +4,6 @@ import ChunkPropTypes from "./ChunkPropTypes";
 import {Accordion, Icon, Grid} from "semantic-ui-react";
 import TakeTable from './TakeTable'
 import 'css/takes.css'
-import PinkButton from "./comments/PinkButton";
 import SideBar from "./SideBar"
 let onClick;
 let CommentContainer
@@ -106,6 +105,7 @@ class Chunk extends Component {
                                     playTake={this.props.playTake}
                                     chunkNumber={this.props.number}
                                     deleteComment={this.props.deleteComment}
+                                    active={this.props.active}
                                 />
                                 <TakeTable
                                     icon={icon2}
@@ -120,6 +120,7 @@ class Chunk extends Component {
                                     playTake={this.props.playTake}
                                     chunkNumber={this.props.number}
                                     deleteComment={this.props.deleteComment}
+                                    active={this.props.active}
                                 />
                                 <TakeTable
                                     icon={icon3}
@@ -134,6 +135,7 @@ class Chunk extends Component {
                                     playTake={this.props.playTake}
                                     chunkNumber={this.props.number}
                                     deleteComment={this.props.deleteComment}
+                                    active={this.props.active}
                                 />
                                 <TakeTable
                                     icon={icon4}
@@ -148,6 +150,7 @@ class Chunk extends Component {
                                     playTake={this.props.playTake}
                                     chunkNumber={this.props.number}
                                     deleteComment={this.props.deleteComment}
+                                    active={this.props.active}
                                 />
                             </Grid>
                         </SideBar>

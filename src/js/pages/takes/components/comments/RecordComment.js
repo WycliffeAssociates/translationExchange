@@ -178,7 +178,7 @@ function DisplayAudioPlayer(props) {
 
                 <Grid.Column width={3}>
                     {props.active ?
-                        <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                        <img src={LoadingGif} alt="Loading..." width="20" height="20"/>
                         : <Button positive size="small" onClick={() => {
                             props.onSave(type, id, jsonblob, props.onClickSave)
                         }}>Save</Button>

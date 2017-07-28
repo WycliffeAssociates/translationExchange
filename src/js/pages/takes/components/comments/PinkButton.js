@@ -124,7 +124,7 @@ class PinkButton extends Component {
             >
                 <Modal.Header style={this.Style}>Comments</Modal.Header>
                 <div>
-                    <RecordComment ref={instance => (this.recordComment = instance) }
+                    <RecordComment ref={instance => (this.recordComment = instance)}
                                    changeSaveButtonState={this.changeSaveButtonState}
                                    updateTakeInState={this.props.updateTakeInState}
                                    sendComment={this.getComment}
