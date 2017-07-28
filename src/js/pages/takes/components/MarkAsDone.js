@@ -93,7 +93,7 @@ class MarkAsDone extends Component {
                                 load.</p>
                             <p>To mark as done, click on 'Finish'.</p>
                             <AudioComponent
-                                width={850} playlist={this.createExportPlaylist()}
+                                width={850} playlist={this.createExportPlaylist()} loop={true}
                                 />
                         </Modal.Description>
                 
