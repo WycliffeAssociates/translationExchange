@@ -212,6 +212,20 @@ class ChapterContainer extends Component {
         }
     }
 
+    onMarkedAsPublish(success) {
+        let parameters = {"is_publish": true}
+        //make patch request to confirm that the chapter is ready to be published
+        axios.patch(config.apiUrl + 'chapters/' + this.state.chapter.id + "/", parameters)
+            .then((response) => {
+                let updatedChapter = Object.assign({}, this.state.chapter);
+                updatedChapter.is_publish = true;
+                this.setState({chapter: updatedChapter});
+                if (success) { success() };
+            }).catch((exception) => {
+                console.log(exception);
+        });
+    }
+
     setSourceProject(projectQuery) {
         axios.post(config.apiUrl + 'get_project_takes/', {
             ...projectQuery,
@@ -307,7 +321,8 @@ class ChapterContainer extends Component {
                                     selectedSourceProject={this.state.selectedSourceProjectQuery}
                                     onClickSave={this.onClickSave.bind(this)}
                                     deleteComment={this.deleteComment.bind(this)}
-                                    setSourceProject={this.setSourceProject.bind(this)}/>
+                                    setSourceProject={this.setSourceProject.bind(this)}
+                                    onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}/>
 
                     {this.state.chunks.map(this.createChunkList.bind(this))}
 

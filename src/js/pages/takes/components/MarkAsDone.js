@@ -16,9 +16,7 @@ class MarkAsDone extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            color: null,
-            modalOpen: false,
-            is_published: this.props.chapter.is_publish,
+            modalOpen: false
         }
 
     }
@@ -52,20 +50,9 @@ class MarkAsDone extends Component {
     }
 
     changeColor() {
-        this.setState({
-            color: 'green'
+        this.props.onMarkedAsPublish(() => {
+            this.handleClose();
         });
-        let parameters = {"is_publish": true}
-//make patch request to confirm that the chapter is ready to be published
-        axios.patch(config.apiUrl + 'chapters/' + this.props.chapter.id + "/", parameters)
-                .then((response) => {
-                    this.setState({is_published: true});
-                    this.changeColor();
-                    console.log(response)
-                }).catch((exception) => {
-            console.log(exception);
-        });
-        this.handleClose();
     }
 
     handleOpen = (e) => this.setState({
@@ -78,7 +65,7 @@ class MarkAsDone extends Component {
         )
 
     render() {
-        let disableBtn = this.state.is_published;
+        let disableBtn = this.props.chapter.is_publish;
         let crfe = this.checkReadyForExport();
         let disableBtnState;
         if (disableBtn === crfe) {
@@ -87,7 +74,7 @@ class MarkAsDone extends Component {
             disableBtnState = false;
         }
         var ExportButton = <Button onClick={this.handleOpen}
-                color={disableBtn === true ? "green" : this.state.color}
+                color={disableBtn === true ? "green" : ""}
                 disabled={disableBtnState}
                 className="icon"
                 icon="share"
