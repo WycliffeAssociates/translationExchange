@@ -60,7 +60,7 @@ class Footer extends Component {
         return (
 
             <div className="footerStyle">
-                <Menu inverted compact secondary>
+                <Menu inverted secondary>
                     {this.props.currentPlaylist.length > 0
                         ? <Menu.Item>
                             <Card fluid>
@@ -77,7 +77,7 @@ class Footer extends Component {
                     */}
 
                     {this.createArray().length > 0
-                        ? <Menu.Item>
+                        ? <Menu.Item position="right">
                             <Label pointing="right" size="huge" basic color="black">Click here to see your stitched takes</Label>
                             <Button icon={icon} basic onClick={this.onClick}/>
                         </Menu.Item>
