@@ -37,9 +37,7 @@ class Footer extends Component {
         }
 
         else {
-            return (
-                <h2>Select a chunk to play</h2>
-            );
+            return null;
         }
 
 

@@ -20,7 +20,9 @@ class Chunk extends Component {
 
         var counter = 0;
 
-        this.props.segments.map((i) => {
+        let orderedSegments = this.props.segments.slice();
+
+        orderedSegments.map((i) => {
 
             counter+= 1
             i.order= counter
