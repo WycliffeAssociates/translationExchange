@@ -12,7 +12,6 @@ class Footer extends Component {
         if (this.props.listenList.length > 0) {
             var takeList = [];
             this.props.listenList.map((i) => {
-                console.log(i)
                 takeList[takeList.length] = i.mode + ' ' + i.chunk.startv + ' take ' + i.count
             })
             return takeList
