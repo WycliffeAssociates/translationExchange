@@ -83,9 +83,13 @@ class MarkAsDone extends Component {
         let disableBtnState;
         if (disableBtn === crfe) {
             disableBtnState = true;
-        } else if (crfe) {
+        } else if (crfe !== disableBtn) {
+            disableBtnState = true;
+        } else {
             disableBtnState = false;
         }
+        console.log(disableBtn);
+        console.log(crfe);
         var ExportButton = <Button onClick={this.handleOpen}
                 color={disableBtn === true ? "green" : this.state.color}
                 disabled={disableBtnState}
