@@ -104,52 +104,33 @@ class ProjectContainer extends Component {
         )
     }
 
-    // TODO: Fix all this
+    // Minimal parameters saves on server query time
     onDownloadProject() {
-        let zipFileName = this.state.language.slug + "_" + QueryString.parse(this.props.location.search).version + "_" + this.state.book.slug + ".zip"
         this.setState({downloadLoading: true, downloadError: "", downloadSuccess: ""});
 
         let params = {
             project: this.state.project_id
         }
-        // var file = new Blob([filePath.blob], {type: 'application/zip'}, true);
-        // FileSaver.saveAs(file);
 
-        //THIS WORKS
-        //window.open(config.streamingUrl + "media/export/" + zipFileName);
+        //check if changes have been made
+        // if (changesHaveBeenMade) {
+        //      // Re-convert file to zip
+        // }
+        // else {
+        //      // immediately download the file
+        // }
 
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
-                //FileDownload(config.apiUrl + download_results, zipFileName);
-                this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
-                console.log(config.apiUrl + download_results.data);
-                console.log(download_results)
 
-                window.open(config.apiUrl + zipFileName);
-                //
-                // var file = new Blob([config.apiUrl + download_results.data], {type: 'application/zip'});
-                // FileSaver.saveAs(file);
-                //this.downloadFile(download_results.data);
+                window.open(config.streamingUrl + download_results.data.location);
+                this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
 
             }).catch((exception) => {
                 this.setState({downloadError: exception});
             }).catch((error) => {
                 this.setState({downloadLoading: false, downloadError: error});
         });
-    }
-
-    downloadFile(args) {
-        // fake server request, getting the file url as response
-        setTimeout(() => {
-            const response = {
-                    file: args,
-            };
-            // server sent the url to the file!
-            // now, let's download:
-            window.open(response.file);
-            // you could also do:
-            // window.location.href = response.file;
-        }, 1000);
     }
 
     componentDidMount() {
