@@ -1,12 +1,23 @@
 import React, {Component} from 'react';
 import MarkAsDone from "./MarkAsDone";
 import CommentContainer from "./comments/PinkButton"
-import {Menu, Container, Card} from 'semantic-ui-react'
+import {Menu, Container, Card, Button} from 'semantic-ui-react'
 import AudioComponent from "./AudioComponent"
 import config from 'config/config'
 import 'css/takes.css'
 
 class Footer extends Component {
+
+    createArray() {
+        if (this.props.listenList.length > 0) {
+            var takeList = [];
+            this.props.listenList.map((i) => {
+                console.log(i)
+                takeList[takeList.length] = i.mode + ' ' + i.chunk.startv + ' take ' + i.count
+            })
+            return takeList
+        }
+    }
 
     createListenPlaylist() {
 
@@ -16,7 +27,7 @@ class Footer extends Component {
             this.props.listenList.map((i) => {
                 playlist[playlist.length] = {
                     "src": config.streamingUrl + i.props.take.location,
-                    "name": this.props.mode + ' ' + i.chunk.startv + ' (' + (playlist.length + 1) + '/' + this.props.listenList.length + ')'
+                    "name": this.props.mode + ' ' + i.chunk.startv + ' take ' + i.count
                 }
             })
             return (
@@ -35,7 +46,13 @@ class Footer extends Component {
 
     }
 
+    onClick() {
+        alert('heyo')
+    }
+
     render () {
+
+        this.createArray()
         return (
             <div>
                 <Container fluid className="blackBar" />
@@ -51,6 +68,10 @@ class Footer extends Component {
 
                     <Menu.Item>
                         {this.createListenPlaylist()}
+                    </Menu.Item>
+
+                    <Menu.Item>
+                        <Button content="expand" icon="unhide" onClick={this.onClick} />
                     </Menu.Item>
                 </Menu>
             </div>

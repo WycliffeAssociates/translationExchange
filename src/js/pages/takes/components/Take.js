@@ -91,15 +91,20 @@ class Take extends Component {
 
                 <Segment.Group horizontal textAlign="left"  >
                     {this.props.take.rating > 1
-                        ? <Segment className="hoverButton" onClick={this.moveLeft.bind(this)}> <Icon name="chevron left" size="small"/></Segment>
-                        : ""
+                        ? <Segment className="hoverButton" onClick={this.moveLeft.bind(this)}>
+                            <Icon name="chevron left" size="large"/>
+                        </Segment>
+                        : <Segment className="hoverButton" onClick={this.props.onDeleteTake}>
+                            <Icon name="trash" color="red" size="large"/>
+                        </Segment>
+
                     }
 
 
                     <Segment compact vertical textAlign="left">
                         <Grid columns={2}>
                             <Grid.Column>
-                                <font size="4"><strong>{this.props.author.name}</strong></font>
+                                <font size="4"><strong>{this.props.author.name} Take {this.props.count}</strong></font>
                             </Grid.Column>
                             <Grid.Column textAlign="right">
                                 <StitchTakesButton onClick={this.addToListen.bind(this)} color="blue"/>
@@ -113,6 +118,7 @@ class Take extends Component {
                                               this.props.chunkNumber,
                                               this.props.author.name,
                                               this.parseDate(this.props.take.date_modified))
+
                                       }
                             />
                         </Segment>
@@ -141,7 +147,7 @@ class Take extends Component {
 
                     {this.props.take.is_publish
                         ? ""
-                        : <Segment onClick={this.moveRight.bind(this)} className="hoverButton"> <Icon name="chevron right" size="small"/></Segment>
+                        : <Segment onClick={this.moveRight.bind(this)} className="hoverButton"> <Icon name="chevron right" size="large"/></Segment>
                     }
 
                 </Segment.Group>

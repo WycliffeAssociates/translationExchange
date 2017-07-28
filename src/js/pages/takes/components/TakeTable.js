@@ -14,7 +14,10 @@ class TakeTable extends Component {
                 <Table textAlign="center">
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell>{this.props.icon}</Table.HeaderCell>
+                            <Table.HeaderCell>
+                                {this.props.icon}
+                            </Table.HeaderCell>
+
                         </Table.Row>
                     </Table.Header>
 
@@ -29,6 +32,8 @@ class TakeTable extends Component {
                             ratingToGet={this.props.column}
                             playTake={this.props.playTake}
                             chunkNumber={this.props.chunkNumber}
+                            mode={this.props.mode}
+
                             // deleteComment={this.props.deleteComment}
                         />
                         <br />
