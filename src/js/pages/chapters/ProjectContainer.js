@@ -115,13 +115,17 @@ class ProjectContainer extends Component {
         // var file = new Blob([filePath.blob], {type: 'application/zip'}, true);
         // FileSaver.saveAs(file);
 
+        //THIS WORKS
+        //window.open(config.streamingUrl + "media/export/" + zipFileName);
+
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
                 //FileDownload(config.apiUrl + download_results, zipFileName);
                 this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
-                console.log(config.apiUrl + download_results.location);
+                console.log(config.apiUrl + download_results.data);
+                console.log(download_results)
 
-                // window.open(response.file);
+                window.open(config.apiUrl + zipFileName);
                 //
                 // var file = new Blob([config.apiUrl + download_results.data], {type: 'application/zip'});
                 // FileSaver.saveAs(file);
