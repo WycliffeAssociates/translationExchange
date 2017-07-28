@@ -8,6 +8,7 @@ import LoadingDisplay from "js/components/LoadingDisplay";
 import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
 import PublishButton from "./components/PublishButton";
+import DownloadTR from "./components/DownloadTR"
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -109,12 +110,18 @@ class ProjectContainer extends Component {
 
                         <Header as='h1' >{this.state.book.name} ({this.state.language.name})
 
+                            <DownloadTR
+                                chapters={this.state.chapters}
+                                isPublish={this.state.is_publish}
+                                onPublish={this.publishFiles.bind(this)}
+                            />
 
                             <PublishButton
                             chapters={this.state.chapters}
                             isPublish={this.state.is_publish}
                             onPublish={this.publishFiles.bind(this)}
-                        />
+                            />
+
                         </Header>
 
 
