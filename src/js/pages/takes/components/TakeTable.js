@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
-import TakeContainer from "../TakeContainer";
-import TakePropTypes from "./TakePropTypes";
 import TakeList from './TakeList'
 import {Table, Grid} from 'semantic-ui-react'
 
 var iterator;
 class TakeTable extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {rating: this.props.column}
-    }
 
     render () {
 
@@ -33,7 +25,7 @@ class TakeTable extends Component {
                             deleteTake={this.props.deleteTake}
                             updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                             onClickSave={this.props.onClickSave}
-                            ratingToGet={this.state.rating}
+                            ratingToGet={this.props.column}
                             // deleteComment={this.props.deleteComment}
                         />
                         <br />

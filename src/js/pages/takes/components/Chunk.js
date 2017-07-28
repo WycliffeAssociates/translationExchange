@@ -1,22 +1,15 @@
 import React, {Component} from 'react';
 import ChunkPropTypes from "./ChunkPropTypes";
 
-import {Accordion, Button, Icon, Container, Grid, Table} from "semantic-ui-react";
-import Footer from './Footer'
+import {Accordion, Icon, Grid} from "semantic-ui-react";
 import TakeTable from './TakeTable'
-import SideBar from './SideBar'
 import 'css/takes.css'
 import PinkButton from "./comments/PinkButton";
-import SourceAudioButton from "./SourceAudioButton"
 let onClick;
 let CommentContainer
 
 
 class Chunk extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {open: false, segments: this.props.segments};
-    }
 
     render () {
 
