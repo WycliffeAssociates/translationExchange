@@ -50,7 +50,8 @@ export default class DownloadTR extends Component{
         parameters={"project":projID};
         axios.post(config.apiUrl + 'get_source/' , parameters, {timeout:0})
             .then((response) => {
-
+                window.open(config.streamingUrl + response.data.location);
+                this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
                 console.log(response)
             }).catch((exception) => {
             console.log(exception);
