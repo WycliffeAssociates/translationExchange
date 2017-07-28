@@ -96,7 +96,7 @@ class ProjectContainer extends Component {
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
 
-                window.open(config.streamingUrl + download_results.data.location);
+                window.location = config.streamingUrl + download_results.data.location;
                 this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
 
             }).catch((exception) => {
