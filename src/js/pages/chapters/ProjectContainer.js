@@ -26,9 +26,6 @@ class ProjectContainer extends Component {
             publishError: "",
             downloadError: "",
             downloadSuccess: "",
-            uploadSourceLoading: false,
-            uploadSourceError: "",
-            uploadSourceSuccess: "",
             anthology: {},
             downloadLoading: false,
             version: {}
@@ -50,24 +47,8 @@ class ProjectContainer extends Component {
         });
 }
 
-    setCheckingLevel(level){
-
-        let params = {
-            filter: {
-                language: this.state.language.slug,
-                book: this.state.book.slug,
-                chapter: this.state.chapters.name,
-                anthology: this.state.anthology.name,
-                version: QueryString.parse(this.props.location.search).version
-            },
-            fields: {
-                checked_level: level
-            }
-        };
-
-        alert("This needs to get fixed - it crashes");
-        // TODO: Endpoint had been renamed to projects/
-        // axios.post(config.apiUrl + "update_project/", params);
+    setCheckingLevel(chapterId, level){
+        axios.patch(config.apiUrl + "chapters/" + chapterId + "/", {checked_level: level});
     }
 
     getChapterData() {
@@ -110,14 +91,6 @@ class ProjectContainer extends Component {
         let params = {
             project: this.state.project_id
         }
-
-        //check if changes have been made
-        // if (changesHaveBeenMade) {
-        //      // Re-convert file to zip
-        // }
-        // else {
-        //      // immediately download the file
-        // }
 
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
@@ -175,42 +148,26 @@ class ProjectContainer extends Component {
                                 version={QueryString.parse(this.props.location.search).version}
                                 navigateToChapter={this.navigateToChapter.bind(this)}
                                 setCheckingLevel={this.setCheckingLevel.bind(this)}
+                                projectIsPublish={this.state.is_publish}
                             />
                         </Table>
+
+                        <DownloadProjects
+                            onDownloadProject={this.onDownloadProject.bind(this)}
+                        />
+
+                        {this.state.downloadLoading
+                            ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                            : ""
+                        }
+                        {this.state.downloadError
+                            ? "There was an error. Please try again"
+                            : ""
+                        }
 
                     </LoadingDisplay>
 
                     <br></br>
-
-
-                    <DownloadProjects
-                        onDownloadProject={this.onDownloadProject.bind(this)}
-                    />
-
-                    {this.state.downloadLoading
-                        ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
-                        : ""
-                    }
-                    {this.state.downloadError
-                        ? "There was an error. Please try again"
-                        : ""
-                    }
-
-                    {!this.state.uploadSourceLoading && this.state.uploadSourceSuccess
-                        ? <div>Successfully uploaded {this.state.uploadSourceSuccess} and set it as source audio</div>
-                        : <form onSubmit={this.uploadSourceFile} method="post" encType="multipart/form-data">
-                            <h4>Upload source audio</h4>
-                            <Input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
-                            {this.state.uploadSourceLoading
-                                ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
-                                : <Button type="submit">Submit</Button>
-                            }
-                            {this.state.uploadSourceError
-                                ? "There was an error uploading the file: " + this.state.uploadSourceError
-                                : ""
-                            }
-                        </form>
-                    }
 
                 </Container>
 

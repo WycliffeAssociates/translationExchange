@@ -26,8 +26,17 @@ class ChapterList extends Component {
 
             <Table.Cell>{chapter.chapter}</Table.Cell>
             <Table.Cell><CircularProgressbar strokeWidth="20" percentage={chapter.percent_complete}/></Table.Cell>
-            <Table.Cell className="dont-hide-overflow"><CheckingLevel num={chapter.checked_level}
-                                                                      setCheckingLevel={this.props.setCheckingLevel}/></Table.Cell>
+            <Table.Cell className="dont-hide-overflow">
+                {/*only allow checking level to be set if project is published*/}
+                {this.props.projectIsPublish
+                    ? <CheckingLevel num={chapter.checked_level}
+                                     setCheckingLevel={this.props.setCheckingLevel}
+                                     chapterId={chapter.id}
+                      />
+                    : chapter.checked_level
+                }
+
+            </Table.Cell>
                     <Table.Cell>
                         {chapter.is_publish
                             ? <Icon name="checkmark" color="green"/>
