@@ -4,13 +4,15 @@
 
 import React, { Component } from 'react'
 import { Button, Header, Icon, Modal } from 'semantic-ui-react'
+import config from 'config/config'
+import axios from 'axios'
+
 let state;
 let handleOpen;
 let handleClose;
 let disable;
-let axios;
-let config;
 let parameters;
+let projID;
 
 
 
@@ -44,26 +46,27 @@ export default class DownloadTR extends Component{
 
     download(){
         //download everything as .tr file
-        //console.log(this.props.project_id);
-        // parameters={"id":this.props.project_id};
-        // axios.post(config.apiUrl + 'get_source/' , parameters)
-        //     .then((response) => {
-        //
-        //         console.log(response)
-        //     }).catch((exception) => {
-        //     console.log(exception);
-        // });
+        console.log(projID);
+        parameters={"project":projID};
+        axios.post(config.apiUrl + 'get_source/' , parameters)
+            .then((response) => {
+
+                console.log(response)
+            }).catch((exception) => {
+            console.log(exception);
+        });
     }
 
 
         render() {
             let readyForPublish = this.checkReadyForPublish();
+            projID = this.props.project_id;
+            console.dir(this.props.project_id)
             let publishButton =
                 <Button
                     floated="right"
                     color={"blue"}
                     disabled={!this.props.isPublish ? this.rtnTrue() : this.rtnFalse()}//enable if pusblished is disabled
-                    //disabled={!this.props.isPublish ? this.rtnFalse() : this.rtnTrue()}
                     onClick={this.download}
                 >
                     Download </Button>
