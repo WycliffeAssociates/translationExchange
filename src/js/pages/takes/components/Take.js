@@ -82,7 +82,65 @@ class Take extends Component {
 
         return (
 
-            <div>
+            <Segment>
+
+                <Grid textAlign="left">
+                    <Grid.Row>
+                        <Grid.Column verticalAlign="middle">
+                            {this.props.take.rating > 1
+                                ? <Icon className="hoverButton" name="chevron left" onClick={this.moveLeft.bind(this)}/>
+                                : <Icon className="hoverButton" name="trash" color="red" onClick={this.props.onDeleteTake}/>
+                            }
+                        </Grid.Column>
+
+                        <Grid.Column width={12}>
+
+                            <Grid.Row verticalAlign="top">
+                                <Grid>
+                                    <Grid.Column width={11} floated="left">
+                                        <font size="3"><strong>Take {this.props.count} -  </strong></font>
+                                        <font size="3" color="grey"> {this.props.author.name}</font>
+                                    </Grid.Column>
+                                    <Grid.Column floated="right">
+                                        <StitchTakesButton onClick={this.addToListen.bind(this)} size="huge" color="blue"/>
+                                    </Grid.Column>
+                                </Grid>
+                            </Grid.Row>
+
+                            <Grid.Row>
+                                {this.parseDate(this.props.take.date_modified)}
+                            </Grid.Row>
+                            <Grid.Row className="centerPlayButton">
+                                <br />
+                                <TakeListenButton onClick={ () =>
+                                    this.props.playTake(this.props.take.location,
+                                        this.props.chunkNumber,
+                                        this.props.author.name,
+                                        this.parseDate(this.props.take.date_modified))
+
+                                }
+                                />
+                            </Grid.Row>
+                            <Grid.Row verticalAlign="bottom">
+                                <br />
+                                <TakeCommentsButton  take={this.props.take}
+                                                     comments={this.props.comments}
+                                                     onClickSave={this.props.onClickSave}
+                                                     deleteComment={this.props.deleteComment}
+                                />
+                            </Grid.Row>
+                        </Grid.Column>
+
+                        <Grid.Column verticalAlign="middle">
+                            {this.props.take.is_publish
+                            ? ""
+                            : <Icon className="hoverButton" name="chevron right" onClick={this.moveRight.bind(this)}/>
+                        }</Grid.Column>
+
+                    </Grid.Row>
+                </Grid>
+
+                {/*
                 <Segment.Group horizontal textAlign="left"  >
                     {this.props.take.rating > 1
                         ? <Segment className="hoverButton" onClick={this.moveLeft.bind(this)}>
@@ -121,7 +179,8 @@ class Take extends Component {
                             <TakeCommentsButton  take={this.props.take}
                                                  comments={this.props.comments}
                                                  onClickSave={this.props.onClickSave}
-                                                 deleteComment={this.props.deleteComment}/>
+                                                 deleteComment={this.props.deleteComment}
+                            />
                         </Segment>
 
                     </Segment>
@@ -136,9 +195,9 @@ class Take extends Component {
                     }
 
                 </Segment.Group>
+                */}
 
-
-            </div>
+            </Segment>
 
         );
     }

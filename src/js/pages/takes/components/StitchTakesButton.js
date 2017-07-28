@@ -10,7 +10,7 @@ class StitchTakesButton extends Component {
          </Button>*/}
 
         return (
-                <Icon name="plus" size="large" color="grey" className="hoverButton" onClick={this.props.onClick} />
+                <Icon name="plus" color="grey" className="hoverButton" onClick={this.props.onClick} />
         )
     }
 }
