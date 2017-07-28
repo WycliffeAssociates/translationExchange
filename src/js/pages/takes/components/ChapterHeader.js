@@ -19,7 +19,11 @@ class ChapterHeader extends Component {
 
                     <Grid.Column width={5} className="verticalLine">
 
-                        <MarkAsDone chapter={this.props.chapter} chunks={this.props.chunks} mode={this.props.mode}/>
+                        <MarkAsDone chapter={this.props.chapter}
+                                    chunks={this.props.chunks}
+                                    mode={this.props.mode}
+                                    onMarkedAsPublish={this.props.onMarkedAsPublish}
+                        />
 
 
                         <PinkButton comments={this.props.chapter.comments}
