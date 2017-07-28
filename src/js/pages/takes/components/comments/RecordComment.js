@@ -90,9 +90,6 @@ export class RecordComment extends Component {
         const AudioURL = this.state.AudioURL;
         const jsonblob = this.state.jsonblob;
 
-
-        let button = <StopButton onClick={this.stopRecording}/>;
-
         let AudioPlayer = null;
 
         let MainButton = null;
@@ -113,7 +110,13 @@ export class RecordComment extends Component {
         }
 
         if (displayButton) {
-            MainButton = <StopButton onClick={this.stopRecording}/>;
+            MainButton = <button
+                className="stop"
+                onClick={this.stopRecording}
+                type="button">
+                <Icon size='small' name='stop' inverted/>
+            </button>;
+
         } else {
 
             MainButton = <button
@@ -148,15 +151,23 @@ export class RecordComment extends Component {
         );
     }
 }
-
-
-function StopButton(props) {
-    return (
-        <button className="stop" onClick={props.onClick}>
-            <Icon name="stop" size='small' inverted/>
-        </button>
-    );
-}
+//
+//
+// function StopButton(props) {
+//     return (
+//         <button
+//             className="stop"
+//             onClick={this.stopRecording}
+//             type="button">
+//             <Icon size='small' name='stop' inverted/>
+//         </button>
+//
+//
+//         // <button className="stop" onClick={props.onClick} type="button">
+//         //     <Icon name="stop" size='small' inverted/>
+//         // </button>
+//     );
+// }
 
 
 function DisplayAudioPlayer(props) {
