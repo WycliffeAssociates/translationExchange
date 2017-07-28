@@ -81,6 +81,10 @@ class Chunk extends Component {
                             <Icon name='dropdown' />
                             <font color="black">
                             {modeLabel} {this.props.number}
+                            {this.props.comments.length > 0
+                                ? <Icon name="circle" color="yellow"/>
+                                : ""
+                            }
                             </font>
                         </center>
 
