@@ -38,6 +38,7 @@ class Footer extends Component {
     render () {
         return (
             <div>
+                <Container fluid className="blackBar" />
                 <Menu compact secondary>
                     {this.props.currentPlaylist.length > 0
                         ? <Menu.Item>
