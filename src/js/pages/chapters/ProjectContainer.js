@@ -110,24 +110,42 @@ class ProjectContainer extends Component {
         this.setState({downloadLoading: true, downloadError: "", downloadSuccess: ""});
 
         let params = {
-            language: this.state.language.slug,
-            version: QueryString.parse(this.props.location.search).version,
-            book: this.state.book.slug
+            project: this.state.project_id
         }
         // var file = new Blob([filePath.blob], {type: 'application/zip'}, true);
         // FileSaver.saveAs(file);
 
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
-                FileDownload(download_results.data, zipFileName);
+                //FileDownload(config.apiUrl + download_results, zipFileName);
                 this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
-                //console.log(download_results.data);
-                //this.saveFile("this data is sent");
+                console.log(config.apiUrl + download_results.location);
+
+                // window.open(response.file);
+                //
+                // var file = new Blob([config.apiUrl + download_results.data], {type: 'application/zip'});
+                // FileSaver.saveAs(file);
+                //this.downloadFile(download_results.data);
+
             }).catch((exception) => {
                 this.setState({downloadError: exception});
             }).catch((error) => {
                 this.setState({downloadLoading: false, downloadError: error});
         });
+    }
+
+    downloadFile(args) {
+        // fake server request, getting the file url as response
+        setTimeout(() => {
+            const response = {
+                    file: args,
+            };
+            // server sent the url to the file!
+            // now, let's download:
+            window.open(response.file);
+            // you could also do:
+            // window.location.href = response.file;
+        }, 1000);
     }
 
     componentDidMount() {
