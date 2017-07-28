@@ -3,39 +3,42 @@ import PropTypes from 'prop-types';
 import Star from './Star';
 import AudioComponent from './AudioComponent';
 import config from "config/config";
-import {Button, Grid, Segment} from "semantic-ui-react";
+import {Button, Grid, Segment, Card, Modal, Icon} from "semantic-ui-react";
 import TakeListenButton from './AddTake'
 import DeleteTake from './DeleteTake'
 import LoadingGif from 'images/loading-tiny.gif'
-import CommentContainer from "./comments/CommentContainer";
 import TakeExportButton from "./SelectTake";
 import ShowMarkers from './ShowMarkers';
+import 'css/takes.css'
+import SideBar from './SideBar'
 
 var listenCounter = 0
 class Take extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {isToggleOn: true, addButtonColor: "", showMarkers: false, showMarkersColor:""}
+        this.state = {isToggleOn: true, addButtonColor: "", showMarkers: false, showMarkersColor: ""}
         // This binding is necessary to make `this` work in the callback
-         this.handleClick = this.handleClick.bind(this);
-         this.showMarker = this.showMarker.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.showMarker = this.showMarker.bind(this);
     }
 
     handleClick() {
         this.setState({isToggleOn: !this.state.isToggleOn});
     }
-    showMarker(){
 
-        if(!this.state.showMarkers){
-            this.setState({showMarkersColor:'yellow', showMarkers:true});
+    showMarker() {
+
+        if (!this.state.showMarkers) {
+            this.setState({showMarkersColor: 'yellow', showMarkers: true});
             console.log('here', this.state.showMarkers);
 
-        }else{
-            this.setState({showMarkersColor:'', showMarkers:false});
+        } else {
+            this.setState({showMarkersColor: '', showMarkers: false});
         }
 
     }
+
     addToListen() {
         this.props.addToListenList(this.props);
 
@@ -55,9 +58,19 @@ class Take extends Component {
         }
     }
 
+    moveLeft () {
+        //alert(this.props.take.rating)
+        //alert('I wish to move this card')
+        this.props.onRatingSet(this.props.take.rating-1)
+    }
 
-    render () {
-        const markers = this.props.take.markers ;
+    moveRight() {
+        this.props.onRatingSet(this.props.take.rating+1)
+    }
+
+
+    render() {
+        const markers = this.props.take.markers;
         let showMarkers = this.state.showMarkers;
         var file = [];
         file[0] = {
@@ -65,71 +78,47 @@ class Take extends Component {
         };
 
         return (
+
             <div>
-        <Grid columns={4}>
 
-            <Grid.Column width={4}>
+
+                <Segment.Group horizontal textAlign="center"  >
+                    <Segment className="hoverButton" onClick={this.moveLeft.bind(this)}> <Icon name="chevron left" /></Segment>
+
+                    <Segment>
                 <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate(this.props.take.date_modified)}</strong>
-            </Grid.Column>
 
-                    <Grid.Column width={2}>
-                        {this.props.ratingLoading
-                            ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
-                            : <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
-                        }
-
-                    </Grid.Column>
-
-            <Grid.Column width={3}>
                 {<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>}
-                <TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>
-                <DeleteTake onDeleteTake={this.props.onDeleteTake}/>
-                <ShowMarkers onClick = {this.showMarker} showMarkersColor={this.state.showMarkersColor} />
-            </Grid.Column>
+                <TakeListenButton onClick={ () =>
+                                      this.props.playTake(this.props.take.location,
+                                          this.props.chunkNumber,
+                                          this.props.author.name,
+                                          this.parseDate(this.props.take.date_modified))
+                                  }
+                />
+                {/*<TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>*/}
+                {/*<DeleteTake onDeleteTake={this.props.onDeleteTake}/>*/}
 
-                    {this.props.source
-                        ? <Grid.Column width={5}>
-                            <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'
-                                    labelPosition='right'/>
-                            Language: {this.props.source.language.name}
-                        </Grid.Column>
-                        : ""
+                {/*<ShowMarkers onClick = {this.showMarker} showMarkersColor={this.state.showMarkersColor} />*/}
 
-                    }
+                    {/*{this.props.source*/}
+                        {/*? <div>*/}
+                            {/*<Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'*/}
+                                    {/*labelPosition='right'/>*/}
+                            {/*Language: {this.props.source.language.name}*/}
+                        {/*</div>*/}
+                        {/*: ""*/}
 
-                </Grid>
+                    {/*}*/}
+                    </Segment>
+
+                    <Segment onClick={this.moveRight.bind(this)} className="hoverButton"> <Icon name="chevron right" /></Segment>
 
 
-                <Grid columns={2} relaxed>
-                    <Grid.Column width={9}>
-                        <AudioComponent
-                            src={config.streamingUrl + this.props.take.location}
-                            playlist={file}
-                            width="700"
-                            mic={true}
-                            take={this.props.take}
-                            markers = {markers}
-                            showMarkers={showMarkers}
-                            onClickSave={this.props.onClickSave}
-                            comments={this.props.comments}
-                        />
-                    </Grid.Column >
+                </Segment.Group>
 
-                {this.state.isToggleOn ? '' :
-                    <Grid.Column width={4}>
-                            <AudioComponent
-                                src={config.streamingUrl + this.props.take.location}
-                                playlist={file}
-                                width="200"
-                                name="Source Audio"
-                                mic={false}
-                                take={this.props.take}
-                            />
-                        </Grid.Column>}
+            </div>
 
-                </Grid>
-
-        </div>
         );
     }
 

@@ -14,8 +14,4 @@ export class ShowMarkers extends Component{
     }
 }
 
-ShowMarkers.propTypes = {
-    onDeleteTake: PropTypes.func.isRequired
-};
-
 export default ShowMarkers;

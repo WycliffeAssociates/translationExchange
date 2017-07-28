@@ -39,3 +39,10 @@
     padding-left: 10px;
     padding-right: 10px;
 }
+
+.bookHeader {
+    background-color: black;
+    width:40%;
+    color: white;
+
+}

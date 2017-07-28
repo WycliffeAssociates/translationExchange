@@ -1,11 +1,10 @@
 import React, {Component} from 'react'
 import Audio from 'translation-audio-player'
-import CommentContainer from './comments/CommentContainer'
 import * as ReactDOM from "react-dom";
-import onClick from './comments/CommentContainer'
 import MicButton from "./comments/MicButton";
 
 
+let onClick;
 // requires a name (str) and src (str) when it is called
 // name : name to display on take
 // src  : url of file to be played in audio player
@@ -49,13 +48,14 @@ class AudioComponent extends Component {
         const pause = this.state.pause;
         const markers = this.props.markers;
         const showMarkers = this.props.showMarkers;
+        var autoPlay = this.props.autoPlay;
 
         return (
             <div>
                 <Audio
                     width={this.props.width}
                     height={150}
-                    autoPlay={false}
+                    autoPlay={true}
                     playlist={file}
                     recordButton={() => {
                         this.onClick()
@@ -78,8 +78,8 @@ class AudioComponent extends Component {
                     take={this.props.take}
                     comments={this.props.comments}
                     onClickSave={this.props.onClickSave}
-                    // deleteComment={this.props.deleteComment}
-                /> :''}
+                    deleteComment={this.props.deleteComment}
+                /> : ''}
 
 
             </div>

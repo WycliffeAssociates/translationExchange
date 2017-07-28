@@ -127,8 +127,6 @@ class Home extends Component {
         }).bind(this);
 
 
-        console.log(projects)
-
         var str = ''
         str += projects.book.name + ' '
         str += projects.language.name + ' '

@@ -5,11 +5,9 @@ import axios from 'axios';
 import config from 'config/config'
 import QueryString from 'query-string';
 import LoadingDisplay from "js/components/LoadingDisplay";
-import CheckingLevel from './components/CheckingLevel'
 import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
 import PublishButton from "./components/PublishButton";
-import FileDownload from 'react-file-download';
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -24,22 +22,9 @@ class ProjectContainer extends Component {
             loaded: false,
             error: "",
             publishError: "",
-            uploadSourceLoading: false,
-            uploadSourceError: "",
-            uploadSourceSuccess: "",
             anthology: {},
             version: {}
         };
-        this.uploadSourceFile = this.uploadSourceFile.bind(this);
-        this.handleFileChange = this.handleFileChange.bind(this);
-    }
-
-    handleFileChange(event) {
-        var data = new FormData();
-        data.append('file', event.target.files[0]);
-        this.setState({
-            filesData: data
-        });
     }
 
     publishFiles() {
@@ -56,33 +41,6 @@ class ProjectContainer extends Component {
             this.setState({publishError: exception});
         });
 }
-
-
-    uploadSourceFile(event) {
-        event.preventDefault();
-        this.setState({uploadSourceLoading: true, uploadSourceError: ""});
-        let uploadedLanguage = "";
-
-        axios.post(config.apiUrl + 'source/source_filename', this.state.filesData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        }).then((response) => {
-            uploadedLanguage = response.data.language.name;
-            let updateProjectParams = {
-                filter: QueryString.parse(this.props.location.search),
-                fields: {
-                    source_language: response.data.language.id
-                }
-            };
-            return axios.post(config.apiUrl + 'update_project/', updateProjectParams);
-        }).then((response) => {
-            this.setState({uploadSourceLoading: false, uploadSourceSuccess: uploadedLanguage});
-        }).catch((error) => {
-            this.setState({uploadSourceLoading: false, uploadSourceError: error});
-        });
-
-    }
 
     setCheckingLevel(level){
 
@@ -148,14 +106,17 @@ class ProjectContainer extends Component {
                     <LoadingDisplay loaded={this.state.loaded}
                                     error={this.state.error}
                                     retry={this.getChapterData.bind(this)}>
-                        <Header as='h1'>{this.state.book.name} ({this.state.language.name})
-                        <PublishButton
+
+                        <Header as='h1' >{this.state.book.name} ({this.state.language.name})
+
+
+                            <PublishButton
                             chapters={this.state.chapters}
                             isPublish={this.state.is_publish}
                             onPublish={this.publishFiles.bind(this)}
                         />
-
                         </Header>
+
 
                         <Table selectable fixed color="grey">
                             <Table.Header>
@@ -177,25 +138,8 @@ class ProjectContainer extends Component {
                                 setCheckingLevel={this.setCheckingLevel.bind(this)}
                             />
                         </Table>
+
                     </LoadingDisplay>
-
-                    <br></br>
-
-                    {!this.state.uploadSourceLoading && this.state.uploadSourceSuccess
-                        ? <div>Successfully uploaded {this.state.uploadSourceSuccess} and set it as source audio</div>
-                        : <form onSubmit={this.uploadSourceFile} method="post" encType="multipart/form-data">
-                            <h4>Upload source audio</h4>
-                            <Input type="file" name="fileUpload" className="form-control" onChange={this.handleFileChange}/>
-                            {this.state.uploadSourceLoading
-                                ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
-                                : <Button type="submit">Submit</Button>
-                            }
-                            {this.state.uploadSourceError
-                                ? "There was an error uploading the file: " + this.state.uploadSourceError
-                                : ""
-                            }
-                        </form>
-                    }
 
                 </Container>
 
