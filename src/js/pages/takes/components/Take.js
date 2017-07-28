@@ -96,13 +96,13 @@ class Take extends Component {
                     }
 
 
-                    <Segment vertical textAlign="left">
+                    <Segment compact vertical textAlign="left">
                         <Grid columns={2}>
                             <Grid.Column>
                                 <font size="4"><strong>{this.props.author.name}</strong></font>
                             </Grid.Column>
                             <Grid.Column textAlign="right">
-                                <StitchTakesButton color="blue"/>
+                                <StitchTakesButton onClick={this.addToListen.bind(this)} color="blue"/>
                             </Grid.Column>
                         </Grid>
                         {this.parseDate(this.props.take.date_modified)}
@@ -115,6 +115,10 @@ class Take extends Component {
                                               this.parseDate(this.props.take.date_modified))
                                       }
                             />
+                        </Segment>
+
+                        <Segment vertical>
+                            Comment button here
                         </Segment>
 
 

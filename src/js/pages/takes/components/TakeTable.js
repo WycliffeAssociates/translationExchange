@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TakeList from './TakeList'
 import {Table, Grid} from 'semantic-ui-react'
+import 'css/takes.css'
 
 var iterator;
 class TakeTable extends Component {

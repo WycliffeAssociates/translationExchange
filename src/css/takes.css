@@ -19,12 +19,6 @@
     padding: 0;
 }
 
-.ChapterTitle {
-    background-color: red;
-    width: 170px;
-    left: 0px;
-
-}
 
 .ColumnA {
     width: 250px;
@@ -90,6 +84,7 @@
     top: 50%;
     transform: translateY(-50%);
 }
+
 
 /* {*/
     /*height: auto !important;*/
