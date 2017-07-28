@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Dropdown, Button, Message } from 'semantic-ui-react'
 import axios from 'axios'
-import config from 'config/config';
+import config from '../../../config/config';
 import QueryString from 'query-string';
 
 

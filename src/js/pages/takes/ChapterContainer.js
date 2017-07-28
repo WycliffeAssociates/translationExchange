@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ChunkList from "./components/ChunkList";
 import axios from 'axios';
-import config from "../../../config/config";
+import config from "config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
 import {Audio, RecordBtn} from "translation-audio-player";
