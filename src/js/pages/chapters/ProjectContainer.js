@@ -9,8 +9,7 @@ import LoadingDisplay from "js/components/LoadingDisplay";
 import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
 import PublishButton from "./components/PublishButton";
-import FileDownload from 'react-file-download';
-import FileSaver from 'file-saver'
+
 
 class ProjectContainer extends Component {
     constructor (props) {
