@@ -37,8 +37,8 @@ class Footer extends Component {
 
     render () {
         return (
-            <div>
-                <Menu compact secondary>
+            <div className="footerStyle">
+                <Menu inverted compact secondary>
                     {this.props.currentPlaylist.length > 0
                         ? <Menu.Item>
                             <Card fluid>

@@ -73,6 +73,11 @@
     display: inline-block;
 }
 
+.footerStyle {
+    background-color: black;
+    color: white;
+}
+
 .verticalLine {
     border-left: thin solid white;
 }
