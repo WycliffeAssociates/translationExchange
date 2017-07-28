@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
+import React, {Component}
+from 'react';
 import PropTypes from "prop-types";
-import {Button, Icon, Modal} from 'semantic-ui-react'
-import AudioComponent from './AudioComponent';
+import {Button, Icon, Modal}
+from 'semantic-ui-react'
+        import AudioComponent from './AudioComponent';
 
 import config from "config/config";
 import axios from 'axios';
@@ -14,9 +16,7 @@ class MarkAsDone extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            color: null,
-            modalOpen: false,
-            is_published : this.props.chapter.is_publish,
+            modalOpen: false
         }
 
     }
@@ -25,7 +25,7 @@ class MarkAsDone extends Component {
         if (this.props.chunks.length === 0) {
             return false;
         } else {
-            //true if every chunk has at least 1 take marked is_publish
+//true if every chunk has at least 1 take marked is_publish
             return this.props.chunks.every((chunk) => {
                 return chunk.takes.some(take => take.take.is_publish);
             });
@@ -35,7 +35,6 @@ class MarkAsDone extends Component {
     createExportPlaylist() {
 
         let length = this.props.chunks.length;
-
         var playlist = [];
         this.props.chunks.map((chunk) => {
             chunk.takes.map((take) => {
@@ -47,28 +46,14 @@ class MarkAsDone extends Component {
                 }
             })
         });
-
         return playlist
     }
 
     changeColor() {
-        this.setState({
-            color: 'green'
+        this.props.onMarkedAsPublish(() => {
+            this.handleClose();
         });
-    
-        let parameters={"is_publish":true}
-        //make patch request to confirm that the chapter is ready to be published
-        axios.patch(config.apiUrl + 'chapters/' + this.props.chapter.id +"/", parameters)
-            .then((response) => {
-             this.setState({is_published:true});
-             this.changeColor();
-               console.log(response)
-            }).catch((exception) => {
-               console.log(exception);
-        });
-        this.handleClose();
     }
-   
 
     handleOpen = (e) => this.setState({
             modalOpen: true,
@@ -80,17 +65,22 @@ class MarkAsDone extends Component {
         )
 
     render() {
-        let disableBtn=this.state.is_published;
+        let disableBtn = this.props.chapter.is_publish;
+        let crfe = this.checkReadyForExport();
+        let disableBtnState;
+        if (disableBtn === crfe) {
+            disableBtnState = true;
+        } else if (crfe) {
+            disableBtnState = false;
+        }
         var ExportButton = <Button onClick={this.handleOpen}
-                                color={disableBtn===true?"green":this.state.color}
-                                disabled={disableBtn}
-                                content={disableBtn===true?"Chapter ready to be Published":"Mark Chapter as Done"}
-                                className="icon"
-                                   icon="share"
-                                floated="right">
-        <Icon color="white" name="sidebar"/>
+                color={disableBtn === true ? "green" : ""}
+                disabled={disableBtnState}
+                className="icon"
+                icon="share"
+                floated="right">
+            <Icon color="white" name="sidebar"/>
         </Button>;
-       
         return (
                 <Modal trigger={ExportButton}
                        open={this.state.modalOpen}
@@ -123,5 +113,4 @@ MarkAsDone.propTypes = {
     chunks: PropTypes.array.isRequired,
     mode: PropTypes.string.isRequired
 };
-
 export default MarkAsDone;
