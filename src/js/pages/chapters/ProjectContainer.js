@@ -114,6 +114,7 @@ class ProjectContainer extends Component {
                                 chapters={this.state.chapters}
                                 isPublish={this.state.is_publish}
                                 onPublish={this.publishFiles.bind(this)}
+                                project_id={this.state.project_id}
                             />
 
                             <PublishButton

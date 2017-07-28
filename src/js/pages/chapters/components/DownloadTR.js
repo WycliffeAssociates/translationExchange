@@ -8,6 +8,11 @@ let state;
 let handleOpen;
 let handleClose;
 let disable;
+let axios;
+let config;
+let parameters;
+
+
 
 export default class DownloadTR extends Component{
     state = { modalOpen: false };
@@ -19,12 +24,6 @@ export default class DownloadTR extends Component{
     handleClose = (e) => this.setState({
         modalOpen: false,
     });
-
-    // called when the user clicks yes inside the modal
-    publishFiles () {
-        this.props.onPublish()
-        this.handleClose()
-    }
 
     checkReadyForPublish() {
         var counter = 0;
@@ -40,74 +39,40 @@ export default class DownloadTR extends Component{
     }
 
     rtnFalse(){
-        return false
+            return false
+        }
+
+    download(){
+        //download everything as .tr file
+        //console.log(this.props.project_id);
+        // parameters={"id":this.props.project_id};
+        // axios.post(config.apiUrl + 'get_source/' , parameters)
+        //     .then((response) => {
+        //
+        //         console.log(response)
+        //     }).catch((exception) => {
+        //     console.log(exception);
+        // });
     }
-    render() {
-        let readyForPublish = this.checkReadyForPublish();
-        let publishButton =
-            <Button
-                floated="right"
-                color={"blue"}
-                disabled={!this.props.isPublish ? this.rtnTrue() : this.rtnFalse()}//enable if pusblished is true
-
-            >
-               Download </Button>
 
 
-        return (
-            //download published projects as .tr files
+        render() {
+            let readyForPublish = this.checkReadyForPublish();
+            let publishButton =
+                <Button
+                    floated="right"
+                    color={"blue"}
+                    disabled={!this.props.isPublish ? this.rtnTrue() : this.rtnFalse()}//enable if pusblished is disabled
+                    //disabled={!this.props.isPublish ? this.rtnFalse() : this.rtnTrue()}
+                    onClick={this.download}
+                >
+                    Download </Button>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <Button/>
-            {/*<Modal*/}
-                {/*trigger={publishButton}*/}
-                {/*open={this.state.modalOpen}*/}
-                {/*onClose={this.handleClose}*/}
-                {/*closeIcon='close'*/}
-                {/*size='small'*/}
-
-            {/*>*/}
-                {/*<Header icon='browser' content='Publish Project' />*/}
-                {/*<Modal.Content>*/}
-                    {/*<h3>Are you ready to publish this project?</h3>*/}
-                {/*</Modal.Content>*/}
-                {/*<Modal.Actions>*/}
-                    {/*<Button color='green' onClick={this.publishFiles.bind(this)} inverted>*/}
-                        {/*<Icon name='checkmark' />Yes*/}
-                    {/*</Button>*/}
-                {/*</Modal.Actions>*/}
-            {/*</Modal>*/}
-        )
+        return publishButton
     }
 }
 
-
-
-
-
-
-
-
-{/*<Button*/}
-{/*disabled={false}*/}
-{/*floated="right"*/}
-{/*color="red"*/}
-    {/*>*/}
-
-    {/*Download</Button>*/}
 
 
 
