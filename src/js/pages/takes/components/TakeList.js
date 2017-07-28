@@ -8,21 +8,10 @@ class TakeList extends Component {
 
     render () {
 
-        var list = [];
-
-            this.props.takes.map((i) => {
-                if((i.take.rating) === (this.props.ratingToGet)) {
-                    list[list.length] = i;
-                }
-            })
-
-
-
         iterator = 0;
         return (
             <div>
-                {list.map(this.createListItem.bind(this))}
-                {/*this.props.takes.map(this.createListItem.bind(this))*/}
+                {this.props.takes.map(this.createListItem.bind(this))}
             </div>
 
         );
@@ -37,12 +26,14 @@ class TakeList extends Component {
                     take={take} // one take
                     count={iterator}
                     source={take.source}
+                    chunkNumber={this.props.chunkNumber}
                     addToListenList={this.props.addToListenList}
                     patchTake={this.props.patchTake}
                     deleteTake={this.props.deleteTake}
                     updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
                     onClickSave={this.props.onClickSave}
                     deleteComment={this.props.deleteComment}
+                    playTake={this.props.playTake}
                 />
             </div>
         );
