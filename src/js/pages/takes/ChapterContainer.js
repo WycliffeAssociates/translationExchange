@@ -8,6 +8,7 @@ import 'css/takes.css'
 import ChapterHeader from "./components/ChapterHeader"
 import Footer from './components/Footer'
 import Chunk from "./components/Chunk"
+import { Modal } from 'semantic-ui-react'
 
 let onClick;
 
@@ -278,7 +279,9 @@ class ChapterContainer extends Component {
         });
         let newListenItem = {
             props: props,
-            chunk: chunk
+            chunk: chunk,
+            count: props.count,
+            mode: props.mode
         };
 
         newArr.push(newListenItem);

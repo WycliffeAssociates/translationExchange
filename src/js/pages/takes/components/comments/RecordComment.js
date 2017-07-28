@@ -151,23 +151,6 @@ export class RecordComment extends Component {
         );
     }
 }
-//
-//
-// function StopButton(props) {
-//     return (
-//         <button
-//             className="stop"
-//             onClick={this.stopRecording}
-//             type="button">
-//             <Icon size='small' name='stop' inverted/>
-//         </button>
-//
-//
-//         // <button className="stop" onClick={props.onClick} type="button">
-//         //     <Icon name="stop" size='small' inverted/>
-//         // </button>
-//     );
-// }
 
 
 function DisplayAudioPlayer(props) {

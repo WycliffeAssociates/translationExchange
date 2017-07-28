@@ -19,8 +19,14 @@ class Chunk extends Component {
         var twostar = [];
         var threestar = [];
 
-        this.props.segments.map((i) => {
+        var counter = 0;
 
+        let orderedSegments = this.props.segments.slice();
+
+        orderedSegments.map((i) => {
+
+            counter+= 1
+            i.order= counter
 
             if (i.take.is_publish) {
                 publish[publish.length] = i
@@ -152,10 +158,14 @@ class Chunk extends Component {
                                 <ChunkSidebar
                                     comments={this.props.comments}
                                     onClickSave={this.props.onClickSave}
+                                    column={0}
+                                    PLAYLIST={onestar}
+                                    playTake={this.props.playTake}
+                                    chunkNumber={this.props.number}
+                                    mode={this.props.mode}
                                     chunkId={this.props.id}
                                     deleteComment={this.props.deleteComment}
                                     active={this.props.active}
-                                    chunkNumber={this.props.number}
                                     onSourceClicked={this.props.onSourceClicked}
                                 />
                             </Grid.Column>
