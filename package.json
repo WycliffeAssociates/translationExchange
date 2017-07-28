@@ -37,7 +37,6 @@
     "semantic-ui-css": "^2.2.11",
     "semantic-ui-react": "^0.71.0",
     "translation-audio-player": "^1.1.0",
-    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "babel-jest": "^20.0.3",
