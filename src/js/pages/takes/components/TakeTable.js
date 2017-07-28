@@ -28,6 +28,7 @@ class TakeTable extends Component {
                             ratingToGet={this.props.column}
                             playTake={this.props.playTake}
                             chunkNumber={this.props.chunkNumber}
+                            deleteComment={this.props.deleteComment}
                             // deleteComment={this.props.deleteComment}
                         />
                         <br />

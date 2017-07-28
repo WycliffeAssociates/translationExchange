@@ -104,6 +104,7 @@ class Chunk extends Component {
                                     PLAYLIST={onestar}
                                     playTake={this.props.playTake}
                                     chunkNumber={this.props.number}
+                                    deleteComment={this.props.deleteComment}
                                 />
                                 <TakeTable
                                     icon={icon2}
@@ -117,6 +118,7 @@ class Chunk extends Component {
                                     PLAYLIST={twostar}
                                     playTake={this.props.playTake}
                                     chunkNumber={this.props.number}
+                                    deleteComment={this.props.deleteComment}
                                 />
                                 <TakeTable
                                     icon={icon3}
@@ -130,6 +132,7 @@ class Chunk extends Component {
                                     PLAYLIST={threestar}
                                     playTake={this.props.playTake}
                                     chunkNumber={this.props.number}
+                                    deleteComment={this.props.deleteComment}
                                 />
                                 <TakeTable
                                     icon={icon4}
@@ -143,6 +146,7 @@ class Chunk extends Component {
                                     PLAYLIST={publish}
                                     playTake={this.props.playTake}
                                     chunkNumber={this.props.number}
+                                    deleteComment={this.props.deleteComment}
                                 />
                             </Grid>
                         </SideBar>

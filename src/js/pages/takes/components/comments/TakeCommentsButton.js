@@ -10,7 +10,7 @@ let onClickCancel;
 let onClickSave;
 let Style;
 
-class PinkButton extends Component {
+class TakeCommentsButton extends Component {
 
     constructor(props) {
         super(props);
@@ -20,8 +20,7 @@ class PinkButton extends Component {
             show: this.props.open,
             SaveButtonState: true,
             blob: null,
-            active: this.props.comments.length > 0
-
+            active: this.props.comments.length > 0,
 
         };
 
@@ -30,7 +29,6 @@ class PinkButton extends Component {
         this.getInitialState = this.getInitialState.bind(this);
         this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
         this.onClickSave = this.onClickSave.bind(this);
-
     }
 
     saveButton() {
@@ -61,6 +59,11 @@ class PinkButton extends Component {
 
     }
 
+    onClickDelete(commentid, takeid) {
+        this.props.deleteComment("take", commentid, takeid)
+    }
+
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.comments.length > 0) {
             this.setState({
@@ -87,11 +90,14 @@ class PinkButton extends Component {
                         width={600}
                         height={300}
                         playlist={file}
+                        ref={audioComponent => {
+                            this.audioComponent = audioComponent;
+                        }}
                     />
                 </Grid.Column>
                 <Grid.Column width={2}>
                     <Button icon negative onClick={() => {
-                        this.props.deleteComment(this.props.type, comment.comment.id, this.props.id)
+                        this.onClickDelete(comment.comment.id, this.props.take.id)
                     }}>
                         <Icon name="trash"/>
                     </Button>
@@ -107,8 +113,7 @@ class PinkButton extends Component {
 
         fontSize: "32",
         color: 'white',
-        textAlign: "center",
-        //width:"500px"
+        textAlign: "center"
 
     };
 
@@ -119,24 +124,24 @@ class PinkButton extends Component {
                 size='small'
                 style={this.Style}
                 closeIcon='close'
-                trigger={<Button
-                    active={this.state.active}
-                    color={this.state.active ? 'yellow' : null}
-                    ref={audioComponent => {
-                        this.audioComponent = audioComponent;
-                    }}
-                    icon="comment outline"
-                    onClick={this.showModal}/>}
+                trigger={
+                    <Button
+                        fluid
+                        ref={audioComponent => {
+                            this.audioComponent = audioComponent;
+                        }}
+                        onClick={this.showModal}
+                        active={this.state.active}
+                        color={this.state.active ? 'yellow' : null}
+                        ><Icon name="comment outline"/></Button>}
             >
                 <Modal.Header style={this.Style}>Comments</Modal.Header>
                 <div>
-                    <RecordComment ref={instance => (this.recordComment = instance) }
+                    <RecordComment ref={instance => (this.recordComment = instance)}
                                    changeSaveButtonState={this.changeSaveButtonState}
-                                   updateTakeInState={this.props.updateTakeInState}
-                                   sendComment={this.getComment}
+                                   type="take"
+                                   id={this.props.take.id}
                                    onClickSave={this.props.onClickSave}
-                                   type={this.props.type}
-                                   id={this.props.id}
 
                     />
 
@@ -171,6 +176,6 @@ class PinkButton extends Component {
 // };
 
 
-export default PinkButton;
+export default TakeCommentsButton;
 
 
