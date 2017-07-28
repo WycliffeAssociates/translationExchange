@@ -94,3 +94,7 @@
     /*position: absolute;*/
 /*}*/
 /*ui inverted vertical labeled icon ui overlay right thin visible sidebar menu*/
+
+.nopadding {
+    padding-bottom: -20px;
+}

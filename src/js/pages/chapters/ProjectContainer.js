@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Button, Container, Header, Table, Input, TextArea } from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
+import DownloadProjects from "./components/DownloadProjects";
 import axios from 'axios';
 import config from 'config/config'
 import QueryString from 'query-string';
@@ -8,6 +9,8 @@ import LoadingDisplay from "js/components/LoadingDisplay";
 import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
 import PublishButton from "./components/PublishButton";
+import DownloadTR from "./components/DownloadTR"
+
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -18,11 +21,14 @@ class ProjectContainer extends Component {
             language: {},
             project_id: -1,
             is_publish: false,
-            filesData : null,
+            filesData: null,
             loaded: false,
             error: "",
             publishError: "",
+            downloadError: "",
+            downloadSuccess: "",
             anthology: {},
+            downloadLoading: false,
             version: {}
         };
     }
@@ -37,27 +43,13 @@ class ProjectContainer extends Component {
             .then((response) => {
                 this.setState({is_publish: true})
             }).catch((exception) => {
-            // modify for the error that occurs if the patch fails
+            // TODO: modify for the error that occurs if the patch fails
             this.setState({publishError: exception});
         });
 }
 
-    setCheckingLevel(level){
-
-        let params = {
-            filter: {
-                language: this.state.language.slug,
-                book: this.state.book.slug,
-                chapter: this.state.chapters.name,
-                anthology: this.state.anthology.name,
-                version: this.state.version.name
-            },
-            fields: {
-                checked_level: level
-            }
-        };
-
-        axios.post(config.apiUrl + "update_project/", params);
+    setCheckingLevel(chapterId, level){
+        axios.patch(config.apiUrl + "chapters/" + chapterId + "/", {checked_level: level});
     }
 
     getChapterData() {
@@ -73,7 +65,8 @@ class ProjectContainer extends Component {
                     project_id: results.data.project_id,
                     is_publish: results.data.is_publish,
                     language: results.data.language,
-                    loaded: true
+                    loaded: true,
+                    version: results.data.version
                 }
             )
         }).catch((exception) => {
@@ -92,9 +85,29 @@ class ProjectContainer extends Component {
         )
     }
 
-    componentDidMount () {
-        this.getChapterData()
+    // Minimal parameters saves on server query time
+    onDownloadProject() {
+        this.setState({downloadLoading: true, downloadError: "", downloadSuccess: ""});
 
+        let params = {
+            project: this.state.project_id
+        }
+
+        axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
+            .then((download_results) => {
+
+                window.location = config.streamingUrl + download_results.data.location;
+                this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
+
+            }).catch((exception) => {
+                this.setState({downloadError: exception});
+            }).catch((error) => {
+                this.setState({downloadLoading: false, downloadError: error});
+        });
+    }
+
+    componentDidMount() {
+        this.getChapterData()
     }
 
     render () {
@@ -109,12 +122,19 @@ class ProjectContainer extends Component {
 
                         <Header as='h1' >{this.state.book.name} ({this.state.language.name})
 
+                            <DownloadTR
+                                chapters={this.state.chapters}
+                                isPublish={this.state.is_publish}
+                                onPublish={this.publishFiles.bind(this)}
+                                project_id={this.state.project_id}
+                            />
 
                             <PublishButton
                             chapters={this.state.chapters}
                             isPublish={this.state.is_publish}
                             onPublish={this.publishFiles.bind(this)}
-                        />
+                            />
+
                         </Header>
 
 
@@ -136,14 +156,31 @@ class ProjectContainer extends Component {
                                 version={QueryString.parse(this.props.location.search).version}
                                 navigateToChapter={this.navigateToChapter.bind(this)}
                                 setCheckingLevel={this.setCheckingLevel.bind(this)}
+                                projectIsPublish={this.state.is_publish}
                             />
                         </Table>
 
+                        <DownloadProjects
+                            onDownloadProject={this.onDownloadProject.bind(this)}
+                        />
+
+                        {this.state.downloadLoading
+                            ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                            : ""
+                        }
+                        {this.state.downloadError
+                            ? "There was an error. Please try again"
+                            : ""
+                        }
+
                     </LoadingDisplay>
+
+                    <br></br>
 
                 </Container>
 
             </div>
+
         );
     }
 }

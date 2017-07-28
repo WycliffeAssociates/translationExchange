@@ -22,7 +22,7 @@ export class CheckingLevel extends React.Component {
 
     setValue(event, data){
         console.log(data.value)
-        this.props.setCheckingLevel(data.value);
+        this.props.setCheckingLevel(this.props.chapterId, data.value);
     }
 
     render() {

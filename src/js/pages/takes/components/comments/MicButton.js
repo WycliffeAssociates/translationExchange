@@ -20,11 +20,9 @@ class MicButton extends Component {
 
         this.state = {
             title: 'Record Comment',
-
             show: this.props.open,
             SaveButtonState: true,
             blob: null,
-            comments: this.props.comments
         };
 
 

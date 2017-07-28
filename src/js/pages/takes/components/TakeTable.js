@@ -33,8 +33,7 @@ class TakeTable extends Component {
                             playTake={this.props.playTake}
                             chunkNumber={this.props.chunkNumber}
                             mode={this.props.mode}
-
-                            // deleteComment={this.props.deleteComment}
+                            deleteComment={this.props.deleteComment}
                         />
                         <br />
                     </Table.Cell>

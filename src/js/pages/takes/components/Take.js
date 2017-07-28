@@ -1,19 +1,15 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Star from './Star';
-import AudioComponent from './AudioComponent';
 import config from "config/config";
 import {Button, Grid, Segment, Card, Modal, Icon} from "semantic-ui-react";
 import TakeListenButton from './AddTake'
-import DeleteTake from './DeleteTake'
-import LoadingGif from 'images/loading-tiny.gif'
-import TakeExportButton from "./SelectTake";
-import ShowMarkers from './ShowMarkers';
 import 'css/takes.css'
 import SideBar from './SideBar'
 import StitchTakesButton from "./StitchTakesButton";
+import TakeCommentsButton from "./comments/TakeCommentsButton";
 
 var listenCounter = 0
+
 class Take extends Component {
 
     constructor(props) {
@@ -59,7 +55,7 @@ class Take extends Component {
         }
     }
 
-    moveLeft () {
+    moveLeft() {
         if (this.props.take.is_publish) {
             this.props.onMarkedForExportToggled();
         } else if (this.props.take.rating > 1) {
@@ -87,30 +83,28 @@ class Take extends Component {
         return (
 
             <div>
-
-
                 <Segment.Group horizontal textAlign="left"  >
                     {this.props.take.rating > 1
                         ? <Segment className="hoverButton" onClick={this.moveLeft.bind(this)}>
-                            <Icon name="chevron left" size="large"/>
+                            <Icon name="chevron left" />
                         </Segment>
                         : <Segment className="hoverButton" onClick={this.props.onDeleteTake}>
-                            <Icon name="trash" color="red" size="large"/>
+                            <Icon name="trash" color="red" />
                         </Segment>
-
                     }
 
-
                     <Segment compact vertical textAlign="left">
-                        <Grid columns={2}>
-                            <Grid.Column>
-                                <font size="4"><strong>{this.props.author.name} Take {this.props.count}</strong></font>
-                            </Grid.Column>
-                            <Grid.Column textAlign="right">
-                                <StitchTakesButton onClick={this.addToListen.bind(this)} color="blue"/>
-                            </Grid.Column>
-                        </Grid>
+                        <Segment vertical>
+                            <Grid columns={2}>
+                                <Grid.Column>
+                                    <font size="4"><strong>{this.props.author.name} Take {this.props.count}</strong></font>
+                                </Grid.Column>
+                                <Grid.Column textAlign="right">
+                                    <StitchTakesButton onClick={this.addToListen.bind(this)} color="blue"/>
+                                </Grid.Column>
+                            </Grid>
                         {this.parseDate(this.props.take.date_modified)}
+                        </Segment>
 
                         <Segment vertical textAlign="center">
                             <TakeListenButton onClick={ () =>
@@ -123,34 +117,26 @@ class Take extends Component {
                             />
                         </Segment>
 
-                        <Segment vertical>
-                            Comment button here
+                        <Segment vertical className="nopadding">
+                            <TakeCommentsButton  take={this.props.take}
+                                                 comments={this.props.comments}
+                                                 onClickSave={this.props.onClickSave}
+                                                 deleteComment={this.props.deleteComment}/>
                         </Segment>
 
-
-                        {/*{<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>}*/}
-                        {/*<TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>*/}
-                        {/*<DeleteTake onDeleteTake={this.props.onDeleteTake}/>*/}
-
-                        {/*<ShowMarkers onClick = {this.showMarker} showMarkersColor={this.state.showMarkersColor} />*/}
-
-                        {/*{this.props.source*/}
-                            {/*? <div>*/}
-                                {/*<Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'*/}
-                                        {/*labelPosition='right'/>*/}
-                                {/*Language: {this.props.source.language.name}*/}
-                            {/*</div>*/}
-                            {/*: ""*/}
-
-                    {/*}*/}
                     </Segment>
+
+
 
                     {this.props.take.is_publish
                         ? ""
-                        : <Segment onClick={this.moveRight.bind(this)} className="hoverButton"> <Icon name="chevron right" size="large"/></Segment>
+                        : <Segment onClick={this.moveRight.bind(this)} className="hoverButton">
+                            <Icon name="chevron right"/>
+                        </Segment>
                     }
 
                 </Segment.Group>
+
 
             </div>
 

@@ -34,9 +34,19 @@ class AudioComponent extends Component {
         ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-pause'));
     }
 
+    componentDidMount() {
+        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-play'));
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.playlist !== this.props.playlist) {
+            ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-skip-to-next'));
+            ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-play'));
+        }
+    }
+
 
     render() {
-
         /*
          var file = [];
          file[0] = {
@@ -61,6 +71,7 @@ class AudioComponent extends Component {
                         this.onClick()
                     }}
                     mic={this.props.mic}
+                    loop={this.props.loop}
                     markers={markers}
                     showMarkers={showMarkers}
 
