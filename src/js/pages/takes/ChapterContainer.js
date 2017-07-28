@@ -349,6 +349,8 @@ class ChapterContainer extends Component {
                     language={this.state.language.name}
                     chunks={this.state.chunks}
                     listenList={this.state.listenList}
+                    playTake={this.playTake.bind(this)}
+                    onSourceClicked={this.onSourceClicked.bind(this)}
                 />
 
 
