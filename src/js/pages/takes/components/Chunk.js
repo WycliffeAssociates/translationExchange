@@ -103,6 +103,7 @@ class Chunk extends Component {
                                         playTake={this.props.playTake}
                                         chunkNumber={this.props.number}
                                         deleteComment={this.props.deleteComment}
+                                        deleteButton={true}
                                     />
                                     <TakeTable
                                         icon={icon2}
