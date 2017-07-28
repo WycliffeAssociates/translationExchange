@@ -8,21 +8,10 @@ class TakeList extends Component {
 
     render () {
 
-        var list = [];
-
-            this.props.takes.map((i) => {
-                if((i.take.rating) === (this.props.ratingToGet)) {
-                    list[list.length] = i;
-                }
-            })
-
-
-
         iterator = 0;
         return (
             <div>
-                {list.map(this.createListItem.bind(this))}
-                {/*this.props.takes.map(this.createListItem.bind(this))*/}
+                {this.props.takes.map(this.createListItem.bind(this))}
             </div>
 
         );
