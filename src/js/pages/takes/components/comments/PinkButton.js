@@ -17,10 +17,10 @@ class PinkButton extends Component {
 
         this.state = {
             title: 'Record Comment',
-
             show: this.props.open,
             SaveButtonState: true,
             blob: null,
+            active: this.props.comments.length > 0
 
 
         };
@@ -62,10 +62,16 @@ class PinkButton extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.open !== this.state.show) {
-            this.setState({show: true});
+        if (nextProps.comments.length > 0) {
+            this.setState({
+                active: true
+            })
         }
-
+        else {
+            this.setState({
+                active: false
+            })
+        }
     }
 
     createPlaylist(comment) {
@@ -114,7 +120,8 @@ class PinkButton extends Component {
                 style={this.Style}
                 closeIcon='close'
                 trigger={<Button
-                    color="pink"
+                    active={this.state.active}
+                    color={this.state.active ? 'yellow' : null}
                     ref={audioComponent => {
                         this.audioComponent = audioComponent;
                     }}

@@ -1,19 +1,16 @@
-/**
- * Created by ericazhong on 7/21/17.
- */
 import React, {Component} from 'react';
 import RecordComment from './RecordComment';
 import './RecordComment.css';
 import {Button, Container, Grid, Header, Icon, Image, Modal, ModalHeader} from 'semantic-ui-react';
 import Audio from "translation-audio-player";
-import config from "config/config";
-import axios from "axios"
+import config from "../../../../../config/config";
+
 // NOTE: (dmarchuk)
 let onClickCancel;
 let onClickSave;
 let Style;
 
-class MicButton extends Component {
+class TakeCommentsButton extends Component {
 
     constructor(props) {
         super(props);
@@ -23,16 +20,15 @@ class MicButton extends Component {
             show: this.props.open,
             SaveButtonState: true,
             blob: null,
-        };
+            active: this.props.comments.length > 0,
 
+        };
 
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
         this.getInitialState = this.getInitialState.bind(this);
         this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
         this.onClickSave = this.onClickSave.bind(this);
-        this.createPlaylist = this.createPlaylist.bind(this);
-
     }
 
     saveButton() {
@@ -52,14 +48,6 @@ class MicButton extends Component {
         this.setState({show: false});
     }
 
-    onClickCancel = () => {                         // used when you click the microphone button in the player
-        this.recordComment.deleteBlob();
-        this.hideModal();
-        this.setState({SaveButtonState: true});
-
-    };
-
-
     onClickSave = () => {
         this.hideModal();
         this.setState({SaveButtonState: true});
@@ -73,6 +61,20 @@ class MicButton extends Component {
 
     onClickDelete(commentid, takeid) {
         this.props.deleteComment("take", commentid, takeid)
+    }
+
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.comments.length > 0) {
+            this.setState({
+                active: true
+            })
+        }
+        else {
+            this.setState({
+                active: false
+            })
+        }
     }
 
     createPlaylist(comment) {
@@ -106,28 +108,36 @@ class MicButton extends Component {
     }
 
     Style = {
-        backgroundColor: "black",
+
+        backgroundColor: 'black',
+
         fontSize: "32",
-        textAlign: "center",
         color: 'white',
-        //width:"500px"
+        textAlign: "center"
 
     };
 
     render() {
-
         return (
 
             <Modal
-                open={this.state.show}
                 size='small'
                 style={this.Style}
                 closeIcon='close'
-                onClose={this.hideModal}
+                trigger={
+                    <Button
+                        fluid
+                        ref={audioComponent => {
+                            this.audioComponent = audioComponent;
+                        }}
+                        onClick={this.showModal}
+                        active={this.state.active}
+                        color={this.state.active ? 'yellow' : null}
+                        ><Icon name="comment outline"/></Button>}
             >
                 <Modal.Header style={this.Style}>Comments</Modal.Header>
                 <div>
-                    <RecordComment ref={instance => (this.recordComment = instance) }
+                    <RecordComment ref={instance => (this.recordComment = instance)}
                                    changeSaveButtonState={this.changeSaveButtonState}
                                    type="take"
                                    id={this.props.take.id}
@@ -155,5 +165,17 @@ class MicButton extends Component {
     }
 }
 
+// PinkButton.propTypes = {
+//     open
+//    comments
+// id
+// type
+// onClickSave
+// updateTakeInState
 
-export default MicButton;
+// };
+
+
+export default TakeCommentsButton;
+
+

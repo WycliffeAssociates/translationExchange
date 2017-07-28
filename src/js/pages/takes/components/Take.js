@@ -1,18 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Star from './Star';
-import AudioComponent from './AudioComponent';
 import config from "config/config";
 import {Button, Grid, Segment, Card, Modal, Icon} from "semantic-ui-react";
 import TakeListenButton from './AddTake'
-import DeleteTake from './DeleteTake'
-import LoadingGif from 'images/loading-tiny.gif'
-import TakeExportButton from "./SelectTake";
-import ShowMarkers from './ShowMarkers';
 import 'css/takes.css'
-import SideBar from './SideBar'
+import TakeCommentsButton from "./comments/TakeCommentsButton";
 
 var listenCounter = 0
+
 class Take extends Component {
 
     constructor(props) {
@@ -58,7 +53,7 @@ class Take extends Component {
         }
     }
 
-    moveLeft () {
+    moveLeft() {
         if (this.props.take.is_publish) {
             this.props.onMarkedForExportToggled();
         } else if (this.props.take.rating > 1) {
@@ -86,47 +81,51 @@ class Take extends Component {
         return (
 
             <div>
+                <Segment.Group horizontal textAlign="center" >
 
-
-                <Segment.Group horizontal textAlign="center"  >
                     {this.props.take.rating > 1
-                        ? <Segment className="hoverButton" onClick={this.moveLeft.bind(this)}> <Icon name="chevron left" /></Segment>
+                        ?
+                        <Segment className="hoverButton" onClick={this.moveLeft.bind(this)}>
+                            <Icon name="chevron left"/>
+                        </Segment>
                         : ""
                     }
+                        <Segment vertical>
+                            <strong><font color="blue">{this.props.author.name} </font>
+                                on {this.parseDate(this.props.take.date_modified)}</strong>
 
-                    <Segment>
-                <strong><font color="blue">{this.props.author.name}</font> on {this.parseDate(this.props.take.date_modified)}</strong>
+                            {/*{<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>}*/}
+                            <TakeListenButton onClick={() =>
+                                this.props.playTake(this.props.take.location,
+                                    this.props.chunkNumber,
+                                    this.props.author.name,
+                                    this.parseDate(this.props.take.date_modified))
+                            }
+                            />
 
-                {/*{<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>}*/}
-                <TakeListenButton onClick={ () =>
-                                      this.props.playTake(this.props.take.location,
-                                          this.props.chunkNumber,
-                                          this.props.author.name,
-                                          this.parseDate(this.props.take.date_modified))
-                                  }
-                />
-                {/*<TakeListenButton onClick={this.addToListen.bind(this)} color={this.state.addButtonColor}/>*/}
-                {/*<DeleteTake onDeleteTake={this.props.onDeleteTake}/>*/}
+                        <Segment vertical className="nopadding">
+                            <TakeCommentsButton  take={this.props.take}
+                                                 comments={this.props.comments}
+                                                 onClickSave={this.props.onClickSave}
+                                                 deleteComment={this.props.deleteComment}/>
+                        </Segment>
 
-                {/*<ShowMarkers onClick = {this.showMarker} showMarkersColor={this.state.showMarkersColor} />*/}
 
-                    {/*{this.props.source*/}
-                        {/*? <div>*/}
-                            {/*<Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow'*/}
-                                    {/*labelPosition='right'/>*/}
-                            {/*Language: {this.props.source.language.name}*/}
-                        {/*</div>*/}
-                        {/*: ""*/}
+                        </Segment>
 
-                    {/*}*/}
-                    </Segment>
+
+
+
 
                     {this.props.take.is_publish
                         ? ""
-                        : <Segment onClick={this.moveRight.bind(this)} className="hoverButton"> <Icon name="chevron right" /></Segment>
+                        : <Segment onClick={this.moveRight.bind(this)} className="hoverButton">
+                            <Icon name="chevron right"/>
+                        </Segment>
                     }
 
                 </Segment.Group>
+
 
             </div>
 
