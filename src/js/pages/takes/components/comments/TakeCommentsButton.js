@@ -97,7 +97,9 @@ class TakeCommentsButton extends Component {
                 </Grid.Column>
                 <Grid.Column width={2}>
                     <Button icon negative onClick={() => {
-                        this.onClickDelete(comment.comment.id, this.props.take.id)
+                        if(window.confirm('Delete this comment?')) {
+                            this.onClickDelete(comment.comment.id, this.props.take.id)
+                        }
                     }}>
                         <Icon name="trash"/>
                     </Button>

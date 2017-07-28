@@ -110,45 +110,48 @@ class ChapterContainer extends Component {
     }
 
     deleteComment(type, commentid, takeid) {
-        axios.delete('http://172.19.145.91/api/comments/' + commentid + '/'
-        ).then((results) => {
-            let updatedChunks = this.state.chunks.slice();
-            if (type === "take") {
-                let chunkToUpdate = updatedChunks.findIndex((chunk) => {
-                    return chunk.takes.find(take => take.take.id === takeid)
-                });
-                let takeToUpdate = updatedChunks[chunkToUpdate].takes
-                    .findIndex(take => take.take.id === takeid);
 
-                updatedChunks[chunkToUpdate].takes[takeToUpdate].comments =
-                    updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.filter(comment => comment.comment.id !== commentid);
-                this.setState({
-                    chunks: updatedChunks
-                });
-            }
+            axios.delete('http://172.19.145.91/api/comments/' + commentid + '/'
+            ).then((results) => {
+                let updatedChunks = this.state.chunks.slice();
+                if (type === "take") {
+                    let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+                        return chunk.takes.find(take => take.take.id === takeid)
+                    });
+                    let takeToUpdate = updatedChunks[chunkToUpdate].takes
+                        .findIndex(take => take.take.id === takeid);
 
-            else if (type === "chunk") {
-                for (var i = 0; i < updatedChunks.length; i++) {
-                    if (updatedChunks[i].id === takeid) {
-                        var chunkToUpdate = i;
-                    }
+                    updatedChunks[chunkToUpdate].takes[takeToUpdate].comments =
+                        updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.filter(comment => comment.comment.id !== commentid);
+                    this.setState({
+                        chunks: updatedChunks
+                    });
                 }
-                updatedChunks[chunkToUpdate].comments = updatedChunks[chunkToUpdate].comments.filter(comment => comment.comment.id !== commentid);
-                this.setState({
-                    chunks: updatedChunks
-                });
 
-            }
-            else if (type === "chapter") {
-                let updatedChapter = Object.assign({}, this.state.chapter);
+                else if (type === "chunk") {
+                    for (var i = 0; i < updatedChunks.length; i++) {
+                        if (updatedChunks[i].id === takeid) {
+                            var chunkToUpdate = i;
+                        }
+                    }
+                    updatedChunks[chunkToUpdate].comments = updatedChunks[chunkToUpdate].comments.filter(comment => comment.comment.id !== commentid);
+                    this.setState({
+                        chunks: updatedChunks
+                    });
 
-                updatedChapter.comments = updatedChapter.comments.filter(comment => comment.comment.id !== commentid);
-                this.setState({
-                    chapter: updatedChapter
-                });
-            }
+                }
+                else if (type === "chapter") {
+                    let updatedChapter = Object.assign({}, this.state.chapter);
 
-        })
+                    updatedChapter.comments = updatedChapter.comments.filter(comment => comment.comment.id !== commentid);
+                    this.setState({
+                        chapter: updatedChapter
+                    });
+                }
+
+
+            })
+
     }
 
     onClickSave(blobx, type, id, success) {

@@ -87,7 +87,8 @@ class PinkButton extends Component {
                 </Grid.Column>
                 <Grid.Column width={2}>
                     <Button icon negative onClick={() => {
-                        this.props.deleteComment(this.props.type, comment.comment.id, this.props.id)
+                        if(window.confirm('Delete this comment?')){
+                        this.props.deleteComment(this.props.type, comment.comment.id, this.props.id)}
                     }}>
                         <Icon name="trash"/>
                     </Button>
