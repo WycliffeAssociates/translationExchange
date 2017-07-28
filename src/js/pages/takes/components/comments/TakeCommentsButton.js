@@ -138,7 +138,7 @@ class TakeCommentsButton extends Component {
                         color={this.state.active ? 'yellow' : null}
                         ><Icon name="comment outline"/></Button>}
                     >
-                <Modal.Header style={this.Style}>Comments</Modal.Header>
+                <Modal.Header style={this.Style}>Comments on Take {this.props.count}, Chunk {this.props.chunkNumber} </Modal.Header>
                 <div>
                     <RecordComment ref={instance => (this.recordComment = instance)}
                                    changeSaveButtonState={this.changeSaveButtonState}

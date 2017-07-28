@@ -123,7 +123,7 @@ class PinkButton extends Component {
                     icon="comment outline"
                     onClick={this.showModal}/>}
             >
-                <Modal.Header style={this.Style}>Comments</Modal.Header>
+                <Modal.Header style={this.Style}>Comments on {this.props.language} {this.props.type} {this.props.number} </Modal.Header>
                 <div>
                     <RecordComment ref={instance => (this.recordComment = instance)}
                                    changeSaveButtonState={this.changeSaveButtonState}

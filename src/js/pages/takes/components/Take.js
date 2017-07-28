@@ -116,6 +116,8 @@ class Take extends Component {
                                                      onClickSave={this.props.onClickSave}
                                                      deleteComment={this.props.deleteComment}
                                                      loadingActive={this.props.active}
+                                                     count={this.props.count}
+                                                     chunkNumber={this.props.chunkNumber}
                                 />
                             </Grid.Row>
                         </Grid.Column>

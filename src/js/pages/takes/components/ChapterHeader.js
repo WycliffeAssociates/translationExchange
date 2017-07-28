@@ -32,6 +32,8 @@ class ChapterHeader extends Component {
                                     type={"chapter"}
                                     deleteComment={this.props.deleteComment}
                                     loadingActive={this.props.active}
+                                    number={this.props.chapter.number}
+                                    language={this.props.language}
                         />
 
                     </Grid.Column>
