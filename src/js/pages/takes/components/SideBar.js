@@ -16,7 +16,7 @@ class SidebarRightOverlay extends Component {
     toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
     render() {
-        const { visible } = this.state
+        const { visible } = this.state;
         return (
             <div>
                 <Sidebar.Pushable as={Segment}>
@@ -36,7 +36,9 @@ class SidebarRightOverlay extends Component {
                                 onClickSave={this.props.onClickSave}
                                 id={this.props.chunkId}
                                 type={"chunk"}
-                                deleteComment={this.props.deleteComment}/>
+                                deleteComment={this.props.deleteComment}
+                                loadingActive={this.props.active}
+                            />
                         </Menu.Item>
                         <Menu.Item>
                             <SourceAudioButton startv={this.props.chunkNumber}

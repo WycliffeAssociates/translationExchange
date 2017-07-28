@@ -89,6 +89,7 @@ class Chunk extends Component {
                                  deleteComment={this.props.deleteComment}
                                  chunkNumber={this.props.number}
                                  onSourceClicked={this.props.onSourceClicked}
+                                 active={this.props.active}
                         >
 
                             <Grid fixed padded fluid columns={4}>

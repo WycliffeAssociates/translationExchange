@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {ReactMic} from 'react-mic';
 import {Button, Grid, Icon} from "semantic-ui-react";
 import "./RecordComment.css"
+import LoadingGif from 'images/loading-tiny.gif'
+
 let startRecording;
 let stopRecording;
 
@@ -16,8 +18,8 @@ export class RecordComment extends Component {
             DisableSaveButton: true,
             blob: '',
             jsonblob: null
-        };
 
+        };
 
         this.onStop = this.onStop.bind(this);
         this.deleteBlob = this.deleteBlob.bind(this);
@@ -46,9 +48,10 @@ export class RecordComment extends Component {
 
     onSave(type, id, jsonblob, func) {
 
-        func(jsonblob, type, id);
-        this.setState({
-            displayPlayer:false
+        func(jsonblob, type, id, () => {
+            this.setState({
+                displayPlayer: false
+            })
         });
     }
 
@@ -101,7 +104,11 @@ export class RecordComment extends Component {
                                               jsonblob={jsonblob}
                                               AudioURL={AudioURL}
                                               onClickSave={this.props.onClickSave}
-                                                onSave={this.onSave.bind(this)}/>;
+                                              onSave={this.onSave.bind(this)}
+                                              active={this.props.loadingActive}
+                                              hideplayer={this.state.hideplayer}
+
+            />;
 
         }
 
@@ -152,14 +159,12 @@ function StopButton(props) {
 }
 
 
-
 function DisplayAudioPlayer(props) {
     const displayPlayer = props.displayPlayer;
     const AudioURL = props.AudioURL;
     const jsonblob = props.jsonblob;
     const type = props.type;
     const id = props.id;
-
     if (displayPlayer) {
 
         return (
@@ -172,8 +177,15 @@ function DisplayAudioPlayer(props) {
                 </Grid.Column>
 
                 <Grid.Column width={3}>
-                    {jsonblob ? <Button positive size="small" onClick={() => {
-                        props.onSave(type, id, jsonblob, props.onClickSave) }}>Save</Button> : ''}
+                    {props.active ?
+                        <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                        : <Button positive size="small" onClick={() => {
+                            props.onSave(type, id, jsonblob, props.onClickSave)
+                        }}>Save</Button>
+
+                    }
+
+
                 </Grid.Column>
             </Grid>
         );

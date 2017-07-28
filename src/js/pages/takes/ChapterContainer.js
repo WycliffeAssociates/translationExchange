@@ -28,7 +28,8 @@ class ChapterContainer extends Component {
             selectedSourceProject: {},
             listenList: [],
             query: '',
-            currentPlaylist: []
+            currentPlaylist: [],
+            active: false
         };
     }
 
@@ -150,7 +151,10 @@ class ChapterContainer extends Component {
         })
     }
 
-    onClickSave(blobx, type, id) {
+    onClickSave(blobx, type, id, success) {
+        this.setState({
+            active: true
+        });
         axios.post(config.apiUrl + 'comments/', {
             "comment": blobx,
             "user": 3,
@@ -169,8 +173,10 @@ class ChapterContainer extends Component {
                     .findIndex(take => take.take.id === id);
                 updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.push(map);
                 this.setState({
-                    chunks: updatedChunks
+                    chunks: updatedChunks,
+                    active: false
                 });
+
             }
             else if (type === "chunk") {
 
@@ -181,7 +187,8 @@ class ChapterContainer extends Component {
                 }
                 updatedChunks[chunkToUpdate].comments.push(map);
                 this.setState({
-                    chunks: updatedChunks
+                    chunks: updatedChunks,
+                    active: false
                 });
             }
 
@@ -189,10 +196,12 @@ class ChapterContainer extends Component {
                 let updatedChapter = Object.assign({}, this.state.chapter);
                 updatedChapter.comments.push(map);
                 this.setState({
-                    chapter: updatedChapter
+                    chapter: updatedChapter,
+                    active: false
                 });
 
             }
+            success();
 
         });
     }
@@ -339,7 +348,6 @@ class ChapterContainer extends Component {
     }
 
     createChunkList(chunk) {
-
         /*
         segments is an array of takes for each chunk
          */
@@ -366,6 +374,7 @@ class ChapterContainer extends Component {
                     listenList={this.state.listenList}
                     playTake={this.playTake.bind(this)}
                     onSourceClicked={this.onSourceClicked.bind(this)}
+                    active={this.state.active}
                 />
 
 

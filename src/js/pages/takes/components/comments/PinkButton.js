@@ -20,7 +20,8 @@ class PinkButton extends Component {
             show: this.props.open,
             SaveButtonState: true,
             blob: null,
-            active: this.props.comments.length > 0
+            active: this.props.comments.length > 0,
+            loadingActive: this.props.active
 
 
         };
@@ -31,11 +32,6 @@ class PinkButton extends Component {
         this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
         this.onClickSave = this.onClickSave.bind(this);
 
-    }
-
-    saveButton() {
-
-        this.setState({disabled: false});
     }
 
     getInitialState() {
@@ -102,9 +98,7 @@ class PinkButton extends Component {
     }
 
     Style = {
-
         backgroundColor: 'black',
-
         fontSize: "32",
         color: 'white',
         textAlign: "center",
@@ -137,6 +131,7 @@ class PinkButton extends Component {
                                    onClickSave={this.props.onClickSave}
                                    type={this.props.type}
                                    id={this.props.id}
+                                   loadingActive={this.props.loadingActive}
 
                     />
 
