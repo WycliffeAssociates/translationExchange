@@ -5,6 +5,7 @@ import config from "../../../config/config";
 import {Button, Grid, Segment} from "semantic-ui-react";
 import _ from 'lodash';
 import Take from "./components/Take";
+import SideBar from './components/SideBar'
 
 
 class TakeContainer extends Component {
@@ -46,6 +47,7 @@ class TakeContainer extends Component {
             <Take count={this.props.count}
                   take={this.props.take.take}
                   author={this.props.take.user}
+                  chunkNumber={this.props.chunkNumber}
                   ratingLoading={this.state.ratingLoading}
                   onRatingSet={this.onRatingSet.bind(this)}
                   onMarkedForExportToggled={this.onMarkedForExportToggled.bind(this)}
@@ -55,6 +57,7 @@ class TakeContainer extends Component {
                   onDeleteTake={this.onDeleteTake.bind(this)}
                   onClickSave={this.props.onClickSave}
                   deleteComment={this.props.deleteComment}
+                  playTake={this.props.playTake}
 
             />
             //other events that require requesting the server would go here

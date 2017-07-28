@@ -9,9 +9,8 @@ import LoadingDisplay from "js/components/LoadingDisplay";
 import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
 import PublishButton from "./components/PublishButton";
-// import FileDownload from 'react-file-download';
+import FileDownload from 'react-file-download';
 import FileSaver from 'file-saver'
-import JSZip from 'jszip'
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -35,16 +34,6 @@ class ProjectContainer extends Component {
             downloadLoading: false,
             version: {}
         };
-        this.uploadSourceFile = this.uploadSourceFile.bind(this);
-        this.handleFileChange = this.handleFileChange.bind(this);
-    }
-
-    handleFileChange(event) {
-        var data = new FormData();
-        data.append('file', event.target.files[0]);
-        this.setState({
-            filesData: data
-        });
     }
 
     publishFiles() {
@@ -57,37 +46,10 @@ class ProjectContainer extends Component {
             .then((response) => {
                 this.setState({is_publish: true})
             }).catch((exception) => {
-            // modify for the error that occurs if the patch fails
+            // TODO: modify for the error that occurs if the patch fails
             this.setState({publishError: exception});
         });
 }
-
-
-    uploadSourceFile(event) {
-        event.preventDefault();
-        this.setState({uploadSourceLoading: true, uploadSourceError: ""});
-        let uploadedLanguage = "";
-
-        axios.post(config.apiUrl + 'source/source_filename', this.state.filesData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        }).then((response) => {
-            uploadedLanguage = response.data.language.name;
-            let updateProjectParams = {
-                filter: QueryString.parse(this.props.location.search),
-                fields: {
-                    source_language: response.data.language.id
-                }
-            };
-            return axios.post(config.apiUrl + 'update_project/', updateProjectParams);
-        }).then((response) => {
-            this.setState({uploadSourceLoading: false, uploadSourceSuccess: uploadedLanguage});
-        }).catch((error) => {
-            this.setState({uploadSourceLoading: false, uploadSourceError: error});
-        });
-
-    }
 
     setCheckingLevel(level){
 
@@ -105,7 +67,7 @@ class ProjectContainer extends Component {
         };
 
         alert("This needs to get fixed - it crashes");
-        // Endpoint had been renamed to projects/
+        // TODO: Endpoint had been renamed to projects/
         // axios.post(config.apiUrl + "update_project/", params);
     }
 
@@ -142,90 +104,28 @@ class ProjectContainer extends Component {
         )
     }
 
-    saveFile() {
-        console.log("Is this gonna work?");
+    // TODO: Fix all this
+    onDownloadProject() {
+        let zipFileName = this.state.language.slug + "_" + QueryString.parse(this.props.location.search).version + "_" + this.state.book.slug + ".zip"
+        this.setState({downloadLoading: true, downloadError: "", downloadSuccess: ""});
 
         let params = {
-            language: this.state.language.slug,
-            version: QueryString.parse(this.props.location.search).version,
-            book: this.state.book.slug
+            project: this.state.project_id
         }
-
-        let filePath = 'C:/Users/wyatt/Downloads/en-x-demo2_ulb_mrk-WORKING.zip'
-
         // var file = new Blob([filePath.blob], {type: 'application/zip'}, true);
         // FileSaver.saveAs(file);
 
-        //Just wanna see if this thing can work like I hope it will...
         axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
             .then((download_results) => {
-                console.log(download_results.data);
-
-                var zip = new JSZip();
-                zip.file("zip_data.zip", download_results.data);
-                zip.generateAsync({type:"uint8array"})
-                    .then(function(data) {
-                        FileSaver.saveAs(data, "example.zip");
-                    });
-
-            }).catch((exception) => {
-            this.setState({downloadError: exception});
-        }).catch((error) => {
-            this.setState({downloadLoading: false, downloadError: error});
-        });
-
-
-        // zip.file("Hello.txt", "Hello World\n");
-        // var img = zip.folder("images");
-        // img.file("smile.gif", imgData, {base64: true});
-        // zip.generateAsync({type:"blob"})
-        //     .then(function(content) {
-        //         // see FileSaver.js
-        //         saveAs(content, "example.zip");
-        //     });
-
-        // well this works
-        // var zip = new JSZip();
-        // zip.file("Example_File_In_ZIP.txt", "What the text?");
-        // zip.generateAsync({type:"blob"})
-        //     .then(function(blob) {
-        //         FileSaver.saveAs(blob, "example.zip");
-        //     });
-
-        // What does this do?
-        //bindEvent(blobLink, 'click', downloadWithBlob);
-
-        console.log("Did this work?");
-    }
-
-    onDownloadProject() {
-        let zipFileName = this.state.language.slug + "_" + QueryString.parse(this.props.location.search).version + "_" + this.state.book.slug + ".zip"
-        this.setState({downloadLoading: true, downloadError: ""});
-
-        let params = {
-            language: this.state.language.slug,
-            version: QueryString.parse(this.props.location.search).version,
-            book: this.state.book.slug
-        }
-
-        axios.post(config.apiUrl + "zip_files/", params, {timeout: 0})
-            .then((download_results) => {
-                //FileDownload(download_results.data, 'file.zip');
-
+                //FileDownload(config.apiUrl + download_results, zipFileName);
                 this.setState({downloadLoading: false, downloadSuccess: "Success. Check your downloads folder"});
-                //Returns a corrupt file - The API returns an open-able file. Is it the Lib
-                var results = download_results.data;
-                console.log(download_results.data);
-                // return(download_results.data);
-                // console.log("returned");
+                console.log(config.apiUrl + download_results.location);
 
-                // Lets test something - I pray this works
-                //var blob = new Blob([download_results.data], {type: 'application/zip'});
-                //FileSaver.saveAs(blob, zipFileName);
-
-
-                //this.saveFile("this data is sent");
-
+                // window.open(response.file);
+                //
+                // var file = new Blob([config.apiUrl + download_results.data], {type: 'application/zip'});
+                // FileSaver.saveAs(file);
+                //this.downloadFile(download_results.data);
 
             }).catch((exception) => {
                 this.setState({downloadError: exception});
@@ -234,8 +134,19 @@ class ProjectContainer extends Component {
         });
     }
 
-
-
+    downloadFile(args) {
+        // fake server request, getting the file url as response
+        setTimeout(() => {
+            const response = {
+                    file: args,
+            };
+            // server sent the url to the file!
+            // now, let's download:
+            window.open(response.file);
+            // you could also do:
+            // window.location.href = response.file;
+        }, 1000);
+    }
 
     componentDidMount() {
         this.getChapterData()
@@ -282,14 +193,14 @@ class ProjectContainer extends Component {
                                 setCheckingLevel={this.setCheckingLevel.bind(this)}
                             />
                         </Table>
+
                     </LoadingDisplay>
 
                     <br></br>
 
 
                     <DownloadProjects
-                        //onDownloadProject={this.onDownloadProject.bind(this)}
-                        saveFile={this.saveFile.bind(this)}
+                        onDownloadProject={this.onDownloadProject.bind(this)}
                     />
 
                     {this.state.downloadLoading
