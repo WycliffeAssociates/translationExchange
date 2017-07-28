@@ -203,7 +203,14 @@ class ChapterContainer extends Component {
             }
             success();
 
-        });
+        }).catch((exception) => {
+
+            alert('try again '+ exception);
+            success();
+            this.setState({
+                active: false
+            });
+    })
     }
 
     updateChosenTakeForChunk(takeId) {

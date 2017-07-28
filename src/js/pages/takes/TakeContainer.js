@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import TakePropTypes from "./components/TakePropTypes";
 import Take from "./components/Take";
-import SideBar from './components/SideBar'
 
 
 class TakeContainer extends Component {

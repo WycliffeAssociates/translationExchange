@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import ChunkPropTypes from "./ChunkPropTypes";
 
-import {Accordion, Icon, Grid} from "semantic-ui-react";
+import {Accordion, Icon, Grid, Menu, Rail} from "semantic-ui-react";
 import TakeTable from './TakeTable'
 import 'css/takes.css'
-import SideBar from "./SideBar"
+
+import ChunkSidebar from "./SideBar"
 let onClick;
 let CommentContainer
 
@@ -81,79 +82,85 @@ class Chunk extends Component {
                     </Accordion.Title>
                     <Accordion.Content className="ChunkBody">
 
-                        <SideBar className="commentBar"
-                                 comments={this.props.comments}
-                                 onClickSave={this.props.onClickSave}
-                                 chunkId={this.props.id}
-                                 deleteComment={this.props.deleteComment}
-                                 chunkNumber={this.props.number}
-                                 onSourceClicked={this.props.onSourceClicked}
-                                 active={this.props.active}
-                        >
+                        <Grid fluid columns={2}>
+                            <Grid.Column width={15}>
+                                <Grid fixed padded fluid columns={4}>
+                                    <TakeTable
+                                        icon={icon1}
+                                        takes={this.props.segments}
+                                        addToListenList={this.props.addToListenList}
+                                        patchTake={this.props.patchTake}
+                                        deleteTake={this.props.deleteTake}
+                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                        onClickSave={this.props.onClickSave}
+                                        column={0}
+                                        PLAYLIST={onestar}
+                                        playTake={this.props.playTake}
+                                        chunkNumber={this.props.number}
+                                        deleteComment={this.props.deleteComment}
+                                        active={this.props.active}
+                                    />
+                                    <TakeTable
+                                        icon={icon2}
+                                        takes={this.props.segments}
+                                        addToListenList={this.props.addToListenList}
+                                        patchTake={this.props.patchTake}
+                                        deleteTake={this.props.deleteTake}
+                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                        onClickSave={this.props.onClickSave}
+                                        column={1}
+                                        PLAYLIST={twostar}
+                                        playTake={this.props.playTake}
+                                        chunkNumber={this.props.number}
+                                        deleteComment={this.props.deleteComment}
+                                        active={this.props.active}
+                                    />
+                                    <TakeTable
+                                        icon={icon3}
+                                        takes={this.props.segments}
+                                        addToListenList={this.props.addToListenList}
+                                        patchTake={this.props.patchTake}
+                                        deleteTake={this.props.deleteTake}
+                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                        onClickSave={this.props.onClickSave}
+                                        column={2}
+                                        PLAYLIST={threestar}
+                                        playTake={this.props.playTake}
+                                        chunkNumber={this.props.number}
+                                        deleteComment={this.props.deleteComment}
+                                        active={this.props.active}
+                                    />
+                                    <TakeTable
+                                        icon={icon4}
+                                        takes={this.props.segments}
+                                        addToListenList={this.props.addToListenList}
+                                        patchTake={this.props.patchTake}
+                                        deleteTake={this.props.deleteTake}
+                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                        onClickSave={this.props.onClickSave}
+                                        column={3}
+                                        PLAYLIST={publish}
+                                        playTake={this.props.playTake}
+                                        chunkNumber={this.props.number}
+                                        deleteComment={this.props.deleteComment}
+                                        active={this.props.active}
+                                    />
 
-                            <Grid fixed padded fluid columns={4}>
-                                <TakeTable
-                                    icon={icon1}
-                                    takes={this.props.segments}
-                                    addToListenList={this.props.addToListenList}
-                                    patchTake={this.props.patchTake}
-                                    deleteTake={this.props.deleteTake}
-                                    updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                </Grid>
+                            </Grid.Column>
+                            <Grid.Column width={1} verticalAlign="middle" floated="right">
+                                <ChunkSidebar
+                                    comments={this.props.comments}
                                     onClickSave={this.props.onClickSave}
-                                    column={0}
-                                    PLAYLIST={onestar}
-                                    playTake={this.props.playTake}
-                                    chunkNumber={this.props.number}
+                                    chunkId={this.props.id}
                                     deleteComment={this.props.deleteComment}
                                     active={this.props.active}
-                                />
-                                <TakeTable
-                                    icon={icon2}
-                                    takes={this.props.segments}
-                                    addToListenList={this.props.addToListenList}
-                                    patchTake={this.props.patchTake}
-                                    deleteTake={this.props.deleteTake}
-                                    updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                                    onClickSave={this.props.onClickSave}
-                                    column={1}
-                                    PLAYLIST={twostar}
-                                    playTake={this.props.playTake}
                                     chunkNumber={this.props.number}
-                                    deleteComment={this.props.deleteComment}
-                                    active={this.props.active}
+                                    onSourceClicked={this.props.onSourceClicked}
                                 />
-                                <TakeTable
-                                    icon={icon3}
-                                    takes={this.props.segments}
-                                    addToListenList={this.props.addToListenList}
-                                    patchTake={this.props.patchTake}
-                                    deleteTake={this.props.deleteTake}
-                                    updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                                    onClickSave={this.props.onClickSave}
-                                    column={2}
-                                    PLAYLIST={threestar}
-                                    playTake={this.props.playTake}
-                                    chunkNumber={this.props.number}
-                                    deleteComment={this.props.deleteComment}
-                                    active={this.props.active}
-                                />
-                                <TakeTable
-                                    icon={icon4}
-                                    takes={this.props.segments}
-                                    addToListenList={this.props.addToListenList}
-                                    patchTake={this.props.patchTake}
-                                    deleteTake={this.props.deleteTake}
-                                    updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                                    onClickSave={this.props.onClickSave}
-                                    column={3}
-                                    PLAYLIST={publish}
-                                    playTake={this.props.playTake}
-                                    chunkNumber={this.props.number}
-                                    deleteComment={this.props.deleteComment}
-                                    active={this.props.active}
-                                />
-                            </Grid>
-                        </SideBar>
+                            </Grid.Column>
+                        </Grid>
+
                     </Accordion.Content>
 
                 </Accordion>
@@ -165,15 +172,6 @@ class Chunk extends Component {
     }
 
 }
-
-/*
-Chunk.propTypes = {
-    chunk: ChunkPropTypes
-};
-
- <SideBar className="commentBar"/>
-
-*/
  Chunk.propTypes = {
  chunk: ChunkPropTypes
  };
