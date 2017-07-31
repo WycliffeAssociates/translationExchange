@@ -10,7 +10,10 @@ import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
 import PublishButton from "./components/PublishButton";
 import DownloadTR from "./components/DownloadTR"
+import Error from '../../pages/404Error'
 
+var locationString;
+var errorBool;
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -106,12 +109,22 @@ class ProjectContainer extends Component {
         });
     }
 
+    errorComponent() {
+        if (locationString !== null) {
+            <Error/>
+            errorBool = true;
+        }
+    }
+
+
     componentDidMount() {
         this.getChapterData()
     }
 
-    render () {
-
+    render (){
+        locationString = this.props.location.search
+        console.log(this.props.location.search)
+        console.log(this.props);
         return (
             <div className="chapters">
                 <Container fluid>

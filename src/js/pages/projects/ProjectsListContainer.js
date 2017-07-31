@@ -65,7 +65,6 @@ class ProjectsListContainer extends Component {
                     }
                     <Error/>
 
-                    console.log("some kind of error message")
                 }
             }).catch((exception) => {
             this.setState({error: exception});
@@ -127,11 +126,8 @@ class ProjectsListContainer extends Component {
         if(locationString !== null){
             <Error/>
             errorBool = true;
-            console.log(locationString + " test inside")
         }
 
-        console.log(this.props.location.search)
-        console.log(locationString)
     }
 
     render () {
@@ -150,24 +146,18 @@ class ProjectsListContainer extends Component {
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={retryRequestProjects.bind(this)}>
-                    <FilterContainer projects={this.state.projects}
-                                     setQuery={this.setQuery.bind(this)}
-                                     queryString={this.props.location.search}
-                                     clearQuery={this.clearQuery.bind(this)}/>
 
-                    {this.state.projects.length > 0
-                        ? <ProjectsList projects={this.state.projects}
-                                        navigateToProject={this.navigateToProject.bind(this)}/>
-                        : locationString !== ""
-                            ? <Error/>
-                            : <ErrorMssgContainer/>
-
-
-                    //     if(this.props.location.search !== ""){
-                    //     <Error/>
-                    // }//why wont this work?
-            }
-
+                    {this.state.projects.length === 0 && locationString !== ""
+                        ? <Error/>
+                        : <div>
+                            <FilterContainer projects={this.state.projects}
+                                             setQuery={this.setQuery.bind(this)}
+                                             queryString={this.props.location.search}
+                                             clearQuery={this.clearQuery.bind(this)}/>
+                            <ProjectsList projects={this.state.projects}
+                                          navigateToProject={this.navigateToProject.bind(this)}/>
+                        </div>
+                    }
 
 
 
