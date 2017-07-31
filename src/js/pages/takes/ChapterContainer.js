@@ -114,7 +114,7 @@ class ChapterContainer extends Component {
      */
 
     patchTake(takeId, patch, success) {
-        axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch, {timeout: 1500}
+        axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch
         ).then((results) => {
             //find the take in state that this one corresponds to
             let updatedChunks = this.state.chunks.slice();
@@ -138,19 +138,19 @@ class ChapterContainer extends Component {
                     this.updatingDeletedTake(takeId);
                 }
                 else {
-                    alert("Something went wrong. Please check your connection and try again.")
+                    alert("Something went wrong. Please check your connection and try again. ")
                 }
             }
             //timeout error doesn't produce response
             else {
-                alert("Something went wrong. Please check your connection and try again.")
+                alert("Something went wrong. Please check your connection and try again. ")
             }
         })
     };
 
     deleteTake(takeId, success) {
         if (window.confirm('Delete this take?')) {
-            axios.delete(config.apiUrl + 'takes/' + takeId + '/', {timeout: 1500}
+            axios.delete(config.apiUrl + 'takes/' + takeId + '/'
 
             ).then((results) => {
                 this.updatingDeletedTake(takeId);
@@ -164,12 +164,12 @@ class ChapterContainer extends Component {
                     }
 
                     else {
-                        alert("Something went wrong. Please check your connection and try again.")
+                        alert("Something went wrong. Please check your connection and try again. " )
                     }
                 }
                 //timeout error doesn't produce response
                 else {
-                    alert("Something went wrong. Please check your connection and try again.")
+                    alert("Something went wrong. Please check your connection and try again. ")
                 }
             })
         }
@@ -178,7 +178,7 @@ class ChapterContainer extends Component {
 
     deleteComment(type, commentId, takeId) {
 
-        axios.delete('http://172.19.145.91/api/comments/' + commentId + '/',{timeout: 1500})
+        axios.delete('http://172.19.145.91/api/comments/' + commentId + '/')
             .then((results) => {
                 this.updatingDeletedComment(type, commentId, takeId)
             })
@@ -209,7 +209,7 @@ class ChapterContainer extends Component {
             "object": id,
             "type": type
 
-        }, {timeout: 2000}).then((results) => {
+        }).then((results) => {
             var map = {"comment": results.data};
             let updatedChunks = this.state.chunks.slice();
 
@@ -253,7 +253,7 @@ class ChapterContainer extends Component {
 
         }).catch((exception) => {
 
-            alert('try again ' + exception);
+            alert("Something went wrong. Please check your connection and try again.");
             success();
             this.setState({
                 active: false
@@ -392,20 +392,6 @@ class ChapterContainer extends Component {
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
-
-{/*<<<<<<< HEAD*/}
-                    {/*<ChapterHeader book={this.state.book.name}*/}
-                                   {/*chapter={this.state.chapter}*/}
-                                   {/*language={this.state.language.name}*/}
-                                   {/*chunks={this.state.chunks}*/}
-                                   {/*mode={this.state.mode}*/}
-                                   {/*selectedSourceProject={this.state.selectedSourceProjectQuery}*/}
-                                   {/*onClickSave={this.onClickSave.bind(this)}*/}
-                                   {/*deleteComment={this.deleteComment.bind(this)}*/}
-                                   {/*setSourceProject={this.setSourceProject.bind(this)}*/}
-                                   {/*onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}*/}
-                                   {/*active={this.state.active}*/}
-{/*=======*/}
                     <ChapterHeader  book={this.state.book}
                                     chapter={this.state.chapter}
                                     language={this.state.language.name}
