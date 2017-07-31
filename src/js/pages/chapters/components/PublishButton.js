@@ -22,12 +22,7 @@ export default class PublishButton extends Component {
     }
 
     checkReadyForPublish() {
-        var counter = 0;
-        this.props.chapters.map((i) => {
-            if (i.is_publish) {counter+=1}
-        });
-        
-        return counter > 0;
+        return this.props.chapters.every(chapter => chapter.is_publish);
     }
 
     render() {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import MarkAsDone from "./MarkAsDone";
 import CommentContainer from "./comments/PinkButton"
-import {Menu, Container, Card, Button, Icon, Label, Modal, Popup, Grid, Divider} from 'semantic-ui-react'
+import {Menu, Container, Card, Button, Icon, Label, Popup, Grid, Divider} from 'semantic-ui-react'
 import AudioComponent from "./AudioComponent"
 import config from 'config/config'
 import 'css/takes.css'
@@ -52,9 +52,7 @@ class Footer extends Component {
         }
 
         else {
-            return (
-                <h2>Select a chunk to play</h2>
-            );
+            return null;
         }
 
     }

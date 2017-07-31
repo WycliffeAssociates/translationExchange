@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {ReactMic} from 'react-mic';
 import {Button, Grid, Icon} from "semantic-ui-react";
 import "./RecordComment.css"
+import LoadingGif from 'images/loading-tiny.gif'
+
 let startRecording;
 let stopRecording;
 
@@ -16,8 +18,8 @@ export class RecordComment extends Component {
             DisableSaveButton: true,
             blob: '',
             jsonblob: null
-        };
 
+        };
 
         this.onStop = this.onStop.bind(this);
         this.deleteBlob = this.deleteBlob.bind(this);
@@ -46,9 +48,10 @@ export class RecordComment extends Component {
 
     onSave(type, id, jsonblob, func) {
 
-        func(jsonblob, type, id);
-        this.setState({
-            displayPlayer:false
+        func(jsonblob, type, id, () => {
+            this.setState({
+                displayPlayer: false
+            })
         });
     }
 
@@ -87,9 +90,6 @@ export class RecordComment extends Component {
         const AudioURL = this.state.AudioURL;
         const jsonblob = this.state.jsonblob;
 
-
-        let button = <StopButton onClick={this.stopRecording}/>;
-
         let AudioPlayer = null;
 
         let MainButton = null;
@@ -101,12 +101,22 @@ export class RecordComment extends Component {
                                               jsonblob={jsonblob}
                                               AudioURL={AudioURL}
                                               onClickSave={this.props.onClickSave}
-                                                onSave={this.onSave.bind(this)}/>;
+                                              onSave={this.onSave.bind(this)}
+                                              active={this.props.loadingActive}
+                                              hideplayer={this.state.hideplayer}
+
+            />;
 
         }
 
         if (displayButton) {
-            MainButton = <StopButton onClick={this.stopRecording}/>;
+            MainButton = <button
+                className="stop"
+                onClick={this.stopRecording}
+                type="button">
+                <Icon size='small' name='stop' inverted/>
+            </button>;
+
         } else {
 
             MainButton = <button
@@ -143,23 +153,12 @@ export class RecordComment extends Component {
 }
 
 
-function StopButton(props) {
-    return (
-        <button className="stop" onClick={props.onClick}>
-            <Icon name="stop" size='small' inverted/>
-        </button>
-    );
-}
-
-
-
 function DisplayAudioPlayer(props) {
     const displayPlayer = props.displayPlayer;
     const AudioURL = props.AudioURL;
     const jsonblob = props.jsonblob;
     const type = props.type;
     const id = props.id;
-
     if (displayPlayer) {
 
         return (
@@ -172,8 +171,15 @@ function DisplayAudioPlayer(props) {
                 </Grid.Column>
 
                 <Grid.Column width={3}>
-                    {jsonblob ? <Button positive size="small" onClick={() => {
-                        props.onSave(type, id, jsonblob, props.onClickSave) }}>Save</Button> : ''}
+                    {props.active ?
+                        <img src={LoadingGif} alt="Loading..." width="20" height="20"/>
+                        : <Button positive size="small" onClick={() => {
+                            props.onSave(type, id, jsonblob, props.onClickSave)
+                        }}>Save</Button>
+
+                    }
+
+
                 </Grid.Column>
             </Grid>
         );

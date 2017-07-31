@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import Audio from 'translation-audio-player'
 import * as ReactDOM from "react-dom";
-import MicButton from "./comments/MicButton";
 
 
 let onClick;
@@ -81,16 +80,6 @@ class AudioComponent extends Component {
                     }}
 
                 />
-
-                {/*used ref to call a method in child class and instance*/}
-                {this.props.mic ? <MicButton
-
-                    ref={instance => (this.commentContainer = instance)}
-                    take={this.props.take}
-                    comments={this.props.comments}
-                    onClickSave={this.props.onClickSave}
-                    deleteComment={this.props.deleteComment}
-                /> : ''}
 
 
             </div>

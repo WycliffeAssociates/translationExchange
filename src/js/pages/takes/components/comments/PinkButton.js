@@ -20,7 +20,8 @@ class PinkButton extends Component {
             show: this.props.open,
             SaveButtonState: true,
             blob: null,
-            active: this.props.comments.length > 0
+            active: this.props.comments.length > 0,
+            loadingActive: this.props.active
 
 
         };
@@ -31,11 +32,6 @@ class PinkButton extends Component {
         this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
         this.onClickSave = this.onClickSave.bind(this);
 
-    }
-
-    saveButton() {
-
-        this.setState({disabled: false});
     }
 
     getInitialState() {
@@ -91,7 +87,8 @@ class PinkButton extends Component {
                 </Grid.Column>
                 <Grid.Column width={2}>
                     <Button icon negative onClick={() => {
-                        this.props.deleteComment(this.props.type, comment.comment.id, this.props.id)
+                        if(window.confirm('Delete this comment?')){
+                        this.props.deleteComment(this.props.type, comment.comment.id, this.props.id)}
                     }}>
                         <Icon name="trash"/>
                     </Button>
@@ -102,9 +99,7 @@ class PinkButton extends Component {
     }
 
     Style = {
-
         backgroundColor: 'black',
-
         fontSize: "32",
         color: 'white',
         textAlign: "center",
@@ -128,15 +123,16 @@ class PinkButton extends Component {
                     icon="comment outline"
                     onClick={this.showModal}/>}
             >
-                <Modal.Header style={this.Style}>Comments</Modal.Header>
+                <Modal.Header style={this.Style}>Comments on {this.props.language} {this.props.type} {this.props.number} </Modal.Header>
                 <div>
-                    <RecordComment ref={instance => (this.recordComment = instance) }
+                    <RecordComment ref={instance => (this.recordComment = instance)}
                                    changeSaveButtonState={this.changeSaveButtonState}
                                    updateTakeInState={this.props.updateTakeInState}
                                    sendComment={this.getComment}
                                    onClickSave={this.props.onClickSave}
                                    type={this.props.type}
                                    id={this.props.id}
+                                   loadingActive={this.props.loadingActive}
 
                     />
 

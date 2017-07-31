@@ -20,7 +20,7 @@ export default class SetSourceAudio extends Component {
 
     getProjects() {
         this.setState({error: ""});
-        axios.post(config.apiUrl + 'all_projects/', {is_publish: true, book: "mrk"})
+        axios.post(config.apiUrl + 'all_projects/', {is_publish: true, book: this.props.book})
             .then((results) => {
                 let projects = [];
                 results.data.map((project) => {
@@ -29,7 +29,13 @@ export default class SetSourceAudio extends Component {
                         book: project.book.slug,
                         version: project.version
                     };
-                    projects.push({key: project.id, value: projectQuery, text: project.language.name + " (" + project.version + ")"});
+                    if (project.id !== this.props.projectId) {
+                        projects.push({
+                            key: project.id,
+                            value: projectQuery,
+                            text: project.language.name + " (" + project.version + ")"
+                        });
+                    }
                 });
                 this.setState({
                     loaded: true,
@@ -66,15 +72,6 @@ export default class SetSourceAudio extends Component {
                       onChange={(event, dropdown) => {this.setSource(dropdown.value)}}
             />
 
-    //         <Dropdown
-    //     search
-    //     selection
-    //     placeholder='Source Audio'
-    //     loading={!this.state.loaded}
-    //     options={this.state.projects}
-    //     onChange={(event, dropdown) => {this.setSource(dropdown.value)}}
-    //     value={this.props.selectedSourceProject}
-    // />
         );
 
     }
