@@ -30,7 +30,11 @@ class ChapterHeader extends Component {
                                     onClickSave={this.props.onClickSave}
                                     id={this.props.chapter.id}
                                     type={"chapter"}
-                                    deleteComment={this.props.deleteComment}/>
+                                    deleteComment={this.props.deleteComment}
+                                    loadingActive={this.props.active}
+                                    number={this.props.chapter.number}
+                                    language={this.props.language}
+                        />
 
                     </Grid.Column>
                 </Grid>

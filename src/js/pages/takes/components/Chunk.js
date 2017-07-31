@@ -4,6 +4,7 @@ import ChunkPropTypes from "./ChunkPropTypes";
 import {Accordion, Icon, Grid, Menu, Rail} from "semantic-ui-react";
 import TakeTable from './TakeTable'
 import 'css/takes.css'
+
 import ChunkSidebar from "./SideBar"
 let onClick;
 let CommentContainer
@@ -108,6 +109,7 @@ class Chunk extends Component {
                                         chunkNumber={this.props.number}
                                         deleteComment={this.props.deleteComment}
                                         deleteButton={true}
+                                        active={this.props.active}
                                     />
                                     <TakeTable
                                         icon={icon2}
@@ -122,6 +124,7 @@ class Chunk extends Component {
                                         playTake={this.props.playTake}
                                         chunkNumber={this.props.number}
                                         deleteComment={this.props.deleteComment}
+                                        active={this.props.active}
                                     />
                                     <TakeTable
                                         icon={icon3}
@@ -136,6 +139,7 @@ class Chunk extends Component {
                                         playTake={this.props.playTake}
                                         chunkNumber={this.props.number}
                                         deleteComment={this.props.deleteComment}
+                                        active={this.props.active}
                                     />
                                     <TakeTable
                                         icon={icon4}
@@ -150,6 +154,7 @@ class Chunk extends Component {
                                         playTake={this.props.playTake}
                                         chunkNumber={this.props.number}
                                         deleteComment={this.props.deleteComment}
+                                        active={this.props.active}
                                     />
 
                                 </Grid>
@@ -165,7 +170,7 @@ class Chunk extends Component {
                                     mode={this.props.mode}
                                     chunkId={this.props.id}
                                     deleteComment={this.props.deleteComment}
-
+                                    active={this.props.active}
                                     onSourceClicked={this.props.onSourceClicked}
                                 />
                             </Grid.Column>
@@ -182,15 +187,6 @@ class Chunk extends Component {
     }
 
 }
-
-/*
-Chunk.propTypes = {
-    chunk: ChunkPropTypes
-};
-
- <SideBar className="commentBar"/>
-
-*/
  Chunk.propTypes = {
  chunk: ChunkPropTypes
  };

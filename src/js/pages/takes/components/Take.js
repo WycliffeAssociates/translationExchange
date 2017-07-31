@@ -4,7 +4,6 @@ import config from "config/config";
 import {Button, Grid, Segment, Card, Modal, Icon} from "semantic-ui-react";
 import TakeListenButton from './AddTake'
 import 'css/takes.css'
-import SideBar from './SideBar'
 import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
 
@@ -23,18 +22,6 @@ class Take extends Component {
     handleClick() {
         this.setState({isToggleOn: !this.state.isToggleOn});
     }
-
-    // showMarker() {
-    //
-    //     if (!this.state.showMarkers) {
-    //         this.setState({showMarkersColor: 'yellow', showMarkers: true});
-    //         console.log('here', this.state.showMarkers);
-    //
-    //     } else {
-    //         this.setState({showMarkersColor: '', showMarkers: false});
-    //     }
-    //
-    // }
 
     addToListen() {
         this.props.addToListenList(this.props);
@@ -84,6 +71,7 @@ class Take extends Component {
 
         return (
 
+
             <Segment>
 
                 <Grid textAlign="left">
@@ -130,6 +118,9 @@ class Take extends Component {
                                                      comments={this.props.comments}
                                                      onClickSave={this.props.onClickSave}
                                                      deleteComment={this.props.deleteComment}
+                                                     loadingActive={this.props.active}
+                                                     count={this.props.count}
+                                                     chunkNumber={this.props.chunkNumber}
                                 />
                             </Grid.Row>
                         </Grid.Column>

@@ -21,7 +21,10 @@ class ChunkSidebar extends Component {
                         onClickSave={this.props.onClickSave}
                         id={this.props.chunkId}
                         type={"chunk"}
-                        deleteComment={this.props.deleteComment}/>
+                        deleteComment={this.props.deleteComment}
+                        loadingActive={this.props.active}
+                        number={this.props.chunkNumber}
+                    />
                 </Menu.Item>
                 <Menu.Item>
                     <SourceAudioButton startv={this.props.chunkNumber}
