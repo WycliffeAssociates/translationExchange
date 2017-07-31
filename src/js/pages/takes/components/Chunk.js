@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import ChunkPropTypes from "./ChunkPropTypes";
 
-import {Accordion, Icon, Grid} from "semantic-ui-react";
+import {Accordion, Icon, Grid, Menu, Rail} from "semantic-ui-react";
 import TakeTable from './TakeTable'
 import 'css/takes.css'
-import PinkButton from "./comments/PinkButton";
-import SideBar from "./SideBar"
+
+import ChunkSidebar from "./SideBar"
 let onClick;
 let CommentContainer
 
@@ -19,8 +19,14 @@ class Chunk extends Component {
         var twostar = [];
         var threestar = [];
 
-        this.props.segments.map((i) => {
+        var counter = 0;
 
+        let orderedSegments = this.props.segments.slice();
+
+        orderedSegments.map((i) => {
+
+            counter+= 1
+            i.order= counter
 
             if (i.take.is_publish) {
                 publish[publish.length] = i
@@ -76,80 +82,104 @@ class Chunk extends Component {
                             <Icon name='dropdown' />
                             <font color="black">
                             {modeLabel} {this.props.number}
+                            {this.props.comments.length > 0
+                                ? <Icon name="circle" color="yellow"/>
+                                : ""
+                            }
                             </font>
                         </center>
 
                     </Accordion.Title>
                     <Accordion.Content className="ChunkBody">
 
-                        <SideBar className="commentBar"
-                                 comments={this.props.comments}
-                                 onClickSave={this.props.onClickSave}
-                                 chunkId={this.props.id}
-                                 deleteComment={this.props.deleteComment}
-                                 chunkNumber={this.props.number}
-                                 onSourceClicked={this.props.onSourceClicked}
-                        >
+                        <Grid fluid columns={2}>
+                            <Grid.Column width={15}>
+                                <Grid fixed padded fluid columns={4}>
+                                    <TakeTable
+                                        icon={icon1}
+                                        mode={this.props.mode}
+                                        takes={this.props.segments}
+                                        addToListenList={this.props.addToListenList}
+                                        patchTake={this.props.patchTake}
+                                        deleteTake={this.props.deleteTake}
+                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                        onClickSave={this.props.onClickSave}
+                                        column={0}
+                                        PLAYLIST={onestar}
+                                        playTake={this.props.playTake}
+                                        chunkNumber={this.props.number}
+                                        deleteComment={this.props.deleteComment}
+                                        deleteButton={true}
+                                        active={this.props.active}
+                                    />
+                                    <TakeTable
+                                        icon={icon2}
+                                        mode={this.props.mode}
+                                        takes={this.props.segments}
+                                        addToListenList={this.props.addToListenList}
+                                        patchTake={this.props.patchTake}
+                                        deleteTake={this.props.deleteTake}
+                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                        onClickSave={this.props.onClickSave}
+                                        column={1}
+                                        PLAYLIST={twostar}
+                                        playTake={this.props.playTake}
+                                        chunkNumber={this.props.number}
+                                        deleteComment={this.props.deleteComment}
+                                        active={this.props.active}
+                                    />
+                                    <TakeTable
+                                        icon={icon3}
+                                        mode={this.props.mode}
+                                        takes={this.props.segments}
+                                        addToListenList={this.props.addToListenList}
+                                        patchTake={this.props.patchTake}
+                                        deleteTake={this.props.deleteTake}
+                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                        onClickSave={this.props.onClickSave}
+                                        column={2}
+                                        PLAYLIST={threestar}
+                                        playTake={this.props.playTake}
+                                        chunkNumber={this.props.number}
+                                        deleteComment={this.props.deleteComment}
+                                        active={this.props.active}
+                                    />
+                                    <TakeTable
+                                        icon={icon4}
+                                        mode={this.props.mode}
+                                        takes={this.props.segments}
+                                        addToListenList={this.props.addToListenList}
+                                        patchTake={this.props.patchTake}
+                                        deleteTake={this.props.deleteTake}
+                                        updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                        onClickSave={this.props.onClickSave}
+                                        column={3}
+                                        PLAYLIST={publish}
+                                        playTake={this.props.playTake}
+                                        chunkNumber={this.props.number}
+                                        deleteComment={this.props.deleteComment}
+                                        active={this.props.active}
+                                    />
 
-                            <Grid fixed padded fluid columns={4}>
-                                <TakeTable
-                                    icon={icon1}
-                                    takes={this.props.segments}
-                                    addToListenList={this.props.addToListenList}
-                                    patchTake={this.props.patchTake}
-                                    deleteTake={this.props.deleteTake}
-                                    updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
+                                </Grid>
+                            </Grid.Column>
+                            <Grid.Column width={1} verticalAlign="middle" floated="right">
+                                <ChunkSidebar
+                                    comments={this.props.comments}
                                     onClickSave={this.props.onClickSave}
                                     column={0}
                                     PLAYLIST={onestar}
                                     playTake={this.props.playTake}
                                     chunkNumber={this.props.number}
+                                    mode={this.props.mode}
+                                    chunkId={this.props.id}
                                     deleteComment={this.props.deleteComment}
+                                    active={this.props.active}
+                                    onSourceClicked={this.props.onSourceClicked}
                                 />
-                                <TakeTable
-                                    icon={icon2}
-                                    takes={this.props.segments}
-                                    addToListenList={this.props.addToListenList}
-                                    patchTake={this.props.patchTake}
-                                    deleteTake={this.props.deleteTake}
-                                    updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                                    onClickSave={this.props.onClickSave}
-                                    column={1}
-                                    PLAYLIST={twostar}
-                                    playTake={this.props.playTake}
-                                    chunkNumber={this.props.number}
-                                    deleteComment={this.props.deleteComment}
-                                />
-                                <TakeTable
-                                    icon={icon3}
-                                    takes={this.props.segments}
-                                    addToListenList={this.props.addToListenList}
-                                    patchTake={this.props.patchTake}
-                                    deleteTake={this.props.deleteTake}
-                                    updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                                    onClickSave={this.props.onClickSave}
-                                    column={2}
-                                    PLAYLIST={threestar}
-                                    playTake={this.props.playTake}
-                                    chunkNumber={this.props.number}
-                                    deleteComment={this.props.deleteComment}
-                                />
-                                <TakeTable
-                                    icon={icon4}
-                                    takes={this.props.segments}
-                                    addToListenList={this.props.addToListenList}
-                                    patchTake={this.props.patchTake}
-                                    deleteTake={this.props.deleteTake}
-                                    updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
-                                    onClickSave={this.props.onClickSave}
-                                    column={3}
-                                    PLAYLIST={publish}
-                                    playTake={this.props.playTake}
-                                    chunkNumber={this.props.number}
-                                    deleteComment={this.props.deleteComment}
-                                />
-                            </Grid>
-                        </SideBar>
+                            </Grid.Column>
+                        </Grid>
+
                     </Accordion.Content>
 
                 </Accordion>
@@ -161,15 +191,6 @@ class Chunk extends Component {
     }
 
 }
-
-/*
-Chunk.propTypes = {
-    chunk: ChunkPropTypes
-};
-
- <SideBar className="commentBar"/>
-
-*/
  Chunk.propTypes = {
  chunk: ChunkPropTypes
  };

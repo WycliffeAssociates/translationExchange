@@ -4,6 +4,7 @@ import config from "config/config";
 import {Button, Grid, Segment, Card, Modal, Icon} from "semantic-ui-react";
 import TakeListenButton from './AddTake'
 import 'css/takes.css'
+import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
 
 var listenCounter = 0
@@ -12,7 +13,7 @@ class Take extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {isToggleOn: true, addButtonColor: "", showMarkers: false, showMarkersColor: ""}
+        this.state = {isToggleOn: true, addButtonIcon: "plus", showMarkers: false, showMarkersColor: ""}
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
         // this.showMarker = this.showMarker.bind(this);
@@ -22,32 +23,20 @@ class Take extends Component {
         this.setState({isToggleOn: !this.state.isToggleOn});
     }
 
-    // showMarker() {
-    //
-    //     if (!this.state.showMarkers) {
-    //         this.setState({showMarkersColor: 'yellow', showMarkers: true});
-    //         console.log('here', this.state.showMarkers);
-    //
-    //     } else {
-    //         this.setState({showMarkersColor: '', showMarkers: false});
-    //     }
-    //
-    // }
-
     addToListen() {
         this.props.addToListenList(this.props);
 
-        if (this.state.addButtonColor !== "blue") {
+        if (this.state.addButtonIcon !== "plus") {
             this.setState(
                 {
-                    addButtonColor: "blue"
+                    addButtonIcon: "plus"
                 }
             )
         }
         else {
             this.setState(
                 {
-                    addButtonColor: ""
+                    addButtonIcon: "minus"
                 }
             )
         }
@@ -62,7 +51,9 @@ class Take extends Component {
     }
 
     moveRight() {
-        if (this.props.take.rating < 3) {
+        if (this.props.take.rating < 1) {
+            this.props.onRatingSet(2);
+        } else if (this.props.take.rating < 3) {
             this.props.onRatingSet(this.props.take.rating + 1)
         } else {
             this.props.onMarkedForExportToggled();
@@ -80,54 +71,70 @@ class Take extends Component {
 
         return (
 
-            <div>
-                <Segment.Group horizontal textAlign="center" >
 
-                    {this.props.take.rating > 1
-                        ?
-                        <Segment className="hoverButton" onClick={this.moveLeft.bind(this)}>
-                            <Icon name="chevron left"/>
-                        </Segment>
-                        : ""
-                    }
-                        <Segment vertical>
-                            <strong><font color="blue">{this.props.author.name} </font>
-                                on {this.parseDate(this.props.take.date_modified)}</strong>
+            <Segment>
 
-                            {/*{<TakeExportButton active={this.props.take.is_publish} onClick={this.props.onMarkedForExportToggled}/>}*/}
-                            <TakeListenButton onClick={() =>
-                                this.props.playTake(this.props.take.location,
-                                    this.props.chunkNumber,
-                                    this.props.author.name,
-                                    this.parseDate(this.props.take.date_modified))
+                <Grid textAlign="left">
+                    <Grid.Row>
+                        <Grid.Column verticalAlign="middle">
+                            {this.props.take.rating > 1
+                                ? <Icon className="hoverButton" name="chevron left" onClick={this.moveLeft.bind(this)}/>
+                                : ""
                             }
-                            />
+                        </Grid.Column>
 
-                        <Segment vertical className="nopadding">
-                            <TakeCommentsButton  take={this.props.take}
-                                                 comments={this.props.comments}
-                                                 onClickSave={this.props.onClickSave}
-                                                 deleteComment={this.props.deleteComment}/>
-                        </Segment>
+                        <Grid.Column width={12}>
 
+                            <Grid.Row verticalAlign="top">
+                                <Grid>
+                                    <Grid.Column width={11} floated="left">
+                                        <font size="3"><strong>Take {this.props.count} -  </strong></font>
+                                        <font size="2" color="grey">{this.props.author ? this.props.author.name : "Unknown Author" }</font>
+                                    </Grid.Column>
+                                    <Grid.Column floated="right">
+                                        <StitchTakesButton onClick={this.addToListen.bind(this)} icon={this.state.addButtonIcon}/>
+                                    </Grid.Column>
+                                </Grid>
+                            </Grid.Row>
 
-                        </Segment>
+                            <Grid.Row>
+                                {this.parseDate(this.props.take.date_modified)}
+                            </Grid.Row>
+                            <Grid.Row className="centerPlayButton">
+                                <br />
+                                <TakeListenButton onClick={ () =>
+                                    this.props.playTake(this.props.take.location,
+                                        this.props.count,
+                                        this.props.chunkNumber,
+                                        this.props.author.name,
+                                        this.parseDate(this.props.take.date_modified))
 
+                                }
+                                />
+                            </Grid.Row>
+                            <Grid.Row verticalAlign="bottom">
+                                <br />
+                                <TakeCommentsButton  take={this.props.take}
+                                                     comments={this.props.comments}
+                                                     onClickSave={this.props.onClickSave}
+                                                     deleteComment={this.props.deleteComment}
+                                                     loadingActive={this.props.active}
+                                                     count={this.props.count}
+                                                     chunkNumber={this.props.chunkNumber}
+                                />
+                            </Grid.Row>
+                        </Grid.Column>
 
+                        <Grid.Column verticalAlign="middle">
+                            {this.props.take.is_publish
+                            ? ""
+                            : <Icon className="hoverButton" name="chevron right" onClick={this.moveRight.bind(this)}/>
+                        }</Grid.Column>
 
+                    </Grid.Row>
+                </Grid>
 
-
-                    {this.props.take.is_publish
-                        ? ""
-                        : <Segment onClick={this.moveRight.bind(this)} className="hoverButton">
-                            <Icon name="chevron right"/>
-                        </Segment>
-                    }
-
-                </Segment.Group>
-
-
-            </div>
+            </Segment>
 
         );
     }

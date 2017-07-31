@@ -10,49 +10,29 @@ let state;
 let toggleVisibility;
 
 
-class SidebarRightOverlay extends Component {
-    state = { visible: true }
-
-    toggleVisibility = () => this.setState({ visible: !this.state.visible })
+class ChunkSidebar extends Component {
 
     render() {
-        const { visible } = this.state
         return (
-            <div>
-                <Sidebar.Pushable as={Segment}>
-                    <Sidebar
-                        as={Menu}
-                        animation='overlay'
-                        width='thin'
-                        direction='right'
-                        visible={visible}
-                        vertical
-                        inverted
-                    >
-
-                        <Menu.Item>
-                            <PinkButton
-                                comments={this.props.comments}
-                                onClickSave={this.props.onClickSave}
-                                id={this.props.chunkId}
-                                type={"chunk"}
-                                deleteComment={this.props.deleteComment}/>
-                        </Menu.Item>
-                        <Menu.Item>
-                            <SourceAudioButton startv={this.props.chunkNumber}
-                                               onSourceClicked={this.props.onSourceClicked}/>
-                        </Menu.Item>
-
-                    </Sidebar>
-                    <Sidebar.Pusher>
-                        <Segment basic>
-                            { this.props.children }
-                        </Segment>
-                    </Sidebar.Pusher>
-                </Sidebar.Pushable>
-            </div>
+            <Menu vertical compact inverted>
+                <Menu.Item>
+                    <PinkButton
+                        comments={this.props.comments}
+                        onClickSave={this.props.onClickSave}
+                        id={this.props.chunkId}
+                        type={"chunk"}
+                        deleteComment={this.props.deleteComment}
+                        loadingActive={this.props.active}
+                        number={this.props.chunkNumber}
+                    />
+                </Menu.Item>
+                <Menu.Item>
+                    <SourceAudioButton startv={this.props.chunkNumber}
+                                       onSourceClicked={this.props.onSourceClicked}/>
+                </Menu.Item>
+            </Menu>
         )
     }
 }
 
-export default SidebarRightOverlay
+export default ChunkSidebar

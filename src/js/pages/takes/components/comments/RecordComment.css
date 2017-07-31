@@ -3,12 +3,9 @@
 
 .sound-wave{
 
-    height: 60px;
+    height: 80px;
     width: 100%;
     border-radius: 5px;
-
-
-
     margin-top: 40px;
 }
 
@@ -18,10 +15,8 @@
     height: 50px;
     width: 50px;
     border-radius: 60px;
-    background-color: none;
-    border: none #3e98c7;
-    border-style: solid;
-    border-color: deepskyblue;
+    background-color: black;
+    border: solid deepskyblue;
     margin-bottom: 10px;
     margin-top: 10px;
 }
@@ -30,7 +25,7 @@
 
 .start:hover {
     cursor: pointer;
-    background-color: none;
+    background-color: #3e98c7;
 }
 
 .start:focus{
@@ -44,7 +39,7 @@
     width: 50px;
     border-radius: 60px;
     background-color: black;
-    border: none #3e98c7;
+    border: solid deepskyblue;
     margin-bottom: 10px;
     margin-top: 10px;
 
@@ -54,8 +49,7 @@
 
 .stop:hover {
     cursor: pointer;
-    background-color: deepskyblue;
-    /*background-color: #F69C76;*/
+    background-color: #3e98c7;
 
 }
 

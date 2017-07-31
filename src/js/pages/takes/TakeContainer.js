@@ -1,9 +1,5 @@
 import React, {Component} from 'react';
 import TakePropTypes from "./components/TakePropTypes";
-import axios from 'axios';
-import config from "../../../config/config";
-import {Button, Grid, Segment} from "semantic-ui-react";
-import _ from 'lodash';
 import Take from "./components/Take";
 import SideBar from './components/SideBar'
 import Error from '../../pages/404Error'
@@ -46,6 +42,20 @@ class TakeContainer extends Component {
     render() {
 
         return (
+            <Take count={this.props.count}
+                  take={this.props.take.take}
+                  author={this.props.take.user}
+                  chunkNumber={this.props.chunkNumber}
+                  ratingLoading={this.state.ratingLoading}
+                  onRatingSet={this.onRatingSet.bind(this)}
+                  onMarkedForExportToggled={this.onMarkedForExportToggled.bind(this)}
+                  source={this.props.source}
+                  comments={this.props.take.comments}
+                  addToListenList={this.props.addToListenList}
+                  onDeleteTake={this.onDeleteTake.bind(this)}
+                  onClickSave={this.props.onClickSave}
+                  deleteComment={this.props.deleteComment}
+                  playTake={this.props.playTake}
 
                 <Take count={this.props.count}
                       take={this.props.take.take}
