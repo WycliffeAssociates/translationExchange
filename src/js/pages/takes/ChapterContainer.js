@@ -57,12 +57,63 @@ class ChapterContainer extends Component {
         });
     }
 
+    updatingDeletedTake(takeId) {
+        let updatedChunks = this.state.chunks.slice();
+        let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+            return chunk.takes.find(take => take.take.id === takeId)
+        });
+        updatedChunks[chunkToUpdate].takes =
+            updatedChunks[chunkToUpdate].takes.filter(take => take.take.id !== takeId);
+
+        this.setState({
+            chunks: updatedChunks
+        });
+    }
+
+    updatingDeletedComment(type, commentId, takeId) {
+        let updatedChunks = this.state.chunks.slice();
+        if (type === "take") {
+            let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+                return chunk.takes.find(take => take.take.id === takeId)
+            });
+            let takeToUpdate = updatedChunks[chunkToUpdate].takes
+                .findIndex(take => take.take.id === takeId);
+
+            updatedChunks[chunkToUpdate].takes[takeToUpdate].comments =
+                updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.filter(comment => comment.comment.id !== commentId);
+            this.setState({
+                chunks: updatedChunks
+            });
+        }
+
+        else if (type === "chunk") {
+            for (var i = 0; i < updatedChunks.length; i++) {
+                if (updatedChunks[i].id === takeId) {
+                    var chunkToUpdate = i;
+                }
+            }
+            updatedChunks[chunkToUpdate].comments = updatedChunks[chunkToUpdate].comments.filter(comment => comment.comment.id !== commentId);
+            this.setState({
+                chunks: updatedChunks
+            });
+
+        }
+        else if (type === "chapter") {
+            let updatedChapter = Object.assign({}, this.state.chapter);
+
+            updatedChapter.comments = updatedChapter.comments.filter(comment => comment.comment.id !== commentId);
+            this.setState({
+                chapter: updatedChapter
+            });
+        }
+    }
+
     /*
      Functions for making requests and updating state
      */
 
     patchTake(takeId, patch, success) {
-        axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch
+        axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch, {timeout: 1500}
         ).then((results) => {
             //find the take in state that this one corresponds to
             let updatedChunks = this.state.chunks.slice();
@@ -80,80 +131,69 @@ class ChapterContainer extends Component {
                 success();
             }
         }).catch((exception) => {
-            alert("Sorry, that take doesn't exist!");
-            let updatedChunks = this.state.chunks.slice();
-            let chunkToUpdate = updatedChunks.findIndex((chunk) => {
-                return chunk.takes.find(take => take.take.id === takeId)
-            });
-            updatedChunks[chunkToUpdate].takes =
-                updatedChunks[chunkToUpdate].takes.filter(take => take.take.id !== takeId);
-
-            this.setState({
-                chunks: updatedChunks
-            });
+            if (exception.response) {
+                if (exception.response.status === 404) {
+                    alert("Sorry, that take doesn't exist!");
+                    this.updatingDeletedTake(takeId);
+                }
+                else {
+                    alert("Something went wrong. Please check your connection and try again.")
+                }
+            }
+            //timeout error doesn't produce response
+            else {
+                alert("Something went wrong. Please check your connection and try again.")
+            }
         })
     };
 
     deleteTake(takeId, success) {
         if (window.confirm('Delete this take?')) {
-            axios.delete(config.apiUrl + 'takes/' + takeId + '/');
-            //find the chunk with the take just deleted
-            let updatedChunks = this.state.chunks.slice();
-            let chunkToUpdate = updatedChunks.findIndex((chunk) => {
-                return chunk.takes.find(take => take.take.id === takeId)
-            });
+            axios.delete(config.apiUrl + 'takes/' + takeId + '/', {timeout: 1500}
+            ).then((results) => {
+                this.updatingDeletedTake(takeId);
+                if (success) {
+                    success();
+                }
+            }).catch((exception) => {
+                if (exception.response) {
+                    if (exception.response.status === 404) {
+                        this.updatingDeletedTake(takeId);
+                    }
 
-            //give it a new array of all its takes except the one to delete
-            updatedChunks[chunkToUpdate].takes =
-                updatedChunks[chunkToUpdate].takes.filter(take => take.take.id !== takeId);
-
-            this.setState({
-                chunks: updatedChunks
-            });
-            if (success) {
-                success();
-            }
+                    else {
+                        alert("Something went wrong. Please check your connection and try again.")
+                    }
+                }
+                //timeout error doesn't produce response
+                else {
+                    alert("Something went wrong. Please check your connection and try again.")
+                }
+            })
         }
     }
 
-    deleteComment(type, commentid, takeid) {
 
-        axios.delete('http://172.19.145.91/api/comments/' + commentid + '/');
-        let updatedChunks = this.state.chunks.slice();
-        if (type === "take") {
-            let chunkToUpdate = updatedChunks.findIndex((chunk) => {
-                return chunk.takes.find(take => take.take.id === takeid)
-            });
-            let takeToUpdate = updatedChunks[chunkToUpdate].takes
-                .findIndex(take => take.take.id === takeid);
+    deleteComment(type, commentId, takeId) {
 
-            updatedChunks[chunkToUpdate].takes[takeToUpdate].comments =
-                updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.filter(comment => comment.comment.id !== commentid);
-            this.setState({
-                chunks: updatedChunks
-            });
-        }
-
-        else if (type === "chunk") {
-            for (var i = 0; i < updatedChunks.length; i++) {
-                if (updatedChunks[i].id === takeid) {
-                    var chunkToUpdate = i;
+        axios.delete('http://172.19.145.91/api/comments/' + commentId + '/',{timeout: 1500})
+            .then((results) => {
+                this.updatingDeletedComment(type, commentId, takeId)
+            })
+            .catch((exception) => {
+                if (exception.response) {
+                    if (exception.response.status === 404) {
+                        this.updatingDeletedComment(type, commentId, takeId)
+                    }
+                    else {
+                        alert("Something went wrong. Please check your connection and try again.")
+                    }
                 }
-            }
-            updatedChunks[chunkToUpdate].comments = updatedChunks[chunkToUpdate].comments.filter(comment => comment.comment.id !== commentid);
-            this.setState({
-                chunks: updatedChunks
-            });
-
-        }
-        else if (type === "chapter") {
-            let updatedChapter = Object.assign({}, this.state.chapter);
-
-            updatedChapter.comments = updatedChapter.comments.filter(comment => comment.comment.id !== commentid);
-            this.setState({
-                chapter: updatedChapter
-            });
-        }
+                //timeout error doesn't produce response
+                else {
+                    alert("Something went wrong. Please check your connection and try again.")
+                }
+            })
     }
 
 
@@ -167,7 +207,7 @@ class ChapterContainer extends Component {
             "object": id,
             "type": type
 
-        }).then((results) => {
+        }, {timeout: 2000}).then((results) => {
             var map = {"comment": results.data};
             let updatedChunks = this.state.chunks.slice();
 
