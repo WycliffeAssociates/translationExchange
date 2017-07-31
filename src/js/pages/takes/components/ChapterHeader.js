@@ -14,7 +14,7 @@ class ChapterHeader extends Component {
 
                 <Grid padded columns={2} >
                     <Grid.Column width={11} style={{paddingTop: 23}}>
-                        {this.props.book} Chapter {this.props.chapter.number} ({this.props.language})
+                        {this.props.book.name} Chapter {this.props.chapter.number} ({this.props.language})
                     </Grid.Column>
 
                     <Grid.Column width={5} className="verticalLine">
@@ -43,6 +43,8 @@ class ChapterHeader extends Component {
             <div className="source">
                 <SetSourceAudio selectedSourceProject={this.props.selectedSourceProject}
                                 setSourceProject={this.props.setSourceProject}
+                                book={this.props.book.slug}
+                                projectId={this.props.projectId}
                                 />
 
             </div>

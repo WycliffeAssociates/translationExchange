@@ -89,7 +89,7 @@ class Take extends Component {
                                 <Grid>
                                     <Grid.Column width={11} floated="left">
                                         <font size="3"><strong>Take {this.props.count} -  </strong></font>
-                                        <font size="2" color="grey"> {this.props.author.name}</font>
+                                        <font size="2" color="grey">{this.props.author ? this.props.author.name : "Unknown Author" }</font>
                                     </Grid.Column>
                                     <Grid.Column floated="right">
                                         <StitchTakesButton onClick={this.addToListen.bind(this)} size="huge" color="blue"/>
