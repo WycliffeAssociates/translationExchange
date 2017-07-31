@@ -53,6 +53,8 @@ class TakeTable extends Component {
                             chunkNumber={this.props.chunkNumber}
                             mode={this.props.mode}
                             deleteComment={this.props.deleteComment}
+                            active={this.props.active}
+                            // deleteComment={this.props.deleteComment}
                         />
                         <br />
                     </Table.Cell>

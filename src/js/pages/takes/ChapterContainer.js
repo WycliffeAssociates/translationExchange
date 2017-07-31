@@ -29,7 +29,8 @@ class ChapterContainer extends Component {
             selectedSourceProject: {},
             listenList: [],
             query: '',
-            currentPlaylist: []
+            currentPlaylist: [],
+            active: false
         };
     }
 
@@ -105,48 +106,54 @@ class ChapterContainer extends Component {
     }
 
     deleteComment(type, commentid, takeid) {
-        axios.delete('http://172.19.145.91/api/comments/' + commentid + '/'
-        ).then((results) => {
-            let updatedChunks = this.state.chunks.slice();
-            if (type === "take") {
-                let chunkToUpdate = updatedChunks.findIndex((chunk) => {
-                    return chunk.takes.find(take => take.take.id === takeid)
-                });
-                let takeToUpdate = updatedChunks[chunkToUpdate].takes
-                    .findIndex(take => take.take.id === takeid);
 
-                updatedChunks[chunkToUpdate].takes[takeToUpdate].comments =
-                    updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.filter(comment => comment.comment.id !== commentid);
-                this.setState({
-                    chunks: updatedChunks
-                });
-            }
+            axios.delete('http://172.19.145.91/api/comments/' + commentid + '/'
+            ).then((results) => {
+                let updatedChunks = this.state.chunks.slice();
+                if (type === "take") {
+                    let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+                        return chunk.takes.find(take => take.take.id === takeid)
+                    });
+                    let takeToUpdate = updatedChunks[chunkToUpdate].takes
+                        .findIndex(take => take.take.id === takeid);
 
-            else if (type === "chunk") {
-                for (var i = 0; i < updatedChunks.length; i++) {
-                    if (updatedChunks[i].id === takeid) {
-                        var chunkToUpdate = i;
-                    }
+                    updatedChunks[chunkToUpdate].takes[takeToUpdate].comments =
+                        updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.filter(comment => comment.comment.id !== commentid);
+                    this.setState({
+                        chunks: updatedChunks
+                    });
                 }
-                updatedChunks[chunkToUpdate].comments = updatedChunks[chunkToUpdate].comments.filter(comment => comment.comment.id !== commentid);
-                this.setState({
-                    chunks: updatedChunks
-                });
 
-            }
-            else if (type === "chapter") {
-                let updatedChapter = Object.assign({}, this.state.chapter);
+                else if (type === "chunk") {
+                    for (var i = 0; i < updatedChunks.length; i++) {
+                        if (updatedChunks[i].id === takeid) {
+                            var chunkToUpdate = i;
+                        }
+                    }
+                    updatedChunks[chunkToUpdate].comments = updatedChunks[chunkToUpdate].comments.filter(comment => comment.comment.id !== commentid);
+                    this.setState({
+                        chunks: updatedChunks
+                    });
 
-                updatedChapter.comments = updatedChapter.comments.filter(comment => comment.comment.id !== commentid);
-                this.setState({
-                    chapter: updatedChapter
-                });
-            }
+                }
+                else if (type === "chapter") {
+                    let updatedChapter = Object.assign({}, this.state.chapter);
 
-        })
+                    updatedChapter.comments = updatedChapter.comments.filter(comment => comment.comment.id !== commentid);
+                    this.setState({
+                        chapter: updatedChapter
+                    });
+                }
+
+
+            })
+
     }
 
-    onClickSave(blobx, type, id) {
+    onClickSave(blobx, type, id, success) {
+        this.setState({
+            active: true
+        });
         axios.post(config.apiUrl + 'comments/', {
             "comment": blobx,
             "user": 3,
@@ -165,8 +172,10 @@ class ChapterContainer extends Component {
                     .findIndex(take => take.take.id === id);
                 updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.push(map);
                 this.setState({
-                    chunks: updatedChunks
+                    chunks: updatedChunks,
+                    active: false
                 });
+
             }
             else if (type === "chunk") {
 
@@ -177,7 +186,8 @@ class ChapterContainer extends Component {
                 }
                 updatedChunks[chunkToUpdate].comments.push(map);
                 this.setState({
-                    chunks: updatedChunks
+                    chunks: updatedChunks,
+                    active: false
                 });
             }
 
@@ -185,12 +195,21 @@ class ChapterContainer extends Component {
                 let updatedChapter = Object.assign({}, this.state.chapter);
                 updatedChapter.comments.push(map);
                 this.setState({
-                    chapter: updatedChapter
+                    chapter: updatedChapter,
+                    active: false
                 });
 
             }
+            success();
 
-        });
+        }).catch((exception) => {
+
+            alert('try again '+ exception);
+            success();
+            this.setState({
+                active: false
+            });
+    })
     }
 
     updateChosenTakeForChunk(takeId) {
@@ -320,7 +339,10 @@ class ChapterContainer extends Component {
                                     onClickSave={this.onClickSave.bind(this)}
                                     deleteComment={this.deleteComment.bind(this)}
                                     setSourceProject={this.setSourceProject.bind(this)}
-                                    onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}/>
+                                    onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}
+                                    active={this.state.active}
+
+                    />
 
                     {this.state.chunks.map(this.createChunkList.bind(this))}
 
@@ -337,7 +359,6 @@ class ChapterContainer extends Component {
     }
 
     createChunkList(chunk) {
-
         /*
         segments is an array of takes for each chunk
          */
@@ -364,6 +385,7 @@ class ChapterContainer extends Component {
                     listenList={this.state.listenList}
                     playTake={this.playTake.bind(this)}
                     onSourceClicked={this.onSourceClicked.bind(this)}
+                    active={this.state.active}
                 />
 
 
