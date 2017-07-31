@@ -11,7 +11,9 @@ class TakeList extends Component {
 
         return (
             <div>
+
                 {this.props.takes.map(this.createListItem.bind(this))}
+
             </div>
 
         );
@@ -21,6 +23,7 @@ class TakeList extends Component {
 
         return (
             <div>
+                <br />
                 <TakeContainer
                     take={take} // one take
                     count={take.order}
@@ -36,7 +39,6 @@ class TakeList extends Component {
                     active={this.props.active}
                     mode={this.props.mode}
                 />
-                <br />
             </div>
         );
     }

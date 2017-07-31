@@ -111,7 +111,7 @@ export class RecordComment extends Component {
 
         if (displayButton) {
             MainButton = <button
-                className="stop"
+                className="stopButton"
                 onClick={this.stopRecording}
                 type="button">
                 <Icon size='small' name='stop' inverted/>

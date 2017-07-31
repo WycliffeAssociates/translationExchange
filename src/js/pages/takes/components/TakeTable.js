@@ -56,7 +56,6 @@ class TakeTable extends Component {
                             active={this.props.active}
                             // deleteComment={this.props.deleteComment}
                         />
-                        <br />
                     </Table.Cell>
                 </Table>
             </Grid.Column>
