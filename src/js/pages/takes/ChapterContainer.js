@@ -178,7 +178,7 @@ class ChapterContainer extends Component {
 
     deleteComment(type, commentId, takeId) {
 
-        axios.delete('http://172.19.145.91/api/comments/' + commentId + '/')
+        axios.delete(config.apiUrl + 'comments/' + commentId + '/')
             .then((results) => {
                 this.updatingDeletedComment(type, commentId, takeId)
             })
