@@ -19,12 +19,6 @@
     padding: 0;
 }
 
-.ChapterTitle {
-    background-color: red;
-    width: 170px;
-    left: 0px;
-
-}
 
 .ColumnA {
     width: 250px;
@@ -43,6 +37,7 @@
 .StickyFooter {
     position: sticky;
     bottom: 0;
+    height: 80px;
     padding: 0;
     background-color: white;
     text-align: center
@@ -73,6 +68,11 @@
     display: inline-block;
 }
 
+.footerStyle {
+    background-color: black;
+    color: white;
+}
+
 .verticalLine {
     border-left: thin solid white;
 }
@@ -99,6 +99,6 @@
 /*}*/
 /*ui inverted vertical labeled icon ui overlay right thin visible sidebar menu*/
 
-.nopadding {
-    padding-bottom: -20px;
+.centerPlayButton {
+    text-align: center
 }
