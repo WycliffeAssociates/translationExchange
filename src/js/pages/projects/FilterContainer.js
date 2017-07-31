@@ -18,7 +18,8 @@ class FilterContainer extends Component {
             languages: [],
             books: [],
             versions: [],
-            projects: []
+            projects: [],
+            errorMssg: ""
         }
     }
 

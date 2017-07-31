@@ -9,7 +9,10 @@ import axios from 'axios';
 import config from 'config/config';
 import FilterContainer from "./FilterContainer";
 import LoadingDisplay from "js/components/LoadingDisplay";
-
+import ErrorMssgContainer from "./ErrorMssgContainer"
+import Error from '../../pages/404Error'
+var locationString;
+var errorBool;
 
 
 class ProjectsListContainer extends Component {
@@ -20,32 +23,54 @@ class ProjectsListContainer extends Component {
             loaded: true,
             error: "",
             projects: [], //projects gotten from the database
-            currentProjectQuery: "" //what query was used to get those projects from the database
+            currentProjectQuery: "", //what query was used to get those projects from the database
+            notFound: false,
+            errorMssg: []
         };
     }
 
-     componentDidMount () {
+    componentDidMount () {
         //if query string isn't blank, then request projects here to initially populate projects list
         if (this.props.location.search) {
             this.requestProjects(this.props.location.search);
         }
-     }
+    }
 
-     requestProjects (queryString) {
-         var query = QueryString.parse(queryString);
-         this.setState({loaded: false, error: ""});
+    requestProjects (queryString) {
 
-         axios.post(config.apiUrl + 'all_projects/', query)
-         .then((results) => {
-             this.setState({
-                 loaded: true,
-                 projects: results.data,
-                 currentProjectQuery: queryString
-             });
-         }).catch((exception) => {
-             this.setState({error: exception});
-         });
-     }
+        var query = QueryString.parse(queryString);
+        this.setState({loaded: false, error: ""});
+        if(this.setState == false){
+            this.props.notFound = true
+        }
+
+        axios.post(config.apiUrl + 'all_projects/', query)
+            .then((results) => {
+            //check if projectslist is empty
+
+                console.dir(results.data.length)
+                if(results.data.length > 0){
+                this.setState({
+                    loaded: true,
+                    projects: results.data,
+                    currentProjectQuery: queryString
+                });}
+                else{
+                    this.setState({
+                        loaded: true,
+                    });
+
+                    this.errorComponent()
+                    if(errorBool === true){
+                    }
+                    <Error/>
+
+                    console.log("some kind of error message")
+                }
+            }).catch((exception) => {
+            this.setState({error: exception});
+        });
+    }
 
     //if the project query string has changed, request projects
     componentWillReceiveProps (nextProps) {
@@ -77,7 +102,7 @@ class ProjectsListContainer extends Component {
                 this.props.history.push({
                     pathname: this.props.location.pathname
                 });
-        });
+            });
     }
 
     navigateToProject (language, book, version) {
@@ -98,8 +123,25 @@ class ProjectsListContainer extends Component {
         )
     }
 
+    errorComponent(){
+        if(locationString !== null){
+            <Error/>
+            errorBool = true;
+            console.log(locationString + " test inside")
+        }
+
+        console.log(this.props.location.search)
+        console.log(locationString)
+    }
+
     render () {
+        if (this.state.notFound) {
+            return <div>no projects found</div>;
+        }
+
+        locationString = this.props.location.search
         var retryRequestProjects = function () {this.requestProjects(this.props.location.search)};
+
 
         return (
             <div className="projects">
@@ -112,11 +154,25 @@ class ProjectsListContainer extends Component {
                                      setQuery={this.setQuery.bind(this)}
                                      queryString={this.props.location.search}
                                      clearQuery={this.clearQuery.bind(this)}/>
+
                     {this.state.projects.length > 0
                         ? <ProjectsList projects={this.state.projects}
                                         navigateToProject={this.navigateToProject.bind(this)}/>
-                        : ""
-                    }
+                        : locationString !== ""
+                            ? <Error/>
+                            : <ErrorMssgContainer/>
+
+
+                    //     if(this.props.location.search !== ""){
+                    //     <Error/>
+                    // }//why wont this work?
+            }
+
+
+
+
+
+
                 </LoadingDisplay>
             </div>
         );
