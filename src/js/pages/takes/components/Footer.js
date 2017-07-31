@@ -29,7 +29,7 @@ class Footer extends Component {
             })
             return (
                 <Card fluid>
-                    <AudioComponent playlist={playlist} width={500}/>
+                    <AudioComponent playlist={playlist} />
                 </Card>
             );
         }
@@ -54,9 +54,9 @@ class Footer extends Component {
                 <Menu inverted compact secondary>
                     {this.props.currentPlaylist.length > 0
                         ? <Menu.Item>
-                            <Card fluid>
-                                <AudioComponent playlist={this.props.currentPlaylist} width={500}/>
-                            </Card>
+
+                                <AudioComponent playlist={this.props.currentPlaylist} />
+
                           </Menu.Item>
                         : ""
                     }
