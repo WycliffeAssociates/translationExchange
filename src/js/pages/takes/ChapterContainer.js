@@ -107,7 +107,7 @@ class ChapterContainer extends Component {
 
     deleteComment(type, commentid, takeid) {
 
-            axios.delete('http://172.19.145.91/api/comments/' + commentid + '/'
+            axios.delete(config.apiUrl + 'comments/' + commentid + '/'
             ).then((results) => {
                 let updatedChunks = this.state.chunks.slice();
                 if (type === "take") {
@@ -330,7 +330,7 @@ class ChapterContainer extends Component {
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
 
-                    <ChapterHeader  book={this.state.book.name}
+                    <ChapterHeader  book={this.state.book}
                                     chapter={this.state.chapter}
                                     language={this.state.language.name}
                                     chunks={this.state.chunks}
@@ -341,6 +341,7 @@ class ChapterContainer extends Component {
                                     setSourceProject={this.setSourceProject.bind(this)}
                                     onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}
                                     active={this.state.active}
+                                    projectId={this.state.project.id}
 
                     />
 
