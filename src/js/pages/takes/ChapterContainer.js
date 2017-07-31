@@ -30,7 +30,8 @@ class ChapterContainer extends Component {
             listenList: [],
             query: '',
             currentPlaylist: [],
-            active: false
+            active: false,
+            audioLoop: false
         };
     }
 
@@ -311,14 +312,16 @@ class ChapterContainer extends Component {
             "name": "take " + takeNum + ", " + this.state.mode + " " + startv + " (" + author + " on " + date + ")"
         }];
         this.setState({
-            currentPlaylist: playlist
+            currentPlaylist: playlist,
+            audioLoop: false
         });
     }
 
     playPlaylist(playlist) {
 
         this.setState({
-            currentPlaylist: playlist
+            currentPlaylist: playlist,
+            audioLoop: true
         })
     }
 
@@ -360,6 +363,7 @@ class ChapterContainer extends Component {
                                 currentPlaylist={this.state.currentPlaylist}
                                 playPlaylist={this.playPlaylist.bind(this)}
                                 playTake={this.playTake.bind(this)}
+                                audioLoop={this.state.audioLoop}
                         />
                     </div>
                 </LoadingDisplay>
