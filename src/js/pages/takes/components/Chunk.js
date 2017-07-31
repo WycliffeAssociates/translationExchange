@@ -97,6 +97,7 @@ class Chunk extends Component {
                                 <Grid fixed padded fluid columns={4}>
                                     <TakeTable
                                         icon={icon1}
+                                        mode={this.props.mode}
                                         takes={this.props.segments}
                                         addToListenList={this.props.addToListenList}
                                         patchTake={this.props.patchTake}
@@ -113,6 +114,7 @@ class Chunk extends Component {
                                     />
                                     <TakeTable
                                         icon={icon2}
+                                        mode={this.props.mode}
                                         takes={this.props.segments}
                                         addToListenList={this.props.addToListenList}
                                         patchTake={this.props.patchTake}
@@ -128,6 +130,7 @@ class Chunk extends Component {
                                     />
                                     <TakeTable
                                         icon={icon3}
+                                        mode={this.props.mode}
                                         takes={this.props.segments}
                                         addToListenList={this.props.addToListenList}
                                         patchTake={this.props.patchTake}
@@ -143,6 +146,7 @@ class Chunk extends Component {
                                     />
                                     <TakeTable
                                         icon={icon4}
+                                        mode={this.props.mode}
                                         takes={this.props.segments}
                                         addToListenList={this.props.addToListenList}
                                         patchTake={this.props.patchTake}
