@@ -11,8 +11,9 @@ class TakeList extends Component {
 
         return (
             <div>
+
                 {this.props.takes.map(this.createListItem.bind(this))}
-                <br />
+
             </div>
 
         );

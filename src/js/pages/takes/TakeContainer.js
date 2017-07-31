@@ -55,7 +55,6 @@ class TakeContainer extends Component {
                   playTake={this.props.playTake}
                   active={this.props.active}
                   mode={this.props.mode}
-
             />
             //other events that require requesting the server would go here
         );

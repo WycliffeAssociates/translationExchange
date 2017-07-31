@@ -180,7 +180,7 @@ class Chunk extends Component {
                             </Grid.Column>
                         </Grid>
 
-                        <br />
+
                     </Accordion.Content>
 
                 </Accordion>
