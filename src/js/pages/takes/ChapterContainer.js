@@ -63,7 +63,6 @@ class ChapterContainer extends Component {
     patchTake(takeId, patch, success) {
         axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch
         ).then((results) => {
-            console.dir(results.data);
             //find the take in state that this one corresponds to
             let updatedChunks = this.state.chunks.slice();
             let chunkToUpdate = updatedChunks.findIndex((chunk) => {
@@ -79,12 +78,23 @@ class ChapterContainer extends Component {
             if (success) {
                 success();
             }
-        });
-    }
+        }).catch((exception) => {
+            alert("Sorry, that take doesn't exist!");
+            let updatedChunks = this.state.chunks.slice();
+            let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+                return chunk.takes.find(take => take.take.id === takeId)
+            });
+            updatedChunks[chunkToUpdate].takes =
+                updatedChunks[chunkToUpdate].takes.filter(take => take.take.id !== takeId);
+
+            this.setState({
+                chunks: updatedChunks
+            });
+        })
+    };
 
     deleteTake(takeId, success) {
-        axios.delete(config.apiUrl + 'takes/' + takeId + '/'
-        ).then((results) => {
+        axios.delete(config.apiUrl + 'takes/' + takeId + '/');
             //find the chunk with the take just deleted
             let updatedChunks = this.state.chunks.slice();
             let chunkToUpdate = updatedChunks.findIndex((chunk) => {
@@ -101,12 +111,10 @@ class ChapterContainer extends Component {
             if (success) {
                 success();
             }
-        });
     }
 
     deleteComment(type, commentid, takeid) {
-        axios.delete('http://172.19.145.91/api/comments/' + commentid + '/'
-        ).then((results) => {
+        axios.delete('http://172.19.145.91/api/comments/' + commentid + '/');
             let updatedChunks = this.state.chunks.slice();
             if (type === "take") {
                 let chunkToUpdate = updatedChunks.findIndex((chunk) => {
@@ -142,8 +150,6 @@ class ChapterContainer extends Component {
                     chapter: updatedChapter
                 });
             }
-
-        })
     }
 
     onClickSave(blobx, type, id) {
