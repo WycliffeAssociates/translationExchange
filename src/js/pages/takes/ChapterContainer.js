@@ -30,7 +30,8 @@ class ChapterContainer extends Component {
             listenList: [],
             query: '',
             currentPlaylist: [],
-            active: false
+            active: false,
+            audioLoop: false
         };
     }
 
@@ -150,6 +151,7 @@ class ChapterContainer extends Component {
     deleteTake(takeId, success) {
         if (window.confirm('Delete this take?')) {
             axios.delete(config.apiUrl + 'takes/' + takeId + '/', {timeout: 1500}
+
             ).then((results) => {
                 this.updatingDeletedTake(takeId);
                 if (success) {
@@ -363,8 +365,17 @@ class ChapterContainer extends Component {
             "name": "take " + takeNum + ", " + this.state.mode + " " + startv + " (" + author + " on " + date + ")"
         }];
         this.setState({
-            currentPlaylist: playlist
+            currentPlaylist: playlist,
+            audioLoop: false
         });
+    }
+
+    playPlaylist(playlist) {
+
+        this.setState({
+            currentPlaylist: playlist,
+            audioLoop: true
+        })
     }
 
     /*
@@ -382,17 +393,31 @@ class ChapterContainer extends Component {
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
 
-                    <ChapterHeader book={this.state.book.name}
-                                   chapter={this.state.chapter}
-                                   language={this.state.language.name}
-                                   chunks={this.state.chunks}
-                                   mode={this.state.mode}
-                                   selectedSourceProject={this.state.selectedSourceProjectQuery}
-                                   onClickSave={this.onClickSave.bind(this)}
-                                   deleteComment={this.deleteComment.bind(this)}
-                                   setSourceProject={this.setSourceProject.bind(this)}
-                                   onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}
-                                   active={this.state.active}
+{/*<<<<<<< HEAD*/}
+                    {/*<ChapterHeader book={this.state.book.name}*/}
+                                   {/*chapter={this.state.chapter}*/}
+                                   {/*language={this.state.language.name}*/}
+                                   {/*chunks={this.state.chunks}*/}
+                                   {/*mode={this.state.mode}*/}
+                                   {/*selectedSourceProject={this.state.selectedSourceProjectQuery}*/}
+                                   {/*onClickSave={this.onClickSave.bind(this)}*/}
+                                   {/*deleteComment={this.deleteComment.bind(this)}*/}
+                                   {/*setSourceProject={this.setSourceProject.bind(this)}*/}
+                                   {/*onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}*/}
+                                   {/*active={this.state.active}*/}
+{/*=======*/}
+                    <ChapterHeader  book={this.state.book}
+                                    chapter={this.state.chapter}
+                                    language={this.state.language.name}
+                                    chunks={this.state.chunks}
+                                    mode={this.state.mode}
+                                    selectedSourceProject={this.state.selectedSourceProjectQuery}
+                                    onClickSave={this.onClickSave.bind(this)}
+                                    deleteComment={this.deleteComment.bind(this)}
+                                    setSourceProject={this.setSourceProject.bind(this)}
+                                    onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}
+                                    active={this.state.active}
+                                    projectId={this.state.project.id}
 
                     />
 
@@ -402,6 +427,9 @@ class ChapterContainer extends Component {
                         <Footer mode={this.state.mode}
                                 listenList={this.state.listenList}
                                 currentPlaylist={this.state.currentPlaylist}
+                                playPlaylist={this.playPlaylist.bind(this)}
+                                playTake={this.playTake.bind(this)}
+                                audioLoop={this.state.audioLoop}
                         />
                     </div>
                 </LoadingDisplay>

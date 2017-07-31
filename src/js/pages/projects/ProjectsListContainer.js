@@ -103,7 +103,7 @@ class ProjectsListContainer extends Component {
 
         return (
             <div className="projects">
-                <Header as='h1' className="headerStyle">Choose a Project</Header>
+                <Header as='h1'>Choose a Project</Header>
 
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}

@@ -6,6 +6,7 @@ import TakePropTypes from "./TakePropTypes";
 var iterator;
 class TakeList extends Component {
 
+
     render () {
 
         return (
@@ -35,6 +36,7 @@ class TakeList extends Component {
                     active={this.props.active}
                     mode={this.props.mode}
                 />
+                <br />
             </div>
         );
     }

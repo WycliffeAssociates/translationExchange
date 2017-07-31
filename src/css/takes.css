@@ -37,7 +37,6 @@
 .StickyFooter {
     position: sticky;
     bottom: 0;
-    height: 80px;
     padding: 0;
     background-color: white;
     text-align: center
