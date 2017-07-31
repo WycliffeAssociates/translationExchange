@@ -301,6 +301,13 @@ class ChapterContainer extends Component {
         });
     }
 
+    playPlaylist(playlist) {
+
+        this.setState({
+            currentPlaylist: playlist
+        })
+    }
+
     /*
      Rendering functions
      */
@@ -333,6 +340,8 @@ class ChapterContainer extends Component {
                         <Footer mode={this.state.mode}
                                 listenList={this.state.listenList}
                                 currentPlaylist={this.state.currentPlaylist}
+                                playPlaylist={this.playPlaylist.bind(this)}
+                                playTake={this.playTake.bind(this)}
                         />
                     </div>
                 </LoadingDisplay>
