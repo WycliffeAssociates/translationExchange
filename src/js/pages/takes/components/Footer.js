@@ -91,7 +91,7 @@ class Footer extends Component {
 
                     {this.createArray().length > 0
                         ? <Menu.Item position="right">
-                            <Label pointing="right" size="huge" basic color="black">Click here to see your stitched takes</Label>
+                            <Label pointing="right" size="huge" basic color="black">Stitched takes</Label>
 
                             <Popup inverted trigger={button} hoverable size="large">
                                 <Grid inverted divided>
