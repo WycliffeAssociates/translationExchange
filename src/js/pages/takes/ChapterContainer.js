@@ -30,7 +30,8 @@ class ChapterContainer extends Component {
             query: '',
             currentPlaylist: [],
             active: false,
-            audioLoop: false
+            audioLoop: false,
+            markers: []
         };
     }
 
@@ -359,14 +360,16 @@ class ChapterContainer extends Component {
 
     }
 
-    playTake(takeLoc, takeNum, startv, author, date) {
+    playTake(takeLoc, takeNum, startv, author, date, markers) {
+
         let playlist = [{
             "src": config.streamingUrl + takeLoc,
             "name": "take " + takeNum + ", " + this.state.mode + " " + startv + " (" + author + " on " + date + ")"
         }];
         this.setState({
             currentPlaylist: playlist,
-            audioLoop: false
+            audioLoop: false,
+            markers: markers
         });
     }
 
@@ -416,6 +419,7 @@ class ChapterContainer extends Component {
                                 playPlaylist={this.playPlaylist.bind(this)}
                                 playTake={this.playTake.bind(this)}
                                 audioLoop={this.state.audioLoop}
+                                markers={this.state.markers}
                         />
                     </div>
                 </LoadingDisplay>
