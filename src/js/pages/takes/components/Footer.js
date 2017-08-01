@@ -36,7 +36,8 @@ class Footer extends Component {
                 }
             })
 
-            this.props.playPlaylist(playlist)
+            this.props.playPlaylist(playlist);
+            console.log('playlist', playlist);
 
             /*
             return (

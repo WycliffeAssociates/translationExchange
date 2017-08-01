@@ -18,7 +18,8 @@ class AudioComponent extends Component {
         this.state = {
             RecordComponent: false,
             show: false,
-            pause: false
+            pause: false,
+            loop:true
         };
 
     }
@@ -35,10 +36,11 @@ class AudioComponent extends Component {
     }
 
     componentDidMount() {
-        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-play'));
+
     }
 
     componentDidUpdate(prevProps) {
+        console.log('prev props', prevProps.playlist);
         if (prevProps.playlist !== this.props.playlist) {
             ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-skip-to-next'));
             ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-play'));
@@ -58,6 +60,7 @@ class AudioComponent extends Component {
         const src = file[0].src;
         const pause = this.state.pause;
         const markers = this.props.markers;
+        const loop = this.state.loop;
         console.log('markers', markers);
         const showMarkers = this.props.showMarkers;
         var autoPlay = this.props.autoPlay;
@@ -75,7 +78,7 @@ class AudioComponent extends Component {
                     }}
                     mic={this.props.mic}
                     src ={src}
-                    loop={this.props.loop}
+                    loop={loop}
                     markers={markers}
                     showMarkers={showMarkers}
                     markersButton={true}
