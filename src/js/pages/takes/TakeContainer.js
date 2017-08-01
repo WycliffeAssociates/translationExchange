@@ -16,12 +16,12 @@ class TakeContainer extends Component {
     }
 
     onMarkedForExportToggled() {
-        var markedForExport = !this.props.take.take.is_publish;
+        let markedForExport = !this.props.take.take.is_publish;
         this.props.patchTake(this.props.take.take.id,
             {is_publish: markedForExport},
-            () => { //success callback
+            (updatedTake) => { //success callback
                 if (markedForExport) {
-                    this.props.updateChosenTakeForChunk(this.props.take.take.id);
+                    this.props.updateChosenTakeForChunk(updatedTake.id);
                 }
             });
     }
@@ -40,23 +40,27 @@ class TakeContainer extends Component {
     }
 
     render() {
-            return (
-                <Take count={this.props.count}
-                      take={this.props.take.take}
-                      author={this.props.take.user}
-                      chunkNumber={this.props.chunkNumber}
-                      ratingLoading={this.state.ratingLoading}
-                      onRatingSet={this.onRatingSet.bind(this)}
-                      onMarkedForExportToggled={this.onMarkedForExportToggled.bind(this)}
-                      source={this.props.source}
-                      comments={this.props.take.comments}
-                      addToListenList={this.props.addToListenList}
-                      onDeleteTake={this.onDeleteTake.bind(this)}
-                      onClickSave={this.props.onClickSave}
-                      deleteComment={this.props.deleteComment}
-                      playTake={this.props.playTake}
-                />
-            );
+
+        return (
+            <Take count={this.props.count}
+                  take={this.props.take.take}
+                  author={this.props.take.user}
+                  chunkNumber={this.props.chunkNumber}
+                  ratingLoading={this.state.ratingLoading}
+                  onRatingSet={this.onRatingSet.bind(this)}
+                  onMarkedForExportToggled={this.onMarkedForExportToggled.bind(this)}
+                  source={this.props.source}
+                  comments={this.props.take.comments}
+                  addToListenList={this.props.addToListenList}
+                  onDeleteTake={this.onDeleteTake.bind(this)}
+                  onClickSave={this.props.onClickSave}
+                  deleteComment={this.props.deleteComment}
+                  playTake={this.props.playTake}
+                  active={this.props.active}
+                  mode={this.props.mode}
+            />
+            //other events that require requesting the server would go here
+        );
     }
 }
 

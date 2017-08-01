@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ChunkPropTypes from "./ChunkPropTypes";
 
-import {Accordion, Icon, Grid, Menu, Rail} from "semantic-ui-react";
+import {Accordion, Icon, Grid, Menu, Rail, Divider} from "semantic-ui-react";
 import TakeTable from './TakeTable'
 import 'css/takes.css'
 
@@ -179,10 +179,13 @@ class Chunk extends Component {
                                 />
                             </Grid.Column>
                         </Grid>
+                        <br />
+
 
                     </Accordion.Content>
 
                 </Accordion>
+
 
             </div>
 
