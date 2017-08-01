@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import ChunkPropTypes from "./ChunkPropTypes";
-
-import {Accordion, Icon, Grid, Menu, Rail, Divider} from "semantic-ui-react";
+import {Accordion, Icon, Grid} from "semantic-ui-react";
 import TakeTable from './TakeTable'
 import 'css/takes.css'
-
 import ChunkSidebar from "./SideBar"
 let onClick;
-let CommentContainer
+let CommentContainer;
 
 
 class Chunk extends Component {
@@ -18,20 +16,15 @@ class Chunk extends Component {
         var onestar = [];
         var twostar = [];
         var threestar = [];
-
         var counter = 0;
 
         let orderedSegments = this.props.segments.slice();
-
         orderedSegments.map((i) => {
-
-            counter+= 1
-            i.order= counter
-
+            counter+= 1;
+            i.order= counter;
             if (i.take.is_publish) {
                 publish[publish.length] = i
             }
-
             else if(i.take.rating < 2) {
                 onestar[onestar.length] = i
             }
@@ -41,10 +34,9 @@ class Chunk extends Component {
             else if(i.take.rating === 3) {
                    threestar[threestar.length] = i
             }
+        });
 
-        })
-
-        var modeLabel = "";
+        let modeLabel = "";
 
         switch (this.props.mode) {
             case "chunk":
@@ -57,25 +49,22 @@ class Chunk extends Component {
                 modeLabel = "Segment";
         }
 
-        var icon1 = <Icon name="star" color="red" size="big"/>
+        var icon1 = <Icon name="star" color="red" size="big"/>;
         var icon2 =
             <div>
                 <Icon name="star" color="yellow" size="big"/>
                 <Icon name="star" color="yellow" size="big"/>
-            </div>
+            </div>;
         var icon3 =
             <div>
                 <Icon name="star" color="green" size="big"/>
                 <Icon name="star" color="green" size="big"/>
                 <Icon name="star" color="green" size="big"/>
-            </div>
-        var icon4 = <Icon name="check" color="pink" size="big"/>
-
+            </div>;
+        var icon4 = <Icon name="check" color="pink" size="big"/>;
 
         return (
-
             <div>
-
                 <Accordion fluid styled>
                     <Accordion.Title className="ChunkTitle">
                         <center>
@@ -88,10 +77,8 @@ class Chunk extends Component {
                             }
                             </font>
                         </center>
-
                     </Accordion.Title>
                     <Accordion.Content className="ChunkBody">
-
                         <Grid fluid columns={2}>
                             <Grid.Column width={15}>
                                 <Grid fixed padded fluid columns={4}>
@@ -156,7 +143,6 @@ class Chunk extends Component {
                                         deleteComment={this.props.deleteComment}
                                         active={this.props.active}
                                     />
-
                                 </Grid>
                             </Grid.Column>
                             <Grid.Column width={1} verticalAlign="middle" floated="right">
@@ -176,16 +162,9 @@ class Chunk extends Component {
                             </Grid.Column>
                         </Grid>
                         <br />
-
-
                     </Accordion.Content>
-
                 </Accordion>
-
-
             </div>
-
-
         );
     }
 

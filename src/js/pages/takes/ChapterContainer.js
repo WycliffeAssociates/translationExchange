@@ -265,7 +265,6 @@ class ChapterContainer extends Component {
         let updatedChunk = this.state.chunks.find((chunk) => {
             return chunk.takes.find(take => take.take.id === takeId)
         });
-
         for (let i = 0; i < updatedChunk.takes.length; i++) {
             let currentTake = updatedChunk.takes[i];
             //if there's one besides the chosen one in the same chunk
@@ -277,7 +276,7 @@ class ChapterContainer extends Component {
     }
 
     onMarkedAsPublish(success) {
-        let parameters = {"is_publish": true}
+        let parameters = {"is_publish": true};
         //make patch request to confirm that the chapter is ready to be published
         axios.patch(config.apiUrl + 'chapters/' + this.state.chapter.id + "/", parameters)
             .then((response) => {
@@ -309,18 +308,16 @@ class ChapterContainer extends Component {
 
     addToListenList(props) {
 
-        var newArr = this.state.listenList;
-        var id = props.take.id;
+        let newArr = this.state.listenList;
+        let id = props.take.id;
 
         for (let i = 0; i < newArr.length; i++) {
             if (newArr[i].props.take.id === id) {
-                newArr.splice(i, 1)
+                newArr.splice(i, 1);
                 this.setState({listenList: newArr});
                 return ''
             }
         }
-
-        //find the chunk that this take was from, and add chunk info
         let chunk = this.state.chunks.find((chunk) => {
             return chunk.takes.find(take => take.take.id === id)
         });
@@ -330,7 +327,6 @@ class ChapterContainer extends Component {
             count: props.count,
             mode: props.mode
         };
-
         newArr.push(newListenItem);
         this.setState({
             listenList: newArr
@@ -348,7 +344,6 @@ class ChapterContainer extends Component {
 
     onSourceClicked(startv) {
         let sourceLoc = this.getSourceAudioLocationForChunk(startv);
-
         let playlist = [{
             "src": config.streamingUrl + sourceLoc,
             "name": this.state.mode + " " + startv + " (source)"
@@ -371,16 +366,12 @@ class ChapterContainer extends Component {
     }
 
     playPlaylist(playlist) {
-
         this.setState({
             currentPlaylist: playlist,
             audioLoop: true
         })
     }
 
-    /*
-     Rendering functions
-     */
     render() {
 
         var query = QueryString.parse(this.props.location.search);
@@ -388,10 +379,10 @@ class ChapterContainer extends Component {
         this.state.query = query;
         return (
             <div>
-
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
-                                retry={this.requestData.bind(this)}>
+                                retry={this.requestData.bind(this)}
+                >
                     <ChapterHeader  book={this.state.book}
                                     chapter={this.state.chapter}
                                     language={this.state.language.name}
@@ -404,12 +395,11 @@ class ChapterContainer extends Component {
                                     onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}
                                     active={this.state.active}
                                     projectId={this.state.project.id}
-
                     />
 
                     {this.state.chunks.map(this.createChunkList.bind(this))}
 
-                    <div fluid className="StickyFooter">
+                    <div className="StickyFooter">
                         <Footer mode={this.state.mode}
                                 listenList={this.state.listenList}
                                 currentPlaylist={this.state.currentPlaylist}
@@ -419,18 +409,13 @@ class ChapterContainer extends Component {
                         />
                     </div>
                 </LoadingDisplay>
-
             </div>
         );
     }
 
     createChunkList(chunk) {
-        /*
-        segments is an array of takes for each chunk
-         */
         return (
             <div>
-
                 <Chunk
                     comments={chunk.comments}
                     segments={chunk.takes}
@@ -449,10 +434,9 @@ class ChapterContainer extends Component {
                     active={this.state.active}
                 />
             </div>
-
         );
-
     }
+
 }
 
 export default ChapterContainer;

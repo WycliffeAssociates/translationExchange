@@ -10,12 +10,7 @@ class TakeList extends Component {
     render () {
 
         return (
-            <div>
-
-                {this.props.takes.map(this.createListItem.bind(this))}
-
-            </div>
-
+                this.props.takes.map(this.createListItem.bind(this))
         );
     }
 

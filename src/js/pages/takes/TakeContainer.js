@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import TakePropTypes from "./components/TakePropTypes";
 import Take from "./components/Take";
 
-
 class TakeContainer extends Component {
+
     constructor(props) {
         super(props);
         this.state = {

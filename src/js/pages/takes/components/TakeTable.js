@@ -3,7 +3,6 @@ import TakeList from './TakeList'
 import {Table, Grid, Button, Icon} from 'semantic-ui-react'
 import 'css/takes.css'
 
-var iterator;
 class TakeTable extends Component {
 
     deleteAllColumnTakes() {
@@ -12,7 +11,6 @@ class TakeTable extends Component {
         this.props.PLAYLIST.map((take) => {
             takesToDelete.push(take.take.id);
         });
-
         //remove them all
         takesToDelete.map((takeId) => {
             this.props.deleteTake(takeId);
@@ -36,7 +34,6 @@ class TakeTable extends Component {
                                     : ""
                                 }
                             </Table.HeaderCell>
-
                         </Table.Row>
                     </Table.Header>
 
@@ -54,15 +51,12 @@ class TakeTable extends Component {
                             mode={this.props.mode}
                             deleteComment={this.props.deleteComment}
                             active={this.props.active}
-                            // deleteComment={this.props.deleteComment}
                         />
                     </Table.Cell>
                 </Table>
             </Grid.Column>
-
         );
     }
-
 
 }
 
