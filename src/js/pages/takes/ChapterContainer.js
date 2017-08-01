@@ -433,7 +433,7 @@ class ChapterContainer extends Component {
 
                 <Chunk
                     comments={chunk.comments}
-                    segments={chunk.takes} // array of takes
+                    segments={chunk.takes}
                     mode={this.state.mode}
                     number={chunk.startv}
                     addToListenList={this.addToListenList.bind(this)}
@@ -443,18 +443,11 @@ class ChapterContainer extends Component {
                     onClickSave={this.onClickSave.bind(this)}
                     id={chunk.id}
                     deleteComment={this.deleteComment.bind(this)}
-                    loaded={this.state.loaded}
-                    chapter={this.state.query.chapter}
-                    book={this.state.book.name}
-                    language={this.state.language.name}
-                    chunks={this.state.chunks}
                     listenList={this.state.listenList}
                     playTake={this.playTake.bind(this)}
                     onSourceClicked={this.onSourceClicked.bind(this)}
                     active={this.state.active}
                 />
-
-
             </div>
 
         );

@@ -31,7 +31,7 @@ class Home extends Component {
     getRecentProjects() {
         axios.post(config.apiUrl + 'all_projects/', {}
         ).then((results) => {
-            this.setState({projects: results.data})
+            this.setState({projects: results.data});
             this.reduceState()
         }).catch((exception) => {
             this.setState({error: exception});
@@ -48,14 +48,14 @@ class Home extends Component {
 
     navigateToProject (language, book, version) {
         //make the query for the right project, using our current query as a base
-        var projectQuery = QueryString.parse(this.state.currentProjectQuery);
+        let projectQuery = QueryString.parse(this.state.currentProjectQuery);
         Object.assign(projectQuery, {
             language: language,
             book: book,
             version: version
         });
 
-        var queryString = QueryString.stringify(projectQuery);
+        let queryString = QueryString.stringify(projectQuery);
         this.props.history.push(
             {
                 pathname: '/chapters',
@@ -74,8 +74,6 @@ class Home extends Component {
 
             <Container fluid className="background">
 
-
-
                 <Container fluid>
                     <br />
                     <Image fluid src={trap} />
@@ -92,15 +90,6 @@ class Home extends Component {
 
                 </Container>
 
-
-
-
-
-
-
-
-
-
                 <Container fluid >
 
                     <Grid padded textAlign="center" >
@@ -109,7 +98,6 @@ class Home extends Component {
                                 <h2><font color="white">Recent Projects</font></h2>
                             </Grid.Row>
                             <Divider />
-
                             {this.state.projects.map(this.createListItem.bind(this))}
                         </Grid.Column>
                     </Grid>
@@ -122,15 +110,15 @@ class Home extends Component {
 
     createListItem(projects) {
 
-        var navigateToProject = (function () {
+        let navigateToProject = (function () {
             this.navigateToProject(projects.language.slug, projects.book.slug, projects.version);
         }).bind(this);
 
 
-        var str = ''
-        str += projects.book.name + ' '
-        str += projects.language.name + ' '
-        str += projects.version
+        let str = '';
+        str += projects.book.name + ' ';
+        str += projects.language.name + ' ';
+        str += projects.version;
 
         return(
             <div>
