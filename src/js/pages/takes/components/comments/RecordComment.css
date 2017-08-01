@@ -33,7 +33,7 @@
 
 }
 
-.stop{
+.stopButton{
 
     height: 50px;
     width: 50px;
@@ -47,13 +47,13 @@
 
 
 
-.stop:hover {
+.stopButton:hover {
     cursor: pointer;
     background-color: #3e98c7;
 
 }
 
-.stop:focus{
+.stopButton:focus{
     outline: none;
 
 }

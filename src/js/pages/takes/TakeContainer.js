@@ -13,12 +13,12 @@ class TakeContainer extends Component {
     }
 
     onMarkedForExportToggled() {
-        var markedForExport = !this.props.take.take.is_publish;
+        let markedForExport = !this.props.take.take.is_publish;
         this.props.patchTake(this.props.take.take.id,
             {is_publish: markedForExport},
-            () => { //success callback
+            (updatedTake) => { //success callback
                 if (markedForExport) {
-                    this.props.updateChosenTakeForChunk(this.props.take.take.id);
+                    this.props.updateChosenTakeForChunk(updatedTake.id);
                 }
             });
     }
@@ -55,7 +55,6 @@ class TakeContainer extends Component {
                   playTake={this.props.playTake}
                   active={this.props.active}
                   mode={this.props.mode}
-
             />
             //other events that require requesting the server would go here
         );

@@ -26,7 +26,7 @@ class Header extends Component {
 
         return (
 
-            <div>
+            <div style={{marginBottom: 10}}>
 
                 <Menu fluid secondary size='huge' compact >
 
@@ -64,7 +64,7 @@ class Header extends Component {
 
                 </Menu>
 
-                <Container className="redBar" fluid></Container>
+                <Container className="redBar" fluid/>
             </div>
 
 

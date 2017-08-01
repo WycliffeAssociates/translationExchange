@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
-import {Menu, Container, Card, Button} from 'semantic-ui-react'
+import MarkAsDone from "./MarkAsDone";
+import CommentContainer from "./comments/PinkButton"
+import {Menu, Container, Card, Button, Icon, Label, Popup, Grid, Divider} from 'semantic-ui-react'
 import AudioComponent from "./AudioComponent"
 import config from 'config/config'
 import 'css/takes.css'
-
+import TakeListenButton from './AddTake'
 class Footer extends Component {
 
     createArray() {
+
         if (this.props.listenList.length > 0) {
             var takeList = [];
             this.props.listenList.map((i) => {
@@ -14,7 +17,12 @@ class Footer extends Component {
             })
             return takeList
         }
+        else {
+            return []
+        }
     }
+
+
 
     createListenPlaylist() {
 
@@ -27,47 +35,94 @@ class Footer extends Component {
                     "name": this.props.mode + ' ' + i.chunk.startv + ' take ' + i.count
                 }
             })
+
+            this.props.playPlaylist(playlist)
+
+            /*
             return (
+
+
                 <Card fluid>
                     <AudioComponent playlist={playlist} />
+
                 </Card>
+
+
             );
+            */
         }
 
         else {
             return null;
         }
 
-
     }
 
-    onClick() {
-        alert('heyo')
-    }
+
 
     render () {
 
-        this.createArray()
+        var take = [{
+            "src": "a",
+            "name": "nathan"
+        }]
+
+        var icon = <Icon name="plus" size="big" color="blue"/>
+        var button = <Button icon={icon} basic/>
+
         return (
 
             <div className="footerStyle">
-                <Menu inverted compact secondary>
+                <Menu inverted secondary>
                     {this.props.currentPlaylist.length > 0
                         ? <Menu.Item>
                             <Card fluid>
-                                <AudioComponent playlist={this.props.currentPlaylist}/>
+                                <AudioComponent playlist={this.props.currentPlaylist} loop={this.props.audioLoop}/>
                             </Card>
                           </Menu.Item>
                         : ""
                     }
 
+
+                    {/*
                     <Menu.Item>
                         {this.createListenPlaylist()}
                     </Menu.Item>
+                    */}
 
-                    <Menu.Item>
-                        <Button content="expand" icon="unhide" onClick={this.onClick} />
-                    </Menu.Item>
+                    {this.createArray().length > 0
+                        ? <Menu.Item position="right">
+                            <Label pointing="right" size="huge" basic color="black">Stitched takes</Label>
+
+                            <Popup inverted trigger={button} hoverable size="large">
+                                <Grid inverted divided>
+                                    <Grid.Column divided>
+                                        <Grid.Row verticalAlign="middle">
+                                            <TakeListenButton onClick={this.createListenPlaylist.bind(this)} /> Play All
+                                            {/*this.createListenPlaylist()*/}
+                                        </Grid.Row>
+
+                                        {this.createArray().map((i) => {
+                                            return(
+                                                <div>
+                                                    <Divider />
+
+                                                <Grid.Row>{i} </Grid.Row>
+                                                </div>
+
+                                            );
+                                        })}
+                                    </Grid.Column>
+
+                                </Grid>
+
+
+                            </Popup>
+
+
+                        </Menu.Item>
+                        : ""
+                    }
                 </Menu>
             </div>
         );

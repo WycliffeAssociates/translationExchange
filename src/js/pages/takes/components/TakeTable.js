@@ -40,7 +40,7 @@ class TakeTable extends Component {
                         </Table.Row>
                     </Table.Header>
 
-                    <Table.Cell>
+                    <Table.Cell className="ChunkTitle">
                         <TakeList
                             takes={this.props.PLAYLIST}
                             addToListenList={this.props.addToListenList}
@@ -56,7 +56,6 @@ class TakeTable extends Component {
                             active={this.props.active}
                             // deleteComment={this.props.deleteComment}
                         />
-                        <br />
                     </Table.Cell>
                 </Table>
             </Grid.Column>

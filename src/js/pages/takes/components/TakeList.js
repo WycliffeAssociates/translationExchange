@@ -6,11 +6,14 @@ import TakePropTypes from "./TakePropTypes";
 var iterator;
 class TakeList extends Component {
 
+
     render () {
 
         return (
             <div>
+
                 {this.props.takes.map(this.createListItem.bind(this))}
+
             </div>
 
         );
@@ -20,6 +23,7 @@ class TakeList extends Component {
 
         return (
             <div>
+                <br />
                 <TakeContainer
                     take={take} // one take
                     count={take.order}

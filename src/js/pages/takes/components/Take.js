@@ -13,7 +13,7 @@ class Take extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {isToggleOn: true, addButtonColor: "", showMarkers: false, showMarkersColor: ""}
+        this.state = {isToggleOn: true, addButtonIcon: "plus", showMarkers: false, showMarkersColor: ""}
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
         // this.showMarker = this.showMarker.bind(this);
@@ -26,17 +26,17 @@ class Take extends Component {
     addToListen() {
         this.props.addToListenList(this.props);
 
-        if (this.state.addButtonColor !== "blue") {
+        if (this.state.addButtonIcon !== "plus") {
             this.setState(
                 {
-                    addButtonColor: "blue"
+                    addButtonIcon: "plus"
                 }
             )
         }
         else {
             this.setState(
                 {
-                    addButtonColor: ""
+                    addButtonIcon: "minus"
                 }
             )
         }
@@ -45,18 +45,18 @@ class Take extends Component {
     moveLeft() {
         if (this.props.take.is_publish) {
             this.props.onMarkedForExportToggled();
-        } else if (this.props.take.rating > 1) {
+        } else if (this.props.take.rating > 1){
             this.props.onRatingSet(this.props.take.rating - 1)
         }
     }
 
     moveRight() {
-        if (this.props.take.rating < 1) {
-            this.props.onRatingSet(2);
-        } else if (this.props.take.rating < 3) {
-            this.props.onRatingSet(this.props.take.rating + 1)
-        } else {
+        if (this.props.take.rating >= 3) {
             this.props.onMarkedForExportToggled();
+        } else if (this.props.take.rating < 1) {
+            this.props.onRatingSet(2);
+        } else {
+            this.props.onRatingSet(this.props.take.rating + 1);
         }
     }
 
@@ -93,7 +93,7 @@ class Take extends Component {
                                         <font size="2" color="grey">{this.props.author ? this.props.author.name : "Unknown Author" }</font>
                                     </Grid.Column>
                                     <Grid.Column floated="right">
-                                        <StitchTakesButton onClick={this.addToListen.bind(this)} size="huge" color="blue"/>
+                                        <StitchTakesButton onClick={this.addToListen.bind(this)} icon={this.state.addButtonIcon}/>
                                     </Grid.Column>
                                 </Grid>
                             </Grid.Row>
