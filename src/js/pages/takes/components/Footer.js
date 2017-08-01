@@ -57,8 +57,6 @@ class Footer extends Component {
 
     }
 
-
-
     render () {
 
         var take = [{
@@ -67,7 +65,6 @@ class Footer extends Component {
         }]
 
         var icon = <Icon name="plus" size="big" color="blue"/>
-        var button = <Button icon={icon} basic/>
 
         return (
 
@@ -93,12 +90,11 @@ class Footer extends Component {
                         ? <Menu.Item position="right">
                             <Label pointing="right" size="huge" basic color="black">Click here to see your stitched takes</Label>
 
-                            <Popup inverted trigger={button} hoverable size="large">
+                            <Popup inverted trigger={icon} hoverable size="large">
                                 <Grid inverted divided>
                                     <Grid.Column divided>
                                         <Grid.Row verticalAlign="middle">
                                             <TakeListenButton onClick={this.createListenPlaylist.bind(this)} /> Play All
-                                            {/*this.createListenPlaylist()*/}
                                         </Grid.Row>
 
                                         {this.createArray().map((i) => {

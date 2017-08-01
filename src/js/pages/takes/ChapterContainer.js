@@ -398,9 +398,6 @@ class ChapterContainer extends Component {
                     active={this.state.active}
                 />
 
-
-
-
             </div>
 
         );
