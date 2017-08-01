@@ -14,26 +14,45 @@ describe('Filter Container', () => {
 
     it('gets filters from project', async () => {
         var filCont = TestUtils.renderIntoDocument(<FilterContainer />)
-        const fakeProjectData = {
-            language :[
+        const fakeProjectData = [{
+            language :
                 {
                     slug: 'tst',
                     name: 'Testing'
-                }
-            ],
+                },
 
-            book : [
+            book :
                 {
-                    slug : 'tst',
-                    name : 'Nick'
-                }
-            ],
+                    slug: 'tst',
+                    name: 'Nick'
+                },
 
             version : 'esv'
-        }
+        }]
         await filCont.getFiltersFromProjects(fakeProjectData)
         expect(filCont.state.loaded).toBe(true)
-        expect(filCont.state.language[0].slug).toBe("")
+        expect(filCont.state.languages[0].key).toBe('tst')
+        expect(filCont.state.books[0].key).toBe('tst')
+        expect(filCont.state.versions[0].key).toBe('esv')
     })
 
+    it('errors are thrown when invalid data is passed', async () => {
+        //this test verifies whether the function 'getFiltersFromProjects'
+        //has error handling capabilities
+        var filCont = TestUtils.renderIntoDocument(<FilterContainer />)
+        const badData = [{
+            speech :{
+                slug : 'english',
+                name : 'eng'
+            },
+
+            novel : {
+              slug : 'none',
+              name : 'Test'
+            },
+
+            version : 'esv'
+        }]
+        await expect(function() {filCont.getFiltersFromProjects(badData)}).toThrow("Error: Improper Data")
+    })
 })
