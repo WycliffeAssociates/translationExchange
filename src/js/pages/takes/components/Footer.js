@@ -54,9 +54,9 @@ class Footer extends Component {
                 <Menu inverted compact secondary>
                     {this.props.currentPlaylist.length > 0
                         ? <Menu.Item>
-
-                                <AudioComponent playlist={this.props.currentPlaylist} />
-
+                            <Card fluid>
+                                <AudioComponent playlist={this.props.currentPlaylist}/>
+                            </Card>
                           </Menu.Item>
                         : ""
                     }

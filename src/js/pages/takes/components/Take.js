@@ -65,6 +65,7 @@ class Take extends Component {
         const markers = this.props.take.markers;
         let showMarkers = this.state.showMarkers;
         var file = [];
+        const src = this.props.take.location;
         file[0] = {
             "src": config.streamingUrl + this.props.take.location
         };

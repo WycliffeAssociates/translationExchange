@@ -37,7 +37,7 @@
 .StickyFooter {
     position: sticky;
     bottom: 0;
-    height: 80px;
+    height: 200px;
     padding: 0;
     background-color: white;
     text-align: center
@@ -69,7 +69,7 @@
 }
 
 .footerStyle {
-    background-color: black;
+    background-color: white;
     color: white;
 }
 

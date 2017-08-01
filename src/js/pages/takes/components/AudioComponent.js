@@ -3,6 +3,7 @@ import Audio from 'translation-audio-player'
 import * as ReactDOM from "react-dom";
 
 
+
 let onClick;
 // requires a name (str) and src (str) when it is called
 // name : name to display on take
@@ -54,6 +55,7 @@ class AudioComponent extends Component {
          }
          */
         var file = this.props.playlist;
+        const src = file[0].src;
         const pause = this.state.pause;
         const markers = this.props.markers;
         const showMarkers = this.props.showMarkers;
@@ -63,20 +65,29 @@ class AudioComponent extends Component {
             <div>
                 <Audio
                     width={''}
-                    height={150}
+                    height={''}
                     autoPlay={true}
                     playlist={file}
                     recordButton={() => {
                         this.onClick()
                     }}
                     mic={this.props.mic}
+                    src ={src}
                     loop={this.props.loop}
+                    //src="https://files.freemusicarchive.org/music%2Fno_curator%2FThe_Womb%2FBang_-_An_Introduction_to_The_Womb%2FThe_Womb_-_02_-_Sex_Club.mp3"
                     markers={markers}
                     showMarkers={showMarkers}
+                    markersButton={true}
 
                     // ref to pause the audio
                     ref={audioComponent => {
                         this.audioComponent = audioComponent;
+                    }}
+                    style={{
+                        boxShadow: '1px 2px 6px rgba(0, 0, 0, 0.2)',
+                        width: '1200px',
+                        height: '150px',
+                        backgroundColor:'black'
                     }}
 
                 />
