@@ -8,7 +8,6 @@ import 'css/takes.css'
 import ChapterHeader from "./components/ChapterHeader"
 import Footer from './components/Footer'
 import Chunk from "./components/Chunk"
-import {Modal} from 'semantic-ui-react'
 
 let onClick;
 
@@ -109,10 +108,6 @@ class ChapterContainer extends Component {
         }
     }
 
-    /*
-     Functions for making requests and updating state
-     */
-
     patchTake(takeId, patch, success) {
         axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch
         ).then((results) => {
@@ -124,13 +119,14 @@ class ChapterContainer extends Component {
             let takeToUpdate = updatedChunks[chunkToUpdate].takes
                 .findIndex(take => take.take.id === takeId);
             updatedChunks[chunkToUpdate].takes[takeToUpdate].take = results.data;
+
             this.setState({
                 chunks: updatedChunks
+            }, () => {
+                if (success) {
+                    success(updatedChunks[chunkToUpdate].takes[takeToUpdate].take);
+                }
             });
-
-            if (success) {
-                success();
-            }
         }).catch((exception) => {
             if (exception.response) {
                 if (exception.response.status === 404) {
@@ -145,8 +141,12 @@ class ChapterContainer extends Component {
             else {
                 alert("Something went wrong. Please check your connection and try again. ")
             }
-        })
-    };
+        });
+    }
+
+    /*
+     Functions for making requests and updating state
+     */
 
     deleteTake(takeId, success) {
         if (window.confirm('Delete this take?')) {
