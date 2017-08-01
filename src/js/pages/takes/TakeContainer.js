@@ -3,7 +3,7 @@ import TakePropTypes from "./components/TakePropTypes";
 import Take from "./components/Take";
 import SideBar from './components/SideBar'
 import Error from '../../pages/404Error'
-
+var count;
 
 
 class TakeContainer extends Component {
@@ -40,23 +40,7 @@ class TakeContainer extends Component {
     }
 
     render() {
-
-        return (
-            <Take count={this.props.count}
-                  take={this.props.take.take}
-                  author={this.props.take.user}
-                  chunkNumber={this.props.chunkNumber}
-                  ratingLoading={this.state.ratingLoading}
-                  onRatingSet={this.onRatingSet.bind(this)}
-                  onMarkedForExportToggled={this.onMarkedForExportToggled.bind(this)}
-                  source={this.props.source}
-                  comments={this.props.take.comments}
-                  addToListenList={this.props.addToListenList}
-                  onDeleteTake={this.onDeleteTake.bind(this)}
-                  onClickSave={this.props.onClickSave}
-                  deleteComment={this.props.deleteComment}
-                  playTake={this.props.playTake}
-
+            return (
                 <Take count={this.props.count}
                       take={this.props.take.take}
                       author={this.props.take.user}
@@ -71,11 +55,8 @@ class TakeContainer extends Component {
                       onClickSave={this.props.onClickSave}
                       deleteComment={this.props.deleteComment}
                       playTake={this.props.playTake}
-
                 />
-
-            //other events that require requesting the server would go here
-        );
+            );
     }
 }
 

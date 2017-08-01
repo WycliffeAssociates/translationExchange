@@ -9,6 +9,8 @@ import ChapterHeader from "./components/ChapterHeader"
 import Footer from './components/Footer'
 import Chunk from "./components/Chunk"
 import { Modal } from 'semantic-ui-react'
+import Error from '../../pages/404Error'
+
 
 let onClick;
 
@@ -57,7 +59,7 @@ class ChapterContainer extends Component {
             )
         });
     }
-
+//this.state.loaded == true and chunks is still empoty
     /*
      Functions for making requests and updating state
      */
@@ -328,48 +330,58 @@ class ChapterContainer extends Component {
     /*
      Rendering functions
      */
+    //TODO use key
+    //TODO use this.props.location.key !== undefined
     render() {
 
         var query = QueryString.parse(this.props.location.search);
-
+        console.dir(this.state)
         this.state.query = query;
-        return (
-            <div>
 
-                <LoadingDisplay loaded={this.state.loaded}
-                                error={this.state.error}
-                                retry={this.requestData.bind(this)}>
+        if(this.state.chunks.length > 0 && this.state.loaded === true) {
+            return (
+                <div>
 
-                    <ChapterHeader  book={this.state.book}
-                                    chapter={this.state.chapter}
-                                    language={this.state.language.name}
-                                    chunks={this.state.chunks}
-                                    mode={this.state.mode}
-                                    selectedSourceProject={this.state.selectedSourceProjectQuery}
-                                    onClickSave={this.onClickSave.bind(this)}
-                                    deleteComment={this.deleteComment.bind(this)}
-                                    setSourceProject={this.setSourceProject.bind(this)}
-                                    onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}
-                                    active={this.state.active}
-                                    projectId={this.state.project.id}
 
-                    />
+                    <LoadingDisplay loaded={this.state.loaded}
+                                    error={this.state.error}
+                                    retry={this.requestData.bind(this)}>
 
-                    {this.state.chunks.map(this.createChunkList.bind(this))}
+                        <ChapterHeader book={this.state.book}
+                                       chapter={this.state.chapter}
+                                       language={this.state.language.name}
+                                       chunks={this.state.chunks}
+                                       mode={this.state.mode}
+                                       selectedSourceProject={this.state.selectedSourceProjectQuery}
+                                       onClickSave={this.onClickSave.bind(this)}
+                                       deleteComment={this.deleteComment.bind(this)}
+                                       setSourceProject={this.setSourceProject.bind(this)}
+                                       onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}
+                                       active={this.state.active}
+                                       projectId={this.state.project.id}
 
-                    <div fluid className="StickyFooter">
-                        <Footer mode={this.state.mode}
-                                listenList={this.state.listenList}
-                                currentPlaylist={this.state.currentPlaylist}
-                                playPlaylist={this.playPlaylist.bind(this)}
-                                playTake={this.playTake.bind(this)}
-                                audioLoop={this.state.audioLoop}
                         />
-                    </div>
-                </LoadingDisplay>
 
-            </div>
-        );
+                        {this.state.chunks.map(this.createChunkList.bind(this))}
+
+                        <div fluid className="StickyFooter">
+                            <Footer mode={this.state.mode}
+                                    listenList={this.state.listenList}
+                                    currentPlaylist={this.state.currentPlaylist}
+                                    playPlaylist={this.playPlaylist.bind(this)}
+                                    playTake={this.playTake.bind(this)}
+                                    audioLoop={this.state.audioLoop}
+                            />
+                        </div>
+                    </LoadingDisplay>
+
+
+                </div>
+            );
+        } else{
+            return(<Error/>)
+            // console.log("theres an error here")
+        }
     }
 
     createChunkList(chunk) {

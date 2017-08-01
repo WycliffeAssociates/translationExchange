@@ -147,7 +147,7 @@ class ProjectsListContainer extends Component {
                                 error={this.state.error}
                                 retry={retryRequestProjects.bind(this)}>
 
-                    {this.state.projects.length === 0 && locationString !== ""
+                    {this.state.projects.length === 0 && locationString === ""
                         ? <Error/>
                         : <div>
                             <FilterContainer projects={this.state.projects}

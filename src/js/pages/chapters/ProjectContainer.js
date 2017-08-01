@@ -14,6 +14,9 @@ import Error from '../../pages/404Error'
 
 var locationString;
 var errorBool;
+var testing;
+let loaded;
+let length;
 
 class ProjectContainer extends Component {
     constructor (props) {
@@ -123,8 +126,14 @@ class ProjectContainer extends Component {
 
     render (){
         locationString = this.props.location.search
-        console.log(this.props.location.search)
-        console.log(this.props);
+       // console.log(this.props.location.search)
+        //console.log(this.state.chapters.length);
+        //{console.log(this.props.location.key)}
+        console.log(this.state.loaded);
+        length = this.state.chapters.length;
+        loaded = this.state.loaded;
+        console.log(length)
+
         return (
             <div className="chapters">
                 <Container fluid>
@@ -164,13 +173,22 @@ class ProjectContainer extends Component {
                                 </Table.Row>
                             </Table.Header>
 
-                            <ChapterList
-                                chapters={this.state.chapters}
-                                version={QueryString.parse(this.props.location.search).version}
-                                navigateToChapter={this.navigateToChapter.bind(this)}
-                                setCheckingLevel={this.setCheckingLevel.bind(this)}
-                                projectIsPublish={this.state.is_publish}
-                            />
+                            {/*//TODO this is where the error is*/}
+                                                        {/*this.state.projects.length === 0 && !== ""*/}
+                            {this.state.chapters.length > 0 && this.state.loaded === true
+                            ? <ChapterList
+                                    chapters={this.state.chapters}
+                                    version={QueryString.parse(this.props.location.search).version}
+                                    navigateToChapter={this.navigateToChapter.bind(this)}
+                                    setCheckingLevel={this.setCheckingLevel.bind(this)}
+                                    projectIsPublish={this.state.is_publish}
+                                />
+                                : <Error/>
+                            }
+
+                            {/*TODO why wont this work?? Why does a console log still work here.*/}
+
+
                         </Table>
 
                         <DownloadProjects
