@@ -58,12 +58,14 @@ class AudioComponent extends Component {
         const src = file[0].src;
         const pause = this.state.pause;
         const markers = this.props.markers;
+        console.log('markers', markers);
         const showMarkers = this.props.showMarkers;
         var autoPlay = this.props.autoPlay;
 
         return (
             <div>
                 <Audio
+                    color="#fff"
                     width={''}
                     height={''}
                     autoPlay={true}
@@ -74,7 +76,6 @@ class AudioComponent extends Component {
                     mic={this.props.mic}
                     src ={src}
                     loop={this.props.loop}
-                    //src="https://files.freemusicarchive.org/music%2Fno_curator%2FThe_Womb%2FBang_-_An_Introduction_to_The_Womb%2FThe_Womb_-_02_-_Sex_Club.mp3"
                     markers={markers}
                     showMarkers={showMarkers}
                     markersButton={true}
