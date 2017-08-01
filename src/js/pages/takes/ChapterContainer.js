@@ -8,7 +8,6 @@ import 'css/takes.css'
 import ChapterHeader from "./components/ChapterHeader"
 import Footer from './components/Footer'
 import Chunk from "./components/Chunk"
-import { Modal } from 'semantic-ui-react'
 
 let onClick;
 
@@ -58,14 +57,60 @@ class ChapterContainer extends Component {
         });
     }
 
-    /*
-     Functions for making requests and updating state
-     */
+    updatingDeletedTake(takeId) {
+        let updatedChunks = this.state.chunks.slice();
+        let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+            return chunk.takes.find(take => take.take.id === takeId)
+        });
+        updatedChunks[chunkToUpdate].takes =
+            updatedChunks[chunkToUpdate].takes.filter(take => take.take.id !== takeId);
+
+        this.setState({
+            chunks: updatedChunks
+        });
+    }
+
+    updatingDeletedComment(type, commentId, takeId) {
+        let updatedChunks = this.state.chunks.slice();
+        if (type === "take") {
+            let chunkToUpdate = updatedChunks.findIndex((chunk) => {
+                return chunk.takes.find(take => take.take.id === takeId)
+            });
+            let takeToUpdate = updatedChunks[chunkToUpdate].takes
+                .findIndex(take => take.take.id === takeId);
+
+            updatedChunks[chunkToUpdate].takes[takeToUpdate].comments =
+                updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.filter(comment => comment.comment.id !== commentId);
+            this.setState({
+                chunks: updatedChunks
+            });
+        }
+
+        else if (type === "chunk") {
+            for (var i = 0; i < updatedChunks.length; i++) {
+                if (updatedChunks[i].id === takeId) {
+                    var chunkToUpdate = i;
+                }
+            }
+            updatedChunks[chunkToUpdate].comments = updatedChunks[chunkToUpdate].comments.filter(comment => comment.comment.id !== commentId);
+            this.setState({
+                chunks: updatedChunks
+            });
+
+        }
+        else if (type === "chapter") {
+            let updatedChapter = Object.assign({}, this.state.chapter);
+
+            updatedChapter.comments = updatedChapter.comments.filter(comment => comment.comment.id !== commentId);
+            this.setState({
+                chapter: updatedChapter
+            });
+        }
+    }
 
     patchTake(takeId, patch, success) {
         axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch
         ).then((results) => {
-            console.dir(results.data);
             //find the take in state that this one corresponds to
             let updatedChunks = this.state.chunks.slice();
             let chunkToUpdate = updatedChunks.findIndex((chunk) => {
@@ -74,82 +119,85 @@ class ChapterContainer extends Component {
             let takeToUpdate = updatedChunks[chunkToUpdate].takes
                 .findIndex(take => take.take.id === takeId);
             updatedChunks[chunkToUpdate].takes[takeToUpdate].take = results.data;
+
             this.setState({
                 chunks: updatedChunks
+            }, () => {
+                if (success) {
+                    success(updatedChunks[chunkToUpdate].takes[takeToUpdate].take);
+                }
             });
-
-            if (success) {
-                success();
+        }).catch((exception) => {
+            if (exception.response) {
+                if (exception.response.status === 404) {
+                    alert("Sorry, that take doesn't exist!");
+                    this.updatingDeletedTake(takeId);
+                }
+                else {
+                    alert("Something went wrong. Please check your connection and try again. ")
+                }
+            }
+            //timeout error doesn't produce response
+            else {
+                alert("Something went wrong. Please check your connection and try again. ")
             }
         });
     }
+
+    /*
+     Functions for making requests and updating state
+     */
 
     deleteTake(takeId, success) {
-        axios.delete(config.apiUrl + 'takes/' + takeId + '/'
-        ).then((results) => {
-            //find the chunk with the take just deleted
-            let updatedChunks = this.state.chunks.slice();
-            let chunkToUpdate = updatedChunks.findIndex((chunk) => {
-                return chunk.takes.find(take => take.take.id === takeId)
-            });
+        if (window.confirm('Delete this take?')) {
+            axios.delete(config.apiUrl + 'takes/' + takeId + '/'
 
-            //give it a new array of all its takes except the one to delete
-            updatedChunks[chunkToUpdate].takes =
-                updatedChunks[chunkToUpdate].takes.filter(take => take.take.id !== takeId);
-
-            this.setState({
-                chunks: updatedChunks
-            });
-            if (success) {
-                success();
-            }
-        });
-    }
-
-    deleteComment(type, commentid, takeid) {
-
-            axios.delete(config.apiUrl + 'comments/' + commentid + '/'
             ).then((results) => {
-                let updatedChunks = this.state.chunks.slice();
-                if (type === "take") {
-                    let chunkToUpdate = updatedChunks.findIndex((chunk) => {
-                        return chunk.takes.find(take => take.take.id === takeid)
-                    });
-                    let takeToUpdate = updatedChunks[chunkToUpdate].takes
-                        .findIndex(take => take.take.id === takeid);
-
-                    updatedChunks[chunkToUpdate].takes[takeToUpdate].comments =
-                        updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.filter(comment => comment.comment.id !== commentid);
-                    this.setState({
-                        chunks: updatedChunks
-                    });
+                this.updatingDeletedTake(takeId);
+                if (success) {
+                    success();
                 }
-
-                else if (type === "chunk") {
-                    for (var i = 0; i < updatedChunks.length; i++) {
-                        if (updatedChunks[i].id === takeid) {
-                            var chunkToUpdate = i;
-                        }
+            }).catch((exception) => {
+                if (exception.response) {
+                    if (exception.response.status === 404) {
+                        this.updatingDeletedTake(takeId);
                     }
-                    updatedChunks[chunkToUpdate].comments = updatedChunks[chunkToUpdate].comments.filter(comment => comment.comment.id !== commentid);
-                    this.setState({
-                        chunks: updatedChunks
-                    });
 
+                    else {
+                        alert("Something went wrong. Please check your connection and try again. " )
+                    }
                 }
-                else if (type === "chapter") {
-                    let updatedChapter = Object.assign({}, this.state.chapter);
-
-                    updatedChapter.comments = updatedChapter.comments.filter(comment => comment.comment.id !== commentid);
-                    this.setState({
-                        chapter: updatedChapter
-                    });
+                //timeout error doesn't produce response
+                else {
+                    alert("Something went wrong. Please check your connection and try again. ")
                 }
-
-
             })
-
+        }
     }
+
+
+    deleteComment(type, commentId, takeId) {
+
+        axios.delete(config.apiUrl + 'comments/' + commentId + '/')
+            .then((results) => {
+                this.updatingDeletedComment(type, commentId, takeId)
+            })
+            .catch((exception) => {
+                if (exception.response) {
+                    if (exception.response.status === 404) {
+                        this.updatingDeletedComment(type, commentId, takeId)
+                    }
+                    else {
+                        alert("Something went wrong. Please check your connection and try again.")
+                    }
+                }
+                //timeout error doesn't produce response
+                else {
+                    alert("Something went wrong. Please check your connection and try again.")
+                }
+            })
+    }
+
 
     onClickSave(blobx, type, id, success) {
         this.setState({
@@ -205,12 +253,12 @@ class ChapterContainer extends Component {
 
         }).catch((exception) => {
 
-            alert('try again '+ exception);
+            alert("Something went wrong. Please check your connection and try again.");
             success();
             this.setState({
                 active: false
             });
-    })
+        })
     }
 
     updateChosenTakeForChunk(takeId) {
@@ -236,9 +284,12 @@ class ChapterContainer extends Component {
                 let updatedChapter = Object.assign({}, this.state.chapter);
                 updatedChapter.is_publish = true;
                 this.setState({chapter: updatedChapter});
-                if (success) { success() };
+                if (success) {
+                    success()
+                }
+                ;
             }).catch((exception) => {
-                console.log(exception);
+            console.log(exception);
         });
     }
 
@@ -287,7 +338,9 @@ class ChapterContainer extends Component {
     }
 
     getSourceAudioLocationForChunk(startv) {
-        if (!this.state.selectedSourceProject ) { return undefined; }
+        if (!this.state.selectedSourceProject) {
+            return undefined;
+        }
         let chunk = this.state.selectedSourceProject.chunks.find((chunk) => (chunk.startv === startv));
         let take = chunk.takes.find((take) => (take.take.is_publish));
         return take.take.location;
@@ -339,7 +392,6 @@ class ChapterContainer extends Component {
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
                                 retry={this.requestData.bind(this)}>
-
                     <ChapterHeader  book={this.state.book}
                                     chapter={this.state.chapter}
                                     language={this.state.language.name}
@@ -401,8 +453,6 @@ class ChapterContainer extends Component {
                     onSourceClicked={this.onSourceClicked.bind(this)}
                     active={this.state.active}
                 />
-
-
 
 
             </div>
