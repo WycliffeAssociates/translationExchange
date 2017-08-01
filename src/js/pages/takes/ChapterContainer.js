@@ -8,7 +8,6 @@ import 'css/takes.css'
 import ChapterHeader from "./components/ChapterHeader"
 import Footer from './components/Footer'
 import Chunk from "./components/Chunk"
-import { Modal } from 'semantic-ui-react'
 
 let onClick;
 
@@ -65,7 +64,6 @@ class ChapterContainer extends Component {
     patchTake(takeId, patch, success) {
         axios.patch(config.apiUrl + 'takes/' + takeId + '/', patch
         ).then((results) => {
-            console.dir(results.data);
             //find the take in state that this one corresponds to
             let updatedChunks = this.state.chunks.slice();
             let chunkToUpdate = updatedChunks.findIndex((chunk) => {
@@ -74,13 +72,15 @@ class ChapterContainer extends Component {
             let takeToUpdate = updatedChunks[chunkToUpdate].takes
                 .findIndex(take => take.take.id === takeId);
             updatedChunks[chunkToUpdate].takes[takeToUpdate].take = results.data;
+
             this.setState({
                 chunks: updatedChunks
+            }, () => {
+                if (success) {
+                    success(updatedChunks[chunkToUpdate].takes[takeToUpdate].take);
+                }
             });
 
-            if (success) {
-                success();
-            }
         });
     }
 
@@ -99,10 +99,11 @@ class ChapterContainer extends Component {
 
             this.setState({
                 chunks: updatedChunks
+            }, () => {
+                if (success) {
+                    success();
+                }
             });
-            if (success) {
-                success();
-            }
         });
     }
 
