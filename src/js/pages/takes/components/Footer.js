@@ -76,7 +76,13 @@ class Footer extends Component {
                     {this.props.currentPlaylist.length > 0
                         ? <Menu.Item>
                             <Card fluid>
-                                <AudioComponent playlist={this.props.currentPlaylist} width={500} loop={this.props.audioLoop}/>
+                                <AudioComponent
+                                    playlist={this.props.currentPlaylist}
+                                    width={500}
+                                    loop={this.props.audioLoop}
+                                    markers={this.props.markers}
+                                    showMarkers={true}
+                                />
                             </Card>
                           </Menu.Item>
                         : ""

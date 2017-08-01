@@ -107,8 +107,8 @@ class Take extends Component {
                                         this.props.count,
                                         this.props.chunkNumber,
                                         this.props.author.name,
-                                        this.parseDate(this.props.take.date_modified))
-
+                                        this.parseDate(this.props.take.date_modified),
+                                        this.props.take.markers)
                                 }
                                 />
                             </Grid.Row>
