@@ -20,7 +20,7 @@ class Header extends Component {
 
 
         var logo = <Image src={combinedShape} size="tiny"/>
-        var text = <h1><font color="#A8A8A8">Terra</font></h1>
+        var text = <h1><font color="#A8A8A8">Translation Exchange</font></h1>
 
         const { activeItem } = this.state;
 
