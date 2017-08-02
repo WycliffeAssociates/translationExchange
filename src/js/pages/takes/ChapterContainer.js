@@ -8,6 +8,7 @@ import 'css/takes.css'
 import ChapterHeader from "./components/ChapterHeader"
 import Footer from './components/Footer'
 import Chunk from "./components/Chunk"
+import Error from "js/pages/404Error";
 
 let onClick;
 
@@ -23,7 +24,6 @@ class ChapterContainer extends Component {
             book: {},
             chapter: {},
             language: {},
-            mode: "",
             selectedSourceProjectQuery: -1,
             selectedSourceProject: {},
             listenList: [],
@@ -51,8 +51,7 @@ class ChapterContainer extends Component {
                     project: results.data.project,
                     book: results.data.book,
                     chapter: results.data.chapter,
-                    language: results.data.language,
-                    mode: results.data.project.mode,
+                    language: results.data.language
                 }
             )
         });
@@ -352,7 +351,7 @@ class ChapterContainer extends Component {
 
         let playlist = [{
             "src": config.streamingUrl + sourceLoc,
-            "name": this.state.mode + " " + startv + " (source)"
+            "name": this.state.project.mode + " " + startv + " (source)"
         }];
         this.setState({
             currentPlaylist: playlist
@@ -364,7 +363,7 @@ class ChapterContainer extends Component {
 
         let playlist = [{
             "src": config.streamingUrl + takeLoc,
-            "name": "take " + takeNum + ", " + this.state.mode + " " + startv + " (" + author + " on " + date + ")"
+            "name": "take " + takeNum + ", " + this.state.project.mode + " " + startv + " (" + author + " on " + date + ")"
         }];
         this.setState({
             currentPlaylist: playlist,
@@ -389,43 +388,49 @@ class ChapterContainer extends Component {
         var query = QueryString.parse(this.props.location.search);
 
         this.state.query = query;
-        return (
-            <div>
 
-                <LoadingDisplay loaded={this.state.loaded}
-                                error={this.state.error}
-                                retry={this.requestData.bind(this)}>
-                    <ChapterHeader  book={this.state.book}
-                                    chapter={this.state.chapter}
-                                    language={this.state.language.name}
-                                    chunks={this.state.chunks}
-                                    mode={this.state.mode}
-                                    selectedSourceProject={this.state.selectedSourceProjectQuery}
-                                    onClickSave={this.onClickSave.bind(this)}
-                                    deleteComment={this.deleteComment.bind(this)}
-                                    setSourceProject={this.setSourceProject.bind(this)}
-                                    onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}
-                                    active={this.state.active}
-                                    projectId={this.state.project.id}
+        if (this.state.loaded && this.state.chunks.length === 0) {
+            return <Error/>;
+        } else {
 
-                    />
+            return (
+                <div>
 
-                    {this.state.chunks.map(this.createChunkList.bind(this))}
+                    <LoadingDisplay loaded={this.state.loaded}
+                                    error={this.state.error}
+                                    retry={this.requestData.bind(this)}>
+                        <ChapterHeader book={this.state.book}
+                                       chapter={this.state.chapter}
+                                       language={this.state.language.name}
+                                       chunks={this.state.chunks}
+                                       mode={this.state.project.mode}
+                                       selectedSourceProject={this.state.selectedSourceProjectQuery}
+                                       onClickSave={this.onClickSave.bind(this)}
+                                       deleteComment={this.deleteComment.bind(this)}
+                                       setSourceProject={this.setSourceProject.bind(this)}
+                                       onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}
+                                       active={this.state.active}
+                                       projectId={this.state.project.id}
 
-                    <div fluid className="StickyFooter">
-                        <Footer mode={this.state.mode}
-                                listenList={this.state.listenList}
-                                currentPlaylist={this.state.currentPlaylist}
-                                playPlaylist={this.playPlaylist.bind(this)}
-                                playTake={this.playTake.bind(this)}
-                                audioLoop={this.state.audioLoop}
-                                markers={this.state.markers}
                         />
-                    </div>
-                </LoadingDisplay>
 
-            </div>
-        );
+                        {this.state.chunks.map(this.createChunkList.bind(this))}
+
+                        <div fluid className="StickyFooter">
+                            <Footer mode={this.state.project.mode}
+                                    listenList={this.state.listenList}
+                                    currentPlaylist={this.state.currentPlaylist}
+                                    playPlaylist={this.playPlaylist.bind(this)}
+                                    playTake={this.playTake.bind(this)}
+                                    audioLoop={this.state.audioLoop}
+                                    markers={this.state.markers}
+                            />
+                        </div>
+                    </LoadingDisplay>
+
+                </div>
+            );
+        }
     }
 
     createChunkList(chunk) {
@@ -438,7 +443,7 @@ class ChapterContainer extends Component {
                 <Chunk
                     comments={chunk.comments}
                     segments={chunk.takes} // array of takes
-                    mode={this.state.mode}
+                    mode={this.state.project.mode}
                     number={chunk.startv}
                     addToListenList={this.addToListenList.bind(this)}
                     patchTake={this.patchTake.bind(this)}

@@ -10,6 +10,7 @@ import LoadingGif from 'images/loading-tiny.gif'
 import 'css/chapters.css'
 import PublishButton from "./components/PublishButton";
 import DownloadTR from "./components/DownloadTR"
+import Error from "js/pages/404Error";
 
 
 class ProjectContainer extends Component {
@@ -112,76 +113,81 @@ class ProjectContainer extends Component {
 
     render () {
 
-        return (
-            <div className="chapters">
-                <Container fluid>
+        if (this.state.loaded && !this.state.chapters) {
+            return <Error/>;
+        } else {
 
-                    <LoadingDisplay loaded={this.state.loaded}
-                                    error={this.state.error}
-                                    retry={this.getChapterData.bind(this)}>
+            return (
+                <div className="chapters">
+                    <Container fluid>
 
-                        <Header as='h1' >{this.state.book.name} ({this.state.language.name})
+                        <LoadingDisplay loaded={this.state.loaded}
+                                        error={this.state.error}
+                                        retry={this.getChapterData.bind(this)}>
 
-                            <DownloadTR
-                                chapters={this.state.chapters}
-                                isPublish={this.state.is_publish}
-                                onPublish={this.publishFiles.bind(this)}
-                                project_id={this.state.project_id}
+                            <Header as='h1'>{this.state.book.name} ({this.state.language.name})
+
+                                <DownloadTR
+                                    chapters={this.state.chapters}
+                                    isPublish={this.state.is_publish}
+                                    onPublish={this.publishFiles.bind(this)}
+                                    project_id={this.state.project_id}
+                                />
+
+                                <PublishButton
+                                    chapters={this.state.chapters}
+                                    isPublish={this.state.is_publish}
+                                    onPublish={this.publishFiles.bind(this)}
+                                />
+
+                            </Header>
+
+
+                            <Table selectable fixed color="grey">
+                                <Table.Header>
+                                    <Table.Row>
+                                        <Table.HeaderCell>Chapter</Table.HeaderCell>
+                                        <Table.HeaderCell>Percent Complete</Table.HeaderCell>
+                                        <Table.HeaderCell>Checking Level</Table.HeaderCell>
+                                        <Table.HeaderCell>Ready to Publish</Table.HeaderCell>
+                                        <Table.HeaderCell>Contributors</Table.HeaderCell>
+                                        <Table.HeaderCell>Translation Type</Table.HeaderCell>
+                                        <Table.HeaderCell>Date Modified</Table.HeaderCell>
+                                    </Table.Row>
+                                </Table.Header>
+
+                                <ChapterList
+                                    chapters={this.state.chapters}
+                                    version={QueryString.parse(this.props.location.search).version}
+                                    navigateToChapter={this.navigateToChapter.bind(this)}
+                                    setCheckingLevel={this.setCheckingLevel.bind(this)}
+                                    projectIsPublish={this.state.is_publish}
+                                />
+                            </Table>
+
+                            <DownloadProjects
+                                onDownloadProject={this.onDownloadProject.bind(this)}
                             />
 
-                            <PublishButton
-                            chapters={this.state.chapters}
-                            isPublish={this.state.is_publish}
-                            onPublish={this.publishFiles.bind(this)}
-                            />
+                            {this.state.downloadLoading
+                                ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
+                                : ""
+                            }
+                            {this.state.downloadError
+                                ? "There was an error. Please try again"
+                                : ""
+                            }
 
-                        </Header>
+                        </LoadingDisplay>
 
+                        <br></br>
 
-                        <Table selectable fixed color="grey">
-                            <Table.Header>
-                                <Table.Row>
-                                    <Table.HeaderCell>Chapter</Table.HeaderCell>
-                                    <Table.HeaderCell>Percent Complete</Table.HeaderCell>
-                                    <Table.HeaderCell>Checking Level</Table.HeaderCell>
-                                    <Table.HeaderCell>Ready to Publish</Table.HeaderCell>
-                                    <Table.HeaderCell>Contributors</Table.HeaderCell>
-                                    <Table.HeaderCell>Translation Type</Table.HeaderCell>
-                                    <Table.HeaderCell>Date Modified</Table.HeaderCell>
-                                </Table.Row>
-                            </Table.Header>
+                    </Container>
 
-                            <ChapterList
-                                chapters={this.state.chapters}
-                                version={QueryString.parse(this.props.location.search).version}
-                                navigateToChapter={this.navigateToChapter.bind(this)}
-                                setCheckingLevel={this.setCheckingLevel.bind(this)}
-                                projectIsPublish={this.state.is_publish}
-                            />
-                        </Table>
+                </div>
 
-                        <DownloadProjects
-                            onDownloadProject={this.onDownloadProject.bind(this)}
-                        />
-
-                        {this.state.downloadLoading
-                            ? <img src={LoadingGif} alt="Loading..." width="16" height="16"/>
-                            : ""
-                        }
-                        {this.state.downloadError
-                            ? "There was an error. Please try again"
-                            : ""
-                        }
-
-                    </LoadingDisplay>
-
-                    <br></br>
-
-                </Container>
-
-            </div>
-
-        );
+            );
+        }
     }
 }
 
