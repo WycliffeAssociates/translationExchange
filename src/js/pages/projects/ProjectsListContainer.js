@@ -9,7 +9,7 @@ import axios from 'axios';
 import config from 'config/config';
 import FilterContainer from "./FilterContainer";
 import LoadingDisplay from "js/components/LoadingDisplay";
-
+import Error from "js/pages/404Error";
 
 
 class ProjectsListContainer extends Component {
@@ -101,25 +101,32 @@ class ProjectsListContainer extends Component {
     render () {
         var retryRequestProjects = function () {this.requestProjects(this.props.location.search)};
 
-        return (
-            <div className="projects">
-                <Header as='h1'>Choose a Project</Header>
+        //if a list of projects was loaded, but it was empty, there is some problem with the query URL
+        if (this.state.loaded && this.state.projects.length === 0 && this.props.location.search) {
+            return <Error/>;
+        }
+        else {
 
-                <LoadingDisplay loaded={this.state.loaded}
-                                error={this.state.error}
-                                retry={retryRequestProjects.bind(this)}>
-                    <FilterContainer projects={this.state.projects}
-                                     setQuery={this.setQuery.bind(this)}
-                                     queryString={this.props.location.search}
-                                     clearQuery={this.clearQuery.bind(this)}/>
-                    {this.state.projects.length > 0
-                        ? <ProjectsList projects={this.state.projects}
-                                        navigateToProject={this.navigateToProject.bind(this)}/>
-                        : ""
-                    }
-                </LoadingDisplay>
-            </div>
-        );
+            return (
+                <div className="projects">
+                    <Header as='h1'>Choose a Project</Header>
+
+                    <LoadingDisplay loaded={this.state.loaded}
+                                    error={this.state.error}
+                                    retry={retryRequestProjects.bind(this)}>
+                        <FilterContainer projects={this.state.projects}
+                                         setQuery={this.setQuery.bind(this)}
+                                         queryString={this.props.location.search}
+                                         clearQuery={this.clearQuery.bind(this)}/>
+                        {this.state.projects.length > 0
+                            ? <ProjectsList projects={this.state.projects}
+                                            navigateToProject={this.navigateToProject.bind(this)}/>
+                            : ""
+                        }
+                    </LoadingDisplay>
+                </div>
+            );
+        }
     }
 }
 
