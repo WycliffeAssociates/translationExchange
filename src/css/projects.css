@@ -52,3 +52,19 @@ tr:hover {
     dominant-baseline: central;
     text-anchor: middle;
 }
+
+.projects {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/*.headerStyle {*/
+    /*background-color: black;*/
+    /*color: white;*/
+    /*width: 42%;*/
+    /*margin: 10px  0;*/
+    /*box-shadow: 5px 5px 5px #888888;*/
+    /*font-size: 22px;*/
+    /*font-family: 'Roboto', sans-serif;*/
+    /*display: inline-block;*/
+/*}*/

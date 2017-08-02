@@ -1,0 +1,103 @@
+.ChapterHeader{
+    color: #434;
+}
+
+.ChapterContainer {
+    background-color: #F2F2F2;
+}
+
+.ChunkTitle {
+    background-color: #e5e5e8;
+}
+
+.ChunkBody {
+    background-color: #FFFFFF;
+    position: relative;
+}
+
+.ui.styled.accordion .content.ChunkBody{
+    padding: 0;
+}
+
+
+.ColumnA {
+    width: 250px;
+}
+
+.takes {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.blackBar {
+    background-color: #000000;
+    height: 5px;
+}
+
+.StickyFooter {
+    position: sticky;
+    bottom: 0;
+    padding: 0;
+    background-color: white;
+    text-align: center
+}
+
+.ChunkFooter {
+    background-color: white;
+    text-align: center;
+    position: relative;
+}
+
+.MoveButtons {
+    vertical-align: middle
+}
+
+.hoverButton:hover {
+    cursor: pointer;
+}
+
+.headerStyle {
+    background-color: black;
+    color: white;
+    width: 42%;
+    margin: 10px  0;
+    box-shadow: 5px 5px 5px #888888;
+    font-size: 22px;
+    font-family: 'Roboto', sans-serif;
+    display: inline-block;
+}
+
+.footerStyle {
+    background-color: black;
+    color: white;
+}
+
+.verticalLine {
+    border-left: thin solid white;
+}
+
+.source {
+    float: right;
+    display: inline-block;
+    margin-top: 25px;
+}
+
+.ChunkBody .ui.visible.right.overlay.sidebar{
+    height: auto !important;
+    width: auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* {*/
+    /*height: auto !important;*/
+    /*width: auto;*/
+    /*top: 50%;*/
+    /*transform: translateY(-50%);*/
+    /*position: absolute;*/
+/*}*/
+/*ui inverted vertical labeled icon ui overlay right thin visible sidebar menu*/
+
+.centerPlayButton {
+    text-align: center
+}

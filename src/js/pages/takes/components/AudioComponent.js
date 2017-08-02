@@ -1,36 +1,26 @@
 import React, {Component} from 'react'
 import Audio from 'translation-audio-player'
-
-// requires a name (str) and src (str) when it is called
-// name : name to display on take
-// src  : url of file to be played in audio player
-import CommentContainer from './comments/CommentContainer'
-
 import * as ReactDOM from "react-dom";
 
 
-import onClick from './comments/CommentContainer'
-
-
-
+let onClick;
 // requires a name (str) and src (str) when it is called
 // name : name to display on take
 // src  : url of file to be played in audio player
 
 class AudioComponent extends Component {
 
-    constructor(props){
+    constructor(props) {
 
         super(props);
 
         this.state = {
             RecordComponent: false,
-            show : false,
+            show: false,
             pause: false
         };
 
     }
-
 
 
     onClick = () => {                         // used when you click the microphone button in the player
@@ -43,39 +33,53 @@ class AudioComponent extends Component {
         ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-pause'));
     }
 
+    componentDidMount() {
+        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-play'));
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.playlist !== this.props.playlist) {
+            ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-skip-to-next'));
+            ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-play'));
+        }
+    }
+
 
     render() {
-
-        var file = [];
-        file[0] = {
-            "name": this.props.name,
-            "src": this.props.src
-        }
-
+        /*
+         var file = [];
+         file[0] = {
+         "name": this.props.name,
+         "src": this.props.src
+         }
+         */
+        var file = this.props.playlist;
         const pause = this.state.pause;
-        console.log(pause);
+        const markers = this.props.markers;
+        const showMarkers = this.props.showMarkers;
+        var autoPlay = this.props.autoPlay;
 
-        return(
+        return (
             <div>
                 <Audio
-
                     width={this.props.width}
                     height={150}
-                    autoPlay={false}
+                    autoPlay={true}
                     playlist={file}
                     recordButton={() => {
                         this.onClick()
-
                     }}
+                    mic={this.props.mic}
+                    loop={this.props.loop}
+                    markers={markers}
+                    showMarkers={showMarkers}
 
                     // ref to pause the audio
-                    ref={audioComponent => { this.audioComponent = audioComponent; }}
+                    ref={audioComponent => {
+                        this.audioComponent = audioComponent;
+                    }}
 
                 />
-
-                {/*used ref to call a method in child class and instance*/}
-                <CommentContainer ref={instance => (this.commentContainer = instance)}/>
-
 
 
             </div>
@@ -84,10 +88,6 @@ class AudioComponent extends Component {
         );
     }
 }
-
-
-
-
 
 
 export default AudioComponent

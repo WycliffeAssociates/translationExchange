@@ -35,7 +35,7 @@ class ProjectsListContainer extends Component {
          var query = QueryString.parse(queryString);
          this.setState({loaded: false, error: ""});
 
-         axios.post(config.apiUrl + 'all_project/', query)
+         axios.post(config.apiUrl + 'all_projects/', query)
          .then((results) => {
              this.setState({
                  loaded: true,
@@ -49,7 +49,9 @@ class ProjectsListContainer extends Component {
 
     //if the project query string has changed, request projects
     componentWillReceiveProps (nextProps) {
-        if (this.state.currentProjectQuery !== nextProps.location.search) {
+        if (!nextProps.location.search) {
+            this.setState({currentProjectQuery: "", projects: []});
+        } else if (this.state.currentProjectQuery !== nextProps.location.search) {
             this.requestProjects(nextProps.location.search);
         }
     }
@@ -100,8 +102,8 @@ class ProjectsListContainer extends Component {
         var retryRequestProjects = function () {this.requestProjects(this.props.location.search)};
 
         return (
-            <div>
-                <Header as='h1'>Choose a project</Header>
+            <div className="projects">
+                <Header as='h1'>Choose a Project</Header>
 
                 <LoadingDisplay loaded={this.state.loaded}
                                 error={this.state.error}
@@ -110,8 +112,11 @@ class ProjectsListContainer extends Component {
                                      setQuery={this.setQuery.bind(this)}
                                      queryString={this.props.location.search}
                                      clearQuery={this.clearQuery.bind(this)}/>
-                    <ProjectsList projects={this.state.projects}
-                                  navigateToProject={this.navigateToProject.bind(this)}/>
+                    {this.state.projects.length > 0
+                        ? <ProjectsList projects={this.state.projects}
+                                        navigateToProject={this.navigateToProject.bind(this)}/>
+                        : ""
+                    }
                 </LoadingDisplay>
             </div>
         );

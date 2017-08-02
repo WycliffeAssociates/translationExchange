@@ -1,74 +1,141 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Star from './Star';
-import AudioComponent from './AudioComponent';
 import config from "config/config";
-import {Button, Grid, Segment} from "semantic-ui-react";
-import TakeExportButton from './SelectTake'
-import Delete from './Delete'
+import {Button, Grid, Segment, Card, Modal, Icon} from "semantic-ui-react";
+import TakeListenButton from './AddTake'
+import 'css/takes.css'
+import StitchTakesButton from "./StitchTakesButton";
+import TakeCommentsButton from "./comments/TakeCommentsButton";
+
+var listenCounter = 0
 
 class Take extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {isToggleOn: true};
+        this.state = {isToggleOn: true, addButtonIcon: "plus", showMarkers: false, showMarkersColor: ""}
         // This binding is necessary to make `this` work in the callback
-         this.handleClick = this.handleClick.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        // this.showMarker = this.showMarker.bind(this);
     }
 
     handleClick() {
         this.setState({isToggleOn: !this.state.isToggleOn});
     }
 
-    render () {
+    addToListen() {
+        this.props.addToListenList(this.props);
+
+        if (this.state.addButtonIcon !== "plus") {
+            this.setState(
+                {
+                    addButtonIcon: "plus"
+                }
+            )
+        }
+        else {
+            this.setState(
+                {
+                    addButtonIcon: "minus"
+                }
+            )
+        }
+    }
+
+    moveLeft() {
+        if (this.props.take.is_publish) {
+            this.props.onMarkedForExportToggled();
+        } else if (this.props.take.rating > 1){
+            this.props.onRatingSet(this.props.take.rating - 1)
+        }
+    }
+
+    moveRight() {
+        if (this.props.take.rating >= 3) {
+            this.props.onMarkedForExportToggled();
+        } else if (this.props.take.rating < 1) {
+            this.props.onRatingSet(2);
+        } else {
+            this.props.onRatingSet(this.props.take.rating + 1);
+        }
+    }
+
+
+    render() {
+        const markers = this.props.take.markers;
+        let showMarkers = this.state.showMarkers;
+        var file = [];
+        file[0] = {
+            "src": config.streamingUrl + this.props.take.location
+        };
+
         return (
-            <div>
-        <Grid columns={4} relaxedclassName="take">
-
-            <Grid.Column width={4}>
-                <strong>Take {this.props.count} by <font color="blue">{this.props.author.name}</font> - {this.parseDate(this.props.take.date_modified)}</strong>
-            </Grid.Column>
-
-            <Grid.Column width={2}>
-                <Star rating={this.props.take.rating} onChange={this.props.onRatingSet}/>
-            </Grid.Column>
-
-            <Grid.Column width={2}>
-                <TakeExportButton active={this.props.take.is_export} onClick={this.props.onMarkedForExportToggled}/>
-                <Delete/>
-            </Grid.Column>
-
-            {this.props.source
-                ? <Grid.Column>
-                    <Button onClick={(e) => this.handleClick(e)} content='Source Audio' icon='right arrow' labelPosition='right' />
-                  </Grid.Column>
-                : ""
-            }
 
 
-        </Grid>
+            <Segment>
 
+                <Grid textAlign="left">
+                    <Grid.Row>
+                        <Grid.Column verticalAlign="middle">
+                            {this.props.take.rating > 1
+                                ? <Icon className="hoverButton" name="chevron left" onClick={this.moveLeft.bind(this)}/>
+                                : ""
+                            }
+                        </Grid.Column>
 
-            <Grid columns={2} relaxed>
-                <Grid.Column width={9}>
-                    <AudioComponent
-                        src={config.streamingUrl + this.props.take.location}
-                        width="700"
-                    />
-                </Grid.Column >
+                        <Grid.Column width={12}>
 
-                {this.state.isToggleOn ? '' :
+                            <Grid.Row verticalAlign="top">
+                                <Grid>
+                                    <Grid.Column width={11} floated="left">
+                                        <font size="3"><strong>Take {this.props.count} -  </strong></font>
+                                        <font size="2" color="grey">{this.props.author ? this.props.author.name : "Unknown Author" }</font>
+                                    </Grid.Column>
+                                    <Grid.Column floated="right">
+                                        <StitchTakesButton onClick={this.addToListen.bind(this)} icon={this.state.addButtonIcon}/>
+                                    </Grid.Column>
+                                </Grid>
+                            </Grid.Row>
 
-                    <Grid.Column width={4}>
-                            <AudioComponent
-                                src={config.streamingUrl + this.props.source.take[0].location}
-                                width="200"
-                            />
-                    </Grid.Column>}
+                            <Grid.Row>
+                                {this.parseDate(this.props.take.date_modified)}
+                            </Grid.Row>
+                            <Grid.Row className="centerPlayButton">
+                                <br />
+                                <TakeListenButton onClick={ () =>
+                                    this.props.playTake(this.props.take.location,
+                                        this.props.count,
+                                        this.props.chunkNumber,
+                                        this.props.author.name,
+                                        this.parseDate(this.props.take.date_modified),
+                                        this.props.take.markers)
+                                }
+                                />
+                            </Grid.Row>
+                            <Grid.Row verticalAlign="bottom">
+                                <br />
+                                <TakeCommentsButton  take={this.props.take}
+                                                     comments={this.props.comments}
+                                                     onClickSave={this.props.onClickSave}
+                                                     deleteComment={this.props.deleteComment}
+                                                     loadingActive={this.props.active}
+                                                     count={this.props.count}
+                                                     chunkNumber={this.props.chunkNumber}
+                                />
+                            </Grid.Row>
+                        </Grid.Column>
 
-            </Grid>
+                        <Grid.Column verticalAlign="middle">
+                            {this.props.take.is_publish
+                            ? ""
+                            : <Icon className="hoverButton" name="chevron right" onClick={this.moveRight.bind(this)}/>
+                        }</Grid.Column>
 
-        </div>
+                    </Grid.Row>
+                </Grid>
+
+            </Segment>
+
         );
     }
 
@@ -82,40 +149,54 @@ class Take extends Component {
         time = time[0].split(':')
         date = date.split('-')
         switch (date[1]) {
-            case '01': date[1] = 'January';
+            case '01':
+                date[1] = 'January';
                 break;
-            case '02': date[1] = 'February';
+            case '02':
+                date[1] = 'February';
                 break;
-            case '03': date[1] = 'March';
+            case '03':
+                date[1] = 'March';
                 break;
-            case '04': date[1] = 'April';
+            case '04':
+                date[1] = 'April';
                 break;
-            case '05': date[1] = 'May';
+            case '05':
+                date[1] = 'May';
                 break;
-            case '06': date[1] = 'June';
+            case '06':
+                date[1] = 'June';
                 break;
-            case '07': date[1] = 'July';
+            case '07':
+                date[1] = 'July';
                 break;
-            case '08': date[1] = 'August';
+            case '08':
+                date[1] = 'August';
                 break;
-            case '09': date[1] = 'September';
+            case '09':
+                date[1] = 'September';
                 break;
-            case '10': date[1] = 'October';
+            case '10':
+                date[1] = 'October';
                 break;
-            case '11': date[1] = 'November';
+            case '11':
+                date[1] = 'November';
                 break;
-            case '12': date[1] = 'December';
+            case '12':
+                date[1] = 'December';
                 break;
         }
 
         var hour = parseInt(time[0])
-        if((hour / 12) > -1)
-        {noon = 'pm'}
+        if ((hour / 12) > -1) {
+            noon = 'pm'
+        }
 
-        if(!((hour % 12) === 0))
-        {hour %= 12}
+        if (!((hour % 12) === 0)) {
+            hour %= 12
+        }
 
-        return (date[1] + ' ' + date[2] + ', ' +  date[0] + ' at ' + hour + ':' + time[1] + noon);
+        return (date[1] + ' ' + date[2] + ', ' + date[0] + ' at ' + hour + ':' + time[1] + noon);
     }
 }
 
@@ -124,9 +205,9 @@ Take.propTypes = {
     take: PropTypes.object.isRequired,
     author: PropTypes.string.isRequired,
     onRatingSet: PropTypes.func.isRequired,
-    onMarkedForExportToggled: PropTypes.func.isRequired
+    onMarkedForExportToggled: PropTypes.func.isRequired,
+    takeId: PropTypes.number.isRequired
 };
-
 
 
 export default Take;
