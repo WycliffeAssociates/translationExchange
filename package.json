@@ -22,6 +22,8 @@
     "react-audioplayer": "^0.3.0",
     "react-axios": "^1.0.2",
     "react-circular-progressbar": "^0.1.5",
+    "react-dnd": "^2.4.0",
+    "react-dnd-html5-backend": "^2.4.1",
     "react-dom": "^15.6.1",
     "react-file-input": "^0.2.5",
     "react-howler": "^3.6.2",
