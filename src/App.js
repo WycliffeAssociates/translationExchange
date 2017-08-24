@@ -1,7 +1,3 @@
-/*
-    An example top-level app that handles basic layout and routing using React Router
- */
-
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import ChapterContainer from "./js/pages/takes/ChapterContainer";

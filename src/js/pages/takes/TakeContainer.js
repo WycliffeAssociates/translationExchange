@@ -13,27 +13,6 @@ class TakeContainer extends Component {
 		};
 	}
 
-	onMarkedForExportToggled() {
-		let markedForExport = !this.props.take.take.is_publish;
-		this.props.patchTake(
-			this.props.take.take.id,
-			{ is_publish: markedForExport },
-			updatedTake => {
-				//success callback
-				if (markedForExport) {
-					this.props.updateChosenTakeForChunk(updatedTake.id);
-				}
-			}
-		);
-	}
-
-	onRatingSet(newRating) {
-		this.setState({ ratingLoading: true });
-		this.props.patchTake(this.props.take.take.id, { rating: newRating }, () => {
-			this.setState({ ratingLoading: false });
-		});
-	}
-
 	onDeleteTake() {
 		this.props.deleteTake(this.props.take.take.id);
 	}
@@ -49,8 +28,6 @@ class TakeContainer extends Component {
 						author={this.props.take.user}
 						chunkNumber={this.props.chunkNumber}
 						ratingLoading={this.state.ratingLoading}
-						onRatingSet={this.onRatingSet.bind(this)}
-						onMarkedForExportToggled={this.onMarkedForExportToggled.bind(this)}
 						source={this.props.source}
 						comments={this.props.take.comments}
 						addToListenList={this.props.addToListenList}
@@ -80,6 +57,11 @@ const takeSource = {
 		const dropResult = monitor.getDropResult();
 		if (dropResult && dropResult.listId !== item.listId) {
 			props.removeTake(item.index);
+			props.makeChanges(
+				item.take.take.is_publish,
+				dropResult.listId,
+				item.take
+			);
 		}
 	}
 };
@@ -122,7 +104,6 @@ const takeTarget = {
 		// Time to actually perform the action
 		if (props.listId === sourceListId) {
 			props.moveTake(dragIndex, hoverIndex);
-
 			// Note: we're mutating the monitor item here!
 			// Generally it's better to avoid mutations,
 			// but it's good here for the sake of performance

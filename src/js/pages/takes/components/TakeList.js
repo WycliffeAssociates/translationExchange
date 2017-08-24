@@ -43,12 +43,39 @@ class TakeList extends Component {
 			})
 		);
 	}
+	onMarkedForExportToggled(take) {
+		let markedForExport = !take.take.is_publish;
+		this.props.patchTake(
+			take.take.id,
+			{ is_publish: markedForExport },
+			updatedTake => {
+				//success callback
+				if (markedForExport) {
+					this.props.updateChosenTakeForChunk(updatedTake.id);
+				}
+			}
+		);
+	}
 
+	onRatingSet(newRating, take) {
+		this.setState({ ratingLoading: true });
+		this.props.patchTake(take.take.id, { rating: newRating }, () => {
+			this.setState({ ratingLoading: false });
+		});
+	}
+	makeChanges(isPublish, newRating, take) {
+		if (isPublish || newRating >= 3) {
+			this.onMarkedForExportToggled(take);
+			this.onRatingSet(newRating, take);
+		} else {
+			this.onRatingSet(newRating, take);
+		}
+	}
 	render() {
 		const style = {
-			minHeight: "231px",
+			minHeight: "231px"
 		};
-		const {takes}=this.state;
+		const { takes } = this.state;
 		const { connectDropTarget } = this.props;
 		return connectDropTarget(
 			<div style={{ ...style }}>
@@ -75,6 +102,7 @@ class TakeList extends Component {
 								listId={this.props.ratingToGet}
 								removeTake={this.removeTake.bind(this)}
 								moveTake={this.moveTake.bind(this)}
+								makeChanges={this.makeChanges.bind(this)}
 							/>
 						</div>
 					);
@@ -91,7 +119,7 @@ const takeTarget = {
 	drop(props, monitor, component) {
 		const { ratingToGet } = props;
 		const sourceObj = monitor.getItem();
-		if (ratingToGet!== sourceObj.listId) {
+		if (ratingToGet !== sourceObj.listId) {
 			component.pushTake(sourceObj.take);
 		}
 		return { listId: ratingToGet };

@@ -109,6 +109,7 @@ class ChapterContainer extends Component {
 	}
 
 	patchTake(takeId, patch, success) {
+		console.log(patch);
 		axios
 			.patch(config.apiUrl + "takes/" + takeId + "/", patch)
 			.then(results => {
