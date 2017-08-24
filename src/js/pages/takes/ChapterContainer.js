@@ -43,7 +43,7 @@ class ChapterContainer extends Component {
 		axios.post(config.apiUrl + "get_project_takes/", query).then(results => {
 			this.setState({
 				loaded: true,
-				chunks: [results.data.chunks[7]],
+				chunks: results.data.chunks,
 				project: results.data.project,
 				book: results.data.book,
 				chapter: results.data.chapter,

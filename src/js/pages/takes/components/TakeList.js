@@ -46,9 +46,7 @@ class TakeList extends Component {
 
 	render() {
 		const style = {
-			width: "200px",
-			height: "700px",
-			border: "1px dashed gray"
+			minHeight: "231px",
 		};
 		const {takes}=this.state;
 		const { connectDropTarget } = this.props;
