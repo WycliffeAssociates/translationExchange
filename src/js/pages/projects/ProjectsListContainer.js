@@ -11,18 +11,22 @@ import LoadingDisplay from "js/components/LoadingDisplay";
 import Error from "js/pages/404Error";
 
 class ProjectsListContainer extends Component {
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 		this.state = {
 			loaded: true,
 			error: "",
-			projects: [], //projects gotten from the database
-			currentProjectQuery: "" //what query was used to get those projects from the database
+			//projects holdder from the database
+			projects: [],
+			//query string used to get those projects from the database
+			currentProjectQuery: ""
 		};
 	}
 
 	componentDidMount() {
-		//if query string isn't blank, then request projects here to initially populate projects list
+		/*
+		get projects if query string is blank
+		 */
 		if (this.props.location.search) {
 			this.requestProjects(this.props.location.search);
 		}
@@ -69,8 +73,10 @@ class ProjectsListContainer extends Component {
 	}
 
 	clearQuery() {
-		//empty the current query and projects, and after the state has been set, navigate
-		//to a URL without the query
+		/*empty the current query and projects,
+		and after the state has been set,
+		 navigate to a URL without the query
+		*/
 		this.setState({ currentProjectQuery: "", projects: [] }, function() {
 			this.props.history.push({
 				pathname: this.props.location.pathname
@@ -109,8 +115,7 @@ class ProjectsListContainer extends Component {
 		} else {
 			return (
 				<div className="projects">
-					<Header as="h1">Choose a Project</Header>
-
+					<h1>Choose a Project</h1>
 					<LoadingDisplay
 						loaded={this.state.loaded}
 						error={this.state.error}
