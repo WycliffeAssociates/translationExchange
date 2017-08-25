@@ -10,8 +10,8 @@ import Chunk from "./components/Chunk";
 import Error from "js/pages/404Error";
 
 class ChapterContainer extends Component {
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 		this.state = {
 			loaded: false,
 			error: "",
@@ -107,7 +107,6 @@ class ChapterContainer extends Component {
 	}
 
 	patchTake(takeId, patch, success) {
-		console.log(patch);
 		axios
 			.patch(config.apiUrl + "takes/" + takeId + "/", patch)
 			.then(results => {

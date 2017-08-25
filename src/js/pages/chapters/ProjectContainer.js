@@ -13,8 +13,8 @@ import DownloadTR from "./components/DownloadTR";
 import Error from "js/pages/404Error";
 
 class ProjectContainer extends Component {
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 		this.state = {
 			chapters: [],
 			book: {},
@@ -98,7 +98,6 @@ class ProjectContainer extends Component {
 		let params = {
 			project: this.state.project_id
 		};
-
 		axios
 			.post(config.apiUrl + "zip_files/", params, { timeout: 0 })
 			.then(download_results => {
@@ -132,7 +131,7 @@ class ProjectContainer extends Component {
 							error={this.state.error}
 							retry={this.getChapterData.bind(this)}
 						>
-							<Header as="h1">
+							<h1>
 								{this.state.book.name} ({this.state.language.name})
 								<DownloadTR
 									chapters={this.state.chapters}
@@ -145,7 +144,7 @@ class ProjectContainer extends Component {
 									isPublish={this.state.is_publish}
 									onPublish={this.publishFiles.bind(this)}
 								/>
-							</Header>
+							</h1>
 
 							<Table selectable fixed color="grey">
 								<Table.Header>
