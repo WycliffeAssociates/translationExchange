@@ -1,44 +1,36 @@
 import React, { Component } from "react";
-import { Button, Image, Container, Grid, Divider } from "semantic-ui-react";
+import { Container, Grid, Divider } from "semantic-ui-react";
 import "css/home.css";
+import StartHere from "./StartHere";
+import LogoTitle from "./LogoTitle";
 import axios from "axios";
 import config from "config/config";
 import QueryString from "query-string";
-import trap from "images/trap.svg";
-import logo from "images/logo.png";
-import { Link } from "react-router-dom";
 
 class Home extends Component {
-	constructor(props) {
-		super(props);
-
-		this.toggle = this.toggle.bind(this);
+	constructor() {
+		super();
 		this.state = {
-			isOpen: false,
 			projects: []
 		};
-
+	}
+	componentDidMount() {
 		this.getRecentProjects();
 	}
-	toggle() {
-		this.setState({
-			isOpen: !this.state.isOpen
-		});
-	}
-
 	getRecentProjects() {
 		axios
 			.post(config.apiUrl + "all_projects/", {})
 			.then(results => {
 				this.setState({ projects: results.data });
-				this.reduceState();
+				this.limitProjects();
 			})
 			.catch(exception => {
 				this.setState({ error: exception });
 			});
 	}
 
-	reduceState() {
+	//limits the number of projects to show
+	limitProjects() {
 		if (this.state.projects.length > 4) {
 			this.setState({
 				projects: this.state.projects.splice(0, 5)
@@ -61,31 +53,13 @@ class Home extends Component {
 			search: "?" + queryString
 		});
 	}
-
 	render() {
 		return (
 			<Container fluid className="background">
 				<Container fluid>
-					<br />
-					<Image fluid src={trap} />
-					<div className="pageTitle">
-						<font size="50">Translation made available </font>
-					</div>
-
-					<div className="logo">
-						<Image src={logo} className="logoterra" />
-					</div>
-					<div className="start-here">
-						<Link to="/projects">
-							<Button
-								icon="right arrow"
-								content="Start here"
-								labelPosition="right"
-							/>
-						</Link>
-					</div>
+					<LogoTitle />
+					<StartHere />
 				</Container>
-
 				<Container fluid>
 					<Grid padded textAlign="center">
 						<Grid.Column width={3}>
@@ -95,7 +69,6 @@ class Home extends Component {
 								</h2>
 							</Grid.Row>
 							<Divider />
-
 							{this.state.projects.map(this.createListItem.bind(this))}
 						</Grid.Column>
 					</Grid>
@@ -123,7 +96,7 @@ class Home extends Component {
 				<Grid.Row divided onClick={navigateToProject} className="hoverButton">
 					<h4>
 						<font color="white">
-							{" "}{str}
+							{str}
 						</font>
 					</h4>
 				</Grid.Row>
@@ -131,5 +104,4 @@ class Home extends Component {
 		);
 	}
 }
-
 export default Home;
