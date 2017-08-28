@@ -71,11 +71,11 @@ class Footer extends Component {
 
         return (
 
-            <div className="footerStyle">
+            <div className="footerStyle" style={{width:'100%'}}>
                 <Menu inverted secondary>
                     {this.props.currentPlaylist.length > 0
-                        ? <Menu.Item>
-                            <Card fluid>
+                        ? <Menu.Item style={{width:'100%'}}>
+                            <div style={{width:'100%'}}>
                                 <AudioComponent
                                     playlist={this.props.currentPlaylist}
                                     width={500}
@@ -83,7 +83,7 @@ class Footer extends Component {
                                     markers={this.props.markers}
                                     showMarkers={true}
                                 />
-                            </Card>
+                            </div>
                           </Menu.Item>
                         : ""
                     }

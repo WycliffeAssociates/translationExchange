@@ -22,6 +22,8 @@
     "react-audioplayer": "^0.3.0",
     "react-axios": "^1.0.2",
     "react-circular-progressbar": "^0.1.5",
+    "react-dnd": "^2.4.0",
+    "react-dnd-html5-backend": "^2.4.1",
     "react-dom": "^15.6.1",
     "react-file-input": "^0.2.5",
     "react-howler": "^3.6.2",
@@ -34,9 +36,11 @@
     "react-scripts": "^1.0.7",
     "react-stars": "^2.1.0",
     "react-transition-group": "^1.2.0",
+    "react-wavesurfer": "^0.8.6",
     "semantic-ui-css": "^2.2.11",
     "semantic-ui-react": "^0.71.0",
-    "translation-audio-player": "^1.4.0"
+    "translation-audio-player": "^1.4.0",
+    "wavesurfer.js": "^1.4.0"
   },
   "devDependencies": {
     "babel-jest": "^20.0.3",

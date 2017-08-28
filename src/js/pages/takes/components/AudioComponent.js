@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Audio from 'translation-audio-player'
 import * as ReactDOM from "react-dom";
+import AudioPlayer from './audioplayer/AudioPlayer';
 
 
 let onClick;
@@ -59,9 +60,10 @@ class AudioComponent extends Component {
         const showMarkers = this.props.showMarkers;
         var autoPlay = this.props.autoPlay;
 
+
         return (
             <div>
-                <Audio
+                <AudioPlayer
                     width={this.props.width}
                     height={150}
                     autoPlay={true}
