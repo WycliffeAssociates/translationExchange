@@ -29,7 +29,7 @@ class WaveForm extends Component {
                    max: nextProps.audioFile.length
      });
 
-
+    console.log(nextProps.audioFile);
 
 
 

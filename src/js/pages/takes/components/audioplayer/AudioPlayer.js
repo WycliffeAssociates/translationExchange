@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import WaveForm from './Waveform';
-import{ PauseButton, PlayButton } from './buttons';
+import{ PauseButton, PlayButton, MultipleTakesButton } from './buttons';
 import TimeContainer from './timeContainer';
 import Marker from './Markers';
+
 
 
 
@@ -40,21 +41,22 @@ constructor(props){
 
 }
 
-// componentWillReceiveProps(nextProps) {
-//   const obj = nextProps.playList;
-//   console.log(obj);
-//   for (const key in obj) {
-//
-//         this.setState(prevState => ({
-//     audioFile: [...prevState.audioFile, obj[key].src],
-//     audioName: [...prevState.audioName, obj[key].name]
-//
-// }));
-//
-//
-//   }
-//
-// }
+componentWillReceiveProps(nextProps) {
+  const obj = nextProps.playlist;
+//  console.log(obj);
+
+  for (const key in obj) {
+
+        this.setState(prevState => ({
+    audioFile: [...prevState.audioFile, obj[key].src],
+    audioName: [...prevState.audioName, obj[key].name]
+
+}));
+
+
+  }
+
+}
 
 componentDidMount () {
    this.setState({ initialWidth: this.rangeInput.offsetWidth });
@@ -92,10 +94,10 @@ dragPosition(markerPosition) {
 
 getAudioAndName(){
   const obj = this.props.playlist;
-  console.log(obj);
+
 
   for (const key in obj) {
-    console.log(obj[key]);
+
         this.setState(prevState => ({
     audioFile: [...prevState.audioFile, obj[key].src],
     audioName: [...prevState.audioName, obj[key].name]
@@ -149,12 +151,19 @@ keepPlaying(check){
 
   render() {
 
+
+
+
      const updateTime = this.state.updateTime;
 
      let markers = '';
      let Button = <PlayButton onClick = {this.toggleButton}/> ;
      if (this.state.play){
       Button = <PauseButton onClick = {this.toggleButton}/>
+     }
+     if(this.props.multipleTakes){
+
+
      }
 
      if(this.state.showMarkers){

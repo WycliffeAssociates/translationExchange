@@ -75,6 +75,7 @@ class AudioComponent extends Component {
                     loop={this.props.loop}
                     markers={markers}
                     showMarkers={showMarkers}
+                    multipleTakes={this.props.multipleTakes}
 
                     // ref to pause the audio
                     ref={audioComponent => {

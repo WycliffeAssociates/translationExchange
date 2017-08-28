@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import MarkAsDone from "./MarkAsDone";
 import CommentContainer from "./comments/PinkButton"
-import {Menu, Container, Card, Button, Icon, Label, Popup, Grid, Divider} from 'semantic-ui-react'
+import {Menu, Container, Card, Button, Icon, Label, Popup, Grid, Divider} from 'semantic-ui-react';
 import AudioComponent from "./AudioComponent"
 import config from 'config/config'
 import 'css/takes.css'
@@ -36,7 +36,7 @@ class Footer extends Component {
                 }
             })
 
-            this.props.playPlaylist(playlist)
+            this.props.playPlaylist(playlist);
 
             /*
             return (
@@ -61,17 +61,53 @@ class Footer extends Component {
 
     render () {
 
-        var take = [{
-            "src": "a",
-            "name": "nathan"
-        }]
+
 
         var icon = <Icon name="plus" size="big" color="blue"/>
-        var button = <Button icon={icon} basic/>
+        var button = <Button icon={icon} inverted color="blue"/>
+        let multipleTakes = false;
+
+   if( this.createArray().length > 0){
+     multipleTakes = true;
+   }
+
 
         return (
 
             <div className="footerStyle" style={{width:'100%'}}>
+              {this.createArray().length > 0
+                  ? <div style={{width:'20%', backgroundColor:'transparent', height: 30 }}>
+                      {/* <Label pointing="right" size="huge" basic color="black">Stitched takes</Label> */}
+
+                      <Popup inverted trigger={button} hoverable size="large">
+                          <Grid inverted divided>
+                              <Grid.Column divided>
+                                  <Grid.Row verticalAlign="middle">
+                                      <TakeListenButton onClick={this.createListenPlaylist.bind(this)} /> Play All
+                                      {/*this.createListenPlaylist()*/}
+                                  </Grid.Row>
+
+                                  {this.createArray().map((i) => {
+                                      return(
+                                          <div>
+                                              <Divider />
+
+                                          <Grid.Row>{i} </Grid.Row>
+                                          </div>
+
+                                      );
+                                  })}
+                              </Grid.Column>
+
+                          </Grid>
+
+
+                      </Popup>
+
+
+                  </div>
+                  : ""
+              }
                 <Menu inverted secondary>
                     {this.props.currentPlaylist.length > 0
                         ? <Menu.Item style={{width:'100%'}}>
@@ -82,6 +118,7 @@ class Footer extends Component {
                                     loop={this.props.audioLoop}
                                     markers={this.props.markers}
                                     showMarkers={true}
+                                    multipleTakes={multipleTakes}
                                 />
                             </div>
                           </Menu.Item>
@@ -95,39 +132,7 @@ class Footer extends Component {
                     </Menu.Item>
                     */}
 
-                    {this.createArray().length > 0
-                        ? <Menu.Item position="right">
-                            <Label pointing="right" size="huge" basic color="black">Stitched takes</Label>
 
-                            <Popup inverted trigger={button} hoverable size="large">
-                                <Grid inverted divided>
-                                    <Grid.Column divided>
-                                        <Grid.Row verticalAlign="middle">
-                                            <TakeListenButton onClick={this.createListenPlaylist.bind(this)} /> Play All
-                                            {/*this.createListenPlaylist()*/}
-                                        </Grid.Row>
-
-                                        {this.createArray().map((i) => {
-                                            return(
-                                                <div>
-                                                    <Divider />
-
-                                                <Grid.Row>{i} </Grid.Row>
-                                                </div>
-
-                                            );
-                                        })}
-                                    </Grid.Column>
-
-                                </Grid>
-
-
-                            </Popup>
-
-
-                        </Menu.Item>
-                        : ""
-                    }
                 </Menu>
             </div>
         );
