@@ -22,9 +22,11 @@ constructor(props){
                 showMarkers: false,
                 markerPosition: 0,
                 markerClicked: false,
-                audioFile: [],
-                audioName:[],
-                nextAudio: false
+                audioFile: '',
+                audioName:'',
+                nextAudio: false,
+                pointer: 1
+
 
 
   }
@@ -43,36 +45,37 @@ constructor(props){
 
 componentWillReceiveProps(nextProps) {
   const obj = nextProps.playlist;
-//  console.log(obj);
+let i =0;
 
-  for (const key in obj) {
+ this.setState({
+  play:      false,
+  audioFile:  nextProps.playlist[0].src,
+  audioName:  nextProps.playlist[0].name
 
-        this.setState(prevState => ({
-    audioFile: [...prevState.audioFile, obj[key].src],
-    audioName: [...prevState.audioName, obj[key].name]
+  });
 
-}));
-
-
-  }
 
 }
 
 componentDidMount () {
    this.setState({ initialWidth: this.rangeInput.offsetWidth });
-   this.getAudioAndName();
-   //console.log(this.props.playlist)
+
+
  }
 
 toggleButton(){
-this.setState({play: !this.state.play});
+this.setState({play: !this.state.play, finishedPlaying: false});
 }
 
 updateTime(updateTime) {
   this.setState({updateTime});
 }
 durationTime(durationTime) {
-  this.setState({ durationTime });
+  if (!this.props.multipleTakes){
+      this.setState({ durationTime, play: this.props.play });
+  }
+this.setState({ durationTime});
+
 }
 initialWidth(initialWidth){
   this.setState({ initialWidth });
@@ -92,21 +95,7 @@ dragPosition(markerPosition) {
 
   }
 
-getAudioAndName(){
-  const obj = this.props.playlist;
 
-
-  for (const key in obj) {
-
-        this.setState(prevState => ({
-    audioFile: [...prevState.audioFile, obj[key].src],
-    audioName: [...prevState.audioName, obj[key].name]
-
-}));
-
-
-  }
-}
 
 callMarker() {
   const markerArray = [];
@@ -132,26 +121,69 @@ callMarker() {
       markerArray
   );
 }
+
 finishedPlaying(check){
+
+
+
 this.setState({finishedPlaying: check,
-                play: false });
+                play: false,
+                audioFile:  this.props.playlist[0].src,
+                audioName:  this.props.playlist[0].name
+                             });
+
+         let i = this.state.pointer;
+        console.log('pointer:' +  this.state.pointer);
+        console.log('length'+ this.props.playlist.length);
+
+   if(this.state.pointer === this.props.playlist.length){
+    this.setState({play: false, pointer: 1});
+
+   }
+
+      if(this.props.playlist.length > 1 && i <  this.props.playlist.length  ){
+       console.log(i);
+        this.setState({
+         play:      true,
+         audioFile:  this.props.playlist[i].src,
+         audioName:  this.props.playlist[i].name,
+         pointer : this.state.pointer + 1
+
+         });
+
+
+
+
+       }
+
+
+
+
 
 }
 
 nextAudio(check){
-this.setState({nextAudio: check});
+//this.setState({nextAudio: check});
 
 }
 
 keepPlaying(check){
-  this.setState({play: true});
+//  this.setState({play: true});
 
 }
+
 
 
   render() {
 
 
+
+  let src = ""
+
+  if(this.state.audioFile !== null){
+
+    src = this.state.audioFile;
+  }
 
 
      const updateTime = this.state.updateTime;
@@ -161,14 +193,10 @@ keepPlaying(check){
      if (this.state.play){
       Button = <PauseButton onClick = {this.toggleButton}/>
      }
-     if(this.props.multipleTakes){
 
-
-     }
 
      if(this.state.showMarkers){
         markers = this.callMarker(); }
-
 
 
     return (
@@ -180,7 +208,7 @@ keepPlaying(check){
        <div ref={input => this.rangeInput = input} className="waveform & Markers Container" style={styles.waveformContainer}>
           {markers}
           <WaveForm
-            audioFile = {this.state.audioFile}
+            audioFile = {src}
             playAudio = {this.state.play}
             durationTime={this.durationTime}
             updateTime = {this.updateTime}
@@ -193,7 +221,7 @@ keepPlaying(check){
             keepPlaying = {this.keepPlaying}
             looping = {true}                                                 // property to use when stiching takes
                                  />
-
+            <div style={{marginTop: 5}}>{this.state.audioName}</div>
 
 
 

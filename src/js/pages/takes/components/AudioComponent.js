@@ -18,7 +18,8 @@ class AudioComponent extends Component {
         this.state = {
             RecordComponent: false,
             show: false,
-            pause: false
+            pause: false,
+            play: false
         };
 
     }
@@ -30,19 +31,26 @@ class AudioComponent extends Component {
         ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-pause'));
     }
 
+    componentWillReceiveProps(nextProps){
+      if(nextProps.multipleTakes){
+        this.setState({play:false});
+      }
+
+    }
+
     componentWillUnmount() {
         ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-pause'));
     }
 
     componentDidMount() {
-        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-play'));
+
+
+     this.setState({play:true});
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.playlist !== this.props.playlist) {
-            ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-skip-to-next'));
-            ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-play'));
-        }
+
+
     }
 
 
@@ -54,6 +62,8 @@ class AudioComponent extends Component {
          "src": this.props.src
          }
          */
+
+
         var file = this.props.playlist;
         const pause = this.state.pause;
         const markers = this.props.markers;
@@ -61,9 +71,11 @@ class AudioComponent extends Component {
         var autoPlay = this.props.autoPlay;
 
 
+
         return (
             <div>
                 <AudioPlayer
+                    play = {this.state.play}
                     width={this.props.width}
                     height={150}
                     autoPlay={true}
@@ -75,7 +87,8 @@ class AudioComponent extends Component {
                     loop={this.props.loop}
                     markers={markers}
                     showMarkers={showMarkers}
-                    multipleTakes={this.props.multipleTakes}
+                    multipleTakes= {this.props.multipleTakes}
+
 
                     // ref to pause the audio
                     ref={audioComponent => {

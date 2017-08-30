@@ -6,15 +6,36 @@ import AudioComponent from "./AudioComponent"
 import config from 'config/config'
 import 'css/takes.css'
 import TakeListenButton from './AddTake'
+
+
 class Footer extends Component {
+
+
+constructor(props){
+  super(props);
+
+
+}
+
+componentWillReceiveProps(nextProps){
+
+
+
+
+}
+
+
 
     createArray() {
 
         if (this.props.listenList.length > 0) {
             var takeList = [];
             this.props.listenList.map((i) => {
-                takeList[takeList.length] = i.mode + ' ' + i.chunk.startv + ' take ' + i.count
+                //takeList[takeList.length] = i.mode + ' ' + i.chunk.startv + ' take ' + i.count
+                  takeList[takeList.length] = i.mode + ' ' + i.chunk.startv
             })
+
+
             return takeList
         }
         else {
@@ -30,25 +51,27 @@ class Footer extends Component {
         if (this.props.listenList.length > 0) {
             var playlist = [];
             this.props.listenList.map((i) => {
+
                 playlist[playlist.length] = {
                     "src": config.streamingUrl + i.props.take.location,
-                    "name": this.props.mode + ' ' + i.chunk.startv + ' take ' + i.count
+                    //"name": this.props.mode + ' ' + i.chunk.startv + ' take ' + i.count,
+                    "name":"take " +
+          					this.props.takeNum +
+          					", " +
+          					this.props.mode +
+          					" " +
+          					i.chunk.startv +
+          					" (" +
+          					this.props.author +
+          					" on " +
+          					this.props.date +
+          					")"
                 }
             })
 
-            this.props.playPlaylist(playlist);
+            //this.props.playPlaylist(playlist);
 
-            /*
-            return (
-
-
-                <Card fluid>
-                    <AudioComponent playlist={playlist} width={700}/>
-                </Card>
-
-
-            );
-            */
+            return(playlist);
         }
 
         else {
@@ -62,47 +85,40 @@ class Footer extends Component {
     render () {
 
 
-
         var icon = <Icon name="plus" size="big" color="blue"/>
         var button = <Button icon={icon} inverted color="blue"/>
         let multipleTakes = false;
+        let playList = this.props.currentPlaylist;
 
-   if( this.createArray().length > 0){
-     multipleTakes = true;
-   }
+        if( this.createArray().length > 0){
+            multipleTakes = true;
+            playList = this.createListenPlaylist();
+
+           }
+
+
 
 
         return (
 
             <div className="footerStyle" style={{width:'100%'}}>
               {this.createArray().length > 0
-                  ? <div style={{width:'20%', backgroundColor:'transparent', height: 30 }}>
+                  ? <div style={{width:'100%', backgroundColor:'transparent', height: 20 }}>
                       {/* <Label pointing="right" size="huge" basic color="black">Stitched takes</Label> */}
 
-                      <Popup inverted trigger={button} hoverable size="large">
-                          <Grid inverted divided>
-                              <Grid.Column divided>
-                                  <Grid.Row verticalAlign="middle">
-                                      <TakeListenButton onClick={this.createListenPlaylist.bind(this)} /> Play All
-                                      {/*this.createListenPlaylist()*/}
-                                  </Grid.Row>
+
 
                                   {this.createArray().map((i) => {
                                       return(
-                                          <div>
-                                              <Divider />
 
-                                          <Grid.Row>{i} </Grid.Row>
-                                          </div>
+
+
+                                           <Button inverted color='blue'>{i}</Button>
+
 
                                       );
                                   })}
-                              </Grid.Column>
 
-                          </Grid>
-
-
-                      </Popup>
 
 
                   </div>
@@ -113,7 +129,7 @@ class Footer extends Component {
                         ? <Menu.Item style={{width:'100%'}}>
                             <div style={{width:'100%'}}>
                                 <AudioComponent
-                                    playlist={this.props.currentPlaylist}
+                                    playlist={playList}
                                     width={500}
                                     loop={this.props.audioLoop}
                                     markers={this.props.markers}

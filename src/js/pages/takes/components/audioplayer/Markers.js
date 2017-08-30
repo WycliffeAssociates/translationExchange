@@ -28,7 +28,7 @@ class Markers extends React.Component {
 
     return (
 
-      <svg onClick={()=> this.props.dragPosition(position)} style={{position: 'absolute', left: position, bottom: 55, cursor: 'pointer' }}  y="" width="29px" height="63px" viewBox="0 0 29 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+      <svg onClick={()=> this.props.dragPosition(position)} style={{position: 'absolute', left: position, bottom: 65, cursor: 'pointer' }}  y="" width="29px" height="63px" viewBox="0 0 29 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
         <defs>
               <path  d="M0.5,2.22034441e-16 L27.8715047,2.22034441e-16 L27.8715047,3.33066907e-16 C28.147647,-1.67976798e-15 28.3715047,0.223857625 28.3715047,0.5 L28.3715047,28.6575595 L28.3715047,28.6575595 C28.3715047,28.9337018 28.147647,29.1575595 27.8715047,29.1575595 C27.7505276,29.1575595 27.6336532,29.1136977 27.5425465,29.034105 L14.1857523,17.3653262 L0.828958158,29.034105 L0.828958158,29.034105 C0.620997808,29.2157835 0.305133052,29.194478 0.123454478,28.9865176 C0.0438617092,28.8954109 -3.73135802e-15,28.7785365 -2.88657986e-15,28.6575595 L0,0.5 L0,0.5 C-3.38176876e-17,0.223857625 0.223857625,5.07271091e-17 0.5,0 Z" id="path-1"></path>
         </defs>

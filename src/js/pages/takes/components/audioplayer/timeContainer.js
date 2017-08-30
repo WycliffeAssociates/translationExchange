@@ -29,9 +29,7 @@ this.state = {currentName: '', max: 0, pointer: 0}
 
    if (this.props.nextAudio){
 
-      this.setState({pointer: this.state.pointer + 1});
-      console.log(`AudioPointer ${this.state.pointer}`);
-        console.log(`max ${this.state.max -1}`);
+      
       if(this.state.pointer === this.state.max-1){
 
         i = 0;
@@ -67,15 +65,14 @@ const name = this.state.currentName;
   return(
 
     <div  style={styles.container}>
-            {/* <div>{this.props.markersButton ? markerButton : ''}</div> */}
              <div style={styles.markerContainer}>
               <MarkerButton onClick= {this.props.markerBtnClicked} />
             </div>
 
-            <div style={styles.nameContainer} >{name}</div>
+            {/* <div style={styles.nameContainer} >{name}</div> */}
             <div style={styles.timeContainer} >
               <Time time={this.props.updatedTime} />
-              <div style = {{marginLeft: 5, marginRight:5, marginTop: 3}}>/</div>
+              <div style = {{marginLeft: 5, marginRight:5}}>/</div>
               <Time time={this.props.audioLength} />
             </div>
           </div>
@@ -91,6 +88,8 @@ const name = this.state.currentName;
 
 const styles = {
   container:{
+    display: 'flex',
+    flexDirection:'column',
     justifyContent: 'center',
     color: "#fff",
     width: 120,

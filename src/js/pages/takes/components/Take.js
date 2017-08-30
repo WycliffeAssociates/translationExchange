@@ -118,7 +118,8 @@ class Take extends Component {
 											this.props.author.name,
 											this.parseDate(this.props.take.date_modified),
 											this.props.take.markers
-										)}
+										)
+									}
 								/>
 							</Grid.Row>
 							<Grid.Row verticalAlign="bottom">
