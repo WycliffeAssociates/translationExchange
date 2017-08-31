@@ -25,7 +25,9 @@ constructor(props){
                 audioFile: '',
                 audioName:'',
                 nextAudio: false,
-                pointer: 1
+                pointer: 1,
+                markers: this.props.markers
+
 
 
 
@@ -39,19 +41,22 @@ constructor(props){
   this.finishedPlaying = this.finishedPlaying.bind(this);
   this.keepPlaying = this.keepPlaying.bind(this);
   this.nextAudio = this.nextAudio.bind(this);
-
+  this.resetMarkerClicked = this.resetMarkerClicked.bind(this);
 
 }
 
 componentWillReceiveProps(nextProps) {
+
+
+
   const obj = nextProps.playlist;
 let i =0;
-
+console.log(nextProps.playlist);
  this.setState({
   play:      false,
   audioFile:  nextProps.playlist[0].src,
-  audioName:  nextProps.playlist[0].name
-
+  audioName:  nextProps.playlist[0].name,
+  markers:    nextProps.playlist[0].markers
   });
 
 
@@ -87,7 +92,7 @@ dragPosition(markerPosition) {
   this.setState({ markerPosition: timePosition,
                   updateTime: timePosition,
                   markerClicked: true,
-                play: true
+                  play: true
 
    });
 
@@ -101,9 +106,14 @@ callMarker() {
   const markerArray = [];
   // console.log('Timeline props', this.props.markers);
   // console.log('local props', markerObj.markers);
-     const receivedMarkerObject = this.props.markers;
-  //  const receivedMarkerObject = markerObject.markers;
+     let receivedMarkerObject = this.props.markers;
 
+
+
+   if(this.props.multipleTakes){
+   receivedMarkerObject = this.state.markers;
+
+   }
   for (const key in receivedMarkerObject) {
 
 
@@ -133,20 +143,20 @@ this.setState({finishedPlaying: check,
                              });
 
          let i = this.state.pointer;
-        console.log('pointer:' +  this.state.pointer);
-        console.log('length'+ this.props.playlist.length);
+
 
    if(this.state.pointer === this.props.playlist.length){
-    this.setState({play: false, pointer: 1});
+    this.setState({play: false, pointer: 1, markers: this.props.playlist[0].markers});
 
    }
 
       if(this.props.playlist.length > 1 && i <  this.props.playlist.length  ){
-       console.log(i);
+
         this.setState({
          play:      true,
          audioFile:  this.props.playlist[i].src,
          audioName:  this.props.playlist[i].name,
+         markers: this.props.playlist[i].markers,
          pointer : this.state.pointer + 1
 
          });
@@ -169,6 +179,11 @@ nextAudio(check){
 
 keepPlaying(check){
 //  this.setState({play: true});
+
+}
+
+resetMarkerClicked(statement){
+this.setState({markerClicked: statement});
 
 }
 
@@ -219,7 +234,8 @@ keepPlaying(check){
             finishedPlaying = {this.finishedPlaying}
             nextAudio ={this.nextAudio}
             keepPlaying = {this.keepPlaying}
-            looping = {true}                                                 // property to use when stiching takes
+            looping = {true}
+            resetMarkerClicked = {this.resetMarkerClicked}                                                 // property to use when stiching takes
                                  />
             <div style={{marginTop: 5}}>{this.state.audioName}</div>
 

@@ -43,7 +43,7 @@ class WaveForm extends Component {
 
 
       this.props.updateTime(this.state.pos);
-
+     this.props.resetMarkerClicked(false);
 
   }
 
@@ -68,7 +68,7 @@ if( this.props.looping && this.state.looping ){
       this.props.nextAudio(true);
   }
 
-this.setState({finished:false});
+this.setState({finished:false, pos: 0});
     this.props.nextAudio(false);
 
   }
@@ -96,13 +96,14 @@ this.setState({finished:false});
 let position = this.state.pos;
 
 
-  if (this.props.markerClicked){
+     if (this.props.markerClicked){
+
       position = this.props.markerPosition;
-  }
+      }
 
 
 
-   const audio = this.state.AudioObj[this.state.audioPointer];
+
 
     return (
 

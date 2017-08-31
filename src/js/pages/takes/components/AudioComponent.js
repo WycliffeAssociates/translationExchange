@@ -32,15 +32,13 @@ class AudioComponent extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-      if(nextProps.multipleTakes){
-        this.setState({play:false});
+      if(nextProps.multipleTakes){        // pause the audio on receiving new audio files, this helps
+        this.setState({play:false});       // to do not make laggy the audioplayer
       }
 
     }
 
-    componentWillUnmount() {
-        ReactDOM.findDOMNode(this.audioComponent).dispatchEvent(new Event('audio-pause'));
-    }
+    
 
     componentDidMount() {
 
