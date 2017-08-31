@@ -425,6 +425,7 @@ class ChapterContainer extends Component {
 		this.state.query = query;
 
 		if (this.state.loaded && this.state.chunks.length === 0) {
+
 			return <Error />;
 		} else {
 			return (

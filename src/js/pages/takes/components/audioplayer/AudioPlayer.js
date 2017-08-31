@@ -39,8 +39,6 @@ constructor(props){
   this.callMarker = this.callMarker.bind(this);
   this.dragPosition = this.dragPosition.bind(this);
   this.finishedPlaying = this.finishedPlaying.bind(this);
-  this.keepPlaying = this.keepPlaying.bind(this);
-  this.nextAudio = this.nextAudio.bind(this);
   this.resetMarkerClicked = this.resetMarkerClicked.bind(this);
 
 }
@@ -172,15 +170,7 @@ this.setState({finishedPlaying: check,
 
 }
 
-nextAudio(check){
-//this.setState({nextAudio: check});
 
-}
-
-keepPlaying(check){
-//  this.setState({play: true});
-
-}
 
 resetMarkerClicked(statement){
 this.setState({markerClicked: statement});
@@ -231,9 +221,8 @@ this.setState({markerClicked: statement});
             markerPosition= {this.state.markerPosition}
             markerClicked={this.state.markerClicked}
             resetMarkerClicked={this.resetMarkerClicked}
-            finishedPlaying = {this.finishedPlaying}
-            nextAudio ={this.nextAudio}
-            keepPlaying = {this.keepPlaying}
+          finishedPlaying = {this.finishedPlaying}
+
             looping = {true}
             resetMarkerClicked = {this.resetMarkerClicked}                                                 // property to use when stiching takes
                                  />
@@ -262,7 +251,7 @@ const styles = {
    container:{
        display: 'flex',
        backgroundColor: '#000',
-       height: 150,
+       height: 125,
        flexDirection: 'row',
        flex: '1 1 0'
 

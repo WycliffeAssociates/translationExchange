@@ -10,10 +10,8 @@ class WaveForm extends Component {
     this.state = {
       playing: false,
       pos: 0,
-      AudioObj:[],
       max: 0,
       nextAudio: false,
-      audioPointer: 0,
       looping: false,
       finished: false
     };
@@ -23,17 +21,7 @@ class WaveForm extends Component {
     this.finishedPlaying = this.finishedPlaying.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
 
-    this.setState({AudioObj: nextProps.audioFile,
-                   max: nextProps.audioFile.length
-     });
-
-
-
-
-
-    }
 
   handlePosChange(e) {
     this.setState({
@@ -51,10 +39,7 @@ class WaveForm extends Component {
 
 loopPlaylist(){
 
-if( this.props.looping && this.state.looping ){
-     this.props.keepPlaying(true);
 
-     }
 
 }
 
@@ -63,40 +48,28 @@ if( this.props.looping && this.state.looping ){
     this.loopPlaylist();
 
 
-  if(this.state.finished){
-
-      this.props.nextAudio(true);
-  }
-
 this.setState({finished:false, pos: 0});
-    this.props.nextAudio(false);
+
 
   }
+
+
 
   finishedPlaying() {
 
     this.setState({pos: 0, looping: true, finished:true });
 
-
-        if(this.state.audioPointer < this.state.max-1) {
-
-              this.setState({audioPointer: this.state.audioPointer + 1});
-
-
-           }else{
-
-             this.setState({audioPointer: 0 , looping: false});
-         }
-
     this.props.finishedPlaying(true);
 
-
   }
+
+
+
   render() {
-let position = this.state.pos;
+    let position = this.state.pos;
 
 
-     if (this.props.markerClicked){
+    if (this.props.markerClicked){
 
       position = this.props.markerPosition;
       }

@@ -58,7 +58,7 @@ componentWillReceiveProps(nextProps){
         if (this.props.listenList.length > 0) {
             var playlist = [];
             this.props.listenList.map((i) => {
-              
+
                 playlist[playlist.length] = {
                     "markers": i.props.take.markers,
                     "src": config.streamingUrl + i.props.take.location,
@@ -134,6 +134,7 @@ componentWillReceiveProps(nextProps){
                 <Menu inverted secondary>
                     {this.props.currentPlaylist.length > 0
                         ? <Menu.Item style={{width:'100%'}}>
+
                             <div style={{width:'100%'}}>
                                 <AudioComponent
                                     playlist={playList}
@@ -237,6 +238,16 @@ componentWillReceiveProps(nextProps){
 
 
 
+
+}
+
+
+
+const styles = {
+  button:{
+
+
+  }
 
 }
 
