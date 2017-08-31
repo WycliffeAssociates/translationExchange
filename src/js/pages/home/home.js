@@ -101,10 +101,10 @@ class Home extends Component {
 
 
 
-                <Container fluid >
+                <Container fluid  >
 
                     <Grid padded textAlign="center" >
-                        <Grid.Column width={3}>
+                        <Grid.Column width={3}  style={{backgroundColor: '#3E4453', borderRadius: 5}}>
                             <Grid.Row height={1}>
                                 <h2><font color="white">Recent Projects</font></h2>
                             </Grid.Row>
