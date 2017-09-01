@@ -46,7 +46,7 @@ loopPlaylist(){
   duration(e) {
     this.props.durationTime(e.wavesurfer.getDuration());
     this.loopPlaylist();
-
+  
 
 this.setState({finished:false, pos: 0});
 

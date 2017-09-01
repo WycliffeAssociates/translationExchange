@@ -49,7 +49,7 @@ componentWillReceiveProps(nextProps) {
 
   const obj = nextProps.playlist;
 let i =0;
-console.log(nextProps.playlist);
+
  this.setState({
   play:      false,
   audioFile:  nextProps.playlist[0].src,
@@ -76,7 +76,8 @@ updateTime(updateTime) {
 durationTime(durationTime) {
   if (!this.props.multipleTakes){
       this.setState({ durationTime, play: this.props.play });
-  }
+  } 
+
 this.setState({ durationTime});
 
 }

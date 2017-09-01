@@ -88,15 +88,11 @@ class Home extends Component {
                         <Link to="/projects">
                             <Button icon="right arrow" content='Start here' labelPosition="right"/>
                         </Link>
+
                     </div>
 
+
                 </Container>
-
-
-
-
-
-
 
 
 
