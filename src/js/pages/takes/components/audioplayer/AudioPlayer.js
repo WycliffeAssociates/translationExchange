@@ -76,7 +76,7 @@ updateTime(updateTime) {
 durationTime(durationTime) {
   if (!this.props.multipleTakes){
       this.setState({ durationTime, play: this.props.play });
-  } 
+  }
 
 this.setState({ durationTime});
 
@@ -222,7 +222,7 @@ this.setState({markerClicked: statement});
             markerPosition= {this.state.markerPosition}
             markerClicked={this.state.markerClicked}
             resetMarkerClicked={this.resetMarkerClicked}
-          finishedPlaying = {this.finishedPlaying}
+            finishedPlaying = {this.finishedPlaying}
 
             looping = {true}
             resetMarkerClicked = {this.resetMarkerClicked}                                                 // property to use when stiching takes
