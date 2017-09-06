@@ -6,7 +6,8 @@ import LogoTitle from "./LogoTitle";
 import axios from "axios";
 import config from "config/config";
 import QueryString from "query-string";
-
+import { connect } from "react-redux";
+import { fetchRecentProjects } from "../../actions/home-recent-projects-actions";
 class Home extends Component {
 	constructor() {
 		super();
@@ -16,6 +17,7 @@ class Home extends Component {
 	}
 	componentDidMount() {
 		this.getRecentProjects();
+		this.props.dispatch(fetchRecentProjects());
 	}
 	getRecentProjects() {
 		axios
@@ -95,13 +97,16 @@ class Home extends Component {
 			<div>
 				<Grid.Row divided onClick={navigateToProject} className="hoverButton">
 					<h4>
-						<font color="white">
-							{str}
-						</font>
+						<font color="white">{str}</font>
 					</h4>
 				</Grid.Row>
 			</div>
 		);
 	}
 }
-export default Home;
+function mapStateToProps(state) {
+	return {
+		homeRecentProjects: state.props
+	};
+}
+export default connect(mapStateToProps)(Home);
