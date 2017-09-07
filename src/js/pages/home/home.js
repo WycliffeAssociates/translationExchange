@@ -9,6 +9,7 @@ import QueryString from "query-string";
 import { connect } from "react-redux";
 import { fetchRecentProjects } from "../../actions/home-recent-projects-actions";
 class Home extends Component {
+
 	constructor() {
 		super();
 		this.state = {
@@ -110,3 +111,4 @@ function mapStateToProps(state) {
 	};
 }
 export default connect(mapStateToProps)(Home);
+

@@ -27,7 +27,10 @@ class ChapterContainer extends Component {
 			currentPlaylist: [],
 			active: false,
 			audioLoop: false,
-			markers: []
+			markers: [],
+			author:'',
+			date:'',
+			takeNum:''
 		};
 	}
 
@@ -391,11 +394,16 @@ class ChapterContainer extends Component {
 		this.setState({
 			currentPlaylist: playlist,
 			audioLoop: false,
-			markers: markers
+			markers: markers,
+			author: author,
+			date: date,
+			takeNum: takeNum
+
 		});
 	}
 
 	playPlaylist(playlist) {
+
 		this.setState({
 			currentPlaylist: playlist,
 			audioLoop: true
@@ -406,11 +414,15 @@ class ChapterContainer extends Component {
      Rendering functions
      */
 	render() {
+
+
+
 		var query = QueryString.parse(this.props.location.search);
 
 		this.state.query = query;
 
 		if (this.state.loaded && this.state.chunks.length === 0) {
+
 			return <Error />;
 		} else {
 			return (
@@ -446,6 +458,9 @@ class ChapterContainer extends Component {
 								playTake={this.playTake.bind(this)}
 								audioLoop={this.state.audioLoop}
 								markers={this.state.markers}
+								author={this.state.author}
+								date={this.state.date}
+								takeNum= {this.state.takeNum}
 							/>
 						</div>
 					</LoadingDisplay>

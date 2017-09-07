@@ -71,15 +71,15 @@ class Take extends Component {
 			<Segment>
 				<Grid textAlign="left">
 					<Grid.Row>
-						<Grid.Column verticalAlign="middle">
+						{/* <Grid.Column verticalAlign="middle">
 							{this.props.take.rating > 1
-								? <Icon
-										className="hoverButton"
-										name="chevron left"
-										onClick={this.moveLeft.bind(this)}
-									/>
-								: ""}
-						</Grid.Column>
+								// ? <Icon
+								// 		className="hoverButton"
+								// 		name="chevron left"
+								// 		//onClick={this.moveLeft.bind(this)}
+								// 	/>
+								// : ""}
+						</Grid.Column> */}
 						<Grid.Column width={12}>
 							<Grid.Row verticalAlign="top">
 								<Grid>
@@ -118,7 +118,8 @@ class Take extends Component {
 											this.props.author.name,
 											this.parseDate(this.props.take.date_modified),
 											this.props.take.markers
-										)}
+										)
+									}
 								/>
 							</Grid.Row>
 							<Grid.Row verticalAlign="bottom">
@@ -135,7 +136,7 @@ class Take extends Component {
 							</Grid.Row>
 						</Grid.Column>
 
-						<Grid.Column verticalAlign="middle">
+						{/* <Grid.Column verticalAlign="middle">
 							{this.props.take.is_publish
 								? ""
 								: <Icon
@@ -143,7 +144,7 @@ class Take extends Component {
 										name="chevron right"
 										onClick={this.moveRight.bind(this)}
 									/>}
-						</Grid.Column>
+						</Grid.Column> */}
 					</Grid.Row>
 				</Grid>
 			</Segment>
