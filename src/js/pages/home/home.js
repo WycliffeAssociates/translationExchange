@@ -18,7 +18,7 @@ class Home extends Component {
 	}
 	componentDidMount() {
 		this.getRecentProjects();
-		this.props.dispatch(fetchRecentProjects());
+		//this.props.dispatch(fetchRecentProjects());
 	}
 	getRecentProjects() {
 		axios
@@ -111,4 +111,3 @@ function mapStateToProps(state) {
 	};
 }
 export default connect(mapStateToProps)(Home);
-

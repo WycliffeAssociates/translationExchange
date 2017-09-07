@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import {updateAudioPlayer} from '../../../../actions';
 import WaveForm from './Waveform';
 import{ PauseButton, PlayButton, MultipleTakesButton } from './buttons';
 import TimeContainer from './timeContainer';
@@ -76,7 +78,7 @@ updateTime(updateTime) {
 }
 durationTime(durationTime) {
   if (!this.props.multipleTakes){
-      this.setState({ durationTime, play: this.props.play });
+      //this.setState({ durationTime, play: this.props.play });
   }
 
 this.setState({ durationTime});
@@ -183,6 +185,7 @@ this.setState({markerClicked: statement});
 
   render() {
 
+console.log(this.props.play);
 
 
   let src = ""
@@ -279,4 +282,14 @@ const styles = {
 
 }
 
-export default AudioPlayer;
+
+const mapToStateProps = state => {
+
+const{ play } = state.audioPlayer;
+debugger;
+return{play};
+
+}
+
+
+export default connect(mapToStateProps, {updateAudioPlayer}) (AudioPlayer);

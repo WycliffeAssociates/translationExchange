@@ -38,7 +38,7 @@ class AudioComponent extends Component {
         this.setState({play:false});       // to do not make laggy the audioplayer
       }
 
-        this.setState({play:true}); 
+        this.setState({play:true});
 
     }
 
@@ -77,7 +77,7 @@ class AudioComponent extends Component {
         return (
             <div>
                 <AudioPlayer
-                    play = {this.state.play}
+                    //play = {this.state.play}
                     width={this.props.width}
                     height={150}
                     autoPlay={true}
