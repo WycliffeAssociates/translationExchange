@@ -37,12 +37,15 @@
     "react-scripts": "^1.0.7",
     "react-stars": "^2.1.0",
     "react-transition-group": "^1.2.0",
+    "react-wavesurfer": "^0.8.6",
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.11",
     "semantic-ui-react": "^0.71.0",
-    "translation-audio-player": "^1.4.0"
+    "translation-audio-player": "^1.4.0",
+    "wavesurfer.js": "^1.4.0",
+    "webpack": "^3.5.6"
   },
   "devDependencies": {
     "babel-jest": "^20.0.3",
