@@ -90,7 +90,7 @@ componentWillReceiveProps(nextProps){
 
 
     render () {
-
+       
 
         var icon = <Icon name="plus" size="big" color="blue"/>
         var button = <Button icon={icon} inverted color="blue"/>

@@ -26,7 +26,8 @@ constructor(props){
                 audioName:'',
                 nextAudio: false,
                 pointer: 1,
-                markers: this.props.markers
+                markers: true                             // used for unit testing comment when finished and uncomment bottom
+                // markers: this.props.markers
 
 
 

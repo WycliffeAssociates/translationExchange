@@ -43,7 +43,9 @@
     "wavesurfer.js": "^1.4.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "babel-jest": "^20.0.3",
+    "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "cross-env": "^5.0.1",
@@ -52,7 +54,8 @@
     "jest-cli": "^20.0.4",
     "react-addons-test-utils": "^15.6.0",
     "react-scripts": "1.0.7",
-    "react-test-renderer": "^15.6.1"
+    "react-test-renderer": "^15.6.1",
+    "webpack": "^3.5.5"
   },
   "scripts": {
     "start": "cross-env NODE_PATH=src react-scripts start",
