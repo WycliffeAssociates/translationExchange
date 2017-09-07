@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import ChunkPropTypes from "./ChunkPropTypes";
 
-import { Accordion, Icon, Grid, Menu, Rail, Divider } from "semantic-ui-react";
+import { Accordion, Icon, Grid } from "semantic-ui-react";
 import TakeTable from "./TakeTable";
 import "css/takes.css";
 
 import ChunkSidebar from "./SideBar";
-let onClick;
-let CommentContainer;
-
 class Chunk extends Component {
 	render() {
 		var publish = [];

@@ -1,8 +1,7 @@
-import React, {Component} from 'react'
-import Audio from 'translation-audio-player'
+import React, { Component } from "react";
+import Audio from "translation-audio-player";
 import * as ReactDOM from "react-dom";
 import AudioPlayer from './audioplayer/AudioPlayer';
-
 
 let onClick;
 // requires a name (str) and src (str) when it is called
@@ -10,6 +9,7 @@ let onClick;
 // src  : url of file to be played in audio player
 
 class AudioComponent extends Component {
+
 
     constructor(props) {
 
