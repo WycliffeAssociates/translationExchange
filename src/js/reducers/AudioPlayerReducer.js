@@ -1,6 +1,6 @@
-import { UPDATE_AUDIOPLAYER, AUDIOPLAYER_INITIAL_STATE} from '../actions/types';
+import { UPDATE_AUDIOPLAYER, PLAY_FROM_CARD_BUTTON} from '../actions/types';
 
-const INITIAL_STATE = { play: false, loop: false };
+const INITIAL_STATE = { play: false, playlist: false, playFromCardButton: false };
 
 export default (state = INITIAL_STATE, action) => {
 

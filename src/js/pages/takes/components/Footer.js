@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { connect } from "react-redux";
+import {updateAudioPlayer} from './../../../actions';
 import MarkAsDone from "./MarkAsDone";
 import CommentContainer from "./comments/PinkButton"
 import {Menu, Container, Card, Button, Icon, Label, Popup, Grid, Divider} from 'semantic-ui-react';
@@ -90,7 +92,7 @@ componentWillReceiveProps(nextProps){
 
 
     render () {
-       
+
 
         var icon = <Icon name="plus" size="big" color="blue"/>
         var button = <Button icon={icon} inverted color="blue"/>
@@ -100,8 +102,10 @@ componentWillReceiveProps(nextProps){
         if( this.createArray().length > 0){
             multipleTakes = true;
             playList = this.createListenPlaylist();
-
-           }
+           this.props.updateAudioPlayer({props: 'playlist', value: true});
+         }else{
+            this.props.updateAudioPlayer({props: 'playlist', value: false});
+         }
 
 
 
@@ -251,5 +255,14 @@ const styles = {
 
 }
 
-export default Footer;
+const mapToStateProps = state => {
 
+const{ readyToPlay, playFromCardButton } = state.audioPlayer;
+
+return{readyToPlay, playFromCardButton };
+
+}
+
+
+
+export default connect(mapToStateProps, {updateAudioPlayer})(Footer);

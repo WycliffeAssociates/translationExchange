@@ -153,7 +153,7 @@ this.setState({finishedPlaying: check,
    }
 
       if(this.props.playlist.length > 1 && i <  this.props.playlist.length  ){
-
+        debugger;
         this.setState({
          play:      true,
          audioFile:  this.props.playlist[i].src,
@@ -185,7 +185,7 @@ this.setState({markerClicked: statement});
 
   render() {
 
-console.log(this.props.play);
+
 
 
   let src = ""
@@ -199,9 +199,9 @@ console.log(this.props.play);
      const updateTime = this.state.updateTime;
 
      let markers = '';
-     let Button = <PlayButton onClick = {this.toggleButton}/> ;
-     if (this.state.play){
-      Button = <PauseButton onClick = {this.toggleButton}/>
+     let Button = <PlayButton onClick = {()=>this.props.updateAudioPlayer({props: 'play', value: true})}/> ;
+     if (this.props.play){
+      Button = <PauseButton onClick = {()=>this.props.updateAudioPlayer({props: 'play', value: false})}/>
      }
 
 
@@ -219,7 +219,7 @@ console.log(this.props.play);
           {markers}
           <WaveForm
             audioFile = {src}
-            playAudio = {this.state.play}
+            playAudio = {this.props.play}
             durationTime={this.durationTime}
             updateTime = {this.updateTime}
             initialWidth = {this.initialWidth}
@@ -286,7 +286,7 @@ const styles = {
 const mapToStateProps = state => {
 
 const{ play } = state.audioPlayer;
-debugger;
+
 return{play};
 
 }

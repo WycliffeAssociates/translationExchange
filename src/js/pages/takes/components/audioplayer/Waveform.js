@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Wavesurfer from 'react-wavesurfer';
+import { connect } from "react-redux";
+import {updateAudioPlayer} from '../../../../actions';
 
 
 class WaveForm extends Component {
@@ -48,6 +50,11 @@ loopPlaylist(){
     this.loopPlaylist();
 
 
+      this.props.updateAudioPlayer({props: 'play', value: true});
+
+
+
+
 this.setState({finished:false, pos: 0});
 
 
@@ -60,6 +67,14 @@ this.setState({finished:false, pos: 0});
     this.setState({pos: 0, looping: true, finished:true });
 
     this.props.finishedPlaying(true);
+
+    this.props.updateAudioPlayer({props: 'play', value: false});
+
+     if(this.props.playlist){
+         this.props.updateAudioPlayer({props: 'play', value: true});
+
+          }
+
 
   }
 
@@ -99,4 +114,14 @@ this.setState({finished:false, pos: 0});
 
 
 
-export default WaveForm;
+const mapToStateProps = state => {
+
+const{ readyToPlay, playFromCardButton } = state.audioPlayer;
+
+return{readyToPlay, playFromCardButton };
+
+}
+
+
+
+export default connect(mapToStateProps, {updateAudioPlayer})(WaveForm);

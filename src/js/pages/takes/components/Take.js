@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import {updateAudioPlayer} from './../../../actions';
 import PropTypes from "prop-types";
 import config from "config/config";
 import { Button, Grid, Segment, Card, Modal, Icon } from "semantic-ui-react";
@@ -110,7 +112,7 @@ class Take extends Component {
 							<Grid.Row className="centerPlayButton">
 								<br />
 								<TakeListenButton
-									onClick={() =>
+									onClick={() => {
 										this.props.playTake(
 											this.props.take.location,
 											this.props.count,
@@ -118,7 +120,11 @@ class Take extends Component {
 											this.props.author.name,
 											this.parseDate(this.props.take.date_modified),
 											this.props.take.markers
-										)
+										    );
+                        
+
+									       }
+
 									}
 								/>
 							</Grid.Row>
@@ -231,4 +237,14 @@ Take.propTypes = {
 	takeId: PropTypes.number.isRequired
 };
 
-export default Take;
+const mapToStateProps = state => {
+
+const{ playFromCardButton } = state.audioPlayer;
+
+return{ playFromCardButton };
+
+}
+
+
+
+export default connect(mapToStateProps, {updateAudioPlayer}) (Take);

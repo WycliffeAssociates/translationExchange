@@ -31,8 +31,7 @@ class AudioComponent extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-      console.log('received props');
-      console.log(this.props.multipleTakes);
+    
 
       if(nextProps.multipleTakes){        // pause the audio on receiving new audio files, this helps
         this.setState({play:false});       // to do not make laggy the audioplayer
