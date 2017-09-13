@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import {updateAudioPlayer} from '../../../../actions';
+import {bindActionCreators} from 'redux';
+import {playAudio, stopAudio, finishedPlaying} from '../../../../actions';
 import WaveForm from './Waveform';
 import{ PauseButton, PlayButton, MultipleTakesButton } from './buttons';
 import TimeContainer from './timeContainer';
@@ -153,7 +154,7 @@ this.setState({finishedPlaying: check,
    }
 
       if(this.props.playlist.length > 1 && i <  this.props.playlist.length  ){
-        debugger;
+
         this.setState({
          play:      true,
          audioFile:  this.props.playlist[i].src,
@@ -162,6 +163,8 @@ this.setState({finishedPlaying: check,
          pointer : this.state.pointer + 1
 
          });
+
+        console.log( this.props.playlist[i].src);
 
 
 
@@ -199,9 +202,9 @@ this.setState({markerClicked: statement});
      const updateTime = this.state.updateTime;
 
      let markers = '';
-     let Button = <PlayButton onClick = {()=>this.props.updateAudioPlayer({props: 'play', value: true})}/> ;
+     let Button = <PlayButton onClick = {()=>this.props.playAudio()}/> ;
      if (this.props.play){
-      Button = <PauseButton onClick = {()=>this.props.updateAudioPlayer({props: 'play', value: false})}/>
+      Button = <PauseButton onClick = {()=>this.props.stopAudio()}/>
      }
 
 
@@ -283,13 +286,29 @@ const styles = {
 }
 
 
-const mapToStateProps = state => {
-
-const{ play } = state.audioPlayer;
-
-return{play};
-
-}
+const mapStateToProps = state => {
 
 
-export default connect(mapToStateProps, {updateAudioPlayer}) (AudioPlayer);
+
+const{ play } = state.setAudioPlayerState;
+
+return{play };
+
+};
+
+const mapDispatchToProps = dispatch => {
+
+  return bindActionCreators({
+          finishedPlaying: finishedPlaying,
+          playAudio:playAudio,
+          stopAudio:stopAudio
+}, dispatch);
+
+};
+
+
+
+
+
+
+export default connect (mapStateToProps, mapDispatchToProps)(AudioPlayer);

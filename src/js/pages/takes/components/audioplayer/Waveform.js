@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Wavesurfer from 'react-wavesurfer';
 import { connect } from "react-redux";
-import {updateAudioPlayer} from '../../../../actions';
+import {bindActionCreators} from 'redux';
+import {playAudio, stopAudio, finishedPlaying} from '../../../../actions';
+
 
 
 class WaveForm extends Component {
@@ -50,7 +52,7 @@ loopPlaylist(){
     this.loopPlaylist();
 
 
-      this.props.updateAudioPlayer({props: 'play', value: true});
+    //  this.props.updateAudioPlayer({props: 'play', value: true});
 
 
 
@@ -66,12 +68,10 @@ this.setState({finished:false, pos: 0});
 
     this.setState({pos: 0, looping: true, finished:true });
 
-    this.props.finishedPlaying(true);
 
-    this.props.updateAudioPlayer({props: 'play', value: false});
 
-     if(this.props.playlist){
-         this.props.updateAudioPlayer({props: 'play', value: true});
+     if(this.props.multipleTakes){
+    //     this.props.updateAudioPlayer({props: 'play', value: true});
 
           }
 
@@ -101,7 +101,7 @@ this.setState({finished:false, pos: 0});
           //audioFile="https://files.freemusicarchive.org/music%2Fno_curator%2FThe_Womb%2FBang_-_An_Introduction_to_The_Womb%2FThe_Womb_-_02_-_Sex_Club.mp3"
           pos={position}
           onPosChange={this.handlePosChange}
-          playing={this.props.playAudio}
+          playing={this.props.play}
           options={{ cursorWidth: 4, progressColor: '#3791D5', cursorColor: '#3791D5', barWidth: 0.2, hideScrollbar: true, normalize: true, height: 90, waveColor: '#FFF' }}
           onReady={this.duration}
           onFinish={this.finishedPlaying}
@@ -114,14 +114,24 @@ this.setState({finished:false, pos: 0});
 
 
 
-const mapToStateProps = state => {
+const mapStateToProps = state => {
 
-const{ readyToPlay, playFromCardButton } = state.audioPlayer;
+const{ play } = state.setAudioPlayerState;
 
-return{readyToPlay, playFromCardButton };
+return{ play };
 
 }
 
+const mapDispatchToProps = dispatch => {
+
+  return bindActionCreators({
+          finishedPlaying: finishedPlaying,
+          playAudio:playAudio,
+          stopAudio:stopAudio
+}, dispatch);
+
+};
 
 
-export default connect(mapToStateProps, {updateAudioPlayer})(WaveForm);
+
+export default connect(mapStateToProps, mapDispatchToProps)(WaveForm);

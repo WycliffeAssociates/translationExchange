@@ -4,7 +4,7 @@ import AudioPlayerReducer from './AudioPlayerReducer';
 
 export default combineReducers({
 
-  audioPlayer: AudioPlayerReducer,
+  setAudioPlayerState: AudioPlayerReducer,
   homeRecentProjects: homeRecentProjects
 
 });

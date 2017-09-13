@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {updateAudioPlayer} from './../../../actions';
 import PropTypes from "prop-types";
 import config from "config/config";
 import { Button, Grid, Segment, Card, Modal, Icon } from "semantic-ui-react";
@@ -31,6 +30,7 @@ class Take extends Component {
 
 	addToListen() {
 		this.props.addToListenList(this.props);
+
 
 		if (this.state.addButtonIcon !== "plus") {
 			this.setState({
@@ -121,7 +121,7 @@ class Take extends Component {
 											this.parseDate(this.props.take.date_modified),
 											this.props.take.markers
 										    );
-                        
+
 
 									       }
 
@@ -239,12 +239,12 @@ Take.propTypes = {
 
 const mapToStateProps = state => {
 
-const{ playFromCardButton } = state.audioPlayer;
+const{ playFromCardButton, multipleTakes } = state.audioPlayer;
 
-return{ playFromCardButton };
+return{ playFromCardButton, multipleTakes };
 
 }
 
 
 
-export default connect(mapToStateProps, {updateAudioPlayer}) (Take);
+export default Take;

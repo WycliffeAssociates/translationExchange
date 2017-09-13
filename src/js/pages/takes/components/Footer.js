@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
-import {updateAudioPlayer} from './../../../actions';
 import MarkAsDone from "./MarkAsDone";
 import CommentContainer from "./comments/PinkButton"
 import {Menu, Container, Card, Button, Icon, Label, Popup, Grid, Divider} from 'semantic-ui-react';
@@ -29,6 +28,15 @@ componentWillReceiveProps(nextProps){
       date: nextProps.date
 
   };
+
+
+}
+
+componentDidUpdate(){
+
+    //  const length=  this.createArray().length;
+    //  this.props.updateAudioPlayer({props: 'playlistLenght', value: length});            // update playlist length
+
 
 
 }
@@ -77,10 +85,12 @@ componentWillReceiveProps(nextProps){
                 }
             })
 
-            //this.props.playPlaylist(playlist);
+
 
 
             return(playlist);
+
+
         }
 
         else {
@@ -100,11 +110,9 @@ componentWillReceiveProps(nextProps){
         let playList = this.props.currentPlaylist;
 
         if( this.createArray().length > 0){
-            multipleTakes = true;
+            //multipleTakes = true;
             playList = this.createListenPlaylist();
-           this.props.updateAudioPlayer({props: 'playlist', value: true});
-         }else{
-            this.props.updateAudioPlayer({props: 'playlist', value: false});
+           //this.props.updateAudioPlayer({props: 'multipleTakes', value: true});
          }
 
 
@@ -141,12 +149,13 @@ componentWillReceiveProps(nextProps){
 
                             <div style={{width:'100%'}}>
                                 <AudioComponent
+
                                     playlist={playList}
                                     width={500}
                                     loop={this.props.audioLoop}
                                     markers={this.props.markers}
                                     showMarkers={true}
-                                    multipleTakes={multipleTakes}
+                                    //multipleTakes={multipleTakes}
                                 />
                             </div>
                           </Menu.Item>
@@ -247,22 +256,10 @@ componentWillReceiveProps(nextProps){
 
 
 
-const styles = {
-  button:{
-
-
-  }
-
-}
-
-const mapToStateProps = state => {
-
-const{ readyToPlay, playFromCardButton } = state.audioPlayer;
-
-return{readyToPlay, playFromCardButton };
-
-}
 
 
 
-export default connect(mapToStateProps, {updateAudioPlayer})(Footer);
+
+
+
+export default Footer;

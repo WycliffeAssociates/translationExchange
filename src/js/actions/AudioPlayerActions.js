@@ -1,12 +1,25 @@
-import { UPDATE_AUDIOPLAYER} from './types';
+import { PLAY_AUDIO, STOP_AUDIO, FINISHED_PLAYING} from './types';
 
 
-export const updateAudioPlayer = ({props, value}) => {
+export const playAudio = () => {
+  return {
+    type: PLAY_AUDIO
+  }
+};
+
+export const stopAudio = () => {
+  return {
+    type: STOP_AUDIO
+  }
+};
+
+
+export const finishedPlaying = (isFinished) => {
 
   return{
-     type: UPDATE_AUDIOPLAYER,
-     payload: {props, value}
+     type: FINISHED_PLAYING,
+     isFinished
 
-  };
+  }
 
 };

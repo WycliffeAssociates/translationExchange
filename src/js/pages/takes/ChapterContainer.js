@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
@@ -391,6 +392,8 @@ class ChapterContainer extends Component {
 					")"
 			}
 		];
+
+
 		this.setState({
 			currentPlaylist: playlist,
 			audioLoop: false,
@@ -501,5 +504,10 @@ class ChapterContainer extends Component {
 		);
 	}
 }
+
+
+
+
+
 
 export default ChapterContainer;
