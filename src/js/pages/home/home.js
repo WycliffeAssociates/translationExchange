@@ -9,6 +9,7 @@ import QueryString from "query-string";
 import { connect } from "react-redux";
 import { fetchRecentProjects } from "../../actions/home-recent-projects-actions";
 class Home extends Component {
+
 	constructor() {
 		super();
 		this.state = {
@@ -17,7 +18,7 @@ class Home extends Component {
 	}
 	componentDidMount() {
 		this.getRecentProjects();
-		this.props.dispatch(fetchRecentProjects());
+		//this.props.dispatch(fetchRecentProjects());
 	}
 	getRecentProjects() {
 		axios

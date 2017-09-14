@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import {bindActionCreators} from 'redux';
 import PropTypes from "prop-types";
 import config from "config/config";
 import { Button, Grid, Segment, Card, Modal, Icon } from "semantic-ui-react";
@@ -6,6 +8,8 @@ import TakeListenButton from "./AddTake";
 import "css/takes.css";
 import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
+import {updatePlaylist} from './../../../actions';
+
 
 var listenCounter = 0;
 
@@ -29,6 +33,7 @@ class Take extends Component {
 
 	addToListen() {
 		this.props.addToListenList(this.props);
+
 
 		if (this.state.addButtonIcon !== "plus") {
 			this.setState({
@@ -59,6 +64,41 @@ class Take extends Component {
 		}
 	}
 
+
+	playTakeRedux() {
+
+		const takeLoc = this.props.take.location;
+		const takeNum = this.props.count;
+		const startv = this.props.chunkNumber;
+		const author = this.props.author.name;
+		const date = this.parseDate(this.props.take.date_modified);
+		const markers = this.props.take.markers;
+
+	 let SingleTakePlaylist = [
+			{
+				src: config.streamingUrl + takeLoc,
+				markers: markers,
+				name:
+					"take " +
+					takeNum +
+					", " +
+					this.props.mode +
+					" " +
+					startv +
+					" (" +
+					author +
+					" on " +
+					date +
+					")"
+			}
+		];
+
+		 this.props.updatePlaylist(SingleTakePlaylist);
+
+
+	}
+
+
 	render() {
 		const markers = this.props.take.markers;
 		let showMarkers = this.state.showMarkers;
@@ -71,15 +111,15 @@ class Take extends Component {
 			<Segment>
 				<Grid textAlign="left">
 					<Grid.Row>
-						<Grid.Column verticalAlign="middle">
+						{/* <Grid.Column verticalAlign="middle">
 							{this.props.take.rating > 1
-								? <Icon
-										className="hoverButton"
-										name="chevron left"
-										onClick={this.moveLeft.bind(this)}
-									/>
-								: ""}
-						</Grid.Column>
+								// ? <Icon
+								// 		className="hoverButton"
+								// 		name="chevron left"
+								// 		//onClick={this.moveLeft.bind(this)}
+								// 	/>
+								// : ""}
+						</Grid.Column> */}
 						<Grid.Column width={12}>
 							<Grid.Row verticalAlign="top">
 								<Grid>
@@ -110,15 +150,9 @@ class Take extends Component {
 							<Grid.Row className="centerPlayButton">
 								<br />
 								<TakeListenButton
-									onClick={() =>
-										this.props.playTake(
-											this.props.take.location,
-											this.props.count,
-											this.props.chunkNumber,
-											this.props.author.name,
-											this.parseDate(this.props.take.date_modified),
-											this.props.take.markers
-										)}
+									onClick={() => { this.playTakeRedux(); }
+
+									}
 								/>
 							</Grid.Row>
 							<Grid.Row verticalAlign="bottom">
@@ -135,7 +169,7 @@ class Take extends Component {
 							</Grid.Row>
 						</Grid.Column>
 
-						<Grid.Column verticalAlign="middle">
+						{/* <Grid.Column verticalAlign="middle">
 							{this.props.take.is_publish
 								? ""
 								: <Icon
@@ -143,7 +177,7 @@ class Take extends Component {
 										name="chevron right"
 										onClick={this.moveRight.bind(this)}
 									/>}
-						</Grid.Column>
+						</Grid.Column> */}
 					</Grid.Row>
 				</Grid>
 			</Segment>
@@ -230,4 +264,21 @@ Take.propTypes = {
 	takeId: PropTypes.number.isRequired
 };
 
-export default Take;
+
+const mapStateToProps = state => {
+
+const{ mode } = state.updatePlaylist;
+
+return{ mode };
+
+}
+
+const mapDispatchToProps = dispatch => {
+
+  return bindActionCreators({updatePlaylist}, dispatch);
+
+};
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Take);

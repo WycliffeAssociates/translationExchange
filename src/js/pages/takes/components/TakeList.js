@@ -94,7 +94,6 @@ class TakeList extends Component {
 								updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
 								onClickSave={this.props.onClickSave}
 								deleteComment={this.props.deleteComment}
-								playTake={this.props.playTake}
 								active={this.props.active}
 								mode={this.props.mode}
 								key={i}
