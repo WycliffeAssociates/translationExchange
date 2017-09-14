@@ -41,15 +41,49 @@ class WaveForm extends Component {
 
 
 
-loopPlaylist(){
+  finishedPlaying(check){
+  debugger;
+  this.setState({finishedPlaying: check,
+                  play: false,
+                  audioFile:  this.props.playlist[0].src,
+                  audioName:  this.props.playlist[0].name
+                               });
+
+           let i = this.state.pointer;
+
+
+     if(this.state.pointer === this.props.playlist.length){
+      this.setState({play: false, pointer: 1, markers: this.props.playlist[0].markers});
+
+     }
+
+        if(this.props.playlist.length > 1 && i <  this.props.playlist.length  ){
+
+          this.setState({
+           play:      true,
+           audioFile:  this.props.playlist[i].src,
+           audioName:  this.props.playlist[i].name,
+           markers: this.props.playlist[i].markers,
+           pointer : this.state.pointer + 1
+
+           });
 
 
 
-}
+
+
+
+         }
+
+
+
+
+
+  }
 
   duration(e) {
     this.props.durationTime(e.wavesurfer.getDuration());
-    this.loopPlaylist();
+    
 
 
     //  this.props.updateAudioPlayer({props: 'play', value: true});

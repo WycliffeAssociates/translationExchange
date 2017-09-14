@@ -1,4 +1,4 @@
-import { PLAY_AUDIO, STOP_AUDIO, FINISHED_PLAYING} from './types';
+import { PLAY_AUDIO, STOP_AUDIO, FINISHED_PLAYING, UPDATE_DATA} from './types';
 
 
 export const playAudio = () => {
@@ -19,6 +19,17 @@ export const finishedPlaying = (isFinished) => {
   return{
      type: FINISHED_PLAYING,
      isFinished
+
+  }
+
+};
+
+
+export const dataDisplay = (AuthorData) => {
+
+  return{
+     type: UPDATE_DATA,
+     AuthorData
 
   }
 

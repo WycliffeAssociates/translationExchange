@@ -112,7 +112,6 @@ componentDidUpdate(){
         if( this.createArray().length > 1){
 
             playList = this.createListenPlaylist();
-            debugger;
          }
 
 

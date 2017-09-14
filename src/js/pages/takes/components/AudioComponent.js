@@ -56,16 +56,9 @@ class AudioComponent extends Component {
 
 
     render() {
-        /*
-         var file = [];
-         file[0] = {
-         "name": this.props.name,
-         "src": this.props.src
-         }
-         */
 
 
-        var file = this.props.playlist;
+
         const pause = this.state.pause;
         const markers = this.props.markers;
         const showMarkers = this.props.showMarkers;
@@ -76,11 +69,9 @@ class AudioComponent extends Component {
         return (
             <div>
                 <AudioPlayer
-                    //play = {this.state.play}
                     width={this.props.width}
                     height={150}
                     autoPlay={true}
-                  //  playlist={file}
                     recordButton={() => {
                         this.onClick()
                     }}
@@ -88,7 +79,7 @@ class AudioComponent extends Component {
                     loop={this.props.loop}
                     markers={markers}
                     showMarkers={showMarkers}
-                    multipleTakes= {this.props.multipleTakes}
+                    
 
 
                     // ref to pause the audio

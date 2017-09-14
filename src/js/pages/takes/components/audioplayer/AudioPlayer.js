@@ -138,9 +138,7 @@ debugger;
 
 
 finishedPlaying(check){
-
-
-
+debugger;
 this.setState({finishedPlaying: check,
                 play: false,
                 audioFile:  this.props.playlist[0].src,
@@ -166,7 +164,7 @@ this.setState({finishedPlaying: check,
 
          });
 
-        console.log( this.props.playlist[i].src);
+
 
 
 
