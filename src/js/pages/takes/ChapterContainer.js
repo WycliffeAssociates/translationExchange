@@ -3,17 +3,15 @@ import axios from "axios";
 import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
-import { Audio, RecordBtn } from "translation-audio-player";
 import "css/takes.css";
 import ChapterHeader from "./components/ChapterHeader";
 import Footer from "./components/Footer";
 import Chunk from "./components/Chunk";
 import Error from "js/pages/404Error";
-let onClick;
 
 class ChapterContainer extends Component {
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 		this.state = {
 			loaded: false,
 			error: "",
@@ -109,7 +107,6 @@ class ChapterContainer extends Component {
 	}
 
 	patchTake(takeId, patch, success) {
-		console.log(patch);
 		axios
 			.patch(config.apiUrl + "takes/" + takeId + "/", patch)
 			.then(results => {

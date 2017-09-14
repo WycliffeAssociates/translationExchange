@@ -4,7 +4,6 @@ import CircularProgressbar from "react-circular-progressbar";
 import { Table, Icon } from "semantic-ui-react";
 import "css/chapters.css";
 import CheckingLevel from "./CheckingLevel";
-var bookTest;
 
 class ChapterList extends Component {
 	render() {
@@ -67,7 +66,7 @@ class ChapterList extends Component {
 	parseDate(date) {
 		var noon = "am";
 		var dateArr = date.split("T");
-		var date = dateArr[0];
+		date = dateArr[0];
 
 		var time = dateArr[1].split(".");
 		time = time[0].split(":");
