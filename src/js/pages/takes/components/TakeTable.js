@@ -47,7 +47,6 @@ class TakeTable extends Component {
 							updateChosenTakeForChunk={this.props.updateChosenTakeForChunk}
 							onClickSave={this.props.onClickSave}
 							ratingToGet={this.props.column}
-							playTake={this.props.playTake}
 							chunkNumber={this.props.chunkNumber}
 							mode={this.props.mode}
 							deleteComment={this.props.deleteComment}

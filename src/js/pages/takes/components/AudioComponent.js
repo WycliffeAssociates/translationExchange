@@ -31,7 +31,7 @@ class AudioComponent extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-    
+
 
       if(nextProps.multipleTakes){        // pause the audio on receiving new audio files, this helps
         this.setState({play:false});       // to do not make laggy the audioplayer
@@ -80,7 +80,7 @@ class AudioComponent extends Component {
                     width={this.props.width}
                     height={150}
                     autoPlay={true}
-                    playlist={file}
+                  //  playlist={file}
                     recordButton={() => {
                         this.onClick()
                     }}

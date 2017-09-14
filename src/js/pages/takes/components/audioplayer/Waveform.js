@@ -66,14 +66,11 @@ this.setState({finished:false, pos: 0});
 
   finishedPlaying() {
 
-    this.setState({pos: 0, looping: true, finished:true });
+    this.setState({pos: 0});
 
-
-
-     if(this.props.multipleTakes){
-    //     this.props.updateAudioPlayer({props: 'play', value: true});
-
-          }
+    if(!this.props.multipleTakes){
+           this.props.stopAudio();
+       }
 
 
   }
@@ -117,8 +114,8 @@ this.setState({finished:false, pos: 0});
 const mapStateToProps = state => {
 
 const{ play } = state.setAudioPlayerState;
-
-return{ play };
+const{ multipleTakes } = state.updatePlaylist;
+return{ play, multipleTakes };
 
 }
 

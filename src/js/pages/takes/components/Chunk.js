@@ -91,7 +91,6 @@ class Chunk extends Component {
 										onClickSave={this.props.onClickSave}
 										column={0}
 										PLAYLIST={onestar}
-										playTake={this.props.playTake}
 										chunkNumber={this.props.number}
 										deleteComment={this.props.deleteComment}
 										deleteButton={true}
@@ -110,7 +109,6 @@ class Chunk extends Component {
 										onClickSave={this.props.onClickSave}
 										column={1}
 										PLAYLIST={twostar}
-										playTake={this.props.playTake}
 										chunkNumber={this.props.number}
 										deleteComment={this.props.deleteComment}
 										active={this.props.active}
@@ -128,7 +126,6 @@ class Chunk extends Component {
 										onClickSave={this.props.onClickSave}
 										column={2}
 										PLAYLIST={threestar}
-										playTake={this.props.playTake}
 										chunkNumber={this.props.number}
 										deleteComment={this.props.deleteComment}
 										active={this.props.active}
@@ -146,7 +143,6 @@ class Chunk extends Component {
 										onClickSave={this.props.onClickSave}
 										column={3}
 										PLAYLIST={publish}
-										playTake={this.props.playTake}
 										chunkNumber={this.props.number}
 										deleteComment={this.props.deleteComment}
 										active={this.props.active}
@@ -159,7 +155,6 @@ class Chunk extends Component {
 									onClickSave={this.props.onClickSave}
 									column={0}
 									PLAYLIST={onestar}
-									playTake={this.props.playTake}
 									chunkNumber={this.props.number}
 									mode={this.props.mode}
 									chunkId={this.props.id}

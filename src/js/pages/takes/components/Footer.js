@@ -109,10 +109,10 @@ componentDidUpdate(){
         let multipleTakes = false;
         let playList = this.props.currentPlaylist;
 
-        if( this.createArray().length > 0){
-            //multipleTakes = true;
+        if( this.createArray().length > 1){
+
             playList = this.createListenPlaylist();
-           //this.props.updateAudioPlayer({props: 'multipleTakes', value: true});
+            debugger;
          }
 
 
@@ -123,7 +123,7 @@ componentDidUpdate(){
             <div className="footerStyle" style={{width:'100%'}}>
               {this.createArray().length > 0
                   ? <div style={{width:'100%', backgroundColor:'transparent', height: 20 }}>
-                      {/* <Label pointing="right" size="huge" basic color="black">Stitched takes</Label> */}
+
 
 
 
@@ -149,25 +149,12 @@ componentDidUpdate(){
 
                             <div style={{width:'100%'}}>
                                 <AudioComponent
-
                                     playlist={playList}
-                                    width={500}
-                                    loop={this.props.audioLoop}
-                                    markers={this.props.markers}
-                                    showMarkers={true}
-                                    //multipleTakes={multipleTakes}
                                 />
                             </div>
                           </Menu.Item>
                         : ""
                     }
-
-
-                    {/*
-                    <Menu.Item>
-                        {this.createListenPlaylist()}
-                    </Menu.Item>
-                    */}
 
 
                 </Menu>

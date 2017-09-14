@@ -109,9 +109,9 @@ callMarker() {
   const markerArray = [];
   // console.log('Timeline props', this.props.markers);
   // console.log('local props', markerObj.markers);
-     let receivedMarkerObject = this.props.markers;
+     let receivedMarkerObject = this.props.playlist[0].markers;
 
-
+debugger;
 
    if(this.props.multipleTakes){
    receivedMarkerObject = this.state.markers;
@@ -134,6 +134,8 @@ callMarker() {
       markerArray
   );
 }
+
+
 
 finishedPlaying(check){
 
@@ -291,8 +293,9 @@ const mapStateToProps = state => {
 
 
 const{ play } = state.setAudioPlayerState;
+const{ playlist } = state.updatePlaylist;
 
-return{play };
+return{play, playlist };
 
 };
 

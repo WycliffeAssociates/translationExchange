@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
+import {bindActionCreators} from 'redux';
+import {updateMode, updatePlaylist} from './../../actions';
 import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
@@ -27,11 +29,6 @@ class ChapterContainer extends Component {
 			query: "",
 			currentPlaylist: [],
 			active: false,
-			audioLoop: false,
-			markers: [],
-			author:'',
-			date:'',
-			takeNum:''
 		};
 	}
 
@@ -43,6 +40,10 @@ class ChapterContainer extends Component {
 		var query = QueryString.parse(this.props.location.search);
 		this.setState({ error: "" });
 		axios.post(config.apiUrl + "get_project_takes/", query).then(results => {
+
+    this.props.updateMode(results.data.project.mode);             //used in take to display the modem, (my assumptions are that the modes are chunk or verse)
+
+
 			this.setState({
 				loaded: true,
 				chunks: results.data.chunks,
@@ -363,55 +364,18 @@ class ChapterContainer extends Component {
 	onSourceClicked(startv) {
 		let sourceLoc = this.getSourceAudioLocationForChunk(startv);
 
-		let playlist = [
+		let sourceAudio = [
 			{
 				src: config.streamingUrl + sourceLoc,
 				name: this.state.project.mode + " " + startv + " (source)"
 			}
 		];
-		this.setState({
-			currentPlaylist: playlist
-		});
+
+   this.props.updatePlaylist(sourceAudio);
+
 	}
 
-	playTake(takeLoc, takeNum, startv, author, date, markers) {
-		let playlist = [
-			{
-				src: config.streamingUrl + takeLoc,
-				name:
-					"take " +
-					takeNum +
-					", " +
-					this.state.project.mode +
-					" " +
-					startv +
-					" (" +
-					author +
-					" on " +
-					date +
-					")"
-			}
-		];
 
-
-		this.setState({
-			currentPlaylist: playlist,
-			audioLoop: false,
-			markers: markers,
-			author: author,
-			date: date,
-			takeNum: takeNum
-
-		});
-	}
-
-	playPlaylist(playlist) {
-
-		this.setState({
-			currentPlaylist: playlist,
-			audioLoop: true
-		});
-	}
 
 	/*
      Rendering functions
@@ -456,14 +420,9 @@ class ChapterContainer extends Component {
 							<Footer
 								mode={this.state.project.mode}
 								listenList={this.state.listenList}
-								currentPlaylist={this.state.currentPlaylist}
-								playPlaylist={this.playPlaylist.bind(this)}
-								playTake={this.playTake.bind(this)}
-								audioLoop={this.state.audioLoop}
+								currentPlaylist={this.props.playlist}            //playlist from redux
 								markers={this.state.markers}
-								author={this.state.author}
-								date={this.state.date}
-								takeNum= {this.state.takeNum}
+
 							/>
 						</div>
 					</LoadingDisplay>
@@ -496,7 +455,6 @@ class ChapterContainer extends Component {
 					language={this.state.language.name}
 					chunks={this.state.chunks}
 					listenList={this.state.listenList}
-					playTake={this.playTake.bind(this)}
 					onSourceClicked={this.onSourceClicked.bind(this)}
 					active={this.state.active}
 				/>
@@ -505,9 +463,20 @@ class ChapterContainer extends Component {
 	}
 }
 
+const mapStateToProps = state => {
+
+const{ playlist } = state.updatePlaylist;
+return{ playlist };
+
+}
+
+const mapDispatchToProps = dispatch => {
+
+  return bindActionCreators({updateMode, updatePlaylist}, dispatch);
+
+};
 
 
 
 
-
-export default ChapterContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(ChapterContainer);
