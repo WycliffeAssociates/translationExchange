@@ -20,7 +20,8 @@ class Take extends Component {
 			isToggleOn: true,
 			addButtonIcon: "plus",
 			showMarkers: false,
-			showMarkersColor: ""
+			showMarkersColor: "",
+			playlist:[]
 		};
 		// This binding is necessary to make `this` work in the callback
 		this.handleClick = this.handleClick.bind(this);
@@ -31,19 +32,16 @@ class Take extends Component {
 		this.setState({ isToggleOn: !this.state.isToggleOn });
 	}
 
+	toggleStitchButton(){
+
+
+	}
+
 	addToListen() {
-		//this.props.addToListenList(this.props);
+		this.toggleStitchButton();
 
 
-		if (this.state.addButtonIcon !== "plus") {
-			this.setState({
-				addButtonIcon: "plus"
-			});
-		} else {
-			this.setState({
-				addButtonIcon: "minus"
-			});
-		}
+
 	}
 
 	moveLeft() {
@@ -64,72 +62,55 @@ class Take extends Component {
 		}
 	}
 
+getTake(){
+	const takeLoc = this.props.take.location;
+	const takeNum = this.props.count;
+	const startv = this.props.chunkNumber;
+	const author = this.props.author.name;
+	const date = this.parseDate(this.props.take.date_modified);
+	const markers = this.props.take.markers;
 
-	playTakeRedux() {
+	let take = [{
+		 src: config.streamingUrl + takeLoc,
+		 markers: markers,
+		 name: `take ${takeNum}, ${this.props.mode} ${startv}  (${author} on ${date})`
+	 }];
 
-		const takeLoc = this.props.take.location;
-		const takeNum = this.props.count;
-		const startv = this.props.chunkNumber;
-		const author = this.props.author.name;
-		const date = this.parseDate(this.props.take.date_modified);
-		const markers = this.props.take.markers;
+	 return take;
+}
 
-		let take = [{
-			 src: config.streamingUrl + takeLoc,
-			 markers: markers,
-			 name:
-				 "take " +
-				 takeNum +
-				 ", " +
-				 this.props.mode +
-				 " " +
-				 startv +
-				 " (" +
-				 author +
-				 " on " +
-				 date +
-				 ")"
-		 }];
+	playTakeFromCard() {
 
-		  this.props.addToPlaylist(take);   // rename to addToPlaylist
+      const take = this.getTake();
+
+		  this.props.addToPlaylist(take);
 
 
 
 	}
 
 
+
+
 	addToPlaylist() {
 
-		const takeLoc = this.props.take.location;
-		const takeNum = this.props.count;
-		const startv = this.props.chunkNumber;
-		const author = this.props.author.name;
-		const date = this.parseDate(this.props.take.date_modified);
-		const markers = this.props.take.markers;
+  const take = this.getTake();
+
+	if (this.state.addButtonIcon !== "plus") {
+
+			this.setState({addButtonIcon: "plus"});
 
 
-	 let SingleTakePlaylist = [
-			{
-				src: config.streamingUrl + takeLoc,
-				markers: markers,
-				name:
-					"take " +
-					takeNum +
-					", " +
-					this.props.mode +
-					" " +
-					startv +
-					" (" +
-					author +
-					" on " +
-					date +
-					")"
-			}
-		];
+		} else {
+
+
+			this.setState({addButtonIcon: "minus"});
+		}
 
 
 
-		this.props.updatePlaylist(SingleTakePlaylist);
+		this.props.addToPlaylist(take);
+
 
 
 	}
@@ -177,7 +158,7 @@ class Take extends Component {
 							<Grid.Row className="centerPlayButton">
 								<br />
 								<TakeListenButton
-									onClick={() => { this.playTakeRedux(); }
+									onClick={() => { this.playTakeFromCard(); }
 
 									}
 								/>
