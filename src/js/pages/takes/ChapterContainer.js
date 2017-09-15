@@ -327,8 +327,7 @@ class ChapterContainer extends Component {
 		var id = props.take.id;
 
 		for (let i = 0; i < newArr.length; i++) {
-			const print =  newArr[i].props.take.id;
-			debugger;
+
 			if (newArr[i].props.take.id === id) {
 				newArr.splice(i, 1);
 				this.setState({ listenList: newArr });

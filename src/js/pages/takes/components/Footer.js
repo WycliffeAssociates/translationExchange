@@ -36,8 +36,7 @@ componentWillReceiveProps(nextProps){
 
 
     createArray() {
-            const print = this.props.listenList;
-            debugger;
+
 
         if (this.props.listenList.length > 0) {
             var takeList = [];
@@ -123,8 +122,6 @@ componentWillReceiveProps(nextProps){
                                   {this.createArray().map((i) => {
                                       return(
 
-
-
                                            <Button inverted color='blue'>{i}</Button>
 
 
@@ -137,7 +134,7 @@ componentWillReceiveProps(nextProps){
                   : ""
               }
                 <Menu inverted secondary>
-                    {this.props.currentPlaylist.length > 0
+                    {this.props.playlist.length > 0
                         ? <Menu.Item style={{width:'100%'}}>
 
                             <div style={{width:'100%'}}>
@@ -237,9 +234,16 @@ componentWillReceiveProps(nextProps){
 
 
 
+const mapStateToProps = state => {
+
+const{ mode, playlist } = state.updatePlaylist;
+
+return{ mode, playlist };
+
+}
 
 
 
 
 
-export default Footer;
+export default connect(mapStateToProps)(Footer);

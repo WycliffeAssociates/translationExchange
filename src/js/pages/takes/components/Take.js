@@ -59,11 +59,11 @@ getTakeInfo(){
 	const date = this.parseDate(this.props.take.date_modified);
 	const markers = this.props.take.markers;
 
-	let take = [{
+	let take = {
 		 src: config.streamingUrl + takeLoc,
 		 markers: markers,
 		 name: `take ${takeNum}, ${this.props.mode} ${startv}  (${author} on ${date})`
-	 }];
+	 };
 
 	 return take;
 }
@@ -72,59 +72,29 @@ getTakeInfo(){
 
       const take = this.getTakeInfo();
 		  this.props.addToPlaylist(take);
-			this.setState({
-				listenList: take
-			});
+
 
 	}
 
-
-	addToListenList(props) {
-
-		var newArr = this.state.listenList;
-		var id = props.take.id;
-
-		for (let i = 0; i < newArr.length; i++) {
-			debugger;
-			if (newArr[i].props.take.id === id) {
-				newArr.splice(i, 1);
-				this.setState({ listenList: newArr });
-				return "";
-			}
-		}
-
-		// //find the chunk that this take was from, and add chunk info
-		// let chunk = this.state.chunks.find(chunk => {
-		// 	return chunk.takes.find(take => take.take.id === id);
-		// });
-		let newListenItem = {
-			props: props,
-			count: props.count,
-			mode: props.mode
-		};
-
-		newArr.push(newListenItem);
-		this.setState({
-			listenList: newArr
-		});
-		debugger;
-	}
 
 	addToPlaylist() {
 
 		this.props.addToListenList(this.props);
 		//this.addToListenList(this.props);
 
-  //const take = this.getTakeInfo();
+     const take = this.getTakeInfo();
 
 	if (this.state.addButtonIcon !== "plus") {
+
 
 
 			this.setState({addButtonIcon: "plus"});
 
 		} else {
-
 			this.setState({addButtonIcon: "minus"});
+			this.props.addToPlaylist(take);
+
+			debugger;
 
 
 
@@ -199,16 +169,6 @@ getTakeInfo(){
 								/>
 							</Grid.Row>
 						</Grid.Column>
-
-						{/* <Grid.Column verticalAlign="middle">
-							{this.props.take.is_publish
-								? ""
-								: <Icon
-										className="hoverButton"
-										name="chevron right"
-										onClick={this.moveRight.bind(this)}
-									/>}
-						</Grid.Column> */}
 					</Grid.Row>
 				</Grid>
 			</Segment>
@@ -298,7 +258,7 @@ Take.propTypes = {
 
 const mapStateToProps = state => {
 
-const{ mode } = state.updatePlaylist;
+const{ mode, playlist } = state.updatePlaylist;
 
 return{ mode };
 
