@@ -8,7 +8,7 @@ import TakeListenButton from "./AddTake";
 import "css/takes.css";
 import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
-import {addToPlaylist} from './../../../actions';
+import {addToPlaylist, playTake} from './../../../actions';
 
 
 var listenCounter = 0;
@@ -71,7 +71,7 @@ getTakeInfo(){
 	playTakeFromCard() {
 
       const take = this.getTakeInfo();
-		  this.props.addToPlaylist(take);
+		  this.props.playTake(take);
 
 
 	}
@@ -94,7 +94,7 @@ getTakeInfo(){
 			this.setState({addButtonIcon: "minus"});
 			this.props.addToPlaylist(take);
 
-			debugger;
+			
 
 
 
@@ -266,7 +266,7 @@ return{ mode };
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({addToPlaylist}, dispatch);
+  return bindActionCreators({addToPlaylist, playTake}, dispatch);
 
 };
 

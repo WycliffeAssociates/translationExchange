@@ -1,4 +1,4 @@
-import { UPDATE_PLAYLIST , MULTIPLE_TAKES, UPDATE_MODE } from '../actions/types';
+import { UPDATE_PLAYLIST , MULTIPLE_TAKES, UPDATE_MODE, PLAY_TAKE } from '../actions/types';
 
 const INITIAL_STATE = { playlist: [],
                         mode: '',
@@ -9,11 +9,17 @@ export default (state = INITIAL_STATE, action) => {
 
     switch (action.type){
 
-        case UPDATE_PLAYLIST:
+        case PLAY_TAKE:
           return {
             ...state,
-            playlist: [...state.playlist, action.playlist]
+            playlist: [action.take]
           };
+
+          case UPDATE_PLAYLIST:
+            return {
+              ...state,
+              playlist: [...state.playlist, action.playlist]
+            };
 
         case UPDATE_MODE:
             return {
@@ -21,10 +27,10 @@ export default (state = INITIAL_STATE, action) => {
               mode: action.mode
             };
 
-        case UPDATE_MODE:
+        case MULTIPLE_TAKES:
              return {
                ...state,
-              mode: action.mode
+              mode: action.multipleTakes
             };
 
 
