@@ -1,9 +1,10 @@
 import axios from "axios";
-import config from "config/config";
+import config from "../../config/config";
 import QueryString from "query-string";
+
 export function fetchRecentProjects() {
 	return function(dispatch) {
-		axios
+		return axios
 			.post(config.apiUrl + "all_projects/", {})
 			.then(response => {
 				dispatch({

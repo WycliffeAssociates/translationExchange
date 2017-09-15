@@ -7,43 +7,16 @@ import axios from "axios";
 import config from "config/config";
 import QueryString from "query-string";
 import { connect } from "react-redux";
-import { fetchRecentProjects } from "../../actions/home-recent-projects-actions";
+import { fetchRecentProjects } from "../../actions/HomeRecentProjectAction";
 class Home extends Component {
-
-	constructor() {
-		super();
-		this.state = {
-			projects: []
-		};
-	}
 	componentDidMount() {
-		this.getRecentProjects();
-		//this.props.dispatch(fetchRecentProjects());
-	}
-	getRecentProjects() {
-		axios
-			.post(config.apiUrl + "all_projects/", {})
-			.then(results => {
-				this.setState({ projects: results.data });
-				this.limitProjects();
-			})
-			.catch(exception => {
-				this.setState({ error: exception });
-			});
-	}
-
-	//limits the number of projects to show
-	limitProjects() {
-		if (this.state.projects.length > 4) {
-			this.setState({
-				projects: this.state.projects.splice(0, 5)
-			});
-		}
+		this.props.dispatch(fetchRecentProjects());
 	}
 
 	navigateToProject(language, book, version) {
 		//make the query for the right project, using our current query as a base
-		var projectQuery = QueryString.parse(this.state.currentProjectQuery);
+		var projectQuery = QueryString.parse(this.props.homeRecentProjects);
+
 		Object.assign(projectQuery, {
 			language: language,
 			book: book,
@@ -57,6 +30,7 @@ class Home extends Component {
 		});
 	}
 	render() {
+		const { homeRecentProjects } = this.props;
 		return (
 			<Container fluid className="background">
 				<Container fluid>
@@ -72,7 +46,9 @@ class Home extends Component {
 								</h2>
 							</Grid.Row>
 							<Divider />
-							{this.state.projects.map(this.createListItem.bind(this))}
+							{homeRecentProjects.map((project, i) => {
+								return this.createListItem(project, i);
+							})}
 						</Grid.Column>
 					</Grid>
 				</Container>
@@ -80,25 +56,26 @@ class Home extends Component {
 		);
 	}
 
-	createListItem(projects) {
-		var navigateToProject = function() {
-			this.navigateToProject(
-				projects.language.slug,
-				projects.book.slug,
-				projects.version
-			);
-		}.bind(this);
-
-		var str = "";
-		str += projects.book.name + " ";
-		str += projects.language.name + " ";
-		str += projects.version;
-
+	createListItem(project, key) {
 		return (
 			<div>
-				<Grid.Row divided onClick={navigateToProject} className="hoverButton">
+				<Grid.Row
+					divided
+					className="hoverButton"
+					key={key}
+					onClick={() =>
+						this.navigateToProject(
+							project.language.slug,
+							project.book.slug,
+							project.version
+						)}
+				>
 					<h4>
-						<font color="white">{str}</font>
+						<font color="white">
+							{project.book.name + " "}
+							{project.language.name + " "}
+							{project.version}
+						</font>
 					</h4>
 				</Grid.Row>
 			</div>
@@ -107,7 +84,7 @@ class Home extends Component {
 }
 function mapStateToProps(state) {
 	return {
-		homeRecentProjects: state.props
+		homeRecentProjects: state.homeRecentProjects
 	};
 }
 export default connect(mapStateToProps)(Home);
