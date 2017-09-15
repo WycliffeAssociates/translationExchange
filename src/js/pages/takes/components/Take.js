@@ -32,7 +32,7 @@ class Take extends Component {
 	}
 
 	addToListen() {
-		this.props.addToListenList(this.props);
+		//this.props.addToListenList(this.props);
 
 
 		if (this.state.addButtonIcon !== "plus") {
@@ -74,6 +74,58 @@ class Take extends Component {
 		const date = this.parseDate(this.props.take.date_modified);
 		const markers = this.props.take.markers;
 
+	//  let SingleTakePlaylist = [
+	// 		{
+	// 			src: config.streamingUrl + takeLoc,
+	// 			markers: markers,
+	// 			name:
+	// 				"take " +
+	// 				takeNum +
+	// 				", " +
+	// 				this.props.mode +
+	// 				" " +
+	// 				startv +
+	// 				" (" +
+	// 				author +
+	// 				" on " +
+	// 				date +
+	// 				")"
+	// 		}
+	// 	];
+		let take = [{
+			 src: config.streamingUrl + takeLoc,
+			 markers: markers,
+			 name:
+				 "take " +
+				 takeNum +
+				 ", " +
+				 this.props.mode +
+				 " " +
+				 startv +
+				 " (" +
+				 author +
+				 " on " +
+				 date +
+				 ")"
+		 }];
+
+		  this.props.updatePlaylist(take);   // rename to addToPlaylist
+
+     debugger;
+
+	}
+
+
+	addToPlaylist() {
+
+		const takeLoc = this.props.take.location;
+		const takeNum = this.props.count;
+		const startv = this.props.chunkNumber;
+		const author = this.props.author.name;
+		const date = this.parseDate(this.props.take.date_modified);
+		const markers = this.props.take.markers;
+
+
 	 let SingleTakePlaylist = [
 			{
 				src: config.streamingUrl + takeLoc,
@@ -93,7 +145,9 @@ class Take extends Component {
 			}
 		];
 
-		 this.props.updatePlaylist(SingleTakePlaylist);
+
+
+		this.props.updatePlaylist(SingleTakePlaylist);
 
 
 	}
@@ -111,15 +165,6 @@ class Take extends Component {
 			<Segment>
 				<Grid textAlign="left">
 					<Grid.Row>
-						{/* <Grid.Column verticalAlign="middle">
-							{this.props.take.rating > 1
-								// ? <Icon
-								// 		className="hoverButton"
-								// 		name="chevron left"
-								// 		//onClick={this.moveLeft.bind(this)}
-								// 	/>
-								// : ""}
-						</Grid.Column> */}
 						<Grid.Column width={12}>
 							<Grid.Row verticalAlign="top">
 								<Grid>
@@ -137,7 +182,7 @@ class Take extends Component {
 									</Grid.Column>
 									<Grid.Column floated="right">
 										<StitchTakesButton
-											onClick={this.addToListen.bind(this)}
+											onClick={()=> this.addToPlaylist()}
 											icon={this.state.addButtonIcon}
 										/>
 									</Grid.Column>

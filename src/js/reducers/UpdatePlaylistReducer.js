@@ -12,7 +12,7 @@ export default (state = INITIAL_STATE, action) => {
         case UPDATE_PLAYLIST:
           return {
             ...state,
-            playlist: action.playlist
+            playlist: action.take
           };
 
         case UPDATE_MODE:
