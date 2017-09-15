@@ -32,18 +32,6 @@ class Take extends Component {
 		this.setState({ isToggleOn: !this.state.isToggleOn });
 	}
 
-	toggleStitchButton(){
-
-
-	}
-
-	addToListen() {
-		this.toggleStitchButton();
-
-
-
-	}
-
 	moveLeft() {
 		if (this.props.take.is_publish) {
 			this.props.onMarkedForExportToggled();
@@ -62,7 +50,7 @@ class Take extends Component {
 		}
 	}
 
-getTake(){
+getTakeInfo(){
 	const takeLoc = this.props.take.location;
 	const takeNum = this.props.count;
 	const startv = this.props.chunkNumber;
@@ -81,11 +69,8 @@ getTake(){
 
 	playTakeFromCard() {
 
-      const take = this.getTake();
-
+      const take = this.getTakeInfo();
 		  this.props.addToPlaylist(take);
-
-
 
 	}
 
@@ -94,22 +79,24 @@ getTake(){
 
 	addToPlaylist() {
 
-  const take = this.getTake();
+  const take = this.getTakeInfo();
 
 	if (this.state.addButtonIcon !== "plus") {
 
-			this.setState({addButtonIcon: "plus"});
 
+			this.setState({addButtonIcon: "plus"});
 
 		} else {
 
+			this.setState({addButtonIcon: "minus", playList: [...this.state.playlist, take]});
+			
+     debugger;
 
-			this.setState({addButtonIcon: "minus"});
 		}
 
 
 
-		this.props.addToPlaylist(take);
+
 
 
 
