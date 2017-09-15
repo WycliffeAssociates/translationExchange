@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
-import {bindActionCreators} from 'redux';
 import MarkAsDone from "./MarkAsDone";
 import CommentContainer from "./comments/PinkButton"
 import {Menu, Container, Card, Button, Icon, Label, Popup, Grid, Divider} from 'semantic-ui-react';
@@ -8,7 +7,6 @@ import AudioComponent from "./AudioComponent"
 import config from 'config/config'
 import 'css/takes.css'
 import TakeListenButton from './AddTake'
-import {updatePlaylist} from './../../../actions';
 
 
 class Footer extends Component {
@@ -34,13 +32,22 @@ componentWillReceiveProps(nextProps){
 
 }
 
+componentDidUpdate(){
+
+    //  const length=  this.createArray().length;
+    //  this.props.updateAudioPlayer({props: 'playlistLenght', value: length});            // update playlist length
+
+
+
+}
+
 
 
     createArray() {
 
-        if (this.props.playlist > 0) {
+        if (this.props.listenList.length > 0) {
             var takeList = [];
-            this.props.playlist.map((i) => {
+            this.props.listenList.map((i) => {
                 //takeList[takeList.length] = i.mode + ' ' + i.chunk.startv + ' take ' + i.count
                   takeList[takeList.length] = i.mode + ' ' + i.chunk.startv
             })
@@ -79,7 +86,7 @@ componentWillReceiveProps(nextProps){
             })
 
 
-           this.props.updatePlaylist(playlist);
+
 
             return(playlist);
 
@@ -100,7 +107,7 @@ componentWillReceiveProps(nextProps){
         var icon = <Icon name="plus" size="big" color="blue"/>
         var button = <Button icon={icon} inverted color="blue"/>
         let multipleTakes = false;
-        let playList = this.props.playlist;
+        let playList = this.props.currentPlaylist;
 
         if( this.createArray().length > 1){
 
@@ -136,7 +143,7 @@ componentWillReceiveProps(nextProps){
                   : ""
               }
                 <Menu inverted secondary>
-                    {this.props.playlist.length > 0
+                    {this.props.currentPlaylist.length > 0
                         ? <Menu.Item style={{width:'100%'}}>
 
                             <div style={{width:'100%'}}>
@@ -234,19 +241,11 @@ componentWillReceiveProps(nextProps){
 }
 
 
-const mapStateToProps = state => {
-
-const{ playlist } = state.updatePlaylist;
-return{ playlist };
-
-}
-
-const mapDispatchToProps = dispatch => {
-
-  return bindActionCreators({updatePlaylist}, dispatch);
-
-};
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Footer);
+
+
+
+
+export default Footer;

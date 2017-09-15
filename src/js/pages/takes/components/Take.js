@@ -8,7 +8,7 @@ import TakeListenButton from "./AddTake";
 import "css/takes.css";
 import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
-import {updatePlaylist} from './../../../actions';
+import {addToPlaylist} from './../../../actions';
 
 
 var listenCounter = 0;
@@ -74,24 +74,6 @@ class Take extends Component {
 		const date = this.parseDate(this.props.take.date_modified);
 		const markers = this.props.take.markers;
 
-	//  let SingleTakePlaylist = [
-	// 		{
-	// 			src: config.streamingUrl + takeLoc,
-	// 			markers: markers,
-	// 			name:
-	// 				"take " +
-	// 				takeNum +
-	// 				", " +
-	// 				this.props.mode +
-	// 				" " +
-	// 				startv +
-	// 				" (" +
-	// 				author +
-	// 				" on " +
-	// 				date +
-	// 				")"
-	// 		}
-	// 	];
 		let take = [{
 			 src: config.streamingUrl + takeLoc,
 			 markers: markers,
@@ -109,9 +91,9 @@ class Take extends Component {
 				 ")"
 		 }];
 
-		  this.props.updatePlaylist(take);   // rename to addToPlaylist
+		  this.props.addToPlaylist(take);   // rename to addToPlaylist
 
-     debugger;
+
 
 	}
 
@@ -320,7 +302,7 @@ return{ mode };
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({updatePlaylist}, dispatch);
+  return bindActionCreators({addToPlaylist}, dispatch);
 
 };
 

@@ -111,7 +111,7 @@ callMarker() {
   // console.log('local props', markerObj.markers);
      let receivedMarkerObject = this.props.playlist[0].markers;
 
-debugger;
+
 
    if(this.props.multipleTakes){
    receivedMarkerObject = this.state.markers;
@@ -138,7 +138,7 @@ debugger;
 
 
 finishedPlaying(check){
-debugger;
+
 this.setState({finishedPlaying: check,
                 play: false,
                 audioFile:  this.props.playlist[0].src,

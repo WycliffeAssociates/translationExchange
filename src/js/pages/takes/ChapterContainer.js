@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
-import {updateMode, updatePlaylist} from './../../actions';
+import {updateMode, addToPlaylist} from './../../actions';
 import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
@@ -371,7 +371,7 @@ class ChapterContainer extends Component {
 			}
 		];
 
-   this.props.updatePlaylist(sourceAudio);
+   this.props.addToPlaylist(sourceAudio);
 
 	}
 
@@ -472,7 +472,7 @@ return{ playlist };
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({updateMode, updatePlaylist}, dispatch);
+  return bindActionCreators({updateMode, addToPlaylist}, dispatch);
 
 };
 

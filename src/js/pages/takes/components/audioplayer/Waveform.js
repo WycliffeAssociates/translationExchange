@@ -42,7 +42,7 @@ class WaveForm extends Component {
 
 
   finishedPlaying(check){
-  debugger;
+  
   this.setState({finishedPlaying: check,
                   play: false,
                   audioFile:  this.props.playlist[0].src,
@@ -83,7 +83,7 @@ class WaveForm extends Component {
 
   duration(e) {
     this.props.durationTime(e.wavesurfer.getDuration());
-    
+
 
 
     //  this.props.updateAudioPlayer({props: 'play', value: true});

@@ -1,7 +1,7 @@
 import { UPDATE_PLAYLIST, MULTIPLE_TAKES, UPDATE_MODE } from './types';
 
 
-export const updatePlaylist = (playlist) => {
+export const addToPlaylist = (playlist) => {
   return {
     type: UPDATE_PLAYLIST,
     playlist
