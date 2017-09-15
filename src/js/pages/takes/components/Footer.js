@@ -32,23 +32,17 @@ componentWillReceiveProps(nextProps){
 
 }
 
-componentDidUpdate(){
-
-    //  const length=  this.createArray().length;
-    //  this.props.updateAudioPlayer({props: 'playlistLenght', value: length});            // update playlist length
-
-
-
-}
 
 
 
     createArray() {
+            const print = this.props.listenList;
+            debugger;
 
         if (this.props.listenList.length > 0) {
             var takeList = [];
             this.props.listenList.map((i) => {
-                //takeList[takeList.length] = i.mode + ' ' + i.chunk.startv + ' take ' + i.count
+
                   takeList[takeList.length] = i.mode + ' ' + i.chunk.startv
             })
 

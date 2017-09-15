@@ -322,10 +322,13 @@ class ChapterContainer extends Component {
 	}
 
 	addToListenList(props) {
+
 		var newArr = this.state.listenList;
 		var id = props.take.id;
 
 		for (let i = 0; i < newArr.length; i++) {
+			const print =  newArr[i].props.take.id;
+			debugger;
 			if (newArr[i].props.take.id === id) {
 				newArr.splice(i, 1);
 				this.setState({ listenList: newArr });
@@ -348,6 +351,7 @@ class ChapterContainer extends Component {
 		this.setState({
 			listenList: newArr
 		});
+
 	}
 
 	getSourceAudioLocationForChunk(startv) {

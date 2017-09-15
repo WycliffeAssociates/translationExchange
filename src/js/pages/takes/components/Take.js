@@ -21,7 +21,8 @@ class Take extends Component {
 			addButtonIcon: "plus",
 			showMarkers: false,
 			showMarkersColor: "",
-			playlist:[]
+			playlist:[],
+			listenList: [],
 		};
 		// This binding is necessary to make `this` work in the callback
 		this.handleClick = this.handleClick.bind(this);
@@ -71,15 +72,50 @@ getTakeInfo(){
 
       const take = this.getTakeInfo();
 		  this.props.addToPlaylist(take);
+			this.setState({
+				listenList: take
+			});
 
 	}
 
 
+	addToListenList(props) {
 
+		var newArr = this.state.listenList;
+		var id = props.take.id;
+
+		for (let i = 0; i < newArr.length; i++) {
+			debugger;
+			if (newArr[i].props.take.id === id) {
+				newArr.splice(i, 1);
+				this.setState({ listenList: newArr });
+				return "";
+			}
+		}
+
+		// //find the chunk that this take was from, and add chunk info
+		// let chunk = this.state.chunks.find(chunk => {
+		// 	return chunk.takes.find(take => take.take.id === id);
+		// });
+		let newListenItem = {
+			props: props,
+			count: props.count,
+			mode: props.mode
+		};
+
+		newArr.push(newListenItem);
+		this.setState({
+			listenList: newArr
+		});
+		debugger;
+	}
 
 	addToPlaylist() {
 
-  const take = this.getTakeInfo();
+		this.props.addToListenList(this.props);
+		//this.addToListenList(this.props);
+
+  //const take = this.getTakeInfo();
 
 	if (this.state.addButtonIcon !== "plus") {
 
@@ -88,9 +124,9 @@ getTakeInfo(){
 
 		} else {
 
-			this.setState({addButtonIcon: "minus", playList: [...this.state.playlist, take]});
-			
-     debugger;
+			this.setState({addButtonIcon: "minus"});
+
+
 
 		}
 

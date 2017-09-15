@@ -2,7 +2,8 @@ import { UPDATE_PLAYLIST , MULTIPLE_TAKES, UPDATE_MODE } from '../actions/types'
 
 const INITIAL_STATE = { playlist: [],
                         mode: '',
-                        multipleTakes: false
+                        multipleTakes: false,
+                        listenList:[]
                       };
 
 export default (state = INITIAL_STATE, action) => {
