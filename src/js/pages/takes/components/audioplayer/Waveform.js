@@ -14,10 +14,9 @@ class WaveForm extends Component {
     this.state = {
       playing: false,
       pos: 0,
-      max: 0,
-      nextAudio: false,
-      looping: false,
-      finished: false
+      audioFile: '',
+      pointer: 1
+
     };
 
     this.handlePosChange = this.handlePosChange.bind(this);
@@ -29,8 +28,7 @@ class WaveForm extends Component {
 
   handlePosChange(e) {
     this.setState({
-      pos: e.originalArgs[0],
-      nextAudio:false,
+      pos: e.originalArgs[0]
     });
 
 
@@ -41,17 +39,16 @@ class WaveForm extends Component {
 
 
 
-  finishedPlaying(check){
-  
-  this.setState({finishedPlaying: check,
-                  play: false,
+  updateAudio(){
+
+  this.setState({
                   audioFile:  this.props.playlist[0].src,
                   audioName:  this.props.playlist[0].name
                                });
 
            let i = this.state.pointer;
 
-
+debugger;
      if(this.state.pointer === this.props.playlist.length){
       this.setState({play: false, pointer: 1, markers: this.props.playlist[0].markers});
 
@@ -104,8 +101,9 @@ this.setState({finished:false, pos: 0});
 
     if(!this.props.multipleTakes){
            this.props.stopAudio();
-       }
-
+       }else{
+     //this.updateAudio();
+   }
 
   }
 
@@ -148,8 +146,8 @@ this.setState({finished:false, pos: 0});
 const mapStateToProps = state => {
 
 const{ play } = state.setAudioPlayerState;
-const{ multipleTakes } = state.updatePlaylist;
-return{ play, multipleTakes };
+const{ multipleTakes, playlist } = state.updatePlaylist;
+return{ play, multipleTakes, playlist };
 
 }
 

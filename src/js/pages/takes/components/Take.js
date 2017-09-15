@@ -8,7 +8,7 @@ import TakeListenButton from "./AddTake";
 import "css/takes.css";
 import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
-import {addToPlaylist, playTake} from './../../../actions';
+import {addToPlaylist, playTake, multipleTakes} from './../../../actions';
 
 
 var listenCounter = 0;
@@ -79,7 +79,7 @@ getTakeInfo(){
 
 	addToPlaylist() {
 
-		this.props.addToListenList(this.props);
+		//this.props.addToListenList(this.props);
 		//this.addToListenList(this.props);
 
      const take = this.getTakeInfo();
@@ -94,7 +94,9 @@ getTakeInfo(){
 			this.setState({addButtonIcon: "minus"});
 			this.props.addToPlaylist(take);
 
-			
+			this.props.multipleTakes(true);         //used to check if there is a playlist so at the end of each take the audio keeps playing until
+                                              // it reaches the last one
+
 
 
 
@@ -266,7 +268,7 @@ return{ mode };
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({addToPlaylist, playTake}, dispatch);
+  return bindActionCreators({addToPlaylist, playTake, multipleTakes}, dispatch);
 
 };
 
