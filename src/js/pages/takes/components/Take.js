@@ -63,7 +63,8 @@ getTakeInfo(){
 	let take = {
 		 src: config.streamingUrl + takeLoc,
 		 markers: markers,
-		 name: `take ${takeNum}, ${this.props.mode} ${startv}  (${author} on ${date})`
+		 name: `take ${takeNum}, ${this.props.mode} ${startv}  (${author} on ${date})`,
+		 id: takeLoc
 	 };
 
 	 return take;
@@ -85,7 +86,7 @@ getTakeInfo(){
     console.log(index);
 		const playlistSrc = i.src;
 		if (playlistSrc === src){
-	
+
 			this.props.removeTakeFromPlaylist(index);
 		}
 	})
@@ -107,6 +108,11 @@ getTakeInfo(){
 				if (this.state.addButtonIcon !== "plus") {
 						this.setState({addButtonIcon: "plus"});
 						this.removeFromPlaylist();
+
+						if(this.props.playlist.length <1){
+							this.props.multipleTakes(false);
+							this.props.addToPlaylist(take);          // add the last take played to the playlist
+						}
 
 					}
 				else {
