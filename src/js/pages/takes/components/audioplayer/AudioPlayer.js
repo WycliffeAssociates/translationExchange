@@ -231,7 +231,6 @@ this.setState({markerClicked: statement});
             resetMarkerClicked={this.resetMarkerClicked}
             finishedPlaying = {this.finishedPlaying}
 
-            looping = {true}
             resetMarkerClicked = {this.resetMarkerClicked}                                                 // property to use when stiching takes
                                  />
             <div style={{marginTop: 5}}>{this.state.audioName}</div>

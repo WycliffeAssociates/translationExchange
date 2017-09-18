@@ -102,7 +102,8 @@ this.setState({finished:false, pos: 0});
     if(!this.props.multipleTakes){
            this.props.stopAudio();
        }else{
-     //this.updateAudio();
+         debugger;
+     this.updateAudio();
    }
 
   }

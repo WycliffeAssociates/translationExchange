@@ -4,6 +4,7 @@ import MarkAsDone from "./MarkAsDone";
 import CommentContainer from "./comments/PinkButton"
 import {Menu, Container, Card, Button, Icon, Label, Popup, Grid, Divider} from 'semantic-ui-react';
 import AudioComponent from "./AudioComponent"
+import AudioPlayer from './audioplayer/AudioPlayer'; // replace for audioComponent and verify that the waveform is updating
 import config from 'config/config'
 import 'css/takes.css'
 import TakeListenButton from './AddTake'
@@ -139,7 +140,7 @@ componentWillReceiveProps(nextProps){
 
                             <div style={{width:'100%'}}>
                                 <AudioComponent
-                                    playlist={playList}
+                                    //playlist={playList}
                                 />
                             </div>
                           </Menu.Item>

@@ -22,7 +22,7 @@ export const updateMode = (mode) => {                       // update mode, chun
   }
 };
 
-export const multipleTakes = (status) => {              
+export const multipleTakes = (status) => {
 
   return {
     type: MULTIPLE_TAKES,

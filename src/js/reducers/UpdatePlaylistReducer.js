@@ -30,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
         case MULTIPLE_TAKES:
              return {
                ...state,
-              mode: action.multipleTakes
+              multipleTakes: action.status
             };
 
 
