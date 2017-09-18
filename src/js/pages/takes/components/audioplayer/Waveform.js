@@ -43,9 +43,6 @@ class WaveForm extends Component {
     this.props.durationTime(e.wavesurfer.getDuration());
     this.setState({finished:false, pos: 0});
 
-
-
-
   }
 
 

@@ -49,7 +49,7 @@ constructor(props){
 
 componentWillReceiveProps(nextProps) {
 
-       if(!this.props.playlistMode){       // used to verify if the playlist mode is on, so it does not update everytime it receives a new prop
+       if(!this.state.looping){       // used to verify if the playlist mode is on, so it does not update everytime it receives a new prop
 
         this.setState({
          audioFile:  nextProps.playlist[0].src,
