@@ -80,7 +80,7 @@ getTakeInfo(){
 
 
 	addToPlaylist() {
-		
+
 		const take = this.getTakeInfo();
 
 		if(!this.props.playlistMode){                        // the first time called the function playlist mode is false so we clear the playlist info from the single take mode

@@ -29,8 +29,8 @@ constructor(props){
                 audioName:'',
                 nextAudio: false,
                 pointer: 1,
-                markers: true                             // used for unit testing comment when finished and uncomment bottom
-                // markers: this.props.markers
+                markers: this.props.markers,
+                looping: false                   // state used to keep playing takes when playlist mode is on
 
 
 
@@ -49,14 +49,15 @@ constructor(props){
 
 componentWillReceiveProps(nextProps) {
 
-  const obj = nextProps.playlist;
+       if(!this.props.playlistMode){       // used to verify if the playlist mode is on, so it does not update everytime it receives a new prop
 
- this.setState({
-  play:      false,
-  audioFile:  nextProps.playlist[0].src,
-  audioName:  nextProps.playlist[0].name,
-  markers:    nextProps.playlist[0].markers
-  });
+        this.setState({
+         audioFile:  nextProps.playlist[0].src,
+         audioName:  nextProps.playlist[0].name,
+         markers:    nextProps.playlist[0].markers
+         });
+
+    }
 
 
 }
@@ -74,10 +75,16 @@ this.setState({play: !this.state.play, finishedPlaying: false});
 updateTime(updateTime) {
   this.setState({updateTime});
 }
+
 durationTime(durationTime) {
 
-
 this.setState({ durationTime});
+
+if(this.state.looping){
+  this.props.playAudio();
+}
+
+
 
 }
 initialWidth(initialWidth){
@@ -108,7 +115,7 @@ callMarker() {
 
 
 
-   if(this.props.multipleTakes){
+   if(this.props.playlistMode){
    receivedMarkerObject = this.state.markers;
 
    }
@@ -134,39 +141,33 @@ callMarker() {
 
 finishedPlaying(){
 
-
-
 let i = this.state.pointer;
 const playlistLength = this.props.playlist.length;
+//debugger;
+if(i < playlistLength){
+      this.setState({
+       audioFile:  this.props.playlist[i].src,
+       audioName:  this.props.playlist[i].name,
+       markers: this.props.playlist[i].markers,
+       pointer : this.state.pointer + 1,
+       looping: true
+
+       });
 
 
-   if(i !== 1 && i === playlistLength ){
-    this.setState({play: false, pointer: 1, markers: this.props.playlist[1].markers});
+}
+else{
+      this.setState({
+       audioFile:  this.props.playlist[0].src,
+       audioName:  this.props.playlist[0].name,
+       markers: this.props.playlist[0].markers,
+       pointer : 1,
+       looping:false
 
-   }
+       });
 
-   debugger;
-
-      if(this.props.playlist.length > 1 && i <  this.props.playlist.length  ){
-
-        this.setState({
-         play:      true,
-         audioFile:  this.props.playlist[i].src,
-         audioName:  this.props.playlist[i].name,
-         markers: this.props.playlist[i].markers,
-         pointer : this.state.pointer + 1
-
-         });
-
-
-
-     this.props.playAudio(); // we wait until the new source file is loaded in to the audioplayer and then we procced to play it, otherwise waveform with crash
-
-
-       }
-
-
-
+       this.props.stopAudio();
+  }
 
 
 }
@@ -185,11 +186,10 @@ this.setState({markerClicked: statement});
 
 
 
-  let src = ""
+  let src = this.props.playlist[0].src;
 
-  if(this.state.audioFile !== null){
-
-    src = this.state.audioFile;
+  if(this.props.playlistMode ){
+     src = this.state.audioFile;
   }
 
 
@@ -284,9 +284,9 @@ const mapStateToProps = state => {
 
 
 const{ play } = state.setAudioPlayerState;
-const{ playlist } = state.updatePlaylist;
+const{ playlist, playlistMode } = state.updatePlaylist;
 
-return{play, playlist };
+return{play, playlist, playlistMode };
 
 };
 
