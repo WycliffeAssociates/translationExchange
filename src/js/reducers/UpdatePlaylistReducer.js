@@ -41,9 +41,10 @@ export default (state = INITIAL_STATE, action) => {
               };
 
         case REMOVE_TAKE_FROM_PLAYLIST:
+           state.playlist.splice(action.index, 1);
             return {
                 ...state,
-              playlist: [...state.playlist.splice(action.index, 1)]
+              playlist: [...state.playlist]
               };
 
 

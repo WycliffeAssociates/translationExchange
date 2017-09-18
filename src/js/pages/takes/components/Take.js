@@ -85,7 +85,7 @@ getTakeInfo(){
     console.log(index);
 		const playlistSrc = i.src;
 		if (playlistSrc === src){
-			debugger; // action to delete an object
+	
 			this.props.removeTakeFromPlaylist(index);
 		}
 	})
