@@ -8,5 +8,4 @@ export default combineReducers({
 	setAudioPlayerState: AudioPlayerReducer,
 	homeRecentProjects: homeRecentProjects,
 	updatePlaylist: UpdatePlaylistReducer
-	//navigateToProject: navigateToProject
 });

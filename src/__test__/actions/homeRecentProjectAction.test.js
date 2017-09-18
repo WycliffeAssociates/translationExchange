@@ -1,8 +1,3 @@
-// it returns a function
-// the returned function returns a promise
-// mock axios that has mock .post()
-// axios.post() is called with mock.apiUrl + "all_projects"
-// // axios.post() is called once
 // the returned function can be called with a dispatch (mock)
 
 import { fetchRecentProjects } from "../../js/actions/HomeRecentProjectAction";
