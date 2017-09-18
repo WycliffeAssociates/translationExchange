@@ -8,7 +8,7 @@ import TakeListenButton from "./AddTake";
 import "css/takes.css";
 import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
-import {addToPlaylist, playTake, multipleTakes, clearPlaylist} from './../../../actions';
+import {addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist} from './../../../actions';
 
 
 var listenCounter = 0;
@@ -78,36 +78,45 @@ getTakeInfo(){
 
 	}
 
+	removeFromPlaylist(){
+  const src = config.streamingUrl + this.props.take.location;
+
+	this.props.playlist.map((i, index) => {         // loop inside the object to find an unique identifier in order to get the index of the object to proceed and delete it
+    console.log(index);
+		const playlistSrc = i.src;
+		if (playlistSrc === src){
+			debugger; // action to delete an object
+			this.props.removeTakeFromPlaylist(index);
+		}
+	})
+
+	}
+
 
 	addToPlaylist() {
 
 		const take = this.getTakeInfo();
 
-		if(!this.props.playlistMode){                        // the first time called the function playlist mode is false so we clear the playlist info from the single take mode
-					this.props.clearPlaylist();
-			 }
+					if(!this.props.playlistMode){                        // the first time called the function playlist mode is false so we clear the playlist info from the single take mode
+								this.props.clearPlaylist();
+						 }
 
 
 
 
-	if (this.state.addButtonIcon !== "plus") {
-			this.setState({addButtonIcon: "plus"});
+				if (this.state.addButtonIcon !== "plus") {
+						this.setState({addButtonIcon: "plus"});
+						this.removeFromPlaylist();
 
-		}
-	else {
+					}
+				else {
 
-			this.setState({addButtonIcon: "minus", clear:false});
-			this.props.addToPlaylist(take);
-			this.props.multipleTakes(true);         //used to check if there is a playlist so at the end of each take the audio keeps playing until
-                                              // it reaches the last one
+						this.setState({addButtonIcon: "minus", clear:false});
+						this.props.addToPlaylist(take);
+						this.props.multipleTakes(true);         //used to check if there is a playlist so at the end of each take the audio keeps playing until
+			                                              // it reaches the last one
 
-		}
-
-
-
-
-
-
+					}
 
 	}
 
@@ -269,7 +278,12 @@ return{ mode , playlistMode, playlist };
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({addToPlaylist, playTake, multipleTakes, clearPlaylist}, dispatch);
+  return bindActionCreators({addToPlaylist,
+		 												 playTake,
+														 multipleTakes,
+														 clearPlaylist,
+													   removeTakeFromPlaylist
+													              }, dispatch);
 
 };
 

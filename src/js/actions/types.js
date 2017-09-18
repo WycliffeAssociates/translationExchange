@@ -6,4 +6,5 @@ export const MULTIPLE_TAKES = 'multiple_takes';
 export const UPDATE_MODE = 'update_mode';   // update mode in the object that contains all the data of the take ( chunk or verse);
 export const UPDATE_DATA = 'update_data';   // update data displayed in the audioplayer
 export const PLAY_TAKE = 'play_take';
-export const CLEAR_PLAYLIST = 'clear_playlist'; 
+export const CLEAR_PLAYLIST = 'clear_playlist';
+export const REMOVE_TAKE_FROM_PLAYLIST = 'remove_take_from_playlist';

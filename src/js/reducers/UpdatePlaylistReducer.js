@@ -1,8 +1,9 @@
-import { UPDATE_PLAYLIST , MULTIPLE_TAKES, UPDATE_MODE, PLAY_TAKE, CLEAR_PLAYLIST } from '../actions/types';
+import { UPDATE_PLAYLIST , MULTIPLE_TAKES, UPDATE_MODE, PLAY_TAKE, CLEAR_PLAYLIST, REMOVE_TAKE_FROM_PLAYLIST } from '../actions/types';
 
 const INITIAL_STATE = { playlist: [],
                         mode: '',
                         playlistMode: false
+
                       };
 
 export default (state = INITIAL_STATE, action) => {
@@ -37,6 +38,12 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
               playlist: []
+              };
+
+        case REMOVE_TAKE_FROM_PLAYLIST:
+            return {
+                ...state,
+              playlist: [...state.playlist.splice(action.index, 1)]
               };
 
 

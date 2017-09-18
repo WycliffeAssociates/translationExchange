@@ -36,7 +36,7 @@ constructor(props){
 
 
   }
-  this.toggleButton = this.toggleButton.bind(this);
+//  this.toggleButton = this.toggleButton.bind(this);
   this.updateTime = this.updateTime.bind(this);
   this.durationTime = this.durationTime.bind(this);
   this.initialWidth = this.initialWidth.bind(this);
@@ -68,9 +68,9 @@ componentDidMount () {
 
  }
 
-toggleButton(){
-this.setState({play: !this.state.play, finishedPlaying: false});
-}
+// toggleButton(){
+// this.setState({play: !this.state.play, finishedPlaying: false});
+// }
 
 updateTime(updateTime) {
   this.setState({updateTime});
@@ -109,8 +109,7 @@ dragPosition(markerPosition) {
 
 callMarker() {
   const markerArray = [];
-  // console.log('Timeline props', this.props.markers);
-  // console.log('local props', markerObj.markers);
+
      let receivedMarkerObject = this.props.playlist[0].markers;
 
 

@@ -120,7 +120,7 @@ componentWillReceiveProps(nextProps){
 
 
 
-                                  {this.createArray().map((i) => {
+                                  {this.props.playlist.map((i) => {
                                       return(
 
                                            <Button inverted color='blue'>{i}</Button>
