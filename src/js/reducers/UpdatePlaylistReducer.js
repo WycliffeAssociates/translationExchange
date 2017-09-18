@@ -1,8 +1,8 @@
-import { UPDATE_PLAYLIST , MULTIPLE_TAKES, UPDATE_MODE, PLAY_TAKE } from '../actions/types';
+import { UPDATE_PLAYLIST , MULTIPLE_TAKES, UPDATE_MODE, PLAY_TAKE, CLEAR_PLAYLIST } from '../actions/types';
 
 const INITIAL_STATE = { playlist: [],
                         mode: '',
-                        multipleTakes: false
+                        playlistMode: false
                       };
 
 export default (state = INITIAL_STATE, action) => {
@@ -30,8 +30,14 @@ export default (state = INITIAL_STATE, action) => {
         case MULTIPLE_TAKES:
              return {
                ...state,
-              multipleTakes: action.status
+              playlistMode: action.status
             };
+
+        case CLEAR_PLAYLIST:
+            return {
+                ...state,
+              playlist: []
+              };
 
 
        default:

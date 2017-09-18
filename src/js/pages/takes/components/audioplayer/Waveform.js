@@ -39,56 +39,11 @@ class WaveForm extends Component {
 
 
 
-  updateAudio(){
-
-  this.setState({
-                  audioFile:  this.props.playlist[0].src,
-                  audioName:  this.props.playlist[0].name
-                               });
-
-           let i = this.state.pointer;
-
-debugger;
-     if(this.state.pointer === this.props.playlist.length){
-      this.setState({play: false, pointer: 1, markers: this.props.playlist[0].markers});
-
-     }
-
-        if(this.props.playlist.length > 1 && i <  this.props.playlist.length  ){
-
-          this.setState({
-           play:      true,
-           audioFile:  this.props.playlist[i].src,
-           audioName:  this.props.playlist[i].name,
-           markers: this.props.playlist[i].markers,
-           pointer : this.state.pointer + 1
-
-           });
-
-
-
-
-
-
-         }
-
-
-
-
-
-  }
-
   duration(e) {
     this.props.durationTime(e.wavesurfer.getDuration());
 
 
-
-    //  this.props.updateAudioPlayer({props: 'play', value: true});
-
-
-
-
-this.setState({finished:false, pos: 0});
+    this.setState({finished:false, pos: 0});
 
 
   }
@@ -98,13 +53,16 @@ this.setState({finished:false, pos: 0});
   finishedPlaying() {
 
     this.setState({pos: 0});
+    this.props.stopAudio();
 
-    if(!this.props.multipleTakes){
-           this.props.stopAudio();
-       }else{
-         debugger;
-     this.updateAudio();
-   }
+    if(this.props.playlistMode){
+            this.props.finishedPlaying();
+       }
+
+
+
+
+
 
   }
 
@@ -147,15 +105,14 @@ this.setState({finished:false, pos: 0});
 const mapStateToProps = state => {
 
 const{ play } = state.setAudioPlayerState;
-const{ multipleTakes, playlist } = state.updatePlaylist;
-return{ play, multipleTakes, playlist };
+const{ playlistMode, playlist } = state.updatePlaylist;
+return{ play, playlistMode, playlist };
 
 }
 
 const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({
-          finishedPlaying: finishedPlaying,
           playAudio:playAudio,
           stopAudio:stopAudio
 }, dispatch);

@@ -49,10 +49,7 @@ constructor(props){
 
 componentWillReceiveProps(nextProps) {
 
-
-
   const obj = nextProps.playlist;
-let i =0;
 
  this.setState({
   play:      false,
@@ -78,9 +75,7 @@ updateTime(updateTime) {
   this.setState({updateTime});
 }
 durationTime(durationTime) {
-  if (!this.props.multipleTakes){
-      //this.setState({ durationTime, play: this.props.play });
-  }
+
 
 this.setState({ durationTime});
 
@@ -137,21 +132,20 @@ callMarker() {
 
 
 
-finishedPlaying(check){
-
-this.setState({finishedPlaying: check,
-                play: false,
-                audioFile:  this.props.playlist[0].src,
-                audioName:  this.props.playlist[0].name
-                             });
-
-         let i = this.state.pointer;
+finishedPlaying(){
 
 
-   if(this.state.pointer === this.props.playlist.length){
-    this.setState({play: false, pointer: 1, markers: this.props.playlist[0].markers});
+
+let i = this.state.pointer;
+const playlistLength = this.props.playlist.length;
+
+
+   if(i !== 1 && i === playlistLength ){
+    this.setState({play: false, pointer: 1, markers: this.props.playlist[1].markers});
 
    }
+
+   debugger;
 
       if(this.props.playlist.length > 1 && i <  this.props.playlist.length  ){
 
@@ -166,7 +160,7 @@ this.setState({finishedPlaying: check,
 
 
 
-
+     this.props.playAudio(); // we wait until the new source file is loaded in to the audioplayer and then we procced to play it, otherwise waveform with crash
 
 
        }

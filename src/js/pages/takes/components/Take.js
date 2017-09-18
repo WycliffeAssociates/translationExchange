@@ -8,7 +8,7 @@ import TakeListenButton from "./AddTake";
 import "css/takes.css";
 import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
-import {addToPlaylist, playTake, multipleTakes} from './../../../actions';
+import {addToPlaylist, playTake, multipleTakes, clearPlaylist} from './../../../actions';
 
 
 var listenCounter = 0;
@@ -22,7 +22,8 @@ class Take extends Component {
 			showMarkers: false,
 			showMarkersColor: "",
 			playlist:[],
-			listenList: [],
+			clear : true
+
 		};
 		// This binding is necessary to make `this` work in the callback
 		this.handleClick = this.handleClick.bind(this);
@@ -70,35 +71,35 @@ getTakeInfo(){
 
 	playTakeFromCard() {
 
-      const take = this.getTakeInfo();
-		  this.props.playTake(take);
-
+      if(!this.props.playlistMode){                           // checks if it is on playlist mode, so when is true it does not play audio from the card
+         const take = this.getTakeInfo();
+		     this.props.playTake(take);
+      }
 
 	}
 
 
 	addToPlaylist() {
+		
+		const take = this.getTakeInfo();
 
-		//this.props.addToListenList(this.props);
-		//this.addToListenList(this.props);
+		if(!this.props.playlistMode){                        // the first time called the function playlist mode is false so we clear the playlist info from the single take mode
+					this.props.clearPlaylist();
+			 }
 
-     const take = this.getTakeInfo();
+
+
 
 	if (this.state.addButtonIcon !== "plus") {
-
-
-
 			this.setState({addButtonIcon: "plus"});
 
-		} else {
-			this.setState({addButtonIcon: "minus"});
-			this.props.addToPlaylist(take);
+		}
+	else {
 
+			this.setState({addButtonIcon: "minus", clear:false});
+			this.props.addToPlaylist(take);
 			this.props.multipleTakes(true);         //used to check if there is a playlist so at the end of each take the audio keeps playing until
                                               // it reaches the last one
-
-
-
 
 		}
 
@@ -260,15 +261,15 @@ Take.propTypes = {
 
 const mapStateToProps = state => {
 
-const{ mode, playlist } = state.updatePlaylist;
+const{ mode, playlist, playlistMode } = state.updatePlaylist;
 
-return{ mode };
+return{ mode , playlistMode, playlist };
 
 }
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({addToPlaylist, playTake, multipleTakes}, dispatch);
+  return bindActionCreators({addToPlaylist, playTake, multipleTakes, clearPlaylist}, dispatch);
 
 };
 

@@ -1,4 +1,4 @@
-import { UPDATE_PLAYLIST, MULTIPLE_TAKES, UPDATE_MODE, PLAY_TAKE } from './types';
+import { UPDATE_PLAYLIST, MULTIPLE_TAKES, UPDATE_MODE, PLAY_TAKE, CLEAR_PLAYLIST } from './types';
 
 
 export const playTake = (take) => {
@@ -12,6 +12,14 @@ export const addToPlaylist = (playlist) => {
     type: UPDATE_PLAYLIST,
     playlist
   }
+};
+
+export const clearPlaylist = () => {
+  return {
+    type: CLEAR_PLAYLIST
+
+  }
+
 };
 
 export const updateMode = (mode) => {                       // update mode, chunk or verse
