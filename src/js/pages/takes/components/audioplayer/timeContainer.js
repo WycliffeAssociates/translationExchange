@@ -15,33 +15,33 @@ this.state = {currentName: '', max: 0, pointer: 0}
 }
 
 
- componentWillReceiveProps(nextProps) {
-   let i = this.state.pointer;
-
-
-
-
-   this.setState({
-                  max: nextProps.audioName.length,
-                  currentName: nextProps.audioName[this.state.pointer]
-    });
-
-
-   if (this.props.nextAudio){
-
-      
-      if(this.state.pointer === this.state.max-1){
-
-        i = 0;
-       this.setState({pointer: 0, currentName: nextProps.audioName[0]});
-
-      }
-
-
-   }
-
-
- }
+ // componentWillReceiveProps(nextProps) {
+ //   let i = this.state.pointer;
+ //
+ //
+ //
+ //
+ //   this.setState({
+ //                  max: nextProps.audioName.length,
+ //                  currentName: nextProps.audioName[this.state.pointer]
+ //    });
+ //
+ //
+ //   if (this.props.nextAudio){
+ //
+ //
+ //      if(this.state.pointer === this.state.max-1){
+ //
+ //        i = 0;
+ //       this.setState({pointer: 0, currentName: nextProps.audioName[0]});
+ //
+ //      }
+ //
+ //
+ //   }
+ //
+ //
+ // }
 
 
 

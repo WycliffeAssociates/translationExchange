@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
-import {updateMode, addToPlaylist} from './../../actions';
+import {updateMode, addToPlaylist, playTake} from './../../actions';
 import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
@@ -365,18 +365,18 @@ class ChapterContainer extends Component {
 	}
 
 	onSourceClicked(startv) {
-		//debugger;
-		let sourceLoc = this.getSourceAudioLocationForChunk(startv);
+	   if(!this.props.playlistMode){
+				let sourceLoc = this.getSourceAudioLocationForChunk(startv);
 
-		let sourceAudio = [
-			{
-				src: config.streamingUrl + sourceLoc,
-				name: this.state.project.mode + " " + startv + " (source)"
-			}
-		];
+				let sourceAudio =
+					{
+						src: config.streamingUrl + sourceLoc,
+						name: this.state.project.mode + " " + startv + " (source)"
+					};
 
-   this.props.addToPlaylist(sourceAudio);
 
+		   this.props.playTake(sourceAudio) ;
+	 	}
 	}
 
 
@@ -469,14 +469,14 @@ class ChapterContainer extends Component {
 
 const mapStateToProps = state => {
 
-const{ playlist } = state.updatePlaylist;
-return{ playlist };
+const{ playlistMode } = state.updatePlaylist;
+return{ playlistMode };
 
 }
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({updateMode, addToPlaylist}, dispatch);
+  return bindActionCreators({updateMode, addToPlaylist, playTake}, dispatch);
 
 };
 
