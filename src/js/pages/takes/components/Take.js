@@ -82,12 +82,12 @@ getTakeInfo(){
 	}
 
 	removeFromPlaylist(){
-  const src = config.streamingUrl + this.props.take.location;
+  const takeLocation = this.props.take.location;
 
 	this.props.playlist.map((i, index) => {         // loop inside the object to find an unique identifier in order to get the index of the object to proceed and delete it
-    console.log(index);
-		const playlistSrc = i.src;
-		if (playlistSrc === src){
+
+		
+		if (i.id === takeLocation){
 
 			this.props.removeTakeFromPlaylist(index);
 		}
