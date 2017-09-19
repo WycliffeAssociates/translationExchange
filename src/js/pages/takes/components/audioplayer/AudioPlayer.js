@@ -64,9 +64,9 @@ componentWillReceiveProps(nextProps) {
 
 componentDidMount () {
    this.setState({ initialWidth: this.rangeInput.offsetWidth });
-
-
  }
+
+
 
 // toggleButton(){
 // this.setState({play: !this.state.play, finishedPlaying: false});
@@ -84,7 +84,7 @@ if(this.state.looping){
   this.props.playAudio();
 }
 
-
+this.props.updateTime(0);                // fixes the small bug of not reseting the timer to zero if the plus is clicked while playing a different take
 
 }
 initialWidth(initialWidth){

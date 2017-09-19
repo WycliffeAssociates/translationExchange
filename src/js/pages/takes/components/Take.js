@@ -8,7 +8,7 @@ import TakeListenButton from "./AddTake";
 import "css/takes.css";
 import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
-import {addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio} from './../../../actions';
+import {addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime} from './../../../actions';
 
 
 var listenCounter = 0;
@@ -86,10 +86,7 @@ getTakeInfo(){
   const takeLocation = this.props.take.location;
 
 	this.props.playlist.map((i, index) => {         // loop inside the object to find an unique identifier in order to get the index of the object to proceed and delete it
-
-
 		if (i.id === takeLocation){
-
 			this.props.removeTakeFromPlaylist(index);
 		}
 	})
@@ -292,7 +289,8 @@ const mapDispatchToProps = dispatch => {
 														 multipleTakes,
 														 clearPlaylist,
 													   removeTakeFromPlaylist,
-  														stopAudio
+  												   stopAudio,
+														 updateTime
 													              }, dispatch);
 
 };
