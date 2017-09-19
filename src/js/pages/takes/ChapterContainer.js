@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
-import {updateMode, addToPlaylist, playTake} from './../../actions';
+import {updateMode, addToPlaylist, playTake, stopAudio} from './../../actions';
 import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
@@ -366,6 +366,7 @@ class ChapterContainer extends Component {
 
 	onSourceClicked(startv) {
 	   if(!this.props.playlistMode){
+			 this.props.stopAudio();
 				let sourceLoc = this.getSourceAudioLocationForChunk(startv);
 
 				let sourceAudio =
@@ -476,7 +477,7 @@ return{ playlistMode };
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({updateMode, addToPlaylist, playTake}, dispatch);
+  return bindActionCreators({updateMode, addToPlaylist, playTake, stopAudio}, dispatch);
 
 };
 

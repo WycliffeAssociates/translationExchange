@@ -1,7 +1,6 @@
-import { PLAY_AUDIO, STOP_AUDIO, FINISHED_PLAYING, UPDATE_TIME, UPDATE_AUDIO_LENGTH } from '../actions/types';
+import { PLAY_AUDIO, STOP_AUDIO, FINISHED_PLAYING, UPDATE_TIME, UPDATE_AUDIO_LENGTH, RESET_AUDIOPLAYER } from '../actions/types';
 
 const INITIAL_STATE = { play: false,
-                        playFromCardButton: false,                            // not used yet
                         isFinished: false,
                         updatedTime: 0,
                         audioLength: 0
@@ -42,6 +41,9 @@ export default (state = INITIAL_STATE, action) => {
             ...state,
             audioLength: action.timeLength
           };
+
+      case RESET_AUDIOPLAYER:
+             return INITIAL_STATE ;
 
        default:
                return state;

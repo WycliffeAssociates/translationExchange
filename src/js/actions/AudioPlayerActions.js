@@ -1,4 +1,4 @@
-import { PLAY_AUDIO, STOP_AUDIO, FINISHED_PLAYING, UPDATE_TIME, UPDATE_AUDIO_LENGTH} from './types';
+import { PLAY_AUDIO, STOP_AUDIO, FINISHED_PLAYING, UPDATE_TIME, UPDATE_AUDIO_LENGTH, RESET_AUDIOPLAYER} from './types';
 
 
 export const playAudio = () => {
@@ -39,7 +39,17 @@ export const timeLength = (timeLength) => {
 
   return{
      type: UPDATE_AUDIO_LENGTH,
-     timeLength,
+     timeLength
+
+  }
+
+};
+
+export const resetAudioPlayer = () => {
+
+  return{
+     type: RESET_AUDIOPLAYER
+
 
   }
 

@@ -183,11 +183,9 @@ this.setState({markerClicked: statement});
   render() {
 
 
-
-
   let src = this.props.playlist[0].src;
 
-  if(this.props.playlistMode ){
+  if(this.props.playlistMode){
      src = this.state.audioFile;
   }
 

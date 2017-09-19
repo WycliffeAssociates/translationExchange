@@ -9,3 +9,4 @@ export const UPDATE_AUDIO_LENGTH = 'update_audio_length';
 export const PLAY_TAKE = 'play_take';
 export const CLEAR_PLAYLIST = 'clear_playlist';
 export const REMOVE_TAKE_FROM_PLAYLIST = 'remove_take_from_playlist';
+export const RESET_AUDIOPLAYER = 'remove_audioplayer';
