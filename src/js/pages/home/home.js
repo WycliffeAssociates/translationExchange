@@ -37,21 +37,26 @@ class Home extends Component {
 					<LogoTitle />
 					<StartHere />
 				</Container>
-				<Container fluid>
-					<Grid padded textAlign="center">
-						<Grid.Column width={3}>
-							<Grid.Row height={1}>
-								<h2>
-									<font color="white">Recent Projects</font>
-								</h2>
-							</Grid.Row>
-							<Divider />
-							{homeRecentProjects.map((project, i) => {
-								return this.createListItem(project, i);
-							})}
-						</Grid.Column>
-					</Grid>
-				</Container>
+
+				{homeRecentProjects.length > 0 ? (
+					<Container fluid>
+						<Grid padded textAlign="center">
+							<Grid.Column width={3}>
+								<Grid.Row height={1}>
+									<h2>
+										<font color="white">Recent Projects</font>
+									</h2>
+								</Grid.Row>
+								<Divider />
+								{homeRecentProjects.map((project, i) => {
+									return this.createListItem(project, i);
+								})}
+							</Grid.Column>
+						</Grid>
+					</Container>
+				) : (
+					""
+				)}
 			</Container>
 		);
 	}
