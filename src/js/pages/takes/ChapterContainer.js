@@ -399,11 +399,13 @@ class ChapterContainer extends Component {
 		} else {
 			return (
 				<div>
+
 					<LoadingDisplay
 						loaded={this.state.loaded}
 						error={this.state.error}
 						retry={this.requestData.bind(this)}
 					>
+
 						<ChapterHeader
 							book={this.state.book}
 							chapter={this.state.chapter}
@@ -422,13 +424,7 @@ class ChapterContainer extends Component {
 						{this.state.chunks.map(this.createChunkList.bind(this))}
 
 						<div fluid className="StickyFooter">
-							<Footer
-								mode={this.state.project.mode}
-								listenList={this.state.listenList}
-								currentPlaylist={this.props.playlist}            //playlist from redux
-								markers={this.state.markers}
-
-							/>
+							<Footer />
 						</div>
 					</LoadingDisplay>
 				</div>

@@ -116,12 +116,13 @@ getTakeInfo(){
 
 					}
 				else {
+					
             this.props.stopAudio();
 						this.setState({addButtonIcon: "minus", clear:false});
 						this.props.addToPlaylist(take);
 						this.props.multipleTakes(true);         //used to check if there is a playlist so at the end of each take the audio keeps playing until
 			                                              // it reaches the last one
-			     
+
 
 					}
 

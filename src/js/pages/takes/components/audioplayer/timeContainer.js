@@ -5,62 +5,8 @@ import {MarkerButton} from './buttons';
 
 class TimeContainer extends Component {
 
-constructor(props){
-super(props);
-
-this.state = {currentName: '', max: 0, pointer: 0}
-
-
-
-}
-
-
- // componentWillReceiveProps(nextProps) {
- //   let i = this.state.pointer;
- //
- //
- //
- //
- //   this.setState({
- //                  max: nextProps.audioName.length,
- //                  currentName: nextProps.audioName[this.state.pointer]
- //    });
- //
- //
- //   if (this.props.nextAudio){
- //
- //
- //      if(this.state.pointer === this.state.max-1){
- //
- //        i = 0;
- //       this.setState({pointer: 0, currentName: nextProps.audioName[0]});
- //
- //      }
- //
- //
- //   }
- //
- //
- // }
-
-
-
-
-
-
-
-
-
-
-
 
 render(){
-
-const name = this.state.currentName;
-
-
-
-
 
   return(
 
@@ -69,7 +15,6 @@ const name = this.state.currentName;
               <MarkerButton onClick= {this.props.markerBtnClicked} />
             </div>
 
-            {/* <div style={styles.nameContainer} >{name}</div> */}
             <div style={styles.timeContainer} >
               <Time time={this.props.updatedTime} />
               <div style = {{marginLeft: 5, marginRight:5}}>/</div>
