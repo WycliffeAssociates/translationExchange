@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from "react-redux";
 import MarkAsDone from "./MarkAsDone";
 import CommentContainer from "./comments/PinkButton"
-import {Menu, Container, Card, Button, Icon, Label, Popup, Grid, Divider} from 'semantic-ui-react';
+import {Menu, Container, Card, Button, Icon, Label, Popup, Grid, Divider, Transition} from 'semantic-ui-react';
 import AudioComponent from "./AudioComponent"
 import AudioPlayer from './audioplayer/AudioPlayer'; // replace for audioComponent and verify that the waveform is updating
 import config from 'config/config'
@@ -121,12 +121,12 @@ componentWillReceiveProps(nextProps){
 
 
                                   {this.props.playlist.map((i) => {
-                                    let playing = 'inverted';
+
 
                                       return(
 
-                                           <Button inverted color='blue'>{i.chunk}</Button>
-
+                                            <Button inverted color='blue'>{i.chunk}</Button>
+                                        //<button style={{backgroundColor: 'transparent', color: '3791D5'}} >{i.chunk}</button>
 
                                       );
                                   })}
