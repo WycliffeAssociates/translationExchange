@@ -8,7 +8,7 @@ import TakeListenButton from "./AddTake";
 import "css/takes.css";
 import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
-import {addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist} from './../../../actions';
+import {addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio} from './../../../actions';
 
 
 var listenCounter = 0;
@@ -73,8 +73,10 @@ getTakeInfo(){
 	playTakeFromCard() {
 
       if(!this.props.playlistMode){                           // checks if it is on playlist mode, so when is true it does not play audio from the card
+				this.props.stopAudio();
          const take = this.getTakeInfo();
 		     this.props.playTake(take);
+
       }
 
 	}
@@ -116,7 +118,7 @@ getTakeInfo(){
 
 					}
 				else {
-
+            this.props.stopAudio();
 						this.setState({addButtonIcon: "minus", clear:false});
 						this.props.addToPlaylist(take);
 						this.props.multipleTakes(true);         //used to check if there is a playlist so at the end of each take the audio keeps playing until
@@ -288,7 +290,8 @@ const mapDispatchToProps = dispatch => {
 		 												 playTake,
 														 multipleTakes,
 														 clearPlaylist,
-													   removeTakeFromPlaylist
+													   removeTakeFromPlaylist,
+  														stopAudio
 													              }, dispatch);
 
 };

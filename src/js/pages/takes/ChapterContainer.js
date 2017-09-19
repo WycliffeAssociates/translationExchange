@@ -365,6 +365,7 @@ class ChapterContainer extends Component {
 	}
 
 	onSourceClicked(startv) {
+		debugger;
 		let sourceLoc = this.getSourceAudioLocationForChunk(startv);
 
 		let sourceAudio = [

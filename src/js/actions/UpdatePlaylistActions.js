@@ -14,7 +14,7 @@ export const addToPlaylist = (playlist) => {
   }
 };
 
-export const clearPlaylist = () => {
+export const clearPlaylist = () => {                                // action used to clear the take played from card
   return {
     type: CLEAR_PLAYLIST
 

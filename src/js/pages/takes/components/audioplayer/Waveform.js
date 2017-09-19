@@ -41,7 +41,10 @@ class WaveForm extends Component {
 
   duration(e) {
     this.props.durationTime(e.wavesurfer.getDuration());
-    this.setState({finished:false, pos: 0});
+    this.setState({ pos: 0});
+    if(!this.props.playlistMode){
+      this.props.playAudio();
+    }
 
   }
 
@@ -53,7 +56,7 @@ class WaveForm extends Component {
     this.props.stopAudio();
 
     if(this.props.playlistMode){
-            this.props.finishedPlaying();
+            this.props.finishedPlaying();  // function called in audioPlayer.js
        }
 
 
@@ -110,8 +113,9 @@ return{ play, playlistMode, playlist };
 const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({
-          playAudio:playAudio,
-          stopAudio:stopAudio
+          playAudio,
+          stopAudio
+
 }, dispatch);
 
 };
