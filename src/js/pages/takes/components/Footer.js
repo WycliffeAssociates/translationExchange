@@ -36,62 +36,62 @@ componentWillReceiveProps(nextProps){
 
 
 
-    createArray() {
-
-
-        if (this.props.listenList.length > 0) {
-            var takeList = [];
-            this.props.listenList.map((i) => {
-
-                  takeList[takeList.length] = i.mode + ' ' + i.chunk.startv
-            })
-
-
-            return takeList
-        }
-        else {
-            return []
-        }
-    }
-
-
-
-    createListenPlaylist() {
-
-
-        if (this.props.listenList.length > 0) {
-            var playlist = [];
-            this.props.listenList.map((i) => {
-
-                playlist[playlist.length] = {
-                    "markers": i.props.take.markers,
-                    "src": config.streamingUrl + i.props.take.location,
-                    //"name": this.props.mode + ' ' + i.chunk.startv + ' take ' + i.count,
-                    "name":
-          					this.props.mode +
-          					" " +
-          					i.chunk.startv +
-          					" (" +
-          					this.state.author +
-          					" on " +
-          					this.parseDate(i.props.take.date_modified) +
-          					")"
-                }
-            })
+    // createArray() {
+    //
+    //
+    //     if (this.props.listenList.length > 0) {
+    //         var takeList = [];
+    //         this.props.listenList.map((i) => {
+    //
+    //               takeList[takeList.length] = i.mode + ' ' + i.chunk.startv
+    //         })
+    //
+    //
+    //         return takeList
+    //     }
+    //     else {
+    //         return []
+    //     }
+    // }
 
 
 
-
-            return(playlist);
-
-
-        }
-
-        else {
-            return null;
-        }
-
-    }
+    // createListenPlaylist() {
+    //
+    //
+    //     if (this.props.listenList.length > 0) {
+    //         var playlist = [];
+    //         this.props.listenList.map((i) => {
+    //
+    //             playlist[playlist.length] = {
+    //                 "markers": i.props.take.markers,
+    //                 "src": config.streamingUrl + i.props.take.location,
+    //                 //"name": this.props.mode + ' ' + i.chunk.startv + ' take ' + i.count,
+    //                 "name":
+    //       					this.props.mode +
+    //       					" " +
+    //       					i.chunk.startv +
+    //       					" (" +
+    //       					this.state.author +
+    //       					" on " +
+    //       					this.parseDate(i.props.take.date_modified) +
+    //       					")"
+    //             }
+    //         })
+    //
+    //
+    //
+    //
+    //         return(playlist);
+    //
+    //
+    //     }
+    //
+    //     else {
+    //         return null;
+    //     }
+    //
+    // }
 
 
 
@@ -99,14 +99,14 @@ componentWillReceiveProps(nextProps){
 
 
         var icon = <Icon name="plus" size="big" color="blue"/>
-        var button = <Button icon={icon} inverted color="blue"/>
-        let multipleTakes = false;
-        let playList = this.props.currentPlaylist;
+      //  var button = <Button icon={icon} inverted color="blue" toggle = {false}/>
+        // let multipleTakes = false;
+        // let playList = this.props.currentPlaylist;
 
-        if( this.createArray().length > 1){
-
-            playList = this.createListenPlaylist();
-         }
+        // if( this.createArray().length > 1){
+        //
+        //     playList = this.createListenPlaylist();
+        //  }
 
 
 
@@ -114,16 +114,18 @@ componentWillReceiveProps(nextProps){
         return (
 
             <div className="footerStyle" style={{width:'100%'}}>
-              {this.createArray().length > 0
+              {this.props.playlist.length > 0 && this.props.playlistMode
                   ? <div style={{width:'100%', backgroundColor:'transparent', height: 20 }}>
 
 
 
 
                                   {this.props.playlist.map((i) => {
+                                    let playing = 'inverted';
+
                                       return(
 
-                                           <Button inverted color='blue'>{i}</Button>
+                                           <Button inverted color='blue'>{i.chunk}</Button>
 
 
                                       );
@@ -156,75 +158,75 @@ componentWillReceiveProps(nextProps){
     }
 
 
-    parseDate(date) {
-      var noon = "am";
-      var dateArr = date.split("T");
-      var date = dateArr[0];
-
-      var time = dateArr[1].split(".");
-      time = time[0].split(":");
-      date = date.split("-");
-      switch (date[1]) {
-        case "01":
-          date[1] = "January";
-          break;
-        case "02":
-          date[1] = "February";
-          break;
-        case "03":
-          date[1] = "March";
-          break;
-        case "04":
-          date[1] = "April";
-          break;
-        case "05":
-          date[1] = "May";
-          break;
-        case "06":
-          date[1] = "June";
-          break;
-        case "07":
-          date[1] = "July";
-          break;
-        case "08":
-          date[1] = "August";
-          break;
-        case "09":
-          date[1] = "September";
-          break;
-        case "10":
-          date[1] = "October";
-          break;
-        case "11":
-          date[1] = "November";
-          break;
-        case "12":
-          date[1] = "December";
-          break;
-      }
-
-      var hour = parseInt(time[0]);
-      if (hour / 12 > -1) {
-        noon = "pm";
-      }
-
-      if (!(hour % 12 === 0)) {
-        hour %= 12;
-      }
-
-      return (
-        date[1] +
-        " " +
-        date[2] +
-        ", " +
-        date[0] +
-        " at " +
-        hour +
-        ":" +
-        time[1] +
-        noon
-      );
-    }
+    // parseDate(date) {
+    //   var noon = "am";
+    //   var dateArr = date.split("T");
+    //   var date = dateArr[0];
+    //
+    //   var time = dateArr[1].split(".");
+    //   time = time[0].split(":");
+    //   date = date.split("-");
+    //   switch (date[1]) {
+    //     case "01":
+    //       date[1] = "January";
+    //       break;
+    //     case "02":
+    //       date[1] = "February";
+    //       break;
+    //     case "03":
+    //       date[1] = "March";
+    //       break;
+    //     case "04":
+    //       date[1] = "April";
+    //       break;
+    //     case "05":
+    //       date[1] = "May";
+    //       break;
+    //     case "06":
+    //       date[1] = "June";
+    //       break;
+    //     case "07":
+    //       date[1] = "July";
+    //       break;
+    //     case "08":
+    //       date[1] = "August";
+    //       break;
+    //     case "09":
+    //       date[1] = "September";
+    //       break;
+    //     case "10":
+    //       date[1] = "October";
+    //       break;
+    //     case "11":
+    //       date[1] = "November";
+    //       break;
+    //     case "12":
+    //       date[1] = "December";
+    //       break;
+    //   }
+    //
+    //   var hour = parseInt(time[0]);
+    //   if (hour / 12 > -1) {
+    //     noon = "pm";
+    //   }
+    //
+    //   if (!(hour % 12 === 0)) {
+    //     hour %= 12;
+    //   }
+    //
+    //   return (
+    //     date[1] +
+    //     " " +
+    //     date[2] +
+    //     ", " +
+    //     date[0] +
+    //     " at " +
+    //     hour +
+    //     ":" +
+    //     time[1] +
+    //     noon
+    //   );
+    // }
 
 
 
@@ -237,9 +239,9 @@ componentWillReceiveProps(nextProps){
 
 const mapStateToProps = state => {
 
-const{ mode, playlist } = state.updatePlaylist;
+const{ mode, playlist, playlistMode } = state.updatePlaylist;
 
-return{ mode, playlist };
+return{ mode, playlist, playlistMode };
 
 }
 

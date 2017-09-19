@@ -64,7 +64,8 @@ getTakeInfo(){
 		 src: config.streamingUrl + takeLoc,
 		 markers: markers,
 		 name: `take ${takeNum}, ${this.props.mode} ${startv}  (${author} on ${date})`,
-		 id: takeLoc
+		 id: takeLoc,
+		 chunk: `${this.props.mode} ${startv}`
 	 };
 
 	 return take;
@@ -86,7 +87,7 @@ getTakeInfo(){
 
 	this.props.playlist.map((i, index) => {         // loop inside the object to find an unique identifier in order to get the index of the object to proceed and delete it
 
-		
+
 		if (i.id === takeLocation){
 
 			this.props.removeTakeFromPlaylist(index);
