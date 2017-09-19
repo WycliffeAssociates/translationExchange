@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
-import {playAudio, stopAudio, finishedPlaying} from '../../../../actions';
+import {playAudio, stopAudio, finishedPlaying, updateTime} from '../../../../actions';
 import WaveForm from './Waveform';
 import{ PauseButton, PlayButton, MultipleTakesButton } from './buttons';
 import TimeContainer from './timeContainer';
@@ -37,7 +37,7 @@ constructor(props){
 
   }
 //  this.toggleButton = this.toggleButton.bind(this);
-  this.updateTime = this.updateTime.bind(this);
+  //this.updateTime = this.updateTime.bind(this);
   this.durationTime = this.durationTime.bind(this);
   this.initialWidth = this.initialWidth.bind(this);
   this.callMarker = this.callMarker.bind(this);
@@ -72,9 +72,9 @@ componentDidMount () {
 // this.setState({play: !this.state.play, finishedPlaying: false});
 // }
 
-updateTime(updateTime) {
-  this.setState({updateTime});
-}
+// updateTime(updateTime) {
+//   this.setState({updateTime});
+// }
 
 durationTime(durationTime) {
 
@@ -93,7 +93,7 @@ initialWidth(initialWidth){
 
 dragPosition(markerPosition) {
   const timePosition = (markerPosition * this.state.durationTime) / this.state.initialWidth;
-
+ //this.props.updateTime(timePosition);
 
   this.setState({ markerPosition: timePosition,
                   markerClicked: true,
@@ -101,7 +101,7 @@ dragPosition(markerPosition) {
 
    });
 
-
+   this.props.playAudio();
 
   }
 
@@ -294,7 +294,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({
           finishedPlaying,
           playAudio,
-          stopAudio
+          stopAudio,
+          updateTime
 }, dispatch);
 
 };
