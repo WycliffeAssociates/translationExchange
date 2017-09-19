@@ -94,10 +94,10 @@ initialWidth(initialWidth){
 dragPosition(markerPosition) {
   const timePosition = (markerPosition * this.state.durationTime) / this.state.initialWidth;
 
+
   this.setState({ markerPosition: timePosition,
-                  updateTime: timePosition,
                   markerClicked: true,
-                  play: true
+
 
    });
 
@@ -192,7 +192,7 @@ this.setState({markerClicked: statement});
   }
 
 
-     const updateTime = this.state.updateTime;
+     //const updateTime = this.state.updateTime;
 
      let markers = '';
      let Button = <PlayButton onClick = {()=>this.props.playAudio()}/> ;
@@ -217,7 +217,7 @@ this.setState({markerClicked: statement});
             audioFile = {src}
             playAudio = {this.props.play}
             durationTime={this.durationTime}
-            updateTime = {this.updateTime}
+            //updateTime = {this.updateTime}
             initialWidth = {this.initialWidth}
             markerPosition= {this.state.markerPosition}
             markerClicked={this.state.markerClicked}
@@ -234,7 +234,7 @@ this.setState({markerClicked: statement});
 
            <TimeContainer
             audioLength={this.state.durationTime}
-            updatedTime = {updateTime}
+            updatedTime = {this.props.updatedTime}
             markerBtnClicked ={()=> this.setState({showMarkers:!this.state.showMarkers})}
             audioName= {this.state.audioName}
             nextAudio={this.state.nextAudio}          />
@@ -282,19 +282,19 @@ const mapStateToProps = state => {
 
 
 
-const{ play } = state.setAudioPlayerState;
+const{ play, updatedTime } = state.setAudioPlayerState;
 const{ playlist, playlistMode } = state.updatePlaylist;
 
-return{play, playlist, playlistMode };
+return{play, playlist, playlistMode, updatedTime };
 
 };
 
 const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({
-          finishedPlaying: finishedPlaying,
-          playAudio:playAudio,
-          stopAudio:stopAudio
+          finishedPlaying,
+          playAudio,
+          stopAudio
 }, dispatch);
 
 };

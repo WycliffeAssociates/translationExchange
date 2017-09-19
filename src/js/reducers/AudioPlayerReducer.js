@@ -1,9 +1,10 @@
-import { PLAY_AUDIO, STOP_AUDIO, FINISHED_PLAYING, UPDATE_DATA } from '../actions/types';
+import { PLAY_AUDIO, STOP_AUDIO, FINISHED_PLAYING, UPDATE_TIME, UPDATE_AUDIO_LENGTH } from '../actions/types';
 
 const INITIAL_STATE = { play: false,
                         playFromCardButton: false,                            // not used yet
                         isFinished: false,
-                        authorDate:''
+                        updatedTime: 0,
+                        audioLength: 0
                       };
 
 export default (state = INITIAL_STATE, action) => {
@@ -30,11 +31,17 @@ export default (state = INITIAL_STATE, action) => {
             isFinished: action.isFinished
           };
 
-      case UPDATE_DATA:    
+      case UPDATE_TIME:
         return {
           ...state,
-          authorDate: action.authorDate
+          updatedTime: action.updateTime
         };
+
+      case UPDATE_AUDIO_LENGTH:
+          return {
+            ...state,
+            audioLength: action.timeLength
+          };
 
        default:
                return state;

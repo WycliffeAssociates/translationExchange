@@ -30,7 +30,7 @@ export const updateMode = (mode) => {                       // update mode, chun
   }
 };
 
-export const multipleTakes = (status) => {
+export const multipleTakes = (status) => {             // boolean to check if the audio player is in playlist mode
 
   return {
     type: MULTIPLE_TAKES,

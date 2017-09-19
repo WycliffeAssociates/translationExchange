@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Wavesurfer from 'react-wavesurfer';
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
-import {playAudio, stopAudio, finishedPlaying} from '../../../../actions';
+import {playAudio, stopAudio, finishedPlaying, updateTime} from '../../../../actions';
 
 
 
@@ -32,7 +32,7 @@ class WaveForm extends Component {
     });
 
 
-      this.props.updateTime(this.state.pos);
+    this.props.updateTime(this.state.pos);
      this.props.resetMarkerClicked(false);
 
   }
@@ -41,6 +41,7 @@ class WaveForm extends Component {
 
   duration(e) {
     this.props.durationTime(e.wavesurfer.getDuration());
+
     this.setState({ pos: 0});
     if(!this.props.playlistMode){
       this.props.playAudio();
@@ -114,7 +115,9 @@ const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({
           playAudio,
-          stopAudio
+          stopAudio,
+          updateTime
+
 
 }, dispatch);
 

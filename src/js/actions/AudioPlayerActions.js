@@ -1,4 +1,4 @@
-import { PLAY_AUDIO, STOP_AUDIO, FINISHED_PLAYING, UPDATE_DATA} from './types';
+import { PLAY_AUDIO, STOP_AUDIO, FINISHED_PLAYING, UPDATE_TIME, UPDATE_AUDIO_LENGTH} from './types';
 
 
 export const playAudio = () => {
@@ -25,11 +25,21 @@ export const finishedPlaying = (isFinished) => {
 };
 
 
-export const dataDisplay = (AuthorData) => {
+export const updateTime = (updateTime) => {
 
   return{
-     type: UPDATE_DATA,
-     AuthorData
+     type: UPDATE_TIME,
+     updateTime,
+
+  }
+
+};
+
+export const timeLength = (timeLength) => {
+
+  return{
+     type: UPDATE_AUDIO_LENGTH,
+     timeLength,
 
   }
 
