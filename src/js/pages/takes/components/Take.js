@@ -8,7 +8,7 @@ import TakeListenButton from "./AddTake";
 import "css/takes.css";
 import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
-import {addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime} from './../../../actions';
+import {addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio} from './../../../actions';
 
 
 var listenCounter = 0;
@@ -87,7 +87,9 @@ getTakeInfo(){
 
 	this.props.playlist.map((i, index) => {         // loop inside the object to find an unique identifier in order to get the index of the object to proceed and delete it
 		if (i.id === takeLocation){
+			this.props.stopAudio();       // solve bug of removing the take playing,
 			this.props.removeTakeFromPlaylist(index);
+			//this.props.playAudio();
 		}
 	})
 
@@ -116,12 +118,15 @@ getTakeInfo(){
 
 					}
 				else {
-					
+
             this.props.stopAudio();
 						this.setState({addButtonIcon: "minus", clear:false});
 						this.props.addToPlaylist(take);
 						this.props.multipleTakes(true);         //used to check if there is a playlist so at the end of each take the audio keeps playing until
 			                                              // it reaches the last one
+          
+					 this.props.playAudio();
+
 
 
 					}
@@ -292,7 +297,8 @@ const mapDispatchToProps = dispatch => {
 														 clearPlaylist,
 													   removeTakeFromPlaylist,
   												   stopAudio,
-														 updateTime
+														 updateTime,
+														 playAudio
 													              }, dispatch);
 
 };
