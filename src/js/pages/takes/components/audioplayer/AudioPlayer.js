@@ -62,10 +62,14 @@ componentWillMount(){
 
 componentDidMount () {
    this.setState({ initialWidth: this.rangeInput.offsetWidth });
+   window.addEventListener("resize", this.updateDimensions.bind(this));
 
  }
 
- 
+ updateDimensions() {
+   this.setState({ initialWidth: this.rangeInput.offsetWidth });   // updates marker position when the window is resized
+}
+
 
 
 
