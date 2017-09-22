@@ -113,7 +113,7 @@ getTakeInfo(){
 
 						if(this.props.playlist.length <1){
 							this.props.multipleTakes(false);
-							this.props.addToPlaylist(take);          // add the last take played to the playlist
+							this.props.playTake(take);          // add the last take played to the playlist
 						}
 
 					}
@@ -124,8 +124,10 @@ getTakeInfo(){
 						this.props.addToPlaylist(take);
 						this.props.multipleTakes(true);         //used to check if there is a playlist so at the end of each take the audio keeps playing until
 			                                              // it reaches the last one
-          
-					 this.props.playAudio();
+
+					if(this.props.playlist.length > 1){   // conditional to do not play the take when it is added the first time to the playlist
+					// this.props.playAudio();
+					 }
 
 
 
@@ -282,6 +284,8 @@ Take.propTypes = {
 
 
 const mapStateToProps = state => {
+
+	const {play} = state.setAudioPlayerState;
 
 const{ mode, playlist, playlistMode } = state.updatePlaylist;
 

@@ -1,8 +1,9 @@
-import { UPDATE_PLAYLIST , MULTIPLE_TAKES, UPDATE_MODE, PLAY_TAKE, CLEAR_PLAYLIST, REMOVE_TAKE_FROM_PLAYLIST, RESET_AUDIOPLAYER } from '../actions/types';
+import { UPDATE_PLAYLIST , MULTIPLE_TAKES, UPDATE_MODE, PLAY_TAKE, CLEAR_PLAYLIST, REMOVE_TAKE_FROM_PLAYLIST, RESET_AUDIOPLAYER, TAKE_ID } from '../actions/types';
 
 const INITIAL_STATE = { playlist: [],
                         mode: '',
-                        playlistMode: false
+                        playlistMode: false,
+                        playingTakeId: 0
 
                       };
 
@@ -46,6 +47,12 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
               playlist: [...state.playlist]
               };
+
+        case TAKE_ID:
+             return {
+                     ...state,
+                playingTakeId : action.id
+                  };
 
          case RESET_AUDIOPLAYER:
             return INITIAL_STATE ;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
-import {playAudio, stopAudio, finishedPlaying, updateTime} from '../../../../actions';
+import {playAudio, stopAudio, finishedPlaying, updateTime, takeId} from '../../../../actions';
 import WaveForm from './Waveform';
-import{ PauseButton, PlayButton, MultipleTakesButton } from './buttons';
+import{ PauseButton, PlayButton, MultipleTakesButton} from './buttons';
 import TimeContainer from './timeContainer';
 import Marker from './Markers';
 
@@ -62,7 +62,10 @@ componentWillMount(){
 
 componentDidMount () {
    this.setState({ initialWidth: this.rangeInput.offsetWidth });
+
  }
+
+ 
 
 
 
@@ -150,7 +153,7 @@ if(i < playlistLength){
        looping: true
 
        });
-
+this.props.takeId(i);
 
 }
 else{
@@ -162,7 +165,7 @@ else{
        looping:false
 
        });
-
+       this.props.takeId(0);
        this.props.stopAudio();
   }
 
@@ -214,7 +217,7 @@ this.setState({markerClicked: statement});
             playAudio = {this.props.play}
             durationTime={this.durationTime}
             //updateTime = {this.updateTime}
-            initialWidth = {this.initialWidth}
+            //initialWidth = {this.initialWidth}
             markerPosition= {this.state.markerPosition}
             markerClicked={this.state.markerClicked}
             resetMarkerClicked={this.resetMarkerClicked}
@@ -279,7 +282,7 @@ const mapStateToProps = state => {
 
 
 const{ play, updatedTime } = state.setAudioPlayerState;
-const{ playlist, playlistMode } = state.updatePlaylist;
+const{ playlist, playlistMode, takeId } = state.updatePlaylist;
 
 return{play, playlist, playlistMode, updatedTime };
 
@@ -291,7 +294,8 @@ const mapDispatchToProps = dispatch => {
           finishedPlaying,
           playAudio,
           stopAudio,
-          updateTime
+          updateTime,
+          takeId
 }, dispatch);
 
 };
