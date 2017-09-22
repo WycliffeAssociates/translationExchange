@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Wavesurfer from 'react-wavesurfer';
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
-import {playAudio, stopAudio, finishedPlaying, updateTime} from '../../../../actions';
+import {playAudio, stopAudio, updateTime} from '../../../../actions';
 
 
 
@@ -32,7 +32,7 @@ class WaveForm extends Component {
     });
 
 
-    this.props.updateTime(this.state.pos);
+  //  this.props.updateTime(this.state.pos);
      this.props.resetMarkerClicked(false);
 
   }
@@ -62,9 +62,6 @@ class WaveForm extends Component {
 
 
 
-
-
-
   }
 
 
@@ -78,7 +75,7 @@ class WaveForm extends Component {
       position = this.props.markerPosition;
       }
 
-
+   console.log(this.props.audioFile);
 
 
 

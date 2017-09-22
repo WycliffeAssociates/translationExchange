@@ -4,7 +4,7 @@ import TakeContainer from "../TakeContainer";
 import TakePropTypes from "./TakePropTypes";
 import update from "react/lib/update";
 import { DropTarget } from "react-dnd";
-var iterator;
+
 class TakeList extends Component {
 	constructor(props) {
 		super(props);

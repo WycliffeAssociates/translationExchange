@@ -1,14 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
-import MarkAsDone from "./MarkAsDone";
-import CommentContainer from "./comments/PinkButton"
-import {Menu, Container, Card, Button, Icon, Label, Popup, Grid, Divider, Transition} from 'semantic-ui-react';
-import AudioComponent from "./AudioComponent"
-import AudioPlayer from './audioplayer/AudioPlayer'; // replace for audioComponent and verify that the waveform is updating
-import config from 'config/config'
+import {Menu, Button} from 'semantic-ui-react';
+import AudioPlayer from './audioplayer/AudioPlayer';
 import 'css/takes.css'
-import TakeListenButton from './AddTake'
 import {resetAudioPlayer} from './../../../actions';
 
 
@@ -21,7 +16,7 @@ class Footer extends Component {
     render () {
 
 
-        var icon = <Icon name="plus" size="big" color="blue"/>
+
 
         return (
 
@@ -47,7 +42,7 @@ class Footer extends Component {
                         ? <Menu.Item style={{width:'100%'}}>
 
                             <div style={{width:'100%'}}>
-                                <AudioComponent
+                                <AudioPlayer
 
                                 />
                             </div>

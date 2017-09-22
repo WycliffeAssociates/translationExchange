@@ -3,11 +3,6 @@ import React from 'react';
 class Markers extends React.Component {
 
 
-  constructor(props){
-    super(props);
-    // this.state = { newPostion: this.props.translate}
-  }
-
   getPosition(position){
   //  console.log(position)
     this.props.dragPosition(position);            // change name to moveCursor

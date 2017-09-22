@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
 import PropTypes from "prop-types";
 import config from "config/config";
-import { Button, Grid, Segment, Card, Modal, Icon } from "semantic-ui-react";
+import { Grid, Segment } from "semantic-ui-react";
 import TakeListenButton from "./AddTake";
 import "css/takes.css";
 import StitchTakesButton from "./StitchTakesButton";
@@ -11,7 +11,7 @@ import TakeCommentsButton from "./comments/TakeCommentsButton";
 import {addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio} from './../../../actions';
 
 
-var listenCounter = 0;
+
 
 class Take extends Component {
 	constructor(props) {
@@ -137,8 +137,7 @@ getTakeInfo(){
 
 
 	render() {
-		const markers = this.props.take.markers;
-		let showMarkers = this.state.showMarkers;
+
 		var file = [];
 		file[0] = {
 			src: config.streamingUrl + this.props.take.location
@@ -285,7 +284,7 @@ Take.propTypes = {
 
 const mapStateToProps = state => {
 
-	const {play} = state.setAudioPlayerState;
+
 
 const{ mode, playlist, playlistMode } = state.updatePlaylist;
 

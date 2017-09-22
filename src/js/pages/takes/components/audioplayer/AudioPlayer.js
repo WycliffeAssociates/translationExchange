@@ -227,7 +227,7 @@ this.setState({markerClicked: statement});
             resetMarkerClicked={this.resetMarkerClicked}
             finishedPlaying = {this.finishedPlaying}
 
-            resetMarkerClicked = {this.resetMarkerClicked}                                                 // property to use when stiching takes
+
                                  />
             <div style={{marginTop: 5}}>{this.state.audioName}</div>
 
@@ -286,7 +286,7 @@ const mapStateToProps = state => {
 
 
 const{ play, updatedTime } = state.setAudioPlayerState;
-const{ playlist, playlistMode, takeId } = state.updatePlaylist;
+const{ playlist, playlistMode } = state.updatePlaylist;
 
 return{play, playlist, playlistMode, updatedTime };
 

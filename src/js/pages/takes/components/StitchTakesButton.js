@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import { Button, Icon, Container } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 import 'css/takes.css'
 
 class StitchTakesButton extends Component {
     render() {
 
-        {/*<Button basic inverted icon color="black" toggle active={this.props.active} onClick={this.props.onClick}>
-         <Icon name='plus' size='small' color="grey"/>
-         </Button>*/}
+
 
         return (
                 <Icon name={this.props.icon} color="blue" size="large" className="hoverButton" onClick={this.props.onClick} />
@@ -15,4 +13,4 @@ class StitchTakesButton extends Component {
     }
 }
 
-export default StitchTakesButton
+export default StitchTakesButton;

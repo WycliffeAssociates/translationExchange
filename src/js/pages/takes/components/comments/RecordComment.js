@@ -4,8 +4,7 @@ import { Button, Grid, Icon } from "semantic-ui-react";
 import "./RecordComment.css";
 import LoadingGif from "images/loading-tiny.gif";
 
-let startRecording;
-let stopRecording;
+
 
 export class RecordComment extends Component {
 	constructor(props) {
