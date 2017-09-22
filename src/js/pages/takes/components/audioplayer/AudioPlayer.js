@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
-import {playAudio, stopAudio, finishedPlaying} from '../../../../actions';
+import {playAudio, stopAudio, finishedPlaying, updateTime, takeId} from '../../../../actions';
 import WaveForm from './Waveform';
-import{ PauseButton, PlayButton, MultipleTakesButton } from './buttons';
+import{ PauseButton, PlayButton, MultipleTakesButton} from './buttons';
 import TimeContainer from './timeContainer';
 import Marker from './Markers';
 
@@ -29,15 +29,15 @@ constructor(props){
                 audioName:'',
                 nextAudio: false,
                 pointer: 1,
-                markers: true                             // used for unit testing comment when finished and uncomment bottom
-                // markers: this.props.markers
+                markers: this.props.markers,
+                looping: false                   // state used to keep playing takes when playlist mode is on
 
 
 
 
   }
-  this.toggleButton = this.toggleButton.bind(this);
-  this.updateTime = this.updateTime.bind(this);
+//  this.toggleButton = this.toggleButton.bind(this);
+  //this.updateTime = this.updateTime.bind(this);
   this.durationTime = this.durationTime.bind(this);
   this.initialWidth = this.initialWidth.bind(this);
   this.callMarker = this.callMarker.bind(this);
@@ -47,42 +47,49 @@ constructor(props){
 
 }
 
-componentWillReceiveProps(nextProps) {
 
 
+componentWillMount(){
 
-  const obj = nextProps.playlist;
-let i =0;
-
- this.setState({
-  play:      false,
-  audioFile:  nextProps.playlist[0].src,
-  audioName:  nextProps.playlist[0].name,
-  markers:    nextProps.playlist[0].markers
-  });
-
-
+  this.setState({
+   audioFile:  this.props.playlist[0].src,
+   audioName:  this.props.playlist[0].name,
+   markers:    this.props.playlist[0].markers
+   });
 }
+
+
 
 componentDidMount () {
    this.setState({ initialWidth: this.rangeInput.offsetWidth });
-
+   window.addEventListener("resize", this.updateDimensions.bind(this));
 
  }
 
-toggleButton(){
-this.setState({play: !this.state.play, finishedPlaying: false});
+ updateDimensions() {
+   this.setState({ initialWidth: this.rangeInput.offsetWidth });   // updates marker position when the window is resized
 }
 
-updateTime(updateTime) {
-  this.setState({updateTime});
-}
+
+
+
+// toggleButton(){
+// this.setState({play: !this.state.play, finishedPlaying: false});
+// }
+
+// updateTime(updateTime) {
+//   this.setState({updateTime});
+// }
+
 durationTime(durationTime) {
-  if (!this.props.multipleTakes){
-      //this.setState({ durationTime, play: this.props.play });
-  }
 
 this.setState({ durationTime});
+
+if(this.state.looping){
+  this.props.playAudio();
+}
+
+this.props.updateTime(0);                // fixes the small bug of not reseting the timer to zero if the plus is clicked while playing a different take
 
 }
 initialWidth(initialWidth){
@@ -91,15 +98,15 @@ initialWidth(initialWidth){
 
 dragPosition(markerPosition) {
   const timePosition = (markerPosition * this.state.durationTime) / this.state.initialWidth;
+ //this.props.updateTime(timePosition);
 
   this.setState({ markerPosition: timePosition,
-                  updateTime: timePosition,
                   markerClicked: true,
-                  play: true
+
 
    });
 
-
+   this.props.playAudio();
 
   }
 
@@ -107,13 +114,12 @@ dragPosition(markerPosition) {
 
 callMarker() {
   const markerArray = [];
-  // console.log('Timeline props', this.props.markers);
-  // console.log('local props', markerObj.markers);
+
      let receivedMarkerObject = this.props.playlist[0].markers;
 
-debugger;
 
-   if(this.props.multipleTakes){
+
+   if(this.props.playlistMode){
    receivedMarkerObject = this.state.markers;
 
    }
@@ -137,42 +143,35 @@ debugger;
 
 
 
-finishedPlaying(check){
-debugger;
-this.setState({finishedPlaying: check,
-                play: false,
-                audioFile:  this.props.playlist[0].src,
-                audioName:  this.props.playlist[0].name
-                             });
+finishedPlaying(){
 
-         let i = this.state.pointer;
+let i = this.state.pointer;
+const playlistLength = this.props.playlist.length;
+//debugger;
+if(i < playlistLength){
+      this.setState({
+       audioFile:  this.props.playlist[i].src,
+       audioName:  this.props.playlist[i].name,
+       markers: this.props.playlist[i].markers,
+       pointer : this.state.pointer + 1,
+       looping: true
 
+       });
+this.props.takeId(i);
 
-   if(this.state.pointer === this.props.playlist.length){
-    this.setState({play: false, pointer: 1, markers: this.props.playlist[0].markers});
+}
+else{
+      this.setState({
+       audioFile:  this.props.playlist[0].src,
+       audioName:  this.props.playlist[0].name,
+       markers: this.props.playlist[0].markers,
+       pointer : 1,
+       looping:false
 
-   }
-
-      if(this.props.playlist.length > 1 && i <  this.props.playlist.length  ){
-
-        this.setState({
-         play:      true,
-         audioFile:  this.props.playlist[i].src,
-         audioName:  this.props.playlist[i].name,
-         markers: this.props.playlist[i].markers,
-         pointer : this.state.pointer + 1
-
-         });
-
-
-
-
-
-
-       }
-
-
-
+       });
+       this.props.takeId(0);
+       this.props.stopAudio();
+  }
 
 
 }
@@ -189,17 +188,14 @@ this.setState({markerClicked: statement});
   render() {
 
 
+  let src = this.props.playlist[0].src;
 
-
-  let src = ""
-
-  if(this.state.audioFile !== null){
-
-    src = this.state.audioFile;
+  if(this.props.playlistMode){
+     src = this.state.audioFile;
   }
 
 
-     const updateTime = this.state.updateTime;
+     //const updateTime = this.state.updateTime;
 
      let markers = '';
      let Button = <PlayButton onClick = {()=>this.props.playAudio()}/> ;
@@ -224,14 +220,13 @@ this.setState({markerClicked: statement});
             audioFile = {src}
             playAudio = {this.props.play}
             durationTime={this.durationTime}
-            updateTime = {this.updateTime}
-            initialWidth = {this.initialWidth}
+            //updateTime = {this.updateTime}
+            //initialWidth = {this.initialWidth}
             markerPosition= {this.state.markerPosition}
             markerClicked={this.state.markerClicked}
             resetMarkerClicked={this.resetMarkerClicked}
             finishedPlaying = {this.finishedPlaying}
 
-            looping = {true}
             resetMarkerClicked = {this.resetMarkerClicked}                                                 // property to use when stiching takes
                                  />
             <div style={{marginTop: 5}}>{this.state.audioName}</div>
@@ -242,7 +237,7 @@ this.setState({markerClicked: statement});
 
            <TimeContainer
             audioLength={this.state.durationTime}
-            updatedTime = {updateTime}
+            updatedTime = {this.props.updatedTime}
             markerBtnClicked ={()=> this.setState({showMarkers:!this.state.showMarkers})}
             audioName= {this.state.audioName}
             nextAudio={this.state.nextAudio}          />
@@ -290,19 +285,21 @@ const mapStateToProps = state => {
 
 
 
-const{ play } = state.setAudioPlayerState;
-const{ playlist } = state.updatePlaylist;
+const{ play, updatedTime } = state.setAudioPlayerState;
+const{ playlist, playlistMode, takeId } = state.updatePlaylist;
 
-return{play, playlist };
+return{play, playlist, playlistMode, updatedTime };
 
 };
 
 const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({
-          finishedPlaying: finishedPlaying,
-          playAudio:playAudio,
-          stopAudio:stopAudio
+          finishedPlaying,
+          playAudio,
+          stopAudio,
+          updateTime,
+          takeId
 }, dispatch);
 
 };

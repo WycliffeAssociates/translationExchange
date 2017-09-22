@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Wavesurfer from 'react-wavesurfer';
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
-import {playAudio, stopAudio, finishedPlaying} from '../../../../actions';
+import {playAudio, stopAudio, finishedPlaying, updateTime} from '../../../../actions';
 
 
 
@@ -14,10 +14,9 @@ class WaveForm extends Component {
     this.state = {
       playing: false,
       pos: 0,
-      max: 0,
-      nextAudio: false,
-      looping: false,
-      finished: false
+      audioFile: '',
+      pointer: 1
+
     };
 
     this.handlePosChange = this.handlePosChange.bind(this);
@@ -29,70 +28,24 @@ class WaveForm extends Component {
 
   handlePosChange(e) {
     this.setState({
-      pos: e.originalArgs[0],
-      nextAudio:false,
+      pos: e.originalArgs[0]
     });
 
 
-      this.props.updateTime(this.state.pos);
+    this.props.updateTime(this.state.pos);
      this.props.resetMarkerClicked(false);
 
   }
 
 
 
-  finishedPlaying(check){
-  debugger;
-  this.setState({finishedPlaying: check,
-                  play: false,
-                  audioFile:  this.props.playlist[0].src,
-                  audioName:  this.props.playlist[0].name
-                               });
-
-           let i = this.state.pointer;
-
-
-     if(this.state.pointer === this.props.playlist.length){
-      this.setState({play: false, pointer: 1, markers: this.props.playlist[0].markers});
-
-     }
-
-        if(this.props.playlist.length > 1 && i <  this.props.playlist.length  ){
-
-          this.setState({
-           play:      true,
-           audioFile:  this.props.playlist[i].src,
-           audioName:  this.props.playlist[i].name,
-           markers: this.props.playlist[i].markers,
-           pointer : this.state.pointer + 1
-
-           });
-
-
-
-
-
-
-         }
-
-
-
-
-
-  }
-
   duration(e) {
     this.props.durationTime(e.wavesurfer.getDuration());
-    
 
-
-    //  this.props.updateAudioPlayer({props: 'play', value: true});
-
-
-
-
-this.setState({finished:false, pos: 0});
-
+    this.setState({ pos: 0});
+    if(!this.props.playlistMode){
+      this.props.playAudio();
+    }
 
   }
 
@@ -101,10 +54,15 @@ this.setState({finished:false, pos: 0});
   finishedPlaying() {
 
     this.setState({pos: 0});
+    this.props.stopAudio();
 
-    if(!this.props.multipleTakes){
-           this.props.stopAudio();
+    if(this.props.playlistMode){
+            this.props.finishedPlaying();  // function called in audioPlayer.js
        }
+
+
+
+
 
 
   }
@@ -148,17 +106,20 @@ this.setState({finished:false, pos: 0});
 const mapStateToProps = state => {
 
 const{ play } = state.setAudioPlayerState;
-const{ multipleTakes } = state.updatePlaylist;
-return{ play, multipleTakes };
+const{ playlistMode, playlist } = state.updatePlaylist;
+return{ play, playlistMode, playlist };
 
 }
 
 const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({
-          finishedPlaying: finishedPlaying,
-          playAudio:playAudio,
-          stopAudio:stopAudio
+          playAudio,
+          stopAudio,
+          updateTime
+
+
+
 }, dispatch);
 
 };

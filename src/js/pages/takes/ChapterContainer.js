@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
-import {updateMode, updatePlaylist} from './../../actions';
+import {updateMode, addToPlaylist, playTake, stopAudio} from './../../actions';
 import config from "../../../config/config";
 import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
@@ -322,10 +322,12 @@ class ChapterContainer extends Component {
 	}
 
 	addToListenList(props) {
+
 		var newArr = this.state.listenList;
 		var id = props.take.id;
 
 		for (let i = 0; i < newArr.length; i++) {
+
 			if (newArr[i].props.take.id === id) {
 				newArr.splice(i, 1);
 				this.setState({ listenList: newArr });
@@ -348,6 +350,7 @@ class ChapterContainer extends Component {
 		this.setState({
 			listenList: newArr
 		});
+
 	}
 
 	getSourceAudioLocationForChunk(startv) {
@@ -362,17 +365,19 @@ class ChapterContainer extends Component {
 	}
 
 	onSourceClicked(startv) {
-		let sourceLoc = this.getSourceAudioLocationForChunk(startv);
+	   if(!this.props.playlistMode){
+			 this.props.stopAudio();
+				let sourceLoc = this.getSourceAudioLocationForChunk(startv);
 
-		let sourceAudio = [
-			{
-				src: config.streamingUrl + sourceLoc,
-				name: this.state.project.mode + " " + startv + " (source)"
-			}
-		];
+				let sourceAudio =
+					{
+						src: config.streamingUrl + sourceLoc,
+						name: this.state.project.mode + " " + startv + " (source)"
+					};
 
-   this.props.updatePlaylist(sourceAudio);
 
+		   this.props.playTake(sourceAudio) ;
+	 	}
 	}
 
 
@@ -394,11 +399,13 @@ class ChapterContainer extends Component {
 		} else {
 			return (
 				<div>
+
 					<LoadingDisplay
 						loaded={this.state.loaded}
 						error={this.state.error}
 						retry={this.requestData.bind(this)}
 					>
+
 						<ChapterHeader
 							book={this.state.book}
 							chapter={this.state.chapter}
@@ -417,13 +424,7 @@ class ChapterContainer extends Component {
 						{this.state.chunks.map(this.createChunkList.bind(this))}
 
 						<div fluid className="StickyFooter">
-							<Footer
-								mode={this.state.project.mode}
-								listenList={this.state.listenList}
-								currentPlaylist={this.props.playlist}            //playlist from redux
-								markers={this.state.markers}
-
-							/>
+							<Footer />
 						</div>
 					</LoadingDisplay>
 				</div>
@@ -465,14 +466,14 @@ class ChapterContainer extends Component {
 
 const mapStateToProps = state => {
 
-const{ playlist } = state.updatePlaylist;
-return{ playlist };
+const{ playlistMode } = state.updatePlaylist;
+return{ playlistMode };
 
 }
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({updateMode, updatePlaylist}, dispatch);
+  return bindActionCreators({updateMode, addToPlaylist, playTake, stopAudio}, dispatch);
 
 };
 

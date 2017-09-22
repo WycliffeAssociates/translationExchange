@@ -8,7 +8,7 @@ import TakeListenButton from "./AddTake";
 import "css/takes.css";
 import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
-import {updatePlaylist} from './../../../actions';
+import {addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio} from './../../../actions';
 
 
 var listenCounter = 0;
@@ -20,7 +20,10 @@ class Take extends Component {
 			isToggleOn: true,
 			addButtonIcon: "plus",
 			showMarkers: false,
-			showMarkersColor: ""
+			showMarkersColor: "",
+			playlist:[],
+			clear : true
+
 		};
 		// This binding is necessary to make `this` work in the callback
 		this.handleClick = this.handleClick.bind(this);
@@ -29,21 +32,6 @@ class Take extends Component {
 
 	handleClick() {
 		this.setState({ isToggleOn: !this.state.isToggleOn });
-	}
-
-	addToListen() {
-		this.props.addToListenList(this.props);
-
-
-		if (this.state.addButtonIcon !== "plus") {
-			this.setState({
-				addButtonIcon: "plus"
-			});
-		} else {
-			this.setState({
-				addButtonIcon: "minus"
-			});
-		}
 	}
 
 	moveLeft() {
@@ -64,37 +52,86 @@ class Take extends Component {
 		}
 	}
 
+getTakeInfo(){
+	const takeLoc = this.props.take.location;
+	const takeNum = this.props.count;
+	const startv = this.props.chunkNumber;
+	const author = this.props.author.name;
+	const date = this.parseDate(this.props.take.date_modified);
+	const markers = this.props.take.markers;
 
-	playTakeRedux() {
+	let take = {
+		 src: config.streamingUrl + takeLoc,
+		 markers: markers,
+		 name: `take ${takeNum}, ${this.props.mode} ${startv}  (${author} on ${date})`,
+		 id: takeLoc,
+		 chunk: `${this.props.mode} ${startv}`
+	 };
 
-		const takeLoc = this.props.take.location;
-		const takeNum = this.props.count;
-		const startv = this.props.chunkNumber;
-		const author = this.props.author.name;
-		const date = this.parseDate(this.props.take.date_modified);
-		const markers = this.props.take.markers;
+	 return take;
+}
 
-	 let SingleTakePlaylist = [
-			{
-				src: config.streamingUrl + takeLoc,
-				markers: markers,
-				name:
-					"take " +
-					takeNum +
-					", " +
-					this.props.mode +
-					" " +
-					startv +
-					" (" +
-					author +
-					" on " +
-					date +
-					")"
-			}
-		];
+	playTakeFromCard() {
 
-		 this.props.updatePlaylist(SingleTakePlaylist);
+      if(!this.props.playlistMode){                           // checks if it is on playlist mode, so when is true it does not play audio from the card
+				this.props.stopAudio();
+         const take = this.getTakeInfo();
+		     this.props.playTake(take);
 
+      }
+
+	}
+
+	removeFromPlaylist(){
+  const takeLocation = this.props.take.location;
+
+	this.props.playlist.map((i, index) => {         // loop inside the object to find an unique identifier in order to get the index of the object to proceed and delete it
+		if (i.id === takeLocation){
+			this.props.stopAudio();       // solve bug of removing the take playing,
+			this.props.removeTakeFromPlaylist(index);
+			//this.props.playAudio();
+		}
+	})
+
+	}
+
+
+	addToPlaylist() {
+
+		const take = this.getTakeInfo();
+
+					if(!this.props.playlistMode){                        // the first time called the function playlist mode is false so we clear the playlist info from the single take mode
+								this.props.clearPlaylist();
+						 }
+
+
+
+
+				if (this.state.addButtonIcon !== "plus") {
+						this.setState({addButtonIcon: "plus"});
+						this.removeFromPlaylist();
+
+						if(this.props.playlist.length <1){
+							this.props.multipleTakes(false);
+							this.props.playTake(take);          // add the last take played to the playlist
+						}
+
+					}
+				else {
+
+            this.props.stopAudio();
+						this.setState({addButtonIcon: "minus", clear:false});
+						this.props.addToPlaylist(take);
+						this.props.multipleTakes(true);         //used to check if there is a playlist so at the end of each take the audio keeps playing until
+			                                              // it reaches the last one
+
+					if(this.props.playlist.length > 1){   // conditional to do not play the take when it is added the first time to the playlist
+					// this.props.playAudio();
+					 }
+
+
+
+					}
 
 	}
 
@@ -111,15 +148,6 @@ class Take extends Component {
 			<Segment>
 				<Grid textAlign="left">
 					<Grid.Row>
-						{/* <Grid.Column verticalAlign="middle">
-							{this.props.take.rating > 1
-								// ? <Icon
-								// 		className="hoverButton"
-								// 		name="chevron left"
-								// 		//onClick={this.moveLeft.bind(this)}
-								// 	/>
-								// : ""}
-						</Grid.Column> */}
 						<Grid.Column width={12}>
 							<Grid.Row verticalAlign="top">
 								<Grid>
@@ -137,7 +165,7 @@ class Take extends Component {
 									</Grid.Column>
 									<Grid.Column floated="right">
 										<StitchTakesButton
-											onClick={this.addToListen.bind(this)}
+											onClick={()=> this.addToPlaylist()}
 											icon={this.state.addButtonIcon}
 										/>
 									</Grid.Column>
@@ -150,7 +178,7 @@ class Take extends Component {
 							<Grid.Row className="centerPlayButton">
 								<br />
 								<TakeListenButton
-									onClick={() => { this.playTakeRedux(); }
+									onClick={() => { this.playTakeFromCard(); }
 
 									}
 								/>
@@ -168,16 +196,6 @@ class Take extends Component {
 								/>
 							</Grid.Row>
 						</Grid.Column>
-
-						{/* <Grid.Column verticalAlign="middle">
-							{this.props.take.is_publish
-								? ""
-								: <Icon
-										className="hoverButton"
-										name="chevron right"
-										onClick={this.moveRight.bind(this)}
-									/>}
-						</Grid.Column> */}
 					</Grid.Row>
 				</Grid>
 			</Segment>
@@ -267,15 +285,25 @@ Take.propTypes = {
 
 const mapStateToProps = state => {
 
-const{ mode } = state.updatePlaylist;
+	const {play} = state.setAudioPlayerState;
 
-return{ mode };
+const{ mode, playlist, playlistMode } = state.updatePlaylist;
+
+return{ mode , playlistMode, playlist };
 
 }
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({updatePlaylist}, dispatch);
+  return bindActionCreators({addToPlaylist,
+		 												 playTake,
+														 multipleTakes,
+														 clearPlaylist,
+													   removeTakeFromPlaylist,
+  												   stopAudio,
+														 updateTime,
+														 playAudio
+													              }, dispatch);
 
 };
 

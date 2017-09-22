@@ -35,7 +35,15 @@ class LoadingDisplay extends Component{
                     return React.Children.only(this.props.children);
                 }
             } else {
-                return (<img src={LoadingGif} alt="Loading..." width="66" height="66"/>);
+
+                return (
+
+                   <div style = {styles.loading}>
+                     <h1>Loading...</h1>
+                  <img src={LoadingGif} alt="Loading..." width="66" height="66"/>
+                   </div>
+                );
+
             }
         }
     }
@@ -45,6 +53,18 @@ LoadingDisplay.propTypes = {
     loaded: PropTypes.bool.isRequired, //is the data loaded and ready to display?
     error: PropTypes.object.isRequired, //empty if there is no error, error message if there is a problem
     retry: PropTypes.func.isRequired //function to call when retrying data request
+};
+
+const styles = {
+    loading:{
+      display: 'flex',
+      height: 400,
+      width: '100%',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
+
 };
 
 export default LoadingDisplay;
