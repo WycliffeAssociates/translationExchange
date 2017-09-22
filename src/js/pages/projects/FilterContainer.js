@@ -150,7 +150,8 @@ class FilterContainer extends Component {
 		versionOptions = versionOptions.concat(this.state.versions);
 
 		return (
-			<div>
+			<div style ={{display:'flex', marginTop: '2%', justifyContent:'center'}}>
+				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
 					placeholder="Select Language"
 					selection
@@ -160,6 +161,8 @@ class FilterContainer extends Component {
 					onChange={this.setLanguage.bind(this)}
 					value={query.language}
 				/>
+				</div>
+				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
 					placeholder="Select Book"
 					selection
@@ -169,6 +172,8 @@ class FilterContainer extends Component {
 					onChange={this.setBook.bind(this)}
 					value={query.book}
 				/>
+				</div>
+				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
 					placeholder="Select Version"
 					selection
@@ -178,7 +183,10 @@ class FilterContainer extends Component {
 					onChange={this.setVersion.bind(this)}
 					value={query.version}
 				/>
+				</div>
+				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Button onClick={this.props.clearQuery}>Clear</Button>
+			  </div>
 				{this.state.error ? (
 					<Message negative>
 						{this.state.error.message}{" "}

@@ -17,6 +17,7 @@ class ProjectsList extends Component {
      */
 	render() {
 		return (
+			<div>
 			<Container fluid>
 				<Table selectable fixed color="grey">
 					<Table.Header>
@@ -33,6 +34,8 @@ class ProjectsList extends Component {
 					</Table.Body>
 				</Table>
 			</Container>
+
+			</div>
 		);
 	}
 

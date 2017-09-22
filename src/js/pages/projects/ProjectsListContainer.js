@@ -114,8 +114,8 @@ class ProjectsListContainer extends Component {
 			return <Error />;
 		} else {
 			return (
-				<div className="projects">
-					<h1>Choose a Project</h1>
+				<div style = {{display: 'flex', alignItems:'center', flexDirection:'column', marginTop: '2%' }}>
+					<h1 style ={{fontSize: 35}} >Choose a Project</h1>
 					<LoadingDisplay
 						loaded={this.state.loaded}
 						error={this.state.error}
@@ -128,12 +128,16 @@ class ProjectsListContainer extends Component {
 							clearQuery={this.clearQuery.bind(this)}
 						/>
 						{this.state.projects.length > 0
-							? <ProjectsList
+							?
+							<div style={{marginTop: 10}}>
+							<ProjectsList
 									projects={this.state.projects}
 									navigateToProject={this.navigateToProject.bind(this)}
 								/>
-							: ""}
+							</div>
+							: ''}
 					</LoadingDisplay>
+
 				</div>
 			);
 		}
