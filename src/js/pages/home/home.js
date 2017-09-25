@@ -10,6 +10,7 @@ import QueryString from "query-string";
 import { connect } from "react-redux";
 import { fetchRecentProjects } from "../../actions/home-recent-projects-actions";
 import countries from './countries.json';
+import languageAndCountry from '../../../languages/languageAndCountry.json'
 
 
 class Home extends Component {
@@ -20,21 +21,19 @@ class Home extends Component {
 			projects: []
 		};
 	}
-	componentDidMount() {
-		this.getRecentProjects();
 
-
+	componentWillMount(){
 		if (window.navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition( position =>{
+				navigator.geolocation.getCurrentPosition( position =>{
 					// Get the coordinates of the current position.
 
-			   const lat = position.coords.latitude;
-         const lng = position.coords.longitude;
+				 const lat = position.coords.latitude;
+				 const lng = position.coords.longitude;
 				 let country=''
 
-         const evaluate = {
-   			 "latitude": lat,
-	       "longitude": lng }
+				 const evaluate = {
+				 "latitude": lat,
+				 "longitude": lng }
 
 				 const fields = [
 					 {name: "latitude", measure: nn.comparisonMethods.number, max: 100 },
@@ -43,20 +42,39 @@ class Home extends Component {
 				 ];
 
 				 nn.findMostSimilar(evaluate, countries, fields, function(nearestNeighbor, probability) {
-					  // console.log(evaluate);
-					  // console.log(nearestNeighbor);
-					  // console.log(probability);
-					  country = nearestNeighbor.country;
+						// console.log(evaluate);
+						// console.log(nearestNeighbor);
+						// console.log(probability);
+						country = nearestNeighbor.country;
 
 					});
-          console.log(country);
-        
+
+
+
+							for (const language in languageAndCountry) {
+				         const lang = languageAndCountry[lang];
+
+								 for (const eachCountry in language) {
+
+									     if(language[eachCountry] == country){
+
+                          console.log(language);
+												}
+											 }
+
+							}
+
+
 				});
 
- }
- else {
-   // geolocation is not supported
- }
+	}
+	else {
+	 // geolocation is not supported
+	}
+
+	}
+	componentDidMount() {
+		this.getRecentProjects();
 
 	}
 	getRecentProjects() {

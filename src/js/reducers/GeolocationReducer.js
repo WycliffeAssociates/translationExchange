@@ -1,28 +1,21 @@
-import { RESET_AUDIOPLAYER } from '../actions/types';
+import { UPDATE_LANGUAGE } from '../actions/types';
+import language from '../../languages/languages.json'
 
-const INITIAL_STATE = { language: {
-  "hello", "juan"}
-
+const INITIAL_STATE = { language: language.English
                       };
 
 export default (state = INITIAL_STATE, action) => {
 
     switch (action.type){
 
-
-
-        case PLAY_AUDIO:
+        case UPDATE_LANGUAGE:
           return {
             state,
-            play: true
+            language: action.updateLanguage
           };
 
        default:
                return state;
-
-
-
-
 
     }
 

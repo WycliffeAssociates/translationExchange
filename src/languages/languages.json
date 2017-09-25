@@ -16,7 +16,13 @@
    "book": "Book",
    "percentComplete": "Percentage Complete",
    "more": "more",
-   
+   "chapter": "Chapter",
+   "checkLevel": "Checking Level",
+   "readyToPublish": "Ready to Publish",
+   "contributors": "Contributors",
+   "translationType": "Translation Type",
+   "dateModified": "Date Modified",
+   "chunk": "Chunk"
    },
 "Spanish": {
      "mainPage": "Translatio",
