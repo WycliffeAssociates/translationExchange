@@ -1,0 +1,30 @@
+{
+ "English": {
+   "mainPage": "Translation made available",
+   "home": "home",
+   "about": "about",
+   "projects": "projects",
+   "ChooseProj": "Choose a Project",
+   "selectLanguage": "Select Language",
+   "selectBook": "Select Book",
+   "selectVersion": "Select Version",
+   "clearButton": "clear",
+   "retry": "retry",
+   "error": "There was a connection error",
+   "loading": "loading...",
+   "language": "Language",
+   "book": "Book",
+   "percentComplete": "Percentage Complete",
+   "more": "more",
+   
+   },
+"Spanish": {
+     "mainPage": "Translatio",
+     "home": "Translation made ",
+     "about": "Translation made available",
+     "projects": "Translation made available",
+     }
+
+
+
+}

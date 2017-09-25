@@ -10,8 +10,8 @@
 // };
 
 var config = {                                                        //remote api
-    apiUrl: "http://192.168.0.21/api/",
-    streamingUrl: "http://http://192.168.0.21/"
+    apiUrl: "http://192.168.0.16/api/",
+    streamingUrl: "http://http://192.168.0.16/"
 };
 
 export default config;

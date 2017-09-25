@@ -50,7 +50,7 @@ class Home extends Component {
 
 					});
           console.log(country);
-         debugger;
+        
 				});
 
  }
