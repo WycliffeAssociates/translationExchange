@@ -18,7 +18,21 @@ class Home extends Component {
 	}
 	componentDidMount() {
 		this.getRecentProjects();
-		//this.props.dispatch(fetchRecentProjects());
+
+
+		if (window.navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition( position =>{
+					// Get the coordinates of the current position.
+         const lat = position.coords.latitude;
+         const lng = position.coords.longitude;
+         debugger;
+				});
+
+ }
+ else {
+   // geolocation is not supported
+ }
+
 	}
 	getRecentProjects() {
 		axios
