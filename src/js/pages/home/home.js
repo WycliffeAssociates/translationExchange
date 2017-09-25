@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container, Grid, Divider } from "semantic-ui-react";
+import nn from 'nearest-neighbor';
 import "css/home.css";
 import StartHere from "./StartHere";
 import LogoTitle from "./LogoTitle";
@@ -8,6 +9,9 @@ import config from "config/config";
 import QueryString from "query-string";
 import { connect } from "react-redux";
 import { fetchRecentProjects } from "../../actions/home-recent-projects-actions";
+import countries from './countries.json';
+
+
 class Home extends Component {
 
 	constructor() {
@@ -23,8 +27,29 @@ class Home extends Component {
 		if (window.navigator.geolocation) {
         navigator.geolocation.getCurrentPosition( position =>{
 					// Get the coordinates of the current position.
-         const lat = position.coords.latitude;
+
+			   const lat = position.coords.latitude;
          const lng = position.coords.longitude;
+				 let country=''
+
+         const evaluate = {
+   			 "latitude": lat,
+	       "longitude": lng }
+
+				 const fields = [
+					 {name: "latitude", measure: nn.comparisonMethods.number, max: 100 },
+					 {name: "longitude", measure: nn.comparisonMethods.number, max: 100 }
+
+				 ];
+
+				 nn.findMostSimilar(evaluate, countries, fields, function(nearestNeighbor, probability) {
+					  // console.log(evaluate);
+					  // console.log(nearestNeighbor);
+					  // console.log(probability);
+					  country = nearestNeighbor.country;
+
+					});
+          console.log(country);
          debugger;
 				});
 
