@@ -121,18 +121,22 @@ class Home extends Component {
 		});
 	}
 	render() {
+		const recentProjects = this.props.language.recentProjects;
+		const title = this.props.language.mainPage;
+		const btnText = this.props.language.startHere;
+
 		return (
 			<Container fluid className="background">
 				<Container fluid>
-					<LogoTitle />
-					<StartHere />
+					<LogoTitle text = {title} />
+					<StartHere text= {btnText} />
 				</Container>
 				<Container fluid>
 					<Grid padded textAlign="center">
 						<Grid.Column width={3}>
 							<Grid.Row height={1}>
 								<h2>
-									<font color="white">Recent Projects</font>
+									<font color="white">{recentProjects}</font>
 								</h2>
 							</Grid.Row>
 							<Divider />
@@ -169,11 +173,15 @@ class Home extends Component {
 		);
 	}
 }
-function mapStateToProps(state) {
-	return {
-		homeRecentProjects: state.props
-	};
-}
+
+
+const mapStateToProps = state => {
+// const{ play, updatedTime } = state.homeRecentProjects;
+const{ language } = state.geolocation;
+
+return{language};
+
+};
 
 const mapDispatchToProps = dispatch => {
 
