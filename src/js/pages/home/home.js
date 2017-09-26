@@ -24,62 +24,7 @@ class Home extends Component {
 		};
 	}
 
-	componentWillMount(){
-		if (window.navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition( position =>{
-					// Get the coordinates of the current position.
 
-				 const lat = position.coords.latitude;
-				 const lng = position.coords.longitude;
-				 let country=''
-
-				 const evaluate = {
-				 "latitude": lat,
-				 "longitude": lng }
-
-				 const fields = [
-					 {name: "latitude", measure: nn.comparisonMethods.number, max: 100 },
-					 {name: "longitude", measure: nn.comparisonMethods.number, max: 100 }
-
-				 ];
-
-				 nn.findMostSimilar(evaluate, countries, fields, function(nearestNeighbor, probability) {
-						// console.log(evaluate);
-						// console.log(nearestNeighbor);
-						// console.log(probability);
-						country = nearestNeighbor.country;
-
-					});
-
-
-
-							for (const key in languageAndCountry) {
-				         const lang = languageAndCountry[key];
-
-								 for (const eachCountry in lang) {
-
-
-									     if(lang[eachCountry] === country){
-
-												const country = key ;
-
-                        //  console.log(lang[eachCountry]);
-                         this.props.updateLanguage(key);
-
-												}
-											 }
-
-							}
-
-
-				});
-
-	}
-	else {
-	 // geolocation is not supported
-	}
-
-	}
 	componentDidMount() {
 		this.getRecentProjects();
 
@@ -183,17 +128,10 @@ return{language};
 
 };
 
-const mapDispatchToProps = dispatch => {
-
-  return bindActionCreators({
-          updateLanguage
-
-}, dispatch);
-
-};
 
 
 
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Home);
+
+export default connect(mapStateToProps)(Home);
