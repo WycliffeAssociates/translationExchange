@@ -59,8 +59,8 @@ class Home extends Component {
 
 									     if(lang[eachCountry] === country){
 
-                          console.log(lang[eachCountry]);
-													debugger;
+                        //  console.log(lang[eachCountry]);
+
 												}
 											 }
 
