@@ -51,14 +51,16 @@ class Home extends Component {
 
 
 
-							for (const language in languageAndCountry) {
-				         const lang = languageAndCountry[lang];
+							for (const key in languageAndCountry) {
+				         const lang = languageAndCountry[key];
 
-								 for (const eachCountry in language) {
+								 for (const eachCountry in lang) {
 
-									     if(language[eachCountry] == country){
 
-                          console.log(language);
+									     if(lang[eachCountry] === country){
+
+                          console.log(lang[eachCountry]);
+													debugger;
 												}
 											 }
 

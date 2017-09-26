@@ -24,11 +24,30 @@
    "dateModified": "Date Modified",
    "chunk": "Chunk"
    },
-"Spanish": {
-     "mainPage": "Translatio",
-     "home": "Translation made ",
-     "about": "Translation made available",
-     "projects": "Translation made available",
+   "Spanish": {
+     "mainPage": "Translation made available",
+     "home": "home",
+     "about": "about",
+     "projects": "projects",
+     "ChooseProj": "Choose a Project",
+     "selectLanguage": "Select Language",
+     "selectBook": "Select Book",
+     "selectVersion": "Select Version",
+     "clearButton": "clear",
+     "retry": "retry",
+     "error": "There was a connection error",
+     "loading": "loading...",
+     "language": "Language",
+     "book": "Book",
+     "percentComplete": "Percentage Complete",
+     "more": "more",
+     "chapter": "Chapter",
+     "checkLevel": "Checking Level",
+     "readyToPublish": "Ready to Publish",
+     "contributors": "Contributors",
+     "translationType": "Translation Type",
+     "dateModified": "Date Modified",
+     "chunk": "Chunk"
      }
 
 
