@@ -140,7 +140,7 @@ class TakeCommentsButton extends Component {
 				}
 			>
 				<Modal.Header style={this.Style}>
-					{this.props.language.commentsOn} {this.props.count}, {this.props.language.chunk} {this.props.chunkNumber}{" "}
+					{this.props.language.commentsOnTake} {this.props.count}, {this.props.language.chunk} {this.props.chunkNumber}{" "}
 				</Modal.Header>
 				<div>
 					<RecordComment

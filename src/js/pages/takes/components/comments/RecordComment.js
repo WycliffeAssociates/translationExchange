@@ -181,9 +181,9 @@ function DisplayAudioPlayer(props) {
 
 const mapStateToProps = state => {
 
-const{ language } = state.geolocation;
+		const{ language } = state.geolocation;
 
-return{language};
+		return{language};
 
 };
 

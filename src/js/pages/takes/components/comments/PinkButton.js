@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import RecordComment from "./RecordComment";
+import { connect } from "react-redux";
 import "./RecordComment.css";
 import {
 	Button,
@@ -131,7 +132,7 @@ class PinkButton extends Component {
 				}
 			>
 				<Modal.Header style={this.Style}>
-					Comments on {this.props.language} {this.props.type}{" "}
+					{this.props.language.commentsOn} {this.props.languagefrmAPI} {this.props.type}{" "}
 					{this.props.number}{" "}
 				</Modal.Header>
 				<div>
@@ -160,4 +161,16 @@ class PinkButton extends Component {
 	}
 }
 
-export default PinkButton;
+
+
+
+const mapStateToProps = state => {
+
+		const{ language } = state.geolocation;
+
+		return{language};
+
+};
+
+
+export default connect (mapStateToProps) (PinkButton);
