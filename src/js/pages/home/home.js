@@ -8,6 +8,8 @@ import axios from "axios";
 import config from "config/config";
 import QueryString from "query-string";
 import { connect } from "react-redux";
+import {bindActionCreators} from 'redux';
+import {updateLanguage} from '../../actions';
 import { fetchRecentProjects } from "../../actions/home-recent-projects-actions";
 import countries from './countries.json';
 import languageAndCountry from '../../../languages/languageAndCountry.json'
@@ -59,7 +61,10 @@ class Home extends Component {
 
 									     if(lang[eachCountry] === country){
 
+												const country = key ;
+
                         //  console.log(lang[eachCountry]);
+                         this.props.updateLanguage(key);
 
 												}
 											 }
@@ -169,4 +174,18 @@ function mapStateToProps(state) {
 		homeRecentProjects: state.props
 	};
 }
-export default connect(mapStateToProps)(Home);
+
+const mapDispatchToProps = dispatch => {
+
+  return bindActionCreators({
+          updateLanguage
+
+}, dispatch);
+
+};
+
+
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home);
