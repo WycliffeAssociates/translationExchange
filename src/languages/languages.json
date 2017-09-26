@@ -28,7 +28,13 @@
    "publish": "Publish",
    "chunk": "Chunk",
    "verse": "Verse",
-   "segment":"Segment"
+   "segment":"Segment",
+   "commentsOn": "Comments on Take",
+   "deleteComment":"Delete this comment?",
+   "save":"Save",
+   "errorTryAgain": "There was an error. Please try again",
+   "take": "Take",
+   "download": "Download"
    },
    "Spanish": {
      "mainPage": "Traducción Disponible Para Todos",
@@ -59,7 +65,13 @@
      "publish": "Publicar",
      "chunk": "Sección",
      "verse": "Versículo",
-     "segment":"Segmento"
+     "segment":"Segmento",
+     "commentsOn": "Comentarios para la Grabación",
+     "deleteComment":"¿Eliminar Comentario?",
+     "save":"Guardar",
+     "errorTryAgain": "Hubo un error, intente de nuevo...",
+     "take": "Grabación",
+     "download": "Descargar"
      }
 
 

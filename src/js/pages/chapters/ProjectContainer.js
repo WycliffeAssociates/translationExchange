@@ -184,7 +184,7 @@ class ProjectContainer extends Component {
 									/>
 								: ""}
 							{this.state.downloadError
-								? "There was an error. Please try again"
+								? this.props.language.errorTryAgain
 								: ""}
 						</LoadingDisplay>
 

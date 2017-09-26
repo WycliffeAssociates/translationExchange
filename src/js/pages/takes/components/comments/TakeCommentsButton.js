@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import RecordComment from "./RecordComment";
 import "./RecordComment.css";
 import {
@@ -19,7 +20,7 @@ class TakeCommentsButton extends Component {
 		super(props);
 
 		this.state = {
-			title: "Record Comment",
+			//title: "Record Comment",
 			show: this.props.open,
 			SaveButtonState: true,
 			blob: null,
@@ -98,7 +99,7 @@ class TakeCommentsButton extends Component {
 						fluid
 						negative
 						onClick={() => {
-							if (window.confirm("Delete this comment?")) {
+							if (window.confirm(this.props.language.deleteComment)) {
 								this.onClickDelete(comment.comment.id, this.props.take.id);
 							}
 						}}
@@ -139,7 +140,7 @@ class TakeCommentsButton extends Component {
 				}
 			>
 				<Modal.Header style={this.Style}>
-					Comments on Take {this.props.count}, Chunk {this.props.chunkNumber}{" "}
+					{this.props.language.commentsOn} {this.props.count}, {this.props.language.chunk} {this.props.chunkNumber}{" "}
 				</Modal.Header>
 				<div>
 					<RecordComment
@@ -165,4 +166,14 @@ class TakeCommentsButton extends Component {
 	}
 }
 
-export default TakeCommentsButton;
+
+const mapStateToProps = state => {
+
+const{ language } = state.geolocation;
+
+return{language};
+
+};
+
+
+export default connect (mapStateToProps) (TakeCommentsButton);

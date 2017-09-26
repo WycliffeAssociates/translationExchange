@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { ReactMic } from "react-mic";
 import { Button, Grid, Icon } from "semantic-ui-react";
 import "./RecordComment.css";
@@ -97,6 +98,7 @@ export class RecordComment extends Component {
 					onSave={this.onSave.bind(this)}
 					active={this.props.loadingActive}
 					hideplayer={this.state.hideplayer}
+					btnText ={this.props.language.save}
 				/>
 			);
 		}
@@ -146,7 +148,9 @@ function DisplayAudioPlayer(props) {
 	const jsonblob = props.jsonblob;
 	const type = props.type;
 	const id = props.id;
+	const btnText = props.btnText;
 	if (displayPlayer) {
+
 		return (
 			<Grid columns={2}>
 				<Grid.Column width={13}>
@@ -165,7 +169,7 @@ function DisplayAudioPlayer(props) {
 									props.onSave(type, id, jsonblob, props.onClickSave);
 								}}
 							>
-								Save
+								{btnText}
 							</Button>}
 				</Grid.Column>
 			</Grid>
@@ -174,4 +178,14 @@ function DisplayAudioPlayer(props) {
 	return null;
 }
 
-export default RecordComment;
+
+const mapStateToProps = state => {
+
+const{ language } = state.geolocation;
+
+return{language};
+
+};
+
+
+export default connect (mapStateToProps) (RecordComment);
