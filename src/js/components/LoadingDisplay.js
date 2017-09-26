@@ -9,6 +9,7 @@
  */
 
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import {Button} from "semantic-ui-react";
 import LoadingGif from '../../images/loading.gif';
@@ -39,7 +40,7 @@ class LoadingDisplay extends Component{
                 return (
 
                    <div style = {styles.loading}>
-                     <h1>Loading...</h1>
+                     <h1>{this.props.language.loading}</h1>
                   <img src={LoadingGif} alt="Loading..." width="66" height="66"/>
                    </div>
                 );
@@ -67,4 +68,14 @@ const styles = {
 
 };
 
-export default LoadingDisplay;
+
+const mapStateToProps = state => {
+
+const{ language } = state.geolocation;
+
+return{language};
+
+};
+
+
+export default connect (mapStateToProps) (LoadingDisplay);

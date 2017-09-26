@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Menu, Container, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import "css/home.css";
@@ -39,7 +40,7 @@ class Header extends Component {
 						<Link to="/">
 							<Menu.Item
 								position="right"
-								name="Home"
+								name={this.props.language.home}
 								active={activeItem === "Home"}
 								onClick={this.handleItemClick}
 							/>
@@ -47,7 +48,7 @@ class Header extends Component {
 
 						<Link to="/about">
 							<Menu.Item
-								name="About"
+								name={this.props.language.about}
 								active={activeItem === "About"}
 								onClick={this.handleItemClick}
 							/>
@@ -55,7 +56,7 @@ class Header extends Component {
 
 						<Link to="/projects">
 							<Menu.Item
-								name="Projects"
+								name={this.props.language.projects}
 								active={activeItem === "Projects"}
 								onClick={this.handleItemClick}
 							/>
@@ -75,4 +76,14 @@ class Header extends Component {
 	}
 }
 
-export default Header;
+
+const mapStateToProps = state => {
+
+const{ language } = state.geolocation;
+
+return{language};
+
+};
+
+
+export default connect (mapStateToProps) (Header);

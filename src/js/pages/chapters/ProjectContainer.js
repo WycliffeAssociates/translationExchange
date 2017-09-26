@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Container, Header, Table } from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
 import DownloadProjects from "./components/DownloadProjects";
@@ -149,13 +150,13 @@ class ProjectContainer extends Component {
 							<Table selectable fixed color="grey">
 								<Table.Header>
 									<Table.Row>
-										<Table.HeaderCell>Chapter</Table.HeaderCell>
-										<Table.HeaderCell>Percent Complete</Table.HeaderCell>
-										<Table.HeaderCell>Checking Level</Table.HeaderCell>
-										<Table.HeaderCell>Ready to Publish</Table.HeaderCell>
-										<Table.HeaderCell>Contributors</Table.HeaderCell>
-										<Table.HeaderCell>Translation Type</Table.HeaderCell>
-										<Table.HeaderCell>Date Modified</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.language.chapter}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.language.percentComplete}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.language.checkLevel}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.language.readyToPublish}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.language.contributors}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.language.translationType}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.language.dateModified}</Table.HeaderCell>
 									</Table.Row>
 								</Table.Header>
 
@@ -195,4 +196,14 @@ class ProjectContainer extends Component {
 	}
 }
 
-export default ProjectContainer;
+
+const mapStateToProps = state => {
+
+const{ language } = state.geolocation;
+
+return{language};
+
+};
+
+
+export default connect (mapStateToProps) (ProjectContainer);

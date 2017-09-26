@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Dropdown, Button, Message } from "semantic-ui-react";
+import { connect } from "react-redux";
 import axios from "axios";
 import config from "config/config";
 import QueryString from "query-string";
@@ -153,7 +154,7 @@ class FilterContainer extends Component {
 			<div style ={{display:'flex', marginTop: '2%', justifyContent:'center'}}>
 				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
-					placeholder="Select Language"
+					placeholder={this.props.language.selectLanguage}  // text from in languages.json
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -164,7 +165,7 @@ class FilterContainer extends Component {
 				</div>
 				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
-					placeholder="Select Book"
+					placeholder={this.props.language.selectBook}
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -175,7 +176,7 @@ class FilterContainer extends Component {
 				</div>
 				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
-					placeholder="Select Version"
+					placeholder={this.props.language.selectVersion}
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -185,12 +186,12 @@ class FilterContainer extends Component {
 				/>
 				</div>
 				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
-				<Button onClick={this.props.clearQuery}>Clear</Button>
+				<Button onClick={this.props.clearQuery}>{this.props.language.clearButton}</Button>
 			  </div>
 				{this.state.error ? (
 					<Message negative>
 						{this.state.error.message}{" "}
-						<Button onClick={this.requestAllFilters.bind(this)}>Retry</Button>
+						<Button onClick={this.requestAllFilters.bind(this)}>{this.props.language.retry}</Button>
 					</Message>
 				) : (
 					""
@@ -200,4 +201,12 @@ class FilterContainer extends Component {
 	}
 }
 
-export default FilterContainer;
+const mapStateToProps = state => {
+
+const{ language } = state.geolocation;
+
+return{language};
+
+};
+
+export default connect( mapStateToProps)(FilterContainer);

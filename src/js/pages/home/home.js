@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
 import {updateLanguage} from '../../actions';
 import { fetchRecentProjects } from "../../actions/home-recent-projects-actions";
-import countries from './countries.json';
+import countries from '../../../languages/countries.json';
 import languageAndCountry from '../../../languages/languageAndCountry.json'
 
 

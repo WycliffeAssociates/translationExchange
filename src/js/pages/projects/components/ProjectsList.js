@@ -4,6 +4,7 @@
  */
 
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Container, Table, Icon } from "semantic-ui-react";
 import CircularProgressbar from "react-circular-progressbar";
@@ -22,10 +23,10 @@ class ProjectsList extends Component {
 				<Table selectable fixed color="grey">
 					<Table.Header>
 						<Table.Row>
-							<Table.HeaderCell>Language</Table.HeaderCell>
-							<Table.HeaderCell>Book</Table.HeaderCell>
-							<Table.HeaderCell>Percent Complete</Table.HeaderCell>
-							<Table.HeaderCell>More</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.language.language}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.language.book}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.language.percentComplete}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.language.more}</Table.HeaderCell>
 						</Table.Row>
 					</Table.Header>
 
@@ -67,14 +68,14 @@ class ProjectsList extends Component {
 					/>
 				</Table.Cell>
 				<Table.Cell>
-					<ReadMore lines={1} onShowMore={this.props.onChange} text="more">
-						<b>Date Modified</b>: {this.parseDate(project.date_modified)} <br />
-						<b>Translation Type</b>: {project.version} <br />
-						<b>Contributors</b>: {this.getContributorText(
+					<ReadMore lines={1} onShowMore={this.props.onChange} text={this.props.language.more}>
+						<b>{this.props.language.dateModified}</b>: {this.parseDate(project.date_modified)} <br />
+						<b>{this.props.language.translationType}</b>: {project.version} <br />
+						<b>{this.props.language.contributors}</b>: {this.getContributorText(
 							project.contributors
 						)}{" "}
 						<br />
-						<b>Published</b>:
+						<b>{this.props.language.published}</b>:
 						{project.is_publish
 							? <Icon name="checkmark" color="green" />
 							: <Icon name="remove" />}
@@ -181,4 +182,14 @@ ProjectsList.propTypes = {
 	).isRequired
 };
 
-export default ProjectsList;
+
+const mapStateToProps = state => {
+
+const{ language } = state.geolocation;
+
+return{language};
+
+};
+
+
+export default connect (mapStateToProps) (ProjectsList);

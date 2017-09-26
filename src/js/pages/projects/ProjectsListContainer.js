@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import QueryString from "query-string";
 import ProjectsList from "./components/ProjectsList";
-
+import { connect } from "react-redux";
 import "../../../css/projects.css";
 import { Header } from "semantic-ui-react";
 import axios from "axios";
@@ -9,6 +9,7 @@ import config from "config/config";
 import FilterContainer from "./FilterContainer";
 import LoadingDisplay from "js/components/LoadingDisplay";
 import Error from "js/pages/404Error";
+
 
 class ProjectsListContainer extends Component {
 	constructor() {
@@ -105,6 +106,8 @@ class ProjectsListContainer extends Component {
 			this.requestProjects(this.props.location.search);
 		};
 
+		const chooseAprojectText = this.props.language.ChooseProj;
+
 		//if a list of projects was loaded, but it was empty, there is some problem with the query URL
 		if (
 			this.state.loaded &&
@@ -115,7 +118,7 @@ class ProjectsListContainer extends Component {
 		} else {
 			return (
 				<div style = {{display: 'flex', alignItems:'center', flexDirection:'column', marginTop: '2%' }}>
-					<h1 style ={{fontSize: 35}} >Choose a Project</h1>
+					<h1 style ={{fontSize: 35}} >{chooseAprojectText}</h1>
 					<LoadingDisplay
 						loaded={this.state.loaded}
 						error={this.state.error}
@@ -144,4 +147,13 @@ class ProjectsListContainer extends Component {
 	}
 }
 
-export default ProjectsListContainer;
+const mapStateToProps = state => {
+
+const{ language } = state.geolocation;
+
+return{language};
+
+};
+
+
+export default connect (mapStateToProps) (ProjectsListContainer);

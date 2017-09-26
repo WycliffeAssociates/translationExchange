@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
 
-export default class PublishButton extends Component {
+
+class PublishButton extends Component {
 	state = { modalOpen: false };
 
 	handleOpen = e =>
@@ -34,7 +36,7 @@ export default class PublishButton extends Component {
 				disabled={!readyForPublish || this.props.isPublish}
 				color={this.props.isPublish ? "green" : ""}
 			>
-				{this.props.isPublish ? "Published" : "Publish"}
+				{this.props.isPublish ? this.props.language.published : this.props.language.publish}
 			</Button>
 		);
 
@@ -59,3 +61,15 @@ export default class PublishButton extends Component {
 		);
 	}
 }
+
+
+const mapStateToProps = state => {
+
+const{ language } = state.geolocation;
+
+return{language};
+
+};
+
+
+export default connect (mapStateToProps) (PublishButton);
