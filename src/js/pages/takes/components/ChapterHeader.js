@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import MarkAsDone from "./MarkAsDone";
 import SetSourceAudio from "./SetSourceAudio";
-import PinkButton from "./comments/PinkButton";
+import RecordButton from "./comments/RecordButton";
 import { Grid } from "semantic-ui-react";
 import "css/takes.css";
 
@@ -23,7 +23,7 @@ class ChapterHeader extends Component {
 								onMarkedAsPublish={this.props.onMarkedAsPublish}
 							/>
 
-							<PinkButton
+							<RecordButton
 								comments={this.props.chapter.comments}
 								onClickSave={this.props.onClickSave}
 								id={this.props.chapter.id}

@@ -20,7 +20,7 @@ let onClickCancel;
 let onClickSave;
 let Style;
 
-class PinkButton extends Component {
+class RecordButton extends Component {
 	constructor(props) {
 		super(props);
 
@@ -173,4 +173,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect (mapStateToProps) (PinkButton);
+export default connect (mapStateToProps) (RecordButton);
