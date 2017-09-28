@@ -127,7 +127,7 @@ class RecordButton extends Component {
 							this.audioComponent = audioComponent;
 						}}
 						icon="comment outline"
-						onClick={this.showModal}
+						onClick={this.props.onClick}
 					/>
 				}
 			>

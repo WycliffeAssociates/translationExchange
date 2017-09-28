@@ -32,6 +32,7 @@ class ChapterHeader extends Component {
 								loadingActive={this.props.active}
 								number={this.props.chapter.number}
 								languagefrmAPI={this.props.language}
+								onClick={()=> console.log('clicked')} 
 							/>
 						</Grid.Column>
 					</Grid>
