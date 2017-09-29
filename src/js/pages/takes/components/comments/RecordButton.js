@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import RecordComment from "./RecordComment";
 import { connect } from "react-redux";
 import "./RecordComment.css";
+import CommentsPlayer from "../comments/commentsPlayer";
 import {
 	Button,
 	Container,
@@ -79,12 +80,17 @@ class RecordButton extends Component {
 			src: config.streamingUrl + comment.comment.location
 		};
 
+		const src = config.streamingUrl + comment.comment.location;
+
 		return (
-			<Grid columns={2}>
-				<Grid.Column width={12}>
-					<Audio width={600} height={300} playlist={file} />
-				</Grid.Column>
-				<Grid.Column width={2}>
+			<div style = {styles.container}>
+
+					<CommentsPlayer
+						audioFile = {src}
+						playAudio = {true}
+																 />
+
+
 					<Button
 						icon
 						negative
@@ -100,8 +106,8 @@ class RecordButton extends Component {
 					>
 						<Icon name="trash" />
 					</Button>
-				</Grid.Column>
-			</Grid>
+
+			</div>
 		);
 	}
 
@@ -135,7 +141,7 @@ class RecordButton extends Component {
 					{this.props.language.commentsOn} {this.props.languagefrmAPI} {this.props.type}{" "}
 					{this.props.number}{" "}
 				</Modal.Header>
-				<div>
+
 					<RecordComment
 						ref={instance => (this.recordComment = instance)}
 						changeSaveButtonState={this.changeSaveButtonState}
@@ -146,7 +152,7 @@ class RecordButton extends Component {
 						id={this.props.id}
 						loadingActive={this.props.loadingActive}
 					/>
-				</div>
+				
 				<Container className="commentsList">
 					<Grid columns={1}>
 						<Grid.Column width={13}>
@@ -161,6 +167,18 @@ class RecordButton extends Component {
 	}
 }
 
+const styles = {
+  container:{
+		width: '100%',
+		display: 'flex',
+		backgroundColor: '#000',
+		height: 125,
+		flexDirection: 'row',
+		flex: '1 1 0'
+
+
+  }
+}
 
 
 

@@ -4,6 +4,7 @@ import { ReactMic } from "react-mic";
 import { Button, Grid, Icon } from "semantic-ui-react";
 import "./RecordComment.css";
 import LoadingGif from "images/loading-tiny.gif";
+import CommentsPlayer from "../comments/commentsPlayer";
 
 
 
@@ -121,22 +122,40 @@ export class RecordComment extends Component {
 			);
 		}
 
+
+let display = (
+	<ReactMic
+		record={this.state.record}
+		className="sound-wave"
+		onStop={this.onStop}
+		strokeColor="#039BE5"
+		backgroundColor="#000000"
+	/>
+
+
+);
+let saveButton ='';
+
+if(this.state.displayPlayer){
+	display = AudioPlayer;
+
+
+
+}
+
+
+
 		return (
 			<div>
-				<ReactMic
-					record={this.state.record}
-					className="sound-wave"
-					onStop={this.onStop}
-					strokeColor="#039BE5"
-					backgroundColor="#000000"
-				/>
+
+			    {display}
+
 				<div className="record-stop-button">
 					{MainButton}
 				</div>
 
-				<div>
-					{AudioPlayer}
-				</div>
+				 {saveButton}
+
 			</div>
 		);
 	}
@@ -152,14 +171,15 @@ function DisplayAudioPlayer(props) {
 	if (displayPlayer) {
 
 		return (
-			<Grid columns={2}>
-				<Grid.Column width={13}>
-					<audio className="audioPlayer" controls name="media">
-						<source src={AudioURL} type="audio/webm" />
-					</audio>
-				</Grid.Column>
+			<div style ={style.audioPlayerContainer}>
 
-				<Grid.Column width={3}>
+					<CommentsPlayer
+						audioFile = {AudioURL}
+						playAudio = {true}
+																 />
+
+
+          <div style ={{ height:'5%', display: 'flex'}} >
 					{props.active
 						? <img src={LoadingGif} alt="Loading..." width="20" height="20" />
 						: <Button
@@ -171,12 +191,26 @@ function DisplayAudioPlayer(props) {
 							>
 								{btnText}
 							</Button>}
-				</Grid.Column>
-			</Grid>
+				   </div>
+			</div>
 		);
 	}
 	return null;
 }
+
+const style = {
+  audioPlayerContainer:{
+		                    width: '95%',
+	                      display: 'flex',
+												alignItems:'center',
+												marginTop: '5%',
+												marginBottom:'5%',
+												marginLeft:'3%',
+												border: '1px solid #eff0f2',
+												borderRadius: '5px'
+											}
+
+};
 
 
 const mapStateToProps = state => {
