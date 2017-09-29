@@ -11,7 +11,7 @@ class CommentsPlayer extends Component {
     super(props);
 
     this.state = {
-      playing: false,
+      play: false,
       pos: 0,
       audioFile: '',
       pointer: 1
@@ -19,8 +19,8 @@ class CommentsPlayer extends Component {
     };
 
     this.handlePosChange = this.handlePosChange.bind(this);
-    this.duration = this.duration.bind(this);
     this.finishedPlaying = this.finishedPlaying.bind(this);
+    this.toggleButton = this.toggleButton.bind(this);
   }
 
 
@@ -37,23 +37,25 @@ class CommentsPlayer extends Component {
 
 
 
-  duration(e) {
-    //this.props.durationTime(e.wavesurfer.getDuration());
+  // duration(e) {
+  //   //this.props.durationTime(e.wavesurfer.getDuration());
+  //
+  //   this.setState({ pos: 0});
+  //
+  //
+  // }
+  //
 
-    this.setState({ pos: 0});
+toggleButton(){
 
+this.setState({play: !this.state.play});
 
-  }
-
+}
 
 
   finishedPlaying() {
 
-    this.setState({pos: 0});
-
-
-
-
+    this.setState({pos: 0, play: false});
 
   }
 
@@ -63,11 +65,17 @@ class CommentsPlayer extends Component {
 
         let position = this.state.pos;
 
+        let playPauseBtn =   <PlayButton/> ;
+
+        if(this.state.play){
+          playPauseBtn = <PauseButton/> ;
+        }
+
 
     return (
         <div style ={styles.container} >
-        <div style = {{alignSelf: 'center'}}>
-        <PlayButton/>
+        <div style = {{alignSelf: 'center', width: '10%'}} onClick = {this.toggleButton}>
+           {playPauseBtn}
         </div>
         <div style = {styles.waveformContainer}>
         <Wavesurfer
@@ -76,7 +84,7 @@ class CommentsPlayer extends Component {
           //audioFile="https://files.freemusicarchive.org/music%2Fno_curator%2FThe_Womb%2FBang_-_An_Introduction_to_The_Womb%2FThe_Womb_-_02_-_Sex_Club.mp3"
           pos={position}
           onPosChange={this.handlePosChange}
-          playing={this.props.play}
+          playing={this.state.play}
           options={{ cursorWidth: 2, progressColor: '#eff0f2', cursorColor: '#3791D5', barWidth: 2, hideScrollbar: true, normalize: true, height: 50, waveColor: '#3791D5' }}
           //onReady={this.duration}
           onFinish={this.finishedPlaying}
@@ -100,7 +108,7 @@ const PlayButton = ({onClick}) => (
 
 
 
-const PauseButton = ({onClick}) => {
+const PauseButton = ({onClick}) => (
 
     <svg width="30px" height="32px" viewBox="60 22 15 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <g id="PauseBtn-2" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" transform="translate(60.000000, 22.000000)">
@@ -108,7 +116,7 @@ const PauseButton = ({onClick}) => {
           <path d="M9.33333333,0.991339547 C9.33333333,0.443837833 9.78079295,0 10.3344504,0 L12.9988829,0 C13.5517846,0 14,0.457197498 14,0.991339547 L14,14.8562795 C14,15.4037812 13.5525404,15.847619 12.9988829,15.847619 L10.3344504,15.847619 C9.78154872,15.847619 9.33333333,15.3904215 9.33333333,14.8562795 L9.33333333,0.991339547 Z" id="Rectangle-Right" fill= "#FFF" />
       </g>
     </svg>
-};
+);
 
 const styles = {
 
@@ -119,12 +127,13 @@ const styles = {
     position: 'relative',
     alignSelf: 'center',
     flex: '1 1 auto',
-    marginLeft: 20
+    marginLeft: '1%'
   },
   waveformContainer:{
 
     width: '90%',
-    marginLeft: '20px'
+    marginRight: '2%'
+
 
 
 

@@ -152,15 +152,15 @@ class RecordButton extends Component {
 						id={this.props.id}
 						loadingActive={this.props.loadingActive}
 					/>
-				
+
 				<Container className="commentsList">
-					<Grid columns={1}>
-						<Grid.Column width={13}>
+					<div style = {{width:'95%' } }>
+
 							{this.props.comments
 								? this.props.comments.map(this.createPlaylist.bind(this))
 								: ""}
-						</Grid.Column>
-					</Grid>
+
+					</div>
 				</Container>
 			</Modal>
 		);
@@ -171,10 +171,8 @@ const styles = {
   container:{
 		width: '100%',
 		display: 'flex',
-		backgroundColor: '#000',
-		height: 125,
-		flexDirection: 'row',
-		flex: '1 1 0'
+		border: '1px solid white',
+		borderRadius: 5
 
 
   }
