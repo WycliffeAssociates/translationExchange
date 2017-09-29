@@ -90,7 +90,7 @@ class RecordButton extends Component {
 						playAudio = {true}
 																 />
 
-
+          <div>
 					<Button
 						icon
 						negative
@@ -106,7 +106,7 @@ class RecordButton extends Component {
 					>
 						<Icon name="trash" />
 					</Button>
-
+        </div>
 			</div>
 		);
 	}
@@ -153,15 +153,15 @@ class RecordButton extends Component {
 						loadingActive={this.props.loadingActive}
 					/>
 
-				<Container className="commentsList">
-					<div style = {{width:'95%' } }>
+				<div style = {{display:'flex', justifyContent:'center', marginTop:'2%', marginBottom:'2%', maxHeight: 350, overflowY: 'scroll' }}>
+					<div style = {{width:'95%', marginTop:'1%' } }>
 
 							{this.props.comments
 								? this.props.comments.map(this.createPlaylist.bind(this))
 								: ""}
 
 					</div>
-				</Container>
+				</div>
 			</Modal>
 		);
 	}
@@ -172,7 +172,8 @@ const styles = {
 		width: '100%',
 		display: 'flex',
 		border: '1px solid white',
-		borderRadius: 5
+		borderRadius: 5,
+		marginBottom: 4
 
 
   }
