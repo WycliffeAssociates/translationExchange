@@ -177,7 +177,7 @@ const styles = {
 
 
   }
-}
+};
 
 
 

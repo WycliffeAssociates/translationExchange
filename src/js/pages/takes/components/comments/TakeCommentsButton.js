@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import RecordComment from "./RecordComment";
 import "./RecordComment.css";
+import CommentsPlayer from "../comments/commentsPlayer";
 import {
 	Button,
 	Container,
@@ -76,24 +77,18 @@ class TakeCommentsButton extends Component {
 	}
 
 	createPlaylist(comment) {
-		var file = [];
-		file[0] = {
-			src: config.streamingUrl + comment.comment.location
-		};
+
+		const src = config.streamingUrl + comment.comment.location
 
 		return (
-			<Grid columns={2}>
-				<Grid.Column width={12}>
-					<Audio
-						width={600}
-						height={300}
-						playlist={file}
-						ref={audioComponent => {
-							this.audioComponent = audioComponent;
-						}}
-					/>
-				</Grid.Column>
-				<Grid.Column width={2}>
+			<div style = {styles.container}>
+
+					<CommentsPlayer
+						audioFile = {src}
+						playAudio = {true}
+																 />
+
+          <div>
 					<Button
 						icon
 						fluid
@@ -106,8 +101,8 @@ class TakeCommentsButton extends Component {
 					>
 						<Icon name="trash" />
 					</Button>
-				</Grid.Column>
-			</Grid>
+				</div>
+			</div>
 		);
 	}
 
@@ -152,20 +147,31 @@ class TakeCommentsButton extends Component {
 						loadingActive={this.props.loadingActive}
 					/>
 				</div>
-				<Container className="commentsList">
-					<Grid columns={1}>
-						<Grid.Column width={13}>
+				<div style = {{display:'flex', justifyContent:'center', marginTop:'2%', marginBottom:'2%', maxHeight: 350, overflowY: 'scroll' }}>
+					<div style = {{width:'95%', marginTop:'1%' } }>
+
 							{this.props.comments
 								? this.props.comments.map(this.createPlaylist.bind(this))
 								: ""}
-						</Grid.Column>
-					</Grid>
-				</Container>
+
+					</div>
+				</div>
 			</Modal>
 		);
 	}
 }
 
+const styles = {
+  container:{
+		width: '100%',
+		display: 'flex',
+		border: '1px solid white',
+		borderRadius: 5,
+		marginBottom: 4
+
+
+  }
+};
 
 const mapStateToProps = state => {
 
