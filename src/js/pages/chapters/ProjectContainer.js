@@ -5,12 +5,13 @@ import DownloadProjects from "./components/DownloadProjects";
 import axios from "axios";
 import config from "config/config";
 import QueryString from "query-string";
-import LoadingDisplay from "js/components/LoadingDisplay";
-import LoadingGif from "images/loading-tiny.gif";
+import LoadingTinyGif from "images/loading-tiny.gif";
 import "css/chapters.css";
 import PublishButton from "./components/PublishButton";
 import DownloadTR from "./components/DownloadTR";
-import Error from "js/pages/404Error";
+import NotFound from "js/pages/NotFound";
+import ErrorButton from '../../components/ErrorBytton';
+import LoadingGif from '../../components/LoadingGif';
 
 class ProjectContainer extends Component {
 	constructor() {
@@ -121,16 +122,17 @@ class ProjectContainer extends Component {
 
 	render() {
 		if (this.state.loaded && !this.state.chapters) {
-			return <Error />;
+			return <NotFound />;
+		}else if(this.state.error){
+			return(<ErrorButton error={this.state.error}/>);
+		}else if(!this.state.loaded){
+			return(
+				<LoadingGif />
+			);
 		} else {
 			return (
 				<div className="chapters">
 					<Container fluid>
-						<LoadingDisplay
-							loaded={this.state.loaded}
-							error={this.state.error}
-							retry={this.getChapterData.bind(this)}
-						>
 							<h1>
 								{this.state.book.name} ({this.state.language.name})
 								<DownloadTR
@@ -176,7 +178,7 @@ class ProjectContainer extends Component {
 
 							{this.state.downloadLoading
 								? <img
-										src={LoadingGif}
+										src={LoadingTinyGif}
 										alt="Loading..."
 										width="16"
 										height="16"
@@ -185,8 +187,6 @@ class ProjectContainer extends Component {
 							{this.state.downloadError
 								? "There was an error. Please try again"
 								: ""}
-						</LoadingDisplay>
-
 						<br />
 					</Container>
 				</div>

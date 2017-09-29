@@ -60,9 +60,9 @@
 		"jest": "^20.0.4",
 		"jest-cli": "^20.0.4",
 		"react-addons-test-utils": "^15.6.0",
-		"react-scripts": "1.0.7",
+		"react-scripts": "^1.0.7",
 		"react-test-renderer": "^15.6.1",
-		"webpack": "^3.5.5"
+		"webpack": "^3.6.0"
 	},
 	"scripts": {
 		"start": "cross-env NODE_PATH=src react-scripts start",

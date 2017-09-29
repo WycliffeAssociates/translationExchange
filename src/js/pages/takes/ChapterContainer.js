@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
 import {updateMode, updatePlaylist} from './../../actions';
 import config from "../../../config/config";
-import LoadingDisplay from "../../components/LoadingDisplay";
 import QueryString from "query-string";
 import "css/takes.css";
 import ChapterHeader from "./components/ChapterHeader";
 import Footer from "./components/Footer";
 import Chunk from "./components/Chunk";
-import Error from "js/pages/404Error";
-
+import NotFound from "js/pages/NotFound";
+import ErrorButton from '../../components/ErrorBytton';
+import LoadingGif from '../../components/LoadingGif';
 class ChapterContainer extends Component {
 	constructor() {
 		super();
@@ -381,24 +381,19 @@ class ChapterContainer extends Component {
      Rendering functions
      */
 	render() {
-
-
-
 		var query = QueryString.parse(this.props.location.search);
-
 		this.state.query = query;
-
 		if (this.state.loaded && this.state.chunks.length === 0) {
-
-			return <Error />;
+			return <NotFound />;
+		}else if(this.state.error){
+			return(<ErrorButton error={this.state.error}/>);
+		}else if(!this.state.loaded){
+			return(
+				<LoadingGif />
+			);
 		} else {
 			return (
 				<div>
-					<LoadingDisplay
-						loaded={this.state.loaded}
-						error={this.state.error}
-						retry={this.requestData.bind(this)}
-					>
 						<ChapterHeader
 							book={this.state.book}
 							chapter={this.state.chapter}
@@ -425,7 +420,6 @@ class ChapterContainer extends Component {
 
 							/>
 						</div>
-					</LoadingDisplay>
 				</div>
 			);
 		}
