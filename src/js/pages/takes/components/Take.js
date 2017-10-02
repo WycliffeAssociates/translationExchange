@@ -63,7 +63,7 @@ getTakeInfo(){
 	let take = {
 		 src: config.streamingUrl + takeLoc,
 		 markers: markers,
-		 name: `take ${takeNum}, ${this.props.mode} ${startv}  (${author} on ${date})`,
+		 name: `${this.props.displayText.take} ${takeNum}, ${this.props.displayText.chunk} ${startv}  (${author} on ${date})`,  // in case of other mode like chunk mode or verse mode verify this
 		 id: takeLoc,
 		 chunk: `${this.props.mode} ${startv}`
 	 };
@@ -153,7 +153,7 @@ getTakeInfo(){
 									<Grid.Column width={11} floated="left">
 										<font size="3">
 											<strong>
-												Take {this.props.count} -{" "}
+												{this.props.displayText.take} {this.props.count} -{" "}
 											</strong>
 										</font>
 										<font size="2" color="grey">
@@ -287,8 +287,9 @@ const mapStateToProps = state => {
 
 
 const{ mode, playlist, playlistMode } = state.updatePlaylist;
+const{ displayText } = state.geolocation;
 
-return{ mode , playlistMode, playlist };
+return{ mode , playlistMode, playlist, displayText };
 
 }
 

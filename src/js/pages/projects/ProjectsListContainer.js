@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import QueryString from "query-string";
 import ProjectsList from "./components/ProjectsList";
-
+import { connect } from "react-redux";
 import "../../../css/projects.css";
 import { Header } from "semantic-ui-react";
 import axios from "axios";
@@ -10,6 +10,7 @@ import ProjectFilter from "./ProjectFilter";
 import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../../js/components/ErrorBytton';
 import LoadingGif from '../../../js/components/LoadingGif';
+
 
 class ProjectsListContainer extends Component {
 	constructor() {
@@ -107,6 +108,8 @@ class ProjectsListContainer extends Component {
 			this.requestProjects(this.props.location.search);
 		};
 
+		const chooseAprojectText = this.props.displayText.ChooseProj;
+
 		//if a list of projects was loaded, but it was empty, there is some problem with the query URL
 		const projectsLoadedButEmpty =
 			loaded &&
@@ -123,8 +126,8 @@ class ProjectsListContainer extends Component {
 			);
 		} else {
 			return (
-				<div className="projects">
-					<h1>Choose a Project</h1>
+        <div style = {{display: 'flex', alignItems:'center', flexDirection:'column', marginTop: '2%' }}>
+	              <h1 style ={{fontSize: 35}} >{chooseAprojectText}</h1>
 					<ProjectFilter
 						projects={projects}
 						setQuery={this.setQuery.bind(this)}
@@ -132,10 +135,13 @@ class ProjectsListContainer extends Component {
 						clearQuery={this.clearQuery.bind(this)}
 					/>
 					{this.state.projects.length > 0
-						? <ProjectsList
+						?
+            <div style={{marginTop: 10}}>
+						<ProjectsList
 							projects={projects}
 							navigateToProject={this.navigateToProject.bind(this)}
 						/>
+						</div>
 						: ""}
 				</div>
 			);
@@ -143,4 +149,13 @@ class ProjectsListContainer extends Component {
 	}
 }
 
-export default ProjectsListContainer;
+const mapStateToProps = state => {
+
+const{ displayText } = state.geolocation;
+
+return{displayText};
+
+};
+
+
+export default connect (mapStateToProps) (ProjectsListContainer);

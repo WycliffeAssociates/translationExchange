@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Dropdown, Button, Message } from "semantic-ui-react";
+import { connect } from "react-redux";
 import axios from "axios";
 import config from "config/config";
 import QueryString from "query-string";
@@ -150,9 +151,10 @@ class ProjectFilter extends Component {
 		versionOptions = versionOptions.concat(this.state.versions);
 
 		return (
-			<div>
+			<div style ={{display:'flex', marginTop: '2%', justifyContent:'center'}}>
+				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
-					placeholder="Select Language"
+					placeholder={this.props.displayText.selectLanguage}  // text from in languages.json
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -160,8 +162,10 @@ class ProjectFilter extends Component {
 					onChange={this.setLanguage.bind(this)}
 					value={query.language}
 				/>
+				</div>
+				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
-					placeholder="Select Book"
+					placeholder={this.props.displayText.selectBook}
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -169,8 +173,10 @@ class ProjectFilter extends Component {
 					onChange={this.setBook.bind(this)}
 					value={query.book}
 				/>
+				</div>
+				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
-					placeholder="Select Version"
+					placeholder={this.props.displayText.selectVersion}
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -178,11 +184,14 @@ class ProjectFilter extends Component {
 					onChange={this.setVersion.bind(this)}
 					value={query.version}
 				/>
-				<Button onClick={this.props.clearQuery}>Clear</Button>
+				</div>
+				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
+				<Button onClick={this.props.clearQuery}>{this.props.displayText.clearButton}</Button>
+			  </div>
 				{this.state.error ? (
 					<Message negative>
 						{this.state.error.message}{" "}
-						<Button onClick={this.requestAllFilters.bind(this)}>Retry</Button>
+						<Button onClick={this.requestAllFilters.bind(this)}>{this.displayText.language.retry}</Button>
 					</Message>
 				) : (
 					""
@@ -192,4 +201,12 @@ class ProjectFilter extends Component {
 	}
 }
 
-export default ProjectFilter;
+const mapStateToProps = state => {
+
+const{ displayText } = state.geolocation;
+
+return{displayText};
+
+};
+
+export default connect( mapStateToProps)(FilterContainer);

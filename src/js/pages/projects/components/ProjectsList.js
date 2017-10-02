@@ -4,6 +4,7 @@
  */
 
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Container, Table, Icon } from "semantic-ui-react";
 import CircularProgressbar from "react-circular-progressbar";
@@ -17,14 +18,15 @@ class ProjectsList extends Component {
      */
 	render() {
 		return (
+			<div>
 			<Container fluid>
 				<Table selectable fixed color="grey">
 					<Table.Header>
 						<Table.Row>
-							<Table.HeaderCell>Language</Table.HeaderCell>
-							<Table.HeaderCell>Book</Table.HeaderCell>
-							<Table.HeaderCell>Percent Complete</Table.HeaderCell>
-							<Table.HeaderCell>More</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.displayText.language}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.displayText.book}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.displayText.percentComplete}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.displayText.more}</Table.HeaderCell>
 						</Table.Row>
 					</Table.Header>
 					<Table.Body>
@@ -32,6 +34,8 @@ class ProjectsList extends Component {
 					</Table.Body>
 				</Table>
 			</Container>
+
+			</div>
 		);
 	}
 
@@ -63,14 +67,14 @@ class ProjectsList extends Component {
 					/>
 				</Table.Cell>
 				<Table.Cell>
-					<ReadMore lines={1} onShowMore={this.props.onChange} text="more">
-						<b>Date Modified</b>: {this.parseDate(project.date_modified)} <br />
-						<b>Translation Type</b>: {project.version} <br />
-						<b>Contributors</b>: {this.getContributorText(
+					<ReadMore lines={1} onShowMore={this.props.onChange} text={this.props.displayText.more}>
+						<b>{this.props.displayText.dateModified}</b>: {this.parseDate(project.date_modified)} <br />
+						<b>{this.props.displayText.translationType}</b>: {project.version} <br />
+						<b>{this.props.displayText.contributors}</b>: {this.getContributorText(
 							project.contributors
 						)}{" "}
 						<br />
-						<b>Published</b>:
+						<b>{this.props.displayText.published}</b>:
 						{project.is_publish
 							? <Icon name="checkmark" color="green" />
 							: <Icon name="remove" />}
@@ -177,4 +181,14 @@ ProjectsList.propTypes = {
 	).isRequired
 };
 
-export default ProjectsList;
+
+const mapStateToProps = state => {
+
+const{ displayText } = state.geolocation;
+
+return{displayText};
+
+};
+
+
+export default connect (mapStateToProps) (ProjectsList);

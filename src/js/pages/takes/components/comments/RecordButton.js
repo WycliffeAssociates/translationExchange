@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import RecordComment from "./RecordComment";
+import { connect } from "react-redux";
 import "./RecordComment.css";
+import CommentsPlayer from "../comments/commentsPlayer";
 import {
 	Button,
 	Container,
@@ -19,7 +21,7 @@ let onClickCancel;
 let onClickSave;
 let Style;
 
-class PinkButton extends Component {
+class RecordButton extends Component {
 	constructor(props) {
 		super(props);
 
@@ -29,7 +31,8 @@ class PinkButton extends Component {
 			SaveButtonState: true,
 			blob: null,
 			active: this.props.comments.length > 0,
-			loadingActive: this.props.active
+			loadingActive: this.props.active,
+			comments: ''
 		};
 
 		this.showModal = this.showModal.bind(this);
@@ -72,23 +75,32 @@ class PinkButton extends Component {
 		}
 	}
 
+
+
+
+
+
+
+
+
 	createPlaylist(comment) {
-		var file = [];
-		file[0] = {
-			src: config.streamingUrl + comment.comment.location
-		};
+
+		const src = config.streamingUrl + comment.comment.location;
 
 		return (
-			<Grid columns={2}>
-				<Grid.Column width={12}>
-					<Audio width={600} height={300} playlist={file} />
-				</Grid.Column>
-				<Grid.Column width={2}>
+			<div key ={comment.comment.id} style = {styles.container}>
+
+					<CommentsPlayer
+						audioFile = {src}
+						playAudio = {true}
+																 />
+
+          <div style ={{display:'flex', alignSelf:'center'}}>
 					<Button
 						icon
 						negative
 						onClick={() => {
-							if (window.confirm("Delete this comment?")) {
+							if (window.confirm(this.props.displayText.deleteComment)) {
 								this.props.deleteComment(
 									this.props.type,
 									comment.comment.id,
@@ -99,8 +111,8 @@ class PinkButton extends Component {
 					>
 						<Icon name="trash" />
 					</Button>
-				</Grid.Column>
-			</Grid>
+        </div>
+			</div>
 		);
 	}
 
@@ -113,6 +125,9 @@ class PinkButton extends Component {
 	};
 
 	render() {
+
+
+
 		return (
 			<Modal
 				size="small"
@@ -126,15 +141,15 @@ class PinkButton extends Component {
 							this.audioComponent = audioComponent;
 						}}
 						icon="comment outline"
-						onClick={this.showModal}
+						onClick={this.props.onClick}
 					/>
 				}
 			>
 				<Modal.Header style={this.Style}>
-					Comments on {this.props.language} {this.props.type}{" "}
+					{this.props.displayText.commentsOn} {this.props.languagefrmAPI} {this.props.type}{" "}
 					{this.props.number}{" "}
 				</Modal.Header>
-				<div>
+
 					<RecordComment
 						ref={instance => (this.recordComment = instance)}
 						changeSaveButtonState={this.changeSaveButtonState}
@@ -145,19 +160,40 @@ class PinkButton extends Component {
 						id={this.props.id}
 						loadingActive={this.props.loadingActive}
 					/>
+
+				<div style = {{display:'flex', justifyContent:'center', marginTop:'2%', marginBottom:'2%', maxHeight: 350, overflowY: 'scroll' }}>
+					<div style = {{width:'95%', marginTop:'1%' } }>
+
+						{this.props.comments.length > 0
+							? this.props.comments.slice(0).reverse().map(this.createPlaylist.bind(this))
+							: ""}
+
+					</div>
 				</div>
-				<Container className="commentsList">
-					<Grid columns={1}>
-						<Grid.Column width={13}>
-							{this.props.comments
-								? this.props.comments.map(this.createPlaylist.bind(this))
-								: ""}
-						</Grid.Column>
-					</Grid>
-				</Container>
 			</Modal>
 		);
 	}
 }
 
-export default PinkButton;
+const styles = {
+  container:{
+		width: '100%',
+		display: 'flex',
+		border: '1px solid white',
+		borderRadius: 5,
+		marginBottom: 4
+  }
+};
+
+
+
+const mapStateToProps = state => {
+
+		const{ displayText } = state.geolocation;
+
+		return{displayText};
+
+};
+
+
+export default connect (mapStateToProps) (RecordButton);

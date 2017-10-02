@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ChunkPropTypes from "./ChunkPropTypes";
-
+import { connect } from "react-redux";
 import { Accordion, Icon, Grid } from "semantic-ui-react";
 import TakeTable from "./TakeTable";
 import "css/takes.css";
@@ -36,13 +36,13 @@ class Chunk extends Component {
 
 		switch (this.props.mode) {
 			case "chunk":
-				modeLabel = "Chunk";
+				modeLabel = this.props.displayText.chunk;
 				break;
 			case "verse":
-				modeLabel = "Verse";
+				modeLabel =  this.props.displayText.verse;
 				break;
 			default:
-				modeLabel = "Segment";
+				modeLabel = this.props.displayText.segment;
 		}
 
 		var icon1 = <Icon name="star" color="red" size="big" />;
@@ -175,4 +175,14 @@ Chunk.propTypes = {
 	chunk: ChunkPropTypes
 };
 
-export default Chunk;
+
+const mapStateToProps = state => {
+
+		const{ displayText } = state.geolocation;
+
+		return{displayText};
+
+};
+
+
+export default connect (mapStateToProps) (Chunk);

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { connect } from "react-redux";
 import {Button} from 'semantic-ui-react'
 import 'css/chapters.css'
 
@@ -21,7 +22,7 @@ class DownloadProjects extends Component {
 
         return (
             <Button
-                content='Download'
+                content={this.props.displayText.download}
                 icon='download'
                 labelPosition='right'
                 size='small'
@@ -31,4 +32,14 @@ class DownloadProjects extends Component {
     }
 }
 
-export default DownloadProjects;
+
+const mapStateToProps = state => {
+
+const{ displayText } = state.geolocation;
+
+return{displayText};
+
+};
+
+
+export default connect (mapStateToProps) (DownloadProjects);

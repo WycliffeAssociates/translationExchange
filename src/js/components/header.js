@@ -1,9 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import {bindActionCreators} from 'redux';
 import { Menu, Container, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import "css/home.css";
 import user from "images/user.png";
 import dots from "images/dots.png";
+import nn from 'nearest-neighbor';
+import countries from '../../languages/countries.json';
+import languageAndCountry from '../../languages/languageAndCountry.json'
+
+import {updateLanguage} from '../actions';
 
 class Header extends Component {
 	state = { activeItem: "home" };
@@ -11,6 +18,64 @@ class Header extends Component {
 	handleItemClick = (e, { name }) => {
 		this.setState({ activeItem: name });
 	};
+
+	componentWillMount(){
+		if (window.navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition( position =>{
+					// Get the coordinates of the current position.
+
+				 const lat = position.coords.latitude;
+				 const lng = position.coords.longitude;
+				 let country=''
+
+				 const evaluate = {
+				 "latitude": lat,
+				 "longitude": lng }
+
+				 const fields = [
+					 {name: "latitude", measure: nn.comparisonMethods.number, max: 100 },
+					 {name: "longitude", measure: nn.comparisonMethods.number, max: 100 }
+
+				 ];
+
+				 nn.findMostSimilar(evaluate, countries, fields, function(nearestNeighbor, probability) {
+						// console.log(evaluate);
+						// console.log(nearestNeighbor);
+						// console.log(probability);
+						country = nearestNeighbor.country;
+						 //console.log(country);
+					});
+
+
+
+							for (const key in languageAndCountry) {
+								 const lang = languageAndCountry[key];
+
+								 for (const eachCountry in lang) {
+
+
+											 if(lang[eachCountry] === country){
+
+												const country = key ;
+
+												 this.props.updateLanguage(key);
+
+
+												}
+											 }
+
+							}
+
+
+				});
+
+	}
+	else {
+	 // geolocation is not supported
+	}
+
+	}
+
 
 	render() {
 		var text = (
@@ -39,7 +104,7 @@ class Header extends Component {
 						<Link to="/">
 							<Menu.Item
 								position="right"
-								name="Home"
+								name={this.props.displayText.home}
 								active={activeItem === "Home"}
 								onClick={this.handleItemClick}
 							/>
@@ -47,7 +112,7 @@ class Header extends Component {
 
 						<Link to="/about">
 							<Menu.Item
-								name="About"
+								name={this.props.displayText.about}
 								active={activeItem === "About"}
 								onClick={this.handleItemClick}
 							/>
@@ -55,7 +120,7 @@ class Header extends Component {
 
 						<Link to="/projects">
 							<Menu.Item
-								name="Projects"
+								name={this.props.displayText.projects}
 								active={activeItem === "Projects"}
 								onClick={this.handleItemClick}
 							/>
@@ -75,4 +140,23 @@ class Header extends Component {
 	}
 }
 
-export default Header;
+
+const mapStateToProps = state => {
+
+const{ displayText } = state.geolocation;
+
+return{displayText};
+
+};
+
+const mapDispatchToProps = dispatch => {
+
+  return bindActionCreators({
+          updateLanguage
+
+}, dispatch);
+
+};
+
+
+export default connect (mapStateToProps, mapDispatchToProps) (Header);

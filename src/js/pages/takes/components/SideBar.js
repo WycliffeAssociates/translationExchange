@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react'
 import { Sidebar, Segment, Menu } from 'semantic-ui-react'
-import PinkButton from "./comments/PinkButton";
+import RecordButton from "./comments/RecordButton";
 import SourceAudioButton from "./SourceAudioButton"
 let state;
 let toggleVisibility;
@@ -16,7 +16,7 @@ class ChunkSidebar extends Component {
         return (
             <Menu vertical compact inverted>
                 <Menu.Item>
-                    <PinkButton
+                    <RecordButton
                         comments={this.props.comments}
                         onClickSave={this.props.onClickSave}
                         id={this.props.chunkId}

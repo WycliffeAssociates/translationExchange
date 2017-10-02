@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Container, Header, Table } from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
 import DownloadProjects from "./components/DownloadProjects";
@@ -151,13 +152,13 @@ class ProjectContainer extends Component {
 							<Table selectable fixed color="grey">
 								<Table.Header>
 									<Table.Row>
-										<Table.HeaderCell>Chapter</Table.HeaderCell>
-										<Table.HeaderCell>Percent Complete</Table.HeaderCell>
-										<Table.HeaderCell>Checking Level</Table.HeaderCell>
-										<Table.HeaderCell>Ready to Publish</Table.HeaderCell>
-										<Table.HeaderCell>Contributors</Table.HeaderCell>
-										<Table.HeaderCell>Translation Type</Table.HeaderCell>
-										<Table.HeaderCell>Date Modified</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.displayText.chapter}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.displayText.percentComplete}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.displayText.checkLevel}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.displayText.readyToPublish}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.displayText.contributors}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.displayText.translationType}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.displayText.dateModified}</Table.HeaderCell>
 									</Table.Row>
 								</Table.Header>
 
@@ -185,7 +186,7 @@ class ProjectContainer extends Component {
 									/>
 								: ""}
 							{this.state.downloadError
-								? "There was an error. Please try again"
+								? this.props.displayText.errorTryAgain
 								: ""}
 						<br />
 					</Container>
@@ -195,4 +196,14 @@ class ProjectContainer extends Component {
 	}
 }
 
-export default ProjectContainer;
+
+const mapStateToProps = state => {
+
+const{ displayText } = state.geolocation;
+
+return{displayText};
+
+};
+
+
+export default connect (mapStateToProps) (ProjectContainer);

@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import MarkAsDone from "./MarkAsDone";
 import SetSourceAudio from "./SetSourceAudio";
-import PinkButton from "./comments/PinkButton";
+import RecordButton from "./comments/RecordButton";
 import { Grid } from "semantic-ui-react";
 import "css/takes.css";
 
 class ChapterHeader extends Component {
 	render() {
 		return (
-			<div>
+			<div style = {{display:'flex', justifyContent: 'space-between'}}>
 				<div className="headerStyle">
 					<Grid padded columns={2}>
 						<Grid.Column width={11} style={{ paddingTop: 23 }}>
@@ -23,7 +23,7 @@ class ChapterHeader extends Component {
 								onMarkedAsPublish={this.props.onMarkedAsPublish}
 							/>
 
-							<PinkButton
+							<RecordButton
 								comments={this.props.chapter.comments}
 								onClickSave={this.props.onClickSave}
 								id={this.props.chapter.id}
@@ -31,7 +31,8 @@ class ChapterHeader extends Component {
 								deleteComment={this.props.deleteComment}
 								loadingActive={this.props.active}
 								number={this.props.chapter.number}
-								language={this.props.language}
+								languagefrmAPI={this.props.language}
+								onClick={()=> console.log('clicked')}
 							/>
 						</Grid.Column>
 					</Grid>

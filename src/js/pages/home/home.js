@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container, Grid, Divider } from "semantic-ui-react";
+import nn from 'nearest-neighbor';
 import "css/home.css";
 import StartHere from "./StartHere";
 import LogoTitle from "./LogoTitle";
@@ -7,10 +8,46 @@ import axios from "axios";
 import config from "config/config";
 import QueryString from "query-string";
 import { connect } from "react-redux";
-import { fetchRecentProjects } from "../../actions/HomeRecentProjectAction";
+import {bindActionCreators} from 'redux';
+import {updateLanguage} from '../../actions';
+import { fetchRecentProjects } from "../../actions/home-recent-projects-actions";
+import countries from '../../../languages/countries.json';
+import languageAndCountry from '../../../languages/languageAndCountry.json'
+
+
 class Home extends Component {
+
+	constructor() {
+		super();
+		this.state = {
+			projects: []
+		};
+	}
+
+
 	componentDidMount() {
-		this.props.dispatch(fetchRecentProjects());
+		this.getRecentProjects();
+
+	}
+	getRecentProjects() {
+		axios
+			.post(config.apiUrl + "all_projects/", {})
+			.then(results => {
+				this.setState({ projects: results.data });
+				this.limitProjects();
+			})
+			.catch(exception => {
+				this.setState({ error: exception });
+			});
+	}
+
+	//limits the number of projects to show
+	limitProjects() {
+		if (this.state.projects.length > 4) {
+			this.setState({
+				projects: this.state.projects.splice(0, 5)
+			});
+		}
 	}
 
 	navigateToProject(language, book, version) {
@@ -31,11 +68,15 @@ class Home extends Component {
 	}
 	render() {
 		const { homeRecentProjects } = this.props;
+		const recentProjects = this.props.displayText.recentProjects;
+		const title = this.props.displayText.mainPage;
+		const btnText = this.props.displayText.startHere;
+
 		return (
 			<Container fluid className="background">
 				<Container fluid>
-					<LogoTitle />
-					<StartHere />
+					<LogoTitle text = {title} />
+					<StartHere text= {btnText} />
 				</Container>
 
 				{homeRecentProjects.length > 0 ? (
@@ -87,9 +128,21 @@ class Home extends Component {
 		);
 	}
 }
-function mapStateToProps(state) {
-	return {
-		homeRecentProjects: state.homeRecentProjects
-	};
-}
+
+
+const mapStateToProps = state => {
+
+const{ displayText } = state.geolocation;
+const{ homeRecentProjects} = state.homeRecentProjects;
+
+return{displayText, homeRecentProjects};
+
+};
+
+
+
+
+
+
+
 export default connect(mapStateToProps)(Home);
