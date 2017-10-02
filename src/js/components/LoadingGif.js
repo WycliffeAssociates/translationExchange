@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import loadingGif from '../../images/loading.gif';
 
-export default class LoadingGif extends Component {
+class LoadingGif extends Component {
     render () {
         return (
           <div style = {styles.loading}>
@@ -34,4 +34,4 @@ return{displayText};
 };
 
 
-export default connect (mapStateToProps) (LoadingDisplay);
+export default connect (mapStateToProps) (LoadingGif);

@@ -209,4 +209,4 @@ return{displayText};
 
 };
 
-export default connect( mapStateToProps)(FilterContainer);
+export default connect( mapStateToProps)(ProjectFilter);

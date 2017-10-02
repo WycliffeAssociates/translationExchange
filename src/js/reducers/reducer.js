@@ -1,7 +1,7 @@
 
 import {combineReducers} from 'redux';
 import AudioPlayerReducer from './AudioPlayerReducer';
-import homeRecentProjects from "./home-recent-projects-reducer";
+import homeRecentProjects from "./HomeRecentProjectsReducer";
 import GeolocationReducer from './GeolocationReducer';
 import UpdatePlaylistReducer from './UpdatePlaylistReducer';
 

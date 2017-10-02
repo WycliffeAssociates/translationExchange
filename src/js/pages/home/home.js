@@ -10,7 +10,7 @@ import QueryString from "query-string";
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
 import {updateLanguage} from '../../actions';
-import { fetchRecentProjects } from "../../actions/home-recent-projects-actions";
+import { fetchRecentProjects } from "../../actions";
 import countries from '../../../languages/countries.json';
 import languageAndCountry from '../../../languages/languageAndCountry.json'
 
@@ -26,29 +26,10 @@ class Home extends Component {
 
 
 	componentDidMount() {
-		this.getRecentProjects();
+		this.props.fetchRecentProjects();
 
 	}
-	getRecentProjects() {
-		axios
-			.post(config.apiUrl + "all_projects/", {})
-			.then(results => {
-				this.setState({ projects: results.data });
-				this.limitProjects();
-			})
-			.catch(exception => {
-				this.setState({ error: exception });
-			});
-	}
 
-	//limits the number of projects to show
-	limitProjects() {
-		if (this.state.projects.length > 4) {
-			this.setState({
-				projects: this.state.projects.splice(0, 5)
-			});
-		}
-	}
 
 	navigateToProject(language, book, version) {
 		//make the query for the right project, using our current query as a base
@@ -140,9 +121,15 @@ return{displayText, homeRecentProjects};
 };
 
 
+const mapDispatchToProps = dispatch => {
+
+  return bindActionCreators({
+          fetchRecentProjects,
+
+}, dispatch);
+};
 
 
 
 
-
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
