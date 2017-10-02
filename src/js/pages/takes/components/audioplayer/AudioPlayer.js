@@ -232,8 +232,6 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-	const { play } = state.setAudioPlayerState;
-	const { playlist } = state.updatePlaylist;
 const{ play, updatedTime } = state.setAudioPlayerState;
 const{ playlist, playlistMode } = state.updatePlaylist;
 
