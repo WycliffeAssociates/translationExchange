@@ -67,19 +67,16 @@ componentDidMount () {
  }
 
  updateDimensions() {
+   if ( this.rangeInput.offsetWidth !== null){
    this.setState({ initialWidth: this.rangeInput.offsetWidth });   // updates marker position when the window is resized
+ }
+
 }
 
 
 
 
-// toggleButton(){
-// this.setState({play: !this.state.play, finishedPlaying: false});
-// }
 
-// updateTime(updateTime) {
-//   this.setState({updateTime});
-// }
 
 durationTime(durationTime) {
 

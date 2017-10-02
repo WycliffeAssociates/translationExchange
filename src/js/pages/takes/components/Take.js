@@ -63,7 +63,7 @@ getTakeInfo(){
 	let take = {
 		 src: config.streamingUrl + takeLoc,
 		 markers: markers,
-		 name: `take ${takeNum}, ${this.props.mode} ${startv}  (${author} on ${date})`,
+		 name: `${this.props.displayText.take} ${takeNum}, ${this.props.displayText.chunk} ${startv}  (${author} on ${date})`,  // in case of other mode like chunk mode or verse mode verify this
 		 id: takeLoc,
 		 chunk: `${this.props.mode} ${startv}`
 	 };

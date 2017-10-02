@@ -8,7 +8,7 @@ import "css/takes.css";
 class ChapterHeader extends Component {
 	render() {
 		return (
-			<div>
+			<div style = {{display:'flex', justifyContent: 'space-between'}}>
 				<div className="headerStyle">
 					<Grid padded columns={2}>
 						<Grid.Column width={11} style={{ paddingTop: 23 }}>
@@ -32,7 +32,7 @@ class ChapterHeader extends Component {
 								loadingActive={this.props.active}
 								number={this.props.chapter.number}
 								languagefrmAPI={this.props.language}
-								onClick={()=> console.log('clicked')} 
+								onClick={()=> console.log('clicked')}
 							/>
 						</Grid.Column>
 					</Grid>

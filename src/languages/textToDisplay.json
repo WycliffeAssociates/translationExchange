@@ -13,7 +13,7 @@
    "clearButton": "clear",
    "retry": "retry",
    "error": "There was a connection error",
-   "loading": "loading...",
+   "loading": "Loading...",
    "language": "Language",
    "book": "Book",
    "percentComplete": "Percentage Complete",
@@ -35,7 +35,8 @@
    "errorTryAgain": "There was an error. Please try again",
    "take": "Take",
    "download": "Download",
-   "commentsOn": "Comments on"
+   "commentsOn": "Comments on",
+   "downloadSrcAudio": "Download Source Audio"
    },
    "Spanish": {
      "mainPage": "Traducción Disponible Para Todos",
@@ -73,7 +74,8 @@
      "errorTryAgain": "Hubo un error, intente de nuevo...",
      "take": "Grabación",
      "download": "Descargar",
-     "commentsOn": "Comentarios para "
+     "commentsOn": "Comentarios para ",
+     "downloadSrcAudio": "Descargar Audio Base"
    },
    "Russian": {
       "mainPage": "Перевод предоставлен",
@@ -111,7 +113,8 @@
       "errorTryAgain": "Ошибка. Пожалуйста, попробуйте снова",
       "take": "Дубль",
       "download": "Скачать",
-      "commentsOn": "Коментарии по"
+      "commentsOn": "Коментарии по",
+      "downloadSrcAudio": "Download Source Audio"
  },
    "Nepali": {
      "mainPage": "Translation made available",
@@ -149,7 +152,8 @@
      "errorTryAgain": "There was an error. Please try again",
      "take": "Take",
      "download": "Download",
-     "commentsOn": "Comments on"
+     "commentsOn": "Comments on",
+     "downloadSrcAudio": "Download Source Audio"
      }
 
 
