@@ -90,7 +90,7 @@ class RecordButton extends Component {
 						playAudio = {true}
 																 />
 
-          <div>
+          <div style ={{display:'flex', alignSelf:'center'}}>
 					<Button
 						icon
 						negative
@@ -174,8 +174,6 @@ const styles = {
 		border: '1px solid white',
 		borderRadius: 5,
 		marginBottom: 4
-
-
   }
 };
 
