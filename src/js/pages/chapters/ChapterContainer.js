@@ -10,7 +10,7 @@ import "css/chapters.css";
 import PublishButton from "./components/PublishButton";
 import DownloadTR from "./components/DownloadTR";
 import NotFound from "js/pages/NotFound";
-import ErrorButton from '../../components/ErrorBytton';
+import ErrorButton from '../../components/ErrorButton';
 import LoadingGif from '../../components/LoadingGif';
 
 class ChapterContainer extends Component {

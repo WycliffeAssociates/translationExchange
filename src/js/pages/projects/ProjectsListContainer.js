@@ -6,7 +6,7 @@ import axios from "axios";
 import config from "config/config";
 import ProjectFilter from "./ProjectFilter";
 import NotFound from "js/pages/NotFound";
-import ErrorButton from '../../../js/components/ErrorBytton';
+import ErrorButton from '../../../js/components/ErrorButton';
 import LoadingGif from '../../../js/components/LoadingGif';
 
 class ProjectsListContainer extends Component {

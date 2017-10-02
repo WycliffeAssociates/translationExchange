@@ -74,7 +74,7 @@ class Home extends Component {
 						)}
 				>
 					<h4>
-						<font color="white">
+						<font fluid color="black">
 							{project.book.name + " "}
 							{project.language.name + " "}
 							{project.version}

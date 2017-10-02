@@ -10,7 +10,7 @@ import ChapterHeader from "./components/ChapterHeader";
 import Footer from "./components/Footer";
 import Chunk from "./components/Chunk";
 import NotFound from "js/pages/NotFound";
-import ErrorButton from '../../components/ErrorBytton';
+import ErrorButton from '../../components/ErrorButton';
 import LoadingGif from '../../components/LoadingGif';
 class ChapterContainer extends Component {
 	constructor() {
