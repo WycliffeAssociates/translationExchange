@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Header, Table } from "semantic-ui-react";
+import { Container, Table } from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
 import DownloadProjects from "./components/DownloadProjects";
 import axios from "axios";
@@ -13,7 +13,7 @@ import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
 
-class ProjectContainer extends Component {
+class ChapterContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -195,4 +195,4 @@ class ProjectContainer extends Component {
 	}
 }
 
-export default ProjectContainer;
+export default ChapterContainer;

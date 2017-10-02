@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import QueryString from "query-string";
 import ProjectsList from "./components/ProjectsList";
-
 import "../../../css/projects.css";
-import { Header } from "semantic-ui-react";
 import axios from "axios";
 import config from "config/config";
 import ProjectFilter from "./ProjectFilter";
@@ -116,7 +114,7 @@ class ProjectsListContainer extends Component {
 		if (projectsLoadedButEmpty) {
 			return <NotFound />;
 		} else if (error) {
-			return (<ErrorButton error={error} />);
+			return (<ErrorButton error={error} retry={retryRequestProjects.bind(this)}/>);
 		} else if (!loaded) {
 			return (
 				<LoadingGif />

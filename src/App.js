@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import ChapterContainer from "./js/pages/takes/ChapterContainer";
 import ProjectsListContainer from "./js/pages/projects/ProjectsListContainer";
-import ProjectContainer from "./js/pages/chapters/ProjectContainer";
+import ProjectContainer from "./js/pages/chapters/ChapterContainer";
 import "./App.css";
 import NotFound from "./js/pages/NotFound";
 import Header from "./js/components/header";

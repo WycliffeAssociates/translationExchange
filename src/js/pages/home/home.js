@@ -3,8 +3,6 @@ import { Container, Grid, Divider } from "semantic-ui-react";
 import "css/home.css";
 import StartHere from "./StartHere";
 import LogoTitle from "./LogoTitle";
-import axios from "axios";
-import config from "config/config";
 import QueryString from "query-string";
 import { connect } from "react-redux";
 import { fetchRecentProjects } from "../../actions/HomeRecentProjectAction";

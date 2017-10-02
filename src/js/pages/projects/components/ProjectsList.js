@@ -134,9 +134,11 @@ class ProjectsList extends Component {
 			case "12":
 				date[1] = "December";
 				break;
+				default:
+				break;
 		}
 
-		var hour = parseInt(time[0]);
+		var hour = parseInt(time[0],10);
 		if (hour / 12 > -1) {
 			noon = "pm";
 		}
