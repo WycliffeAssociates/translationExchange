@@ -31,7 +31,8 @@ class RecordButton extends Component {
 			SaveButtonState: true,
 			blob: null,
 			active: this.props.comments.length > 0,
-			loadingActive: this.props.active
+			loadingActive: this.props.active,
+			comments: ''
 		};
 
 		this.showModal = this.showModal.bind(this);
@@ -74,16 +75,20 @@ class RecordButton extends Component {
 		}
 	}
 
+
+
+
+ 
+
+
+
+
 	createPlaylist(comment) {
-		var file = [];
-		file[0] = {
-			src: config.streamingUrl + comment.comment.location
-		};
 
 		const src = config.streamingUrl + comment.comment.location;
 
 		return (
-			<div style = {styles.container}>
+			<div key ={comment.comment.id} style = {styles.container}>
 
 					<CommentsPlayer
 						audioFile = {src}
@@ -120,6 +125,9 @@ class RecordButton extends Component {
 	};
 
 	render() {
+
+
+
 		return (
 			<Modal
 				size="small"
@@ -156,9 +164,9 @@ class RecordButton extends Component {
 				<div style = {{display:'flex', justifyContent:'center', marginTop:'2%', marginBottom:'2%', maxHeight: 350, overflowY: 'scroll' }}>
 					<div style = {{width:'95%', marginTop:'1%' } }>
 
-							{this.props.comments
-								? this.props.comments.map(this.createPlaylist.bind(this))
-								: ""}
+						{this.props.comments.length > 0
+							? this.props.comments.slice(0).reverse().map(this.createPlaylist.bind(this))
+							: ""}
 
 					</div>
 				</div>
