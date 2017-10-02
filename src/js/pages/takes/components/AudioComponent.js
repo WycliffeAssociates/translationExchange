@@ -59,33 +59,24 @@ class AudioComponent extends Component {
 
 
 
-        const pause = this.state.pause;
-        const markers = this.props.markers;
-        const showMarkers = this.props.showMarkers;
-        var autoPlay = this.props.autoPlay;
+
 
 
 
         return (
             <div>
                 <AudioPlayer
-                    width={this.props.width}
-                    height={150}
-                    autoPlay={true}
+
                     recordButton={() => {
-                        this.onClick()
+
                     }}
-                    mic={this.props.mic}
-                    loop={this.props.loop}
-                    markers={markers}
-                    showMarkers={showMarkers}
-                    
 
 
-                    // ref to pause the audio
-                    ref={audioComponent => {
-                        this.audioComponent = audioComponent;
-                    }}
+
+
+
+
+
 
                 />
 
