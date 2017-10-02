@@ -5,8 +5,6 @@ import {Link} from "react-router-dom";
 class NotFound extends Component {
 
     render() {
-        // link of page
-        // {window.document.location.href}
         return (
             <Segment raised textAlign="center">
                  This page doesn't exist.

@@ -1,14 +1,11 @@
-import {combineReducers} from 'redux';
-import AudioPlayerReducer from './AudioPlayerReducer';
-import homeRecentProjects from "./home-recent-projects-reducer";
+import { combineReducers } from "redux";
+import AudioPlayerReducer from "./AudioPlayerReducer";
+import homeRecentProjects from "./HomeRecentProjectsReducer";
 
-import UpdatePlaylistReducer from './UpdatePlaylistReducer';
-
+import UpdatePlaylistReducer from "./UpdatePlaylistReducer";
 
 export default combineReducers({
-
-  setAudioPlayerState: AudioPlayerReducer,
-  homeRecentProjects: homeRecentProjects,
-  updatePlaylist: UpdatePlaylistReducer
-
+	setAudioPlayerState: AudioPlayerReducer,
+	homeRecentProjects: homeRecentProjects,
+	updatePlaylist: UpdatePlaylistReducer
 });

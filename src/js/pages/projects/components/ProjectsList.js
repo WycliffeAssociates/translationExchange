@@ -27,7 +27,6 @@ class ProjectsList extends Component {
 							<Table.HeaderCell>More</Table.HeaderCell>
 						</Table.Row>
 					</Table.Header>
-
 					<Table.Body>
 						{this.props.projects.map(this.createListItem.bind(this))}
 					</Table.Body>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
 import {playAudio, stopAudio, finishedPlaying, updateTime, takeId} from '../../../../actions';
@@ -7,13 +7,7 @@ import{ PauseButton, PlayButton, MultipleTakesButton} from './buttons';
 import TimeContainer from './timeContainer';
 import Marker from './Markers';
 
-
-
-
-
 class AudioPlayer extends Component {
-
-
 constructor(props){
   super(props);
 
@@ -47,18 +41,13 @@ constructor(props){
 
 }
 
-
-
 componentWillMount(){
-
   this.setState({
    audioFile:  this.props.playlist[0].src,
    audioName:  this.props.playlist[0].name,
    markers:    this.props.playlist[0].markers
    });
 }
-
-
 
 componentDidMount () {
    this.setState({ initialWidth: this.rangeInput.offsetWidth });
@@ -69,17 +58,6 @@ componentDidMount () {
  updateDimensions() {
    this.setState({ initialWidth: this.rangeInput.offsetWidth });   // updates marker position when the window is resized
 }
-
-
-
-
-// toggleButton(){
-// this.setState({play: !this.state.play, finishedPlaying: false});
-// }
-
-// updateTime(updateTime) {
-//   this.setState({updateTime});
-// }
 
 durationTime(durationTime) {
 
@@ -176,18 +154,12 @@ else{
 
 }
 
-
-
 resetMarkerClicked(statement){
 this.setState({markerClicked: statement});
 
 }
 
-
-
   render() {
-
-
   let src = this.props.playlist[0].src;
 
   if(this.props.playlistMode){
@@ -203,16 +175,12 @@ this.setState({markerClicked: statement});
       Button = <PauseButton onClick = {()=>this.props.stopAudio()}/>
      }
 
-
      if(this.state.showMarkers){
         markers = this.callMarker(); }
-
 
     return (
       <div className="ParentContainer" style={styles.container}>
           {Button}
-
-
 
        <div ref={input => this.rangeInput = input} className="waveform & Markers Container" style={styles.waveformContainer}>
           {markers}
@@ -225,66 +193,47 @@ this.setState({markerClicked: statement});
             markerPosition= {this.state.markerPosition}
             markerClicked={this.state.markerClicked}
             resetMarkerClicked={this.resetMarkerClicked}
-            finishedPlaying = {this.finishedPlaying}
-
-
-                                 />
+            finishedPlaying = {this.finishedPlaying}/>
             <div style={{marginTop: 5}}>{this.state.audioName}</div>
-
-
-
        </div>
-
            <TimeContainer
             audioLength={this.state.durationTime}
             updatedTime = {this.props.updatedTime}
             markerBtnClicked ={()=> this.setState({showMarkers:!this.state.showMarkers})}
             audioName= {this.state.audioName}
             nextAudio={this.state.nextAudio}          />
-
         </div>
-
-
     );
   }
+
 }
 
 const styles = {
-
-   container:{
-       display: 'flex',
-       backgroundColor: '#000',
-       height: 125,
-       flexDirection: 'row',
-       flex: '1 1 0'
-
-
-   },
-   waveformContainer:{
-    position: 'relative',
-    alignSelf: 'center',
-    flex: '1 1 auto',
-    marginLeft: 20
-
-  },
-  markerContainer:{
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width:'100%',
-    height: '100%'
-
-
-  }
-
-
-}
-
+	container: {
+		display: "flex",
+		backgroundColor: "#000",
+		height: 125,
+		flexDirection: "row",
+		flex: "1 1 0"
+	},
+	waveformContainer: {
+		position: "relative",
+		alignSelf: "center",
+		flex: "1 1 auto",
+		marginLeft: 20
+	},
+	markerContainer: {
+		position: "absolute",
+		top: 0,
+		left: 0,
+		width: "100%",
+		height: "100%"
+	}
+};
 
 const mapStateToProps = state => {
-
-
-
+	const { play } = state.setAudioPlayerState;
+	const { playlist } = state.updatePlaylist;
 const{ play, updatedTime } = state.setAudioPlayerState;
 const{ playlist, playlistMode } = state.updatePlaylist;
 
@@ -301,12 +250,6 @@ const mapDispatchToProps = dispatch => {
           updateTime,
           takeId
 }, dispatch);
-
 };
 
-
-
-
-
-
-export default connect (mapStateToProps, mapDispatchToProps)(AudioPlayer);
+export default connect(mapStateToProps, mapDispatchToProps)(AudioPlayer);

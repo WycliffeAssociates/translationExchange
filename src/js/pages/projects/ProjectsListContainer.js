@@ -6,9 +6,10 @@ import "../../../css/projects.css";
 import { Header } from "semantic-ui-react";
 import axios from "axios";
 import config from "config/config";
-import FilterContainer from "./FilterContainer";
-import LoadingDisplay from "js/components/LoadingDisplay";
-import Error from "js/pages/404Error";
+import ProjectFilter from "./ProjectFilter";
+import NotFound from "js/pages/NotFound";
+import ErrorButton from '../../../js/components/ErrorBytton';
+import LoadingGif from '../../../js/components/LoadingGif';
 
 class ProjectsListContainer extends Component {
 	constructor() {
@@ -77,7 +78,7 @@ class ProjectsListContainer extends Component {
 		and after the state has been set,
 		 navigate to a URL without the query
 		*/
-		this.setState({ currentProjectQuery: "", projects: [] }, function() {
+		this.setState({ currentProjectQuery: "", projects: [] }, function () {
 			this.props.history.push({
 				pathname: this.props.location.pathname
 			});
@@ -101,39 +102,41 @@ class ProjectsListContainer extends Component {
 	}
 
 	render() {
-		var retryRequestProjects = function() {
+		const { loaded, error, projects } = this.state;
+		var retryRequestProjects = function () {
 			this.requestProjects(this.props.location.search);
 		};
 
 		//if a list of projects was loaded, but it was empty, there is some problem with the query URL
-		if (
-			this.state.loaded &&
-			this.state.projects.length === 0 &&
-			this.props.location.search
-		) {
-			return <Error />;
+		const projectsLoadedButEmpty =
+			loaded &&
+			projects.length === 0 &&
+			this.props.location.search;
+
+		if (projectsLoadedButEmpty) {
+			return <NotFound />;
+		} else if (error) {
+			return (<ErrorButton error={error} />);
+		} else if (!loaded) {
+			return (
+				<LoadingGif />
+			);
 		} else {
 			return (
 				<div className="projects">
 					<h1>Choose a Project</h1>
-					<LoadingDisplay
-						loaded={this.state.loaded}
-						error={this.state.error}
-						retry={retryRequestProjects.bind(this)}
-					>
-						<FilterContainer
-							projects={this.state.projects}
-							setQuery={this.setQuery.bind(this)}
-							queryString={this.props.location.search}
-							clearQuery={this.clearQuery.bind(this)}
+					<ProjectFilter
+						projects={projects}
+						setQuery={this.setQuery.bind(this)}
+						queryString={this.props.location.search}
+						clearQuery={this.clearQuery.bind(this)}
+					/>
+					{this.state.projects.length > 0
+						? <ProjectsList
+							projects={projects}
+							navigateToProject={this.navigateToProject.bind(this)}
 						/>
-						{this.state.projects.length > 0
-							? <ProjectsList
-									projects={this.state.projects}
-									navigateToProject={this.navigateToProject.bind(this)}
-								/>
-							: ""}
-					</LoadingDisplay>
+						: ""}
 				</div>
 			);
 		}

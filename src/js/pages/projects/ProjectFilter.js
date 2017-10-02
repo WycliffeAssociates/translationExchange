@@ -4,7 +4,7 @@ import axios from "axios";
 import config from "config/config";
 import QueryString from "query-string";
 
-class FilterContainer extends Component {
+class ProjectFilter extends Component {
 	/*
      In the constructor, set the state to being empty so the component
      can render without errors before the API request finishes
@@ -192,4 +192,4 @@ class FilterContainer extends Component {
 	}
 }
 
-export default FilterContainer;
+export default ProjectFilter;

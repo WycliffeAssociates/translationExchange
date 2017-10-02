@@ -4,7 +4,7 @@ import ChapterContainer from "./js/pages/takes/ChapterContainer";
 import ProjectsListContainer from "./js/pages/projects/ProjectsListContainer";
 import ProjectContainer from "./js/pages/chapters/ProjectContainer";
 import "./App.css";
-import NotFound from "./js/pages/404Error";
+import NotFound from "./js/pages/NotFound";
 import Header from "./js/components/header";
 import Home from "./js/pages/home/home";
 import About from "./js/pages/about/about";
@@ -12,6 +12,7 @@ import axios from "axios";
 import User from "./js/pages/user/user";
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
+
 class App extends Component {
 	constructor(props) {
 		super(props);
