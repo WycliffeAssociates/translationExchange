@@ -5,19 +5,14 @@ import {
 	Button,
 	Container,
 	Grid,
-	Header,
 	Icon,
-	Image,
 	Modal,
-	ModalHeader
+
 } from "semantic-ui-react";
 import Audio from "translation-audio-player";
 import config from "../../../../../config/config";
 
-// NOTE: (dmarchuk)
-let onClickCancel;
-let onClickSave;
-let Style;
+
 
 class TakeCommentsButton extends Component {
 	constructor(props) {

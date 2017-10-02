@@ -18,7 +18,7 @@ class TakeContainer extends Component {
 	}
 
 	render() {
-		const { isDragging, connectDragSource, connectDropTarget } = this.props;
+		const { connectDragSource, connectDropTarget } = this.props;
 		return connectDragSource(
 			connectDropTarget(
 				<div>
