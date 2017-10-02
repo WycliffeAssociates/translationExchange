@@ -1,17 +1,12 @@
-/**
- * Created by DennisMarchuk on 7/19/2017.
- */
-/* global options*/
 
-import { Icon } from 'semantic-ui-react'
+
+
 import React, { Component } from 'react';
 import { Dropdown, Menu } from 'semantic-ui-react'
-import axios from 'axios';
-import config from "../../../../config/config";
-import ProjectContainer from "../ProjectContainer"
 
 
-export class CheckingLevel extends React.Component {
+
+export class CheckingLevel extends Component {
 
     options = [
         {key: 0, text: '0', value: 0},

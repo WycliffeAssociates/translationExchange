@@ -1,82 +1,61 @@
-
-
-
-.sound-wave{
-
-    height: 80px;
-    width: 100%;
-    border-radius: 5px;
-    margin-top: 40px;
+.sound-wave {
+	height: 80px;
+	width: 100%;
+	border-radius: 5px;
+	margin-top: 40px;
 }
 
-
-.start{
-
-    height: 50px;
-    width: 50px;
-    border-radius: 60px;
-    background-color: black;
-    border: solid deepskyblue;
-    margin-bottom: 10px;
-    margin-top: 10px;
+.start {
+	height: 50px;
+	width: 50px;
+	border-radius: 60px;
+	background-color: black;
+	border: solid deepskyblue;
+	margin-bottom: 10px;
+	margin-top: 10px;
 }
-
-
 
 .start:hover {
-    cursor: pointer;
-    background-color: #3e98c7;
+	cursor: pointer;
+	background-color: #3e98c7;
 }
 
-.start:focus{
-    outline: none;
-
+.start:focus {
+	outline: none;
 }
 
-.stopButton{
-
-    height: 50px;
-    width: 50px;
-    border-radius: 60px;
-    background-color: black;
-    border: solid deepskyblue;
-    margin-bottom: 10px;
-    margin-top: 10px;
-
+.stopButton {
+	height: 50px;
+	width: 50px;
+	border-radius: 60px;
+	background-color: black;
+	border: solid deepskyblue;
+	margin-bottom: 10px;
+	margin-top: 10px;
 }
-
-
 
 .stopButton:hover {
-    cursor: pointer;
-    background-color: #3e98c7;
-
+	cursor: pointer;
+	background-color: #3e98c7;
 }
 
-.stopButton:focus{
-    outline: none;
-
+.stopButton:focus {
+	outline: none;
 }
 
-.mic{
-    margin-left: 15px;
-    color: white;
+.mic {
+	margin-left: 15px;
+	color: white;
 }
 
-
-.audioPlayer{
-    margin-bottom: 10px;
-    -webkit-box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.54);
-    -moz-box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.54);
-    box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.54);
-    width: 80%;
+.audioPlayer {
+	margin-bottom: 10px;
+	-webkit-box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.54);
+	-moz-box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.54);
+	box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.54);
+	width: 80%;
 }
 
-.commentsList{
-    background-color: black;
+.commentsList {
+	background-color: black;
 }
-
-
-
-
-
