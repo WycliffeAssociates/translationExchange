@@ -78,7 +78,7 @@ class RecordButton extends Component {
 
 
 
- 
+
 
 
 
@@ -100,7 +100,7 @@ class RecordButton extends Component {
 						icon
 						negative
 						onClick={() => {
-							if (window.confirm("Delete this comment?")) {
+							if (window.confirm(this.props.displayText.deleteComment)) {
 								this.props.deleteComment(
 									this.props.type,
 									comment.comment.id,
@@ -146,7 +146,7 @@ class RecordButton extends Component {
 				}
 			>
 				<Modal.Header style={this.Style}>
-					{this.props.language.commentsOn} {this.props.languagefrmAPI} {this.props.type}{" "}
+					{this.props.displayText.commentsOn} {this.props.languagefrmAPI} {this.props.type}{" "}
 					{this.props.number}{" "}
 				</Modal.Header>
 
@@ -189,9 +189,9 @@ const styles = {
 
 const mapStateToProps = state => {
 
-		const{ language } = state.geolocation;
+		const{ displayText } = state.geolocation;
 
-		return{language};
+		return{displayText};
 
 };
 

@@ -26,15 +26,10 @@ class TakeCommentsButton extends Component {
 			active: this.props.comments.length > 0
 		};
 
-		
+
 		this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
 		this.onClickSave = this.onClickSave.bind(this);
 	}
-
-
-
-
-
 
 
 
@@ -75,13 +70,13 @@ class TakeCommentsButton extends Component {
 						playAudio = {true}
 																 />
 
-          <div>
+          <div style ={{display:'flex', alignSelf:'center'}}>
 					<Button
 						icon
 						fluid
 						negative
 						onClick={() => {
-							if (window.confirm(this.props.language.deleteComment)) {
+							if (window.confirm(this.props.displayText.deleteComment)) {
 								this.onClickDelete(comment.comment.id, this.props.take.id);
 							}
 						}}
@@ -133,7 +128,7 @@ class TakeCommentsButton extends Component {
 				}
 			>
 				<Modal.Header style={this.Style}>
-					{this.props.language.commentsOnTake} {this.props.count}, {this.props.language.chunk} {this.props.chunkNumber}{" "}
+					{this.props.displayText.commentsOnTake} {this.props.count}, {this.props.displayText.chunk} {this.props.chunkNumber}{" "}
 				</Modal.Header>
 				<div>
 					<RecordComment
@@ -173,9 +168,9 @@ const styles = {
 
 const mapStateToProps = state => {
 
-const{ language } = state.geolocation;
+const{ displayText } = state.geolocation;
 
-return{language};
+return{displayText};
 
 };
 

@@ -1,5 +1,5 @@
 import { UPDATE_LANGUAGE } from '../actions/types';
-import language from '../../languages/languages.json'
+import language from '../../languages/textToDisplay.json'
 
 const INITIAL_STATE = { displayText: language.English
                       };

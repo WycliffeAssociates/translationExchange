@@ -12,4 +12,3 @@ export const REMOVE_TAKE_FROM_PLAYLIST = 'remove_take_from_playlist';
 export const RESET_AUDIOPLAYER = 'remove_audioplayer';
 export const TAKE_ID = 'take_id';
 export const UPDATE_LANGUAGE = 'update_language';
-export const UPDATE_TITLE = 'update_title';

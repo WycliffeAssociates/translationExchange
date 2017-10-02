@@ -153,7 +153,7 @@ getTakeInfo(){
 									<Grid.Column width={11} floated="left">
 										<font size="3">
 											<strong>
-												{this.props.language.take} {this.props.count} -{" "}
+												{this.props.displayText.take} {this.props.count} -{" "}
 											</strong>
 										</font>
 										<font size="2" color="grey">
@@ -287,9 +287,9 @@ const mapStateToProps = state => {
 
 
 const{ mode, playlist, playlistMode } = state.updatePlaylist;
-const{ language } = state.geolocation;
+const{ displayText } = state.geolocation;
 
-return{ mode , playlistMode, playlist, language };
+return{ mode , playlistMode, playlist, displayText };
 
 }
 

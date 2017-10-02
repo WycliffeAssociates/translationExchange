@@ -36,13 +36,13 @@ class Chunk extends Component {
 
 		switch (this.props.mode) {
 			case "chunk":
-				modeLabel = this.props.language.chunk;
+				modeLabel = this.props.displayText.chunk;
 				break;
 			case "verse":
-				modeLabel =  this.props.language.verse;
+				modeLabel =  this.props.displayText.verse;
 				break;
 			default:
-				modeLabel = this.props.language.segment;
+				modeLabel = this.props.displayText.segment;
 		}
 
 		var icon1 = <Icon name="star" color="red" size="big" />;
@@ -178,9 +178,9 @@ Chunk.propTypes = {
 
 const mapStateToProps = state => {
 
-		const{ language } = state.geolocation;
+		const{ displayText } = state.geolocation;
 
-		return{language};
+		return{displayText};
 
 };
 

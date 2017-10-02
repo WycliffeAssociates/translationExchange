@@ -99,7 +99,7 @@ export class RecordComment extends Component {
 					onSave={this.onSave.bind(this)}
 					active={this.props.loadingActive}
 					hideplayer={this.state.hideplayer}
-					btnText ={this.props.language.save}
+					btnText ={this.props.displayText.save}
 				/>
 			);
 		}
@@ -181,7 +181,7 @@ function DisplayAudioPlayer(props) {
 
           <div style ={{ height:'5%', display: 'flex'}} >
 					{props.active
-						? <img style={{justifyContent:'center', display: 'flex'}} src={LoadingGif} alt="Loading..." width="40" height="40" /> 
+						? <img style={{justifyContent:'center', display: 'flex'}} src={LoadingGif} alt="Loading..." width="40" height="40" />
 						: <Button
 								positive
 								size="small"
@@ -215,9 +215,9 @@ const style = {
 
 const mapStateToProps = state => {
 
-		const{ language } = state.geolocation;
+		const{ displayText } = state.geolocation;
 
-		return{language};
+		return{displayText};
 
 };
 
