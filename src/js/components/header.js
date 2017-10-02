@@ -104,7 +104,7 @@ class Header extends Component {
 						<Link to="/">
 							<Menu.Item
 								position="right"
-								name={this.props.language.home}
+								name={this.props.displayText.home}
 								active={activeItem === "Home"}
 								onClick={this.handleItemClick}
 							/>
@@ -112,7 +112,7 @@ class Header extends Component {
 
 						<Link to="/about">
 							<Menu.Item
-								name={this.props.language.about}
+								name={this.props.displayText.about}
 								active={activeItem === "About"}
 								onClick={this.handleItemClick}
 							/>
@@ -120,7 +120,7 @@ class Header extends Component {
 
 						<Link to="/projects">
 							<Menu.Item
-								name={this.props.language.projects}
+								name={this.props.displayText.projects}
 								active={activeItem === "Projects"}
 								onClick={this.handleItemClick}
 							/>
@@ -143,9 +143,9 @@ class Header extends Component {
 
 const mapStateToProps = state => {
 
-const{ language } = state.geolocation;
+const{ displayText } = state.geolocation;
 
-return{language};
+return{displayText};
 
 };
 

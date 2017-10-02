@@ -36,7 +36,7 @@ class PublishButton extends Component {
 				disabled={!readyForPublish || this.props.isPublish}
 				color={this.props.isPublish ? "green" : ""}
 			>
-				{this.props.isPublish ? this.props.language.published : this.props.language.publish}
+				{this.props.isPublish ? this.props.displayText.published : this.props.displayText.publish}
 			</Button>
 		);
 
@@ -65,9 +65,9 @@ class PublishButton extends Component {
 
 const mapStateToProps = state => {
 
-const{ language } = state.geolocation;
+const{ displayText } = state.geolocation;
 
-return{language};
+return{displayText};
 
 };
 

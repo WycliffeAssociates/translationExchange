@@ -1,7 +1,7 @@
 import { UPDATE_LANGUAGE } from '../actions/types';
 import language from '../../languages/languages.json'
 
-const INITIAL_STATE = { language: language.English
+const INITIAL_STATE = { displayText: language.English
                       };
 
 export default (state = INITIAL_STATE, action) => {
@@ -11,7 +11,7 @@ export default (state = INITIAL_STATE, action) => {
         case UPDATE_LANGUAGE:
           return {
             state,
-            language: language[action.updatelanguage]
+            displayText: language[action.updatelanguage]
           };
 
        default:

@@ -40,7 +40,7 @@ class LoadingDisplay extends Component{
                 return (
 
                    <div style = {styles.loading}>
-                     <h1>{this.props.language.loading}</h1>
+                     <h1>{this.props.displayText.loading}</h1>
                   <img src={LoadingGif} alt="Loading..." width="66" height="66"/>
                    </div>
                 );
@@ -71,9 +71,9 @@ const styles = {
 
 const mapStateToProps = state => {
 
-const{ language } = state.geolocation;
+const{ displayText } = state.geolocation;
 
-return{language};
+return{displayText};
 
 };
 

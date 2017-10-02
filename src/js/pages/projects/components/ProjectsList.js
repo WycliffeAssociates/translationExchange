@@ -23,10 +23,10 @@ class ProjectsList extends Component {
 				<Table selectable fixed color="grey">
 					<Table.Header>
 						<Table.Row>
-							<Table.HeaderCell>{this.props.language.language}</Table.HeaderCell>
-							<Table.HeaderCell>{this.props.language.book}</Table.HeaderCell>
-							<Table.HeaderCell>{this.props.language.percentComplete}</Table.HeaderCell>
-							<Table.HeaderCell>{this.props.language.more}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.displayText.language}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.displayText.book}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.displayText.percentComplete}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.displayText.more}</Table.HeaderCell>
 						</Table.Row>
 					</Table.Header>
 
@@ -68,14 +68,14 @@ class ProjectsList extends Component {
 					/>
 				</Table.Cell>
 				<Table.Cell>
-					<ReadMore lines={1} onShowMore={this.props.onChange} text={this.props.language.more}>
-						<b>{this.props.language.dateModified}</b>: {this.parseDate(project.date_modified)} <br />
-						<b>{this.props.language.translationType}</b>: {project.version} <br />
-						<b>{this.props.language.contributors}</b>: {this.getContributorText(
+					<ReadMore lines={1} onShowMore={this.props.onChange} text={this.props.displayText.more}>
+						<b>{this.props.displayText.dateModified}</b>: {this.parseDate(project.date_modified)} <br />
+						<b>{this.props.displayText.translationType}</b>: {project.version} <br />
+						<b>{this.props.displayText.contributors}</b>: {this.getContributorText(
 							project.contributors
 						)}{" "}
 						<br />
-						<b>{this.props.language.published}</b>:
+						<b>{this.props.displayText.published}</b>:
 						{project.is_publish
 							? <Icon name="checkmark" color="green" />
 							: <Icon name="remove" />}
@@ -185,9 +185,9 @@ ProjectsList.propTypes = {
 
 const mapStateToProps = state => {
 
-const{ language } = state.geolocation;
+const{ displayText } = state.geolocation;
 
-return{language};
+return{displayText};
 
 };
 

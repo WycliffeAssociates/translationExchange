@@ -106,7 +106,7 @@ class ProjectsListContainer extends Component {
 			this.requestProjects(this.props.location.search);
 		};
 
-		const chooseAprojectText = this.props.language.ChooseProj;
+		const chooseAprojectText = this.props.displayText.ChooseProj;
 
 		//if a list of projects was loaded, but it was empty, there is some problem with the query URL
 		if (
@@ -149,9 +149,9 @@ class ProjectsListContainer extends Component {
 
 const mapStateToProps = state => {
 
-const{ language } = state.geolocation;
+const{ displayText } = state.geolocation;
 
-return{language};
+return{displayText};
 
 };
 

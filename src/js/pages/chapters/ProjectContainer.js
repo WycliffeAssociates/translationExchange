@@ -150,13 +150,13 @@ class ProjectContainer extends Component {
 							<Table selectable fixed color="grey">
 								<Table.Header>
 									<Table.Row>
-										<Table.HeaderCell>{this.props.language.chapter}</Table.HeaderCell>
-										<Table.HeaderCell>{this.props.language.percentComplete}</Table.HeaderCell>
-										<Table.HeaderCell>{this.props.language.checkLevel}</Table.HeaderCell>
-										<Table.HeaderCell>{this.props.language.readyToPublish}</Table.HeaderCell>
-										<Table.HeaderCell>{this.props.language.contributors}</Table.HeaderCell>
-										<Table.HeaderCell>{this.props.language.translationType}</Table.HeaderCell>
-										<Table.HeaderCell>{this.props.language.dateModified}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.displayText.chapter}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.displayText.percentComplete}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.displayText.checkLevel}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.displayText.readyToPublish}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.displayText.contributors}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.displayText.translationType}</Table.HeaderCell>
+										<Table.HeaderCell>{this.props.displayText.dateModified}</Table.HeaderCell>
 									</Table.Row>
 								</Table.Header>
 
@@ -184,7 +184,7 @@ class ProjectContainer extends Component {
 									/>
 								: ""}
 							{this.state.downloadError
-								? this.props.language.errorTryAgain
+								? this.props.displayText.errorTryAgain
 								: ""}
 						</LoadingDisplay>
 
@@ -199,9 +199,9 @@ class ProjectContainer extends Component {
 
 const mapStateToProps = state => {
 
-const{ language } = state.geolocation;
+const{ displayText } = state.geolocation;
 
-return{language};
+return{displayText};
 
 };
 

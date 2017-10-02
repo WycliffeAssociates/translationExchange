@@ -154,7 +154,7 @@ class FilterContainer extends Component {
 			<div style ={{display:'flex', marginTop: '2%', justifyContent:'center'}}>
 				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
-					placeholder={this.props.language.selectLanguage}  // text from in languages.json
+					placeholder={this.props.displayText.selectLanguage}  // text from in languages.json
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -165,7 +165,7 @@ class FilterContainer extends Component {
 				</div>
 				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
-					placeholder={this.props.language.selectBook}
+					placeholder={this.props.displayText.selectBook}
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -176,7 +176,7 @@ class FilterContainer extends Component {
 				</div>
 				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
-					placeholder={this.props.language.selectVersion}
+					placeholder={this.props.displayText.selectVersion}
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -186,12 +186,12 @@ class FilterContainer extends Component {
 				/>
 				</div>
 				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
-				<Button onClick={this.props.clearQuery}>{this.props.language.clearButton}</Button>
+				<Button onClick={this.props.clearQuery}>{this.props.displayText.clearButton}</Button>
 			  </div>
 				{this.state.error ? (
 					<Message negative>
 						{this.state.error.message}{" "}
-						<Button onClick={this.requestAllFilters.bind(this)}>{this.props.language.retry}</Button>
+						<Button onClick={this.requestAllFilters.bind(this)}>{this.displayText.language.retry}</Button>
 					</Message>
 				) : (
 					""
@@ -203,9 +203,9 @@ class FilterContainer extends Component {
 
 const mapStateToProps = state => {
 
-const{ language } = state.geolocation;
+const{ displayText } = state.geolocation;
 
-return{language};
+return{displayText};
 
 };
 

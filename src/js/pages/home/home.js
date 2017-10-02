@@ -66,9 +66,9 @@ class Home extends Component {
 		});
 	}
 	render() {
-		const recentProjects = this.props.language.recentProjects;
-		const title = this.props.language.mainPage;
-		const btnText = this.props.language.startHere;
+		const recentProjects = this.props.displayText.recentProjects;
+		const title = this.props.displayText.mainPage;
+		const btnText = this.props.displayText.startHere;
 
 		return (
 			<Container fluid className="background">
@@ -121,10 +121,10 @@ class Home extends Component {
 
 
 const mapStateToProps = state => {
-// const{ play, updatedTime } = state.homeRecentProjects;
-const{ language } = state.geolocation;
 
-return{language};
+const{ displayText } = state.geolocation;
+
+return{displayText};
 
 };
 

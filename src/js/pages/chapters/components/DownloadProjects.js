@@ -22,7 +22,7 @@ class DownloadProjects extends Component {
 
         return (
             <Button
-                content={this.props.language.download}
+                content={this.props.displayText.download}
                 icon='download'
                 labelPosition='right'
                 size='small'
@@ -35,9 +35,9 @@ class DownloadProjects extends Component {
 
 const mapStateToProps = state => {
 
-const{ language } = state.geolocation;
+const{ displayText } = state.geolocation;
 
-return{language};
+return{displayText};
 
 };
 
