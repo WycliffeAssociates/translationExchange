@@ -21,35 +21,22 @@ class TakeCommentsButton extends Component {
 		super(props);
 
 		this.state = {
-			//title: "Record Comment",
-			show: this.props.open,
 			SaveButtonState: true,
 			blob: null,
 			active: this.props.comments.length > 0
 		};
 
-		this.showModal = this.showModal.bind(this);
-		this.hideModal = this.hideModal.bind(this);
-		this.getInitialState = this.getInitialState.bind(this);
+		
 		this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
 		this.onClickSave = this.onClickSave.bind(this);
 	}
 
-	saveButton() {
-		this.setState({ disabled: false });
-	}
 
-	getInitialState() {
-		return { show: false };
-	}
 
-	showModal() {
-		this.setState({ show: true });
-	}
 
-	hideModal() {
-		this.setState({ show: false });
-	}
+
+
+
 
 	onClickSave = () => {
 		this.hideModal();
