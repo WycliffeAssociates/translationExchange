@@ -13,7 +13,7 @@ export default class ErrorButton extends Component {
         );
     }
 }
-ErrorButton.prototype={
+ErrorButton.proptype={
     retry:PropTypes.func.isRequired,
     error: PropTypes.string.isRequired
 }

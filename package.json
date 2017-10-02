@@ -12,7 +12,7 @@
 		"json-schema-traverse": "^0.3.1",
 		"lodash": "latest",
 		"nock": "^9.0.14",
-		"prop-types": "^15.5.10",
+		"prop-types": "^15.6.0",
 		"query-string": "^4.3.4",
 		"react": "^15.6.1",
 		"react-addons": "^0.9.1-deprecated",

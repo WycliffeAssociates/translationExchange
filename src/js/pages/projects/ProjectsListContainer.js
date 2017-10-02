@@ -78,7 +78,7 @@ class ProjectsListContainer extends Component {
 		and after the state has been set,
 		 navigate to a URL without the query
 		*/
-		this.setState({ currentProjectQuery: "", projects: [] }, function() {
+		this.setState({ currentProjectQuery: "", projects: [] }, function () {
 			this.props.history.push({
 				pathname: this.props.location.pathname
 			});
@@ -102,8 +102,8 @@ class ProjectsListContainer extends Component {
 	}
 
 	render() {
-		const {loaded,error,projects}=this.state;
-		var retryRequestProjects = function() {
+		const { loaded, error, projects } = this.state;
+		var retryRequestProjects = function () {
 			this.requestProjects(this.props.location.search);
 		};
 
@@ -115,28 +115,28 @@ class ProjectsListContainer extends Component {
 
 		if (projectsLoadedButEmpty) {
 			return <NotFound />;
-		} else if(error){
-			return(<ErrorButton error={error}/>);
-		}else if(!loaded){
-			return(
+		} else if (error) {
+			return (<ErrorButton error={error} />);
+		} else if (!loaded) {
+			return (
 				<LoadingGif />
 			);
-		}else{
+		} else {
 			return (
 				<div className="projects">
 					<h1>Choose a Project</h1>
-						<ProjectFilter
+					<ProjectFilter
+						projects={projects}
+						setQuery={this.setQuery.bind(this)}
+						queryString={this.props.location.search}
+						clearQuery={this.clearQuery.bind(this)}
+					/>
+					{this.state.projects.length > 0
+						? <ProjectsList
 							projects={projects}
-							setQuery={this.setQuery.bind(this)}
-							queryString={this.props.location.search}
-							clearQuery={this.clearQuery.bind(this)}
+							navigateToProject={this.navigateToProject.bind(this)}
 						/>
-						{this.state.projects.length > 0
-							? <ProjectsList
-									projects={projects}
-									navigateToProject={this.navigateToProject.bind(this)}
-								/>
-							: ""}
+						: ""}
 				</div>
 			);
 		}
