@@ -63,7 +63,7 @@ getTakeInfo(){
 	let take = {
 		 src: config.streamingUrl + takeLoc,
 		 markers: markers,
-		 name: `${this.props.displayText.take} ${takeNum}, ${this.props.displayText.chunk} ${startv}  (${author} on ${date})`,  // in case of other mode like chunk mode or verse mode verify this
+		 name: `${this.props.displayText.take} ${takeNum}, ${this.props.displayText.chunk} ${startv}  (${author} ${this.props.displayText.on} ${date})`,  // in case of other mode like chunk mode or verse mode verify this
 		 id: takeLoc,
 		 chunk: `${this.props.mode} ${startv}`
 	 };
@@ -257,18 +257,7 @@ getTakeInfo(){
 			hour %= 12;
 		}
 
-		return (
-			date[1] +
-			" " +
-			date[2] +
-			", " +
-			date[0] +
-			" at " +
-			hour +
-			":" +
-			time[1] +
-			noon
-		);
+		return (     `${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`	);
 	}
 }
 

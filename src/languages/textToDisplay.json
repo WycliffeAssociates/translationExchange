@@ -48,7 +48,9 @@
    "month9": "September",
    "month10": "October",
    "month11": "November",
-   "month12": "December"
+   "month12": "December",
+    "at": "at",
+    "on": "on"
    },
    "Spanish": {
      "mainPage": "Traducción Disponible Para Todos",
@@ -99,7 +101,9 @@
      "month9": "Septiembre",
      "month10": "Octubre",
      "month11": "Noviembre",
-     "month12": "Diciembre"
+     "month12": "Diciembre",
+     "at": "a las",
+     "on": "en"
    },
    "Russian": {
       "mainPage": "Перевод предоставлен",
@@ -150,7 +154,9 @@
       "month9": "September",
       "month10": "October",
       "month11": "November",
-      "month12": "December"
+      "month12": "December",
+      "at": "at",
+      "on": "on"
  },
    "Nepali": {
      "mainPage": "Translation made available",
@@ -201,7 +207,9 @@
      "month9": "September",
      "month10": "October",
      "month11": "November",
-     "month12": "December"
+     "month12": "December",
+     "at": "at",
+     "on": "on"
      }
 
 
