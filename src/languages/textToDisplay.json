@@ -11,7 +11,7 @@
    "selectBook": "Select Book",
    "selectVersion": "Select Version",
    "clearButton": "clear",
-   "retry": "retry",
+   "retry": "Retry",
    "error": "There was a connection error",
    "loading": "Loading...",
    "language": "Language",
@@ -50,7 +50,9 @@
    "month11": "November",
    "month12": "December",
     "at": "at",
-    "on": "on"
+    "on": "on",
+    "dataError": "There was a problem loading the data:"
+
    },
    "Spanish": {
      "mainPage": "Traducción Disponible Para Todos",
@@ -64,7 +66,7 @@
      "selectBook": "Selecciona Libro",
      "selectVersion": "Selecciona Versión",
      "clearButton": "Borrar",
-     "retry": "reintentar",
+     "retry": "Reintentar",
      "error": "Hubo un error de conexión",
      "loading": "Cargando...",
      "language": "Lenguaje",
@@ -103,7 +105,9 @@
      "month11": "Noviembre",
      "month12": "Diciembre",
      "at": "a las",
-     "on": "en"
+     "on": "en",
+     "dataError": "Hubo un problema cargando la información:"
+
    },
    "Russian": {
       "mainPage": "Перевод предоставлен",
@@ -156,7 +160,8 @@
       "month11": "November",
       "month12": "December",
       "at": "at",
-      "on": "on"
+      "on": "on",
+      "dataError": "There was a problem loading the data:"
  },
    "Nepali": {
      "mainPage": "Translation made available",
@@ -209,7 +214,9 @@
      "month11": "November",
      "month12": "December",
      "at": "at",
-     "on": "on"
+     "on": "on",
+     "dataError": "There was a problem loading the data:"
+
      }
 
 

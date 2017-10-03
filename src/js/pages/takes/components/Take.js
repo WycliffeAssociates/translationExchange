@@ -65,7 +65,7 @@ getTakeInfo(){
 		 markers: markers,
 		 name: `${this.props.displayText.take} ${takeNum}, ${this.props.displayText.chunk} ${startv}  (${author} ${this.props.displayText.on} ${date})`,  // in case of other mode like chunk mode or verse mode verify this
 		 id: takeLoc,
-		 chunk: `${this.props.mode} ${startv}`
+		 chunk: `${this.props.displayText.chunk} ${startv}`          // in case of a different mode like segment or verse here is assumed that only chunks will be used
 	 };
 
 	 return take;

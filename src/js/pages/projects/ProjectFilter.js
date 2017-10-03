@@ -191,7 +191,7 @@ class ProjectFilter extends Component {
 				{this.state.error ? (
 					<Message negative>
 						{this.state.error.message}{" "}
-						<Button onClick={this.requestAllFilters.bind(this)}>{this.displayText.language.retry}</Button>
+						<Button onClick={this.requestAllFilters.bind(this)}>{this.props.displayText.retry}</Button>
 					</Message>
 				) : (
 					""
