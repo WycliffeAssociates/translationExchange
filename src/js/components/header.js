@@ -63,8 +63,11 @@ class Header extends Component {
 					                     if( rtlLanguages[rtl] === country){
 
 					 											this.props.updateDirection('rtl');
+
 					 										}
-												   }
+
+													}
+													break;
 											 }
 
 							     }
