@@ -56,7 +56,7 @@ class Home extends Component {
 		return (
 			<Container fluid className="background">
 				<Container fluid>
-					<LogoTitle text = {title} />
+					<LogoTitle titleText = {title} />
 					<StartHere text= {btnText} />
 				</Container>
 

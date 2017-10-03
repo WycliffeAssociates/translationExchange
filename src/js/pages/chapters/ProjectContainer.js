@@ -144,7 +144,7 @@ class ProjectContainer extends Component {
 								/>
 								<PublishButton
 									chapters={this.state.chapters}
-									isPublish={this.state.is_publish}
+									isPublished={this.state.is_publish}
 									onPublish={this.publishFiles.bind(this)}
 								/>
 							</h1>
