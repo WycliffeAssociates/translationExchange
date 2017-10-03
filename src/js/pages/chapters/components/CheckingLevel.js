@@ -1,10 +1,5 @@
-
-
-
 import React, { Component } from 'react';
 import { Dropdown, Menu } from 'semantic-ui-react'
-
-
 
 export class CheckingLevel extends Component {
 
@@ -16,7 +11,6 @@ export class CheckingLevel extends Component {
     ];
 
     setValue(event, data){
-        console.log(data.value)
         this.props.setCheckingLevel(this.props.chapterId, data.value);
     }
 

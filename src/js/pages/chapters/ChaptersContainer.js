@@ -10,10 +10,10 @@ import "css/chapters.css";
 import PublishButton from "./components/PublishButton";
 import DownloadTR from "./components/DownloadTR";
 import NotFound from "js/pages/NotFound";
-import ErrorButton from '../../components/ErrorButton';
-import LoadingGif from '../../components/LoadingGif';
+import ErrorButton from "../../components/ErrorButton";
+import LoadingGif from "../../components/LoadingGif";
 
-class ChapterContainer extends Component {
+class ChaptersContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -123,70 +123,68 @@ class ChapterContainer extends Component {
 	render() {
 		if (this.state.loaded && !this.state.chapters) {
 			return <NotFound />;
-		}else if(this.state.error){
-			return(<ErrorButton error={this.state.error}/>);
-		}else if(!this.state.loaded){
-			return(
-				<LoadingGif />
-			);
+		} else if (this.state.error) {
+			return <ErrorButton error={this.state.error} />;
+		} else if (!this.state.loaded) {
+			return <LoadingGif />;
 		} else {
 			return (
 				<div className="chapters">
 					<Container fluid>
-							<h1>
-								{this.state.book.name} ({this.state.language.name})
-								<DownloadTR
-									chapters={this.state.chapters}
-									isPublish={this.state.is_publish}
-									onPublish={this.publishFiles.bind(this)}
-									project_id={this.state.project_id}
-								/>
-								<PublishButton
-									chapters={this.state.chapters}
-									isPublish={this.state.is_publish}
-									onPublish={this.publishFiles.bind(this)}
-								/>
-							</h1>
-
-							<Table selectable fixed color="grey">
-								<Table.Header>
-									<Table.Row>
-										<Table.HeaderCell>Chapter</Table.HeaderCell>
-										<Table.HeaderCell>Percent Complete</Table.HeaderCell>
-										<Table.HeaderCell>Checking Level</Table.HeaderCell>
-										<Table.HeaderCell>Ready to Publish</Table.HeaderCell>
-										<Table.HeaderCell>Contributors</Table.HeaderCell>
-										<Table.HeaderCell>Translation Type</Table.HeaderCell>
-										<Table.HeaderCell>Date Modified</Table.HeaderCell>
-									</Table.Row>
-								</Table.Header>
-
-								<ChapterList
-									chapters={this.state.chapters}
-									version={
-										QueryString.parse(this.props.location.search).version
-									}
-									navigateToChapter={this.navigateToChapter.bind(this)}
-									setCheckingLevel={this.setCheckingLevel.bind(this)}
-									projectIsPublish={this.state.is_publish}
-								/>
-							</Table>
-
-							<DownloadProjects
-								onDownloadProject={this.onDownloadProject.bind(this)}
+						<h1>
+							{this.state.book.name} ({this.state.language.name})
+							<DownloadTR
+								chapters={this.state.chapters}
+								isPublish={this.state.is_publish}
+								onPublish={this.publishFiles.bind(this)}
+								project_id={this.state.project_id}
 							/>
+							<PublishButton
+								chapters={this.state.chapters}
+								isPublish={this.state.is_publish}
+								onPublish={this.publishFiles.bind(this)}
+							/>
+						</h1>
 
-							{this.state.downloadLoading
-								? <img
-										src={LoadingTinyGif}
-										alt="Loading..."
-										width="16"
-										height="16"
-									/>
-								: ""}
-							{this.state.downloadError
-								? "There was an error. Please try again"
-								: ""}
+						<Table selectable fixed color="grey">
+							<Table.Header>
+								<Table.Row>
+									<Table.HeaderCell>Chapter</Table.HeaderCell>
+									<Table.HeaderCell>Percent Complete</Table.HeaderCell>
+									<Table.HeaderCell>Checking Level</Table.HeaderCell>
+									<Table.HeaderCell>Ready to Publish</Table.HeaderCell>
+									<Table.HeaderCell>Contributors</Table.HeaderCell>
+									<Table.HeaderCell>Translation Type</Table.HeaderCell>
+									<Table.HeaderCell>Date Modified</Table.HeaderCell>
+								</Table.Row>
+							</Table.Header>
+
+							<ChapterList
+								chapters={this.state.chapters}
+								version={QueryString.parse(this.props.location.search).version}
+								navigateToChapter={this.navigateToChapter.bind(this)}
+								setCheckingLevel={this.setCheckingLevel.bind(this)}
+								projectIsPublish={this.state.is_publish}
+							/>
+						</Table>
+
+						<DownloadProjects
+							onDownloadProject={this.onDownloadProject.bind(this)}
+						/>
+
+						{this.state.downloadLoading ? (
+							<img
+								src={LoadingTinyGif}
+								alt="Loading..."
+								width="16"
+								height="16"
+							/>
+						) : (
+							""
+						)}
+						{this.state.downloadError
+							? "There was an error. Please try again"
+							: ""}
 						<br />
 					</Container>
 				</div>
@@ -195,4 +193,4 @@ class ChapterContainer extends Component {
 	}
 }
 
-export default ChapterContainer;
+export default ChaptersContainer;
