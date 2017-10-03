@@ -22,7 +22,7 @@ export function dispatchHomeRecentProjectsReceived(response) {
 }
 export function dispatchHomeRecentProjectsErr(error) {
 	return {
-		type: 'HOME_RECENT_PROJECTS_RECEIVED',
+		type: 'HOME_RECENT_PROJECTS_ERR',
 		error
 	}
 }

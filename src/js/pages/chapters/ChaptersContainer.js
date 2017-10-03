@@ -12,6 +12,9 @@ import DownloadTR from "./components/DownloadTR";
 import NotFound from "js/pages/NotFound";
 import ErrorButton from "../../components/ErrorButton";
 import LoadingGif from "../../components/LoadingGif";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { publishFiles, fetchChapterData } from '../../actions';
 
 class ChaptersContainer extends Component {
 	constructor() {
@@ -34,51 +37,11 @@ class ChaptersContainer extends Component {
 		};
 	}
 
-	publishFiles() {
-		let chapterID = this.state.project_id;
-		let parameters = {
-			is_publish: true
-		};
-
-		axios
-			.patch(config.apiUrl + "projects/" + chapterID + "/", parameters)
-			.then(response => {
-				this.setState({ is_publish: true });
-			})
-			.catch(exception => {
-				// TODO: modify for the error that occurs if the patch fails
-				this.setState({ publishError: exception });
-			});
-	}
-
 	setCheckingLevel(chapterId, level) {
 		axios.patch(config.apiUrl + "chapters/" + chapterId + "/", {
 			checked_level: level
 		});
 	}
-
-	getChapterData() {
-		var query = QueryString.parse(this.props.location.search);
-
-		this.setState({ error: "" });
-		axios
-			.post(config.apiUrl + "get_chapters/", query)
-			.then(results => {
-				this.setState({
-					chapters: results.data.chapters,
-					book: results.data.book,
-					project_id: results.data.project_id,
-					is_publish: results.data.is_publish,
-					language: results.data.language,
-					loaded: true,
-					version: results.data.version
-				});
-			})
-			.catch(exception => {
-				this.setState({ error: exception });
-			});
-	}
-
 	navigateToChapter(chNum) {
 		var query = QueryString.parse(this.props.location.search);
 		query.chapter = chNum;
@@ -89,60 +52,62 @@ class ChaptersContainer extends Component {
 	}
 
 	// Minimal parameters saves on server query time
-	onDownloadProject() {
-		this.setState({
-			downloadLoading: true,
-			downloadError: "",
-			downloadSuccess: ""
-		});
+	// onDownloadProject() {
+	// 	this.setState({
+	// 		downloadLoading: true,
+	// 		downloadError: "",
+	// 		downloadSuccess: ""
+	// 	});
 
-		let params = {
-			project: this.state.project_id
-		};
-		axios
-			.post(config.apiUrl + "zip_files/", params, { timeout: 0 })
-			.then(download_results => {
-				window.location = config.streamingUrl + download_results.data.location;
-				this.setState({
-					downloadLoading: false,
-					downloadSuccess: "Success. Check your downloads folder"
-				});
-			})
-			.catch(exception => {
-				this.setState({ downloadError: exception });
-			})
-			.catch(error => {
-				this.setState({ downloadLoading: false, downloadError: error });
-			});
-	}
+	// 	let params = {
+	// 		project: project_id
+	// 	};
+	// 	axios
+	// 		.post(config.apiUrl + "zip_files/", params, { timeout: 0 })
+	// 		.then(download_results => {
+	// 			window.location = config.streamingUrl + download_results.data.location;
+	// 			this.setState({
+	// 				downloadLoading: false,
+	// 				downloadSuccess: "Success. Check your downloads folder"
+	// 			});
+	// 		})
+	// 		.catch(exception => {
+	// 			this.setState({ downloadError: exception });
+	// 		})
+	// 		.catch(error => {
+	// 			this.setState({ downloadLoading: false, downloadError: error });
+	// 		});
+	// }
 
 	componentDidMount() {
-		this.getChapterData();
+		let query = QueryString.parse(this.props.location.search);
+		this.props.fetchChapterData(query);
 	}
 
 	render() {
-		if (this.state.loaded && !this.state.chapters) {
+		const {book,chapters,is_publish,language,loaded,project_id,error} =this.props.chapterData;
+		if (loaded && !chapters) {
 			return <NotFound />;
-		} else if (this.state.error) {
-			return <ErrorButton error={this.state.error} />;
-		} else if (!this.state.loaded) {
+		} else if (error) {
+			return <ErrorButton error={error} />;
+		} else if (!loaded) {
 			return <LoadingGif />;
 		} else {
 			return (
 				<div className="chapters">
 					<Container fluid>
 						<h1>
-							{this.state.book.name} ({this.state.language.name})
+							{book.name} ({language.name})
 							<DownloadTR
-								chapters={this.state.chapters}
-								isPublish={this.state.is_publish}
-								onPublish={this.publishFiles.bind(this)}
-								project_id={this.state.project_id}
+								chapters={chapters}
+								isPublish={is_publish}
+								onPublish={this.props.publishFiles}
+								project_id={project_id}
 							/>
 							<PublishButton
-								chapters={this.state.chapters}
-								isPublish={this.state.is_publish}
-								onPublish={this.publishFiles.bind(this)}
+								chapters={chapters}
+								isPublish={is_publish}
+								onPublish={this.props.publishFiles(project_id)}
 							/>
 						</h1>
 
@@ -160,19 +125,19 @@ class ChaptersContainer extends Component {
 							</Table.Header>
 
 							<ChapterList
-								chapters={this.state.chapters}
+								chapters={chapters}
 								version={QueryString.parse(this.props.location.search).version}
 								navigateToChapter={this.navigateToChapter.bind(this)}
 								setCheckingLevel={this.setCheckingLevel.bind(this)}
-								projectIsPublish={this.state.is_publish}
+								projectIsPublish={is_publish}
 							/>
 						</Table>
 
 						<DownloadProjects
-							onDownloadProject={this.onDownloadProject.bind(this)}
+							//onDownloadProject={this.onDownloadProject.bind(this)}
 						/>
 
-						{this.state.downloadLoading ? (
+						{false ? (
 							<img
 								src={LoadingTinyGif}
 								alt="Loading..."
@@ -180,9 +145,9 @@ class ChaptersContainer extends Component {
 								height="16"
 							/>
 						) : (
-							""
-						)}
-						{this.state.downloadError
+								""
+							)}
+						{false
 							? "There was an error. Please try again"
 							: ""}
 						<br />
@@ -192,5 +157,15 @@ class ChaptersContainer extends Component {
 		}
 	}
 }
-
-export default ChaptersContainer;
+const mapStateToProps = (state) => {
+	return {
+		chapterData: state.chapterData
+	}
+}
+const matchDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		publishFiles,
+		fetchChapterData
+	}, dispatch);
+}
+export default connect(mapStateToProps, matchDispatchToProps)(ChaptersContainer);
