@@ -14,7 +14,7 @@ import ErrorButton from "../../components/ErrorButton";
 import LoadingGif from "../../components/LoadingGif";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { publishFiles, fetchChapterData } from '../../actions';
+import { publishFiles, fetchChapterData,setCheckingLevel } from '../../actions';
 
 class ChaptersContainer extends Component {
 	constructor() {
@@ -37,11 +37,6 @@ class ChaptersContainer extends Component {
 		};
 	}
 
-	setCheckingLevel(chapterId, level) {
-		axios.patch(config.apiUrl + "chapters/" + chapterId + "/", {
-			checked_level: level
-		});
-	}
 	navigateToChapter(chNum) {
 		var query = QueryString.parse(this.props.location.search);
 		query.chapter = chNum;
@@ -85,7 +80,7 @@ class ChaptersContainer extends Component {
 	}
 
 	render() {
-		const {book,chapters,is_publish,language,loaded,project_id,error} =this.props.chapterData;
+		const { book, chapters, is_publish, language, loaded, project_id, error } = this.props.chapterData;
 		if (loaded && !chapters) {
 			return <NotFound />;
 		} else if (error) {
@@ -128,13 +123,13 @@ class ChaptersContainer extends Component {
 								chapters={chapters}
 								version={QueryString.parse(this.props.location.search).version}
 								navigateToChapter={this.navigateToChapter.bind(this)}
-								setCheckingLevel={this.setCheckingLevel.bind(this)}
+								setCheckingLevel={this.props.setCheckingLevel}
 								projectIsPublish={is_publish}
 							/>
 						</Table>
 
 						<DownloadProjects
-							//onDownloadProject={this.onDownloadProject.bind(this)}
+						//onDownloadProject={this.onDownloadProject.bind(this)}
 						/>
 
 						{false ? (
@@ -165,7 +160,8 @@ const mapStateToProps = (state) => {
 const matchDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		publishFiles,
-		fetchChapterData
+		fetchChapterData,
+		setCheckingLevel
 	}, dispatch);
 }
 export default connect(mapStateToProps, matchDispatchToProps)(ChaptersContainer);
