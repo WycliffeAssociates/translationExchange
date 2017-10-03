@@ -36,7 +36,19 @@
    "take": "Take",
    "download": "Download",
    "commentsOn": "Comments on",
-   "downloadSrcAudio": "Download Source Audio"
+   "downloadSrcAudio": "Download Source Audio",
+   "month1": "January",
+   "month2": "February",
+   "month3": "March",
+   "month4": "April",
+   "month5": "May",
+   "month6": "June",
+   "month7": "July",
+   "month8": "August",
+   "month9": "September",
+   "month10": "October",
+   "month11": "November",
+   "month12": "December"
    },
    "Spanish": {
      "mainPage": "Traducción Disponible Para Todos",
@@ -75,7 +87,19 @@
      "take": "Grabación",
      "download": "Descargar",
      "commentsOn": "Comentarios para ",
-     "downloadSrcAudio": "Descargar Audio Base"
+     "downloadSrcAudio": "Descargar Audio Base",
+     "month1": "Enero",
+     "month2": "Febrero",
+     "month3": "Marzo",
+     "month4": "Abril",
+     "month5": "Mayo",
+     "month6": "Junio",
+     "month7": "Julio",
+     "month8": "Agosto",
+     "month9": "Septiembre",
+     "month10": "Octubre",
+     "month11": "Noviembre",
+     "month12": "Diciembre"
    },
    "Russian": {
       "mainPage": "Перевод предоставлен",
@@ -114,7 +138,19 @@
       "take": "Дубль",
       "download": "Скачать",
       "commentsOn": "Коментарии по",
-      "downloadSrcAudio": "Download Source Audio"
+      "downloadSrcAudio": "Download Source Audio",
+      "month1": "January",
+      "month2": "February",
+      "month3": "March",
+      "month4": "April",
+      "month5": "May",
+      "month6": "June",
+      "month7": "July",
+      "month8": "August",
+      "month9": "September",
+      "month10": "October",
+      "month11": "November",
+      "month12": "December"
  },
    "Nepali": {
      "mainPage": "Translation made available",
@@ -153,7 +189,19 @@
      "take": "Take",
      "download": "Download",
      "commentsOn": "Comments on",
-     "downloadSrcAudio": "Download Source Audio"
+     "downloadSrcAudio": "Download Source Audio",
+     "month1": "January",
+     "month2": "February",
+     "month3": "March",
+     "month4": "April",
+     "month5": "May",
+     "month6": "June",
+     "month7": "July",
+     "month8": "August",
+     "month9": "September",
+     "month10": "October",
+     "month11": "November",
+     "month12": "December"
      }
 
 
