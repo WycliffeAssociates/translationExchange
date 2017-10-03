@@ -8,9 +8,10 @@ import user from "images/user.png";
 import dots from "images/dots.png";
 import nn from 'nearest-neighbor';
 import countries from '../../languages/countries.json';
-import languageAndCountry from '../../languages/languageAndCountry.json'
+import languageAndCountry from '../../languages/languageAndCountry.json';
+import rtlLanguages from  '../../languages/rtlLanguages.json'
 
-import {updateLanguage} from '../actions';
+import {updateLanguage, updateDirection} from '../actions';
 
 class Header extends Component {
 	state = { activeItem: "home" };
@@ -53,17 +54,20 @@ class Header extends Component {
 
 								 for (const eachCountry in lang) {
 
-
 											 if(lang[eachCountry] === country){
-
-												const country = key ;
 
 												 this.props.updateLanguage(key);
 
+												 for (const rtl in rtlLanguages){                 // checks if it is an RTL language
 
-												}
+					                     if( rtlLanguages[rtl] === country){
+
+					 											this.props.updateDirection('rtl');
+					 										}
+												   }
 											 }
 
+							     }
 							}
 
 
@@ -72,7 +76,7 @@ class Header extends Component {
 	}
 	else {
 	 // geolocation is not supported
-	}
+	   }
 
 	}
 
@@ -152,7 +156,8 @@ return{displayText};
 const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({
-          updateLanguage
+          updateLanguage,
+					updateDirection
 
 }, dispatch);
 

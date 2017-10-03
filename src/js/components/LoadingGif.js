@@ -7,7 +7,7 @@ class LoadingGif extends Component {
         return (
           <div style = {styles.loading}>
             <h1>{this.props.displayText.loading}</h1>
-         <img src={LoadingGif} alt="Loading..." width="66" height="66"/>
+         <img src={loadingGif} alt="Loading..." width="66" height="66"/>
           </div>
         );
     }

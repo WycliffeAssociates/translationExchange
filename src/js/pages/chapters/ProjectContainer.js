@@ -132,9 +132,9 @@ class ProjectContainer extends Component {
 			);
 		} else {
 			return (
-				<div className="chapters">
+				<div className="chapters" style ={{direction:`${this.props.direction}`}}>
 					<Container fluid>
-							<h1>
+							<h1 style={{display: 'flex', justifyContent: 'space-between'}}>
 								{this.state.book.name} ({this.state.language.name})
 								<DownloadTR
 									chapters={this.state.chapters}
@@ -199,9 +199,10 @@ class ProjectContainer extends Component {
 
 const mapStateToProps = state => {
 
+const {direction} = state.direction;
 const{ displayText } = state.geolocation;
 
-return{displayText};
+return{displayText, direction};
 
 };
 

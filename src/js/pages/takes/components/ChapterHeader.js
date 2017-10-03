@@ -16,6 +16,7 @@ class ChapterHeader extends Component {
 						</Grid.Column>
 
 						<Grid.Column width={5} className="verticalLine">
+							<div style = {{display:'flex', justifyContent: 'space-between'}}>
 							<MarkAsDone
 								chapter={this.props.chapter}
 								chunks={this.props.chunks}
@@ -34,6 +35,7 @@ class ChapterHeader extends Component {
 								languagefrmAPI={this.props.language}
 								onClick={()=> console.log('clicked')}
 							/>
+							</div>
 						</Grid.Column>
 					</Grid>
 				</div>
