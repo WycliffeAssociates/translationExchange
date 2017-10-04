@@ -95,8 +95,10 @@ class Header extends Component {
 
 		return (
 			<div style={{ marginBottom: 10 }}>
+
 				<Menu fluid secondary size="huge" compact>
-					<Menu.Item position="left">
+					<div style = {{display: 'flex', flex: 1, justifyContent: 'space-between', direction:`${this.props.direction}` }}>
+					<Menu.Item>
 						<Link to="/">
 							<Menu.Item>
 								<Image src={dots} width="120" height="30" />
@@ -107,7 +109,7 @@ class Header extends Component {
 						</Link>
 					</Menu.Item>
 
-					<Menu.Item position="right">
+					<Menu.Item>
 						<Link to="/">
 							<Menu.Item
 								position="right"
@@ -139,6 +141,7 @@ class Header extends Component {
 							</Menu.Item>
 						</Link>
 					</Menu.Item>
+					 </div>
 				</Menu>
 
 				<Container className="redBar" fluid />
@@ -151,8 +154,9 @@ class Header extends Component {
 const mapStateToProps = state => {
 
 const{ displayText } = state.geolocation;
+const {direction} = state.direction;
 
-return{displayText};
+return{displayText, direction};
 
 };
 

@@ -18,7 +18,7 @@ class ProjectsList extends Component {
      */
 	render() {
 		return (
-			<div>
+			<div style ={{direction:`${this.props.direction}`}}>
 			<Container fluid>
 				<Table selectable fixed color="grey">
 					<Table.Header>
@@ -151,7 +151,7 @@ class ProjectsList extends Component {
 
 		return (     `${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`	);
 	   }
-  
+
 }
 /*
     Use PropTypes to define what props this component expects. If it's passed the wrong props,
@@ -174,9 +174,11 @@ ProjectsList.propTypes = {
 
 const mapStateToProps = state => {
 
+	const {direction} = state.direction;
+
 const{ displayText } = state.geolocation;
 
-return{displayText};
+return{displayText, direction};
 
 };
 
