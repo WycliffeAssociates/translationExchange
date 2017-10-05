@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import ChapterContainer from "./js/pages/takes/ChapterContainer";
 import ProjectsListContainer from "./js/pages/projects/ProjectsListContainer";
-import ProjectContainer from "./js/pages/chapters/ProjectContainer";
+import ChaptersContainer from "./js/pages/chapters/ChaptersContainer";
 import "./App.css";
 import NotFound from "./js/pages/NotFound";
 import Header from "./js/components/header";
@@ -38,7 +38,7 @@ class App extends Component {
 					<Route exact path="/" component={Home} />
 					<Route exact path="/about" component={About} />
 					<Route exact path="/projects" component={ProjectsListContainer} />
-					<Route exact path="/chapters" component={ProjectContainer} />
+					<Route exact path="/chapters" component={ChaptersContainer} />
 					<Route exact path="/takes" component={ChapterContainer} />
 					<Route exact path="/user" component={User} />
 					<Route path="*" component={NotFound} />

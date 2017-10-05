@@ -14,7 +14,7 @@ import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
 
-class ProjectContainer extends Component {
+class ChaptersContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -206,4 +206,4 @@ return{displayText};
 };
 
 
-export default connect (mapStateToProps) (ProjectContainer);
+export default connect (mapStateToProps) (ChaptersContainer);
