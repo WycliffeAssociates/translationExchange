@@ -14,7 +14,7 @@ import ErrorButton from "../../components/ErrorButton";
 import LoadingGif from "../../components/LoadingGif";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { publishFiles, fetchChapterData,setCheckingLevel } from '../../actions';
+import { publishFiles, fetchChapterData, setCheckingLevel, downloadProject } from '../../actions';
 
 class ChaptersContainer extends Component {
 	constructor() {
@@ -47,32 +47,14 @@ class ChaptersContainer extends Component {
 	}
 
 	// Minimal parameters saves on server query time
-	// onDownloadProject() {
-	// 	this.setState({
-	// 		downloadLoading: true,
-	// 		downloadError: "",
-	// 		downloadSuccess: ""
-	// 	});
-
-	// 	let params = {
-	// 		project: project_id
-	// 	};
-	// 	axios
-	// 		.post(config.apiUrl + "zip_files/", params, { timeout: 0 })
-	// 		.then(download_results => {
-	// 			window.location = config.streamingUrl + download_results.data.location;
-	// 			this.setState({
-	// 				downloadLoading: false,
-	// 				downloadSuccess: "Success. Check your downloads folder"
-	// 			});
-	// 		})
-	// 		.catch(exception => {
-	// 			this.setState({ downloadError: exception });
-	// 		})
-	// 		.catch(error => {
-	// 			this.setState({ downloadLoading: false, downloadError: error });
-	// 		});
-	// }
+	onDownloadProject() {
+		this.setState({
+			downloadLoading: true,
+			downloadError: "",
+			downloadSuccess: ""
+		});
+		this.props.downloadProject(this.props.chapterData.project_id);
+	}
 
 	componentDidMount() {
 		let query = QueryString.parse(this.props.location.search);
@@ -129,10 +111,10 @@ class ChaptersContainer extends Component {
 						</Table>
 
 						<DownloadProjects
-						//onDownloadProject={this.onDownloadProject.bind(this)}
+							onDownloadProject={this.onDownloadProject.bind(this)}
 						/>
 
-						{false ? (
+						{this.props.downloadProject.downloadLoading ? (
 							<img
 								src={LoadingTinyGif}
 								alt="Loading..."
@@ -142,7 +124,7 @@ class ChaptersContainer extends Component {
 						) : (
 								""
 							)}
-						{false
+						{this.props.downloadProject.downloadError
 							? "There was an error. Please try again"
 							: ""}
 						<br />
@@ -154,14 +136,16 @@ class ChaptersContainer extends Component {
 }
 const mapStateToProps = (state) => {
 	return {
-		chapterData: state.chapterData
+		chapterData: state.chapterData,
+		downloadProject: state.downloadProject
 	}
 }
 const matchDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		publishFiles,
 		fetchChapterData,
-		setCheckingLevel
+		setCheckingLevel,
+		downloadProject
 	}, dispatch);
 }
 export default connect(mapStateToProps, matchDispatchToProps)(ChaptersContainer);
