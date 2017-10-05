@@ -33,3 +33,29 @@ export function fetchChaptersContainerDataFailed(error) {
         error
     }
 };
+export function setCheckingLevel(chapterId, level) {
+
+    return function (dispatch) {
+        return axios
+            .patch(config.apiUrl + "chapters/" + chapterId + "/", { checked_level: level })
+            .then(response => {
+                dispatch(dispatchSetCheckingLevelSuccess(response.data));
+            })
+            .catch(err => {
+                dispatch(dispatchSetCheckingLevelFailed(err));
+            });
+    };
+}
+
+export function dispatchSetCheckingLevelSuccess(response) {
+    return {
+        type: 'SET_CHECKING_LEVEL_SUCCESS',
+        response
+    }
+}
+export function dispatchSetCheckingLevelFailed(error) {
+    return {
+        type: 'SET_CHECKING_LEVEL_FAILED',
+        error
+    }
+}

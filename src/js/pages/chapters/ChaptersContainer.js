@@ -14,7 +14,7 @@ import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
 import { bindActionCreators } from 'redux';
-import { fetchChaptersContainerData } from '../../actions';
+import { fetchChaptersContainerData,setCheckingLevel } from '../../actions';
 
 class ChaptersContainer extends Component {
 	constructor() {
@@ -47,9 +47,7 @@ class ChaptersContainer extends Component {
 	}
 
 	setCheckingLevel(chapterId, level) {
-		axios.patch(config.apiUrl + "chapters/" + chapterId + "/", {
-			checked_level: level
-		});
+		this.props.setCheckingLevel(chapterId,level);
 	}
 
 	getChapterData() {
@@ -188,7 +186,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators({
-		fetchChaptersContainerData
+		fetchChaptersContainerData,
+		setCheckingLevel
 	}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ChaptersContainer);
