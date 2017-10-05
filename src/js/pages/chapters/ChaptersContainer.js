@@ -14,7 +14,7 @@ import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
 import { bindActionCreators } from 'redux';
-import { fetchChaptersContainerData,setCheckingLevel } from '../../actions';
+import { fetchChaptersContainerData, setCheckingLevel, publishFiles, downloadProject } from '../../actions';
 
 class ChaptersContainer extends Component {
 	constructor() {
@@ -30,31 +30,17 @@ class ChaptersContainer extends Component {
 	}
 
 	publishFiles() {
-		let chapterID = this.props.project_id;
-		let parameters = {
-			is_publish: true
-		};
-
-		axios
-			.patch(config.apiUrl + "projects/" + chapterID + "/", parameters)
-			.then(response => {
-				this.setState({ is_publish: true });
-			})
-			.catch(exception => {
-				// TODO: modify for the error that occurs if the patch fails
-				this.setState({ publishError: exception });
-			});
+		this.props.publishFiles(this.props.project_id);
 	}
 
 	setCheckingLevel(chapterId, level) {
-		this.props.setCheckingLevel(chapterId,level);
+		this.props.setCheckingLevel(chapterId, level);
 		var query = QueryString.parse(this.props.location.search);
 		this.props.fetchChaptersContainerData(query);
 	}
 
 	getChapterData() {
 		var query = QueryString.parse(this.props.location.search);
-		console.log(query);
 		this.props.fetchChaptersContainerData(query);
 	}
 
@@ -74,28 +60,29 @@ class ChaptersContainer extends Component {
 			downloadError: "",
 			downloadSuccess: ""
 		});
+		this.props.downloadProject(this.props.project_id);
 
-		let params = {
-			project: this.state.project_id
-		};
-		axios
-			.post(config.apiUrl + "zip_files/", params, { timeout: 0 })
-			.then(download_results => {
-				window.location = config.streamingUrl + download_results.data.location;
-				this.setState({
-					downloadLoading: false,
-					downloadSuccess: "Success. Check your downloads folder"
-				});
-			})
-			.catch(exception => {
-				this.setState({ downloadError: exception });
-			})
-			.catch(error => {
-				this.setState({ downloadLoading: false, downloadError: error });
-			});
+		// let params = {
+		// 	project: this.state.project_id
+		// };
+		// axios
+		// 	.post(config.apiUrl + "zip_files/", params, { timeout: 0 })
+		// 	.then(download_results => {
+		// 		window.location = config.streamingUrl + download_results.data.location;
+		// 		this.setState({
+		// 			downloadLoading: false,
+		// 			downloadSuccess: "Success. Check your downloads folder"
+		// 		});
+		// 	})
+		// 	.catch(exception => {
+		// 		this.setState({ downloadError: exception });
+		// 	})
+		// 	.catch(error => {
+		// 		this.setState({ downloadLoading: false, downloadError: error });
+		// 	});
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		this.getChapterData();
 	}
 
@@ -155,7 +142,7 @@ class ChaptersContainer extends Component {
 							onDownloadProject={this.onDownloadProject.bind(this)}
 						/>
 
-						{this.state.downloadLoading
+						{this.props.downloadLoading
 							? <img
 								src={LoadingTinyGif}
 								alt="Loading..."
@@ -163,7 +150,7 @@ class ChaptersContainer extends Component {
 								height="16"
 							/>
 							: ""}
-						{this.state.downloadError
+						{this.props.downloadError
 							? this.props.displayText.errorTryAgain
 							: ""}
 						<br />
@@ -178,11 +165,11 @@ class ChaptersContainer extends Component {
 const mapStateToProps = state => {
 
 	const { displayText } = state.geolocation;
-	const { chapters, book,project_id,is_publish,
-		language,loaded } = state.chaptersContainer;
+	const { chapters, book, project_id, is_publish,
+		language, loaded, downloadLoading, downloadError, downloadSuccess } = state.chaptersContainer;
 	return {
-		displayText, chapters, book,project_id,
-		is_publish,language,loaded
+		displayText, chapters, book, project_id,
+		is_publish, language, loaded, downloadLoading, downloadError, downloadSuccess
 	};
 
 };
@@ -190,7 +177,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators({
 		fetchChaptersContainerData,
-		setCheckingLevel
+		setCheckingLevel, publishFiles
+		, downloadProject
 	}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ChaptersContainer);
