@@ -9,26 +9,14 @@ import QueryString from "query-string";
 import LoadingTinyGif from "images/loading-tiny.gif";
 import "css/chapters.css";
 import PublishButton from "./components/PublishButton";
-import DownloadTR from "./components/DownloadTR";
+import DownloadSourceAudio from "./components/DownloadSourceAudio";
 import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
 import { bindActionCreators } from 'redux';
-import { fetchChaptersContainerData, setCheckingLevel, publishFiles, downloadProject } from '../../actions';
+import { fetchChaptersContainerData, setCheckingLevel, publishFiles, downloadProject, downloadSourceAudio } from '../../actions';
 
 class ChaptersContainer extends Component {
-	constructor() {
-		super();
-		this.state = {
-			filesData: null,
-			publishError: "",
-			downloadError: "",
-			downloadSuccess: "",
-			anthology: {},
-			downloadLoading: false,
-		};
-	}
-
 	publishFiles() {
 		this.props.publishFiles(this.props.project_id);
 	}
@@ -55,33 +43,11 @@ class ChaptersContainer extends Component {
 
 	// Minimal parameters saves on server query time
 	onDownloadProject() {
-		this.setState({
-			downloadLoading: true,
-			downloadError: "",
-			downloadSuccess: ""
-		});
 		this.props.downloadProject(this.props.project_id);
-
-		// let params = {
-		// 	project: this.state.project_id
-		// };
-		// axios
-		// 	.post(config.apiUrl + "zip_files/", params, { timeout: 0 })
-		// 	.then(download_results => {
-		// 		window.location = config.streamingUrl + download_results.data.location;
-		// 		this.setState({
-		// 			downloadLoading: false,
-		// 			downloadSuccess: "Success. Check your downloads folder"
-		// 		});
-		// 	})
-		// 	.catch(exception => {
-		// 		this.setState({ downloadError: exception });
-		// 	})
-		// 	.catch(error => {
-		// 		this.setState({ downloadLoading: false, downloadError: error });
-		// 	});
 	}
-
+	onDownloadSourceAudio() {
+		this.props.downloadSourceAudio(this.props.project_id);
+	}
 	componentWillMount() {
 		this.getChapterData();
 	}
@@ -89,8 +55,8 @@ class ChaptersContainer extends Component {
 	render() {
 		if (this.props.loaded && !this.props.chapters) {
 			return <NotFound />;
-		} else if (this.state.error) {
-			return (<ErrorButton error={this.state.error} />);
+		} else if (this.props.error) {
+			return (<ErrorButton error={this.props.error} />);
 		} else if (!this.props.loaded) {
 			return (
 				<LoadingGif />
@@ -101,11 +67,10 @@ class ChaptersContainer extends Component {
 					<Container fluid>
 						<h1>
 							{this.props.book.name} ({this.props.language.name})
-								<DownloadTR
-								chapters={this.props.chapters}
+								<DownloadSourceAudio
 								isPublish={this.props.is_publish}
-								onPublish={this.publishFiles.bind(this)}
-								project_id={this.state.project_id}
+								downloadLoadingSourceAudio={this.props.downloadLoadingSourceAudio}
+								onDownloadSourceAudio={this.onDownloadSourceAudio.bind(this)}
 							/>
 							<PublishButton
 								chapters={this.props.chapters}
@@ -142,17 +107,20 @@ class ChaptersContainer extends Component {
 							onDownloadProject={this.onDownloadProject.bind(this)}
 						/>
 
-						{this.props.downloadLoading
-							? <img
+						{this.props.downloadLoading &&
+							<img
 								src={LoadingTinyGif}
 								alt="Loading..."
 								width="16"
 								height="16"
 							/>
-							: ""}
+						}
+
 						{this.props.downloadError
 							? this.props.displayText.errorTryAgain
-							: ""}
+							: null
+						}
+
 						<br />
 					</Container>
 				</div>
@@ -166,10 +134,16 @@ const mapStateToProps = state => {
 
 	const { displayText } = state.geolocation;
 	const { chapters, book, project_id, is_publish,
-		language, loaded, downloadLoading, downloadError, downloadSuccess } = state.chaptersContainer;
+		language, loaded, downloadLoading,
+		downloadError, downloadSuccess, downloadLoadingSourceAudio,
+		downloadErrorAudioSource } = state.chaptersContainer;
 	return {
-		displayText, chapters, book, project_id,
-		is_publish, language, loaded, downloadLoading, downloadError, downloadSuccess
+		displayText, chapters, book,
+		project_id, is_publish, language,
+		loaded, downloadLoading,
+		downloadError, downloadSuccess,
+		downloadLoadingSourceAudio,
+		downloadErrorAudioSource
 	};
 
 };
@@ -178,7 +152,7 @@ const mapDispatchToProps = dispatch => {
 	return bindActionCreators({
 		fetchChaptersContainerData,
 		setCheckingLevel, publishFiles
-		, downloadProject
+		, downloadProject, downloadSourceAudio
 	}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ChaptersContainer);

@@ -18,34 +18,26 @@ let projID;
 
 export default class DownloadTR extends Component{
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          downloadLoading: false
-        };
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //       downloadLoading: false
+    //     };
+    // }
 
     download(){
-        this.setState({downloadLoading: true});
-        parameters={"project":projID};
-        axios.post(config.apiUrl + 'get_source/' , parameters, {timeout:0})
-            .then((response) => {
-                window.location = config.streamingUrl + response.data.location;
-                this.setState({downloadLoading: false});
-            }).catch((exception) => {
-            console.log(exception);
-        });
+        this.props.onDownloadSourceAudio();
     }
 
 
         render() {
-            projID = this.props.project_id;
+            // projID = this.props.project_id;
             let publishButton =
                 <Button
                     floated="right"
                     color={"blue"}
-                    disabled={this.state.downloadLoading}//enable if published is disabled
-                    loading={this.state.downloadLoading}
+                    disabled={this.props.downloadLoadingSourceAudio}//enable if published is disabled
+                    loading={this.props.downloadLoadingSourceAudio}
                     onClick={this.download.bind(this)}
                 >
                     Download Source Audio

@@ -96,36 +96,74 @@ export function dispatchPublishFilesFailed(error) {
 export function downloadProject(projectId) {
 
     return function (dispatch) {
+        dispatch(dispatchLoadingDownloadProject());
         return axios
             .post(config.apiUrl + "zip_files/", { project: projectId }, { timeout: 0 })
             .then(response => {
+                //Todo: find the better way to download files
+                window.location = config.streamingUrl + response.data.location;
                 dispatch(dispatchdownloadProjectSuccess(response.data));
             })
             .catch(err => {
                 dispatch(dispatchdownloadProjectFailed(err));
-            }).catch(exception=>{
+            }).catch(exception => {
                 dispatchdownloadProjectException(exception);
             });
     };
 }
+export function dispatchLoadingDownloadProject() {
+    return {
+        type: 'DOWNLOAD_PROJECT'
+    }
+}
 export function dispatchdownloadProjectSuccess(response) {
     return {
         type: 'DOWNLOAD_PROJECT_SUCCESS',
-        response,
-        downloadLoading: false,
-        downloadSuccess: "Success. Check your downloads folder"
+        response
     }
 }
 export function dispatchdownloadProjectFailed(error) {
     return {
         type: 'DOWNLOAD_PROJECT_FAILED',
-        downloadLoading: false,
-        downloadError: error
+        error
     }
 }
 export function dispatchdownloadProjectException(exception) {
     return {
         type: 'DOWNLOAD_PROJECT_EXCEPTION',
         downloadError: exception
+    }
+}
+//download source audio
+export function downloadSourceAudio(projectId) {
+    return function (dispatch) {
+        dispatch(dispatchLoadingDownloadSourceAudio());
+        return axios
+            .post(config.apiUrl + "get_source/", { project: projectId }, { timeout: 0 })
+            .then(response => {
+                //Todo: find the better way to download files
+                window.location = config.streamingUrl + response.data.location;
+                dispatch(dispatchDownloadSourceAudioSuccess(response.data));
+            })
+            .catch(err => {
+                dispatch(dispatchDownloadSourceAudioFailed(err));
+            });
+    };
+}
+export function dispatchLoadingDownloadSourceAudio() {
+    return {
+        type: 'DOWNLOAD_SOURCE_AUDIO'
+    }
+}
+export function dispatchDownloadSourceAudioSuccess(response) {
+    return {
+        type: 'DOWNLOAD_SOURCE_AUDIO_SUCCESS',
+        response
+    }
+}
+export function dispatchDownloadSourceAudioFailed(error) {
+    return {
+        type: 'DOWNLOAD_SOURCE_AUDIO_SUCCESS_FAILED',
+        error
     }
 }
