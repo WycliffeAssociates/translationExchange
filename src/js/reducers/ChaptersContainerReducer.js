@@ -20,7 +20,12 @@ export default (state = INITIAL_STATE, action) => {
             is_published: action.is_published,
             loaded: action.loaded
         };
-        case "FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS": return {error:action.error};
+        case 'SET_CHECKING_LEVEL_SUCCESS':
+        
+            return { ...state,  };
+        case 'SET_CHECKING_LEVEL_FAILED':
+            return { ...state, error: action.error }
+        case "FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS": return { error: action.error };
         default: return state;
     }
 };

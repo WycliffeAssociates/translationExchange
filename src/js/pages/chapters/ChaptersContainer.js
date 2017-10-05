@@ -48,10 +48,13 @@ class ChaptersContainer extends Component {
 
 	setCheckingLevel(chapterId, level) {
 		this.props.setCheckingLevel(chapterId,level);
+		var query = QueryString.parse(this.props.location.search);
+		this.props.fetchChaptersContainerData(query);
 	}
 
 	getChapterData() {
 		var query = QueryString.parse(this.props.location.search);
+		console.log(query);
 		this.props.fetchChaptersContainerData(query);
 	}
 
