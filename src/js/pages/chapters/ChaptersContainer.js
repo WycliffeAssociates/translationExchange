@@ -13,30 +13,24 @@ import DownloadTR from "./components/DownloadTR";
 import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
+import { bindActionCreators } from 'redux';
+import { fetchChaptersContainerData } from '../../actions';
 
 class ChaptersContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
-			chapters: [],
-			book: {},
-			language: {},
-			project_id: -1,
-			is_publish: false,
 			filesData: null,
-			loaded: false,
-			error: "",
 			publishError: "",
 			downloadError: "",
 			downloadSuccess: "",
 			anthology: {},
 			downloadLoading: false,
-			version: {}
 		};
 	}
 
 	publishFiles() {
-		let chapterID = this.state.project_id;
+		let chapterID = this.props.project_id;
 		let parameters = {
 			is_publish: true
 		};
@@ -60,24 +54,7 @@ class ChaptersContainer extends Component {
 
 	getChapterData() {
 		var query = QueryString.parse(this.props.location.search);
-
-		this.setState({ error: "" });
-		axios
-			.post(config.apiUrl + "get_chapters/", query)
-			.then(results => {
-				this.setState({
-					chapters: results.data.chapters,
-					book: results.data.book,
-					project_id: results.data.project_id,
-					is_publish: results.data.is_publish,
-					language: results.data.language,
-					loaded: true,
-					version: results.data.version
-				});
-			})
-			.catch(exception => {
-				this.setState({ error: exception });
-			});
+		this.props.fetchChaptersContainerData(query);
 	}
 
 	navigateToChapter(chNum) {
@@ -122,72 +99,72 @@ class ChaptersContainer extends Component {
 	}
 
 	render() {
-		if (this.state.loaded && !this.state.chapters) {
+		if (this.props.loaded && !this.props.chapters) {
 			return <NotFound />;
-		}else if(this.state.error){
-			return(<ErrorButton error={this.state.error}/>);
-		}else if(!this.state.loaded){
-			return(
+		} else if (this.state.error) {
+			return (<ErrorButton error={this.state.error} />);
+		} else if (!this.props.loaded) {
+			return (
 				<LoadingGif />
 			);
 		} else {
 			return (
 				<div className="chapters">
 					<Container fluid>
-							<h1>
-								{this.state.book.name} ({this.state.language.name})
+						<h1>
+							{this.props.book.name} ({this.props.language.name})
 								<DownloadTR
-									chapters={this.state.chapters}
-									isPublish={this.state.is_publish}
-									onPublish={this.publishFiles.bind(this)}
-									project_id={this.state.project_id}
-								/>
-								<PublishButton
-									chapters={this.state.chapters}
-									isPublish={this.state.is_publish}
-									onPublish={this.publishFiles.bind(this)}
-								/>
-							</h1>
-
-							<Table selectable fixed color="grey">
-								<Table.Header>
-									<Table.Row>
-										<Table.HeaderCell>{this.props.displayText.chapter}</Table.HeaderCell>
-										<Table.HeaderCell>{this.props.displayText.percentComplete}</Table.HeaderCell>
-										<Table.HeaderCell>{this.props.displayText.checkLevel}</Table.HeaderCell>
-										<Table.HeaderCell>{this.props.displayText.readyToPublish}</Table.HeaderCell>
-										<Table.HeaderCell>{this.props.displayText.contributors}</Table.HeaderCell>
-										<Table.HeaderCell>{this.props.displayText.translationType}</Table.HeaderCell>
-										<Table.HeaderCell>{this.props.displayText.dateModified}</Table.HeaderCell>
-									</Table.Row>
-								</Table.Header>
-
-								<ChapterList
-									chapters={this.state.chapters}
-									version={
-										QueryString.parse(this.props.location.search).version
-									}
-									navigateToChapter={this.navigateToChapter.bind(this)}
-									setCheckingLevel={this.setCheckingLevel.bind(this)}
-									projectIsPublish={this.state.is_publish}
-								/>
-							</Table>
-
-							<DownloadProjects
-								onDownloadProject={this.onDownloadProject.bind(this)}
+								chapters={this.props.chapters}
+								isPublish={this.props.is_publish}
+								onPublish={this.publishFiles.bind(this)}
+								project_id={this.state.project_id}
 							/>
+							<PublishButton
+								chapters={this.props.chapters}
+								isPublish={this.props.is_publish}
+								onPublish={this.publishFiles.bind(this)}
+							/>
+						</h1>
 
-							{this.state.downloadLoading
-								? <img
-										src={LoadingTinyGif}
-										alt="Loading..."
-										width="16"
-										height="16"
-									/>
-								: ""}
-							{this.state.downloadError
-								? this.props.displayText.errorTryAgain
-								: ""}
+						<Table selectable fixed color="grey">
+							<Table.Header>
+								<Table.Row>
+									<Table.HeaderCell>{this.props.displayText.chapter}</Table.HeaderCell>
+									<Table.HeaderCell>{this.props.displayText.percentComplete}</Table.HeaderCell>
+									<Table.HeaderCell>{this.props.displayText.checkLevel}</Table.HeaderCell>
+									<Table.HeaderCell>{this.props.displayText.readyToPublish}</Table.HeaderCell>
+									<Table.HeaderCell>{this.props.displayText.contributors}</Table.HeaderCell>
+									<Table.HeaderCell>{this.props.displayText.translationType}</Table.HeaderCell>
+									<Table.HeaderCell>{this.props.displayText.dateModified}</Table.HeaderCell>
+								</Table.Row>
+							</Table.Header>
+
+							<ChapterList
+								chapters={this.props.chapters}
+								version={
+									QueryString.parse(this.props.location.search).version
+								}
+								navigateToChapter={this.navigateToChapter.bind(this)}
+								setCheckingLevel={this.setCheckingLevel.bind(this)}
+								projectIsPublish={this.props.is_publish}
+							/>
+						</Table>
+
+						<DownloadProjects
+							onDownloadProject={this.onDownloadProject.bind(this)}
+						/>
+
+						{this.state.downloadLoading
+							? <img
+								src={LoadingTinyGif}
+								alt="Loading..."
+								width="16"
+								height="16"
+							/>
+							: ""}
+						{this.state.downloadError
+							? this.props.displayText.errorTryAgain
+							: ""}
 						<br />
 					</Container>
 				</div>
@@ -199,11 +176,19 @@ class ChaptersContainer extends Component {
 
 const mapStateToProps = state => {
 
-const{ displayText } = state.geolocation;
-
-return{displayText};
+	const { displayText } = state.geolocation;
+	const { chapters, book,project_id,is_publish,
+		language,loaded } = state.chaptersContainer;
+	return {
+		displayText, chapters, book,project_id,
+		is_publish,language,loaded
+	};
 
 };
 
-
-export default connect (mapStateToProps) (ChaptersContainer);
+const mapDispatchToProps = dispatch => {
+	return bindActionCreators({
+		fetchChaptersContainerData
+	}, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ChaptersContainer);
