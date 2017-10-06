@@ -20,7 +20,7 @@ class Footer extends Component {
 
         return (
 
-            <div className="footerStyle" style={{width:'100%', direction: 'ltr'}}>
+            <div className="footerStyle" style={{width:'100%'}}>
               {this.props.playlist.length > 0 && this.props.playlistMode
                   ? <div style={{width:'100%', backgroundColor:'transparent', height: 20 }}>
                                   {this.props.playlist.map((i) => {
