@@ -63,7 +63,7 @@ class ChaptersContainer extends Component {
 			);
 		} else {
 			return (
-				<div className="chapters">
+				<div className="chapters" style={{ direction:`${this.props.direction}` }} >
 					<Container fluid>
 						<h1>
 							{this.props.book.name} ({this.props.language.name})
@@ -133,6 +133,7 @@ class ChaptersContainer extends Component {
 
 const mapStateToProps = state => {
 
+const {direction} = state.direction;
 	const { displayText } = state.geolocation;
 	const { chapters, book, project_id, is_publish,
 		language, loaded, downloadLoading,
@@ -144,7 +145,8 @@ const mapStateToProps = state => {
 		loaded, downloadLoading,
 		downloadError, downloadSuccess,
 		downloadLoadingSourceAudio,
-		downloadErrorAudioSource
+		downloadErrorAudioSource,
+		direction
 	};
 
 };
