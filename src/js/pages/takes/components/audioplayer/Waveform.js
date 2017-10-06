@@ -32,7 +32,7 @@ class WaveForm extends Component {
     });
 
 
-     this.props.updateTime(this.state.pos);
+  //  this.props.updateTime(this.state.pos);
      this.props.resetMarkerClicked(false);
 
   }

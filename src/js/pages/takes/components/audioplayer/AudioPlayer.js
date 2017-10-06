@@ -169,13 +169,9 @@ this.setState({markerClicked: statement});
 
   render() {
   let src = this.props.playlist[0].src;
-  let takeInfo = this.props.playlist[0].name;
-
 
   if(this.props.playlistMode){
-    console.log(this.state.audioFile);
      src = this.state.audioFile;
-     takeInfo = this.state.audioName;
   }
 
 
@@ -206,7 +202,7 @@ this.setState({markerClicked: statement});
             markerClicked={this.state.markerClicked}
             resetMarkerClicked={this.resetMarkerClicked}
             finishedPlaying = {this.finishedPlaying}/>
-            <div style={{marginTop: 5}}>{takeInfo}</div>
+            <div style={{marginTop: 5}}>{this.state.audioName}</div>
        </div>
            <TimeContainer
             audioLength={this.state.durationTime}
