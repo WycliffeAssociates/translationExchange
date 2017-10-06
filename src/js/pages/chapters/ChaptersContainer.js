@@ -75,6 +75,7 @@ class ChaptersContainer extends Component {
 							<PublishButton
 								chapters={this.props.chapters}
 								isPublish={this.props.is_publish}
+								displayText={this.props.displayText}
 								onPublish={this.publishFiles.bind(this)}
 							/>
 						</h1>
