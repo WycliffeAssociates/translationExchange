@@ -8,23 +8,14 @@ import axios from "axios";
 import config from "config/config";
 import QueryString from "query-string";
 import { connect } from "react-redux";
-import {bindActionCreators} from 'redux';
-import {updateLanguage} from '../../actions';
+import { bindActionCreators } from 'redux';
+import { updateLanguage } from '../../actions';
 import { fetchRecentProjects } from "../../actions";
 import countries from '../../../languages/countries.json';
 import languageAndCountry from '../../../languages/languageAndCountry.json'
 
 
 class Home extends Component {
-
-	constructor() {
-		super();
-		this.state = {
-			projects: []
-		};
-	}
-
-
 	componentDidMount() {
 		this.props.fetchRecentProjects();
 
@@ -56,8 +47,8 @@ class Home extends Component {
 		return (
 			<Container fluid className="background">
 				<Container fluid>
-					<LogoTitle text = {title} />
-					<StartHere text= {btnText} />
+					<LogoTitle text={title} />
+					<StartHere text={btnText} />
 				</Container>
 
 				{homeRecentProjects.length > 0 ? (
@@ -77,8 +68,8 @@ class Home extends Component {
 						</Grid>
 					</Container>
 				) : (
-					""
-				)}
+						""
+					)}
 			</Container>
 		);
 	}
@@ -113,23 +104,19 @@ class Home extends Component {
 
 const mapStateToProps = state => {
 
-const{ displayText } = state.geolocation;
-const{ homeRecentProjects} = state.homeRecentProjects;
+	const { displayText } = state.geolocation;
+	const { homeRecentProjects } = state.homeRecentProjects;
 
-return{displayText, homeRecentProjects};
+	return { displayText, homeRecentProjects };
 
 };
 
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({
-          fetchRecentProjects,
+	return bindActionCreators({
+		fetchRecentProjects,
 
-}, dispatch);
+	}, dispatch);
 };
-
-
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
