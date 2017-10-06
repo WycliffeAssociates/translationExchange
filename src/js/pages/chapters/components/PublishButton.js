@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
-
 
 class PublishButton extends Component {
 	state = { modalOpen: false };
@@ -62,14 +60,4 @@ class PublishButton extends Component {
 	}
 }
 
-
-const mapStateToProps = state => {
-
-const{ displayText } = state.geolocation;
-
-return{displayText};
-
-};
-
-
-export default connect (mapStateToProps) (PublishButton);
+export default PublishButton;

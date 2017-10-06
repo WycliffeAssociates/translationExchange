@@ -30,6 +30,10 @@ export default (state = INITIAL_STATE, action) => {
         case 'SET_CHECKING_LEVEL_FAILED':
             return { ...state, error: action.error }
         case 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS': return { error: action.error };
+        case 'PUBLISH_FILES_SUCCESS':
+        return{...state,is_publish: true}
+        case 'PUBLISH_FILES_FAILED':
+        return{...state,error:action.error}
         case 'DOWNLOAD_PROJECT':
             return {
                 ...state,

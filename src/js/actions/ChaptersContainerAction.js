@@ -81,8 +81,7 @@ export function publishFiles(chapterId) {
 export function dispatchPublishFilesSuccess(response) {
     return {
         type: 'PUBLISH_FILES_SUCCESS',
-        response,
-        is_publish: true
+        response
     }
 }
 export function dispatchPublishFilesFailed(error) {
