@@ -56,7 +56,7 @@ class Home extends Component {
 		return (
 			<Container fluid className="background">
 				<Container fluid>
-					<LogoTitle text = {title} />
+					<LogoTitle titleText = {title} />
 					<StartHere text= {btnText} />
 				</Container>
 
@@ -66,7 +66,7 @@ class Home extends Component {
 							<Grid.Column width={3}>
 								<Grid.Row height={1}>
 									<h2>
-										<font color="white">Recent Projects</font>
+										<font color="white">{this.props.displayText.recentProjects}</font>
 									</h2>
 								</Grid.Row>
 								<Divider />

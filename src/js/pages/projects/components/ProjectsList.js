@@ -18,7 +18,7 @@ class ProjectsList extends Component {
      */
 	render() {
 		return (
-			<div>
+			<div style ={{direction:`${this.props.direction}`}}>
 			<Container fluid>
 				<Table selectable fixed color="grey">
 					<Table.Header>
@@ -96,47 +96,47 @@ class ProjectsList extends Component {
 	parseDate(date) {
 		var noon = "am";
 		var dateArr = date.split("T");
-		date = dateArr[0];
+		var date = dateArr[0];
 
 		var time = dateArr[1].split(".");
 		time = time[0].split(":");
 		date = date.split("-");
 		switch (date[1]) {
 			case "01":
-				date[1] = "January";
+				date[1] = this.props.displayText.month1;
 				break;
 			case "02":
-				date[1] = "February";
+				date[1] = this.props.displayText.month2;
 				break;
 			case "03":
-				date[1] = "March";
+				date[1] = this.props.displayText.month3;
 				break;
 			case "04":
-				date[1] = "April";
+				date[1] = this.props.displayText.month4;
 				break;
 			case "05":
-				date[1] = "May";
+				date[1] = this.props.displayText.month5;
 				break;
 			case "06":
-				date[1] = "June";
+				date[1] = this.props.displayText.month6;
 				break;
 			case "07":
-				date[1] = "July";
+				date[1] = this.props.displayText.month7;
 				break;
 			case "08":
-				date[1] = "August";
+				date[1] = this.props.displayText.month8;
 				break;
 			case "09":
-				date[1] = "September";
+				date[1] = this.props.displayText.month9;
 				break;
 			case "10":
-				date[1] = "October";
+				date[1] = this.props.displayText.month10;
 				break;
 			case "11":
-				date[1] = "November";
+				date[1] = this.props.displayText.month11;
 				break;
 			case "12":
-				date[1] = "December";
+				date[1] = this.props.displayText.month12;
 				break;
 		}
 
@@ -149,19 +149,9 @@ class ProjectsList extends Component {
 			hour %= 12;
 		}
 
-		return (
-			date[1] +
-			" " +
-			date[2] +
-			", " +
-			date[0] +
-			" at " +
-			hour +
-			":" +
-			time[1] +
-			noon
-		);
-	}
+		return (     `${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`	);
+	   }
+
 }
 /*
     Use PropTypes to define what props this component expects. If it's passed the wrong props,
@@ -184,9 +174,11 @@ ProjectsList.propTypes = {
 
 const mapStateToProps = state => {
 
+	const {direction} = state.direction;
+
 const{ displayText } = state.geolocation;
 
-return{displayText};
+return{displayText, direction};
 
 };
 

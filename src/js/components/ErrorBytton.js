@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 import {Button} from "semantic-ui-react";
 import PropTypes from 'prop-types';
-export default class ErrorButton extends Component {
+
+class ErrorButton extends Component {
     render () {
         return (
             <Button
-            label={{as: 'a', basic: true, pointing: 'right', content: "There was a problem loading the data: " + this.props.error.message}}
+            label={{as: 'a', basic: true, pointing: 'right', content: `${this.props.displayText.dataError}  ${this.props.error.message}`}}
             labelPosition='left'
             onClick={this.props.retry}
-            content='Retry'
+            content={this.props.displayText.retry}
         />
         );
     }
@@ -17,3 +19,17 @@ ErrorButton.proptype={
     retry:PropTypes.func.isRequired,
     error: PropTypes.string.isRequired
 }
+
+
+const mapStateToProps = state => {
+
+const{ displayText } = state.geolocation;
+
+return{displayText};
+
+};
+
+
+
+
+export default connect (mapStateToProps) (ErrorButton);

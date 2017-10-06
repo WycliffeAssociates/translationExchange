@@ -151,7 +151,7 @@ class ProjectFilter extends Component {
 		versionOptions = versionOptions.concat(this.state.versions);
 
 		return (
-			<div style ={{display:'flex', marginTop: '2%', justifyContent:'center'}}>
+			<div style ={{display:'flex', marginTop: '2%', justifyContent:'center', direction:`${this.props.direction}` }}>
 				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
 					placeholder={this.props.displayText.selectLanguage}  // text from in languages.json
@@ -191,7 +191,7 @@ class ProjectFilter extends Component {
 				{this.state.error ? (
 					<Message negative>
 						{this.state.error.message}{" "}
-						<Button onClick={this.requestAllFilters.bind(this)}>{this.displayText.language.retry}</Button>
+						<Button onClick={this.requestAllFilters.bind(this)}>{this.props.displayText.retry}</Button>
 					</Message>
 				) : (
 					""
@@ -203,9 +203,10 @@ class ProjectFilter extends Component {
 
 const mapStateToProps = state => {
 
+const {direction} = state.direction;
 const{ displayText } = state.geolocation;
 
-return{displayText};
+return{displayText, direction};
 
 };
 

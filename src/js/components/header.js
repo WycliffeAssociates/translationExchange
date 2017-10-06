@@ -8,9 +8,10 @@ import user from "images/user.png";
 import dots from "images/dots.png";
 import nn from 'nearest-neighbor';
 import countries from '../../languages/countries.json';
-import languageAndCountry from '../../languages/languageAndCountry.json'
+import languageAndCountry from '../../languages/languageAndCountry.json';
+import rtlLanguages from  '../../languages/rtlLanguages.json'
 
-import {updateLanguage} from '../actions';
+import {updateLanguage, updateDirection} from '../actions';
 
 class Header extends Component {
 	state = { activeItem: "home" };
@@ -53,17 +54,23 @@ class Header extends Component {
 
 								 for (const eachCountry in lang) {
 
-
 											 if(lang[eachCountry] === country){
-
-												const country = key ;
 
 												 this.props.updateLanguage(key);
 
+												 for (const rtl in rtlLanguages){                 // checks if it is an RTL language
 
-												}
+					                     if( rtlLanguages[rtl] === country){
+
+					 											this.props.updateDirection('rtl');
+
+					 										}
+
+													}
+													break;
 											 }
 
+							     }
 							}
 
 
@@ -72,7 +79,7 @@ class Header extends Component {
 	}
 	else {
 	 // geolocation is not supported
-	}
+	   }
 
 	}
 
@@ -88,8 +95,10 @@ class Header extends Component {
 
 		return (
 			<div style={{ marginBottom: 10 }}>
+
 				<Menu fluid secondary size="huge" compact>
-					<Menu.Item position="left">
+					<div style = {{display: 'flex', flex: 1, justifyContent: 'space-between', direction:`${this.props.direction}` }}>
+					<Menu.Item>
 						<Link to="/">
 							<Menu.Item>
 								<Image src={dots} width="120" height="30" />
@@ -100,7 +109,7 @@ class Header extends Component {
 						</Link>
 					</Menu.Item>
 
-					<Menu.Item position="right">
+					<Menu.Item>
 						<Link to="/">
 							<Menu.Item
 								position="right"
@@ -132,6 +141,7 @@ class Header extends Component {
 							</Menu.Item>
 						</Link>
 					</Menu.Item>
+					 </div>
 				</Menu>
 
 				<Container className="redBar" fluid />
@@ -144,15 +154,17 @@ class Header extends Component {
 const mapStateToProps = state => {
 
 const{ displayText } = state.geolocation;
+const {direction} = state.direction;
 
-return{displayText};
+return{displayText, direction};
 
 };
 
 const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({
-          updateLanguage
+          updateLanguage,
+					updateDirection
 
 }, dispatch);
 

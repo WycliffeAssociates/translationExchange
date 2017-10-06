@@ -63,9 +63,9 @@ getTakeInfo(){
 	let take = {
 		 src: config.streamingUrl + takeLoc,
 		 markers: markers,
-		 name: `${this.props.displayText.take} ${takeNum}, ${this.props.displayText.chunk} ${startv}  (${author} on ${date})`,  // in case of other mode like chunk mode or verse mode verify this
+		 name: `${this.props.displayText.take} ${takeNum}, ${this.props.displayText.chunk} ${startv}  (${author} ${this.props.displayText.on} ${date})`,  // in case of other mode like chunk mode or verse mode verify this
 		 id: takeLoc,
-		 chunk: `${this.props.mode} ${startv}`
+		 chunk: `${this.props.displayText.chunk} ${startv}`          // in case of a different mode like segment or verse here is assumed that only chunks will be used
 	 };
 
 	 return take;
@@ -211,40 +211,40 @@ getTakeInfo(){
 		date = date.split("-");
 		switch (date[1]) {
 			case "01":
-				date[1] = "January";
+				date[1] = this.props.displayText.month1;
 				break;
 			case "02":
-				date[1] = "February";
+				date[1] = this.props.displayText.month2;
 				break;
 			case "03":
-				date[1] = "March";
+				date[1] = this.props.displayText.month3;
 				break;
 			case "04":
-				date[1] = "April";
+				date[1] = this.props.displayText.month4;
 				break;
 			case "05":
-				date[1] = "May";
+				date[1] = this.props.displayText.month5;
 				break;
 			case "06":
-				date[1] = "June";
+				date[1] = this.props.displayText.month6;
 				break;
 			case "07":
-				date[1] = "July";
+				date[1] = this.props.displayText.month7;
 				break;
 			case "08":
-				date[1] = "August";
+				date[1] = this.props.displayText.month8;
 				break;
 			case "09":
-				date[1] = "September";
+				date[1] = this.props.displayText.month9;
 				break;
 			case "10":
-				date[1] = "October";
+				date[1] = this.props.displayText.month10;
 				break;
 			case "11":
-				date[1] = "November";
+				date[1] = this.props.displayText.month11;
 				break;
 			case "12":
-				date[1] = "December";
+				date[1] = this.props.displayText.month12;
 				break;
 		}
 
@@ -257,18 +257,7 @@ getTakeInfo(){
 			hour %= 12;
 		}
 
-		return (
-			date[1] +
-			" " +
-			date[2] +
-			", " +
-			date[0] +
-			" at " +
-			hour +
-			":" +
-			time[1] +
-			noon
-		);
+		return (     `${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`	);
 	}
 }
 

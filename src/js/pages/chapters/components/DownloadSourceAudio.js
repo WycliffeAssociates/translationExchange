@@ -1,8 +1,5 @@
-/**
- * Created by DennisMarchuk on 7/27/2017.
- */
-
 import React, { Component } from 'react'
+import { connect } from "react-redux";
 import { Button } from 'semantic-ui-react'
 import config from 'config/config'
 import axios from 'axios'
@@ -16,7 +13,7 @@ let projID;
 
 
 
-export default class DownloadTR extends Component{
+class DownloadTR extends Component{
 
     // constructor(props) {
     //     super(props);
@@ -40,7 +37,7 @@ export default class DownloadTR extends Component{
                     loading={this.props.downloadLoadingSourceAudio}
                     onClick={this.download.bind(this)}
                 >
-                    Download Source Audio
+                    {this.props.displayText.downloadSrcAudio}
                 </Button>
 
             if (this.props.isPublish) {
@@ -50,3 +47,15 @@ export default class DownloadTR extends Component{
             }
     }
 }
+
+
+const mapStateToProps = state => {
+
+const{ displayText } = state.geolocation;
+
+return{displayText};
+
+};
+
+
+export default connect (mapStateToProps) (DownloadTR);

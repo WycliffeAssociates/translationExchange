@@ -33,10 +33,10 @@ class PublishButton extends Component {
 			<Button
 				onClick={this.handleOpen}
 				floated="right"
-				disabled={!readyForPublish || this.props.isPublish}
-				color={this.props.isPublish ? "green" : ""}
+				disabled={!readyForPublish || this.props.isPublished}
+				color={this.props.isPublished ? "green" : ""}
 			>
-				{this.props.isPublish ? this.props.displayText.published : this.props.displayText.publish}
+				{this.props.isPublished ? this.props.displayText.published : this.props.displayText.publish}
 			</Button>
 		);
 

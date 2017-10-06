@@ -125,8 +125,8 @@ class RecordButton extends Component {
 	};
 
 	render() {
-
-
+console.log(this.props.comments);
+console.log(this.props.comments.slice(0).reverse());
 
 		return (
 			<Modal

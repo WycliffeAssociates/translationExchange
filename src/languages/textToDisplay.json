@@ -11,7 +11,7 @@
    "selectBook": "Select Book",
    "selectVersion": "Select Version",
    "clearButton": "clear",
-   "retry": "retry",
+   "retry": "Retry",
    "error": "There was a connection error",
    "loading": "Loading...",
    "language": "Language",
@@ -36,7 +36,23 @@
    "take": "Take",
    "download": "Download",
    "commentsOn": "Comments on",
-   "downloadSrcAudio": "Download Source Audio"
+   "downloadSrcAudio": "Download Source Audio",
+   "month1": "January",
+   "month2": "February",
+   "month3": "March",
+   "month4": "April",
+   "month5": "May",
+   "month6": "June",
+   "month7": "July",
+   "month8": "August",
+   "month9": "September",
+   "month10": "October",
+   "month11": "November",
+   "month12": "December",
+    "at": "at",
+    "on": "on",
+    "dataError": "There was a problem loading the data:"
+
    },
    "Spanish": {
      "mainPage": "Traducción Disponible Para Todos",
@@ -50,7 +66,7 @@
      "selectBook": "Selecciona Libro",
      "selectVersion": "Selecciona Versión",
      "clearButton": "Borrar",
-     "retry": "reintentar",
+     "retry": "Reintentar",
      "error": "Hubo un error de conexión",
      "loading": "Cargando...",
      "language": "Lenguaje",
@@ -75,7 +91,23 @@
      "take": "Grabación",
      "download": "Descargar",
      "commentsOn": "Comentarios para ",
-     "downloadSrcAudio": "Descargar Audio Base"
+     "downloadSrcAudio": "Descargar Audio Base",
+     "month1": "Enero",
+     "month2": "Febrero",
+     "month3": "Marzo",
+     "month4": "Abril",
+     "month5": "Mayo",
+     "month6": "Junio",
+     "month7": "Julio",
+     "month8": "Agosto",
+     "month9": "Septiembre",
+     "month10": "Octubre",
+     "month11": "Noviembre",
+     "month12": "Diciembre",
+     "at": "a las",
+     "on": "en",
+     "dataError": "Hubo un problema cargando la información:"
+
    },
    "Russian": {
       "mainPage": "Перевод предоставлен",
@@ -114,7 +146,22 @@
       "take": "Дубль",
       "download": "Скачать",
       "commentsOn": "Коментарии по",
-      "downloadSrcAudio": "Download Source Audio"
+      "downloadSrcAudio": "Download Source Audio",
+      "month1": "January",
+      "month2": "February",
+      "month3": "March",
+      "month4": "April",
+      "month5": "May",
+      "month6": "June",
+      "month7": "July",
+      "month8": "August",
+      "month9": "September",
+      "month10": "October",
+      "month11": "November",
+      "month12": "December",
+      "at": "at",
+      "on": "on",
+      "dataError": "There was a problem loading the data:"
  },
    "Nepali": {
      "mainPage": "Translation made available",
@@ -153,7 +200,23 @@
      "take": "Take",
      "download": "Download",
      "commentsOn": "Comments on",
-     "downloadSrcAudio": "Download Source Audio"
+     "downloadSrcAudio": "Download Source Audio",
+     "month1": "January",
+     "month2": "February",
+     "month3": "March",
+     "month4": "April",
+     "month5": "May",
+     "month6": "June",
+     "month7": "July",
+     "month8": "August",
+     "month9": "September",
+     "month10": "October",
+     "month11": "November",
+     "month12": "December",
+     "at": "at",
+     "on": "on",
+     "dataError": "There was a problem loading the data:"
+
      }
 
 

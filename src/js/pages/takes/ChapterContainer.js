@@ -397,8 +397,9 @@ class ChapterContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
+			
 			return (
-				<div>
+				<div style ={{direction:`${this.props.direction}`}}>
 						<ChapterHeader
 							book={this.state.book}
 							chapter={this.state.chapter}
@@ -458,8 +459,10 @@ class ChapterContainer extends Component {
 
 const mapStateToProps = state => {
 
+const {direction} = state.direction;
 const{ playlistMode } = state.updatePlaylist;
-return{ playlistMode };
+
+return{ playlistMode, direction };
 
 }
 
