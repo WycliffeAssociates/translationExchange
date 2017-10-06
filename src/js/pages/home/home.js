@@ -8,8 +8,8 @@ import axios from "axios";
 import config from "config/config";
 import QueryString from "query-string";
 import { connect } from "react-redux";
-import {bindActionCreators} from 'redux';
-import {updateLanguage} from '../../actions';
+import { bindActionCreators } from 'redux';
+import { updateLanguage } from '../../actions';
 import { fetchRecentProjects } from "../../actions";
 import countries from '../../../languages/countries.json';
 import languageAndCountry from '../../../languages/languageAndCountry.json'
@@ -52,15 +52,14 @@ class Home extends Component {
 		const recentProjects = this.props.displayText.recentProjects;
 		const title = this.props.displayText.mainPage;
 		const btnText = this.props.displayText.startHere;
-
 		return (
 			<Container fluid className="background">
 				<Container fluid>
-					<LogoTitle titleText = {title} />
-					<StartHere text= {btnText} />
+					<LogoTitle titleText={title} />
+					<StartHere text={btnText} />
 				</Container>
 
-				{homeRecentProjects.length > 0 ? (
+				{homeRecentProjects&&homeRecentProjects.length > 0 ? (
 					<Container fluid>
 						<Grid padded textAlign="center">
 							<Grid.Column width={3}>
@@ -70,15 +69,15 @@ class Home extends Component {
 									</h2>
 								</Grid.Row>
 								<Divider />
-								{homeRecentProjects.map((project, i) => {
+								{homeRecentProjects.splice(0,4).map((project, i) => {
 									return this.createListItem(project, i);
 								})}
 							</Grid.Column>
 						</Grid>
 					</Container>
 				) : (
-					""
-				)}
+						""
+					)}
 			</Container>
 		);
 	}
@@ -113,20 +112,20 @@ class Home extends Component {
 
 const mapStateToProps = state => {
 
-const{ displayText } = state.geolocation;
-const{ homeRecentProjects} = state.homeRecentProjects;
+	const { displayText } = state.geolocation;
+	const { homeRecentProjects } = state.homeRecentProjects;
 
-return{displayText, homeRecentProjects};
+	return { displayText, homeRecentProjects };
 
 };
 
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({
-          fetchRecentProjects,
+	return bindActionCreators({
+		fetchRecentProjects,
 
-}, dispatch);
+	}, dispatch);
 };
 
 
