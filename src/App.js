@@ -14,6 +14,7 @@ import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
 import MultiBackend from 'react-dnd-multi-backend';
 import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch';
+import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 
 class App extends Component {
@@ -53,4 +54,4 @@ class App extends Component {
 	}
 }
 
-export default DragDropContext(MultiBackend(HTML5toTouch))(App);
+export default DragDropContext(TouchBackend({ enableMouseEvents: true }))(App);
