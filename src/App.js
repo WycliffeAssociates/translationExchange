@@ -12,6 +12,9 @@ import axios from "axios";
 import User from "./js/pages/user/user";
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
+import MultiBackend from 'react-dnd-multi-backend';
+import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch';
+
 
 class App extends Component {
 	constructor(props) {
@@ -50,4 +53,4 @@ class App extends Component {
 	}
 }
 
-export default DragDropContext(HTML5Backend)(App);
+export default DragDropContext(MultiBackend(HTML5toTouch))(App);
