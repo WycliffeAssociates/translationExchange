@@ -14,6 +14,7 @@ import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
 import { default as ItemPreview } from './components/ItemPreview.js';
 
+
 class ChapterContainer extends Component {
 	constructor() {
 		super();
@@ -454,7 +455,7 @@ class ChapterContainer extends Component {
 					onSourceClicked={this.onSourceClicked.bind(this)}
 					active={this.state.active}
 				/>
-			
+
 			</div>
 		);
 	}

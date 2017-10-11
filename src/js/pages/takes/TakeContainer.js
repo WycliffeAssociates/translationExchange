@@ -4,6 +4,11 @@ import Take from "./components/Take";
 import { findDOMNode } from "react-dom";
 import { DragSource, DropTarget, DragPreview} from "react-dnd";
 import flow from "lodash/flow";
+import objectAssign from 'object-assign';
+import MultiBackend, { Preview } from 'react-dnd-multi-backend';
+
+
+
 
 
 class TakeContainer extends Component {
@@ -12,6 +17,8 @@ class TakeContainer extends Component {
 		this.state = {
 			isToggleOn: true,
 			ratingLoading: false
+
+
 		};
 	}
 
@@ -19,11 +26,23 @@ class TakeContainer extends Component {
 		this.props.deleteTake(this.props.take.take.id);
 	}
 
+
+
+	generatePreview(type, item, style) {
+	    objectAssign(style, {backgroundColor: '#fff', width: '50px', height: '50px'});
+	    return <div style={style}>hello</div>;
+	  }
+
+
 	render() {
-		const { connectDragSource, connectDropTarget, connectDragPreview } = this.props;
+		const { connectDragSource, connectDropTarget, connectDragPreview, isDragging } = this.props;
+
+
+
+    const style = { opacity: isDragging ? 0.5 : 1 };
 
    let content = (
-		 <div>
+		 <div style= {style}>
 		 <Take
 			 count={this.props.count}
 			 take={this.props.take.take}
@@ -39,7 +58,7 @@ class TakeContainer extends Component {
 			 active={this.props.active}
 			 mode={this.props.mode}
 		 />
-
+     <Preview generator={this.generatePreview} />
 	 </div>);
 
 	 // Connect as drag source
@@ -81,6 +100,14 @@ const takeSource = {
 		}
 	}
 };
+
+
+const collect = (connect, monitor) => {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  };
+}
 
 const takeTarget = {
 	hover(props, monitor, component) {
@@ -130,33 +157,11 @@ const takeTarget = {
 };
 
 
-const dropTarget = {
-    drop (props, monitor) {
-        const item = monitor.getItem();
-        // Don't trigger reorder if it's to the same spot
-        if (
-            item.listId === props.listId &&
-            item.id === props.id
-        ) {
-            return;
-        }
-        item.onReorder(
-            {
-                listId: item.listId,
-                id: item.id
-            },
-            {
-                listId: props.listId,
-                id: props.id
-            });
-    }
-};
-
 
 
 
 export default flow(
-	DropTarget("TakeContainer", dropTarget, (connect, monitor) => ({
+	DropTarget("TakeContainer", takeTarget, (connect, monitor) => ({
 		connectDropTarget: connect.dropTarget(),
 		  isOver: monitor.isOver()
 
@@ -165,7 +170,7 @@ export default flow(
 	DragSource("TakeContainer", takeSource, (connect, monitor) => ({
 		connectDragSource: connect.dragSource(),
 		isDragging: monitor.isDragging(),
-		connectDragPreview: connect.dragPreview(),
+		connectDragPreview: connect.dragPreview()
 
 	}))
 )(TakeContainer);

@@ -137,6 +137,7 @@ getTakeInfo(){
 	}
 
 
+
 	render() {
 
 		var file = [];
@@ -145,7 +146,7 @@ getTakeInfo(){
 		};
 
 		return (
-
+     <div>
 			<Segment>
 				<Grid textAlign="left">
 					<Grid.Row>
@@ -200,6 +201,9 @@ getTakeInfo(){
 					</Grid.Row>
 				</Grid>
 			</Segment>
+
+
+		</div>
 		);
 	}
 

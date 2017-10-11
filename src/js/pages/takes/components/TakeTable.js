@@ -4,6 +4,7 @@ import { Table, Grid, Button, Icon } from "semantic-ui-react";
 import "css/takes.css";
 
 
+
 var iterator;
 class TakeTable extends Component {
 	deleteAllColumnTakes() {
@@ -19,8 +20,11 @@ class TakeTable extends Component {
 		});
 	}
 
+
+
 	render() {
 		return (
+
 			<Grid.Column>
 				<Table textAlign="center">
 					<Table.Header>
@@ -56,6 +60,9 @@ class TakeTable extends Component {
 					</Table.Cell>
 				</Table>
 			</Grid.Column>
+
+
+
 		);
 	}
 }
