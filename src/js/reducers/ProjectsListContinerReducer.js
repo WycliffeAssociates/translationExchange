@@ -26,7 +26,7 @@ export default (state = INITIAL_STATE, action) => {
             }
         case "ALL_PROJECTS_RESET":
             return {
-                ...state, currentProjectQuery: "", projects: []
+                ...state, currentProjectQuery: "", projects: [], loaded: true
             }
         default: return state;
     }

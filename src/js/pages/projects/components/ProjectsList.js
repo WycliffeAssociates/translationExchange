@@ -17,22 +17,22 @@ class ProjectsList extends Component {
      */
 	render() {
 		return (
-			<div style ={{direction:`${this.props.direction}`}}>
-			<Container fluid>
-				<Table selectable fixed color="grey">
-					<Table.Header>
-						<Table.Row>
-							<Table.HeaderCell>{this.props.displayText.language}</Table.HeaderCell>
-							<Table.HeaderCell>{this.props.displayText.book}</Table.HeaderCell>
-							<Table.HeaderCell>{this.props.displayText.percentComplete}</Table.HeaderCell>
-							<Table.HeaderCell>{this.props.displayText.more}</Table.HeaderCell>
-						</Table.Row>
-					</Table.Header>
-					<Table.Body>
-						{this.props.projects.map(this.createListItem.bind(this))}
-					</Table.Body>
-				</Table>
-			</Container>
+			<div style={{ direction: `${this.props.direction}` }}>
+				<Container fluid>
+					<Table selectable fixed color="grey">
+						<Table.Header>
+							<Table.Row>
+								<Table.HeaderCell>{this.props.displayText.language}</Table.HeaderCell>
+								<Table.HeaderCell>{this.props.displayText.book}</Table.HeaderCell>
+								<Table.HeaderCell>{this.props.displayText.percentComplete}</Table.HeaderCell>
+								<Table.HeaderCell>{this.props.displayText.more}</Table.HeaderCell>
+							</Table.Row>
+						</Table.Header>
+						<Table.Body>
+							{this.props.projects.map(this.createListItem.bind(this))}
+						</Table.Body>
+					</Table>
+				</Container>
 
 			</div>
 		);
@@ -43,7 +43,7 @@ class ProjectsList extends Component {
      */
 	/*{project.percentFinished}*/
 	createListItem(project) {
-		var navigateToProject = function() {
+		var navigateToProject = function () {
 			this.props.navigateToProject(
 				project.language.slug,
 				project.book.slug,
@@ -148,8 +148,8 @@ class ProjectsList extends Component {
 			hour %= 12;
 		}
 
-		return (     `${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`	);
-	   }
+		return (`${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`);
+	}
 
 }
 /*

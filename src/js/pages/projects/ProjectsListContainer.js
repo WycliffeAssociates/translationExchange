@@ -12,16 +12,17 @@ import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../../js/components/ErrorBytton';
 import LoadingGif from '../../../js/components/LoadingGif';
 import { bindActionCreators } from 'redux';
-import { fetchAllProjects, dispatchAllProjectsReset } from '../../actions';
+import { fetchAllProjects, dispatchAllProjectsReset} from '../../actions';
 
 class ProjectsListContainer extends Component {
-
 
 	componentDidMount() {
 		/*
 		get projects if query string is blank
 		 */
-		this.requestProjects(this.props.location.search);
+		if (this.props.location.search) {
+			this.requestProjects(this.props.location.search);
+		}
 	}
 
 	requestProjects(queryString) {
@@ -30,15 +31,10 @@ class ProjectsListContainer extends Component {
 	}
 
 	//if the project query string has changed, request projects
-	componentDidUpdate(prevProps, prevState) {
-		if (!isEqual(prevProps.location, this.props.location)) {
-			if (!this.props.location.search) {
-				this.props.dispatchAllProjectsReset();
-			} else if (this.props.location.search !== prevProps.location.search) {
-				this.requestProjects(this.props.location.search);
-			}
+	componentWillReceiveProps(nextProps) {
+		if (this.props.currentProjectQuery !== nextProps.location.search) {
+			this.requestProjects(nextProps.location.search);
 		}
-
 	}
 
 	setQuery(newQueryElement) {
@@ -59,11 +55,18 @@ class ProjectsListContainer extends Component {
 		and after the state has been set,
 		 navigate to a URL without the query
 		*/
-		this.setState({ currentProjectQuery: "", projects: [] }, function () {
+
+		/***
+		 * TODO: Look out for better implemention way
+		**/
+
+		if (this.props.location.search) {
 			this.props.history.push({
 				pathname: this.props.location.pathname
 			});
-		});
+		} else {
+			this.props.dispatchAllProjectsReset();
+		}
 	}
 
 	navigateToProject(language, book, version) {

@@ -2,7 +2,6 @@ import axios from "axios";
 import config from "../../config/config";
 
 export const  fetchAllProjects= (query,queryString) => {
-    console.log("Here");
     return function (dispatch) {
         dispatch(dispatchAllProjectsLoading());
 		return axios
@@ -11,6 +10,7 @@ export const  fetchAllProjects= (query,queryString) => {
 				dispatch(dispatchAllProjectsReceived(response.data,queryString));
 			})
 			.catch(err => {
+                console.log(err);
 				dispatch(dispatchAllProjectsFailed(err));
 			});
 	};
