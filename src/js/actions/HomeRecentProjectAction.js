@@ -1,6 +1,5 @@
 import axios from "axios";
 import config from "../../config/config";
-import QueryString from "query-string";
 
 export function fetchRecentProjects() {
 	return function (dispatch) {

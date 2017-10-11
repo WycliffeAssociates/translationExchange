@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Dropdown, Button, Message } from "semantic-ui-react";
-import { connect } from "react-redux";
 import axios from "axios";
 import config from "config/config";
 import QueryString from "query-string";
@@ -201,13 +200,4 @@ class ProjectFilter extends Component {
 	}
 }
 
-const mapStateToProps = state => {
-
-const {direction} = state.direction;
-const{ displayText } = state.geolocation;
-
-return{displayText, direction};
-
-};
-
-export default connect( mapStateToProps)(ProjectFilter);
+export default ProjectFilter;

@@ -4,7 +4,6 @@
  */
 
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Container, Table, Icon } from "semantic-ui-react";
 import CircularProgressbar from "react-circular-progressbar";
@@ -171,16 +170,4 @@ ProjectsList.propTypes = {
 	).isRequired
 };
 
-
-const mapStateToProps = state => {
-
-	const {direction} = state.direction;
-
-const{ displayText } = state.geolocation;
-
-return{displayText, direction};
-
-};
-
-
-export default connect (mapStateToProps) (ProjectsList);
+export default ProjectsList;
