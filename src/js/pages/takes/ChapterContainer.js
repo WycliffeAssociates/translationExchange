@@ -12,6 +12,8 @@ import Chunk from "./components/Chunk";
 import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
+import { default as ItemPreview } from './components/ItemPreview.js';
+
 class ChapterContainer extends Component {
 	constructor() {
 		super();
@@ -397,7 +399,7 @@ class ChapterContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
-			
+
 			return (
 				<div style ={{direction:`${this.props.direction}`}}>
 						<ChapterHeader
@@ -452,6 +454,7 @@ class ChapterContainer extends Component {
 					onSourceClicked={this.onSourceClicked.bind(this)}
 					active={this.state.active}
 				/>
+			
 			</div>
 		);
 	}

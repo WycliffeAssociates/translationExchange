@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import TakePropTypes from "./components/TakePropTypes";
 import Take from "./components/Take";
 import { findDOMNode } from "react-dom";
-import { DragSource, DropTarget } from "react-dnd";
+import { DragSource, DropTarget, DragPreview} from "react-dnd";
 import flow from "lodash/flow";
+
+
 class TakeContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -18,28 +20,43 @@ class TakeContainer extends Component {
 	}
 
 	render() {
-		const { connectDragSource, connectDropTarget } = this.props;
-		return connectDragSource(
-			connectDropTarget(
-				<div>
-					<Take
-						count={this.props.count}
-						take={this.props.take.take}
-						author={this.props.take.user}
-						chunkNumber={this.props.chunkNumber}
-						ratingLoading={this.state.ratingLoading}
-						source={this.props.source}
-						comments={this.props.take.comments}
-						addToListenList={this.props.addToListenList}
-						onDeleteTake={this.onDeleteTake.bind(this)}
-						onClickSave={this.props.onClickSave}
-						deleteComment={this.props.deleteComment}
-						active={this.props.active}
-						mode={this.props.mode}
-					/>
-				</div>
-			)
-		);
+		const { connectDragSource, connectDropTarget, connectDragPreview } = this.props;
+
+   let content = (
+		 <div>
+		 <Take
+			 count={this.props.count}
+			 take={this.props.take.take}
+			 author={this.props.take.user}
+			 chunkNumber={this.props.chunkNumber}
+			 ratingLoading={this.state.ratingLoading}
+			 source={this.props.source}
+			 comments={this.props.take.comments}
+			 addToListenList={this.props.addToListenList}
+			 onDeleteTake={this.onDeleteTake.bind(this)}
+			 onClickSave={this.props.onClickSave}
+			 deleteComment={this.props.deleteComment}
+			 active={this.props.active}
+			 mode={this.props.mode}
+		 />
+
+	 </div>);
+
+	 // Connect as drag source
+			content = connectDragSource(content, { dropEffect: 'move' });
+			// Connect as drop target
+			content = connectDropTarget(content);
+			// Connect to drag layer
+			content = connectDragPreview(content);
+
+
+		return content;
+
+
+
+
+
+
 	}
 }
 
@@ -112,12 +129,43 @@ const takeTarget = {
 	}
 };
 
+
+const dropTarget = {
+    drop (props, monitor) {
+        const item = monitor.getItem();
+        // Don't trigger reorder if it's to the same spot
+        if (
+            item.listId === props.listId &&
+            item.id === props.id
+        ) {
+            return;
+        }
+        item.onReorder(
+            {
+                listId: item.listId,
+                id: item.id
+            },
+            {
+                listId: props.listId,
+                id: props.id
+            });
+    }
+};
+
+
+
+
 export default flow(
-	DropTarget("TakeContainer", takeTarget, connect => ({
-		connectDropTarget: connect.dropTarget()
+	DropTarget("TakeContainer", dropTarget, (connect, monitor) => ({
+		connectDropTarget: connect.dropTarget(),
+		  isOver: monitor.isOver()
+
+
 	})),
 	DragSource("TakeContainer", takeSource, (connect, monitor) => ({
 		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging()
+		isDragging: monitor.isDragging(),
+		connectDragPreview: connect.dragPreview(),
+
 	}))
 )(TakeContainer);

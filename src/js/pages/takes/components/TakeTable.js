@@ -3,6 +3,7 @@ import TakeList from "./TakeList";
 import { Table, Grid, Button, Icon } from "semantic-ui-react";
 import "css/takes.css";
 
+
 var iterator;
 class TakeTable extends Component {
 	deleteAllColumnTakes() {

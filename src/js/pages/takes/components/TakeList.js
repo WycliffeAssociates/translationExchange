@@ -5,6 +5,7 @@ import TakePropTypes from "./TakePropTypes";
 import update from "react/lib/update";
 import { DropTarget } from "react-dnd";
 
+
 class TakeList extends Component {
 	constructor(props) {
 		super(props);
@@ -103,6 +104,8 @@ class TakeList extends Component {
 								moveTake={this.moveTake.bind(this)}
 								makeChanges={this.makeChanges.bind(this)}
 							/>
+
+
 						</div>
 					);
 				})}

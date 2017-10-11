@@ -12,6 +12,13 @@ import axios from "axios";
 import User from "./js/pages/user/user";
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
+import { default as TouchBackend } from 'react-dnd-touch-backend';
+
+//import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch'; // or any other pipeline
+import MultiBackend, { Preview, TouchTransition } from 'react-dnd-multi-backend';
+
+
+
 
 class App extends Component {
 	constructor(props) {
@@ -43,11 +50,26 @@ class App extends Component {
 					<Route exact path="/user" component={User} />
 					<Route path="*" component={NotFound} />
 				</Switch>
-
+          <Preview generator={this.generatePreview} />
 				{/*<Footer/>*/}
 			</div>
 		);
 	}
 }
 
-export default DragDropContext(HTML5Backend)(App);
+
+const HTML5toTouch = {
+  backends: [
+    {
+      backend: HTML5Backend
+    },
+    {
+      backend: TouchBackend({enableMouseEvents: true}), // Note that you can call your backends with options
+      preview: true,
+      transition: TouchTransition
+    }
+  ]
+};
+
+// export default DragDropContext(TouchBackend({ enableMouseEvents: true }))(App);
+  export default DragDropContext(MultiBackend(HTML5toTouch))(App);

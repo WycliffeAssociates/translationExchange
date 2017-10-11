@@ -13,6 +13,7 @@ import {addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPla
 
 
 
+
 class Take extends Component {
 	constructor(props) {
 		super(props);
@@ -144,6 +145,7 @@ getTakeInfo(){
 		};
 
 		return (
+
 			<Segment>
 				<Grid textAlign="left">
 					<Grid.Row>
