@@ -13,6 +13,7 @@ class TakeList extends Component {
 		super(props);
 		this.state = {
 			takes: this.props.takes
+	
 		};
 	}
 	pushTake(take) {
@@ -86,10 +87,10 @@ class TakeList extends Component {
 		const { takes } = this.state;
 		const { connectDropTarget } = this.props;
 		return connectDropTarget(
-			<div style={{ ...style }}>
+			<div  style={{ ...style }}>
 				{takes.map((take, i) => {
 					return (
-						<div>
+						<div >
 							<br />
 							<TakeContainer
 								take={take} // one take
@@ -110,8 +111,9 @@ class TakeList extends Component {
 								removeTake={this.removeTake.bind(this)}
 								moveTake={this.moveTake.bind(this)}
 								makeChanges={this.makeChanges.bind(this)}
+
 							/>
-							
+
 
 
 

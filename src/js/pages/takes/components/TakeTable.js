@@ -5,6 +5,7 @@ import "css/takes.css";
 
 
 
+
 var iterator;
 class TakeTable extends Component {
 	deleteAllColumnTakes() {

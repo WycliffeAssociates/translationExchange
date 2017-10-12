@@ -146,7 +146,7 @@ getTakeInfo(){
 		};
 
 		return (
-     <div>
+
 			<Segment>
 				<Grid textAlign="left">
 					<Grid.Row>
@@ -203,7 +203,7 @@ getTakeInfo(){
 			</Segment>
 
 
-		</div>
+
 		);
 	}
 

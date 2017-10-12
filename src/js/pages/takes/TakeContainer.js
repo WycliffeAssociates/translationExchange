@@ -6,7 +6,7 @@ import { DragSource, DropTarget, DragPreview} from "react-dnd";
 import flow from "lodash/flow";
 import objectAssign from 'object-assign';
 import MultiBackend, { Preview } from 'react-dnd-multi-backend';
-
+import ItemPreview from './components/ItemPreview';
 
 
 
@@ -16,11 +16,19 @@ class TakeContainer extends Component {
 		super(props);
 		this.state = {
 			isToggleOn: true,
-			ratingLoading: false
+			ratingLoading: false,
+			height:null,
+			width: null
 
 
 		};
 	}
+
+	componentDidMount () {
+	 const height = this.myInput.offsetHeight;
+	 const width = this.myInput.offsetWidth;
+	 this.setState({height, width });
+ }
 
 	onDeleteTake() {
 		this.props.deleteTake(this.props.take.take.id);
@@ -39,10 +47,13 @@ class TakeContainer extends Component {
 
 
 
-    const style = { opacity: isDragging ? 0.5 : 1 };
+    const style = { opacity: isDragging ? 0.7 : 1 };
 
    let content = (
-		 <div style= {style}>
+
+<div>
+		 <div ref={input => {this.myInput = input}} className="item" style= {style}>
+
 		 <Take
 			 count={this.props.count}
 			 take={this.props.take.take}
@@ -57,9 +68,36 @@ class TakeContainer extends Component {
 			 deleteComment={this.props.deleteComment}
 			 active={this.props.active}
 			 mode={this.props.mode}
+			 height= {this.state.height}
+			 width= {this.state.width}
 		 />
-     <Preview generator={this.generatePreview} />
-	 </div>);
+
+	 </div>
+	 <ItemPreview
+ 	 count={this.props.count}
+ 	 take={this.props.take.take}
+ 	 author={this.props.take.user}
+ 	 chunkNumber={this.props.chunkNumber}
+ 	 ratingLoading={this.state.ratingLoading}
+ 	 source={this.props.source}
+ 	 comments={this.props.take.comments}
+ 	 addToListenList={this.props.addToListenList}
+ 	 onDeleteTake={this.onDeleteTake.bind(this)}
+ 	 onClickSave={this.props.onClickSave}
+ 	 deleteComment={this.props.deleteComment}
+ 	 active={this.props.active}
+ 	 mode={this.props.mode}
+
+ 	key="__preview" name="TakeContainer" />
+
+</div>
+ );
+
+
+
+
+
+
 
 	 // Connect as drag source
 			content = connectDragSource(content, { dropEffect: 'move' });
@@ -83,8 +121,9 @@ TakeContainer.propTypes = {
 	take: TakePropTypes
 };
 const takeSource = {
-	beginDrag(props) {
-		return { index: props.index, listId: props.listId, take: props.take };
+	beginDrag(props, monitor, component) {
+    const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
+		return { index: props.index, listId: props.listId, take: props.take, rect:hoverBoundingRect };
 	},
 
 	endDrag(props, monitor) {
@@ -101,13 +140,6 @@ const takeSource = {
 	}
 };
 
-
-const collect = (connect, monitor) => {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
-  };
-}
 
 const takeTarget = {
 	hover(props, monitor, component) {
