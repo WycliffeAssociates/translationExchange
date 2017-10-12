@@ -153,7 +153,7 @@ class ProjectFilter extends Component {
 			<div style ={{display:'flex', marginTop: '2%', justifyContent:'center', direction:`${this.props.direction}` }}>
 				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
-					placeholder={this.props.displayText.selectLanguage}  // text from in languages.json
+					placeholder={this.props.selectLanguage}  // text from in languages.json
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -164,7 +164,7 @@ class ProjectFilter extends Component {
 				</div>
 				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
-					placeholder={this.props.displayText.selectBook}
+					placeholder={this.props.selectBook}
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -175,7 +175,7 @@ class ProjectFilter extends Component {
 				</div>
 				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
 				<Dropdown
-					placeholder={this.props.displayText.selectVersion}
+					placeholder={this.props.selectVersion}
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -185,12 +185,12 @@ class ProjectFilter extends Component {
 				/>
 				</div>
 				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
-				<Button onClick={this.props.clearQuery}>{this.props.displayText.clearButton}</Button>
+				<Button onClick={this.props.clearQuery}>{this.props.clearButton}</Button>
 			  </div>
 				{this.state.error ? (
 					<Message negative>
 						{this.state.error.message}{" "}
-						<Button onClick={this.requestAllFilters.bind(this)}>{this.props.displayText.retry}</Button>
+						<Button onClick={this.requestAllFilters.bind(this)}>{this.props.retry}</Button>
 					</Message>
 				) : (
 					""

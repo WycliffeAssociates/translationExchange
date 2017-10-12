@@ -45,7 +45,7 @@ class ProjectsList extends Component {
 	createListItem(project) {
 		var navigateToProject = function () {
 			this.props.navigateToProject(
-				project.language.slug,
+				//project.language.slug,
 				project.book.slug,
 				project.version
 			);

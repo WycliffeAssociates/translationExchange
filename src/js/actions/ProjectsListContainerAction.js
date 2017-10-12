@@ -10,7 +10,6 @@ export const  fetchAllProjects= (query,queryString) => {
 				dispatch(dispatchAllProjectsReceived(response.data,queryString));
 			})
 			.catch(err => {
-                console.log(err);
 				dispatch(dispatchAllProjectsFailed(err));
 			});
 	};

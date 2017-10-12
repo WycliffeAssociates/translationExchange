@@ -27,9 +27,4 @@ class DownloadTR extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    const { displayText } = state.geolocation;
-    return { displayText };
-};
-
-export default connect(mapStateToProps)(DownloadTR);
+export default DownloadTR;

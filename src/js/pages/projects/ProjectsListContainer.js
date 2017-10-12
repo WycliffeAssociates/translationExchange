@@ -3,16 +3,12 @@ import QueryString from "query-string";
 import ProjectsList from "./components/ProjectsList";
 import { connect } from "react-redux";
 import "../../../css/projects.css";
-import { Header } from "semantic-ui-react";
-import axios from "axios";
-import { isEqual } from "lodash";
-import config from "config/config";
 import ProjectFilter from "./ProjectFilter";
 import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../../js/components/ErrorBytton';
 import LoadingGif from '../../../js/components/LoadingGif';
 import { bindActionCreators } from 'redux';
-import { fetchAllProjects, dispatchAllProjectsReset} from '../../actions';
+import { fetchAllProjects, dispatchAllProjectsReset } from '../../actions';
 
 class ProjectsListContainer extends Component {
 
@@ -32,7 +28,9 @@ class ProjectsListContainer extends Component {
 
 	//if the project query string has changed, request projects
 	componentWillReceiveProps(nextProps) {
-		if (this.props.currentProjectQuery !== nextProps.location.search) {
+		if (!nextProps.location.search) {
+			this.props.dispatchAllProjectsReset();
+		} else if (this.props.currentProjectQuery !== nextProps.location.search) {
 			this.requestProjects(nextProps.location.search);
 		}
 	}
@@ -59,12 +57,9 @@ class ProjectsListContainer extends Component {
 		/***
 		 * TODO: Look out for better implemention way
 		**/
-
 		if (this.props.location.search) {
-			this.props.history.push({
-				pathname: this.props.location.pathname
-			});
-		} else {
+			this.props.history.push({ pathname: this.props.location.pathname });
+		}else {
 			this.props.dispatchAllProjectsReset();
 		}
 	}
@@ -87,10 +82,6 @@ class ProjectsListContainer extends Component {
 
 	render() {
 		const { loaded, error, projects } = this.props;
-		var retryRequestProjects = function () {
-			this.requestProjects(this.props.location.search);
-		};
-
 		const chooseAprojectText = this.props.displayText.ChooseProj;
 
 		//if a list of projects was loaded, but it was empty, there is some problem with the query URL
@@ -116,7 +107,10 @@ class ProjectsListContainer extends Component {
 						setQuery={this.setQuery.bind(this)}
 						queryString={this.props.location.search}
 						clearQuery={this.clearQuery.bind(this)}
-						displayText={this.props.displayText}
+						selectLanguage={this.props.displayText.selectLanguage}
+						selectBook={this.props.displayText.selectBook}
+						selectVersion={this.props.displayText.selectVersion}
+						clearButton={this.props.displayText.clearButton}
 						direction={this.props.direction}
 					/>
 					{this.props.projects.length > 0
@@ -137,9 +131,9 @@ class ProjectsListContainer extends Component {
 }
 
 const mapStateToProps = state => {
-	const { direction } = state.direction;
-	const { displayText } = state.geolocation;
-	const { loaded, projects, error, currentProjectQuery } = state.projectsListContainer
+	const { direction = 'ltr' } = state.direction || {};
+	const { displayText = "" } = state.geolocation;
+	const { loaded = false, projects = [], error = "", currentProjectQuery = "" } = state.projectsListContainer
 	return { displayText, direction, loaded, projects, error, currentProjectQuery };
 };
 const mapDispatchToProps = dispatch => {

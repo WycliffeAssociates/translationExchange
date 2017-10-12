@@ -18,7 +18,7 @@ export default (state = INITIAL_STATE, action) => {
             };
         case "ALL_PROJECTS_FAILED":
             return {
-                ...state, error: action.err
+                ...state, error: action.err,loaded:true
             }
         case "ALL_PROJECTS_LOADING":
             return {
@@ -26,7 +26,7 @@ export default (state = INITIAL_STATE, action) => {
             }
         case "ALL_PROJECTS_RESET":
             return {
-                ...state, currentProjectQuery: "", projects: [], loaded: true
+                ...state, currentProjectQuery: "", projects: [],loaded:true
             }
         default: return state;
     }
