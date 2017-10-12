@@ -33,13 +33,5 @@ class DownloadProjects extends Component {
 }
 
 
-const mapStateToProps = state => {
 
-const{ displayText } = state.geolocation;
-
-return{displayText};
-
-};
-
-
-export default connect (mapStateToProps) (DownloadProjects);
+export default DownloadProjects;

@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Container, Header, Table } from "semantic-ui-react";
+import { Container, Table } from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
 import DownloadProjects from "./components/DownloadProjects";
-import axios from "axios";
-import config from "config/config";
 import QueryString from "query-string";
 import LoadingTinyGif from "images/loading-tiny.gif";
 import "css/chapters.css";
@@ -71,6 +69,7 @@ class ChaptersContainer extends Component {
 								isPublish={this.props.is_publish}
 								downloadLoadingSourceAudio={this.props.downloadLoadingSourceAudio}
 								onDownloadSourceAudio={this.onDownloadSourceAudio.bind(this)}
+								displayText={this.props.displayText}
 							/>
 							<PublishButton
 								chapters={this.props.chapters}
@@ -101,11 +100,13 @@ class ChaptersContainer extends Component {
 								navigateToChapter={this.navigateToChapter.bind(this)}
 								setCheckingLevel={this.setCheckingLevel.bind(this)}
 								projectIsPublish={this.props.is_publish}
+								displayText={this.props.displayText}
 							/>
 						</Table>
 
 						<DownloadProjects
 							onDownloadProject={this.onDownloadProject.bind(this)}
+							displayText={this.props.displayText}
 						/>
 
 						{this.props.downloadLoading &&

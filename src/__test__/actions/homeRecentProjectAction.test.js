@@ -1,6 +1,6 @@
 // the returned function can be called with a dispatch (mock)
 
-import { fetchRecentProjects } from "../../js/actions/HomeRecentProjectAction";
+import { fetchRecentProjects } from "../../js/actions";
 import axios from "axios";
 import config from "../../config/config";
 

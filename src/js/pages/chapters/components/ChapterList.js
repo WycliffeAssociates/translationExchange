@@ -140,13 +140,4 @@ ChapterList.propTypes = {
 	path: PropTypes.string.isRequired
 };
 
-const mapStateToProps = state => {
-
-const{ displayText } = state.geolocation;
-
-return{displayText};
-
-};
-
-
-export default connect (mapStateToProps) (ChapterList);
+export default ChapterList;
