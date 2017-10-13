@@ -175,14 +175,4 @@ Chunk.propTypes = {
 	chunk: ChunkPropTypes
 };
 
-
-const mapStateToProps = state => {
-
-		const{ displayText } = state.geolocation;
-
-		return{displayText};
-
-};
-
-
-export default connect (mapStateToProps) (Chunk);
+export default Chunk;

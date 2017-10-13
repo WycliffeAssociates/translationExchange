@@ -10,9 +10,6 @@ import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
 import {addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio} from './../../../actions';
 
-
-
-
 class Take extends Component {
 	constructor(props) {
 		super(props);

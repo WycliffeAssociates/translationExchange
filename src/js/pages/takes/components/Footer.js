@@ -14,12 +14,7 @@ class Footer extends Component {
       }
 
     render () {
-
-
-
-
         return (
-
             <div className="footerStyle" style={{width:'100%', direction:"ltr"}}>
               {this.props.playlist.length > 0 && this.props.playlistMode
                   ? <div style={{width:'100%', backgroundColor:'transparent', height: 20 }}>
@@ -28,12 +23,8 @@ class Footer extends Component {
 
                                             <Button inverted color='blue'>{i.chunk}</Button>
                                         //<button style={{backgroundColor: 'transparent', color: '3791D5'}} >{i.chunk}</button>
-
                                       );
                                   })}
-
-
-
                   </div>
                   : ""
               }
@@ -43,13 +34,11 @@ class Footer extends Component {
 
                             <div style={{width:'100%'}}>
                                 <AudioPlayer
-
                                 />
                             </div>
                           </Menu.Item>
                         : ""
                     }
-
 
                 </Menu>
             </div>

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
+
 import MarkAsDone from "./MarkAsDone";
 import SetSourceAudio from "./SetSourceAudio";
 import RecordButton from "./comments/RecordButton";
@@ -53,14 +55,8 @@ class ChapterHeader extends Component {
 	}
 }
 
+ChapterHeader.propsType={
+	
+}
 
-const mapStateToProps = state => {
-
-const{ displayText } = state.geolocation;
-
-return{displayText};
-
-};
-
-
-export default connect (mapStateToProps) (ChapterHeader);
+export default ChapterHeader;

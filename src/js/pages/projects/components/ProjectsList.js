@@ -45,7 +45,7 @@ class ProjectsList extends Component {
 	createListItem(project) {
 		var navigateToProject = function () {
 			this.props.navigateToProject(
-				//project.language.slug,
+				project.language.slug,
 				project.book.slug,
 				project.version
 			);
@@ -162,7 +162,7 @@ ProjectsList.propTypes = {
 	projects: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.number.isRequired,
-			book: PropTypes.string.isRequired,
+			book: PropTypes.object.isRequired,
 			language: PropTypes.string.isRequired,
 			translationType: PropTypes.string.isRequired,
 			percentFinished: PropTypes.number.isRequired,

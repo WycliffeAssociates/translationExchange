@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import {bindActionCreators} from 'redux';
-import {updateMode, addToPlaylist, playTake, stopAudio} from './../../actions';
+import { bindActionCreators } from 'redux';
+
 import config from "../../../config/config";
 import QueryString from "query-string";
 import "css/takes.css";
@@ -12,17 +12,12 @@ import Chunk from "./components/Chunk";
 import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
-class ChapterContainer extends Component {
+import { updateMode, addToPlaylist, playTake, stopAudio, fetchTakes } from './../../actions';
+
+class ChunkListContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
-			loaded: false,
-			error: "",
-			chunks: [],
-			project: {},
-			book: {},
-			chapter: {},
-			language: {},
 			selectedSourceProjectQuery: -1,
 			selectedSourceProject: {},
 			listenList: [],
@@ -33,30 +28,12 @@ class ChapterContainer extends Component {
 	}
 
 	componentDidMount() {
-		this.requestData();
-	}
-
-	requestData() {
 		var query = QueryString.parse(this.props.location.search);
-		this.setState({ error: "" });
-		axios.post(config.apiUrl + "get_project_takes/", query).then(results => {
-
-    this.props.updateMode(results.data.project.mode);             //used in take to display the modem, (my assumptions are that the modes are chunk or verse)
-
-
-			this.setState({
-				loaded: true,
-				chunks: results.data.chunks,
-				project: results.data.project,
-				book: results.data.book,
-				chapter: results.data.chapter,
-				language: results.data.language
-			});
-		});
+		this.props.fetchTakes(query);
 	}
 
 	updatingDeletedTake(takeId) {
-		let updatedChunks = this.state.chunks.slice();
+		let updatedChunks = this.props.chunks.slice();
 		let chunkToUpdate = updatedChunks.findIndex(chunk => {
 			return chunk.takes.find(take => take.take.id === takeId);
 		});
@@ -70,7 +47,7 @@ class ChapterContainer extends Component {
 	}
 
 	updatingDeletedComment(type, commentId, takeId) {
-		let updatedChunks = this.state.chunks.slice();
+		let updatedChunks = this.props.chunks.slice();
 		if (type === "take") {
 			let chunkToUpdate = updatedChunks.findIndex(chunk => {
 				return chunk.takes.find(take => take.take.id === takeId);
@@ -83,7 +60,7 @@ class ChapterContainer extends Component {
 				chunkToUpdate
 			].takes[takeToUpdate].comments.filter(
 				comment => comment.comment.id !== commentId
-			);
+				);
 			this.setState({
 				chunks: updatedChunks
 			});
@@ -100,7 +77,7 @@ class ChapterContainer extends Component {
 				chunks: updatedChunks
 			});
 		} else if (type === "chapter") {
-			let updatedChapter = Object.assign({}, this.state.chapter);
+			let updatedChapter = Object.assign({}, this.props.chapter);
 
 			updatedChapter.comments = updatedChapter.comments.filter(
 				comment => comment.comment.id !== commentId
@@ -116,7 +93,7 @@ class ChapterContainer extends Component {
 			.patch(config.apiUrl + "takes/" + takeId + "/", patch)
 			.then(results => {
 				//find the take in state that this one corresponds to
-				let updatedChunks = this.state.chunks.slice();
+				let updatedChunks = this.props.chunks.slice();
 				let chunkToUpdate = updatedChunks.findIndex(chunk => {
 					return chunk.takes.find(take => take.take.id === takeId);
 				});
@@ -225,7 +202,7 @@ class ChapterContainer extends Component {
 			})
 			.then(results => {
 				var map = { comment: results.data };
-				let updatedChunks = this.state.chunks.slice();
+				let updatedChunks = this.props.chunks.slice();
 
 				if (type === "take") {
 					let chunkToUpdate = updatedChunks.findIndex(chunk => {
@@ -251,7 +228,7 @@ class ChapterContainer extends Component {
 						active: false
 					});
 				} else {
-					let updatedChapter = Object.assign({}, this.state.chapter);
+					let updatedChapter = Object.assign({}, this.props.chapter);
 					updatedChapter.comments.push(map);
 					this.setState({
 						chapter: updatedChapter,
@@ -272,7 +249,7 @@ class ChapterContainer extends Component {
 	}
 
 	updateChosenTakeForChunk(takeId) {
-		let updatedChunk = this.state.chunks.find(chunk => {
+		let updatedChunk = this.props.chunks.find(chunk => {
 			return chunk.takes.find(take => take.take.id === takeId);
 		});
 
@@ -291,11 +268,11 @@ class ChapterContainer extends Component {
 		//make patch request to confirm that the chapter is ready to be published
 		axios
 			.patch(
-				config.apiUrl + "chapters/" + this.state.chapter.id + "/",
-				parameters
+			config.apiUrl + "chapters/" + this.props.chapter.id + "/",
+			parameters
 			)
 			.then(response => {
-				let updatedChapter = Object.assign({}, this.state.chapter);
+				let updatedChapter = Object.assign({}, this.props.chapter);
 				updatedChapter.is_publish = true;
 				this.setState({ chapter: updatedChapter });
 				if (success) {
@@ -311,7 +288,7 @@ class ChapterContainer extends Component {
 		axios
 			.post(config.apiUrl + "get_project_takes/", {
 				...projectQuery,
-				chapter: this.state.chapter.number
+				chapter: this.props.chapter.number
 			})
 			.then(results => {
 				this.setState({
@@ -336,7 +313,7 @@ class ChapterContainer extends Component {
 		}
 
 		//find the chunk that this take was from, and add chunk info
-		let chunk = this.state.chunks.find(chunk => {
+		let chunk = this.props.chunks.find(chunk => {
 			return chunk.takes.find(take => take.take.id === id);
 		});
 		let newListenItem = {
@@ -365,19 +342,19 @@ class ChapterContainer extends Component {
 	}
 
 	onSourceClicked(startv) {
-	   if(!this.props.playlistMode){
-			 this.props.stopAudio();
-				let sourceLoc = this.getSourceAudioLocationForChunk(startv);
+		if (!this.props.playlistMode) {
+			this.props.stopAudio();
+			let sourceLoc = this.getSourceAudioLocationForChunk(startv);
 
-				let sourceAudio =
-					{
-						src: config.streamingUrl + sourceLoc,
-						name: this.state.project.mode + " " + startv + " (source)"
-					};
+			let sourceAudio =
+				{
+					src: config.streamingUrl + sourceLoc,
+					name: this.props.project.mode + " " + startv + " (source)"
+				};
 
 
-		   this.props.playTake(sourceAudio) ;
-	 	}
+			this.props.playTake(sourceAudio);
+		}
 	}
 
 
@@ -388,38 +365,39 @@ class ChapterContainer extends Component {
 	render() {
 		var query = QueryString.parse(this.props.location.search);
 		this.state.query = query;
-		if (this.state.loaded && this.state.chunks.length === 0) {
+		if (this.props.loaded && this.props.chunks.length === 0) {
 			return <NotFound />;
-		}else if(this.state.error){
-			return(<ErrorButton error={this.state.error}/>);
-		}else if(!this.state.loaded){
-			return(
+		} else if (this.props.error) {
+			return (<ErrorButton error={this.props.error} />);
+		} else if (!this.props.loaded) {
+			return (
 				<LoadingGif />
 			);
 		} else {
-			
+
 			return (
-				<div style ={{direction:`${this.props.direction}`}}>
-						<ChapterHeader
-							book={this.state.book}
-							chapter={this.state.chapter}
-							language={this.state.language.name}
-							chunks={this.state.chunks}
-							mode={this.state.project.mode}
-							selectedSourceProject={this.state.selectedSourceProjectQuery}
-							onClickSave={this.onClickSave.bind(this)}
-							deleteComment={this.deleteComment.bind(this)}
-							setSourceProject={this.setSourceProject.bind(this)}
-							onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}
-							active={this.state.active}
-							projectId={this.state.project.id}
-						/>
+				<div style={{ direction: `${this.props.direction}` }}>
+					<ChapterHeader
+						book={this.props.book}
+						chapter={this.props.chapter}
+						language={this.props.language.name}
+						chunks={this.props.chunks}
+						mode={this.props.project.mode}
+						selectedSourceProject={this.state.selectedSourceProjectQuery}
+						onClickSave={this.onClickSave.bind(this)}
+						deleteComment={this.deleteComment.bind(this)}
+						setSourceProject={this.setSourceProject.bind(this)}
+						onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}
+						active={this.state.active}
+						projectId={this.props.project.id}
+						displayText={this.props.displayText}
+					/>
 
-						{this.state.chunks.map(this.createChunkList.bind(this))}
+					{this.props.chunks.map(this.createChunkList.bind(this))}
 
-						<div fluid className="StickyFooter">
-							<Footer />
-						</div>
+					<div fluid className="StickyFooter">
+						<Footer />
+					</div>
 				</div>
 			);
 		}
@@ -434,7 +412,7 @@ class ChapterContainer extends Component {
 				<Chunk
 					comments={chunk.comments}
 					segments={chunk.takes} // array of takes
-					mode={this.state.project.mode}
+					mode={this.props.project.mode}
 					number={chunk.startv}
 					addToListenList={this.addToListenList.bind(this)}
 					patchTake={this.patchTake.bind(this)}
@@ -443,14 +421,16 @@ class ChapterContainer extends Component {
 					onClickSave={this.onClickSave.bind(this)}
 					id={chunk.id}
 					deleteComment={this.deleteComment.bind(this)}
-					loaded={this.state.loaded}
+					loaded={this.props.loaded}
 					chapter={this.state.query.chapter}
-					book={this.state.book.name}
-					language={this.state.language.name}
-					chunks={this.state.chunks}
+					book={this.props.book.name}
+					language={this.props.language.name}
+					chunks={this.props.chunks}
 					listenList={this.state.listenList}
 					onSourceClicked={this.onSourceClicked.bind(this)}
 					active={this.state.active}
+					displayText={this.props.displayText}
+
 				/>
 			</div>
 		);
@@ -458,21 +438,16 @@ class ChapterContainer extends Component {
 }
 
 const mapStateToProps = state => {
-
-const {direction} = state.direction;
-const{ playlistMode } = state.updatePlaylist;
-
-return{ playlistMode, direction };
+	const { displayText = "" } = state.geolocation;
+	const { direction } = state.direction;
+	const { playlistMode } = state.updatePlaylist;
+	const { loaded=false, error="", chunks=[], project={}, book={}, chapter={}, language={} } = state.chunkListContainer;
+	return { playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language };
 
 }
 
 const mapDispatchToProps = dispatch => {
-
-  return bindActionCreators({updateMode, addToPlaylist, playTake, stopAudio}, dispatch);
-
+	return bindActionCreators({ updateMode, addToPlaylist, playTake, stopAudio, fetchTakes }, dispatch);
 };
 
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChapterContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ChunkListContainer);
