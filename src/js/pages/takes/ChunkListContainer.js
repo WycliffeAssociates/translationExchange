@@ -12,7 +12,7 @@ import Chunk from "./components/Chunk";
 import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
-import { updateMode, addToPlaylist, playTake, stopAudio, fetchTakes } from './../../actions';
+import {addToPlaylist, playTake, stopAudio, fetchTakes } from './../../actions';
 
 class ChunkListContainer extends Component {
 	constructor() {
@@ -447,7 +447,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators({ updateMode, addToPlaylist, playTake, stopAudio, fetchTakes }, dispatch);
+	return bindActionCreators({addToPlaylist, playTake, stopAudio, fetchTakes }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChunkListContainer);

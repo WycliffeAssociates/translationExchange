@@ -6,14 +6,14 @@ const INITIAL_STATE = {
     book: {},
     chapter: {},
     language: {},
-    active:false
+    active: false
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case "FETCH_TAKES_SUCCESS":
             return {
-                ...state,
+                state: action.response,
                 chapter: action.chapter,
                 book: action.book,
                 language: action.language,
