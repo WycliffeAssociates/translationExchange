@@ -95,7 +95,7 @@ class ProjectsList extends Component {
 	parseDate(date) {
 		var noon = "am";
 		var dateArr = date.split("T");
-		var date = dateArr[0];
+		 date = dateArr[0];
 
 		var time = dateArr[1].split(".");
 		time = time[0].split(":");
@@ -137,9 +137,11 @@ class ProjectsList extends Component {
 			case "12":
 				date[1] = this.props.displayText.month12;
 				break;
+				default:
+				break;
 		}
 
-		var hour = parseInt(time[0]);
+		var hour = parseInt(time[0],10);
 		if (hour / 12 > -1) {
 			noon = "pm";
 		}

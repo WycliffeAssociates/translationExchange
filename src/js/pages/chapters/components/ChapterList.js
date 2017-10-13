@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import CircularProgressbar from "react-circular-progressbar";
 import { Table, Icon } from "semantic-ui-react";
@@ -31,10 +30,10 @@ class ChapterList extends Component {
 					{/*only allow checking level to be set if project is published*/}
 					{this.props.projectIsPublish
 						? <CheckingLevel
-								num={chapter.checked_level}
-								setCheckingLevel={this.props.setCheckingLevel}
-								chapterId={chapter.id}
-							/>
+							num={chapter.checked_level}
+							setCheckingLevel={this.props.setCheckingLevel}
+							chapterId={chapter.id}
+						/>
 						: chapter.checked_level}
 				</Table.Cell>
 				<Table.Cell>
@@ -67,7 +66,7 @@ class ChapterList extends Component {
 	parseDate(date) {
 		var noon = "am";
 		var dateArr = date.split("T");
-		var date = dateArr[0];
+		date = dateArr[0];
 
 		var time = dateArr[1].split(".");
 		time = time[0].split(":");
@@ -109,9 +108,11 @@ class ChapterList extends Component {
 			case "12":
 				date[1] = this.props.displayText.month12;
 				break;
+			default:
+				break;
 		}
 
-		var hour = parseInt(time[0]);
+		var hour = parseInt(time[0],10);
 		if (hour / 12 > -1) {
 			noon = "pm";
 		}
@@ -120,8 +121,8 @@ class ChapterList extends Component {
 			hour %= 12;
 		}
 
-		return (     `${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`	);
-		 }
+		return (`${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`);
+	}
 }
 
 ChapterList.propTypes = {

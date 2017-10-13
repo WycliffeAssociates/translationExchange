@@ -11,11 +11,7 @@
 		"js-base64": "^2.1.9",
 		"json-schema-traverse": "^0.3.1",
 		"lodash": "latest",
-<<<<<<< HEAD
-		"nearest-neighbor": "0.0.3",
-=======
 		"nearest-neighbor": "^0.0.3",
->>>>>>> test_refactor
 		"nock": "^9.0.14",
 		"prop-types": "^15.6.0",
 		"query-string": "^4.3.4",

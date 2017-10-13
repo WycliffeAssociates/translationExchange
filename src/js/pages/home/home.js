@@ -5,12 +5,7 @@ import StartHere from "./StartHere";
 import LogoTitle from "./LogoTitle";
 import QueryString from "query-string";
 import { connect } from "react-redux";
-<<<<<<< HEAD
 import { bindActionCreators } from 'redux';
-import { updateLanguage } from '../../actions';
-=======
-import {bindActionCreators} from 'redux';
->>>>>>> test_refactor
 import { fetchRecentProjects } from "../../actions";
 
 class Home extends Component {
@@ -110,16 +105,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 
-<<<<<<< HEAD
 	return bindActionCreators({
 		fetchRecentProjects,
 
 	}, dispatch);
-=======
-  return bindActionCreators({
-          fetchRecentProjects
-}, dispatch);
->>>>>>> test_refactor
 };
 
 
