@@ -17,6 +17,15 @@ export const fetchTakes = (query) => {
     };
 }
 
+
+export const resetInfo = () => {
+
+  return {
+    type: 'RESET_STATE'
+  }
+
+}
+
 export function fetchTakesSuccess(response) {
     return {
         type: 'FETCH_TAKES_SUCCESS',
