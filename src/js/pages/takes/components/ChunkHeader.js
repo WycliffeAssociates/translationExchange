@@ -54,9 +54,4 @@ class ChapterHeader extends Component {
 		);
 	}
 }
-
-ChapterHeader.propsType={
-	
-}
-
 export default ChapterHeader;

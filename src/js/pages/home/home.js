@@ -92,7 +92,6 @@ class Home extends Component {
 	}
 }
 
-
 const mapStateToProps = state => {
 
 	const { displayText } = state.geolocation;
@@ -110,8 +109,5 @@ const mapDispatchToProps = dispatch => {
 
 	}, dispatch);
 };
-
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
