@@ -45,6 +45,7 @@ class TakeList extends Component {
 	}
 	onMarkedForExportToggled(take) {
 		let markedForExport = !take.take.is_publish;
+		
 		this.props.patchTake(
 			take.take.id,
 			{ is_publish: markedForExport },
@@ -64,12 +65,40 @@ class TakeList extends Component {
 		});
 	}
 	makeChanges(isPublish, newRating, take) {
-		if (isPublish || newRating >= 3) {
-			this.onMarkedForExportToggled(take);
-			this.onRatingSet(newRating, take);
-		} else {
-			this.onRatingSet(newRating, take);
+
+		if (isPublish) {
+
+ 			this.onMarkedForExportToggled(take);
+
+ 		}else {
+
+		switch(newRating){
+      case 0:
+			     return this.onRatingSet(1, take);
+	    case 1:
+
+		       return this.onRatingSet(2, take);
+			case 2:
+			     return this.onRatingSet(3, take);
+		  case 3:
+			     return 	this.onMarkedForExportToggled(take);
+		  default:
+			     return null;
+
 		}
+
+	}
+
+    // if(newRating >1 ){
+		// 	 this.onRatingSet(newRating -1, take);
+		// }
+		//
+		// if (isPublish || newRating >= 3) {
+		// 	this.onMarkedForExportToggled(take);
+		// 	this.onRatingSet(newRating, take);
+		// } else {
+		// 	this.onRatingSet(newRating -1, take);
+		// }
 	}
 	render() {
 		const style = {
