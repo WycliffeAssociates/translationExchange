@@ -17,6 +17,7 @@ export const fetchChunks = (query) => {
     };
 }
 
+
 export const resetInfo = () => {
 
   return {
