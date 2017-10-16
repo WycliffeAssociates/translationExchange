@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ChunkListContainer from '../../../js/pages/takes/ChunkListContainer';
+import ChunkListContainer from '../../../js/pages/takes/chunks/ChunkListContainer';
 
 describe('ChunkListContainer', () => {
     const store = mockStore({
