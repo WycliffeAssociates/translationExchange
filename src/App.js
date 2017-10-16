@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import ChunkListContainer from "./js/pages/takes/ChunkListContainer";
+import ChunkListContainer from "./js/pages/takes/chunks/ChunkListContainer";
 import ProjectsListContainer from "./js/pages/projects/ProjectsListContainer";
 import ChaptersContainer from "./js/pages/chapters/ChaptersContainer";
 import "./App.css";

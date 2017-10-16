@@ -3,16 +3,16 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
-import config from "../../../config/config";
+import config from "../../../../config/config";
 import QueryString from "query-string";
 import "css/takes.css";
-import ChunkHeader from "./components/ChunkHeader";
-import Footer from "./components/Footer";
-import Chunk from "./components/Chunk";
+import ChunkHeader from "./ChunkHeader";
+import Footer from "../components/Footer";
+import Chunk from "./Chunk";
 import NotFound from "js/pages/NotFound";
-import ErrorButton from '../../components/ErrorBytton';
-import LoadingGif from '../../components/LoadingGif';
-import { addToPlaylist, playTake, stopAudio, fetchChunks, setSourceProject, resetInfo } from './../../actions';
+import ErrorButton from '../../../components/ErrorBytton';
+import LoadingGif from '../../../components/LoadingGif';
+import { addToPlaylist, playTake, stopAudio, fetchChunks, setSourceProject, resetInfo } from './../../../actions';
 
 class ChunkListContainer extends Component {
 	constructor() {

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import TakeList from "./TakePropTypes";
+import TakeList from "../components/TakePropTypes";
 
 var ChunkPropTypes = PropTypes.shape(
     {
