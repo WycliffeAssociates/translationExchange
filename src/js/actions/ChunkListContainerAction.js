@@ -7,14 +7,23 @@ export const fetchTakes = (query) => {
         return axios
             .post(config.apiUrl + "get_project_takes/", query)
             .then(response => {
+                console.log('finding chunk',response);
                 dispatch(fetchTakesSuccess(response.data));
                 dispatch(updateMode(response.data.project.mode));
             })
             .catch(error => {
-                console.log(error);
                 dispatch(fetchTakesFailed(error));
             });
     };
+}
+
+
+export const resetInfo = () => {
+
+  return {
+    type: 'RESET_STATE'
+  }
+
 }
 
 export function fetchTakesSuccess(response) {

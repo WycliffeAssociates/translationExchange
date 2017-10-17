@@ -7,9 +7,9 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('ChaptersContainerAction', () => {
-
-it('should behave...', () => {
-    
-});
+    const store = mockStore();
+    it('should behave...', () => {
+        
+    });
 
 });

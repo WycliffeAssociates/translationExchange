@@ -9,6 +9,7 @@ const mockStore = configureMockStore(middlewares)
 
 describe('ChaptersContainer', () => {
     const store = mockStore({
+        direction:{},
         geolocation: {},
         chaptersContainer: {
         }

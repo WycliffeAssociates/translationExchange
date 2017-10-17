@@ -109,6 +109,7 @@ class ChunkListContainer extends Component {
 					() => {
 						if (success) {
 							success(updatedChunks[chunkToUpdate].takes[takeToUpdate].take);
+							
 						}
 					}
 				);

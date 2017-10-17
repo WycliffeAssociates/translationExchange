@@ -43,33 +43,40 @@ class TakeList extends Component {
 			})
 		);
 	}
-	onMarkedForExportToggled(take) {
-		let markedForExport = !take.take.is_publish;
-		this.props.patchTake(
-			take.take.id,
-			{ is_publish: markedForExport },
-			updatedTake => {
-				//success callback
-				if (markedForExport) {
-					this.props.updateChosenTakeForChunk(updatedTake.id);
-				}
-			}
-		);
-	}
 
-	onRatingSet(newRating, take) {
-		this.setState({ ratingLoading: true });
-		this.props.patchTake(take.take.id, { rating: newRating }, () => {
-			this.setState({ ratingLoading: false });
-		});
-	}
-	makeChanges(isPublish, newRating, take) {
-		if (isPublish || newRating >= 3) {
-			this.onMarkedForExportToggled(take);
-			this.onRatingSet(newRating, take);
-		} else {
-			this.onRatingSet(newRating, take);
+onDrop(isPublished, newRating, take){
+
+	this.props.patchTake(
+		take.take.id,
+		{ is_publish: isPublished, rating: newRating },
+		updatedTake => {
+			//success callback
+			if (isPublished) {
+				this.props.updateChosenTakeForChunk(updatedTake.id);
+
+			}
 		}
+	);
+}
+
+
+
+	makeChanges(isPublish, newRating, take) {
+		switch(newRating){
+			case 0:
+					 return this.onDrop(false, 1, take);
+			case 1:
+
+					 return this.onDrop(false, 2, take);
+			case 2:
+					 return this.onDrop(false, 3, take);
+			case 3:
+				 return this.onDrop(true, take.rating, take);
+			default:
+					 return null;
+
+			}
+
 	}
 	render() {
 		const style = {

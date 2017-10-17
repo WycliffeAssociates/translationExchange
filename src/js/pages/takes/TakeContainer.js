@@ -52,6 +52,7 @@ const takeSource = {
 	},
 
 	endDrag(props, monitor) {
+		
 		const item = monitor.getItem();
 		const dropResult = monitor.getDropResult();
 		if (dropResult && dropResult.listId !== item.listId) {
