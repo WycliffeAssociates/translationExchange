@@ -45,7 +45,7 @@ class TakeList extends Component {
 	}
 	onMarkedForExportToggled(take) {
 		let markedForExport = !take.take.is_publish;
-		
+
 		this.props.patchTake(
 			take.take.id,
 			{ is_publish: markedForExport },
@@ -53,41 +53,39 @@ class TakeList extends Component {
 				//success callback
 				if (markedForExport) {
 					this.props.updateChosenTakeForChunk(updatedTake.id);
+
 				}
 			}
 		);
 	}
 
 	onRatingSet(newRating, take) {
-		this.setState({ ratingLoading: true });
+
 		this.props.patchTake(take.take.id, { rating: newRating }, () => {
-			this.setState({ ratingLoading: false });
+
 		});
 	}
 	makeChanges(isPublish, newRating, take) {
 
 		if (isPublish) {
+      this.onMarkedForExportToggled(take);
 
- 			this.onMarkedForExportToggled(take);
+ 		}
+       debugger;
+			switch(newRating){
+	      case 0:
+				     return this.onRatingSet(1, take);
+		    case 1:
 
- 		}else {
+			       return this.onRatingSet(2, take);
+				case 2:
+				     return this.onRatingSet(3, take);
+			  case 3:
+	         return this.onMarkedForExportToggled(take);
+			  default:
+				     return null;
 
-		switch(newRating){
-      case 0:
-			     return this.onRatingSet(1, take);
-	    case 1:
-
-		       return this.onRatingSet(2, take);
-			case 2:
-			     return this.onRatingSet(3, take);
-		  case 3:
-			     return 	this.onMarkedForExportToggled(take);
-		  default:
-			     return null;
-
-		}
-
-	}
+	      }
 
     // if(newRating >1 ){
 		// 	 this.onRatingSet(newRating -1, take);
