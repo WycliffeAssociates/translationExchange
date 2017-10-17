@@ -421,20 +421,12 @@ const mapStateToProps = state => {
 	const { displayText = "" } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-<<<<<<< HEAD:src/js/pages/takes/ChunkListContainer.js
-	const { loaded=false, error="", chunks=[], project={}, book={}, chapter={}, language={} } = state.chunkListContainer;
-	return { playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language };
-=======
 	const { loaded = false, error = "", chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
 	return { playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery };
->>>>>>> chunklistpage:src/js/pages/chunks/ChunkListContainer.js
 
 }
 
 const mapDispatchToProps = dispatch => {
-<<<<<<< HEAD:src/js/pages/takes/ChunkListContainer.js
-	return bindActionCreators({ updateMode, addToPlaylist, playTake, stopAudio, fetchTakes }, dispatch);
-=======
 	return bindActionCreators(
 		{
 			addToPlaylist,
@@ -444,7 +436,6 @@ const mapDispatchToProps = dispatch => {
 			setSourceProject,
 			resetInfo
 		}, dispatch);
->>>>>>> chunklistpage:src/js/pages/chunks/ChunkListContainer.js
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChunkListContainer);
