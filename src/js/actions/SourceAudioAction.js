@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "../../config/config";
 
-export const fetchAllSourceAudio = (book, projectId) => {
+export const fetchAllSourceAudio = (book, projectId, setInitialSourceAudio) => {
     return function (dispatch) {
         dispatch(dispatchSourceAudioLoading());
         return axios
@@ -22,7 +22,11 @@ export const fetchAllSourceAudio = (book, projectId) => {
                         });
                     }
                 });
+
+                setInitialSourceAudio(projects[0].value);
+
                 dispatch(dispatchSourceAudioReceived(projects));
+
             })
             .catch(err => {
                 dispatch(dispatchSourceAudioFailed(err));
