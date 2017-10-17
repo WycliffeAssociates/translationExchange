@@ -15,14 +15,6 @@ import LoadingGif from '../../components/LoadingGif';
 import { addToPlaylist, playTake, stopAudio, fetchChunks, setSourceProject, resetInfo } from './../../actions';
 
 class ChunkListContainer extends Component {
-	constructor() {
-		super();
-		this.state = {
-			listenList: [],
-			currentPlaylist: [],
-		};
-	}
-
 	componentWillUnmount() {
 		this.props.resetInfo();
 
@@ -110,7 +102,7 @@ class ChunkListContainer extends Component {
 					() => {
 						if (success) {
 							success(updatedChunks[chunkToUpdate].takes[takeToUpdate].take);
-							
+
 						}
 					}
 				);
@@ -290,38 +282,6 @@ class ChunkListContainer extends Component {
 		this.props.setSourceProject(projectQuery, this.props.chapter.number);
 	}
 
-	addToListenList(props) {
-
-		var newArr = this.state.listenList;
-		var id = props.take.id;
-
-		for (let i = 0; i < newArr.length; i++) {
-
-			if (newArr[i].props.take.id === id) {
-				newArr.splice(i, 1);
-				this.setState({ listenList: newArr });
-				return "";
-			}
-		}
-
-		//find the chunk that this take was from, and add chunk info
-		let chunk = this.props.chunks.find(chunk => {
-			return chunk.takes.find(take => take.take.id === id);
-		});
-		let newListenItem = {
-			props: props,
-			chunk: chunk,
-			count: props.count,
-			mode: props.mode
-		};
-
-		newArr.push(newListenItem);
-		this.setState({
-			listenList: newArr
-		});
-
-	}
-
 	getSourceAudioLocationForChunk(startv) {
 		if (!this.props.selectedSourceProject) {
 			return undefined;
@@ -396,7 +356,6 @@ class ChunkListContainer extends Component {
 					segments={chunk.takes} // array of takes
 					mode={this.props.project.mode}
 					number={chunk.startv}
-					addToListenList={this.addToListenList.bind(this)}
 					patchTake={this.patchTake.bind(this)}
 					deleteTake={this.deleteTake.bind(this)}
 					updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
@@ -407,7 +366,6 @@ class ChunkListContainer extends Component {
 					book={this.props.book.name}
 					language={this.props.language.name}
 					chunks={this.props.chunks}
-					listenList={this.state.listenList}
 					onSourceClicked={this.onSourceClicked.bind(this)}
 					active={this.props.active}
 					displayText={this.props.displayText}
