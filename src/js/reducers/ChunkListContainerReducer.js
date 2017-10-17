@@ -34,6 +34,17 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state, error: action.error
             }
+        case "SET_ACTIVE_TO_FALSE":
+            return { ...state, active: false };
+        case 'PATCH_TAKE_SUCCESS':
+            return {
+                ...state, chunks: action.updatedChunk
+            }
+        case 'UPDATE_DELETED_CHUNK': return {
+            ...state, chunks: action.updatedChunk
+        }
+        case 'PATCH_TAKE_FAILED':
+            return { ...state, error: action.error };
         case 'RESET_STATE':
             return INITIAL_STATE;
         default: return state;

@@ -12,7 +12,16 @@ import Chunk from "./Chunk";
 import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
-import { addToPlaylist, playTake, stopAudio, fetchChunks, setSourceProject, resetInfo } from './../../actions';
+import {
+	addToPlaylist,
+	playTake,
+	stopAudio,
+	fetchChunks,
+	setSourceProject,
+	resetInfo,
+	patchTake,
+	updateDeletedChunk
+} from './../../actions';
 
 class ChunkListContainer extends Component {
 	componentWillUnmount() {
@@ -33,10 +42,7 @@ class ChunkListContainer extends Component {
 		updatedChunks[chunkToUpdate].takes = updatedChunks[
 			chunkToUpdate
 		].takes.filter(take => take.take.id !== takeId);
-
-		this.setState({
-			chunks: updatedChunks
-		});
+		this.props.updateDeletedChunk(updatedChunks);
 	}
 
 	updatingDeletedComment(type, commentId, takeId) {
@@ -82,48 +88,7 @@ class ChunkListContainer extends Component {
 	}
 
 	patchTake(takeId, patch, success) {
-		axios
-			.patch(config.apiUrl + "takes/" + takeId + "/", patch)
-			.then(results => {
-				//find the take in state that this one corresponds to
-				let updatedChunks = this.props.chunks.slice();
-				let chunkToUpdate = updatedChunks.findIndex(chunk => {
-					return chunk.takes.find(take => take.take.id === takeId);
-				});
-				let takeToUpdate = updatedChunks[chunkToUpdate].takes.findIndex(
-					take => take.take.id === takeId
-				);
-				updatedChunks[chunkToUpdate].takes[takeToUpdate].take = results.data;
-
-				this.setState(
-					{
-						chunks: updatedChunks
-					},
-					() => {
-						if (success) {
-							success(updatedChunks[chunkToUpdate].takes[takeToUpdate].take);
-
-						}
-					}
-				);
-			})
-			.catch(exception => {
-				if (exception.response) {
-					if (exception.response.status === 404) {
-						alert("Sorry, that take doesn't exist!");
-						this.updatingDeletedTake(takeId);
-					} else {
-						alert(
-							"Something went wrong. Please check your connection and try again. "
-						);
-					}
-				} else {
-					//timeout error doesn't produce response
-					alert(
-						"Something went wrong. Please check your connection and try again. "
-					);
-				}
-			});
+		this.props.patchTake(takeId, patch, success, this.props.chunks, this.updatingDeletedTake.bind(this));
 	}
 
 	/*
@@ -392,7 +357,9 @@ const mapDispatchToProps = dispatch => {
 			stopAudio,
 			fetchChunks,
 			setSourceProject,
-			resetInfo
+			resetInfo,
+			patchTake,
+			updateDeletedChunk
 		}, dispatch);
 };
 
