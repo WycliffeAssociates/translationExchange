@@ -8,6 +8,7 @@ import ChaptersContainerReducer from './ChaptersContainerReducer';
 import DirectionReducer from './DirectionReducer';
 import ProjectsListContainerReducer from './ProjectsListContinerReducer';
 import ChunkListContainerReducer from './ChunkListContainerReducer';
+import SourceAudioReducer from './SourceAudioReducer';
 
 export default combineReducers({
   setAudioPlayerState: AudioPlayerReducer,
@@ -17,5 +18,6 @@ export default combineReducers({
   chaptersContainer: ChaptersContainerReducer,
   direction: DirectionReducer,
   projectsListContainer: ProjectsListContainerReducer,
-  chunkListContainer: ChunkListContainerReducer
+  chunkListContainer: ChunkListContainerReducer,
+  sourceAudio: SourceAudioReducer
 });

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import TakeList from "./TakePropTypes";
+import TakeList from "../takes/components/TakePropTypes";
 
 var ChunkPropTypes = PropTypes.shape(
     {
@@ -8,5 +8,4 @@ var ChunkPropTypes = PropTypes.shape(
         ...TakeList.propTypes
     }
 ).isRequired;
-
 export default ChunkPropTypes;

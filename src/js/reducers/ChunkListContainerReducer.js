@@ -6,27 +6,32 @@ const INITIAL_STATE = {
     book: {},
     chapter: {},
     language: {},
-    active: false
+    active: false,
+    selectedSourceProjectQuery: -1,
+    selectedSourceProject: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case "FETCH_TAKES_SUCCESS":
+        case "FETCH_CHUNKS_SUCCESS":
             return {
-                state: action.response,
+                ...state,
+                chunks: action.chunks,
+                project: action.project,
                 chapter: action.chapter,
                 book: action.book,
                 language: action.language,
-                chunks: action.chunks,
-                project: action.project,
                 loaded: true,
             };
-        case 'FETCH_TAKES_FAILED':
+        case 'FETCH_CHUNKS_FAILED':
             return { ...state, error: action.error }
-
-       case 'RESET_STATE':
-            return INITIAL_STATE
-
+        case "SET_SOURCE_PROJECT_SUCCESS":
+            return {
+                ...state, selectedSourceProject: action.response,
+                selectedSourceProjectQuery: action.query
+            }
+        case 'RESET_STATE':
+            return INITIAL_STATE;
         default: return state;
     }
 };
