@@ -12,7 +12,7 @@ import Chunk from "./components/Chunk";
 import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
-import {addToPlaylist, playTake, stopAudio, fetchTakes, resetInfo } from './../../actions';
+import { updateMode, addToPlaylist, playTake, stopAudio, fetchTakes } from './../../actions';
 
 class ChunkListContainer extends Component {
 	constructor() {
@@ -27,12 +27,7 @@ class ChunkListContainer extends Component {
 		};
 	}
 
-	componentWillUnmount() {
-			this.props.resetInfo();
-
-	}
-
-	componentWillMount() {
+	componentDidMount() {
 		var query = QueryString.parse(this.props.location.search);
 		this.props.fetchTakes(query);
 	}
@@ -114,6 +109,7 @@ class ChunkListContainer extends Component {
 					() => {
 						if (success) {
 							success(updatedChunks[chunkToUpdate].takes[takeToUpdate].take);
+							
 						}
 					}
 				);
@@ -446,13 +442,13 @@ const mapStateToProps = state => {
 	const { displayText = "" } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { loaded, error, chunks, project, book, chapter, language } = state.chunkListContainer;
+	const { loaded=false, error="", chunks=[], project={}, book={}, chapter={}, language={} } = state.chunkListContainer;
 	return { playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language };
 
 }
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators({addToPlaylist, playTake, stopAudio, fetchTakes, resetInfo }, dispatch);
+	return bindActionCreators({ updateMode, addToPlaylist, playTake, stopAudio, fetchTakes }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChunkListContainer);

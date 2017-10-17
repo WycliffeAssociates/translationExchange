@@ -6,4 +6,3 @@ export * from './ChaptersContainerAction';
 export * from './DirectionActions';
 export * from './ProjectsListContainerAction';
 export * from './ChunkListContainerAction';
-export * from './setRatingActions';
