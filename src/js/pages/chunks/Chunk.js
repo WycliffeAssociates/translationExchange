@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import ChunkPropTypes from "./ChunkPropTypes";
 import { connect } from "react-redux";
 import { Accordion, Icon, Grid } from "semantic-ui-react";
-import TakeTable from "../components/TakeTable";
+import TakeTable from "../takes/components/TakeTable";
 import "css/takes.css";
 
-import ChunkSidebar from "../components/SideBar";
+import ChunkSidebar from "../takes/components/SideBar";
 class Chunk extends Component {
 	render() {
 		var publish = [];

@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 
-import MarkAsDone from "../components/MarkAsDone";
-import SetSourceAudio from "../components/SetSourceAudio";
-import RecordButton from "../components/comments/RecordButton";
+import MarkAsDone from "../takes/components/MarkAsDone";
+import SetSourceAudio from "../takes/components/SetSourceAudio";
+import RecordButton from "../takes/components/comments/RecordButton";
 import { Grid } from "semantic-ui-react";
 import "css/takes.css";
 
