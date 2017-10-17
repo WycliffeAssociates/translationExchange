@@ -7,8 +7,8 @@ const INITIAL_STATE = {
     chapter: {},
     language: {},
     active: false,
-    selectedSourceProjectQuery: "",
-    selectedSourceProject: []
+    selectedSourceProjectQuery:-1,
+    selectedSourceProject: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -29,10 +29,6 @@ export default (state = INITIAL_STATE, action) => {
             ...state, selectedSourceProject: action.response,
             selectedSourceProjectQuery: action.query
         }
-        case "SET_SOURCE_PROJECT":
-            return {
-                ...state, error: action.error
-            };
         case 'RESET_STATE':
             return INITIAL_STATE;
         default: return state;

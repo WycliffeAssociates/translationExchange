@@ -24,9 +24,10 @@ class SetSourceAudio extends Component {
                 labeled
                 className="icon"
                 icon="assistive listening systems"
+                value={this.props.selectedSourceProject}
                 loading={!this.props.loaded}
                 options={this.props.projects}
-                onChange={(event, dropdown) => { this.setSource(dropdown.value)}}
+                onChange={(event, dropdown) => { this.setSource(dropdown.value) }}
             />
         );
     }

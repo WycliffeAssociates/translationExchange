@@ -18,11 +18,8 @@ class ChunkListContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
-			selectedSourceProjectQuery: -1,
-			selectedSourceProject: {},
 			listenList: [],
 			currentPlaylist: [],
-			active: false,
 		};
 	}
 
@@ -367,7 +364,7 @@ class ChunkListContainer extends Component {
 						language={this.props.language.name}
 						chunks={this.props.chunks}
 						mode={this.props.project.mode}
-						selectedSourceProject={QueryString.parse(this.props.location.search)}
+						selectedSourceProject={this.props.selectedSourceProjectQuery}
 						onClickSave={this.onClickSave.bind(this)}
 						deleteComment={this.deleteComment.bind(this)}
 						setSourceProject={this.setSourceProject.bind(this)}
@@ -423,7 +420,7 @@ const mapStateToProps = state => {
 	const { displayText = "" } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { loaded = false, error = "", chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false } = state.chunkListContainer;
+	const { loaded = false, error = "", chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
 	return { playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language };
 
 }

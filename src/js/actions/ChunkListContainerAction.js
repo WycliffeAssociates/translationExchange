@@ -20,9 +20,9 @@ export const fetchChunks = (query) => {
 
 export const resetInfo = () => {
 
-  return {
-    type: 'RESET_STATE'
-  }
+    return {
+        type: 'RESET_STATE'
+    }
 
 }
 
@@ -46,6 +46,7 @@ export function dispatchChunksFailed(error) {
 //setSourceProject
 
 export const setSourceProject = (query, chapter) => {
+    console.log("url",config.apiUrl + "get_project_takes/", { ...query, chapter: chapter });
     return function (dispatch) {
         return axios
             .post(config.apiUrl + "get_project_takes/", { ...query, chapter: chapter })
@@ -59,6 +60,7 @@ export const setSourceProject = (query, chapter) => {
 }
 
 export function setSoruceProjectSuccess(response, query) {
+    console.log("empty", response);
     return {
         type: 'SET_SOURCE_PROJECT_SUCCESS',
         response,
