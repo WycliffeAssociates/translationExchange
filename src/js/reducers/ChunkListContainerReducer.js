@@ -7,7 +7,7 @@ const INITIAL_STATE = {
     chapter: {},
     language: {},
     active: false,
-    selectedSourceProjectQuery:-1,
+    selectedSourceProjectQuery: -1,
     selectedSourceProject: {}
 };
 
@@ -25,10 +25,11 @@ export default (state = INITIAL_STATE, action) => {
             };
         case 'FETCH_CHUNKS_FAILED':
             return { ...state, error: action.error }
-        case "SET_SOURCE_PROJECT": return {
-            ...state, selectedSourceProject: action.response,
-            selectedSourceProjectQuery: action.query
-        }
+        case "SET_SOURCE_PROJECT_SUCCESS":
+            return {
+                ...state, selectedSourceProject: action.response,
+                selectedSourceProjectQuery: action.query
+            }
         case 'RESET_STATE':
             return INITIAL_STATE;
         default: return state;

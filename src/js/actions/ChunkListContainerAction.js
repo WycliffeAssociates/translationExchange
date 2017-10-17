@@ -46,29 +46,27 @@ export function dispatchChunksFailed(error) {
 //setSourceProject
 
 export const setSourceProject = (query, chapter) => {
-    console.log("url",config.apiUrl + "get_project_takes/", { ...query, chapter: chapter });
     return function (dispatch) {
         return axios
             .post(config.apiUrl + "get_project_takes/", { ...query, chapter: chapter })
             .then(response => {
-                dispatch(setSoruceProjectSuccess(response.data, query));
+                dispatch(setSourceProjectSuccess(response.data, query));
             })
             .catch(error => {
-                dispatch(setSoruceProjectFailed(error));
+                dispatch(setSourceProjectFailed(error));
             });
     };
 }
 
-export function setSoruceProjectSuccess(response, query) {
-    console.log("empty", response);
+export function setSourceProjectSuccess(response, query) {
+    console.log('data', response);
     return {
         type: 'SET_SOURCE_PROJECT_SUCCESS',
         response,
         query
     }
 }
-export function setSoruceProjectFailed(error) {
-    console.log("error", error);
+export function setSourceProjectFailed(error) {
     return {
         type: 'SET_SOURCE_PROJECT_FAILED',
         error

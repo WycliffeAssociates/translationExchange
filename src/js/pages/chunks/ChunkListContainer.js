@@ -421,7 +421,7 @@ const mapStateToProps = state => {
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
 	const { loaded = false, error = "", chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
-	return { playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language };
+	return { playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery };
 
 }
 
