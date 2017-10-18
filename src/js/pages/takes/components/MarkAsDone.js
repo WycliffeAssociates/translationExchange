@@ -145,7 +145,7 @@ class MarkAsDone extends Component {
                     <Modal.Description style= {styles.modal}>
                         <p>Here is a preview of the takes you have selected to export. This may take a few seconds to
                                 load.</p>
-                        <p>To mark as done, click on 'Finish'.</p>
+                        <p>To mark as done, click on 'Export'.</p>
                         {this.audioPlayer()}
                     </Modal.Description>
 
