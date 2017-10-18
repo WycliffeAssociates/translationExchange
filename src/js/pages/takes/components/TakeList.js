@@ -44,38 +44,35 @@ class TakeList extends Component {
 		);
 	}
 
-onDrop(isPublished, newRating, take){
+	onDrop(isPublished, newRating, take) {
+		this.props.patchTake(
+			take.take.id,
+			{ is_publish: isPublished, rating: newRating },
+			updatedTake => {
+				//success callback
+				if (isPublished) {
+					this.props.updateChosenTakeForChunk(updatedTake.id);
 
-	this.props.patchTake(
-		take.take.id,
-		{ is_publish: isPublished, rating: newRating },
-		updatedTake => {
-			//success callback
-			if (isPublished) {
-				this.props.updateChosenTakeForChunk(updatedTake.id);
-
+				}
 			}
-		}
-	);
-}
-
-
+		);
+	}
 
 	makeChanges(isPublish, newRating, take) {
-		switch(newRating){
+		switch (newRating) {
 			case 0:
-					 return this.onDrop(false, 1, take);
+				return this.onDrop(false, 1, take);
 			case 1:
 
-					 return this.onDrop(false, 2, take);
+				return this.onDrop(false, 2, take);
 			case 2:
-					 return this.onDrop(false, 3, take);
+				return this.onDrop(false, 3, take);
 			case 3:
-				 return this.onDrop(true, take.rating, take);
+				return this.onDrop(true, take.rating, take);
 			default:
-					 return null;
+				return null;
 
-			}
+		}
 
 	}
 	render() {
@@ -84,6 +81,7 @@ onDrop(isPublished, newRating, take){
 		};
 		const { takes } = this.state;
 		const { connectDropTarget } = this.props;
+		
 		return connectDropTarget(
 			<div style={{ ...style }}>
 				{takes.map((take, i) => {

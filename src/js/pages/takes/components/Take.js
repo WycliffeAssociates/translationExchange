@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from "prop-types";
 import config from "config/config";
 import { Grid, Segment } from "semantic-ui-react";
@@ -8,7 +8,7 @@ import TakeListenButton from "./AddTake";
 import "css/takes.css";
 import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
-import {addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio} from './../../../actions';
+import { addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio } from './../../../actions';
 
 class Take extends Component {
 	constructor(props) {
@@ -18,8 +18,8 @@ class Take extends Component {
 			addButtonIcon: "plus",
 			showMarkers: false,
 			showMarkersColor: "",
-			playlist:[],
-			clear : true
+			playlist: [],
+			clear: true
 
 		};
 		// This binding is necessary to make `this` work in the callback
@@ -49,86 +49,80 @@ class Take extends Component {
 		}
 	}
 
-getTakeInfo(){
-	const takeLoc = this.props.take.location;
-	const takeNum = this.props.count;
-	const startv = this.props.chunkNumber;
-	const author = this.props.author.name;
-	const date = this.parseDate(this.props.take.date_modified);
-	const markers = this.props.take.markers;
+	getTakeInfo() {
+		const takeLoc = this.props.take.location;
+		const takeNum = this.props.count;
+		const startv = this.props.chunkNumber;
+		const author = this.props.author.name;
+		const date = this.parseDate(this.props.take.date_modified);
+		const markers = this.props.take.markers;
 
-	let take = {
-		 src: config.streamingUrl + takeLoc,
-		 markers: markers,
-		 name: `${this.props.displayText.take} ${takeNum}, ${this.props.displayText.chunk} ${startv}  (${author} ${this.props.displayText.on} ${date})`,  // in case of other mode like chunk mode or verse mode verify this
-		 id: takeLoc,
-		 chunk: `${this.props.displayText.chunk} ${startv}`          // in case of a different mode like segment or verse here is assumed that only chunks will be used
-	 };
-	 console.log("finding chunk",take.chunk);
-	 return take;
-}
+		let take = {
+			src: config.streamingUrl + takeLoc,
+			markers: markers,
+			name: `${this.props.displayText.take} ${takeNum}, ${this.props.displayText.chunk} ${startv}  (${author} ${this.props.displayText.on} ${date})`,  // in case of other mode like chunk mode or verse mode verify this
+			id: takeLoc,
+			chunk: `${this.props.displayText.chunk} ${startv}`          // in case of a different mode like segment or verse here is assumed that only chunks will be used
+		};
+		return take;
+	}
 
 	playTakeFromCard() {
 
-      if(!this.props.playlistMode){                           // checks if it is on playlist mode, so when is true it does not play audio from the card
-				this.props.stopAudio();
-         const take = this.getTakeInfo();
-		     this.props.playTake(take);
+		if (!this.props.playlistMode) {                           // checks if it is on playlist mode, so when is true it does not play audio from the card
+			this.props.stopAudio();
+			const take = this.getTakeInfo();
+			this.props.playTake(take);
 
-      }
+		}
 
 	}
 
-	removeFromPlaylist(){
-  const takeLocation = this.props.take.location;
+	removeFromPlaylist() {
+		const takeLocation = this.props.take.location;
 
-	this.props.playlist.map((i, index) => {         // loop inside the object to find an unique identifier in order to get the index of the object to proceed and delete it
-		if (i.id === takeLocation){
-			this.props.stopAudio();       // solve bug of removing the take playing,
-			this.props.removeTakeFromPlaylist(index);
-			//this.props.playAudio();
-		}
-	})
+		this.props.playlist.map((i, index) => {         // loop inside the object to find an unique identifier in order to get the index of the object to proceed and delete it
+			if (i.id === takeLocation) {
+				this.props.stopAudio();       // solve bug of removing the take playing,
+				this.props.removeTakeFromPlaylist(index);
+				//this.props.playAudio();
+			}
+		})
 
 	}
 
 
 	addToPlaylist() {
-
 		const take = this.getTakeInfo();
 
-					if(!this.props.playlistMode){                        // the first time called the function playlist mode is false so we clear the playlist info from the single take mode
-								this.props.clearPlaylist();
-						 }
+		if (!this.props.playlistMode) {                        // the first time called the function playlist mode is false so we clear the playlist info from the single take mode
+			this.props.clearPlaylist();
+		}
+
+		if (this.state.addButtonIcon !== "plus") {
+			this.setState({ addButtonIcon: "plus" });
+			this.removeFromPlaylist();
+
+			if (this.props.playlist.length < 1) {
+				this.props.multipleTakes(false);
+				this.props.playTake(take);          // add the last take played to the playlist
+			}
+
+		}
+		else {
+			this.props.stopAudio();
+			this.setState({ addButtonIcon: "minus", clear: false });
+			this.props.addToPlaylist(take);
+			this.props.multipleTakes(true);         //used to check if there is a playlist so at the end of each take the audio keeps playing until
+			// it reaches the last one
+
+			if (this.props.playlist.length > 1) {   // conditional to do not play the take when it is added the first time to the playlist
+				// this.props.playAudio();
+			}
 
 
 
-
-				if (this.state.addButtonIcon !== "plus") {
-						this.setState({addButtonIcon: "plus"});
-						this.removeFromPlaylist();
-
-						if(this.props.playlist.length <1){
-							this.props.multipleTakes(false);
-							this.props.playTake(take);          // add the last take played to the playlist
-						}
-
-					}
-				else {
-
-            this.props.stopAudio();
-						this.setState({addButtonIcon: "minus", clear:false});
-						this.props.addToPlaylist(take);
-						this.props.multipleTakes(true);         //used to check if there is a playlist so at the end of each take the audio keeps playing until
-			                                              // it reaches the last one
-
-					if(this.props.playlist.length > 1){   // conditional to do not play the take when it is added the first time to the playlist
-					// this.props.playAudio();
-					 }
-
-
-
-					}
+		}
 
 	}
 
@@ -161,7 +155,7 @@ getTakeInfo(){
 									</Grid.Column>
 									<Grid.Column floated="right">
 										<StitchTakesButton
-											onClick={()=> this.addToPlaylist()}
+											onClick={() => this.addToPlaylist()}
 											icon={this.state.addButtonIcon}
 										/>
 									</Grid.Column>
@@ -254,7 +248,7 @@ getTakeInfo(){
 			hour %= 12;
 		}
 
-		return (     `${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`	);
+		return (`${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`);
 	}
 }
 
@@ -272,24 +266,25 @@ const mapStateToProps = state => {
 
 
 
-const{ mode, playlist, playlistMode } = state.updatePlaylist;
-const{ displayText } = state.geolocation;
+	const { mode, playlist, playlistMode } = state.updatePlaylist;
+	const { displayText } = state.geolocation;
 
-return{ mode , playlistMode, playlist, displayText };
+	return { mode, playlistMode, playlist, displayText };
 
 }
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({addToPlaylist,
-		 												 playTake,
-														 multipleTakes,
-														 clearPlaylist,
-													   removeTakeFromPlaylist,
-  												   stopAudio,
-														 updateTime,
-														 playAudio
-													              }, dispatch);
+	return bindActionCreators({
+		addToPlaylist,
+		playTake,
+		multipleTakes,
+		clearPlaylist,
+		removeTakeFromPlaylist,
+		stopAudio,
+		updateTime,
+		playAudio
+	}, dispatch);
 
 };
 

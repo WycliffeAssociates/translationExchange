@@ -86,7 +86,6 @@ export const patchTake = (takeId, patch, success, chunks, updatingDeletedTake) =
                     take => take.take.id === takeId
                 );
                 chunksToSearchIn[chunkToUpdate].takes[takeToUpdate].take = response.data;
-
                 if (success) {
                     setActiveToFalse(chunksToSearchIn[chunkToUpdate].takes[takeToUpdate].take);
                 }
@@ -97,7 +96,7 @@ export const patchTake = (takeId, patch, success, chunks, updatingDeletedTake) =
                 if (error.response) {
                     if (error.response.status === 404) {
                         message = "Sorry, that take doesn't exist!";
-                        updateDeletedChunk(takeId);
+                        updatingDeletedTake(takeId);
                     } else {
                         message = "Something went wrong. Please check your connection and try again.";
                     }
@@ -127,8 +126,42 @@ export const setActiveToFalse = () => {
     }
 };
 export const updateDeletedChunk = (updatedChunk) => {
+    console.log("updated chunk", updatedChunk);
     return {
         type: 'UPDATE_DELETED_CHUNK',
         updatedChunk
+    }
+};
+
+//delete take 
+export const deleteTake = (takeId, success, updatingDeletedTake) => {
+    return function (dispatch) {
+        return axios
+            .delete(config.apiUrl + "takes/" + takeId + "/")
+            .then((response) => {
+                updatingDeletedTake(takeId);
+                if (success) {
+                    dispatch(setActiveToFalse());
+                }
+            }).catch(exception => {
+                let message;
+                if (exception.response) {
+                    if (exception.response.status === 404) {
+                        updatingDeletedTake(takeId);
+                    } else {
+                        message = "Something went wrong. Please check your connection and try again. ";
+                    }
+                } else {
+                    message = "Something went wrong. Please check your connection and try again. ";
+                }
+                dispatch(deleteTakeFailed(message));
+            });
+    };
+}
+
+export function deleteTakeFailed(error) {
+    return {
+        type: 'DELETE_TAKE_FAILED',
+        error
     }
 };
