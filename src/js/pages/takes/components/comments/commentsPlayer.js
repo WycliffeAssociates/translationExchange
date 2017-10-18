@@ -13,14 +13,13 @@ class CommentsPlayer extends Component {
     this.state = {
       play: false,
       pos: 0,
-      audioFile: '',
-      pointer: 1
-
+      audioFile: ''
     };
 
     this.handlePosChange = this.handlePosChange.bind(this);
     this.finishedPlaying = this.finishedPlaying.bind(this);
     this.toggleButton = this.toggleButton.bind(this);
+    this.duration = this.duration.bind(this);
   }
 
 
@@ -37,14 +36,17 @@ class CommentsPlayer extends Component {
 
 
 
-  // duration(e) {
-  //   //this.props.durationTime(e.wavesurfer.getDuration());
-  //
-  //   this.setState({ pos: 0});
-  //
-  //
-  // }
-  //
+  duration(e) {
+    //this.props.durationTime(e.wavesurfer.getDuration());
+
+    if(this.props.pointer > 0 ) {
+
+       this.setState({play: true});
+    }
+ 
+
+  }
+
 
 toggleButton(){
 
@@ -56,6 +58,10 @@ this.setState({play: !this.state.play});
   finishedPlaying() {
 
     this.setState({pos: 0, play: false});
+    if(this.props.loop){
+      this.props.playNext(true);
+
+    }
 
   }
 
@@ -74,7 +80,7 @@ this.setState({play: !this.state.play});
 
     return (
         <div style ={styles.container} >
-        <div style = {{alignSelf: 'center', width: '10%'}} onClick = {this.toggleButton}>
+        <div style = {{alignSelf: 'center', width: '10%', display:'flex', justifyContent:'center'}} onClick = {this.toggleButton}>
            {playPauseBtn}
         </div>
         <div style = {styles.waveformContainer}>
@@ -86,7 +92,7 @@ this.setState({play: !this.state.play});
           onPosChange={this.handlePosChange}
           playing={this.state.play}
           options={{ cursorWidth: 2, progressColor: '#eff0f2', cursorColor: '#3791D5', barWidth: 2, hideScrollbar: true, normalize: true, height: 50, waveColor: '#3791D5' }}
-          //onReady={this.duration}
+          onReady={this.duration}
           onFinish={this.finishedPlaying}
         />
         </div>

@@ -64,7 +64,7 @@ getTakeInfo(){
 		 id: takeLoc,
 		 chunk: `${this.props.displayText.chunk} ${startv}`          // in case of a different mode like segment or verse here is assumed that only chunks will be used
 	 };
-	 console.log("finding chunk",take.chunk);
+	
 	 return take;
 }
 

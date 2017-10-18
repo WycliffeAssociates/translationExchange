@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { Button, Icon, Modal } from 'semantic-ui-react'
-
-import AudioComponent from './AudioComponent';
+import { connect } from "react-redux";
+import {bindActionCreators} from 'redux';
+import {addToPlaylist, UpdateExportPlaylist} from './../../../actions';
 import AudioPlayer from './audioplayer/AudioPlayer';
+import CommentsPlayer from '../components/comments/commentsPlayer.js'
 
 import config from "config/config";
 import axios from 'axios';
@@ -18,10 +20,14 @@ class MarkAsDone extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modalOpen: false
+            modalOpen: false,
+            playList: null,
+            pointer: 0
         }
+  this.playNext = this.playNext.bind(this);
 
     }
+
 
     checkReadyForExport() {
         if (this.props.chunks.length === 0) {
@@ -36,18 +42,21 @@ class MarkAsDone extends Component {
 
     createExportPlaylist() {
         let length = this.props.chunks.length;
-        var playlist = [];
+        let playlist = [];
+
         this.props.chunks.map((chunk) => {
             chunk.takes.map((take) => {
                 if (take.take.is_publish) {
-                    playlist.push({
+                    playlist.push( {
                         "src": config.streamingUrl + take.take.location,
                         "name": this.props.mode + ' ' + chunk.startv + ' (' + (playlist.length + 1) + '/' + length + ')'
                     });
+
                 }
             })
         });
-        return playlist
+        this.props.UpdateExportPlaylist(playlist);
+        return playlist;
     }
 
     changeColor() {
@@ -56,14 +65,38 @@ class MarkAsDone extends Component {
         });
     }
 
-    handleOpen = (e) => this.setState({
-        modalOpen: true,
+    handleOpen = (e) => {
+      const playList = this.createExportPlaylist();
+
+      this.setState({playList, modalOpen: true});
+
+
     }
-    );
-    handleClose = (e) => this.setState({
-        modalOpen: false,
+
+    handleClose = (e) => this.setState({  modalOpen: false  });
+
+    playNext(check){
+
+
+      if(check){
+
+         const playlistLength = this.state.playList.length;
+         const pointer = this.state.pointer;
+
+         if(playlistLength > 1 && pointer < playlistLength - 1) {
+              this.setState({pointer: this.state.pointer + 1});
+            
+           }else{
+            this.setState({pointer: 0})
+           }
+
+
+
+      }
+
+
     }
-    )
+
 
     render() {
         let disableBtn = this.props.chapter.is_publish;
@@ -74,6 +107,7 @@ class MarkAsDone extends Component {
         } else if (crfe) {
             disableBtnState = false;
         }
+
         var ExportButton = <Button onClick={this.handleOpen}
             color={disableBtn === true ? "green" : ""}
             disabled={disableBtnState}
@@ -82,24 +116,41 @@ class MarkAsDone extends Component {
             floated="right">
             <Icon color="white" name="sidebar" />
         </Button>;
+
+
+
+       let audioPlayer ='';
+        if(this.state.modalOpen){
+           audioPlayer =
+            <div style ={styles.audioPlayer}>
+           <CommentsPlayer
+               //audioFile = "http://172.19.145.91/media/dump/1501176679.73d99dfff8-5117-4635-b734-65140995db67/mrk/07/chapter.wav"
+                  audioFile = {this.state.playList[this.state.pointer].src}
+                 playNext = {this.playNext}
+                 loop = {true}
+                 pointer = {this.state.pointer}
+                 length = {this.state.playList.length}
+           />
+           </div>;
+         }
+
+       console.log(this.state.pointer);
         return (
-            <Modal trigger={ExportButton}
+            <Modal  trigger={ExportButton}
                 open={this.state.modalOpen}
                 onClose={this.handleClose}
                 closeIcon="close">
-                <Modal.Header>You are ready to mark Chapter {this.props.chapter.number} as finished!</Modal.Header>
-                <Modal.Content>
-                    <Modal.Description>
+                <Modal.Header style= {styles.modal}>You are ready to mark Chapter {this.props.chapter.number} as finished!</Modal.Header>
+                <Modal.Content style= {styles.modal}>
+                    <Modal.Description style= {styles.modal}>
                         <p>Here is a preview of the takes you have selected to export. This may take a few seconds to
                                 load.</p>
                         <p>To mark as done, click on 'Finish'.</p>
-                        <AudioPlayer
-                            width={850} playlist={this.createExportPlaylist()} loop={true}
-                        />
+                        {audioPlayer}
                     </Modal.Description>
 
                 </Modal.Content>
-                <Modal.Actions>
+                <Modal.Actions style= {styles.modal}>
                     {/*this button will do a call to database to change chapter.exportready to true */}
                     <Button content="Finish" onClick={this.changeColor.bind(this)} />
 
@@ -114,4 +165,39 @@ MarkAsDone.propTypes = {
     chunks: PropTypes.array.isRequired,
     mode: PropTypes.string.isRequired
 };
-export default MarkAsDone;
+
+const styles = {
+  modal:{
+     backgroundColor: '#000',
+     color:'#fff'
+
+  },
+  audioPlayer:{
+    border: '1px solid white',
+    borderRadius: 5,
+    display: 'inline-block',
+    width: '80%'
+
+  }
+
+}
+
+
+const mapDispatchToProps = dispatch => {
+
+  return bindActionCreators({UpdateExportPlaylist}, dispatch);
+
+};
+
+
+const mapStateToProps = state => {
+
+     const{  exportPlaylist,  } = state.updateExportPlaylist;
+
+
+  return{ exportPlaylist };
+
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MarkAsDone);
