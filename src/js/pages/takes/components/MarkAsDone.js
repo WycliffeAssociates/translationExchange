@@ -58,6 +58,10 @@ class MarkAsDone extends Component {
         this.props.onMarkedAsPublish(() => {
             this.handleClose();
         });
+
+
+
+
     }
 
     handleOpen = (e) => {

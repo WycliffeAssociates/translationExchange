@@ -13,6 +13,7 @@ import User from "./js/pages/user/user";
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
 
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -44,7 +45,7 @@ class App extends Component {
 					<Route path="*" component={NotFound} />
 				</Switch>
 
-				{/*<Footer/>*/}
+
 			</div>
 		);
 	}

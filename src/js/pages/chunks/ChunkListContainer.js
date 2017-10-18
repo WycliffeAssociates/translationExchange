@@ -13,6 +13,7 @@ import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
 import { addToPlaylist, playTake, stopAudio, fetchChunks, setSourceProject, resetInfo } from './../../actions';
+import {notify} from 'react-notify-toast';
 
 class ChunkListContainer extends Component {
 	componentWillUnmount() {
@@ -230,6 +231,8 @@ class ChunkListContainer extends Component {
 					});
 				}
 				success();
+				let myColor = { background: '#50f442', text: "#FFFFFF" };
+				notify.show("Saved", "custom", 1500, myColor);
 			})
 			.catch(exception => {
 				alert(

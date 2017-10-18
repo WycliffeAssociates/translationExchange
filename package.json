@@ -29,6 +29,7 @@
 		"react-file-input": "^0.2.5",
 		"react-howler": "^3.6.2",
 		"react-mic": "^7.1.6",
+		"react-notify-toast": "^0.3.2",
 		"react-rating": "^0.8.1",
 		"react-read-more": "^1.0.0",
 		"react-redux": "^5.0.6",
