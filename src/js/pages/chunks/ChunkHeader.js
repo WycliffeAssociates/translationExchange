@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-
 import MarkAsDone from "../takes/components/MarkAsDone";
 import SetSourceAudio from "../takes/components/SetSourceAudio";
 import RecordButton from "../takes/components/comments/RecordButton";

@@ -117,9 +117,6 @@ const styles = {
 
   container:{
     display: 'flex',
-    alignContent: 'space-between',
-    width: '80%',
-    position: 'relative',
     alignSelf: 'center',
     flex: '1 1 auto',
     marginLeft: '1%'
