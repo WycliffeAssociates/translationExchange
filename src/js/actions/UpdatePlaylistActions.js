@@ -1,4 +1,4 @@
-import { UPDATE_PLAYLIST, MULTIPLE_TAKES, UPDATE_MODE, PLAY_TAKE, CLEAR_PLAYLIST, REMOVE_TAKE_FROM_PLAYLIST, TAKE_ID, UPDATE_EXPORT_PLAYLIST } from './types';
+import { UPDATE_PLAYLIST, MULTIPLE_TAKES, UPDATE_MODE, PLAY_TAKE, CLEAR_PLAYLIST, REMOVE_TAKE_FROM_PLAYLIST, TAKE_ID} from './types';
 
 
 export const playTake = (take) => {
@@ -41,7 +41,6 @@ export const multipleTakes = (status) => {             // boolean to check if th
 
 
 export const removeTakeFromPlaylist = (index) => {
-
   return {
     type: REMOVE_TAKE_FROM_PLAYLIST,
     index
@@ -54,15 +53,4 @@ export const takeId = (id) => {
     type: TAKE_ID,
     id
   }
-
-};
-
-
-export const UpdateExportPlaylist = (playlist) => {
-  return {
-    type: UPDATE_EXPORT_PLAYLIST,
-    playlist
-  }
-
-
 };

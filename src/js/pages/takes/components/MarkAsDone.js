@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { Button, Icon, Modal } from 'semantic-ui-react'
-import { connect } from "react-redux";
-import {bindActionCreators} from 'redux';
-import {addToPlaylist, UpdateExportPlaylist} from './../../../actions';
 import AudioPlayer from './audioplayer/AudioPlayer';
 import CommentsPlayer from '../components/comments/commentsPlayer.js'
-
 import config from "config/config";
 import axios from 'axios';
 
@@ -25,7 +21,6 @@ class MarkAsDone extends Component {
             pointer: 0
         }
   this.playNext = this.playNext.bind(this);
-
     }
 
 
@@ -55,7 +50,7 @@ class MarkAsDone extends Component {
                 }
             })
         });
-        this.props.UpdateExportPlaylist(playlist);
+
         return playlist;
     }
 
@@ -67,17 +62,12 @@ class MarkAsDone extends Component {
 
     handleOpen = (e) => {
       const playList = this.createExportPlaylist();
-
       this.setState({playList, modalOpen: true});
-
-
-    }
+       }
 
     handleClose = (e) => this.setState({  modalOpen: false  });
 
     playNext(check){
-
-
       if(check){
 
          const playlistLength = this.state.playList.length;
@@ -85,58 +75,68 @@ class MarkAsDone extends Component {
 
          if(playlistLength > 1 && pointer < playlistLength - 1) {
               this.setState({pointer: this.state.pointer + 1});
-            
+
            }else{
             this.setState({pointer: 0})
            }
-
-
-
       }
-
 
     }
 
 
+
+  audioPlayer (){
+    if(this.state.modalOpen){
+         return(
+         <div style={{display:'flex'}}>
+          <div style ={styles.audioPlayer}>
+            <CommentsPlayer
+             //audioFile = "http://172.19.145.91/media/dump/1501176679.73d99dfff8-5117-4635-b734-65140995db67/mrk/07/chapter.wav"
+                audioFile = {this.state.playList[this.state.pointer].src}
+               playNext = {this.playNext}
+               loop = {true}
+               pointer = {this.state.pointer}
+               length = {this.state.playList.length}
+             />
+           </div>
+           <div style ={styles.nameContainer}>
+           {this.state.playList[this.state.pointer].name}
+           </div>
+         </div>);
+     }
+     else{
+      return ''
+      }
+  }
+
+
+  exportButton(){
+    let disableBtn = this.props.chapter.is_publish;
+    let crfe = this.checkReadyForExport();
+    let disableBtnState;
+    if (disableBtn === crfe) {
+        disableBtnState = true;
+    } else if (crfe) {
+        disableBtnState = false;
+    }
+
+    return(
+       <Button onClick={this.handleOpen}
+        color={disableBtn === true ? "green" : ""}
+        disabled={disableBtnState}
+        className="icon"
+        icon="share"
+        floated="right">
+        <Icon color="white" name="sidebar" />
+    </Button>
+   );
+
+  }
+
+
     render() {
-        let disableBtn = this.props.chapter.is_publish;
-        let crfe = this.checkReadyForExport();
-        let disableBtnState;
-        if (disableBtn === crfe) {
-            disableBtnState = true;
-        } else if (crfe) {
-            disableBtnState = false;
-        }
-
-        var ExportButton = <Button onClick={this.handleOpen}
-            color={disableBtn === true ? "green" : ""}
-            disabled={disableBtnState}
-            className="icon"
-            icon="share"
-            floated="right">
-            <Icon color="white" name="sidebar" />
-        </Button>;
-
-
-
-       let audioPlayer ='';
-        if(this.state.modalOpen){
-           audioPlayer =
-            <div style ={styles.audioPlayer}>
-           <CommentsPlayer
-               //audioFile = "http://172.19.145.91/media/dump/1501176679.73d99dfff8-5117-4635-b734-65140995db67/mrk/07/chapter.wav"
-                  audioFile = {this.state.playList[this.state.pointer].src}
-                 playNext = {this.playNext}
-                 loop = {true}
-                 pointer = {this.state.pointer}
-                 length = {this.state.playList.length}
-           />
-           </div>;
-         }
-
-       console.log(this.state.pointer);
         return (
-            <Modal  trigger={ExportButton}
+            <Modal  trigger={this.exportButton()}
                 open={this.state.modalOpen}
                 onClose={this.handleClose}
                 closeIcon="close">
@@ -146,14 +146,13 @@ class MarkAsDone extends Component {
                         <p>Here is a preview of the takes you have selected to export. This may take a few seconds to
                                 load.</p>
                         <p>To mark as done, click on 'Finish'.</p>
-                        {audioPlayer}
+                        {this.audioPlayer()}
                     </Modal.Description>
 
                 </Modal.Content>
                 <Modal.Actions style= {styles.modal}>
                     {/*this button will do a call to database to change chapter.exportready to true */}
-                    <Button content="Finish" onClick={this.changeColor.bind(this)} />
-
+                    <Button content="Export" onClick={this.changeColor.bind(this)} />
                 </Modal.Actions>
             </Modal>
         );
@@ -177,27 +176,15 @@ const styles = {
     borderRadius: 5,
     display: 'inline-block',
     width: '80%'
+  },
+  nameContainer:{
+   display: 'flex',
+   flex: 1,
+   justifyContent: 'center',
+   alignSelf:'center'
 
   }
-
 }
 
 
-const mapDispatchToProps = dispatch => {
-
-  return bindActionCreators({UpdateExportPlaylist}, dispatch);
-
-};
-
-
-const mapStateToProps = state => {
-
-     const{  exportPlaylist,  } = state.updateExportPlaylist;
-
-
-  return{ exportPlaylist };
-
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(MarkAsDone);
+export default MarkAsDone;
