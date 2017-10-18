@@ -10,6 +10,7 @@ import ProjectsListContainerReducer from './ProjectsListContinerReducer';
 import ChunkListContainerReducer from './ChunkListContainerReducer';
 import SourceAudioReducer from './SourceAudioReducer';
 
+
 export default combineReducers({
   setAudioPlayerState: AudioPlayerReducer,
   homeRecentProjects: homeRecentProjects,
@@ -19,5 +20,6 @@ export default combineReducers({
   direction: DirectionReducer,
   projectsListContainer: ProjectsListContainerReducer,
   chunkListContainer: ChunkListContainerReducer,
-  sourceAudio: SourceAudioReducer
+  sourceAudio: SourceAudioReducer,
+
 });

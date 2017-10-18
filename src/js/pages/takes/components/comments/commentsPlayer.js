@@ -12,15 +12,13 @@ class CommentsPlayer extends Component {
 
     this.state = {
       play: false,
-      pos: 0,
-      audioFile: '',
-      pointer: 1
-
+      pos: 0
     };
 
     this.handlePosChange = this.handlePosChange.bind(this);
     this.finishedPlaying = this.finishedPlaying.bind(this);
     this.toggleButton = this.toggleButton.bind(this);
+    this.duration = this.duration.bind(this);
   }
 
 
@@ -31,31 +29,30 @@ class CommentsPlayer extends Component {
     });
 
 
-
-
   }
 
 
+  duration(e) {
 
-  // duration(e) {
-  //   //this.props.durationTime(e.wavesurfer.getDuration());
-  //
-  //   this.setState({ pos: 0});
-  //
-  //
-  // }
-  //
+    if(this.props.pointer > 0 ) {
+
+       this.setState({play: true});
+     }
+  }
+
 
 toggleButton(){
-
 this.setState({play: !this.state.play});
-
 }
 
 
   finishedPlaying() {
 
     this.setState({pos: 0, play: false});
+    if(this.props.loop){
+      this.props.playNext(true);
+
+    }
 
   }
 
@@ -74,19 +71,17 @@ this.setState({play: !this.state.play});
 
     return (
         <div style ={styles.container} >
-        <div style = {{alignSelf: 'center', width: '10%'}} onClick = {this.toggleButton}>
+        <div style = {{alignSelf: 'center', width: '10%', display:'flex', justifyContent:'center'}} onClick = {this.toggleButton}>
            {playPauseBtn}
         </div>
         <div style = {styles.waveformContainer}>
         <Wavesurfer
           audioFile ={this.props.audioFile}
-          //audioFile="http://172.19.145.91/media/dump/1501176679.73d99dfff8-5117-4635-b734-65140995db67/mrk/07/chapter.wav"
-          //audioFile="https://files.freemusicarchive.org/music%2Fno_curator%2FThe_Womb%2FBang_-_An_Introduction_to_The_Womb%2FThe_Womb_-_02_-_Sex_Club.mp3"
           pos={position}
           onPosChange={this.handlePosChange}
           playing={this.state.play}
           options={{ cursorWidth: 2, progressColor: '#eff0f2', cursorColor: '#3791D5', barWidth: 2, hideScrollbar: true, normalize: true, height: 50, waveColor: '#3791D5' }}
-          //onReady={this.duration}
+          onReady={this.duration}
           onFinish={this.finishedPlaying}
         />
         </div>
@@ -130,13 +125,8 @@ const styles = {
     marginLeft: '1%'
   },
   waveformContainer:{
-
     width: '90%',
     marginRight: '2%'
-
-
-
-
   }
 
 };
