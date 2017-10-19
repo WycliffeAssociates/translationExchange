@@ -14,7 +14,7 @@ export default (state = INITIAL_STATE, action) => {
             };
         case "SOURCE_AUDIO_FAILED":
             return {
-                ...state, error: action.err
+                ...state, error: action.err, loaded: true
             }
         case "SOURCE_AUDIO_LOADING":
             return {
