@@ -28,12 +28,12 @@ class TakeTable extends Component {
 								{this.props.icon}
 								{this.props.deleteButton && this.props.orderedTakes.length > 0
 									? <Button
-											floated="left"
-											icon
-											onClick={this.deleteAllColumnTakes.bind(this)}
-										>
-											<Icon name="trash" color="red" />
-										</Button>
+										floated="left"
+										icon
+										onClick={this.deleteAllColumnTakes.bind(this)}
+									>
+										<Icon name="trash" color="red" />
+									</Button>
 									: ""}
 							</Table.HeaderCell>
 						</Table.Row>
@@ -60,7 +60,7 @@ class TakeTable extends Component {
 }
 function arraysEqual(arr1, arr2) {
 	if (arr1.length !== arr2.length) return false;
-	for (var i = arr1.length; i--; ) {
+	for (var i = arr1.length; i--;) {
 		if (arr1[i] !== arr2[i]) return false;
 	}
 
