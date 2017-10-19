@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import TakePropTypes from "./components/TakePropTypes";
-import Take from "./components/Take";
+import TakePropTypes from "./TakePropTypes";
+import Take from "./Take";
 import { findDOMNode } from "react-dom";
 import { DragSource, DropTarget } from "react-dnd";
 import flow from "lodash/flow";

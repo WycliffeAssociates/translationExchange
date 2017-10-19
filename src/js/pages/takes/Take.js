@@ -7,8 +7,8 @@ import { Grid, Segment } from "semantic-ui-react";
 import TakeListenButton from "./AddTake";
 import "css/takes.css";
 import StitchTakesButton from "./StitchTakesButton";
-import TakeCommentsButton from "./comments/TakeCommentsButton";
-import { addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio } from './../../../actions';
+import TakeCommentsButton from "./components/comments/TakeCommentsButton";
+import { addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio } from './../../actions';
 
 class Take extends Component {
 	constructor(props) {

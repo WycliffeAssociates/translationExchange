@@ -99,30 +99,6 @@ class ChunkListContainer extends Component {
 	deleteTake(takeId, success) {
 		if (window.confirm("Delete this take?")) {
 			this.props.deleteTake(takeId, success, this.updatingDeletedTake.bind(this));
-			// axios
-			// 	.delete(config.apiUrl + "takes/" + takeId + "/")
-			// 	.then(results => {
-			// 		this.updatingDeletedTake(takeId);
-			// 		if (success) {
-			// 			success();
-			// 		}
-			// 	})
-			// 	.catch(exception => {
-			// 		if (exception.response) {
-			// 			if (exception.response.status === 404) {
-			// 				this.updatingDeletedTake(takeId);
-			// 			} else {
-			// 				alert(
-			// 					"Something went wrong. Please check your connection and try again. "
-			// 				);
-			// 			}
-			// 		} else {
-			// 			//timeout error doesn't produce response
-			// 			alert(
-			// 				"Something went wrong. Please check your connection and try again. "
-			// 			);
-			// 		}
-			// 	});
 		}
 	}
 
@@ -316,30 +292,30 @@ class ChunkListContainer extends Component {
 		/*
         takesForChunk is an array of takes for each chunk
          */
-	//	if (chunk.takes.length > 0) {
-			return (
-				<div>
-					<Chunk
-						comments={chunk.comments}
-						takesForChunk={chunk.takes} // array of takes
-						mode={this.props.project.mode}
-						number={chunk.startv}
-						patchTake={this.patchTake.bind(this)}
-						deleteTake={this.deleteTake.bind(this)}
-						updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
-						onClickSave={this.onClickSave.bind(this)}
-						id={chunk.id}
-						deleteComment={this.deleteComment.bind(this)}
-						loaded={this.props.loaded}
-						book={this.props.book.name}
-						language={this.props.language.name}
-						onSourceClicked={this.onSourceClicked.bind(this)}
-						active={this.props.active}
-						displayText={this.props.displayText}
-					/>
-				</div>
-			);
-	//	}
+		//	if (chunk.takes.length > 0) {
+		return (
+			<div>
+				<Chunk
+					comments={chunk.comments}
+					takesForChunk={chunk.takes} // array of takes
+					mode={this.props.project.mode}
+					number={chunk.startv}
+					patchTake={this.patchTake.bind(this)}
+					deleteTake={this.deleteTake.bind(this)}
+					updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
+					onClickSave={this.onClickSave.bind(this)}
+					id={chunk.id}
+					deleteComment={this.deleteComment.bind(this)}
+					loaded={this.props.loaded}
+					book={this.props.book.name}
+					language={this.props.language.name}
+					onSourceClicked={this.onSourceClicked.bind(this)}
+					active={this.props.active}
+					displayText={this.props.displayText}
+				/>
+			</div>
+		);
+		//	}
 	}
 }
 
