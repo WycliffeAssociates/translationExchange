@@ -24,7 +24,8 @@ import {
 	patchTake,
 	updateDeletedChunk,
 	deleteTake,
-	chapterUpdate
+	chapterUpdate,
+	deleteComment
 } from './../../actions';
 
 class ChunkListContainer extends Component {
@@ -63,7 +64,7 @@ class ChunkListContainer extends Component {
 			].takes[takeToUpdate].comments.filter(
 				comment => comment.comment.id !== commentId
 				);
-				this.props.updateDeletedChunk(updatedChunks);
+			this.props.updateDeletedChunk(updatedChunks);
 		} else if (type === "chunk") {
 			for (var i = 0; i < updatedChunks.length; i++) {
 				if (updatedChunks[i].id === takeId) {
@@ -73,7 +74,7 @@ class ChunkListContainer extends Component {
 			updatedChunks[chunkToUpdate].comments = updatedChunks[
 				chunkToUpdate
 			].comments.filter(comment => comment.comment.id !== commentId);
-       this.props.updateDeletedChunk(updatedChunks);
+			this.props.updateDeletedChunk(updatedChunks);
 		} else if (type === "chapter") {
 			let updatedChapter = Object.assign({}, this.props.chapter);
 
@@ -99,27 +100,7 @@ class ChunkListContainer extends Component {
 	}
 
 	deleteComment(type, commentId, takeId) {
-		axios
-			.delete(config.apiUrl + "comments/" + commentId + "/")
-			.then(results => {
-				this.updatingDeletedComment(type, commentId, takeId);
-			})
-			.catch(exception => {
-				if (exception.response) {
-					if (exception.response.status === 404) {
-						this.updatingDeletedComment(type, commentId, takeId);
-					} else {
-						alert(
-							"Something went wrong. Please check your connection and try again."
-						);
-					}
-				} else {
-					//timeout error doesn't produce response
-					alert(
-						"Something went wrong. Please check your connection and try again."
-					);
-				}
-			});
+		this.props.deleteComment(type, commentId, takeId, this.updatingDeletedComment.bind(this));
 	}
 
 	onClickSave(blobx, type, id, success) {
@@ -338,7 +319,8 @@ const mapDispatchToProps = dispatch => {
 			patchTake,
 			updateDeletedChunk,
 			deleteTake,
-			chapterUpdate
+			chapterUpdate,
+			deleteComment
 		}, dispatch);
 };
 

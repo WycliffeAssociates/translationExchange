@@ -169,7 +169,37 @@ export function deleteTakeFailed(error) {
 
 export const chapterUpdate = (chapter) => {
     return {
-         type: 'CHAPTER_UPDATE',
-         chapter
-        };
+        type: 'CHAPTER_UPDATE',
+        chapter
     };
+};
+
+//delete comment
+export const deleteComment = (type, commentId, takeId, updatingDeletedComment) => {
+    return function (dispatch) {
+        return axios
+            .delete(config.apiUrl + "comments/" + commentId + "/")
+            .then((response) => {
+                updatingDeletedComment(type, commentId, takeId);
+            }).catch(exception => {
+                let message;
+                if (exception.response) {
+                    if (exception.response.status === 404) {
+                        updatingDeletedComment(type, commentId, takeId);
+                    } else {
+                        message = "Something went wrong. Please check your connection and try again. ";
+                    }
+                } else {
+                    message = "Something went wrong. Please check your connection and try again. ";
+                }
+                dispatch(deleteCommentFailed(message));
+            });
+    };
+}
+
+export function deleteCommentFailed(error) {
+    return {
+        type: 'DELETE_COMMENT_FAILED',
+        error
+    }
+};

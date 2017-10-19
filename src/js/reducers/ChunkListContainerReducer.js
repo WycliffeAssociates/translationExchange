@@ -61,6 +61,9 @@ export default (state = INITIAL_STATE, action) => {
 
         case 'DELETE_TAKE_FAILED':
             return { ...state, error: action.error }
+            
+        case 'DELETE_COMMENT_FAILED':
+            return { ...state, error: action.error }
 
         case 'RESET_STATE':
             return INITIAL_STATE;
