@@ -292,6 +292,9 @@ class ChunkListContainer extends Component {
 		/*
         takesForChunk is an array of takes for each chunk
          */
+		/**
+		 * TODO: discuss if the empty list be show or not(Chunks without takes)
+		 */
 		//	if (chunk.takes.length > 0) {
 		return (
 			<div>
