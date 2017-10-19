@@ -50,11 +50,11 @@ export default (state = INITIAL_STATE, action) => {
             ...state, chunks: action.updatedChunk
         }
 
-        // case 'DELETE_CHUNK':
-        //     return {
-        //         ...state,
-        //         chunks: state.chunks.filter(c => c.id !== action.id)
-        //     }
+        case 'CHAPTER_UPDATE':
+            return {
+                ...state,
+                chapter: action.chapter
+            }
 
         case 'PATCH_TAKE_FAILED':
             return { ...state, error: action.error };

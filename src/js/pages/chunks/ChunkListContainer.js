@@ -23,13 +23,13 @@ import {
 	resetInfo,
 	patchTake,
 	updateDeletedChunk,
-	deleteTake
+	deleteTake,
+	chapterUpdate
 } from './../../actions';
 
 class ChunkListContainer extends Component {
 	componentWillUnmount() {
 		this.props.resetInfo();
-
 	}
 
 	componentWillMount() {
@@ -63,9 +63,7 @@ class ChunkListContainer extends Component {
 			].takes[takeToUpdate].comments.filter(
 				comment => comment.comment.id !== commentId
 				);
-			this.setState({
-				chunks: updatedChunks
-			});
+				this.props.updateDeletedChunk(updatedChunks);
 		} else if (type === "chunk") {
 			for (var i = 0; i < updatedChunks.length; i++) {
 				if (updatedChunks[i].id === takeId) {
@@ -75,18 +73,14 @@ class ChunkListContainer extends Component {
 			updatedChunks[chunkToUpdate].comments = updatedChunks[
 				chunkToUpdate
 			].comments.filter(comment => comment.comment.id !== commentId);
-			this.setState({
-				chunks: updatedChunks
-			});
+       this.props.updateDeletedChunk(updatedChunks);
 		} else if (type === "chapter") {
 			let updatedChapter = Object.assign({}, this.props.chapter);
 
 			updatedChapter.comments = updatedChapter.comments.filter(
 				comment => comment.comment.id !== commentId
 			);
-			this.setState({
-				chapter: updatedChapter
-			});
+			this.props.chapterUpdate(updatedChapter);
 		}
 	}
 
@@ -101,30 +95,6 @@ class ChunkListContainer extends Component {
 	deleteTake(takeId, success) {
 		if (window.confirm("Delete this take?")) {
 			this.props.deleteTake(takeId, success, this.updatingDeletedTake.bind(this));
-			// axios
-			// 	.delete(config.apiUrl + "takes/" + takeId + "/")
-			// 	.then(results => {
-			// 		this.updatingDeletedTake(takeId);
-			// 		if (success) {
-			// 			success();
-			// 		}
-			// 	})
-			// 	.catch(exception => {
-			// 		if (exception.response) {
-			// 			if (exception.response.status === 404) {
-			// 				this.updatingDeletedTake(takeId);
-			// 			} else {
-			// 				alert(
-			// 					"Something went wrong. Please check your connection and try again. "
-			// 				);
-			// 			}
-			// 		} else {
-			// 			//timeout error doesn't produce response
-			// 			alert(
-			// 				"Something went wrong. Please check your connection and try again. "
-			// 			);
-			// 		}
-			// 	});
 		}
 	}
 
@@ -367,7 +337,8 @@ const mapDispatchToProps = dispatch => {
 			resetInfo,
 			patchTake,
 			updateDeletedChunk,
-			deleteTake
+			deleteTake,
+			chapterUpdate
 		}, dispatch);
 };
 

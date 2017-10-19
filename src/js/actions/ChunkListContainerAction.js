@@ -133,7 +133,7 @@ export const updateDeletedChunk = (updatedChunk) => {
     }
 };
 
-//delete take 
+//delete take
 export const deleteTake = (takeId, success, updatingDeletedTake) => {
     return function (dispatch) {
         return axios
@@ -165,3 +165,11 @@ export function deleteTakeFailed(error) {
         error
     }
 };
+
+
+export const chapterUpdate = (chapter) => {
+    return {
+         type: 'CHAPTER_UPDATE',
+         chapter
+        };
+    };
