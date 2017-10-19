@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import ChapterContainer from "./js/pages/takes/ChapterContainer";
+import ChunkListContainer from "./js/pages/chunks/ChunkListContainer";
 import ProjectsListContainer from "./js/pages/projects/ProjectsListContainer";
 import ChaptersContainer from "./js/pages/chapters/ChaptersContainer";
 import "./App.css";
@@ -17,6 +17,7 @@ import { default as TouchBackend } from 'react-dnd-touch-backend';
 //import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch'; // or any other pipeline
 //import MultiBackend, {  TouchTransition } from 'react-dnd-multi-backend';
 //import objectAssign from 'object-assign';
+
 
 
 
@@ -46,12 +47,12 @@ class App extends Component {
 					<Route exact path="/about" component={About} />
 					<Route exact path="/projects" component={ProjectsListContainer} />
 					<Route exact path="/chapters" component={ChaptersContainer} />
-					<Route exact path="/takes" component={ChapterContainer} />
+					<Route exact path="/takes" component={ChunkListContainer} />
 					<Route exact path="/user" component={User} />
 					<Route path="*" component={NotFound} />
 				</Switch>
 
-				{/*<Footer/>*/}
+
 			</div>
 		);
 	}

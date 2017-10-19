@@ -1,6 +1,5 @@
 import axios from "axios";
 import config from "../../config/config";
-import QueryString from "query-string";
 
 //chaptersContainer
 
@@ -20,8 +19,8 @@ export const fetchChaptersContainerData = (query) => {
 export function fetchChaptersContainerDataSuccess(response) {
     return {
         type: 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS',
-        response,
         chapters: response.chapters,
+        version:response.version,
         book: response.book,
         project_id: response.project_id,
         is_publish: response.is_publish,

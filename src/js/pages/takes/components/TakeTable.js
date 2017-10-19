@@ -11,7 +11,7 @@ class TakeTable extends Component {
 	deleteAllColumnTakes() {
 		//get a list of the take ID's to delete
 		let takesToDelete = [];
-		this.props.PLAYLIST.map(take => {
+		this.props.orderedTakes.map(take => {
 			takesToDelete.push(take.take.id);
 		});
 
@@ -32,7 +32,7 @@ class TakeTable extends Component {
 						<Table.Row>
 							<Table.HeaderCell>
 								{this.props.icon}
-								{this.props.deleteButton && this.props.PLAYLIST.length > 0
+								{this.props.deleteButton && this.props.orderedTakes.length > 0
 									? <Button
 											floated="left"
 											icon
@@ -46,7 +46,7 @@ class TakeTable extends Component {
 					</Table.Header>
 					<Table.Cell className="ChunkTitle">
 						<TakeList
-							takes={this.props.PLAYLIST}
+							takes={this.props.orderedTakes}
 							addToListenList={this.props.addToListenList}
 							patchTake={this.props.patchTake}
 							deleteTake={this.props.deleteTake}

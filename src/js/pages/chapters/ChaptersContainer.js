@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Container, Header, Table } from "semantic-ui-react";
+import { Container, Table } from "semantic-ui-react";
 import ChapterList from "./components/ChapterList";
 import DownloadProjects from "./components/DownloadProjects";
-import axios from "axios";
-import config from "config/config";
 import QueryString from "query-string";
 import LoadingTinyGif from "images/loading-tiny.gif";
 import "css/chapters.css";
@@ -63,7 +61,7 @@ class ChaptersContainer extends Component {
 			);
 		} else {
 			return (
-				<div className="chapters">
+				<div className="chapters" style={{ direction:`${this.props.direction}` }} >
 					<Container fluid>
 						<h1>
 							{this.props.book.name} ({this.props.language.name})
@@ -71,6 +69,7 @@ class ChaptersContainer extends Component {
 								isPublish={this.props.is_publish}
 								downloadLoadingSourceAudio={this.props.downloadLoadingSourceAudio}
 								onDownloadSourceAudio={this.onDownloadSourceAudio.bind(this)}
+								displayText={this.props.displayText}
 							/>
 							<PublishButton
 								chapters={this.props.chapters}
@@ -101,11 +100,13 @@ class ChaptersContainer extends Component {
 								navigateToChapter={this.navigateToChapter.bind(this)}
 								setCheckingLevel={this.setCheckingLevel.bind(this)}
 								projectIsPublish={this.props.is_publish}
+								displayText={this.props.displayText}
 							/>
 						</Table>
 
 						<DownloadProjects
 							onDownloadProject={this.onDownloadProject.bind(this)}
+							displayText={this.props.displayText}
 						/>
 
 						{this.props.downloadLoading &&
@@ -133,6 +134,7 @@ class ChaptersContainer extends Component {
 
 const mapStateToProps = state => {
 
+const {direction} = state.direction;
 	const { displayText } = state.geolocation;
 	const { chapters, book, project_id, is_publish,
 		language, loaded, downloadLoading,
@@ -144,7 +146,8 @@ const mapStateToProps = state => {
 		loaded, downloadLoading,
 		downloadError, downloadSuccess,
 		downloadLoadingSourceAudio,
-		downloadErrorAudioSource
+		downloadErrorAudioSource,
+		direction
 	};
 
 };

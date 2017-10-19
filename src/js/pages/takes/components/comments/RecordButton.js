@@ -3,6 +3,7 @@ import RecordComment from "./RecordComment";
 import { connect } from "react-redux";
 import "./RecordComment.css";
 import CommentsPlayer from "../comments/commentsPlayer";
+import Notifications from 'react-notify-toast';
 import {
 	Button,
 	Container,
@@ -169,6 +170,7 @@ class RecordButton extends Component {
 
 					</div>
 				</div>
+				<Notifications />
 			</Modal>
 		);
 	}

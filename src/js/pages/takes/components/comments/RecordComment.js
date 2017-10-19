@@ -99,7 +99,7 @@ export class RecordComment extends Component {
 					onSave={this.onSave.bind(this)}
 					active={this.props.loadingActive}
 					hideplayer={this.state.hideplayer}
-					btnText ={this.props.displayText.save}
+					btnText={this.props.displayText.save}
 				/>
 			);
 		}
@@ -123,38 +123,32 @@ export class RecordComment extends Component {
 		}
 
 
-let display = (
-	<ReactMic
-		record={this.state.record}
-		className="sound-wave"
-		onStop={this.onStop}
-		strokeColor="#039BE5"
-		backgroundColor="#000000"
-	/>
+		let display = (
+			<ReactMic
+				record={this.state.record}
+				className="sound-wave"
+				onStop={this.onStop}
+				strokeColor="#039BE5"
+				backgroundColor="#000000"
+			/>
 
 
-);
-let saveButton ='';
+		);
+		let saveButton = '';
 
-if(this.state.displayPlayer){
-	display = AudioPlayer;
-
-
-
-}
-
-
-
+		if (this.state.displayPlayer) {
+			display = AudioPlayer;
+		}
 		return (
 			<div>
 
-			    {display}
+				{display}
 
 				<div className="record-stop-button">
 					{MainButton}
 				</div>
 
-				 {saveButton}
+				{saveButton}
 
 			</div>
 		);
@@ -169,29 +163,26 @@ function DisplayAudioPlayer(props) {
 	const id = props.id;
 	const btnText = props.btnText;
 	if (displayPlayer) {
-
 		return (
-			<div style ={style.audioPlayerContainer}>
+			<div style={style.audioPlayerContainer}>
+				<CommentsPlayer
+					audioFile={AudioURL}
+					playAudio={true}
+				/>
 
-					<CommentsPlayer
-						audioFile = {AudioURL}
-						playAudio = {true}
-																 />
-
-
-          <div style ={{ height:'5%', display: 'flex'}} >
+				<div style={{ height: '5%', display: 'flex' }} >
 					{props.active
-						? <img style={{justifyContent:'center', display: 'flex'}} src={LoadingGif} alt="Loading..." width="40" height="40" />
+						? <img style={{ justifyContent: 'center', display: 'flex' }} src={LoadingGif} alt="Loading..." width="40" height="40" />
 						: <Button
-								positive
-								size="small"
-								onClick={() => {
-									props.onSave(type, id, jsonblob, props.onClickSave);
-								}}
-							>
-								{btnText}
-							</Button>}
-				   </div>
+							positive
+							size="small"
+							onClick={() => {
+								props.onSave(type, id, jsonblob, props.onClickSave);
+							}}
+						>
+							{btnText}
+						</Button>}
+				</div>
 			</div>
 		);
 	}
@@ -199,27 +190,27 @@ function DisplayAudioPlayer(props) {
 }
 
 const style = {
-  audioPlayerContainer:{
-		                    width: '95%',
-	                      display: 'flex',
-												alignItems:'center',
-												marginTop: '5%',
-												marginBottom:'5%',
-												marginLeft:'3%',
-												border: '1px solid #eff0f2',
-												borderRadius: '5px'
-											}
+	audioPlayerContainer: {
+		width: '95%',
+		display: 'flex',
+		alignItems: 'center',
+		marginTop: '5%',
+		marginBottom: '5%',
+		marginLeft: '3%',
+		border: '1px solid #eff0f2',
+		borderRadius: '5px'
+	}
 
 };
 
 
 const mapStateToProps = state => {
 
-		const{ displayText } = state.geolocation;
+	const { displayText } = state.geolocation;
 
-		return{displayText};
+	return { displayText };
 
 };
 
 
-export default connect (mapStateToProps) (RecordComment);
+export default connect(mapStateToProps)(RecordComment);
