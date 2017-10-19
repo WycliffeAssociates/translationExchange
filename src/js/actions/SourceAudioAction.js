@@ -20,11 +20,9 @@ export const fetchAllSourceAudio = (book, projectId, setInitialSourceAudio) => {
                             value: projectQuery,
                             text: project.language.name + " (" + project.version + ")"
                         });
+                        setInitialSourceAudio(projects[0].value);
                     }
                 });
-
-                setInitialSourceAudio(projects[0].value);
-
                 dispatch(dispatchSourceAudioReceived(projects));
 
             })

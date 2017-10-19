@@ -16,7 +16,6 @@ class TakeContainer extends Component {
 	onDeleteTake() {
 		this.props.deleteTake(this.props.take.take.id);
 	}
-
 	render() {
 		const { connectDragSource, connectDropTarget } = this.props;
 		return connectDragSource(
@@ -52,7 +51,7 @@ const takeSource = {
 	},
 
 	endDrag(props, monitor) {
-		
+
 		const item = monitor.getItem();
 		const dropResult = monitor.getDropResult();
 		if (dropResult && dropResult.listId !== item.listId) {

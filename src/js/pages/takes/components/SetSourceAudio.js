@@ -15,20 +15,19 @@ class SetSourceAudio extends Component {
     }
 
     render() {
-        console.log("projects", this.props);
         return (
-            <Dropdown
-                search
-                selection
-                floated="right"
-                labeled
-                className="icon"
-                icon="assistive listening systems"
-                value={this.props.selectedSourceProject}
-                loading={!this.props.loaded}
-                options={this.props.projects}
-                onChange={(event, dropdown) => { this.setSource(dropdown.value) }}
-            />
+                <Dropdown
+                    search
+                    selection
+                    floated="right"
+                    labeled
+                    className="icon"
+                    icon="assistive listening systems"
+                    value={this.props.selectedSourceProject}
+                    loading={!this.props.loaded}
+                    options={this.props.projects}
+                    onChange={(event, dropdown) => { this.setSource(dropdown.value) }}
+                />
         );
     }
 }

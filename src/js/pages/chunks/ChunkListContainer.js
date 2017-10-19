@@ -12,8 +12,19 @@ import Chunk from "./Chunk";
 import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
-import { addToPlaylist, playTake, stopAudio, fetchChunks, setSourceProject, resetInfo } from './../../actions';
-import {notify} from 'react-notify-toast';
+import { notify } from 'react-notify-toast';
+
+import {
+	addToPlaylist,
+	playTake,
+	stopAudio,
+	fetchChunks,
+	setSourceProject,
+	resetInfo,
+	patchTake,
+	updateDeletedChunk,
+	deleteTake
+} from './../../actions';
 
 class ChunkListContainer extends Component {
 	componentWillUnmount() {
@@ -34,10 +45,7 @@ class ChunkListContainer extends Component {
 		updatedChunks[chunkToUpdate].takes = updatedChunks[
 			chunkToUpdate
 		].takes.filter(take => take.take.id !== takeId);
-
-		this.setState({
-			chunks: updatedChunks
-		});
+		this.props.updateDeletedChunk(updatedChunks);
 	}
 
 	updatingDeletedComment(type, commentId, takeId) {
@@ -83,48 +91,7 @@ class ChunkListContainer extends Component {
 	}
 
 	patchTake(takeId, patch, success) {
-		axios
-			.patch(config.apiUrl + "takes/" + takeId + "/", patch)
-			.then(results => {
-				//find the take in state that this one corresponds to
-				let updatedChunks = this.props.chunks.slice();
-				let chunkToUpdate = updatedChunks.findIndex(chunk => {
-					return chunk.takes.find(take => take.take.id === takeId);
-				});
-				let takeToUpdate = updatedChunks[chunkToUpdate].takes.findIndex(
-					take => take.take.id === takeId
-				);
-				updatedChunks[chunkToUpdate].takes[takeToUpdate].take = results.data;
-
-				this.setState(
-					{
-						chunks: updatedChunks
-					},
-					() => {
-						if (success) {
-							success(updatedChunks[chunkToUpdate].takes[takeToUpdate].take);
-
-						}
-					}
-				);
-			})
-			.catch(exception => {
-				if (exception.response) {
-					if (exception.response.status === 404) {
-						alert("Sorry, that take doesn't exist!");
-						this.updatingDeletedTake(takeId);
-					} else {
-						alert(
-							"Something went wrong. Please check your connection and try again. "
-						);
-					}
-				} else {
-					//timeout error doesn't produce response
-					alert(
-						"Something went wrong. Please check your connection and try again. "
-					);
-				}
-			});
+		this.props.patchTake(takeId, patch, success, this.props.chunks, this.updatingDeletedTake.bind(this));
 	}
 
 	/*
@@ -133,30 +100,31 @@ class ChunkListContainer extends Component {
 
 	deleteTake(takeId, success) {
 		if (window.confirm("Delete this take?")) {
-			axios
-				.delete(config.apiUrl + "takes/" + takeId + "/")
-				.then(results => {
-					this.updatingDeletedTake(takeId);
-					if (success) {
-						success();
-					}
-				})
-				.catch(exception => {
-					if (exception.response) {
-						if (exception.response.status === 404) {
-							this.updatingDeletedTake(takeId);
-						} else {
-							alert(
-								"Something went wrong. Please check your connection and try again. "
-							);
-						}
-					} else {
-						//timeout error doesn't produce response
-						alert(
-							"Something went wrong. Please check your connection and try again. "
-						);
-					}
-				});
+			this.props.deleteTake(takeId, success, this.updatingDeletedTake.bind(this));
+			// axios
+			// 	.delete(config.apiUrl + "takes/" + takeId + "/")
+			// 	.then(results => {
+			// 		this.updatingDeletedTake(takeId);
+			// 		if (success) {
+			// 			success();
+			// 		}
+			// 	})
+			// 	.catch(exception => {
+			// 		if (exception.response) {
+			// 			if (exception.response.status === 404) {
+			// 				this.updatingDeletedTake(takeId);
+			// 			} else {
+			// 				alert(
+			// 					"Something went wrong. Please check your connection and try again. "
+			// 				);
+			// 			}
+			// 		} else {
+			// 			//timeout error doesn't produce response
+			// 			alert(
+			// 				"Something went wrong. Please check your connection and try again. "
+			// 			);
+			// 		}
+			// 	});
 		}
 	}
 
@@ -350,13 +318,14 @@ class ChunkListContainer extends Component {
 
 	createChunkList(chunk) {
 		/*
-        segments is an array of takes for each chunk
+        takesForChunk is an array of takes for each chunk
          */
+		//	if (chunk.takes.length > 0) {
 		return (
 			<div>
 				<Chunk
 					comments={chunk.comments}
-					segments={chunk.takes} // array of takes
+					takesForChunk={chunk.takes} // array of takes
 					mode={this.props.project.mode}
 					number={chunk.startv}
 					patchTake={this.patchTake.bind(this)}
@@ -368,13 +337,13 @@ class ChunkListContainer extends Component {
 					loaded={this.props.loaded}
 					book={this.props.book.name}
 					language={this.props.language.name}
-					chunks={this.props.chunks}
 					onSourceClicked={this.onSourceClicked.bind(this)}
 					active={this.props.active}
 					displayText={this.props.displayText}
 				/>
 			</div>
 		);
+		//	}
 	}
 }
 
@@ -395,7 +364,10 @@ const mapDispatchToProps = dispatch => {
 			stopAudio,
 			fetchChunks,
 			setSourceProject,
-			resetInfo
+			resetInfo,
+			patchTake,
+			updateDeletedChunk,
+			deleteTake
 		}, dispatch);
 };
 
