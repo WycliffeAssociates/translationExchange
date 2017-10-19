@@ -42,77 +42,84 @@ class TakeContainer extends Component {
 	  }
 
 
+
+dragObject(){
+	const { connectDragSource, connectDropTarget, connectDragPreview, isDragging } = this.props;
+
+
+
+	const style = { opacity: isDragging ? 0 : 1 };
+
+	let content = (
+
+	<div>
+	 <div ref={input => {this.myInput = input}} className="item" style= {style}>
+
+	 <Take
+		 count={this.props.count}
+		 take={this.props.take.take}
+		 author={this.props.take.user}
+		 chunkNumber={this.props.chunkNumber}
+		 ratingLoading={this.state.ratingLoading}
+		 source={this.props.source}
+		 comments={this.props.take.comments}
+		 addToListenList={this.props.addToListenList}
+		 onDeleteTake={this.onDeleteTake.bind(this)}
+		 onClickSave={this.props.onClickSave}
+		 deleteComment={this.props.deleteComment}
+		 active={this.props.active}
+		 mode={this.props.mode}
+		 height= {this.state.height}
+		 width= {this.state.width}
+	 />
+
+	</div>
+	<ItemPreview
+	// count={this.props.count}
+	// take={this.props.take.take}
+	// author={this.props.take.user}
+	// chunkNumber={this.props.chunkNumber}
+	// ratingLoading={this.state.ratingLoading}
+	// source={this.props.source}
+	// comments={this.props.take.comments}
+	// addToListenList={this.props.addToListenList}
+	// onDeleteTake={this.onDeleteTake.bind(this)}
+	// onClickSave={this.props.onClickSave}
+	// deleteComment={this.props.deleteComment}
+	// active={this.props.active}
+	// mode={this.props.mode}
+
+	key="__preview" name="TakeContainer" />
+
+	</div>
+	);
+
+
+
+
+
+
+
+	// Connect as drag source
+		content = connectDragSource(content, { dropEffect: 'move' });
+		// Connect as drop target
+		content = connectDropTarget(content);
+		// Connect to drag layer
+		content = connectDragPreview(content);
+
+
+	return content;
+
+
+
+}
+
+
+
+
 	render() {
-		const { connectDragSource, connectDropTarget, connectDragPreview, isDragging } = this.props;
 
-
-
-    const style = { opacity: isDragging ? 0.7 : 1 };
-
-   let content = (
-
-<div>
-		 <div ref={input => {this.myInput = input}} className="item" style= {style}>
-
-		 <Take
-			 count={this.props.count}
-			 take={this.props.take.take}
-			 author={this.props.take.user}
-			 chunkNumber={this.props.chunkNumber}
-			 ratingLoading={this.state.ratingLoading}
-			 source={this.props.source}
-			 comments={this.props.take.comments}
-			 addToListenList={this.props.addToListenList}
-			 onDeleteTake={this.onDeleteTake.bind(this)}
-			 onClickSave={this.props.onClickSave}
-			 deleteComment={this.props.deleteComment}
-			 active={this.props.active}
-			 mode={this.props.mode}
-			 height= {this.state.height}
-			 width= {this.state.width}
-		 />
-
-	 </div>
-	 <ItemPreview
- 	 count={this.props.count}
- 	 take={this.props.take.take}
- 	 author={this.props.take.user}
- 	 chunkNumber={this.props.chunkNumber}
- 	 ratingLoading={this.state.ratingLoading}
- 	 source={this.props.source}
- 	 comments={this.props.take.comments}
- 	 addToListenList={this.props.addToListenList}
- 	 onDeleteTake={this.onDeleteTake.bind(this)}
- 	 onClickSave={this.props.onClickSave}
- 	 deleteComment={this.props.deleteComment}
- 	 active={this.props.active}
- 	 mode={this.props.mode}
-
- 	key="__preview" name="TakeContainer" />
-
-</div>
- );
-
-
-
-
-
-
-
-	 // Connect as drag source
-			content = connectDragSource(content, { dropEffect: 'move' });
-			// Connect as drop target
-			content = connectDropTarget(content);
-			// Connect to drag layer
-			content = connectDragPreview(content);
-
-
-		return content;
-
-
-
-
-
+		return this.dragObject()
 
 	}
 }

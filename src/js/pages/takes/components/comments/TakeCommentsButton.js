@@ -100,16 +100,6 @@ class TakeCommentsButton extends Component {
 
 	render() {
 
-		let commentsArr = '';
-
-
-	 if(this.props.comments > 0){
-
-		 const arr = this.props.comments.map(this.createPlaylist);
-		 commentsArr =  arr.reverse();
-	 }
-
-
 		return (
 			<Modal
 				size="small"

@@ -5,6 +5,7 @@ import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
 import Take from "./Take";
 import TakeListenButton from "./AddTake";
+import blur from '../../../../images/blur.png'
 
 function collect (monitor) {
     var item = monitor.getItem();
@@ -67,53 +68,62 @@ function ItemPreview ({
 
 
     return (
-      <div style={getItemStyles(currentOffset, rect)}>
-      <Segment>
-        <Grid textAlign="left">
-          <Grid.Row>
-            <Grid.Column width={12}>
-              <Grid.Row verticalAlign="top">
-                <Grid>
-                  <Grid.Column width={11} floated="left">
-                    <font size="3">
-                      <strong>
-                        {"take"} {count} -{" "}
-                      </strong>
-                    </font>
-                    <font size="2" color="grey">
-                      {author
-                        ? author.name
-                        : "Unknown Author"}
-                    </font>
-                  </Grid.Column>
-                  <Grid.Column floated="right">
-                    <StitchTakesButton
-                    />
-                  </Grid.Column>
-                </Grid>
-              </Grid.Row>
+        <div style={getItemStyles(currentOffset, rect)}>
+        <img src={blur} style = {{width: 335, height: 190}}/>
+        </div>
 
-              <Grid.Row>
-                {"date"}
-              </Grid.Row>
-              <Grid.Row className="centerPlayButton">
-                <br />
-                <TakeListenButton
-
-
-
-                />
-              </Grid.Row>
-              <Grid.Row verticalAlign="bottom">
-                <br />
-
-              </Grid.Row>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Segment>
-</div>
     );
+
+
+
+
+//       <div style={getItemStyles(currentOffset, rect)}>
+//       <Segment>
+//         <Grid textAlign="left">
+//           <Grid.Row>
+//             <Grid.Column width={12}>
+//               <Grid.Row verticalAlign="top">
+//                 <Grid>
+//                   <Grid.Column width={11} floated="left">
+//                     <font size="3">
+//                       <strong>
+//                         {"take"} {count} -{" "}
+//                       </strong>
+//                     </font>
+//                     <font size="2" color="grey">
+//                       {author
+//                         ? author.name
+//                         : "Unknown Author"}
+//                     </font>
+//                   </Grid.Column>
+//                   <Grid.Column floated="right">
+//                     <StitchTakesButton
+//                     />
+//                   </Grid.Column>
+//                 </Grid>
+//               </Grid.Row>
+//
+//               <Grid.Row>
+//                 {"date"}
+//               </Grid.Row>
+//               <Grid.Row className="centerPlayButton">
+//                 <br />
+//                 <TakeListenButton
+//
+//
+//
+//                 />
+//               </Grid.Row>
+//               <Grid.Row verticalAlign="bottom">
+//                 <br />
+//
+//               </Grid.Row>
+//             </Grid.Column>
+//           </Grid.Row>
+//         </Grid>
+//       </Segment>
+// </div>
+    // );
 }
 
 ItemPreview.propTypes = {
