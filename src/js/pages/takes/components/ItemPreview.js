@@ -1,10 +1,10 @@
 import React from 'react';
 import DragLayer from 'react-dnd/lib/DragLayer';
 import { Grid, Segment } from "semantic-ui-react";
-import StitchTakesButton from "./StitchTakesButton";
+import StitchTakesButton from "../StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
-import Take from "./Take";
-import TakeListenButton from "./AddTake";
+import Take from "../Take";
+import TakeListenButton from "../AddTake";
 import blur from '../../../../images/blur.png'
 
 function collect (monitor) {

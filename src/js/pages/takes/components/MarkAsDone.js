@@ -129,7 +129,7 @@ class MarkAsDone extends Component {
         return (
             <Button onClick={this.handleOpen}
                 color={disableBtn === true ? "green" : ""}
-                disabled={disableBtnState}
+                disabled={false}
                 className="icon"
                 icon="share"
                 floated="right">
