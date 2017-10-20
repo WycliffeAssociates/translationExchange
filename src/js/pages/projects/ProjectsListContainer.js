@@ -4,7 +4,7 @@ import ProjectsList from "./components/ProjectsList";
 import { connect } from "react-redux";
 import "../../../css/projects.css";
 import ProjectFilter from "./ProjectFilter";
-import NotFound from "js/pages/NotFound";
+import NotFound from "../NotFound";
 import ErrorButton from '../../../js/components/ErrorBytton';
 import LoadingGif from '../../../js/components/LoadingGif';
 import { bindActionCreators } from 'redux';
@@ -59,7 +59,7 @@ class ProjectsListContainer extends Component {
 		**/
 		if (this.props.location.search) {
 			this.props.history.push({ pathname: this.props.location.pathname });
-		}else {
+		} else {
 			this.props.dispatchAllProjectsReset();
 		}
 	}
@@ -93,10 +93,10 @@ class ProjectsListContainer extends Component {
 		if (projectsLoadedButEmpty) {
 			return <NotFound />;
 		} else if (error) {
-			return (<ErrorButton error={error} />);
+			return (<ErrorButton displayText={this.props.displayText} error={error} />);
 		} else if (!loaded) {
 			return (
-				<LoadingGif />
+				<LoadingGif displayText={this.props.displayText} />
 			);
 		} else {
 			return (
