@@ -96,7 +96,7 @@ class ProjectsListContainer extends Component {
 			return (<ErrorButton displayText={this.props.displayText} error={error} />);
 		} else if (!loaded) {
 			return (
-				<LoadingGif displayText={this.props.displayText} />
+				<LoadingGif displayText={this.props.displayText.loading} />
 			);
 		} else {
 			return (
