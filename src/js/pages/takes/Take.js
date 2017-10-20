@@ -195,7 +195,7 @@ class Take extends Component {
 	parseDate(date) {
 		var noon = "am";
 		var dateArr = date.split("T");
-		var date = dateArr[0];
+		date = dateArr[0];
 
 		var time = dateArr[1].split(".");
 		time = time[0].split(":");
@@ -239,7 +239,7 @@ class Take extends Component {
 				break;
 		}
 
-		var hour = parseInt(time[0]);
+		var hour = parseInt(time[0],10);
 		if (hour / 12 > -1) {
 			noon = "pm";
 		}

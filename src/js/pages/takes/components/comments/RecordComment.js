@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { ReactMic } from "react-mic";
-import { Button, Grid, Icon } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 import "./RecordComment.css";
 import LoadingGif from "images/Spinner.gif";
 import CommentsPlayer from "../comments/commentsPlayer";

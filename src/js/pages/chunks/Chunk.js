@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ChunkPropTypes from "./ChunkPropTypes";
-import { connect } from "react-redux";
 import { Accordion, Icon, Grid } from "semantic-ui-react";
 import TakeTable from "../takes/TakeTable";
 import "css/takes.css";

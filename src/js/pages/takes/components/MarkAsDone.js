@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { Button, Icon, Modal } from 'semantic-ui-react'
-import AudioPlayer from './audioplayer/AudioPlayer';
 import CommentsPlayer from '../components/comments/commentsPlayer.js'
 import config from "config/config";
-import axios from 'axios';
 
-
-let handleOpen;
-let handleClose;
 // this is the page for one chapter
 
 class MarkAsDone extends Component {
@@ -123,11 +118,8 @@ class MarkAsDone extends Component {
         } else if (crfe) {
             disableBtnState = false;
         }
-        console.log("disableBtn", disableBtn);
-        console.log("crfe", crfe);
-        console.log("disableBtnState", disableBtnState);
         return (
-            <Button onClick={this.handleOpen}
+            <Button onClick={this.handleOpen.bind(this)}
                 color={disableBtn === true ? "green" : ""}
                 disabled={disableBtnState}
                 className="icon"

@@ -5,13 +5,10 @@ import "./RecordComment.css";
 import CommentsPlayer from "../comments/commentsPlayer";
 import {
 	Button,
-	Container,
-	Grid,
 	Icon,
 	Modal,
 
 } from "semantic-ui-react";
-import Audio from "translation-audio-player";
 import config from "../../../../../config/config";
 import Notifications from 'react-notify-toast';
 
@@ -64,14 +61,14 @@ class TakeCommentsButton extends Component {
 		const src = config.streamingUrl + comment.comment.location
 
 		return (
-			<div style = {styles.container}>
+			<div style={styles.container}>
 
-					<CommentsPlayer
-						audioFile = {src}
-						playAudio = {true}
-																 />
+				<CommentsPlayer
+					audioFile={src}
+					playAudio={true}
+				/>
 
-          <div style ={{display:'flex', alignSelf:'center'}}>
+				<div style={{ display: 'flex', alignSelf: 'center' }}>
 					<Button
 						icon
 						fluid
@@ -85,7 +82,7 @@ class TakeCommentsButton extends Component {
 						<Icon name="trash" />
 					</Button>
 				</div>
-						<Notifications />
+				<Notifications />
 			</div>
 		);
 	}
@@ -99,17 +96,9 @@ class TakeCommentsButton extends Component {
 	};
 
 	render() {
-
-		let commentsArr = '';
-
-
-	 if(this.props.comments > 0){
-
-		 const arr = this.props.comments.map(this.createPlaylist);
-		 commentsArr =  arr.reverse();
-	 }
-
-
+		if (this.props.comments > 0) {
+			this.props.comments.map(this.createPlaylist);
+		}
 		return (
 			<Modal
 				size="small"
@@ -142,12 +131,12 @@ class TakeCommentsButton extends Component {
 						loadingActive={this.props.loadingActive}
 					/>
 				</div>
-				<div style = {{display:'flex', justifyContent:'center', marginTop:'2%', marginBottom:'2%', maxHeight: 350, overflowY: 'scroll' }}>
-					<div style = {{width:'95%', marginTop:'1%' } }>
+				<div style={{ display: 'flex', justifyContent: 'center', marginTop: '2%', marginBottom: '2%', maxHeight: 350, overflowY: 'scroll' }}>
+					<div style={{ width: '95%', marginTop: '1%' }}>
 
-							{this.props.comments.length > 0
-								? this.props.comments.slice(0).reverse().map(this.createPlaylist.bind(this))
-								: ""}
+						{this.props.comments.length > 0
+							? this.props.comments.slice(0).reverse().map(this.createPlaylist.bind(this))
+							: ""}
 
 					</div>
 				</div>
@@ -157,7 +146,7 @@ class TakeCommentsButton extends Component {
 }
 
 const styles = {
-  container:{
+	container: {
 		width: '100%',
 		display: 'flex',
 		border: '1px solid white',
@@ -165,16 +154,16 @@ const styles = {
 		marginBottom: 4
 
 
-  }
+	}
 };
 
 const mapStateToProps = state => {
 
-const{ displayText } = state.geolocation;
+	const { displayText } = state.geolocation;
 
-return{displayText};
+	return { displayText };
 
 };
 
 
-export default connect (mapStateToProps) (TakeCommentsButton);
+export default connect(mapStateToProps)(TakeCommentsButton);

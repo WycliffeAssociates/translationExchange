@@ -6,21 +6,10 @@ import CommentsPlayer from "../comments/commentsPlayer";
 import Notifications from 'react-notify-toast';
 import {
 	Button,
-	Container,
-	Grid,
-	Header,
 	Icon,
-	Image,
-	Modal,
-	ModalHeader
+	Modal
 } from "semantic-ui-react";
-import Audio from "translation-audio-player";
 import config from "../../../../../config/config";
-
-// NOTE: (dmarchuk)
-let onClickCancel;
-let onClickSave;
-let Style;
 
 class RecordButton extends Component {
 	constructor(props) {
@@ -89,14 +78,14 @@ class RecordButton extends Component {
 		const src = config.streamingUrl + comment.comment.location;
 
 		return (
-			<div key ={comment.comment.id} style = {styles.container}>
+			<div key={comment.comment.id} style={styles.container}>
 
-					<CommentsPlayer
-						audioFile = {src}
-						playAudio = {true}
-																 />
+				<CommentsPlayer
+					audioFile={src}
+					playAudio={true}
+				/>
 
-          <div style ={{display:'flex', alignSelf:'center'}}>
+				<div style={{ display: 'flex', alignSelf: 'center' }}>
 					<Button
 						icon
 						negative
@@ -112,7 +101,7 @@ class RecordButton extends Component {
 					>
 						<Icon name="trash" />
 					</Button>
-        </div>
+				</div>
 			</div>
 		);
 	}
@@ -150,19 +139,19 @@ class RecordButton extends Component {
 					{this.props.number}{" "}
 				</Modal.Header>
 
-					<RecordComment
-						ref={instance => (this.recordComment = instance)}
-						changeSaveButtonState={this.changeSaveButtonState}
-						updateTakeInState={this.props.updateTakeInState}
-						sendComment={this.getComment}
-						onClickSave={this.props.onClickSave}
-						type={this.props.type}
-						id={this.props.id}
-						loadingActive={this.props.loadingActive}
-					/>
+				<RecordComment
+					ref={instance => (this.recordComment = instance)}
+					changeSaveButtonState={this.changeSaveButtonState}
+					updateTakeInState={this.props.updateTakeInState}
+					sendComment={this.getComment}
+					onClickSave={this.props.onClickSave}
+					type={this.props.type}
+					id={this.props.id}
+					loadingActive={this.props.loadingActive}
+				/>
 
-				<div style = {{display:'flex', justifyContent:'center', marginTop:'2%', marginBottom:'2%', maxHeight: 350, overflowY: 'scroll' }}>
-					<div style = {{width:'95%', marginTop:'1%' } }>
+				<div style={{ display: 'flex', justifyContent: 'center', marginTop: '2%', marginBottom: '2%', maxHeight: 350, overflowY: 'scroll' }}>
+					<div style={{ width: '95%', marginTop: '1%' }}>
 
 						{this.props.comments.length > 0
 							? this.props.comments.slice(0).reverse().map(this.createPlaylist.bind(this))
@@ -177,24 +166,24 @@ class RecordButton extends Component {
 }
 
 const styles = {
-  container:{
+	container: {
 		width: '100%',
 		display: 'flex',
 		border: '1px solid white',
 		borderRadius: 5,
 		marginBottom: 4
-  }
+	}
 };
 
 
 
 const mapStateToProps = state => {
 
-		const{ displayText } = state.geolocation;
+	const { displayText } = state.geolocation;
 
-		return{displayText};
+	return { displayText };
 
 };
 
 
-export default connect (mapStateToProps) (RecordButton);
+export default connect(mapStateToProps)(RecordButton);

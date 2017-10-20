@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
 import loadingGif from '../../images/loading.gif';
 
 class LoadingGif extends Component {

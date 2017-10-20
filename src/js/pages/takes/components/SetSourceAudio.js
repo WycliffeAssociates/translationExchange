@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { Dropdown } from 'semantic-ui-react'
-import axios from 'axios';
-import config from 'config/config';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import { fetchAllSourceAudio } from "../../../actions";
