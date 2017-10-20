@@ -13,7 +13,6 @@ import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
 
-import { notify } from 'react-notify-toast';
 
 import {
 	addToPlaylist,
@@ -25,7 +24,10 @@ import {
 	patchTake,
 	updateDeletedChunk,
 	deleteTake,
-	chapterUpdate
+	chapterUpdate,
+	deleteComment,
+	markedAsPublished,
+	saveComment
 } from './../../actions';
 
 class ChunkListContainer extends Component {
@@ -64,7 +66,7 @@ class ChunkListContainer extends Component {
 			].takes[takeToUpdate].comments.filter(
 				comment => comment.comment.id !== commentId
 				);
-				this.props.updateDeletedChunk(updatedChunks);
+			this.props.updateDeletedChunk(updatedChunks);
 		} else if (type === "chunk") {
 			for (var i = 0; i < updatedChunks.length; i++) {
 				if (updatedChunks[i].id === takeId) {
@@ -74,7 +76,7 @@ class ChunkListContainer extends Component {
 			updatedChunks[chunkToUpdate].comments = updatedChunks[
 				chunkToUpdate
 			].comments.filter(comment => comment.comment.id !== commentId);
-       this.props.updateDeletedChunk(updatedChunks);
+			this.props.updateDeletedChunk(updatedChunks);
 		} else if (type === "chapter") {
 			let updatedChapter = Object.assign({}, this.props.chapter);
 
@@ -100,88 +102,11 @@ class ChunkListContainer extends Component {
 	}
 
 	deleteComment(type, commentId, takeId) {
-		axios
-			.delete(config.apiUrl + "comments/" + commentId + "/")
-			.then(results => {
-				this.updatingDeletedComment(type, commentId, takeId);
-			})
-			.catch(exception => {
-				if (exception.response) {
-					if (exception.response.status === 404) {
-						this.updatingDeletedComment(type, commentId, takeId);
-					} else {
-						alert(
-							"Something went wrong. Please check your connection and try again."
-						);
-					}
-				} else {
-					//timeout error doesn't produce response
-					alert(
-						"Something went wrong. Please check your connection and try again."
-					);
-				}
-			});
+		this.props.deleteComment(type, commentId, takeId, this.updatingDeletedComment.bind(this));
 	}
 
 	onClickSave(blobx, type, id, success) {
-		this.setState({
-			active: true
-		});
-		axios
-			.post(config.apiUrl + "comments/", {
-				comment: blobx,
-				user: 3,
-				object: id,
-				type: type
-			})
-			.then(results => {
-				var map = { comment: results.data };
-				let updatedChunks = this.props.chunks.slice();
-
-				if (type === "take") {
-					let chunkToUpdate = updatedChunks.findIndex(chunk => {
-						return chunk.takes.find(take => take.take.id === id);
-					});
-					let takeToUpdate = updatedChunks[chunkToUpdate].takes.findIndex(
-						take => take.take.id === id
-					);
-					updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.push(map);
-					this.setState({
-						chunks: updatedChunks,
-						active: false
-					});
-				} else if (type === "chunk") {
-					for (var i = 0; i < updatedChunks.length; i++) {
-						if (updatedChunks[i].id === id) {
-							var chunkToUpdate = i;
-						}
-					}
-					updatedChunks[chunkToUpdate].comments.push(map);
-					this.setState({
-						chunks: updatedChunks,
-						active: false
-					});
-				} else {
-					let updatedChapter = Object.assign({}, this.props.chapter);
-					updatedChapter.comments.push(map);
-					this.setState({
-						chapter: updatedChapter,
-						active: false
-					});
-				}
-				success();
-				let myColor = { background: '#50f442', text: "#FFFFFF" };
-				notify.show("Saved", "custom", 1500, myColor);
-			})
-			.catch(exception => {
-				alert(
-					"Something went wrong. Please check your connection and try again."
-				);
-				success();
-				this.setState({
-					active: false
-				});
-			});
+		this.props.saveComment(blobx, type, id, success, this.props.chunks, this.props.chapter);
 	}
 
 	updateChosenTakeForChunk(takeId) {
@@ -200,24 +125,29 @@ class ChunkListContainer extends Component {
 	}
 
 	onMarkedAsPublish(success) {
-		let parameters = { is_publish: true };
-		//make patch request to confirm that the chapter is ready to be published
-		axios
-			.patch(
-			config.apiUrl + "chapters/" + this.props.chapter.id + "/",
-			parameters
-			)
-			.then(response => {
-				let updatedChapter = Object.assign({}, this.props.chapter);
-				updatedChapter.is_publish = true;
-				this.setState({ chapter: updatedChapter });
-				if (success) {
-					success();
-				}
-			})
-			.catch(exception => {
-				console.log(exception);
-			});
+		/**
+		 * TODO : needs server implementation and get clear requirement
+		 */
+		this.props.markedAsPublish(success, this.props.chapter);
+		// //make patch request to confirm that the chapter is ready to be published
+
+		// let parameters = { is_publish: true };
+		// axios
+		// 	.patch(
+		// 	config.apiUrl + "chapters/" + this.props.chapter.id + "/",
+		// 	parameters
+		// 	)
+		// 	.then(response => {
+		// 		let updatedChapter = Object.assign({}, this.props.chapter);
+		// 		updatedChapter.is_publish = true;
+		// 		this.setState({ chapter: updatedChapter });
+		// 		if (success) {
+		// 			success();
+		// 		}
+		// 	})
+		// 	.catch(exception => {
+		// 		console.log(exception);
+		// 	});
 	}
 
 	setSourceProject(projectQuery) {
@@ -325,8 +255,8 @@ const mapStateToProps = state => {
 	const { displayText = "" } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { loaded = false, error = "", chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
-	return { playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery };
+	const { loaded = false, error = "", chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
+	return { playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 }
 
@@ -342,7 +272,10 @@ const mapDispatchToProps = dispatch => {
 			patchTake,
 			updateDeletedChunk,
 			deleteTake,
-			chapterUpdate
+			chapterUpdate,
+			deleteComment,
+			markedAsPublished,
+			saveComment
 		}, dispatch);
 };
 

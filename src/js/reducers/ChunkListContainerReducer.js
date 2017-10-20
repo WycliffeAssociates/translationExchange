@@ -8,7 +8,8 @@ const INITIAL_STATE = {
     language: {},
     active: false,
     selectedSourceProjectQuery: -1,
-    selectedSourceProject: {}
+    selectedSourceProject: {},
+    notifyFlag: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -53,7 +54,7 @@ export default (state = INITIAL_STATE, action) => {
         case 'CHAPTER_UPDATE':
             return {
                 ...state,
-                chapter: action.chapter
+                chapter: action.chapter, active: false
             }
 
         case 'PATCH_TAKE_FAILED':
@@ -62,6 +63,26 @@ export default (state = INITIAL_STATE, action) => {
         case 'DELETE_TAKE_FAILED':
             return { ...state, error: action.error }
 
+        case 'DELETE_COMMENT_FAILED':
+            return { ...state, error: action.error }
+        case 'MARK_AS_PUBLISHED_SUCCESS':
+            return {
+                ...state, chapter: action.response
+            }
+        case 'MARK_AS_PUBLISHED_FAILED':
+            return {
+                ...state, error: action.error
+            }
+        case 'SAVE_COMMENT_LOADING':
+            return { ...state, active: true };
+        case 'SAVE_COMMENT_SUCCESS':
+            return {
+                ...state, chunks: action.response, active: false
+            }
+        case 'SAVE_COMMENT_FAILED':
+            return {
+                ...state, error: action.error, active: false
+            }
         case 'RESET_STATE':
             return INITIAL_STATE;
 

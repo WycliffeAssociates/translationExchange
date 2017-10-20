@@ -4,11 +4,8 @@ import 'css/takes.css'
 
 class StitchTakesButton extends Component {
     render() {
-
-
-
         return (
-                <Icon name={this.props.icon} color="blue" size="large" className="hoverButton" onClick={this.props.onClick} />
+            <Icon name={this.props.icon} color="blue" size="large" className="hoverButton" onClick={this.props.onClick} />
         )
     }
 }
