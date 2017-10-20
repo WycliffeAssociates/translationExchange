@@ -48,7 +48,7 @@ dragObject(){
 
 
 
-	const style = { opacity: isDragging ? 0 : 1 };
+	const style = { opacity: isDragging ? 0.1 : 1 };
 
 	let content = (
 
