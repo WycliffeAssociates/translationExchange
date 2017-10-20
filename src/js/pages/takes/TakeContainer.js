@@ -74,7 +74,7 @@ dragObject(){
 	 />
 
 	</div>
-	<ItemPreview
+	{/* <ItemPreview
 	// count={this.props.count}
 	// take={this.props.take.take}
 	// author={this.props.take.user}
@@ -89,7 +89,7 @@ dragObject(){
 	// active={this.props.active}
 	// mode={this.props.mode}
 
-	key="__preview" name="TakeContainer" />
+	key="__preview" name="TakeContainer" /> */}
 
 	</div>
 	);
@@ -101,11 +101,11 @@ dragObject(){
 
 
 	// Connect as drag source
-		content = connectDragSource(content, { dropEffect: 'move' });
+		content = connectDragSource(content);
 		// Connect as drop target
 		content = connectDropTarget(content);
 		// Connect to drag layer
-		content = connectDragPreview(content);
+		//content = connectDragPreview(content);
 
 
 	return content;
@@ -129,8 +129,8 @@ TakeContainer.propTypes = {
 };
 const takeSource = {
 	beginDrag(props, monitor, component) {
-    const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
-		return { index: props.index, listId: props.listId, take: props.take, rect:hoverBoundingRect };
+  
+		return { index: props.index, listId: props.listId, take: props.take };
 	},
 
 	endDrag(props, monitor) {

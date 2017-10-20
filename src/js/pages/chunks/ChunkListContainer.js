@@ -12,6 +12,7 @@ import Chunk from "./Chunk";
 import NotFound from "js/pages/NotFound";
 import ErrorButton from '../../components/ErrorBytton';
 import LoadingGif from '../../components/LoadingGif';
+
 import { notify } from 'react-notify-toast';
 
 import {
@@ -259,7 +260,9 @@ class ChunkListContainer extends Component {
 			);
 		} else {
 			return (
+
 				<div style={{ direction: `${this.props.direction}` }}>
+
 					<ChunkHeader
 						book={this.props.book}
 						chapter={this.props.chapter}
@@ -282,14 +285,15 @@ class ChunkListContainer extends Component {
 						<Footer />
 					</div>
 				</div>
+
 			);
 		}
 	}
 
 	createChunkList(chunk) {
-		/*
-        takesForChunk is an array of takes for each chunk
-         */
+		/**
+		 * TODO: discuss if the empty list be show or not(Chunks without takes)
+		 */
 		//	if (chunk.takes.length > 0) {
 		return (
 			<div>

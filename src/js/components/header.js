@@ -10,8 +10,8 @@ import nn from 'nearest-neighbor';
 import countries from '../../languages/countries.json';
 import languageAndCountry from '../../languages/languageAndCountry.json';
 import rtlLanguages from  '../../languages/rtlLanguages.json'
-
 import {updateLanguage, updateDirection} from '../actions';
+import ItemPreview from '../pages/takes/components/ItemPreview';
 
 class Header extends Component {
 	state = { activeItem: "home" };
@@ -95,7 +95,7 @@ class Header extends Component {
 
 		return (
 			<div style={{ marginBottom: 10 }}>
-
+        <ItemPreview key="__preview" name="TakeContainer" />
 				<Menu fluid secondary size="huge" compact>
 					<div style = {{display: 'flex', flex: 1, justifyContent: 'space-between', direction:`${this.props.direction}` }}>
 					<Menu.Item>

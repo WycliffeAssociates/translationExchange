@@ -29,8 +29,8 @@ function getItemStyles (currentOffset, rect) {
     }
 
     // http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
-    var x = currentOffset.x - rect.x ;
-    var y = currentOffset.y - rect.y * 2;
+    var x = currentOffset.x  ;
+    var y = currentOffset.y;
     var transform = `translate(${x}px, ${y}px)`;
 
     return {
@@ -38,7 +38,8 @@ function getItemStyles (currentOffset, rect) {
         transform: transform,
         WebkitTransform: transform,
         height: 0,
-        position:'absolute'
+        position:'relative',
+        zIndex: 1
 
 
     };
