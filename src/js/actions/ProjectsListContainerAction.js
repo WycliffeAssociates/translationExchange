@@ -1,40 +1,40 @@
 import axios from "axios";
 import config from "../../config/config";
 
-export const  fetchAllProjects= (query,queryString) => {
+export const fetchAllProjects = (query, queryString) => {
     return function (dispatch) {
         dispatch(dispatchAllProjectsLoading());
-		return axios
-			.post(config.apiUrl + "all_projects/", query)
-			.then(response => {
-				dispatch(dispatchAllProjectsReceived(response.data,queryString));
-			})
-			.catch(err => {
-				dispatch(dispatchAllProjectsFailed(err));
-			});
-	};
+        return axios
+            .post(config.apiUrl + "all_projects/", query)
+            .then(response => {
+                dispatch(dispatchAllProjectsReceived(response.data, queryString));
+            })
+            .catch(err => {
+                dispatch(dispatchAllProjectsFailed(err));
+            });
+    };
 };
 
-export const dispatchAllProjectsReceived=(response,queryString)=>{
-    return{
-        type:"ALL_PROJECTS_SUCCESS",
+export const dispatchAllProjectsReceived = (response, queryString) => {
+    return {
+        type: "ALL_PROJECTS_SUCCESS",
         response,
         queryString
     }
 }
-export const dispatchAllProjectsFailed=err=>{
-    return{
-        type:"ALL_PROJECTS_FAILED",
+export const dispatchAllProjectsFailed = err => {
+    return {
+        type: "ALL_PROJECTS_FAILED",
         err
     }
 }
-export const dispatchAllProjectsLoading=()=>{
-    return{
-        type:"ALL_PROJECTS_LOADING",
+export const dispatchAllProjectsLoading = () => {
+    return {
+        type: "ALL_PROJECTS_LOADING",
     }
 }
-export const dispatchAllProjectsReset=()=>{
-    return{
-        type:"ALL_PROJECTS_RESET",
+export const dispatchAllProjectsReset = () => {
+    return {
+        type: "ALL_PROJECTS_RESET",
     }
 }

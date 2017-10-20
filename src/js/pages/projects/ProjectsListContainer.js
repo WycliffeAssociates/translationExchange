@@ -12,7 +12,7 @@ import { fetchAllProjects, dispatchAllProjectsReset } from '../../actions';
 
 class ProjectsListContainer extends Component {
 
-	componentDidMount() {
+	componentWillMount() {
 		/*
 		get projects if query string is blank
 		 */
@@ -22,7 +22,7 @@ class ProjectsListContainer extends Component {
 	}
 
 	requestProjects(queryString) {
-		var query = QueryString.parse(queryString);
+		var query = QueryString.parse(this.props.location.search);
 		this.props.fetchAllProjects(query, queryString);
 	}
 
