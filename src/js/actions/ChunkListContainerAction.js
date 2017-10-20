@@ -1,6 +1,7 @@
 import axios from "axios";
 import config from "../../config/config";
 import { updateMode } from "./UpdatePlaylistActions";
+import { notify } from 'react-notify-toast';
 
 //dispatch Chunks
 export const fetchChunks = (query) => {
@@ -203,3 +204,101 @@ export function deleteCommentFailed(error) {
         error
     }
 };
+
+//	MarkedAsPublish
+export const markedAsPublished = (success, chapter) => {
+    return function (dispatch) {
+        return axios
+            .patch(config.apiUrl + "chapters/" + chapter.id + "/",
+            { is_publish: true })
+            .then((response) => {
+                let updatedChapter = Object.assign({}, chapter);
+                updatedChapter.is_publish = true;
+                dispatch(markAsPublishedSuccess(updatedChapter));
+                if (success) {
+                    success();
+                }
+            }).catch(error => {
+                dispatch(markAsPublishedFailed(error));
+            });
+    };
+}
+
+export function markAsPublishedSuccess(response) {
+    return {
+        type: 'MARK_AS_PUBLISHED_SUCCESS',
+        response
+    }
+};
+export function markAsPublishedFailed(error) {
+    return {
+        type: 'MARK_AS_PUBLISHED_FAILED',
+        error
+    }
+};
+
+//saveComment
+
+export const saveComment = (blobx, type, id, success, chunks, chapter) => {
+    return function (dispatch) {
+        dispatch(saveCommentLoading());
+        return axios
+            .post(config.apiUrl + "comments/", {
+                comment: blobx,
+                user: 3,
+                object: id,
+                type: type
+            })
+            .then(results => {
+                var map = { comment: results.data };
+                let updatedChunks = chunks.slice();
+                if (type === "take") {
+                    let chunkToUpdate = updatedChunks.findIndex(chunk => {
+                        return chunk.takes.find(take => take.take.id === id);
+                    });
+                    let takeToUpdate = updatedChunks[chunkToUpdate].takes.findIndex(
+                        take => take.take.id === id
+                    );
+                    updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.push(map);
+                    dispatch(saveCommentSuccess(updatedChunks));
+                } else if (type === "chunk") {
+                    for (var i = 0; i < updatedChunks.length; i++) {
+                        if (updatedChunks[i].id === id) {
+                            var chunkToUpdate = i;
+                        }
+                    }
+                    updatedChunks[chunkToUpdate].comments.push(map);
+                    dispatch(saveCommentSuccess(updatedChunks));
+                } else {
+                    let updatedChapter = Object.assign({}, chapter);
+                    updatedChapter.comments.push(map);
+                    dispatch(chapterUpdate(updatedChapter));
+                }
+                success();
+                let myColor = { background: '#50f442', text: "#FFFFFF" };
+                notify.show("Saved", "custom", 1500, myColor);
+            })
+            .catch(exception => {
+                dispatch(saveCommentFailed(exception))
+                success();
+            });
+    }
+}
+export function saveCommentSuccess(response) {
+    return {
+        type: 'SAVE_COMMENT_SUCCESS',
+        response
+    }
+};
+export function saveCommentFailed(error) {
+    return {
+        type: 'SAVE_COMMENT_FAILED',
+        error
+    }
+};
+export function saveCommentLoading() {
+    return {
+        type: 'SAVE_COMMENT_LOADING'
+    }
+};
+
