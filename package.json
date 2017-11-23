@@ -6,6 +6,7 @@
 		"axios": "^0.16.2",
 		"classnames": "^2.2.5",
 		"cross-env": "^5.0.1",
+		"express": "^4.16.2",
 		"fast-deep-equal": "^1.0.0",
 		"howler": "^2.0.4",
 		"js-base64": "^2.1.9",
@@ -71,5 +72,6 @@
 		"build": "cross-env NODE_PATH=src react-scripts build",
 		"test": "cross-env NODE_PATH=src react-scripts test --env=jsdom",
 		"eject": "react-scripts eject"
-	}
+	},
+	"proxy": "http://translationExchange:8080"
 }
