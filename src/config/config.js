@@ -11,7 +11,7 @@
 
 var config = {                                                        //remote api
     apiUrl: "http://10.0.0.1/api/",
-    streamingUrl: "http://http://10.0.0.1/"
+    streamingUrl: "http://10.0.0.1/"
 };
 
 export default config;
