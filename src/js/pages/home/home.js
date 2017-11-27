@@ -34,7 +34,7 @@ class Home extends Component {
 	navigateToProject(language, book, version) {
 		//make the query for the right project, using our current query as a base
 		var projectQuery = QueryString.parse(this.props.homeRecentProjects);
-
+     debugger;
 		Object.assign(projectQuery, {
 			language: language,
 			book: book,

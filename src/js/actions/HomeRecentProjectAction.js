@@ -5,8 +5,10 @@ import QueryString from "query-string";
 export function fetchRecentProjects() {
 	return function (dispatch) {
 		return axios
-			.post(config.apiUrl + "all_projects/", {})
+			.post(config.apiUrl + "get_projects/", {})
 			.then(response => {
+				console.log(response.data);
+				debugger;
 				dispatch(dispatchHomeRecentProjectsReceived(response.data));
 			})
 			.catch(err => {
