@@ -83,6 +83,7 @@ class Home extends Component {
 	}
 
 	createListItem(project, key) {
+		debugger;
 		return (
 			<div>
 				<Grid.Row
@@ -93,14 +94,14 @@ class Home extends Component {
 						this.navigateToProject(
 							project.language.slug,
 							project.book.slug,
-							project.version
+							project.version.slug
 						)}
 				>
 					<h4>
 						<font color="white">
 							{project.book.name + " "}
 							{project.language.name + " "}
-							{project.version}
+							{project.version.slug}
 						</font>
 					</h4>
 				</Grid.Row>

@@ -39,20 +39,29 @@ class ChapterContainer extends Component {
 	requestData() {
 		var query = QueryString.parse(this.props.location.search);
 		this.setState({ error: "" });
-		axios.post(config.apiUrl + "get_project_takes/", query).then(results => {
+		axios.post(config.apiUrl + "get_projects/", query).then(results => {
 
-    this.props.updateMode(results.data.project.mode);             //used in take to display the modem, (my assumptions are that the modes are chunk or verse)
-
-
-			this.setState({
-				loaded: true,
-				chunks: results.data.chunks,
+    this.props.updateMode(results.data.project.mode);
+		debugger;
+		this.setState({
 				project: results.data.project,
 				book: results.data.book,
 				chapter: results.data.chapter,
 				language: results.data.language
 			});
 		});
+		axios.post(config.apiUrl + "get_project_takes/", query).then(results => {
+		debugger
+
+			this.setState({
+				loaded: true,
+				chunks: results.data
+
+			});
+		});
+
+
+
 	}
 
 	updatingDeletedTake(takeId) {
@@ -397,7 +406,7 @@ class ChapterContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
-			
+
 			return (
 				<div style ={{direction:`${this.props.direction}`}}>
 						<ChapterHeader

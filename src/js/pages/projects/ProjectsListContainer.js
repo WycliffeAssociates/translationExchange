@@ -35,11 +35,12 @@ class ProjectsListContainer extends Component {
 	}
 
 	requestProjects(queryString) {
-		var query = QueryString.parse(queryString);
+		const query = QueryString.parse(queryString);
+
 		this.setState({ loaded: false, error: "" });
 
 		axios
-			.post(config.apiUrl + "all_projects/", query)
+			.post(config.apiUrl + "get_projects/", query)
 			.then(results => {
 				this.setState({
 					loaded: true,
@@ -134,7 +135,7 @@ class ProjectsListContainer extends Component {
 						queryString={this.props.location.search}
 						clearQuery={this.clearQuery.bind(this)}
 					/>
-					{this.state.projects.length > 0
+					{projects.length > 0
 						?
             <div style={{marginTop: 10}}>
 						<ProjectsList

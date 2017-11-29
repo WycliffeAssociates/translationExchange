@@ -7,8 +7,6 @@ export function fetchRecentProjects() {
 		return axios
 			.post(config.apiUrl + "get_projects/", {})
 			.then(response => {
-				console.log(response.data);
-				debugger;
 				dispatch(dispatchHomeRecentProjectsReceived(response.data));
 			})
 			.catch(err => {
@@ -18,12 +16,14 @@ export function fetchRecentProjects() {
 }
 
 export function dispatchHomeRecentProjectsReceived(response) {
+
 	return {
 		type: 'HOME_RECENT_PROJECTS_RECEIVED',
 		response
 	}
 }
 export function dispatchHomeRecentProjectsErr(error) {
+	
 	return {
 		type: 'HOME_RECENT_PROJECTS_RECEIVED',
 		error
