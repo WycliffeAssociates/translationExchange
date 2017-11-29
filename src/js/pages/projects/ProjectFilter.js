@@ -80,7 +80,7 @@ class ProjectFilter extends Component {
 							return { key: book.slug, text: book.name, value: book.slug };
 						}),
 						versions: versionsResponse.data.map(function(version) {
-							return { key: version, text: version, value: version };
+							return { key: version.slug, text: version.slug, value: version.slug };
 						})
 					});
 				})

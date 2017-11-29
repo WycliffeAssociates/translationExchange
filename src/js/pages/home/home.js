@@ -17,7 +17,7 @@ class Home extends Component {
 	navigateToProject(language, book, version) {
 		//make the query for the right project, using our current query as a base
 		var projectQuery = QueryString.parse(this.props.homeRecentProjects);
-
+     debugger;
 		Object.assign(projectQuery, {
 			language: language,
 			book: book,
@@ -66,6 +66,7 @@ class Home extends Component {
 	}
 
 	createListItem(project, key) {
+		
 		return (
 			<div>
 				<Grid.Row
@@ -76,14 +77,14 @@ class Home extends Component {
 						this.navigateToProject(
 							project.language.slug,
 							project.book.slug,
-							project.version
+							project.version.slug
 						)}
 				>
 					<h4>
 						<font color="white">
 							{project.book.name + " "}
 							{project.language.name + " "}
-							{project.version}
+							{project.version.slug}
 						</font>
 					</h4>
 				</Grid.Row>

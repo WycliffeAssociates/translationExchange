@@ -18,36 +18,33 @@ class MarkAsDone extends Component {
         this.playNext = this.playNext.bind(this);
     }
 
+//     checkReadyForExport() {
+//         if (this.props.chunks.length === 0) {
+//             return false;
+//         } else {
+// //true if every chunk has at least 1 take marked is_publish
+//             return this.props.chunks.every((chunk) => {
+//                 return chunk.takes.some(take => take.take.is_publish);
+//             });
+//         }
+//     }
 
-    checkReadyForExport() {
-        if (this.props.chunks.length === 0) {
-            return false;
-        } else {
-            //true if every chunk has at least 1 take marked is_publish
-            return this.props.chunks.every((chunk) => {
-                return chunk.takes.some(take => take.take.is_publish);
-            });
-        }
-    }
-
-    createExportPlaylist() {
-        let length = this.props.chunks.length;
-        let playlist = [];
-
-        this.props.chunks.map((chunk) => {
-            chunk.takes.map((take) => {
-                if (take.take.is_publish) {
-                    playlist.push({
-                        "src": config.streamingUrl + take.take.location,
-                        "name": this.props.mode + ' ' + chunk.startv + ' (' + (playlist.length + 1) + '/' + length + ')'
-                    });
-
-                }
-            })
-        });
-
-        return playlist;
-    }
+    // createExportPlaylist() {
+    //
+    //     let length = this.props.chunks.length;
+    //     var playlist = [];
+    //     this.props.chunks.map((chunk) => {
+    //         chunk.takes.map((take) => {
+    //             if (take.take.is_publish) {
+    //                 playlist.push({
+    //                     "src": config.streamingUrl + take.take.location,
+    //                     "name": this.props.mode + ' ' + chunk.startv + ' (' + (playlist.length + 1) + '/' + length + ')'
+    //                 });
+    //             }
+    //         })
+    //     });
+    //     return playlist
+    // }
 
     changeColor() {
         this.props.onMarkedAsPublish(() => {
@@ -108,18 +105,14 @@ class MarkAsDone extends Component {
 
     exportButton() {
         let disableBtn = this.props.chapter.is_publish;
-
-        let crfe = this.checkReadyForExport();
-
-        let disableBtnState = true;
-
-        if (disableBtn & crfe) {
-            disableBtnState = true;
-        } else if (crfe) {
-            disableBtnState = false;
-        }
-        return (
-            <Button onClick={this.handleOpen.bind(this)}
+        // let crfe = this.checkReadyForExport();
+        let disableBtnState = false;
+        // if (disableBtn === crfe) {
+        //     disableBtnState = true;
+        // } else if (crfe) {
+        //     disableBtnState = false;
+        // }
+        var ExportButton = <Button onClick={this.handleOpen}
                 color={disableBtn === true ? "green" : ""}
                 disabled={disableBtnState}
                 className="icon"
@@ -127,7 +120,7 @@ class MarkAsDone extends Component {
                 floated="right">
                 <Icon color="white" name="sidebar" />
             </Button>
-        );
+      
 
     }
 
@@ -143,17 +136,20 @@ class MarkAsDone extends Component {
                     <Modal.Description style={styles.modal}>
                         <p>Here is a preview of the takes you have selected to export. This may take a few seconds to
                                 load.</p>
-                        <p>To mark as done, click on 'Export'.</p>
-                        {this.audioPlayer()}
-                    </Modal.Description>
+                            <p>To mark as done, click on 'Finish'.</p>
+                            {/* <AudioComponent
+                                width={850} playlist={this.createExportPlaylist()} loop={true}
+                                /> */}
+                        </Modal.Description>
 
-                </Modal.Content>
-                <Modal.Actions style={styles.modal}>
-                    {/*this button will do a call to database to change chapter.exportready to true */}
-                    <Button content="Export" onClick={this.changeColor.bind(this)} />
-                </Modal.Actions>
-            </Modal>
-        );
+                    </Modal.Content>
+                    <Modal.Actions>
+                        {/*this button will do a call to database to change chapter.exportready to true */}
+                        <Button content="Finish" onClick={this.changeColor.bind(this)} />
+
+                    </Modal.Actions>
+                </Modal>
+                );
     }
 }
 

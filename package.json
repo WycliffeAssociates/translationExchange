@@ -6,6 +6,7 @@
 		"axios": "^0.16.2",
 		"classnames": "^2.2.5",
 		"cross-env": "^5.0.1",
+		"express": "^4.16.2",
 		"fast-deep-equal": "^1.0.0",
 		"howler": "^2.0.4",
 		"js-base64": "^2.1.9",
@@ -25,7 +26,9 @@
 		"react-axios": "^1.0.2",
 		"react-circular-progressbar": "^0.1.5",
 		"react-dnd": "^2.4.0",
-		"react-dnd-html5-backend": "^2.4.1",
+		"react-dnd-html5-backend": "^2.5.4",
+		"react-dnd-multi-backend": "^3.0.4",
+		"react-dnd-touch-backend": "^0.3.15",
 		"react-file-input": "^0.2.5",
 		"react-howler": "^3.6.2",
 		"react-mic": "^7.1.6",
@@ -70,5 +73,6 @@
 		"build": "cross-env NODE_PATH=src react-scripts build",
 		"test": "cross-env NODE_PATH=src react-scripts test --env=jsdom",
 		"eject": "react-scripts eject"
-	}
+	},
+	"proxy": "http://translationExchange:8080"
 }

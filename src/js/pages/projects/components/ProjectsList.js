@@ -43,11 +43,12 @@ class ProjectsList extends Component {
      */
 	/*{project.percentFinished}*/
 	createListItem(project) {
-		var navigateToProject = function () {
+		var navigateToProject = function() {
+			project.version.slug
 			this.props.navigateToProject(
 				project.language.slug,
 				project.book.slug,
-				project.version
+				project.version.slug
 			);
 		}.bind(this);
 
@@ -68,13 +69,13 @@ class ProjectsList extends Component {
 				<Table.Cell>
 					<ReadMore lines={1} onShowMore={this.props.onChange} text={this.props.displayText.more}>
 						<b>{this.props.displayText.dateModified}</b>: {this.parseDate(project.date_modified)} <br />
-						<b>{this.props.displayText.translationType}</b>: {project.version} <br />
+						<b>{this.props.displayText.translationType}</b>: {project.version.slug} <br />
 						<b>{this.props.displayText.contributors}</b>: {this.getContributorText(
 							project.contributors
 						)}{" "}
 						<br />
 						<b>{this.props.displayText.published}</b>:
-						{project.is_publish
+						{project.published
 							? <Icon name="checkmark" color="green" />
 							: <Icon name="remove" />}
 					</ReadMore>
