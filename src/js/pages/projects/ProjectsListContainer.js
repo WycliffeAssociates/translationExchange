@@ -22,6 +22,7 @@ class ProjectsListContainer extends Component {
 	}
 
 	requestProjects(queryString) {
+		debugger;
 		var query = QueryString.parse(this.props.location.search);
 		this.props.fetchAllProjects(query, queryString);
 	}

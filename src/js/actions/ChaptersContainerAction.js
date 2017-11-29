@@ -4,7 +4,7 @@ import config from "../../config/config";
 //chaptersContainer
 
 export const fetchChaptersContainerData = (query) => {
-  debugger;
+
     return function (dispatch) {
         return axios
             .post(config.apiUrl + "get_chapters/", query)
@@ -18,6 +18,7 @@ export const fetchChaptersContainerData = (query) => {
 }
 
 export function fetchChaptersContainerDataSuccess(response) {
+
     return {
         type: 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS',
         chapters: response.chapters,
