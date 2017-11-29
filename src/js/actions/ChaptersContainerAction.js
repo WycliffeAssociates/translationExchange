@@ -4,7 +4,6 @@ import config from "../../config/config";
 //chaptersContainer
 
 export const fetchChaptersContainerData = (query) => {
-  debugger;
     return function (dispatch) {
         return axios
             .post(config.apiUrl + "get_chapters/", query)
@@ -97,7 +96,7 @@ export function downloadProject(projectId) {
     return function (dispatch) {
         dispatch(dispatchLoadingDownloadProject());
         return axios
-            .post(config.apiUrl + "zip_files/", { project: projectId }, { timeout: 0 })
+            .post(config.apiUrl + "zip_project_files/", { project_id: projectId }, { timeout: 0 })
             .then(response => {
                 //Todo: find the better way to download files
                 window.location = config.streamingUrl + response.data.location;
