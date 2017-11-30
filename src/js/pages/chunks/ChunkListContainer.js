@@ -17,7 +17,7 @@ import {
 	addToPlaylist,
 	playTake,
 	stopAudio,
-	fetchChunks,
+	getSelectedProjectInfo,
 	setSourceProject,
 	resetInfo,
 	patchTake,
@@ -36,7 +36,8 @@ class ChunkListContainer extends Component {
 
 	componentWillMount() {
 		var query = QueryString.parse(this.props.location.search);
-		this.props.fetchChunks(query);
+		//this.props.fetchChunks(query);
+		this.props.getSelectedProjectInfo(query);
 	}
 
 	updatingDeletedTake(takeId) {
@@ -262,7 +263,7 @@ const mapDispatchToProps = dispatch => {
 			addToPlaylist,
 			playTake,
 			stopAudio,
-			fetchChunks,
+			getSelectedProjectInfo,
 			setSourceProject,
 			resetInfo,
 			patchTake,

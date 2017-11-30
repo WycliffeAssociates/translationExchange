@@ -39,8 +39,7 @@ class ProjectsList extends Component {
      */
 	/*{project.percentFinished}*/
 	createListItem(project) {
-		console.log(project)
-		debugger;
+		
 		var navigateToProject = function() {
 			project.version.slug
 			this.props.navigateToProject(
