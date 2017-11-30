@@ -120,7 +120,7 @@ class MarkAsDone extends Component {
                 floated="right">
                 <Icon color="white" name="sidebar" />
             </Button>
-        );
+      
 
     }
 
