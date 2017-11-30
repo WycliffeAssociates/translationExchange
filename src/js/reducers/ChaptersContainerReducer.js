@@ -5,7 +5,7 @@ const INITIAL_STATE = {
     language: {},
     version: {},
     project_id: -1,
-    is_published: false,
+    published: false,
     loaded: false,
     downloadError: "",
     downloadSuccess: "",
@@ -23,7 +23,7 @@ export default (state = INITIAL_STATE, action) => {
             language: action.language,
             version: action.version,
             project_id: action.project_id,
-            is_published: action.is_published,
+            published: action.published,
             loaded: action.loaded
         };
         case 'SET_CHECKING_LEVEL_SUCCESS':
