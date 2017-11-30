@@ -18,7 +18,7 @@ class DownloadTR extends Component {
                 {this.props.displayText.downloadSrcAudio}
             </Button>
 
-        if (this.props.isPublish) {
+        if (this.props.published) {
             return publishButton;
         } else {
             return null;

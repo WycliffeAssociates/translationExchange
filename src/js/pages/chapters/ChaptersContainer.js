@@ -66,14 +66,14 @@ class ChaptersContainer extends Component {
 						<h1>
 							{this.props.book.name} ({this.props.language.name})
 								<DownloadSourceAudio
-								isPublish={this.props.published}
+								published={this.props.published}
 								downloadLoadingSourceAudio={this.props.downloadLoadingSourceAudio}
 								onDownloadSourceAudio={this.onDownloadSourceAudio.bind(this)}
 								displayText={this.props.displayText}
 							/>
 							<PublishButton
 								chapters={this.props.chapters}
-								isPublish={this.props.published}
+								published={this.props.published}
 								displayText={this.props.displayText}
 								onPublish={this.publishFiles.bind(this)}
 							/>
