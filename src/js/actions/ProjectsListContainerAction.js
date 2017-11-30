@@ -5,7 +5,7 @@ export const fetchAllProjects = (query, queryString) => {
     return function (dispatch) {
         dispatch(dispatchAllProjectsLoading());
         return axios
-            .post(config.apiUrl + "all_projects/", query)
+            .post(config.apiUrl + "get_projects/", query)
             .then(response => {
                 dispatch(dispatchAllProjectsReceived(response.data, queryString));
             })
