@@ -3,15 +3,10 @@
  */
 
 import React, { Component } from 'react'
-import { Sidebar, Segment, Menu } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 import RecordButton from "./comments/RecordButton";
 import SourceAudioButton from "./SourceAudioButton"
-let state;
-let toggleVisibility;
-
-
 class ChunkSidebar extends Component {
-
     render() {
         return (
             <Menu vertical compact inverted>
@@ -28,7 +23,7 @@ class ChunkSidebar extends Component {
                 </Menu.Item>
                 <Menu.Item>
                     <SourceAudioButton startv={this.props.chunkNumber}
-                                       onSourceClicked={this.props.onSourceClicked}/>
+                        onSourceClicked={this.props.onSourceClicked} />
                 </Menu.Item>
             </Menu>
         )

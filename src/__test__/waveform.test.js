@@ -17,7 +17,8 @@ describe("Waveform", () => {
 	// });
 
 	it("Passes through audioFile prop to Wavesurfer", () => {
-		const waveform = shallow(<WaveForm audioFile={"something"} />);
+
+		const waveform = shallow(<WaveForm audioFile={"something"}  store={store}/>);
 
 		expect(waveform.props().audioFile).toEqual("something");
 	});

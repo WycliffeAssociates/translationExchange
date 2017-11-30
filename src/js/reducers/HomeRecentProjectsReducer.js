@@ -1,11 +1,12 @@
-const INITIAL_STATE = { homeRecentProjects:[]
-                      };
+const INITIAL_STATE = {
+	homeRecentProjects: [], error:''
+};
 
 
 export default function reducer(state = INITIAL_STATE, action) {
 	switch (action.type) {
 		case "HOME_RECENT_PROJECTS_ERR":
-			return state;
+			return { ...state, error: action.error };
 		case "HOME_RECENT_PROJECTS_RECEIVED":
     
 			return {

@@ -1,35 +1,18 @@
 import React, { Component } from "react";
 import { Container, Grid, Divider } from "semantic-ui-react";
-import nn from 'nearest-neighbor';
 import "css/home.css";
 import StartHere from "./StartHere";
 import LogoTitle from "./LogoTitle";
-import axios from "axios";
-import config from "config/config";
 import QueryString from "query-string";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { updateLanguage } from '../../actions';
 import { fetchRecentProjects } from "../../actions";
-import countries from '../../../languages/countries.json';
-import languageAndCountry from '../../../languages/languageAndCountry.json'
-
 
 class Home extends Component {
 
-	constructor() {
-		super();
-		this.state = {
-			projects: []
-		};
-	}
-
-
 	componentDidMount() {
 		this.props.fetchRecentProjects();
-
 	}
-
 
 	navigateToProject(language, book, version) {
 		//make the query for the right project, using our current query as a base
@@ -65,7 +48,7 @@ class Home extends Component {
 							<Grid.Column width={3}>
 								<Grid.Row height={1}>
 									<h2>
-										<font color="white">{this.props.displayText.recentProjects}</font>
+										<font color="white">{recentProjects}</font>
 									</h2>
 								</Grid.Row>
 								<Divider />
@@ -110,7 +93,6 @@ class Home extends Component {
 	}
 }
 
-
 const mapStateToProps = state => {
 
 	const { displayText } = state.geolocation;
@@ -128,8 +110,5 @@ const mapDispatchToProps = dispatch => {
 
 	}, dispatch);
 };
-
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -23,8 +23,10 @@ yarn-error.log*
 # user specific IDE stuff
 .idea/workspace.xml
 .vscode
+*coverage
 
 # ignore large files
 *.mp3
 *.wav
 *.lock
+

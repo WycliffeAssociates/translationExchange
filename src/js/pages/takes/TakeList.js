@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import TakeContainer from "../TakeContainer";
+import TakeContainer from "./TakeContainer";
 import TakePropTypes from "./TakePropTypes";
 import update from "react/lib/update";
 import { DropTarget } from "react-dnd";
@@ -43,40 +43,45 @@ class TakeList extends Component {
 			})
 		);
 	}
-	onMarkedForExportToggled(take) {
-		let markedForExport = !take.take.is_publish;
+
+	onDrop(isPublished, newRating, take) {
 		this.props.patchTake(
 			take.take.id,
-			{ is_publish: markedForExport },
+			{ is_publish: isPublished, rating: newRating },
 			updatedTake => {
 				//success callback
-				if (markedForExport) {
+				if (isPublished) {
 					this.props.updateChosenTakeForChunk(updatedTake.id);
+
 				}
 			}
 		);
 	}
 
-	onRatingSet(newRating, take) {
-		this.setState({ ratingLoading: true });
-		this.props.patchTake(take.take.id, { rating: newRating }, () => {
-			this.setState({ ratingLoading: false });
-		});
-	}
 	makeChanges(isPublish, newRating, take) {
-		if (isPublish || newRating >= 3) {
-			this.onMarkedForExportToggled(take);
-			this.onRatingSet(newRating, take);
-		} else {
-			this.onRatingSet(newRating, take);
+		switch (newRating) {
+			case 0:
+				return this.onDrop(false, 1, take);
+			case 1:
+
+				return this.onDrop(false, 2, take);
+			case 2:
+				return this.onDrop(false, 3, take);
+			case 3:
+				return this.onDrop(true, take.rating, take);
+			default:
+				return null;
+
 		}
+
 	}
 	render() {
 		const style = {
 			minHeight: "231px"
 		};
-		const { takes } = this.state;
+		const { takes } = this.props;
 		const { connectDropTarget } = this.props;
+
 		return connectDropTarget(
 			<div style={{ ...style }}>
 				{takes.map((take, i) => {

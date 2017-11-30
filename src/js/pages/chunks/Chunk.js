@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import ChunkPropTypes from "./ChunkPropTypes";
-import { connect } from "react-redux";
 import { Accordion, Icon, Grid } from "semantic-ui-react";
-import TakeTable from "./TakeTable";
+import TakeTable from "../takes/TakeTable";
 import "css/takes.css";
 
-import ChunkSidebar from "./SideBar";
+import ChunkSidebar from "../takes/components/SideBar";
 class Chunk extends Component {
 	render() {
 		var publish = [];
@@ -15,9 +14,9 @@ class Chunk extends Component {
 
 		var counter = 0;
 
-		let orderedSegments = this.props.segments.slice();
+		let orderedTakes = this.props.takesForChunk.slice();
 
-		orderedSegments.map(i => {
+		orderedTakes.map(i => {
 			counter += 1;
 			i.order = counter;
 
@@ -39,7 +38,7 @@ class Chunk extends Component {
 				modeLabel = this.props.displayText.chunk;
 				break;
 			case "verse":
-				modeLabel =  this.props.displayText.verse;
+				modeLabel = this.props.displayText.verse;
 				break;
 			default:
 				modeLabel = this.props.displayText.segment;
@@ -81,7 +80,6 @@ class Chunk extends Component {
 									<TakeTable
 										icon={icon1}
 										mode={this.props.mode}
-										takes={this.props.segments}
 										addToListenList={this.props.addToListenList}
 										patchTake={this.props.patchTake}
 										deleteTake={this.props.deleteTake}
@@ -90,7 +88,7 @@ class Chunk extends Component {
 										}
 										onClickSave={this.props.onClickSave}
 										column={0}
-										PLAYLIST={onestar}
+										orderedTakes={onestar}
 										chunkNumber={this.props.number}
 										deleteComment={this.props.deleteComment}
 										deleteButton={true}
@@ -99,7 +97,6 @@ class Chunk extends Component {
 									<TakeTable
 										icon={icon2}
 										mode={this.props.mode}
-										takes={this.props.segments}
 										addToListenList={this.props.addToListenList}
 										patchTake={this.props.patchTake}
 										deleteTake={this.props.deleteTake}
@@ -108,7 +105,7 @@ class Chunk extends Component {
 										}
 										onClickSave={this.props.onClickSave}
 										column={1}
-										PLAYLIST={twostar}
+										orderedTakes={twostar}
 										chunkNumber={this.props.number}
 										deleteComment={this.props.deleteComment}
 										active={this.props.active}
@@ -116,7 +113,6 @@ class Chunk extends Component {
 									<TakeTable
 										icon={icon3}
 										mode={this.props.mode}
-										takes={this.props.segments}
 										addToListenList={this.props.addToListenList}
 										patchTake={this.props.patchTake}
 										deleteTake={this.props.deleteTake}
@@ -125,7 +121,7 @@ class Chunk extends Component {
 										}
 										onClickSave={this.props.onClickSave}
 										column={2}
-										PLAYLIST={threestar}
+										orderedTakes={threestar}
 										chunkNumber={this.props.number}
 										deleteComment={this.props.deleteComment}
 										active={this.props.active}
@@ -133,7 +129,6 @@ class Chunk extends Component {
 									<TakeTable
 										icon={icon4}
 										mode={this.props.mode}
-										takes={this.props.segments}
 										addToListenList={this.props.addToListenList}
 										patchTake={this.props.patchTake}
 										deleteTake={this.props.deleteTake}
@@ -142,7 +137,7 @@ class Chunk extends Component {
 										}
 										onClickSave={this.props.onClickSave}
 										column={3}
-										PLAYLIST={publish}
+										orderedTakes={publish}
 										chunkNumber={this.props.number}
 										deleteComment={this.props.deleteComment}
 										active={this.props.active}
@@ -154,7 +149,7 @@ class Chunk extends Component {
 									comments={this.props.comments}
 									onClickSave={this.props.onClickSave}
 									column={0}
-									PLAYLIST={onestar}
+									orderedTakes={onestar}
 									chunkNumber={this.props.number}
 									mode={this.props.mode}
 									chunkId={this.props.id}
@@ -175,14 +170,4 @@ Chunk.propTypes = {
 	chunk: ChunkPropTypes
 };
 
-
-const mapStateToProps = state => {
-
-		const{ displayText } = state.geolocation;
-
-		return{displayText};
-
-};
-
-
-export default connect (mapStateToProps) (Chunk);
+export default Chunk;

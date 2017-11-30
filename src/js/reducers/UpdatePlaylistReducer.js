@@ -58,9 +58,7 @@ export default (state = INITIAL_STATE, action) => {
             return INITIAL_STATE ;
 
 
-
-
-       default:
+         default:
                return state;
 
 

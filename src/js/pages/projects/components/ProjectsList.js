@@ -1,8 +1,3 @@
-/*
-    Here's an example presentation component that just handles outputting data. It
-    doesn't care where you got the data from - it just displays it.
- */
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";

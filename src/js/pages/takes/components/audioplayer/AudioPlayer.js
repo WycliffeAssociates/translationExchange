@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {bindActionCreators} from 'redux';
 import {playAudio, stopAudio, finishedPlaying, updateTime, takeId} from '../../../../actions';
 import WaveForm from './Waveform';
-import{ PauseButton, PlayButton, MultipleTakesButton} from './buttons';
+import{ PauseButton, PlayButton} from './buttons';
 import TimeContainer from './timeContainer';
 import Marker from './Markers';
 
