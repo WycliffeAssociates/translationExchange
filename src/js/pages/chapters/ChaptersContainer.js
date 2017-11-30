@@ -9,7 +9,7 @@ import "css/chapters.css";
 import PublishButton from "./components/PublishButton";
 import DownloadSourceAudio from "./components/DownloadSourceAudio";
 import NotFound from "js/pages/NotFound";
-import ErrorButton from '../../components/ErrorBytton';
+import ErrorButton from '../../components/ErrorButton';
 import LoadingGif from '../../components/LoadingGif';
 import { bindActionCreators } from 'redux';
 import { fetchChaptersContainerData, setCheckingLevel, publishFiles, downloadProject, downloadSourceAudio } from '../../actions';

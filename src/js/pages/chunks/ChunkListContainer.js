@@ -9,7 +9,7 @@ import ChunkHeader from "./ChunkHeader";
 import Footer from "../takes/components/Footer";
 import Chunk from "./Chunk";
 import NotFound from "js/pages/NotFound";
-import ErrorButton from '../../components/ErrorBytton';
+import ErrorButton from '../../components/ErrorButton';
 import LoadingGif from '../../components/LoadingGif';
 
 

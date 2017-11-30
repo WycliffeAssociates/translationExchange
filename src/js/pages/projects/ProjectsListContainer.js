@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import "../../../css/projects.css";
 import ProjectFilter from "./ProjectFilter";
 import NotFound from "../NotFound";
-import ErrorButton from '../../../js/components/ErrorBytton';
+import ErrorButton from '../../../js/components/ErrorButton';
 import LoadingGif from '../../../js/components/LoadingGif';
 import { bindActionCreators } from 'redux';
 import { fetchAllProjects, dispatchAllProjectsReset } from '../../actions';
