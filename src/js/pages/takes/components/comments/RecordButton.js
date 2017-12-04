@@ -65,14 +65,6 @@ class RecordButton extends Component {
 		// }
 	}
 
-
-
-
-
-
-
-
-
 	createPlaylist(comment) {
 
 		const src = config.streamingUrl + comment.comment.location;

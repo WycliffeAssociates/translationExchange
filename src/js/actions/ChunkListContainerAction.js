@@ -11,14 +11,12 @@ const query = {chunk_id:q}
         return axios
             .post(config.apiUrl + "get_takes/", query)
             .then(response => {
-
-                dispatch(dispatchTakesSuccess(response.data));
-                //dispatch(updateMode(response.data.project.mode));
-
+                dispatch(dispatchChunksSuccess(response.data));
+                dispatch(updateMode(response.data.mode['name']));
             })
-            .catch(error => {
-                dispatch(dispatchChunksFailed(error));
-            });
+            // .catch(error => {
+            //     dispatch(dispatchChunksFailed(error));
+            // });
     };
 }
 
@@ -90,8 +88,12 @@ export function dispatchTakesSuccess( takeResponse) {
 
  
     return {
-        type: 'FETCH_TAKE_SUCCESS',
-        take: takeResponse
+        type: 'FETCH_CHUNKS_SUCCESS',
+        chunks: response.chunks,
+        project: response.project,
+        chapter: response.chapter,
+        book: response.book,
+        language: response.language,
     }
 }
 
