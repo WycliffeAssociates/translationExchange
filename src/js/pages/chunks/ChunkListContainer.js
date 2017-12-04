@@ -34,7 +34,7 @@ class ChunkListContainer extends Component {
 		this.props.resetInfo();
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		var query = QueryString.parse(this.props.location.search);
 		this.props.fetchChunks(query);
 	}
@@ -189,7 +189,7 @@ class ChunkListContainer extends Component {
 			);
 		} else {
 			return (
-				<div style={{ direction: `${this.props.direction}` }}>
+				<div>
 					<ChunkHeader
 						book={this.props.book}
 						chapter={this.props.chapter}
@@ -205,9 +205,7 @@ class ChunkListContainer extends Component {
 						projectId={this.props.project.id}
 						displayText={this.props.displayText}
 					/>
-
 					{this.props.chunks.map(this.createChunkList.bind(this))}
-
 					<div fluid className="StickyFooter">
 						<Footer />
 					</div>

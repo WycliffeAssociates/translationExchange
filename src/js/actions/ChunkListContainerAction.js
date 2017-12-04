@@ -10,11 +10,11 @@ export const fetchChunks = (query) => {
             .post(config.apiUrl + "get_project_takes/", query)
             .then(response => {
                 dispatch(dispatchChunksSuccess(response.data));
-                dispatch(updateMode(response.data.project.mode));
+                dispatch(updateMode(response.data.mode['name']));
             })
-            .catch(error => {
-                dispatch(dispatchChunksFailed(error));
-            });
+            // .catch(error => {
+            //     dispatch(dispatchChunksFailed(error));
+            // });
     };
 }
 
@@ -34,7 +34,7 @@ export function dispatchChunksSuccess(response) {
         project: response.project,
         chapter: response.chapter,
         book: response.book,
-        language: response.language
+        language: response.language,
     }
 }
 export function dispatchChunksFailed(error) {
