@@ -2,6 +2,8 @@ const INITIAL_STATE = {
     loaded: false,
     error: "",
     chunks: [],
+    comments: [],
+    take: [],
     project: {},
     book: {},
     chapter: {},
@@ -14,7 +16,8 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case "FETCH_CHUNKS_SUCCESS":
+        case "FETCH_PROJECT_SUCCESS":
+
             return {
                 ...state,
                 chunks: action.chunks,
@@ -22,8 +25,19 @@ export default (state = INITIAL_STATE, action) => {
                 chapter: action.chapter,
                 book: action.book,
                 language: action.language,
+                comments: action.comments,
+                takes: action.takes,
                 loaded: true,
             };
+
+
+
+            case "FETCH_TAKE_SUCCESS":
+
+                return {
+                    ...state,
+                    take: action.take
+                };
 
         case 'FETCH_CHUNKS_FAILED':
             return { ...state, error: action.error }

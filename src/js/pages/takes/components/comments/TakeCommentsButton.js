@@ -21,7 +21,7 @@ class TakeCommentsButton extends Component {
 		this.state = {
 			SaveButtonState: true,
 			blob: null,
-			active: this.props.comments.length > 0
+			//active: this.props.comments.length > 0
 		};
 
 
@@ -45,15 +45,15 @@ class TakeCommentsButton extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.comments.length > 0) {
-			this.setState({
-				active: true
-			});
-		} else {
-			this.setState({
-				active: false
-			});
-		}
+		// if (nextProps.comments.length > 0) {
+		// 	this.setState({
+		// 		active: true
+		// 	});
+		// } else {
+		// 	this.setState({
+		// 		active: false
+		// 	});
+		// }
 	}
 
 	createPlaylist(comment) {
@@ -134,9 +134,9 @@ class TakeCommentsButton extends Component {
 				<div style={{ display: 'flex', justifyContent: 'center', marginTop: '2%', marginBottom: '2%', maxHeight: 350, overflowY: 'scroll' }}>
 					<div style={{ width: '95%', marginTop: '1%' }}>
 
-						{this.props.comments.length > 0
+						{/* {this.props.comments.length > 0
 							? this.props.comments.slice(0).reverse().map(this.createPlaylist.bind(this))
-							: ""}
+							: ""} */}
 
 					</div>
 				</div>

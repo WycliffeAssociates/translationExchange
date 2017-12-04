@@ -22,8 +22,16 @@ class ProjectsListContainer extends Component {
 	}
 
 	requestProjects(queryString) {
-		var query = QueryString.parse(this.props.location.search);
-		this.props.fetchAllProjects(query, queryString);
+		var queryInfo = QueryString.parse(queryString);
+		// const getKey = Object.keys(queryInfo);
+		// const getVal= Object.values(queryInfo);
+		// const key = getKey[0];
+		// const val = getVal[0];
+    //
+	  // const query = {  key:{ slug: val }};
+
+
+		this.props.fetchAllProjects(queryInfo, queryString);
 	}
 
 	//if the project query string has changed, request projects

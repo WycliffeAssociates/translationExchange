@@ -25,7 +25,7 @@ class ChapterHeader extends Component {
 							/>
 
 							<RecordButton
-								comments={this.props.chapter.comments}
+								comments={this.props.chapter.comment}
 								onClickSave={this.props.onClickSave}
 								id={this.props.chapter.id}
 								type={"chapter"}

@@ -4,6 +4,8 @@ import { Table, Grid, Button, Icon } from "semantic-ui-react";
 import "css/takes.css";
 
 class TakeTable extends Component {
+
+
 	deleteAllColumnTakes() {
 		//get a list of the take ID's to delete
 		let takesToDelete = [];
@@ -18,6 +20,8 @@ class TakeTable extends Component {
 	}
 
 	render() {
+		
+
 		return (
 			<Grid.Column>
 				<Table textAlign="center">

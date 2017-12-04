@@ -3,26 +3,29 @@ import config from "../../config/config";
 import { updateMode } from "./UpdatePlaylistActions";
 import { notify } from 'react-notify-toast';
 
-// //dispatch Chunks
-// export const fetchChunks = (query) => {
-//   debugger;
-//     return function (dispatch) {
-//         return axios
-//             .post(config.apiUrl + "get_chunks/", query)
-//             .then(response => {
-//                 dispatch(dispatchChunksSuccess(response.data));
-//                 dispatch(updateMode(response.data.project.mode));
-//             })
-//             .catch(error => {
-//                 dispatch(dispatchChunksFailed(error));
-//             });
-//     };
-// }
+
+export const getAudioTakes = (q) => {
+const query = {chunk_id:q}
+
+    return function (dispatch) {
+        return axios
+            .post(config.apiUrl + "get_takes/", query)
+            .then(response => {
+
+                dispatch(dispatchTakesSuccess(response.data));
+                //dispatch(updateMode(response.data.project.mode));
+
+            })
+            .catch(error => {
+                dispatch(dispatchChunksFailed(error));
+            });
+    };
+}
 
 
 export const getSelectedProjectInfo = (query) =>{                               // from the selected project get chunks, book, language, chapter, project
+
   return function(dispatch){
- debugger;
   return axios
             .all([
               axios.post(config.apiUrl + "get_chunks/", query),
@@ -46,7 +49,7 @@ export const getSelectedProjectInfo = (query) =>{                               
             )
             .catch(error => {
 
-              dispatch(dispatchChunksFailed(error));
+              dispatch(dispatchChunksFailed(error)); //TODO change name to function
                   });
 
     }
@@ -70,19 +73,32 @@ export function dispatchProjectInfoSuccess( chunksResponse,
                                             projectsResponse
 
 ) {
-  console.log(chapterResponse.data.chapters);
-  
+
+
     return {
-        type: 'FETCH_CHUNKS_SUCCESS',
+        type: 'FETCH_PROJECT_SUCCESS',
         chunks: chunksResponse.data,
         project: projectsResponse.data,
         chapter: chapterResponse.data.chapters,
         book: chapterResponse.data.book,
-        language: chapterResponse.data.language
+        language: chapterResponse.data.language,
+        comments: chapterResponse.data.chapters[0].comments
     }
 }
+
+export function dispatchTakesSuccess( takeResponse) {
+
+ 
+    return {
+        type: 'FETCH_TAKE_SUCCESS',
+        take: takeResponse
+    }
+}
+
+
+
 export function dispatchChunksFailed(error) {
-  debugger;
+
     return {
         type: 'FETCH_CHUNKS_FAILED',
         error

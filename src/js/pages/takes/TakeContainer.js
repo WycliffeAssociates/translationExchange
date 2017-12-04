@@ -14,7 +14,7 @@ class TakeContainer extends Component {
 	}
 
 	onDeleteTake() {
-		this.props.deleteTake(this.props.take.take.id);
+		this.props.deleteTake(this.props.take.id);
 	}
 	render() {
 		const { connectDragSource, connectDropTarget } = this.props;
@@ -23,7 +23,7 @@ class TakeContainer extends Component {
 				<div>
 					<Take
 						count={this.props.count}
-						take={this.props.take.take}
+						take={this.props.take}
 						author={this.props.take.user}
 						chunkNumber={this.props.chunkNumber}
 						ratingLoading={this.state.ratingLoading}
@@ -57,7 +57,7 @@ const takeSource = {
 		if (dropResult && dropResult.listId !== item.listId) {
 			props.removeTake(item.index);
 			props.makeChanges(
-				item.take.take.is_publish,
+				item.take.published,
 				dropResult.listId,
 				item.take
 			);

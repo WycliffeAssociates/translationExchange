@@ -2,7 +2,9 @@ import axios from "axios";
 import config from "../../config/config";
 
 export const fetchAllProjects = (query, queryString) => {
+
     return function (dispatch) {
+        
         dispatch(dispatchAllProjectsLoading());
         return axios
             .post(config.apiUrl + "get_projects/", query)
