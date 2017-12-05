@@ -44,13 +44,13 @@ class TakeList extends Component {
 		);
 	}
 
-	onDrop(isPublished, newRating, take) {
+	onDrop(published, newRating, take) {
 		this.props.patchTake(
-			take.take.id,
-			{ is_publish: isPublished, rating: newRating },
+			take.id,
+			{ published: published, rating: newRating },
 			updatedTake => {
 				//success callback
-				if (isPublished) {
+				if (published) {
 					this.props.updateChosenTakeForChunk(updatedTake.id);
 
 				}

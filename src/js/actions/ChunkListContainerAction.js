@@ -88,7 +88,7 @@ export function dispatchProjectInfoSuccess( chunksResponse,
 
 export function dispatchTakesSuccess( takeResponse) {
 
- 
+
     return {
         type: 'FETCH_TAKE_SUCCESS',
         take: takeResponse
@@ -135,15 +135,17 @@ export function setSourceProjectFailed(error) {
 
 //patch take
 export const patchTake = (takeId, patch, success, chunks, updatingDeletedTake) => {
+
     return function (dispatch) {
         return axios
             .patch(config.apiUrl + "takes/" + takeId + "/", patch)
             .then(response => {
+
                 //find correct take to update
                 let chunksToSearchIn = chunks.slice();
-                let chunkToUpdate = chunksToSearchIn.findIndex(chunk => {
-                    return chunk.takes.find(take => take.take.id === takeId);
-                });
+                debugger;
+                let chunkToUpdate = chunksToSearchIn[takeId];
+                console.log(chunkToUpdate)
                 let takeToUpdate = chunksToSearchIn[chunkToUpdate].takes.findIndex(
                     take => take.take.id === takeId
                 );

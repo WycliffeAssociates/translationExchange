@@ -91,7 +91,7 @@ class ProjectFilter extends Component {
 	}
 
 	//called when page first loads
-	componentDidMount() {
+	componentWillMount() {
 		if (this.props.queryString) {
 			this.getFiltersFromProjects(this.props.projects);
 		} else {
