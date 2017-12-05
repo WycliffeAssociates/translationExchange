@@ -65,7 +65,6 @@ class Home extends Component {
 	}
 
 	createListItem(project, key) {
-		
 		return (
 			<div>
 				<Grid.Row

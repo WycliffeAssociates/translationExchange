@@ -3,11 +3,13 @@ import config from "../../config/config";
 import { updateMode } from "./UpdatePlaylistActions";
 import { notify } from 'react-notify-toast';
 
-//dispatch Chunks
-export const fetchChunks = (query) => {
+
+export const getAudioTakes = (q) => {
+const query = {chunk_id:q}
+
     return function (dispatch) {
         return axios
-            .post(config.apiUrl + "get_project_takes/", query)
+            .post(config.apiUrl + "get_takes/", query)
             .then(response => {
                 dispatch(dispatchChunksSuccess(response.data));
                 dispatch(updateMode(response.data.mode['name']));
@@ -19,6 +21,43 @@ export const fetchChunks = (query) => {
 }
 
 
+export const getSelectedProjectInfo = (query) =>{                               // from the selected project get chunks, book, language, chapter, project
+
+  return function(dispatch){
+  return axios
+            .all([
+              axios.post(config.apiUrl + "get_chunks/", query),
+              axios.post(config.apiUrl + "get_chapters/", query),
+              axios.post(config.apiUrl + "get_projects/", query)
+            ])
+            .then(
+              axios.spread(function(
+                chunksResponse,
+                chaptersResponse,
+                projectsResponse
+              ) {
+
+                  dispatch(dispatchProjectInfoSuccess(
+                    chunksResponse,
+                    chaptersResponse,
+                    projectsResponse
+                  ));
+
+              })
+            )
+            .catch(error => {
+
+              dispatch(dispatchChunksFailed(error)); //TODO change name to function
+                  });
+
+    }
+
+
+
+}
+
+
+
 export const resetInfo = () => {
 
     return {
@@ -27,7 +66,27 @@ export const resetInfo = () => {
 
 }
 
-export function dispatchChunksSuccess(response) {
+export function dispatchProjectInfoSuccess( chunksResponse,
+                                            chapterResponse,
+                                            projectsResponse
+
+) {
+
+
+    return {
+        type: 'FETCH_PROJECT_SUCCESS',
+        chunks: chunksResponse.data,
+        project: projectsResponse.data,
+        chapter: chapterResponse.data.chapters,
+        book: chapterResponse.data.book,
+        language: chapterResponse.data.language,
+        comments: chapterResponse.data.chapters[0].comments
+    }
+}
+
+export function dispatchTakesSuccess( takeResponse) {
+
+ 
     return {
         type: 'FETCH_CHUNKS_SUCCESS',
         chunks: response.chunks,
@@ -37,7 +96,11 @@ export function dispatchChunksSuccess(response) {
         language: response.language,
     }
 }
+
+
+
 export function dispatchChunksFailed(error) {
+
     return {
         type: 'FETCH_CHUNKS_FAILED',
         error
@@ -301,4 +364,3 @@ export function saveCommentLoading() {
         type: 'SAVE_COMMENT_LOADING'
     }
 };
-

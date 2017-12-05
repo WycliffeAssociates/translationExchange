@@ -1,9 +1,5 @@
-/*
-    Here's an example presentation component that just handles outputting data. It
-    doesn't care where you got the data from - it just displays it.
- */
-
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Container, Table, Icon } from "semantic-ui-react";
 import CircularProgressbar from "react-circular-progressbar";
@@ -17,22 +13,22 @@ class ProjectsList extends Component {
      */
 	render() {
 		return (
-			<div style={{ direction: `${this.props.direction}` }}>
-				<Container fluid>
-					<Table selectable fixed color="grey">
-						<Table.Header>
-							<Table.Row>
-								<Table.HeaderCell>{this.props.displayText.language}</Table.HeaderCell>
-								<Table.HeaderCell>{this.props.displayText.book}</Table.HeaderCell>
-								<Table.HeaderCell>{this.props.displayText.percentComplete}</Table.HeaderCell>
-								<Table.HeaderCell>{this.props.displayText.more}</Table.HeaderCell>
-							</Table.Row>
-						</Table.Header>
-						<Table.Body>
-							{this.props.projects.map(this.createListItem.bind(this))}
-						</Table.Body>
-					</Table>
-				</Container>
+			<div style ={{direction:`${this.props.direction}`}}>
+			<Container fluid>
+				<Table selectable fixed color="grey">
+					<Table.Header>
+						<Table.Row>
+							<Table.HeaderCell>{this.props.displayText.language}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.displayText.book}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.displayText.percentComplete}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.displayText.more}</Table.HeaderCell>
+						</Table.Row>
+					</Table.Header>
+					<Table.Body>
+						{this.props.projects.map(this.createListItem.bind(this))}
+					</Table.Body>
+				</Table>
+			</Container>
 
 			</div>
 		);
@@ -43,6 +39,7 @@ class ProjectsList extends Component {
      */
 	/*{project.percentFinished}*/
 	createListItem(project) {
+		
 		var navigateToProject = function() {
 			project.version.slug
 			this.props.navigateToProject(
@@ -96,7 +93,7 @@ class ProjectsList extends Component {
 	parseDate(date) {
 		var noon = "am";
 		var dateArr = date.split("T");
-		 date = dateArr[0];
+		var date = dateArr[0];
 
 		var time = dateArr[1].split(".");
 		time = time[0].split(":");
@@ -138,11 +135,9 @@ class ProjectsList extends Component {
 			case "12":
 				date[1] = this.props.displayText.month12;
 				break;
-				default:
-				break;
 		}
 
-		var hour = parseInt(time[0],10);
+		var hour = parseInt(time[0]);
 		if (hour / 12 > -1) {
 			noon = "pm";
 		}
@@ -151,8 +146,8 @@ class ProjectsList extends Component {
 			hour %= 12;
 		}
 
-		return (`${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`);
-	}
+		return (     `${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`	);
+	   }
 
 }
 /*
@@ -163,7 +158,7 @@ ProjectsList.propTypes = {
 	projects: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.number.isRequired,
-			book: PropTypes.object.isRequired,
+			book: PropTypes.string.isRequired,
 			language: PropTypes.string.isRequired,
 			translationType: PropTypes.string.isRequired,
 			percentFinished: PropTypes.number.isRequired,
@@ -173,4 +168,16 @@ ProjectsList.propTypes = {
 	).isRequired
 };
 
-export default ProjectsList;
+
+const mapStateToProps = state => {
+
+	const {direction} = state.direction;
+
+const{ displayText } = state.geolocation;
+
+return{displayText, direction};
+
+};
+
+
+export default connect (mapStateToProps) (ProjectsList);

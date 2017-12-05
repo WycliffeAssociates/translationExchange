@@ -17,7 +17,7 @@ import {
 	addToPlaylist,
 	playTake,
 	stopAudio,
-	fetchChunks,
+	getSelectedProjectInfo,
 	setSourceProject,
 	resetInfo,
 	patchTake,
@@ -26,7 +26,8 @@ import {
 	chapterUpdate,
 	deleteComment,
 	markedAsPublished,
-	saveComment
+	saveComment,
+	getAudioTakes
 } from './../../actions';
 
 class ChunkListContainer extends Component {
@@ -36,10 +37,19 @@ class ChunkListContainer extends Component {
 
 	componentDidMount() {
 		var query = QueryString.parse(this.props.location.search);
-		this.props.fetchChunks(query);
+
+
+		 // const query = {  book:{ slug: queryInfo.book },
+		 //  								chapter:{number: queryInfo.chapter },
+			// 							  language:{slug: queryInfo.language},
+			// 								version:{slug: queryInfo.version}
+			// 							};
+
+		this.props.getSelectedProjectInfo(query);
 	}
 
 	updatingDeletedTake(takeId) {
+
 		let updatedChunks = this.props.chunks.slice();
 		let chunkToUpdate = updatedChunks.findIndex(chunk => {
 			return chunk.takes.find(take => take.take.id === takeId);
@@ -51,6 +61,7 @@ class ChunkListContainer extends Component {
 	}
 
 	updatingDeletedComment(type, commentId, takeId) {
+
 		let updatedChunks = this.props.chunks.slice();
 		if (type === "take") {
 			let chunkToUpdate = updatedChunks.findIndex(chunk => {
@@ -219,13 +230,17 @@ class ChunkListContainer extends Component {
 		 * TODO: discuss if the empty list be show or not(Chunks without takes)
 		 */
 		//	if (chunk.takes.length > 0) {
+	//const take = this.props.getAudioTakes(chunk.id);
+  
+
 		return (
 			<div>
 				<Chunk
-					comments={chunk.comments}
-					takesForChunk={chunk.takes} // array of takes
-					mode={this.props.project.mode}
+					comments={this.props.comments}
+					takesForChunk={chunk} // array of takes
+					mode={"chunk"}        //todo get mode from API
 					number={chunk.startv}
+					chunkId= {chunk.id}
 					patchTake={this.patchTake.bind(this)}
 					deleteTake={this.deleteTake.bind(this)}
 					updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
@@ -249,7 +264,7 @@ const mapStateToProps = state => {
 	const { displayText = "" } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { loaded = false, error = "", chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
+	const { loaded = false, error = "", comments =[], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
 	return { playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 }
@@ -260,7 +275,7 @@ const mapDispatchToProps = dispatch => {
 			addToPlaylist,
 			playTake,
 			stopAudio,
-			fetchChunks,
+			getSelectedProjectInfo,
 			setSourceProject,
 			resetInfo,
 			patchTake,
@@ -269,7 +284,8 @@ const mapDispatchToProps = dispatch => {
 			chapterUpdate,
 			deleteComment,
 			markedAsPublished,
-			saveComment
+			saveComment,
+			getAudioTakes
 		}, dispatch);
 };
 

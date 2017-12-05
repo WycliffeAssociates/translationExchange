@@ -3,9 +3,34 @@ import ChunkPropTypes from "./ChunkPropTypes";
 import { Accordion, Icon, Grid } from "semantic-ui-react";
 import TakeTable from "../takes/TakeTable";
 import "css/takes.css";
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
+import { getAudioTakes } from './../../actions';
 
 import ChunkSidebar from "../takes/components/SideBar";
 class Chunk extends Component {
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			takes: []
+
+		};
+
+	}
+
+getTakes(chunkId) {
+
+	this.props.getAudioTakes(chunkId);
+
+
+}
+
+
+
+
+
 	render() {
 		var publish = [];
 		var onestar = [];
@@ -13,23 +38,28 @@ class Chunk extends Component {
 		var threestar = [];
 
 		var counter = 0;
+    //console.log(this.props.take);
+		let orderedTakes = this.props.take.slice();
 
-		let orderedTakes = this.props.takesForChunk.slice();
 
-		orderedTakes.map(i => {
-			counter += 1;
-			i.order = counter;
+			orderedTakes.map(i => {
+				counter += 1;
+				i.order = counter;
+        console.log(i)
+				if (i.published) {
 
-			if (i.take.is_publish) {
-				publish[publish.length] = i;
-			} else if (i.take.rating < 2) {
-				onestar[onestar.length] = i;
-			} else if (i.take.rating === 2) {
-				twostar[twostar.length] = i;
-			} else if (i.take.rating === 3) {
-				threestar[threestar.length] = i;
-			}
-		});
+					publish[publish.length] = i;
+				} else if (i.rating < 2) {
+					
+					onestar[onestar.length] = i;
+				} else if (i.rating === 2) {
+					twostar[twostar.length] = i;
+				} else if (i.rating === 3) {
+					threestar[threestar.length] = i;
+				}
+			});
+
+
 
 		var modeLabel = "";
 
@@ -62,14 +92,14 @@ class Chunk extends Component {
 		return (
 			<div>
 				<Accordion fluid styled>
-					<Accordion.Title className="ChunkTitle">
+					<Accordion.Title className="ChunkTitle" onClick={()=> this.getTakes(this.props.chunkId)} >
 						<center>
 							<Icon name="dropdown" />
 							<font color="black">
 								{modeLabel} {this.props.number}
-								{this.props.comments.length > 0
+								{/* {this.props.comments.length > 0
 									? <Icon name="circle" color="yellow" />
-									: ""}
+									: ""} */}
 							</font>
 						</center>
 					</Accordion.Title>
@@ -170,4 +200,19 @@ Chunk.propTypes = {
 	chunk: ChunkPropTypes
 };
 
-export default Chunk;
+
+
+const mapStateToProps = state => {
+
+	const {  take } = state.chunkListContainer;
+	return { take };
+
+}
+
+const mapDispatchToProps = dispatch => {
+	return bindActionCreators(
+		{	getAudioTakes
+		}, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chunk);

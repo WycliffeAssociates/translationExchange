@@ -45,15 +45,15 @@ class TakeCommentsButton extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.comments.length > 0) {
-			this.setState({
-				active: true
-			});
-		} else {
-			this.setState({
-				active: false
-			});
-		}
+		// if (nextProps.comments.length > 0) {
+		// 	this.setState({
+		// 		active: true
+		// 	});
+		// } else {
+		// 	this.setState({
+		// 		active: false
+		// 	});
+		// }
 	}
 
 	createPlaylist(comment) {
