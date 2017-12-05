@@ -21,7 +21,7 @@ class Chunk extends Component {
 	}
 
 getTakes(chunkId) {
-
+  
 	this.props.getAudioTakes(chunkId);
 
 
@@ -50,7 +50,7 @@ getTakes(chunkId) {
 
 					publish[publish.length] = i;
 				} else if (i.rating < 2) {
-					
+
 					onestar[onestar.length] = i;
 				} else if (i.rating === 2) {
 					twostar[twostar.length] = i;

@@ -21,7 +21,7 @@ class TakeCommentsButton extends Component {
 		this.state = {
 			SaveButtonState: true,
 			blob: null,
-			//active: this.props.comments.length > 0
+			// active: this.props.comments.length > 0
 		};
 
 

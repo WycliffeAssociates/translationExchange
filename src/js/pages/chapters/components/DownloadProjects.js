@@ -18,7 +18,6 @@ class DownloadProjects extends Component {
     }
 
     render () {
-
         return (
             <Button
                 content={this.props.displayText.download}

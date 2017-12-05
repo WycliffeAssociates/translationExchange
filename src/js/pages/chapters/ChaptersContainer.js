@@ -9,7 +9,7 @@ import "css/chapters.css";
 import PublishButton from "./components/PublishButton";
 import DownloadSourceAudio from "./components/DownloadSourceAudio";
 import NotFound from "js/pages/NotFound";
-import ErrorButton from '../../components/ErrorBytton';
+import ErrorButton from '../../components/ErrorButton';
 import LoadingGif from '../../components/LoadingGif';
 import { bindActionCreators } from 'redux';
 import { fetchChaptersContainerData, setCheckingLevel, publishFiles, downloadProject, downloadSourceAudio } from '../../actions';
@@ -66,14 +66,14 @@ class ChaptersContainer extends Component {
 						<h1>
 							{this.props.book.name} ({this.props.language.name})
 								<DownloadSourceAudio
-								isPublish={this.props.is_publish}
+								published={this.props.published}
 								downloadLoadingSourceAudio={this.props.downloadLoadingSourceAudio}
 								onDownloadSourceAudio={this.onDownloadSourceAudio.bind(this)}
 								displayText={this.props.displayText}
 							/>
 							<PublishButton
 								chapters={this.props.chapters}
-								isPublish={this.props.is_publish}
+								published={this.props.published}
 								displayText={this.props.displayText}
 								onPublish={this.publishFiles.bind(this)}
 							/>
@@ -99,7 +99,7 @@ class ChaptersContainer extends Component {
 								}
 								navigateToChapter={this.navigateToChapter.bind(this)}
 								setCheckingLevel={this.setCheckingLevel.bind(this)}
-								projectIsPublish={this.props.is_publish}
+								projectIsPublish={this.props.published}
 								displayText={this.props.displayText}
 							/>
 						</Table>
@@ -136,13 +136,13 @@ const mapStateToProps = state => {
 
 const {direction} = state.direction;
 	const { displayText } = state.geolocation;
-	const { chapters, book, project_id, is_publish,
+	const { chapters, book, project_id, published,
 		language, loaded, downloadLoading,
 		downloadError, downloadSuccess, downloadLoadingSourceAudio,
 		downloadErrorAudioSource } = state.chaptersContainer;
 	return {
 		displayText, chapters, book,
-		project_id, is_publish, language,
+		project_id, published, language,
 		loaded, downloadLoading,
 		downloadError, downloadSuccess,
 		downloadLoadingSourceAudio,

@@ -6,10 +6,9 @@ class ErrorButton extends Component {
     render() {
         return (
             <Button
-                label={{ as: 'a', basic: true, pointing: 'right', content: `  ${this.props.error}` }}
+                label={{ as: 'a', basic: true, pointing: 'right', content: `${this.props.error.message}` }}
                 labelPosition='left'
-              //  onClick={this.props.retry}
-                content={"sd"}
+                onClick={this.props.retry}
             />
         );
     }

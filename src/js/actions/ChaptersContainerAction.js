@@ -23,7 +23,7 @@ export function fetchChaptersContainerDataSuccess(response) {
         version:response.version,
         book: response.book,
         project_id: response.project_id,
-        is_publish: response.is_publish,
+        published: response.published,
         language: response.language,
         loaded: true
     }
@@ -96,7 +96,7 @@ export function downloadProject(projectId) {
     return function (dispatch) {
         dispatch(dispatchLoadingDownloadProject());
         return axios
-            .post(config.apiUrl + "zip_files/", { project: projectId }, { timeout: 0 })
+            .post(config.apiUrl + "zip_project_files/", { project_id: projectId }, { timeout: 0 })
             .then(response => {
                 //Todo: find the better way to download files
                 window.location = config.streamingUrl + response.data.location;
@@ -137,7 +137,7 @@ export function downloadSourceAudio(projectId) {
     return function (dispatch) {
         dispatch(dispatchLoadingDownloadSourceAudio());
         return axios
-            .post(config.apiUrl + "get_source/", { project: projectId }, { timeout: 0 })
+            .post(config.apiUrl + "get_source/", { project_id: projectId,published:true }, { timeout: 0 })
             .then(response => {
                 //Todo: find the better way to download files
                 window.location = config.streamingUrl + response.data.location;

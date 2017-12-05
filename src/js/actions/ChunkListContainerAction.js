@@ -5,7 +5,7 @@ import { notify } from 'react-notify-toast';
 
 
 export const getAudioTakes = (q) => {
-const query = {chunk_id:q}
+    const query = { chunk_id: q }
 
     return function (dispatch) {
         return axios
@@ -13,8 +13,6 @@ const query = {chunk_id:q}
             .then(response => {
 
                 dispatch(dispatchTakesSuccess(response.data));
-                //dispatch(updateMode(response.data.project.mode));
-
             })
             .catch(error => {
                 dispatch(dispatchChunksFailed(error));
@@ -23,42 +21,36 @@ const query = {chunk_id:q}
 }
 
 
-export const getSelectedProjectInfo = (query) =>{                               // from the selected project get chunks, book, language, chapter, project
+export const getSelectedProjectInfo = (query) => {                               // from the selected project get chunks, book, language, chapter, project
 
-  return function(dispatch){
-  return axios
+    return function (dispatch) {
+        return axios
             .all([
-              axios.post(config.apiUrl + "get_chunks/", query),
-              axios.post(config.apiUrl + "get_chapters/", query),
-              axios.post(config.apiUrl + "get_projects/", query)
+                axios.post(config.apiUrl + "get_chunks/", query),
+                axios.post(config.apiUrl + "get_chapters/", query),
+                axios.post(config.apiUrl + "get_projects/", query)
             ])
             .then(
-              axios.spread(function(
+            axios.spread(function (
                 chunksResponse,
                 chaptersResponse,
                 projectsResponse
-              ) {
+            ) {
 
-                  dispatch(dispatchProjectInfoSuccess(
+                dispatch(dispatchProjectInfoSuccess(
                     chunksResponse,
                     chaptersResponse,
                     projectsResponse
-                  ));
+                ));
 
-              })
+            })
             )
             .catch(error => {
 
-              dispatch(dispatchChunksFailed(error)); //TODO change name to function
-                  });
-
+                dispatch(dispatchChunksFailed(error)); //TODO change name to function
+            });
     }
-
-
-
 }
-
-
 
 export const resetInfo = () => {
 
@@ -68,13 +60,9 @@ export const resetInfo = () => {
 
 }
 
-export function dispatchProjectInfoSuccess( chunksResponse,
-                                            chapterResponse,
-                                            projectsResponse
-
-) {
-
-
+export function dispatchProjectInfoSuccess(chunksResponse,
+    chapterResponse,
+    projectsResponse) {
     return {
         type: 'FETCH_PROJECT_SUCCESS',
         chunks: chunksResponse.data,
@@ -86,19 +74,14 @@ export function dispatchProjectInfoSuccess( chunksResponse,
     }
 }
 
-export function dispatchTakesSuccess( takeResponse) {
-
-
+export function dispatchTakesSuccess(takeResponse) {
     return {
         type: 'FETCH_TAKE_SUCCESS',
         take: takeResponse
     }
 }
 
-
-
 export function dispatchChunksFailed(error) {
-
     return {
         type: 'FETCH_CHUNKS_FAILED',
         error
@@ -143,6 +126,9 @@ export const patchTake = (takeId, patch, success, chunks, updatingDeletedTake) =
 
                 //find correct take to update
                 let chunksToSearchIn = chunks.slice();
+                // let chunkToUpdate = chunksToSearchIn.findIndex(chunk => {
+                //     return chunk.takes.find(take => take.take.id === takeId);
+                // });
                 debugger;
                 let chunkToUpdate = chunksToSearchIn[takeId];
                 console.log(chunkToUpdate)
