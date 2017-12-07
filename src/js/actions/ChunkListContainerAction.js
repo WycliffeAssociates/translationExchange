@@ -92,7 +92,7 @@ export function dispatchChunksFailed(error) {
 export const setSourceProject = (query, chapter) => {
     return function (dispatch) {
         return axios
-            .post(config.apiUrl + "get_project_takes/", { ...query, chapter: chapter })
+            .post(config.apiUrl + "get_projects/", { ...query, chapter: chapter })
             .then(response => {
                 dispatch(setSourceProjectSuccess(response.data, query));
             })

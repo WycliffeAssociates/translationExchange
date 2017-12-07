@@ -30,14 +30,11 @@ export default (state = INITIAL_STATE, action) => {
                 loaded: true,
             };
 
-
-
-            case "FETCH_TAKE_SUCCESS":
-
-                return {
-                    ...state,
-                    take: action.take
-                };
+        case "FETCH_TAKE_SUCCESS":
+            return {
+                ...state,
+                take: action.take
+            };
 
         case 'FETCH_CHUNKS_FAILED':
             return { ...state, error: action.error }

@@ -12,13 +12,13 @@ export const fetchAllSourceAudio = (book, projectId, setInitialSourceAudio) => {
                     let projectQuery = {
                         language: project.language.slug,
                         book: project.book.slug,
-                        version: project.version
+                        version: project.version.slug
                     };
                     if (project.id !== projectId) {
                         projects.push({
                             key: project.id,
                             value: projectQuery,
-                            text: project.language.name + " (" + project.version + ")"
+                            text: project.language.name + " (" + project.version.name + ")"
                         });
                         setInitialSourceAudio(projects[0].value);
                     }
