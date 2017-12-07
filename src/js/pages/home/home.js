@@ -41,7 +41,7 @@ class Home extends Component {
 					<StartHere text={btnText} />
 				</Container>
 
-				{homeRecentProjects&&homeRecentProjects.length > 0 ? (
+				{homeRecentProjects && homeRecentProjects.length > 0 ? (
 					<Container fluid>
 						<Grid padded textAlign="center">
 							<Grid.Column width={3}>
@@ -51,8 +51,10 @@ class Home extends Component {
 									</h2>
 								</Grid.Row>
 								<Divider />
-								{homeRecentProjects.splice(0,4).map((project, i) => {
-									return this.createListItem(project, i);
+								{homeRecentProjects.splice(0, 4).map((project, i) => {
+									if (project.published == false) {
+										return this.createListItem(project, i);
+									}
 								})}
 							</Grid.Column>
 						</Grid>
