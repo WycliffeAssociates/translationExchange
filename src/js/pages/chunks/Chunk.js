@@ -40,14 +40,10 @@ getTakes(chunkId) {
 		var counter = 0;
     //console.log(this.props.take);
 		let orderedTakes = this.props.take.slice();
-
-
 			orderedTakes.map(i => {
 				counter += 1;
 				i.order = counter;
-        console.log(i)
 				if (i.published) {
-
 					publish[publish.length] = i;
 				} else if (i.rating < 2) {
 
@@ -58,11 +54,7 @@ getTakes(chunkId) {
 					threestar[threestar.length] = i;
 				}
 			});
-
-
-
 		var modeLabel = "";
-
 		switch (this.props.mode) {
 			case "chunk":
 				modeLabel = this.props.displayText.chunk;

@@ -80,8 +80,6 @@ class TakeList extends Component {
 			minHeight: "231px"
 		};
 		const { takes } = this.props;
-		console.log(takes);
-
 		const { connectDropTarget } = this.props;
 
 		return connectDropTarget(

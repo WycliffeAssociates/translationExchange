@@ -9,11 +9,6 @@ class SetSourceAudio extends Component {
         this.props.fetchAllSourceAudio(this.props.book, this.props.projectId, this.setSource.bind(this));
     }
     setSource(project) {
-        project={
-            book:'gen',
-            language:'yo',
-            version:''
-        }
         this.props.setSourceProject(project);
     }
 

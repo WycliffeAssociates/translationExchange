@@ -107,8 +107,6 @@ class RecordButton extends Component {
 	};
 
 	render() {
-
-
 		return (
 			<Modal
 				size="small"
@@ -138,7 +136,7 @@ class RecordButton extends Component {
 					sendComment={this.getComment}
 					onClickSave={this.props.onClickSave}
 					type={this.props.type}
-					id={this.props.id}
+					id={this.props.number}
 					loadingActive={this.props.loadingActive}
 				/>
 
