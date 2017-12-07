@@ -57,11 +57,14 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, active: false };
 
         case 'PATCH_TAKE_SUCCESS':
+        
             return {
                 ...state, chunks: action.updatedChunk
             }
 
-        case 'UPDATE_DELETED_CHUNK': return {
+        case 'UPDATE_DELETED_CHUNK':
+
+         return {
             ...state, chunks: action.updatedChunk
         }
 

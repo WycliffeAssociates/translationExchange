@@ -11,7 +11,6 @@ export const getAudioTakes = (q) => {
         return axios
             .post(config.apiUrl + "get_takes/", query)
             .then(response => {
-
                 dispatch(dispatchTakesSuccess(response.data));
             })
             .catch(error => {
@@ -90,9 +89,10 @@ export function dispatchChunksFailed(error) {
 
 //setSourceProject
 export const setSourceProject = (query, chapter) => {
+  debugger;
     return function (dispatch) {
         return axios
-            .post(config.apiUrl + "get_project_takes/", { ...query, chapter: chapter })
+            .post(config.apiUrl + "get_takes/", { ...query, chapter: chapter })
             .then(response => {
                 dispatch(setSourceProjectSuccess(response.data, query));
             })
@@ -126,20 +126,18 @@ export const patchTake = (takeId, patch, success, chunks, updatingDeletedTake) =
 
                 //find correct take to update
                 let chunksToSearchIn = chunks.slice();
-                // let chunkToUpdate = chunksToSearchIn.findIndex(chunk => {
-                //     return chunk.takes.find(take => take.take.id === takeId);
-                // });
-                debugger;
-                let chunkToUpdate = chunksToSearchIn[takeId];
-                console.log(chunkToUpdate)
-                let takeToUpdate = chunksToSearchIn[chunkToUpdate].takes.findIndex(
-                    take => take.take.id === takeId
-                );
-                chunksToSearchIn[chunkToUpdate].takes[takeToUpdate].take = response.data;
-                if (success) {
-                    setActiveToFalse(chunksToSearchIn[chunkToUpdate].takes[takeToUpdate].take);
-                }
-                dispatch(patchTakeSuccess(chunksToSearchIn));
+
+                let chunkToUpdate = chunksToSearchIn.map(chunk => {return chunk.id} ).indexOf(takeId);   // search in the chunks array the index of the chunk that contains the take modified
+
+
+                // let takeToUpdate = chunksToSearchIn[chunkToUpdate].takes.findIndex(
+                //     take => take.take.id === takeId
+                // );
+                // chunksToSearchIn[chunkToUpdate].takes[takeToUpdate].take = response.data;
+                // if (success) {
+                //     setActiveToFalse(chunksToSearchIn[chunkToUpdate].takes[takeToUpdate].take);
+                // }
+                 //dispatch(patchTakeSuccess(chunksToSearchIn));
             })
             .catch(error => {
                 let message;
