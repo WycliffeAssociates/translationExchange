@@ -11,7 +11,8 @@ export const getAudioTakes = (q) => {
         return axios
             .post(config.apiUrl + "get_takes/", query)
             .then(response => {
-                dispatch(dispatchTakesSuccess(response.data));
+
+                dispatch(dispatchTakesSuccess(response.data, q));
             })
             .catch(error => {
                 dispatch(dispatchChunksFailed(error));
@@ -52,11 +53,9 @@ export const getSelectedProjectInfo = (query) => {                              
 }
 
 export const resetInfo = () => {
-
     return {
         type: 'RESET_STATE'
     }
-
 }
 
 export function dispatchProjectInfoSuccess(chunksResponse,
@@ -73,10 +72,12 @@ export function dispatchProjectInfoSuccess(chunksResponse,
     }
 }
 
-export function dispatchTakesSuccess(takeResponse) {
+export function dispatchTakesSuccess(takesResponse, chunkId) {
+   takesResponse.map(take => take.chunkId = chunkId);
+
     return {
         type: 'FETCH_TAKE_SUCCESS',
-        take: takeResponse
+        takes: takesResponse
     }
 }
 
@@ -89,7 +90,7 @@ export function dispatchChunksFailed(error) {
 
 //setSourceProject
 export const setSourceProject = (query, chapter) => {
-  debugger;
+
     return function (dispatch) {
         return axios
             .post(config.apiUrl + "get_takes/", { ...query, chapter: chapter })
@@ -117,27 +118,20 @@ export function setSourceProjectFailed(error) {
 };
 
 //patch take
-export const patchTake = (takeId, patch, success, chunks, updatingDeletedTake) => {
-
+export const patchTake = (takeId, patch, success, takes, updatingDeletedTake) => {
     return function (dispatch) {
         return axios
             .patch(config.apiUrl + "takes/" + takeId + "/", patch)
             .then(response => {
-
                 //find correct take to update
-                let chunksToSearchIn = chunks.slice();
+                let takesToSearchIn = takes
 
-                let chunkToUpdate = chunksToSearchIn.map(chunk => {return chunk.id} ).indexOf(takeId);   // search in the chunks array the index of the chunk that contains the take modified
+                let takeIdToUpdate = takesToSearchIn.map(chunk => {return chunk.id} ).indexOf(takeId);   // search in the chunks array the index of the chunk that contains the take modified
 
+                let updatedTakeInfo = response.data;
 
-                // let takeToUpdate = chunksToSearchIn[chunkToUpdate].takes.findIndex(
-                //     take => take.take.id === takeId
-                // );
-                // chunksToSearchIn[chunkToUpdate].takes[takeToUpdate].take = response.data;
-                // if (success) {
-                //     setActiveToFalse(chunksToSearchIn[chunkToUpdate].takes[takeToUpdate].take);
-                // }
-                 //dispatch(patchTakeSuccess(chunksToSearchIn));
+                takesToSearchIn[takeIdToUpdate] = updatedTakeInfo;
+                dispatch(patchTakeSuccess(takesToSearchIn));
             })
             .catch(error => {
                 let message;
@@ -156,10 +150,10 @@ export const patchTake = (takeId, patch, success, chunks, updatingDeletedTake) =
     };
 }
 
-export function patchTakeSuccess(updatedChunk) {
+export function patchTakeSuccess(updatedTakes) {
     return {
         type: 'PATCH_TAKE_SUCCESS',
-        updatedChunk
+        updatedTakes
     }
 }
 export function patchTakeFailed(error) {

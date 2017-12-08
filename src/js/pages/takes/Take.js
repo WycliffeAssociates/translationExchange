@@ -10,6 +10,7 @@ import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./components/comments/TakeCommentsButton";
 import { addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio } from './../../actions';
 
+
 class Take extends Component {
 	constructor(props) {
 		super(props);
@@ -51,20 +52,19 @@ class Take extends Component {
 
 	getTakeInfo() {
 		const takeLoc = this.props.take.location;
-		debugger;
 		const takeNum = this.props.count;
 		const startv = this.props.chunkNumber;
+		const author = this.props.author.name;
 		const date = this.parseDate(this.props.take.date_modified);
 		const markers = this.props.take.markers;
 
 		let take = {
 			src: config.streamingUrl + takeLoc,
 			markers: markers,
-			name: `${this.props.displayText.take} ${takeNum}, ${this.props.displayText.chunk} ${startv}  ( 'author' ${this.props.displayText.on} ${date})`,  // in case of other mode like chunk mode or verse mode verify this
+			name: `${this.props.displayText.take} ${takeNum}, ${this.props.displayText.chunk} ${startv}  (${author} ${this.props.displayText.on} ${date})`,  // in case of other mode like chunk mode or verse mode verify this
 			id: takeLoc,
 			chunk: `${this.props.displayText.chunk} ${startv}`          // in case of a different mode like segment or verse here is assumed that only chunks will be used
 		};
-		console.log(config.streamingUrl + takeLoc);
 		return take;
 	}
 
@@ -128,17 +128,16 @@ class Take extends Component {
 	}
 
 
+
 	render() {
 
 		var file = [];
 		file[0] = {
-
 			src: config.streamingUrl + this.props.take.location
 		};
 
-		//console.log(this.props);
-
 		return (
+
 			<Segment>
 				<Grid textAlign="left">
 					<Grid.Row>
@@ -193,13 +192,16 @@ class Take extends Component {
 					</Grid.Row>
 				</Grid>
 			</Segment>
+
+
+
 		);
 	}
 
 	parseDate(date) {
 		var noon = "am";
 		var dateArr = date.split("T");
-		date = dateArr[0];
+		var date = dateArr[0];
 
 		var time = dateArr[1].split(".");
 		time = time[0].split(":");
@@ -243,7 +245,7 @@ class Take extends Component {
 				break;
 		}
 
-		var hour = parseInt(time[0],10);
+		var hour = parseInt(time[0]);
 		if (hour / 12 > -1) {
 			noon = "pm";
 		}

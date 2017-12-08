@@ -12,24 +12,26 @@ class Chunk extends Component {
 
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			takes: []
-
+    	this.state = {
+			calledChunks: [],
+			chunkId:''
 		};
-
 	}
 
+
 getTakes(chunkId) {
-  
-	this.props.getAudioTakes(chunkId);
+const {calledChunks} = this.state
 
-
+if(!calledChunks.includes(chunkId)){                 // once you click a chunk, checks if the chunk has not been clicked before
+    this.props.getAudioTakes(chunkId);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
+																										// so next time clicked to close it won't call the api
+	  this.setState({
+		calledChunks: [...this.state.calledChunks, chunkId],
+		chunkId
+	})
 }
 
-
-
-
+}
 
 	render() {
 		var publish = [];
@@ -38,31 +40,40 @@ getTakes(chunkId) {
 		var threestar = [];
 
 		var counter = 0;
-    //console.log(this.props.take);
-		let orderedTakes = this.props.take.slice();
+		let orderedTakes = this.props.takes;
 
 
-			orderedTakes.map(i => {
-				counter += 1;
-				i.order = counter;
-        console.log(i)
-				if (i.published) {
 
-					publish[publish.length] = i;
-				} else if (i.rating < 2) {
 
-					onestar[onestar.length] = i;
-				} else if (i.rating === 2) {
-					twostar[twostar.length] = i;
-				} else if (i.rating === 3) {
-					threestar[threestar.length] = i;
-				}
+			//orderedTakes.map(i => {
+
+			orderedTakes.map(tksList => {
+
+        tksList.map(tk => {
+					debugger;
+					if(this.state.chunkId === tk.chunkId){   // get takes corresponding just to the selected chunk
+						counter += 1;
+					 tk.order = counter;
+					 if (tk.published) {
+						 publish[publish.length] = tk;
+					 } else if (tk.rating < 2) {
+						 onestar[onestar.length] = tk;
+					 } else if (tk.rating === 2) {
+						 twostar[twostar.length] = tk;
+					 } else if (tk.rating === 3) {
+						 threestar[threestar.length] = tk;
+					 }
+					}
+
+
+				});
+
+
+
+
+
 			});
-
-
-
 		var modeLabel = "";
-
 		switch (this.props.mode) {
 			case "chunk":
 				modeLabel = this.props.displayText.chunk;
@@ -73,7 +84,6 @@ getTakes(chunkId) {
 			default:
 				modeLabel = this.props.displayText.segment;
 		}
-
 		var icon1 = <Icon name="star" color="red" size="big" />;
 		var icon2 = (
 			<div>
@@ -91,8 +101,8 @@ getTakes(chunkId) {
 		var icon4 = <Icon name="check" color="pink" size="big" />;
 		return (
 			<div>
-				<Accordion fluid styled>
-					<Accordion.Title className="ChunkTitle" onClick={()=> this.getTakes(this.props.chunkId)} >
+				<Accordion fluid styled >
+					<Accordion.Title className="ChunkTitle" onClick={(itempProps)=> this.getTakes(this.props.chunkId, itempProps)} >
 						<center>
 							<Icon name="dropdown" />
 							<font color="black">
@@ -200,13 +210,9 @@ Chunk.propTypes = {
 	chunk: ChunkPropTypes
 };
 
-
-
 const mapStateToProps = state => {
-
-	const {  take } = state.chunkListContainer;
-	return { take };
-
+	const {  takes } = state.chunkListContainer;
+	return { takes };
 }
 
 const mapDispatchToProps = dispatch => {

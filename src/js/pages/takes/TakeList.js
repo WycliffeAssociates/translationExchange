@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import TakeContainer from "./TakeContainer";
 import TakePropTypes from "./TakePropTypes";
 import update from "react/lib/update";
+import { connect } from "react-redux";
 import { DropTarget } from "react-dnd";
 
 class TakeList extends Component {
@@ -52,7 +53,6 @@ class TakeList extends Component {
 				//success callback
 				if (published) {
 					this.props.updateChosenTakeForChunk(updatedTake.id);
-
 				}
 			}
 		);
@@ -80,14 +80,11 @@ class TakeList extends Component {
 			minHeight: "231px"
 		};
 		const { takes } = this.props;
-		console.log(takes);
-
 		const { connectDropTarget } = this.props;
 
 		return connectDropTarget(
 			<div style={{ ...style }}>
 				{takes.map((take, i) => {
-					console.log("take", take);
 					return (
 						<div>
 							<br />
@@ -132,6 +129,13 @@ const takeTarget = {
 		return { listId: ratingToGet };
 	}
 };
+
+
+const mapStateToProps = state => {
+	const {takes} = state.chunkListContainer;
+	return {takes};
+}
+
 
 export default DropTarget("TakeContainer", takeTarget, (connect, monitor) => ({
 	connectDropTarget: connect.dropTarget(),

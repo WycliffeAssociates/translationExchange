@@ -4,6 +4,8 @@ import Take from "./Take";
 import { findDOMNode } from "react-dom";
 import { DragSource, DropTarget } from "react-dnd";
 import flow from "lodash/flow";
+import ItemPreview from './components/ItemPreview';
+
 class TakeContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -16,29 +18,63 @@ class TakeContainer extends Component {
 	onDeleteTake() {
 		this.props.deleteTake(this.props.take.id);
 	}
+
+	dragObject(){
+	const { connectDragSource, connectDropTarget, connectDragPreview, isDragging } = this.props;
+	const style = { opacity: isDragging ? 0.1 : 1 };
+
+	let content = (
+	<div>
+	 <div ref={input => {this.myInput = input}} className="item" style= {style}>
+		 <Take
+				count={this.props.count}
+				take={this.props.take}
+				author={this.props.take.user}
+				chunkNumber={this.props.chunkNumber}
+				ratingLoading={this.state.ratingLoading}
+				source={this.props.source}
+				comments={this.props.take.comments}
+				addToListenList={this.props.addToListenList}
+				onDeleteTake={this.onDeleteTake.bind(this)}
+				onClickSave={this.props.onClickSave}
+				deleteComment={this.props.deleteComment}
+				active={this.props.active}
+				mode={this.props.mode}
+			/>
+	</div>
+	{/* <ItemPreview
+	// count={this.props.count}
+	// take={this.props.take.take}
+	// author={this.props.take.user}
+	// chunkNumber={this.props.chunkNumber}
+	// ratingLoading={this.state.ratingLoading}
+	// source={this.props.source}
+	// comments={this.props.take.comments}
+	// addToListenList={this.props.addToListenList}
+	// onDeleteTake={this.onDeleteTake.bind(this)}
+	// onClickSave={this.props.onClickSave}
+	// deleteComment={this.props.deleteComment}
+	// active={this.props.active}
+	// mode={this.props.mode}
+	key="__preview" name="TakeContainer" /> */}
+
+	</div>
+	);
+
+	// Connect as drag source
+		content = connectDragSource(content);
+		// Connect as drop target
+		content = connectDropTarget(content);
+		// Connect to drag layer
+		//content = connectDragPreview(content);
+
+	return content;
+
+}
+
+
 	render() {
-		const { connectDragSource, connectDropTarget } = this.props;
-		return connectDragSource(
-			connectDropTarget(
-				<div>
-					<Take
-						count={this.props.count}
-						take={this.props.take}
-						author={this.props.take.user}
-						chunkNumber={this.props.chunkNumber}
-						ratingLoading={this.state.ratingLoading}
-						source={this.props.source}
-						comments={this.props.take.comments}
-						addToListenList={this.props.addToListenList}
-						onDeleteTake={this.onDeleteTake.bind(this)}
-						onClickSave={this.props.onClickSave}
-						deleteComment={this.props.deleteComment}
-						active={this.props.active}
-						mode={this.props.mode}
-					/>
-				</div>
-			)
-		);
+		return this.dragObject()
 	}
 }
 
@@ -49,9 +85,7 @@ const takeSource = {
 	beginDrag(props) {
 		return { index: props.index, listId: props.listId, take: props.take };
 	},
-
 	endDrag(props, monitor) {
-
 		const item = monitor.getItem();
 		const dropResult = monitor.getDropResult();
 		if (dropResult && dropResult.listId !== item.listId) {

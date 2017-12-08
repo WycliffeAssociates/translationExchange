@@ -3,7 +3,7 @@ const INITIAL_STATE = {
     error: "",
     chunks: [],
     comments: [],
-    take: [],
+    takes: [],
     project: {},
     book: {},
     chapter: {},
@@ -17,7 +17,6 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case "FETCH_PROJECT_SUCCESS":
-
             return {
                 ...state,
                 chunks: action.chunks,
@@ -26,19 +25,14 @@ export default (state = INITIAL_STATE, action) => {
                 book: action.book,
                 language: action.language,
                 comments: action.comments,
-                takes: action.takes,
                 loaded: true,
             };
-
-
-
             case "FETCH_TAKE_SUCCESS":
-
                 return {
-                    ...state,
-                    take: action.take
+                     ...state,
+                      //takes: action.takes
+                    takes: [...state.takes, action.takes]
                 };
-
         case 'FETCH_CHUNKS_FAILED':
             return { ...state, error: action.error }
 
@@ -57,23 +51,18 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, active: false };
 
         case 'PATCH_TAKE_SUCCESS':
-        
             return {
-                ...state, chunks: action.updatedChunk
+                ...state, takes: action.updatedTakes
             }
-
         case 'UPDATE_DELETED_CHUNK':
-
          return {
             ...state, chunks: action.updatedChunk
         }
-
         case 'CHAPTER_UPDATE':
             return {
                 ...state,
                 chapter: action.chapter, active: false
             }
-
         case 'PATCH_TAKE_FAILED':
             return { ...state, error: action.error };
 
@@ -102,7 +91,6 @@ export default (state = INITIAL_STATE, action) => {
             }
         case 'RESET_STATE':
             return INITIAL_STATE;
-
         default: return state;
     }
 };

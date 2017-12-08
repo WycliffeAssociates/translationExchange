@@ -37,14 +37,6 @@ class ChunkListContainer extends Component {
 
 	componentDidMount() {
 		var query = QueryString.parse(this.props.location.search);
-
-
-		 // const query = {  book:{ slug: queryInfo.book },
-		 //  								chapter:{number: queryInfo.chapter },
-			// 							  language:{slug: queryInfo.language},
-			// 								version:{slug: queryInfo.version}
-			// 							};
-
 		this.props.getSelectedProjectInfo(query);
 	}
 
@@ -98,7 +90,7 @@ class ChunkListContainer extends Component {
 	}
 
 	patchTake(takeId, patch, success) {
-		this.props.patchTake(takeId, patch, success, this.props.chunks, this.updatingDeletedTake.bind(this));
+		this.props.patchTake(takeId, patch, success, this.props.takes, this.updatingDeletedTake.bind(this));
 	}
 
 	/*
@@ -231,7 +223,7 @@ class ChunkListContainer extends Component {
 		 */
 		//	if (chunk.takes.length > 0) {
 	//const take = this.props.getAudioTakes(chunk.id);
-  
+
 
 		return (
 			<div>
@@ -264,8 +256,8 @@ const mapStateToProps = state => {
 	const { displayText = "" } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { loaded = false, error = "", comments =[], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
-	return { playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
+	const { takes, loaded = false, error = "", comments =[], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
+	return { takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 }
 

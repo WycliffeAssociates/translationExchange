@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TakeList from "./TakeList";
+import { connect } from "react-redux";
 import { Table, Grid, Button, Icon } from "semantic-ui-react";
 import "css/takes.css";
 
@@ -20,8 +21,6 @@ class TakeTable extends Component {
 	}
 
 	render() {
-		
-
 		return (
 			<Grid.Column>
 				<Table textAlign="center">
@@ -61,4 +60,11 @@ class TakeTable extends Component {
 		);
 	}
 }
-export default TakeTable;
+
+
+const mapStateToProps = state => {
+	const {  takes } = state.chunkListContainer;
+	return { takes };
+}
+
+export default connect(mapStateToProps)(TakeTable);
