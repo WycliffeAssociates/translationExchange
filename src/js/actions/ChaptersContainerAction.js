@@ -68,7 +68,7 @@ export function publishFiles(chapterId) {
 
     return function (dispatch) {
         return axios
-            .patch(config.apiUrl + "projects/" + chapterId + "/", { is_publish: true })
+            .patch(config.apiUrl + "projects/" + chapterId + "/", { published: true })
             .then(response => {
                 dispatch(dispatchPublishFilesSuccess(response.data));
             })

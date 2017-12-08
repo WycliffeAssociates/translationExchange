@@ -32,7 +32,7 @@ class Take extends Component {
 	}
 
 	moveLeft() {
-		if (this.props.take.is_publish) {
+		if (this.props.take.published) {
 			this.props.onMarkedForExportToggled();
 		} else if (this.props.take.rating > 1) {
 			this.props.onRatingSet(this.props.take.rating - 1);

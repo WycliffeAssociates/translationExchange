@@ -25,13 +25,13 @@ class ChapterHeader extends Component {
 							/>
 
 							<RecordButton
-								comments={this.props.chapter.comment}
+								comments={this.props.chapter[0].comments}
 								onClickSave={this.props.onClickSave}
-								id={this.props.chapter.id}
+								id={this.props.chapter[0].id}
 								type={"chapter"}
 								deleteComment={this.props.deleteComment}
 								loadingActive={this.props.active}
-								number={this.props.chapter.number}
+								number={this.props.chapter[0].chapter}
 								languagefrmAPI={this.props.language}
 
 							/>

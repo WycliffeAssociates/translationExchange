@@ -37,7 +37,7 @@ class ChapterList extends Component {
 						: chapter.checked_level}
 				</Table.Cell>
 				<Table.Cell>
-					{chapter.is_publish
+					{chapter.published
 						? <Icon name="checkmark" color="green" />
 						: <Icon name="remove" />}
 				</Table.Cell>

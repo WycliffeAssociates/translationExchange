@@ -127,9 +127,9 @@ class ChunkListContainer extends Component {
 		for (let i = 0; i < updatedChunk.takes.length; i++) {
 			let currentTake = updatedChunk.takes[i];
 			//if there's one besides the chosen one in the same chunk
-			//that is marked is_publish, then patch it to not be marked is_publish
-			if (currentTake.take.is_publish && currentTake.take.id !== takeId) {
-				this.patchTake(currentTake.take.id, { is_publish: false });
+			//that is marked published, then patch it to not be marked published
+			if (currentTake.take.published && currentTake.take.id !== takeId) {
+				this.patchTake(currentTake.take.id, { published: false });
 			}
 		}
 	}
@@ -141,7 +141,7 @@ class ChunkListContainer extends Component {
 		this.props.markedAsPublish(success, this.props.chapter);
 		// //make patch request to confirm that the chapter is ready to be published
 
-		// let parameters = { is_publish: true };
+		// let parameters = { published: true };
 		// axios
 		// 	.patch(
 		// 	config.apiUrl + "chapters/" + this.props.chapter.id + "/",
@@ -149,7 +149,7 @@ class ChunkListContainer extends Component {
 		// 	)
 		// 	.then(response => {
 		// 		let updatedChapter = Object.assign({}, this.props.chapter);
-		// 		updatedChapter.is_publish = true;
+		// 		updatedChapter.published = true;
 		// 		this.setState({ chapter: updatedChapter });
 		// 		if (success) {
 		// 			success();
@@ -172,7 +172,7 @@ class ChunkListContainer extends Component {
 		let chunk = this.props.selectedSourceProject.chunks.find(
 			chunk => chunk.startv === startv
 		);
-		let take = chunk.takes.find(take => take.take.is_publish);
+		let take = chunk.takes.find(take => take.take.published);
 		return take.take.location;
 	}
 

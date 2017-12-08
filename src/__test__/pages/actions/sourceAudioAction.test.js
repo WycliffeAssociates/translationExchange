@@ -14,7 +14,7 @@ describe('Source Audio Action', () => {
 
     it('should fetch source audio', () => {
         nock(config.apiUrl).post("all_projects/",
-            { is_publish: true, book: "mrk" })
+            { published: true, book: "mrk" })
             .reply(200, { body: { projects: [1, 2, 3, 4, 5] } });
     });
     const actions = [

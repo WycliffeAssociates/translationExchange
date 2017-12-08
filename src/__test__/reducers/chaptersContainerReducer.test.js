@@ -8,7 +8,7 @@ describe('ChaptersContainerReducer', () => {
         language: {},
         version: {},
         project_id: -1,
-        is_published: false,
+        publisheded: false,
         loaded: false,
         downloadError: "",
         downloadSuccess: "",

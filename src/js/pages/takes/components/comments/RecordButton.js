@@ -14,13 +14,12 @@ import config from "../../../../../config/config";
 class RecordButton extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			title: "Record Comment",
 			show: this.props.open,
 			SaveButtonState: true,
 			blob: null,
-			//active: this.props.comments.length > 0,
+			active:typeof this.props.comments != 'undefined' && this.props.comments.length > 0,
 			loadingActive: this.props.active,
 			comments: ''
 		};
@@ -54,15 +53,15 @@ class RecordButton extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		// if (nextProps.comments.length > 0) {
-		// 	this.setState({
-		// 		active: true
-		// 	});
-		// } else {
-		// 	this.setState({
-		// 		active: false
-		// 	});
-		// }
+		if (typeof nextProps.comments != 'undefined' && nextProps.comments.length > 0) {
+			this.setState({
+				active: true
+			});
+		} else {
+			this.setState({
+				active: false
+			});
+		}
 	}
 
 	createPlaylist(comment) {
@@ -165,8 +164,6 @@ const styles = {
 	}
 };
 
-
-
 const mapStateToProps = state => {
 
 	const { displayText } = state.geolocation;
@@ -174,6 +171,5 @@ const mapStateToProps = state => {
 	return { displayText };
 
 };
-
 
 export default connect(mapStateToProps)(RecordButton);

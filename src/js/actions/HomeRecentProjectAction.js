@@ -4,7 +4,7 @@ import config from "../../config/config";
 export function fetchRecentProjects() {
 	return function (dispatch) {
 		return axios
-			.post(config.apiUrl + "get_projects/", {})
+			.post(config.apiUrl + "get_projects/", {"published":false,"limit":4,"order":"desc"})
 			.then(response => {
 				dispatch(dispatchHomeRecentProjectsReceived(response.data));
 			})

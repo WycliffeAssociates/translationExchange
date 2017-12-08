@@ -21,7 +21,7 @@ class PublishButton extends Component {
 	}
 
 	checkReadyForPublish() {
-		return this.props.chapters.every(chapter => chapter.is_publish);
+		return this.props.chapters.every(chapter => chapter.published);
 	}
 
 	render() {

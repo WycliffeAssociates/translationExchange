@@ -22,9 +22,9 @@ class MarkAsDone extends Component {
 //         if (this.props.chunks.length === 0) {
 //             return false;
 //         } else {
-// //true if every chunk has at least 1 take marked is_publish
+// //true if every chunk has at least 1 take marked published
 //             return this.props.chunks.every((chunk) => {
-//                 return chunk.takes.some(take => take.take.is_publish);
+//                 return chunk.takes.some(take => take.take.published);
 //             });
 //         }
 //     }
@@ -35,7 +35,7 @@ class MarkAsDone extends Component {
     //     var playlist = [];
     //     this.props.chunks.map((chunk) => {
     //         chunk.takes.map((take) => {
-    //             if (take.take.is_publish) {
+    //             if (take.take.published) {
     //                 playlist.push({
     //                     "src": config.streamingUrl + take.take.location,
     //                     "name": this.props.mode + ' ' + chunk.startv + ' (' + (playlist.length + 1) + '/' + length + ')'
@@ -104,7 +104,7 @@ class MarkAsDone extends Component {
 
 
     exportButton() {
-        let disableBtn = this.props.chapter.is_publish;
+        let disableBtn = this.props.chapter.published;
         // let crfe = this.checkReadyForExport();
         let disableBtnState = false;
         // if (disableBtn === crfe) {

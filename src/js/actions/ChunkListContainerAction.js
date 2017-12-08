@@ -26,9 +26,9 @@ export const getSelectedProjectInfo = (query) => {                              
     return function (dispatch) {
         return axios
             .all([
-                axios.post(config.apiUrl + "get_chunks/", query),
+                axios.post(config.apiUrl + "get_projects/", query),
                 axios.post(config.apiUrl + "get_chapters/", query),
-                axios.post(config.apiUrl + "get_projects/", query)
+                axios.post(config.apiUrl + "get_chunks/", query)
             ])
             .then(
             axios.spread(function (
@@ -36,17 +36,13 @@ export const getSelectedProjectInfo = (query) => {                              
                 chaptersResponse,
                 projectsResponse
             ) {
-
                 dispatch(dispatchProjectInfoSuccess(
                     chunksResponse,
                     chaptersResponse,
                     projectsResponse
                 ));
-
-            })
-            )
+            }))
             .catch(error => {
-
                 dispatch(dispatchChunksFailed(error)); //TODO change name to function
             });
     }
@@ -259,10 +255,10 @@ export const markedAsPublished = (success, chapter) => {
     return function (dispatch) {
         return axios
             .patch(config.apiUrl + "chapters/" + chapter.id + "/",
-            { is_publish: true })
+            { published: true })
             .then((response) => {
                 let updatedChapter = Object.assign({}, chapter);
-                updatedChapter.is_publish = true;
+                updatedChapter.published = true;
                 dispatch(markAsPublishedSuccess(updatedChapter));
                 if (success) {
                     success();

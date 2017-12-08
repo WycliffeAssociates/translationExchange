@@ -32,7 +32,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, error: action.error }
         case 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS': return { error: action.error };
         case 'PUBLISH_FILES_SUCCESS':
-            return { ...state, is_publish: true }
+            return { ...state, published: true }
         case 'PUBLISH_FILES_FAILED':
             return { ...state, error: action.error }
         case 'DOWNLOAD_PROJECT':

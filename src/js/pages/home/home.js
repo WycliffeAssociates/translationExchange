@@ -52,9 +52,7 @@ class Home extends Component {
 								</Grid.Row>
 								<Divider />
 								{homeRecentProjects.splice(0, 4).map((project, i) => {
-									if (project.published == false) {
 										return this.createListItem(project, i);
-									}
 								})}
 							</Grid.Column>
 						</Grid>

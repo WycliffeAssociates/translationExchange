@@ -42,6 +42,7 @@ export class RecordComment extends Component {
 	};
 
 	onSave(type, id, jsonblob, func) {
+
 		func(jsonblob, type, id, () => {
 			this.setState({
 				displayPlayer: false
@@ -131,25 +132,18 @@ export class RecordComment extends Component {
 				strokeColor="#039BE5"
 				backgroundColor="#000000"
 			/>
-
-
 		);
 		let saveButton = '';
-
 		if (this.state.displayPlayer) {
 			display = AudioPlayer;
 		}
 		return (
 			<div>
-
 				{display}
-
 				<div className="record-stop-button">
 					{MainButton}
 				</div>
-
 				{saveButton}
-
 			</div>
 		);
 	}
@@ -211,6 +205,5 @@ const mapStateToProps = state => {
 	return { displayText };
 
 };
-
 
 export default connect(mapStateToProps)(RecordComment);

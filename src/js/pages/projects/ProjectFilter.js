@@ -111,19 +111,19 @@ class ProjectFilter extends Component {
 
 	setLanguage(event, dropdown) {
 		if (dropdown.value) {
-			this.props.setQuery({ language: dropdown.value });
+			this.props.setQuery({ language: dropdown.value,published:false });
 		}
 	}
 
 	setBook(event, dropdown) {
 		if (dropdown.value) {
-			this.props.setQuery({ book: dropdown.value });
+			this.props.setQuery({ book: dropdown.value ,published:false });
 		}
 	}
 
 	setVersion(event, dropdown) {
 		if (dropdown.value) {
-			this.props.setQuery({ version: dropdown.value });
+			this.props.setQuery({ version: dropdown.value ,published:false });
 		}
 	}
 

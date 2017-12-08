@@ -15,21 +15,12 @@ class Chunk extends Component {
 
 		this.state = {
 			takes: []
-
 		};
-
 	}
 
-getTakes(chunkId) {
-  
-	this.props.getAudioTakes(chunkId);
-
-
-}
-
-
-
-
+	getTakes(chunkId) {
+		this.props.getAudioTakes(chunkId);
+	}
 
 	render() {
 		var publish = [];
@@ -38,22 +29,21 @@ getTakes(chunkId) {
 		var threestar = [];
 
 		var counter = 0;
-    //console.log(this.props.take);
 		let orderedTakes = this.props.take.slice();
-			orderedTakes.map(i => {
-				counter += 1;
-				i.order = counter;
-				if (i.published) {
-					publish[publish.length] = i;
-				} else if (i.rating < 2) {
+		orderedTakes.map(i => {
+			counter += 1;
+			i.order = counter;
+			if (i.published) {
+				publish[publish.length] = i;
+			} else if (i.rating < 2) {
 
-					onestar[onestar.length] = i;
-				} else if (i.rating === 2) {
-					twostar[twostar.length] = i;
-				} else if (i.rating === 3) {
-					threestar[threestar.length] = i;
-				}
-			});
+				onestar[onestar.length] = i;
+			} else if (i.rating === 2) {
+				twostar[twostar.length] = i;
+			} else if (i.rating === 3) {
+				threestar[threestar.length] = i;
+			}
+		});
 		var modeLabel = "";
 		switch (this.props.mode) {
 			case "chunk":
@@ -84,7 +74,7 @@ getTakes(chunkId) {
 		return (
 			<div>
 				<Accordion fluid styled>
-					<Accordion.Title className="ChunkTitle" onClick={()=> this.getTakes(this.props.chunkId)} >
+					<Accordion.Title className="ChunkTitle" onClick={() => this.getTakes(this.props.chunkId)} >
 						<center>
 							<Icon name="dropdown" />
 							<font color="black">
@@ -196,14 +186,15 @@ Chunk.propTypes = {
 
 const mapStateToProps = state => {
 
-	const {  take } = state.chunkListContainer;
+	const { take } = state.chunkListContainer;
 	return { take };
 
 }
 
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
-		{	getAudioTakes
+		{
+			getAudioTakes
 		}, dispatch);
 };
 
