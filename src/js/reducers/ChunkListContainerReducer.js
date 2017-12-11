@@ -11,7 +11,8 @@ const INITIAL_STATE = {
     active: false,
     selectedSourceProjectQuery: -1,
     selectedSourceProject: {},
-    notifyFlag: false
+    notifyFlag: false,
+    update: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -26,21 +27,19 @@ export default (state = INITIAL_STATE, action) => {
                 language: action.language,
                 comments: action.comments,
                 loaded: true,
+                update: false,
+                chunkIdClicked:''
             };
         case "FETCH_TAKE_SUCCESS":
-       const tst = action.takes;
-        debugger;
             return {
                  ...state,
-                  //takes: action.takes
-                takes: state.takes.concat(action.takes)
+                takes: state.takes.concat(action.takes),
             };
         case "FETCH_TAKE_SUCCESS_FIRST_TIME":
-            debugger;
             return {
                  ...state,
-                  //takes: action.takes
-                takes: action.takes
+                takes: action.takes,
+                update: !state.update
             };
 
         case 'FETCH_CHUNKS_FAILED':
@@ -61,9 +60,18 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, active: false };
 
         case 'PATCH_TAKE_SUCCESS':
+            const before = state.takes
+            const after = action.updatedTakes.slice()
             return {
-                ...state, takes: action.updatedTakes
+                ...state, takes: after
             }
+
+        case 'CHUNK_ID_CLICKED':
+        return{
+          ...state,
+          chunkIdClicked: action.id
+        }
+
         case 'UPDATE_DELETED_CHUNK':
          return {
             ...state, chunks: action.updatedChunk

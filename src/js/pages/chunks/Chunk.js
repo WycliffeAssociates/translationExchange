@@ -5,7 +5,7 @@ import TakeTable from "../takes/TakeTable";
 import "css/takes.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { getAudioTakes } from './../../actions';
+import { getAudioTakes, getChunkIdClicked } from './../../actions';
 
 import ChunkSidebar from "../takes/components/SideBar";
 class Chunk extends Component {
@@ -14,70 +14,64 @@ class Chunk extends Component {
 		super(props);
     	this.state = {
 			calledChunks: [],
-			chunkId:'',
-			tksCounter: true          // counter used for call an action to replace takes on an empy array or add the takes to an array with previous takes called
+			chunkId:''
 		};
 	}
 
 
 getTakes(chunkId) {
   let counter = this.props.takes.length;
-	debugger;
 
-let {calledChunks, tksCounter} = this.state
-		if(!calledChunks.includes(chunkId)){                 // once you click a chunk, checks if the chunk has not been clicked before
-		    this.props.getAudioTakes(chunkId, counter);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
-																												// so next time clicked to close it won't call the api
-			  this.setState({
-				calledChunks: [...this.state.calledChunks, chunkId],
-				chunkId,
-				tksCounter:false
+debugger;
+	let {calledChunks, tksCounter} = this.state
+			if(!calledChunks.includes(chunkId)){                 // once you click a chunk, checks if the chunk has not been clicked before
+					this.props.getChunkIdClicked(chunkId);
+					this.props.getAudioTakes(chunkId, counter);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
+																													// so next time clicked to close it won't call the api
+				  this.setState({
+					calledChunks: [...this.state.calledChunks, chunkId]
 
-			})
+				})
 		}
-
-
-    debugger;
 
 }
 
 	render() {
-		var publish = [];
-		var onestar = [];
-		var twostar = [];
-		var threestar = [];
+		let publish = [];
+		let onestar = [];
+		let twostar = [];
+		let threestar =[];
 
 		var counter = 0;
 		let orderedTakes = this.props.takes;
 
-
-
-
-			//orderedTakes.map(i => {
+   	//console.log(this.props.takes)
 
 			orderedTakes.map(tk => {
-
-        //tksList.map(tk => {
-
-					if(this.state.chunkId === tk.chunkId){   // get takes corresponding just to the selected chunk
+				   const test = this.props.chunkIdClicked;
+					 debugger;
+					if(this.props.chunkIdClicked === tk.chunkId){   // get takes corresponding just to the selected chunk
 						counter += 1;
 					 tk.order = counter;
 					 if (tk.published) {
 						 publish[publish.length] = tk;
+						  debugger;
 					 } else if (tk.rating < 2) {
 						 onestar[onestar.length] = tk;
+						 debugger;
 					 } else if (tk.rating === 2) {
 						 twostar[twostar.length] = tk;
+						  debugger;
 					 } else if (tk.rating === 3) {
 						 threestar[threestar.length] = tk;
+						  debugger;
 					 }
 					}
 
 
-			//	});
 
 
-
+//console.log(threestar);
 
 
 			});
@@ -141,6 +135,7 @@ let {calledChunks, tksCounter} = this.state
 										deleteComment={this.props.deleteComment}
 										deleteButton={true}
 										active={this.props.active}
+										chunkId={this.props.id}
 									/>
 									<TakeTable
 										icon={icon2}
@@ -157,6 +152,7 @@ let {calledChunks, tksCounter} = this.state
 										chunkNumber={this.props.number}
 										deleteComment={this.props.deleteComment}
 										active={this.props.active}
+										chunkId={this.props.id}
 									/>
 									<TakeTable
 										icon={icon3}
@@ -173,6 +169,7 @@ let {calledChunks, tksCounter} = this.state
 										chunkNumber={this.props.number}
 										deleteComment={this.props.deleteComment}
 										active={this.props.active}
+										chunkId={this.props.id}
 									/>
 									<TakeTable
 										icon={icon4}
@@ -189,6 +186,7 @@ let {calledChunks, tksCounter} = this.state
 										chunkNumber={this.props.number}
 										deleteComment={this.props.deleteComment}
 										active={this.props.active}
+										chunkId={this.props.id}
 									/>
 								</Grid>
 							</Grid.Column>
@@ -219,13 +217,14 @@ Chunk.propTypes = {
 };
 
 const mapStateToProps = state => {
-	const {  takes } = state.chunkListContainer;
-	return { takes };
+	const {  takes, update, chunkIdClicked } = state.chunkListContainer;
+	return { takes, update, chunkIdClicked };
 }
 
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
-		{	getAudioTakes
+		{	getAudioTakes,
+			getChunkIdClicked
 		}, dispatch);
 };
 

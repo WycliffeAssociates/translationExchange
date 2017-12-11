@@ -4,24 +4,33 @@ import { updateMode } from "./UpdatePlaylistActions";
 import { notify } from 'react-notify-toast';
 
 
-export const getAudioTakes = (q, counter) => {
-    const query = { chunk_id: q }
-debugger;
+export const getAudioTakes = (chunkId, counter) => {
+    const query = { chunk_id: chunkId }
     return function (dispatch) {
         return axios
             .post(config.apiUrl + "get_takes/", query)
             .then(response => {
                 if(counter === 0) {
 
-                dispatch(dispatchTakesFirstTimeSuccess(response.data, q));
+                dispatch(dispatchTakesFirstTimeSuccess(response.data, chunkId));
               }else{
-                dispatch(dispatchTakesSuccess(response.data, q));
+                dispatch(dispatchTakesSuccess(response.data, chunkId));
               }
             })
             .catch(error => {
                 dispatch(dispatchChunksFailed(error));
             });
     };
+}
+
+
+export const getChunkIdClicked = (id) => {
+  return {
+      type: 'CHUNK_ID_CLICKED',
+      id
+  }
+
+
 }
 
 
@@ -132,7 +141,7 @@ export function setSourceProjectFailed(error) {
 };
 
 //patch take
-export const patchTake = (takeId, patch, success, takes, updatingDeletedTake) => {
+export const patchTake = (takeId, patch, success, takes, updatingDeletedTake, chunkId) => {
     return function (dispatch) {
         return axios
             .patch(config.apiUrl + "takes/" + takeId + "/", patch)
@@ -142,14 +151,18 @@ export const patchTake = (takeId, patch, success, takes, updatingDeletedTake) =>
 
                 let takeIdToUpdate;
 
-                listOfTakes.map(takes  => {
-                  takeIdToUpdate = takes.map( tk => {
-                    return tk.id}).indexOf(takeId);  // search in the chunks array the index of the chunk that contains the take modified
-                  } )
-                let updatedTakeInfo = response.data;
-                listOfTakes.map(takes => takes[takeIdToUpdate] = updatedTakeInfo)
-                 const tst = listOfTakes;
+                takeIdToUpdate = listOfTakes.map(takes  => {
+                  return takes.id
+                  // takeIdToUpdate = takes.map( tk => {
+                  //   return tk.id})  // search in the chunks array the index of the chunk that contains the take modified
+                  } ).indexOf(takeId);
 
+
+                let updatedTakeInfo = response.data;
+                updatedTakeInfo.chunkId = chunkId;
+                listOfTakes[takeIdToUpdate] = updatedTakeInfo;
+                debugger;
+                 const tst = listOfTakes;
                 dispatch(patchTakeSuccess(listOfTakes));
             })
             .catch(error => {

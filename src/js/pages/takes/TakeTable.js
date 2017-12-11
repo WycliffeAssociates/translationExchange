@@ -21,6 +21,7 @@ class TakeTable extends Component {
 	}
 
 	render() {
+
 		return (
 			<Grid.Column>
 				<Table textAlign="center">
@@ -53,6 +54,7 @@ class TakeTable extends Component {
 							mode={this.props.mode}
 							deleteComment={this.props.deleteComment}
 							active={this.props.active}
+							chunkId={this.props.chunkId}
 						/>
 					</Table.Cell>
 				</Table>

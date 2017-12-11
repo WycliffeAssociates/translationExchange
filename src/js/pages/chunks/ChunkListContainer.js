@@ -89,8 +89,8 @@ class ChunkListContainer extends Component {
 		}
 	}
 
-	patchTake(takeId, patch, success) {
-		this.props.patchTake(takeId, patch, success, this.props.takes, this.updatingDeletedTake.bind(this));
+	patchTake(takeId, patch, success, chunkId) {
+		this.props.patchTake(takeId, patch, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
 	}
 
 	/*
