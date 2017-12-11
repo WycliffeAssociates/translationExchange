@@ -160,9 +160,7 @@ export const patchTake = (takeId, patch, success, takes, updatingDeletedTake, ch
 
                 let updatedTakeInfo = response.data;
                 updatedTakeInfo.chunkId = chunkId;
-                listOfTakes[takeIdToUpdate] = updatedTakeInfo;
-                debugger;
-                 const tst = listOfTakes;
+                listOfTakes[takeIdToUpdate] = updatedTakeInfo;            
                 dispatch(patchTakeSuccess(listOfTakes));
             })
             .catch(error => {

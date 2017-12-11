@@ -28,7 +28,8 @@ export default (state = INITIAL_STATE, action) => {
                 comments: action.comments,
                 loaded: true,
                 update: false,
-                chunkIdClicked:''
+                chunkIdClicked:'',
+                calledChunks:''
             };
         case "FETCH_TAKE_SUCCESS":
             return {
@@ -69,7 +70,8 @@ export default (state = INITIAL_STATE, action) => {
         case 'CHUNK_ID_CLICKED':
         return{
           ...state,
-          chunkIdClicked: action.id
+          chunkIdClicked: action.id,
+          calledChunks: [...state.calledChunks, action.id]
         }
 
         case 'UPDATE_DELETED_CHUNK':

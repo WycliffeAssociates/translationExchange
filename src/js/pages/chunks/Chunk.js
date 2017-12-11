@@ -21,17 +21,14 @@ class Chunk extends Component {
 
 getTakes(chunkId) {
   let counter = this.props.takes.length;
-
-debugger;
-	let {calledChunks, tksCounter} = this.state
+let tst = this.props.calledChunks;
+	let {calledChunks } = this.props
 			if(!calledChunks.includes(chunkId)){                 // once you click a chunk, checks if the chunk has not been clicked before
 					this.props.getChunkIdClicked(chunkId);
 					this.props.getAudioTakes(chunkId, counter);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
-																													// so next time clicked to close it won't call the api
-				  this.setState({
-					calledChunks: [...this.state.calledChunks, chunkId]
+																													              // so next time clicked to close it won't call the api
 
-				})
+
 		}
 
 }
@@ -41,7 +38,6 @@ debugger;
 		let onestar = [];
 		let twostar = [];
 		let threestar =[];
-
 		var counter = 0;
 		let orderedTakes = this.props.takes;
 
@@ -49,24 +45,23 @@ debugger;
 
 			orderedTakes.map(tk => {
 				   const test = this.props.chunkIdClicked;
-					 debugger;
-					if(this.props.chunkIdClicked === tk.chunkId){   // get takes corresponding just to the selected chunk
-						counter += 1;
-					 tk.order = counter;
-					 if (tk.published) {
-						 publish[publish.length] = tk;
-						  debugger;
-					 } else if (tk.rating < 2) {
-						 onestar[onestar.length] = tk;
-						 debugger;
-					 } else if (tk.rating === 2) {
-						 twostar[twostar.length] = tk;
-						  debugger;
-					 } else if (tk.rating === 3) {
-						 threestar[threestar.length] = tk;
-						  debugger;
-					 }
-					}
+					if(this.props.id === tk.chunkId){   // get takes corresponding just to the selected chunk
+									counter += 1;
+								 tk.order = counter;
+								 if (tk.published) {
+									 publish[publish.length] = tk;
+
+								 } else if (tk.rating < 2) {
+									 onestar[onestar.length] = tk;
+
+								 } else if (tk.rating === 2) {
+									 twostar[twostar.length] = tk;
+
+								 } else if (tk.rating === 3) {
+									 threestar[threestar.length] = tk;
+
+								 }
+				}
 
 
 
@@ -217,8 +212,8 @@ Chunk.propTypes = {
 };
 
 const mapStateToProps = state => {
-	const {  takes, update, chunkIdClicked } = state.chunkListContainer;
-	return { takes, update, chunkIdClicked };
+	const {  takes, update, chunkIdClicked, calledChunks } = state.chunkListContainer;
+	return { takes, update, chunkIdClicked, calledChunks };
 }
 
 const mapDispatchToProps = dispatch => {
