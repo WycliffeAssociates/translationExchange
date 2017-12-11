@@ -42,6 +42,7 @@ class TakeContainer extends Component {
 				mode={this.props.mode}
 			/>
 	</div>
+
 	{/* <ItemPreview
 	// count={this.props.count}
 	// take={this.props.take.take}

@@ -10,7 +10,7 @@ import nn from 'nearest-neighbor';
 import countries from '../../languages/countries.json';
 import languageAndCountry from '../../languages/languageAndCountry.json';
 import rtlLanguages from  '../../languages/rtlLanguages.json'
-
+import ItemPreview from '../pages/takes/components/ItemPreview';
 import {updateLanguage, updateDirection} from '../actions';
 
 class Header extends Component {
@@ -95,7 +95,8 @@ class Header extends Component {
 
 		return (
 			<div style={{ marginBottom: 10 }}>
-
+				
+		<ItemPreview key="__preview" name="TakeContainer" />
 				<Menu fluid secondary size="huge" compact>
 					<div style = {{display: 'flex', flex: 1, justifyContent: 'space-between', direction:`${this.props.direction}` }}>
 					<Menu.Item>
