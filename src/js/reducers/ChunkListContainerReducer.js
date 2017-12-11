@@ -27,12 +27,22 @@ export default (state = INITIAL_STATE, action) => {
                 comments: action.comments,
                 loaded: true,
             };
-            case "FETCH_TAKE_SUCCESS":
-                return {
-                     ...state,
-                      //takes: action.takes
-                    takes: [...state.takes, action.takes]
-                };
+        case "FETCH_TAKE_SUCCESS":
+       const tst = action.takes;
+        debugger;
+            return {
+                 ...state,
+                  //takes: action.takes
+                takes: state.takes.concat(action.takes)
+            };
+        case "FETCH_TAKE_SUCCESS_FIRST_TIME":
+            debugger;
+            return {
+                 ...state,
+                  //takes: action.takes
+                takes: action.takes
+            };
+
         case 'FETCH_CHUNKS_FAILED':
             return { ...state, error: action.error }
 

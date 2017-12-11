@@ -4,15 +4,19 @@ import { updateMode } from "./UpdatePlaylistActions";
 import { notify } from 'react-notify-toast';
 
 
-export const getAudioTakes = (q) => {
+export const getAudioTakes = (q, counter) => {
     const query = { chunk_id: q }
-
+debugger;
     return function (dispatch) {
         return axios
             .post(config.apiUrl + "get_takes/", query)
             .then(response => {
+                if(counter === 0) {
 
+                dispatch(dispatchTakesFirstTimeSuccess(response.data, q));
+              }else{
                 dispatch(dispatchTakesSuccess(response.data, q));
+              }
             })
             .catch(error => {
                 dispatch(dispatchChunksFailed(error));
@@ -72,6 +76,16 @@ export function dispatchProjectInfoSuccess(chunksResponse,
     }
 }
 
+
+export function dispatchTakesFirstTimeSuccess(takesResponse, chunkId) {
+   takesResponse.map(take => take.chunkId = chunkId);
+
+    return {
+        type: 'FETCH_TAKE_SUCCESS_FIRST_TIME',
+        takes: takesResponse
+    }
+}
+
 export function dispatchTakesSuccess(takesResponse, chunkId) {
    takesResponse.map(take => take.chunkId = chunkId);
 
@@ -124,14 +138,19 @@ export const patchTake = (takeId, patch, success, takes, updatingDeletedTake) =>
             .patch(config.apiUrl + "takes/" + takeId + "/", patch)
             .then(response => {
                 //find correct take to update
-                let takesToSearchIn = takes
+                let listOfTakes = takes
 
-                let takeIdToUpdate = takesToSearchIn.map(chunk => {return chunk.id} ).indexOf(takeId);   // search in the chunks array the index of the chunk that contains the take modified
+                let takeIdToUpdate;
 
+                listOfTakes.map(takes  => {
+                  takeIdToUpdate = takes.map( tk => {
+                    return tk.id}).indexOf(takeId);  // search in the chunks array the index of the chunk that contains the take modified
+                  } )
                 let updatedTakeInfo = response.data;
+                listOfTakes.map(takes => takes[takeIdToUpdate] = updatedTakeInfo)
+                 const tst = listOfTakes;
 
-                takesToSearchIn[takeIdToUpdate] = updatedTakeInfo;
-                dispatch(patchTakeSuccess(takesToSearchIn));
+                dispatch(patchTakeSuccess(listOfTakes));
             })
             .catch(error => {
                 let message;

@@ -14,22 +14,30 @@ class Chunk extends Component {
 		super(props);
     	this.state = {
 			calledChunks: [],
-			chunkId:''
+			chunkId:'',
+			tksCounter: true          // counter used for call an action to replace takes on an empy array or add the takes to an array with previous takes called
 		};
 	}
 
 
 getTakes(chunkId) {
-const {calledChunks} = this.state
+  let counter = this.props.takes.length;
+	debugger;
 
-if(!calledChunks.includes(chunkId)){                 // once you click a chunk, checks if the chunk has not been clicked before
-    this.props.getAudioTakes(chunkId);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
-																										// so next time clicked to close it won't call the api
-	  this.setState({
-		calledChunks: [...this.state.calledChunks, chunkId],
-		chunkId
-	})
-}
+let {calledChunks, tksCounter} = this.state
+		if(!calledChunks.includes(chunkId)){                 // once you click a chunk, checks if the chunk has not been clicked before
+		    this.props.getAudioTakes(chunkId, counter);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
+																												// so next time clicked to close it won't call the api
+			  this.setState({
+				calledChunks: [...this.state.calledChunks, chunkId],
+				chunkId,
+				tksCounter:false
+
+			})
+		}
+
+
+    debugger;
 
 }
 
@@ -47,10 +55,10 @@ if(!calledChunks.includes(chunkId)){                 // once you click a chunk, 
 
 			//orderedTakes.map(i => {
 
-			orderedTakes.map(tksList => {
+			orderedTakes.map(tk => {
 
-        tksList.map(tk => {
-					debugger;
+        //tksList.map(tk => {
+
 					if(this.state.chunkId === tk.chunkId){   // get takes corresponding just to the selected chunk
 						counter += 1;
 					 tk.order = counter;
@@ -66,7 +74,7 @@ if(!calledChunks.includes(chunkId)){                 // once you click a chunk, 
 					}
 
 
-				});
+			//	});
 
 
 
