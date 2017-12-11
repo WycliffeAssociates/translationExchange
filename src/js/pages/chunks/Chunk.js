@@ -27,10 +27,7 @@ let tst = this.props.calledChunks;
 					this.props.getChunkIdClicked(chunkId);
 					this.props.getAudioTakes(chunkId, counter);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
 																													              // so next time clicked to close it won't call the api
-
-
 		}
-
 }
 
 	render() {
