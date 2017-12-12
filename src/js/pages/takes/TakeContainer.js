@@ -11,13 +11,19 @@ class TakeContainer extends Component {
 		super(props);
 		this.state = {
 			isToggleOn: true,
-			ratingLoading: false
+			ratingLoading: false,
+			rect: 0
 		};
 	}
 
 	onDeleteTake() {
 		this.props.deleteTake(this.props.take.id);
 	}
+
+	componentDidMount() {
+	 const rect = this.myInput.getBoundingClientRect();
+	 this.setState({ rect });
+ }
 
 	dragObject(){
 	const { connectDragSource, connectDropTarget, connectDragPreview, isDragging } = this.props;
@@ -80,9 +86,10 @@ TakeContainer.propTypes = {
 	take: TakePropTypes
 };
 const takeSource = {
-	beginDrag(props, monitor) {
+	beginDrag(props) {
+		//const rect = TakeContainer.getBoundingClientRect();
 
-		return { index: props.index, listId: props.listId, take: props.take  };
+		return { index: props.index, listId: props.listId, take: props.take};
 	},
 	endDrag(props, monitor) {
 		const item = monitor.getItem();

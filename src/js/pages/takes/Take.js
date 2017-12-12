@@ -21,7 +21,6 @@ class Take extends Component {
 			showMarkersColor: "",
 			playlist: [],
 			clear: true
-
 		};
 		// This binding is necessary to make `this` work in the callback
 		this.handleClick = this.handleClick.bind(this);
@@ -31,6 +30,7 @@ class Take extends Component {
 	handleClick() {
 		this.setState({ isToggleOn: !this.state.isToggleOn });
 	}
+
 
 	moveLeft() {
 		if (this.props.take.is_publish) {
@@ -120,8 +120,6 @@ class Take extends Component {
 				// this.props.playAudio();
 			}
 
-
-
 		}
 
 	}
@@ -191,8 +189,6 @@ class Take extends Component {
 					</Grid.Row>
 				</Grid>
 			</Segment>
-
-
 
 		);
 	}
@@ -266,20 +262,13 @@ Take.propTypes = {
 	takeId: PropTypes.number.isRequired
 };
 
-
 const mapStateToProps = state => {
-
-
-
 	const { mode, playlist, playlistMode } = state.updatePlaylist;
 	const { displayText } = state.geolocation;
-
 	return { mode, playlistMode, playlist, displayText };
-
 }
 
 const mapDispatchToProps = dispatch => {
-
 	return bindActionCreators({
 		addToPlaylist,
 		playTake,
@@ -292,7 +281,5 @@ const mapDispatchToProps = dispatch => {
 	}, dispatch);
 
 };
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Take);
