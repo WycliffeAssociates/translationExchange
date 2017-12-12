@@ -134,7 +134,7 @@ function ItemPreview ({
     );
 }
 
-function parseDate(date) {
+function parseDate(date) {      //TODO get the displaytext from redux
   var noon = "am";
   var dateArr = date.split("T");
   var date = dateArr[0];
@@ -195,8 +195,6 @@ function parseDate(date) {
 
 
 
-
-
 ItemPreview.propTypes = {
     id: React.PropTypes.string,
     name: React.PropTypes.string,
@@ -208,15 +206,11 @@ ItemPreview.propTypes = {
 };
 
 
-
-
 const mapStateToProps = state => {
     	const { mode, playlist, playlistMode } = state.updatePlaylist;
     	const { displayText } = state.geolocation;
 	return { displayText };
 }
-
-
 
 
 export default compose( DragLayer(collect),connect(mapStateToProps))(ItemPreview);
