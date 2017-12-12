@@ -47,8 +47,6 @@ class Header extends Component {
 						 //console.log(country);
 					});
 
-
-
 							for (const key in languageAndCountry) {
 								 const lang = languageAndCountry[key];
 
@@ -95,7 +93,7 @@ class Header extends Component {
 
 		return (
 			<div style={{ marginBottom: 10 }}>
-				
+
 		<ItemPreview key="__preview" name="TakeContainer" />
 				<Menu fluid secondary size="huge" compact>
 					<div style = {{display: 'flex', flex: 1, justifyContent: 'space-between', direction:`${this.props.direction}` }}>

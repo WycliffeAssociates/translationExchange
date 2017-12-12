@@ -27,7 +27,6 @@ export default (state = INITIAL_STATE, action) => {
                 language: action.language,
                 comments: action.comments,
                 loaded: true,
-                update: false,
                 chunkIdClicked:'',
                 calledChunks:''
             };
@@ -40,7 +39,7 @@ export default (state = INITIAL_STATE, action) => {
             return {
                  ...state,
                 takes: action.takes,
-                update: !state.update
+
             };
 
         case 'FETCH_CHUNKS_FAILED':
@@ -61,10 +60,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, active: false };
 
         case 'PATCH_TAKE_SUCCESS':
-            const before = state.takes
-            const after = action.updatedTakes.slice()
             return {
-                ...state, takes: after
+                ...state, takes: action.updatedTakes.slice()
             }
 
         case 'CHUNK_ID_CLICKED':

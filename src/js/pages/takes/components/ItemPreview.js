@@ -11,6 +11,7 @@ function collect (monitor) {
     var item = monitor.getItem();
 
     return {
+
         rect: item && item.rect,
         id: item && item.listId,
         name: item && item.index,
@@ -18,10 +19,11 @@ function collect (monitor) {
         isDragging: monitor.isDragging(),
         monitor: monitor,
         item
+
     };
 }
 
-function getItemStyles (currentOffset, rect) {
+function getItemStyles (currentOffset, item ) {
     if (!currentOffset) {
         return {
             display: 'none'
@@ -29,8 +31,10 @@ function getItemStyles (currentOffset, rect) {
     }
 
     // http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
-    var x = currentOffset.x  ;
+    var x = currentOffset.x;
     var y = currentOffset.y;
+
+    //console.log(`x: ${x} y:${y}`);
     var transform = `translate(${x}px, ${y}px)`;
 
     return {
@@ -41,8 +45,6 @@ function getItemStyles (currentOffset, rect) {
         width:0,
         position:'absolute',
         zIndex: 1
-
-
     };
 }
 
@@ -63,17 +65,12 @@ function ItemPreview ({
     monitor,
     rect
 
-
-
 }) {
 
-
-
     return (
-        <div style={getItemStyles(currentOffset, rect)}>
+        <div style={getItemStyles(currentOffset, monitor)}>
         <img src={blur} style = {{width: 335, height: 190}}/>
         </div>
-
     );
 
 }

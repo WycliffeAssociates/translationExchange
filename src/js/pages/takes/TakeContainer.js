@@ -68,11 +68,8 @@ class TakeContainer extends Component {
 		content = connectDropTarget(content);
 		// Connect to drag layer
 		//content = connectDragPreview(content);
-
 	return content;
-
 }
-
 
 	render() {
 		return this.dragObject()
@@ -83,8 +80,9 @@ TakeContainer.propTypes = {
 	take: TakePropTypes
 };
 const takeSource = {
-	beginDrag(props) {
-		return { index: props.index, listId: props.listId, take: props.take };
+	beginDrag(props, monitor) {
+
+		return { index: props.index, listId: props.listId, take: props.take  };
 	},
 	endDrag(props, monitor) {
 		const item = monitor.getItem();

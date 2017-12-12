@@ -46,7 +46,6 @@ class TakeList extends Component {
 	}
 
 	onDrop(published, newRating, take) {
- 		const tst = this.props.chunkId;
 		this.props.patchTake(
 			take.id,
 			{ published: published, rating: newRating },

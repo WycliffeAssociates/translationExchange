@@ -54,7 +54,7 @@ class Take extends Component {
 		const takeLoc = this.props.take.location;
 		const takeNum = this.props.count;
 		const startv = this.props.chunkNumber;
-		const author = this.props.author.name;
+		const author =  'author';    // TODO include autor from backend this.props.author.name;
 		const date = this.parseDate(this.props.take.date_modified);
 		const markers = this.props.take.markers;
 
@@ -74,7 +74,6 @@ class Take extends Component {
 			this.props.stopAudio();
 			const take = this.getTakeInfo();
 			this.props.playTake(take);
-
 		}
 
 	}
