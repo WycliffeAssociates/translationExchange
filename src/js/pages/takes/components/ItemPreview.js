@@ -174,8 +174,6 @@ const parseDate = (date) => {      //TODO get the displaytext from redux
       date[1] = "November";
       break;
     case "12":
-
-      debugger;
       date[1] = "December";
       break;
   }
