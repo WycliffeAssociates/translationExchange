@@ -60,7 +60,7 @@ const ItemPreview = ({
     comments,
     addToListenList,
     active,
-    height,q
+    height,
     width,
     item,
     monitor,
