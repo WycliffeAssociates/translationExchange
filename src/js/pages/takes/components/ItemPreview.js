@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Grid, Segment, Icon, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { compose } from 'redux'
@@ -7,13 +7,11 @@ import StitchTakesButton from "../StitchTakesButton";
 import TakeCommentsButton from "./comments/TakeCommentsButton";
 import Take from "../Take";
 import TakeListenButton from "../AddTake";
-
 import blur from '../../../../images/blur.PNG'
 
-function collect (monitor) {
+const collect = (monitor) => {
     var item = monitor.getItem();
     return {
-
         rect: item && item.rect,
         id: item && item.listId,
         name: item && item.index,
@@ -22,11 +20,10 @@ function collect (monitor) {
         monitor: monitor,
         take: item && item.take,
         item
-
     };
 }
 
-function getItemStyles (currentOffset, take ) {
+const getItemStyles= (currentOffset, take ) => {
     if (!currentOffset) {
         return {
             display: 'none'
@@ -52,7 +49,7 @@ function getItemStyles (currentOffset, take ) {
 
 
 
-function ItemPreview ({
+const ItemPreview = ({
     isDragging,
     currentOffset,
     count,
@@ -63,19 +60,19 @@ function ItemPreview ({
     comments,
     addToListenList,
     active,
-    height,
+    height,q
     width,
     item,
     monitor,
     rect
 
-}) {
+}) => {
   let takeText = '';
   let date = '';
   if(take !== null){
       takeText = `Take ${take.order}`;
     date = parseDate(take.date_modified);
-}
+      }
     return (
         <div style={getItemStyles(currentOffset, take)}>
           <Segment>
@@ -134,7 +131,7 @@ function ItemPreview ({
     );
 }
 
-function parseDate(date) {      //TODO get the displaytext from redux
+const parseDate = (date) => {      //TODO get the displaytext from redux
   var noon = "am";
   var dateArr = date.split("T");
   var date = dateArr[0];
@@ -177,6 +174,8 @@ function parseDate(date) {      //TODO get the displaytext from redux
       date[1] = "November";
       break;
     case "12":
+
+      debugger;
       date[1] = "December";
       break;
   }
@@ -194,23 +193,12 @@ function parseDate(date) {      //TODO get the displaytext from redux
 }
 
 
-
-ItemPreview.propTypes = {
-    id: React.PropTypes.string,
-    name: React.PropTypes.string,
-    currentOffset: React.PropTypes.shape({
-        x: React.PropTypes.number,
-        y: React.PropTypes.number
-    }),
-    isDragging: React.PropTypes.bool
-};
-
-
 const mapStateToProps = state => {
-    	const { mode, playlist, playlistMode } = state.updatePlaylist;
     	const { displayText } = state.geolocation;
+
 	return { displayText };
 }
+
 
 
 export default compose( DragLayer(collect),connect(mapStateToProps))(ItemPreview);
