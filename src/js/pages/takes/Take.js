@@ -124,8 +124,6 @@ class Take extends Component {
 
 	}
 
-
-
 	render() {
 
 		var file = [];
@@ -134,7 +132,7 @@ class Take extends Component {
 		};
 
 		return (
-
+    <div >
 			<Segment>
 				<Grid textAlign="left">
 					<Grid.Row>
@@ -189,6 +187,7 @@ class Take extends Component {
 					</Grid.Row>
 				</Grid>
 			</Segment>
+			</div>
 
 		);
 	}

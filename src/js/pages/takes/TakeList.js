@@ -10,9 +10,11 @@ class TakeList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			takes: this.props.takes
+			takes: this.props.takes,
 		};
 	}
+
+
 	pushTake(take) {
 		this.setState(
 			update(this.state, {
@@ -76,6 +78,7 @@ class TakeList extends Component {
 		}
 
 	}
+
 	render() {
 		const style = {
 			minHeight: "231px"

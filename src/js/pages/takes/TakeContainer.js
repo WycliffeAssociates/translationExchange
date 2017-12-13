@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TakePropTypes from "./TakePropTypes";
 import Take from "./Take";
-import { findDOMNode } from "react-dom";
+import ReactDOM, { findDOMNode } from "react-dom";
 import { DragSource, DropTarget } from "react-dnd";
 import flow from "lodash/flow";
 import ItemPreview from './components/ItemPreview';
@@ -20,17 +20,12 @@ class TakeContainer extends Component {
 		this.props.deleteTake(this.props.take.id);
 	}
 
-	componentDidMount() {
-	 const rect = this.myInput.getBoundingClientRect();
-	 this.setState({ rect });
- }
 
 	dragObject(){
 	const { connectDragSource, connectDropTarget, connectDragPreview, isDragging } = this.props;
 	const style = { opacity: isDragging ? 0.1 : 1 };
-
 	let content = (
-	<div>
+
 	 <div ref={input => {this.myInput = input}} className="item" style= {style}>
 		 <Take
 				count={this.props.count}
@@ -49,31 +44,13 @@ class TakeContainer extends Component {
 			/>
 	</div>
 
-	{/* <ItemPreview
-	// count={this.props.count}
-	// take={this.props.take.take}
-	// author={this.props.take.user}
-	// chunkNumber={this.props.chunkNumber}
-	// ratingLoading={this.state.ratingLoading}
-	// source={this.props.source}
-	// comments={this.props.take.comments}
-	// addToListenList={this.props.addToListenList}
-	// onDeleteTake={this.onDeleteTake.bind(this)}
-	// onClickSave={this.props.onClickSave}
-	// deleteComment={this.props.deleteComment}
-	// active={this.props.active}
-	// mode={this.props.mode}
-	key="__preview" name="TakeContainer" /> */}
-
-	</div>
 	);
 
 	// Connect as drag source
 		content = connectDragSource(content);
 		// Connect as drop target
 		content = connectDropTarget(content);
-		// Connect to drag layer
-		//content = connectDragPreview(content);
+		
 	return content;
 }
 
@@ -85,11 +62,13 @@ class TakeContainer extends Component {
 TakeContainer.propTypes = {
 	take: TakePropTypes
 };
-const takeSource = {
-	beginDrag(props) {
-		//const rect = TakeContainer.getBoundingClientRect();
 
-		return { index: props.index, listId: props.listId, take: props.take};
+
+
+const takeSource = {
+	beginDrag(props, monitor, component) {
+
+		return { index: props.index, listId: props.listId, take: props.take, active: props.active};
 	},
 	endDrag(props, monitor) {
 		const item = monitor.getItem();

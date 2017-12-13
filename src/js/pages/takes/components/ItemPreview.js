@@ -12,29 +12,32 @@ import blur from '../../../../images/blur.PNG'
 const collect = (monitor) => {
     var item = monitor.getItem();
     return {
-        rect: item && item.rect,
+
         id: item && item.listId,
         name: item && item.index,
         currentOffset: monitor.getSourceClientOffset(),
         isDragging: monitor.isDragging(),
         monitor: monitor,
         take: item && item.take,
+        active: item && item.active,
         item
     };
 }
 
-const getItemStyles= (currentOffset, take ) => {
+const getItemStyles= (currentOffset ) => {
+
     if (!currentOffset) {
         return {
             display: 'none'
         };
     }
 
+    const winOffset = window.pageYOffset ;
+
     // http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
     var x = currentOffset.x;
-    var y = currentOffset.y;
+    var y = currentOffset.y + winOffset;  // addoffset when the screen is scrolled because the origin is respect to the (0,0) component and not the window
 
-    //console.log(`x: ${x} y:${y}`);
     var transform = `translate(${x}px, ${y}px)`;
 
     return {
@@ -43,26 +46,27 @@ const getItemStyles= (currentOffset, take ) => {
         WebkitTransform: transform,
         position:'absolute',
         zIndex: 1,
-        width: '20%'
+        width: '20%',
+
     };
 }
-
-
-
 
 class ItemPreview extends Component {
 
 render(){
 
   let take = this.props.take;
+  let rect = this.props.rect;
+  let active = false;
   let takeText = '';
   let date = '';
   if(take !== null){
       takeText = `Take ${take.order}`;
     date = this.parseDate(take.date_modified);
+    active = this.props.active;
       }
     return (
-        <div style={getItemStyles(this.props.currentOffset, take)}>
+        <div style={getItemStyles(this.props.currentOffset)}>
           <Segment>
     				<Grid textAlign="left">
     					<Grid.Row>
@@ -106,7 +110,7 @@ render(){
                     <Button
           						fluid
           						// active={this.state.active}
-          						// color={this.state.active ? "yellow" : null}
+          						 color={active ? "yellow" : null}
           					>
           						<Icon name="comment outline" />
           					</Button>
@@ -121,7 +125,7 @@ render(){
   }
 
 
- parseDate(date)    {      //TODO get the displaytext from redux
+ parseDate(date)    {
     var noon = "am";
     var dateArr = date.split("T");
     var date = dateArr[0];
