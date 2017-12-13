@@ -49,32 +49,20 @@ const getItemStyles= (currentOffset, take ) => {
 
 
 
-const ItemPreview = ({
-    isDragging,
-    currentOffset,
-    count,
-    take,
-    author,
-    chunkNumber,
-    source,
-    comments,
-    addToListenList,
-    active,
-    height,
-    width,
-    item,
-    monitor,
-    rect
 
-}) => {
+class ItemPreview extends Component {
+
+render(){
+
+  let take = this.props.take;
   let takeText = '';
   let date = '';
   if(take !== null){
       takeText = `Take ${take.order}`;
-    date = parseDate(take.date_modified);
+    date = this.parseDate(take.date_modified);
       }
     return (
-        <div style={getItemStyles(currentOffset, take)}>
+        <div style={getItemStyles(this.props.currentOffset, take)}>
           <Segment>
     				<Grid textAlign="left">
     					<Grid.Row>
@@ -129,65 +117,69 @@ const ItemPreview = ({
     			</Segment>
         </div>
     );
-}
 
-const parseDate = (date) => {      //TODO get the displaytext from redux
-  var noon = "am";
-  var dateArr = date.split("T");
-  var date = dateArr[0];
-
-  var time = dateArr[1].split(".");
-  time = time[0].split(":");
-  date = date.split("-");
-  switch (date[1]) {
-    case "01":
-      date[1] = "January";
-      break;
-    case "02":
-      date[1] = "February";
-      break;
-    case "03":
-      date[1] = "March";
-      break;
-    case "04":
-      date[1] = "April";
-      break;
-    case "05":
-      date[1] = "May";
-      break;
-    case "06":
-      date[1] = "June";
-      break;
-    case "07":
-      date[1] = "July";
-      break;
-    case "08":
-      date[1] = "August";
-      break;
-    case "09":
-      date[1] = "September";
-      break;
-    case "10":
-      date[1] = "October";
-      break;
-    case "11":
-      date[1] = "November";
-      break;
-    case "12":
-      date[1] = "December";
-      break;
   }
 
-  var hour = parseInt(time[0]);
-  if (hour / 12 > -1) {
-    noon = "pm";
+
+ parseDate(date)    {      //TODO get the displaytext from redux
+    var noon = "am";
+    var dateArr = date.split("T");
+    var date = dateArr[0];
+    var time = dateArr[1].split(".");
+    time = time[0].split(":");
+    date = date.split("-");
+    switch (date[1]) {
+      case "01":
+        date[1] = this.props.displayText.month1;
+        break;
+      case "02":
+        date[1] = this.props.displayText.month2;
+        break;
+      case "03":
+        date[1] = this.props.displayText.month3;
+        break;
+      case "04":
+        date[1] = this.props.displayText.month4;
+        break;
+      case "05":
+        date[1] = this.props.displayText.month5;
+        break;
+      case "06":
+        date[1] = this.props.displayText.month6;
+        break;
+      case "07":
+        date[1] = this.props.displayText.month7;
+        break;
+      case "08":
+        date[1] = this.props.displayText.month8;
+        break;
+      case "09":
+        date[1] = this.props.displayText.month9;
+        break;
+      case "10":
+        date[1] = this.props.displayText.month10;
+        break;
+      case "11":
+        date[1] = this.props.displayText.month11;
+        break;
+      case "12":
+        date[1] = this.props.displayText.month12;
+        break;
+    }
+
+    var hour = parseInt(time[0]);
+    if (hour / 12 > -1) {
+      noon = "pm";
+    }
+
+    if (!(hour % 12 === 0)) {
+      hour %= 12;
+    }
+
+    return (`${date[1]} ${date[2]}, ${date[0]} at ${hour}:${time[1]}${noon}`);
   }
 
-  if (!(hour % 12 === 0)) {
-    hour %= 12;
-  }
 
-  return (`${date[1]} ${date[2]}, ${date[0]} at ${hour}:${time[1]}${noon}`);
 }
 
 
