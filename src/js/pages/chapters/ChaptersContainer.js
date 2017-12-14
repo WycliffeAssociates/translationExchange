@@ -61,10 +61,10 @@ class ChaptersContainer extends Component {
 			);
 		} else {
 			return (
-				<div className="chapters" style={{ direction:`${this.props.direction}` }} >
+				<div className="chapters" style={{ direction: `${this.props.direction}` }} >
 					<Container fluid>
 						<h1>
-							{this.props.book.name} ({this.props.language.name})
+							{this.props.book} ({this.props.language})
 								<DownloadSourceAudio
 								published={this.props.published}
 								downloadLoadingSourceAudio={this.props.downloadLoadingSourceAudio}
@@ -94,13 +94,11 @@ class ChaptersContainer extends Component {
 
 							<ChapterList
 								chapters={this.props.chapters}
-								version={
-									QueryString.parse(this.props.location.search).version
-								}
-								navigateToChapter={this.navigateToChapter.bind(this)}
-								setCheckingLevel={this.setCheckingLevel.bind(this)}
-								projectIsPublish={this.props.published}
-								displayText={this.props.displayText}
+								version={this.props.version}
+							navigateToChapter={this.navigateToChapter.bind(this)}
+							setCheckingLevel={this.setCheckingLevel.bind(this)}
+							projectIsPublish={this.props.published}
+							displayText={this.props.displayText}
 							/>
 						</Table>
 
@@ -134,9 +132,9 @@ class ChaptersContainer extends Component {
 
 const mapStateToProps = state => {
 
-const {direction} = state.direction;
+	const { direction } = state.direction;
 	const { displayText } = state.geolocation;
-	const { chapters, book, project_id, published,
+	const { chapters, book, version, project_id, published,
 		language, loaded, downloadLoading,
 		downloadError, downloadSuccess, downloadLoadingSourceAudio,
 		downloadErrorAudioSource } = state.chaptersContainer;

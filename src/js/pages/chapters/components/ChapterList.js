@@ -18,7 +18,7 @@ class ChapterList extends Component {
 		return (
 			<Table.Row onClick={() => this.props.navigateToChapter(chapter.chapter)}>
 				<Table.Cell>
-					{chapter.chapter}
+					{chapter.id}
 				</Table.Cell>
 				<Table.Cell>
 					<CircularProgressbar
@@ -42,7 +42,7 @@ class ChapterList extends Component {
 						: <Icon name="remove" />}
 				</Table.Cell>
 				<Table.Cell>
-					{this.getContributorText(chapter.contributors)}
+					{chapter.contributor}
 				</Table.Cell>
 				<Table.Cell>
 					{this.props.version}
