@@ -30,22 +30,24 @@ class ExportTakesButton extends Component {
         }
     }
 
-    // createExportPlaylist() {
-    //
-    //     let length = this.props.chunks.length;
-    //     var playlist = [];
-    //     this.props.chunks.map((chunk) => {
-    //         chunk.takes.map((take) => {
-    //             if (take.take.is_publish) {
-    //                 playlist.push({
-    //                     "src": config.streamingUrl + take.take.location,
-    //                     "name": this.props.mode + ' ' + chunk.startv + ' (' + (playlist.length + 1) + '/' + length + ')'
-    //                 });
-    //             }
-    //         })
-    //     });
-    //     return playlist
-    // }
+    createExportPlaylist() {
+
+        let length = this.props.chunks.length;
+        const takes = this.props.takes;
+        let playlist = [];
+        takes.map((take) => {
+                    playlist.push({
+                        "src": config.streamingUrl + take.location,
+                        "name": this.props.mode + ' ' + take.startv + ' (' + (playlist.length + 1) + '/' + length + ')'
+                         }
+                    );
+                }
+
+        );
+        const tst = playlist;
+        debugger;
+        return playlist
+    }
 
     changeColor() {
         this.props.onMarkedAsPublish(() => {
@@ -116,7 +118,7 @@ class ExportTakesButton extends Component {
                 });
 
        enableBtn = published.every(val => val ===true);
-        debugger;
+
 
        }
    //    const publish = takes.map(tk => {
@@ -158,9 +160,7 @@ class ExportTakesButton extends Component {
                         <p>Here is a preview of the takes you have selected to export. This may take a few seconds to
                                 load.</p>
                             <p>To mark as done, click on 'Finish'.</p>
-                            {/* <AudioComponent
-                                width={850} playlist={this.createExportPlaylist()} loop={true}
-                                /> */}
+                             {this.audioPlayer()}
                         </Modal.Description>
 
                     </Modal.Content>
