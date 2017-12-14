@@ -95,7 +95,6 @@ class ChunkListContainer extends Component {
 	 takes.map(tk => {
 		if (chunkId === tk.chunkId && tk.published === true && patch.published === true ){
 			returnTake = tk;
-			debugger;
 		}
 
 	});
