@@ -1,15 +1,16 @@
 import axios from "axios";
 import config from "../../config/config";
 
-export const fetchAllProjects = (query, queryString) => {
+export const fetchAllProjects = (query) => {
 
     return function (dispatch) {
-        
+
         dispatch(dispatchAllProjectsLoading());
         return axios
-            .post(config.apiUrl + "get_projects/", query)
+            .get(`${config.apiUrl}projects/${query}`)
             .then(response => {
-                dispatch(dispatchAllProjectsReceived(response.data, queryString));
+              debugger;
+                dispatch(dispatchAllProjectsReceived(response.data, query ));
             })
             .catch(err => {
                 dispatch(dispatchAllProjectsFailed(err));

@@ -39,47 +39,50 @@ class ProjectsList extends Component {
      */
 	/*{project.percentFinished}*/
 	createListItem(project) {
-		
-		var navigateToProject = function() {
-			project.version.slug
-			this.props.navigateToProject(
-				project.language.slug,
-				project.book.slug,
-				project.version.slug
-			);
-		}.bind(this);
 
-		return (
-			<Table.Row>
-				<Table.Cell onClick={navigateToProject}>
-					{project.language.name}
-				</Table.Cell>
-				<Table.Cell onClick={navigateToProject}>
-					{project.book.name}
-				</Table.Cell>
-				<Table.Cell onClick={navigateToProject}>
-					<CircularProgressbar
-						strokeWidth="20"
-						percentage={project.completed}
-					/>
-				</Table.Cell>
-				<Table.Cell>
-					<ReadMore lines={1} onShowMore={this.props.onChange} text={this.props.displayText.more}>
-						<b>{this.props.displayText.dateModified}</b>: {this.parseDate(project.date_modified)} <br />
-						<b>{this.props.displayText.translationType}</b>: {project.version.slug} <br />
-						<b>{this.props.displayText.contributors}</b>: {this.getContributorText(
-							project.contributors
-						)}{" "}
-						<br />
-						<b>{this.props.displayText.published}</b>:
-						{project.published
-							? <Icon name="checkmark" color="green" />
-							: <Icon name="remove" />}
-					</ReadMore>
-				</Table.Cell>
-			</Table.Row>
-		);
-	}
+	        var navigateToProject = function() {
+	            project.version.slug
+	            this.props.navigateToProject(
+	                project.language.slug,
+	                project.book.slug,
+	                project.version.slug,
+	                project.published,
+	                project.id
+
+	            );
+	        }.bind(this);
+
+	        return (
+	            <Table.Row>
+	                <Table.Cell onClick={navigateToProject}>
+	                    {project.language.name}
+	                </Table.Cell>
+	                <Table.Cell onClick={navigateToProject}>
+	                    {project.book.name}
+	                </Table.Cell>
+	                <Table.Cell onClick={navigateToProject}>
+	                    <CircularProgressbar
+	                        strokeWidth="20"
+	                        percentage={project.completed}
+	                    />
+	                </Table.Cell>
+	                <Table.Cell>
+	                    <ReadMore lines={1} onShowMore={this.props.onChange} text={this.props.displayText.more}>
+	                        {/* {this.parseDate(project.date_modified)} */}
+	                        <b>{this.props.displayText.dateModified}</b>: {"GET FROM BACKEND, projectlist"} <br />
+	                        <b>{this.props.displayText.translationType}</b>: {project.version.slug} <br />
+	                        {/* {this.getContributorText(project.contributors)} */}
+	                        <b>{this.props.displayText.contributors}</b>: {"GET FROM BACKEND, projectlist"}{" "}
+	                        <br />
+	                        <b>{this.props.displayText.published}</b>:
+	                        {project.published
+	                            ? <Icon name="checkmark" color="green" />
+	                            : <Icon name="remove" />}
+	                    </ReadMore>
+	                </Table.Cell>
+	            </Table.Row>
+	        );
+	    }
 
 	getContributorText(contributors) {
 		let contribText = "";

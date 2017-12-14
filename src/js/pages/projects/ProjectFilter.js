@@ -52,43 +52,43 @@ class ProjectFilter extends Component {
 	}
 
 	requestAllFilters() {
-		var self = this;
-		self.setState({ error: "" });
+	        var self = this;
+	        self.setState({ error: "" });
 
-		axios
-			.all([
-				axios.get(config.apiUrl + "get_langs/"),
-				axios.get(config.apiUrl + "get_books/"),
-				axios.get(config.apiUrl + "get_versions/")
-			])
-			.then(
-				axios.spread(function(
-					languagesResponse,
-					booksResponse,
-					versionsResponse
-				) {
-					self.setState({
-						loaded: true,
-						languages: languagesResponse.data.map(function(language) {
-							return {
-								key: language.slug,
-								text: language.name,
-								value: language.slug
-							};
-						}),
-						books: booksResponse.data.map(function(book) {
-							return { key: book.slug, text: book.name, value: book.slug };
-						}),
-						versions: versionsResponse.data.map(function(version) {
-							return { key: version.slug, text: version.slug, value: version.slug };
-						})
-					});
-				})
-			)
-			.catch(exception => {
-				self.setState({ error: exception });
-			});
-	}
+	        axios
+	            .all([
+	                axios.get(config.apiUrl + "languages/"),
+	                axios.get(config.apiUrl + "books/"),
+	                axios.get(config.apiUrl + "versions/")
+	            ])
+	            .then(
+	                axios.spread(function(
+	                    languagesResponse,
+	                    booksResponse,
+	                    versionsResponse
+	                ) {
+	                    self.setState({
+	                        loaded: true,
+	                        languages: languagesResponse.data.map(function(language) {
+	                            return {
+	                                key: language.slug,
+	                                text: language.name,
+	                                value: language.slug
+	                            };
+	                        }),
+	                        books: booksResponse.data.map(function(book) {
+	                            return { key: book.slug, text: book.name, value: book.slug };
+	                        }),
+	                        versions: versionsResponse.data.map(function(version) {
+	                            return { key: version.slug, text: version.slug, value: version.slug };
+	                        })
+	                    });
+	                })
+	            )
+	            .catch(exception => {
+	                self.setState({ error: exception });
+	            });
+	    }
 
 	//called when page first loads
 	componentWillMount() {
