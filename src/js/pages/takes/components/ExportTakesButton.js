@@ -49,9 +49,11 @@ class ExportTakesButton extends Component {
     }
 
     changeColor() {
-        this.props.onMarkedAsPublish(() => {
-            this.handleClose();
-        });
+        // this.props.onMarkedAsPublish(() => {
+        //     this.handleClose();
+        // });
+
+          this.handleClose();
 
     }
 
@@ -127,7 +129,7 @@ class ExportTakesButton extends Component {
 
              });
 
-        
+
 
 
        enableBtn = checkPublishedStatus.every(val => val ===true);              // verify all the published takes
@@ -199,7 +201,6 @@ const styles = {
 
     }
 }
-
 
 const mapStateToProps = state => {
 

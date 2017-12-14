@@ -278,10 +278,11 @@ export const markedAsPublished = (success, chapter) => {
     return function (dispatch) {
         return axios
             .patch(config.apiUrl + "chapters/" + chapter.id + "/",
-            { is_publish: true })
+            { published: true })
             .then((response) => {
+              debugger;
                 let updatedChapter = Object.assign({}, chapter);
-                updatedChapter.is_publish = true;
+                updatedChapter.published = true;
                 dispatch(markAsPublishedSuccess(updatedChapter));
                 if (success) {
                     success();
