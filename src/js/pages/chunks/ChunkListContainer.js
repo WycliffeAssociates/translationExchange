@@ -103,7 +103,7 @@ class ChunkListContainer extends Component {
 		  const update = { published:false,
 											 rating: 3	}
 		 	this.props.patchTake(returnTake.id, update, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
-			debugger;
+
 	 }
 			this.props.patchTake(takeId, patch, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
 	}
