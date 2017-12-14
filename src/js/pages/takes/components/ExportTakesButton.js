@@ -44,8 +44,7 @@ class ExportTakesButton extends Component {
                 }
 
         );
-        const tst = playlist;
-        debugger;
+
         return playlist
     }
 
@@ -87,7 +86,6 @@ class ExportTakesButton extends Component {
                 <div style={{ display: 'flex' }}>
                     <div style={styles.audioPlayer}>
                         <CommentsPlayer
-                            //audioFile = "http://172.19.145.91/media/dump/1501176679.73d99dfff8-5117-4635-b734-65140995db67/mrk/07/chapter.wav"
                             audioFile={this.state.playList[this.state.pointer].src}
                             playNext={this.playNext}
                             loop={true}
@@ -111,14 +109,28 @@ class ExportTakesButton extends Component {
        const {takes, chunks} = this.props;
 
        if(takes.length >= chunks.length ){
+         let takesPublishedChunkId = [];
+         takes.map(tk => {
 
-         const published = takes.map(tk => {
-              if(!tk.published) return false;
-          return true;
+            if(tk.published){
+              takesPublishedChunkId.push(tk.chunkId);           // create a list of all the published takes
+            }
+
                 });
 
-       enableBtn = published.every(val => val ===true);
+       const checkPublishedStatus =  chunks.map(chnk => {                       //check every chunk to see if it contains a published take
+                       if( takesPublishedChunkId.includes(chnk.id)){
+                          return true;
+                       }else{
+                         return false;
+                       }
 
+             });
+
+        
+
+
+       enableBtn = checkPublishedStatus.every(val => val ===true);              // verify all the published takes
 
        }
 
