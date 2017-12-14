@@ -121,21 +121,12 @@ class ExportTakesButton extends Component {
 
 
        }
-   //    const publish = takes.map(tk => {
-   //      if(!tk.published) return false;
-   //
-   // return true;
-   //
-   //    });
+
 
         let enableButton = true;
-        // let crfe = this.checkReadyForExport();
+
         let disableBtnState = false;
-        // if (disableBtn === crfe) {
-        //     disableBtnState = true;
-        // } else if (crfe) {
-        //     disableBtnState = false;
-        // }
+
         return( <Button onClick={this.handleOpen}
                 color={"green"}
                 disabled={!enableBtn}

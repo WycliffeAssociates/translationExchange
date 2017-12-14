@@ -148,19 +148,16 @@ export const patchTake = (takeId, patch, success, takes, updatingDeletedTake, ch
             .then(response => {
                 //find correct take to update
                 let listOfTakes = takes
-
                 let takeIdToUpdate;
-
                 takeIdToUpdate = listOfTakes.map(takes  => {
                   return takes.id
-                  // takeIdToUpdate = takes.map( tk => {
-                  //   return tk.id})  // search in the chunks array the index of the chunk that contains the take modified
+
                   } ).indexOf(takeId);
 
 
                 let updatedTakeInfo = response.data;
                 updatedTakeInfo.chunkId = chunkId;
-                listOfTakes[takeIdToUpdate] = updatedTakeInfo;            
+                listOfTakes[takeIdToUpdate] = updatedTakeInfo;
                 dispatch(patchTakeSuccess(listOfTakes));
             })
             .catch(error => {

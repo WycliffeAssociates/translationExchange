@@ -90,7 +90,21 @@ class ChunkListContainer extends Component {
 	}
 
 	patchTake(takeId, patch, success, chunkId) {
-		this.props.patchTake(takeId, patch, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
+  const {takes} = this.props;
+	let returnTake = null;
+	 takes.map(tk => {
+		if (chunkId === tk.chunkId && tk.published == true){
+			returnTake = tk;
+			
+		}
+
+	});
+	 if (returnTake !== null){
+		  const update = { published:false,
+											 rating: 3	}
+		 	this.props.patchTake(returnTake.id, update, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
+	 }
+			this.props.patchTake(takeId, patch, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
 	}
 
 	/*
@@ -218,19 +232,13 @@ class ChunkListContainer extends Component {
 	}
 
 	createChunkList(chunk) {
-		/**
-		 * TODO: discuss if the empty list be show or not(Chunks without takes)
-		 */
-		//	if (chunk.takes.length > 0) {
-	//const take = this.props.getAudioTakes(chunk.id);
-
 
 		return (
 			<div>
 				<Chunk
 					comments={this.props.comments}
 					takesForChunk={chunk} // array of takes
-					mode={"chunk"}        //todo get mode from API
+					mode={"chunk"}        //TODO get mode from backend
 					number={chunk.startv}
 					chunkId= {chunk.id}
 					patchTake={this.patchTake.bind(this)}
