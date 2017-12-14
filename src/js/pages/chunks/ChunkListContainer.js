@@ -93,9 +93,9 @@ class ChunkListContainer extends Component {
   const {takes} = this.props;
 	let returnTake = null;
 	 takes.map(tk => {
-		if (chunkId === tk.chunkId && tk.published == true){
+		if (chunkId === tk.chunkId && tk.published === true && patch.published === true ){
 			returnTake = tk;
-			
+			debugger;
 		}
 
 	});
@@ -103,6 +103,7 @@ class ChunkListContainer extends Component {
 		  const update = { published:false,
 											 rating: 3	}
 		 	this.props.patchTake(returnTake.id, update, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
+			debugger;
 	 }
 			this.props.patchTake(takeId, patch, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
 	}
