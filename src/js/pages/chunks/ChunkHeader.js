@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import MarkAsDone from "../takes/components/MarkAsDone";
+import ExportTakesButton from "../takes/components/ExportTakesButton";
 import SetSourceAudio from "../takes/components/SetSourceAudio";
 import RecordButton from "../takes/components/comments/RecordButton";
 import { Grid } from "semantic-ui-react";
 import "css/takes.css";
 
-class ChapterHeader extends Component {
+class ChunkHeader extends Component {
 	render() {
 		return (
 			<div style = {{display:'flex', justifyContent: 'space-between'}}>
@@ -17,7 +17,7 @@ class ChapterHeader extends Component {
 
 						<Grid.Column width={5} className="verticalLine">
 							<div style = {{display:'flex', justifyContent: 'space-between'}}>
-							<MarkAsDone
+							<ExportTakesButton
 								chapter={this.props.chapter}
 								chunks={this.props.chunks}
 								mode={this.props.mode}
@@ -51,4 +51,4 @@ class ChapterHeader extends Component {
 		);
 	}
 }
-export default ChapterHeader;
+export default ChunkHeader;

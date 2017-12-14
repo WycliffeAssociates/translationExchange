@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import PropTypes from "prop-types";
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import CommentsPlayer from '../components/comments/commentsPlayer.js'
@@ -6,7 +7,7 @@ import config from "config/config";
 
 // this is the page for one chapter
 
-class MarkAsDone extends Component {
+class ExportTakesButton extends Component {
 
     constructor(props) {
         super(props);
@@ -18,16 +19,16 @@ class MarkAsDone extends Component {
         this.playNext = this.playNext.bind(this);
     }
 
-//     checkReadyForExport() {
-//         if (this.props.chunks.length === 0) {
-//             return false;
-//         } else {
-// //true if every chunk has at least 1 take marked is_publish
-//             return this.props.chunks.every((chunk) => {
-//                 return chunk.takes.some(take => take.take.is_publish);
-//             });
-//         }
-//     }
+    checkReadyForExport() {
+        if (this.props.chunks.length === 0) {
+            return false;
+        } else {
+      //true if every chunk has at least 1 take marked as published
+            return this.props.chunks.every((chunk) => {
+                return chunk.takes.some(take => take.take.is_publish);
+            });
+        }
+    }
 
     // createExportPlaylist() {
     //
@@ -104,7 +105,28 @@ class MarkAsDone extends Component {
 
 
     exportButton() {
-        let disableBtn = this.props.chapter.is_publish;
+      let enableBtn = false;
+       const {takes, chunks} = this.props;
+
+       if(takes.length >= chunks.length ){
+
+         const published = takes.map(tk => {
+              if(!tk.published) return false;
+          return true;
+                });
+
+       enableBtn = published.every(val => val ===true);
+        debugger;
+
+       }
+   //    const publish = takes.map(tk => {
+   //      if(!tk.published) return false;
+   //
+   // return true;
+   //
+   //    });
+
+        let enableButton = true;
         // let crfe = this.checkReadyForExport();
         let disableBtnState = false;
         // if (disableBtn === crfe) {
@@ -112,15 +134,14 @@ class MarkAsDone extends Component {
         // } else if (crfe) {
         //     disableBtnState = false;
         // }
-        var ExportButton = <Button onClick={this.handleOpen}
-                color={disableBtn === true ? "green" : ""}
-                disabled={disableBtnState}
+        return( <Button onClick={this.handleOpen}
+                color={"green"}
+                disabled={!enableBtn}
                 className="icon"
                 icon="share"
                 floated="right">
                 <Icon color="white" name="sidebar" />
-            </Button>
-      
+            </Button> );
 
     }
 
@@ -153,11 +174,7 @@ class MarkAsDone extends Component {
     }
 }
 
-MarkAsDone.propTypes = {
-    chapter: PropTypes.number.isRequired,
-    chunks: PropTypes.array.isRequired,
-    mode: PropTypes.string.isRequired
-};
+
 
 const styles = {
     modal: {
@@ -181,4 +198,12 @@ const styles = {
 }
 
 
-export default MarkAsDone;
+const mapStateToProps = state => {
+
+  const { takes } = state.chunkListContainer;
+
+  return{ takes }
+}
+
+
+export default connect(mapStateToProps) (ExportTakesButton);
