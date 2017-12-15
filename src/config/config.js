@@ -10,8 +10,8 @@
 // };
 
  var config = {
-     apiUrl: "http://127.0.0.1:8000/api/",
-     streamingUrl: "http://127.0.0.1:8000/"
+     apiUrl: "https://te.loc/api/",
+     streamingUrl: "https://te.loc/"
 };
 
 
