@@ -90,21 +90,23 @@ class ChunkListContainer extends Component {
 	}
 
 	patchTake(takeId, patch, success, chunkId) {
-  const {takes} = this.props;
-	let returnTake = null;
-	 takes.map(tk => {
-		if (chunkId === tk.chunkId && tk.published === true && patch.published === true ){
-			returnTake = tk;
+		const { takes } = this.props;
+		let returnTake = null;
+		takes.map(tk => {
+			if (chunkId === tk.chunkId && tk.published === true && patch.published === true) {
+				returnTake = tk;
+			}
+
+		});
+		if (returnTake !== null) {
+			const update = {
+				published: false,
+				rating: 3
+			}
+			this.props.patchTake(returnTake.id, update, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
+
 		}
-
-	});
-	 if (returnTake !== null){
-		  const update = { published:false,
-											 rating: 3	}
-		 	this.props.patchTake(returnTake.id, update, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
-
-	 }
-			this.props.patchTake(takeId, patch, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
+		this.props.patchTake(takeId, patch, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
 	}
 
 	/*
@@ -141,29 +143,7 @@ class ChunkListContainer extends Component {
 	}
 
 	onMarkedAsPublish(success) {
-		/**
-		 * TODO : needs server implementation and get clear requirement
-		 */
 		this.props.markedAsPublish(success, this.props.chapter);
-		// //make patch request to confirm that the chapter is ready to be published
-
-		// let parameters = { is_publish: true };
-		// axios
-		// 	.patch(
-		// 	config.apiUrl + "chapters/" + this.props.chapter.id + "/",
-		// 	parameters
-		// 	)
-		// 	.then(response => {
-		// 		let updatedChapter = Object.assign({}, this.props.chapter);
-		// 		updatedChapter.is_publish = true;
-		// 		this.setState({ chapter: updatedChapter });
-		// 		if (success) {
-		// 			success();
-		// 		}
-		// 	})
-		// 	.catch(exception => {
-		// 		console.log(exception);
-		// 	});
 	}
 
 	setSourceProject(projectQuery) {
@@ -240,7 +220,7 @@ class ChunkListContainer extends Component {
 					takesForChunk={chunk} // array of takes
 					mode={"chunk"}        //TODO get mode from backend
 					number={chunk.startv}
-					chunkId= {chunk.id}
+					chunkId={chunk.id}
 					patchTake={this.patchTake.bind(this)}
 					deleteTake={this.deleteTake.bind(this)}
 					updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
@@ -264,8 +244,8 @@ const mapStateToProps = state => {
 	const { displayText = "" } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { takes, loaded = false, error = "", comments =[], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
-	return { takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
+	const { loaded = false, error = "", comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
+	return { playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 }
 

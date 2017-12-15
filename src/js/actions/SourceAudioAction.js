@@ -5,7 +5,7 @@ export const fetchAllSourceAudio = (book, projectId, setInitialSourceAudio) => {
     return function (dispatch) {
         dispatch(dispatchSourceAudioLoading());
         return axios
-            .post(config.apiUrl + "get_projects/", { published: true, book: book })
+            .get(config.apiUrl + `projects/?id=${projectId}&published=true`)
             .then(response => {
                 let projects = [];
                 response.data.map(project => {

@@ -20,7 +20,7 @@ class RecordButton extends Component {
 			show: this.props.open,
 			SaveButtonState: true,
 			blob: null,
-			//active: this.props.comments.length > 0,
+			// active: this.props.comments.length > 0,
 			loadingActive: this.props.active,
 			comments: ''
 		};
@@ -108,7 +108,6 @@ class RecordButton extends Component {
 
 	render() {
 
-
 		return (
 			<Modal
 				size="small"
@@ -167,14 +166,11 @@ const styles = {
 	}
 };
 
-
-
 const mapStateToProps = state => {
 
 	const { displayText } = state.geolocation;
 
 	return { displayText };
-
 };
 
 

@@ -121,8 +121,6 @@ export class RecordComment extends Component {
 				</button>
 			);
 		}
-
-
 		let display = (
 			<ReactMic
 				record={this.state.record}
@@ -131,8 +129,6 @@ export class RecordComment extends Component {
 				strokeColor="#039BE5"
 				backgroundColor="#000000"
 			/>
-
-
 		);
 		let saveButton = '';
 
