@@ -324,6 +324,7 @@ export function markAsPublishedFailed(error) {
 //saveComment
 
 export const saveComment = (blobx, type, id, success, chunks, chapter) => {
+  debugger;
     return function (dispatch) {
         dispatch(saveCommentLoading());
         return axios

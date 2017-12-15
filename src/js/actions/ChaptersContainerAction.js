@@ -114,22 +114,23 @@ export function dispatchPublishFilesFailed(error) {
 //download project
 export function downloadProject(projectId) {
 
-    return function (dispatch) {
-        dispatch(dispatchLoadingDownloadProject());
-        return axios
-            .post(config.apiUrl + "zip_project_files/", { project_id: projectId }, { timeout: 0 })
-            .then(response => {
-                //Todo: find the better way to download files
-                window.location = config.streamingUrl + response.data.location;
-                dispatch(dispatchdownloadProjectSuccess(response.data));
-            })
-            .catch(err => {
-                dispatch(dispatchdownloadProjectFailed(err));
-            }).catch(exception => {
-                dispatchdownloadProjectException(exception);
-            });
-    };
+   return function (dispatch) {
+       dispatch(dispatchLoadingDownloadProject());
+       return axios
+           .get(config.apiUrl + `zip/?id=${projectId}`)
+           .then(response => {
+               //Todo: find the better way to download files
+               window.location = config.streamingUrl + response.data.location;
+               dispatch(dispatchdownloadProjectSuccess(response.data));
+           })
+           .catch(err => {
+               dispatch(dispatchdownloadProjectFailed(err));
+           }).catch(exception => {
+               dispatchdownloadProjectException(exception);
+           });
+   };
 }
+
 export function dispatchLoadingDownloadProject() {
     return {
         type: 'DOWNLOAD_PROJECT'
@@ -155,19 +156,19 @@ export function dispatchdownloadProjectException(exception) {
 }
 //download source audio
 export function downloadSourceAudio(projectId) {
-    return function (dispatch) {
-        dispatch(dispatchLoadingDownloadSourceAudio());
-        return axios
-            .post(config.apiUrl + "get_source/", { project_id: projectId,published:true }, { timeout: 0 })
-            .then(response => {
-                //Todo: find the better way to download files
-                window.location = config.streamingUrl + response.data.location;
-                dispatch(dispatchDownloadSourceAudioSuccess(response.data));
-            })
-            .catch(err => {
-                dispatch(dispatchDownloadSourceAudioFailed(err));
-            });
-    };
+   return function (dispatch) {
+       dispatch(dispatchLoadingDownloadSourceAudio());
+       return axios
+           .get(config.apiUrl + `tr/?id=${projectId}&published=true`)
+           .then(response => {
+               //Todo: find the better way to download files
+               window.location = config.streamingUrl + response.data.location;
+               dispatch(dispatchDownloadSourceAudioSuccess(response.data));
+           })
+           .catch(err => {
+               dispatch(dispatchDownloadSourceAudioFailed(err));
+           });
+   };
 }
 export function dispatchLoadingDownloadSourceAudio() {
     return {
