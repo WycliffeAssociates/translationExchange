@@ -43,9 +43,9 @@ class ProjectsList extends Component {
 	        var navigateToProject = function() {
 	            project.version.slug
 	            this.props.navigateToProject(
-	                project.language.slug,
-	                project.book.slug,
-	                project.version.slug,
+	                project.language,
+	                project.book,
+	                project.version,
 	                project.published,
 	                project.id
 

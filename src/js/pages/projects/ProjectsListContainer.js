@@ -64,13 +64,15 @@ class ProjectsListContainer extends Component {
 		}
 	}
 
-	navigateToProject(language, book, version) {
+	navigateToProject(language, book, version, published, project_id) {
 		//make the query for the right project, using our current query as a base
 		var projectQuery = QueryString.parse(this.props.currentProjectQuery);
 		Object.assign(projectQuery, {
-			language: language,
-			book: book,
-			version: version
+			language: language.name,
+			book: book.slug,
+			version: version.slug,
+			published,
+			project_id
 		});
 
 		var queryString = QueryString.stringify(projectQuery);

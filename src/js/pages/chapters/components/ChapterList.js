@@ -15,10 +15,11 @@ class ChapterList extends Component {
 	}
 
 	createListItem(chapter) {
+	
 		return (
 			<Table.Row onClick={() => this.props.navigateToChapter(chapter.chapter)}>
 				<Table.Cell>
-					{chapter.chapter}
+					{chapter.number}
 				</Table.Cell>
 				<Table.Cell>
 					<CircularProgressbar
@@ -37,18 +38,20 @@ class ChapterList extends Component {
 						: chapter.checked_level}
 				</Table.Cell>
 				<Table.Cell>
-					{chapter.is_publish
+					{chapter.published
 						? <Icon name="checkmark" color="green" />
 						: <Icon name="remove" />}
 				</Table.Cell>
 				<Table.Cell>
-					{this.getContributorText(chapter.contributors)}
+					{"add contributor from backend"}
+					{/* {this.getContributorText(chapter.contributors)} */}
 				</Table.Cell>
 				<Table.Cell>
 					{this.props.version}
 				</Table.Cell>
 				<Table.Cell>
-					{this.parseDate(chapter.date_modified)}
+					{"Add date from chapter backend"}
+					{/* {this.parseDate(chapter.date_modified)} */}
 				</Table.Cell>
 			</Table.Row>
 		);
@@ -134,7 +137,6 @@ ChapterList.propTypes = {
 			number: PropTypes.number.isRequired,
 			percentFinished: PropTypes.number.isRequired,
 			checkingLevel: PropTypes.number.isRequired,
-			contributors: PropTypes.arrayOf(PropTypes.string).isRequired,
 			timestamp: PropTypes.string.isRequired
 		})
 	).isRequired,

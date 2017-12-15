@@ -16,7 +16,8 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case "FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS": return {
+        case "FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS":
+         return {
             ...state,
             chapters: action.chapters,
             book: action.book,
@@ -30,7 +31,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state };
         case 'SET_CHECKING_LEVEL_FAILED':
             return { ...state, error: action.error }
-        case 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS': return { error: action.error };
+        // case 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS': return { error: action.error };
         case 'PUBLISH_FILES_SUCCESS':
             return { ...state, is_publish: true }
         case 'PUBLISH_FILES_FAILED':

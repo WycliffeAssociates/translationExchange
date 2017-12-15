@@ -9,7 +9,6 @@ export const fetchAllProjects = (query) => {
         return axios
             .get(`${config.apiUrl}projects/${query}`)
             .then(response => {
-              debugger;
                 dispatch(dispatchAllProjectsReceived(response.data, query ));
             })
             .catch(err => {

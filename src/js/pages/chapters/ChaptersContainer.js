@@ -26,7 +26,8 @@ class ChaptersContainer extends Component {
 	}
 
 	getChapterData() {
-		var query = QueryString.parse(this.props.location.search);
+		const query = QueryString.parse(this.props.location.search);
+
 		this.props.fetchChaptersContainerData(query);
 	}
 

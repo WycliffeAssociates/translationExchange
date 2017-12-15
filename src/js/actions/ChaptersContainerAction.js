@@ -3,28 +3,65 @@ import config from "../../config/config";
 
 //chaptersContainer
 
+// export const fetchChaptersContainerData = (query) => {
+//
+//     return function (dispatch) {
+//         return axios
+//             .get(`${config.apiUrl}chapters/?project_id=${query.project_id}`)
+//             .then(response => {
+//
+//               const {book, project_id, version, published, language} = query;
+//                 dispatch(fetchChaptersContainerDataSuccess(response.data, book, project_id, version, published, language));
+//             })
+//             .catch(err => {
+//                 dispatch(fetchChaptersContainerDataFailed(err));
+//             });
+//     };
+// }
+
 export const fetchChaptersContainerData = (query) => {
     return function (dispatch) {
         return axios
-            .post(config.apiUrl + "get_chapters/", query)
-            .then(response => {
-                dispatch(fetchChaptersContainerDataSuccess(response.data));
+        .all([
+            axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`),
+            axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`),
+            axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
+            axios.get(`${config.apiUrl}versions/?project_id=${query.project_id}`),
+
+        ])
+        .then(
+            axios.spread(function(
+                chaptersResponse,
+                languagesResponse,
+                booksResponse,
+                versionsResponse
+            ) {
+
+                 dispatch(fetchChaptersContainerDataSuccess( chaptersResponse.data, languagesResponse.data, booksResponse.data, versionsResponse.data, query.project_id, query.published));
             })
+        )
             .catch(err => {
                 dispatch(fetchChaptersContainerDataFailed(err));
             });
     };
 }
 
-export function fetchChaptersContainerDataSuccess(response) {
+
+
+
+
+export function fetchChaptersContainerDataSuccess(chapters, language, book, version, project_id, published) {
+
+
     return {
         type: 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS',
-        chapters: response.chapters,
-        version:response.version,
-        book: response.book,
-        project_id: response.project_id,
-        published: response.published,
-        language: response.language,
+        language: language[0],
+        version: version[0],
+        book: book[0],
+        project_id,
+        published,
+
+          chapters,
         loaded: true
     }
 }
