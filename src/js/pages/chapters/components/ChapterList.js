@@ -15,9 +15,9 @@ class ChapterList extends Component {
 	}
 
 	createListItem(chapter) {
-	
+  
 		return (
-			<Table.Row onClick={() => this.props.navigateToChapter(chapter.chapter)}>
+			<Table.Row onClick={() => this.props.navigateToChapter( chapter.number)}>
 				<Table.Cell>
 					{chapter.number}
 				</Table.Cell>
