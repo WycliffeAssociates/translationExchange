@@ -35,7 +35,7 @@ class ChunkListContainer extends Component {
 		this.props.resetInfo();
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		var query = QueryString.parse(this.props.location.search);
 		this.props.getSelectedProjectInfo(query);
 	}

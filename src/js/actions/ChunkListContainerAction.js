@@ -8,7 +8,7 @@ export const getAudioTakes = (chunkId, counter) => {
     const query = { chunk_id: chunkId }
     return function (dispatch) {
         return axios
-            .post(config.apiUrl + "get_takes/", query)
+            .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`)
             .then(response => {
                 if(counter === 0) {
 
@@ -24,6 +24,9 @@ export const getAudioTakes = (chunkId, counter) => {
 }
 
 
+
+
+
 export const getChunkIdClicked = (id) => {
   return {
       type: 'CHUNK_ID_CLICKED',
@@ -35,26 +38,36 @@ export const getChunkIdClicked = (id) => {
 
 
 export const getSelectedProjectInfo = (query) => {                               // from the selected project get chunks, book, language, chapter, project
-
+   debugger;
     return function (dispatch) {
         return axios
             .all([
-                axios.post(config.apiUrl + "get_chunks/", query),
-                axios.post(config.apiUrl + "get_chapters/", query),
-                axios.post(config.apiUrl + "get_projects/", query)
+                axios.get(`${config.apiUrl}chunks/?chapter_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}projects/?project_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}comments/?project_id=${query.project_id}`)
+
             ])
             .then(
             axios.spread(function (
                 chunksResponse,
                 chaptersResponse,
-                projectsResponse
+                projectsResponse,
+                booksResponse,
+                languageResponse,
+                commentsResponse
             ) {
 
                 dispatch(dispatchProjectInfoSuccess(
                     chunksResponse,
                     chaptersResponse,
-                    projectsResponse
-                ));
+                    projectsResponse,
+                    booksResponse,
+                    languageResponse,
+                    commentsResponse
+                                    ));
 
             })
             )
@@ -73,15 +86,22 @@ export const resetInfo = () => {
 
 export function dispatchProjectInfoSuccess(chunksResponse,
     chapterResponse,
-    projectsResponse) {
+    projectsResponse,
+    booksResponse,
+    languageResponse,
+    commentsResponse
+  ) {
+
+     debugger;
+
     return {
         type: 'FETCH_PROJECT_SUCCESS',
         chunks: chunksResponse.data,
-        project: projectsResponse.data,
-        chapter: chapterResponse.data.chapters,
-        book: chapterResponse.data.book,
-        language: chapterResponse.data.language,
-        comments: chapterResponse.data.chapters[0].comments
+        project: projectsResponse.data[0],
+        chapter: chapterResponse,
+        book: booksResponse.data[0],
+        language: languageResponse.data[0],
+        comments: commentsResponse.data[0]
     }
 }
 
