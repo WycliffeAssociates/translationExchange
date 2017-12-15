@@ -6,7 +6,7 @@ import { fetchAllSourceAudio } from "../../../actions";
 
 class SetSourceAudio extends Component {
     componentDidMount() {
-        this.props.fetchAllSourceAudio(this.props.book, this.props.projectId, this.setSource.bind(this));
+        this.props.fetchAllSourceAudio(this.props.projectId, this.setSource.bind(this));
     }
     setSource(project) {
         this.props.setSourceProject(project);
