@@ -327,7 +327,7 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
     return function (dispatch) {
         dispatch(saveCommentLoading());
         return axios
-            .get(config.apiUrl + "comments/", {
+            .post(config.apiUrl + "comments/", {
                 comment: blobx,
                 user: 3,
                 object: id,
