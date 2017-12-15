@@ -15,7 +15,6 @@ class ChapterList extends Component {
 	}
 
 	createListItem(chapter) {
-  
 		return (
 			<Table.Row onClick={() => this.props.navigateToChapter( chapter.number)}>
 				<Table.Cell>
@@ -43,14 +42,13 @@ class ChapterList extends Component {
 						: <Icon name="remove" />}
 				</Table.Cell>
 				<Table.Cell>
-					{"add contributor from backend"}
-					{/* {this.getContributorText(chapter.contributors)} */}
+					{this.getContributorText(chapter.contributors)}
 				</Table.Cell>
 				<Table.Cell>
 					{this.props.version}
 				</Table.Cell>
 				<Table.Cell>
-					{"Add date from chapter backend"}
+					{"December 06, 2017 at 2:53pm (Mr. Backend)"}
 					{/* {this.parseDate(chapter.date_modified)} */}
 				</Table.Cell>
 			</Table.Row>
