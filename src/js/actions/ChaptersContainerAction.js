@@ -6,36 +6,31 @@ import config from "../../config/config";
 export const fetchChaptersContainerData = (query) => {
     return function (dispatch) {
         return axios
-        .all([
-            axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`),
-            axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`),
-            axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
-            axios.get(`${config.apiUrl}versions/?project_id=${query.project_id}`),
+            .all([
+                axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}versions/?project_id=${query.project_id}`),
 
-        ])
-        .then(
-            axios.spread(function(
+            ])
+            .then(
+            axios.spread(function (
                 chaptersResponse,
                 languagesResponse,
                 booksResponse,
                 versionsResponse
             ) {
 
-                 dispatch(fetchChaptersContainerDataSuccess( chaptersResponse.data, languagesResponse.data, booksResponse.data, versionsResponse.data, query.project_id, query.published));
+                dispatch(fetchChaptersContainerDataSuccess(chaptersResponse.data, languagesResponse.data, booksResponse.data, versionsResponse.data, query.project_id, query.published));
             })
-        )
+            )
             .catch(err => {
                 dispatch(fetchChaptersContainerDataFailed(err));
             });
     };
 }
 
-
-
-
-
 export function fetchChaptersContainerDataSuccess(chapters, language, book, version, project_id, published) {
-
 
     return {
         type: 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS',
@@ -45,7 +40,7 @@ export function fetchChaptersContainerDataSuccess(chapters, language, book, vers
         project_id,
         published,
 
-          chapters,
+        chapters,
         loaded: true
     }
 }
@@ -117,7 +112,7 @@ export function downloadProject(projectId) {
     return function (dispatch) {
         dispatch(dispatchLoadingDownloadProject());
         return axios
-            .post(config.apiUrl + "zip_project_files/", { project_id: projectId }, { timeout: 0 })
+            .get(config.apiUrl + `zip/?id=${projectId}`)
             .then(response => {
                 //Todo: find the better way to download files
                 window.location = config.streamingUrl + response.data.location;
@@ -158,7 +153,7 @@ export function downloadSourceAudio(projectId) {
     return function (dispatch) {
         dispatch(dispatchLoadingDownloadSourceAudio());
         return axios
-            .post(config.apiUrl + "get_source/", { project_id: projectId,published:true }, { timeout: 0 })
+            .get(config.apiUrl + `tr/?id=${projectId}&published=true`)
             .then(response => {
                 //Todo: find the better way to download files
                 window.location = config.streamingUrl + response.data.location;
