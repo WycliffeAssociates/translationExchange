@@ -327,14 +327,16 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
     return function (dispatch) {
         dispatch(saveCommentLoading());
         return axios
-            .post(config.apiUrl + "comments/", {
+            .get(config.apiUrl + "comments/", {
                 comment: blobx,
                 user: 3,
                 object: id,
                 type: type
             })
             .then(results => {
+
                 var map = { comment: results.data };
+                debugger;
                 let updatedChunks = chunks.slice();
                 if (type === "take") {
                     let chunkToUpdate = updatedChunks.findIndex(chunk => {
