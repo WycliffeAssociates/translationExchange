@@ -144,7 +144,9 @@ class ChunkListContainer extends Component {
 		/**
 		 * TODO : needs server implementation and get clear requirement
 		 */
+		debugger;
 		this.props.markedAsPublish(success, this.props.chapter);
+
 		// //make patch request to confirm that the chapter is ready to be published
 
 		// let parameters = { is_publish: true };
