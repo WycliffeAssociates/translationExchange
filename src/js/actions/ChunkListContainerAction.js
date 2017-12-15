@@ -10,6 +10,7 @@ export const getAudioTakes = (chunkId, counter) => {
         return axios
             .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`)
             .then(response => {
+                debugger;
                 if(counter === 0) {
 
                 dispatch(dispatchTakesFirstTimeSuccess(response.data, chunkId));
@@ -38,7 +39,6 @@ export const getChunkIdClicked = (id) => {
 
 
 export const getSelectedProjectInfo = (query) => {                               // from the selected project get chunks, book, language, chapter, project
-   debugger;
     return function (dispatch) {
         return axios
             .all([
@@ -91,8 +91,6 @@ export function dispatchProjectInfoSuccess(chunksResponse,
     languageResponse,
     commentsResponse
   ) {
-
-     debugger;
 
     return {
         type: 'FETCH_PROJECT_SUCCESS',
@@ -300,7 +298,6 @@ export const markedAsPublished = (success, chapter) => {
             .patch(config.apiUrl + "chapters/" + chapter.id + "/",
             { published: true })
             .then((response) => {
-              debugger;
                 let updatedChapter = Object.assign({}, chapter);
                 updatedChapter.published = true;
                 dispatch(markAsPublishedSuccess(updatedChapter));
