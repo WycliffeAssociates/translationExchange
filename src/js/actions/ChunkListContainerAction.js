@@ -130,9 +130,10 @@ export function dispatchChunksFailed(error) {
 
 //setSourceProject
 export const setSourceProject = (query, chapter) => {
+
     return function (dispatch) {
         return axios
-            .get(config.apiUrl + "takes/", { ...query, chapter: chapter })
+            .post(config.apiUrl + "get_takes/", { ...query, chapter: chapter })
             .then(response => {
                 dispatch(setSourceProjectSuccess(response.data, query));
             })
@@ -334,9 +335,7 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
                 type: type
             })
             .then(results => {
-
                 var map = { comment: results.data };
-                debugger;
                 let updatedChunks = chunks.slice();
                 if (type === "take") {
                     let chunkToUpdate = updatedChunks.findIndex(chunk => {

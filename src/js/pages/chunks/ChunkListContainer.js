@@ -143,31 +143,7 @@ class ChunkListContainer extends Component {
 	}
 
 	onMarkedAsPublish(success) {
-		/**
-		 * TODO : needs server implementation and get clear requirement
-		 */
-		debugger;
 		this.props.markedAsPublish(success, this.props.chapter);
-
-		// //make patch request to confirm that the chapter is ready to be published
-
-		// let parameters = { is_publish: true };
-		// axios
-		// 	.patch(
-		// 	config.apiUrl + "chapters/" + this.props.chapter.id + "/",
-		// 	parameters
-		// 	)
-		// 	.then(response => {
-		// 		let updatedChapter = Object.assign({}, this.props.chapter);
-		// 		updatedChapter.is_publish = true;
-		// 		this.setState({ chapter: updatedChapter });
-		// 		if (success) {
-		// 			success();
-		// 		}
-		// 	})
-		// 	.catch(exception => {
-		// 		console.log(exception);
-		// 	});
 	}
 
 	setSourceProject(projectQuery) {
