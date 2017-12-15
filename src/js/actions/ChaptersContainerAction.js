@@ -18,44 +18,14 @@ export const fetchChaptersContainerData = (query) => {
 }
 
 export function fetchChaptersContainerDataSuccess(response) {
-    response =
-        {
-            project_id: 1,
-            published: false,
-            //slug
-            language: "yolo",
-            version: "ulb",
-            book: "Genesis",
-            chapters: [
-                {
-                    "id": 1,
-                    "number": 1,
-                    "checked_level": 0,
-                    "published": false,
-                    "project": 1,
-                    "date_modified": "2017-12-14T15:01:49.577746Z",
-                    "contributor": "Philip"
-                },
-                {
-                    "id": 2,
-                    "number": 2,
-                    "checked_level": 0,
-                    "published": false,
-                    "project": 1,
-                    "date_modified": "2017-02-14T15:01:49.577746Z",
-                    "contributor": "Silas"
-                }
-            ],
-        }
-
     return {
         type: 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS',
-        project_id: response.project_id,
-        published: response.published,
-        language: response.language,
-        version: response.version,
-        book: response.book,
-        chapters: response.chapters,
+        project_id: response[0].project.id,
+        published: response[0].project.published,
+        language: response[0].project.language,
+        version: response[0].project.version,
+        book: response[0].project.book,
+        chapters: response,
         loaded: true
     }
 }
@@ -168,7 +138,7 @@ export function downloadSourceAudio(projectId) {
     return function (dispatch) {
         dispatch(dispatchLoadingDownloadSourceAudio());
         return axios
-            .post(config.apiUrl + "get_source/", { project_id: projectId, published: true }, { timeout: 0 })
+            .get(config.apiUrl + `tr/?id=${projectId}&published=true`)
             .then(response => {
                 //Todo: find the better way to download files
                 window.location = config.streamingUrl + response.data.location;

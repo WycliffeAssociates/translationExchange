@@ -16,7 +16,7 @@ class ChapterList extends Component {
 
 	createListItem(chapter) {
 		return (
-			<Table.Row onClick={() => this.props.navigateToChapter(chapter.chapter)}>
+			<Table.Row onClick={() => this.props.navigateToChapter(chapter.id)}>
 				<Table.Cell>
 					{chapter.id}
 				</Table.Cell>
@@ -45,7 +45,7 @@ class ChapterList extends Component {
 					{chapter.contributor}
 				</Table.Cell>
 				<Table.Cell>
-					{this.props.version}
+					{this.props.version.slug}
 				</Table.Cell>
 				<Table.Cell>
 					{this.parseDate(chapter.date_modified)}
@@ -64,64 +64,66 @@ class ChapterList extends Component {
 	}
 
 	parseDate(date) {
-		var noon = "am";
-		var dateArr = date.split("T");
-		date = dateArr[0];
+		if (date) {
+			var noon = "am";
+			var dateArr = date.split("T");
+			date = dateArr[0];
 
-		var time = dateArr[1].split(".");
-		time = time[0].split(":");
-		date = date.split("-");
-		switch (date[1]) {
-			case "01":
-				date[1] = this.props.displayText.month1;
-				break;
-			case "02":
-				date[1] = this.props.displayText.month2;
-				break;
-			case "03":
-				date[1] = this.props.displayText.month3;
-				break;
-			case "04":
-				date[1] = this.props.displayText.month4;
-				break;
-			case "05":
-				date[1] = this.props.displayText.month5;
-				break;
-			case "06":
-				date[1] = this.props.displayText.month6;
-				break;
-			case "07":
-				date[1] = this.props.displayText.month7;
-				break;
-			case "08":
-				date[1] = this.props.displayText.month8;
-				break;
-			case "09":
-				date[1] = this.props.displayText.month9;
-				break;
-			case "10":
-				date[1] = this.props.displayText.month10;
-				break;
-			case "11":
-				date[1] = this.props.displayText.month11;
-				break;
-			case "12":
-				date[1] = this.props.displayText.month12;
-				break;
-			default:
-				break;
+			var time = dateArr[1].split(".");
+			time = time[0].split(":");
+			date = date.split("-");
+			switch (date[1]) {
+				case "01":
+					date[1] = this.props.displayText.month1;
+					break;
+				case "02":
+					date[1] = this.props.displayText.month2;
+					break;
+				case "03":
+					date[1] = this.props.displayText.month3;
+					break;
+				case "04":
+					date[1] = this.props.displayText.month4;
+					break;
+				case "05":
+					date[1] = this.props.displayText.month5;
+					break;
+				case "06":
+					date[1] = this.props.displayText.month6;
+					break;
+				case "07":
+					date[1] = this.props.displayText.month7;
+					break;
+				case "08":
+					date[1] = this.props.displayText.month8;
+					break;
+				case "09":
+					date[1] = this.props.displayText.month9;
+					break;
+				case "10":
+					date[1] = this.props.displayText.month10;
+					break;
+				case "11":
+					date[1] = this.props.displayText.month11;
+					break;
+				case "12":
+					date[1] = this.props.displayText.month12;
+					break;
+				default:
+					break;
+			}
+
+			var hour = parseInt(time[0], 10);
+			if (hour / 12 > -1) {
+				noon = "pm";
+			}
+
+			if (!(hour % 12 === 0)) {
+				hour %= 12;
+			}
+
+			return (`${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`);
 		}
-
-		var hour = parseInt(time[0],10);
-		if (hour / 12 > -1) {
-			noon = "pm";
-		}
-
-		if (!(hour % 12 === 0)) {
-			hour %= 12;
-		}
-
-		return (`${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`);
 	}
 }
 

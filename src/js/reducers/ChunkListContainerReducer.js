@@ -17,7 +17,6 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case "FETCH_PROJECT_SUCCESS":
-
             return {
                 ...state,
                 chunks: action.chunks,

@@ -26,20 +26,20 @@ export const getSelectedProjectInfo = (query) => {                              
     return function (dispatch) {
         return axios
             .all([
-                axios.post(config.apiUrl + "get_projects/", query),
-                axios.post(config.apiUrl + "get_chapters/", query),
-                axios.post(config.apiUrl + "get_chunks/", query)
+                axios.get(config.apiUrl + `projects/?project_id=${query.project_id}&published=${query.published}`),
+                axios.get(config.apiUrl + `chapters/?id=${query.chapter}&published=${query.published}`),
+                axios.get(config.apiUrl + `chunks/?chapter_id=${query.chapter}&project_id=${query.project_id}`)
             ])
             .then(
             axios.spread(function (
-                chunksResponse,
+                projectsResponse,
                 chaptersResponse,
-                projectsResponse
+                chunksResponse
             ) {
                 dispatch(dispatchProjectInfoSuccess(
-                    chunksResponse,
-                    chaptersResponse,
-                    projectsResponse
+                    projectsResponse.data,
+                    chaptersResponse.data,
+                    chunksResponse.data
                 ));
             }))
             .catch(error => {
@@ -56,17 +56,17 @@ export const resetInfo = () => {
 
 }
 
-export function dispatchProjectInfoSuccess(chunksResponse,
-    chapterResponse,
-    projectsResponse) {
+export function dispatchProjectInfoSuccess(
+    projectsResponse, chapterResponse,
+    chunksResponse ) {
+   
     return {
         type: 'FETCH_PROJECT_SUCCESS',
-        chunks: chunksResponse.data,
-        project: projectsResponse.data,
-        chapter: chapterResponse.data.chapters,
-        book: chapterResponse.data.book,
-        language: chapterResponse.data.language,
-        comments: chapterResponse.data.chapters[0].comments
+        chunks: chunksResponse,
+        project: projectsResponse,
+        chapter: chapterResponse,
+        book: chunksResponse,
+        language: chunksResponse
     }
 }
 

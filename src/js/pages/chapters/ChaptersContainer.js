@@ -64,7 +64,7 @@ class ChaptersContainer extends Component {
 				<div className="chapters" style={{ direction: `${this.props.direction}` }} >
 					<Container fluid>
 						<h1>
-							{this.props.book} ({this.props.language})
+							{this.props.book.name} ({this.props.language.name})
 								<DownloadSourceAudio
 								published={this.props.published}
 								downloadLoadingSourceAudio={this.props.downloadLoadingSourceAudio}
@@ -95,10 +95,10 @@ class ChaptersContainer extends Component {
 							<ChapterList
 								chapters={this.props.chapters}
 								version={this.props.version}
-							navigateToChapter={this.navigateToChapter.bind(this)}
-							setCheckingLevel={this.setCheckingLevel.bind(this)}
-							projectIsPublish={this.props.published}
-							displayText={this.props.displayText}
+								navigateToChapter={this.navigateToChapter.bind(this)}
+								setCheckingLevel={this.setCheckingLevel.bind(this)}
+								projectIsPublish={this.props.published}
+								displayText={this.props.displayText}
 							/>
 						</Table>
 
@@ -140,7 +140,7 @@ const mapStateToProps = state => {
 		downloadErrorAudioSource } = state.chaptersContainer;
 	return {
 		displayText, chapters, book,
-		project_id, published, language,
+		project_id, published, language, version,
 		loaded, downloadLoading,
 		downloadError, downloadSuccess,
 		downloadLoadingSourceAudio,

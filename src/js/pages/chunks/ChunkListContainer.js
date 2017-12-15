@@ -37,14 +37,6 @@ class ChunkListContainer extends Component {
 
 	componentDidMount() {
 		var query = QueryString.parse(this.props.location.search);
-
-
-		 // const query = {  book:{ slug: queryInfo.book },
-		 //  								chapter:{number: queryInfo.chapter },
-			// 							  language:{slug: queryInfo.language},
-			// 								version:{slug: queryInfo.version}
-			// 							};
-
 		this.props.getSelectedProjectInfo(query);
 	}
 
