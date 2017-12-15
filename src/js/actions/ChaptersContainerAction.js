@@ -3,22 +3,6 @@ import config from "../../config/config";
 
 //chaptersContainer
 
-// export const fetchChaptersContainerData = (query) => {
-//
-//     return function (dispatch) {
-//         return axios
-//             .get(`${config.apiUrl}chapters/?project_id=${query.project_id}`)
-//             .then(response => {
-//
-//               const {book, project_id, version, published, language} = query;
-//                 dispatch(fetchChaptersContainerDataSuccess(response.data, book, project_id, version, published, language));
-//             })
-//             .catch(err => {
-//                 dispatch(fetchChaptersContainerDataFailed(err));
-//             });
-//     };
-// }
-
 export const fetchChaptersContainerData = (query) => {
     return function (dispatch) {
         return axios

@@ -4,7 +4,7 @@ import config from "../../config/config";
 export function fetchRecentProjects() {
 	return function (dispatch) {
 		return axios
-			.post(config.apiUrl + "get_projects/", {})
+			.get(config.apiUrl + "projects/")
 			.then(response => {
 				dispatch(dispatchHomeRecentProjectsReceived(response.data));
 			})
@@ -22,7 +22,7 @@ export function dispatchHomeRecentProjectsReceived(response) {
 	}
 }
 export function dispatchHomeRecentProjectsErr(error) {
-	
+
 	return {
 		type: 'HOME_RECENT_PROJECTS_RECEIVED',
 		error

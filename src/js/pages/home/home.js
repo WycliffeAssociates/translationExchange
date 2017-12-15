@@ -14,13 +14,15 @@ class Home extends Component {
 		this.props.fetchRecentProjects();
 	}
 
-	navigateToProject(language, book, version) {
+	navigateToProject(language, book, version, published, project_id) {
 		//make the query for the right project, using our current query as a base
 		var projectQuery = QueryString.parse(this.props.homeRecentProjects);
 		Object.assign(projectQuery, {
-			language: language,
-			book: book,
-			version: version
+			language: language.name,
+			book: book.slug,
+			version: version.slug,
+			published,
+			project_id
 		});
 
 		var queryString = QueryString.stringify(projectQuery);
@@ -75,7 +77,9 @@ class Home extends Component {
 						this.navigateToProject(
 							project.language.slug,
 							project.book.slug,
-							project.version.slug
+							project.version.slug,
+							project.published,
+							project.id
 						)}
 				>
 					<h4>

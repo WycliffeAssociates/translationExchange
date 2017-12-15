@@ -10,7 +10,6 @@ export const getAudioTakes = (chunkId, counter) => {
         return axios
             .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`)
             .then(response => {
-                debugger;
                 if(counter === 0) {
 
                 dispatch(dispatchTakesFirstTimeSuccess(response.data, chunkId));
