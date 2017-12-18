@@ -144,7 +144,6 @@ class ChunkListContainer extends Component {
 		/**
 		 * TODO : needs server implementation and get clear requirement
 		 */
-		debugger;
 		this.props.markedAsPublish(success, this.props.chapter);
 
 		// //make patch request to confirm that the chapter is ready to be published
@@ -176,18 +175,16 @@ class ChunkListContainer extends Component {
 		if (!this.props.selectedSourceProject) {
 			return undefined;
 		}
-		let chunk = this.props.selectedSourceProject.chunks.find(
-			chunk => chunk.startv === startv
+		let chunk = this.props.selectedSourceProject.find(
+			chunk => chunk.id === startv
 		);
-		let take = chunk.takes.find(take => take.take.is_publish);
-		return take.take.location;
+		return chunk.location;
 	}
 
 	onSourceClicked(startv) {
 		if (!this.props.playlistMode) {
 			this.props.stopAudio();
 			let sourceLoc = this.getSourceAudioLocationForChunk(startv);
-
 			let sourceAudio =
 				{
 					src: config.streamingUrl + sourceLoc,

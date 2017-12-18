@@ -161,7 +161,6 @@ function DisplayAudioPlayer(props) {
 	const jsonblob = props.jsonblob;
 	const type = props.type;
 	const id = props.id;
-	debugger;
 	const btnText = props.btnText;
 	if (displayPlayer) {
 		return (
