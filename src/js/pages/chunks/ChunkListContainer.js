@@ -148,18 +148,16 @@ class ChunkListContainer extends Component {
 		if (!this.props.selectedSourceProject) {
 			return undefined;
 		}
-		let chunk = this.props.selectedSourceProject.chunks.find(
-			chunk => chunk.startv === startv
+		let chunk = this.props.selectedSourceProject.find(
+			chunk => chunk.id === startv
 		);
-		let take = chunk.takes.find(take => take.take.is_publish);
-		return take.take.location;
+		return chunk.location;
 	}
 
 	onSourceClicked(startv) {
 		if (!this.props.playlistMode) {
 			this.props.stopAudio();
 			let sourceLoc = this.getSourceAudioLocationForChunk(startv);
-
 			let sourceAudio =
 				{
 					src: config.streamingUrl + sourceLoc,
@@ -187,7 +185,7 @@ class ChunkListContainer extends Component {
 						chapterNum = {chapterNum}
 						book={this.props.book}
 						chapter={this.props.chapter}
-						language={this.props.language.name}
+						language={this.props.language}
 						chunks={this.props.chunks}
 						mode={this.props.project.mode}
 						selectedSourceProject={this.props.selectedSourceProjectQuery}

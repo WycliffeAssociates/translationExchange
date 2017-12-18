@@ -12,7 +12,7 @@ class ChunkHeader extends Component {
 				<div className="headerStyle">
 					<Grid padded columns={2}>
 						<Grid.Column width={11} style={{ paddingTop: 23 }}>
-							{this.props.book.name} {this.props.displayText.chapter} {this.props.chapter.number} ({this.props.language})
+							{this.props.book.name} {this.props.displayText.chapter} {this.props.chapter.number} ({this.props.language.name})
 						</Grid.Column>
 
 						<Grid.Column width={5} className="verticalLine">
@@ -42,7 +42,7 @@ class ChunkHeader extends Component {
 					<SetSourceAudio
 						selectedSourceProject={this.props.selectedSourceProject}
 						setSourceProject={this.props.setSourceProject}
-						book={this.props.book.slug}
+						language={this.props.language}
 						projectId={this.props.projectId}
 					/>
 				</div>
