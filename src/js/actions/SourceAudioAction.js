@@ -1,11 +1,12 @@
 import axios from "axios";
 import config from "../../config/config";
 
-export const fetchAllSourceAudio = (projectId, setInitialSourceAudio) => {
+export const fetchAllSourceAudio = (projectId, language, setInitialSourceAudio) => {
     return function (dispatch) {
         dispatch(dispatchSourceAudioLoading());
+        let strig =config.apiUrl + `projects/?id=${projectId}&lang=${language}&published=true`;
         return axios
-            .get(config.apiUrl + `projects/?id=${projectId}&published=true`)
+            .get(config.apiUrl + `projects/?id=${projectId}&lang=${language}&published=true`)
             .then(response => {
                 let projects = [];
                 response.data.map(project => {

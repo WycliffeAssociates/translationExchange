@@ -212,7 +212,7 @@ class ChunkListContainer extends Component {
 					<ChunkHeader
 						book={this.props.book}
 						chapter={this.props.chapter}
-						language={this.props.language.name}
+						language={this.props.language}
 						chunks={this.props.chunks}
 						mode={this.props.project.mode}
 						selectedSourceProject={this.props.selectedSourceProjectQuery}
