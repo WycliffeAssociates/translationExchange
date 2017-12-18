@@ -291,6 +291,7 @@ export function deleteCommentFailed(error) {
 
 //	MarkedAsPublish
 export const markedAsPublished = (success, chapter) => {
+  debugger;
     return function (dispatch) {
         return axios
             .patch(config.apiUrl + "chapters/" + chapter.id + "/",

@@ -140,34 +140,6 @@ class ChunkListContainer extends Component {
 		}
 	}
 
-	onMarkedAsPublish(success) {
-		/**
-		 * TODO : needs server implementation and get clear requirement
-		 */
-		debugger;
-		this.props.markedAsPublish(success, this.props.chapter);
-
-		// //make patch request to confirm that the chapter is ready to be published
-
-		// let parameters = { is_publish: true };
-		// axios
-		// 	.patch(
-		// 	config.apiUrl + "chapters/" + this.props.chapter.id + "/",
-		// 	parameters
-		// 	)
-		// 	.then(response => {
-		// 		let updatedChapter = Object.assign({}, this.props.chapter);
-		// 		updatedChapter.is_publish = true;
-		// 		this.setState({ chapter: updatedChapter });
-		// 		if (success) {
-		// 			success();
-		// 		}
-		// 	})
-		// 	.catch(exception => {
-		// 		console.log(exception);
-		// 	});
-	}
-
 	setSourceProject(projectQuery) {
 		this.props.setSourceProject(projectQuery, this.props.chapter.number);
 	}
@@ -207,9 +179,11 @@ class ChunkListContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
+			const chapterNum = this.props.chunks[0].chapter;
 			return (
 				<div>
 					<ChunkHeader
+						chapterNum = {chapterNum}
 						book={this.props.book}
 						chapter={this.props.chapter}
 						language={this.props.language.name}
@@ -219,7 +193,6 @@ class ChunkListContainer extends Component {
 						onClickSave={this.onClickSave.bind(this)}
 						deleteComment={this.deleteComment.bind(this)}
 						setSourceProject={this.setSourceProject.bind(this)}
-						onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}
 						active={this.props.active}
 						projectId={this.props.project.id}
 						displayText={this.props.displayText}

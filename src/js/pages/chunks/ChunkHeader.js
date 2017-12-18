@@ -21,7 +21,7 @@ class ChunkHeader extends Component {
 								chapter={this.props.chapter}
 								chunks={this.props.chunks}
 								mode={this.props.mode}
-								onMarkedAsPublish={this.props.onMarkedAsPublish}
+								chapterNum = {this.props.chapterNum}
 							/>
 
 							<RecordButton
