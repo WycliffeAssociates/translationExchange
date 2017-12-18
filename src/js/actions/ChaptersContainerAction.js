@@ -32,8 +32,6 @@ export const fetchChaptersContainerData = (query) => {
 
 
 
-
-
 export function fetchChaptersContainerDataSuccess(chapters, language, book, version, project_id, published) {
 
 
@@ -89,7 +87,7 @@ export function publishFiles(chapterId) {
 
     return function (dispatch) {
         return axios
-            .patch(config.apiUrl + "projects/" + chapterId + "/", { is_publish: true })
+            .patch(config.apiUrl + "projects/" + chapterId + "/", { publish: true })
             .then(response => {
                 dispatch(dispatchPublishFilesSuccess(response.data));
             })

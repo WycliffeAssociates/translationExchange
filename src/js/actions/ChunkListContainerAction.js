@@ -24,24 +24,21 @@ export const getAudioTakes = (chunkId, counter) => {
 }
 
 
-
-
-
 export const getChunkIdClicked = (id) => {
   return {
       type: 'CHUNK_ID_CLICKED',
       id
   }
 
-
 }
 
 
-export const getSelectedProjectInfo = (query) => {                               // from the selected project get chunks, book, language, chapter, project
+export const getSelectedProjectInfo = (query) => {
+                            // from the selected project get chunks, book, language, chapter, project
     return function (dispatch) {
         return axios
             .all([
-                axios.get(`${config.apiUrl}chunks/?chapter_id=${query.chapter_num}`),
+                axios.get(`${config.apiUrl}chunks/?chapter_id=${query.chapterId}`),
                 axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`),
                 axios.get(`${config.apiUrl}projects/?project_id=${query.project_id}`),
                 axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
@@ -65,7 +62,8 @@ export const getSelectedProjectInfo = (query) => {                              
                     projectsResponse,
                     booksResponse,
                     languageResponse,
-                    commentsResponse
+                    commentsResponse,
+                    query.chapterId
                                     ));
 
             })
@@ -88,7 +86,8 @@ export function dispatchProjectInfoSuccess(chunksResponse,
     projectsResponse,
     booksResponse,
     languageResponse,
-    commentsResponse
+    commentsResponse,
+    chapterId
   ) {
 
     return {
@@ -98,10 +97,10 @@ export function dispatchProjectInfoSuccess(chunksResponse,
         chapter: chapterResponse,
         book: booksResponse.data[0],
         language: languageResponse.data[0],
-        comments: commentsResponse.data[0]
+        comments: commentsResponse.data[0],
+        chapterId
     }
 }
-
 
 export function dispatchTakesFirstTimeSuccess(takesResponse, chunkId) {
    takesResponse.map(take => take.chunkId = chunkId);
@@ -290,15 +289,13 @@ export function deleteCommentFailed(error) {
 };
 
 //	MarkedAsPublish
-export const markedAsPublished = (success, chapter) => {
-  debugger;
+export const markedAsPublished = (success, chapterId) => {
     return function (dispatch) {
         return axios
-            .patch(config.apiUrl + "chapters/" + chapter.id + "/",
+            .patch(config.apiUrl + "chapters/" + chapterId + "/",
             { published: true })
             .then((response) => {
-                let updatedChapter = Object.assign({}, chapter);
-                updatedChapter.published = true;
+                const updatedChapter= response.data;
                 dispatch(markAsPublishedSuccess(updatedChapter));
                 if (success) {
                     success();
@@ -310,6 +307,7 @@ export const markedAsPublished = (success, chapter) => {
 }
 
 export function markAsPublishedSuccess(response) {
+
     return {
         type: 'MARK_AS_PUBLISHED_SUCCESS',
         response
@@ -325,7 +323,7 @@ export function markAsPublishedFailed(error) {
 //saveComment
 
 export const saveComment = (blobx, type, id, success, chunks, chapter) => {
-  debugger;
+
     return function (dispatch) {
         dispatch(saveCommentLoading());
         return axios
@@ -338,7 +336,7 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
             .then(results => {
 
                 var map = { comment: results.data };
-                debugger;
+
                 let updatedChunks = chunks.slice();
                 if (type === "take") {
                     let chunkToUpdate = updatedChunks.findIndex(chunk => {

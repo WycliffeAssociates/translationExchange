@@ -30,10 +30,11 @@ class ChaptersContainer extends Component {
 		this.props.fetchChaptersContainerData(query);
 	}
 
-	navigateToChapter(chNum) {
+	navigateToChapter(chNum, chId) {
 
 		var query = QueryString.parse(this.props.location.search);
 		query.chapter_num = chNum;
+		query.chapterId =chId;
 		this.props.history.push({
 			pathname: "/takes",
 			search: QueryString.stringify(query)

@@ -53,13 +53,12 @@ class ExportTakesButton extends Component {
     }
 
     finishExportingChapter() {
-        const tst = this.props.chapterNum;
-				debugger;
+        const {chapterId} = this.props;
         this.props.markedAsPublished(() => {
             this.handleClose();
-        });
+        }, chapterId);
 
-			//	this.props.markedAsPublished();
+
 
     }
 
@@ -215,9 +214,9 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
 
-    const { takes } = state.chunkListContainer;
+    const { takes, chapterId } = state.chunkListContainer;
 
-  return{ takes }
+  return{ takes, chapterId }
 }
 
 

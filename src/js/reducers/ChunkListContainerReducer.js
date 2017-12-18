@@ -12,7 +12,8 @@ const INITIAL_STATE = {
     selectedSourceProjectQuery: -1,
     selectedSourceProject: {},
     notifyFlag: false,
-    update: false
+    update: false,
+    chapterId:''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -27,7 +28,7 @@ export default (state = INITIAL_STATE, action) => {
                 language: action.language,
                 comments: action.comments,
                 loaded: true,
-                chunkIdClicked:'',
+                chapterId:action.chapterId,
                 calledChunks:''
             };
         case "FETCH_TAKE_SUCCESS":

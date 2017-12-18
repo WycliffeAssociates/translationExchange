@@ -180,6 +180,7 @@ class ChunkListContainer extends Component {
 			);
 		} else {
 			const chapterNum = this.props.chunks[0].chapter;
+	
 			return (
 				<div>
 					<ChunkHeader
