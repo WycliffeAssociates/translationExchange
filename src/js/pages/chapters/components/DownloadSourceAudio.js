@@ -7,19 +7,24 @@ class DownloadTR extends Component {
     }
 
     render() {
-        let publishButton =
-            <Button
+        if (this.props.published === "true") {
+            return (<Button
                 floated="right"
                 color={"blue"}
-                disabled={this.props.downloadLoadingSourceAudio}//enable if published is disabled
+                disabled={false}//enable if published is disabled
                 loading={this.props.downloadLoadingSourceAudio}
                 onClick={this.download.bind(this)}>
                 {this.props.displayText.downloadSrcAudio}
-            </Button>
-        if (this.props.published==="true") {
-            return publishButton;
+            </Button>)
         } else {
-            return null;
+            return (<Button
+                floated="right"
+                color={"blue"}
+                disabled={true}//enable if published is disabled
+                loading={this.props.downloadLoadingSourceAudio}
+                onClick={this.download.bind(this)}>
+                {this.props.displayText.downloadSrcAudio}
+            </Button>)
         }
     }
 }
