@@ -101,7 +101,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, active: true };
         case 'SAVE_COMMENT_SUCCESS':
             return {
-                ...state, chunks: action.response, active: false
+                ...state, active: false
             }
         case 'SAVE_COMMENT_FAILED':
             return {

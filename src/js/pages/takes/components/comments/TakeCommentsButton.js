@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import RecordComment from "./RecordComment";
+import { bindActionCreators } from 'redux';
 import "./RecordComment.css";
 import CommentsPlayer from "../comments/commentsPlayer";
 import {
@@ -11,6 +12,7 @@ import {
 } from "semantic-ui-react";
 import config from "../../../../../config/config";
 import Notifications from 'react-notify-toast';
+import {getAudioComments} from '../../../../actions/index';
 
 
 
@@ -29,6 +31,12 @@ class TakeCommentsButton extends Component {
 		this.onClickSave = this.onClickSave.bind(this);
 	}
 
+getComments(){
+
+	//this.props.getAudioComments();
+	debugger;
+
+}
 
 
 	onClickSave = () => {
@@ -44,17 +52,6 @@ class TakeCommentsButton extends Component {
 		this.props.deleteComment("take", commentid, takeid);
 	}
 
-	componentWillReceiveProps(nextProps) {
-		// if (nextProps.comments.length > 0) {
-		// 	this.setState({
-		// 		active: true
-		// 	});
-		// } else {
-		// 	this.setState({
-		// 		active: false
-		// 	});
-		// }
-	}
 
 	createPlaylist(comment) {
 
@@ -110,7 +107,7 @@ class TakeCommentsButton extends Component {
 						ref={audioComponent => {
 							this.audioComponent = audioComponent;
 						}}
-						onClick={this.showModal}
+						onClick={this.getComments.bind(this)}
 						active={this.state.active}
 						color={this.state.active ? "yellow" : null}
 					>
@@ -157,6 +154,11 @@ const styles = {
 	}
 };
 
+const mapDispatchToProps = dispatch => {
+  	return bindActionCreators({  getAudioComments  }, dispatch);
+};
+
+
 const mapStateToProps = state => {
 
 	const { displayText } = state.geolocation;
@@ -166,4 +168,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps)(TakeCommentsButton);
+export default connect(mapStateToProps, mapDispatchToProps)(TakeCommentsButton);
