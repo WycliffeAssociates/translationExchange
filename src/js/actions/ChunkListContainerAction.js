@@ -69,7 +69,6 @@ export const getSelectedProjectInfo = (query) => {
             })
             )
             .catch(error => {
-
                 dispatch(dispatchChunksFailed(error)); //TODO change name to function
             });
     }

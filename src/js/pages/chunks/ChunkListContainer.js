@@ -156,7 +156,7 @@ class ChunkListContainer extends Component {
 		return chunk.location;
 	}
 
-	onSourceClicked(chunkId,chunkNumber) {
+	onSourceClicked(chunkId, chunkNumber) {
 		if (!this.props.playlistMode) {
 			this.props.stopAudio();
 			let sourceLoc = this.getSourceAudioLocationForChunk(chunkId);
@@ -288,6 +288,7 @@ class ChunkListContainer extends Component {
 					language={this.props.language.name}
 					onSourceClicked={this.onSourceClicked.bind(this)}
 					active={this.props.active}
+					published={this.props.project.published}
 					displayText={this.props.displayText}
 				/>
 			</div>

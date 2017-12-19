@@ -44,7 +44,7 @@ class Chunk extends Component {
 			const test = this.props.chunkIdClicked;
 			if (this.props.id === tk.chunkId) {   // get takes corresponding just to the selected chunk
 				counter += 1;
-				tk.order = counter; 
+				tk.order = counter;
 				if (tk.published) {
 					publish[publish.length] = tk;
 
@@ -178,6 +178,7 @@ class Chunk extends Component {
 							</Grid.Column>
 							<Grid.Column width={1} verticalAlign="middle" floated="right">
 								<ChunkSidebar
+									published={this.props.published}
 									comments={this.props.comments}
 									onClickSave={this.props.onClickSave}
 									column={0}
@@ -203,7 +204,7 @@ Chunk.propTypes = {
 };
 
 const mapStateToProps = state => {
-	const { takes, update, chunkIdClicked, calledChunks } = state.chunkListContainer;
+	const { takes, update, chunkIdClicked, calledChunks, project } = state.chunkListContainer;
 	return { takes, update, chunkIdClicked, calledChunks };
 }
 

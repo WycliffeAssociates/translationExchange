@@ -21,10 +21,13 @@ class ChunkSidebar extends Component {
                         number={this.props.chunkNumber}
                     />
                 </Menu.Item>
-                <Menu.Item>
-                    <SourceAudioButton chunkId={this.props.chunkId} chunkNumber={this.props.chunkNumber}
-                        onSourceClicked={this.props.onSourceClicked} />
-                </Menu.Item>
+                {this.props.published ?
+                    <Menu.Item>
+                        <SourceAudioButton chunkId={this.props.chunkId} chunkNumber={this.props.chunkNumber}
+                            onSourceClicked={this.props.onSourceClicked} />
+                    </Menu.Item>
+                    : null
+                }
             </Menu>
         )
     }
