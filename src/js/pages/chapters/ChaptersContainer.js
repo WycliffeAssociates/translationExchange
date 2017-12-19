@@ -31,7 +31,6 @@ class ChaptersContainer extends Component {
 	}
 
 	navigateToChapter(chNum, chId) {
-
 		var query = QueryString.parse(this.props.location.search);
 		query.chapter_num = chNum;
 		query.chapterId =chId;
@@ -119,12 +118,10 @@ class ChaptersContainer extends Component {
 								height="16"
 							/>
 						}
-
 						{this.props.downloadError
 							? this.props.displayText.errorTryAgain
 							: null
 						}
-
 						<br />
 					</Container>
 				</div>
