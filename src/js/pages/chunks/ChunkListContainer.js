@@ -90,21 +90,23 @@ class ChunkListContainer extends Component {
 	}
 
 	patchTake(takeId, patch, success, chunkId) {
-  const {takes} = this.props;
-	let returnTake = null;
-	 takes.map(tk => {
-		if (chunkId === tk.chunkId && tk.published === true && patch.published === true ){
-			returnTake = tk;
+		const { takes } = this.props;
+		let returnTake = null;
+		takes.map(tk => {
+			if (chunkId === tk.chunkId && tk.published === true && patch.published === true) {
+				returnTake = tk;
+			}
+
+		});
+		if (returnTake !== null) {
+			const update = {
+				published: false,
+				rating: 3
+			}
+			this.props.patchTake(returnTake.id, update, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
+
 		}
-
-	});
-	 if (returnTake !== null){
-		  const update = { published:false,
-											 rating: 3	}
-		 	this.props.patchTake(returnTake.id, update, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
-
-	 }
-			this.props.patchTake(takeId, patch, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
+		this.props.patchTake(takeId, patch, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
 	}
 
 	/*
@@ -144,24 +146,25 @@ class ChunkListContainer extends Component {
 		this.props.setSourceProject(projectQuery, this.props.chapter.number);
 	}
 
-	getSourceAudioLocationForChunk(startv) {
+	getSourceAudioLocationForChunk(chunkId) {
 		if (!this.props.selectedSourceProject) {
 			return undefined;
 		}
 		let chunk = this.props.selectedSourceProject.find(
-			chunk => chunk.id === startv
+			chunk => chunk.id === chunkId
 		);
 		return chunk.location;
 	}
 
-	onSourceClicked(startv) {
+	onSourceClicked(chunkId,chunkNumber) {
 		if (!this.props.playlistMode) {
 			this.props.stopAudio();
-			let sourceLoc = this.getSourceAudioLocationForChunk(startv);
+			let sourceLoc = this.getSourceAudioLocationForChunk(chunkId);
+			const date = this.parseDate(this.props.project.date_modified);
 			let sourceAudio =
 				{
 					src: config.streamingUrl + sourceLoc,
-					name: this.props.project.mode + " " + startv + " (source)"
+					name: `${this.props.displayText.chunk} ${chunkNumber}(${"author"} ${this.props.displayText.on}${date})`
 				};
 			this.props.playTake(sourceAudio);
 		}
@@ -178,11 +181,11 @@ class ChunkListContainer extends Component {
 			);
 		} else {
 			const chapterNum = this.props.chunks[0].chapter;
-	
+
 			return (
 				<div>
 					<ChunkHeader
-						chapterNum = {chapterNum}
+						chapterNum={chapterNum}
 						book={this.props.book}
 						chapter={this.props.chapter}
 						language={this.props.language}
@@ -205,6 +208,65 @@ class ChunkListContainer extends Component {
 		}
 	}
 
+	parseDate(date) {
+		var noon = "am";
+		var dateArr = date.split("T");
+		var date = dateArr[0];
+
+		var time = dateArr[1].split(".");
+		time = time[0].split(":");
+		date = date.split("-");
+		switch (date[1]) {
+			case "01":
+				date[1] = this.props.displayText.month1;
+				break;
+			case "02":
+				date[1] = this.props.displayText.month2;
+				break;
+			case "03":
+				date[1] = this.props.displayText.month3;
+				break;
+			case "04":
+				date[1] = this.props.displayText.month4;
+				break;
+			case "05":
+				date[1] = this.props.displayText.month5;
+				break;
+			case "06":
+				date[1] = this.props.displayText.month6;
+				break;
+			case "07":
+				date[1] = this.props.displayText.month7;
+				break;
+			case "08":
+				date[1] = this.props.displayText.month8;
+				break;
+			case "09":
+				date[1] = this.props.displayText.month9;
+				break;
+			case "10":
+				date[1] = this.props.displayText.month10;
+				break;
+			case "11":
+				date[1] = this.props.displayText.month11;
+				break;
+			case "12":
+				date[1] = this.props.displayText.month12;
+				break;
+		}
+
+		var hour = parseInt(time[0]);
+		if (hour / 12 > -1) {
+			noon = "pm";
+		}
+
+		if (!(hour % 12 === 0)) {
+			hour %= 12;
+		}
+
+		return (`${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`);
+	}
+
 	createChunkList(chunk) {
 
 		return (
@@ -214,7 +276,7 @@ class ChunkListContainer extends Component {
 					takesForChunk={chunk} // array of takes
 					mode={"chunk"}        //TODO get mode from backend
 					number={chunk.startv}
-					chunkId= {chunk.id}
+					chunkId={chunk.id}
 					patchTake={this.patchTake.bind(this)}
 					deleteTake={this.deleteTake.bind(this)}
 					updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
@@ -238,7 +300,7 @@ const mapStateToProps = state => {
 	const { displayText = "" } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { takes, loaded = false, error = "", comments =[], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
+	const { takes, loaded = false, error = "", comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
 	return { takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 }
