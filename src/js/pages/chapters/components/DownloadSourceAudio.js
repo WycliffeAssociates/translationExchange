@@ -13,12 +13,10 @@ class DownloadTR extends Component {
                 color={"blue"}
                 disabled={this.props.downloadLoadingSourceAudio}//enable if published is disabled
                 loading={this.props.downloadLoadingSourceAudio}
-                onClick={this.download.bind(this)}
-            >
+                onClick={this.download.bind(this)}>
                 {this.props.displayText.downloadSrcAudio}
             </Button>
-
-        if (this.props.published) {
+        if (this.props.published==="true") {
             return publishButton;
         } else {
             return null;
