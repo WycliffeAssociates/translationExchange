@@ -164,7 +164,7 @@ class ChunkListContainer extends Component {
 			let sourceAudio =
 				{
 					src: config.streamingUrl + sourceLoc,
-					name: `${this.props.displayText.chunk} ${chunkNumber}(${"author"} ${this.props.displayText.on}${date})`
+					name: `${this.props.displayText.chunk} ${chunkNumber},(${"author"} ${this.props.displayText.on}${date})`
 				};
 			this.props.playTake(sourceAudio);
 		}
