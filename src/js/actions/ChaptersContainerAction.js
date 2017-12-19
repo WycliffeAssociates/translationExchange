@@ -111,12 +111,12 @@ export function dispatchPublishFilesFailed(error) {
 }
 
 //download project
-export function downloadProject(projectId, option) {
+export function downloadProject(projectId, file_format) {
 
     return function (dispatch) {
         dispatch(dispatchLoadingDownloadProject());
         return axios
-            .get(config.apiUrl + `zip/?id=${projectId}&option=${option}`)
+            .get(config.apiUrl + `zip/?id=${projectId}&file_format=${file_format}`)
             .then(response => {
                 //Todo: find the better way to download files
                 window.location = config.streamingUrl + response.data.location;
