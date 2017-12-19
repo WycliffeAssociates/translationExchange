@@ -89,7 +89,7 @@ export function dispatchProjectInfoSuccess(chunksResponse,
     commentsResponse,
     chapterId
   ) {
-
+    
     return {
         type: 'FETCH_PROJECT_SUCCESS',
         chunks: chunksResponse.data,

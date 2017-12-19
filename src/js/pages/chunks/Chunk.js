@@ -44,7 +44,7 @@ class Chunk extends Component {
 			const test = this.props.chunkIdClicked;
 			if (this.props.id === tk.chunkId) {   // get takes corresponding just to the selected chunk
 				counter += 1;
-				tk.order = counter;
+				tk.order = counter; 
 				if (tk.published) {
 					publish[publish.length] = tk;
 

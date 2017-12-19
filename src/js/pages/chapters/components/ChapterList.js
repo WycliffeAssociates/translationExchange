@@ -28,7 +28,7 @@ class ChapterList extends Component {
 				</Table.Cell>
 				<Table.Cell className="dont-hide-overflow">
 					{/*only allow checking level to be set if project is published*/}
-					{this.props.projectIsPublish
+					{chapter.published
 						? <CheckingLevel
 							num={chapter.checked_level}
 							setCheckingLevel={this.props.setCheckingLevel}

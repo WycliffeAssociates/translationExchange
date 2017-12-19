@@ -150,8 +150,8 @@ class ProjectFilter extends Component {
 		versionOptions = versionOptions.concat(this.state.versions);
 
 		return (
-			<div style ={{display:'flex', marginTop: '2%', justifyContent:'center', direction:`${this.props.direction}` }}>
-				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
+			<div style ={{ width: '100%', display:'flex', marginTop: '2%', justifyContent:'space-between', direction:`${this.props.direction}` }}>
+				<div style ={{marginLeft: '20%', height:'auto'}}>
 				<Dropdown
 					placeholder={this.props.selectLanguage}  // text from in languages.json
 					selection
@@ -162,7 +162,7 @@ class ProjectFilter extends Component {
 					value={query.language}
 				/>
 				</div>
-				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
+				<div style ={{ height:'auto',}}>
 				<Dropdown
 					placeholder={this.props.selectBook}
 					selection
@@ -173,7 +173,7 @@ class ProjectFilter extends Component {
 					value={query.book}
 				/>
 				</div>
-				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
+				<div style ={{height:'auto'}}>
 				<Dropdown
 					placeholder={this.props.selectVersion}
 					selection
@@ -184,7 +184,7 @@ class ProjectFilter extends Component {
 					value={query.version}
 				/>
 				</div>
-				<div style ={{width: 300, height:'auto', display:'inline-block'}}>
+				<div style ={{height:'auto', marginRight: '20%'}}>
 				<Button onClick={this.props.clearQuery}>{this.props.clearButton}</Button>
 			  </div>
 				{this.state.error ? (

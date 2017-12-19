@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Dropdown, Menu } from 'semantic-ui-react';
+import { connect } from "react-redux";
 
 export class CheckingLevel extends Component {
 
@@ -15,6 +16,7 @@ export class CheckingLevel extends Component {
     }
 
     render() {
+      console.log(this.props.num);
         return (
             (
                 <Menu compact>
@@ -25,4 +27,11 @@ export class CheckingLevel extends Component {
     }
 }
 
-export default CheckingLevel;
+const mapStateToProps = state => {
+    const{ checked_level } = state.chaptersContainer;
+
+    return{checked_level}
+
+};
+
+export default connect(mapStateToProps) (CheckingLevel);

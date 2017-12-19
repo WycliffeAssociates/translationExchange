@@ -70,6 +70,7 @@ export function setCheckingLevel(chapterId, level) {
 }
 
 export function dispatchSetCheckingLevelSuccess(response) {
+
     return {
         type: 'SET_CHECKING_LEVEL_SUCCESS',
         response

@@ -62,6 +62,8 @@ class ChaptersContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
+
+
 			return (
 				<div className="chapters" style={{ direction:`${this.props.direction}` }} >
 					<Container fluid>
