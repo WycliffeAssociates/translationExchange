@@ -16,7 +16,6 @@ export class CheckingLevel extends Component {
     }
 
     render() {
-      console.log(this.props.num);
         return (
             (
                 <Menu compact>

@@ -16,6 +16,8 @@ class ProjectsListContainer extends Component {
 		/*
 		get projects if query string is blank
 		 */
+
+
 		if (this.props.location.search) {
 			this.requestProjects(this.props.location.search);
 		}
@@ -29,7 +31,7 @@ class ProjectsListContainer extends Component {
 	//if the project query string has changed, request projects
 	componentWillReceiveProps(nextProps) {
 		if (!nextProps.location.search) {
-			this.props.dispatchAllProjectsReset();
+
 		} else if (this.props.currentProjectQuery !== nextProps.location.search) {
 			this.requestProjects(nextProps.location.search);
 		}
