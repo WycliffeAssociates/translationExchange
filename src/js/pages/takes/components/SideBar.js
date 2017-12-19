@@ -22,7 +22,7 @@ class ChunkSidebar extends Component {
                     />
                 </Menu.Item>
                 <Menu.Item>
-                    <SourceAudioButton startv={this.props.chunkId}
+                    <SourceAudioButton chunkId={this.props.chunkId} chunkNumber={this.props.chunkNumber}
                         onSourceClicked={this.props.onSourceClicked} />
                 </Menu.Item>
             </Menu>
