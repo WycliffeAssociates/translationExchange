@@ -127,7 +127,7 @@ class RecordButton extends Component {
 				}
 			>
 				<Modal.Header style={this.Style}>
-					{this.props.displayText.commentsOn} {this.props.languagefrmAPI} {this.props.type}{" "}
+					{this.props.displayText.commentsOn} {this.props.type}{" "}
 					{this.props.number}{" "}
 				</Modal.Header>
 

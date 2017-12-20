@@ -27,12 +27,11 @@ class ChunkHeader extends Component {
 							<RecordButton
 								comments={this.props.chapter.comment}
 								onClickSave={this.props.onClickSave}
-								id={this.props.chapter.id}
+								id={this.props.chapter.data[0].id}
 								type={"chapter"}
 								deleteComment={this.props.deleteComment}
 								loadingActive={this.props.active}
-								number={this.props.chapter.number}
-								languagefrmAPI={this.props.language}
+								number={this.props.chapterNum}
 							/>
 							</div>
 						</Grid.Column>

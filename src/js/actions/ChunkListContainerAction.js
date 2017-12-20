@@ -355,11 +355,6 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
                 type: type
             })
             .then(results => {
-                debugger;
-                // var map = { comment: results.data };
-                //
-                // let updatedChunks = chunks.slice();
-                // dispatch(saveCommentSuccess(updatedChunks));
                 var map = { comment: results.data };
                    if (type === "take") {
                        dispatch(saveCommentSuccess(map));
@@ -372,12 +367,7 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
                    let myColor = { background: '#50f442 ', text: "#FFFFFF " };
                    notify.show("Saved", "custom", 1500, myColor);
                })
-              //  success();
-                // let myColor = { background: '#50f442', text: "#FFFFFF" };
-                // notify.show("Saved", "custom", 1500, myColor);
-
             .catch(exception => {
-              debugger;
                 dispatch(saveCommentFailed(exception))
                 success();
             });
