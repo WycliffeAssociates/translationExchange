@@ -59,6 +59,7 @@ class RecordButton extends Component {
 	getComments(){
 	  const type = this.props.type;
 		const id = this.props.id;
+		debugger;
 
 		this.props.getAudioComments(id, `${type}_id`);
 
