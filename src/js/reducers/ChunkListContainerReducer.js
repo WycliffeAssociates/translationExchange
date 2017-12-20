@@ -26,7 +26,6 @@ export default (state = INITIAL_STATE, action) => {
                 chapter: action.chapter,
                 book: action.book,
                 language: action.language,
-                comments: action.comments,
                 loaded: true,
                 chapterId:action.chapterId,
                 calledChunks:''

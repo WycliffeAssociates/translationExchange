@@ -68,7 +68,6 @@ export const getSelectedProjectInfo = (query) => {
                 axios.get(`${config.apiUrl}projects/?project_id=${query.project_id}`),
                 axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
                 axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}comments/?project_id=${query.project_id}`)
 
             ])
             .then(
@@ -78,7 +77,6 @@ export const getSelectedProjectInfo = (query) => {
                 projectsResponse,
                 booksResponse,
                 languageResponse,
-                commentsResponse
             ) {
 
                 dispatch(dispatchProjectInfoSuccess(
@@ -87,9 +85,7 @@ export const getSelectedProjectInfo = (query) => {
                     projectsResponse,
                     booksResponse,
                     languageResponse,
-                    commentsResponse,
-                    query.chapterId
-                                    ));
+                    query.chapterId));
 
             })
             )
@@ -110,7 +106,6 @@ export function dispatchProjectInfoSuccess(chunksResponse,
     projectsResponse,
     booksResponse,
     languageResponse,
-    commentsResponse,
     chapterId
   ) {
 
@@ -121,7 +116,6 @@ export function dispatchProjectInfoSuccess(chunksResponse,
         chapter: chapterResponse,
         book: booksResponse.data[0],
         language: languageResponse.data[0],
-        comments: commentsResponse.data[0],
         chapterId
     }
 }
