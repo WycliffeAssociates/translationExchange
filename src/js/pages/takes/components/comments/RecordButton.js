@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import RecordComment from "./RecordComment";
 import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
 import "./RecordComment.css";
 import CommentsPlayer from "../comments/commentsPlayer";
 import Notifications from 'react-notify-toast';
@@ -10,6 +11,7 @@ import {
 	Modal
 } from "semantic-ui-react";
 import config from "../../../../../config/config";
+import {getAudioComments} from '../../../../actions/index';
 
 class RecordButton extends Component {
 	constructor(props) {
@@ -53,24 +55,22 @@ class RecordButton extends Component {
 		this.setState({ SaveButtonState: newState });
 	}
 
-	componentWillReceiveProps(nextProps) {
-		// if (nextProps.comments.length > 0) {
-		// 	this.setState({
-		// 		active: true
-		// 	});
-		// } else {
-		// 	this.setState({
-		// 		active: false
-		// 	});
-		// }
+
+	getComments(){
+	  const type = this.props.type;
+		const id = this.props.id;
+
+		this.props.getAudioComments(id, `${type}_id`);
+
 	}
+
 
 	createPlaylist(comment) {
 
-		const src = config.streamingUrl + comment.comment.location;
+		const src = config.streamingUrl + comment.location;
 
 		return (
-			<div key={comment.comment.id} style={styles.container}>
+			<div key={comment.id} style={styles.container}>
 
 				<CommentsPlayer
 					audioFile={src}
@@ -85,7 +85,7 @@ class RecordButton extends Component {
 							if (window.confirm(this.props.displayText.deleteComment)) {
 								this.props.deleteComment(
 									this.props.type,
-									comment.comment.id,
+									comment.id,
 									this.props.id
 								);
 							}
@@ -122,7 +122,7 @@ class RecordButton extends Component {
 							this.audioComponent = audioComponent;
 						}}
 						icon="comment outline"
-						onClick={this.props.onClick}
+						onClick={this.getComments.bind(this)}
 					/>
 				}
 			>
@@ -145,9 +145,9 @@ class RecordButton extends Component {
 				<div style={{ display: 'flex', justifyContent: 'center', marginTop: '2%', marginBottom: '2%', maxHeight: 350, overflowY: 'scroll' }}>
 					<div style={{ width: '95%', marginTop: '1%' }}>
 
-						{/* {this.props.comments.length > 0
+						{this.props.comments.length > 0
 							? this.props.comments.slice(0).reverse().map(this.createPlaylist.bind(this))
-							: ""} */}
+							: ""}
 
 					</div>
 				</div>
@@ -168,14 +168,18 @@ const styles = {
 };
 
 
+const mapDispatchToProps = dispatch => {
+  	return bindActionCreators({  getAudioComments  }, dispatch);
+};
+
 
 const mapStateToProps = state => {
-
+ const {comments} = state.chunkListContainer;
 	const { displayText } = state.geolocation;
 
-	return { displayText };
+	return { displayText, comments };
 
 };
 
 
-export default connect(mapStateToProps)(RecordButton);
+export default connect(mapStateToProps, mapDispatchToProps)(RecordButton);

@@ -25,8 +25,6 @@ export const getAudioTakes = (chunkId, counter) => {
 
 
 export const getAudioComments = (query , type) => {
-
-
     return function (dispatch) {
         return axios
             .get(`${config.apiUrl}comments/?${type}=${query}`)
@@ -68,7 +66,8 @@ export const getSelectedProjectInfo = (query) => {
                 axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}&id=${query.chapterId}`),
                 axios.get(`${config.apiUrl}projects/?project_id=${query.project_id}`),
                 axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`)
+
 
             ])
             .then(
@@ -77,7 +76,7 @@ export const getSelectedProjectInfo = (query) => {
                 chaptersResponse,
                 projectsResponse,
                 booksResponse,
-                languageResponse,
+                languageResponse
             ) {
 
                 dispatch(dispatchProjectInfoSuccess(
@@ -86,7 +85,8 @@ export const getSelectedProjectInfo = (query) => {
                     projectsResponse,
                     booksResponse,
                     languageResponse,
-                    query.chapterId));
+                    query.chapterId
+                                    ));
 
             })
             )
@@ -340,6 +340,7 @@ export function markAsPublishedFailed(error) {
 //saveComment
 
 export const saveComment = (blobx, type, id, success, chunks, chapter) => {
+
     return function (dispatch) {
         dispatch(saveCommentLoading());
         return axios
@@ -363,13 +364,13 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
                    // notify.show("Saved", "custom", 1500, myColor);
                })
             .catch(exception => {
+
                 dispatch(saveCommentFailed(exception))
                 success();
             });
     }
 }
 export function saveCommentSuccess(comments) {
-
     return {
         type: 'SAVE_COMMENT_SUCCESS',
         comments
