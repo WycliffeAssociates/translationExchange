@@ -4,7 +4,6 @@ import config from "../../config/config";
 //chaptersContainer
 
 export const fetchChaptersContainerData = (query) => {
-  debugger;
     return function (dispatch) {
         return axios
             .all([
@@ -34,8 +33,6 @@ export const fetchChaptersContainerData = (query) => {
 
 
 export function fetchChaptersContainerDataSuccess(chapters, language, book, version, project_id, published) {
-    debugger;
-
     return {
         type: 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS',
         language: language[0],
