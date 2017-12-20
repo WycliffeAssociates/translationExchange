@@ -25,7 +25,6 @@ class ChunkHeader extends Component {
 							/>
 
 							<RecordButton
-								comments={this.props.chapter.comment}
 								onClickSave={this.props.onClickSave}
 								id={this.props.chapter.id}
 								type={"chapter"}

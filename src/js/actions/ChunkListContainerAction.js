@@ -25,8 +25,6 @@ export const getAudioTakes = (chunkId, counter) => {
 
 
 export const getAudioComments = (query , type) => {
-
-
     return function (dispatch) {
         return axios
             .get(`${config.apiUrl}comments/?${type}=${query}`)
@@ -68,8 +66,8 @@ export const getSelectedProjectInfo = (query) => {
                 axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`),
                 axios.get(`${config.apiUrl}projects/?project_id=${query.project_id}`),
                 axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}comments/?project_id=${query.project_id}`)
+                axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`)
+
 
             ])
             .then(
@@ -78,8 +76,7 @@ export const getSelectedProjectInfo = (query) => {
                 chaptersResponse,
                 projectsResponse,
                 booksResponse,
-                languageResponse,
-                commentsResponse
+                languageResponse
             ) {
 
                 dispatch(dispatchProjectInfoSuccess(
@@ -88,7 +85,6 @@ export const getSelectedProjectInfo = (query) => {
                     projectsResponse,
                     booksResponse,
                     languageResponse,
-                    commentsResponse,
                     query.chapterId
                                     ));
 
@@ -122,7 +118,6 @@ export function dispatchProjectInfoSuccess(chunksResponse,
         chapter: chapterResponse,
         book: booksResponse.data[0],
         language: languageResponse.data[0],
-        comments: commentsResponse.data[0],
         chapterId
     }
 }
@@ -346,6 +341,7 @@ export function markAsPublishedFailed(error) {
 //saveComment
 
 export const saveComment = (blobx, type, id, success, chunks, chapter) => {
+
     return function (dispatch) {
         dispatch(saveCommentLoading());
         return axios
@@ -376,13 +372,13 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
 
 
             .catch(exception => {
+
                 dispatch(saveCommentFailed(exception))
                 success();
             });
     }
 }
 export function saveCommentSuccess(comments) {
-
     return {
         type: 'SAVE_COMMENT_SUCCESS',
         comments
