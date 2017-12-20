@@ -64,7 +64,7 @@ export const getSelectedProjectInfo = (query) => {
         return axios
             .all([
                 axios.get(`${config.apiUrl}chunks/?chapter_id=${query.chapterId}`),
-                axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}&id=${query.chapterId}`),
                 axios.get(`${config.apiUrl}projects/?project_id=${query.project_id}`),
                 axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
                 axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`),

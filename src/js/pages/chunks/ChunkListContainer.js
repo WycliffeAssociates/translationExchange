@@ -180,12 +180,10 @@ class ChunkListContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
-			const chapterNum = this.props.chunks[0].chapter;
-
 			return (
 				<div>
 					<ChunkHeader
-						chapterNum={chapterNum}
+						chapterNum={this.props.chapter.data[0].number}
 						book={this.props.book}
 						chapter={this.props.chapter}
 						language={this.props.language}
