@@ -11,18 +11,18 @@ class DownloadProjects extends Component {
 
         this.state = {
             loading: false,
-            option: 'zip'
+            file_format: 'zip'
         };
         this.onDownloadProject = this.onDownloadProject.bind(this)
     }
 
     onDownloadProject() {
         this.setState({ loading: true });
-        this.props.onDownloadProject(this.state.option);
+        this.props.onDownloadProject(this.state.file_format);
     }
-    getOption(event, data) {
+    getFileFormat(event, data) {
         this.setState({
-            option: data.value
+            file_format: data.value
         });
     }
 
@@ -30,7 +30,7 @@ class DownloadProjects extends Component {
         return (
             <Button.Group color='teal'>
                 <Button onClick={this.onDownloadProject}>Download</Button>
-                <Dropdown options={options} floating button className='icon' onChange={this.getOption.bind(this)} />
+                <Dropdown options={options} floating button className='icon' onChange={this.getFileFormat.bind(this)} />
             </Button.Group>
 
         );

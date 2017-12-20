@@ -65,11 +65,10 @@ export const getSelectedProjectInfo = (query) => {
         return axios
             .all([
                 axios.get(`${config.apiUrl}chunks/?chapter_id=${query.chapterId}`),
-                axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}&id=${query.chapterId}`),
                 axios.get(`${config.apiUrl}projects/?project_id=${query.project_id}`),
                 axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
                 axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}comments/?project_id=${query.project_id}`)
 
             ])
             .then(
@@ -79,7 +78,6 @@ export const getSelectedProjectInfo = (query) => {
                 projectsResponse,
                 booksResponse,
                 languageResponse,
-                commentsResponse
             ) {
 
                 dispatch(dispatchProjectInfoSuccess(
@@ -88,9 +86,7 @@ export const getSelectedProjectInfo = (query) => {
                     projectsResponse,
                     booksResponse,
                     languageResponse,
-                    commentsResponse,
-                    query.chapterId
-                                    ));
+                    query.chapterId));
 
             })
             )
@@ -111,7 +107,6 @@ export function dispatchProjectInfoSuccess(chunksResponse,
     projectsResponse,
     booksResponse,
     languageResponse,
-    commentsResponse,
     chapterId
   ) {
 
@@ -122,7 +117,6 @@ export function dispatchProjectInfoSuccess(chunksResponse,
         chapter: chapterResponse,
         book: booksResponse.data[0],
         language: languageResponse.data[0],
-        comments: commentsResponse.data[0],
         chapterId
     }
 }
@@ -356,12 +350,7 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
                 type: type
             })
             .then(results => {
-
-                // var map = { comment: results.data };
-                //
-                // let updatedChunks = chunks.slice();
-                // dispatch(saveCommentSuccess(updatedChunks));
-                //var map = { comment: results.data };
+                var map = { comment: results.data };
                    if (type === "take") {
                        dispatch(saveCommentSuccess(results.data));
                    } else if (type === "chunk") {
@@ -373,8 +362,6 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
                    // let myColor = { background: '#50f442 ', text: "#FFFFFF " };
                    // notify.show("Saved", "custom", 1500, myColor);
                })
-
-
             .catch(exception => {
                 dispatch(saveCommentFailed(exception))
                 success();

@@ -41,8 +41,8 @@ class ChaptersContainer extends Component {
 	}
 
 	// Minimal parameters saves on server query time
-	onDownloadProject(option) {
-		this.props.downloadProject(this.props.project_id,option);
+	onDownloadProject(file_format) {
+		this.props.downloadProject(this.props.project_id,file_format);
 	}
 	onDownloadSourceAudio() {
 		this.props.downloadSourceAudio(this.props.project_id);
