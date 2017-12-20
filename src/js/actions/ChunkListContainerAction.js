@@ -60,6 +60,7 @@ export const getChunkIdClicked = (id) => {
 
 export const getSelectedProjectInfo = (query) => {
                             // from the selected project get chunks, book, language, chapter, project
+
     return function (dispatch) {
         return axios
             .all([
@@ -381,7 +382,7 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
     }
 }
 export function saveCommentSuccess(comments) {
-  
+
     return {
         type: 'SAVE_COMMENT_SUCCESS',
         comments

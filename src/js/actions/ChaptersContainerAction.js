@@ -4,11 +4,12 @@ import config from "../../config/config";
 //chaptersContainer
 
 export const fetchChaptersContainerData = (query) => {
+  debugger;
     return function (dispatch) {
         return axios
             .all([
                 axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}languages/?name=${query.language}`),
+                axios.get(`${config.apiUrl}languages/?slug=${query.lang}`),
                 axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
                 axios.get(`${config.apiUrl}versions/?project_id=${query.project_id}`),
 
@@ -20,7 +21,7 @@ export const fetchChaptersContainerData = (query) => {
                 booksResponse,
                 versionsResponse
             ) {
-
+              debugger;
                 dispatch(fetchChaptersContainerDataSuccess(chaptersResponse.data, languagesResponse.data, booksResponse.data, versionsResponse.data, query.project_id, query.published));
             })
             )
