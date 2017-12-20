@@ -2,7 +2,6 @@ import axios from "axios";
 import config from "../../config/config";
 
 export const fetchAllProjects = (query) => {
-    debugger;
     return function (dispatch) {
 
         dispatch(dispatchAllProjectsLoading());
