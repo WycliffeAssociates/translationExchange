@@ -355,39 +355,36 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
                 type: type
             })
             .then(results => {
-                debugger;
+
                 // var map = { comment: results.data };
                 //
                 // let updatedChunks = chunks.slice();
                 // dispatch(saveCommentSuccess(updatedChunks));
-                var map = { comment: results.data };
+                //var map = { comment: results.data };
                    if (type === "take") {
-                       dispatch(saveCommentSuccess(map));
+                       dispatch(saveCommentSuccess(results.data));
                    } else if (type === "chunk") {
-                       dispatch(saveCommentSuccess(map));
+                       dispatch(saveCommentSuccess(results.data));
                    } else {
-                       dispatch(chapterUpdate(map));
+                       dispatch(chapterUpdate(results.data));
                    }
                    success();
-                   let myColor = { background: '#50f442 ', text: "#FFFFFF " };
-                   notify.show("Saved", "custom", 1500, myColor);
+                   // let myColor = { background: '#50f442 ', text: "#FFFFFF " };
+                   // notify.show("Saved", "custom", 1500, myColor);
                })
-              //  success();
-                // let myColor = { background: '#50f442', text: "#FFFFFF" };
-                // notify.show("Saved", "custom", 1500, myColor);
+
 
             .catch(exception => {
-              debugger;
                 dispatch(saveCommentFailed(exception))
                 success();
             });
     }
 }
-export function saveCommentSuccess(response) {
-  debugger;
+export function saveCommentSuccess(comments) {
+  
     return {
         type: 'SAVE_COMMENT_SUCCESS',
-        response
+        comments
     }
 };
 export function saveCommentFailed(error) {

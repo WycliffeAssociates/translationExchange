@@ -109,7 +109,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, active: true };
         case 'SAVE_COMMENT_SUCCESS':
             return {
-                ...state, active: false
+                ...state, comments: state.comments.concat(action.comments), active: false
             }
         case 'SAVE_COMMENT_FAILED':
             return {
