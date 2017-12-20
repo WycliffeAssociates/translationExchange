@@ -8,7 +8,7 @@ export const fetchChaptersContainerData = (query) => {
         return axios
             .all([
                 axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}languages/?name=${query.language}`),
                 axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
                 axios.get(`${config.apiUrl}versions/?project_id=${query.project_id}`),
 
@@ -33,8 +33,6 @@ export const fetchChaptersContainerData = (query) => {
 
 
 export function fetchChaptersContainerDataSuccess(chapters, language, book, version, project_id, published) {
-
-
     return {
         type: 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS',
         language: language[0],

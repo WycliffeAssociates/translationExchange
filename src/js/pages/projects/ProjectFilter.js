@@ -111,7 +111,7 @@ class ProjectFilter extends Component {
 
 	setLanguage(event, dropdown) {
 		if (dropdown.value) {
-			this.props.setQuery({ language: dropdown.value });
+			this.props.setQuery({ lang: dropdown.value });
 		}
 	}
 

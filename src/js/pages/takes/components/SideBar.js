@@ -8,6 +8,7 @@ import RecordButton from "./comments/RecordButton";
 import SourceAudioButton from "./SourceAudioButton"
 class ChunkSidebar extends Component {
     render() {
+    
         return (
             <Menu vertical compact inverted>
                 <Menu.Item>
