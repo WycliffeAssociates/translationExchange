@@ -32,9 +32,8 @@ class TakeCommentsButton extends Component {
 	}
 
 getComments(){
-
-	//this.props.getAudioComments();
-	debugger;
+  const takeId = this.props.take.id
+	this.props.getAudioComments(takeId, 'take_id');
 
 }
 
@@ -54,8 +53,7 @@ getComments(){
 
 
 	createPlaylist(comment) {
-
-		const src = config.streamingUrl + comment.comment.location
+		const src = config.streamingUrl + comment.location
 
 		return (
 			<div style={styles.container}>
@@ -72,7 +70,7 @@ getComments(){
 						negative
 						onClick={() => {
 							if (window.confirm(this.props.displayText.deleteComment)) {
-								this.onClickDelete(comment.comment.id, this.props.take.id);
+								this.onClickDelete(comment.id, this.props.take.id);
 							}
 						}}
 					>
@@ -93,9 +91,7 @@ getComments(){
 	};
 
 	render() {
-		if (this.props.comments > 0) {
-			this.props.comments.map(this.createPlaylist);
-		}
+
 		return (
 			<Modal
 				size="small"
@@ -131,9 +127,9 @@ getComments(){
 				<div style={{ display: 'flex', justifyContent: 'center', marginTop: '2%', marginBottom: '2%', maxHeight: 350, overflowY: 'scroll' }}>
 					<div style={{ width: '95%', marginTop: '1%' }}>
 
-						{/* {this.props.comments.length > 0
+						{this.props.comments.length > 0
 							? this.props.comments.slice(0).reverse().map(this.createPlaylist.bind(this))
-							: ""} */}
+							: ""}
 
 					</div>
 				</div>
@@ -160,10 +156,10 @@ const mapDispatchToProps = dispatch => {
 
 
 const mapStateToProps = state => {
-
+	const {comments} = state.chunkListContainer;
 	const { displayText } = state.geolocation;
 
-	return { displayText };
+	return { displayText, comments };
 
 };
 

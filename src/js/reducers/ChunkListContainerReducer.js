@@ -34,8 +34,16 @@ export default (state = INITIAL_STATE, action) => {
         case "FETCH_TAKE_SUCCESS":
             return {
                  ...state,
-                takes: state.takes.concat(action.takes),
+                takes: state.takes.concat(action.takes)
             };
+
+       case "GET_COMMENTS_SUCCESS":
+            return{
+              ...state,
+             comments: action.comments
+
+            }
+
         case "FETCH_TAKE_SUCCESS_FIRST_TIME":
             return {
                  ...state,

@@ -24,25 +24,29 @@ export const getAudioTakes = (chunkId, counter) => {
 }
 
 
-export const getAudioComments = () => {
-    debugger;
+export const getAudioComments = (query , type) => {
 
-    // const query = { chunk_id: chunkId }
-    // return function (dispatch) {
-    //     return axios
-    //         .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`)
-    //         .then(response => {
-    //             if(counter === 0) {
-    //
-    //             dispatch(dispatchTakesFirstTimeSuccess(response.data, chunkId));
-    //           }else{
-    //             dispatch(dispatchTakesSuccess(response.data, chunkId));
-    //           }
-    //         })
-    //         .catch(error => {
-    //             dispatch(dispatchChunksFailed(error));
-    //         });
-    // };
+
+    return function (dispatch) {
+        return axios
+            .get(`${config.apiUrl}comments/?${type}=${query}`)
+            .then(response => {
+              dispatch(dispatchGetAudioCommentsSuccess(response.data))
+            })
+            .catch(error => {
+                dispatch(dispatchChunksFailed(error));
+            });
+    };
+}
+
+
+
+export const dispatchGetAudioCommentsSuccess = (comments) => {
+  return {
+      type: 'GET_COMMENTS_SUCCESS',
+      comments
+  }
+
 }
 
 
@@ -325,9 +329,7 @@ export const markedAsPublished = (success, chapterId) => {
             });
     };
 }
-
 export function markAsPublishedSuccess(response) {
-
     return {
         type: 'MARK_AS_PUBLISHED_SUCCESS',
         response
@@ -354,36 +356,26 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
             })
             .then(results => {
                 debugger;
+                // var map = { comment: results.data };
+                //
+                // let updatedChunks = chunks.slice();
+                // dispatch(saveCommentSuccess(updatedChunks));
                 var map = { comment: results.data };
-
-                let updatedChunks = chunks.slice();
-                dispatch(saveCommentSuccess(updatedChunks));
-                // if (type === "take") {
-                //     let chunkToUpdate = updatedChunks.findIndex(chunk => {
-                //         return chunk.takes.find(take => take.take.id === id);
-                //     });
-                //     let takeToUpdate = updatedChunks[chunkToUpdate].takes.findIndex(
-                //         take => take.take.id === id
-                //     );
-                //     updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.push(map);
-                //     dispatch(saveCommentSuccess(updatedChunks));
-                // } else if (type === "chunk") {
-                //     for (var i = 0; i < updatedChunks.length; i++) {
-                //         if (updatedChunks[i].id === id) {
-                //             var chunkToUpdate = i;
-                //         }
-                //     }
-                //     updatedChunks[chunkToUpdate].comments.push(map);
-                //     dispatch(saveCommentSuccess(updatedChunks));
-                // } else {
-                //     let updatedChapter = Object.assign({}, chapter);
-                //     updatedChapter.comments.push(map);
-                //     dispatch(chapterUpdate(updatedChapter));
-                // }
-                success();
+                   if (type === "take") {
+                       dispatch(saveCommentSuccess(map));
+                   } else if (type === "chunk") {
+                       dispatch(saveCommentSuccess(map));
+                   } else {
+                       dispatch(chapterUpdate(map));
+                   }
+                   success();
+                   let myColor = { background: '#50f442 ', text: "#FFFFFF " };
+                   notify.show("Saved", "custom", 1500, myColor);
+               })
+              //  success();
                 // let myColor = { background: '#50f442', text: "#FFFFFF" };
                 // notify.show("Saved", "custom", 1500, myColor);
-            })
+
             .catch(exception => {
               debugger;
                 dispatch(saveCommentFailed(exception))
