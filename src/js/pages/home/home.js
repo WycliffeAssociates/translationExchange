@@ -18,9 +18,9 @@ class Home extends Component {
 		//make the query for the right project, using our current query as a base
 		var projectQuery = QueryString.parse(this.props.homeRecentProjects);
 		Object.assign(projectQuery, {
-			language: language.name,
-			book: book.slug,
-			version: version.slug,
+			lang: language,
+			book: book,
+			version: version,
 			published,
 			project_id
 		});
