@@ -24,7 +24,6 @@ class ProjectsListContainer extends Component {
 	}
 
 	requestProjects(queryString) {
-		//var query = QueryString.parse(this.props.location.search);
 		this.props.fetchAllProjects(queryString);
 	}
 

@@ -54,7 +54,7 @@ class ChunkListContainer extends Component {
 	}
 
 	updatingDeletedComment(type, commentId, takeId) {
-
+       //this.props.getAudioTakes(chunkId, counter);
 		// let updatedChunks = this.props.chunks.slice();
 		// if (type === "take") {
 		// 	let chunkToUpdate = updatedChunks.findIndex(chunk => {

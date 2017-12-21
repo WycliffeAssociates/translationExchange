@@ -14,6 +14,7 @@ class TakeTable extends Component {
 			takesToDelete.push(take.id);
 		});
 
+		 debugger;
 		//remove them all
 		takesToDelete.map(takeId => {
 			this.props.deleteTake(takeId);
@@ -21,7 +22,6 @@ class TakeTable extends Component {
 	}
 
 	render() {
-
 		return (
 			<Grid.Column>
 				<Table textAlign="center">

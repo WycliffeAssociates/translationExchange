@@ -58,15 +58,15 @@ export const getChunkIdClicked = (id) => {
 
 export const getSelectedProjectInfo = (query) => {
                             // from the selected project get chunks, book, language, chapter, project
-
+    debugger;
     return function (dispatch) {
         return axios
             .all([
                 axios.get(`${config.apiUrl}chunks/?chapter_id=${query.chapterId}`),
                 axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}&id=${query.chapterId}`),
-                axios.get(`${config.apiUrl}projects/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`)
+                axios.get(`${config.apiUrl}projects/?id=${query.project_id}`),
+                axios.get(`${config.apiUrl}books/?slug=${query.book}`),
+                axios.get(`${config.apiUrl}languages/?id=${query.project_id}`)
 
 
             ])
@@ -199,7 +199,7 @@ export const patchTake = (takeId, patch, success, takes, updatingDeletedTake, ch
                 if (error.response) {
                     if (error.response.status === 404) {
                         message = "Sorry, that take doesn't exist!";
-                        updatingDeletedTake(takeId);
+                        updatingDeletedTake(chunkId);
                     } else {
                         message = "Something went wrong. Please check your connection and try again.";
                     }
@@ -238,7 +238,6 @@ export const updateDeletedChunk = (updatedChunk) => {
 
 //delete take
 export const deleteTake = (takeId, success, updatingDeletedTake) => {
-  debugger;
     return function (dispatch) {
         return axios
             .delete(config.apiUrl + "takes/" + takeId + "/")
@@ -264,7 +263,6 @@ export const deleteTake = (takeId, success, updatingDeletedTake) => {
 }
 
 export function deleteTakeFailed(error) {
-  debugger;
     return {
         type: 'DELETE_TAKE_FAILED',
         error
