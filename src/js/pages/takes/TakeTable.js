@@ -11,7 +11,7 @@ class TakeTable extends Component {
 		//get a list of the take ID's to delete
 		let takesToDelete = [];
 		this.props.orderedTakes.map(take => {
-			takesToDelete.push(take.take.id);
+			takesToDelete.push(take.id);
 		});
 
 		//remove them all

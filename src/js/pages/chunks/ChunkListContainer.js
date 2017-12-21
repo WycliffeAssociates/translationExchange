@@ -42,14 +42,15 @@ class ChunkListContainer extends Component {
 
 	updatingDeletedTake(takeId) {
 
-		let updatedChunks = this.props.chunks.slice();
-		let chunkToUpdate = updatedChunks.findIndex(chunk => {
-			return chunk.takes.find(take => take.take.id === takeId);
-		});
-		updatedChunks[chunkToUpdate].takes = updatedChunks[
-			chunkToUpdate
-		].takes.filter(take => take.take.id !== takeId);
-		this.props.updateDeletedChunk(updatedChunks);
+		// let updatedChunks = this.props.chunks.slice();
+		// debugger;
+		// let chunkToUpdate = updatedChunks.findIndex(chunk => {
+		// 	return chunk.takes.find(take => take.take.id === takeId);
+		// });
+		// updatedChunks[chunkToUpdate].takes = updatedChunks[
+		// 	chunkToUpdate
+		// ].takes.filter(take => take.take.id !== takeId);
+		// this.props.updateDeletedChunk(updatedChunks);
 	}
 
 	updatingDeletedComment(type, commentId, takeId) {

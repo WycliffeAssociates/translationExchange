@@ -238,6 +238,7 @@ export const updateDeletedChunk = (updatedChunk) => {
 
 //delete take
 export const deleteTake = (takeId, success, updatingDeletedTake) => {
+  debugger;
     return function (dispatch) {
         return axios
             .delete(config.apiUrl + "takes/" + takeId + "/")
@@ -263,6 +264,7 @@ export const deleteTake = (takeId, success, updatingDeletedTake) => {
 }
 
 export function deleteTakeFailed(error) {
+  debugger;
     return {
         type: 'DELETE_TAKE_FAILED',
         error
