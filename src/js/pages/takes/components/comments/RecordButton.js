@@ -11,7 +11,7 @@ import {
 	Modal
 } from "semantic-ui-react";
 import config from "../../../../../config/config";
-import {getAudioComments} from '../../../../actions/index';
+import {getAudioComments, resetComments} from '../../../../actions/index';
 
 class RecordButton extends Component {
 	constructor(props) {
@@ -34,6 +34,10 @@ class RecordButton extends Component {
 		this.onClickSave = this.onClickSave.bind(this);
 	}
 
+	resetComments(){
+		this.props.resetComments();
+	}
+
 	getInitialState() {
 		return { show: false };
 	}
@@ -43,6 +47,7 @@ class RecordButton extends Component {
 	}
 
 	hideModal() {
+		debugger;
 		this.setState({ show: false });
 	}
 
@@ -59,8 +64,6 @@ class RecordButton extends Component {
 	getComments(){
 	  const type = this.props.type;
 		const id = this.props.id;
-		debugger;
-
 		this.props.getAudioComments(id, `${type}_id`);
 
 	}
@@ -115,6 +118,7 @@ class RecordButton extends Component {
 				size="small"
 				style={this.Style}
 				closeIcon="close"
+				onClose={this.resetComments.bind(this)}
 				trigger={
 					<Button
 						active={this.state.active}
@@ -124,6 +128,7 @@ class RecordButton extends Component {
 						}}
 						icon="comment outline"
 						onClick={this.getComments.bind(this)}
+
 					/>
 				}
 			>
@@ -170,7 +175,7 @@ const styles = {
 
 
 const mapDispatchToProps = dispatch => {
-  	return bindActionCreators({  getAudioComments  }, dispatch);
+  	return bindActionCreators({  getAudioComments, resetComments  }, dispatch);
 };
 
 

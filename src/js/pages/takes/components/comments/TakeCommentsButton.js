@@ -12,7 +12,7 @@ import {
 } from "semantic-ui-react";
 import config from "../../../../../config/config";
 import Notifications from 'react-notify-toast';
-import {getAudioComments} from '../../../../actions/index';
+import {getAudioComments, resetComments} from '../../../../actions/index';
 
 
 
@@ -31,12 +31,15 @@ class TakeCommentsButton extends Component {
 		this.onClickSave = this.onClickSave.bind(this);
 	}
 
-getComments(){
-  const takeId = this.props.take.id
-	this.props.getAudioComments(takeId, 'take_id');
+	resetComments(){
+			this.props.resetComments();
+		}
 
-}
+	getComments(){
+	  const takeId = this.props.take.id
+		this.props.getAudioComments(takeId, 'take_id');
 
+	}
 
 	onClickSave = () => {
 		this.hideModal();
@@ -97,6 +100,7 @@ getComments(){
 				size="small"
 				style={this.Style}
 				closeIcon="close"
+				onClose={this.resetComments.bind(this)}
 				trigger={
 					<Button
 						fluid
@@ -151,7 +155,7 @@ const styles = {
 };
 
 const mapDispatchToProps = dispatch => {
-  	return bindActionCreators({  getAudioComments  }, dispatch);
+  	return bindActionCreators({  getAudioComments, resetComments  }, dispatch);
 };
 
 

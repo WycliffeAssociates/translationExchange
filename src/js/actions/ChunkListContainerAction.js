@@ -357,7 +357,7 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
                    } else if (type === "chunk") {
                        dispatch(saveCommentSuccess(results.data));
                    } else {
-                       dispatch(chapterUpdate(results.data));
+                       dispatch(saveCommentSuccess(results.data));
                    }
                    success();
                    // let myColor = { background: '#50f442 ', text: "#FFFFFF " };
@@ -370,6 +370,13 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
             });
     }
 }
+
+export function resetComments(){
+  return{
+    type: 'RESET_COMMENTS'
+  }
+}
+
 export function saveCommentSuccess(comments) {
     return {
         type: 'SAVE_COMMENT_SUCCESS',

@@ -43,6 +43,12 @@ export default (state = INITIAL_STATE, action) => {
 
             }
 
+        case "RESET_COMMENTS":
+           return{
+             ...state,
+            comments: []
+           }
+
         case "FETCH_TAKE_SUCCESS_FIRST_TIME":
             return {
                  ...state,
