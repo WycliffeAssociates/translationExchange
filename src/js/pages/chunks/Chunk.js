@@ -12,61 +12,55 @@ class Chunk extends Component {
 
 	constructor(props) {
 		super(props);
-    	this.state = {
+		this.state = {
 			calledChunks: [],
-			chunkId:''
+			chunkId: ''
 		};
 	}
 
 
-getTakes(chunkId) {
-  let counter = this.props.takes.length;
-let tst = this.props.calledChunks;
-	let {calledChunks } = this.props
-			if(!calledChunks.includes(chunkId)){                 // once you click a chunk, checks if the chunk has not been clicked before
-					this.props.getChunkIdClicked(chunkId);
-					this.props.getAudioTakes(chunkId, counter);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
-																													              // so next time clicked to close it won't call the api
+	getTakes(chunkId) {
+		let counter = this.props.takes.length;
+		let tst = this.props.calledChunks;
+		let { calledChunks } = this.props
+		if (!calledChunks.includes(chunkId)) {                 // once you click a chunk, checks if the chunk has not been clicked before
+			this.props.getChunkIdClicked(chunkId);
+			this.props.getAudioTakes(chunkId, counter);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
+			// so next time clicked to close it won't call the api
 		}
-}
+	}
 
 	render() {
 		let publish = [];
 		let onestar = [];
 		let twostar = [];
-		let threestar =[];
+		let threestar = [];
 		var counter = 0;
 		let orderedTakes = this.props.takes;
 
-   	//console.log(this.props.takes)
+		//console.log(this.props.takes)
 
-			orderedTakes.map(tk => {
-				   const test = this.props.chunkIdClicked;
-					if(this.props.id === tk.chunkId){   // get takes corresponding just to the selected chunk
-									counter += 1;
-								 tk.order = counter;
-								 if (tk.published) {
-									 publish[publish.length] = tk;
+		orderedTakes.map(tk => {
+			const test = this.props.chunkIdClicked;
+			if (this.props.id === tk.chunkId) {   // get takes corresponding just to the selected chunk
+				counter += 1;
+				tk.order = counter;
+				if (tk.published) {
+					publish[publish.length] = tk;
 
-								 } else if (tk.rating < 2) {
-									 onestar[onestar.length] = tk;
+				} else if (tk.rating < 2) {
+					onestar[onestar.length] = tk;
 
-								 } else if (tk.rating === 2) {
-									 twostar[twostar.length] = tk;
+				} else if (tk.rating === 2) {
+					twostar[twostar.length] = tk;
 
-								 } else if (tk.rating === 3) {
-									 threestar[threestar.length] = tk;
+				} else if (tk.rating === 3) {
+					threestar[threestar.length] = tk;
 
-								 }
 				}
+			}
 
-
-
-
-//console.log(threestar);
-
-
-			});
+		});
 		var modeLabel = "";
 		switch (this.props.mode) {
 			case "chunk":
@@ -96,7 +90,7 @@ let tst = this.props.calledChunks;
 		return (
 			<div>
 				<Accordion fluid styled >
-					<Accordion.Title className="ChunkTitle" onClick={(itempProps)=> this.getTakes(this.props.chunkId, itempProps)} >
+					<Accordion.Title className="ChunkTitle" onClick={(itempProps) => this.getTakes(this.props.chunkId, itempProps)} >
 						<center>
 							<Icon name="dropdown" />
 							<font color="black">
@@ -184,6 +178,7 @@ let tst = this.props.calledChunks;
 							</Grid.Column>
 							<Grid.Column width={1} verticalAlign="middle" floated="right">
 								<ChunkSidebar
+									published={this.props.published}
 									comments={this.props.comments}
 									onClickSave={this.props.onClickSave}
 									column={0}
@@ -209,13 +204,14 @@ Chunk.propTypes = {
 };
 
 const mapStateToProps = state => {
-	const {  takes, update, chunkIdClicked, calledChunks } = state.chunkListContainer;
+	const { takes, update, chunkIdClicked, calledChunks, project } = state.chunkListContainer;
 	return { takes, update, chunkIdClicked, calledChunks };
 }
 
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
-		{	getAudioTakes,
+		{
+			getAudioTakes,
 			getChunkIdClicked
 		}, dispatch);
 };

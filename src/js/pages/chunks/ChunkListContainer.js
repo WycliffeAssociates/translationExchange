@@ -42,51 +42,52 @@ class ChunkListContainer extends Component {
 
 	updatingDeletedTake(takeId) {
 
-		let updatedChunks = this.props.chunks.slice();
-		let chunkToUpdate = updatedChunks.findIndex(chunk => {
-			return chunk.takes.find(take => take.take.id === takeId);
-		});
-		updatedChunks[chunkToUpdate].takes = updatedChunks[
-			chunkToUpdate
-		].takes.filter(take => take.take.id !== takeId);
-		this.props.updateDeletedChunk(updatedChunks);
+		// let updatedChunks = this.props.chunks.slice();
+		// debugger;
+		// let chunkToUpdate = updatedChunks.findIndex(chunk => {
+		// 	return chunk.takes.find(take => take.take.id === takeId);
+		// });
+		// updatedChunks[chunkToUpdate].takes = updatedChunks[
+		// 	chunkToUpdate
+		// ].takes.filter(take => take.take.id !== takeId);
+		// this.props.updateDeletedChunk(updatedChunks);
 	}
 
 	updatingDeletedComment(type, commentId, takeId) {
-
-		let updatedChunks = this.props.chunks.slice();
-		if (type === "take") {
-			let chunkToUpdate = updatedChunks.findIndex(chunk => {
-				return chunk.takes.find(take => take.take.id === takeId);
-			});
-			let takeToUpdate = updatedChunks[chunkToUpdate].takes.findIndex(
-				take => take.take.id === takeId
-			);
-
-			updatedChunks[chunkToUpdate].takes[takeToUpdate].comments = updatedChunks[
-				chunkToUpdate
-			].takes[takeToUpdate].comments.filter(
-				comment => comment.comment.id !== commentId
-				);
-			this.props.updateDeletedChunk(updatedChunks);
-		} else if (type === "chunk") {
-			for (var i = 0; i < updatedChunks.length; i++) {
-				if (updatedChunks[i].id === takeId) {
-					var chunkToUpdate = i;
-				}
-			}
-			updatedChunks[chunkToUpdate].comments = updatedChunks[
-				chunkToUpdate
-			].comments.filter(comment => comment.comment.id !== commentId);
-			this.props.updateDeletedChunk(updatedChunks);
-		} else if (type === "chapter") {
-			let updatedChapter = Object.assign({}, this.props.chapter);
-
-			updatedChapter.comments = updatedChapter.comments.filter(
-				comment => comment.comment.id !== commentId
-			);
-			this.props.chapterUpdate(updatedChapter);
-		}
+       //this.props.getAudioTakes(chunkId, counter);
+		// let updatedChunks = this.props.chunks.slice();
+		// if (type === "take") {
+		// 	let chunkToUpdate = updatedChunks.findIndex(chunk => {
+		// 		return chunk.takes.find(take => take.take.id === takeId);
+		// 	});
+		// 	let takeToUpdate = updatedChunks[chunkToUpdate].takes.findIndex(
+		// 		take => take.take.id === takeId
+		// 	);
+    //
+		// 	updatedChunks[chunkToUpdate].takes[takeToUpdate].comments = updatedChunks[
+		// 		chunkToUpdate
+		// 	].takes[takeToUpdate].comments.filter(
+		// 		comment => comment.comment.id !== commentId
+		// 		);
+		// 	this.props.updateDeletedChunk(updatedChunks);
+		// } else if (type === "chunk") {
+		// 	for (var i = 0; i < updatedChunks.length; i++) {
+		// 		if (updatedChunks[i].id === takeId) {
+		// 			var chunkToUpdate = i;
+		// 		}
+		// 	}
+		// 	updatedChunks[chunkToUpdate].comments = updatedChunks[
+		// 		chunkToUpdate
+		// 	].comments.filter(comment => comment.comment.id !== commentId);
+		// 	this.props.updateDeletedChunk(updatedChunks);
+		// } else if (type === "chapter") {
+		// 	let updatedChapter = Object.assign({}, this.props.chapter);
+    //
+		// 	updatedChapter.comments = updatedChapter.comments.filter(
+		// 		comment => comment.comment.id !== commentId
+		// 	);
+		// 	this.props.chapterUpdate(updatedChapter);
+		// }
 	}
 
 	patchTake(takeId, patch, success, chunkId) {
@@ -142,34 +143,29 @@ class ChunkListContainer extends Component {
 		}
 	}
 
-	onMarkedAsPublish(success) {
-		this.props.markedAsPublish(success, this.props.chapter);
-	}
-
 	setSourceProject(projectQuery) {
 		this.props.setSourceProject(projectQuery, this.props.chapter.number);
 	}
 
-	getSourceAudioLocationForChunk(startv) {
+	getSourceAudioLocationForChunk(chunkId) {
 		if (!this.props.selectedSourceProject) {
 			return undefined;
 		}
-		let chunk = this.props.selectedSourceProject.chunks.find(
-			chunk => chunk.startv === startv
+		let chunk = this.props.selectedSourceProject.find(
+			chunk => chunk.id === chunkId
 		);
-		let take = chunk.takes.find(take => take.take.is_publish);
-		return take.take.location;
+		return chunk.location;
 	}
 
-	onSourceClicked(startv) {
+	onSourceClicked(chunkId, chunkNumber) {
 		if (!this.props.playlistMode) {
 			this.props.stopAudio();
-			let sourceLoc = this.getSourceAudioLocationForChunk(startv);
-
+			let sourceLoc = this.getSourceAudioLocationForChunk(chunkId);
+			const date = this.parseDate(this.props.project.date_modified);
 			let sourceAudio =
 				{
 					src: config.streamingUrl + sourceLoc,
-					name: this.props.project.mode + " " + startv + " (source)"
+					name: `${this.props.displayText.chunk} ${chunkNumber},(${"author"} ${this.props.displayText.on}${date})`
 				};
 			this.props.playTake(sourceAudio);
 		}
@@ -188,16 +184,16 @@ class ChunkListContainer extends Component {
 			return (
 				<div>
 					<ChunkHeader
+						chapterNum={this.props.chapter.data[0].number}
 						book={this.props.book}
 						chapter={this.props.chapter}
-						language={this.props.language.name}
+						language={this.props.language}
 						chunks={this.props.chunks}
 						mode={this.props.project.mode}
 						selectedSourceProject={this.props.selectedSourceProjectQuery}
 						onClickSave={this.onClickSave.bind(this)}
 						deleteComment={this.deleteComment.bind(this)}
 						setSourceProject={this.setSourceProject.bind(this)}
-						onMarkedAsPublish={this.onMarkedAsPublish.bind(this)}
 						active={this.props.active}
 						projectId={this.props.project.id}
 						displayText={this.props.displayText}
@@ -209,6 +205,65 @@ class ChunkListContainer extends Component {
 				</div>
 			);
 		}
+	}
+
+	parseDate(date) {
+		var noon = "am";
+		var dateArr = date.split("T");
+		var date = dateArr[0];
+
+		var time = dateArr[1].split(".");
+		time = time[0].split(":");
+		date = date.split("-");
+		switch (date[1]) {
+			case "01":
+				date[1] = this.props.displayText.month1;
+				break;
+			case "02":
+				date[1] = this.props.displayText.month2;
+				break;
+			case "03":
+				date[1] = this.props.displayText.month3;
+				break;
+			case "04":
+				date[1] = this.props.displayText.month4;
+				break;
+			case "05":
+				date[1] = this.props.displayText.month5;
+				break;
+			case "06":
+				date[1] = this.props.displayText.month6;
+				break;
+			case "07":
+				date[1] = this.props.displayText.month7;
+				break;
+			case "08":
+				date[1] = this.props.displayText.month8;
+				break;
+			case "09":
+				date[1] = this.props.displayText.month9;
+				break;
+			case "10":
+				date[1] = this.props.displayText.month10;
+				break;
+			case "11":
+				date[1] = this.props.displayText.month11;
+				break;
+			case "12":
+				date[1] = this.props.displayText.month12;
+				break;
+		}
+
+		var hour = parseInt(time[0]);
+		if (hour / 12 > -1) {
+			noon = "pm";
+		}
+
+		if (!(hour % 12 === 0)) {
+			hour %= 12;
+		}
+
+		return (`${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`);
 	}
 
 	createChunkList(chunk) {
@@ -232,6 +287,7 @@ class ChunkListContainer extends Component {
 					language={this.props.language.name}
 					onSourceClicked={this.onSourceClicked.bind(this)}
 					active={this.props.active}
+					published={this.props.project.published}
 					displayText={this.props.displayText}
 				/>
 			</div>
@@ -244,8 +300,8 @@ const mapStateToProps = state => {
 	const { displayText = "" } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { loaded = false, error = "", comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
-	return { playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
+	const { takes, loaded = false, error = "", comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
+	return { takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 }
 

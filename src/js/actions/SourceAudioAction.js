@@ -1,11 +1,12 @@
 import axios from "axios";
 import config from "../../config/config";
 
-export const fetchAllSourceAudio = (book, projectId, setInitialSourceAudio) => {
+export const fetchAllSourceAudio = (projectId, language, setInitialSourceAudio) => {
     return function (dispatch) {
         dispatch(dispatchSourceAudioLoading());
+        let strig =config.apiUrl + `projects/?id=${projectId}&lang=${language}&published=true`;
         return axios
-            .get(config.apiUrl + `projects/?id=${projectId}&published=true`)
+            .get(config.apiUrl + `projects/?id=${projectId}&lang=${language}&published=true`)
             .then(response => {
                 let projects = [];
                 response.data.map(project => {
@@ -14,15 +15,13 @@ export const fetchAllSourceAudio = (book, projectId, setInitialSourceAudio) => {
                         book: project.book.slug,
                         version: project.version
                     };
-                    if (project.id !== projectId) {
-                        projects.push({
-                            key: project.id,
-                            value: projectQuery,
-                            text: project.language.name + " (" + project.version + ")"
-                        });
-                        setInitialSourceAudio(projects[0].value);
-                    }
+                    projects.push({
+                        key: project.id,
+                        value: projectQuery,
+                        text: project.language.name + " (" + project.version.slug + ")"
+                    });
                 });
+                setInitialSourceAudio(projects[0].value);
                 dispatch(dispatchSourceAudioReceived(projects));
 
             })

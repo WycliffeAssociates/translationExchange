@@ -12,7 +12,8 @@ const INITIAL_STATE = {
     selectedSourceProjectQuery: -1,
     selectedSourceProject: {},
     notifyFlag: false,
-    update: false
+    update: false,
+    chapterId:''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -25,16 +26,29 @@ export default (state = INITIAL_STATE, action) => {
                 chapter: action.chapter,
                 book: action.book,
                 language: action.language,
-                comments: action.comments,
                 loaded: true,
-                chunkIdClicked:'',
+                chapterId:action.chapterId,
                 calledChunks:''
             };
         case "FETCH_TAKE_SUCCESS":
             return {
                  ...state,
-                takes: state.takes.concat(action.takes),
+                takes: state.takes.concat(action.takes)
             };
+
+       case "GET_COMMENTS_SUCCESS":
+            return{
+              ...state,
+             comments: action.comments
+
+            }
+
+        case "RESET_COMMENTS":
+           return{
+             ...state,
+            comments: []
+           }
+
         case "FETCH_TAKE_SUCCESS_FIRST_TIME":
             return {
                  ...state,
@@ -100,7 +114,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, active: true };
         case 'SAVE_COMMENT_SUCCESS':
             return {
-                ...state, chunks: action.response, active: false
+                ...state, comments: state.comments.concat(action.comments), active: false
             }
         case 'SAVE_COMMENT_FAILED':
             return {

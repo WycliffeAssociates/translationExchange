@@ -8,8 +8,8 @@ export const fetchChaptersContainerData = (query) => {
         return axios
             .all([
                 axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}languages/?slug=${query.lang}`),
+                axios.get(`${config.apiUrl}books/?slug=${query.book}`),
                 axios.get(`${config.apiUrl}versions/?project_id=${query.project_id}`),
 
             ])
@@ -20,7 +20,6 @@ export const fetchChaptersContainerData = (query) => {
                 booksResponse,
                 versionsResponse
             ) {
-
                 dispatch(fetchChaptersContainerDataSuccess(chaptersResponse.data, languagesResponse.data, booksResponse.data, versionsResponse.data, query.project_id, query.published));
             })
             )
@@ -30,8 +29,9 @@ export const fetchChaptersContainerData = (query) => {
     };
 }
 
-export function fetchChaptersContainerDataSuccess(chapters, language, book, version, project_id, published) {
 
+
+export function fetchChaptersContainerDataSuccess(chapters, language, book, version, project_id, published) {
     return {
         type: 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS',
         language: language[0],
@@ -67,6 +67,7 @@ export function setCheckingLevel(chapterId, level) {
 }
 
 export function dispatchSetCheckingLevelSuccess(response) {
+
     return {
         type: 'SET_CHECKING_LEVEL_SUCCESS',
         response
@@ -84,7 +85,7 @@ export function publishFiles(chapterId) {
 
     return function (dispatch) {
         return axios
-            .patch(config.apiUrl + "projects/" + chapterId + "/", { is_publish: true })
+            .patch(config.apiUrl + "projects/" + chapterId + "/", { publish: true })
             .then(response => {
                 dispatch(dispatchPublishFilesSuccess(response.data));
             })
@@ -107,12 +108,12 @@ export function dispatchPublishFilesFailed(error) {
 }
 
 //download project
-export function downloadProject(projectId) {
+export function downloadProject(projectId, file_format) {
 
     return function (dispatch) {
         dispatch(dispatchLoadingDownloadProject());
         return axios
-            .get(config.apiUrl + `zip/?id=${projectId}`)
+            .get(config.apiUrl + `zip/?id=${projectId}&file_format=${file_format}`)
             .then(response => {
                 //Todo: find the better way to download files
                 window.location = config.streamingUrl + response.data.location;
@@ -125,6 +126,7 @@ export function downloadProject(projectId) {
             });
     };
 }
+
 export function dispatchLoadingDownloadProject() {
     return {
         type: 'DOWNLOAD_PROJECT'

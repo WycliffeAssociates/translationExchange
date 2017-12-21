@@ -15,9 +15,8 @@ class ChapterList extends Component {
 	}
 
 	createListItem(chapter) {
-  
 		return (
-			<Table.Row onClick={() => this.props.navigateToChapter( chapter.number)}>
+			<Table.Row onClick={() => this.props.navigateToChapter( chapter.number, chapter.id)}>
 				<Table.Cell>
 					{chapter.number}
 				</Table.Cell>
@@ -29,7 +28,7 @@ class ChapterList extends Component {
 				</Table.Cell>
 				<Table.Cell className="dont-hide-overflow">
 					{/*only allow checking level to be set if project is published*/}
-					{this.props.projectIsPublish
+					{chapter.published
 						? <CheckingLevel
 							num={chapter.checked_level}
 							setCheckingLevel={this.props.setCheckingLevel}

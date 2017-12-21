@@ -30,10 +30,10 @@ class ChaptersContainer extends Component {
 		this.props.fetchChaptersContainerData(query);
 	}
 
-	navigateToChapter(chNum) {
-
+	navigateToChapter(chNum, chId) {
 		var query = QueryString.parse(this.props.location.search);
 		query.chapter_num = chNum;
+		query.chapterId =chId;
 		this.props.history.push({
 			pathname: "/takes",
 			search: QueryString.stringify(query)
@@ -41,8 +41,8 @@ class ChaptersContainer extends Component {
 	}
 
 	// Minimal parameters saves on server query time
-	onDownloadProject() {
-		this.props.downloadProject(this.props.project_id);
+	onDownloadProject(file_format) {
+		this.props.downloadProject(this.props.project_id,file_format);
 	}
 	onDownloadSourceAudio() {
 		this.props.downloadSourceAudio(this.props.project_id);
@@ -61,6 +61,8 @@ class ChaptersContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
+
+
 			return (
 				<div className="chapters" style={{ direction:`${this.props.direction}` }} >
 					<Container fluid>
@@ -118,12 +120,10 @@ class ChaptersContainer extends Component {
 								height="16"
 							/>
 						}
-
 						{this.props.downloadError
 							? this.props.displayText.errorTryAgain
 							: null
 						}
-
 						<br />
 					</Container>
 				</div>

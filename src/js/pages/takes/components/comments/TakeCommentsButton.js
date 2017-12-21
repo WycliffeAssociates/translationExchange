@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import RecordComment from "./RecordComment";
+import { bindActionCreators } from 'redux';
 import "./RecordComment.css";
 import CommentsPlayer from "../comments/commentsPlayer";
 import {
@@ -11,6 +12,7 @@ import {
 } from "semantic-ui-react";
 import config from "../../../../../config/config";
 import Notifications from 'react-notify-toast';
+import {getAudioComments, resetComments} from '../../../../actions/index';
 
 
 
@@ -21,7 +23,7 @@ class TakeCommentsButton extends Component {
 		this.state = {
 			SaveButtonState: true,
 			blob: null,
-			// active: this.props.comments.length > 0
+		  //active: this.props.comments.length > 0
 		};
 
 
@@ -29,7 +31,15 @@ class TakeCommentsButton extends Component {
 		this.onClickSave = this.onClickSave.bind(this);
 	}
 
+	resetComments(){
+			this.props.resetComments();
+		}
 
+	getComments(){
+	  const takeId = this.props.take.id
+		this.props.getAudioComments(takeId, 'take_id');
+
+	}
 
 	onClickSave = () => {
 		this.hideModal();
@@ -44,21 +54,9 @@ class TakeCommentsButton extends Component {
 		this.props.deleteComment("take", commentid, takeid);
 	}
 
-	componentWillReceiveProps(nextProps) {
-		// if (nextProps.comments.length > 0) {
-		// 	this.setState({
-		// 		active: true
-		// 	});
-		// } else {
-		// 	this.setState({
-		// 		active: false
-		// 	});
-		// }
-	}
 
 	createPlaylist(comment) {
-
-		const src = config.streamingUrl + comment.comment.location
+		const src = config.streamingUrl + comment.location
 
 		return (
 			<div style={styles.container}>
@@ -75,7 +73,7 @@ class TakeCommentsButton extends Component {
 						negative
 						onClick={() => {
 							if (window.confirm(this.props.displayText.deleteComment)) {
-								this.onClickDelete(comment.comment.id, this.props.take.id);
+								this.onClickDelete(comment.id, this.props.take.id);
 							}
 						}}
 					>
@@ -96,21 +94,20 @@ class TakeCommentsButton extends Component {
 	};
 
 	render() {
-		if (this.props.comments > 0) {
-			this.props.comments.map(this.createPlaylist);
-		}
+
 		return (
 			<Modal
 				size="small"
 				style={this.Style}
 				closeIcon="close"
+				onClose={this.resetComments.bind(this)}
 				trigger={
 					<Button
 						fluid
 						ref={audioComponent => {
 							this.audioComponent = audioComponent;
 						}}
-						onClick={this.showModal}
+						onClick={this.getComments.bind(this)}
 						active={this.state.active}
 						color={this.state.active ? "yellow" : null}
 					>
@@ -134,9 +131,9 @@ class TakeCommentsButton extends Component {
 				<div style={{ display: 'flex', justifyContent: 'center', marginTop: '2%', marginBottom: '2%', maxHeight: 350, overflowY: 'scroll' }}>
 					<div style={{ width: '95%', marginTop: '1%' }}>
 
-						{/* {this.props.comments.length > 0
+						{this.props.comments.length > 0
 							? this.props.comments.slice(0).reverse().map(this.createPlaylist.bind(this))
-							: ""} */}
+							: ""}
 
 					</div>
 				</div>
@@ -157,13 +154,18 @@ const styles = {
 	}
 };
 
-const mapStateToProps = state => {
+const mapDispatchToProps = dispatch => {
+  	return bindActionCreators({  getAudioComments, resetComments  }, dispatch);
+};
 
+
+const mapStateToProps = state => {
+	const {comments} = state.chunkListContainer;
 	const { displayText } = state.geolocation;
 
-	return { displayText };
+	return { displayText, comments };
 
 };
 
 
-export default connect(mapStateToProps)(TakeCommentsButton);
+export default connect(mapStateToProps, mapDispatchToProps)(TakeCommentsButton);

@@ -151,7 +151,6 @@ class ProjectsList extends Component {
 
 		return (     `${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`	);
 	   }
-
 }
 /*
     Use PropTypes to define what props this component expects. If it's passed the wrong props,

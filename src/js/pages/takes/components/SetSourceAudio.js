@@ -6,7 +6,7 @@ import { fetchAllSourceAudio } from "../../../actions";
 
 class SetSourceAudio extends Component {
     componentDidMount() {
-        this.props.fetchAllSourceAudio(this.props.book, this.props.projectId, this.setSource.bind(this));
+        this.props.fetchAllSourceAudio(this.props.projectId, this.props.language.slug, this.setSource.bind(this));
     }
     setSource(project) {
         this.props.setSourceProject(project);
@@ -14,6 +14,7 @@ class SetSourceAudio extends Component {
 
     render() {
         return (
+            this.props.projects.length > 0 ?
                 <Dropdown
                     search
                     selection
@@ -25,7 +26,7 @@ class SetSourceAudio extends Component {
                     loading={!this.props.loaded}
                     options={this.props.projects}
                     onChange={(event, dropdown) => { this.setSource(dropdown.value) }}
-                />
+                /> : null
         );
     }
 }

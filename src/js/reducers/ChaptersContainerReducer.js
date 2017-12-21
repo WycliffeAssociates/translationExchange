@@ -11,7 +11,8 @@ const INITIAL_STATE = {
     downloadSuccess: "",
     downloadLoading: false,
     downloadLoadingSourceAudio: false,
-    downloadErrorAudioSource: ""
+    downloadErrorAudioSource: "",
+    checked_level: 0
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -28,7 +29,7 @@ export default (state = INITIAL_STATE, action) => {
             loaded: action.loaded
         };
         case 'SET_CHECKING_LEVEL_SUCCESS':
-            return { ...state };
+            return { ...state, checked_level: action.checked_level };
         case 'SET_CHECKING_LEVEL_FAILED':
             return { ...state, error: action.error }
         // case 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS': return { error: action.error };

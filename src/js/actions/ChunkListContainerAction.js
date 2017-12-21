@@ -24,7 +24,28 @@ export const getAudioTakes = (chunkId, counter) => {
 }
 
 
+export const getAudioComments = (query , type) => {
+    return function (dispatch) {
+        return axios
+            .get(`${config.apiUrl}comments/?${type}=${query}`)
+            .then(response => {
+              dispatch(dispatchGetAudioCommentsSuccess(response.data))
+            })
+            .catch(error => {
+                dispatch(dispatchChunksFailed(error));
+            });
+    };
+}
 
+
+
+export const dispatchGetAudioCommentsSuccess = (comments) => {
+  return {
+      type: 'GET_COMMENTS_SUCCESS',
+      comments
+  }
+
+}
 
 
 export const getChunkIdClicked = (id) => {
@@ -32,21 +53,21 @@ export const getChunkIdClicked = (id) => {
       type: 'CHUNK_ID_CLICKED',
       id
   }
-
-
 }
 
 
-export const getSelectedProjectInfo = (query) => {                               // from the selected project get chunks, book, language, chapter, project
+export const getSelectedProjectInfo = (query) => {
+                            // from the selected project get chunks, book, language, chapter, project
+    debugger;
     return function (dispatch) {
         return axios
             .all([
-                axios.get(`${config.apiUrl}chunks/?chapter_id=${query.chapter_num}`),
-                axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}projects/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}books/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}languages/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}comments/?project_id=${query.project_id}`)
+                axios.get(`${config.apiUrl}chunks/?chapter_id=${query.chapterId}`),
+                axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}&id=${query.chapterId}`),
+                axios.get(`${config.apiUrl}projects/?id=${query.project_id}`),
+                axios.get(`${config.apiUrl}books/?slug=${query.book}`),
+                axios.get(`${config.apiUrl}languages/?id=${query.project_id}`)
+
 
             ])
             .then(
@@ -55,8 +76,7 @@ export const getSelectedProjectInfo = (query) => {                              
                 chaptersResponse,
                 projectsResponse,
                 booksResponse,
-                languageResponse,
-                commentsResponse
+                languageResponse
             ) {
 
                 dispatch(dispatchProjectInfoSuccess(
@@ -65,13 +85,12 @@ export const getSelectedProjectInfo = (query) => {                              
                     projectsResponse,
                     booksResponse,
                     languageResponse,
-                    commentsResponse
+                    query.chapterId
                                     ));
 
             })
             )
             .catch(error => {
-
                 dispatch(dispatchChunksFailed(error)); //TODO change name to function
             });
     }
@@ -88,7 +107,7 @@ export function dispatchProjectInfoSuccess(chunksResponse,
     projectsResponse,
     booksResponse,
     languageResponse,
-    commentsResponse
+    chapterId
   ) {
 
     return {
@@ -98,10 +117,9 @@ export function dispatchProjectInfoSuccess(chunksResponse,
         chapter: chapterResponse,
         book: booksResponse.data[0],
         language: languageResponse.data[0],
-        comments: commentsResponse.data[0]
+        chapterId
     }
 }
-
 
 export function dispatchTakesFirstTimeSuccess(takesResponse, chunkId) {
    takesResponse.map(take => take.chunkId = chunkId);
@@ -182,7 +200,7 @@ export const patchTake = (takeId, patch, success, takes, updatingDeletedTake, ch
                 if (error.response) {
                     if (error.response.status === 404) {
                         message = "Sorry, that take doesn't exist!";
-                        updatingDeletedTake(takeId);
+                        updatingDeletedTake(chunkId);
                     } else {
                         message = "Something went wrong. Please check your connection and try again.";
                     }
@@ -291,14 +309,13 @@ export function deleteCommentFailed(error) {
 };
 
 //	MarkedAsPublish
-export const markedAsPublished = (success, chapter) => {
+export const markedAsPublished = (success, chapterId) => {
     return function (dispatch) {
         return axios
-            .patch(config.apiUrl + "chapters/" + chapter.id + "/",
+            .patch(config.apiUrl + "chapters/" + chapterId + "/",
             { published: true })
             .then((response) => {
-                let updatedChapter = Object.assign({}, chapter);
-                updatedChapter.published = true;
+                const updatedChapter= response.data;
                 dispatch(markAsPublishedSuccess(updatedChapter));
                 if (success) {
                     success();
@@ -308,7 +325,6 @@ export const markedAsPublished = (success, chapter) => {
             });
     };
 }
-
 export function markAsPublishedSuccess(response) {
     return {
         type: 'MARK_AS_PUBLISHED_SUCCESS',
@@ -325,6 +341,7 @@ export function markAsPublishedFailed(error) {
 //saveComment
 
 export const saveComment = (blobx, type, id, success, chunks, chapter) => {
+
     return function (dispatch) {
         dispatch(saveCommentLoading());
         return axios
@@ -336,43 +353,35 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
             })
             .then(results => {
                 var map = { comment: results.data };
-                let updatedChunks = chunks.slice();
-                if (type === "take") {
-                    let chunkToUpdate = updatedChunks.findIndex(chunk => {
-                        return chunk.takes.find(take => take.take.id === id);
-                    });
-                    let takeToUpdate = updatedChunks[chunkToUpdate].takes.findIndex(
-                        take => take.take.id === id
-                    );
-                    updatedChunks[chunkToUpdate].takes[takeToUpdate].comments.push(map);
-                    dispatch(saveCommentSuccess(updatedChunks));
-                } else if (type === "chunk") {
-                    for (var i = 0; i < updatedChunks.length; i++) {
-                        if (updatedChunks[i].id === id) {
-                            var chunkToUpdate = i;
-                        }
-                    }
-                    updatedChunks[chunkToUpdate].comments.push(map);
-                    dispatch(saveCommentSuccess(updatedChunks));
-                } else {
-                    let updatedChapter = Object.assign({}, chapter);
-                    updatedChapter.comments.push(map);
-                    dispatch(chapterUpdate(updatedChapter));
-                }
-                success();
-                let myColor = { background: '#50f442', text: "#FFFFFF" };
-                notify.show("Saved", "custom", 1500, myColor);
-            })
+                   if (type === "take") {
+                       dispatch(saveCommentSuccess(results.data));
+                   } else if (type === "chunk") {
+                       dispatch(saveCommentSuccess(results.data));
+                   } else {
+                       dispatch(saveCommentSuccess(results.data));
+                   }
+                   success();
+                   // let myColor = { background: '#50f442 ', text: "#FFFFFF " };
+                   // notify.show("Saved", "custom", 1500, myColor);
+               })
             .catch(exception => {
+
                 dispatch(saveCommentFailed(exception))
                 success();
             });
     }
 }
-export function saveCommentSuccess(response) {
+
+export function resetComments(){
+  return{
+    type: 'RESET_COMMENTS'
+  }
+}
+
+export function saveCommentSuccess(comments) {
     return {
         type: 'SAVE_COMMENT_SUCCESS',
-        response
+        comments
     }
 };
 export function saveCommentFailed(error) {

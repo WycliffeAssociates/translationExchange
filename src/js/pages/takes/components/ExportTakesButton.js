@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from "prop-types";
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import CommentsPlayer from '../components/comments/commentsPlayer.js'
 import config from "config/config";
+import {
+	markedAsPublished,
+} from "../../../actions";
 
 // this is the page for one chapter
 
@@ -48,12 +52,13 @@ class ExportTakesButton extends Component {
         return playlist
     }
 
-    changeColor() {
-        // this.props.onMarkedAsPublish(() => {
-        //     this.handleClose();
-        // });
+    finishExportingChapter() {
+        const {chapterId} = this.props;
+        this.props.markedAsPublished(() => {
+            this.handleClose();
+        }, chapterId);
 
-          this.handleClose();
+
 
     }
 
@@ -129,9 +134,6 @@ class ExportTakesButton extends Component {
 
              });
 
-
-
-
        enableBtn = checkPublishedStatus.every(val => val ===true);              // verify all the published takes
 
        }
@@ -159,7 +161,7 @@ class ExportTakesButton extends Component {
                 open={this.state.modalOpen}
                 onClose={this.handleClose}
                 closeIcon="close">
-                <Modal.Header style={styles.modal}>You are ready to mark Chapter {this.props.chapter.number} as finished!</Modal.Header>
+                <Modal.Header style={styles.modal}>You are ready to mark Chapter {this.props.chapterNum} as finished!</Modal.Header>
                 <Modal.Content style={styles.modal}>
                     <Modal.Description style={styles.modal}>
                         <p>Here is a preview of the takes you have selected to export. This may take a few seconds to
@@ -171,7 +173,7 @@ class ExportTakesButton extends Component {
                     </Modal.Content>
                     <Modal.Actions>
                         {/*this button will do a call to database to change chapter.exportready to true */}
-                        <Button content="Finish" onClick={this.changeColor.bind(this)} />
+                        <Button content="Finish" onClick={this.finishExportingChapter.bind(this)} />
 
                     </Modal.Actions>
                 </Modal>
@@ -202,12 +204,20 @@ const styles = {
     }
 }
 
+
+const mapDispatchToProps = dispatch => {
+	return bindActionCreators(
+		{	markedAsPublished,
+		}, dispatch);
+};
+
+
 const mapStateToProps = state => {
 
-  const { takes } = state.chunkListContainer;
+    const { takes, chapterId } = state.chunkListContainer;
 
-  return{ takes }
+  return{ takes, chapterId }
 }
 
 
-export default connect(mapStateToProps) (ExportTakesButton);
+export default connect(mapStateToProps, mapDispatchToProps) (ExportTakesButton);
