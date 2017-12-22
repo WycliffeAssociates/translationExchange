@@ -27,7 +27,8 @@ import {
 	deleteComment,
 	markedAsPublished,
 	saveComment,
-	getAudioTakes
+	getAudioTakes,
+	deleteTakeSuccess
 } from './../../actions';
 
 class ChunkListContainer extends Component {
@@ -41,6 +42,9 @@ class ChunkListContainer extends Component {
 	}
 
 	updatingDeletedTake(takeId) {
+    const tks = this.props.takes;
+
+	  this.props.deleteTakeSuccess(takeId, tks);
 
 		// let updatedChunks = this.props.chunks.slice();
 		// debugger;
@@ -321,7 +325,8 @@ const mapDispatchToProps = dispatch => {
 			deleteComment,
 			markedAsPublished,
 			saveComment,
-			getAudioTakes
+			getAudioTakes,
+			deleteTakeSuccess
 		}, dispatch);
 };
 

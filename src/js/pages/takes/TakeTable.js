@@ -13,8 +13,7 @@ class TakeTable extends Component {
 		this.props.orderedTakes.map(take => {
 			takesToDelete.push(take.id);
 		});
-
-		 debugger;
+	
 		//remove them all
 		takesToDelete.map(takeId => {
 			this.props.deleteTake(takeId);

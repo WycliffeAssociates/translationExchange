@@ -36,6 +36,12 @@ export default (state = INITIAL_STATE, action) => {
                 takes: state.takes.concat(action.takes)
             };
 
+            case "'DELETE_TAKE_SUCCESS'":
+                return {
+                     ...state,
+                     takes: state.takes.splice(action.takeIndex, 1)
+                };
+
        case "GET_COMMENTS_SUCCESS":
             return{
               ...state,

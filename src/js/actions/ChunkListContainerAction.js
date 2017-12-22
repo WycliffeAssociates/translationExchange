@@ -58,7 +58,6 @@ export const getChunkIdClicked = (id) => {
 
 export const getSelectedProjectInfo = (query) => {
                             // from the selected project get chunks, book, language, chapter, project
-    debugger;
     return function (dispatch) {
         return axios
             .all([
@@ -243,6 +242,7 @@ export const deleteTake = (takeId, success, updatingDeletedTake) => {
             .delete(config.apiUrl + "takes/" + takeId + "/")
             .then((response) => {
                 updatingDeletedTake(takeId);
+
                 if (success) {
                     dispatch(setActiveToFalse());
                 }
@@ -261,6 +261,22 @@ export const deleteTake = (takeId, success, updatingDeletedTake) => {
             });
     };
 }
+
+export function deleteTakeSuccess(takeId, takes){
+  const takeIndex = takes.map(tk  => {
+    return tk.id
+
+    } ).indexOf(takeId);
+
+   takes.splice(takeIndex, 1);
+
+  return {
+      type: 'DELETE_TAKE_SUCCESS',
+      takeIndex
+  }
+
+}
+
 
 export function deleteTakeFailed(error) {
     return {
