@@ -39,7 +39,6 @@ export function fetchChaptersContainerDataSuccess(chapters, language, book, vers
         book: book[0],
         project_id,
         published,
-
         chapters,
         loaded: true
     }
@@ -70,7 +69,7 @@ export function dispatchSetCheckingLevelSuccess(response) {
 
     return {
         type: 'SET_CHECKING_LEVEL_SUCCESS',
-        response
+        checked_level:response.checked_level
     }
 }
 export function dispatchSetCheckingLevelFailed(error) {

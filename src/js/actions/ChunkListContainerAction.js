@@ -57,8 +57,7 @@ export const getChunkIdClicked = (id) => {
 
 
 export const getSelectedProjectInfo = (query) => {
-                            // from the selected project get chunks, book, language, chapter, project
-    debugger;
+    // from the selected project get chunks, book, language, chapter, project
     return function (dispatch) {
         return axios
             .all([
@@ -67,8 +66,6 @@ export const getSelectedProjectInfo = (query) => {
                 axios.get(`${config.apiUrl}projects/?id=${query.project_id}`),
                 axios.get(`${config.apiUrl}books/?slug=${query.book}`),
                 axios.get(`${config.apiUrl}languages/?id=${query.project_id}`)
-
-
             ])
             .then(
             axios.spread(function (
@@ -78,16 +75,13 @@ export const getSelectedProjectInfo = (query) => {
                 booksResponse,
                 languageResponse
             ) {
-
                 dispatch(dispatchProjectInfoSuccess(
                     chunksResponse,
                     chaptersResponse,
                     projectsResponse,
                     booksResponse,
                     languageResponse,
-                    query.chapterId
-                                    ));
-
+                    query.chapterId ));
             })
             )
             .catch(error => {
@@ -188,8 +182,6 @@ export const patchTake = (takeId, patch, success, takes, updatingDeletedTake, ch
                   return takes.id
 
                   } ).indexOf(takeId);
-
-
                 let updatedTakeInfo = response.data;
                 updatedTakeInfo.chunkId = chunkId;
                 listOfTakes[takeIdToUpdate] = updatedTakeInfo;

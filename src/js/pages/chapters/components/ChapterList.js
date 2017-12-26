@@ -30,7 +30,7 @@ class ChapterList extends Component {
 					{/*only allow checking level to be set if project is published*/}
 					{chapter.published
 						? <CheckingLevel
-							num={chapter.checked_level}
+							num={this.props.checked_level>=0?this.props.checked_level:chapter.checked_level}
 							setCheckingLevel={this.props.setCheckingLevel}
 							chapterId={chapter.id}
 						/>

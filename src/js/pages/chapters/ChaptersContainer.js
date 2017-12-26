@@ -21,8 +21,6 @@ class ChaptersContainer extends Component {
 
 	setCheckingLevel(chapterId, level) {
 		this.props.setCheckingLevel(chapterId, level);
-		var query = QueryString.parse(this.props.location.search);
-		this.props.fetchChaptersContainerData(query);
 	}
 
 	getChapterData() {
@@ -33,7 +31,7 @@ class ChaptersContainer extends Component {
 	navigateToChapter(chNum, chId) {
 		var query = QueryString.parse(this.props.location.search);
 		query.chapter_num = chNum;
-		query.chapterId =chId;
+		query.chapterId = chId;
 		this.props.history.push({
 			pathname: "/takes",
 			search: QueryString.stringify(query)
@@ -42,7 +40,7 @@ class ChaptersContainer extends Component {
 
 	// Minimal parameters saves on server query time
 	onDownloadProject(file_format) {
-		this.props.downloadProject(this.props.project_id,file_format);
+		this.props.downloadProject(this.props.project_id, file_format);
 	}
 	onDownloadSourceAudio() {
 		this.props.downloadSourceAudio(this.props.project_id);
@@ -61,10 +59,8 @@ class ChaptersContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
-
-
 			return (
-				<div className="chapters" style={{ direction:`${this.props.direction}` }} >
+				<div className="chapters" style={{ direction: `${this.props.direction}` }} >
 					<Container fluid>
 						<h1>
 							{this.props.book.name} ({this.props.language.name})
@@ -97,6 +93,7 @@ class ChaptersContainer extends Component {
 
 							<ChapterList
 								chapters={this.props.chapters}
+								checked_level={this.props.checked_level}
 								version={
 									QueryString.parse(this.props.location.search).version
 								}
@@ -134,13 +131,13 @@ class ChaptersContainer extends Component {
 
 
 const mapStateToProps = state => {
-
-const {direction} = state.direction;
+	console.log("chapters container",state.chaptersContainer);
+	const { direction } = state.direction;
 	const { displayText } = state.geolocation;
 	const { chapters, book, project_id, published,
 		language, loaded, downloadLoading,
 		downloadError, downloadSuccess, downloadLoadingSourceAudio,
-		downloadErrorAudioSource } = state.chaptersContainer;
+		downloadErrorAudioSource,checked_level } = state.chaptersContainer;
 	return {
 		displayText, chapters, book,
 		project_id, published, language,
@@ -148,7 +145,7 @@ const {direction} = state.direction;
 		downloadError, downloadSuccess,
 		downloadLoadingSourceAudio,
 		downloadErrorAudioSource,
-		direction
+		direction,checked_level
 	};
 
 };

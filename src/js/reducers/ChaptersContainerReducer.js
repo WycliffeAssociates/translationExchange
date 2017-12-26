@@ -12,7 +12,7 @@ const INITIAL_STATE = {
     downloadLoading: false,
     downloadLoadingSourceAudio: false,
     downloadErrorAudioSource: "",
-    checked_level: 0
+    checked_level: -1
 };
 
 export default (state = INITIAL_STATE, action) => {

@@ -26,11 +26,4 @@ export class CheckingLevel extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    const{ checked_level } = state.chaptersContainer;
-
-    return{checked_level}
-
-};
-
-export default connect(mapStateToProps) (CheckingLevel);
+export default CheckingLevel;
