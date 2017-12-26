@@ -42,7 +42,7 @@ class ExportTakesButton extends Component {
         takes.map((take) => {
                     playlist.push({
                         "src": config.streamingUrl + take.location,
-                        "name": this.props.mode.name + ' ' + take.chunkId + ' (' + (playlist.length + 1) + '/' + length + ')'
+                        "name": this.props.mode + ' ' + take.startv + ' (' + (playlist.length + 1) + '/' + length + ')'
                          }
                     );
                 }

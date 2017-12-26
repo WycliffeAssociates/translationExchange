@@ -30,7 +30,7 @@ class ChapterList extends Component {
 					{/*only allow checking level to be set if project is published*/}
 					{chapter.published
 						? <CheckingLevel
-							num={chapter.checked_level}
+							num={this.props.checked_level>=0?this.props.checked_level:chapter.checked_level}
 							setCheckingLevel={this.props.setCheckingLevel}
 							chapterId={chapter.id}
 						/>
@@ -42,13 +42,14 @@ class ChapterList extends Component {
 						: <Icon name="remove" />}
 				</Table.Cell>
 				<Table.Cell>
-					{this.getContributorText(chapter.contributors)}
+					{"add contributor from backend"}
+					{/* {this.getContributorText(chapter.contributors)} */}
 				</Table.Cell>
 				<Table.Cell>
 					{this.props.version}
 				</Table.Cell>
 				<Table.Cell>
-					{"December 06, 2017 at 2:53pm (Mr. Backend)"}
+					{"Add date from chapter backend"}
 					{/* {this.parseDate(chapter.date_modified)} */}
 				</Table.Cell>
 			</Table.Row>

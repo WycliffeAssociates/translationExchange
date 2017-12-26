@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Button, Dropdown } from 'semantic-ui-react'
 import 'css/chapters.css'
 const options = [
-    { key: 'zip', icon: 'file archive outline', text: 'Zip', value: 'zip' },
-    { key: 'tr', icon: 'file archive outline', text: 'Tr', value: 'tr' }
+    { key: 'mp3', icon: 'file archive outline', text: 'MP3', value: 'mp3' },
+    { key: 'wav', icon: 'file archive outline', text: 'WAV', value: 'wav' }
 ]
 class DownloadProjects extends Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class DownloadProjects extends Component {
 
         this.state = {
             loading: false,
-            file_format: 'zip'
+            file_format: 'mp3'
         };
         this.onDownloadProject = this.onDownloadProject.bind(this)
     }
@@ -36,7 +36,5 @@ class DownloadProjects extends Component {
         );
     }
 }
-
-
 
 export default DownloadProjects;
