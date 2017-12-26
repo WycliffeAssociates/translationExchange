@@ -263,6 +263,7 @@ export const deleteTake = (takeId, success, updatingDeletedTake) => {
 }
 
 export function deleteTakeSuccess(takeId, takes){
+    debugger;
   const takeIndex = takes.map(tk  => {
     return tk.id
 
@@ -270,9 +271,10 @@ export function deleteTakeSuccess(takeId, takes){
 
    takes.splice(takeIndex, 1);
 
+
   return {
       type: 'DELETE_TAKE_SUCCESS',
-      takeIndex
+      takes
   }
 
 }

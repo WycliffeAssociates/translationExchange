@@ -36,10 +36,12 @@ export default (state = INITIAL_STATE, action) => {
                 takes: state.takes.concat(action.takes)
             };
 
-            case "'DELETE_TAKE_SUCCESS'":
+            case "DELETE_TAKE_SUCCESS":
+                const tst = action.takes;
+                debugger;
                 return {
                      ...state,
-                     takes: state.takes.splice(action.takeIndex, 1)
+                     takes: action.takes
                 };
 
        case "GET_COMMENTS_SUCCESS":
@@ -56,6 +58,7 @@ export default (state = INITIAL_STATE, action) => {
            }
 
         case "FETCH_TAKE_SUCCESS_FIRST_TIME":
+
             return {
                  ...state,
                 takes: action.takes,

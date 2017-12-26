@@ -43,19 +43,9 @@ class ChunkListContainer extends Component {
 
 	updatingDeletedTake(takeId) {
     const tks = this.props.takes;
-
 	  this.props.deleteTakeSuccess(takeId, tks);
-
-		// let updatedChunks = this.props.chunks.slice();
-		// debugger;
-		// let chunkToUpdate = updatedChunks.findIndex(chunk => {
-		// 	return chunk.takes.find(take => take.take.id === takeId);
-		// });
-		// updatedChunks[chunkToUpdate].takes = updatedChunks[
-		// 	chunkToUpdate
-		// ].takes.filter(take => take.take.id !== takeId);
-		// this.props.updateDeletedChunk(updatedChunks);
-	}
+        this.forceUpdate();        // used to rerender when a take is delete it
+    }
 
 	updatingDeletedComment(type, commentId, takeId) {
        //this.props.getAudioTakes(chunkId, counter);
@@ -185,6 +175,7 @@ class ChunkListContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
+
 			return (
 				<div>
 					<ChunkHeader
