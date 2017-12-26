@@ -24,6 +24,7 @@ class TakeCommentsButton extends Component {
 			SaveButtonState: true,
 			blob: null,
 		  //active: this.props.comments.length > 0
+			comments: this.props.comments
 		};
 
 
@@ -51,12 +52,11 @@ class TakeCommentsButton extends Component {
 	}
 
 	onClickDelete(commentid, takeid) {
-		this.props.deleteComment("take", commentid, takeid);
+		this.props.deleteComment("take", commentid, takeid, );
 	}
 
-
 	createPlaylist(comment) {
-		const src = config.streamingUrl + comment.location
+		const src = config.streamingUrl + comment.location;
 
 		return (
 			<div style={styles.container}>

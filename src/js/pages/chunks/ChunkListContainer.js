@@ -28,7 +28,8 @@ import {
 	markedAsPublished,
 	saveComment,
 	getAudioTakes,
-	deleteTakeSuccess
+	deleteTakeSuccess,
+    deleteCommentSuccess
 } from './../../actions';
 
 class ChunkListContainer extends Component {
@@ -47,41 +48,10 @@ class ChunkListContainer extends Component {
         this.forceUpdate();        // used to rerender when a take is delete it
     }
 
-	updatingDeletedComment(type, commentId, takeId) {
-
-		// let updatedChunks = this.props.chunks.slice();
-		// if (type === "take") {
-		// 	let chunkToUpdate = updatedChunks.findIndex(chunk => {
-		// 		return chunk.takes.find(take => take.take.id === takeId);
-		// 	});
-		// 	let takeToUpdate = updatedChunks[chunkToUpdate].takes.findIndex(
-		// 		take => take.take.id === takeId
-		// 	);
-
-		// 	updatedChunks[chunkToUpdate].takes[takeToUpdate].comments = updatedChunks[
-		// 		chunkToUpdate
-		// 	].takes[takeToUpdate].comments.filter(
-		// 		comment => comment.comment.id !== commentId
-		// 		);
-		// 	this.props.updateDeletedChunk(updatedChunks);
-		// } else if (type === "chunk") {
-		// 	for (var i = 0; i < updatedChunks.length; i++) {
-		// 		if (updatedChunks[i].id === takeId) {
-		// 			var chunkToUpdate = i;
-		// 		}
-		// 	}
-		// 	updatedChunks[chunkToUpdate].comments = updatedChunks[
-		// 		chunkToUpdate
-		// 	].comments.filter(comment => comment.comment.id !== commentId);
-		// 	this.props.updateDeletedChunk(updatedChunks);
-		// } else if (type === "chapter") {
-		// 	let updatedChapter = Object.assign({}, this.props.chapter);
-
-		// 	updatedChapter.comments = updatedChapter.comments.filter(
-		// 		comment => comment.comment.id !== commentId
-		// 	);
-		// 	this.props.chapterUpdate(updatedChapter);
-		// }
+	updatingDeletedComment(type, commentId) {
+		const comments = this.props.comments;
+        this.props.deleteCommentSuccess(commentId, comments);
+        this.forceUpdate();        // used to rerender when a comment is delete it
 	}
 
 	patchTake(takeId, patch, success, chunkId) {
@@ -296,7 +266,7 @@ const mapStateToProps = state => {
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
 	const { takes, loaded = false, error = "", comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
-	return { takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
+	return {comments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 }
 
@@ -317,7 +287,8 @@ const mapDispatchToProps = dispatch => {
 			markedAsPublished,
 			saveComment,
 			getAudioTakes,
-			deleteTakeSuccess
+			deleteTakeSuccess,
+            deleteCommentSuccess
 		}, dispatch);
 };
 

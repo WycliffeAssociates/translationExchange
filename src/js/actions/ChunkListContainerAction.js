@@ -296,7 +296,7 @@ export const deleteComment = (type, commentId, takeId, updatingDeletedComment) =
         return axios
             .delete(config.apiUrl + "comments/" + commentId + "/")
             .then((response) => {
-                updatingDeletedComment(type, commentId, takeId);
+                updatingDeletedComment(type, commentId);
             }).catch(exception => {
                 let message;
                 if (exception.response) {
@@ -311,6 +311,22 @@ export const deleteComment = (type, commentId, takeId, updatingDeletedComment) =
                 dispatch(deleteCommentFailed(message));
             });
     };
+};
+
+export function deleteCommentSuccess(commentId, comments){
+    debugger;
+    const commentIndex = comments.map(comment  => {
+        return comment.id
+
+    } ).indexOf(commentId);
+
+    comments.splice(commentIndex, 1);
+
+    return {
+        type: 'DELETE_COMMENT_SUCCESS',
+        comments
+    }
+
 }
 
 export function deleteCommentFailed(error) {

@@ -42,12 +42,18 @@ export default (state = INITIAL_STATE, action) => {
                      takes: action.takes
                 };
 
+        case 'DELETE_COMMENT_SUCCESS':
+            return{
+                ...state,
+                comments: action.comments
+            };
+
        case "GET_COMMENTS_SUCCESS":
             return{
               ...state,
              comments: action.comments
 
-            }
+            };
 
         case "RESET_COMMENTS":
            return{
