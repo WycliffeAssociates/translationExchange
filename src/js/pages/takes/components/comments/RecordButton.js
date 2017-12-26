@@ -11,7 +11,7 @@ import {
 	Modal
 } from "semantic-ui-react";
 import config from "../../../../../config/config";
-import {getAudioComments, resetComments} from '../../../../actions/index';
+import { getAudioComments, resetComments } from '../../../../actions/index';
 
 class RecordButton extends Component {
 	constructor(props) {
@@ -24,7 +24,7 @@ class RecordButton extends Component {
 			blob: null,
 			// active: this.props.comments.length > 0,
 			loadingActive: this.props.active,
-			comments: ''
+			comments: [],
 		};
 
 		this.showModal = this.showModal.bind(this);
@@ -34,7 +34,7 @@ class RecordButton extends Component {
 		this.onClickSave = this.onClickSave.bind(this);
 	}
 
-	resetComments(){
+	resetComments() {
 		this.props.resetComments();
 	}
 
@@ -61,8 +61,8 @@ class RecordButton extends Component {
 	}
 
 
-	getComments(){
-	  const type = this.props.type;
+	getComments() {
+		const type = this.props.type;
 		const id = this.props.id;
 		this.props.getAudioComments(id, `${type}_id`);
 
@@ -70,9 +70,7 @@ class RecordButton extends Component {
 
 
 	createPlaylist(comment) {
-
 		const src = config.streamingUrl + comment.location;
-
 		return (
 			<div key={comment.id} style={styles.container}>
 
@@ -92,6 +90,12 @@ class RecordButton extends Component {
 									comment.id,
 									this.props.id
 								);
+								let comments = [];
+								this.props.comments.map(com => {
+									if (com.id != comment.id) {
+										comments.push(com);
+									} this.setState({ comments})
+								})
 							}
 						}}
 					>
@@ -111,7 +115,6 @@ class RecordButton extends Component {
 	};
 
 	render() {
-
 		return (
 			<Modal
 				size="small"
@@ -149,11 +152,11 @@ class RecordButton extends Component {
 
 				<div style={{ display: 'flex', justifyContent: 'center', marginTop: '2%', marginBottom: '2%', maxHeight: 350, overflowY: 'scroll' }}>
 					<div style={{ width: '95%', marginTop: '1%' }}>
-
-						{this.props.comments.length > 0
-							? this.props.comments.slice(0).reverse().map(this.createPlaylist.bind(this))
-							: ""}
-
+						{this.state.comments.length>0? this.state.comments.slice(0).reverse().map(this.createPlaylist.bind(this)) :
+							this.props.comments.length > 0
+								? this.props.comments.slice(0).reverse().map(this.createPlaylist.bind(this))
+								: ""
+						}
 					</div>
 				</div>
 				<Notifications />
@@ -174,12 +177,12 @@ const styles = {
 
 
 const mapDispatchToProps = dispatch => {
-  	return bindActionCreators({  getAudioComments, resetComments  }, dispatch);
+	return bindActionCreators({ getAudioComments, resetComments }, dispatch);
 };
 
 
 const mapStateToProps = state => {
- const {comments} = state.chunkListContainer;
+	const { comments } = state.chunkListContainer;
 	const { displayText } = state.geolocation;
 
 	return { displayText, comments };

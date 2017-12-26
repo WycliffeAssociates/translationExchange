@@ -54,7 +54,7 @@ class ChunkListContainer extends Component {
 	}
 
 	updatingDeletedComment(type, commentId, takeId) {
-       //this.props.getAudioTakes(chunkId, counter);
+
 		// let updatedChunks = this.props.chunks.slice();
 		// if (type === "take") {
 		// 	let chunkToUpdate = updatedChunks.findIndex(chunk => {
@@ -63,7 +63,7 @@ class ChunkListContainer extends Component {
 		// 	let takeToUpdate = updatedChunks[chunkToUpdate].takes.findIndex(
 		// 		take => take.take.id === takeId
 		// 	);
-    //
+
 		// 	updatedChunks[chunkToUpdate].takes[takeToUpdate].comments = updatedChunks[
 		// 		chunkToUpdate
 		// 	].takes[takeToUpdate].comments.filter(
@@ -82,7 +82,7 @@ class ChunkListContainer extends Component {
 		// 	this.props.updateDeletedChunk(updatedChunks);
 		// } else if (type === "chapter") {
 		// 	let updatedChapter = Object.assign({}, this.props.chapter);
-    //
+
 		// 	updatedChapter.comments = updatedChapter.comments.filter(
 		// 		comment => comment.comment.id !== commentId
 		// 	);

@@ -137,15 +137,11 @@ export class RecordComment extends Component {
 		}
 		return (
 			<div>
-
 				{display}
-
 				<div className="record-stop-button">
 					{MainButton}
 				</div>
-
 				{saveButton}
-
 			</div>
 		);
 	}
