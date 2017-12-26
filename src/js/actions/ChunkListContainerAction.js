@@ -314,7 +314,6 @@ export const deleteComment = (type, commentId, takeId, updatingDeletedComment) =
 };
 
 export function deleteCommentSuccess(commentId, comments){
-    debugger;
     const commentIndex = comments.map(comment  => {
         return comment.id
 
