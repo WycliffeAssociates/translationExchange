@@ -18,6 +18,7 @@ class TakeContainer extends Component {
 
 	onDeleteTake() {
 		this.props.deleteTake(this.props.take.id);
+		debugger;
 	}
 
 

@@ -37,8 +37,6 @@ export default (state = INITIAL_STATE, action) => {
             };
 
             case "DELETE_TAKE_SUCCESS":
-                const tst = action.takes;
-                debugger;
                 return {
                      ...state,
                      takes: action.takes

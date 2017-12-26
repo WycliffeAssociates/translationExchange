@@ -5,7 +5,7 @@ import { notify } from 'react-notify-toast';
 
 
 export const getAudioTakes = (chunkId, counter) => {
-    const query = { chunk_id: chunkId }
+    const query = { chunk_id: chunkId };
     return function (dispatch) {
         return axios
             .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`)
@@ -21,7 +21,7 @@ export const getAudioTakes = (chunkId, counter) => {
                 dispatch(dispatchChunksFailed(error));
             });
     };
-}
+};
 
 
 export const getAudioComments = (query , type) => {
@@ -35,7 +35,7 @@ export const getAudioComments = (query , type) => {
                 dispatch(dispatchChunksFailed(error));
             });
     };
-}
+};
 
 
 
@@ -45,7 +45,7 @@ export const dispatchGetAudioCommentsSuccess = (comments) => {
       comments
   }
 
-}
+};
 
 
 export const getChunkIdClicked = (id) => {
@@ -53,7 +53,7 @@ export const getChunkIdClicked = (id) => {
       type: 'CHUNK_ID_CLICKED',
       id
   }
-}
+};
 
 
 export const getSelectedProjectInfo = (query) => {
@@ -263,7 +263,7 @@ export const deleteTake = (takeId, success, updatingDeletedTake) => {
 }
 
 export function deleteTakeSuccess(takeId, takes){
-    debugger;
+
   const takeIndex = takes.map(tk  => {
     return tk.id
 
