@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from "prop-types";
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import CommentsPlayer from '../components/comments/commentsPlayer.js'
 import config from "config/config";
@@ -19,20 +18,10 @@ class ExportTakesButton extends Component {
             modalOpen: false,
             playList: null,
             pointer: 0
-        }
+        };
         this.playNext = this.playNext.bind(this);
     }
 
-    checkReadyForExport() {
-        if (this.props.chunks.length === 0) {
-            return false;
-        } else {
-      //true if every chunk has at least 1 take marked as published
-            return this.props.chunks.every((chunk) => {
-                return chunk.takes.some(take => take.take.is_publish);
-            });
-        }
-    }
 
     createExportPlaylist() {
 
@@ -45,6 +34,7 @@ class ExportTakesButton extends Component {
                         "name": this.props.mode + ' ' + take.startv + ' (' + (playlist.length + 1) + '/' + length + ')'
                          }
                     );
+                return null; // added to satisfy warning of return expected on arrow function
                 }
 
         );
@@ -122,7 +112,7 @@ class ExportTakesButton extends Component {
             if(tk.published){
               takesPublishedChunkId.push(tk.chunkId);           // create a list of all the published takes
             }
-
+            return null; // added to satisfy warning of return expected on arrow function
                 });
 
        const checkPublishedStatus =  chunks.map(chnk => {                       //check every chunk to see if it contains a published take
@@ -138,10 +128,6 @@ class ExportTakesButton extends Component {
 
        }
 
-
-        let enableButton = true;
-
-        let disableBtnState = false;
 
         return( <Button onClick={this.handleOpen}
                 color={"green"}

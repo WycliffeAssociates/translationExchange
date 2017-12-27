@@ -12,11 +12,13 @@ class TakeTable extends Component {
 		let takesToDelete = [];
 		this.props.orderedTakes.map(take => {
 			takesToDelete.push(take.id);
+            return null; // added to satisfy warning of return expected on arrow function
 		});
 	
 		//remove them all
 		takesToDelete.map(takeId => {
 			this.props.deleteTake(takeId);
+            return null; // added to satisfy warning of return expected on arrow function
 		});
 	}
 

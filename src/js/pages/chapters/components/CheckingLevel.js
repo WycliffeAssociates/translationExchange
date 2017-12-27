@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Dropdown, Menu } from 'semantic-ui-react';
-import { connect } from "react-redux";
 
 export class CheckingLevel extends Component {
 

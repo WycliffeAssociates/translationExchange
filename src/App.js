@@ -10,10 +10,9 @@ import Home from "./js/pages/home/home";
 import About from "./js/pages/about/about";
 import axios from "axios";
 import User from "./js/pages/user/user";
-import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
-import MultiBackend from 'react-dnd-multi-backend';
-import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch';
+//import MultiBackend from 'react-dnd-multi-backend';
+//import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 

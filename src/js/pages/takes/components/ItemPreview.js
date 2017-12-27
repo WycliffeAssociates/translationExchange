@@ -3,11 +3,7 @@ import {Grid, Segment, Icon, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { compose } from 'redux'
 import DragLayer from 'react-dnd/lib/DragLayer';
-import StitchTakesButton from "../StitchTakesButton";
-import TakeCommentsButton from "./comments/TakeCommentsButton";
-import Take from "../Take";
-import TakeListenButton from "../AddTake";
-import blur from '../../../../images/blur.PNG'
+
 
 const collect = (monitor) => {
     var item = monitor.getItem();
@@ -22,7 +18,7 @@ const collect = (monitor) => {
         active: item && item.active,
         item
     };
-}
+};
 
 const getItemStyles= (currentOffset ) => {
 
@@ -35,10 +31,10 @@ const getItemStyles= (currentOffset ) => {
     const winOffset = window.pageYOffset ;
 
     // http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
-    var x = currentOffset.x;
-    var y = currentOffset.y + winOffset;  // addoffset when the screen is scrolled because the origin is respect to the (0,0) component and not the window
+    const x = currentOffset.x;
+    const y = currentOffset.y + winOffset;  // addoffset when the screen is scrolled because the origin is respect to the (0,0) component and not the window
 
-    var transform = `translate(${x}px, ${y}px)`;
+    const transform = `translate(${x}px, ${y}px)`;
 
     return {
         pointerEvents: 'none',
@@ -49,14 +45,13 @@ const getItemStyles= (currentOffset ) => {
         width: '20%',
 
     };
-}
+};
 
 class ItemPreview extends Component {
 
 render(){
 
   let take = this.props.take;
-  let rect = this.props.rect;
   let active = false;
   let takeText = '';
   let date = '';
@@ -125,11 +120,11 @@ render(){
   }
 
 
- parseDate(date)    {
-    var noon = "am";
-    var dateArr = date.split("T");
-    var date = dateArr[0];
-    var time = dateArr[1].split(".");
+ parseDate(dateReceived)    {
+    let noon = "am";
+    let dateArr = dateReceived.split("T");
+    let date = dateArr[0];
+    let time = dateArr[1].split(".");
     time = time[0].split(":");
     date = date.split("-");
     switch (date[1]) {
@@ -169,9 +164,13 @@ render(){
       case "12":
         date[1] = this.props.displayText.month12;
         break;
+      default:
+        date[1] = '';
+        break;
+
     }
 
-    var hour = parseInt(time[0]);
+    let hour = parseInt(time[0], 10);
     if (hour / 12 > -1) {
       noon = "pm";
     }
@@ -191,7 +190,7 @@ const mapStateToProps = state => {
     	const { displayText } = state.geolocation;
 
 	return { displayText };
-}
+};
 
 
 

@@ -4,7 +4,6 @@ import config from "../../config/config";
 export const fetchAllSourceAudio = (projectId, language, setInitialSourceAudio) => {
     return function (dispatch) {
         dispatch(dispatchSourceAudioLoading());
-        let strig =config.apiUrl + `projects/?id=${projectId}&lang=${language}&published=true`;
         return axios
             .get(config.apiUrl + `projects/?id=${projectId}&lang=${language}&published=true`)
             .then(response => {
@@ -20,6 +19,7 @@ export const fetchAllSourceAudio = (projectId, language, setInitialSourceAudio) 
                         value: projectQuery,
                         text: project.language.name + " (" + project.version.slug + ")"
                     });
+                    return null; // added to satisfy warning of return expected on arrow function
                 });
                 setInitialSourceAudio(projects[0].value);
                 dispatch(dispatchSourceAudioReceived(projects));

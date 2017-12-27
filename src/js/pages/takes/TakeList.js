@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import TakeContainer from "./TakeContainer";
 import TakePropTypes from "./TakePropTypes";
 import update from "react/lib/update";
-import { connect } from "react-redux";
 import { DropTarget } from "react-dnd";
 
 class TakeList extends Component {
@@ -134,12 +133,6 @@ const takeTarget = {
 		return { listId: ratingToGet };
 	}
 };
-
-
-const mapStateToProps = state => {
-	const {takes} = state.chunkListContainer;
-	return {takes};
-}
 
 
 export default DropTarget("TakeContainer", takeTarget, (connect, monitor) => ({

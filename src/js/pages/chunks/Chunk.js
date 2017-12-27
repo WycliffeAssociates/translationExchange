@@ -21,7 +21,6 @@ class Chunk extends Component {
 
 	getTakes(chunkId) {
 		let counter = this.props.takes.length;
-		let tst = this.props.calledChunks;
 		let { calledChunks } = this.props
 		if (!calledChunks.includes(chunkId)) {                 // once you click a chunk, checks if the chunk has not been clicked before
 			this.props.getChunkIdClicked(chunkId);
@@ -38,10 +37,8 @@ class Chunk extends Component {
 		var counter = 0;
 		let orderedTakes = this.props.takes;
 
-		//console.log(this.props.takes)
 
 		orderedTakes.map(tk => {
-			const test = this.props.chunkIdClicked;
 			if (this.props.id === tk.chunkId) {   // get takes corresponding just to the selected chunk
 				counter += 1;
 				tk.order = counter;
@@ -59,9 +56,9 @@ class Chunk extends Component {
 
 				}
 			}
-
+         return null;
 		});
-		var modeLabel = "";
+		let modeLabel = "";
 		switch (this.props.mode) {
 			case "chunk":
 				modeLabel = this.props.displayText.chunk;
@@ -204,7 +201,7 @@ Chunk.propTypes = {
 };
 
 const mapStateToProps = state => {
-	const { takes, update, chunkIdClicked, calledChunks, project } = state.chunkListContainer;
+	const { takes, update, chunkIdClicked, calledChunks } = state.chunkListContainer;
 	return { takes, update, chunkIdClicked, calledChunks };
 }
 

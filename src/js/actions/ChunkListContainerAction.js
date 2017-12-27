@@ -1,11 +1,9 @@
 import axios from "axios";
 import config from "../../config/config";
-import { updateMode } from "./UpdatePlaylistActions";
 import { notify } from 'react-notify-toast';
 
 
 export const getAudioTakes = (chunkId, counter) => {
-    const query = { chunk_id: chunkId };
     return function (dispatch) {
         return axios
             .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`)
@@ -379,7 +377,6 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
                 type: type
             })
             .then(results => {
-                var map = { comment: results.data };
                    if (type === "take") {
                        dispatch(saveCommentSuccess(results.data));
                    } else if (type === "chunk") {
@@ -388,12 +385,12 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
                        dispatch(saveCommentSuccess(results.data));
                    }
                    success();
-                   // let myColor = { background: '#50f442 ', text: "#FFFFFF " };
-                   // notify.show("Saved", "custom", 1500, myColor);
+                   let myColor = { background: '#50f442 ', text: "#FFFFFF " };
+                   notify.show("Saved", "custom", 1500, myColor);
                })
             .catch(exception => {
 
-                dispatch(saveCommentFailed(exception))
+                dispatch(saveCommentFailed(exception));
                 success();
             });
     }

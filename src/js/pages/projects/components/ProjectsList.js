@@ -40,8 +40,7 @@ class ProjectsList extends Component {
 	/*{project.percentFinished}*/
 	createListItem(project) {
 
-	        var navigateToProject = function() {
-	            project.version.slug
+	        const navigateToProject = function() {
 	            this.props.navigateToProject(
 	                project.language,
 	                project.book,
@@ -93,10 +92,10 @@ class ProjectsList extends Component {
 		return contribText;
 	}
 
-	parseDate(date) {
-		var noon = "am";
-		var dateArr = date.split("T");
-		var date = dateArr[0];
+    parseDate(dateReceived) {
+        let noon = "am";
+        let dateArr = dateReceived.split("T");
+        let date = dateArr[0];
 
 		var time = dateArr[1].split(".");
 		time = time[0].split(":");
@@ -138,9 +137,12 @@ class ProjectsList extends Component {
 			case "12":
 				date[1] = this.props.displayText.month12;
 				break;
+            default:
+                date[1] = '';
+                break;
 		}
 
-		var hour = parseInt(time[0]);
+		let hour = parseInt(time[0], 10); // 10 is the radix parameter
 		if (hour / 12 > -1) {
 			noon = "pm";
 		}
