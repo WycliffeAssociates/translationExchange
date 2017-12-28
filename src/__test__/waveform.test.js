@@ -4,7 +4,7 @@ import { shallow, mount } from "enzyme";
 import WaveForm from "../js/pages/takes/components/audioplayer/Waveform";
 import Wavesurfer from "react-wavesurfer";
 
-describe("Waveform", () => {
+describe.skip("Waveform", () => {
 	// it('Crashes when there is not valid audio file', () => {
 	//    const src= 5454
 	//

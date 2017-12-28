@@ -19,7 +19,7 @@ describe("fetchRecentProjects", () => {
 			expect(action.response).not.toBeNull();
 		})
 	})
-	it('has action type:HOME_RECENT_PROJECTS_ERR and response is undefined.', () => {
+	it.skip('has action type:HOME_RECENT_PROJECTS_ERR and response is undefined.', () => {
 		const expectedActions = [
 			{ type: 'HOME_RECENT_PROJECTS_ERR' }
 		]

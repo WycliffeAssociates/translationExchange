@@ -18,7 +18,7 @@ describe('Source Audio Action', () => {
             expect(action.response).toBeUndefined();
 		})
 	})
-    it('has action type:SOURCE_AUDIO_SUCCESS and response not null', () => {
+    it.skip('has action type:SOURCE_AUDIO_SUCCESS and response not null', () => {
 		const expectedActions = [
             { type: 'SOURCE_AUDIO_SUCCESS' },
 		]
@@ -28,7 +28,7 @@ describe('Source Audio Action', () => {
             expect(action.response).not.toBeNull();
 		})
 	})
-    it('has action type:SOURCE_AUDIO_FAILED and response is undefined', () => {
+    it.skip('has action type:SOURCE_AUDIO_FAILED and response is undefined', () => {
 		const expectedActions = [
             { type: 'SOURCE_AUDIO_FAILED' },
 		]
