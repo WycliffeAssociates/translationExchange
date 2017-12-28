@@ -70,6 +70,7 @@
     "react-addons-test-utils": "^15.6.0",
     "react-scripts": "^1.0.7",
     "react-test-renderer": "^15.6.1",
+    "web-audio-mock": "^0.1.9",
     "webpack": "^3.6.0"
   },
   "scripts": {

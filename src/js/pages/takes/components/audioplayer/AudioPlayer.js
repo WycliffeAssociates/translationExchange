@@ -130,7 +130,6 @@ class AudioPlayer extends Component {
 
     let i = this.state.pointer;
     const playlistLength = this.props.playlist.length;
-    //debugger;
     if (i < playlistLength) {
       this.setState({
         audioFile: this.props.playlist[i].src,
