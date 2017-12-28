@@ -15,6 +15,6 @@ describe('SourceAudioReducer', () => {
         expect(reducer({}, { type: "SOURCE_AUDIO_SUCCESS", projects: [1, 2, 3, 4, 5] })).toEqual({ loaded: true, projects: [1, 2, 3, 4, 5] });
     });
     it('should have error message', () => {
-        expect(reducer({}, { type: "SOURCE_AUDIO_FAILED", err: "The error message" })).toEqual({ error: "The error message" });
+        expect(reducer({}, { type: "SOURCE_AUDIO_FAILED", err: "The error message" })).toEqual({ error: "The error message","loaded":true });
     });
 });

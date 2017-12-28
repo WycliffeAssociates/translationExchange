@@ -1,9 +1,9 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import ProjectsFilter from '../../../js/pages/projects/ProjectFilter';
 
 describe('Projects Filter', () => {
-    const wrapper = mount(<ProjectsFilter />);
+    const wrapper = shallow(<ProjectsFilter />);
     it('renders', () => {
         expect(wrapper).toHaveLength(1);
     });

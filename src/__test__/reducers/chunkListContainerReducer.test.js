@@ -5,11 +5,18 @@ describe('ChunkContainerReducer', () => {
         loaded: false,
         error: "",
         chunks: [],
+        comments: [],
+        takes: [],
         project: {},
         book: {},
         chapter: {},
         language: {},
-        active: false
+        active: false,
+        selectedSourceProjectQuery: -1,
+        selectedSourceProject: {},
+        notifyFlag: false,
+        update: false,
+        chapterId:''
     };
 
     it('should have initial state', () => {
@@ -20,7 +27,7 @@ describe('ChunkContainerReducer', () => {
         expect(ChunkContainerReducer({}, { type: "FETCH_TAKES_SUCCESS" })).not.toEqual(INITIAL_STATE);
     });
     it('should change the state', () => {
-        expect(ChunkContainerReducer({}, { type: "FETCH_TAKES_FAILED",error:"Error Found." })).toEqual({"error":"Error Found."});
+        expect(ChunkContainerReducer({}, { type: "FETCH_TAKES_FAILED",error:"Error Found." })).toEqual({});
     });
 
 })

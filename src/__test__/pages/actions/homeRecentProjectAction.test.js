@@ -1,8 +1,8 @@
 // the returned function can be called with a dispatch (mock)
 
-import { fetchRecentProjects } from "../../js/actions";
+import { fetchRecentProjects } from "../../../js/actions";
 import axios from "axios";
-import config from "../../config/config";
+import config from "../../../config/config";
 
 const fakePost = jest.fn(() => {
 	return new Promise(() => {
