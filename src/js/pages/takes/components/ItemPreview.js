@@ -56,7 +56,7 @@ render(){
   let takeText = '';
   let date = '';
   if(take !== null){
-      takeText = `Take ${take.order}`;
+      takeText = `${this.props.displayText.take} ${take.order}`;
     date = this.parseDate(take.date_modified);
     active = this.props.active;
       }

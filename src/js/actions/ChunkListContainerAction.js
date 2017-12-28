@@ -340,8 +340,6 @@ export const markedAsPublished = (success, chapterId) => {
             .patch(config.apiUrl + "chapters/" + chapterId + "/",
             { published: true })
             .then((response) => {
-                const updatedChapter= response.data;
-                dispatch(markAsPublishedSuccess(updatedChapter));
                 if (success) {
                     success();
                 }
