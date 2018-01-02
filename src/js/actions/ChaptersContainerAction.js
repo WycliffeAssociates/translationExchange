@@ -27,7 +27,7 @@ export const fetchChaptersContainerData = (query) => {
                 dispatch(fetchChaptersContainerDataFailed(err));
             });
     };
-}
+};
 
 
 
@@ -72,6 +72,7 @@ export function dispatchSetCheckingLevelSuccess(response) {
         checked_level:response.checked_level
     }
 }
+
 export function dispatchSetCheckingLevelFailed(error) {
     return {
         type: 'SET_CHECKING_LEVEL_FAILED',

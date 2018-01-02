@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
 import Marker from "../js/pages/takes/components/audioplayer/Markers";
+import Adapter from 'enzyme-adapter-react-15';
 
 describe("Marker", () => {
 	it("postions the svg element correctly", () => {

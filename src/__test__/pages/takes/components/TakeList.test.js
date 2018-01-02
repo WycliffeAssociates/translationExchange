@@ -5,9 +5,9 @@ import TakeList from '../../../../js/pages/takes/TakeList';
 describes('Test set rating function', () => {
 
 
-    const wrapper = shallow(<TakeList />);
+    //const wrapper = shallow(<TakeList />);
 
-    const test = wrapper.instance().onDrop();
+   // const test = wrapper.instance().onDrop();
 
     ///console.log(test);
 

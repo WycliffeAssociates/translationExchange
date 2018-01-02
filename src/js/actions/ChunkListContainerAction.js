@@ -87,13 +87,13 @@ export const getSelectedProjectInfo = (query) => {
                 dispatch(dispatchChunksFailed(error)); //TODO change name to function
             });
     }
-}
+};
 
 export const resetInfo = () => {
     return {
         type: 'RESET_STATE'
     }
-}
+};
 
 export function dispatchProjectInfoSuccess(chunksResponse,
     chapterResponse,
@@ -141,7 +141,6 @@ export function dispatchChunksFailed(error) {
 
 //setSourceProject
 export const setSourceProject = (query, chapter) => {
-
     return function (dispatch) {
         return axios
             .post(config.apiUrl + "get_takes/", { ...query, chapter: chapter })
@@ -152,7 +151,7 @@ export const setSourceProject = (query, chapter) => {
                 dispatch(setSourceProjectFailed(error));
             });
     };
-}
+};
 
 export function setSourceProjectSuccess(response, query) {
     return {
@@ -175,7 +174,7 @@ export const patchTake = (takeId, patch, success, takes, updatingDeletedTake, ch
             .patch(config.apiUrl + "takes/" + takeId + "/", patch)
             .then(response => {
                 //find correct take to update
-                let listOfTakes = takes
+                let listOfTakes = takes;
                 let takeIdToUpdate;
                 takeIdToUpdate = listOfTakes.map(takes  => {
                   return takes.id
@@ -220,13 +219,7 @@ export const setActiveToFalse = () => {
         type: 'SET_ACTIVE_TO_FALSE'
     }
 };
-export const updateDeletedChunk = (updatedChunk) => {
-    console.log("updated chunk", updatedChunk);
-    return {
-        type: 'UPDATE_DELETED_CHUNK',
-        updatedChunk
-    }
-};
+
 
 //delete take
 export const deleteTake = (takeId, success, updatingDeletedTake) => {
@@ -253,7 +246,7 @@ export const deleteTake = (takeId, success, updatingDeletedTake) => {
                 dispatch(deleteTakeFailed(message));
             });
     };
-}
+};
 
 export function deleteTakeSuccess(takeId, takes){
 

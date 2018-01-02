@@ -8,26 +8,27 @@ const mockStore = configureMockStore(middlewares);
 
 describe('ChaptersContainerAction', () => {
     const store = mockStore();
-    it('has action type:FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS and response is not null', () => {
+    it('has action type:FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS and response is not undefined', () => {
         const expectedActions = [
             { type: 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS' }
-        ]
-        const store = mockStore({ chapters: [] })
-        let query = { project_id: 1, lang: 'yo', book: 'gen' }
+        ];
+        const store = mockStore({ chapters: [] });
+        let query = { project_id: 1, lang: 'yo', book: 'gen' };
         return store.dispatch(fetchChaptersContainerData(query)).then(() => {
             let action = store.getActions()[0];
-            expect(action.type).toEqual(expectedActions[0].type)
-            expect(action.response).not.toBeNull();
+            console.log(action);
+            expect(action.type).toEqual(expectedActions[0].type);
+            expect(action.project).not.toBeUndefined();
         })
-    })
-    it('has action type:FETCH_CHAPTERS_CONTAINER_DATA_FAILED and response is not null', () => {
+    });
+    it('has action type:FETCH_CHAPTERS_CONTAINER_DATA_FAILED and response is not undefined', () => {
         const expectedActions = [
             { type: 'FETCH_CHAPTERS_CONTAINER_DATA_FAILED' }
-        ]
-        const store = mockStore({ projects: [] })
+        ];
+        const store = mockStore({ projects: [] });
         return store.dispatch(fetchChaptersContainerData({})).then(() => {
             let action = store.getActions()[0];
-            expect(action.type).toEqual(expectedActions[0].type)
+            expect(action.type).toEqual(expectedActions[0].type);
             expect(action.response).toBeUndefined();
         })
     })
