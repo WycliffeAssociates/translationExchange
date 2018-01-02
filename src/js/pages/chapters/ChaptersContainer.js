@@ -131,13 +131,12 @@ class ChaptersContainer extends Component {
 
 
 const mapStateToProps = state => {
-	console.log("chapters container",state.chaptersContainer);
 	const { direction } = state.direction;
 	const { displayText } = state.geolocation;
 	const { chapters, book, project_id, published,
 		language, loaded, downloadLoading,
 		downloadError, downloadSuccess, downloadLoadingSourceAudio,
-		downloadErrorAudioSource,checked_level } = state.chaptersContainer;
+		downloadErrorAudioSource, checked_level } = state.chaptersContainer;
 	return {
 		displayText, chapters, book,
 		project_id, published, language,
@@ -145,7 +144,7 @@ const mapStateToProps = state => {
 		downloadError, downloadSuccess,
 		downloadLoadingSourceAudio,
 		downloadErrorAudioSource,
-		direction,checked_level
+		direction, checked_level
 	};
 
 };

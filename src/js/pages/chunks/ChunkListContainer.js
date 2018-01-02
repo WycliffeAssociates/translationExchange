@@ -148,7 +148,6 @@ class ChunkListContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
-
 			return (
 				<div>
 					<ChunkHeader
@@ -233,7 +232,6 @@ class ChunkListContainer extends Component {
 		if (!(hour % 12 === 0)) {
 			hour %= 12;
 		}
-
 		return (`${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`);
 	}
 
@@ -263,7 +261,6 @@ class ChunkListContainer extends Component {
 				/>
 			</div>
 		);
-		//	}
 	}
 }
 

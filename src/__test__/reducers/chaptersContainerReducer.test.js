@@ -8,13 +8,14 @@ describe('ChaptersContainerReducer', () => {
         language: {},
         version: {},
         project_id: -1,
-        is_published: false,
+        published: false,
         loaded: false,
         downloadError: "",
         downloadSuccess: "",
         downloadLoading: false,
         downloadLoadingSourceAudio: false,
-        downloadErrorAudioSource: ""
+        downloadErrorAudioSource: "",
+        checked_level: -1
     };
     it('should have initial state', () => {
         expect(ChaptersContainerReducer(undefined, {})).toEqual(INITIAL_STATE);
