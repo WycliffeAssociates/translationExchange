@@ -8,7 +8,7 @@
 //     apiUrl: "http://172.19.145.91/api/",
 //     streamingUrl: "http://172.19.145.91/"
 // };
-
+//
  var config = {
      apiUrl: "http://127.0.0.1:8000/api/",
      streamingUrl: "http://127.0.0.1/"
