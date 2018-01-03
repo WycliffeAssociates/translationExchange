@@ -65,7 +65,7 @@ class ChaptersContainer extends Component {
 						<h1>
 							{this.props.book.name} ({this.props.language.name})
 								<DownloadSourceAudio
-								published={this.props.published}
+								published={true}
 								downloadLoadingSourceAudio={this.props.downloadLoadingSourceAudio}
 								onDownloadSourceAudio={this.onDownloadSourceAudio.bind(this)}
 								displayText={this.props.displayText}
