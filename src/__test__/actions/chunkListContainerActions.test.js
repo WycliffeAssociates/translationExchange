@@ -63,7 +63,6 @@ describe('chunkListContainerActions', () => {
         const query = {book: "mat", chapterId: "3", chapter_num: "1", lang: "aaa", language: "ghotuo", project_id:"2",published:"false",version:"ulb" }
         return store.dispatch(getSelectedProjectInfo(query)).then(() => {
             let action = store.getActions()[0];
-
             expect(action.type).toEqual(expectedActions[0].type);
             expect(action.project).not.toBeUndefined();
             expect(action.chapter).not.toBeUndefined();

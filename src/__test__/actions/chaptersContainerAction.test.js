@@ -16,9 +16,8 @@ describe('ChaptersContainerAction', () => {
         let query = { project_id: 1, lang: 'yo', book: 'gen' };
         return store.dispatch(fetchChaptersContainerData(query)).then(() => {
             let action = store.getActions()[0];
-            console.log(action);
             expect(action.type).toEqual(expectedActions[0].type);
-            expect(action.project).not.toBeUndefined();
+            expect(action.chapters).not.toBeUndefined();
         })
     });
     it('has action type:FETCH_CHAPTERS_CONTAINER_DATA_FAILED and response is not undefined', () => {
