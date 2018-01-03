@@ -98,17 +98,18 @@ class AudioPlayer extends Component {
   callMarker() {
     const markerArray = [];
 
-    let receivedMarkerObject = this.props.playlist[0].markers;
+    let receivedMarkerString = this.props.playlist[0].markers;
 
+    let receivedMarkerObject = JSON.parse(receivedMarkerString);
 
 
     if (this.props.playlistMode) {
-      receivedMarkerObject = this.state.markers;
-
+      receivedMarkerObject = JSON.parse(this.state.markers);
     }
+
+
     for (const key in receivedMarkerObject) {
-
-
+      const test = receivedMarkerObject[key];
       const position = ((receivedMarkerObject[key] / 44100) / (this.state.durationTime)) * this.state.initialWidth;
       markerArray.push(<Marker
         style={{ overflow: 'visible' }}
