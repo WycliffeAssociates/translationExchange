@@ -28,17 +28,21 @@ class ExportTakesButton extends Component {
         let length = this.props.chunks.length;
         const takes = this.props.takes;
         let playlist = [];
+        let i=0;
         takes.map((take) => {
-                    playlist.push({
-                        "src": config.streamingUrl + take.location,
-                        "name": this.props.mode + ' ' + take.startv + ' (' + (playlist.length + 1) + '/' + length + ')'
-                         }
-                    );
+                    if(take.published) {
+
+                        playlist.push({
+                                "src": config.streamingUrl + take.location,
+                                "name": this.props.mode.name + ' ' + this.props.chunks[i].startv + ' (' + (playlist.length + 1) + '/' + length + ')'
+                            }
+                        );
+                        i++;
+                    }
                 return null; // added to satisfy warning of return expected on arrow function
                 }
 
         );
-
         return playlist
     }
 

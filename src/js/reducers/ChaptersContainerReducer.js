@@ -67,7 +67,7 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 downloadLoadingSourceAudio: false
             }
-        case 'DOWNLOAD_SOURCE_AUDIO_FAILED':
+        case 'DOWNLOAD_SOURCE_AUDIO_SUCCESS_FAILED':
             return {
                 ...state,
                 downloadLoadingSourceAudio: false,
