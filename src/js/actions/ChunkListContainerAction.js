@@ -4,7 +4,6 @@ import { notify } from 'react-notify-toast';
 
 
 export const getAudioTakes = (chunkId, counter) => {
-    debugger;
     return function (dispatch) {
         return axios
             .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`)
