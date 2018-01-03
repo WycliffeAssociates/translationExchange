@@ -27,7 +27,6 @@ class ExportTakesButton extends Component {
 
         let length = this.props.chunks.length;
         const takes = this.props.takes;
-
         let playlist = [];
         let i=0;
         takes.map((take) => {
