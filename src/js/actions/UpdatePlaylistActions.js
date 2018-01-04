@@ -1,4 +1,4 @@
-import { UPDATE_PLAYLIST, MULTIPLE_TAKES, UPDATE_MODE, PLAY_TAKE, CLEAR_PLAYLIST, REMOVE_TAKE_FROM_PLAYLIST, TAKE_ID} from './types';
+import { UPDATE_PLAYLIST, MULTIPLE_TAKES, UPDATE_MODE, PLAY_TAKE, CLEAR_PLAYLIST, REMOVE_TAKE_FROM_PLAYLIST, TAKE_ID, SHOW_PLAYER} from './types';
 
 
 export const playTake = (take) => {
@@ -53,4 +53,12 @@ export const takeId = (id) => {
     type: TAKE_ID,
     id
   }
+};
+
+export const showPlayer = (status) => {
+
+    return {
+        type: SHOW_PLAYER,
+        status
+    }
 };

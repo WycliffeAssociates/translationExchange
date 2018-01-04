@@ -13,3 +13,4 @@ export const RESET_AUDIOPLAYER = 'remove_audioplayer';
 export const TAKE_ID = 'take_id';
 export const UPDATE_LANGUAGE = 'update_language';
 export const UPDATE_DIRECTION = 'update_direction';
+export const SHOW_PLAYER = 'hide_player';

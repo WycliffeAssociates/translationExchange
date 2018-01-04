@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Menu, Button } from 'semantic-ui-react';
 import AudioPlayer from './audioplayer/AudioPlayer';
 import 'css/takes.css'
-import { resetAudioPlayer } from './../../../actions';
+import { resetAudioPlayer, showPlayer } from './../../../actions';
 
 
 class Footer extends Component {
@@ -29,10 +29,13 @@ class Footer extends Component {
                     : ""
                 }
                 <Menu inverted secondary>
-                    {this.props.playlist.length > 0
+                    {this.props.playlist.length > 0 && this.props.displayPlayer
                         ? <Menu.Item style={{ width: '100%' }}>
 
                             <div style={{ width: '100%' }}>
+                                <div style={{display: 'flex', justifyContent: 'flex-end', marginRight:'2.6%'}}>
+                                    <Button color='red' icon='close' onClick={()=>this.props.showPlayer(false)}/>
+                                </div>
                                 <AudioPlayer
                                 />
                             </div>
@@ -51,14 +54,14 @@ class Footer extends Component {
 
 
 const mapStateToProps = state => {
-    const { playlist, playlistMode } = state.updatePlaylist;
+    const { playlist, playlistMode, displayPlayer } = state.updatePlaylist;
 
-    return { playlist, playlistMode };
+    return { playlist, playlistMode, displayPlayer };
 };
 
 const mapDispatchToProps = dispatch => {
 
-    return bindActionCreators({ resetAudioPlayer }, dispatch);
+    return bindActionCreators({ resetAudioPlayer, showPlayer }, dispatch);
 
 };
 

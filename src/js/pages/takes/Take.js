@@ -8,7 +8,7 @@ import TakeListenButton from "./AddTake";
 import "css/takes.css";
 import StitchTakesButton from "./StitchTakesButton";
 import TakeCommentsButton from "./components/comments/TakeCommentsButton";
-import { addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio } from './../../actions';
+import { addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio, showPlayer } from './../../actions';
 
 
 class Take extends Component {
@@ -73,6 +73,7 @@ class Take extends Component {
 		if (!this.props.playlistMode) {                           // checks if it is on playlist mode, so when is true it does not play audio from the card
 			this.props.stopAudio();
 			const take = this.getTakeInfo();
+			this.props.showPlayer(true);
 			this.props.playTake(take);
 		}
 
@@ -280,7 +281,8 @@ const mapDispatchToProps = dispatch => {
 		removeTakeFromPlaylist,
 		stopAudio,
 		updateTime,
-		playAudio
+		playAudio,
+        showPlayer
 	}, dispatch);
 
 };
