@@ -37,7 +37,6 @@ class Chunk extends Component {
 		let orderNumber;
 		let orderedTakes = this.props.takes;
 
-
 		orderedTakes.map(tk => {
 			if (this.props.id === tk.chunkId) {   // get takes corresponding just to the selected chunk
                 const lastChars = tk.location.slice(-6);
