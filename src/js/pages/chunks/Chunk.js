@@ -204,7 +204,7 @@ Chunk.propTypes = {
 const mapStateToProps = state => {
 	const { takes, update, chunkIdClicked, calledChunks } = state.chunkListContainer;
 	return { takes, update, chunkIdClicked, calledChunks };
-}
+};
 
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
