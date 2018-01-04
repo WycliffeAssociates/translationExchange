@@ -4,13 +4,19 @@ import { bindActionCreators } from 'redux';
 import { Menu, Button } from 'semantic-ui-react';
 import AudioPlayer from './audioplayer/AudioPlayer';
 import 'css/takes.css'
-import { resetAudioPlayer, showPlayer } from './../../../actions';
+import { resetAudioPlayer, showPlayer, stopAudio } from './../../../actions';
 
 
 class Footer extends Component {
 
     componentWillUnmount() {
         this.props.resetAudioPlayer();
+    }
+
+    hidePlayer(){
+        this.props.showPlayer(false);
+        this.props.stopAudio();
+
     }
 
     render() {
@@ -34,7 +40,7 @@ class Footer extends Component {
 
                             <div style={{ width: '100%' }}>
                                 <div style={{display: 'flex', justifyContent: 'flex-end', marginRight:'2.6%'}}>
-                                    <Button color='red' icon='close' onClick={()=>this.props.showPlayer(false)}/>
+                                    <Button color='red' icon='close' onClick={()=>this.hidePlayer()}/>
                                 </div>
                                 <AudioPlayer
                                 />
@@ -61,7 +67,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 
-    return bindActionCreators({ resetAudioPlayer, showPlayer }, dispatch);
+    return bindActionCreators({ resetAudioPlayer, showPlayer, stopAudio }, dispatch);
 
 };
 
