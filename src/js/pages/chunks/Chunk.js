@@ -21,7 +21,7 @@ class Chunk extends Component {
 
 	getTakes(chunkId) {
 		let counter = this.props.takes.length;
-		let { calledChunks } = this.props
+		let { calledChunks } = this.props;
 		if (!calledChunks.includes(chunkId)) {                 // once you click a chunk, checks if the chunk has not been clicked before
 			this.props.getChunkIdClicked(chunkId);
 			this.props.getAudioTakes(chunkId, counter);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
@@ -34,14 +34,16 @@ class Chunk extends Component {
 		let onestar = [];
 		let twostar = [];
 		let threestar = [];
-		var counter = 0;
+		let orderNumber;
 		let orderedTakes = this.props.takes;
 
 
 		orderedTakes.map(tk => {
 			if (this.props.id === tk.chunkId) {   // get takes corresponding just to the selected chunk
-				counter += 1;
-				tk.order = counter;
+                const lastChars = tk.location.slice(-6);
+                const takeNum = lastChars.slice(0,2);    // meantime solution for the take number, got it from
+														//take file name
+                tk.order = takeNum;
 				if (tk.published) {
 					publish[publish.length] = tk;
 

@@ -179,7 +179,7 @@ render(){
       hour %= 12;
     }
 
-    return (`${date[1]} ${date[2]}, ${date[0]} at ${hour}:${time[1]}${noon}`);
+    return (`${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`);
   }
 
 
