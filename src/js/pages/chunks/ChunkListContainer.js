@@ -37,13 +37,14 @@ class ChunkListContainer extends Component {
 	}
 
 	componentWillMount() {
-		var query = QueryString.parse(this.props.location.search);
+		const query = QueryString.parse(this.props.location.search);
 		this.props.getSelectedProjectInfo(query);
 	}
 
 	updatingDeletedTake(takeId) {
     const tks = this.props.takes;
 	  this.props.deleteTakeSuccess(takeId, tks);
+	  debugger;
         this.forceUpdate();        // used to rerender when a take is delete it
     }
 
