@@ -48,6 +48,7 @@ describe('chunkListContainerActions', () => {
         return store.dispatch(getAudioComments(chapterId, type)).then(() => {
             let action = store.getActions()[0];
 
+
             expect(action.type).toEqual(expectedActions[0].type);
             expect(action.comments).not.toBeUndefined();
 
@@ -69,6 +70,31 @@ describe('chunkListContainerActions', () => {
             expect(action.chunks).not.toBeUndefined();
 
 
+        })
+    });
+
+
+    it('Checks the content received for takes is the expected ', () => {
+        const expectedActions = [
+            { type: 'FETCH_TAKE_SUCCESS_FIRST_TIME' }
+        ];
+        const store = mockStore({ takes: [] });
+        const chunkId = 1;
+        const counter =0;
+        return store.dispatch(getAudioTakes(chunkId, counter)).then(() => {
+            let action = store.getActions()[0];
+            const{id, location, duration, rating, published,
+                  markers, date_modified, chunk, chunk_modified} = action.takes[0];
+
+            expect(typeof(id)).toEqual('number');
+            expect(typeof(location)).toEqual('string');
+            expect(typeof(duration)).toEqual('number');
+            expect(typeof(rating)).toEqual('number');
+            expect(typeof(published)).toEqual('boolean');
+            expect(typeof(markers)).toEqual('string');
+            expect(typeof(date_modified)).toEqual('string');
+            expect(typeof(chunk)).toEqual('number');
+            expect(typeof(chunkId)).toEqual('number');
         })
     });
 
