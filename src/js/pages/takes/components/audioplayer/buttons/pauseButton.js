@@ -29,7 +29,7 @@ const styles = {
     height: 70,
     backgroundColor: "#000",
     cursor: 'pointer',
-    // border:'none'
+    borderRadius:'10px'
 
   },
   buttonContainer: {

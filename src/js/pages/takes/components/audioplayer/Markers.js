@@ -25,7 +25,7 @@ class Markers extends React.Component {
 
       <svg
         onClick={()=> this.props.dragPosition(position)}
-        style={{position: 'absolute', left: position, bottom: 65, cursor: 'pointer' }}
+        style={{position: 'absolute', left: position, bottom: 55, cursor: 'pointer' }}
         width="29px"
         height="63px"
         viewBox="0 0 29 63"

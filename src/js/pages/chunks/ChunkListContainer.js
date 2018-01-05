@@ -166,9 +166,9 @@ class ChunkListContainer extends Component {
 						displayText={this.props.displayText}
 					/>
 					{this.props.chunks.map(this.createChunkList.bind(this))}
-					<div fluid className="StickyFooter">
+
 						<Footer />
-					</div>
+
 				</div>
 			);
 		}

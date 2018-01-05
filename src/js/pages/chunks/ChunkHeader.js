@@ -9,7 +9,7 @@ class ChunkHeader extends Component {
 	render() {
 		return (
 			<div style = {{display:'flex', justifyContent: 'space-between'}}>
-				<div className="headerStyle">
+				<div className="headerStyle" style={{borderRadius:'7px'}}>
 					<Grid padded columns={2}>
 						<Grid.Column width={11} style={{ paddingTop: 23 }}>
 							{this.props.book.name} {this.props.displayText.chapter} {this.props.chapterNum} ({this.props.language.name})

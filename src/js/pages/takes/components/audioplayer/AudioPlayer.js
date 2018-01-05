@@ -222,7 +222,8 @@ const styles = {
     backgroundColor: "#000",
     height: 125,
     flexDirection: "row",
-    flex: "1 1 0"
+    flex: "1 1 0",
+    borderRadius: '10px'
   },
   waveformContainer: {
     position: "relative",
