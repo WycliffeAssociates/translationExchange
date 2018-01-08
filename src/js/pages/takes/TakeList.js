@@ -4,6 +4,7 @@ import TakeContainer from "./TakeContainer";
 import TakePropTypes from "./TakePropTypes";
 import update from "react/lib/update";
 import { DropTarget } from "react-dnd";
+import 'css/takelist.css';
 
 class TakeList extends Component {
 	constructor(props) {
@@ -79,17 +80,13 @@ class TakeList extends Component {
 	}
 
 	render() {
-		const style = {
-			maxHeight: "20em",
-			minHeight: "20em",
-			overflowY: "scroll"
-		};
+
 		const { takes } = this.props;
 
 		const { connectDropTarget } = this.props;
 
 		return connectDropTarget(
-			<div style={{ ...style }}>
+			<div className="TakeList">
 				{takes.map((take, i) => {
 					return (
 						<div>
