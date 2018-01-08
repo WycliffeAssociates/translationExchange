@@ -80,10 +80,11 @@ class TakeList extends Component {
 
 	render() {
 		const style = {
-			minHeight: "231px"
+			maxHeight: "20em",
+			overflowY: "scroll"
 		};
 		const { takes } = this.props;
-	
+
 		const { connectDropTarget } = this.props;
 
 		return connectDropTarget(
