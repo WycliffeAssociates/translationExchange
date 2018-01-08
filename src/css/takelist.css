@@ -2,7 +2,7 @@
     max-height: 20em;
     min-height: 20em;
     overflow-y: scroll;
-   padding-right: 10px;
+    padding-right: 10px;
 }
 ::-webkit-scrollbar {
     width: 2em;
