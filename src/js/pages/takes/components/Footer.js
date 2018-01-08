@@ -33,7 +33,7 @@ class Footer extends Component {
         const maxMovement = this.state.initialWidth * .94 ;
         return (
 
-            <Draggable axis="x" bounds={{left :0, right: maxMovement}}>
+            <Draggable axis="x" bounds={{left :0, right: maxMovement, top:0, bottom: 0 }}>
                 <div className="footerStyle" ref={input => this.rangeInput = input} style={styles.stickyFooter}>
                     {this.props.playlist.length > 0 && this.props.playlistMode
                         ? <div style={{ width: '100%', backgroundColor: 'transparent', height: 20 }}>
