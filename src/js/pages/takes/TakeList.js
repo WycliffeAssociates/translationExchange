@@ -81,6 +81,7 @@ class TakeList extends Component {
 	render() {
 		const style = {
 			maxHeight: "20em",
+			minHeight: "20em",
 			overflowY: "scroll"
 		};
 		const { takes } = this.props;
