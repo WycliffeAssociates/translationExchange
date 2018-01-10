@@ -236,10 +236,10 @@ class ChunkListContainer extends Component {
 	}
 
 	createChunkList(chunk) {
-
 		return (
 			<div>
 				<Chunk
+					has_comments={chunk.has_comment}
 					comments={this.props.comments}
 					takesForChunk={chunk} // array of takes
 					mode={"chunk"}        //TODO get mode from backend
@@ -255,7 +255,7 @@ class ChunkListContainer extends Component {
 					book={this.props.book.name}
 					language={this.props.language.name}
 					onSourceClicked={this.onSourceClicked.bind(this)}
-					active={this.props.active}
+					active={this.props.activ}
 					published={this.props.project.published}
 					displayText={this.props.displayText}
 				/>

@@ -109,7 +109,7 @@ class TakeCommentsButton extends Component {
 						}}
 						onClick={this.getComments.bind(this)}
 						active={this.state.active}
-						color={this.state.active ? "yellow" : null}
+						color={this.props.has_comments ? "yellow" : null}
 					>
 						<Icon name="comment outline" />
 					</Button>

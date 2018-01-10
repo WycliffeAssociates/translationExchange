@@ -131,6 +131,8 @@ class Take extends Component {
 		file[0] = {
 			src: config.streamingUrl + this.props.take.location
 		};
+		const has_comments = this.props.take.has_comment;
+
 
 		return (
     <div >
@@ -181,6 +183,7 @@ class Take extends Component {
 									loadingActive={this.props.active}
 									count={this.props.count}
 									chunkNumber={this.props.chunkNumber}
+									has_comments={has_comments}
 								/>
 							</Grid.Row>
 						</Grid.Column>

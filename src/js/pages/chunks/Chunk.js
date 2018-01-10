@@ -36,6 +36,7 @@ class Chunk extends Component {
 		let threestar = [];
 		let orderNumber;
 		let orderedTakes = this.props.takes;
+		const has_comments = this.props.has_comments;
 
 		orderedTakes.map(tk => {
 			if (this.props.id === tk.chunkId) {   // get takes corresponding just to the selected chunk
@@ -93,9 +94,9 @@ class Chunk extends Component {
 							<Icon name="dropdown" />
 							<font color="black">
 								{modeLabel} {this.props.number}
-								{/* {this.props.comments.length > 0
+								{this.props.has_comments
 									? <Icon name="circle" color="yellow" />
-									: ""} */}
+									: ""}
 							</font>
 						</center>
 					</Accordion.Title>
@@ -187,6 +188,7 @@ class Chunk extends Component {
 									deleteComment={this.props.deleteComment}
 									active={this.props.active}
 									onSourceClicked={this.props.onSourceClicked}
+									has_comments={has_comments}
 								/>
 							</Grid.Column>
 						</Grid>

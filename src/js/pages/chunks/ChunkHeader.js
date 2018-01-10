@@ -7,6 +7,7 @@ import "css/takes.css";
 
 class ChunkHeader extends Component {
 	render() {
+		const has_comments = this.props.chapter.data[0].has_comment;
 		return (
 			<div style = {{display:'flex', justifyContent: 'space-between'}}>
 				<div className="headerStyle">
@@ -30,6 +31,7 @@ class ChunkHeader extends Component {
 								type={"chapter"}
 								deleteComment={this.props.deleteComment}
 								loadingActive={this.props.active}
+								has_comments ={has_comments}
 								number={this.props.chapterNum}
 							/>
 							</div>

@@ -101,7 +101,7 @@ class RecordButton extends Component {
 				trigger={
 					<Button
 						active={this.state.active}
-						color={this.state.active ? "yellow" : null}
+						color={this.props.has_comments ? "yellow" : null}
 						ref={audioComponent => {
                             this.audioComponent = audioComponent;
                         }}

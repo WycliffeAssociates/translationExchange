@@ -19,6 +19,7 @@ class ChunkSidebar extends Component {
                         deleteComment={this.props.deleteComment}
                         loadingActive={this.props.active}
                         number={this.props.chunkNumber}
+                        has_comments={this.props.has_comments}
                     />
                 </Menu.Item>
                 {this.props.published ?
