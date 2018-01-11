@@ -16,7 +16,6 @@ import {getAudioComments, resetComments} from '../../../../actions/index';
 class RecordButton extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             title: "Record Comment",
             show: this.props.open,
@@ -24,34 +23,28 @@ class RecordButton extends Component {
             blob: null,
             //active: this.props.comments.length > 0,
             loadingActive: this.props.active,
-            comments: ''
+            commentIndicator: false
         };
-
          this.changeSaveButtonState = this.changeSaveButtonState.bind(this);
     }
 
     resetComments(){
-        this.props.resetComments();
+       this.props.resetComments();
     }
 
-
-    changeSaveButtonState(newState) {
-        this.setState({ SaveButtonState: newState });
+    changeSaveButtonState() {
+        this.setState({ commentIndicator: true });
     }
-
 
     getComments(){
         const type = this.props.type;
         const id = this.props.id;
         this.props.getAudioComments(id, `${type}_id`);
-
     }
 
 
     createPlaylist(comment) {
-
         const src = config.streamingUrl + comment.location;
-
         return (
 			<div key={comment.id} style={styles.container}>
 
@@ -91,8 +84,7 @@ class RecordButton extends Component {
 
     render() {
 
-
-        return (
+      return (
 			<Modal
 				size="small"
 				style={this.Style}
@@ -101,13 +93,12 @@ class RecordButton extends Component {
 				trigger={
 					<Button
 						active={this.state.active}
-						color={this.props.has_comments ? "yellow" : null}
+						color={ this.props.has_comments  ? "yellow" : null}
 						ref={audioComponent => {
                             this.audioComponent = audioComponent;
                         }}
 						icon="comment outline"
 						onClick={this.getComments.bind(this)}
-
 					/>
                 }
 			>
@@ -161,9 +152,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     const {comments} = state.chunkListContainer;
     const { displayText } = state.geolocation;
-
     return { displayText, comments };
-
 };
 
 

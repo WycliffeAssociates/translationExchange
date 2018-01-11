@@ -92,7 +92,9 @@ class ChunkListContainer extends Component {
 	}
 
 	onClickSave(blobx, type, id, success) {
-		this.props.saveComment(blobx, type, id, success, this.props.chunks, this.props.chapter);
+		const {chunks, chapter, takes} = this.props;
+
+		this.props.saveComment(blobx, type, id, success, chunks, chapter, takes);
 	}
 
 	updateChosenTakeForChunk(takeId) {

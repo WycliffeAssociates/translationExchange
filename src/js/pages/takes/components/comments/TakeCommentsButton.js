@@ -33,7 +33,7 @@ class TakeCommentsButton extends Component {
 	}
 
 	resetComments(){
-			this.props.resetComments();
+		  this.props.resetComments();
 		}
 
 	getComments(){
@@ -94,7 +94,6 @@ class TakeCommentsButton extends Component {
 	};
 
 	render() {
-
 		return (
 			<Modal
 				size="small"

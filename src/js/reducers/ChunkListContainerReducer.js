@@ -35,12 +35,28 @@ export default (state = INITIAL_STATE, action) => {
                  ...state,
                 takes: state.takes.concat(action.takes)
             };
+        case "UPDATE_CHUNK_HAS_COMMENTS":
+            return{
+              ...state,
+              chunks: action.updatedChunks
+            }
+        case "UPDATE_TAKE_HAS_COMMENTS":
+            return{
+              ...state,
+              takes: action.updatedTakes
+            }
 
-            case "DELETE_TAKE_SUCCESS":
-                return {
-                     ...state,
-                     takes: action.takes
-                };
+            case "UPDATE_CHAPTER_HAS_COMMENTS":
+                return{
+                  ...state,
+                  chapter: action.updatedChapter
+                }
+
+        case "DELETE_TAKE_SUCCESS":
+            return {
+                 ...state,
+                 takes: action.takes
+            };
 
         case 'DELETE_COMMENT_SUCCESS':
             return{

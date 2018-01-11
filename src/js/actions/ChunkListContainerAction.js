@@ -356,8 +356,7 @@ export function markAsPublishedFailed(error) {
 
 //saveComment
 
-export const saveComment = (blobx, type, id, success, chunks, chapter) => {
-
+export const saveComment = (blobx, type, id, success, chunks, chapter, takes) => {
     return function (dispatch) {
         dispatch(saveCommentLoading());
         return axios
@@ -370,20 +369,57 @@ export const saveComment = (blobx, type, id, success, chunks, chapter) => {
             .then(results => {
                    if (type === "take") {
                        dispatch(saveCommentSuccess(results.data));
+                       let takeIdToUpdate;
+                       takeIdToUpdate = takes.map(tk  => {
+                         return tk.id
+                       } ).indexOf(id);
+                       takes[takeIdToUpdate].has_comment = true;
+                       dispatch(updateTakesSuccess(takes));
                    } else if (type === "chunk") {
                        dispatch(saveCommentSuccess(results.data));
+                       let chunkIdToUpdate;
+                       chunkIdToUpdate = chunks.map(chunk  => {
+                         return chunk.id
+                       } ).indexOf(id);
+                       chunks[chunkIdToUpdate].has_comment = true;
+                       dispatch(updateChunksSuccess(chunks));
                    } else {
                        dispatch(saveCommentSuccess(results.data));
+                       chapter.data[0].has_comment= true;
+                       dispatch(updateChapterSuccess(chapter));
+
                    }
                    success();
                    let myColor = { background: '#50f442 ', text: "#FFFFFF " };
                    notify.show("Saved", "custom", 1500, myColor);
+                   //find correct take to update
+
                })
             .catch(exception => {
-
                 dispatch(saveCommentFailed(exception));
                 success();
             });
+    }
+}
+
+export function updateTakesSuccess(updatedTakes) {
+    return {
+        type: 'UPDATE_TAKE_HAS_COMMENTS',
+        updatedTakes
+    }
+}
+
+export function updateChapterSuccess(updatedChapter) {
+    return {
+        type: 'UPDATE_CHAPTER_HAS_COMMENTS',
+        updatedChapter
+    }
+}
+
+export function updateChunksSuccess(updatedChunks) {
+    return {
+        type: 'UPDATE_CHUNK_HAS_COMMENTS',
+        updatedChunks
     }
 }
 
@@ -399,6 +435,7 @@ export function saveCommentSuccess(comments) {
         comments
     }
 };
+
 export function saveCommentFailed(error) {
     return {
         type: 'SAVE_COMMENT_FAILED',
