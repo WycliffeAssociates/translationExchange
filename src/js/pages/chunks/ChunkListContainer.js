@@ -257,7 +257,7 @@ class ChunkListContainer extends Component {
 					book={this.props.book.name}
 					language={this.props.language.name}
 					onSourceClicked={this.onSourceClicked.bind(this)}
-					active={this.props.activ}
+					active={this.props.active}
 					published={this.props.project.published}
 					displayText={this.props.displayText}
 				/>

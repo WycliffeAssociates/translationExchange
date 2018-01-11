@@ -15,9 +15,14 @@
 // };
 
 
+// const config = {                                                        //remote api
+//     apiUrl: "https://localhost/api/",
+//     streamingUrl: "https://localhost/"
+// };
+
 const config = {                                                        //remote api
-    apiUrl: "https://localhost/api/",
-    streamingUrl: "https://localhost/"
+    apiUrl: "https://te.loc/api/",
+    streamingUrl: "https://te.loc/"
 };
 
 export default config;
