@@ -282,17 +282,38 @@ export const chapterUpdate = (chapter) => {
 };
 
 //delete comment
-export const deleteComment = (type, commentId, takeId, updatingDeletedComment) => {
+export const deleteComment = (type, commentId, id, updatingDeletedComment, chunks, chapter, takes, comments) => {
     return function (dispatch) {
         return axios
             .delete(config.apiUrl + "comments/" + commentId + "/")
-            .then((response) => {
+            .then(() => {
                 updatingDeletedComment(type, commentId);
+                if(comments.length === 0){
+                  if (type === "take") {
+                      let takeIdToUpdate;
+                      takeIdToUpdate = takes.map(tk  => {
+                        return tk.id
+                      } ).indexOf(id);
+                      takes[takeIdToUpdate].has_comment = false;
+                      dispatch(updateTakesSuccess(takes));
+                  } else if (type === "chunk") {
+                      let chunkIdToUpdate;
+                      chunkIdToUpdate = chunks.map(chunk  => {
+                        return chunk.id
+                      } ).indexOf(id);
+                      chunks[chunkIdToUpdate].has_comment = false;
+                      dispatch(updateChunksSuccess(chunks));
+                  } else {
+                      chapter.data[0].has_comment= false;
+                      dispatch(updateChapterSuccess(chapter));
+                  }
+
+                }
             }).catch(exception => {
                 let message;
                 if (exception.response) {
                     if (exception.response.status === 404) {
-                        updatingDeletedComment(type, commentId, takeId);
+                        updatingDeletedComment(type, commentId, id);
                     } else {
                         message = "Something went wrong. Please check your connection and try again. ";
                     }
@@ -305,12 +326,14 @@ export const deleteComment = (type, commentId, takeId, updatingDeletedComment) =
 };
 
 export function deleteCommentSuccess(commentId, comments){
+
     const commentIndex = comments.map(comment  => {
         return comment.id
-
     } ).indexOf(commentId);
 
     comments.splice(commentIndex, 1);
+
+
 
     return {
         type: 'DELETE_COMMENT_SUCCESS',

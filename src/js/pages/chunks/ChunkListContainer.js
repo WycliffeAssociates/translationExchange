@@ -44,12 +44,11 @@ class ChunkListContainer extends Component {
 	updatingDeletedTake(takeId) {
     const tks = this.props.takes;
 	  this.props.deleteTakeSuccess(takeId, tks);
-	  debugger;
         this.forceUpdate();        // used to rerender when a take is delete it
     }
 
-	updatingDeletedComment(type, commentId) {
-		const comments = this.props.comments;
+	updatingDeletedComment(commentId) {
+		const {comments} = this.props;
         this.props.deleteCommentSuccess(commentId, comments);
         this.forceUpdate();        // used to rerender when a comment is delete it
 	}
@@ -88,7 +87,8 @@ class ChunkListContainer extends Component {
 	}
 
 	deleteComment(type, commentId, takeId) {
-		this.props.deleteComment(type, commentId, takeId, this.updatingDeletedComment.bind(this));
+		const {chunks, chapter, takes, comments} = this.props;
+		this.props.deleteComment(type, commentId, takeId, this.updatingDeletedComment.bind(this), chunks, chapter, takes, comments);
 	}
 
 	onClickSave(blobx, type, id, success) {
