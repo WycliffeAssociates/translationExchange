@@ -7,6 +7,7 @@ import CheckingLevel from "./CheckingLevel";
 
 class ChapterList extends Component {
 	render() {
+	
 		return (
 			<Table.Body>
 				{this.props.chapters.map(this.createListItem.bind(this))}

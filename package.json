@@ -12,10 +12,12 @@
     "js-base64": "^2.1.9",
     "json-schema-traverse": "^0.3.1",
     "lodash": "latest",
+    "logrocket": "^0.6.2",
     "nearest-neighbor": "^0.0.3",
     "nock": "^9.0.14",
     "prop-types": "^15.6.0",
     "query-string": "^4.3.4",
+    "raven-js": "^3.22.1",
     "react": "^15.6.1",
     "react-addons": "^0.9.1-deprecated",
     "react-addons-create-fragment": "^15.6.0",
@@ -48,6 +50,7 @@
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.11",
     "semantic-ui-react": "^0.71.0",
+    "slack-notify": "^0.1.6",
     "translation-audio-player": "^1.4.0",
     "wavesurfer.js": "^1.4.0",
     "webpack": "^3.6.0"
@@ -74,7 +77,6 @@
     "web-audio-mock": "^0.1.9",
     "webpack": "^3.6.0"
   },
-
   "scripts": {
     "start": "cross-env NODE_PATH=src react-scripts start",
     "build": "cross-env NODE_PATH=src react-scripts build",

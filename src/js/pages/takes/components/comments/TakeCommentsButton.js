@@ -39,7 +39,6 @@ class TakeCommentsButton extends Component {
 	getComments(){
 	  const takeId = this.props.take.id
 		this.props.getAudioComments(takeId, 'take_id');
-
 	}
 
 	onClickSave = () => {
@@ -148,8 +147,6 @@ const styles = {
 		border: '1px solid white',
 		borderRadius: 5,
 		marginBottom: 4
-
-
 	}
 };
 

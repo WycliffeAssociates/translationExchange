@@ -34,11 +34,11 @@ class Chunk extends Component {
 		let onestar = [];
 		let twostar = [];
 		let threestar = [];
-		let orderNumber;
 		let orderedTakes = this.props.takes;
 		const has_comments = this.props.has_comments;
 		orderedTakes.map(tk => {
 			if (this.props.id === tk.chunkId) {   // get takes corresponding just to the selected chunk
+
                 const lastChars = tk.location.slice(-6);
                 const takeNum = lastChars.slice(0,2);    // meantime solution for the take number, got it from
 														//take file name
@@ -204,7 +204,7 @@ Chunk.propTypes = {
 
 const mapStateToProps = state => {
 	const { takes, update, chunkIdClicked, calledChunks } = state.chunkListContainer;
-	return { takes, update, chunkIdClicked, calledChunks };
+	return {takes,  update, chunkIdClicked, calledChunks };
 };
 
 const mapDispatchToProps = dispatch => {
