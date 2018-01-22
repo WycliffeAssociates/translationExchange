@@ -9,7 +9,6 @@ export const fetchAllSourceAudio = (setInitialSourceAudio) => {
             .then(response => {
                 let projects = [];
                 response.data.map(project => {
-                  debugger;
                     let projectQuery = {
                         language: project.language.slug,
                         book: project.book.slug,

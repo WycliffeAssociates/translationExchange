@@ -140,12 +140,10 @@ export function dispatchChunksFailed(error) {
 
 //setSourceProject
 export const setSourceProject = (query, chapter) => {
-  debugger;
   return function(dispatch) {
     return axios
       .post(config.apiUrl + "takes/", { ...query, chapter: chapter })
       .then(response => {
-        debugger;
         dispatch(setSourceProjectSuccess(response.data, query));
       })
       .catch(error => {

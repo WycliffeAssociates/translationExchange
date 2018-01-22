@@ -16,14 +16,11 @@ class SetSourceAudio extends Component {
     }
     setSource(project) {
       this.setState({menu: project})
-
-      debugger;
         //this.props.setSourceProject(project);
 
     }
 
     render() {
-      this.pro
         return (
             this.props.projects.length > 0 ?
                 <Dropdown

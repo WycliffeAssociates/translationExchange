@@ -114,7 +114,6 @@ class ChunkListContainer extends Component {
 	}
 
 	setSourceProject(projectQuery) {
-		debugger;
 		this.props.setSourceProject(projectQuery, this.props.chapter.data[0].number);
 	}
 
