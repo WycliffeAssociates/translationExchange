@@ -114,37 +114,17 @@ class ChunkListContainer extends Component {
 	}
 
 	setSourceProject(projectQuery) {
-		this.props.setSourceProject(projectQuery, this.props.chapter.data[0].number);
-	}
-
-	getSourceAudioLocationForChunk(chunkId) {              //----------------------------------------------------------------------------------
-
-		this.props.getSourceTakes(chunkId);
-
-		const tst = this.props;
 		debugger;
-		let chunk = this.props.selectedSourceProject.find(
-			chunk => chunk.id === chunkId
-		);
-		return chunk.location;
+		this.props.setSourceProject(projectQuery, this.props.chapter.data[0].number);
 	}
 
 	onSourceClicked(chunkId, chunkNumber) {
 
 		if (!this.props.playlistMode) {
 			this.props.stopAudio();
-			//let sourceLoc = this.getSourceAudioLocationForChunk(chunkId, this.playSource());
 			this.props.getSourceTakes(chunkId,  this.playSource.bind(this), chunkNumber);
-
-			// let sourceAudio =
-			// 	{
-			// 		src: config.streamingUrl + sourceLoc,
-			// 		name: `${this.props.displayText.chunk} ${chunkNumber},(${"author"} ${this.props.displayText.on}${date})`
-			// 	};
-			// this.props.playTake(sourceAudio);
 		}
 	}
-
 
 	playSource(sourceLoc, chunkId, chunkNumber){
     const date = this.parseDate(this.props.project.date_modified);
@@ -156,7 +136,6 @@ class ChunkListContainer extends Component {
 		this.props.playTake(sourceAudio);
 
 	}
-
 
 	render() {
 		if (this.props.loaded && this.props.chunks.length === 0) {

@@ -1,15 +1,15 @@
 import axios from "axios";
 import config from "../../config/config";
 
-export const fetchAllSourceAudio = (projectId, language, setInitialSourceAudio) => {
+export const fetchAllSourceAudio = (setInitialSourceAudio) => {
     return function (dispatch) {
         dispatch(dispatchSourceAudioLoading());
         return axios
-            .get(config.apiUrl + `projects/?id=${projectId}&lang=${language}&published=true`)
+            .get(config.apiUrl + `projects/?published=true`)
             .then(response => {
                 let projects = [];
-
                 response.data.map(project => {
+                  debugger;
                     let projectQuery = {
                         language: project.language.slug,
                         book: project.book.slug,

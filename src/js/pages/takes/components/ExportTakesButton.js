@@ -51,9 +51,6 @@ class ExportTakesButton extends Component {
         this.props.markedAsPublished(() => {
             this.handleClose();
         }, chapterId);
-
-
-
     }
 
     handleOpen = (e) => {
@@ -106,7 +103,7 @@ class ExportTakesButton extends Component {
 
 
     exportButton() {
-      let enableBtn = false;
+      let enableBtn = this.props.chapter.data[0].published;
        const {takes, chunks} = this.props;
 
        if(takes.length >= chunks.length ){
@@ -129,6 +126,7 @@ class ExportTakesButton extends Component {
              });
 
        enableBtn = checkPublishedStatus.every(val => val ===true);              // verify all the published takes
+			 
 
        }
 
