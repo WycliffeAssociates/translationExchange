@@ -21,7 +21,7 @@ export const fetchAllSourceAudio = (projectId, language, setInitialSourceAudio) 
                     });
                   return null; // added to satisfy warning of return expected on arrow function
                 });
-                setInitialSourceAudio(projects[0].value);
+                // setInitialSourceAudio(projects[0].value);
                 dispatch(dispatchSourceAudioReceived(projects));
 
             })

@@ -113,7 +113,7 @@ class ChunkListContainer extends Component {
 	}
 
 	setSourceProject(projectQuery) {
-		this.props.setSourceProject(projectQuery, this.props.chapter.number);
+		this.props.setSourceProject(projectQuery, this.props.chapter.data[0].number);
 	}
 
 	getSourceAudioLocationForChunk(chunkId) {
