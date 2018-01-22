@@ -8,6 +8,7 @@ export const fetchAllSourceAudio = (projectId, language, setInitialSourceAudio) 
             .get(config.apiUrl + `projects/?id=${projectId}&lang=${language}&published=true`)
             .then(response => {
                 let projects = [];
+
                 response.data.map(project => {
                     let projectQuery = {
                         language: project.language.slug,
@@ -26,12 +27,27 @@ export const fetchAllSourceAudio = (projectId, language, setInitialSourceAudio) 
 
             })
             .catch(err => {
+
                 dispatch(dispatchSourceAudioFailed(err));
             });
     };
 };
 
+export const getSourceTakes = (chunkId, playSourceTake, chunkNumber) => {
+  return function(dispatch) {
+    return axios
+      .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`)
+      .then(response => {
+           playSourceTake(response.data[0].location, chunkId, chunkNumber);
+      })
+      .catch(error => {
+        //dispatch(dispatchChunksFailed(error));
+      });
+  };
+};
+
 export const dispatchSourceAudioReceived = (projects) => {
+
     return {
         type: "SOURCE_AUDIO_SUCCESS",
         projects

@@ -144,6 +144,7 @@ export const setSourceProject = (query, chapter) => {
     return axios
       .post(config.apiUrl + "takes/", { ...query, chapter: chapter })
       .then(response => {
+        debugger;
         dispatch(setSourceProjectSuccess(response.data, query));
       })
       .catch(error => {
@@ -159,6 +160,7 @@ export function setSourceProjectSuccess(response, query) {
     query
   };
 }
+
 export function setSourceProjectFailed(error) {
   return {
     type: "SET_SOURCE_PROJECT_FAILED",

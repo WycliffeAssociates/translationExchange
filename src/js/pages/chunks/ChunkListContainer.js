@@ -28,7 +28,8 @@ import {
 	saveComment,
 	getAudioTakes,
 	deleteTakeSuccess,
-    deleteCommentSuccess
+  deleteCommentSuccess,
+	getSourceTakes
 } from './../../actions';
 
 class ChunkListContainer extends Component {
@@ -116,10 +117,12 @@ class ChunkListContainer extends Component {
 		this.props.setSourceProject(projectQuery, this.props.chapter.data[0].number);
 	}
 
-	getSourceAudioLocationForChunk(chunkId) {
-		if (!this.props.selectedSourceProject) {
-			return undefined;
-		}
+	getSourceAudioLocationForChunk(chunkId) {              //----------------------------------------------------------------------------------
+
+		this.props.getSourceTakes(chunkId);
+
+		const tst = this.props;
+		debugger;
 		let chunk = this.props.selectedSourceProject.find(
 			chunk => chunk.id === chunkId
 		);
@@ -127,18 +130,33 @@ class ChunkListContainer extends Component {
 	}
 
 	onSourceClicked(chunkId, chunkNumber) {
+
 		if (!this.props.playlistMode) {
 			this.props.stopAudio();
-			let sourceLoc = this.getSourceAudioLocationForChunk(chunkId);
-			const date = this.parseDate(this.props.project.date_modified);
-			let sourceAudio =
-				{
-					src: config.streamingUrl + sourceLoc,
-					name: `${this.props.displayText.chunk} ${chunkNumber},(${"author"} ${this.props.displayText.on}${date})`
-				};
-			this.props.playTake(sourceAudio);
+			//let sourceLoc = this.getSourceAudioLocationForChunk(chunkId, this.playSource());
+			this.props.getSourceTakes(chunkId,  this.playSource.bind(this), chunkNumber);
+
+			// let sourceAudio =
+			// 	{
+			// 		src: config.streamingUrl + sourceLoc,
+			// 		name: `${this.props.displayText.chunk} ${chunkNumber},(${"author"} ${this.props.displayText.on}${date})`
+			// 	};
+			// this.props.playTake(sourceAudio);
 		}
 	}
+
+
+	playSource(sourceLoc, chunkId, chunkNumber){
+    const date = this.parseDate(this.props.project.date_modified);
+		let sourceAudio =
+			{
+				src: config.streamingUrl + sourceLoc,
+				name: `${this.props.displayText.chunk} ${chunkNumber}, (${"author"} ${this.props.displayText.on}${date})`
+			};
+		this.props.playTake(sourceAudio);
+
+	}
+
 
 	render() {
 		if (this.props.loaded && this.props.chunks.length === 0) {
@@ -237,7 +255,7 @@ class ChunkListContainer extends Component {
 		return (`${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`);
 	}
 
-	createChunkList(chunk) {
+	createChunkList(chunk){
 		return (
 			<div>
 				<Chunk
@@ -292,7 +310,8 @@ const mapDispatchToProps = dispatch => {
 			saveComment,
 			getAudioTakes,
 			deleteTakeSuccess,
-            deleteCommentSuccess
+      deleteCommentSuccess,
+			getSourceTakes
 		}, dispatch);
 };
 
