@@ -13,7 +13,7 @@ import axios from "axios";
 import User from "./js/pages/user/user";
 import { DragDropContext } from "react-dnd";
 import Raven from 'raven-js';
-import {sentry_url} from './config/sentryConfig';
+import CrashReporter from './crashReporter'
 
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 const MY_SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
@@ -51,14 +51,22 @@ class App extends Component {
 	{
 
 
-		axios.post(`https://hooks.slack.com/services/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`, {"text": "Message from te"})
-		.then( response => {
-				debugger;
-			})
-			.catch(error => {
+		document.addEventListener('ravenFailure', ({data}) => {
+			debugger;
+      // Only store it once.
+      if (!data.extra.retry) {
+        // Mutation with side effect.
+        data.extra.retry = true;
 
-	});
-  
+        const sentryOffline = JSON.parse(window.localStorage.sentryOffline);
+        // We can't store too much data
+        if (sentryOffline.length < 10) {
+          sentryOffline.push(data); // We use a FIFO.
+          window.localStorage.sentryOffline = JSON.stringify(sentryOffline);
+        }
+      }
+    });
+
       const online = navigator.onLine;
 
 			window.addEventListener('unhandledrejection', event => {
