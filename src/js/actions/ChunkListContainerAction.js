@@ -371,10 +371,11 @@ export function deleteCommentFailed(error) {
 }
 
 //	MarkedAsPublish
-export const markedAsPublished = (success, chapterId) => {
+export const markedAsPublished = (success, chapterId, set) => {
+  debugger;
   return function(dispatch) {
     return axios
-      .patch(config.apiUrl + "chapters/" + chapterId + "/", { published: true })
+      .patch(config.apiUrl + "chapters/" + chapterId + "/", { published: set })
       .then(response => {
         if (success) {
           success();

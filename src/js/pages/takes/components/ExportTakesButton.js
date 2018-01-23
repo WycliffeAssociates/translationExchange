@@ -50,7 +50,7 @@ class ExportTakesButton extends Component {
         const {chapterId} = this.props;
         this.props.markedAsPublished(() => {
             this.handleClose();
-        }, chapterId);
+        }, chapterId, true);
     }
 
     handleOpen = (e) => {
@@ -62,7 +62,6 @@ class ExportTakesButton extends Component {
 
     playNext(check) {
         if (check) {
-
             const playlistLength = this.state.playList.length;
             const pointer = this.state.pointer;
 
@@ -73,7 +72,6 @@ class ExportTakesButton extends Component {
                 this.setState({ pointer: 0 })
             }
         }
-
     }
 
 
@@ -104,7 +102,7 @@ class ExportTakesButton extends Component {
 
     exportButton() {
       let enableBtn = this.props.chapter.data[0].published;
-       const {takes, chunks} = this.props;
+       const {takes, chunks, chapterId} = this.props;
 
        if(takes.length >= chunks.length ){
          let takesPublishedChunkId = [];
@@ -120,15 +118,19 @@ class ExportTakesButton extends Component {
                        if( takesPublishedChunkId.includes(chnk.id)){
                           return true;
                        }else{
-                         return false;
+
+                       return false;
                        }
 
              });
 
        enableBtn = checkPublishedStatus.every(val => val ===true);              // verify all the published takes
-			 
 
-       }
+			 console.log(enableBtn);
+
+			 }
+
+
 
 
         return( <Button onClick={this.handleOpen}

@@ -109,6 +109,7 @@ class ChunkListContainer extends Component {
 			//that is marked is_publish, then patch it to not be marked is_publish
 			if (currentTake.take.is_publish && currentTake.take.id !== takeId) {
 				this.patchTake(currentTake.take.id, { is_publish: false });
+
 			}
 		}
 	}
