@@ -129,7 +129,6 @@ class ProjectFilter extends Component {
 
 	render() {
 		var query = QueryString.parse(this.props.queryString);
-
 		//if there are no options currently selected, put in a blank option
 		var languageOptions = [];
 		if (!query.language) {

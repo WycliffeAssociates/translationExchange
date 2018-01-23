@@ -26,7 +26,7 @@ class PublishButton extends Component {
 
 	render() {
 		let readyForPublish = this.checkReadyForPublish();
-	
+
 		let publishButton = (
 			<Button
 				onClick={this.handleOpen}

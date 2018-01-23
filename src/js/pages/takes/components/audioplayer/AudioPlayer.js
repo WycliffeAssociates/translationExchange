@@ -109,7 +109,6 @@ class AudioPlayer extends Component {
 
 
     for (const key in receivedMarkerObject) {
-      const test = receivedMarkerObject[key];
       const position = ((receivedMarkerObject[key] / 44100) / (this.state.durationTime)) * this.state.initialWidth;
       markerArray.push(<Marker
         style={{ overflow: 'visible' }}
