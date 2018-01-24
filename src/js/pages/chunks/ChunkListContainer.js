@@ -63,9 +63,10 @@ class ChunkListContainer extends Component {
 	patchTake(takeId, patch, success, chunkId) {
 		const { takes, chapter } = this.props;
 		let returnTake = null;
-		let published = this.props.chapter.data[0].published || this.props.chapterPublished;
+		//let published = this.props.chapter.published || this.props.chapterPublished;
+		let published = this.props.chapter.published;
 
-		const chapterId = chapter.data[0].id;
+		const chapterId = chapter.id;
 		takes.map(tk => {
 			if (chunkId === tk.chunkId && tk.published === true && patch.published === true) {
 				returnTake = tk;
@@ -130,7 +131,7 @@ class ChunkListContainer extends Component {
 	}
 
 	setSourceProject(projectQuery) {
-		this.props.setSourceProject(projectQuery, this.props.chapter.data[0].number);
+		this.props.setSourceProject(projectQuery, this.props.chapter.number);
 	}
 
 	onSourceClicked(chunkId, chunkNumber) {
@@ -165,7 +166,7 @@ class ChunkListContainer extends Component {
 			return (
 				<div>
 					<ChunkHeader
-						chapterNum={this.props.chapter.data[0].number}
+						chapterNum={this.props.chapter.number}
 						book={this.props.book}
 						chapter={this.props.chapter}
 						language={this.props.language}
@@ -282,8 +283,8 @@ const mapStateToProps = state => {
 	const { displayText = "" } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { chapterPublished, takes, loaded = false, error = "", comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
-	return {chapterPublished, comments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
+	const { takes, loaded = false, error = "", comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
+	return {comments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 }
 

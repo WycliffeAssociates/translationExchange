@@ -14,8 +14,7 @@ const INITIAL_STATE = {
     notifyFlag: false,
     update: false,
     chapterId:'',
-    takesToExport: [],
-    chapterPublished: false
+    takesToExport: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -142,11 +141,9 @@ export default (state = INITIAL_STATE, action) => {
         case 'DELETE_COMMENT_FAILED':
             return { ...state, error: action.error }
         case 'MARK_AS_PUBLISHED_SUCCESS':
-        const tst = action.response;
-        debugger;
             return {
-                ...state, chapterPublished: action.set,
-                chapter: action.response
+                ...state, chapter: action.response,
+
             }
         case 'MARK_AS_PUBLISHED_FAILED':
             return {

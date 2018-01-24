@@ -26,7 +26,7 @@ class ExportTakesButton extends Component {
     }
 
 		componentWillMount(){
-			const published = this.props.chapter.data[0].published;
+			const published = this.props.chapter.published;
 			const {chapterId} = this.props;
 			if(published){
 				this.props.getTakesToExport(chapterId);
@@ -120,7 +120,7 @@ class ExportTakesButton extends Component {
 
 
     exportButton() {
-      let enableBtn = this.props.chapter.data[0].published;
+      let enableBtn = this.props.chapter.published;
 			const {takes, chunks} = this.props;
 
 

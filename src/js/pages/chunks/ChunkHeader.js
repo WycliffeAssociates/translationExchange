@@ -7,7 +7,7 @@ import "css/takes.css";
 
 class ChunkHeader extends Component {
 	render() {
-		const has_comments = this.props.chapter.data[0].has_comment;
+		const has_comments = this.props.chapter.has_comment;
 		return (
 			<div style = {{display:'flex', justifyContent: 'space-between'}}>
 				<div className="headerStyle">
@@ -27,7 +27,7 @@ class ChunkHeader extends Component {
 
 							<RecordButton
 								onClickSave={this.props.onClickSave}
-								id={this.props.chapter.data[0].id}
+								id={this.props.chapter.id}
 								type={"chapter"}
 								deleteComment={this.props.deleteComment}
 								loadingActive={this.props.active}

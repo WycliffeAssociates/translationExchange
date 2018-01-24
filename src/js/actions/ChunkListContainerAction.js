@@ -119,12 +119,11 @@ export function dispatchProjectInfoSuccess(
   languageResponse,
   chapterId
 ) {
-  debugger;
   return {
     type: "FETCH_PROJECT_SUCCESS",
     chunks: chunksResponse.data,
     project: projectsResponse.data[0],
-    chapter: chapterResponse,
+    chapter: chapterResponse.data[0],
     book: booksResponse.data[0],
     language: languageResponse.data[0],
     chapterId
@@ -410,19 +409,19 @@ export const markedAsPublished = (success, chapterId, set) => {
           let myColor = { background: "#50f442 ", text: "#FFFFFF " };
     			notify.show("Chapter Marked as published", "custom", 1700, myColor);
         }
-        let chapter=[]
-        chapter.push(response);
-          dispatch(markAsPublishedSuccess(chapter, set));
+        // let chapter=[]
+        // chapter.push(response);
+          dispatch(markAsPublishedSuccess(response.data));
       })
       .catch(error => {
         dispatch(markAsPublishedFailed(error));
       });
   };
 };
-export function markAsPublishedSuccess(response, set) {
+export function markAsPublishedSuccess(response) {
   return {
     type: "MARK_AS_PUBLISHED_SUCCESS",
-    response, set
+    response
   };
 }
 export function markAsPublishedFailed(error) {
