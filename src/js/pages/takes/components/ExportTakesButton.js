@@ -78,7 +78,7 @@ class ExportTakesButton extends Component {
 
     handleClose = () => {
 			this.setState({ modalOpen: false })
-			setTimeout(()=>window.history.go(-1), 500);
+			
 
 		};
 
