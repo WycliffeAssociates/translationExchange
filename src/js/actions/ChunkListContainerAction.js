@@ -411,8 +411,6 @@ export const markedAsPublished = (success, chapterId, set) => {
     			notify.show(`Chapter ${chapterNum} Marked as Published`, "custom", 2500, myColor);
           setTimeout(()=>window.history.go(-1), 500);
         }
-        // let chapter=[]
-        // chapter.push(response);
           dispatch(markAsPublishedSuccess(response.data));
       })
       .catch(error => {
