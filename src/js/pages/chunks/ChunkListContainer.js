@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-
+import { notify } from "react-notify-toast";
 import config from "../../../config/config";
 import QueryString from "query-string";
 import "css/takes.css";
@@ -54,12 +54,26 @@ class ChunkListContainer extends Component {
         this.forceUpdate();        // used to rerender when a comment is delete it
 	}
 
+	notifyUnpublished(){
+		let myColor = { background: "#FF0000 ", text: "#FFFFFF " };
+		notify.show("Chapter  unpublished", "custom", 1700, myColor);
+		this.forceUpdate();
+	}
+
 	patchTake(takeId, patch, success, chunkId) {
-		const { takes } = this.props;
+		const { takes, chapter } = this.props;
 		let returnTake = null;
+		let published = this.props.chapter.data[0].published || this.props.chapterPublished;
+
+		const chapterId = chapter.data[0].id;
 		takes.map(tk => {
 			if (chunkId === tk.chunkId && tk.published === true && patch.published === true) {
 				returnTake = tk;
+			}
+
+			if (chunkId === tk.chunkId && tk.published && !patch.published && published) {
+
+			 this.props.markedAsPublished(this.notifyUnpublished.bind(this), chapterId, false)
 			}
 
 			return null;
@@ -71,10 +85,11 @@ class ChunkListContainer extends Component {
 				published: false,
 				rating: 3
 			}
-			this.props.patchTake(returnTake.id, update, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
+			this.props.patchTake(returnTake.id, update, success, takes, this.updatingDeletedTake.bind(this), chunkId);
+			this.props.markedAsPublished(this.notifyUnpublished.bind(this), chapterId, false)  // unpublished when you switch takes from checkmark to 3 stars
 
 		}
-		this.props.patchTake(takeId, patch, success, this.props.takes, this.updatingDeletedTake.bind(this), chunkId);
+		this.props.patchTake(takeId, patch, success, takes, this.updatingDeletedTake.bind(this), chunkId);
 	}
 
 	/*
@@ -267,8 +282,8 @@ const mapStateToProps = state => {
 	const { displayText = "" } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { takes, loaded = false, error = "", comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
-	return {comments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
+	const { chapterPublished, takes, loaded = false, error = "", comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
+	return {chapterPublished, comments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 }
 

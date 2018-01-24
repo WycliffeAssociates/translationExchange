@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import CommentsPlayer from '../components/comments/commentsPlayer.js'
 import config from "config/config";
+import { notify } from "react-notify-toast";
 import {
 	markedAsPublished,
 	getTakesToExport
@@ -30,7 +31,6 @@ class ExportTakesButton extends Component {
 			if(published){
 				this.props.getTakesToExport(chapterId);
 			}
-
 		}
 
 

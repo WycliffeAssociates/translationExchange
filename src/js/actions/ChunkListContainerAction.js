@@ -119,6 +119,7 @@ export function dispatchProjectInfoSuccess(
   languageResponse,
   chapterId
 ) {
+  debugger;
   return {
     type: "FETCH_PROJECT_SUCCESS",
     chunks: chunksResponse.data,
@@ -217,6 +218,7 @@ export const patchTake = (
         updatedTakeInfo.chunkId = chunkId;
         listOfTakes[takeIdToUpdate] = updatedTakeInfo;
         dispatch(patchTakeSuccess(listOfTakes));
+
       })
       .catch(error => {
         let message;
@@ -404,16 +406,23 @@ export const markedAsPublished = (success, chapterId, set) => {
         if (success) {
           success();
         }
+        if(set){
+          let myColor = { background: "#50f442 ", text: "#FFFFFF " };
+    			notify.show("Chapter Marked as published", "custom", 1700, myColor);
+        }
+        let chapter=[]
+        chapter.push(response);
+          dispatch(markAsPublishedSuccess(chapter, set));
       })
       .catch(error => {
         dispatch(markAsPublishedFailed(error));
       });
   };
 };
-export function markAsPublishedSuccess(response) {
+export function markAsPublishedSuccess(response, set) {
   return {
     type: "MARK_AS_PUBLISHED_SUCCESS",
-    response
+    response, set
   };
 }
 export function markAsPublishedFailed(error) {
@@ -424,7 +433,6 @@ export function markAsPublishedFailed(error) {
 }
 
 //saveComment
-
 export const saveComment = (
   blobx,
   type,
