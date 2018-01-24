@@ -16,7 +16,7 @@ class TakeContainer extends Component {
 
 	onDeleteTake() {
 		this.props.deleteTake(this.props.take.id);
-		debugger;
+
 	}
 
 
@@ -49,7 +49,7 @@ class TakeContainer extends Component {
 		content = connectDragSource(content);
 		// Connect as drop target
 		content = connectDropTarget(content);
-		
+
 	return content;
 }
 

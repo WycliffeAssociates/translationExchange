@@ -402,12 +402,13 @@ export const markedAsPublished = (success, chapterId, set) => {
     return axios
       .patch(config.apiUrl + "chapters/" + chapterId + "/", { published: set })
       .then(response => {
+        const chapterNum = response.data.number;
         if (success) {
           success();
         }
         if(set){
           let myColor = { background: "#50f442 ", text: "#FFFFFF " };
-    			notify.show("Chapter Marked as published", "custom", 1700, myColor);
+    			notify.show(`Chapter ${chapterNum} Marked as Published`, "custom", 2500, myColor);
         }
         // let chapter=[]
         // chapter.push(response);
@@ -477,8 +478,8 @@ export const saveComment = (
           dispatch(updateChapterSuccess(chapter));
         }
         success();
-        let myColor = { background: "#50f442 ", text: "#FFFFFF " };
-        notify.show("Saved", "custom", 1500, myColor);
+        // let myColor = { background: "#50f442 ", text: "#FFFFFF " };
+        // notify.show("Saved", "custom", 1500, myColor);
         //find correct take to update
       })
       .catch(exception => {

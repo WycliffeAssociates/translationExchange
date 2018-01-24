@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Button, Icon, Modal } from 'semantic-ui-react'
+import { browserHistory } from 'react-router'
 import CommentsPlayer from '../components/comments/commentsPlayer.js'
 import config from "config/config";
 import { notify } from "react-notify-toast";
@@ -77,6 +78,8 @@ class ExportTakesButton extends Component {
 
     handleClose = () => {
 			this.setState({ modalOpen: false })
+			setTimeout(()=>window.history.go(-1), 500);
+
 		};
 
     playNext(check) {
