@@ -17,7 +17,6 @@ class SetSourceAudio extends Component {
     setSource(project) {
       this.setState({menu: project})
         //this.props.setSourceProject(project);
-
     }
 
     render() {

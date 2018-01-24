@@ -13,7 +13,8 @@ const INITIAL_STATE = {
     selectedSourceProject: {},
     notifyFlag: false,
     update: false,
-    chapterId:''
+    chapterId:'',
+    takesToExport: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -82,6 +83,14 @@ export default (state = INITIAL_STATE, action) => {
             return {
                  ...state,
                 takes: action.takes,
+
+            };
+
+
+        case "FETCH_TAKE_TO_EXPORT_SUCCESS":
+            return {
+                 ...state,
+              takesToExport: action.takes,
 
             };
 

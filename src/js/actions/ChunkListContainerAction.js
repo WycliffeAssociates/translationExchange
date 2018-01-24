@@ -19,6 +19,23 @@ export const getAudioTakes = (chunkId, counter) => {
   };
 };
 
+
+export const getTakesToExport = (chapterId) => {
+  return function(dispatch) {
+    return axios
+      .get(`${config.apiUrl}takes/?chapter_id=${chapterId}&published=true`)
+      .then(response => {
+          dispatch(dispatchTakesToExportSuccess(response.data));
+      })
+      .catch(error => {
+        dispatch(dispatchChunksFailed(error));
+      });
+  };
+};
+
+
+
+
 export const getAudioComments = (query, type) => {
   return function(dispatch) {
     return axios
@@ -127,6 +144,14 @@ export function dispatchTakesSuccess(takesResponse, chunkId) {
 
   return {
     type: "FETCH_TAKE_SUCCESS",
+    takes: takesResponse
+  };
+}
+
+export function dispatchTakesToExportSuccess(takesResponse) {
+
+  return {
+    type: "FETCH_TAKE_TO_EXPORT_SUCCESS",
     takes: takesResponse
   };
 }
@@ -372,7 +397,6 @@ export function deleteCommentFailed(error) {
 
 //	MarkedAsPublish
 export const markedAsPublished = (success, chapterId, set) => {
-  debugger;
   return function(dispatch) {
     return axios
       .patch(config.apiUrl + "chapters/" + chapterId + "/", { published: set })
