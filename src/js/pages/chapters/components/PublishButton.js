@@ -25,8 +25,6 @@ class PublishButton extends Component {
 	}
 
 	render() {
-		const tst = this.checkReadyForPublish();
-		debugger;
 		let publishButton = (
 			<Button
 				onClick={this.handleOpen}
