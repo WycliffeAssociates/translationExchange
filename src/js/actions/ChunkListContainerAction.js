@@ -351,7 +351,7 @@ export const deleteComment = (
             chunks[chunkIdToUpdate].has_comment = false;
             dispatch(updateChunksSuccess(chunks));
           } else {
-            chapter.data[0].has_comment = false;
+            chapter.has_comment = false;
             dispatch(updateChapterSuccess(chapter));
           }
         }
@@ -418,6 +418,8 @@ export const markedAsPublished = (success, chapterId, set) => {
       });
   };
 };
+
+
 export function markAsPublishedSuccess(response) {
   return {
     type: "MARK_AS_PUBLISHED_SUCCESS",
@@ -473,13 +475,10 @@ export const saveComment = (
           dispatch(updateChunksSuccess(chunks));
         } else {
           dispatch(saveCommentSuccess(results.data));
-          chapter.data[0].has_comment = true;
+          chapter.has_comment = true;
           dispatch(updateChapterSuccess(chapter));
         }
         success();
-        // let myColor = { background: "#50f442 ", text: "#FFFFFF " };
-        // notify.show("Saved", "custom", 1500, myColor);
-        //find correct take to update
       })
       .catch(exception => {
         dispatch(saveCommentFailed(exception));

@@ -16,7 +16,7 @@ import { fetchChaptersContainerData, setCheckingLevel, publishFiles, downloadPro
 
 class ChaptersContainer extends Component {
 	publishFiles() {
-		this.props.publishFiles(this.props.project_id);
+		this.props.publishFiles(this.props.project_id, true);
 	}
 
 	setCheckingLevel(chapterId, level) {

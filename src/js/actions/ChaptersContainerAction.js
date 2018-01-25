@@ -1,5 +1,6 @@
 import axios from "axios";
 import config from "../../config/config";
+import { notify } from "react-notify-toast";
 
 //chaptersContainer
 
@@ -81,13 +82,15 @@ export function dispatchSetCheckingLevelFailed(error) {
 }
 
 //publish files
-export function publishFiles(chapterId) {
+export function publishFiles(projectId, set) {
 
     return function (dispatch) {
         return axios
-            .patch(config.apiUrl + "projects/" + chapterId + "/", { published: true })
+            .patch(config.apiUrl + "projects/" + projectId + "/", { published: set })
             .then(response => {
                 dispatch(dispatchPublishFilesSuccess(response.data));
+                let myColor = { background: "#50f442 ", text: "#FFFFFF " };
+                notify.show(`Book Marked as Published`, "custom", 2500, myColor);
             })
             .catch(err => {
                 dispatch(dispatchPublishFilesFailed(err));

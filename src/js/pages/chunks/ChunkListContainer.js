@@ -29,7 +29,8 @@ import {
 	getAudioTakes,
 	deleteTakeSuccess,
   deleteCommentSuccess,
-	getSourceTakes
+	getSourceTakes,
+	publishFiles
 } from './../../actions';
 
 class ChunkListContainer extends Component {
@@ -56,14 +57,13 @@ class ChunkListContainer extends Component {
 
 	notifyUnpublished(){
 		let myColor = { background: "#FF0000 ", text: "#FFFFFF " };
-		notify.show("Chapter  unpublished", "custom", 1700, myColor);
+		notify.show("Chapter and book unpublished", "custom", 1800, myColor);
 		this.forceUpdate();
 	}
 
 	patchTake(takeId, patch, success, chunkId) {
-		const { takes, chapter } = this.props;
+		const { takes, chapter, project } = this.props;
 		let returnTake = null;
-		//let published = this.props.chapter.published || this.props.chapterPublished;
 		let published = this.props.chapter.published;
 
 		const chapterId = chapter.id;
@@ -75,6 +75,7 @@ class ChunkListContainer extends Component {
 			if (chunkId === tk.chunkId && tk.published && !patch.published && published) {
 
 			 this.props.markedAsPublished(this.notifyUnpublished.bind(this), chapterId, false)
+			 this.props.publishFiles(project.id, false); // unpublish project
 			}
 
 			return null;
@@ -88,6 +89,7 @@ class ChunkListContainer extends Component {
 			}
 			this.props.patchTake(returnTake.id, update, success, takes, this.updatingDeletedTake.bind(this), chunkId);
 			this.props.markedAsPublished(this.notifyUnpublished.bind(this), chapterId, false)  // unpublished when you switch takes from checkmark to 3 stars
+			this.props.publishFiles(chapterId, false);
 
 		}
 		this.props.patchTake(takeId, patch, success, takes, this.updatingDeletedTake.bind(this), chunkId);
@@ -306,7 +308,8 @@ const mapDispatchToProps = dispatch => {
 			getAudioTakes,
 			deleteTakeSuccess,
       deleteCommentSuccess,
-			getSourceTakes
+			getSourceTakes,
+			publishFiles
 		}, dispatch);
 };
 
