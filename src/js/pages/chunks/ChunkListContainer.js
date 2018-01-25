@@ -57,7 +57,7 @@ class ChunkListContainer extends Component {
 
 	notifyUnpublished(){
 		let myColor = { background: "#FF0000 ", text: "#FFFFFF " };
-		notify.show("Chapter  unpublished", "custom", 1700, myColor);
+		notify.show("Chapter and book unpublished", "custom", 1800, myColor);
 		this.forceUpdate();
 	}
 
