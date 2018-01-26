@@ -9,18 +9,23 @@
 //     streamingUrl: "http://172.19.145.91/"
 // };
 //
+
  var config = {
-     apiUrl: "http://127.0.0.1:8000/api/",
-     streamingUrl: "http://127.0.0.1/"
+     apiUrl: "https://127.0.0.1/api/",
+     streamingUrl: "https://127.0.0.1/"
 };
 
 
-// const config = {                                                        //remote api
+const SENTRY_KEY = '88334842aa79457baf6c939141ec062c';
+const SENTRY_APP = '276208';
+export const SENTRY_URL = `https://${SENTRY_KEY}@sentry.io/${SENTRY_APP}`;
+
+// const config = {                                            //remote api
 //     apiUrl: "https://localhost/api/",
 //     streamingUrl: "https://localhost/"
 // };
 
-// const config = {                                                        //remote api
+// const config = {                                            //remote api
 //     apiUrl: "https://te.loc/api/",
 //     streamingUrl: "https://te.loc/"
 // };

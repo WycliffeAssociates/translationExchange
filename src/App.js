@@ -4,7 +4,6 @@ import ChunkListContainer from "./js/pages/chunks/ChunkListContainer";
 import ProjectsListContainer from "./js/pages/projects/ProjectsListContainer";
 import ChaptersContainer from "./js/pages/chapters/ChaptersContainer";
 import "./App.css";
-import config from "./../src/config/config"
 import NotFound from "./js/pages/NotFound";
 import Header from "./js/components/header";
 import Home from "./js/pages/home/home";
@@ -13,22 +12,30 @@ import axios from "axios";
 import User from "./js/pages/user/user";
 import { DragDropContext } from "react-dnd";
 import Raven from 'raven-js';
-import CrashReporter from './crashReporter'
-
 import { default as TouchBackend } from 'react-dnd-touch-backend';
-const MY_SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
-const slack = require('slack-notify')(MY_SLACK_WEBHOOK_URL);
-const SENTRY_URL = 'https://88334842aa79457baf6c939141ec062c@sentry.io/276208';
+import { SENTRY_URL } from './../src/config/config';
+
+Raven.config(SENTRY_URL).install();
+
+//const MY_SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
+//const slack = require('slack-notify')(MY_SLACK_WEBHOOK_URL);
+//const SENTRY_URL = 'https://88334842aa79457baf6c939141ec062c@sentry.io/276208';
 //const sentryOffline = JSON.parse(window.localStorage.sentryOffline);
+
+/*function removeMessageFromLocalStorage(log, index)
+{
+    Raven.captureMessage('', log);
+    localStorage.removeItem(localStorage.key(index));
+}
 
 var ravenOptions =
 {
-	/*
+	
 	    Configurations for Raven for offline capabilities. ravenOptions will
 	    call the callback function and pass in the error message 'data' that
 	    should be sent to Sentry. If there is no internet connection, then it 
 	    won't send the error message.
-	*/
+	
 	shouldSendCallback:
 	    function(data)
 	    {
@@ -40,13 +47,9 @@ var ravenOptions =
 		    	storageIndex < localStorage.length;
 		    	storageIndex++)
 		    {
-		        localStorage.getItem(localStorage.key(storageIndex))
-			    .then( function (log)
-			           {
-				       Raven.captureMessage('', log);
-				       localStorage.removeItem(localStorage.key(storageIndex));
-				   }
-			         );
+		        removeMessageFromLocalStorage(
+				localStorage.getItem(localStorage.key(storageIndex)), 
+				storageIndex);
 		    }
 	            return true;
 		}
@@ -58,7 +61,8 @@ var ravenOptions =
 		    return false;
 		}
 	    }
-}
+}*/
+
 class App extends Component 
 {
     constructor(props) 
@@ -68,7 +72,7 @@ class App extends Component
 	axios.defaults.timeout = 20000;
     }
 
-    componentDidCatch(error, errorInfo) 
+   /* componentDidCatch(error, errorInfo) 
     {
         Raven.captureException(error, { extra: errorInfo });
 	console.log('componentDidCatch worked');
@@ -77,10 +81,10 @@ class App extends Component
 
     componentWillMount()
     {
-        Raven.config(SENTRY_URL, ravenOptions).install();
+        //Raven.config(SENTRY_URL, ravenOptions).install();
     }
 
-    startErrorLog()
+   /* startErrorLog()
     {
         document.addEventListener(
 	    'ravenFailure', 
@@ -94,7 +98,7 @@ class App extends Component
                 //}
             }
 	);
-    }
+    }*/
 
 
 

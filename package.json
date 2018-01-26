@@ -17,6 +17,7 @@
     "nock": "^9.0.14",
     "prop-types": "^15.6.0",
     "query-string": "^4.3.4",
+    "raven": "^2.4.0",
     "raven-js": "^3.22.1",
     "react": "^15.6.1",
     "react-addons": "^0.9.1-deprecated",
