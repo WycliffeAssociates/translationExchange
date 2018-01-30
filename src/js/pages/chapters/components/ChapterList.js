@@ -23,7 +23,7 @@ class ChapterList extends Component {
 				<Table.Cell>
 					<CircularProgressbar
 						strokeWidth="20"
-						percentage={chapter.percent_complete}
+						percentage={chapter.completed}
 					/>
 				</Table.Cell>
 				<Table.Cell className="dont-hide-overflow">
