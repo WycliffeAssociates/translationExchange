@@ -11,8 +11,7 @@ import About from "./js/pages/about/about";
 import axios from "axios";
 import User from "./js/pages/user/user";
 import { DragDropContext } from "react-dnd";
-//import MultiBackend from 'react-dnd-multi-backend';
-//import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch';
+import Notifications from 'react-notify-toast';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 
@@ -37,6 +36,7 @@ class App extends Component {
              */
 
 			<div>
+				 <Notifications />
 				<Header />
 				<Switch>
 					<Route exact path="/" component={Home} />

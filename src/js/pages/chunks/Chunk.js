@@ -34,7 +34,7 @@ class Chunk extends Component {
 		let onestar = [];
 		let twostar = [];
 		let threestar = [];
-		let orderNumber;
+		
 		let orderedTakes = this.props.takes;
 		const has_comments = this.props.has_comments;
 		orderedTakes.map(tk => {

@@ -13,7 +13,8 @@ const INITIAL_STATE = {
     selectedSourceProject: {},
     notifyFlag: false,
     update: false,
-    chapterId:''
+    chapterId:'',
+    takesToExport: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -85,6 +86,14 @@ export default (state = INITIAL_STATE, action) => {
 
             };
 
+
+        case "FETCH_TAKE_TO_EXPORT_SUCCESS":
+            return {
+                 ...state,
+              takesToExport: action.takes,
+
+            };
+
         case 'FETCH_CHUNKS_FAILED':
             return { ...state, error: action.error }
 
@@ -133,7 +142,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, error: action.error }
         case 'MARK_AS_PUBLISHED_SUCCESS':
             return {
-                ...state, chapter: action.response
+                ...state, chapter: action.response,
+
             }
         case 'MARK_AS_PUBLISHED_FAILED':
             return {

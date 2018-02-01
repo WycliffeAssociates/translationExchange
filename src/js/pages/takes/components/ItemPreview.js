@@ -51,14 +51,14 @@ class ItemPreview extends Component {
 
 render(){
 
-  let take = this.props.take;
+  let {take} = this.props;
   let active = false;
   let takeText = '';
   let date = '';
   if(take !== null){
       takeText = `${this.props.displayText.take} ${take.order}`;
     date = this.parseDate(take.date_modified);
-    active = this.props.active;
+    active = this.props.take.has_comment;
       }
     return (
         <div style={getItemStyles(this.props.currentOffset)}>
@@ -104,7 +104,6 @@ render(){
     								<br />
                     <Button
           						fluid
-          						// active={this.state.active}
           						 color={active ? "yellow" : null}
           					>
           						<Icon name="comment outline" />

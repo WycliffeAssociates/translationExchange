@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Button, Icon, Modal } from 'semantic-ui-react'
+import { browserHistory } from 'react-router'
 import CommentsPlayer from '../components/comments/commentsPlayer.js'
 import config from "config/config";
+import { notify } from "react-notify-toast";
 import {
 	markedAsPublished,
+	getTakesToExport
 } from "../../../actions";
 
 // this is the page for one chapter
@@ -16,22 +19,36 @@ class ExportTakesButton extends Component {
         super(props);
         this.state = {
             modalOpen: false,
-            playList: null,
-            pointer: 0
+            playList: [],
+            pointer: 0,
+
         };
         this.playNext = this.playNext.bind(this);
     }
 
+		componentWillMount(){
+			const published = this.props.chapter.published;
+			const {chapterId} = this.props;
+			if(published){
+				this.props.getTakesToExport(chapterId);
+			}
+		}
+
 
     createExportPlaylist() {
-
         let length = this.props.chunks.length;
-        const takes = this.props.takes;
+        const {takes, takesToExport, chunks} = this.props;
+
+				let selectedTakes = takes;
+				 if(takes.length < chunks.length ){
+					selectedTakes = takesToExport;
+				 }
+
+
         let playlist = [];
         let i=0;
-        takes.map((take) => {
+        selectedTakes.map((take) => {
                     if(take.published) {
-
                         playlist.push({
                                 "src": config.streamingUrl + take.location,
                                 "name": this.props.mode.name + ' ' + this.props.chunks[i].startv + ' (' + (playlist.length + 1) + '/' + length + ')'
@@ -43,29 +60,30 @@ class ExportTakesButton extends Component {
                 }
 
         );
-        return playlist
+          return playlist
+
     }
 
     finishExportingChapter() {
         const {chapterId} = this.props;
         this.props.markedAsPublished(() => {
             this.handleClose();
-        }, chapterId);
-
-
-
+        }, chapterId, true);
     }
 
-    handleOpen = (e) => {
+    handleOpen = () => {
         const playList = this.createExportPlaylist();
         this.setState({ playList, modalOpen: true });
     }
 
-    handleClose = (e) => this.setState({ modalOpen: false });
+    handleClose = () => {
+			this.setState({ modalOpen: false })
+			
+
+		};
 
     playNext(check) {
         if (check) {
-
             const playlistLength = this.state.playList.length;
             const pointer = this.state.pointer;
 
@@ -76,7 +94,6 @@ class ExportTakesButton extends Component {
                 this.setState({ pointer: 0 })
             }
         }
-
     }
 
 
@@ -106,13 +123,13 @@ class ExportTakesButton extends Component {
 
 
     exportButton() {
-      let enableBtn = false;
-       const {takes, chunks} = this.props;
+      let enableBtn = this.props.chapter.published;
+			const {takes, chunks} = this.props;
+
 
        if(takes.length >= chunks.length ){
          let takesPublishedChunkId = [];
          takes.map(tk => {
-
             if(tk.published){
               takesPublishedChunkId.push(tk.chunkId);           // create a list of all the published takes
             }
@@ -123,14 +140,12 @@ class ExportTakesButton extends Component {
                        if( takesPublishedChunkId.includes(chnk.id)){
                           return true;
                        }else{
-                         return false;
+                       		return false;
                        }
-
              });
 
        enableBtn = checkPublishedStatus.every(val => val ===true);              // verify all the published takes
-
-       }
+			 }
 
 
         return( <Button onClick={this.handleOpen}
@@ -141,11 +156,11 @@ class ExportTakesButton extends Component {
                 floated="right">
                 <Icon color="white" name="sidebar" />
             </Button> );
-
     }
 
 
     render() {
+
         return (
             <Modal trigger={this.exportButton()}
                 open={this.state.modalOpen}
@@ -157,7 +172,8 @@ class ExportTakesButton extends Component {
                         <p>Here is a preview of the takes you have selected to export. This may take a few seconds to
                                 load.</p>
                             <p>To mark as done, click on 'Finish'.</p>
-                             {this.audioPlayer()}
+                             {this.state.playList.length > 0 ? this.audioPlayer() : ''}
+
                         </Modal.Description>
 
                     </Modal.Content>
@@ -198,15 +214,15 @@ const styles = {
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
 		{	markedAsPublished,
+			getTakesToExport
 		}, dispatch);
 };
 
 
 const mapStateToProps = state => {
+    const { takes, chapterId, takesToExport } = state.chunkListContainer;
 
-    const { takes, chapterId } = state.chunkListContainer;
-
-  return{ takes, chapterId }
+  return{ takes, chapterId, takesToExport }
 }
 
 

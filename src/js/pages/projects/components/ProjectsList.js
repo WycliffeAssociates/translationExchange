@@ -68,10 +68,10 @@ class ProjectsList extends Component {
 	                <Table.Cell>
 	                    <ReadMore lines={1} onShowMore={this.props.onChange} text={this.props.displayText.more}>
 	                        {/* {this.parseDate(project.date_modified)} */}
-	                        <b>{this.props.displayText.dateModified}</b>: {"GET FROM BACKEND, projectlist"} <br />
+	                        <b>{this.props.displayText.dateModified}</b>: {"January 09, 2018"} <br />
 	                        <b>{this.props.displayText.translationType}</b>: {project.version.slug} <br />
 	                        {/* {this.getContributorText(project.contributors)} */}
-	                        <b>{this.props.displayText.contributors}</b>: {"GET FROM BACKEND, projectlist"}{" "}
+	                        <b>{this.props.displayText.contributors}</b>: {"Translator 1"}{" "}
 	                        <br />
 	                        <b>{this.props.displayText.published}</b>:
 	                        {project.published

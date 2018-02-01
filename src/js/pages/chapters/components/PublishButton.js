@@ -21,17 +21,15 @@ class PublishButton extends Component {
 	}
 
 	checkReadyForPublish() {
-		return this.props.chapters.every(chapter => chapter.is_publish);
+		return this.props.chapters.every(chapter => chapter.published);
 	}
 
 	render() {
-		let readyForPublish = this.checkReadyForPublish();
-	
 		let publishButton = (
 			<Button
 				onClick={this.handleOpen}
 				floated="right"
-				disabled={!readyForPublish || this.props.isPublished}
+				disabled={!this.checkReadyForPublish()}
 				color={this.props.isPublished ? "green" : ""}
 			>
 				{this.props.isPublished ? this.props.displayText.published : this.props.displayText.publish}

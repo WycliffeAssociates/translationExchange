@@ -23,7 +23,7 @@ class ChapterList extends Component {
 				<Table.Cell>
 					<CircularProgressbar
 						strokeWidth="20"
-						percentage={chapter.percent_complete}
+						percentage={chapter.completed}
 					/>
 				</Table.Cell>
 				<Table.Cell className="dont-hide-overflow">
@@ -42,14 +42,14 @@ class ChapterList extends Component {
 						: <Icon name="remove" />}
 				</Table.Cell>
 				<Table.Cell>
-					{"add contributor from backend"}
+					{"contributor 1"}
 					{/* {this.getContributorText(chapter.contributors)} */}
 				</Table.Cell>
 				<Table.Cell>
 					{this.props.version}
 				</Table.Cell>
 				<Table.Cell>
-					{"Add date from chapter backend"}
+					{"January 09, 2018"}
 					{/* {this.parseDate(chapter.date_modified)} */}
 				</Table.Cell>
 			</Table.Row>

@@ -5,11 +5,18 @@ import { bindActionCreators } from 'redux';
 import { fetchAllSourceAudio } from "../../../actions";
 
 class SetSourceAudio extends Component {
+    constructor(props){
+      super(props);
+      this.state ={menu:'select language'}
+
+    }
+
     componentDidMount() {
-        this.props.fetchAllSourceAudio(this.props.projectId, this.props.language.slug, this.setSource.bind(this));
+        this.props.fetchAllSourceAudio(this.setSource.bind(this));
     }
     setSource(project) {
-        this.props.setSourceProject(project);
+      this.setState({menu: project})
+        //this.props.setSourceProject(project);
     }
 
     render() {
@@ -22,7 +29,7 @@ class SetSourceAudio extends Component {
                     labeled
                     className="icon"
                     icon="assistive listening systems"
-                    value={this.props.selectedSourceProject}
+                    value={this.state.menu}
                     loading={!this.props.loaded}
                     options={this.props.projects}
                     onChange={(event, dropdown) => { this.setSource(dropdown.value) }}
