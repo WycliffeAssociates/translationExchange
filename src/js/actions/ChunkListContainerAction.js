@@ -330,7 +330,7 @@ export const deleteComment = (
     return axios
       .delete(config.apiUrl + "comments/" + commentId + "/")
       .then(() => {
-        updatingDeletedComment(type, commentId);
+        updatingDeletedComment(commentId, comments);
         if (comments.length === 0) {
           if (type === "take") {
             let takeIdToUpdate;

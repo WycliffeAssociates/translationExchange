@@ -49,8 +49,15 @@ class ChunkListContainer extends Component {
         this.forceUpdate();        // used to rerender when a take is delete it
     }
 
-	updatingDeletedComment(commentId) {
-		const {comments} = this.props;
+	updatingDeletedComment(commentId, comments) {
+		let commentsToUpdate =[]
+		comments.map((cmt)=> {
+				if(cmt.id !== commentId){
+				commentsToUpdate.push(cmt);
+				}
+				return null;
+		});
+
         this.props.deleteCommentSuccess(commentId, comments);
         this.forceUpdate();        // used to rerender when a comment is delete it
 	}
