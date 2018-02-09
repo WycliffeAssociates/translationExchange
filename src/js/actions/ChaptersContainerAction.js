@@ -89,8 +89,10 @@ export function publishFiles(projectId, set) {
             .patch(config.apiUrl + "projects/" + projectId + "/", { published: set })
             .then(response => {
                 dispatch(dispatchPublishFilesSuccess(response.data));
+                if(set){
                 let myColor = { background: "#50f442 ", text: "#FFFFFF " };
                 notify.show(`Book Marked as Published`, "custom", 2500, myColor);
+              }
             })
             .catch(err => {
                 dispatch(dispatchPublishFilesFailed(err));
