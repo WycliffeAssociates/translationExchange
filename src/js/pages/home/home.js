@@ -6,12 +6,13 @@ import LogoTitle from "./LogoTitle";
 import QueryString from "query-string";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { fetchRecentProjects } from "../../actions";
+import { fetchRecentProjects, initSocket } from "../../actions";
 
 class Home extends Component {
 
 	componentDidMount() {
 		this.props.fetchRecentProjects();
+		this.props.initSocket('ws://localhost:8000');
 	}
 
 	navigateToProject(language, book, version, published, project_id) {
@@ -109,6 +110,7 @@ const mapDispatchToProps = dispatch => {
 
 	return bindActionCreators({
 		fetchRecentProjects,
+		initSocket
 
 	}, dispatch);
 };

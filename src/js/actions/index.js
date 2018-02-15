@@ -7,3 +7,4 @@ export * from './DirectionActions';
 export * from './ProjectsListContainerAction';
 export * from './ChunkListContainerAction';
 export * from './SourceAudioAction';
+export * from './WebSocketActions'

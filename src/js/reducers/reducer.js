@@ -9,6 +9,7 @@ import DirectionReducer from './DirectionReducer';
 import ProjectsListContainerReducer from './ProjectsListContinerReducer';
 import ChunkListContainerReducer from './ChunkListContainerReducer';
 import SourceAudioReducer from './SourceAudioReducer';
+import WebSocketReducer from './WebSocketReducer';
 
 
 export default combineReducers({
@@ -21,5 +22,7 @@ export default combineReducers({
   projectsListContainer: ProjectsListContainerReducer,
   chunkListContainer: ChunkListContainerReducer,
   sourceAudio: SourceAudioReducer,
+  webSocket: WebSocketReducer
+
 
 });
