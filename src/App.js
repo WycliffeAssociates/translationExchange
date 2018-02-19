@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import ChapterContainer from "./js/pages/takes/ChapterContainer";
+import ChunkListContainer from "./js/pages/chunks/ChunkListContainer";
 import ProjectsListContainer from "./js/pages/projects/ProjectsListContainer";
-import ProjectContainer from "./js/pages/chapters/ProjectContainer";
+import ChaptersContainer from "./js/pages/chapters/ChaptersContainer";
 import "./App.css";
 import NotFound from "./js/pages/NotFound";
 import Header from "./js/components/header";
@@ -10,8 +10,11 @@ import Home from "./js/pages/home/home";
 import About from "./js/pages/about/about";
 import axios from "axios";
 import User from "./js/pages/user/user";
-import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
+import Notifications from 'react-notify-toast';
+import { default as TouchBackend } from 'react-dnd-touch-backend';
+
+
 
 class App extends Component {
 	constructor(props) {
@@ -21,6 +24,10 @@ class App extends Component {
 		axios.defaults.timeout = 20000;
 	}
 
+
+
+
+
 	render() {
 		return (
 			/*
@@ -29,21 +36,22 @@ class App extends Component {
              */
 
 			<div>
+				 <Notifications />
 				<Header />
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route exact path="/about" component={About} />
 					<Route exact path="/projects" component={ProjectsListContainer} />
-					<Route exact path="/chapters" component={ProjectContainer} />
-					<Route exact path="/takes" component={ChapterContainer} />
+					<Route exact path="/chapters" component={ChaptersContainer} />
+					<Route exact path="/takes" component={ChunkListContainer} />
 					<Route exact path="/user" component={User} />
 					<Route path="*" component={NotFound} />
 				</Switch>
 
-				{/*<Footer/>*/}
+
 			</div>
 		);
 	}
 }
 
-export default DragDropContext(HTML5Backend)(App);
+export default DragDropContext(TouchBackend({ enableMouseEvents: true }))(App);

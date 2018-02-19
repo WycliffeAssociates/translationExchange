@@ -1,68 +1,44 @@
 import React, { Component } from "react";
 import QueryString from "query-string";
 import ProjectsList from "./components/ProjectsList";
-
+import { connect } from "react-redux";
 import "../../../css/projects.css";
-import { Header } from "semantic-ui-react";
-import axios from "axios";
-import config from "config/config";
 import ProjectFilter from "./ProjectFilter";
-import NotFound from "js/pages/NotFound";
-import ErrorButton from '../../../js/components/ErrorBytton';
+import NotFound from "../NotFound";
+import ErrorButton from '../../../js/components/ErrorButton';
 import LoadingGif from '../../../js/components/LoadingGif';
+import { bindActionCreators } from 'redux';
+import { fetchAllProjects, dispatchAllProjectsReset } from '../../actions';
 
 class ProjectsListContainer extends Component {
-	constructor() {
-		super();
-		this.state = {
-			loaded: true,
-			error: "",
-			//projects holdder from the database
-			projects: [],
-			//query string used to get those projects from the database
-			currentProjectQuery: ""
-		};
-	}
 
-	componentDidMount() {
+	componentWillMount() {
 		/*
 		get projects if query string is blank
 		 */
+
+
 		if (this.props.location.search) {
 			this.requestProjects(this.props.location.search);
 		}
 	}
 
 	requestProjects(queryString) {
-		var query = QueryString.parse(queryString);
-		this.setState({ loaded: false, error: "" });
-
-		axios
-			.post(config.apiUrl + "all_projects/", query)
-			.then(results => {
-				this.setState({
-					loaded: true,
-					projects: results.data,
-					currentProjectQuery: queryString
-				});
-			})
-			.catch(exception => {
-				this.setState({ error: exception });
-			});
+		this.props.fetchAllProjects(queryString);
 	}
 
 	//if the project query string has changed, request projects
 	componentWillReceiveProps(nextProps) {
 		if (!nextProps.location.search) {
-			this.setState({ currentProjectQuery: "", projects: [] });
-		} else if (this.state.currentProjectQuery !== nextProps.location.search) {
+
+		} else if (this.props.currentProjectQuery !== nextProps.location.search) {
 			this.requestProjects(nextProps.location.search);
 		}
 	}
 
 	setQuery(newQueryElement) {
 		//merge together the current query with the new query element
-		var currentQuery = QueryString.parse(this.state.currentProjectQuery);
+		var currentQuery = QueryString.parse(this.props.currentProjectQuery);
 		Object.assign(currentQuery, newQueryElement);
 
 		//now turn the query into a query string and navigate to it
@@ -78,20 +54,26 @@ class ProjectsListContainer extends Component {
 		and after the state has been set,
 		 navigate to a URL without the query
 		*/
-		this.setState({ currentProjectQuery: "", projects: [] }, function () {
-			this.props.history.push({
-				pathname: this.props.location.pathname
-			});
-		});
+
+		/***
+		 * TODO: Look out for better implemention way
+		**/
+		if (this.props.location.search) {
+			this.props.history.push({ pathname: this.props.location.pathname });
+		} else {
+			this.props.dispatchAllProjectsReset();
+		}
 	}
 
-	navigateToProject(language, book, version) {
+	navigateToProject(language, book, version, published, project_id) {
 		//make the query for the right project, using our current query as a base
-		var projectQuery = QueryString.parse(this.state.currentProjectQuery);
+		var projectQuery = QueryString.parse(this.props.currentProjectQuery);
 		Object.assign(projectQuery, {
-			language: language,
-			book: book,
-			version: version
+			language: language.name,
+			book: book.slug,
+			version: version.slug,
+			published,
+			project_id
 		});
 
 		var queryString = QueryString.stringify(projectQuery);
@@ -102,10 +84,8 @@ class ProjectsListContainer extends Component {
 	}
 
 	render() {
-		const { loaded, error, projects } = this.state;
-		var retryRequestProjects = function () {
-			this.requestProjects(this.props.location.search);
-		};
+		const { loaded, error, projects } = this.props;
+		const chooseAprojectText = this.props.displayText.ChooseProj;
 
 		//if a list of projects was loaded, but it was empty, there is some problem with the query URL
 		const projectsLoadedButEmpty =
@@ -116,26 +96,36 @@ class ProjectsListContainer extends Component {
 		if (projectsLoadedButEmpty) {
 			return <NotFound />;
 		} else if (error) {
-			return (<ErrorButton error={error} />);
+			return (<ErrorButton displayText={this.props.displayText} error={error} />);
 		} else if (!loaded) {
 			return (
-				<LoadingGif />
+				<LoadingGif displayText={this.props.displayText.loading} />
 			);
 		} else {
 			return (
-				<div className="projects">
-					<h1>Choose a Project</h1>
+				<div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '2%' }}>
+					<h1 style={{ fontSize: 35 }} >{chooseAprojectText}</h1>
 					<ProjectFilter
 						projects={projects}
 						setQuery={this.setQuery.bind(this)}
 						queryString={this.props.location.search}
 						clearQuery={this.clearQuery.bind(this)}
+						selectLanguage={this.props.displayText.selectLanguage}
+						selectBook={this.props.displayText.selectBook}
+						selectVersion={this.props.displayText.selectVersion}
+						clearButton={this.props.displayText.clearButton}
+						direction={this.props.direction}
 					/>
-					{this.state.projects.length > 0
-						? <ProjectsList
-							projects={projects}
-							navigateToProject={this.navigateToProject.bind(this)}
-						/>
+					{this.props.projects.length > 0
+						?
+						<div style={{ marginTop: 10 }}>
+							<ProjectsList
+								projects={projects}
+								navigateToProject={this.navigateToProject.bind(this)}
+								displayText={this.props.displayText}
+								direction={this.props.direction}
+							/>
+						</div>
 						: ""}
 				</div>
 			);
@@ -143,4 +133,15 @@ class ProjectsListContainer extends Component {
 	}
 }
 
-export default ProjectsListContainer;
+const mapStateToProps = state => {
+	const { direction = 'ltr' } = state.direction || {};
+	const { displayText = "" } = state.geolocation;
+	const { loaded = false, projects = [], error = "", currentProjectQuery = "" } = state.projectsListContainer
+	return { displayText, direction, loaded, projects, error, currentProjectQuery };
+};
+const mapDispatchToProps = dispatch => {
+	return bindActionCreators({
+		fetchAllProjects, dispatchAllProjectsReset
+	}, dispatch);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsListContainer);

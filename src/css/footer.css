@@ -1,0 +1,10 @@
+.footerStyle {
+  width: '100%';
+  direction: ltr;
+  backgroundColor: transparent;
+  position: sticky;
+  bottom: 0;
+  padding: 0;
+  text-align: center;
+  overflow-x:hidden;
+}

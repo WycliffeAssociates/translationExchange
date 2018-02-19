@@ -32,7 +32,7 @@ class WaveForm extends Component {
     });
 
 
-  //  this.props.updateTime(this.state.pos);
+     this.props.updateTime(this.state.pos);
      this.props.resetMarkerClicked(false);
 
   }
@@ -75,7 +75,6 @@ class WaveForm extends Component {
       position = this.props.markerPosition;
       }
 
-   console.log(this.props.audioFile);
 
 
 
@@ -114,8 +113,6 @@ const mapDispatchToProps = dispatch => {
           playAudio,
           stopAudio,
           updateTime
-
-
 
 }, dispatch);
 

@@ -40,50 +40,20 @@ class AudioComponent extends Component {
         this.setState({play:true});
 
     }
-
-
-
     componentDidMount() {
-
-
      this.setState({play:true});
     }
 
     componentDidUpdate(prevProps) {
 
-
     }
-
-
     render() {
-
-
-
-
-
-
-
         return (
             <div>
                 <AudioPlayer
-
-                    recordButton={() => {
-
-                    }}
-
-
-
-
-
-
-
-
+                    recordButton={() => {}}
                 />
-
-
             </div>
-
-
         );
     }
 }
