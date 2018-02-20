@@ -12,7 +12,9 @@ class Home extends Component {
 
 	componentDidMount() {
 		this.props.fetchRecentProjects();
-		this.props.initSocket('ws://localhost:8000');
+
+		this.props.initSocket('ws://localhost:8000/websocket/');
+
 	}
 
 	navigateToProject(language, book, version, published, project_id) {

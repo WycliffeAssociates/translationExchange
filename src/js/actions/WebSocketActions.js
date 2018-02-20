@@ -9,15 +9,17 @@ export const initSocket = (uri) => {
         dispatch(error('WebSocket is not supported by your browser'));
         return;
     }
-
     const socket = new WebSocket(uri);
     dispatch(connect());
 
     socket.onopen = () => dispatch(open(socket));
     socket.onerror = () => dispatch(error(true));
     socket.onmessage = evt => {
-      console.log(evt);
-      dispatch(message(...JSON.parse(evt.data)))};
+     dispatch(message(evt.data));
+  
+
+   };
+
     socket.onclose = () => dispatch(close());
   }
 };
@@ -38,6 +40,7 @@ export const open = (instance) => {
 
 
 export const message = (message) => {
+  console.log(message)
   return{
      type: MESSAGED,
      message

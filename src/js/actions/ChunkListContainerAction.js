@@ -21,6 +21,7 @@ export const getAudioTakes = (chunkId, counter) => {
 
 
 export const getTakesToExport = (chapterId) => {
+  debugger;
   return function(dispatch) {
     return axios
       .get(`${config.apiUrl}takes/?chapter_id=${chapterId}&published=true`)
