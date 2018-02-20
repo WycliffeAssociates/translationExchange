@@ -1,34 +1,33 @@
-// the returned function can be called with a dispatch (mock)
-
-import { fetchRecentProjects } from "../../js/actions/HomeRecentProjectAction";
-import axios from "axios";
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import { fetchRecentProjects } from "../../js/actions";
 import config from "../../config/config";
+import { access } from 'fs';
 
-const fakePost = jest.fn(() => {
-	return new Promise(() => {
-		return new Promise(() => {});
-	});
-});
-
-jest.mock("axios");
-
-axios.post = fakePost;
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
 describe("fetchRecentProjects", () => {
-	describe("returned value", () => {
-		it("is a function", () => {
-			var result = fetchRecentProjects();
-			expect(typeof result).toBe("function");
-		});
-
-		it("returns a promise", () => {
-			const returnedFunction = fetchRecentProjects();
-			const result = returnedFunction();
-			expect(typeof result.then).toBe("function");
-		});
-	});
-	it('is called with following parameter :config.apiUrl + "all_projects/,{}"', () => {
-		expect(fakePost).toBeCalledWith(config.apiUrl + "all_projects/", {});
-		expect(fakePost.mock.calls.length).toBe(1);
-	});
-});
+	it('has action type:HOME_RECENT_PROJECTS_RECEIVED and response is not null', () => {
+		const expectedActions = [
+			{ type: 'HOME_RECENT_PROJECTS_RECEIVED' }
+		]
+		const store = mockStore({ projects: [] })
+		return store.dispatch(fetchRecentProjects()).then(() => {
+			let action = store.getActions()[0];
+			expect(action.type).toEqual(expectedActions[0].type)
+			expect(action.response).not.toBeNull();
+		})
+	})
+	it.skip('has action type:HOME_RECENT_PROJECTS_ERR and response is undefined.', () => {
+		const expectedActions = [
+			{ type: 'HOME_RECENT_PROJECTS_ERR' }
+		]
+		const store = mockStore({ projects: [] })
+		return store.dispatch(fetchRecentProjects()).then(() => {
+			let action = store.getActions()[0];
+			expect(action.type).toEqual(expectedActions[0].type);
+			expect(action.response).toBeUndefined();
+		})
+	})
+})

@@ -52,46 +52,46 @@ class ProjectFilter extends Component {
 	}
 
 	requestAllFilters() {
-		var self = this;
-		self.setState({ error: "" });
+	        var self = this;
+	        self.setState({ error: "" });
 
-		axios
-			.all([
-				axios.get(config.apiUrl + "get_langs/"),
-				axios.get(config.apiUrl + "get_books/"),
-				axios.get(config.apiUrl + "get_versions/")
-			])
-			.then(
-				axios.spread(function(
-					languagesResponse,
-					booksResponse,
-					versionsResponse
-				) {
-					self.setState({
-						loaded: true,
-						languages: languagesResponse.data.map(function(language) {
-							return {
-								key: language.slug,
-								text: language.name,
-								value: language.slug
-							};
-						}),
-						books: booksResponse.data.map(function(book) {
-							return { key: book.slug, text: book.name, value: book.slug };
-						}),
-						versions: versionsResponse.data.map(function(version) {
-							return { key: version, text: version, value: version };
-						})
-					});
-				})
-			)
-			.catch(exception => {
-				self.setState({ error: exception });
-			});
-	}
+	        axios
+	            .all([
+	                axios.get(config.apiUrl + "languages/"),
+	                axios.get(config.apiUrl + "books/"),
+	                axios.get(config.apiUrl + "versions/")
+	            ])
+	            .then(
+	                axios.spread(function(
+	                    languagesResponse,
+	                    booksResponse,
+	                    versionsResponse
+	                ) {
+	                    self.setState({
+	                        loaded: true,
+	                        languages: languagesResponse.data.map(function(language) {
+	                            return {
+	                                key: language.slug,
+	                                text: language.name,
+	                                value: language.slug
+	                            };
+	                        }),
+	                        books: booksResponse.data.map(function(book) {
+	                            return { key: book.slug, text: book.name, value: book.slug };
+	                        }),
+	                        versions: versionsResponse.data.map(function(version) {
+	                            return { key: version.slug, text: version.slug, value: version.slug };
+	                        })
+	                    });
+	                })
+	            )
+	            .catch(exception => {
+	                self.setState({ error: exception });
+	            });
+	    }
 
 	//called when page first loads
-	componentDidMount() {
+	componentWillMount() {
 		if (this.props.queryString) {
 			this.getFiltersFromProjects(this.props.projects);
 		} else {
@@ -111,7 +111,7 @@ class ProjectFilter extends Component {
 
 	setLanguage(event, dropdown) {
 		if (dropdown.value) {
-			this.props.setQuery({ language: dropdown.value });
+			this.props.setQuery({ lang: dropdown.value });
 		}
 	}
 
@@ -150,9 +150,10 @@ class ProjectFilter extends Component {
 		versionOptions = versionOptions.concat(this.state.versions);
 
 		return (
-			<div>
+			<div style ={{ width: '100%', display:'flex', marginTop: '2%', justifyContent:'space-between', direction:`${this.props.direction}` }}>
+				<div style ={{marginLeft: '20%', height:'auto'}}>
 				<Dropdown
-					placeholder="Select Language"
+					placeholder={this.props.selectLanguage}  // text from in languages.json
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -160,8 +161,10 @@ class ProjectFilter extends Component {
 					onChange={this.setLanguage.bind(this)}
 					value={query.language}
 				/>
+				</div>
+				<div style ={{ height:'auto',}}>
 				<Dropdown
-					placeholder="Select Book"
+					placeholder={this.props.selectBook}
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -169,8 +172,10 @@ class ProjectFilter extends Component {
 					onChange={this.setBook.bind(this)}
 					value={query.book}
 				/>
+				</div>
+				<div style ={{height:'auto'}}>
 				<Dropdown
-					placeholder="Select Version"
+					placeholder={this.props.selectVersion}
 					selection
 					search
 					loading={!this.state.loaded && !this.state.error}
@@ -178,11 +183,14 @@ class ProjectFilter extends Component {
 					onChange={this.setVersion.bind(this)}
 					value={query.version}
 				/>
-				<Button onClick={this.props.clearQuery}>Clear</Button>
+				</div>
+				<div style ={{height:'auto', marginRight: '20%'}}>
+				<Button onClick={this.props.clearQuery}>{this.props.clearButton}</Button>
+			  </div>
 				{this.state.error ? (
 					<Message negative>
 						{this.state.error.message}{" "}
-						<Button onClick={this.requestAllFilters.bind(this)}>Retry</Button>
+						<Button onClick={this.requestAllFilters.bind(this)}>{this.props.retry}</Button>
 					</Message>
 				) : (
 					""

@@ -19,12 +19,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
+yarn.lock
 # user specific IDE stuff
 .idea/workspace.xml
 .vscode
+*coverage
 
 # ignore large files
 *.mp3
 *.wav
 *.lock
+

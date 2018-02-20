@@ -8,7 +8,7 @@ class LogoTitle extends Component {
 			<div>
 				<Image fluid src={trap} />
 				<div className="pageTitle">
-					<font size="50">Translation made available </font>
+					<font size="50">{this.props.titleText} </font>
 				</div>
 
 				<div className="logo">

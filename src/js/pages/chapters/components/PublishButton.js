@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
 
-export default class PublishButton extends Component {
+class PublishButton extends Component {
 	state = { modalOpen: false };
 
 	handleOpen = e =>
@@ -21,20 +21,18 @@ export default class PublishButton extends Component {
 	}
 
 	checkReadyForPublish() {
-		return this.props.chapters.every(chapter => chapter.is_publish);
+		return this.props.chapters.every(chapter => chapter.published);
 	}
 
 	render() {
-		let readyForPublish = this.checkReadyForPublish();
-
 		let publishButton = (
 			<Button
 				onClick={this.handleOpen}
 				floated="right"
-				disabled={!readyForPublish || this.props.isPublish}
-				color={this.props.isPublish ? "green" : ""}
+				disabled={!this.checkReadyForPublish()}
+				color={this.props.isPublished ? "green" : ""}
 			>
-				{this.props.isPublish ? "Published" : "Publish"}
+				{this.props.isPublished ? this.props.displayText.published : this.props.displayText.publish}
 			</Button>
 		);
 
@@ -59,3 +57,5 @@ export default class PublishButton extends Component {
 		);
 	}
 }
+
+export default PublishButton;

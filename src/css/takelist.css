@@ -1,0 +1,10 @@
+.TakeList{
+    max-height: 20em;
+    min-height: 20em;
+    overflow-y: auto;
+    padding-right: 10px;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 2em;
+}
