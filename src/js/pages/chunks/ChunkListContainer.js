@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { notify } from "react-notify-toast";
+import { NotificationManager} from 'react-notifications';
 import config from "../../../config/config";
 import QueryString from "query-string";
 import "css/takes.css";
@@ -63,8 +63,8 @@ class ChunkListContainer extends Component {
 	}
 
 	notifyUnpublished(){
-		let myColor = { background: "#FF0000 ", text: "#FFFFFF " };
-		notify.show("Chapter and book unpublished", "custom", 1800, myColor);
+
+		NotificationManager.error("Chapter and book unpublished", "Warning!");
 		this.forceUpdate();
 	}
 

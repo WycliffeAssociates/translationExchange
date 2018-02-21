@@ -13,7 +13,7 @@ class Home extends Component {
 	componentDidMount() {
 		this.props.fetchRecentProjects();
 
-		this.props.initSocket('ws://localhost:8000/websocket/');
+		this.props.initSocket('ws://localhost:8001/websocket/');
 
 	}
 

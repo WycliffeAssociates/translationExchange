@@ -10,8 +10,9 @@ import Home from "./js/pages/home/home";
 import About from "./js/pages/about/about";
 import axios from "axios";
 import User from "./js/pages/user/user";
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer} from 'react-notifications';
 import { DragDropContext } from "react-dnd";
-import Notifications from 'react-notify-toast';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 
@@ -36,7 +37,7 @@ class App extends Component {
              */
 
 			<div>
-				 <Notifications />
+				 <NotificationContainer/>
 				<Header />
 				<Switch>
 					<Route exact path="/" component={Home} />

@@ -11,7 +11,6 @@ import {
 
 } from "semantic-ui-react";
 import config from "../../../../../config/config";
-import Notifications from 'react-notify-toast';
 import {getAudioComments, resetComments} from '../../../../actions/index';
 
 
@@ -80,7 +79,6 @@ class TakeCommentsButton extends Component {
 						<Icon name="trash" />
 					</Button>
 				</div>
-				<Notifications />
 			</div>
 		);
 	}

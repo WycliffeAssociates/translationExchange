@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../../config/config";
-import { notify } from "react-notify-toast";
+import { NotificationManager} from 'react-notifications';
 
 export const getAudioTakes = (chunkId, counter) => {
   return function(dispatch) {
@@ -408,8 +408,7 @@ export const markedAsPublished = (success, chapterId, set) => {
           success();
         }
         if(set){
-          let myColor = { background: "#50f442 ", text: "#FFFFFF " };
-    			notify.show(`Chapter ${chapterNum} Marked as Published`, "custom", 2500, myColor);
+    			NotificationManager.success(`Chapter ${chapterNum} Marked as Published`, 'Success!');
           setTimeout(()=>window.history.go(-1), 500);
         }
           dispatch(markAsPublishedSuccess(response.data));

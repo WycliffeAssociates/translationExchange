@@ -31,7 +31,7 @@
     "react-file-input": "^0.2.5",
     "react-howler": "^3.6.2",
     "react-mic": "^7.1.6",
-    "react-notify-toast": "^0.3.2",
+    "react-notifications": "^1.4.3",
     "react-rating": "^0.8.1",
     "react-read-more": "^1.0.0",
     "react-redux": "^5.0.6",
@@ -74,7 +74,6 @@
     "web-audio-mock": "^0.1.9",
     "webpack": "^3.6.0"
   },
-
   "scripts": {
     "start": "cross-env NODE_PATH=src react-scripts start",
     "build": "cross-env NODE_PATH=src react-scripts build",

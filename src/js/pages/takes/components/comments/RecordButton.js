@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import "./RecordComment.css";
 import CommentsPlayer from "../comments/commentsPlayer";
-import Notifications from 'react-notify-toast';
 import {
     Button,
     Icon,
@@ -127,7 +126,6 @@ class RecordButton extends Component {
 
 					</div>
 				</div>
-				<Notifications />
 			</Modal>
         );
     }

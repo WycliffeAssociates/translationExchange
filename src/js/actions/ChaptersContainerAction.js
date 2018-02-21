@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../../config/config";
-import { notify } from "react-notify-toast";
+import { NotificationManager} from 'react-notifications';
 
 //chaptersContainer
 
@@ -90,8 +90,7 @@ export function publishFiles(projectId, set) {
             .then(response => {
                 dispatch(dispatchPublishFilesSuccess(response.data));
                 if(set){
-                let myColor = { background: "#50f442 ", text: "#FFFFFF " };
-                notify.show(`Book Marked as Published`, "custom", 2500, myColor);
+                NotificationManager.success(`Book Marked as Published`, "Success!");
               }
             })
             .catch(err => {

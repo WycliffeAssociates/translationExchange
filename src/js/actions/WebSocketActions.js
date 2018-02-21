@@ -1,4 +1,5 @@
 import { CONNECTING, OPENED, MESSAGED, ERROR, CLOSED} from './types';
+import { NotificationManager} from 'react-notifications';
 
 
 export const initSocket = (uri) => {
@@ -16,7 +17,7 @@ export const initSocket = (uri) => {
     socket.onerror = () => dispatch(error(true));
     socket.onmessage = evt => {
      dispatch(message(evt.data));
-  
+
 
    };
 
@@ -40,7 +41,7 @@ export const open = (instance) => {
 
 
 export const message = (message) => {
-  console.log(message)
+  NotificationManager.info(message, 'Success!');
   return{
      type: MESSAGED,
      message
