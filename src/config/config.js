@@ -20,9 +20,9 @@
 //     streamingUrl: "http://localhost/"
 // };
 
-const config = {                                                        //remote api
-    apiUrl: "https://te.loc/api/",
-    streamingUrl: "https://te.loc/"
-};
+// const config = {                                                        //remote api
+//     apiUrl: "https://te.loc/api/",
+//     streamingUrl: "https://te.loc/"
+// };
 
 export default config;
