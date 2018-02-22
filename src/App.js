@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import {connect} from 'react-redux';
-import { bindActionCreators } from 'redux';
 import ChunkListContainer from "./js/pages/chunks/ChunkListContainer";
 import ProjectsListContainer from "./js/pages/projects/ProjectsListContainer";
 import ChaptersContainer from "./js/pages/chapters/ChaptersContainer";
@@ -10,7 +8,6 @@ import NotFound from "./js/pages/NotFound";
 import Header from "./js/components/header";
 import Home from "./js/pages/home/home";
 import About from "./js/pages/about/about";
-import {initSocket} from './js/actions'
 import axios from "axios";
 import User from "./js/pages/user/user";
 import 'react-notifications/lib/notifications.css';
@@ -27,11 +24,6 @@ class App extends Component {
 		//configuration for web requests
 		axios.defaults.timeout = 20000;
 	}
-
-componentDidMount(){
-	//this.props.initSocket('ws://localhost:8001/websocket/');
-}
-
 
 
 
@@ -60,16 +52,6 @@ componentDidMount(){
 		);
 	}
 }
-
-const mapDispatchToProps = dispatch => {
-
-	return bindActionCreators({
-
-		initSocket
-
-	}, dispatch);
-};
-
 
 
 export default DragDropContext(TouchBackend({ enableMouseEvents: true }))(App);

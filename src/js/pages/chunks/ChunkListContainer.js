@@ -80,7 +80,7 @@ class ChunkListContainer extends Component {
 				returnTake = tk;
 			}
 
-			if (chunkId === tk.chunkId && tk.published && !patch.published && published) {
+			if (chunkId === tk.chunkId && tk.published && !patch.published && published && tk.id === takeId) {
        debugger;
 			 this.props.markedAsPublished(this.notifyUnpublished.bind(this), chapterId, false)
 			 this.props.publishFiles(project.id, false); // unpublish project
