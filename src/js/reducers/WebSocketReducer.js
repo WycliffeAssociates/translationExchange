@@ -1,7 +1,7 @@
 import {  CONNECTING, OPENED, MESSAGED, ERROR, CLOSED } from '../actions/types';
 
 const initialState = {
-    instance: null,
+    socket: null,
     loading: false,
     connected: false,
     error: null,
@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
             ...state,
             connected: true,
             loading: false,
-            instance: action.instance,
+            socket: action.instance,
         };
     case MESSAGED:
         return {
@@ -38,7 +38,7 @@ const reducer = (state = initialState, action) => {
             ...state,
             loading: false,
             connected: false,
-            instance: null,
+            socket: null,
         };
     default:
         return state;

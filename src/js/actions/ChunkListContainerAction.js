@@ -3,6 +3,7 @@ import config from "../../config/config";
 import { NotificationManager} from 'react-notifications';
 
 export const getAudioTakes = (chunkId, counter) => {
+  debugger;
   return function(dispatch) {
     return axios
       .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`)
@@ -21,7 +22,6 @@ export const getAudioTakes = (chunkId, counter) => {
 
 
 export const getTakesToExport = (chapterId) => {
-  debugger;
   return function(dispatch) {
     return axios
       .get(`${config.apiUrl}takes/?chapter_id=${chapterId}&published=true`)

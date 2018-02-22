@@ -75,12 +75,13 @@ class ChunkListContainer extends Component {
 
 		const chapterId = chapter.id;
 		takes.map(tk => {
+			debugger;
 			if (chunkId === tk.chunkId && tk.published === true && patch.published === true) {
 				returnTake = tk;
 			}
 
 			if (chunkId === tk.chunkId && tk.published && !patch.published && published) {
-
+       debugger;
 			 this.props.markedAsPublished(this.notifyUnpublished.bind(this), chapterId, false)
 			 this.props.publishFiles(project.id, false); // unpublish project
 			}

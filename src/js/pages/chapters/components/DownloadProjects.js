@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Dropdown } from 'semantic-ui-react'
+import { connect } from "react-redux";
 import 'css/chapters.css'
 const options = [
     { key: 'mp3', icon: 'file archive outline', text: 'MP3', value: 'mp3' },
@@ -18,7 +19,11 @@ class DownloadProjects extends Component {
 
     onDownloadProject() {
         this.setState({ loading: true });
-        this.props.onDownloadProject(this.state.file_format);
+        const message = {action: "download_project"};
+        // sends message to channels back-end
+        const {socket} = this.props;
+        socket.send(JSON.stringify(message))
+        //this.props.onDownloadProject(this.state.file_format);
     }
     getFileFormat(event, data) {
         this.setState({
@@ -37,4 +42,11 @@ class DownloadProjects extends Component {
     }
 }
 
-export default DownloadProjects;
+const mapStateToProps = state => {
+
+    const {socket} = state.webSocket;
+
+    return{socket};
+}
+
+export default connect(mapStateToProps)(DownloadProjects);
