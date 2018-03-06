@@ -10,6 +10,7 @@ import Home from './js/pages/home/home';
 import About from './js/pages/about/about';
 import axios from 'axios';
 import User from './js/pages/user/user';
+import CreateUserContainer from './js/pages/user/components/CreateUserContainer'
 import Login from './js/pages/Login/LoginPage.js';
 import Redirect from './js/pages/user/components/Redirect.js';
 import { DragDropContext } from 'react-dnd';
@@ -49,7 +50,6 @@ class App extends Component {
 
       <div>
         <Notifications />
-        <Header />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
@@ -57,6 +57,7 @@ class App extends Component {
           <Route exact path="/projects" component={ProjectsListContainer} />
           <Route exact path="/chapters" component={ChaptersContainer} />
           <Route exact path="/takes" component={ChunkListContainer} />
+          <Route exact path="/user/create" component={CreateUserContainer} />
           <Route exact path="/user" component={User} />
           <Route path="/callback" component={Redirect} />
           <Route path="*" component={NotFound} />

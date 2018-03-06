@@ -9,7 +9,7 @@ import CommentsPlayer from "../comments/commentsPlayer";
 
 
 export class RecordComment extends Component {
-	constructor(props) {
+  constructor(props) {
 		super(props);
 		this.state = {
 			record: false,

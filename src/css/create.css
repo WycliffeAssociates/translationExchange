@@ -1,0 +1,6 @@
+.background {
+    background: #b2fefa; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #b2fefa, #0ed2f7); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #b2fefa, #0ed2f7); /* W3C */
+
+}

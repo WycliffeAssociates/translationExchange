@@ -1,10 +1,12 @@
 /* global require gapi:true */
 import React, { Component } from 'react';
+
 // import {OAuthSignIn} from 'redux-auth/material-ui-theme';
 import 'css/home.css';
 import {connect} from 'react-redux';
 import {dispatchToken} from '../../actions/database.js';
 var defaultImg = require('../../../images/white.png');
+
 
 class User extends Component {
 
@@ -35,9 +37,6 @@ class User extends Component {
     });
 
   }
-
-
-
 
   onSignIn(googleUser) {
 
@@ -74,7 +73,7 @@ class User extends Component {
 
 
   render() {
-
+    const {history} = this.props;
     return (
       <div>
         <div
@@ -88,7 +87,7 @@ class User extends Component {
           <div id="g-signin2" onSuccess= {this.onSignIn} style={{margin: 'auto', textAlign: 'center', marginLeft: '4.5vw'}}> </div>
 
 
-          <button style={{width: '80%', height: '3vw', marginTop: '1vw',
+          <button onClick ={() => { history.push('/user/create')}} style={{width: '80%', height: '3vw', marginTop: '1vw',
             backgroundColor: '#FF6600', color: 'white', border: 'none', boxShadow: '1px 1px 1px rgba(0,0,0,0.6)'}}> Create Account </button>
 
           <button style={{width: '80%', height: '3vw', marginTop: '1vw',
