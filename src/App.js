@@ -6,14 +6,17 @@ import ChaptersContainer from './js/pages/chapters/ChaptersContainer';
 import './App.css';
 import NotFound from './js/pages/NotFound';
 import Header from './js/components/header';
+import UserCard from './js/pages/Login/components/UserCard.js';
 import Home from './js/pages/home/home';
 import About from './js/pages/about/about';
 import axios from 'axios';
 import User from './js/pages/user/user';
-import Login from './js/pages/Login/LoginPage.js';
+import Welcome from './js/pages/Login/LoginPage.js';
+import AvailableUsers from './js/pages/Login/AvailableUsers.js';
 import Redirect from './js/pages/user/components/Redirect.js';
 import { DragDropContext } from 'react-dnd';
 import Notifications from 'react-notify-toast';
+import Root from './js/components/Root.js';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 // import and configure the raven client for sentry in order to track errors
@@ -49,15 +52,17 @@ class App extends Component {
 
       <div>
         <Notifications />
-        <Header />
+        {/*<Header /> */}
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/projects" component={ProjectsListContainer} />
-          <Route exact path="/chapters" component={ChaptersContainer} />
-          <Route exact path="/takes" component={ChunkListContainer} />
-          <Route exact path="/user" component={User} />
+          <Route  exact path="/" component={Root} />
+          <Route  path ="/users" component={AvailableUsers} />
+          <Route  path="/home" component={Home} />
+          <Route  path="/welcome" component={Welcome} />
+          <Route  path="/about" component={About} />
+          <Route  path="/projects" component={ProjectsListContainer} />
+          <Route  path="/chapters" component={ChaptersContainer} />
+          <Route  path="/takes" component={ChunkListContainer} />
+          <Route  path="/user" component={User} />
           <Route path="/callback" component={Redirect} />
           <Route path="*" component={NotFound} />
         </Switch>
