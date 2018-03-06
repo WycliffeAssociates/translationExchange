@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import { Button, Header, Icon, Modal } from "semantic-ui-react";
+/*  eslint indent:[ "error", "tab", {SwitchCase: 1}]*/
+import React, { Component } from 'react';
+import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 
 class PublishButton extends Component {
 	state = { modalOpen: false };
 
 	handleOpen = e =>
 		this.setState({
-			modalOpen: true
+			modalOpen: true,
 		});
 
 	handleClose = e =>
 		this.setState({
-			modalOpen: false
+			modalOpen: false,
 		});
 
 	// called when the user clicks yes inside the modal
@@ -30,7 +31,7 @@ class PublishButton extends Component {
 				onClick={this.handleOpen}
 				floated="right"
 				disabled={!this.checkReadyForPublish()}
-				color={this.props.isPublished ? "green" : ""}
+				color={this.props.isPublished ? 'green' : 'red'}
 			>
 				{this.props.isPublished ? this.props.displayText.published : this.props.displayText.publish}
 			</Button>

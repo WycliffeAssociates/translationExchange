@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import { Container, Grid, Divider } from "semantic-ui-react";
-import "css/home.css";
-import StartHere from "./StartHere";
-import LogoTitle from "./LogoTitle";
-import QueryString from "query-string";
-import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
-import { fetchRecentProjects } from "../../actions";
+/* eslint indent:["error", "tab"]*/
+import React, { Component } from 'react';
+import { Container, Grid, Divider } from 'semantic-ui-react';
+import 'css/home.css';
+import StartHere from './StartHere';
+import LogoTitle from './LogoTitle';
+import QueryString from 'query-string';
+import { connect } from 'react-redux';
+//import { bindActionCreators } from 'redux';
+import { fetchRecentProjects } from '../../actions';
 
 class Home extends Component {
 
 	componentDidMount() {
-		this.props.fetchRecentProjects();
+		this.props.dispatch(fetchRecentProjects());
 	}
 
 	navigateToProject(language, book, version, published, project_id) {
@@ -22,13 +23,13 @@ class Home extends Component {
 			book: book,
 			version: version,
 			published,
-			project_id
+			project_id,
 		});
 
 		var queryString = QueryString.stringify(projectQuery);
 		this.props.history.push({
-			pathname: "/chapters",
-			search: "?" + queryString
+			pathname: '/chapters',
+			search: '?' + queryString,
 		});
 	}
 	render() {
@@ -37,19 +38,24 @@ class Home extends Component {
 		const title = this.props.displayText.mainPage;
 		const btnText = this.props.displayText.startHere;
 		return (
-			<Container fluid className="background">
+			<Container  fluid className="background">
 				<Container fluid>
 					<LogoTitle titleText={title} />
 					<StartHere text={btnText} />
 				</Container>
 
 				{homeRecentProjects&&homeRecentProjects.length > 0 ? (
-					<Container fluid>
+					<Container fluid
+						style={{border: 'solid',
+							borderColor: 'lightgray', borderWidth: '0.5px', width: '70vw',
+							margin: 'auto', textAlign: 'center',
+							boxShadow: '5px 5px 5px rgba(0, 0, 0, 0.6)',
+							backgroundColor: 'white', borderRadius: '5px'}} >
 						<Grid padded textAlign="center">
 							<Grid.Column width={3}>
 								<Grid.Row height={1}>
 									<h2>
-										<font color="white">{recentProjects}</font>
+										<font color="black">{recentProjects}</font>
 									</h2>
 								</Grid.Row>
 								<Divider />
@@ -60,8 +66,8 @@ class Home extends Component {
 						</Grid>
 					</Container>
 				) : (
-						""
-					)}
+					''
+				)}
 			</Container>
 		);
 	}
@@ -82,12 +88,12 @@ class Home extends Component {
 							project.id
 						)}
 				>
-					<h4>
-						<font color="white">
-							{project.book.name + " "}
-							{project.language.name + " "}
-							{project.version.slug}
-						</font>
+					<h4 className="recentProjectsList">
+
+						{project.book.name + ' '}
+						{project.language.name + ' '}
+						{project.version.slug}
+
 					</h4>
 				</Grid.Row>
 			</div>
@@ -105,12 +111,6 @@ const mapStateToProps = state => {
 };
 
 
-const mapDispatchToProps = dispatch => {
-
-	return bindActionCreators({
-		fetchRecentProjects,
-
-	}, dispatch);
-};
+const mapDispatchToProps = (dispatch) => ({dispatch});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

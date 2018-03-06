@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import QueryString from "query-string";
-import ProjectsList from "./components/ProjectsList";
-import { connect } from "react-redux";
-import "../../../css/projects.css";
-import ProjectFilter from "./ProjectFilter";
-import NotFound from "../NotFound";
+/*eslint indent:["error", "tab", {SwitchCase: 1}] */
+import React, { Component } from 'react';
+import QueryString from 'query-string';
+import ProjectsList from './components/ProjectsList';
+import { connect } from 'react-redux';
+import '../../../css/projects.css';
+import ProjectFilter from './ProjectFilter';
+import NotFound from '../NotFound';
 import ErrorButton from '../../../js/components/ErrorButton';
 import LoadingGif from '../../../js/components/LoadingGif';
 import { bindActionCreators } from 'redux';
@@ -45,7 +46,7 @@ class ProjectsListContainer extends Component {
 		var queryString = QueryString.stringify(currentQuery);
 		this.props.history.push({
 			pathname: this.props.location.pathname,
-			search: "?" + queryString
+			search: '?' + queryString
 		});
 	}
 
@@ -78,8 +79,8 @@ class ProjectsListContainer extends Component {
 
 		var queryString = QueryString.stringify(projectQuery);
 		this.props.history.push({
-			pathname: "/chapters",
-			search: "?" + queryString
+			pathname: '/chapters',
+			search: '?' + queryString
 		});
 	}
 
@@ -126,7 +127,7 @@ class ProjectsListContainer extends Component {
 								direction={this.props.direction}
 							/>
 						</div>
-						: ""}
+						: ''}
 				</div>
 			);
 		}
@@ -135,8 +136,8 @@ class ProjectsListContainer extends Component {
 
 const mapStateToProps = state => {
 	const { direction = 'ltr' } = state.direction || {};
-	const { displayText = "" } = state.geolocation;
-	const { loaded = false, projects = [], error = "", currentProjectQuery = "" } = state.projectsListContainer
+	const { displayText = '' } = state.geolocation;
+	const { loaded = false, projects = [], error = '', currentProjectQuery = '' } = state.projectsListContainer
 	return { displayText, direction, loaded, projects, error, currentProjectQuery };
 };
 const mapDispatchToProps = dispatch => {

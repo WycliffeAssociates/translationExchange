@@ -1,20 +1,21 @@
-import React, { Component } from "react";
-import ChunkPropTypes from "./ChunkPropTypes";
-import { Accordion, Icon, Grid } from "semantic-ui-react";
-import TakeTable from "../takes/TakeTable";
-import "css/takes.css";
-import { connect } from "react-redux";
+/* eslint indent: ["error", "tab", {SwitchCase: 1}] */
+import React, { Component } from 'react';
+import ChunkPropTypes from './ChunkPropTypes';
+import { Accordion, Icon, Grid } from 'semantic-ui-react';
+import TakeTable from '../takes/TakeTable';
+import 'css/takes.css';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAudioTakes, getChunkIdClicked } from './../../actions';
 
-import ChunkSidebar from "../takes/components/SideBar";
+import ChunkSidebar from '../takes/components/SideBar';
 class Chunk extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
 			calledChunks: [],
-			chunkId: ''
+			chunkId: '',
 		};
 	}
 
@@ -34,15 +35,15 @@ class Chunk extends Component {
 		let onestar = [];
 		let twostar = [];
 		let threestar = [];
-		
+
 		let orderedTakes = this.props.takes;
 		const has_comments = this.props.has_comments;
 		orderedTakes.map(tk => {
 			if (this.props.id === tk.chunkId) {   // get takes corresponding just to the selected chunk
-                const lastChars = tk.location.slice(-6);
-                const takeNum = lastChars.slice(0,2);    // meantime solution for the take number, got it from
-														//take file name
-                tk.order = takeNum;
+				const lastChars = tk.location.slice(-6);
+				const takeNum = lastChars.slice(0,2);    // meantime solution for the take number, got it from
+				//take file name
+				tk.order = takeNum;
 				if (tk.published) {
 					publish[publish.length] = tk;
 
@@ -57,14 +58,14 @@ class Chunk extends Component {
 
 				}
 			}
-         return null;
+			return null;
 		});
-		let modeLabel = "";
+		let modeLabel = '';
 		switch (this.props.mode) {
-			case "chunk":
+			case 'chunk':
 				modeLabel = this.props.displayText.chunk;
 				break;
-			case "verse":
+			case 'verse':
 				modeLabel = this.props.displayText.verse;
 				break;
 			default:
@@ -95,7 +96,7 @@ class Chunk extends Component {
 								{modeLabel} {this.props.number}
 								{this.props.has_comments
 									? <Icon name="circle" color="yellow" />
-									: ""}
+									: ''}
 							</font>
 						</center>
 					</Accordion.Title>
@@ -199,7 +200,7 @@ class Chunk extends Component {
 	}
 }
 Chunk.propTypes = {
-	chunk: ChunkPropTypes
+	chunk: ChunkPropTypes,
 };
 
 const mapStateToProps = state => {
@@ -211,7 +212,7 @@ const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
 		{
 			getAudioTakes,
-			getChunkIdClicked
+			getChunkIdClicked,
 		}, dispatch);
 };
 

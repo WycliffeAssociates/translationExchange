@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import trap from "images/trap.svg";
-import logo from "images/logo.png";
-import { Image } from "semantic-ui-react";
+/* eslint indent:["error", "tab"]*/
+import React, { Component } from 'react';
+import trap from 'images/trap.svg';
+import logo from 'images/logo.png';
+import { Image } from 'semantic-ui-react';
 class LogoTitle extends Component {
 	render() {
 		return (
@@ -12,7 +13,7 @@ class LogoTitle extends Component {
 				</div>
 
 				<div className="logo">
-					<Image src={logo} className="logoterra" />
+					<Image src={logo} height="300vw" width="300vw"  />
 				</div>
 			</div>
 		);

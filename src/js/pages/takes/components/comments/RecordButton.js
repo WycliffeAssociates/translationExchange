@@ -76,9 +76,12 @@ class RecordButton extends Component {
 
     Style = {
         backgroundColor: "black",
-        fontSize: "32",
+        fontSize: "32px",
         color: "white",
-        textAlign: "center"
+        textAlign: "center",
+        display: 'block',
+        margin: 'auto',
+        marginTop: '20vh',
         //width:"500px"
     };
 

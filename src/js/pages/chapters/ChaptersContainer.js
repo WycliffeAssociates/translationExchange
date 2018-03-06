@@ -1,14 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Container, Table } from "semantic-ui-react";
-import ChapterList from "./components/ChapterList";
-import DownloadProjects from "./components/DownloadProjects";
-import QueryString from "query-string";
-import LoadingTinyGif from "images/loading-tiny.gif";
-import "css/chapters.css";
-import PublishButton from "./components/PublishButton";
-import DownloadSourceAudio from "./components/DownloadSourceAudio";
-import NotFound from "js/pages/NotFound";
+/* eslint indent:[ "error", "tab", {SwitchCase: 1}]*/
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Container, Table } from 'semantic-ui-react';
+import ChapterList from './components/ChapterList';
+import DownloadProjects from './components/DownloadProjects';
+import QueryString from 'query-string';
+import LoadingTinyGif from 'images/loading-tiny.gif';
+import 'css/chapters.css';
+import PublishButton from './components/PublishButton';
+import DownloadSourceAudio from './components/DownloadSourceAudio';
+import NotFound from 'js/pages/NotFound';
 import ErrorButton from '../../components/ErrorButton';
 import LoadingGif from '../../components/LoadingGif';
 import { bindActionCreators } from 'redux';
@@ -33,8 +35,8 @@ class ChaptersContainer extends Component {
 		query.chapter_num = chNum;
 		query.chapterId = chId;
 		this.props.history.push({
-			pathname: "/takes",
-			search: QueryString.stringify(query)
+			pathname: '/takes',
+			search: QueryString.stringify(query),
 		});
 	}
 
@@ -64,7 +66,7 @@ class ChaptersContainer extends Component {
 					<Container fluid>
 						<h1>
 							{this.props.book.name} ({this.props.language.name})
-								<DownloadSourceAudio
+							<DownloadSourceAudio
 								published={true}
 								downloadLoadingSourceAudio={this.props.downloadLoadingSourceAudio}
 								onDownloadSourceAudio={this.onDownloadSourceAudio.bind(this)}
@@ -144,7 +146,7 @@ const mapStateToProps = state => {
 		downloadError, downloadSuccess,
 		downloadLoadingSourceAudio,
 		downloadErrorAudioSource,
-		direction, checked_level
+		direction, checked_level,
 	};
 
 };
@@ -153,7 +155,7 @@ const mapDispatchToProps = dispatch => {
 	return bindActionCreators({
 		fetchChaptersContainerData,
 		setCheckingLevel, publishFiles
-		, downloadProject, downloadSourceAudio
+		, downloadProject, downloadSourceAudio,
 	}, dispatch);
-}
+};
 export default connect(mapStateToProps, mapDispatchToProps)(ChaptersContainer);

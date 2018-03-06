@@ -1,6 +1,6 @@
-import axios from "axios";
-import config from "../../config/config";
-import { notify } from "react-notify-toast";
+import axios from 'axios';
+import config from '../../config/config';
+import { notify } from 'react-notify-toast';
 
 export const getAudioTakes = (chunkId, counter) => {
   return function(dispatch) {
@@ -25,7 +25,7 @@ export const getTakesToExport = (chapterId) => {
     return axios
       .get(`${config.apiUrl}takes/?chapter_id=${chapterId}&published=true`)
       .then(response => {
-          dispatch(dispatchTakesToExportSuccess(response.data));
+        dispatch(dispatchTakesToExportSuccess(response.data));
       })
       .catch(error => {
         dispatch(dispatchChunksFailed(error));
@@ -51,15 +51,15 @@ export const getAudioComments = (query, type) => {
 
 export const dispatchGetAudioCommentsSuccess = comments => {
   return {
-    type: "GET_COMMENTS_SUCCESS",
-    comments
+    type: 'GET_COMMENTS_SUCCESS',
+    comments,
   };
 };
 
 export const getChunkIdClicked = id => {
   return {
-    type: "CHUNK_ID_CLICKED",
-    id
+    type: 'CHUNK_ID_CLICKED',
+    id,
   };
 };
 
@@ -77,7 +77,7 @@ export const getSelectedProjectInfo = query => {
         ),
         axios.get(`${config.apiUrl}projects/?id=${query.project_id}`),
         axios.get(`${config.apiUrl}books/?slug=${query.book}`),
-        axios.get(`${config.apiUrl}languages/?id=${query.project_id}`)
+        axios.get(`${config.apiUrl}languages/?id=${query.project_id}`),
       ])
       .then(
         axios.spread(function(
@@ -107,7 +107,7 @@ export const getSelectedProjectInfo = query => {
 
 export const resetInfo = () => {
   return {
-    type: "RESET_STATE"
+    type: 'RESET_STATE',
   };
 };
 
@@ -120,13 +120,13 @@ export function dispatchProjectInfoSuccess(
   chapterId
 ) {
   return {
-    type: "FETCH_PROJECT_SUCCESS",
+    type: 'FETCH_PROJECT_SUCCESS',
     chunks: chunksResponse.data,
     project: projectsResponse.data[0],
     chapter: chapterResponse.data[0],
     book: booksResponse.data[0],
     language: languageResponse.data[0],
-    chapterId
+    chapterId,
   };
 }
 
@@ -134,8 +134,8 @@ export function dispatchTakesFirstTimeSuccess(takesResponse, chunkId) {
   takesResponse.map(take => (take.chunkId = chunkId));
 
   return {
-    type: "FETCH_TAKE_SUCCESS_FIRST_TIME",
-    takes: takesResponse
+    type: 'FETCH_TAKE_SUCCESS_FIRST_TIME',
+    takes: takesResponse,
   };
 }
 
@@ -143,23 +143,23 @@ export function dispatchTakesSuccess(takesResponse, chunkId) {
   takesResponse.map(take => (take.chunkId = chunkId));
 
   return {
-    type: "FETCH_TAKE_SUCCESS",
-    takes: takesResponse
+    type: 'FETCH_TAKE_SUCCESS',
+    takes: takesResponse,
   };
 }
 
 export function dispatchTakesToExportSuccess(takesResponse) {
 
   return {
-    type: "FETCH_TAKE_TO_EXPORT_SUCCESS",
-    takes: takesResponse
+    type: 'FETCH_TAKE_TO_EXPORT_SUCCESS',
+    takes: takesResponse,
   };
 }
 
 export function dispatchChunksFailed(error) {
   return {
-    type: "FETCH_CHUNKS_FAILED",
-    error
+    type: 'FETCH_CHUNKS_FAILED',
+    error,
   };
 }
 
@@ -167,7 +167,7 @@ export function dispatchChunksFailed(error) {
 export const setSourceProject = (query, chapter) => {
   return function(dispatch) {
     return axios
-      .post(config.apiUrl + "takes/", { ...query, chapter: chapter })
+      .post(config.apiUrl + 'takes/', { ...query, chapter: chapter })
       .then(response => {
         dispatch(setSourceProjectSuccess(response.data, query));
       })
@@ -179,16 +179,16 @@ export const setSourceProject = (query, chapter) => {
 
 export function setSourceProjectSuccess(response, query) {
   return {
-    type: "SET_SOURCE_PROJECT_SUCCESS",
+    type: 'SET_SOURCE_PROJECT_SUCCESS',
     response,
-    query
+    query,
   };
 }
 
 export function setSourceProjectFailed(error) {
   return {
-    type: "SET_SOURCE_PROJECT_FAILED",
-    error
+    type: 'SET_SOURCE_PROJECT_FAILED',
+    error,
   };
 }
 
@@ -203,7 +203,7 @@ export const patchTake = (
 ) => {
   return function(dispatch) {
     return axios
-      .patch(config.apiUrl + "takes/" + takeId + "/", patch)
+      .patch(config.apiUrl + 'takes/' + takeId + '/', patch)
       .then(response => {
         //find correct take to update
         let listOfTakes = takes;
@@ -223,15 +223,15 @@ export const patchTake = (
         let message;
         if (error.response) {
           if (error.response.status === 404) {
-            message = "Sorry, that take doesn't exist!";
+            message = 'Sorry, that take does not exist!';
             updatingDeletedTake(chunkId);
           } else {
             message =
-              "Something went wrong. Please check your connection and try again.";
+              'Something went wrong. Please check your connection and try again.';
           }
         } else {
           message =
-            "Something went wrong. Please check your connection and try again.";
+            'Something went wrong. Please check your connection and try again.';
         }
         dispatch(patchTakeFailed(message));
       });
@@ -240,19 +240,19 @@ export const patchTake = (
 
 export function patchTakeSuccess(updatedTakes) {
   return {
-    type: "PATCH_TAKE_SUCCESS",
-    updatedTakes
+    type: 'PATCH_TAKE_SUCCESS',
+    updatedTakes,
   };
 }
 export function patchTakeFailed(error) {
   return {
-    type: "PATCH_TAKE_FAILED",
-    error
+    type: 'PATCH_TAKE_FAILED',
+    error,
   };
 }
 export const setActiveToFalse = () => {
   return {
-    type: "SET_ACTIVE_TO_FALSE"
+    type: 'SET_ACTIVE_TO_FALSE',
   };
 };
 
@@ -260,8 +260,8 @@ export const setActiveToFalse = () => {
 export const deleteTake = (takeId, success, updatingDeletedTake) => {
   return function(dispatch) {
     return axios
-      .delete(config.apiUrl + "takes/" + takeId + "/")
-      .then(response => {
+      .delete(config.apiUrl + 'takes/' + takeId + '/')
+      .then(() => {
         updatingDeletedTake(takeId);
 
         if (success) {
@@ -275,11 +275,11 @@ export const deleteTake = (takeId, success, updatingDeletedTake) => {
             updatingDeletedTake(takeId);
           } else {
             message =
-              "Something went wrong. Please check your connection and try again. ";
+              'Something went wrong. Please check your connection and try again. ';
           }
         } else {
           message =
-            "Something went wrong. Please check your connection and try again. ";
+            'Something went wrong. Please check your connection and try again.';
         }
         dispatch(deleteTakeFailed(message));
       });
@@ -296,22 +296,22 @@ export function deleteTakeSuccess(takeId, takes) {
   takes.splice(takeIndex, 1);
 
   return {
-    type: "DELETE_TAKE_SUCCESS",
-    takes
+    type: 'DELETE_TAKE_SUCCESS',
+    takes,
   };
 }
 
 export function deleteTakeFailed(error) {
   return {
-    type: "DELETE_TAKE_FAILED",
-    error
+    type: 'DELETE_TAKE_FAILED',
+    error,
   };
 }
 
 export const chapterUpdate = chapter => {
   return {
-    type: "CHAPTER_UPDATE",
-    chapter
+    type: 'CHAPTER_UPDATE',
+    chapter,
   };
 };
 
@@ -328,11 +328,11 @@ export const deleteComment = (
 ) => {
   return function(dispatch) {
     return axios
-      .delete(config.apiUrl + "comments/" + commentId + "/")
+      .delete(config.apiUrl + 'comments/' + commentId + '/')
       .then(() => {
         updatingDeletedComment(commentId, comments);
         if (comments.length === 0) {
-          if (type === "take") {
+          if (type === 'take') {
             let takeIdToUpdate;
             takeIdToUpdate = takes
               .map(tk => {
@@ -341,7 +341,7 @@ export const deleteComment = (
               .indexOf(id);
             takes[takeIdToUpdate].has_comment = false;
             dispatch(updateTakesSuccess(takes));
-          } else if (type === "chunk") {
+          } else if (type === 'chunk') {
             let chunkIdToUpdate;
             chunkIdToUpdate = chunks
               .map(chunk => {
@@ -363,11 +363,11 @@ export const deleteComment = (
             updatingDeletedComment(type, commentId, id);
           } else {
             message =
-              "Something went wrong. Please check your connection and try again. ";
+              'Something went wrong. Please check your connection and try again. ';
           }
         } else {
           message =
-            "Something went wrong. Please check your connection and try again. ";
+            'Something went wrong. Please check your connection and try again. ';
         }
         dispatch(deleteCommentFailed(message));
       });
@@ -384,15 +384,15 @@ export function deleteCommentSuccess(commentId, comments) {
   comments.splice(commentIndex, 1);
 
   return {
-    type: "DELETE_COMMENT_SUCCESS",
-    comments
+    type: 'DELETE_COMMENT_SUCCESS',
+    comments,
   };
 }
 
 export function deleteCommentFailed(error) {
   return {
-    type: "DELETE_COMMENT_FAILED",
-    error
+    type: 'DELETE_COMMENT_FAILED',
+    error,
   };
 }
 
@@ -400,18 +400,18 @@ export function deleteCommentFailed(error) {
 export const markedAsPublished = (success, chapterId, set) => {
   return function(dispatch) {
     return axios
-      .patch(config.apiUrl + "chapters/" + chapterId + "/", { published: set })
+      .patch(config.apiUrl + 'chapters/' + chapterId + '/', { published: set })
       .then(response => {
         const chapterNum = response.data.number;
         if (success) {
           success();
         }
-        if(set){
-          let myColor = { background: "#50f442 ", text: "#FFFFFF " };
-    			notify.show(`Chapter ${chapterNum} Marked as Published`, "custom", 2500, myColor);
+        if (set) {
+          let myColor = { background: '#50f442', text: '#FFFFFF' };
+          notify.show(`Chapter ${chapterNum} Marked as Published`, 'custom', 2500, myColor);
           setTimeout(()=>window.history.go(-1), 500);
         }
-          dispatch(markAsPublishedSuccess(response.data));
+        dispatch(markAsPublishedSuccess(response.data));
       })
       .catch(error => {
         dispatch(markAsPublishedFailed(error));
@@ -422,14 +422,14 @@ export const markedAsPublished = (success, chapterId, set) => {
 
 export function markAsPublishedSuccess(response) {
   return {
-    type: "MARK_AS_PUBLISHED_SUCCESS",
-    response
+    type: 'MARK_AS_PUBLISHED_SUCCESS',
+    response,
   };
 }
 export function markAsPublishedFailed(error) {
   return {
-    type: "MARK_AS_PUBLISHED_FAILED",
-    error
+    type: 'MARK_AS_PUBLISHED_FAILED',
+    error,
   };
 }
 
@@ -446,14 +446,14 @@ export const saveComment = (
   return function(dispatch) {
     dispatch(saveCommentLoading());
     return axios
-      .post(config.apiUrl + "comments/", {
+      .post(config.apiUrl + 'comments/', {
         comment: blobx,
         user: 3,
         object: id,
-        type: type
+        type: type,
       })
       .then(results => {
-        if (type === "take") {
+        if (type === 'take') {
           dispatch(saveCommentSuccess(results.data));
           let takeIdToUpdate;
           takeIdToUpdate = takes
@@ -463,7 +463,7 @@ export const saveComment = (
             .indexOf(id);
           takes[takeIdToUpdate].has_comment = true;
           dispatch(updateTakesSuccess(takes));
-        } else if (type === "chunk") {
+        } else if (type === 'chunk') {
           dispatch(saveCommentSuccess(results.data));
           let chunkIdToUpdate;
           chunkIdToUpdate = chunks
@@ -489,46 +489,46 @@ export const saveComment = (
 
 export function updateTakesSuccess(updatedTakes) {
   return {
-    type: "UPDATE_TAKE_HAS_COMMENTS",
-    updatedTakes
+    type: 'UPDATE_TAKE_HAS_COMMENTS',
+    updatedTakes,
   };
 }
 
 export function updateChapterSuccess(updatedChapter) {
   return {
-    type: "UPDATE_CHAPTER_HAS_COMMENTS",
-    updatedChapter
+    type: 'UPDATE_CHAPTER_HAS_COMMENTS',
+    updatedChapter,
   };
 }
 
 export function updateChunksSuccess(updatedChunks) {
   return {
-    type: "UPDATE_CHUNK_HAS_COMMENTS",
-    updatedChunks
+    type: 'UPDATE_CHUNK_HAS_COMMENTS',
+    updatedChunks,
   };
 }
 
 export function resetComments() {
   return {
-    type: "RESET_COMMENTS"
+    type: 'RESET_COMMENTS',
   };
 }
 
 export function saveCommentSuccess(comments) {
   return {
-    type: "SAVE_COMMENT_SUCCESS",
-    comments
+    type: 'SAVE_COMMENT_SUCCESS',
+    comments,
   };
 }
 
 export function saveCommentFailed(error) {
   return {
-    type: "SAVE_COMMENT_FAILED",
-    error
+    type: 'SAVE_COMMENT_FAILED',
+    error,
   };
 }
 export function saveCommentLoading() {
   return {
-    type: "SAVE_COMMENT_LOADING"
+    type: 'SAVE_COMMENT_LOADING',
   };
 }

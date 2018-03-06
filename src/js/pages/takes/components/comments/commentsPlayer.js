@@ -9,7 +9,7 @@ class CommentsPlayer extends Component {
 
     this.state = {
       play: false,
-      pos: 0
+      pos: 0,
     };
 
     this.handlePosChange = this.handlePosChange.bind(this);
@@ -20,7 +20,7 @@ class CommentsPlayer extends Component {
 
   handlePosChange(e) {
     this.setState({
-      pos: e.originalArgs[0]
+      pos: e.originalArgs[0],
     });
   }
 
@@ -99,12 +99,12 @@ const styles = {
     display: 'flex',
     alignSelf: 'center',
     flex: '1 1 auto',
-    marginLeft: '1%'
+    marginLeft: '1%',
   },
   waveformContainer: {
     width: '90%',
-    marginRight: '2%'
-  }
+    marginRight: '2%',
+  },
 
 };
 export default CommentsPlayer;

@@ -98,48 +98,41 @@ class Header extends Component {
 				<Menu fluid secondary size="huge" compact>
 					<div style = {{display: 'flex', flex: 1, justifyContent: 'space-between', direction:`${this.props.direction}` }}>
 					<Menu.Item>
-						<Link to="/">
-							<Menu.Item>
+
+						<Menu.Item as={Link} to='/'>
 								<Image src={dots} width="120" height="30" />
 							</Menu.Item>
-						</Link>
-						<Link to="/">
-							<Menu.Item content={text} />
-						</Link>
+
+							<Menu.Item as={Link} to='/' content={text} />
+
 					</Menu.Item>
 
 					<Menu.Item>
-						<Link to="/">
-							<Menu.Item
+							<Menu.Item as={Link} to='/'
 								position="right"
 								name={this.props.displayText.home}
 								active={activeItem === "Home"}
 								onClick={this.handleItemClick}
 							/>
-						</Link>
 
-						<Link to="/about">
-							<Menu.Item
+
+							<Menu.Item as={Link} to='/about'
 								name={this.props.displayText.about}
 								active={activeItem === "About"}
 								onClick={this.handleItemClick}
 							/>
-						</Link>
 
-						<Link to="/projects">
-							<Menu.Item
+
+							<Menu.Item as={Link} to='/projects'
 								name={this.props.displayText.projects}
 								active={activeItem === "Projects"}
 								onClick={this.handleItemClick}
 							/>
-						</Link>
 
-						<Link to="/user">
-							<Menu.Item>
+							<Menu.Item as={Link} to='/user'>
 								<Image src={user} size="mini" />
 							</Menu.Item>
-						</Link>
-					</Menu.Item>
+						</Menu.Item>
 					 </div>
 				</Menu>
 

@@ -1,0 +1,92 @@
+.LoginDiv {
+  background: linear-gradient(to bottom right, #0F98CB, #31E8F4);
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  padding: 5vw 0;
+}
+
+.WelcomeDialog {
+
+  width: 30vw;
+  height: 35vw;
+  padding: 2vw;
+  background-color: white;
+  box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.4);
+  margin: auto;
+  border-radius: 15px;
+  border: none;
+
+}
+
+
+.iconWelcome {
+  height: 7vw;
+  width: 7vw;
+  border-radius: 100px;
+}
+
+.welcomeh3 {
+  margin-top: -0.5vw;
+  font-size: 1.5vw;
+}
+
+.welcomeTo {
+  font-size: 1.5vw;
+  font-weight: lighter;
+}
+
+.welcomeInstructions {
+
+  font-weight: 500;
+  color: gray;
+  margin: 1vw;
+  font-size: 1.25vw;
+}
+
+.continueButton {
+  background: linear-gradient(to bottom right, #069DD5, #50B2D6);
+  height: 2.5vw;
+  width: 14vw;
+  font-size: 15px;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 1px 3px 2px 1px rgba(0,0,0,0.6);
+
+}
+
+.googleSignInButton {
+
+  width: 14vw;
+  height: 2.5vw;
+  border-radius: 20px;
+  margin: 1vw;
+  /*margin-left: 5.5vw; */
+  border: 'none';
+  background-color: red;
+
+}
+
+.gitHubSignInButton {
+  /* width: 14vw;
+  height: 2.5vw; */
+  font-size: 1.25vw;
+  text-align: left;
+  padding: 0.75vw 4vw;
+  background-color: white;
+  border: none;
+  box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
+  margin-top: 2vw;
+
+}
+
+
+.signInLink {
+  color: gray;
+}
+
+
+.buttons {
+  margin-top: 4vw;
+}

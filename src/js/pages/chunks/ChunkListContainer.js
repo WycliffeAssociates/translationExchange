@@ -1,14 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+/* eslint indent: ["error", "tab", {SwitchCase: 1}]*/
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { notify } from "react-notify-toast";
-import config from "../../../config/config";
-import QueryString from "query-string";
-import "css/takes.css";
-import ChunkHeader from "./ChunkHeader";
-import Footer from "../takes/components/Footer";
-import Chunk from "./Chunk";
-import NotFound from "js/pages/NotFound";
+import { notify } from 'react-notify-toast';
+import config from '../../../config/config';
+import QueryString from 'query-string';
+import 'css/takes.css';
+import ChunkHeader from './ChunkHeader';
+import Footer from '../takes/components/Footer';
+import Chunk from './Chunk';
+import NotFound from 'js/pages/NotFound';
 import ErrorButton from '../../components/ErrorButton';
 import LoadingGif from '../../components/LoadingGif';
 
@@ -28,12 +29,18 @@ import {
 	saveComment,
 	getAudioTakes,
 	deleteTakeSuccess,
-  deleteCommentSuccess,
+	deleteCommentSuccess,
 	getSourceTakes,
-	publishFiles
+	publishFiles,
 } from './../../actions';
 
 class ChunkListContainer extends Component {
+
+	constructor(props) {
+		super(props);
+
+		this.createChunkList= this.createChunkList.bind(this);
+	}
 	componentWillUnmount() {
 		this.props.resetInfo();
 	}
@@ -44,27 +51,27 @@ class ChunkListContainer extends Component {
 	}
 
 	updatingDeletedTake(takeId) {
-    const tks = this.props.takes;
-	  this.props.deleteTakeSuccess(takeId, tks);
-        this.forceUpdate();        // used to rerender when a take is delete it
-    }
-
-	updatingDeletedComment(commentId, comments) {
-		let commentsToUpdate =[]
-		comments.map((cmt)=> {
-				if(cmt.id !== commentId){
-				commentsToUpdate.push(cmt);
-				}
-				return null;
-		});
-
-        this.props.deleteCommentSuccess(commentId, comments);
-        this.forceUpdate();        // used to rerender when a comment is delete it
+		const tks = this.props.takes;
+		this.props.deleteTakeSuccess(takeId, tks);
+		this.forceUpdate();        // used to rerender when a take is delete it
 	}
 
-	notifyUnpublished(){
-		let myColor = { background: "#FF0000 ", text: "#FFFFFF " };
-		notify.show("Chapter and book unpublished", "custom", 1800, myColor);
+	updatingDeletedComment(commentId, comments) {
+		let commentsToUpdate =[];
+		comments.map((cmt)=> {
+			if (cmt.id !== commentId) {
+				commentsToUpdate.push(cmt);
+			}
+			return null;
+		});
+
+		this.props.deleteCommentSuccess(commentId, comments);
+		this.forceUpdate();        // used to rerender when a comment is delete it
+	}
+
+	notifyUnpublished() {
+		let myColor = { background: '#FF0000', text: '#FFFFFF'};
+		notify.show('Chapter and book unpublished', 'custom', 1800, myColor);
 		this.forceUpdate();
 	}
 
@@ -81,8 +88,8 @@ class ChunkListContainer extends Component {
 
 			if (chunkId === tk.chunkId && tk.published && !patch.published && published) {
 
-			 this.props.markedAsPublished(this.notifyUnpublished.bind(this), chapterId, false)
-			 this.props.publishFiles(project.id, false); // unpublish project
+				this.props.markedAsPublished(this.notifyUnpublished.bind(this), chapterId, false);
+				this.props.publishFiles(project.id, false); // unpublish project
 			}
 
 			return null;
@@ -92,10 +99,10 @@ class ChunkListContainer extends Component {
 		if (returnTake !== null) {
 			const update = {
 				published: false,
-				rating: 3
-			}
+				rating: 3,
+			};
 			this.props.patchTake(returnTake.id, update, success, takes, this.updatingDeletedTake.bind(this), chunkId);
-			this.props.markedAsPublished(this.notifyUnpublished.bind(this), chapterId, false)  // unpublished when you switch takes from checkmark to 3 stars
+			this.props.markedAsPublished(this.notifyUnpublished.bind(this), chapterId, false); // unpublished when you switch takes from checkmark to 3 stars
 			this.props.publishFiles(chapterId, false);
 
 		}
@@ -107,7 +114,7 @@ class ChunkListContainer extends Component {
      */
 
 	deleteTake(takeId, success) {
-		if (window.confirm("Delete this take?")) {
+		if (window.confirm('Delete this take?')) {
 			this.props.deleteTake(takeId, success, this.updatingDeletedTake.bind(this));
 		}
 	}
@@ -151,12 +158,12 @@ class ChunkListContainer extends Component {
 		}
 	}
 
-	playSource(sourceLoc, chunkId, chunkNumber){
-    const date = this.parseDate(this.props.project.date_modified);
+	playSource(sourceLoc, chunkId, chunkNumber) {
+		const date = this.parseDate(this.props.project.date_modified);
 		let sourceAudio =
 			{
 				src: config.streamingUrl + sourceLoc,
-				name: `${this.props.displayText.chunk} ${chunkNumber}, (${"author"} ${this.props.displayText.on}${date})`
+				name: `${this.props.displayText.chunk} ${chunkNumber}, (${'author'} ${this.props.displayText.on}${date})`,
 			};
 		this.props.playTake(sourceAudio);
 
@@ -189,7 +196,7 @@ class ChunkListContainer extends Component {
 						projectId={this.props.project.id}
 						displayText={this.props.displayText}
 					/>
-					{this.props.chunks.map(this.createChunkList.bind(this))}
+					{this.props.chunks.map((chunk,index) => this.createChunkList(chunk, index))}
 					<div fluid className="StickyFooter">
 						<Footer />
 					</div>
@@ -198,59 +205,59 @@ class ChunkListContainer extends Component {
 		}
 	}
 
-    parseDate(dateReceived) {
-        let noon = "am";
-        let dateArr = dateReceived.split("T");
-        let date = dateArr[0];
+	parseDate(dateReceived) {
+		let noon = 'am';
+		let dateArr = dateReceived.split('T');
+		let date = dateArr[0];
 
-		var time = dateArr[1].split(".");
-		time = time[0].split(":");
-		date = date.split("-");
+		var time = dateArr[1].split('.');
+		time = time[0].split(':');
+		date = date.split('-');
 		switch (date[1]) {
-			case "01":
+			case '01':
 				date[1] = this.props.displayText.month1;
 				break;
-			case "02":
+			case '02':
 				date[1] = this.props.displayText.month2;
 				break;
-			case "03":
+			case '0':
 				date[1] = this.props.displayText.month3;
 				break;
-			case "04":
+			case '04':
 				date[1] = this.props.displayText.month4;
 				break;
-			case "05":
+			case '05':
 				date[1] = this.props.displayText.month5;
 				break;
-			case "06":
+			case '06':
 				date[1] = this.props.displayText.month6;
 				break;
-			case "07":
+			case '07':
 				date[1] = this.props.displayText.month7;
 				break;
-			case "08":
+			case '08':
 				date[1] = this.props.displayText.month8;
 				break;
-			case "09":
+			case '09':
 				date[1] = this.props.displayText.month9;
 				break;
-			case "10":
+			case '10':
 				date[1] = this.props.displayText.month10;
 				break;
-			case "11":
+			case '11':
 				date[1] = this.props.displayText.month11;
 				break;
-			case "12":
+			case '12':
 				date[1] = this.props.displayText.month12;
 				break;
 			default:
-                date[1] = '';
+				date[1] = '';
 				break;
-        }
+		}
 
 		let hour = parseInt(time[0], 10);
 		if (hour / 12 > -1) {
-			noon = "pm";
+			noon = 'pm';
 		}
 
 		if (!(hour % 12 === 0)) {
@@ -259,14 +266,14 @@ class ChunkListContainer extends Component {
 		return (`${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`);
 	}
 
-	createChunkList(chunk){
+	createChunkList(chunk,index) {
 		return (
-			<div>
+			<div 	key={index}>
 				<Chunk
 					has_comments={chunk.has_comment}
 					comments={this.props.comments}
 					takesForChunk={chunk} // array of takes
-					mode={"chunk"}        //TODO get mode from backend
+					mode={'chunk'}        //TODO get mode from backend
 					number={chunk.startv}
 					chunkId={chunk.id}
 					patchTake={this.patchTake.bind(this)}
@@ -289,13 +296,13 @@ class ChunkListContainer extends Component {
 }
 
 const mapStateToProps = state => {
-	const { displayText = "" } = state.geolocation;
+	const { displayText = '' } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { takes, loaded = false, error = "", comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = "" } = state.chunkListContainer;
+	const { takes, loaded = false, error = '', comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
 	return {comments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
-}
+};
 
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
@@ -314,9 +321,9 @@ const mapDispatchToProps = dispatch => {
 			saveComment,
 			getAudioTakes,
 			deleteTakeSuccess,
-      deleteCommentSuccess,
+			deleteCommentSuccess,
 			getSourceTakes,
-			publishFiles
+			publishFiles,
 		}, dispatch);
 };
 
