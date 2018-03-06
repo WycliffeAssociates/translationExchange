@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Welcome from './components/Welcome.js';
+import WelcomeComponent from './components/WelcomeComponent.js';
 import 'css/Login.css';
 
-class ComponentName extends React.Component {
+class Welcome extends React.Component {
 
   constructor(props) {
     super(props);
@@ -13,9 +13,9 @@ class ComponentName extends React.Component {
   render() {
 
     return (
-      <div className="LoginDiv">
+      <div className="WelcomeDiv">
 
-        <Welcome />
+        <WelcomeComponent />
 
       </div>
     );
@@ -32,4 +32,4 @@ const mapDispatchToProps = (dispatch) => ({dispatch});
 // });
 
 
-export default connect(mapDispatchToProps)(ComponentName);
+export default connect(mapDispatchToProps)(Welcome);

@@ -1,4 +1,4 @@
-.LoginDiv {
+.WelcomeDiv {
   background: linear-gradient(to bottom right, #0F98CB, #31E8F4);
   height: 100vh;
   width: 100vw;
@@ -8,7 +8,7 @@
 
 .WelcomeDialog {
 
-  width: 30vw;
+  width: 35vw;
   height: 35vw;
   padding: 2vw;
   background-color: white;
@@ -34,6 +34,15 @@
 .welcomeTo {
   font-size: 1.5vw;
   font-weight: lighter;
+  border-bottom: 1px solid lightgray;
+  line-height: 0.1vw;
+}
+
+.h2span {
+  background: #fff;
+  z-index: 2;
+  padding-left: 3vw;
+  padding-right: 3vw;
 }
 
 .welcomeInstructions {
@@ -45,6 +54,7 @@
 }
 
 .continueButton {
+  display: block;
   background: linear-gradient(to bottom right, #069DD5, #50B2D6);
   height: 2.5vw;
   width: 14vw;
@@ -53,6 +63,7 @@
   border: none;
   border-radius: 20px;
   box-shadow: 1px 3px 2px 1px rgba(0,0,0,0.6);
+
 
 }
 
@@ -71,13 +82,15 @@
 .gitHubSignInButton {
   /* width: 14vw;
   height: 2.5vw; */
+  display: block;
   font-size: 1.25vw;
-  text-align: left;
+  text-align: center;
   padding: 0.75vw 4vw;
   background-color: white;
   border: none;
   box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
   margin-top: 2vw;
+
 
 }
 
@@ -88,5 +101,8 @@
 
 
 .buttons {
+  margin: auto;
   margin-top: 4vw;
+  text-align: center;
+  padding: 2vw 8vw;
 }
