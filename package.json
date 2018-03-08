@@ -60,6 +60,7 @@
     "semantic-ui-css": "^2.2.11",
     "semantic-ui-react": "^0.71.0",
     "spark-md5": "^3.0.0",
+    "styled-components": "^3.2.1",
     "translation-audio-player": "^1.4.0",
     "wavesurfer.js": "^1.4.0",
     "webpack": "^3.6.0"

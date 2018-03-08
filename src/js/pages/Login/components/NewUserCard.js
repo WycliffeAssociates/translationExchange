@@ -51,7 +51,7 @@ const styles = {
 
   addButton: {
 
-    color: '#29B4F5',
+    color: '#009CFF',
     marginBottom: '1.5vw',
     border: 'none',
     fontSize: '8vw',
@@ -60,7 +60,7 @@ const styles = {
   },
 
   cardLabel: {
-    color: '#29B4F5',
+    color: '#009CFF',
     fontSize: '1.85vw',
   },
 

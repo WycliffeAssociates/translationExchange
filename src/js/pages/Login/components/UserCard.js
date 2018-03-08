@@ -66,7 +66,7 @@ const styles= {
 
   playButton: {
 
-    color: '#3195F4',
+    color: '#009CFF',
     border: 'none',
     height: '4.75vw',
     width: '7vw',
@@ -80,7 +80,7 @@ const styles= {
 
   cardOptions: {
 
-    backgroundColor: '#3195F4',
+    background: '#009CFF',
     width: 'inherit',
     padding: '1vw',
     overflow: 'hidden',
@@ -91,7 +91,7 @@ const styles= {
     display: 'inline-block',
     color: 'white',
     border: 'none',
-    backgroundColor: '#3195F4',
+    backgroundColor: '#009CFF',
     height: '3.5vw',
     width: '7vw',
     paddingLeft: '2vw',

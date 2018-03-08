@@ -18,33 +18,32 @@ class AvailableUsers extends React.Component {
 
 
     return (
-      <div className= "usersContainer">
+      <div className="container">
+        <div className= "backgroundOverlayUsers">
 
-        <h2 className={'pageHeader'}> Available Users </h2>
+          <h2 className={'pageHeader'}> Available Users </h2>
 
-        <Grid columns={16}>
+          <Grid columns={16}>
 
-          <Grid.Column width ={3}>
-            <NewUserCard {...this.props} />
-          </Grid.Column >
-          {
-            // this.state.users.map((i)  => {
-            //
-            //return (
-            <Grid.Column width={3}>
-              <UserCard  hash={this.props.users[0].hash} />
-            </Grid.Column>
+            <Grid.Column width ={3}>
+              <NewUserCard {...this.props} />
+            </Grid.Column >
+            {
+              // this.state.users.map((i)  => {
+              //
+              //return (
+              <Grid.Column width={3}>
+                <UserCard  hash={this.props.users[0].hash} />
+              </Grid.Column>
 
-            //);})
+              //);})
 
-          }
+            }
+          </Grid>
 
-
-
-
-        </Grid>
-
+        </div>
       </div>
+
 
 
     );

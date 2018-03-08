@@ -13,9 +13,12 @@ class Welcome extends React.Component {
   render() {
 
     return (
-      <div className="WelcomeDiv">
+      <div className = "container">
+        <div className="backgroundOverlayLogin">
 
-        <WelcomeComponent {...this.props} />
+          <WelcomeComponent {...this.props} />
+
+        </div>
 
       </div>
     );
