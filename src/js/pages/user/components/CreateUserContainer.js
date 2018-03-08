@@ -38,9 +38,10 @@ const styles ={
     height: '60%',
     boxShadow: '5px 5px 5px rgba(0, 0, 0, 0.4)',
     borderRadius: '2%',
-    minWidth: 469,
-  },
-};
+    minWidth: 469 ,
+    maxWidth: 1680
+  }
+}
 
 
 export default CreateUserContainer;

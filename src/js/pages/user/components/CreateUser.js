@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import { ReactMic } from 'react-mic';
-import { Button, Icon } from "semantic-ui-react";
-import CircularProgressbar from "react-circular-progressbar";
+import Blink from 'react-blink'
 import SparkMD5 from 'spark-md5';
 import jdenticon from 'jdenticon';
 import Waveform from './Waveform';
 import TimeLine from './timeLine.png';
-
+import RecordButton from './RecordButton';
+import BottomButtons from './BottomButtons'
 
 class CreateUser extends Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class CreateUser extends Component {
       audio: false,
     };
     this.onStop = this.onStop.bind(this);
+    this.redo = this.redo.bind(this);
   }
 
   startRecording = () => {
@@ -49,18 +50,15 @@ class CreateUser extends Component {
   }
 
   audioWave() {
-    const { recordedBlob, generatedHash, audio } = this.state;
+    const { recordedBlob, audio } = this.state;
 
     if (audio) {
       return (
         <div style = {styles.recordContainer}>
-          <div style={styles.WaveformContainer}>
-            <Waveform audioFile={recordedBlob.blob} />
-          </div>
+          <Waveform audioFile={recordedBlob.blob} />
         </div>
       )
 
-      //return (  <svg id="canvas" width="460" height="460" data-jdenticon-value={generatedHash}/>)
     }
     return (
       <div style={styles.recordContainer}>
@@ -78,7 +76,20 @@ class CreateUser extends Component {
     );
   }
 
-  bottomSection() {
+  redo() {
+    this.setState({
+      recording: false,
+      recordedBlob: null,
+      generatedHash: '',
+      audio: false,
+    })
+  }
+
+  done() {
+
+  }
+
+bottomSection() {
     const {recording, generatedHash} = this.state;
     let header ='What is your name?';
     let buttonIcon = 'microphone';
@@ -86,22 +97,28 @@ class CreateUser extends Component {
     let bottomText = 'Record';
     let textStyle = styles.textRecord;
 
-    let handler =
-     <button style = {buttonStyle}  onClick={this.startRecording} type="button">
-       <Icon style={styles.iconStyle} size="big" name={buttonIcon} />
-     </button>;
+    let handler = <RecordButton startRecording={this.startRecording}  />
+
+    let blink =
+                  `
+                  0%{opacity: 0;}
+                  50%{opacity: .5;}
+                  100%{opacity: 1;}
+                `
+
 
     if (recording) {
-      buttonIcon='stop';
-      buttonStyle= {...styles.playButton, backgroundColor: '#E74C3C' };
-      //handler = <CircularProgressbar percentage={60} />
+      buttonIcon='stop'
+      buttonStyle= {...styles.playButton, backgroundColor: '#E74C3C' }
+      bottomText= 'Recording'
+      textStyle= {...styles.textRecord, animation: `${blink} 1s linear infinite`}
     }
 
     if (this.state.audio) {
       header='is this OK?';
       buttonIcon= 'play';
-      bottomText= 'Listen';
-      handler = <svg id="canvas" width="20%" height="20%" data-jdenticon-value={generatedHash} />;
+      bottomText=
+      handler = <svg id="canvas" width="20%" height="20%" data-jdenticon-value={generatedHash} />
 
     }
 
@@ -112,14 +129,11 @@ class CreateUser extends Component {
         <h1>{header}</h1>
         <p style={styles.textPrivacy}>If you are concerned for your privacy or safety, please use a nickname or pseudonym.</p>
         {handler}
-        <p style={textStyle}>{bottomText}</p>
+        {this.state.audio ? <BottomButtons done={()=>this.done()}  redo={()=>this.redo()} /> : <p style={textStyle}>{bottomText}</p>}
       </div>
 
     );
   }
-
-
-
 
 
   render() {
