@@ -3,11 +3,6 @@ import { Icon } from "semantic-ui-react";
 
 class BottomButtons extends Component {
 
-  constructor(props) {
-    super(props);
-
-  }
-
 
 render() {
     return (
