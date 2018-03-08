@@ -1,41 +1,38 @@
 import React, {Component} from 'react';
 import { Icon } from "semantic-ui-react";
-import ReactCountdownClock from "react-countdown-clock";
 
 
-class RecordButton extends Component {
+
+class PlayPauseBtn extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      counter: 0
+      icon:'play'
 
     }
-    this.startRecording = this.startRecording.bind(this);
+    this.startPlaying = this.startPlaying.bind(this);
   }
 
-compo
 
-startRecording() {
-    this.setState( {counter: 3} );
-    this.props.startRecording()
+startPlaying() {
+  this.props.startPlaying();
+  if (this.state.playing){
+      this.setState({icon:'play', playing: true})
+  }
+  else{
+  this.setState({icon:'pause', playing: true})
+}
 }
 
 render() {
   return(
-  <div style= {styles.container}>
   <div style = {styles.buttonContainer}>
-    <button style = {styles.playButton}  onClick={this.startRecording} type="button">
+    <button style = {styles.playButton}  onClick={this.startPlaying} type="button">
       <Icon style={styles.iconStyle} size="big" name='play' />
     </button>
   </div>
-  <ReactCountdownClock seconds={this.state.counter}
-   color="#E74C3C"
-   alpha={0.9}
-   size={100}
-    />
 
- </div>
 )
 }
 
@@ -54,20 +51,19 @@ const styles = {
     borderRadius: '80%',
     backgroundColor: '#fff',
     outline: 'none',
-    borderColor: 'transparent',
-
-
+    borderColor: '#2D2D2D',
+    border: '1%'
   },
   iconStyle:{
     marginLeft: '5%',
-    color: '#E74C3C'
+    color: '#2D2D2D'
   },
   buttonContainer:{
     position: 'absolute',
-    height: '70%',
-    width: '70%',
+    height: '15%',
+    width: '18%',
     zIndex: 2,
-    top: '50%',
+    top: '35%',
     left: '50%',
     transform: 'translate(-50%, -50%)'
   }
@@ -77,4 +73,4 @@ const styles = {
 
 
 
-export default RecordButton;
+export default PlayPauseBtn;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Wavesurfer from 'react-wavesurfer';
-//import {playAudio, stopAudio, updateTime} from '../../../../actions';
+import PlayPauseBtn from './PlayPauseBtn';
 
 class CommentsPlayer extends Component {
 
@@ -34,12 +34,6 @@ class CommentsPlayer extends Component {
   render() {
     let position = this.state.pos;
 
-    // let playPauseBtn = <PlayButton />;
-    //
-    // if (this.state.play) {
-    //   playPauseBtn = <PauseButton />;
-    // }
-
     return (
       <div style={styles.container} >
         <div style={styles.waveformContainer}>
@@ -53,6 +47,8 @@ class CommentsPlayer extends Component {
             onFinish={this.finishedPlaying}
           />
         </div>
+        <PlayPauseBtn startPlaying= {()=>this.toggleButton} />
+
       </div>
 
     );
@@ -67,6 +63,8 @@ const styles = {
     display: 'flex',
     alignSelf: 'center',
     flex: '1 1 auto',
+    width: '100%',
+    paddingTop: '14%'
   },
   waveformContainer: {
     width: '100%',
