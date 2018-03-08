@@ -8,7 +8,7 @@ class PlayPauseBtn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      icon:'play'
+      icon: 'play',
 
     }
     this.startPlaying = this.startPlaying.bind(this);
@@ -16,20 +16,23 @@ class PlayPauseBtn extends Component {
 
 
 startPlaying() {
-  this.props.startPlaying();
-  if (this.state.playing){
-      this.setState({icon:'play', playing: true})
-  }
-  else{
-  this.setState({icon:'pause', playing: true})
-}
+    this.props.startPlaying();
+    console.log(this.props.playing)
+    if (this.props.playing) {
+      this.setState({icon:'play'})
+    } else {
+
+      this.setState({icon:'pause'})
+    }
+
 }
 
 render() {
+  const {icon}= this.state;;
   return(
   <div style = {styles.buttonContainer}>
-    <button style = {styles.playButton}  onClick={this.startPlaying} type="button">
-      <Icon style={styles.iconStyle} size="big" name='play' />
+    <button style = {styles.playButton}  onClick={()=>this.startPlaying()} type="button">
+      <Icon style={styles.iconStyle} size="big" name={icon} />
     </button>
   </div>
 
@@ -52,7 +55,7 @@ const styles = {
     backgroundColor: '#fff',
     outline: 'none',
     borderColor: '#2D2D2D',
-    border: '1%'
+    border: '.5%'
   },
   iconStyle:{
     marginLeft: '5%',
