@@ -10,12 +10,11 @@ class CreateUserContainer extends Component {
 
 
   render() {
-
     return (
-      <div className="background" style={styles.container}>
+      <div className="background" style= {styles.container} >
 
         <Card style={styles.card}>
-          <CreateUser/>
+          <CreateUser />
         </Card>
 
       </div>
@@ -29,14 +28,15 @@ const styles ={
   container:{
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   card:{
     width: '30%',
-    height: '60%'
-
+    height: '90%',
+    boxShadow: '5px 5px 5px rgba(0, 0, 0, 0.4)',
+    borderRadius: '2%',
+    minWidth: 469
   }
-
 }
 
 
