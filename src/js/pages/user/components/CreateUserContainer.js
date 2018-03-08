@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Card } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react';
 import 'css/create.css';
 import CreateUser from './CreateUser';
 
@@ -25,19 +25,22 @@ class CreateUserContainer extends Component {
 }
 
 const styles ={
-  container:{
+  container: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    height: '100vh',
+    width: '100vw',
+
   },
-  card:{
+  card: {
     width: '30%',
-    height: '90%',
+    height: '60%',
     boxShadow: '5px 5px 5px rgba(0, 0, 0, 0.4)',
     borderRadius: '2%',
-    minWidth: 469
-  }
-}
+    minWidth: 469,
+  },
+};
 
 
 export default CreateUserContainer;

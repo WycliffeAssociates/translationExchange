@@ -15,21 +15,21 @@ class CreateUser extends Component {
       recording: false,
       recordedBlob: null,
       generatedHash: '',
-      audio: false
-    }
+      audio: false,
+    };
     this.onStop = this.onStop.bind(this);
   }
 
   startRecording = () => {
     this.setState({
-      recording: true
+      recording: true,
     });
     setTimeout(()=>{this.stopRecording(); }, 3000);
   }
 
   stopRecording() {
     this.setState({
-      recording: false
+      recording: false,
     });
   }
 
@@ -37,10 +37,10 @@ class CreateUser extends Component {
     const a = new FileReader();
     a.readAsArrayBuffer(recordedBlob.blob);
 
-    let generatedHash =''
+    let generatedHash ='';
     a.onloadend =  () => {
       generatedHash= SparkMD5.ArrayBuffer.hash(a.result);
-      this.setState({recordedBlob, generatedHash, audio: true})
+      this.setState({recordedBlob, generatedHash, audio: true});
       jdenticon.update('svg', generatedHash);
     };
 
@@ -78,8 +78,8 @@ class CreateUser extends Component {
     );
   }
 
-bottomSection() {
-   const {recording, generatedHash} = this.state;
+  bottomSection() {
+    const {recording, generatedHash} = this.state;
     let header ='What is your name?';
     let buttonIcon = 'microphone';
     let buttonStyle = styles.playButton;
@@ -89,24 +89,24 @@ bottomSection() {
     let handler =
      <button style = {buttonStyle}  onClick={this.startRecording} type="button">
        <Icon style={styles.iconStyle} size="big" name={buttonIcon} />
-     </button>
+     </button>;
 
     if (recording) {
-      buttonIcon='stop'
-      buttonStyle= {...styles.playButton, backgroundColor: '#E74C3C' }
+      buttonIcon='stop';
+      buttonStyle= {...styles.playButton, backgroundColor: '#E74C3C' };
       //handler = <CircularProgressbar percentage={60} />
     }
 
     if (this.state.audio) {
-      header='is this OK?'
+      header='is this OK?';
       buttonIcon= 'play';
-      bottomText= 'Listen'
-      handler = <svg id="canvas" width="20%" height="20%" data-jdenticon-value={generatedHash} />
+      bottomText= 'Listen';
+      handler = <svg id="canvas" width="20%" height="20%" data-jdenticon-value={generatedHash} />;
 
     }
 
 
-return (
+    return (
 
       <div style={styles.centerContainer}>
         <h1>{header}</h1>
@@ -115,8 +115,8 @@ return (
         <p style={textStyle}>{bottomText}</p>
       </div>
 
-    )
-}
+    );
+  }
 
 
 
@@ -148,12 +148,12 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%',
-    marginTop:'20%'
+    marginTop: '20%',
   },
-  textPrivacy:{
+  textPrivacy: {
     textAlign: 'center',
     width: '80%',
-    fontWeight: 600
+    fontWeight: 600,
   },
   recordContainer: {
     width: '100%',
@@ -164,39 +164,39 @@ const styles = {
     backgroundRepeat: 'no-repeat',
     backgroundColor: '#2D2D2D',
     borderTopLeftRadius: 7,
-    borderTopRightRadius: 7
+    borderTopRightRadius: 7,
   },
-  recordPreview:{
+  recordPreview: {
     marginTop: '4%',
-    width: '100%'
+    width: '100%',
   },
-  playButton:{
+  playButton: {
     height: '80px',
     width: '80px',
     borderRadius: '50px',
     backgroundColor: '#fff',
     marginBottom: '10px',
     marginTop: '10px',
-    outline: 'none'
+    outline: 'none',
   },
-  textRecord:{
+  textRecord: {
     fontSize: '1vw',
     textDecoration: 'underline',
     lineHeight: 1.8,
     fontWeight: 900,
     color: '#E74C3C',
   },
-  WaveformContainer:{
+  WaveformContainer: {
     width: '100%',
-    paddingTop: '14%'
+    paddingTop: '14%',
 
   },
-  iconStyle:{
+  iconStyle: {
     marginLeft: '5%',
-    color: '#E74C3C'
-  }
+    color: '#E74C3C',
+  },
 
 
-}
+};
 
 export default CreateUser;
