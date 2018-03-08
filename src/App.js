@@ -13,6 +13,7 @@ import axios from 'axios';
 import User from './js/pages/user/user';
 import Welcome from './js/pages/Login/LoginPage.js';
 import AvailableUsers from './js/pages/Login/AvailableUsers.js';
+import CreateUserContainer from './js/pages/user/components/CreateUserContainer'
 import Redirect from './js/pages/user/components/Redirect.js';
 import { DragDropContext } from 'react-dnd';
 import Notifications from 'react-notify-toast';
@@ -55,7 +56,8 @@ class App extends Component {
         {/*<Header /> */}
         <Switch>
           <Route  exact path="/" component={Root} />
-          <Route  path ="/users" component={AvailableUsers} />
+          <Route  exact path ="/users" component={AvailableUsers} />
+          <Route exact path="/users/new-user" component={CreateUserContainer} />
           <Route  path="/home" component={Home} />
           <Route  path="/welcome" component={Welcome} />
           <Route  path="/about" component={About} />
