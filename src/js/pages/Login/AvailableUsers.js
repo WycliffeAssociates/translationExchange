@@ -2,18 +2,20 @@ import React from 'react';
 import UserCard from './components/UserCard';
 import NewUserCard from './components/NewUserCard';
 import {Grid} from 'semantic-ui-react';
-export default class ComponentName extends React.Component {
+import {connect} from 'react-redux';
+
+class AvailableUsers extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      users: [1,2,3,4,5,6,7,8,90,12,23,34,45,23],
-    };
   }
 
 
   render() {
+
+    console.log(this.props);
+
 
     return (
       <div className= "usersContainer">
@@ -23,17 +25,17 @@ export default class ComponentName extends React.Component {
         <Grid columns={16}>
 
           <Grid.Column width ={3}>
-            <NewUserCard />
+            <NewUserCard {...this.props} />
           </Grid.Column >
           {
-            this.state.users.map((i)  => {
+            // this.state.users.map((i)  => {
+            //
+            //return (
+            <Grid.Column width={3}>
+              <UserCard  hash={this.props.users[0].hash} />
+            </Grid.Column>
 
-              return (
-                <Grid.Column width={3}>
-                  <UserCard key={i} srcNumber={i} />
-                </Grid.Column>
-
-              );})
+            //);})
 
           }
 
@@ -50,3 +52,10 @@ export default class ComponentName extends React.Component {
   }
 
 }
+
+const mapStateToProps = ({user}) => ({
+  users: user.users,
+
+});
+
+export default connect (mapStateToProps)(AvailableUsers);

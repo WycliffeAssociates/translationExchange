@@ -1,27 +1,19 @@
 import React from 'react';
+import jdenticon from 'jdenticon';
 //import {Card} from 'semantic-ui-react';
 
 export default class UserCard extends React.Component {
 
   constructor(props) {
     super(props);
+
   }
 
+  componentDidMount() {
+    jdenticon.update('svg', this.props.hash);
+  }
 
   render() {
-
-    var src=require('../../../../images/default-identicon.png') ;
-
-    if (this.props.srcNumber%3 === 0 ) {
-      src= require('../../../../images/default-identicon.png');
-    }
-    else if (this.props.srcNumber%3 === 1) {
-      src= require('../../../../images/goat-identicon.png');
-    }
-
-    else {
-      src= require('../../../../images/master-identicon.png');
-    }
     return (
 
 
@@ -29,7 +21,8 @@ export default class UserCard extends React.Component {
         <div style={styles.divStyle}>
 
           <div style={styles.imageDiv}>
-            <img style={styles.imgStyle} src={src} />
+            <svg id="canvas" style={styles.imgStyle} data-jdenticon-value={this.props.hash} />
+
           </div>
 
           <div style={styles.cardOptions}>

@@ -4,16 +4,18 @@ export default class NewUserCard extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
 
   render() {
 
     return (
-      <div className="NewUserCard">
+      <div className="NewUserCard" onClick={this.handleClick}>
         <div style={styles.divStyle}>
 
-          <button style={styles.addButton}> <i className="fa fa-user-plus" /> </button>
+          <button style={styles.addButton} > <i className="fa fa-user-plus" /> </button>
           <label style={styles.cardLabel}> New User </label>
 
 
@@ -21,6 +23,11 @@ export default class NewUserCard extends React.Component {
 
       </div>
     );
+  }
+
+
+  handleClick() {
+    this.props.history.push({pathname: '/users/new-user'});
   }
 
 }
