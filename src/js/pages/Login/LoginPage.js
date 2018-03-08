@@ -15,7 +15,7 @@ class Welcome extends React.Component {
     return (
       <div className="WelcomeDiv">
 
-        <WelcomeComponent />
+        <WelcomeComponent {...this.props} />
 
       </div>
     );

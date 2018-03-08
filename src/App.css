@@ -42,6 +42,9 @@
   color: orange;
 }
 
+button:focus {
+  outline: none;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

@@ -4,7 +4,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 //import {dispatchToken} from '../../../actions/database.js';
 
-export default class WelcomeComponent extends React.Component {
+export class WelcomeComponent extends React.Component {
 
   constructor(props) {
     super(props);
@@ -16,19 +16,20 @@ export default class WelcomeComponent extends React.Component {
 
     this.onSignIn = this.onSignIn.bind(this);
     this.signOut = this.signOut.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillMount() {
 
     //specs/styling for the rendering of google sign in button
-    gapi.signin2.render('g-signin2', {
-      'scope': 'https://www.googleapis.com/auth/plus.login',
-      'longtitle': true,
+    //gapi.signin2.render('g-signin2', {
+    //  'scope': 'https://www.googleapis.com/auth/plus.login',
+    //  'longtitle': true,
       //'width': '225vw',
       // 'height': 40,
-      'theme': 'light',
+    //  'theme': 'light',
       //'onsuccess': this.onSignIn,
-    });
+  //  });
 
   }
 
@@ -36,58 +37,62 @@ export default class WelcomeComponent extends React.Component {
 
 
     return (
-      <div className= "WelcomeDialog">
+      <div className="container">
+      <div className="backgroundOverlay">
 
-        <img className="iconWelcome" src={require('../../../../images/welcome.png')}  />
+        <div className= "WelcomeDialog">
 
-        <span style={{display: 'block', margin: '1vw'}}>
-          <p className ="welcomeTo"> <span className="h2span"> WELCOME TO </span> </p>
-          <h2 className="welcomeh3"> translation Exchange  </h2>
-        </span>
 
-        <p className="welcomeInstructions">
-          <span> To continue, please create an account or sign in with an Authorized Account.
+          <img className="iconWelcome" src={require('../../../../images/welcome.png')}  />
+
+          <span style={{display: 'block', margin: '1vw'}}>
+            <p className ="welcomeTo"> <span className="h2span"> WELCOME TO </span> </p>
+            <h2 className="welcomeh3"> translation Exchange  </h2>
           </span>
-        </p>
+
+          <p className="welcomeInstructions">
+            <span> To continue, please create an account or sign in with an Authorized Account.
+            </span>
+          </p>
 
 
-        <div className="buttons">
-          <Link to="/users">
+          <div className="buttons">
 
-            <button className="continueButton">
-            Continue <i className="fa fa-arrow-right fa-fw fa-lg"></i>
+            <button className="continueButton" onClick={()=> this.handleClick('continue')}>
+              Continue <i className="fa fa-arrow-right fa-fw fa-lg"></i>
             </button>
 
-          </Link>
 
 
 
-          { /*
-            <div>
-              <button id="g-signin2" style={{display: 'block', border: 'none', margin: 'auto', marginTop: '1vw', marginBottom: '1vw'}}
-                onSuccess= {this.onSignIn}> </button>
-            </div> */
-          }
 
-          <button className="gitHubSignInButton">
-            <i className="fa fa-github fa-fw fa-lg" />
-            <a className="signInLink"
-              href="https://github.com/login/oauth/authorize?scope=user:email&client_id=f570d7b8fb0342eb629b"> Sign in</a>
+            { /*
+              <div>
+                <button id="g-signin2" style={{display: 'block', border: 'none', margin: 'auto', marginTop: '1vw', marginBottom: '1vw'}}
+                  onSuccess= {this.onSignIn}> </button>
+              </div> */
+            }
 
-          </button>
+            <button className="gitHubSignInButton">
+              <i className="fa fa-github fa-fw fa-lg" />
+              <a className="signInLink"
+                href="https://github.com/login/oauth/authorize?scope=user:email&client_id=f570d7b8fb0342eb629b"> Sign in</a>
+
+            </button>
 
 
+
+          </div>
 
         </div>
-
-
+      </div>
       </div>
     );
   }
 
   onSignIn(googleUser) {
 
-    console.log(googleUser);
+    //console.log(googleUser);
     // Useful data for your client-side scripts:
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId()); // Don't send this directly to your server!
@@ -108,6 +113,15 @@ export default class WelcomeComponent extends React.Component {
   }
 
 
+  handleClick(clickSrc) {
+
+    if (clickSrc === 'continue') {
+      this.props.history.push('./users');
+    }
+
+  }
+
+
   signOut() {
 
     var auth2 = gapi.auth2.getAuthInstance();
@@ -120,3 +134,5 @@ export default class WelcomeComponent extends React.Component {
   }
 
 }
+
+export default WelcomeComponent;

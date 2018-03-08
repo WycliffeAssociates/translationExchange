@@ -1,7 +1,7 @@
 import React from 'react';
 import UserCard from './components/UserCard';
 import NewUserCard from './components/NewUserCard';
-import {Grid, Card} from 'semantic-ui-react';
+import {Grid} from 'semantic-ui-react';
 export default class ComponentName extends React.Component {
 
   constructor(props) {
@@ -16,7 +16,10 @@ export default class ComponentName extends React.Component {
   render() {
 
     return (
-      <div style={{padding: '3vw', background: 'linear-gradient(to bottom right, #069DD5, #50B2D6)', height: 'inherit', width: '100vw'}}>
+      <div className= "usersContainer">
+
+        <h2 className={'pageHeader'}> Available Users </h2>
+
         <Grid columns={16}>
 
           <Grid.Column width ={3}>
@@ -33,9 +36,6 @@ export default class ComponentName extends React.Component {
               );})
 
           }
-          <Grid.Column width ={3}>
-            <Card raised color={'teal'} image={require('../../../images/default-identicon.png')} description ={'this is it'} style={{borderRadius: '20px', overflow: 'hidden'}} />
-          </Grid.Column >
 
 
 
