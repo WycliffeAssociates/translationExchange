@@ -38,54 +38,54 @@ export class WelcomeComponent extends React.Component {
 
     return (
       <div className="container">
-      <div className="backgroundOverlay">
+        <div className="backgroundOverlay">
 
-        <div className= "WelcomeDialog">
+          <div className= "WelcomeDialog">
 
 
-          <img className="iconWelcome" src={require('../../../../images/welcome.png')}  />
+            <img className="iconWelcome" src={require('../../../../images/welcome.png')}  />
 
-          <span style={{display: 'block', margin: '1vw'}}>
-            <p className ="welcomeTo"> <span className="h2span"> WELCOME TO </span> </p>
-            <h2 className="welcomeh3"> translation Exchange  </h2>
-          </span>
-
-          <p className="welcomeInstructions">
-            <span> To continue, please create an account or sign in with an Authorized Account.
+            <span style={{display: 'block', margin: '1vw'}}>
+              <p className ="welcomeTo"> <span className="h2span"> WELCOME TO </span> </p>
+              <h2 className="welcomeh3"> translation Exchange  </h2>
             </span>
-          </p>
+
+            <p className="welcomeInstructions">
+              <span> To continue, please create an account or sign in with an Authorized Account.
+              </span>
+            </p>
 
 
-          <div className="buttons">
+            <div className="buttons">
 
-            <button className="continueButton" onClick={()=> this.handleClick('continue')}>
-              Continue <i className="fa fa-arrow-right fa-fw fa-lg"></i>
-            </button>
-
-
+              <button className="continueButton" onClick={()=> this.handleClick('continue')}>
+                Continue <i className="fa fa-arrow-right fa-fw fa-lg"></i>
+              </button>
 
 
 
-            { /*
-              <div>
-                <button id="g-signin2" style={{display: 'block', border: 'none', margin: 'auto', marginTop: '1vw', marginBottom: '1vw'}}
-                  onSuccess= {this.onSignIn}> </button>
-              </div> */
-            }
-
-            <button className="gitHubSignInButton">
-              <i className="fa fa-github fa-fw fa-lg" />
-              <a className="signInLink"
-                href="https://github.com/login/oauth/authorize?scope=user:email&client_id=f570d7b8fb0342eb629b"> Sign in</a>
-
-            </button>
 
 
+              { /*
+                <div>
+                  <button id="g-signin2" style={{display: 'block', border: 'none', margin: 'auto', marginTop: '1vw', marginBottom: '1vw'}}
+                    onSuccess= {this.onSignIn}> </button>
+                </div> */
+              }
+
+              <button className="gitHubSignInButton">
+                <i className="fa fa-github fa-fw fa-lg" />
+                <a className="signInLink"
+                  href="https://github.com/login/oauth/authorize?scope=user:email&client_id=f570d7b8fb0342eb629b"> Sign in</a>
+
+              </button>
+
+
+
+            </div>
 
           </div>
-
         </div>
-      </div>
       </div>
     );
   }
