@@ -28,18 +28,20 @@ class CommentsPlayer extends Component {
   }
 
   finishedPlaying() {
+
     this.setState({ pos: 0, play: false });
+    this.forceUpdate();
   }
 
   render() {
-    let position = this.state.pos;
+  const{ pos, play} = this.state;
 
     return (
       <div style={styles.container} >
         <div style={styles.waveformContainer}>
           <Wavesurfer
             audioFile={this.props.audioFile}
-            pos={position}
+            pos={pos}
             onPosChange={this.handlePosChange}
             playing={this.state.play}
             options={{ cursorWidth: 2, progressColor: '#eff0f2', cursorColor: 'transparent', barWidth: 4, hideScrollbar: true, normalize: true, height: 60, waveColor: '#3791D5' }}
@@ -47,7 +49,7 @@ class CommentsPlayer extends Component {
             onFinish={this.finishedPlaying}
           />
         </div>
-        <PlayPauseBtn startPlaying= {()=>this.toggleButton} />
+        <PlayPauseBtn startPlaying= {()=>this.toggleButton()} playing={play} />
 
       </div>
 
@@ -64,7 +66,8 @@ const styles = {
     alignSelf: 'center',
     flex: '1 1 auto',
     width: '100%',
-    paddingTop: '14%'
+    paddingTop: '14%',
+    marginLeft: '5%'
   },
   waveformContainer: {
     width: '100%',

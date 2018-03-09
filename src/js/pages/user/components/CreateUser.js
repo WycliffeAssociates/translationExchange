@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { ReactMic } from 'react-mic';
-import Blink from 'react-blink'
 import SparkMD5 from 'spark-md5';
 import jdenticon from 'jdenticon';
 import Waveform from './Waveform';
@@ -99,19 +98,12 @@ bottomSection() {
 
     let handler = <RecordButton startRecording={this.startRecording}  />
 
-    let blink =
-                  `
-                  0%{opacity: 0;}
-                  50%{opacity: .5;}
-                  100%{opacity: 1;}
-                `
 
 
     if (recording) {
       buttonIcon='stop'
       buttonStyle= {...styles.playButton, backgroundColor: '#E74C3C' }
       bottomText= 'Recording'
-      textStyle= {...styles.textRecord, animation: `${blink} 1s linear infinite`}
     }
 
     if (this.state.audio) {
