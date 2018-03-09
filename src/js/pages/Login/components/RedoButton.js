@@ -21,4 +21,5 @@ const Button= styled.button`
   border-color: #00C5FF;
   margin-left: 2vw;
   box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+  cursor: pointer;
 `;

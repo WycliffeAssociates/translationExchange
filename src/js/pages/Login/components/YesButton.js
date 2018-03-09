@@ -19,4 +19,5 @@ const Button= styled.button`
   border: none;
   margin-left: '2vw';
   box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+  cursor: pointer;
 `;
