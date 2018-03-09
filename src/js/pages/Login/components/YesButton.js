@@ -2,15 +2,13 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-export default class YesButton extends React.Component {
+export const YesButton = ({onClick}) => {
 
-  render() {
+  return (
+    <Button onClick={onClick}> Yes <i className="fa fa-check" /> </Button>
+  );
+};
 
-    return (
-      <Button onClick={this.props.onClick}> Yes <i className="fa fa-check" /> </Button>
-    );
-  }
-}
 
 const Button= styled.button`
   border-radius: 20px;

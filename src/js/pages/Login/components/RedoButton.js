@@ -2,14 +2,13 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-export default class RedoButton extends React.Component {
-  render() {
-    return (
-      <Button onClick={this.props.onClick}> Redo <i className="fa fa-microphone" /> </Button>
-    );
-  }
+export const RedoButton = ({onClick}) => {
 
-}
+  return (
+    <Button onClick={onClick}> Redo <i className="fa fa-microphone" /> </Button>
+  );
+
+};
 
 const Button= styled.button`
   border-radius: 20px;
