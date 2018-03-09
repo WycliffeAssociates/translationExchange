@@ -14,7 +14,7 @@ class RecordButton extends Component {
     this.startRecording = this.startRecording.bind(this);
   }
 
-compo
+
 
 startRecording() {
   this.setState( {counter: 3} );
