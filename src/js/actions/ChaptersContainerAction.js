@@ -8,10 +8,18 @@ export const fetchChaptersContainerData = (query) => {
     return function (dispatch) {
         return axios
             .all([
-                axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}languages/?slug=${query.lang}`),
-                axios.get(`${config.apiUrl}books/?slug=${query.book}`),
-                axios.get(`${config.apiUrl}versions/?project_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`,{
+                    headers: { Authorization: "Token " + localStorage.getItem('token') }
+                }),
+                axios.get(`${config.apiUrl}languages/?slug=${query.lang}`,{
+                    headers: { Authorization: "Token " + localStorage.getItem('token') }
+                }),
+                axios.get(`${config.apiUrl}books/?slug=${query.book}`,{
+                    headers: { Authorization: "Token " + localStorage.getItem('token') }
+                }),
+                axios.get(`${config.apiUrl}versions/?project_id=${query.project_id}`,{
+                    headers: { Authorization: "Token " + localStorage.getItem('token') }
+                }),
 
             ])
             .then(

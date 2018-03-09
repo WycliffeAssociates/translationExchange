@@ -4,7 +4,9 @@ import config from "../../config/config";
 export function fetchRecentProjects() {
 	return function (dispatch) {
 		return axios
-			.get(config.apiUrl + "projects/")
+			.get(config.apiUrl + "projects/",{
+				headers: { Authorization: "Token " + localStorage.getItem('token') }
+			})
 			.then(response => {
 				dispatch(dispatchHomeRecentProjectsReceived(response.data));
 			})

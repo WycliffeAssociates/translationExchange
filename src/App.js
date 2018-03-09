@@ -10,6 +10,7 @@ import Home from "./js/pages/home/home";
 import About from "./js/pages/about/about";
 import axios from "axios";
 import User from "./js/pages/user/user";
+import Login from "./js/pages/user/login";
 import { DragDropContext } from "react-dnd";
 import Notifications from 'react-notify-toast';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
@@ -45,10 +46,9 @@ class App extends Component {
 					<Route exact path="/chapters" component={ChaptersContainer} />
 					<Route exact path="/takes" component={ChunkListContainer} />
 					<Route exact path="/user" component={User} />
+					<Route exact path="/login" component={Login} />
 					<Route path="*" component={NotFound} />
 				</Switch>
-
-
 			</div>
 		);
 	}
