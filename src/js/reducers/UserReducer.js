@@ -6,7 +6,7 @@ export const initialState = ({
 });
 
 function userReducer( state= initialState, action ={}) {
-  console.log(action.type);
+
   switch (action.type) {
     case 'CREATE_USER':
       var newUser = {

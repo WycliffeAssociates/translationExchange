@@ -1,20 +1,37 @@
 import React from 'react';
 import jdenticon from 'jdenticon';
+import ReactPlayer from 'react-player';
 //import {Card} from 'semantic-ui-react';
+//
 
 export default class UserCard extends React.Component {
 
   constructor(props) {
     super(props);
-
+    this.state = {
+      playing: false
+    }
+    this.play = this.play.bind(this);
+    this.ended = this.ended.bind(this);
   }
 
   componentDidMount() {
     jdenticon.update(`#canvas${this.props.id}` , this.props.hash);
   }
 
+  play() {
+    console.log('working')
+    this.setState({playing: true})
+  }
+
+  ended() {
+    this.setState({playing:false})
+  }
   render() {
     var key= this.props.id? this.props.id: 0;
+    const {recording} = this.props;
+    const blob = recording ? recording : {blobUrl:'none'} ;
+    console.log(blob)
     return (
 
 
@@ -27,9 +44,9 @@ export default class UserCard extends React.Component {
           </div>
 
           <div style={styles.cardOptions}>
-            <button style={styles.playButton}> <i className="fa fa-play"  /> </button>
+            <button onClick={()=> this.play()} style={styles.playButton}> <i className="fa fa-play"  /> </button>
             <button style={styles.signOutButton}> <i className="fa fa-sign-out fa-lg"  /> </button>
-
+            <ReactPlayer url={blob.blobURL} playing={this.state.playing} onEnded={this.ended()}  />
           </div>
         </div>
 

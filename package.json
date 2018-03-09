@@ -42,6 +42,7 @@
     "react-howler": "^3.6.2",
     "react-mic": "^7.1.6",
     "react-notify-toast": "^0.3.2",
+    "react-player": "^1.2.1",
     "react-progress-circle": "^0.2.3",
     "react-rating": "^0.8.1",
     "react-read-more": "^1.0.0",

@@ -35,7 +35,7 @@ class AvailableUsers extends React.Component {
 
                 return (
                   <Grid.Column width={3}>
-                    <UserCard  key={user} id={index} hash={user.hash} />
+                    <UserCard  key={user} id={index} hash={user.hash} recording={user.recording} />
                   </Grid.Column>
                 );}) :   <Grid.Column width={3}> <UserCard id={0} key={0} hash={this.props.users[0].hash} /> </Grid.Column>
 
@@ -55,6 +55,7 @@ class AvailableUsers extends React.Component {
 
 const mapStateToProps = ({user}) => ({
   users: user.users,
+  recording: user.recording
 
 });
 
