@@ -78,11 +78,7 @@ export class WelcomeComponent extends React.Component {
           </GitHubSignInButton>
 
         </ButtonsContainer>
-
-
-        <YesButton />
-        <RedoButton />
-
+        
       </WelcomeDialog>
 
     );

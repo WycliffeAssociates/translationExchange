@@ -19,6 +19,7 @@ const Button= styled.button`
   border: solid;
   border-width: 2px;
   border-color: #00C5FF;
-  margin-left: 2vw;
+  
   box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+  cursor: pointer;
 `;

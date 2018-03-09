@@ -14,10 +14,16 @@ class PlayPauseBtn extends Component {
     this.startPlaying = this.startPlaying.bind(this);
   }
 
+componentWillReceiveProps(nextProps) {
+    if (!nextProps.playing) {
+      this.setState({icon:'play'})
+    }
+}
+
 
 startPlaying() {
     this.props.startPlaying();
-    console.log(this.props.playing)
+
     if (this.props.playing) {
       this.setState({icon:'play'})
     } else {

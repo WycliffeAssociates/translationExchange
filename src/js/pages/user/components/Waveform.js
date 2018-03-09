@@ -29,8 +29,8 @@ class CommentsPlayer extends Component {
 
   finishedPlaying() {
 
-    this.setState({ pos: 0, play: false });
-    this.forceUpdate();
+    this.setState({ play: false, pos: 0 });
+
   }
 
   render() {

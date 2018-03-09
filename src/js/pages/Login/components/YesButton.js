@@ -17,6 +17,6 @@ const Button= styled.button`
   font-size: 1.5vw;
   font-weight: 100;
   border: none;
-  margin-left: '2vw';
   box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+  cursor: pointer;
 `;
