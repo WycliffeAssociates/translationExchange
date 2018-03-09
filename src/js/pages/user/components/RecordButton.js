@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { Icon } from "semantic-ui-react";
-import ReactCountdownClock from "react-countdown-clock";
+import { Icon } from 'semantic-ui-react';
+import ReactCountdownClock from 'react-countdown-clock';
 
 
 class RecordButton extends Component {
@@ -8,9 +8,9 @@ class RecordButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      counter: 0
+      counter: 0,
 
-    }
+    };
     this.startRecording = this.startRecording.bind(this);
   }
 
@@ -18,7 +18,7 @@ compo
 
 startRecording() {
   this.setState( {counter: 3} );
-  this.props.startRecording()
+  this.props.startRecording();
 }
 
 render() {

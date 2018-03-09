@@ -5,7 +5,8 @@ import jdenticon from 'jdenticon';
 import Waveform from './Waveform';
 import TimeLine from './timeLine.png';
 import RecordButton from './RecordButton';
-import BottomButtons from './BottomButtons'
+import BottomButtons from './BottomButtons';
+import {createUser} from '../../../actions/UserActions';
 
 class CreateUser extends Component {
   constructor(props) {
@@ -18,7 +19,11 @@ class CreateUser extends Component {
     };
     this.onStop = this.onStop.bind(this);
     this.redo = this.redo.bind(this);
+    this.done = this.done.bind(this);
+
+
   }
+
 
   startRecording = () => {
     this.setState({
@@ -56,7 +61,7 @@ class CreateUser extends Component {
         <div style = {styles.recordContainer}>
           <Waveform audioFile={recordedBlob.blob} />
         </div>
-      )
+      );
 
     }
     return (
@@ -81,10 +86,14 @@ class CreateUser extends Component {
       recordedBlob: null,
       generatedHash: '',
       audio: false,
-    })
+    });
   }
 
   done() {
+
+    let {dispatch} = this.props;
+    dispatch(createUser('none', this.state.generatedHash));
+    this.props.history.push('/users');
 
   }
 
@@ -121,7 +130,7 @@ bottomSection() {
         <h1>{header}</h1>
         <p style={styles.textPrivacy}>If you are concerned for your privacy or safety, please use a nickname or pseudonym.</p>
         {handler}
-        {this.state.audio ? <BottomButtons done={()=>this.done()}  redo={()=>this.redo()} /> : <p style={textStyle}>{bottomText}</p>}
+        {this.state.audio ? <BottomButtons done={this.done}  redo={this.redo} /> : <p style={textStyle}>{bottomText}</p>}
       </div>
 
     );
@@ -146,7 +155,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height: '100%'
+    height: '100%',
 
   },
   centerContainer: {
@@ -173,7 +182,7 @@ const styles = {
     borderTopRightRadius: 7,
   },
   recordPreview: {
-    marginTop: '4%',
+    marginTop: '3%',
     width: '100%',
   },
   playButton: {

@@ -15,6 +15,7 @@ class AvailableUsers extends React.Component {
   render() {
 
     console.log(this.props);
+    console.log(this.props.users);
 
 
     return (
@@ -28,15 +29,15 @@ class AvailableUsers extends React.Component {
             <Grid.Column width ={3}>
               <NewUserCard {...this.props} />
             </Grid.Column >
-            {
-              // this.state.users.map((i)  => {
-              //
-              //return (
-              <Grid.Column width={3}>
-                <UserCard  hash={this.props.users[0].hash} />
-              </Grid.Column>
 
-              //);})
+            {
+              this.props.users.length>=2? this.props.users.map((user)  => {
+
+                return (
+                  <Grid.Column width={3}>
+                    <UserCard  hash={user.hash} />
+                  </Grid.Column>
+                );}) :   <Grid.Column width={3}> <UserCard hash={this.props.users[0].hash} /> </Grid.Column>
 
             }
           </Grid>
