@@ -17,38 +17,40 @@ class RecordButton extends Component {
 compo
 
 startRecording() {
-    this.setState( {counter: 3} );
-    this.props.startRecording()
+  this.setState( {counter: 3} );
+  this.props.startRecording()
 }
 
 render() {
-  return(
-  <div style= {styles.container}>
-  <div style = {styles.buttonContainer}>
-    <button style = {styles.playButton}  onClick={this.startRecording} type="button">
-      <Icon style={styles.iconStyle} size="big" name='play' />
-    </button>
-  </div>
-  <ReactCountdownClock seconds={this.state.counter}
-   color="#E74C3C"
-   alpha={0.9}
-   size={100}
-    />
+  return (
+    <div style= {styles.container}>
+      <div style = {styles.buttonContainer}>
+        <button style = {styles.playButton}  onClick={this.startRecording} type="voice">
+          <Icon style={styles.iconStyle} size="big" name="play" />
+        </button>
+      </div>
 
- </div>
-)
+      <ReactCountdownClock seconds={this.state.counter}
+        color="#E74C3C"
+        alpha={0.9}
+        size={100}
+      />
+
+
+    </div>
+  );
 }
 
 
-};
+}
 
 
 const styles = {
   container: {
-    position: 'relative'
+    position: 'relative',
   },
 
-  playButton:{
+  playButton: {
     height: '100%',
     width: '100%',
     borderRadius: '80%',
@@ -58,21 +60,21 @@ const styles = {
 
 
   },
-  iconStyle:{
+  iconStyle: {
     marginLeft: '5%',
-    color: '#E74C3C'
+    color: '#E74C3C',
   },
-  buttonContainer:{
+  buttonContainer: {
     position: 'absolute',
     height: '70%',
     width: '70%',
     zIndex: 2,
     top: '50%',
     left: '50%',
-    transform: 'translate(-50%, -50%)'
-  }
+    transform: 'translate(-50%, -50%)',
+  },
 
-}
+};
 
 
 
