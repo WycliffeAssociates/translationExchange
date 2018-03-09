@@ -10,10 +10,11 @@ export default class UserCard extends React.Component {
   }
 
   componentDidMount() {
-    jdenticon.update('svg', this.props.hash);
+    jdenticon.update(`#canvas${this.props.id}` , this.props.hash);
   }
 
   render() {
+    var key= this.props.id? this.props.id: 0;
     return (
 
 
@@ -21,7 +22,7 @@ export default class UserCard extends React.Component {
         <div style={styles.divStyle}>
 
           <div style={styles.imageDiv}>
-            <svg id="canvas" style={styles.imgStyle} data-jdenticon-value={this.props.hash} />
+            <svg id={`canvas${key}`} style={styles.imgStyle} data-jdenticon-value={this.props.hash} />
 
           </div>
 

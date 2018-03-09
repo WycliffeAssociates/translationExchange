@@ -31,13 +31,13 @@ class AvailableUsers extends React.Component {
             </Grid.Column >
 
             {
-              this.props.users.length>=2? this.props.users.map((user)  => {
+              this.props.users.length>=2? this.props.users.map((user,index)  => {
 
                 return (
                   <Grid.Column width={3}>
-                    <UserCard  hash={user.hash} />
+                    <UserCard  key={user} id={index} hash={user.hash} />
                   </Grid.Column>
-                );}) :   <Grid.Column width={3}> <UserCard hash={this.props.users[0].hash} /> </Grid.Column>
+                );}) :   <Grid.Column width={3}> <UserCard key={0} hash={this.props.users[0].hash} /> </Grid.Column>
 
             }
           </Grid>
