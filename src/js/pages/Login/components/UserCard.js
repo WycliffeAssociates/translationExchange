@@ -11,11 +11,22 @@ export default class UserCard extends React.Component {
   }
 
   componentDidMount() {
-    jdenticon.update(`#canvas${this.props.id}` , this.props.hash);
+    jdenticon.update(`#canvas${this.props.id}` , this.props.user.hash);
+  }
+
+  handleClick(recording) {
+    var blobString = recording.
+    this.setState({
+      playing: true,
+
+    })
+
   }
 
   render() {
     var key= this.props.id? this.props.id: 0;
+    let {user} = this.props;
+    console.log(user.hash);
     return (
 
 
@@ -23,12 +34,12 @@ export default class UserCard extends React.Component {
         <Card>
 
           <ImageContainer>
-            <Image id={`canvas${key}`} data-jdenticon-value={this.props.hash} />
+            <Image id={`canvas${key}`} data-jdenticon-value={user.hash} />
 
           </ImageContainer>
 
           <CardOptions>
-            <PlayButton> <i className="fa fa-play"  /> </PlayButton>
+            <PlayButton onClick={() => this.handleClick(user.recording)}> <i className="fa fa-play"  /> </PlayButton>
 
           </CardOptions>
         </Card>
