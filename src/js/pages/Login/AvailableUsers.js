@@ -37,7 +37,7 @@ class AvailableUsers extends React.Component {
                   <Grid.Column width={3}>
                     <UserCard  key={user} id={index} hash={user.hash} />
                   </Grid.Column>
-                );}) :   <Grid.Column width={3}> <UserCard key={0} hash={this.props.users[0].hash} /> </Grid.Column>
+                );}) :   <Grid.Column width={3}> <UserCard id={0} key={0} hash={this.props.users[0].hash} /> </Grid.Column>
 
             }
           </Grid>
