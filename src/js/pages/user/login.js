@@ -41,7 +41,7 @@ export default class Demo extends Component {
     );
   }
   onGoogleLoginSuccess (user) {
-    return axios.post("https://localhost/api/login/social/token_user/google-oauth2/",{clientId:'654283088678-4m4eecv24f79fn9neid8v9846m0gdl49.apps.googleusercontent.com',redirectUri:'https://localhost/',code:user.code}).
+    return axios.post("https://localhost/api/login/social/token_user/google-oauth2/",{clientId:'429550859531-rp6ihtu7o9fe9uko3t6523hs8m5b06ir.apps.googleusercontent.com',redirectUri:'https://localhost/',code:user.code}).
     then(response=>{
       console.log(response);
       localStorage.setItem('token',response.data.token);
@@ -79,11 +79,11 @@ export default class Demo extends Component {
     return (
       <div>
         <GitHubLogin clientId="f5e981378e91c2067d41"
-          redirectUri="https://localhost" 
+          redirectUri="https://localhost/"
           onSuccess={this.onLoginSuccess}
           onFailure={this.onLoginFailure}/>
-         <GoogleLogin clientId="654283088678-4m4eecv24f79fn9neid8v9846m0gdl49.apps.googleusercontent.com"
-          redirectUri="https://localhost" 
+         <GoogleLogin clientId="429550859531-rp6ihtu7o9fe9uko3t6523hs8m5b06ir.apps.googleusercontent.com"
+          redirectUri="https://localhost/"
           onSuccess={this.onGoogleLoginSuccess}
           onFailure={this.onLoginFailure}/>
       </div>

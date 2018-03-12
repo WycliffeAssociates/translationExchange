@@ -31,8 +31,8 @@ class GitHubLogin extends Component {
       client_id: clientId,
       scope,
       redirect_uri: redirectUri,
-      state:'state_parameter_passthrough_value',
-      access_type:'offline',
+      //state:'state_parameter_passthrough_value',
+      //access_type:'offline',
       response_type:'code'
     });
     const popup = this.popup = PopupWindow.open(
