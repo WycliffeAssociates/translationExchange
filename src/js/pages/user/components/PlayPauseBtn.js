@@ -69,7 +69,7 @@ const styles = {
   },
   buttonContainer:{
     position: 'absolute',
-    height: '15%',
+    height: '13%',
     width: '18%',
     zIndex: 2,
     top: '35%',
