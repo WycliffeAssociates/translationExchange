@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import { Icon } from "semantic-ui-react";
-import YesButton from '../../../pages/Login/components/YesButton';
-import RedoButton from '../../../pages/Login/components/RedoButton';
+import {YesButton} from '../../../pages/Login/components/YesButton';
+import {RedoButton} from '../../../pages/Login/components/RedoButton';
 
 class BottomButtons extends Component {
 

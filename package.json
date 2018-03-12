@@ -29,6 +29,7 @@
     "react-addons-create-fragment": "^15.6.0",
     "react-addons-css-transition-group": "^15.6.0",
     "react-addons-transition-group": "^15.6.0",
+    "react-animations": "^1.0.0",
     "react-audio-player": "^0.5.0",
     "react-audioplayer": "^0.3.0",
     "react-axios": "^1.0.2",
