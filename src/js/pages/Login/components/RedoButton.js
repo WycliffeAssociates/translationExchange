@@ -5,7 +5,7 @@ import styled from 'styled-components';
 export const RedoButton = ({onClick}) => {
 
   return (
-    <Button onClick={onClick}> Redo <i className="fa fa-microphone" /> </Button>
+    <Button onClick={onClick}> Redo <i className="fa fa-redo" /> </Button>
   );
 
 };
@@ -15,7 +15,7 @@ const Button= styled.button`
   color: #00C5FF;
   background: white;
   padding: 0.4vw 4vw;
-  font-size: 1.5vw;
+  font-size: 1.25vw;
   font-weight: 100;
   border: solid;
   border-width: 2px;

@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 export default class NewUserCard extends React.Component {
 
@@ -12,16 +13,17 @@ export default class NewUserCard extends React.Component {
   render() {
 
     return (
-      <div className="NewUserCard" onClick={this.handleClick}>
-        <div style={styles.divStyle}>
+      <NewUserCardContainer onClick={this.handleClick}>
 
-          <button style={styles.addButton} > <i className="fa fa-user-plus" /> </button>
-          <label style={styles.cardLabel}> New User </label>
+        <UserCard>
+
+          <AddUser> <i className="fa fa-user-plus" /> </AddUser>
+          <CardLabel> New User </CardLabel>
 
 
-        </div>
+        </UserCard>
 
-      </div>
+      </NewUserCardContainer>
     );
   }
 
@@ -33,35 +35,38 @@ export default class NewUserCard extends React.Component {
 }
 
 
-const styles = {
 
-  divStyle: {
-
-    textAlign: 'center',
-    height: '18vw',
-    width: '15vw',
-    borderRadius: '20px',
-    boxShadow: '3px 4px 5px rgba(0,0,0,0.6)',
-    overflow: 'hidden',
-    backgroundColor: 'white',
-    padding: '2vw 3.5vw',
-  },
+const NewUserCardContainer = styled.div`
+`;
 
 
+const UserCard= styled.div`
 
-  addButton: {
+    text-align: center;
+    height: 18vw;
+    width: 13vw;
+    border-radius: 1.5vw;
+    box-shadow: 3px 4px 5px rgba(0,0,0,0.6);
+    overflow: hidden;
+    background-color: white;
+    padding: 2vw 3.5vw;
+  `;
 
-    color: '#009CFF',
-    marginBottom: '1.5vw',
-    border: 'none',
-    fontSize: '8vw',
-    backgroundColor: 'white',
 
-  },
 
-  cardLabel: {
-    color: '#009CFF',
-    fontSize: '1.85vw',
-  },
+const AddUser = styled.div`
 
-};
+    color: #009CFF;
+    margin-bottom: 1.5vw;
+    border: none;
+    font-size: 7vw;
+    background-color: white;
+    margin-left: -0.5vw;
+
+  `;
+
+const CardLabel = styled.label`
+    color: #009CFF;
+    font-size: 1.35vw;
+    text-decoration: underline;
+  `;
