@@ -2,17 +2,19 @@ import axios from 'axios';
 import config from '../../config/config';
 
 export const fetchAllProjects = (query) => {
-  return function(dispatch) {
-    dispatch(dispatchAllProjectsLoading());
-    return axios
-      .get(`${config.apiUrl}projects/${query}`)
-      .then(response => {
-        dispatch(dispatchAllProjectsReceived(response.data, query ));
-      })
-      .catch(err => {
-        dispatch(dispatchAllProjectsFailed(err));
-      });
-  };
+    return function (dispatch) {
+        dispatch(dispatchAllProjectsLoading());
+        return axios
+            .get(`${config.apiUrl}projects/${query}`,{
+				headers: { Authorization: "Token " + localStorage.getItem('token') }
+			})
+            .then(response => {
+                dispatch(dispatchAllProjectsReceived(response.data, query ));
+            })
+            .catch(err => {
+                dispatch(dispatchAllProjectsFailed(err));
+            });
+    };
 };
 
 export const dispatchAllProjectsReceived = (response, queryString) => {
