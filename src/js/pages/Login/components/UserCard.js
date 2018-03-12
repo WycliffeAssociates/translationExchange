@@ -108,7 +108,7 @@ const PlayButton = styled.button`
     border: none;
     height: 4vw;
     width: 15vw;
-    margin-left: -1.5vw;
+    margin-left: -2vw;
     margin-top: -0.7vw;
     display: inline-block;
     background-color: #009CFF;

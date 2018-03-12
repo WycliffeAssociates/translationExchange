@@ -8,10 +8,18 @@ export const fetchChaptersContainerData = (query) => {
     return function (dispatch) {
         return axios
             .all([
-                axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`),
-                axios.get(`${config.apiUrl}languages/?slug=${query.lang}`),
-                axios.get(`${config.apiUrl}books/?slug=${query.book}`),
-                axios.get(`${config.apiUrl}versions/?project_id=${query.project_id}`),
+                axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`,{
+                    headers: { Authorization: "Token " + localStorage.getItem('token') }
+                }),
+                axios.get(`${config.apiUrl}languages/?slug=${query.lang}`,{
+                    headers: { Authorization: "Token " + localStorage.getItem('token') }
+                }),
+                axios.get(`${config.apiUrl}books/?slug=${query.book}`,{
+                    headers: { Authorization: "Token " + localStorage.getItem('token') }
+                }),
+                axios.get(`${config.apiUrl}versions/?project_id=${query.project_id}`,{
+                    headers: { Authorization: "Token " + localStorage.getItem('token') }
+                }),
 
             ])
             .then(
@@ -56,7 +64,11 @@ export function setCheckingLevel(chapterId, level) {
 
     return function (dispatch) {
         return axios
-            .patch(config.apiUrl + "chapters/" + chapterId + "/", { checked_level: level })
+            .patch(config.apiUrl + "chapters/" + chapterId + "/", { checked_level: level },
+            {
+                headers: { Authorization: "Token " + localStorage.getItem('token') }
+            }
+        )
             .then(response => {
                 dispatch(dispatchSetCheckingLevelSuccess(response.data));
             })
@@ -86,7 +98,10 @@ export function publishFiles(projectId, set) {
 
     return function (dispatch) {
         return axios
-            .patch(config.apiUrl + "projects/" + projectId + "/", { published: set })
+            .patch(config.apiUrl + "projects/" + projectId + "/", { published: set },
+            {
+                headers: { Authorization: "Token " + localStorage.getItem('token') }
+            })
             .then(response => {
                 dispatch(dispatchPublishFilesSuccess(response.data));
                 if(set){
@@ -118,7 +133,10 @@ export function downloadProject(projectId, file_format) {
     return function (dispatch) {
         dispatch(dispatchLoadingDownloadProject());
         return axios
-            .get(config.apiUrl + `zip/?id=${projectId}&file_format=${file_format}`)
+            .get(config.apiUrl + `zip/?id=${projectId}&file_format=${file_format}`,
+            {
+				headers: { Authorization: "Token " + localStorage.getItem('token') }}
+        )
             .then(response => {
                 //Todo: find the better way to download files
                 window.location = config.streamingUrl + response.data.location;
@@ -160,7 +178,10 @@ export function downloadSourceAudio(projectId) {
     return function (dispatch) {
         dispatch(dispatchLoadingDownloadSourceAudio());
         return axios
-            .get(config.apiUrl + `tr/?id=${projectId}&published=true`)
+            .get(config.apiUrl + `tr/?id=${projectId}&published=true`,
+            {
+                headers: { Authorization: "Token " + localStorage.getItem('token') }
+            })
             .then(response => {
                 //Todo: find the better way to download files
                 window.location = config.streamingUrl + response.data.location;

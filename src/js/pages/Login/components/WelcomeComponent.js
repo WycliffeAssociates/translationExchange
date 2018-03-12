@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import GitHubLogin from '../../../components/social-login/GitHubLogin';
 //import {dispatchToken} from '../../../actions/database.js';
 
 export class WelcomeComponent extends React.Component {
@@ -47,11 +48,11 @@ export class WelcomeComponent extends React.Component {
             Continue <i className="fa fa-arrow-right fa-fw"></i>
           </ContinueButton>
 
-          <GitHubSignInButton>
-            <i className="fab fa-github fa-fw " />
-            <a className="signInLink"
-              href="https://github.com/login/oauth/authorize?scope=user:email&client_id=f570d7b8fb0342eb629b"> Sign in</a>
-          </GitHubSignInButton>
+          <GitHubLogin clientId="f5e981378e91c2067d41"
+            redirectUri="https://localhost/"
+            onSuccess={this.onLoginSuccess}
+            onFailure={this.onLoginFailure}/>
+
 
         </ButtonsContainer>
 
