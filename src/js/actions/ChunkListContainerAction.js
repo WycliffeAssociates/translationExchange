@@ -5,7 +5,10 @@ import { notify } from "react-notify-toast";
 export const getAudioTakes = (chunkId, counter) => {
   return function(dispatch) {
     return axios
-      .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`)
+      .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`,
+      {
+        headers: { Authorization: "Token " + localStorage.getItem('token') }
+    })
       .then(response => {
         if (counter === 0) {
           dispatch(dispatchTakesFirstTimeSuccess(response.data, chunkId));
@@ -23,7 +26,10 @@ export const getAudioTakes = (chunkId, counter) => {
 export const getTakesToExport = (chapterId) => {
   return function(dispatch) {
     return axios
-      .get(`${config.apiUrl}takes/?chapter_id=${chapterId}&published=true`)
+      .get(`${config.apiUrl}takes/?chapter_id=${chapterId}&published=true`,
+      {
+        headers: { Authorization: "Token " + localStorage.getItem('token') }
+    })
       .then(response => {
           dispatch(dispatchTakesToExportSuccess(response.data));
       })
@@ -39,7 +45,10 @@ export const getTakesToExport = (chapterId) => {
 export const getAudioComments = (query, type) => {
   return function(dispatch) {
     return axios
-      .get(`${config.apiUrl}comments/?${type}=${query}`)
+      .get(`${config.apiUrl}comments/?${type}=${query}`,
+      {
+        headers: { Authorization: "Token " + localStorage.getItem('token') }
+    })
       .then(response => {
         dispatch(dispatchGetAudioCommentsSuccess(response.data));
       })
@@ -69,15 +78,25 @@ export const getSelectedProjectInfo = query => {
   return function(dispatch) {
     return axios
       .all([
-        axios.get(`${config.apiUrl}chunks/?chapter_id=${query.chapterId}`),
+        axios.get(`${config.apiUrl}chunks/?chapter_id=${query.chapterId}`,{
+          headers: { Authorization: "Token " + localStorage.getItem('token') }
+      }),
         axios.get(
           `${config.apiUrl}chapters/?project_id=${query.project_id}&id=${
             query.chapterId
           }`
-        ),
-        axios.get(`${config.apiUrl}projects/?id=${query.project_id}`),
-        axios.get(`${config.apiUrl}books/?slug=${query.book}`),
-        axios.get(`${config.apiUrl}languages/?id=${query.project_id}`)
+       ,{
+        headers: { Authorization: "Token " + localStorage.getItem('token') }
+    } ),
+        axios.get(`${config.apiUrl}projects/?id=${query.project_id}`,{
+          headers: { Authorization: "Token " + localStorage.getItem('token') }
+      }),
+        axios.get(`${config.apiUrl}books/?slug=${query.book}`,{
+          headers: { Authorization: "Token " + localStorage.getItem('token') }
+      }),
+        axios.get(`${config.apiUrl}languages/?id=${query.project_id}`,{
+          headers: { Authorization: "Token " + localStorage.getItem('token') }
+      })
       ])
       .then(
         axios.spread(function(
@@ -167,7 +186,9 @@ export function dispatchChunksFailed(error) {
 export const setSourceProject = (query, chapter) => {
   return function(dispatch) {
     return axios
-      .post(config.apiUrl + "takes/", { ...query, chapter: chapter })
+      .post(config.apiUrl + "takes/", { ...query, chapter: chapter },{
+        headers: { Authorization: "Token " + localStorage.getItem('token') }
+    })
       .then(response => {
         dispatch(setSourceProjectSuccess(response.data, query));
       })
@@ -203,7 +224,9 @@ export const patchTake = (
 ) => {
   return function(dispatch) {
     return axios
-      .patch(config.apiUrl + "takes/" + takeId + "/", patch)
+      .patch(config.apiUrl + "takes/" + takeId + "/", patch,{
+        headers: { Authorization: "Token " + localStorage.getItem('token') }
+    })
       .then(response => {
         //find correct take to update
         let listOfTakes = takes;
@@ -260,7 +283,9 @@ export const setActiveToFalse = () => {
 export const deleteTake = (takeId, success, updatingDeletedTake) => {
   return function(dispatch) {
     return axios
-      .delete(config.apiUrl + "takes/" + takeId + "/")
+      .delete(config.apiUrl + "takes/" + takeId + "/",{
+        headers: { Authorization: "Token " + localStorage.getItem('token') }
+    })
       .then(response => {
         updatingDeletedTake(takeId);
 
@@ -328,7 +353,9 @@ export const deleteComment = (
 ) => {
   return function(dispatch) {
     return axios
-      .delete(config.apiUrl + "comments/" + commentId + "/")
+      .delete(config.apiUrl + "comments/" + commentId + "/",{
+        headers: { Authorization: "Token " + localStorage.getItem('token') }
+    })
       .then(() => {
         updatingDeletedComment(commentId, comments);
         if (comments.length === 0) {
@@ -400,7 +427,9 @@ export function deleteCommentFailed(error) {
 export const markedAsPublished = (success, chapterId, set) => {
   return function(dispatch) {
     return axios
-      .patch(config.apiUrl + "chapters/" + chapterId + "/", { published: set })
+      .patch(config.apiUrl + "chapters/" + chapterId + "/", { published: set },{
+        headers: { Authorization: "Token " + localStorage.getItem('token') }
+    })
       .then(response => {
         const chapterNum = response.data.number;
         if (success) {
@@ -451,7 +480,9 @@ export const saveComment = (
         user: 3,
         object: id,
         type: type
-      })
+      },{
+        headers: { Authorization: "Token " + localStorage.getItem('token') }
+    })
       .then(results => {
         if (type === "take") {
           dispatch(saveCommentSuccess(results.data));
