@@ -25,7 +25,7 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '90%',
-    marginTop: '3%',
+    marginTop: '12%',
   },
   redoBtn: {
     backgroundColor: 'transparent',

@@ -15,9 +15,10 @@ const Button= styled.button`
   color: white;
   background: linear-gradient(to bottom, #0076FF, #00C5FF);
   padding: 0.4vw 4vw;
-  font-size: 1.5vw;
+  font-size: 1.1vw;
   font-weight: 100;
   border: none;
-  box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+  text-decoration: underline;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
   cursor: pointer;
 `;

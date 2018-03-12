@@ -66,11 +66,13 @@ const styles = {
     alignSelf: 'center',
     flex: '1 1 auto',
     width: '100%',
-    paddingTop: '14%',
-    marginLeft: '5%'
+    paddingTop: '15%',
+    marginRight: '2%'
+
   },
   waveformContainer: {
     width: '100%',
+    marginRight: '10%'
   },
 
 };

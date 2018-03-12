@@ -99,6 +99,7 @@ const Card= styled.div`
     box-shadow: 3px 4px 5px rgba(0,0,0,0.6);
     overflow: hidden;
     background-color: white;
+    border: solid white;
 `;
 
 const ImageContainer = styled.div`
@@ -130,6 +131,8 @@ const CardOptions= styled.div`
     padding: 1vw;
     overflow: hidden;
     text-align: left;
+    border-color: white;
+    border-width: 1vw;
   `;
 
 const SignOutButton = styled.div`
