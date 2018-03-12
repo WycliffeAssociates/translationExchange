@@ -5,7 +5,9 @@ export const fetchAllSourceAudio = (setInitialSourceAudio) => {
     return function (dispatch) {
         dispatch(dispatchSourceAudioLoading());
         return axios
-            .get(config.apiUrl + `projects/?published=true`)
+            .get(config.apiUrl + `projects/?published=true`,{
+                headers: { Authorization: "Token " + localStorage.getItem('token') }
+            })
             .then(response => {
                 let projects = [];
                 response.data.map(project => {
@@ -35,7 +37,9 @@ export const fetchAllSourceAudio = (setInitialSourceAudio) => {
 export const getSourceTakes = (chunkId, playSourceTake, chunkNumber) => {
   return function(dispatch) {
     return axios
-      .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`)
+      .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`,{
+        headers: { Authorization: "Token " + localStorage.getItem('token') }
+    })
       .then(response => {
            playSourceTake(response.data[0].location, chunkId, chunkNumber);
       })

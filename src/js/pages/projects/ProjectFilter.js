@@ -57,9 +57,15 @@ class ProjectFilter extends Component {
 
 	        axios
 	            .all([
-	                axios.get(config.apiUrl + "languages/"),
-	                axios.get(config.apiUrl + "books/"),
-	                axios.get(config.apiUrl + "versions/")
+	                axios.get(config.apiUrl + "languages/",{
+						headers: { Authorization: "Token " + localStorage.getItem('token') }
+					}),
+	                axios.get(config.apiUrl + "books/",{
+						headers: { Authorization: "Token " + localStorage.getItem('token') }
+					}),
+	                axios.get(config.apiUrl + "versions/",{
+						headers: { Authorization: "Token " + localStorage.getItem('token') }
+					})
 	            ])
 	            .then(
 	                axios.spread(function(
