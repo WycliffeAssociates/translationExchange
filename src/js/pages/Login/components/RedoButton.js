@@ -15,12 +15,12 @@ const Button= styled.button`
   color: #00C5FF;
   background: white;
   padding: 0.4vw 4vw;
-  font-size: 1.25vw;
+  font-size: 1.1vw;
   font-weight: 100;
   border: solid;
   border-width: 2px;
   border-color: #00C5FF;
-
-  box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+  text-decoration: underline;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
   cursor: pointer;
 `;

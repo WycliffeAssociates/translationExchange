@@ -90,9 +90,9 @@ class CreateUser extends Component {
   }
 
   done() {
-
+    const {recordedBlob, generatedHash} = this.state;
     let {dispatch} = this.props;
-    dispatch(createUser(this.state.recordedBlob, this.state.generatedHash));
+    dispatch(createUser(recordedBlob, generatedHash));
     this.props.history.push('/users');
 
   }
