@@ -1,7 +1,7 @@
 /* eslint indent:["error", "tab"]*/
 import React, { Component } from 'react';
-import trap from 'images/trap.svg';
-import logo from 'images/logo.png';
+import trap from 'assets/images/trap.svg';
+import logo from 'assets/images/logo.png';
 import { Image } from 'semantic-ui-react';
 class LogoTitle extends Component {
 	render() {
