@@ -53,6 +53,7 @@ const styles ={
     borderRadius: '2%',
     minWidth: 469 ,
     maxWidth: 1680,
+    paddingBottom: '1.5vw',
   },
 };
 
