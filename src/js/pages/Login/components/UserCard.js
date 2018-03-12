@@ -21,14 +21,6 @@ export default class UserCard extends React.Component {
     jdenticon.update(`#canvas${this.props.id}` , this.props.user.hash);
   }
 
-  handleClick(recording) {
-    var blobString = recording.
-    this.setState({
-      playing: true,
-
-    })
-
-  }
 
   play() {
 
@@ -94,8 +86,8 @@ const UserCardContainer = styled.div`
 const Card= styled.div`
     text-align: center;
     height: 18vw;
-    width: 15vw;
-    border-radius: 20px;
+    width: 13vw;
+    border-radius: 1.5vw;
     box-shadow: 3px 4px 5px rgba(0,0,0,0.6);
     overflow: hidden;
     background-color: white;
@@ -116,11 +108,11 @@ const PlayButton = styled.button`
     border: none;
     height: 4vw;
     width: 15vw;
-    margin-left: -1vw;
+    margin-left: -1.5vw;
     margin-top: -0.7vw;
     display: inline-block;
     background-color: #009CFF;
-    padding: 0.5vw 1vw;
+    padding: 0vw 0vw;
     font-size: 2vw; //in the font awesome library the font size ends up controlling the size of the icon
   `;
 

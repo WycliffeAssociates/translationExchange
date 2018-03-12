@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { ReactMic } from "react-mic";
 import { Button, Icon } from "semantic-ui-react";
 import "./RecordComment.css";
-import LoadingGif from "images/Spinner.gif";
+import LoadingGif from "assets/images/Spinner.gif";
 import CommentsPlayer from "../comments/commentsPlayer";
 
 

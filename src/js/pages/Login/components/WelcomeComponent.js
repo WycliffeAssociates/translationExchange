@@ -1,10 +1,7 @@
 /* global require gapi:true */
 
 import React from 'react';
-import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import {YesButton} from './YesButton';
-import {RedoButton} from './RedoButton';
 //import {dispatchToken} from '../../../actions/database.js';
 
 export class WelcomeComponent extends React.Component {
@@ -22,20 +19,6 @@ export class WelcomeComponent extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  componentWillMount() {
-
-    //specs/styling for the rendering of google sign in button
-    //gapi.signin2.render('g-signin2', {
-    //  'scope': 'https://www.googleapis.com/auth/plus.login',
-    //  'longtitle': true,
-    //'width': '225vw',
-    // 'height': 40,
-    //  'theme': 'light',
-    //'onsuccess': this.onSignIn,
-  //  });
-
-  }
-
   render() {
 
 
@@ -44,7 +27,7 @@ export class WelcomeComponent extends React.Component {
       <WelcomeDialog>
 
 
-        <WelcomeIcon src={require('../../../../images/welcome.png')}  />
+        <WelcomeIcon src={require('../../../../assets/images/welcome.png')}  />
 
         <span style={{display: 'block', margin: '1vw'}}>
           <WelcomeTo> <H2span> WELCOME TO </H2span> </WelcomeTo>
@@ -64,21 +47,14 @@ export class WelcomeComponent extends React.Component {
             Continue <i className="fa fa-arrow-right fa-fw"></i>
           </ContinueButton>
 
-          { /*
-            <div>
-              <button id="g-signin2" style={{display: 'block', border: 'none', margin: 'auto', marginTop: '1vw', marginBottom: '1vw'}}
-                onSuccess= {this.onSignIn}> </button>
-            </div> */
-          }
-
           <GitHubSignInButton>
-            <i className="fa fa-github fa-fw fa-lg" />
+            <i className="fab fa-github fa-fw " />
             <a className="signInLink"
               href="https://github.com/login/oauth/authorize?scope=user:email&client_id=f570d7b8fb0342eb629b"> Sign in</a>
           </GitHubSignInButton>
 
         </ButtonsContainer>
-        
+
       </WelcomeDialog>
 
     );
@@ -133,13 +109,13 @@ export class WelcomeComponent extends React.Component {
 
 const  WelcomeDialog = styled.div`
 
-    width: 35vw;
+    width: 30vw;
     height: 40vw;
     padding: 2vw;
     background-color: white;
     box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.4);
     margin: auto;
-    border-radius: 15px;
+    border-radius: 2vw;
     border: none;
   `;
 
@@ -182,29 +158,31 @@ const ContinueButton = styled.button`
     /* height: 2.5vw;
     width: 14vw; */
     margin-top: 1vw;
-    padding: 0.75vw 3vw;
+    padding: 0.5vw 2.75vw;
     font-size: 1.45vw;
     font-weight: 100;
     color: white;
     border: none;
-    border-radius: 20px;
+    border-radius: 2vw;
     box-shadow: 1px 3px 2px 1px rgba(0,0,0,0.2);
     cursor: pointer;
     `;
 
 const GitHubSignInButton= styled(ContinueButton)`
 
-    padding: 0.75vw 3.6vw;
+    padding: 0.5vw 3.5vw;
     background: white;
     margin-top: 3vw;
     color: black;
     `;
 
 const ButtonsContainer = styled.div`
-    margin: auto;
-    marginTop: 4vw;
+    margin-top: 2vw;
+    margin-left: -2vw;
     textAlign: center;
     padding: 2vw 8vw;
+    width: inherit;
+
   `;
 
 

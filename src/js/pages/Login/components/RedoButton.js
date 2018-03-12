@@ -5,7 +5,7 @@ import styled from 'styled-components';
 export const RedoButton = ({onClick}) => {
 
   return (
-    <Button onClick={onClick}> Redo <i className="fa fa-microphone" /> </Button>
+    <Button onClick={onClick}> Redo <i className="fa fa-redo" /> </Button>
   );
 
 };

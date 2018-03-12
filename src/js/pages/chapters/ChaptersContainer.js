@@ -6,7 +6,7 @@ import { Container, Table } from 'semantic-ui-react';
 import ChapterList from './components/ChapterList';
 import DownloadProjects from './components/DownloadProjects';
 import QueryString from 'query-string';
-import LoadingTinyGif from 'images/loading-tiny.gif';
+import LoadingTinyGif from 'assets/images/loading-tiny.gif';
 import 'css/chapters.css';
 import PublishButton from './components/PublishButton';
 import DownloadSourceAudio from './components/DownloadSourceAudio';
