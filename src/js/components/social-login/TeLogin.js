@@ -10,6 +10,7 @@ class TeLogin extends Component {
     children: PropTypes.node,
     className: PropTypes.string,
     iconHash: PropTypes.string.isRequired,
+    nameAudio: PropTypes.string,
     isLogin: PropTypes.bool,
     onRequest: PropTypes.func,
     onSuccess: PropTypes.func,
@@ -24,16 +25,19 @@ class TeLogin extends Component {
   }
 
   onBtnClick = () => {
-    const { iconHash, isLogin } = this.props;
+    const { iconHash, nameAudio, isLogin } = this.props;
 
     this.onRequest();
 
-    var url = "https://localhost/api/auth/create/";
-    if(isLogin) {
-      url = "https://localhost/api/auth/login/";
+    var data = {iconHash: iconHash};
+
+    var url = "https://localhost/api/login/";
+    if(!isLogin) {
+      url = "https://localhost/api/profiles/";
+      data.nameAudio = nameAudio;
     }
 
-    return axios.post(url, {iconHash: iconHash}).
+    return axios.post(url, data).
       then(data => {
         this.onSuccess(data)
       }).catch(error => {
