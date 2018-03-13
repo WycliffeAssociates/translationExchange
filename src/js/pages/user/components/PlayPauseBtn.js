@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Icon } from "semantic-ui-react";
+//import { Icon } from "semantic-ui-react";
 import styled from 'styled-components';
 
 
@@ -38,9 +38,11 @@ class PlayPauseBtn extends Component {
     const {icon}= this.state;
     return (
       <ButtonContainer>
+
         <PlayButton  onClick={()=>this.startPlaying()} type="button">
-          <Icon style={styles.iconStyle} size="big" name={icon} />
+          <Icon> <i className={`fa fa-${icon}`} /> </Icon>
         </PlayButton>
+
       </ButtonContainer>
 
     );
@@ -55,30 +57,35 @@ const Container =  styled.div`
 
 const  PlayButton = styled.button`
     height: 100%;
-    width: 100%;
-    border-radius: 80%;
+    width: 45%;
+    border-radius: 50%;
     background-color: #fff;
     outline: none;
     border-color: #2D2D2D;
     border: .5%;
+    cursor: pointer;
   `;
 
 const ButtonContainer =styled.div`
     position: absolute;
     height: 13%;
     width: 18%;
-    zIndex: 2;
+    z-index: 2;
     top: 35%;
-    left: 50%;
+    left: 55%;
     transform: translate(-50%, -50%);
+    cursor: pointer;
   `;
-const styles = {
 
-  iconStyle: {
-    marginLeft: '5%',
-    color: '#2D2D2D',
-  },
-};
+const Icon = styled.button`
+  margin-left: 5%;
+  color: #2D2D2D;
+  border: none;
+  font-size: 2vw;
+  cursor: pointer;
+
+`;
+
 
 
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Wavesurfer from 'react-wavesurfer';
 import PlayPauseBtn from './PlayPauseBtn';
+import styled from 'styled-components';
 
 class CommentsPlayer extends Component {
 
@@ -34,11 +35,12 @@ class CommentsPlayer extends Component {
   }
 
   render() {
-  const{ pos, play} = this.state;
+    const { pos, play} = this.state;
 
     return (
-      <div style={styles.container} >
-        <div style={styles.waveformContainer}>
+      <Container>
+        <WaveformContainer>
+
           <Wavesurfer
             audioFile={this.props.audioFile}
             pos={pos}
@@ -48,32 +50,28 @@ class CommentsPlayer extends Component {
             onReady={this.duration}
             onFinish={this.finishedPlaying}
           />
-        </div>
+
+        </WaveformContainer>
         <PlayPauseBtn startPlaying= {()=>this.toggleButton()} playing={play} />
 
-      </div>
+      </Container>
 
     );
   }
 }
 
+const Container = styled.div`
+    display: flex;
+    align-self: center;
+    flex: 1 1 auto;
+    width: 100%;
+    padding-top: 11%;
+    margin-right: 2%;
+`;
 
+const WaveformContainer = styled.div`
+    width: 100%;
+    margin-right: 10%
+  `;
 
-const styles = {
-
-  container: {
-    display: 'flex',
-    alignSelf: 'center',
-    flex: '1 1 auto',
-    width: '100%',
-    paddingTop: '15%',
-    marginRight: '2%'
-
-  },
-  waveformContainer: {
-    width: '100%',
-    marginRight: '10%'
-  },
-
-};
 export default CommentsPlayer;

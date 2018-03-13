@@ -91,13 +91,18 @@ const Card= styled.div`
     box-shadow: 3px 4px 5px rgba(0,0,0,0.6);
     overflow: hidden;
     background-color: white;
-    border: solid white;
+    border: solid white 0.1vw;
+    cursor: pointer;
 `;
 Card.displayName = 'Card';
 
 
 const ImageContainer = styled.div`
     padding: 1.5vw 0.5vw;
+    &:hover ${ImageContainer} {
+      background-color: white;
+      box-shadow: 1px 1px 1px rbga(0,0,0,0.5);
+    }
 `;
 ImageContainer.displayName = 'ImageContainer';
 
@@ -119,6 +124,12 @@ const PlayButton = styled.button`
     background-color: #009CFF;
     padding: 0vw 0vw;
     font-size: 2vw; //in the font awesome library the font size ends up controlling the size of the icon
+    &:hover ${PlayButton} {
+      background-color: white;
+      color: #009CFF;
+    }
+    cursor: pointer;
+
   `;
 PlayButton.displayName = 'PlayButton';
 
@@ -131,6 +142,10 @@ const CardOptions= styled.div`
     text-align: left;
     border-color: white;
     border-width: 1vw;
+    &:hover ${CardOptions} {
+      background-color: white;
+      color: #009CFF;
+    }
   `;
 CardOptions.displayName = 'CardOptions';
 

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Icon } from 'semantic-ui-react';
 import ReactCountdownClock from 'react-countdown-clock';
 import styled from 'styled-components';
 
@@ -23,11 +22,12 @@ class RecordButton extends Component {
   }
 
   render() {
+    const {icon} = this.props;
     return (
       <Container>
         <ButtonContainer>
           <PlayButton  onClick={this.startRecording} type="voice">
-            <Icon style={styles.iconStyle} size="big" name="play" />
+            <Icon> <i className={`fa fa-${icon}`} /> </Icon>
           </PlayButton>
         </ButtonContainer>
 
@@ -68,13 +68,14 @@ const ButtonContainer = styled.div`
   transform: translate(-50%, -50%);
 `;
 
+const Icon = styled.button`
+margin-left: 5%;
+color: #E74C3C;
+border: none;
+font-size: 2vw;
+margin-left: -0.005vw;
 
-const styles = {
-  iconStyle: {
-    marginLeft: '5%',
-    color: '#E74C3C',
-  },
-};
+`;
 
 
 

@@ -29,7 +29,7 @@ export default class NewUserCard extends React.Component {
 
 
   handleClick() {
-    this.props.history.push({pathname: '/users/new-user'});
+    this.props.history.push({pathname: '/users/registration'});
   }
 
 }
@@ -51,6 +51,7 @@ const Card= styled.div`
     overflow: hidden;
     background-color: white;
     padding: 2vw 3.5vw;
+    cursor: pointer;
   `;
 Card.displayName = 'Card';
 
