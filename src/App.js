@@ -57,7 +57,7 @@ class App extends Component {
         <Switch>
           <Route  exact path="/" component={Root} />
           <Route  exact path ="/users" component={AvailableUsers} />
-          <Route  exact path="/users/new-user" component={CreateUserContainer} />
+          <Route  exact path="/users/registration" component={CreateUserContainer} />
           <Route  path="/home" component={Home} />
           <Route  path="/welcome" component={Welcome} />
           <Route  path="/about" component={About} />
