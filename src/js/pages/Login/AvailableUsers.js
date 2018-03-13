@@ -53,10 +53,10 @@ class AvailableUsers extends React.Component {
 
 }
 
-const mapStateToProps = ({user}) => ({
-  users: user.users,
-  recording: user.recording
+const mapStateToProps = state => {
+  const { users } = this.state;
+  return {users}
 
-});
+}
 
 export default connect (mapStateToProps)(AvailableUsers);

@@ -1,28 +1,26 @@
-export const initialState = ({
+const INITIAL_STATE = ({
+  users: [{hash:'hash1', audio:''},{hash:'hash2', audio:''}],
+  loading: false
+})
 
-  users: [{hash: 'FFngfh546535462', recording: 'none'}],
-
-
-});
-
-function userReducer( state= initialState, action ={}) {
+export default( state= INITIAL_STATE, action ={}) {
 
   switch (action.type) {
-    case 'CREATE_USER':
-      var newUser = {
-        recording: action.recordedBlob,
-        hash: action.hash,
-      };
+    case 'FETCHED_USERS':
       return {
-        ...state,
-        users: [...state.users, newUser],
+        ...state, users: action.users,
+                  loading: false
+
       };
+    case 'LOADING_USER':
+      return{
+        ...state, loading: true
+      }
 
     default:
       return {
         ...state,
       };
-
   }
 
 }

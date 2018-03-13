@@ -63,11 +63,11 @@ export default class Demo extends Component {
     })
   }
 
-  onLogoutFailure (err) {
+  onLogoutFailure(err) {
     console.error(err)
   }
 
-  logout () {
+  logout() {
     const { logged, currentProvider } = this.state
 
     if (logged && currentProvider) {
@@ -88,5 +88,5 @@ export default class Demo extends Component {
           onFailure={this.onLoginFailure}/>
       </div>
     )
-  }  
+  }
 }

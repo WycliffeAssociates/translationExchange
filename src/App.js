@@ -31,7 +31,7 @@ class App extends Component {
 
     //configuration for web requests
     axios.defaults.timeout = 20000;
-
+    
     this.state ={
       hasError: false,
     };

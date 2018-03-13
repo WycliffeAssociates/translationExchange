@@ -32,8 +32,8 @@ export default class UserCard extends React.Component {
   }
   render() {
     var key= this.props.id? this.props.id: 0;
-    const {recording, hash} = this.props.user;
-    const blob = recording ? recording : {blobUrl:'none'} ;
+    const {audio, hash} = this.props.user;
+    const blob = audio ? audio : {} ;
     const {playing} = this.state;
     let icon = 'fa fa-play'
     if(playing) {
@@ -41,15 +41,12 @@ export default class UserCard extends React.Component {
     }
 
     return (
-
-
       <UserCardContainer>
         <PulseEffect animate={playing}>
           <Card>
 
             <ImageContainer>
               <Image id={`canvas${key}`} data-jdenticon-value={hash} />
-
             </ImageContainer>
 
             <CardOptions>
