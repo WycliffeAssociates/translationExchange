@@ -482,7 +482,7 @@ export const saveComment = (
         type: type
       },{
         headers: { Authorization: "Token " + localStorage.getItem('token') }
-    })
+      })
       .then(results => {
         if (type === 'take') {
           dispatch(saveCommentSuccess(results.data));

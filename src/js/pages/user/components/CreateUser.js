@@ -8,6 +8,7 @@ import RecordButton from './RecordButton';
 import BottomButtons from './BottomButtons';
 import styled from 'styled-components';
 
+
 class CreateUser extends Component {
   constructor(props) {
     super(props);
@@ -95,37 +96,40 @@ class CreateUser extends Component {
 
   done() {
     const {recordedBlob, generatedHash} = this.state;
-    this.props.createUser(recordedBlob, generatedHash);
-    this.props.history.push('/users');
+    const reader = new FileReader();
 
+    reader.addEventListener(
+      "load",
+      () => {
+        const jsonblob = reader.result
+        this.props.createUser(jsonblob, generatedHash);
+      },
+      false
+    );
+
+    reader.readAsDataURL(recordedBlob.blob)
+
+    this.props.history.push('/users');
   }
 
   bottomSection() {
     const {recording, generatedHash} = this.state;
     let header ='What is your name?';
-    let buttonIcon = 'microphone';
-    let buttonStyle = styles.playButton;
     let bottomText = 'Record';
     let textStyle = styles.textRecord;
 
     let handler = <RecordButton startRecording={this.startRecording} icon={buttonIcon} /> ;
 
-
-
     if (recording) {
-      buttonIcon='stop'
-      buttonStyle= {...styles.playButton, backgroundColor: '#E74C3C' }
       bottomText= 'Recording'
     }
 
     if (this.state.audio) {
       header='is this OK?';
-      buttonIcon= 'play';
+
       bottomText=
       handler = <svg id="canvas" width="20%" height="20%" data-jdenticon-value={generatedHash} />
-
     }
-
 
     return (
 
@@ -229,8 +233,5 @@ const styles = {
   },
 
 };
-
-
-
 
 export default CreateUser;

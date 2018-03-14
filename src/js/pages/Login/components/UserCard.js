@@ -2,6 +2,7 @@ import React from 'react';
 import jdenticon from 'jdenticon';
 import ReactPlayer from 'react-player';
 import styled,  { keyframes } from 'styled-components';
+import config from '../../../../config/config'
 import { pulse } from 'react-animations';
 //import {Card} from 'semantic-ui-react';
 //
@@ -11,50 +12,47 @@ export default class UserCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playing: false,
-    };
+      playing: false
+    }
     this.play = this.play.bind(this);
     this.ended = this.ended.bind(this);
   }
 
   componentDidMount() {
-    jdenticon.update(`#canvas${this.props.id}` , this.props.user.hash);
+    const {hash} =this.props.user || '' ;
+    jdenticon.update(`#canvas${this.props.id}` , hash);
   }
 
 
   play() {
 
-    this.setState({playing: true});
+    this.setState({playing: true})
   }
 
   ended() {
-    this.setState({playing: false});
+    this.setState({playing: false})
   }
   render() {
     var key= this.props.id? this.props.id: 0;
-    const {recording, hash} = this.props.user;
-    const blob = recording ? recording : {blobUrl: 'none'} ;
+    const {name_audio, icon_hash} = this.props.user || [];
+    const audioURL = config.streamingUrl + name_audio;
     const {playing} = this.state;
-    let icon = 'fa fa-play';
+    let icon = 'fa fa-play'
     if (playing) {
-      icon ='fa fa-volume-up';
+      icon ='fa fa-volume-up'
     }
 
     return (
-
-
       <UserCardContainer>
         <PulseEffect animate={playing}>
           <Card>
-
             <ImageContainer>
-              <Image id={`canvas${key}`} data-jdenticon-value={hash} />
-
+              <Image id={`canvas${key}`} data-jdenticon-value={icon_hash} />
             </ImageContainer>
 
             <CardOptions>
               <PlayButton onClick={()=> this.play()}> <i className={`${icon}`}  /> </PlayButton>
-              <ReactPlayer url={blob.blobURL} playing={this.state.playing} onEnded={()=> this.ended()}  />
+              <ReactPlayer url={audioURL} playing={this.state.playing} onEnded={()=> this.ended()}  />
             </CardOptions>
           </Card>
         </PulseEffect>
@@ -66,7 +64,7 @@ export default class UserCard extends React.Component {
 
 
 // keyframes returns a unique name based on a hash of the contents of the keyframes
-const pulse_animation = keyframes`${pulse}`;
+const pulse_animation = keyframes`${pulse}`
 
 
 // Here we create a component that will rotate everything we pass in over two seconds
@@ -79,7 +77,7 @@ const UserCardContainer = styled.div`
   // height: 100vh;
   // width: 100vw;
 `;
-UserCardContainer.displayName = 'UserCardContainer';
+
 
 
 
@@ -91,27 +89,17 @@ const Card= styled.div`
     box-shadow: 3px 4px 5px rgba(0,0,0,0.6);
     overflow: hidden;
     background-color: white;
-    border: solid white 0.1vw;
-    cursor: pointer;
+    border: solid white;
 `;
-Card.displayName = 'Card';
-
 
 const ImageContainer = styled.div`
     padding: 1.5vw 0.5vw;
-    &:hover ${ImageContainer} {
-      background-color: white;
-      box-shadow: 1px 1px 1px rbga(0,0,0,0.5);
-    }
 `;
-ImageContainer.displayName = 'ImageContainer';
-
 
 const Image= styled.svg`
     height: 10vw;
     width: 10vw;
 `;
-Image.displayName = 'Image';
 
 const PlayButton = styled.button`
     color: white;
@@ -124,14 +112,7 @@ const PlayButton = styled.button`
     background-color: #009CFF;
     padding: 0vw 0vw;
     font-size: 2vw; //in the font awesome library the font size ends up controlling the size of the icon
-    &:hover ${PlayButton} {
-      background-color: white;
-      color: #009CFF;
-    }
-    cursor: pointer;
-
   `;
-PlayButton.displayName = 'PlayButton';
 
 const CardOptions= styled.div`
 
@@ -142,13 +123,7 @@ const CardOptions= styled.div`
     text-align: left;
     border-color: white;
     border-width: 1vw;
-    &:hover ${CardOptions} {
-      background-color: white;
-      color: #009CFF;
-    }
   `;
-CardOptions.displayName = 'CardOptions';
-
 
 const SignOutButton = styled.div`
     display: inline-block;
@@ -161,4 +136,4 @@ const SignOutButton = styled.div`
     font-size: 2vw; //in the font awesome library the font size ends up controlling the size of the icon
 `;
 
-SignOutButton.displayName = 'SignOutButton';
+

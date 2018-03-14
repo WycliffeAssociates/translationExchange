@@ -22,5 +22,5 @@ export default combineReducers({
   projectsListContainer: ProjectsListContainerReducer,
   chunkListContainer: ChunkListContainerReducer,
   sourceAudio: SourceAudioReducer,
-  user,
+  user
 });

@@ -5,10 +5,6 @@ import 'css/Login.css';
 
 class Welcome extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
 
   render() {
 

@@ -3,19 +3,17 @@ import UserCard from './components/UserCard';
 import NewUserCard from './components/NewUserCard';
 import {Grid} from 'semantic-ui-react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {fetchUsers} from '../../actions';
 
 class AvailableUsers extends React.Component {
 
-  constructor(props) {
-    super(props);
 
+  componentWillMount() {
+    this.props.fetchUsers();
   }
 
-
   render() {
-
-    console.log(this.props);
-    console.log(this.props.users);
 
 
     return (
@@ -31,13 +29,13 @@ class AvailableUsers extends React.Component {
             </Grid.Column >
 
             {
-              this.props.users.length>=2? this.props.users.map((user,index)  => {
+              this.props.users.length>0? this.props.users.map((user,index)  => {
 
                 return (
                   <Grid.Column width={3}>
                     <UserCard  key={user} id={index} user={user} />
                   </Grid.Column>
-                );}) :   <Grid.Column width={3}> <UserCard id={0} key={0} user={this.props.users[0]} /> </Grid.Column>
+                );}) :   ''
 
             }
           </Grid>
@@ -53,10 +51,14 @@ class AvailableUsers extends React.Component {
 
 }
 
-const mapStateToProps = ({user}) => ({
-  users: user.users,
-  recording: user.recording
+const mapStateToProps = state => {
+  const { users } = state.user;
+  return {users}
+}
 
-});
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {  fetchUsers }, dispatch);
+};
 
-export default connect (mapStateToProps)(AvailableUsers);
+export default connect (mapStateToProps, mapDispatchToProps )(AvailableUsers);
