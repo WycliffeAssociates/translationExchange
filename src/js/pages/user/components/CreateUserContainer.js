@@ -1,48 +1,79 @@
 
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { Card } from 'semantic-ui-react';
 import 'css/create.css';
 import CreateUser from './CreateUser';
+import styled from 'styled-components';
 import {bindActionCreators} from 'redux';
 import { createUser } from '../../../actions/UserActions';
 
 
 class CreateUserContainer extends Component {
 
+
+  constructor(props) {
+    super(props);
+
+    const {dispatch} = this.props;
+
+    this.boundUserActionCreators = bindActionCreators(UserActionCreators, dispatch);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.props.history.push({pathname: '/users'});
+  }
+
+
   render() {
     return (
-      <div className="background" style= {styles.container} >
+      <div className="pageBackground">
 
-        <Card style={styles.card}>
-          <CreateUser {...this.props} />
-        </Card>
+        <Label onClick={this.handleClick}>
+          <i className="fa fa-hand-point-left fa-fw" /> Back to Login
+        </Label>
 
+
+        <Container>
+          <Card>
+            <CreateUser {...this.boundUserActionCreators} {...this.props} />
+          </Card>
+
+        </Container>
       </div>
 
     );
   }
-
 }
 
-const styles ={
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-    width: '100vw',
+const  Container = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 3vw;
+`;
 
-  },
-  card: {
-    width: '30vw',
-    height: '40vw',
-    boxShadow: '5px 5px 5px rgba(0, 0, 0, 0.4)',
-    borderRadius: '2%',
-    minWidth: 469 ,
-    maxWidth: 1680,
-  },
-};
+const Label = styled.label`
+  color: white;
+  font-size: 1.2vw;
+  padding: 0.5vw 0.5vw;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
+const Card = styled.div`
+  width: 33vw;
+  height: 40vw;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+  border-radius: 2%;
+  min-width: 469;
+  max-width: 1680;
+  padding-bottom: 1.5vw;
+  background-color: white;
+  overflow: hidden;
+`;
+
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({createUser}, dispatch)
