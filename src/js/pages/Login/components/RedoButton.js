@@ -24,3 +24,4 @@ const Button= styled.button`
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
   cursor: pointer;
 `;
+Button.displayName = 'Button';

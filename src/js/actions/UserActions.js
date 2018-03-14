@@ -33,8 +33,8 @@ export const createUser = (recordedBlob, hash, callback) => {
       })
       .then(response => {
         localStorage.setItem('token',response.data.token);
-        callback();
-        //TODO login user with user id and redirect him to projects
+        callback(); // used to redirect user
+
       })
       .catch(exception => {
 

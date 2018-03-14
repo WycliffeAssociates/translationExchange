@@ -1,31 +1,30 @@
 /* global it: true   expect:true  describe:true*/
 import React from 'react';
 import WelcomeComponent from '../../../../js/pages/Login/components/WelcomeComponent';
-import renderer from 'react-test-renderer';
-import {mount, shallow} from 'enzyme';
+import {shallow} from 'enzyme';
 
-const mockProps = {
+const defaultProps = {
   history: [],
 };
 
 describe('welcome component suite', function() {
   //const Component = <WelcomeComponent />
-  const wrapper = shallow(<WelcomeComponent {...mockProps} />);
+  const wrapper = shallow(<WelcomeComponent {...defaultProps} />);
 
   it('should render without error', function() {
-    expect(wrapper.contains(<div className="WelcomeDialog"> </div>));
+    expect(wrapper.contains('WelcomeDialog'));
   });
 
   it('should navigate to users', function() {
-    const button = wrapper.find('button').first();
-    //console.log(button.handleClick);
+    const button = wrapper.find('ContinueButton').first();
     button.simulate('click');
     expect(wrapper.instance().props.history.length).toEqual(1);
-
 
   });
 
   it('should find the handleClick function', function() {
-    // expect(wrapper.find('button').to.have.length(2);
+    const button = wrapper.find('GitHubSignInButton');
+    button.simulate('click');
+    // expect(wrapper.instance().props.history.length).toEqual(2);
   });
 });

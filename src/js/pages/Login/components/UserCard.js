@@ -1,6 +1,5 @@
 import React from 'react';
 import jdenticon from 'jdenticon';
-import { Redirect } from 'react-router';
 import ReactPlayer from 'react-player';
 import styled,  { keyframes } from 'styled-components';
 import config from '../../../../config/config'
@@ -24,13 +23,7 @@ export default class UserCard extends React.Component {
   }
 
   identLogin(hash) {
-    const tst = this.props;
-    debugger;
-    this.props.identiconLogin(hash, this.redirect());
-  }
-
-  redirect() {
-    this.props.history.push("/projects");
+    this.props.identiconLogin(hash, ()=>this.props.history.push('/projects'));
   }
 
   play() {
@@ -59,7 +52,7 @@ export default class UserCard extends React.Component {
             </ImageContainer>
 
             <CardOptions>
-              <PlayButton onClick={()=> this.play()}> <i className={`${icon}`}  /> </PlayButton>
+              <PlayButton playing={playing} onClick={()=> this.play()}> <i className={`${icon}`}  /> </PlayButton>
               <ReactPlayer url={audioURL} playing={this.state.playing} onEnded={()=> this.ended()}  />
             </CardOptions>
           </Card>
@@ -115,7 +108,7 @@ const Image= styled.svg`
 `;
 
 const PlayButton = styled.button`
-    color: white;
+    color: ${props => props.playing ? '#99ff99' : 'white'  } ;
     border: none;
     height: 4vw;
     width: 15vw;

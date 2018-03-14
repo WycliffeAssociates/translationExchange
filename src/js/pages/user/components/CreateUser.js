@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import { ReactMic } from 'react-mic';
 import SparkMD5 from 'spark-md5';
 import jdenticon from 'jdenticon';
-import Waveform from './Waveform';
-import TimeLine from './timeLine.png';
-import RecordButton from './RecordButton';
-import BottomButtons from './BottomButtons';
+import WaveformContainer from './WaveformContainer';
+import BottomSection from './BottomSection';
 
 
 class CreateUser extends Component {
@@ -48,31 +45,6 @@ class CreateUser extends Component {
     };
   }
 
-  audioWave() {
-    const { recordedBlob, audio } = this.state;
-
-    if (audio) {
-      return (
-        <div style = {styles.recordContainer}>
-          <Waveform audioFile={recordedBlob.blob} />
-        </div>
-      );
-
-    }
-    return (
-      <div style={styles.recordContainer}>
-        <div style={styles.recordPreview}>
-          <ReactMic
-            record={this.state.recording}
-            className="sound-wave"
-            onStop={this.onStop}
-            strokeColor="#009CFF"
-            backgroundColor="transparent"
-          />
-        </div>
-      </div>
-    );
-  }
 
   redo() {
     this.setState({
@@ -103,44 +75,24 @@ class CreateUser extends Component {
     this.props.history.push('/projects');
   }
 
-bottomSection() {
-    const {recording, generatedHash} = this.state;
-    let header ='What is your name?';
-    let bottomText = 'Record';
-    let textStyle = styles.textRecord;
-
-    let handler = <RecordButton startRecording={this.startRecording}  />
-
-    if (recording) {
-      bottomText= 'Recording'
-    }
-
-    if (this.state.audio) {
-      header='is this OK?';
-
-      bottomText=
-      handler = <svg id="canvas" width="20%" height="20%" data-jdenticon-value={generatedHash} />
-    }
-
-    return (
-      <div style={styles.centerContainer}>
-        <h1>{header}</h1>
-        <p style={styles.textPrivacy}>If you are concerned for your privacy or safety, please use a nickname or pseudonym.</p>
-        {handler}
-        {this.state.audio ? <BottomButtons done={this.save}  redo={this.redo} /> : <p style={textStyle}>{bottomText}</p>}
-      </div>
-
-    );
-  }
-
-
   render() {
-
+    const { recordedBlob, audio, recording, generatedHash } = this.state;
 
     return (
       <div style={styles.container}>
-        {this.audioWave()}
-        {this.bottomSection()}
+        <WaveformContainer
+          recording={recording}
+          recordedBlob={recordedBlob}
+          audio={audio}
+          onStop={this.onStop}
+        />
+        <BottomSection
+          startRecording={this.startRecording}
+          save={this.save}
+          redo={this.redo}
+          audio={audio}
+          generatedHash={generatedHash}
+        />
 
       </div>
     );
@@ -155,33 +107,6 @@ const styles = {
     height: '100%',
 
   },
-  centerContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '100%',
-    marginTop: '20%',
-  },
-  textPrivacy: {
-    textAlign: 'center',
-    width: '80%',
-    fontWeight: 600,
-  },
-  recordContainer: {
-    width: '100%',
-    height: '35%',
-    minWidth: 469,
-    backgroundImage: `url(${ TimeLine })`,
-    backgroundPosition: '50%',
-    backgroundRepeat: 'no-repeat',
-    backgroundColor: '#2D2D2D',
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-  },
-  recordPreview: {
-    marginTop: '3%',
-    width: '100%',
-  },
   playButton: {
     height: '80px',
     width: '80px',
@@ -191,19 +116,11 @@ const styles = {
     marginTop: '10px',
     outline: 'none',
   },
-  textRecord: {
-    fontSize: '1vw',
-    textDecoration: 'underline',
-    lineHeight: 1.8,
-    fontWeight: 900,
-    color: '#E74C3C',
-  },
   WaveformContainer: {
     width: '100%',
     paddingTop: '14%',
 
   }
-
 
 };
 

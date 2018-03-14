@@ -29,7 +29,7 @@ export default class NewUserCard extends React.Component {
 
 
   handleClick() {
-    this.props.history.push({pathname: '/users/new-user'});
+    this.props.history.push({pathname: '/users/registration'});
   }
 
 }
