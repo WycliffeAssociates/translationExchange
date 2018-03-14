@@ -120,16 +120,20 @@ const  WelcomeDialog = styled.div`
     border: none;
   `;
 
+WelcomeDialog.displayName='WelcomeDialog';
+
 const WelcomeIcon= styled.img`
     height: 7vw;
     width: 7vw;
     border-radius: 100px;
   `;
+WelcomeIcon.displayName = 'WelcomeIcon';
 
 const Welcomeh2 = styled.h2`
     marginTop: -0.5vw;
     font-size: 1.5vw;
   `;
+Welcomeh2.displayName = 'Welcomeh2';
 
 const WelcomeTo = styled.p`
     font-size: 1.5vw;
@@ -137,6 +141,7 @@ const WelcomeTo = styled.p`
     border-bottom: 1px solid lightgray;
     line-eight: 0.1vw;
   `;
+WelcomeTo.displayName = 'WelcomeTo';
 
 const H2span = styled.span`
     background: #fff;
@@ -145,6 +150,8 @@ const H2span = styled.span`
     padding-right: 3vw;
   `;
 
+H2span.displayName = 'H2span';
+
 const WelcomeInstructions =styled.p`
 
     font-weight: 500;
@@ -152,6 +159,7 @@ const WelcomeInstructions =styled.p`
     margin: 2vw;
     font-size: 1.25vw;
   `;
+WelcomeInstructions.displayName = 'WelcomeInstructions';
 
 const ContinueButton = styled.button`
     display: block;
@@ -168,6 +176,7 @@ const ContinueButton = styled.button`
     box-shadow: 1px 3px 2px 1px rgba(0,0,0,0.2);
     cursor: pointer;
     `;
+ContinueButton.displayName = 'ContinueButton';
 
 const GitHubSignInButton= styled(ContinueButton)`
 
@@ -176,6 +185,7 @@ const GitHubSignInButton= styled(ContinueButton)`
     margin-top: 3vw;
     color: black;
     `;
+GitHubSignInButton.displayName = 'GitHubSignInButton';
 
 const ButtonsContainer = styled.div`
     margin-top: 2vw;
@@ -185,6 +195,7 @@ const ButtonsContainer = styled.div`
     width: inherit;
 
   `;
+ButtonsContainer.displayName = 'ButtonsContainer';
 
 
 

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Icon } from "semantic-ui-react";
+//import { Icon } from "semantic-ui-react";
+import styled from 'styled-components';
 
 
 
@@ -10,74 +11,81 @@ class PlayPauseBtn extends Component {
     this.state = {
       icon: 'play',
 
-    }
+    };
     this.startPlaying = this.startPlaying.bind(this);
   }
 
-componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (!nextProps.playing) {
-      this.setState({icon:'play'})
+      this.setState({icon: 'play'});
     }
-}
+  }
 
 
-startPlaying() {
+  startPlaying() {
     this.props.startPlaying();
 
     if (this.props.playing) {
-      this.setState({icon:'play'})
+      this.setState({icon: 'play'});
     } else {
 
-      this.setState({icon:'pause'})
+      this.setState({icon: 'pause'});
     }
 
-}
-
-render() {
-  const {icon}= this.state;;
-  return(
-  <div style = {styles.buttonContainer}>
-    <button style = {styles.playButton}  onClick={()=>this.startPlaying()} type="button">
-      <Icon style={styles.iconStyle} size="big" name={icon} />
-    </button>
-  </div>
-
-)
-}
-
-
-};
-
-
-const styles = {
-  container: {
-    position: 'relative'
-  },
-
-  playButton:{
-    height: '100%',
-    width: '100%',
-    borderRadius: '80%',
-    backgroundColor: '#fff',
-    outline: 'none',
-    borderColor: '#2D2D2D',
-    border: '.5%'
-  },
-  iconStyle:{
-    marginLeft: '5%',
-    color: '#2D2D2D'
-  },
-  buttonContainer:{
-    position: 'absolute',
-    height: '13%',
-    width: '18%',
-    zIndex: 2,
-    top: '35%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
   }
 
+  render() {
+    const {icon}= this.state;
+    return (
+      <ButtonContainer>
+
+        <PlayButton  onClick={()=>this.startPlaying()} type="button">
+          <Icon> <i className={`fa fa-${icon}`} /> </Icon>
+        </PlayButton>
+
+      </ButtonContainer>
+
+    );
+  }
+
+
 }
+
+const Container =  styled.div`
+    position: relative;
+`;
+
+const  PlayButton = styled.button`
+    height: 100%;
+    width: 45%;
+    border-radius: 50%;
+    background-color: #fff;
+    outline: none;
+    border-color: #2D2D2D;
+    border: .5%;
+    cursor: pointer;
+  `;
+
+const ButtonContainer =styled.div`
+    position: absolute;
+    height: 13%;
+    width: 18%;
+    z-index: 2;
+    top: 35%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  `;
+
+const Icon = styled.button`
+  margin-left: 5%;
+  color: #2D2D2D;
+  border: none;
+  font-size: 2vw;
+  cursor: pointer;
+
+`;
+
 
 
 

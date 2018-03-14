@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 // import { Icon } from "semantic-ui-react";
+import styled from 'styled-components';
 import {YesButton} from '../../../pages/Login/components/YesButton';
 import {RedoButton} from '../../../pages/Login/components/RedoButton';
 
@@ -10,36 +11,23 @@ class BottomButtons extends Component {
 
 
     return (
-      <div style= {styles.container}>
+      <Container>
         <RedoButton onClick={this.props.redo} />
         <YesButton  onClick={this.props.done} />
-      </div>
+      </Container>
     );
   }
 }
 
 
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '90%',
-    marginTop: '12%',
-  },
-  redoBtn: {
-    backgroundColor: 'transparent',
-    borderColor: '#009CFF',
-    borderRadius: '5%',
-  },
-  yesBtn: {
-    backgroundColor: '#009CFF',
-    borderRadius: '5%',
-  },
 
-};
-
-
+const Container= styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 12%;
+  `;
 
 
 export default BottomButtons;

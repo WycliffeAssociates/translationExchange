@@ -6,7 +6,7 @@ import Waveform from './Waveform';
 import TimeLine from './timeLine.png';
 import RecordButton from './RecordButton';
 import BottomButtons from './BottomButtons';
-import {createUser} from '../../../actions/UserActions';
+import styled from 'styled-components';
 
 class CreateUser extends Component {
   constructor(props) {
@@ -58,15 +58,17 @@ class CreateUser extends Component {
 
     if (audio) {
       return (
-        <div style = {styles.recordContainer}>
+        <RecordContainer>
           <Waveform audioFile={recordedBlob.blob} />
-        </div>
+        </RecordContainer>
       );
 
     }
     return (
-      <div style={styles.recordContainer}>
-        <div style={styles.recordPreview}>
+      <RecordContainer>
+
+        <RecordPreview>
+
           <ReactMic
             record={this.state.recording}
             className="sound-wave"
@@ -74,8 +76,10 @@ class CreateUser extends Component {
             strokeColor="#009CFF"
             backgroundColor="transparent"
           />
-        </div>
-      </div>
+
+        </RecordPreview>
+
+      </RecordContainer>
 
     );
   }
@@ -91,13 +95,12 @@ class CreateUser extends Component {
 
   done() {
     const {recordedBlob, generatedHash} = this.state;
-    let {dispatch} = this.props;
-    dispatch(createUser(recordedBlob, generatedHash));
+    this.props.createUser(recordedBlob, generatedHash);
     this.props.history.push('/users');
 
   }
 
-bottomSection() {
+  bottomSection() {
     const {recording, generatedHash} = this.state;
     let header ='What is your name?';
     let buttonIcon = 'microphone';
@@ -105,7 +108,7 @@ bottomSection() {
     let bottomText = 'Record';
     let textStyle = styles.textRecord;
 
-    let handler = <RecordButton startRecording={this.startRecording}  />
+    let handler = <RecordButton startRecording={this.startRecording} icon={buttonIcon} /> ;
 
 
 
@@ -126,12 +129,14 @@ bottomSection() {
 
     return (
 
-      <div style={styles.centerContainer}>
+      <CenterContainer>
         <h1>{header}</h1>
-        <p style={styles.textPrivacy}>If you are concerned for your privacy or safety, please use a nickname or pseudonym.</p>
+
+        <TextPrivacy>If you are concerned for your privacy or safety, please use a nickname or pseudonym.</TextPrivacy>
         {handler}
         {this.state.audio ? <BottomButtons done={this.done}  redo={this.redo} /> : <p style={textStyle}>{bottomText}</p>}
-      </div>
+
+      </CenterContainer>
 
     );
   }
@@ -141,54 +146,75 @@ bottomSection() {
 
 
     return (
-      <div style={styles.container}>
+      <Container>
+
         {this.audioWave()}
         {this.bottomSection()}
 
-      </div>
+      </Container>
     );
   }
 }
 
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    height: '100%',
 
-  },
-  centerContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '100%',
-    marginTop: '20%',
-  },
-  textPrivacy: {
-    textAlign: 'center',
-    width: '80%',
-    fontWeight: 600,
-  },
-  recordContainer: {
-    width: '100%',
-    height: '35%',
-    minWidth: 469,
-    backgroundImage: `url(${ TimeLine })`,
-    backgroundPosition: '50%',
-    backgroundRepeat: 'no-repeat',
-    backgroundColor: '#2D2D2D',
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-  },
-  recordPreview: {
-    marginTop: '3%',
-    width: '100%',
-  },
+
+
+
+const  Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+ `;
+Container.displayName = 'Container';
+
+const  CenterContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 20%;
+  `;
+CenterContainer.displayName = 'CenterContainer';
+const TextPrivacy = styled.p`
+    text-align: center;
+    width: 80%;
+    font-weight: 600;
+  `;
+TextPrivacy.displayName = 'TextPrivacy';
+
+const RecordContainer = styled.div`
+    width: 100%;
+    height: 35%;
+    min-width: 469;
+    background-image: url(${ TimeLine });
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-color: #2D2D2D;
+    border-top-left-radius: 7;
+    border-top-right-radius: 7;
+  `;
+RecordContainer.displayName = 'RecordContainer';
+const RecordPreview = styled.div`
+    margin-top: 3%;
+    width: 100%;
+  `;
+
+const WaveformContainer = styled.div`
+    width: 100%;
+    padding-top: 14%;
+`;
+WaveformContainer.displayName = 'WaveformContainer';
+const  IconStyle = styled.div`
+    margin-left: 5%;
+    color: #E74C3C;
+`;
+IconStyle.displayName = 'IconStyle';
+const styles = {
   playButton: {
-    height: '80px',
-    width: '80px',
-    borderRadius: '50px',
+    height: '5vw',
+    width: '5vw',
+    borderRadius: '100px',
     backgroundColor: '#fff',
     marginBottom: '10px',
     marginTop: '10px',
@@ -201,17 +227,10 @@ const styles = {
     fontWeight: 900,
     color: '#E74C3C',
   },
-  WaveformContainer: {
-    width: '100%',
-    paddingTop: '14%',
-
-  },
-  iconStyle: {
-    marginLeft: '5%',
-    color: '#E74C3C',
-  },
-
 
 };
+
+
+
 
 export default CreateUser;
