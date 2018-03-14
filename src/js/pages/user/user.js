@@ -82,7 +82,7 @@ class User extends Component {
             borderWidth: '0.5px', padding: '2vw', boxShadow: '5px 5px 5px rgba(0,0,0,0.6)'}}>
 
 
-          <img src={this.state.imageSrc}  style={{margin: 'auto', borderRadius: '100px', height: '7vw', width: '7vw'}} />
+          <img src={this.state.imageSrc} alt="img-alt" style={{margin: 'auto', borderRadius: '100px', height: '7vw', width: '7vw'}} />
 
           <div id="g-signin2" onSuccess= {this.onSignIn} style={{margin: 'auto', textAlign: 'center', marginLeft: '4.5vw'}}> </div>
 

@@ -5,8 +5,6 @@ import ProjectsListContainer from './js/pages/projects/ProjectsListContainer';
 import ChaptersContainer from './js/pages/chapters/ChaptersContainer';
 import './App.css';
 import NotFound from './js/pages/NotFound';
-import Header from './js/components/header';
-import UserCard from './js/pages/Login/components/UserCard.js';
 import Home from './js/pages/home/home';
 import About from './js/pages/about/about';
 import axios from 'axios';
@@ -31,7 +29,7 @@ class App extends Component {
 
     //configuration for web requests
     axios.defaults.timeout = 20000;
-    
+
     this.state ={
       hasError: false,
     };
@@ -53,7 +51,7 @@ class App extends Component {
 
       <div>
         <Notifications />
-        {/*<Header /> */}
+
         <Switch>
           <Route  exact path="/" component={Root} />
           <Route  exact path ="/users" component={AvailableUsers} />

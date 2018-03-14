@@ -1,19 +1,20 @@
-const INITIAL_STATE = ({
-  users: [{hash:'hash1', audio:''},{hash:'hash2', audio:''}],
+const INITIAL_STATE = {
+  users: [],
   loading: false
-})
+}
 
-export default( state= INITIAL_STATE, action ={}) {
+export default( state= INITIAL_STATE, action) => {
 
   switch (action.type) {
     case 'FETCHED_USERS':
       return {
-        ...state, users: action.users,
-                  loading: false
+        ...state,
+        users: action.users,
+        loading: false
 
       };
     case 'LOADING_USER':
-      return{
+      return {
         ...state, loading: true
       }
 
@@ -24,6 +25,3 @@ export default( state= INITIAL_STATE, action ={}) {
   }
 
 }
-
-
-export default userReducer;

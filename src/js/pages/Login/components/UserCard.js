@@ -2,6 +2,7 @@ import React from 'react';
 import jdenticon from 'jdenticon';
 import ReactPlayer from 'react-player';
 import styled,  { keyframes } from 'styled-components';
+import config from '../../../../config/config'
 import { pulse } from 'react-animations';
 //import {Card} from 'semantic-ui-react';
 //
@@ -18,7 +19,8 @@ export default class UserCard extends React.Component {
   }
 
   componentDidMount() {
-    jdenticon.update(`#canvas${this.props.id}` , this.props.user.hash);
+    const {hash} =this.props.user || '' ;
+    jdenticon.update(`#canvas${this.props.id}` , hash);
   }
 
 
@@ -32,11 +34,11 @@ export default class UserCard extends React.Component {
   }
   render() {
     var key= this.props.id? this.props.id: 0;
-    const {audio, hash} = this.props.user;
-    const blob = audio ? audio : {} ;
+    const {name_audio, icon_hash} = this.props.user || [];
+    const audioURL = config.streamingUrl + name_audio;
     const {playing} = this.state;
     let icon = 'fa fa-play'
-    if(playing) {
+    if (playing) {
       icon ='fa fa-volume-up'
     }
 
@@ -44,14 +46,13 @@ export default class UserCard extends React.Component {
       <UserCardContainer>
         <PulseEffect animate={playing}>
           <Card>
-
             <ImageContainer>
-              <Image id={`canvas${key}`} data-jdenticon-value={hash} />
+              <Image id={`canvas${key}`} data-jdenticon-value={icon_hash} />
             </ImageContainer>
 
             <CardOptions>
               <PlayButton onClick={()=> this.play()}> <i className={`${icon}`}  /> </PlayButton>
-              <ReactPlayer url={blob.blobURL} playing={this.state.playing} onEnded={()=> this.ended()}  />
+              <ReactPlayer url={audioURL} playing={this.state.playing} onEnded={()=> this.ended()}  />
             </CardOptions>
           </Card>
         </PulseEffect>

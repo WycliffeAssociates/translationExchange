@@ -37,7 +37,7 @@ class PopupWindow {
           }
 
           const params = toParams(popup.location.search.replace(/^\?/, ''));
-
+        
           resolve(params);
 
           this.close();

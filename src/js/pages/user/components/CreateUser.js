@@ -6,7 +6,7 @@ import Waveform from './Waveform';
 import TimeLine from './timeLine.png';
 import RecordButton from './RecordButton';
 import BottomButtons from './BottomButtons';
-import {createUser} from '../../../actions/UserActions';
+
 
 class CreateUser extends Component {
   constructor(props) {
@@ -91,41 +91,43 @@ class CreateUser extends Component {
 
   done() {
     const {recordedBlob, generatedHash} = this.state;
-    let {dispatch} = this.props;
-    dispatch(createUser(recordedBlob, generatedHash));
-    this.props.history.push('/users');
 
+    const reader = new FileReader();
+
+    reader.addEventListener(
+      "load",
+      () => {
+        const jsonblob = reader.result
+        this.props.createUser(jsonblob, generatedHash);
+      },
+      false
+    );
+
+    reader.readAsDataURL(recordedBlob.blob)
+
+    this.props.history.push('/users');
   }
 
 bottomSection() {
     const {recording, generatedHash} = this.state;
     let header ='What is your name?';
-    let buttonIcon = 'microphone';
-    let buttonStyle = styles.playButton;
     let bottomText = 'Record';
     let textStyle = styles.textRecord;
 
     let handler = <RecordButton startRecording={this.startRecording}  />
 
-
-
     if (recording) {
-      buttonIcon='stop'
-      buttonStyle= {...styles.playButton, backgroundColor: '#E74C3C' }
       bottomText= 'Recording'
     }
 
     if (this.state.audio) {
       header='is this OK?';
-      buttonIcon= 'play';
+
       bottomText=
       handler = <svg id="canvas" width="20%" height="20%" data-jdenticon-value={generatedHash} />
-
     }
 
-
     return (
-
       <div style={styles.centerContainer}>
         <h1>{header}</h1>
         <p style={styles.textPrivacy}>If you are concerned for your privacy or safety, please use a nickname or pseudonym.</p>
@@ -205,11 +207,7 @@ const styles = {
     width: '100%',
     paddingTop: '14%',
 
-  },
-  iconStyle: {
-    marginLeft: '5%',
-    color: '#E74C3C',
-  },
+  }
 
 
 };

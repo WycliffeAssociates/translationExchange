@@ -5,29 +5,17 @@ import { Card } from 'semantic-ui-react';
 import 'css/create.css';
 import CreateUser from './CreateUser';
 import {bindActionCreators} from 'redux';
-import * as UserActionCreators from '../../../actions/UserActions';
+import { createUser } from '../../../actions/UserActions';
 
 
 class CreateUserContainer extends Component {
-
-  constructor(props) {
-    super(props);
-
-    const {dispatch} = this.props;
-    console.log(dispatch, 'dispatch');
-
-    this.boundUserActionCreators = bindActionCreators(UserActionCreators, dispatch);
-    console.log(this.boundUserActionCreators);
-  }
-
-
 
   render() {
     return (
       <div className="background" style= {styles.container} >
 
         <Card style={styles.card}>
-          <CreateUser {...this.boundUserActionCreators} {...this.props} />
+          <CreateUser {...this.props} />
         </Card>
 
       </div>
@@ -56,6 +44,9 @@ const styles ={
   },
 };
 
-const mapDispatchToProps = ({dispatch}) => ({dispatch});
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({createUser}, dispatch)
+}
 
-export default connect(mapDispatchToProps) (CreateUserContainer);
+
+export default connect(null, mapDispatchToProps) (CreateUserContainer);
