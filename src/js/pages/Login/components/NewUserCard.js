@@ -50,6 +50,7 @@ const UserCard= styled.div`
     overflow: hidden;
     background-color: white;
     padding: 2vw 3.5vw;
+    cursor: pointer;
   `;
 
 
@@ -63,10 +64,12 @@ const AddUser = styled.div`
     background-color: white;
     margin-left: -0.5vw;
 
+
   `;
 
 const CardLabel = styled.label`
     color: #009CFF;
     font-size: 1.35vw;
     text-decoration: underline;
+    cursor: pointer;
   `;

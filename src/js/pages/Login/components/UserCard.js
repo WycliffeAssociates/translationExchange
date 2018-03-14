@@ -1,11 +1,11 @@
 import React from 'react';
 import jdenticon from 'jdenticon';
+import { Redirect } from 'react-router';
 import ReactPlayer from 'react-player';
 import styled,  { keyframes } from 'styled-components';
 import config from '../../../../config/config'
 import { pulse } from 'react-animations';
-//import {Card} from 'semantic-ui-react';
-//
+
 
 export default class UserCard extends React.Component {
 
@@ -23,9 +23,17 @@ export default class UserCard extends React.Component {
     jdenticon.update(`#canvas${this.props.id}` , hash);
   }
 
+  identLogin(hash) {
+    const tst = this.props;
+    debugger;
+    this.props.identiconLogin(hash, this.redirect());
+  }
+
+  redirect() {
+    this.props.history.push("/projects");
+  }
 
   play() {
-
     this.setState({playing: true})
   }
 
@@ -46,7 +54,7 @@ export default class UserCard extends React.Component {
       <UserCardContainer>
         <PulseEffect animate={playing}>
           <Card>
-            <ImageContainer>
+            <ImageContainer onClick={()=> this.identLogin(icon_hash)}>
               <Image id={`canvas${key}`} data-jdenticon-value={icon_hash} />
             </ImageContainer>
 
@@ -94,6 +102,11 @@ const Card= styled.div`
 
 const ImageContainer = styled.div`
     padding: 1.5vw 0.5vw;
+    cursor: pointer;
+    transition: transform 300ms ease-in-out;
+    &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const Image= styled.svg`
@@ -111,6 +124,7 @@ const PlayButton = styled.button`
     display: inline-block;
     background-color: #009CFF;
     padding: 0vw 0vw;
+    cursor: pointer;
     font-size: 2vw; //in the font awesome library the font size ends up controlling the size of the icon
   `;
 

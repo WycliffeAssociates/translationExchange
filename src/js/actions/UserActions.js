@@ -23,9 +23,9 @@ export const fetchUserSuccess = (users) => {
 
 
 //saveComment
-export const createUser = (recordedBlob, hash) => {
+export const createUser = (recordedBlob, hash, callback) => {
   return function(dispatch) {
-    dispatch(loadingUsers());
+    dispatch(loadingProccess()); // can be used to render a spinner
     return axios
       .post(`${config.apiUrl}profiles/`, {
         nameAudio: recordedBlob,
@@ -33,21 +33,18 @@ export const createUser = (recordedBlob, hash) => {
       })
       .then(response => {
         localStorage.setItem('token',response.data.token);
-        //success();
+        callback();
         //TODO login user with user id and redirect him to projects
       })
       .catch(exception => {
-        //dispatch(saveCommentFailed(exception));
-        //success();
+
       });
   };
 };
 
 export const onLoginSuccess = (user) => {
-  console.log(user);
   return axios.post(`${config.apiUrl}login/social/token_user/github/`,{clientId:'f5e981378e91c2067d41',redirectUri: config.streamingUrl, code:user.code})
     .then(response=>{
-      console.log(response);
       localStorage.setItem('token',response.data.token);
     }).catch(err=>{
       console.log(err);
@@ -55,8 +52,28 @@ export const onLoginSuccess = (user) => {
     );
 }
 
-export const loadingUsers = () => {
+export const loadingProccess = () => {
   return {
     type: 'LOADING_USER'
+  }
+}
+export const identiconLogin = (iconHash, callback) => {
+
+return dispatch => {
+    return axios.post(`${config.apiUrl}login/`,{iconHash: iconHash})
+      .then(response=>{
+        localStorage.setItem('token',response.data.token);
+        callback();
+        dispatch(identiconLoginSuccess());
+      }).catch(err=>{
+        console.log(err);
+      }
+      );
+  }
+}
+
+export const identiconLoginSuccess = () => {
+  return {
+    type: 'IDENTICON_LOGIN_SUCCESS'
   }
 }

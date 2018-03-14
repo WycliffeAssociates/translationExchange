@@ -19,9 +19,7 @@ class CreateUser extends Component {
     };
     this.onStop = this.onStop.bind(this);
     this.redo = this.redo.bind(this);
-    this.done = this.done.bind(this);
-
-
+    this.save = this.save.bind(this);
   }
 
 
@@ -48,9 +46,6 @@ class CreateUser extends Component {
       this.setState({recordedBlob, generatedHash, audio: true});
       jdenticon.update('svg', generatedHash);
     };
-
-
-
   }
 
   audioWave() {
@@ -76,7 +71,6 @@ class CreateUser extends Component {
           />
         </div>
       </div>
-
     );
   }
 
@@ -89,23 +83,24 @@ class CreateUser extends Component {
     });
   }
 
-  done() {
+  save() {               // saves to database
     const {recordedBlob, generatedHash} = this.state;
-
     const reader = new FileReader();
 
     reader.addEventListener(
       "load",
       () => {
         const jsonblob = reader.result
-        this.props.createUser(jsonblob, generatedHash);
+        this.props.createUser(jsonblob, generatedHash, this.done()); // action to create user in db
       },
       false
     );
+    reader.readAsDataURL(recordedBlob.blob);
 
-    reader.readAsDataURL(recordedBlob.blob)
+  }
 
-    this.props.history.push('/users');
+  done() {
+    this.props.history.push('/projects');
   }
 
 bottomSection() {
@@ -132,7 +127,7 @@ bottomSection() {
         <h1>{header}</h1>
         <p style={styles.textPrivacy}>If you are concerned for your privacy or safety, please use a nickname or pseudonym.</p>
         {handler}
-        {this.state.audio ? <BottomButtons done={this.done}  redo={this.redo} /> : <p style={textStyle}>{bottomText}</p>}
+        {this.state.audio ? <BottomButtons done={this.save}  redo={this.redo} /> : <p style={textStyle}>{bottomText}</p>}
       </div>
 
     );
