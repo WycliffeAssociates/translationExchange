@@ -143,3 +143,5 @@ const SignOutButton = styled.div`
     padding-left: 2vw;
     font-size: 2vw; //in the font awesome library the font size ends up controlling the size of the icon
 `;
+
+
