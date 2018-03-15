@@ -41,7 +41,7 @@ border-top-left-radius: 7px;
 border-top-right-radius: 7px;
 `;
 const RecordContainer = styled.div`
-margin-top: 3%;
+margin-top: 4.5vh;
 height: 29vh;
 width: 100%;
 `;

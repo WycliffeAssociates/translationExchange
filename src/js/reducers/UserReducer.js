@@ -3,8 +3,8 @@ const INITIAL_STATE = {
   loading: false,
   userCreated: false,
   audioName: '',
-  hash: ''
-}
+  hash: '',
+};
 
 export default( state= INITIAL_STATE, action) => {
 
@@ -13,20 +13,22 @@ export default( state= INITIAL_STATE, action) => {
       return {
         ...state,
         users: action.users,
-        loading: false
+        loading: false,
 
       };
     case 'LOADING_USER':
       return {
-        ...state, loading: true
-      }
+        ...state, loading: true,
+      };
     case 'USER_CREATED':
       return {
         ...state,
         audioName: action.audioName,
         hash: action.hash,
-        userCreated: true
-      }
+        userCreated: true,
+      };
+    case 'RESET_USER_CREATED':
+        return {...state, userCreated: false,}
 
     default:
       return {
@@ -34,4 +36,4 @@ export default( state= INITIAL_STATE, action) => {
       };
   }
 
-}
+};

@@ -56,6 +56,7 @@ const PlayButton = styled.button`
   background-color: #fff;
   outline: none;
   border-color: transparent;
+  cursor: pointer;
 `;
 
 const ButtonContainer = styled.div`
@@ -76,6 +77,7 @@ border: none;
 font-size: 2vw;
 margin-left: -0.005vw;
 background-color:transparent;
+cursor: pointer;
 
 `;
 

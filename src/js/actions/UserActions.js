@@ -10,17 +10,17 @@ return (dispatch) => {
         dispatch(fetchUserSuccess(response.data));
       })
       .catch(error => {
-        //TODO handle error
-      })
-  }
-}
+        console.log(error); //TODO handle error
+      });
+  };
+};
 
 export const fetchUserSuccess = (users) => {
   return {
     type: 'FETCHED_USERS',
-    users
-  }
-}
+    users,
+  };
+};
 
 
 //createUser
@@ -30,16 +30,16 @@ export const createUser = (recordedBlob, hash) => {
     return axios
       .post(`${config.apiUrl}profiles/`, {
         nameAudio: recordedBlob,
-        iconHash: hash
+        iconHash: hash,
       })
       .then(response => {
-        const{nameAudio, token} = response.data;
+        const {nameAudio, token} = response.data;
 
         localStorage.setItem('token', token);
         dispatch(userCreated(nameAudio, hash));
       })
-      .catch(exception => {
-
+      .catch( exception => {
+        console.log(exception); //TODO display error page
       });
   };
 };
@@ -48,28 +48,35 @@ export const userCreated = (audioName, hash)=>{
   return {
     type: 'USER_CREATED',
     audioName,
-    hash
+    hash,
 
 
-  }
-}
+  };
+};
+
+export const resetUserCreated = ()=>{
+  return {
+    type: 'RESET_USER_CREATED',
+  };
+};
+
 
 
 export const onLoginSuccess = (user) => {
-  return axios.post(`${config.apiUrl}login/social/token_user/github/`,{clientId:'f5e981378e91c2067d41',redirectUri: config.streamingUrl, code:user.code})
+  return axios.post(`${config.apiUrl}login/social/token_user/github/`,{clientId:'f5e981378e91c2067d41',redirectUri: config.streamingUrl, code: user.code})
     .then(response=>{
       localStorage.setItem('token',response.data.token);
     }).catch(err=>{
       console.log(err);
     }
     );
-}
+};
 
 export const loadingProccess = () => {
   return {
-    type: 'LOADING_USER'
-  }
-}
+    type: 'LOADING_USER',
+  };
+};
 export const identiconLogin = (iconHash, callback) => {
 
 return dispatch => {
@@ -82,11 +89,11 @@ return dispatch => {
         console.log(err);
       }
       );
-  }
-}
+  };
+};
 
 export const identiconLoginSuccess = () => {
   return {
-    type: 'IDENTICON_LOGIN_SUCCESS'
-  }
-}
+    type: 'IDENTICON_LOGIN_SUCCESS',
+  };
+};

@@ -6,11 +6,14 @@ import CreateUser from './CreateUser';
 import UserCreated from './UserCreated'
 import styled from 'styled-components';
 import {bindActionCreators} from 'redux';
-import { createUser } from '../../../actions/UserActions';
+import { createUser, resetUserCreated } from '../../../actions/UserActions';
 
 
 class CreateUserContainer extends Component {
 
+  componentWillUnmount() {
+    this.props.resetUserCreated();
+  }
 
   handleClick() {
     this.props.history.push({pathname: '/users'});
@@ -68,7 +71,7 @@ const Card = styled.div`
 
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({createUser}, dispatch)
+  return bindActionCreators({createUser, resetUserCreated}, dispatch)
 }
 
 const mapStateToProps = state => {

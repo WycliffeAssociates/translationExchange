@@ -22,7 +22,7 @@ export default ({recording, generatedHash, startRecording, redo, save, audio}) =
 
   return (
     <Container>
-      <h1>{header}</h1>
+      <Header>{header}</Header>
       <PrivacyText> If you are concerned for your privacy or safety, please use a nickname or pseudonym.</PrivacyText>
       {handler}
       {audio ? <BottomButtons done={save}  redo={redo} /> : <BottomText>{displayText}</BottomText>}
@@ -30,6 +30,10 @@ export default ({recording, generatedHash, startRecording, redo, save, audio}) =
 
   );
 };
+
+const Header = styled.h1`
+  font-size: 2vw;
+`;
 
 const BottomText = styled.p`
 font-size: 1vw;
@@ -44,6 +48,7 @@ const PrivacyText = styled.p`
 text-align: center;
 width: 25vw;
 font-weight: 600;
+font-size: .9vw;
 `;
 
 const Container = styled.div`

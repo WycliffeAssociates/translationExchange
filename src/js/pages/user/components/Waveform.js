@@ -65,7 +65,7 @@ const Container = styled.div`
     align-self: center;
     flex: 1 1 auto;
     width: 100%;
-    padding-top: 11%;
+    padding-top: 9.9vh;
     margin-right: 2%;
 `;
 

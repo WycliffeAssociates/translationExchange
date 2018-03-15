@@ -23,7 +23,7 @@ class UserCreated extends Component {
       <Container>
         <TextHeader> You are ready to go! </TextHeader>
         <IdenticonContainer>
-          <svg id="createdUser" width="90%" height="90%" data-jdenticon-value="asdaad3dasasda3asd" />
+          <svg id="createdUser" width="90%" height="90%" data-jdenticon-hash={hash} />
         </IdenticonContainer>
         <Button onClick={()=>this.redirect()}> go to projects <i className="fa fa-arrow-right" /> </Button>
       </Container>
@@ -43,7 +43,7 @@ justify-content: space-between;
 
 const TextHeader = styled.h1`
   padding-top: 3vw;
-  font-size: 2.5vw;
+  font-size: 2vw;
 `;
 
 const IdenticonContainer = styled.div`
