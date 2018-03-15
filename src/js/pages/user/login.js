@@ -32,13 +32,13 @@ export default class Demo extends Component {
 
   onLoginSuccess (user) {
     return axios.post("https://localhost/api/login/social/token_user/github/",{clientId:'f5e981378e91c2067d41',redirectUri:'https://localhost/',code:user.code}).
-    then(response=>{
-      console.log(response);
-      localStorage.setItem('token',response.data.token);
-    }).catch(err=>{
-      console.log(err);
-    }
-    );
+      then(response=>{
+        console.log(response);
+        localStorage.setItem('token',response.data.token);
+      }).catch(err=>{
+        console.log(err);
+      }
+      );
   }
   onGoogleLoginSuccess (user) {
     return axios.post("https://localhost/api/login/social/token_user/google-oauth2/",{clientId:'429550859531-rp6ihtu7o9fe9uko3t6523hs8m5b06ir.apps.googleusercontent.com',redirectUri:'https://localhost/',code:user.code}).
@@ -63,11 +63,11 @@ export default class Demo extends Component {
     })
   }
 
-  onLogoutFailure (err) {
+  onLogoutFailure(err) {
     console.error(err)
   }
 
-  logout () {
+  logout() {
     const { logged, currentProvider } = this.state
 
     if (logged && currentProvider) {
@@ -88,5 +88,5 @@ export default class Demo extends Component {
           onFailure={this.onLoginFailure}/>
       </div>
     )
-  }  
+  }
 }

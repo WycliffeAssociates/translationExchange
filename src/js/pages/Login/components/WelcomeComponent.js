@@ -2,7 +2,13 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import config from '../../../../config/config'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import {onLoginSuccess} from '../../../actions'
 import GitHubLogin from '../../../components/social-login/GitHubLogin';
+
+
 //import {dispatchToken} from '../../../actions/database.js';
 
 export class WelcomeComponent extends React.Component {
@@ -18,6 +24,12 @@ export class WelcomeComponent extends React.Component {
     this.onSignIn = this.onSignIn.bind(this);
     this.signOut = this.signOut.bind(this);
     this.handleClick = this.handleClick.bind(this);
+  }
+
+
+
+  onLogin(user) {
+    this.props.onLoginSuccess(user);
   }
 
   render() {
@@ -49,8 +61,8 @@ export class WelcomeComponent extends React.Component {
           </ContinueButton>
 
           <GitHubLogin clientId="f5e981378e91c2067d41"
-            redirectUri="https://localhost/"
-            onSuccess={this.onLoginSuccess}
+            redirectUri={config.streamingUrl}
+            onSuccess={data=>this.onLogin(data)}
             onFailure={this.onLoginFailure}/>
 
 
@@ -197,6 +209,10 @@ const ButtonsContainer = styled.div`
   `;
 ButtonsContainer.displayName = 'ButtonsContainer';
 
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {  onLoginSuccess }, dispatch);
+};
 
 
-export default WelcomeComponent;
+export default connect(null, mapDispatchToProps) (WelcomeComponent);

@@ -3,24 +3,21 @@ import UserCard from './components/UserCard';
 import NewUserCard from './components/NewUserCard';
 import {Grid} from 'semantic-ui-react';
 import {connect} from 'react-redux';
-import styled from 'styled-components';
+import {bindActionCreators} from 'redux';
+import {fetchUsers} from '../../actions';
 
 class AvailableUsers extends React.Component {
 
-  constructor(props) {
-    super(props);
 
+  componentWillMount() {
+    this.props.fetchUsers();
   }
-
 
   render() {
 
-    console.log(this.props);
-    console.log(this.props.users);
-
 
     return (
-      <Container>
+      <div className="container">
         <div className= "backgroundOverlayUsers">
 
           <h2 className={'pageHeader'}> Available Users </h2>
@@ -32,19 +29,19 @@ class AvailableUsers extends React.Component {
             </Grid.Column >
 
             {
-              this.props.users.length>=2? this.props.users.map((user,index)  => {
+              this.props.users.length>0? this.props.users.map((user,index)  => {
 
                 return (
                   <Grid.Column width={3}>
                     <UserCard  key={user} id={index} user={user} />
                   </Grid.Column>
-                );}) :   <Grid.Column width={3}> <UserCard id={0} key={0} user={this.props.users[0]} /> </Grid.Column>
+                );}) :   ''
 
             }
           </Grid>
 
         </div>
-      </Container>
+      </div>
 
 
 
@@ -54,16 +51,14 @@ class AvailableUsers extends React.Component {
 
 }
 
-const Container = styled.div`
-background: linear-gradient(to bottom right, #0076FF , #00C5FF );
-width: 100vw;
-text-align: center;
-`;
+const mapStateToProps = state => {
+  const { users } = state.user;
+  return {users};
+};
 
-const mapStateToProps = ({user}) => ({
-  users: user.users,
-  recording: user.recording,
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {  fetchUsers }, dispatch);
+};
 
-});
-
-export default connect (mapStateToProps)(AvailableUsers);
+export default connect (mapStateToProps, mapDispatchToProps )(AvailableUsers);

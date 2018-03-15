@@ -5,10 +5,11 @@ import 'css/create.css';
 import CreateUser from './CreateUser';
 import styled from 'styled-components';
 import {bindActionCreators} from 'redux';
-import * as UserActionCreators from '../../../actions/UserActions';
+import { createUser } from '../../../actions/UserActions';
 
 
 class CreateUserContainer extends Component {
+
 
   constructor(props) {
     super(props);
@@ -24,7 +25,6 @@ class CreateUserContainer extends Component {
   }
 
 
-
   render() {
     return (
       <div className="pageBackground">
@@ -32,6 +32,7 @@ class CreateUserContainer extends Component {
         <Label onClick={this.handleClick}>
           <i className="fa fa-hand-point-left fa-fw" /> Back to Login
         </Label>
+
 
         <Container>
           <Card>
@@ -74,6 +75,9 @@ const Card = styled.div`
 `;
 
 
-const mapDispatchToProps = ({dispatch}) => ({dispatch});
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({createUser}, dispatch)
+}
 
-export default connect(mapDispatchToProps) (CreateUserContainer);
+
+export default connect(null, mapDispatchToProps) (CreateUserContainer);

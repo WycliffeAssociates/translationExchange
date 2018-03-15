@@ -21,7 +21,6 @@ class GitHubLogin extends Component {
     const height = window.innerHeight * .6;
     const left = window.innerWidth *.25;
     const top =  window.innerHeight * .25;
-    debugger;
 
     this.setState({left, top, width, height})
   }
