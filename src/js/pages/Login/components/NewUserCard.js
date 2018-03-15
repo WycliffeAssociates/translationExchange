@@ -13,9 +13,9 @@ export default class NewUserCard extends React.Component {
   render() {
 
     return (
-      <NewUserCardContainer onClick={this.handleClick}>
+      <NewUserCardContainer  onClick={this.handleClick}>
 
-        <UserCard>
+        <UserCard id="id1">
 
           <AddUser> <i className="fa fa-user-plus" /> </AddUser>
           <CardLabel> New User </CardLabel>
@@ -51,6 +51,7 @@ const UserCard= styled.div`
     background-color: white;
     padding: 2vw 3.5vw;
     cursor: pointer;
+
   `;
 
 
@@ -63,8 +64,6 @@ const AddUser = styled.div`
     font-size: 7vw;
     background-color: white;
     margin-left: -0.5vw;
-
-
   `;
 
 const CardLabel = styled.label`

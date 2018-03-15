@@ -6,6 +6,7 @@ return (dispatch) => {
     return axios
       .get(`${config.apiUrl}profiles/`)
       .then(response => {
+
         dispatch(fetchUserSuccess(response.data));
       })
       .catch(error => {
@@ -22,8 +23,8 @@ export const fetchUserSuccess = (users) => {
 }
 
 
-//saveComment
-export const createUser = (recordedBlob, hash, callback) => {
+//createUser
+export const createUser = (recordedBlob, hash) => {
   return function(dispatch) {
     dispatch(loadingProccess()); // can be used to render a spinner
     return axios
@@ -32,15 +33,27 @@ export const createUser = (recordedBlob, hash, callback) => {
         iconHash: hash
       })
       .then(response => {
-        localStorage.setItem('token',response.data.token);
-        callback(); // used to redirect user
+        const{nameAudio, token} = response.data;
 
+        localStorage.setItem('token', token);
+        dispatch(userCreated(nameAudio, hash));
       })
       .catch(exception => {
 
       });
   };
 };
+
+export const userCreated = (audioName, hash)=>{
+  return {
+    type: 'USER_CREATED',
+    audioName,
+    hash
+
+
+  }
+}
+
 
 export const onLoginSuccess = (user) => {
   return axios.post(`${config.apiUrl}login/social/token_user/github/`,{clientId:'f5e981378e91c2067d41',redirectUri: config.streamingUrl, code:user.code})

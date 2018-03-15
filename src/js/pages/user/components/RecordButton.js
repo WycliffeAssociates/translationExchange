@@ -66,6 +66,7 @@ const ButtonContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
 `;
 
 const Icon = styled.button`
@@ -74,6 +75,7 @@ color: #E74C3C;
 border: none;
 font-size: 2vw;
 margin-left: -0.005vw;
+background-color:transparent;
 
 `;
 

@@ -4,7 +4,7 @@ import BottomButtons from './BottomButtons';
 import RecordButton from './RecordButton';
 
 export default ({recording, generatedHash, startRecording, redo, save, audio}) => {
-  
+
   let header ='What is your name?';
   let displayText = 'Record';
   let icon = 'play';
@@ -37,11 +37,12 @@ text-decoration: underline;
 line-height: 1.8px;
 font-weight: 900;
 color: #E74C3C;
+margin-top: 1vw
 `;
 
 const PrivacyText = styled.p`
 text-align: center;
-width: '80%';
+width: 25vw;
 font-weight: 600;
 `;
 
@@ -50,5 +51,5 @@ display: flex;
 flex-direction: column;
 align-items: center;
 width: 100%;
-margin-top: 20%;
+margin-top: 7vh;
 `;

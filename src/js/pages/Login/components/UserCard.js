@@ -18,8 +18,8 @@ export default class UserCard extends React.Component {
   }
 
   componentDidMount() {
-    const {hash} =this.props.user || '' ;
-    jdenticon.update(`#canvas${this.props.id}` , hash);
+    const {icon_hash} =this.props.user || '' ;
+    jdenticon.update(`#canvas${this.props.id}` , icon_hash);
   }
 
   identLogin(hash) {
@@ -36,6 +36,7 @@ export default class UserCard extends React.Component {
   render() {
     var key= this.props.id? this.props.id: 0;
     const {name_audio, icon_hash} = this.props.user || [];
+    console.log(icon_hash);
     const audioURL = config.streamingUrl + name_audio;
     const {playing} = this.state;
     let icon = 'fa fa-play'
@@ -48,7 +49,7 @@ export default class UserCard extends React.Component {
         <PulseEffect animate={playing}>
           <Card>
             <ImageContainer onClick={()=> this.identLogin(icon_hash)}>
-              <Image id={`canvas${key}`} data-jdenticon-value={icon_hash} />
+              <Image id={`canvas${key}`} data-jdenticon-hash={icon_hash} />
             </ImageContainer>
 
             <CardOptions>

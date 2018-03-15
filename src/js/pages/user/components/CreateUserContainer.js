@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import 'css/create.css';
 import CreateUser from './CreateUser';
+import UserCreated from './UserCreated'
 import styled from 'styled-components';
 import {bindActionCreators} from 'redux';
 import { createUser } from '../../../actions/UserActions';
@@ -17,6 +18,7 @@ class CreateUserContainer extends Component {
 
 
   render() {
+    const {userCreated} = this.props;
     return (
       <div className="pageBackground">
 
@@ -26,7 +28,7 @@ class CreateUserContainer extends Component {
 
         <Container>
           <Card>
-            <CreateUser {...this.props} />
+            {userCreated ? <UserCreated {...this.props} /> : <CreateUser {...this.props} />}
           </Card>
 
         </Container>
@@ -69,5 +71,10 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({createUser}, dispatch)
 }
 
+const mapStateToProps = state => {
+  const {hash, audioName, userCreated, loading} = state.user;
+  return {hash, audioName, userCreated, loading };
+}
 
-export default connect(null, mapDispatchToProps) (CreateUserContainer);
+
+export default connect(mapStateToProps, mapDispatchToProps) (CreateUserContainer);

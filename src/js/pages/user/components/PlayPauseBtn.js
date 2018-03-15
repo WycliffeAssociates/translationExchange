@@ -56,9 +56,9 @@ const Container =  styled.div`
 `;
 
 const  PlayButton = styled.button`
-    height: 100%;
-    width: 45%;
-    border-radius: 50%;
+    height: 11vh;
+    width: 6.4vw;
+    border-radius: 8vw;
     background-color: #fff;
     outline: none;
     border-color: #2D2D2D;
@@ -68,11 +68,10 @@ const  PlayButton = styled.button`
 
 const ButtonContainer =styled.div`
     position: absolute;
-    height: 13%;
-    width: 18%;
+    width: 18vw;
     z-index: 2;
-    top: 35%;
-    left: 55%;
+    top: 39vh;
+    left: 56vw;
     transform: translate(-50%, -50%);
     cursor: pointer;
   `;
@@ -83,6 +82,7 @@ const Icon = styled.button`
   border: none;
   font-size: 2vw;
   cursor: pointer;
+  background-color:transparent;
 
 `;
 

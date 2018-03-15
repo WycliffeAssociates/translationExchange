@@ -31,7 +31,7 @@ export default ({recordedBlob, audio, onStop, recording}) => {
 
 const Container = styled.div`
 width: 100%;
-height: 35%;
+height: 29vh;
 min-width: 469;
 background-image: url(${TimeLine} );
 background-position: 50%;
@@ -42,5 +42,6 @@ border-top-right-radius: 7px;
 `;
 const RecordContainer = styled.div`
 margin-top: 3%;
+height: 29vh;
 width: 100%;
 `;
