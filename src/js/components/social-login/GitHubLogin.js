@@ -12,8 +12,8 @@ class GitHubLogin extends Component {
       left: 0,
       top: 0,
       height: 0,
-      width: 0
-    }
+      width: 0,
+    };
   }
 
   componentDidMount() {
@@ -22,7 +22,7 @@ class GitHubLogin extends Component {
     const left = window.innerWidth *.25;
     const top =  window.innerHeight * .25;
 
-    this.setState({left, top, width, height})
+    this.setState({left, top, width, height});
   }
 
   static defaultProps = {

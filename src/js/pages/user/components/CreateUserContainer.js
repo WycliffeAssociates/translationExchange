@@ -14,9 +14,8 @@ class CreateUserContainer extends Component {
   constructor(props) {
     super(props);
 
-    const {dispatch} = this.props;
+    //const {dispatch} = this.props;
 
-    this.boundUserActionCreators = bindActionCreators(UserActionCreators, dispatch);
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -76,8 +75,8 @@ const Card = styled.div`
 
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({createUser}, dispatch)
-}
+  return bindActionCreators({createUser}, dispatch);
+};
 
 
 export default connect(null, mapDispatchToProps) (CreateUserContainer);

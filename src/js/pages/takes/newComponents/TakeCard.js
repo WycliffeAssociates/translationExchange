@@ -8,7 +8,8 @@ export default class TakeCard extends React.Component {
     super(props);
 
     this.state = {
-      showComments: true,
+      showComments: false,
+      takePlaying: false,
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -18,12 +19,19 @@ export default class TakeCard extends React.Component {
     jdenticon.update('randomhash4324');
   }
 
-  handleClick() {
+  handleClick(caller) {
+    if (caller === 'comment') {
+      this.setState(prevState => ({ showComments: !prevState.showComments}));
+    }
 
-    this.setState(prevState => ({ showComments: !prevState.showComments}));
+    else if (caller === 'play') {
+      this.setState(prevState => ({takePlaying: !prevState.takePlaying}));
+    }
   }
 
   render() {
+
+    let icon = this.state.takePlaying? 'fas fa-play fa-fw': 'fas fa-pause fa-fw';
 
     return (
       <Container>
@@ -48,7 +56,7 @@ export default class TakeCard extends React.Component {
 
 
         <BottomButtons>
-          <CommentButton onClick={this.handleClick}>
+          <CommentButton onClick={() => this.handleClick('comment')}>
             <span className="fa-layers fa-fw">
               <i className="fas fa-comment" />
               <span className="fa-layers-counter" style={{fontSize: '2.1vw'}}> 2,112 </span>
@@ -56,8 +64,8 @@ export default class TakeCard extends React.Component {
           </CommentButton>
 
 
-          <PlayTake>
-            <i className="fa fa-play fas-space" /> 1:45
+          <PlayTake onClick= {() => this.handleClick('play')}>
+            <i className={`${icon}`} /> {icon}
           </PlayTake>
         </BottomButtons>
 
@@ -152,7 +160,7 @@ const BottomButtons = styled.div`
  align-items: stretch;
 `;
 
-const Button = styled.label`
+const Button = styled.button`
   font-size: 1.75vw;
   border: none;
   align-self: stretch;
