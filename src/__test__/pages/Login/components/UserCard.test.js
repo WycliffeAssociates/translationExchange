@@ -1,15 +1,16 @@
-/* global describe  it expect*/
+/* global describe  it:true expect:true  test:true */
 import React from 'react';
 import {shallow} from 'enzyme';
-import UserCard from '../../../../js/pages/Login/components/UserCard';
+import  UserCard from '../../../../js/pages/Login/components/UserCard';
 import jdenticon from 'jdenticon';
 import sinon from 'sinon';
+
 
 const willMount = sinon.spy();
 const didMount = sinon.spy();
 const willUnmount = sinon.spy();
 
-const defaultProps = {
+const mockProps = {
   id: 0,
   user: {
     recording: '',
@@ -18,10 +19,11 @@ const defaultProps = {
 };
 
 describe('User card suite', function() {
-  //const wrapper = shallow(<UserCard />);
-  // it('should render the user card', function() {
-  //   expect(wrapper.find('UserCardContainer'));
-  // });
+  test('renderer', function() {
+    const {wrapper} = shallow(<UserCard {...mockProps} />);
+    expect(wrapper.exists()).toBe(true);
+
+  });
 
   //it('')
 });

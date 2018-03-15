@@ -34,7 +34,7 @@ import {
 	publishFiles,
 } from './../../actions';
 
-class ChunkListContainer extends Component {
+export class ChunkListContainer extends Component {
 
 	constructor(props) {
 		super(props);

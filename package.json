@@ -82,10 +82,12 @@
     "cross-env": "^5.0.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "enzyme-to-json": "^3.3.0",
+    "enzyme-to-json": "^3.3.1",
     "fetch-mock": "^5.13.1",
     "jest": "^20.0.4",
     "jest-cli": "^20.0.4",
+    "jest-styled-components": "^5.0.0",
+    "jsdom": "^11.6.2",
     "moxios": "^0.4.0",
     "react-addons-test-utils": "^15.6.0",
     "react-scripts": "^1.0.7",
@@ -100,5 +102,12 @@
     "test": "cross-env NODE_PATH=src react-scripts test",
     "eject": "react-scripts eject"
   },
+
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
+
   "proxy": "http://translationExchange:8080"
 }

@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+/* eslint indent: ["error", "tab", {SwitchCase: 1}] */
+import React, { Component } from 'react';
 
 class About extends Component {
 	render() {

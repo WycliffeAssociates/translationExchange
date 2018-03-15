@@ -1,16 +1,25 @@
+/* global describe it expect jest */
 import React from 'react';
-import { shallow } from 'enzyme';
-import TakeList from '../../../../js/pages/takes/TakeList';
+import {shallow} from 'enzyme';
+import {TakeList} from '../../../../js/pages/takes/TakeList';
 
-describes('Test set rating function', () => {
+const mockProps = {
+  takes: [],
+  connectDropTarget: jest.fn(),
+
+};
+const wrapper = shallow(<TakeList {...mockProps} />);
+describe('Test set rating function', () => {
+
+  it('should render the component', function() {
+    expect(wrapper.instance());
+  });
 
 
-    //const wrapper = shallow(<TakeList />);
+// const test = wrapper.instance().onDrop();
 
-   // const test = wrapper.instance().onDrop();
+///console.log(test);
 
-    ///console.log(test);
-
-  //  expect(true).toEqual(true);
+//  expect(true).toEqual(true);
 
 });

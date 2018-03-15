@@ -18,6 +18,7 @@ import Redirect from './js/pages/user/components/Redirect.js';
 import { DragDropContext } from 'react-dnd';
 import Notifications from 'react-notify-toast';
 import Root from './js/components/Root.js';
+import TakeCard from './js/pages/takes/newComponents/TakeCard';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 // import and configure the raven client for sentry in order to track errors
@@ -66,6 +67,7 @@ class App extends Component {
           <Route  path="/takes" component={ChunkListContainer} />
           <Route  path="/user" component={User} />
           <Route path="/callback" component={Redirect} />
+          <Route path ="/newComponents" component={TakeCard} />
           <Route path="*" component={NotFound} />
         </Switch>
 

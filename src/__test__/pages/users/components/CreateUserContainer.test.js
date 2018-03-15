@@ -1,14 +1,19 @@
-/* global it:true describe:true expect:true */
+/* global it:true describe:true expect:true*/
+require('../../../setup.js');
 import React from 'react';
 import {shallow} from 'enzyme';
-//import {Card} from 'semantic-ui-react';
 import CreateUserContainer from '../../../../js/pages/user/components/CreateUserContainer';
+import mockStore from '../../../mockStore';
+
+const store = mockStore({
+});
+
 
 describe('Create User Container Suite', function() {
-  const wrapper = shallow(<CreateUserContainer />);
+  const wrapper = shallow(<CreateUserContainer store={store} />);
 
   it('should render correctly', function() {
-    expect(wrapper.find(<div className="background" />));
+    expect(wrapper.find(<div className="pageBackground" />));
 
   });
 

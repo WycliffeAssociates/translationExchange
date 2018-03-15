@@ -3,6 +3,7 @@ import UserCard from './components/UserCard';
 import NewUserCard from './components/NewUserCard';
 import {Grid} from 'semantic-ui-react';
 import {connect} from 'react-redux';
+import styled from 'styled-components';
 
 class AvailableUsers extends React.Component {
 
@@ -19,7 +20,7 @@ class AvailableUsers extends React.Component {
 
 
     return (
-      <div className="container">
+      <Container>
         <div className= "backgroundOverlayUsers">
 
           <h2 className={'pageHeader'}> Available Users </h2>
@@ -43,7 +44,7 @@ class AvailableUsers extends React.Component {
           </Grid>
 
         </div>
-      </div>
+      </Container>
 
 
 
@@ -53,9 +54,15 @@ class AvailableUsers extends React.Component {
 
 }
 
+const Container = styled.div`
+background: linear-gradient(to bottom right, #0076FF , #00C5FF );
+width: 100vw;
+text-align: center;
+`;
+
 const mapStateToProps = ({user}) => ({
   users: user.users,
-  recording: user.recording
+  recording: user.recording,
 
 });
 

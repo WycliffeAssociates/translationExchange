@@ -15,10 +15,15 @@ export default class UserCard extends React.Component {
     };
     this.play = this.play.bind(this);
     this.ended = this.ended.bind(this);
+    this.generateSVG = this.generateSVG.bind(this);
   }
 
   componentDidMount() {
     jdenticon.update(`#canvas${this.props.id}` , this.props.user.hash);
+  }
+
+  generateSVG() {
+    return (jdenticon.toSvg(this.props.user.hash, '10vw'));
   }
 
 
@@ -32,6 +37,8 @@ export default class UserCard extends React.Component {
   }
   render() {
     var key= this.props.id? this.props.id: 0;
+    var svg = jdenticon.toSvg(this.props.user.hash);
+    console.log(svg);
     const {recording, hash} = this.props.user;
     const blob = recording ? recording : {blobUrl: 'none'} ;
     const {playing} = this.state;
@@ -48,13 +55,12 @@ export default class UserCard extends React.Component {
           <Card>
 
             <ImageContainer>
-              <Image id={`canvas${key}`} data-jdenticon-value={hash} />
-
+              <Image key={key} id={`canvas${key}`} data-jdenticon-value={hash} />
             </ImageContainer>
 
             <CardOptions>
+              <ReactPlayer url={blob.blobURL} playing={this.state.playing} onEnded={()=> this.ended()} style={{display: 'none'}} />
               <PlayButton onClick={()=> this.play()}> <i className={`${icon}`}  /> </PlayButton>
-              <ReactPlayer url={blob.blobURL} playing={this.state.playing} onEnded={()=> this.ended()}  />
             </CardOptions>
           </Card>
         </PulseEffect>
@@ -75,9 +81,7 @@ const PulseEffect = styled.div`
 `;
 
 const UserCardContainer = styled.div`
-  /* background: linear-gradient(to bottom right, rgba(0,118,255,0.5), rgba(0,197,255,0.5)); */
-  // height: 100vh;
-  // width: 100vw;
+
 `;
 UserCardContainer.displayName = 'UserCardContainer';
 
@@ -91,7 +95,6 @@ const Card= styled.div`
     box-shadow: 3px 4px 5px rgba(0,0,0,0.6);
     overflow: hidden;
     background-color: white;
-    border: solid white 0.1vw;
     cursor: pointer;
 `;
 Card.displayName = 'Card';
@@ -99,10 +102,9 @@ Card.displayName = 'Card';
 
 const ImageContainer = styled.div`
     padding: 1.5vw 0.5vw;
-    &:hover ${ImageContainer} {
-      background-color: white;
-      box-shadow: 1px 1px 1px rbga(0,0,0,0.5);
-    }
+     &:hover {
+       opacity: 0.8;
+  }
 `;
 ImageContainer.displayName = 'ImageContainer';
 
@@ -116,36 +118,21 @@ Image.displayName = 'Image';
 const PlayButton = styled.button`
     color: white;
     border: none;
-    height: 4vw;
-    width: 15vw;
-    margin-left: -2vw;
-    margin-top: -0.7vw;
-    display: inline-block;
     background-color: #009CFF;
-    padding: 0vw 0vw;
+    height: inherit;
+    width: inherit;
     font-size: 2vw; //in the font awesome library the font size ends up controlling the size of the icon
-    &:hover ${PlayButton} {
-      background-color: white;
-      color: #009CFF;
-    }
+    &:hover {
+      opacity: 0.9;
+      }
     cursor: pointer;
 
   `;
 PlayButton.displayName = 'PlayButton';
 
 const CardOptions= styled.div`
-
-    background: #009CFF;
+    height: 53%;
     width: inherit;
-    padding: 1vw;
-    overflow: hidden;
-    text-align: left;
-    border-color: white;
-    border-width: 1vw;
-    &:hover ${CardOptions} {
-      background-color: white;
-      color: #009CFF;
-    }
   `;
 CardOptions.displayName = 'CardOptions';
 

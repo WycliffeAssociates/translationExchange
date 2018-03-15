@@ -37,6 +37,7 @@ export default class NewUserCard extends React.Component {
 
 
 const NewUserCardContainer = styled.div`
+
 `;
 NewUserCardContainer.displayName = 'NewUserCardContainer';
 
@@ -52,6 +53,7 @@ const Card= styled.div`
     background-color: white;
     padding: 2vw 3.5vw;
     cursor: pointer;
+
   `;
 Card.displayName = 'Card';
 
@@ -64,7 +66,7 @@ const AddUser = styled.div`
     font-size: 7vw;
     background-color: white;
     margin-left: -0.5vw;
-
+    
   `;
 AddUser.displayName = 'AddUser';
 
