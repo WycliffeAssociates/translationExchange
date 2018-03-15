@@ -1,6 +1,9 @@
 const INITIAL_STATE = {
   users: [],
-  loading: false
+  loading: false,
+  userCreated: false,
+  audioName: '',
+  hash: ''
 }
 
 export default( state= INITIAL_STATE, action) => {
@@ -16,6 +19,13 @@ export default( state= INITIAL_STATE, action) => {
     case 'LOADING_USER':
       return {
         ...state, loading: true
+      }
+    case 'USER_CREATED':
+      return {
+        ...state,
+        audioName: action.audioName,
+        hash: action.hash,
+        userCreated: true
       }
 
     default:

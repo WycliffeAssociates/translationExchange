@@ -6,6 +6,7 @@ return (dispatch) => {
     return axios
       .get(`${config.apiUrl}profiles/`)
       .then(response => {
+
         dispatch(fetchUserSuccess(response.data));
       })
       .catch(error => {
@@ -22,32 +23,41 @@ export const fetchUserSuccess = (users) => {
 }
 
 
-//saveComment
+//createUser
 export const createUser = (recordedBlob, hash) => {
   return function(dispatch) {
-    dispatch(loadingUsers());
+    dispatch(loadingProccess()); // can be used to render a spinner
     return axios
       .post(`${config.apiUrl}profiles/`, {
         nameAudio: recordedBlob,
         iconHash: hash
       })
       .then(response => {
-        localStorage.setItem('token',response.data.token);
-        //success();
-        //TODO login user with user id and redirect him to projects
+        const{nameAudio, token} = response.data;
+
+        localStorage.setItem('token', token);
+        dispatch(userCreated(nameAudio, hash));
       })
       .catch(exception => {
-        //dispatch(saveCommentFailed(exception));
-        //success();
+
       });
   };
 };
 
+export const userCreated = (audioName, hash)=>{
+  return {
+    type: 'USER_CREATED',
+    audioName,
+    hash
+
+
+  }
+}
+
+
 export const onLoginSuccess = (user) => {
-  console.log(user);
   return axios.post(`${config.apiUrl}login/social/token_user/github/`,{clientId:'f5e981378e91c2067d41',redirectUri: config.streamingUrl, code:user.code})
     .then(response=>{
-      console.log(response);
       localStorage.setItem('token',response.data.token);
     }).catch(err=>{
       console.log(err);
@@ -55,8 +65,28 @@ export const onLoginSuccess = (user) => {
     );
 }
 
-export const loadingUsers = () => {
+export const loadingProccess = () => {
   return {
     type: 'LOADING_USER'
+  }
+}
+export const identiconLogin = (iconHash, callback) => {
+
+return dispatch => {
+    return axios.post(`${config.apiUrl}login/`,{iconHash: iconHash})
+      .then(response=>{
+        localStorage.setItem('token',response.data.token);
+        callback();
+        dispatch(identiconLoginSuccess());
+      }).catch(err=>{
+        console.log(err);
+      }
+      );
+  }
+}
+
+export const identiconLoginSuccess = () => {
+  return {
+    type: 'IDENTICON_LOGIN_SUCCESS'
   }
 }
