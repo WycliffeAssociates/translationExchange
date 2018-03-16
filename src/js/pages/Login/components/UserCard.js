@@ -4,8 +4,7 @@ import ReactPlayer from 'react-player';
 import styled,  { keyframes } from 'styled-components';
 import config from '../../../../config/config'
 import { pulse } from 'react-animations';
-//import {Card} from 'semantic-ui-react';
-//
+
 
 export default class UserCard extends React.Component {
 
@@ -19,13 +18,15 @@ export default class UserCard extends React.Component {
   }
 
   componentDidMount() {
-    const {hash} =this.props.user || '' ;
-    jdenticon.update(`#canvas${this.props.id}` , hash);
+    const {icon_hash} =this.props.user || '' ;
+    jdenticon.update(`#canvas${this.props.id}` , icon_hash);
   }
 
+  identLogin(hash) {
+    this.props.identiconLogin(hash, ()=>this.props.history.push('/projects'));
+  }
 
   play() {
-
     this.setState({playing: true})
   }
 
@@ -35,6 +36,7 @@ export default class UserCard extends React.Component {
   render() {
     var key= this.props.id? this.props.id: 0;
     const {name_audio, icon_hash} = this.props.user || [];
+    console.log(icon_hash);
     const audioURL = config.streamingUrl + name_audio;
     const {playing} = this.state;
     let icon = 'fa fa-play'
@@ -46,12 +48,12 @@ export default class UserCard extends React.Component {
       <UserCardContainer>
         <PulseEffect animate={playing}>
           <Card>
-            <ImageContainer>
-              <Image id={`canvas${key}`} data-jdenticon-value={icon_hash} />
+            <ImageContainer onClick={()=> this.identLogin(icon_hash)}>
+              <Image id={`canvas${key}`} data-jdenticon-hash={icon_hash} />
             </ImageContainer>
 
             <CardOptions>
-              <PlayButton onClick={()=> this.play()}> <i className={`${icon}`}  /> </PlayButton>
+              <PlayButton playing={playing} onClick={()=> this.play()}> <i className={`${icon}`}  /> </PlayButton>
               <ReactPlayer url={audioURL} playing={this.state.playing} onEnded={()=> this.ended()}  />
             </CardOptions>
           </Card>
@@ -94,6 +96,11 @@ const Card= styled.div`
 
 const ImageContainer = styled.div`
     padding: 1.5vw 0.5vw;
+    cursor: pointer;
+    transition: transform 300ms ease-in-out;
+    &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const Image= styled.svg`
@@ -102,7 +109,7 @@ const Image= styled.svg`
 `;
 
 const PlayButton = styled.button`
-    color: white;
+    color: ${props => props.playing ? '#99ff99' : 'white'  } ;
     border: none;
     height: 4vw;
     width: 15vw;
@@ -111,6 +118,7 @@ const PlayButton = styled.button`
     display: inline-block;
     background-color: #009CFF;
     padding: 0vw 0vw;
+    cursor: pointer;
     font-size: 2vw; //in the font awesome library the font size ends up controlling the size of the icon
   `;
 

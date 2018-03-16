@@ -3,21 +3,16 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import 'css/create.css';
 import CreateUser from './CreateUser';
+import UserCreated from './UserCreated'
 import styled from 'styled-components';
 import {bindActionCreators} from 'redux';
-import { createUser } from '../../../actions/UserActions';
+import { createUser, resetUserCreated } from '../../../actions/UserActions';
 
 
 class CreateUserContainer extends Component {
 
-
-  constructor(props) {
-    super(props);
-
-    const {dispatch} = this.props;
-
-    this.boundUserActionCreators = bindActionCreators(UserActionCreators, dispatch);
-    this.handleClick = this.handleClick.bind(this);
+  componentWillUnmount() {
+    this.props.resetUserCreated();
   }
 
   handleClick() {
@@ -26,17 +21,17 @@ class CreateUserContainer extends Component {
 
 
   render() {
+    const {userCreated} = this.props;
     return (
       <div className="pageBackground">
 
-        <Label onClick={this.handleClick}>
+        <Label onClick={()=>this.handleClick()}>
           <i className="fa fa-hand-point-left fa-fw" /> Back to Login
         </Label>
 
-
         <Container>
           <Card>
-            <CreateUser {...this.boundUserActionCreators} {...this.props} />
+            {userCreated ? <UserCreated {...this.props} /> : <CreateUser {...this.props} />}
           </Card>
 
         </Container>
@@ -76,8 +71,13 @@ const Card = styled.div`
 
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({createUser}, dispatch)
+  return bindActionCreators({createUser, resetUserCreated}, dispatch)
+}
+
+const mapStateToProps = state => {
+  const {hash, audioName, userCreated, loading} = state.user;
+  return {hash, audioName, userCreated, loading };
 }
 
 
-export default connect(null, mapDispatchToProps) (CreateUserContainer);
+export default connect(mapStateToProps, mapDispatchToProps) (CreateUserContainer);

@@ -20,7 +20,7 @@
 
 .backgroundOverlayLogin {
   background-image: url('../assets/images/background-pattern.png');
-  height: 100vh;
+  height: auto;
   width: 100vw;
   display: flex;
   align-items: center;
@@ -30,7 +30,7 @@
 
 .backgroundOverlayUsers {
   background-image: url('../assets/images/background-pattern.png');
-  height: 100vh;
+  height: auto;
   width: 100vw;
   padding: 5vw;
 
