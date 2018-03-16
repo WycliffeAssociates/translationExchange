@@ -14,7 +14,7 @@ class TakeTable extends Component {
 			takesToDelete.push(take.id);
             return null; // added to satisfy warning of return expected on arrow function
 		});
-	
+
 		//remove them all
 		takesToDelete.map(takeId => {
 			this.props.deleteTake(takeId);
@@ -43,7 +43,8 @@ class TakeTable extends Component {
 						</Table.Row>
 					</Table.Header>
 					<Table.Cell className="ChunkTitle">
-						<TakeList
+						
+							<TakeList
 							takes={this.props.orderedTakes}
 							addToListenList={this.props.addToListenList}
 							patchTake={this.props.patchTake}
@@ -56,6 +57,7 @@ class TakeTable extends Component {
 							deleteComment={this.props.deleteComment}
 							active={this.props.active}
 							chunkId={this.props.chunkId}
+
 						/>
 					</Table.Cell>
 				</Table>

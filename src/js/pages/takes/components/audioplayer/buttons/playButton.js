@@ -21,8 +21,9 @@ const styles = {
     justifyContent: 'center',
     width: 70,
     height: 70,
-    backgroundColor: "#000",
+    backgroundColor: 'white',
     cursor: 'pointer',
+    //color: 'red'
     // border:'none'
 
   },

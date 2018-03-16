@@ -55,7 +55,7 @@ export default class UserCard extends React.Component {
           <Card>
 
             <ImageContainer>
-              <Image key={key} id={`canvas${key}`} data-jdenticon-value={hash} />
+              <Image key={key} id={`canvas${key}`} data-jdenticon-hash={hash} />
             </ImageContainer>
 
             <CardOptions>

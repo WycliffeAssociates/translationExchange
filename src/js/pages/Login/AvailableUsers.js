@@ -4,6 +4,7 @@ import NewUserCard from './components/NewUserCard';
 import {Grid} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import jdenticon from 'jdenticon';
 import {fetchUsers} from '../../actions';
 
 class AvailableUsers extends React.Component {

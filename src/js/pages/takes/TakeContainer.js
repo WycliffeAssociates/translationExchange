@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TakePropTypes from "./TakePropTypes";
-import Take from "./Take";
+import TakeCard from './newComponents/TakeCard';
 import { DragSource, DropTarget } from "react-dnd";
 import flow from "lodash/flow";
 
@@ -26,7 +26,7 @@ class TakeContainer extends Component {
 	let content = (
 
 	 <div ref={input => {this.myInput = input}} className="item" style= {style}>
-		 <Take
+		 <TakeCard
 				count={this.props.count}
 				take={this.props.take}
 				author={this.props.take.user}

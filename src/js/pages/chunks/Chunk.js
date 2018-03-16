@@ -1,10 +1,11 @@
-/* eslint indent: ["error", "tab", {SwitchCase: 1}] */
+/* eslint indent: [1, "tab", {SwitchCase: 1}] */
 import React, { Component } from 'react';
 import ChunkPropTypes from './ChunkPropTypes';
 import { Accordion, Icon, Grid } from 'semantic-ui-react';
 import TakeTable from '../takes/TakeTable';
 import 'css/takes.css';
 import { connect } from 'react-redux';
+import jdenticon from 'jdenticon';
 import { bindActionCreators } from 'redux';
 import { getAudioTakes, getChunkIdClicked } from './../../actions';
 
@@ -17,6 +18,10 @@ class Chunk extends Component {
 			calledChunks: [],
 			chunkId: '',
 		};
+	}
+
+	componentDidMount() {
+		jdenticon.update('undefined');
 	}
 
 
@@ -103,25 +108,28 @@ class Chunk extends Component {
 					<Accordion.Content className="ChunkBody">
 						<Grid fluid columns={2}>
 							<Grid.Column width={15}>
-								<Grid fixed padded fluid columns={4}>
-									<TakeTable
-										icon={icon1}
-										mode={this.props.mode}
-										addToListenList={this.props.addToListenList}
-										patchTake={this.props.patchTake}
-										deleteTake={this.props.deleteTake}
-										updateChosenTakeForChunk={
-											this.props.updateChosenTakeForChunk
-										}
-										onClickSave={this.props.onClickSave}
-										column={0}
-										orderedTakes={onestar}
-										chunkNumber={this.props.number}
-										deleteComment={this.props.deleteComment}
-										deleteButton={true}
-										active={this.props.active}
-										chunkId={this.props.id}
-									/>
+								<Grid fixed padded fluid columns={3}>
+									{
+										// <TakeTable
+										// 	icon={icon1}
+										// 	mode={this.props.mode}
+										// 	addToListenList={this.props.addToListenList}
+										// 	patchTake={this.props.patchTake}
+										// 	deleteTake={this.props.deleteTake}
+										// 	updateChosenTakeForChunk={
+										// 		this.props.updateChosenTakeForChunk
+										// 	}
+										// 	onClickSave={this.props.onClickSave}
+										// 	column={0}
+										// 	orderedTakes={onestar}
+										// 	chunkNumber={this.props.number}
+										// 	deleteComment={this.props.deleteComment}
+										// 	deleteButton={true}
+										// 	active={this.props.active}
+										// 	chunkId={this.props.id}
+										// />
+
+									}
 									<TakeTable
 										icon={icon2}
 										mode={this.props.mode}
@@ -139,6 +147,8 @@ class Chunk extends Component {
 										active={this.props.active}
 										chunkId={this.props.id}
 									/>
+
+									{
 									<TakeTable
 										icon={icon3}
 										mode={this.props.mode}
@@ -156,6 +166,8 @@ class Chunk extends Component {
 										active={this.props.active}
 										chunkId={this.props.id}
 									/>
+									}
+
 									<TakeTable
 										icon={icon4}
 										mode={this.props.mode}
@@ -173,6 +185,7 @@ class Chunk extends Component {
 										active={this.props.active}
 										chunkId={this.props.id}
 									/>
+
 								</Grid>
 							</Grid.Column>
 							<Grid.Column width={1} verticalAlign="middle" floated="right">
