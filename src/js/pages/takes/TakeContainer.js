@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TakePropTypes from "./TakePropTypes";
-import TakeCard from './newComponents/TakeCard';
+import TakeCard from './newComponents/TakeCard/TakeCard';
+import Take from './Take';
 import { DragSource, DropTarget } from "react-dnd";
 import flow from "lodash/flow";
 

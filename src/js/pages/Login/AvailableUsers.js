@@ -4,8 +4,7 @@ import NewUserCard from './components/NewUserCard';
 import {Grid} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import jdenticon from 'jdenticon';
-import {fetchUsers} from '../../actions';
+import {fetchUsers, identiconLogin} from '../../actions';
 
 class AvailableUsers extends React.Component {
 
@@ -34,7 +33,7 @@ class AvailableUsers extends React.Component {
 
                 return (
                   <Grid.Column width={3}>
-                    <UserCard  key={user} id={index} user={user} />
+                    <UserCard  key={user} id={index} user={user} {...this.props} />
                   </Grid.Column>
                 );}) :   ''
 
@@ -59,7 +58,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    {  fetchUsers }, dispatch);
+    {  fetchUsers, identiconLogin }, dispatch);
 };
 
 export default connect (mapStateToProps, mapDispatchToProps )(AvailableUsers);

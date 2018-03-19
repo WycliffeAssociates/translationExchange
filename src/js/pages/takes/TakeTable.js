@@ -42,8 +42,10 @@ class TakeTable extends Component {
 							</Table.HeaderCell>
 						</Table.Row>
 					</Table.Header>
-					<Table.Cell className="ChunkTitle">
-						
+					<Table.Cell className="ChunkTitle"
+					style={{background: '#2D2D2D'}}
+					>
+
 							<TakeList
 							takes={this.props.orderedTakes}
 							addToListenList={this.props.addToListenList}

@@ -1,4 +1,4 @@
-/* eslint indent: ["error", "tab", {SwitchCase: 1}]*/
+/* eslint indent: [0, "tab", {SwitchCase: 1}]*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,6 +12,7 @@ import Chunk from './Chunk';
 import NotFound from 'js/pages/NotFound';
 import ErrorButton from '../../components/ErrorButton';
 import LoadingGif from '../../components/LoadingGif';
+import Toggle from 'react-toggle';
 
 
 import {
@@ -180,7 +181,7 @@ export class ChunkListContainer extends Component {
 			);
 		} else {
 			return (
-				<div>
+				<div className="background">
 					<ChunkHeader
 						chapterNum={this.props.chapter.number}
 						book={this.props.book}
@@ -196,10 +197,50 @@ export class ChunkListContainer extends Component {
 						projectId={this.props.project.id}
 						displayText={this.props.displayText}
 					/>
-					{this.props.chunks.map((chunk,index) => this.createChunkList(chunk, index))}
-					<div fluid className="StickyFooter">
-						<Footer />
+
+
+					<div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+						{
+						<div style={{flex: '1'}}>
+							<Chunk
+						has_comments={this.props.chunks[0].has_comment}
+						comments={this.props.comments}
+						takesForChunk={this.props.chunks[0]} // array of takes
+						mode={'chunks'}        //TODO get mode from backend
+						number={this.props.chunks[0].startv}
+						chunkId={this.props.chunks[0].id}
+						patchTake={this.patchTake.bind(this)}
+						deleteTake={this.deleteTake.bind(this)}
+						updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
+						onClickSave={this.onClickSave.bind(this)}
+						id={this.props.chunks[0].id}
+						deleteComment={this.deleteComment.bind(this)}
+						loaded={this.props.loaded}
+						book={this.props.book.name}
+						language={this.props.language.name}
+						onSourceClicked={this.onSourceClicked.bind(this)}
+						active={this.props.active}
+						published={this.props.project.published}
+						displayText={this.props.displayText}
+					/>
+
 					</div>
+				}
+
+
+					<div style={{background: '#2D2D2D', marginTop: '1vw', padding: '0.2vw'}} >
+
+					<div style={{display: 'flex', flexDirection: 'row' , justifyContent: 'space-between', marginTop: '1vw'}}>
+
+						<Toggle defaultChecked= {false} />
+
+						<label style={{textDecoration: 'underline', color: '#009CFF'}}> Hide <i className= "fa fa-arrow-right" /> </label>
+					</div>
+					{this.props.chunks.map((chunk,index) => this.createChunkList(chunk, index))}
+					</div>
+				</div>
+
+
 				</div>
 			);
 		}
@@ -268,28 +309,34 @@ export class ChunkListContainer extends Component {
 
 	createChunkList(chunk,index) {
 		return (
-			<div 	key={index}>
-				<Chunk
-					has_comments={chunk.has_comment}
-					comments={this.props.comments}
-					takesForChunk={chunk} // array of takes
-					mode={'chunk'}        //TODO get mode from backend
-					number={chunk.startv}
-					chunkId={chunk.id}
-					patchTake={this.patchTake.bind(this)}
-					deleteTake={this.deleteTake.bind(this)}
-					updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
-					onClickSave={this.onClickSave.bind(this)}
-					id={chunk.id}
-					deleteComment={this.deleteComment.bind(this)}
-					loaded={this.props.loaded}
-					book={this.props.book.name}
-					language={this.props.language.name}
-					onSourceClicked={this.onSourceClicked.bind(this)}
-					active={this.props.active}
-					published={this.props.project.published}
-					displayText={this.props.displayText}
-				/>
+			<div 	key={index} style={{marginTop: '0.5vw'}}>
+				{
+				// 	<Chunk
+				// 	has_comments={chunk.has_comment}
+				// 	comments={this.props.comments}
+				// 	takesForChunk={chunk} // array of takes
+				// 	mode={'chunk'}        //TODO get mode from backend
+				// 	number={chunk.startv}
+				// 	chunkId={chunk.id}
+				// 	patchTake={this.patchTake.bind(this)}
+				// 	deleteTake={this.deleteTake.bind(this)}
+				// 	updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
+				// 	onClickSave={this.onClickSave.bind(this)}
+				// 	id={chunk.id}
+				// 	deleteComment={this.deleteComment.bind(this)}
+				// 	loaded={this.props.loaded}
+				// 	book={this.props.book.name}
+				// 	language={this.props.language.name}
+				// 	onSourceClicked={this.onSourceClicked.bind(this)}
+				// 	active={this.props.active}
+				// 	published={this.props.project.published}
+				// 	displayText={this.props.displayText}
+				// />
+			}
+				<label style={{margin: '2vw', color: 'white'}}key={index}> chunk </label>
+				<label style={{margin: '2vw', color: 'white'}}> Unavailble </label>
+
+
 			</div>
 		);
 	}

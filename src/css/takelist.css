@@ -5,8 +5,16 @@
     padding-right: 10px;
     overflow-x: hidden; */
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    //justify-content: space-between;
+    overflow: auto;
+    height: 70vh;
+}
+
+.background {
+
+  background: url('../assets/images/img1.PNG') ;
+  height: 100vh;
 }
 ::-webkit-scrollbar {
     width: 2em;

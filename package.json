@@ -57,6 +57,7 @@
     "react-social-auth": "^1.0.45",
     "react-social-login": "^3.2.1",
     "react-stars": "^2.1.0",
+    "react-toggle": "^4.0.2",
     "react-transition-group": "^1.2.0",
     "react-truncate": "^2.3.0",
     "react-wavesurfer": "^0.8.6",
@@ -102,12 +103,10 @@
     "test": "cross-env NODE_PATH=src react-scripts test",
     "eject": "react-scripts eject"
   },
-
   "jest": {
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
   },
-
   "proxy": "http://translationExchange:8080"
 }
