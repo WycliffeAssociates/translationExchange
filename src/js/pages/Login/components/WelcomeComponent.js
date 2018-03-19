@@ -63,7 +63,7 @@ export class WelcomeComponent extends React.Component {
           <GitHubLogin clientId="f5e981378e91c2067d41"
             redirectUri={config.streamingUrl}
             onSuccess={data=>this.onLogin(data)}
-            onFailure={this.onLoginFailure}/>
+            onFailure={this.onLoginFailure} />
 
 
         </ButtonsContainer>

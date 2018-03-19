@@ -1,10 +1,11 @@
-/* eslint indent: ["error", "tab", {SwitchCase: 1}] */
+/* eslint indent: [1, "tab", {SwitchCase: 1}] */
 import React, { Component } from 'react';
 import ChunkPropTypes from './ChunkPropTypes';
 import { Accordion, Icon, Grid } from 'semantic-ui-react';
 import TakeTable from '../takes/TakeTable';
 import 'css/takes.css';
 import { connect } from 'react-redux';
+import jdenticon from 'jdenticon';
 import { bindActionCreators } from 'redux';
 import { getAudioTakes, getChunkIdClicked } from './../../actions';
 
@@ -19,6 +20,11 @@ class Chunk extends Component {
 		};
 	}
 
+	componentDidMount() {
+		//jdenticon.update('undefined');
+		this.getTakes(this.props.chunkId);
+	}
+
 
 	getTakes(chunkId) {
 		let counter = this.props.takes.length;
@@ -31,6 +37,7 @@ class Chunk extends Component {
 	}
 
 	render() {
+		console.log(this.props, 'this is chunk props');
 		let publish = [];
 		let onestar = [];
 		let twostar = [];
@@ -88,40 +95,37 @@ class Chunk extends Component {
 		var icon4 = <Icon name="check" color="pink" size="big" />;
 		return (
 			<div>
-				<Accordion fluid styled >
-					<Accordion.Title className="ChunkTitle" onClick={(itempProps) => this.getTakes(this.props.chunkId, itempProps)} >
-						<center>
-							<Icon name="dropdown" />
-							<font color="black">
-								{modeLabel} {this.props.number}
-								{this.props.has_comments
-									? <Icon name="circle" color="yellow" />
-									: ''}
-							</font>
-						</center>
-					</Accordion.Title>
-					<Accordion.Content className="ChunkBody">
+				{/*<Accordion fluid styled >
+					<Accordion.Title className="ChunkTitle" onClick={(itempProps) => this.getTakes(this.props.chunkId, itempProps)} > */
+				}
+					{//</Accordion.Title>
+
+					//<Accordion.Content className="ChunkBody">
+				}
 						<Grid fluid columns={2}>
-							<Grid.Column width={15}>
-								<Grid fixed padded fluid columns={4}>
-									<TakeTable
-										icon={icon1}
-										mode={this.props.mode}
-										addToListenList={this.props.addToListenList}
-										patchTake={this.props.patchTake}
-										deleteTake={this.props.deleteTake}
-										updateChosenTakeForChunk={
-											this.props.updateChosenTakeForChunk
-										}
-										onClickSave={this.props.onClickSave}
-										column={0}
-										orderedTakes={onestar}
-										chunkNumber={this.props.number}
-										deleteComment={this.props.deleteComment}
-										deleteButton={true}
-										active={this.props.active}
-										chunkId={this.props.id}
-									/>
+							<Grid.Column width={16}>
+								<Grid fixed padded fluid columns={4} >
+
+										<TakeTable
+											icon={icon1}
+											mode={this.props.mode}
+											addToListenList={this.props.addToListenList}
+											patchTake={this.props.patchTake}
+											deleteTake={this.props.deleteTake}
+											updateChosenTakeForChunk={
+												this.props.updateChosenTakeForChunk
+											}
+											onClickSave={this.props.onClickSave}
+											column={0}
+											orderedTakes={onestar}
+											chunkNumber={this.props.number}
+											deleteComment={this.props.deleteComment}
+											deleteButton={true}
+											active={this.props.active}
+											chunkId={this.props.id}
+										/>
+
+
 									<TakeTable
 										icon={icon2}
 										mode={this.props.mode}
@@ -139,6 +143,8 @@ class Chunk extends Component {
 										active={this.props.active}
 										chunkId={this.props.id}
 									/>
+
+
 									<TakeTable
 										icon={icon3}
 										mode={this.props.mode}
@@ -156,6 +162,8 @@ class Chunk extends Component {
 										active={this.props.active}
 										chunkId={this.props.id}
 									/>
+
+
 									<TakeTable
 										icon={icon4}
 										mode={this.props.mode}
@@ -173,28 +181,16 @@ class Chunk extends Component {
 										active={this.props.active}
 										chunkId={this.props.id}
 									/>
+
 								</Grid>
 							</Grid.Column>
-							<Grid.Column width={1} verticalAlign="middle" floated="right">
-								<ChunkSidebar
-									published={this.props.published}
-									comments={this.props.comments}
-									onClickSave={this.props.onClickSave}
-									column={0}
-									orderedTakes={onestar}
-									chunkNumber={this.props.number}
-									mode={this.props.mode}
-									chunkId={this.props.id}
-									deleteComment={this.props.deleteComment}
-									active={this.props.active}
-									onSourceClicked={this.props.onSourceClicked}
-									has_comments={has_comments}
-								/>
-							</Grid.Column>
+
 						</Grid>
 						<br />
-					</Accordion.Content>
-				</Accordion>
+					{ //</Accordion.Content>
+				//</Accordion>
+			}
+
 			</div>
 		);
 	}

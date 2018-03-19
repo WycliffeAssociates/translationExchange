@@ -53,8 +53,8 @@ class AvailableUsers extends React.Component {
 
 const mapStateToProps = state => {
   const { users } = state.user;
-  return {users}
-}
+  return {users};
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(

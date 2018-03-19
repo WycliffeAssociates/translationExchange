@@ -1,22 +1,36 @@
+/* global describe it expect jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import ChunkListContainer from '../../../js/pages/chunks/ChunkListContainer';
+import {ChunkListContainer} from '../../../js/pages/chunks/ChunkListContainer';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-const middlewares = [thunk]
-const mockStore = configureMockStore(middlewares)
 
 describe('ChunkListContainer', () => {
-    
-    const store = mockStore({
-        geolocation: {},
-        direction: {},
-        chunkListContainer: {}
-    });
+  const mockProps = {
+    comments: '',
+    takes: '',
+    playlistMode: '',
+    direction: '',
+    displayText: '',
+    loaded: '',
+    error: '',
+    project: '',
+    book: '',
+    chapter: '',
+    language: '',
+    selectedSourceProject: '',
+    selectedSourceProjectQuery: '',
+    active: '',
+    notifyFlag: '',
+    location: {
+      search: '',
+    },
+    getSelectedProjectInfo: jest.fn(),
+  };
 
-    const wrapper = shallow(<ChunkListContainer store={store} />);
-    it('should render', () => {
-        expect(wrapper).toHaveLength(1);
-    });
+  const wrapper = shallow(<ChunkListContainer {...mockProps} />);
+  it('should render', () => {
+    expect(wrapper).toHaveLength(1);
+  });
 });

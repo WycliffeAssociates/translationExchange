@@ -14,6 +14,7 @@ class Footer extends Component {
     }
 
     render() {
+      console.log(this.props);
         return (
             <div className="footerStyle" style={{ width: '100%', direction: "ltr" }}>
                 {this.props.playlist.length > 0 && this.props.playlistMode

@@ -64,6 +64,7 @@ const  PlayButton = styled.button`
     border: .5%;
     cursor: pointer;
   `;
+PlayButton.displayName = 'PlayButton';
 
 const ButtonContainer =styled.div`
     position: absolute;
@@ -74,6 +75,7 @@ const ButtonContainer =styled.div`
     transform: translate(-50%, -50%);
     cursor: pointer;
   `;
+ButtonContainer.displayName = 'ButtonContainer';
 
 const Icon = styled.button`
   margin-left: 5%;
@@ -84,6 +86,7 @@ const Icon = styled.button`
   background-color:transparent;
 
 `;
+Icon.displayName = 'Icon';
 
 
 

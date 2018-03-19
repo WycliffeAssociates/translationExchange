@@ -11,9 +11,18 @@ import { createUser, resetUserCreated } from '../../../actions/UserActions';
 
 class CreateUserContainer extends Component {
 
+
+  constructor(props) {
+    super(props);
+
+    //const {dispatch} = this.props;
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   componentWillUnmount() {
     this.props.resetUserCreated();
-  }
+    }
 
   handleClick() {
     this.props.history.push({pathname: '/users'});
@@ -71,13 +80,13 @@ const Card = styled.div`
 
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({createUser, resetUserCreated}, dispatch)
-}
+  return bindActionCreators({createUser, resetUserCreated}, dispatch);
+};
 
 const mapStateToProps = state => {
   const {hash, audioName, userCreated, loading} = state.user;
   return {hash, audioName, userCreated, loading };
-}
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps) (CreateUserContainer);

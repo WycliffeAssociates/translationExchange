@@ -57,6 +57,7 @@
     "react-social-auth": "^1.0.45",
     "react-social-login": "^3.2.1",
     "react-stars": "^2.1.0",
+    "react-toggle": "^4.0.2",
     "react-transition-group": "^1.2.0",
     "react-truncate": "^2.3.0",
     "react-wavesurfer": "^0.8.6",
@@ -82,10 +83,12 @@
     "cross-env": "^5.0.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "enzyme-to-json": "^3.3.0",
+    "enzyme-to-json": "^3.3.1",
     "fetch-mock": "^5.13.1",
     "jest": "^20.0.4",
     "jest-cli": "^20.0.4",
+    "jest-styled-components": "^5.0.0",
+    "jsdom": "^11.6.2",
     "moxios": "^0.4.0",
     "react-addons-test-utils": "^15.6.0",
     "react-scripts": "^1.0.7",
@@ -99,6 +102,11 @@
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "cross-env NODE_PATH=src react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "proxy": "http://translationExchange:8080"
 }

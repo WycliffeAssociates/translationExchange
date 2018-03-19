@@ -66,6 +66,7 @@ export const onLoginSuccess = (user) => {
   return axios.post(`${config.apiUrl}login/social/token_user/github/`,{clientId:'f5e981378e91c2067d41',redirectUri: config.streamingUrl, code: user.code})
     .then(response=>{
       localStorage.setItem('token',response.data.token);
+
     }).catch(err=>{
       console.log(err);
     }
@@ -84,7 +85,7 @@ return dispatch => {
       .then(response=>{
         localStorage.setItem('token',response.data.token);
         callback();
-        dispatch(identiconLoginSuccess());
+        dispatch(identiconLoginSuccess(iconHash));
       }).catch(err=>{
         console.log(err);
       }
@@ -92,8 +93,9 @@ return dispatch => {
   };
 };
 
-export const identiconLoginSuccess = () => {
+export const identiconLoginSuccess = (iconHash) => {
   return {
-    type: 'IDENTICON_LOGIN_SUCCESS',
+    type: 'LOGIN_SUCCESS',
+    iconHash: iconHash,
   };
 };

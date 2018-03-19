@@ -1,9 +1,20 @@
 .TakeList{
-    max-height: 20em;
+    /* max-height: 20em;
     min-height: 20em;
     overflow-y: auto;
     padding-right: 10px;
-    overflow-x: hidden;
+    overflow-x: hidden; */
+    display: flex;
+    flex-direction: column;
+    //justify-content: space-between;
+    overflow: auto;
+    height: 70vh;
+}
+
+.background {
+
+  background: url('../assets/images/img1.PNG') ;
+  height: 100vh;
 }
 ::-webkit-scrollbar {
     width: 2em;

@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   userCreated: false,
   audioName: '',
   hash: '',
+  loggedInUser: null,
 };
 
 export default( state= INITIAL_STATE, action) => {
@@ -28,7 +29,13 @@ export default( state= INITIAL_STATE, action) => {
         userCreated: true,
       };
     case 'RESET_USER_CREATED':
-        return {...state, userCreated: false,}
+      return {...state, userCreated: false};
+
+    case 'LOGIN_SUCCESS':
+      return {
+        ...state,
+        loggedInUser: action.iconHash,
+      };
 
     default:
       return {

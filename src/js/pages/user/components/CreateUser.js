@@ -38,7 +38,7 @@ class CreateUser extends Component {
     a.onloadend =  () => {
       generatedHash= SparkMD5.ArrayBuffer.hash(a.result);
       this.setState({recordedBlob, generatedHash, audio: true});
-      jdenticon.update('svg', generatedHash);
+      jdenticon.update('#canvas', generatedHash);
     };
   }
 
@@ -57,7 +57,7 @@ class CreateUser extends Component {
     const reader = new FileReader();
 
     reader.addEventListener(
-      "load",
+      'load',
       () => {
         const jsonblob = reader.result
         this.props.createUser(jsonblob, generatedHash); // action to create user in db

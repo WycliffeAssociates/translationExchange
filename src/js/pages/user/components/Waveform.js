@@ -71,7 +71,7 @@ const Container = styled.div`
 
 const WaveformContainer = styled.div`
     width: 100%;
-    margin-right: 10%
+    margin-right: 5%
   `;
 
 export default CommentsPlayer;

@@ -13,7 +13,9 @@
 }
 
 .container {
-   background: linear-gradient(to bottom right, rgba(0,118,255,0.8), rgba(0,197,255,0.8));
+   background: linear-gradient(to bottom right, #0076FF , #00C5FF );
+   height: auto;
+   width: 100vw;
    text-align: center;
 
 }
@@ -30,10 +32,9 @@
 
 .backgroundOverlayUsers {
   background-image: url('../assets/images/background-pattern.png');
-  height: auto;
-  width: 100vw;
   padding: 5vw;
-
+  height: 100vh;
+  background-attachment: fixed;
 }
 
 .WelcomeDialog {

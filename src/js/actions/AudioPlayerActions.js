@@ -9,48 +9,48 @@ export const playAudio = () => {
 
 export const stopAudio = () => {
   return {
-    type: STOP_AUDIO
-  }
+    type: STOP_AUDIO,
+  };
 };
 
 
 export const finishedPlaying = (isFinished) => {
 
-  return{
-     type: FINISHED_PLAYING,
-     isFinished
+  return {
+    type: FINISHED_PLAYING,
+    isFinished,
 
-  }
+  };
 
 };
 
 
 export const updateTime = (updateTime) => {
 
-  return{
-     type: UPDATE_TIME,
-     updateTime,
+  return  {
+    type: UPDATE_TIME,
+    updateTime,
 
-  }
+  };
 
 };
 
 export const timeLength = (timeLength) => {
 
-  return{
-     type: UPDATE_AUDIO_LENGTH,
-     timeLength
+  return {
+    type: UPDATE_AUDIO_LENGTH,
+    timeLength,
 
-  }
+  };
 
 };
 
 export const resetAudioPlayer = () => {
 
-  return{
-     type: RESET_AUDIOPLAYER
+  return {
+    type: RESET_AUDIOPLAYER,
 
 
-  }
+  };
 
 };

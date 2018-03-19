@@ -39,6 +39,7 @@ export default class NewUserCard extends React.Component {
 
 
 const NewUserCardContainer = styled.div`
+
 `;
 NewUserCardContainer.displayName = 'NewUserCardContainer';
 

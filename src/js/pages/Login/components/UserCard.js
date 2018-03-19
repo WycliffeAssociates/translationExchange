@@ -11,8 +11,8 @@ export default class UserCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playing: false
-    }
+      playing: false,
+    };
     this.play = this.play.bind(this);
     this.ended = this.ended.bind(this);
   }
@@ -27,11 +27,11 @@ export default class UserCard extends React.Component {
   }
 
   play() {
-    this.setState({playing: true})
+    this.setState({playing: true});
   }
 
   ended() {
-    this.setState({playing: false})
+    this.setState({playing: false});
   }
   render() {
     var key= this.props.id? this.props.id: 0;
@@ -39,9 +39,9 @@ export default class UserCard extends React.Component {
     console.log(icon_hash);
     const audioURL = config.streamingUrl + name_audio;
     const {playing} = this.state;
-    let icon = 'fa fa-play'
+    let icon = 'fa fa-play';
     if (playing) {
-      icon ='fa fa-volume-up'
+      icon ='fa fa-volume-up';
     }
 
     return (
@@ -66,7 +66,7 @@ export default class UserCard extends React.Component {
 
 
 // keyframes returns a unique name based on a hash of the contents of the keyframes
-const pulse_animation = keyframes`${pulse}`
+const pulse_animation = keyframes`${pulse}`;
 
 
 // Here we create a component that will rotate everything we pass in over two seconds
@@ -143,5 +143,3 @@ const SignOutButton = styled.div`
     padding-left: 2vw;
     font-size: 2vw; //in the font awesome library the font size ends up controlling the size of the icon
 `;
-
-

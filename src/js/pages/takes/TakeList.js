@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import TakeContainer from "./TakeContainer";
-import TakePropTypes from "./TakePropTypes";
+/* eslint indent: ["error", "tab", {SwitchCase: 1}] */
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import TakeContainer from './TakeContainer';
+import TakePropTypes from './TakePropTypes';
 import update from 'immutability-helper';
-import { DropTarget } from "react-dnd";
+import { DropTarget } from 'react-dnd';
 import 'css/takelist.css';
 
-class TakeList extends Component {
+export class TakeList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -19,8 +20,8 @@ class TakeList extends Component {
 		this.setState(
 			update(this.state, {
 				takes: {
-					$push: [take]
-				}
+					$push: [take],
+				},
 			})
 		);
 	}
@@ -29,8 +30,8 @@ class TakeList extends Component {
 		this.setState(
 			update(this.state, {
 				takes: {
-					$splice: [[index, 1]]
-				}
+					$splice: [[index, 1]],
+				},
 			})
 		);
 	}
@@ -41,8 +42,8 @@ class TakeList extends Component {
 		this.setState(
 			update(this.state, {
 				takes: {
-					$splice: [[dragIndex, 1], [hoverIndex, 0, dragTake]]
-				}
+					$splice: [[dragIndex, 1], [hoverIndex, 0, dragTake]],
+				},
 			})
 		);
 	}
@@ -120,7 +121,7 @@ class TakeList extends Component {
 }
 
 TakeList.propTypes = {
-	takes: PropTypes.arrayOf(TakePropTypes).isRequired
+	takes: PropTypes.arrayOf(TakePropTypes).isRequired,
 };
 const takeTarget = {
 	drop(props, monitor, component) {
@@ -130,12 +131,12 @@ const takeTarget = {
 			component.pushTake(sourceObj.take);
 		}
 		return { listId: ratingToGet };
-	}
+	},
 };
 
 
-export default DropTarget("TakeContainer", takeTarget, (connect, monitor) => ({
+export default DropTarget('TakeContainer', takeTarget, (connect, monitor) => ({
 	connectDropTarget: connect.dropTarget(),
 	isOver: monitor.isOver(),
-	canDrop: monitor.canDrop()
+	canDrop: monitor.canDrop(),
 }))(TakeList);
