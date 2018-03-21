@@ -58,6 +58,7 @@ export class ChunkListContainer extends Component {
 
 	componentWillMount() {
 		const query = QueryString.parse(this.props.location.search);
+		debugger;
 		this.props.getSelectedProjectInfo(query);
 	}
 
@@ -264,9 +265,7 @@ export class ChunkListContainer extends Component {
 				</div>
 
 
-									<div style={{background: '#2D2D2D', width: '100vw', height: '4.5vw', marginTop: '0vw'}}>
 
-									</div>
 				</div>
 			);
 		}

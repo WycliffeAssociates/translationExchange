@@ -8,7 +8,10 @@ class Player extends Component {
   componentDidMount() {
     const {icon_hash} =this.props.user || '' ;
     jdenticon.update(`#canvas${this.props.id}` , icon_hash);
+
+    debugger;
   }
+
 
   render() {
     const { key, icon_hash, audioUrl} = this.props;
