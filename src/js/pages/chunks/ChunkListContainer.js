@@ -13,6 +13,8 @@ import NotFound from 'js/pages/NotFound';
 import ErrorButton from '../../components/ErrorButton';
 import LoadingGif from '../../components/LoadingGif';
 import Toggle from 'react-toggle';
+import styled from 'styled-components';
+import Comments from './components/Comments';
 
 
 import {
@@ -39,6 +41,7 @@ export class ChunkListContainer extends Component {
 
 	constructor(props) {
 		super(props);
+		this.state ={commentsTab: true}
 
 		this.createChunkList= this.createChunkList.bind(this);
 	}
@@ -228,16 +231,16 @@ export class ChunkListContainer extends Component {
 				}
 
 
-					<div style={{background: '#2D2D2D', marginTop: '1vw', padding: '0.2vw'}} >
+					<UtilityTab >
 
-					<div style={{display: 'flex', flexDirection: 'row' , justifyContent: 'space-between', marginTop: '1vw'}}>
+					<OptionsContainer>
 
-						<Toggle defaultChecked= {false} />
+						<Toggle defaultChecked= {false} onChange={e=>this.setState({commentsTab: e.target.checked})} />
 
 						<label style={{textDecoration: 'underline', color: '#009CFF'}}> Hide <i className= "fa fa-arrow-right" /> </label>
-					</div>
-					{this.props.chunks.map((chunk,index) => this.createChunkList(chunk, index))}
-					</div>
+					</OptionsContainer>
+          { this.state.commentsTab ? <div><Comments text="Chapter 1" /><Comments text="Chunk 1" /></div> :	this.props.chunks.map((chunk,index) => this.createChunkList(chunk, index))}
+				</UtilityTab>
 				</div>
 
 
@@ -341,6 +344,21 @@ export class ChunkListContainer extends Component {
 		);
 	}
 }
+
+const UtilityTab = styled.div `
+	background: #2D2D2D;
+	margin-top: 1vw;
+	padding: 0.2vw;
+	width: 14.7vw;
+`;
+
+const OptionsContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 1vw;
+
+`;
 
 const mapStateToProps = state => {
 	const { displayText = '' } = state.geolocation;
