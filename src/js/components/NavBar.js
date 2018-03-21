@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import jdenticon from 'jdenticon';
+import PopUpDialog from './PopUpDialog';
 
 class NavBar extends Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class NavBar extends Component {
           <LogOut display={this.state.displayLogOut} onClick={()=> this.logOut()} class="tooltip">
             <span class="tooltiptext">Log Out</span>
           </LogOut>
+          <PopUpDialog />
         </IdenticonContainer>
       </Container>
     );

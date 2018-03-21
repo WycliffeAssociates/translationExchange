@@ -1,6 +1,6 @@
 .container{
     height: 20vw !important;
-    width: 35vw !important;
+    width: 30vw !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,12 +11,14 @@
 .content{
     margin-top:50%;
     text-align: center;
-    height: 15vw;
+    height: 25vw !important;
 }
+
 .action{
     padding-left:10vw;
-}
-.action{
     border-radius: 2vw !important;
     background: linear-gradient(to bottom, #0076FF, #00C5FF) !important;
+}
+.i.close.icon::before{
+    color:'blue' !important;
 }
