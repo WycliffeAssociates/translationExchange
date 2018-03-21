@@ -24,26 +24,28 @@ class TakeTable extends Component {
 
 	render() {
 		return (
-			<Grid.Column>
-				<Table textAlign="center">
-					<Table.Header>
+			<Grid.Column >
+				<Table textAlign="center" style={{background: 'rgba(45,45,45,0.3)'}}>
+					<Table.Header style={{background: 'rgba(45,45,45,0.4)'}}>
 						<Table.Row>
-							<Table.HeaderCell>
+							<Table.HeaderCell  style={{background: 'rgba(45,45,45,0.3)'}}>
 								{this.props.icon}
-								{this.props.deleteButton && this.props.orderedTakes.length > 0
-									? <Button
-										floated="left"
-										icon
-										onClick={this.deleteAllColumnTakes.bind(this)}
-									>
-										<Icon name="trash" color="red" />
-									</Button>
-									: ""}
+								{
+									// this.props.deleteButton && this.props.orderedTakes.length > 0
+									// ? <Button
+									// 	floated="left"
+									// 	icon
+									// 	onClick={this.deleteAllColumnTakes.bind(this)}
+									// >
+									// 	<Icon name="trash" color="red" />
+									// </Button>
+									// : ""
+								}
 							</Table.HeaderCell>
 						</Table.Row>
 					</Table.Header>
 					<Table.Cell className="ChunkTitle"
-					style={{background: '#2D2D2D'}}
+					style={{background: 'rgba(45,45,45,0.3)'}}
 					>
 
 							<TakeList
@@ -64,6 +66,7 @@ class TakeTable extends Component {
 					</Table.Cell>
 				</Table>
 			</Grid.Column>
+
 		);
 	}
 }

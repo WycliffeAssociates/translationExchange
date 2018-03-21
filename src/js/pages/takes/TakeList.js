@@ -1,6 +1,7 @@
 /* eslint indent: ["error", "tab", {SwitchCase: 1}] */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import TakeContainer from './TakeContainer';
 import TakePropTypes from './TakePropTypes';
 import update from 'immutability-helper';
@@ -115,10 +116,33 @@ export class TakeList extends Component {
 						</div>
 					);
 				})}
+
+				<TakePlaceHolder>
+
+					<div>
+						<label style={{display: 'block'}}> <i className = "fa fa-bars" /> </label>
+						<br />
+						<label style={{display: 'block'}}> Drag Here </label>
+					</div>
+
+				</TakePlaceHolder>
 			</div>
 		);
 	}
 }
+
+const TakePlaceHolder = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 13.5vw;
+	border: dashed 1.6px white;
+	width: inherit;
+	color: white;
+	margin-top: 1vw;
+	font-size: 1.1vw;
+	`;
+
 
 TakeList.propTypes = {
 	takes: PropTypes.arrayOf(TakePropTypes).isRequired,

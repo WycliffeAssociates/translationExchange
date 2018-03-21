@@ -7,6 +7,23 @@ export default class TakeCardBottomButtons extends React.Component {
     super(props);
 
     this.playButton = this.playButton.bind(this);
+    this.convertToMinutes = this.convertToMinutes.bind(this);
+  }
+
+  convertToMinutes(seconds) {
+    var final = '';
+    var finalSeconds = 0;
+    var minutes = 0;
+
+    minutes = Math.floor(seconds/60);
+    finalSeconds = seconds%60;
+    if (finalSeconds<10) {
+      finalSeconds = '0'+ finalSeconds;
+    }
+
+    final = minutes + ':'+ finalSeconds;
+
+    return final;
   }
 
 
@@ -19,12 +36,12 @@ export default class TakeCardBottomButtons extends React.Component {
       <PlayTakeContainer>
 
         <PlayTake  style={{display: playing? 'none': ''}} onClick= {() => this.props.playTakeFromCard()}>
-          {play} {this.props.take.duration}s
+          {play} {this.convertToMinutes(this.props.take.duration)}
         </PlayTake>
 
 
         <PlayTake style={{display: playing? '': 'none' }} onClick= {() => this.props.playTakeFromCard()}>
-          {pause} {this.props.take.duration}s
+          {pause} {this.convertToMinutes(this.props.take.duration)}
         </PlayTake>
 
 

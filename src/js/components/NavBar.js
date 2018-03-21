@@ -29,9 +29,9 @@ class NavBar extends Component {
           <Title>Translation Exchange </Title>
         </TextContainer>
         <IconsContainer>
-          <i class="fas fa-book"></i>
-          <i class="fas fa-tasks"></i>
-          <i class="fab fa-audible"></i>
+          <Icon> <img style={{height: '2vw', width: '2vw', display: 'block'}} src={require('../../assets/images/class_black_54x54.png')} /> <label> 1 John </label> </Icon>
+          <Icon> <img style={{height: '2vw', width: '2vw', display: 'block'}} src={require('../../assets/images/chrome_reader_mode_black_54x54.png')} /> <label> Chapter 1 </label> </Icon>
+          <Icon> <img style={{height: '2vw', width: '2vw', display: 'block'}} src={require('../../assets/images/grapheq_black_54x54.png')} /> <label> Chunk 1 </label> </Icon>
         </IconsContainer>
         <IdenticonContainer>
           <Identicon id="ActiveUser"
@@ -86,8 +86,12 @@ const IconsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.5vw;
+  font-size: 0.75vw;
+  text-align: center;
+`;
 
+const Icon = styled.div`
+text-align: left;
 `;
 
 const IdenticonContainer = styled.div`
