@@ -1,3 +1,12 @@
+
+.backgroundKaban {
+
+  background: url('../assets/images/obs-en-01-01.jpg')  ;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .ChapterHeader{
     color: #434;
 }
@@ -146,22 +155,26 @@
   height: 24px;
   padding: 0;
   border-radius: 30px;
-  background-color: #4D4D4D;
+  background-color: #FF9800;
+  color: white;
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
 .react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
-  background-color: #000000;
+  background-color: #FF9800;
+  color: white;
+
 }
 
 .react-toggle--checked .react-toggle-track {
-  background-color: #19AB27;
+  background-color: #009CFF;
+  color: white;
 }
 
 .react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
-  background-color: #128D15;
+  background-color: #009CFF;
 }
 
 .react-toggle-track-check {
@@ -242,4 +255,29 @@
   -webkit-box-shadow: 0px 0px 5px 5px #0099E0;
   -moz-box-shadow: 0px 0px 5px 5px #0099E0;
   box-shadow: 0px 0px 5px 5px #0099E0;
+}
+
+
+.labelLines {
+ overflow: hidden;
+ text-align: center;
+ color: white;
+}
+.labelLines:before,
+.labelLines:after {
+ background-color: white;
+ content: "";
+ display: inline-block;
+ height: 1px;
+ position: relative;
+ vertical-align: middle;
+ width: 40%;
+}
+.labelLines:before {
+ right: 0.5em;
+ margin-left: -50%;
+}
+.labelLines:after {
+ left: 0.5em;
+ margin-right: -50%;
 }

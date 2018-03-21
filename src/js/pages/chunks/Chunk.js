@@ -22,9 +22,13 @@ class Chunk extends Component {
 
 	componentDidMount() {
 		//jdenticon.update('undefined');
-		this.getTakes(this.props.chunkId);
+		this.getTakes(this.props.selectedChunk);
 	}
 
+	componentDidUpdate() {
+		this.getTakes(this.props.selectedChunk);
+
+	}
 
 	getTakes(chunkId) {
 		let counter = this.props.takes.length;
@@ -37,7 +41,7 @@ class Chunk extends Component {
 	}
 
 	render() {
-		console.log(this.props, 'this is chunk props');
+		console.log(this.props.selectedChunk, 'this is chunk props');
 		let publish = [];
 		let onestar = [];
 		let twostar = [];
@@ -78,21 +82,21 @@ class Chunk extends Component {
 			default:
 				modeLabel = this.props.displayText.segment;
 		}
-		var icon1 = <Icon name="star" color="red" size="big" />;
+		var icon1 = <label className="labelLines"> <i className="far fa-star fa-2x" /> </label>;
 		var icon2 = (
-			<div>
-				<Icon name="star" color="yellow" size="big" />
-				<Icon name="star" color="yellow" size="big" />
+			<div className="labelLines">
+				<label> <i className="far fa-star fa-2x" /> </label>
+				<label> <i className="far fa-star fa-2x" /> </label>
 			</div>
 		);
 		var icon3 = (
-			<div>
-				<Icon name="star" color="green" size="big" />
-				<Icon name="star" color="green" size="big" />
-				<Icon name="star" color="green" size="big" />
+			<div className="labelLines">
+				<label > <i className="far fa-star fa-2x" /> </label>
+				<label > <i className="far fa-star fa-2x" /> </label>
+				<label > <i className="far fa-star fa-2x" /> </label>
 			</div>
 		);
-		var icon4 = <Icon name="check" color="pink" size="big" />;
+		var icon4 = <label className="labelLines"> <i className="fas fa-check fa-2x" /> </label>;;
 		return (
 			<div>
 				{/*<Accordion fluid styled >

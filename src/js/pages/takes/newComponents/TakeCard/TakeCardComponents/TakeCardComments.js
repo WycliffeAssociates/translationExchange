@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReactPlayer from 'react-player';
+import PlayerTracker from '../../../../../components/playerTracker';
 import {ReactMic} from 'react-mic';
 
 export default class TakeCardComments extends React.Component {
@@ -45,6 +46,7 @@ export default class TakeCardComments extends React.Component {
           <CommentIcon id="comment" data-jdenticon-value={'imthemaster'} />
           <CommentPlayer >
             <PlayComment onClick ={this.props.playComment}> <i className={playPauseIcon} /> </PlayComment>
+            <PlayerTracker />
             <ReactPlayer url={this.props.blob} playing ={this.props.playingComment} style={{display: 'none'}} />
           </CommentPlayer>
 
@@ -114,7 +116,7 @@ const CommentRow = styled.div`
 
 const CommentPlayer = styled.div`
   display: flex;
-  alignItems: flex-start;
+  align-items: center;
   flex: 1;
 `;
 const RowButton = styled(Button)`

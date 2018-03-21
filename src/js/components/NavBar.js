@@ -3,10 +3,25 @@ import styled from 'styled-components';
 import jdenticon from 'jdenticon';
 
 class NavBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state ={displayLogOut: false}
+  }
 
   componentDidMount() {
-    jdenticon.update('#ActiveUser', 'Antonio');
+    jdenticon.update('#ActiveUser');
+}
+
+
+  logOut() {
+    localStorage.removeItem('token');
+    
   }
+
+  hiddeLogOut() {
+    setTimeout(()=> this.setState({displayLogOut: false}) , 1500);
+  }
+
   render() {
     return (
       <Container>
@@ -14,12 +29,18 @@ class NavBar extends Component {
           <Title>Translation Exchange </Title>
         </TextContainer>
         <IconsContainer>
-          <i class="fas fa-book"></i>
-          <i class="fas fa-tasks"></i>
-          <i class="fab fa-audible"></i>
+          <Icon> <img style={{height: '2vw', width: '2vw', display: 'block'}} src={require('../../assets/images/class_black_54x54.png')} /> <label> 1 John </label> </Icon>
+          <Icon> <img style={{height: '2vw', width: '2vw', display: 'block'}} src={require('../../assets/images/chrome_reader_mode_black_54x54.png')} /> <label> Chapter 1 </label> </Icon>
+          <Icon> <img style={{height: '2vw', width: '2vw', display: 'block'}} src={require('../../assets/images/grapheq_black_54x54.png')} /> <label> Chunk 1 </label> </Icon>
         </IconsContainer>
         <IdenticonContainer>
-          <Identicon id="ActiveUser" data-jdenticon-value="Antonio" />
+          <Identicon id="ActiveUser"
+            data-jdenticon-value="Antonio"
+            onMouseEnter={()=> this.setState({displayLogOut: true})}
+            onMouseLeave={()=> this.hiddeLogOut()} />
+          <LogOut display={this.state.displayLogOut} onClick={()=> this.logOut()} class="tooltip">
+            <span class="tooltiptext">Log Out</span>
+          </LogOut>
         </IdenticonContainer>
       </Container>
     );
@@ -27,18 +48,37 @@ class NavBar extends Component {
 }
 
 const Container = styled.div`
+  background-color: #fff;
   width: 100vw;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   box-shadow: 3px 4px 5px rgba(0,0,0,0.2);
   z-index: 2;
-  background: white;
 `;
 
 const Identicon= styled.svg`
   height: 5vw;
   width: 5vw;
+
+`;
+
+const LogOut = styled.div`
+  visibility: ${props=> props.display ? 'visible' : 'hidden'};
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  position: absolute;
+  z-index: 1;
+  margin-left: -2.5vw;
+  cursor: pointer;
+  &:hover{
+    visibility: visible;
+  }
 `;
 
 const IconsContainer = styled.div`
@@ -46,8 +86,12 @@ const IconsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.5vw;
+  font-size: 0.75vw;
+  text-align: center;
+`;
 
+const Icon = styled.div`
+text-align: left;
 `;
 
 const IdenticonContainer = styled.div`
