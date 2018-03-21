@@ -79,7 +79,22 @@
     "start": "cross-env NODE_PATH=src react-scripts start",
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "cross-env NODE_PATH=src react-scripts test",
+    "test:ci": "cross-env NODE_PATH=src react-scripts test --testResultsProcessor ./node_modules/jest-junit --coverage --coverageDirectory=src/__test__/coverage",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ]
+  },
+  "jest-junit": {
+    "suitName": "jest tests",
+    "output": "src/__test__/junit.xml",
+    "classNameTemplate": "{classname} - {title}",
+    "titleTemplate": "{classname} - {title}",
+    "ancestorSeparator": " > ",
+    "usePathForSuitName": "true"
   },
   "proxy": "http://translationExchange:8080"
 }
