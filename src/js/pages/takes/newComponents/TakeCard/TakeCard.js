@@ -18,12 +18,12 @@ export class TakeCard extends React.Component {
     super(props);
 
     this.state = {
-      showComments: true,
+      showComments: false,
       takePlaying: false,
       recording: false,
       blob: '',
       isToggleOn: true,
-      showMarkers: false,
+      showMarkers: true,
       showMarkersColor: '',
       clear: true,
       hash: 'randomhash4324',
@@ -44,6 +44,10 @@ export class TakeCard extends React.Component {
     jdenticon.update('#user',this.props.users.loggedInUser? this.props.users.loggedInUser: 'random');
     jdenticon.update('#comment','imthemaster');
 
+  }
+
+  componentDidUpdate() {
+    jdenticon.update('#comment','imthemaster');
   }
 
   expandComments() {
@@ -204,7 +208,7 @@ background: white;
 border-top: solid 0.04vw lightgray;
 border-left: solid 0.04vw lightgray;
 box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.4);
-width: 15vw;
+width: 18vw;
 height: inherit;
 border-radius: 0.3vw;
 overflow: hidden;
