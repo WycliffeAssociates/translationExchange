@@ -42,11 +42,11 @@ class NavBar extends Component {
           <LogOut display={this.state.displayLogOut} onClick={()=> this.logOut()} class="tooltip">
             <span class="tooltiptext">Log Out</span>
           </LogOut>
-          <PopUpDialog btnText="Review" icon='fa fa-check fa-2x' 
+          <PopUpDialog btnText="Review" icon='check' 
           title='Great Job!'
            para1='You completed all of the takes for chapter 1'
            para2='Would you like to review the chapter?' arrowIcon="arrow right" skipText='Skip to Chapter 2' reviewText='Review Chapter 1' btnIcon="done_all"/>
-          <PopUpDialog btnText="Compile" icon='fa fa-check fa-2x' 
+          <PopUpDialog btnText="Compile" icon='check' 
           title='Great Job!'
            para1='You completed checking chapter 1'
            para2='Would you like to compile chapter 1?' arrowIcon="arrow left" skipText='Go Back' reviewText='Compile Chapter 1' btnIcon="folder_open"/>

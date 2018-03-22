@@ -25,7 +25,7 @@ class PopUpDialog extends Component {
          <Span onClick={()=>this.close()}>X</Span>
             <Modal.Description style={{ color: "white", paddingTop: 75 }}>
               <Header style={{ color: "white" }}>
-                <i className={icon} color="white" />
+                <i className="material-icons" style={{color:"white",fontSize:'4vw'}}>{icon}</i>
                 <p>{title}</p>
               </Header>
               <p>{para1}</p>
