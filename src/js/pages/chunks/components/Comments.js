@@ -10,17 +10,19 @@ class Comments extends Component {
 
   render() {
     const {comments, text} = this.props;
+
+
     return (
       <Container>
         <TextContainer>
           <TextHeader> {text} </TextHeader>
           <SvgContainer>
-            <SvgLine/>
+            <SvgLine />
           </SvgContainer>
 
         </TextContainer>
         <AudioContainer>
-          {!comments > 0 ? <div><Player /> <Player /></div> : <NoComments>No comments Available</NoComments> }
+          {comments.length > 0 ? <div> {comments.map(((cm, index)=> <Player id={index} comments={cm} />  ))}</div> : <NoComments>No comments Available</NoComments> }
 
         </AudioContainer>
         <ButtonContainer>

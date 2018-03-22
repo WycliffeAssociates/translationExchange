@@ -22,6 +22,35 @@ export const getAudioTakes = (chunkId, counter) => {
   };
 };
 
+export const getAudioComments = (query, type) => {
+
+  return function(dispatch) {
+    return axios
+      .get(`${config.apiUrl}comments/?${type}=${query}`,
+        {
+          headers: { Authorization: "Token " + localStorage.getItem('token') }
+        })
+      .then(response => {
+        switch (type) {
+          case 'chunk_id':
+            dispatch(dispatchGetAudioCommentsSuccess(response.data));
+            break;
+          case 'chapter_id':
+            dispatch(dispatchGetAudioCommentsSuccess(response.data));
+            break;
+
+          default:
+
+
+        }
+
+      })
+      .catch(error => {
+        console.log(error); // todo manage error
+      });
+  };
+};
+
 
 export const getTakesToExport = (chapterId) => {
   return function(dispatch) {
@@ -42,21 +71,7 @@ export const getTakesToExport = (chapterId) => {
 
 
 
-export const getAudioComments = (query, type) => {
-  return function(dispatch) {
-    return axios
-      .get(`${config.apiUrl}comments/?${type}=${query}`,
-      {
-        headers: { Authorization: "Token " + localStorage.getItem('token') }
-    })
-      .then(response => {
-        dispatch(dispatchGetAudioCommentsSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(dispatchChunksFailed(error));
-      });
-  };
-};
+
 
 export const dispatchGetAudioCommentsSuccess = comments => {
   return {

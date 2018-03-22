@@ -6,8 +6,8 @@ export default class Root extends React.Component {
   render() {
 
     return (
-      <div style={style}>
-
+      <div style={style} >
+        <i onClick={()=> this.props.history.push('/welcome')} style ={icon} class="material-icons">account_circle</i>
       </div>
     );
   }
@@ -22,4 +22,8 @@ const style = {
   textAlign: 'center',
   padding: '5vw 0',
 
+
 };
+const icon = {
+cursor: 'pointer',
+}
