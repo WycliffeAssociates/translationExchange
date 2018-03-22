@@ -16,7 +16,13 @@ class NavBar extends Component {
         <IconsContainer>
           <Icon> <img style={{height: '2vw', width: '2vw', display: 'block'}} src={require('../../assets/images/class_black_54x54.png')} /> <label> 1 John </label> </Icon>
           <Icon> <img style={{height: '2vw', width: '2vw', display: 'block'}} src={require('../../assets/images/chrome_reader_mode_black_54x54.png')} /> <label> Chapter 1 </label> </Icon>
-          <Icon> <img style={{height: '2vw', width: '2vw', display: 'block'}} src={require('../../assets/images/grapheq_black_54x54.png')} /> <label> Chunk 1 </label> </Icon>
+          <Dropdown>
+            <Icon> <img style={{height: '2vw', width: '2vw', display: 'block'}} src={require('../../assets/images/grapheq_black_54x54.png')} /> <label> Chunk 1 </label> </Icon>
+            <List>
+              <li> first </li>
+              <li> seconod </li>
+            </List>
+          </Dropdown>
         </IconsContainer>
         <IdenticonContainer>
           <Identicon id="ActiveUser" data-jdenticon-value="Antonio" />
@@ -39,6 +45,17 @@ const Container = styled.div`
 const Identicon= styled.svg`
   height: 5vw;
   width: 5vw;
+`;
+
+const Dropdown = styled.div`
+  display: block;
+  &:hover(:first-child) {
+    display: block;
+  }
+`;
+
+const List = styled.ul`
+display: none;
 `;
 
 const IconsContainer = styled.div`

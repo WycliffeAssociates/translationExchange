@@ -15,7 +15,7 @@ import CreateUserContainer from './js/pages/user/components/CreateUserContainer'
 import { DragDropContext } from 'react-dnd';
 import Notifications from 'react-notify-toast';
 import Root from './js/components/Root.js';
-import TakeCard from './js/pages/takes/newComponents/TakeCard/TakeCard';
+import playerTracker from './js/components/playerTracker';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 // import and configure the raven client for sentry in order to track errors
@@ -63,7 +63,7 @@ class App extends Component {
           <Route  path="/chapters" component={ChaptersContainer} />
           <Route  path="/takes" component={ChunkListContainer} />
           <Route  path="/user" component={User} />
-          <Route path ="/newComponents" component={TakeCard} />
+          <Route path ="/newComponents" component={playerTracker} />
           <Route path="*" component={NotFound} />
         </Switch>
 
