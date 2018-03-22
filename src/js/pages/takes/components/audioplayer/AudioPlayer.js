@@ -17,7 +17,7 @@ class AudioPlayer extends Component {
       durationTime: 0,
       updateTime: 0,
       initialWidth: 0,
-      showMarkers: false,
+      showMarkers: true,
       markerPosition: 0,
       markerClicked: false,
       audioFile: '',
@@ -46,13 +46,13 @@ class AudioPlayer extends Component {
     this.setState({
       audioFile: this.props.playlist[0].src,
       audioName: this.props.playlist[0].name,
-      markers: this.props.playlist[0].markers
+      markers: this.props.playlist[0].markers,
     });
   }
 
   componentDidMount() {
     this.setState({ initialWidth: this.rangeInput.offsetWidth });
-    window.addEventListener("resize", this.updateDimensions.bind(this));
+    window.addEventListener('resize', this.updateDimensions.bind(this));
 
   }
 
