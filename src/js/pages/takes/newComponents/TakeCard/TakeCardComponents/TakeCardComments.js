@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import ReactPlayer from 'react-player';
-import PlayerTracker from '../../../../../components/playerTracker';
 import {ReactMic} from 'react-mic';
-
+import CommentRow from './TakeCardCommentRow'
 export default class TakeCardComments extends React.Component {
 
   constructor(props) {
@@ -37,23 +35,16 @@ export default class TakeCardComments extends React.Component {
 
   render() {
 
-    let playPauseIcon = 'fas fa-play fa-fw';
-
     return (
       <Comments>
-        <CommentRow>
 
-          <CommentIcon id="comment" data-jdenticon-value={'imthemaster'} />
-          <CommentPlayer >
-            <PlayComment onClick ={this.props.playComment}> <i className={playPauseIcon} /> </PlayComment>
-            <PlayerTracker />
-            <ReactPlayer url={this.props.blob} playing ={this.props.playingComment} style={{display: 'none'}} />
-          </CommentPlayer>
+        {
+          this.props.has_comment?
+            <CommentRow {...this.props} />
+            :
 
-          <RowButton> <i className = "fa fa-trash" /> </RowButton>
-
-        </CommentRow>
-
+            ''
+        }
         <MoreOptions>
 
           <LoadMore>
@@ -67,12 +58,12 @@ export default class TakeCardComments extends React.Component {
 
         {
         // this.props.recording?
-          <ReactMic
-            className = "sound-wave"
-            record = {this.props.recording}
-            onStop = {this.props.onStop}
-            strokeColor="#009CFF"
-            backgroundColor="transparent" />
+          // <ReactMic
+          //   className = "sound-wave"
+          //   record = {this.props.recording}
+          //   onStop = {this.props.onStop}
+          //   strokeColor="#009CFF"
+          //   backgroundColor="transparent" />
         //  : ''
         }
 
@@ -82,7 +73,6 @@ export default class TakeCardComments extends React.Component {
 
 }
 
-
 const Button = styled.button`
   font-size: 1.75vw;
   flex: 1;
@@ -91,39 +81,12 @@ const Button = styled.button`
   padding: 0.75vw;
   border-top: solid 0.05vw #009CFF;
   text-align:center;
-`;
+  background: none;
 
-const PlayComment = styled(Button)`
-  font-size: 1vw;
-  flex: 0;
-  border-top: none;
-  padding: 0.4vw;
 `;
-
 
 const Comments = styled.div`
 padding-left: 1vw;
-`;
-
-const CommentRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: solid 0.01vw lightgray;
-  overflow: hidden;
-`;
-
-const CommentPlayer = styled.div`
-  display: flex;
-  align-items: center;
-  flex: 1;
-`;
-const RowButton = styled(Button)`
-  flex:0;
-  padding: 0.4vw;
-  border-top: none;
-  font-size: 1vw;
 `;
 
 const MoreOptions = styled.div`
@@ -151,10 +114,4 @@ const RecordComment = styled(Button)`
   align-self: flex-end;
   border-top: none;
 
-`;
-
-const CommentIcon = styled.svg`
-  height: 2vw;
-  width: 2w;
-  margin-top: 0;
 `;
