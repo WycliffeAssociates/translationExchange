@@ -58,7 +58,6 @@ export class ChunkListContainer extends Component {
 
 	componentWillMount() {
 		const query = QueryString.parse(this.props.location.search);
-		debugger;
 		this.props.getSelectedProjectInfo(query);
 	}
 

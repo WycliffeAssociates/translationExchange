@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Label, Popup, Button, Header, Icon, Modal } from "semantic-ui-react";
 import "css/popup-dialog.css";
-import { CheckAllIcon } from "mdi-react";
+import styled from 'styled-components';
+import { CheckAllIcon, FlaskEmptyIcon } from "mdi-react";
 class PopUpDialog extends Component {
   state = { open: false };
 
@@ -10,6 +11,7 @@ class PopUpDialog extends Component {
 
   render() {
     const { open, dimmer } = this.state;
+    const {icon,title,para1,para2,skipText,reviewText}=this.props;
     return (
       <div>
         <Button onClick={this.show("blurring")}>Review</Button>
@@ -18,38 +20,37 @@ class PopUpDialog extends Component {
           open={open}
           onClose={this.close}
           className="container"
-          closeIcon
           size="mini"
         >
           <Modal.Content>
+         <Span onClick={()=>this.close()}>X</Span>
             <Modal.Description style={{ color: "white", paddingTop: 75 }}>
               <Header style={{ color: "white" }}>
-                <i className="fa fa-check fa-2x" color="white" />
-                <p>Great Job!</p>
+                <i className={icon} color="white" />
+                <p>{title}</p>
               </Header>
-              <p>You completed all of the takes for chapter 1.</p>
-              <p>Would you like to review the chapter?</p>
+              <p>{para1}</p>
+              <p>{para2}</p>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
-            <span style={{ float: "left", paddingTop: 12 }}>
+            <span style={{ float: "left", paddingTop: 4 }}>
               <Icon name="arrow right" color="blue" />{" "}
-              <a style={{ textDecoration: "underline" }} href="#">
-                Skip to Chapter 2
+              <a style={{ textDecoration: "underline" ,marginRight:80}} href="#">
+               {skipText}
               </a>
             </span>
-            <Button primary className="action">
+            <div className='review-btn' onClick={()=>console.log("clicks")}>
               <CheckAllIcon color="white" />
               <span
                 style={{
-                  padding: 10,
-                  fontSize: 16,
+                  paddingLeft:5,
                   textDecoration: "underline"
                 }}
               >
-                Review Chapter 1
+                {reviewText}
               </span>
-            </Button>
+              </div>
           </Modal.Actions>
         </Modal>
       </div>
@@ -57,4 +58,12 @@ class PopUpDialog extends Component {
   }
 }
 
+const Span=styled.span`
+color:white;
+font-size:1.8vw;
+position:absolute;
+top:0.3vw;
+right:.6vw;
+cursor:pointer;
+`
 export default PopUpDialog;

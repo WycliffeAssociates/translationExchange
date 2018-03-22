@@ -14,10 +14,15 @@
     height: 25vw !important;
 }
 
-.action{
-    padding-left:10vw;
+.review-btn{
     border-radius: 2vw !important;
-    background: linear-gradient(to bottom, #0076FF, #00C5FF) !important;
+    background: linear-gradient(to top, #0076FF, #00C5FF) !important;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color: white;
+    height: 2vw;
+    cursor: pointer;
 }
 .i.close.icon::before{
     color:'blue' !important;
