@@ -10,7 +10,7 @@ class PopUpDialog extends Component {
 
   render() {
     const { open, dimmer } = this.state;
-    const {icon,title,para1,para2,arrowIcon,skipText,reviewText,btnIcon,btnText}=this.props;
+    const {icon,title,para1,para2,arrowIcon,skipText,reviewText,btnIcon,btnText,bgContentColor,reviewCompileBtnBgColor,iconColor}=this.props;
     return (
       <div>
         <Button onClick={this.show("blurring")}>{btnText}</Button>
@@ -21,25 +21,25 @@ class PopUpDialog extends Component {
           className="container"
           size="mini"
         >
-          <Modal.Content>
+          <Modal.Content className={bgContentColor}>
          <Span onClick={()=>this.close()}>X</Span>
             <Modal.Description style={{ color: "white", paddingTop: 75 }}>
               <Header style={{ color: "white" }}>
                 <i className="material-icons" style={{color:"white",fontSize:'4vw'}}>{icon}</i>
-                <p>{title}</p>
+                <p style={{fontWeight:'bold'}}>{title}</p>
               </Header>
               <p>{para1}</p>
               <p>{para2}</p>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
-            <span style={{ float: "left", paddingTop: 4 }}>
-              <Icon name={arrowIcon} color="blue" />{" "}
-              <a style={{ textDecoration: "underline" ,marginRight:80}} href="#">
+            <span style={{ float: "left", paddingTop: 4}}>
+              <Icon name={arrowIcon} color={iconColor}/>
+              <a style={{ textDecoration: "underline" ,marginRight:80,color:iconColor}} href="#">
                {skipText}
               </a>
             </span>
-            <div className='review-btn' onClick={()=>console.log("clicks")}>
+            <div className={reviewCompileBtnBgColor} onClick={()=>console.log("clicks")}>
             <i className="material-icons">{btnIcon}</i>
               <span
                 style={{
