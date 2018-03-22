@@ -86,9 +86,8 @@
     "coverageReporters": [
       "lcov",
       "text"
-    ]
-    }
-  },
+     ]
+    },
   "jest-junit": {
     "suitName": "jest tests",
     "output": "src/__test__/junit.xml",
