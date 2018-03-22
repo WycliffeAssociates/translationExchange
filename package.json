@@ -79,7 +79,7 @@
     "start": "cross-env NODE_PATH=src react-scripts start",
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "cross-env NODE_PATH=src react-scripts test",
-    "test:ci": "cross-env NODE_PATH=src jest --ci", 
+    "test:ci": "cross-env NODE_PATH=src react-scripts test --coverage --collectCoverageFrom=src/js/actions/types.js ",
     "eject": "react-scripts eject"
   },
   "jest": {
@@ -87,6 +87,7 @@
       "lcov",
       "text"
     ]
+    }
   },
   "jest-junit": {
     "suitName": "jest tests",

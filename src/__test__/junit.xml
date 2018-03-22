@@ -1,6 +1,6 @@
-<testsuites name="jest tests" tests="29" failures="8" time="19.586">
-  <testsuite name="fetchRecentProjects" errors="0" failures="1" skipped="1" timestamp="2018-03-21T20:04:51" time="3.685" tests="2">
-    <testcase classname="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_RECEIVED and response is not null" name="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_RECEIVED and response is not null" time="1.056">
+<testsuites name="jest tests" tests="29" failures="8" time="26.563000000000002">
+  <testsuite name="fetchRecentProjects" errors="0" failures="1" skipped="1" timestamp="2018-03-22T15:15:37" time="5.442" tests="2">
+    <testcase classname="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_RECEIVED and response is not null" name="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_RECEIVED and response is not null" time="1.195">
       <failure>Error: expect(received).toEqual(expected)
 
 Expected value to equal:
@@ -11,12 +11,12 @@ Received:
     at &lt;anonymous&gt;
     at process._tickCallback (internal/process/next_tick.js:188:7)</failure>
     </testcase>
-    <testcase classname="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_ERR and response is undefined." name="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_ERR and response is undefined." time="0">
+    <testcase classname="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_ERR and response is undefined." name="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_ERR and response is undefined." time="0.001">
       <skipped/>
     </testcase>
   </testsuite>
-  <testsuite name="ChunkContainerReducer" errors="0" failures="1" skipped="0" timestamp="2018-03-21T20:04:55" time="0.418" tests="3">
-    <testcase classname="ChunkContainerReducer - should have initial state" name="ChunkContainerReducer - should have initial state" time="0.01">
+  <testsuite name="ChunkContainerReducer" errors="0" failures="1" skipped="0" timestamp="2018-03-22T15:15:43" time="0.608" tests="3">
+    <testcase classname="ChunkContainerReducer - should have initial state" name="ChunkContainerReducer - should have initial state" time="0">
       <failure>Error: expect(received).toEqual(expected)
 
 Expected value to equal:
@@ -47,19 +47,13 @@ Difference:
     at &lt;anonymous&gt;
     at process._tickCallback (internal/process/next_tick.js:188:7)</failure>
     </testcase>
-    <testcase classname="ChunkContainerReducer - should change the state" name="ChunkContainerReducer - should change the state" time="0">
+    <testcase classname="ChunkContainerReducer - should change the state" name="ChunkContainerReducer - should change the state" time="0.014">
     </testcase>
     <testcase classname="ChunkContainerReducer - should change the state" name="ChunkContainerReducer - should change the state" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="Marker" errors="0" failures="0" skipped="0" timestamp="2018-03-21T20:04:55" time="0.259" tests="2">
-    <testcase classname="Marker - postions the svg element correctly" name="Marker - postions the svg element correctly" time="0.007">
-    </testcase>
-    <testcase classname="Marker - calls dragPosition prop when svg is clicked" name="Marker - calls dragPosition prop when svg is clicked" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="ChaptersContainerAction" errors="0" failures="1" skipped="0" timestamp="2018-03-21T20:04:51" time="4.754" tests="2">
-    <testcase classname="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS and response is not undefined" name="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS and response is not undefined" time="1.063">
+  <testsuite name="ChaptersContainerAction" errors="0" failures="1" skipped="0" timestamp="2018-03-22T15:15:37" time="6.505" tests="2">
+    <testcase classname="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS and response is not undefined" name="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS and response is not undefined" time="1.252">
       <failure>Error: expect(received).toEqual(expected)
 
 Expected value to equal:
@@ -70,33 +64,25 @@ Received:
     at &lt;anonymous&gt;
     at process._tickCallback (internal/process/next_tick.js:188:7)</failure>
     </testcase>
-    <testcase classname="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_FAILED and response is not undefined" name="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_FAILED and response is not undefined" time="1.034">
+    <testcase classname="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_FAILED and response is not undefined" name="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_FAILED and response is not undefined" time="1.053">
     </testcase>
   </testsuite>
-  <testsuite name="Home Recent Project Reducer" errors="0" failures="0" skipped="0" timestamp="2018-03-21T20:04:56" time="0.23" tests="2">
-    <testcase classname="Home Recent Project Reducer - should return initial state" name="Home Recent Project Reducer - should return initial state" time="0">
+  <testsuite name="Marker" errors="0" failures="0" skipped="0" timestamp="2018-03-22T15:15:44" time="0.435" tests="2">
+    <testcase classname="Marker - postions the svg element correctly" name="Marker - postions the svg element correctly" time="0.02">
     </testcase>
-    <testcase classname="Home Recent Project Reducer - should output the given error" name="Home Recent Project Reducer - should output the given error" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="ProjectsListContainerReducer" errors="0" failures="0" skipped="0" timestamp="2018-03-21T20:04:56" time="0.214" tests="3">
-    <testcase classname="ProjectsListContainerReducer - should have initial State" name="ProjectsListContainerReducer - should have initial State" time="0.015">
-    </testcase>
-    <testcase classname="ProjectsListContainerReducer - should change the initial state" name="ProjectsListContainerReducer - should change the initial state" time="0">
-    </testcase>
-    <testcase classname="ProjectsListContainerReducer - should change the initial state" name="ProjectsListContainerReducer - should change the initial state" time="0">
+    <testcase classname="Marker - calls dragPosition prop when svg is clicked" name="Marker - calls dragPosition prop when svg is clicked" time="0.003">
     </testcase>
   </testsuite>
-  <testsuite name="Record comments array" errors="0" failures="0" skipped="0" timestamp="2018-03-21T20:04:57" time="0.186" tests="1">
-    <testcase classname="Record comments array - check if the comments positions are inverted for the purpose of displaying newest to oldest comments" name="Record comments array - check if the comments positions are inverted for the purpose of displaying newest to oldest comments" time="0">
+  <testsuite name="ProjectsListContainerReducer" errors="0" failures="0" skipped="0" timestamp="2018-03-22T15:15:44" time="0.345" tests="3">
+    <testcase classname="ProjectsListContainerReducer - should have initial State" name="ProjectsListContainerReducer - should have initial State" time="0.002">
+    </testcase>
+    <testcase classname="ProjectsListContainerReducer - should change the initial state" name="ProjectsListContainerReducer - should change the initial state" time="0.001">
+    </testcase>
+    <testcase classname="ProjectsListContainerReducer - should change the initial state" name="ProjectsListContainerReducer - should change the initial state" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="ProjectsListContainer Action" errors="0" failures="0" skipped="0" timestamp="2018-03-21T20:04:57" time="0.2" tests="1">
-    <testcase classname="ProjectsListContainer Action - has action type:ALL_PROJECTS_LOADING and ALL_PROJECTS_SUCCESS " name="ProjectsListContainer Action - has action type:ALL_PROJECTS_LOADING and ALL_PROJECTS_SUCCESS " time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="Source Audio Action" errors="0" failures="0" skipped="2" timestamp="2018-03-21T20:04:56" time="1.267" tests="3">
-    <testcase classname="Source Audio Action - has action type:SOURCE_AUDIO_LOADING and response is not defined" name="Source Audio Action - has action type:SOURCE_AUDIO_LOADING and response is not defined" time="1.039">
+  <testsuite name="Source Audio Action" errors="0" failures="0" skipped="2" timestamp="2018-03-22T15:15:43" time="1.457" tests="3">
+    <testcase classname="Source Audio Action - has action type:SOURCE_AUDIO_LOADING and response is not defined" name="Source Audio Action - has action type:SOURCE_AUDIO_LOADING and response is not defined" time="1.022">
     </testcase>
     <testcase classname="Source Audio Action - has action type:SOURCE_AUDIO_SUCCESS and response not null" name="Source Audio Action - has action type:SOURCE_AUDIO_SUCCESS and response not null" time="0">
       <skipped/>
@@ -105,22 +91,36 @@ Received:
       <skipped/>
     </testcase>
   </testsuite>
-  <testsuite name="ChaptersContainerReducer" errors="0" failures="0" skipped="0" timestamp="2018-03-21T20:04:57" time="0.24" tests="2">
-    <testcase classname="ChaptersContainerReducer - should have initial state" name="ChaptersContainerReducer - should have initial state" time="0.002">
+  <testsuite name="ProjectsListContainer Action" errors="0" failures="0" skipped="0" timestamp="2018-03-22T15:15:45" time="0.492" tests="1">
+    <testcase classname="ProjectsListContainer Action - has action type:ALL_PROJECTS_LOADING and ALL_PROJECTS_SUCCESS " name="ProjectsListContainer Action - has action type:ALL_PROJECTS_LOADING and ALL_PROJECTS_SUCCESS " time="0.005">
+    </testcase>
+  </testsuite>
+  <testsuite name="SourceAudioReducer" errors="0" failures="0" skipped="0" timestamp="2018-03-22T15:15:45" time="0.445" tests="3">
+    <testcase classname="SourceAudioReducer - should return initial state..." name="SourceAudioReducer - should return initial state..." time="0.002">
+    </testcase>
+    <testcase classname="SourceAudioReducer - should change the state of loaded and products" name="SourceAudioReducer - should change the state of loaded and products" time="0.002">
+    </testcase>
+    <testcase classname="SourceAudioReducer - should have error message" name="SourceAudioReducer - should have error message" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Record comments array" errors="0" failures="0" skipped="0" timestamp="2018-03-22T15:15:45" time="0.398" tests="1">
+    <testcase classname="Record comments array - check if the comments positions are inverted for the purpose of displaying newest to oldest comments" name="Record comments array - check if the comments positions are inverted for the purpose of displaying newest to oldest comments" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="Home Recent Project Reducer" errors="0" failures="0" skipped="0" timestamp="2018-03-22T15:15:45" time="0.435" tests="2">
+    <testcase classname="Home Recent Project Reducer - should return initial state" name="Home Recent Project Reducer - should return initial state" time="0.002">
+    </testcase>
+    <testcase classname="Home Recent Project Reducer - should output the given error" name="Home Recent Project Reducer - should output the given error" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="ChaptersContainerReducer" errors="0" failures="0" skipped="0" timestamp="2018-03-22T15:15:46" time="0.434" tests="2">
+    <testcase classname="ChaptersContainerReducer - should have initial state" name="ChaptersContainerReducer - should have initial state" time="0.003">
     </testcase>
     <testcase classname="ChaptersContainerReducer - should change state" name="ChaptersContainerReducer - should change state" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="SourceAudioReducer" errors="0" failures="0" skipped="0" timestamp="2018-03-21T20:04:57" time="0.241" tests="3">
-    <testcase classname="SourceAudioReducer - should return initial state..." name="SourceAudioReducer - should return initial state..." time="0.002">
-    </testcase>
-    <testcase classname="SourceAudioReducer - should change the state of loaded and products" name="SourceAudioReducer - should change the state of loaded and products" time="0.001">
-    </testcase>
-    <testcase classname="SourceAudioReducer - should have error message" name="SourceAudioReducer - should have error message" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="chunkListContainerActions" errors="0" failures="5" skipped="0" timestamp="2018-03-21T20:04:51" time="7.892" tests="5">
-    <testcase classname="chunkListContainerActions - has action type: FETCH_TAKE_SUCCESS_FIRST_TIME and response is not undefined" name="chunkListContainerActions - has action type: FETCH_TAKE_SUCCESS_FIRST_TIME and response is not undefined" time="1.043">
+  <testsuite name="chunkListContainerActions" errors="0" failures="5" skipped="0" timestamp="2018-03-22T15:15:37" time="9.567" tests="5">
+    <testcase classname="chunkListContainerActions - has action type: FETCH_TAKE_SUCCESS_FIRST_TIME and response is not undefined" name="chunkListContainerActions - has action type: FETCH_TAKE_SUCCESS_FIRST_TIME and response is not undefined" time="1.197">
       <failure>Error: expect(received).toEqual(expected)
 
 Expected value to equal:
@@ -131,7 +131,7 @@ Received:
     at &lt;anonymous&gt;
     at process._tickCallback (internal/process/next_tick.js:188:7)</failure>
     </testcase>
-    <testcase classname="chunkListContainerActions - has action type: FETCH_TAKE_SUCCESS and response is not undefined" name="chunkListContainerActions - has action type: FETCH_TAKE_SUCCESS and response is not undefined" time="1.02">
+    <testcase classname="chunkListContainerActions - has action type: FETCH_TAKE_SUCCESS and response is not undefined" name="chunkListContainerActions - has action type: FETCH_TAKE_SUCCESS and response is not undefined" time="1.047">
       <failure>Error: expect(received).toEqual(expected)
 
 Expected value to equal:
@@ -142,7 +142,7 @@ Received:
     at &lt;anonymous&gt;
     at process._tickCallback (internal/process/next_tick.js:188:7)</failure>
     </testcase>
-    <testcase classname="chunkListContainerActions - has action type: GET_COMMENTS_SUCCESS and response is not undefined" name="chunkListContainerActions - has action type: GET_COMMENTS_SUCCESS and response is not undefined" time="1.016">
+    <testcase classname="chunkListContainerActions - has action type: GET_COMMENTS_SUCCESS and response is not undefined" name="chunkListContainerActions - has action type: GET_COMMENTS_SUCCESS and response is not undefined" time="1.014">
       <failure>Error: expect(received).toEqual(expected)
 
 Expected value to equal:
@@ -153,7 +153,7 @@ Received:
     at &lt;anonymous&gt;
     at process._tickCallback (internal/process/next_tick.js:188:7)</failure>
     </testcase>
-    <testcase classname="chunkListContainerActions - has action type: FETCH_PROJECT_SUCCESS and response is not undefined" name="chunkListContainerActions - has action type: FETCH_PROJECT_SUCCESS and response is not undefined" time="1.009">
+    <testcase classname="chunkListContainerActions - has action type: FETCH_PROJECT_SUCCESS and response is not undefined" name="chunkListContainerActions - has action type: FETCH_PROJECT_SUCCESS and response is not undefined" time="1.027">
       <failure>Error: expect(received).toEqual(expected)
 
 Expected value to equal:
@@ -164,7 +164,7 @@ Received:
     at &lt;anonymous&gt;
     at process._tickCallback (internal/process/next_tick.js:188:7)</failure>
     </testcase>
-    <testcase classname="chunkListContainerActions - Checks the content received for takes is the expected " name="chunkListContainerActions - Checks the content received for takes is the expected " time="1.004">
+    <testcase classname="chunkListContainerActions - Checks the content received for takes is the expected " name="chunkListContainerActions - Checks the content received for takes is the expected " time="1.02">
       <failure>TypeError: Cannot read property &apos;0&apos; of undefined
     at store.dispatch.then (C:\Users\dipinton\translationExchange\src\__test__\actions\chunkListContainerActions.test.js:87:25)
     at &lt;anonymous&gt;
