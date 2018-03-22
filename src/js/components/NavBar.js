@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import jdenticon from 'jdenticon';
+import { connect } from 'react-redux';
 
 class NavBar extends Component {
   constructor(props) {
@@ -9,13 +10,16 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
-    jdenticon.update('#ActiveUser');
+    const {loggedInUser}= this.props;
+    jdenticon.update('#ActiveUser', loggedInUser);
+    debugger;
 }
 
 
   logOut() {
     localStorage.removeItem('token');
-    
+    this.props.history.push('./welcome');
+
   }
 
   hiddeLogOut() {
@@ -23,23 +27,34 @@ class NavBar extends Component {
   }
 
   render() {
+    const {loggedInUser, book, language, history}= this.props;
     return (
       <Container>
         <TextContainer>
           <Title>Translation Exchange </Title>
         </TextContainer>
         <IconsContainer>
-          <Icon> <img style={{height: '2vw', width: '2vw', display: 'block'}} src={require('../../assets/images/class_black_54x54.png')} /> <label> 1 John </label> </Icon>
-          <Icon> <img style={{height: '2vw', width: '2vw', display: 'block'}} src={require('../../assets/images/chrome_reader_mode_black_54x54.png')} /> <label> Chapter 1 </label> </Icon>
-          <Icon> <img style={{height: '2vw', width: '2vw', display: 'block'}} src={require('../../assets/images/grapheq_black_54x54.png')} /> <label> Chunk 1 </label> </Icon>
+          <TextIconContainer onClick={()=> history.push('/projects')}>
+            <i class="material-icons">book</i>
+            <Text>{book.name}</Text>
+          </TextIconContainer>
+          <TextIconContainer onClick={()=> history.push(`/projects?lang=${language.slug}`)} >
+            <i class="material-icons">chrome_reader_mode</i>
+            <Text>{language.name}</Text>
+          </TextIconContainer>
+          <TextIconContainer selected={true}>
+            <i class="material-icons">graphic_eq</i>
+            <Text>chunk</Text>
+          </TextIconContainer>
+
         </IconsContainer>
         <IdenticonContainer>
           <Identicon id="ActiveUser"
-            data-jdenticon-value="Antonio"
+            data-jdenticon-hash={loggedInUser}
             onMouseEnter={()=> this.setState({displayLogOut: true})}
             onMouseLeave={()=> this.hiddeLogOut()} />
           <LogOut display={this.state.displayLogOut} onClick={()=> this.logOut()} class="tooltip">
-            <span class="tooltiptext">Log Out</span>
+            <span>Log Out</span>
           </LogOut>
         </IdenticonContainer>
       </Container>
@@ -55,6 +70,15 @@ const Container = styled.div`
   justify-content: space-between;
   box-shadow: 3px 4px 5px rgba(0,0,0,0.2);
   z-index: 2;
+`;
+const Text = styled.p`
+`;
+
+const TextIconContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  color: ${props=> props.selected ? '#009CFF': ''}
 `;
 
 const Identicon= styled.svg`
@@ -110,4 +134,9 @@ const TextContainer = styled.div`
 
 `;
 
-export default NavBar;
+const mapStateToProps = state => {
+  const {loggedInUser} = state.user;
+  return {loggedInUser}
+
+}
+export default connect(mapStateToProps)(NavBar);

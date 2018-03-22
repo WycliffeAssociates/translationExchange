@@ -8,7 +8,10 @@ import RecordButton from '../takes/components/comments/RecordButton';
 import { Grid } from 'semantic-ui-react';
 import 'css/takes.css';
 
-class ChunkHeader extends Component {
+class ChunkHeader extends Component{
+
+
+
 
 	render() {
 		const has_comments = this.props.chapter.has_comment;
@@ -54,7 +57,7 @@ class ChunkHeader extends Component {
 			// </div>
 		}
 
-		<NavBar />
+		<NavBar { ...this.props } />
 
 		</div>
 		);

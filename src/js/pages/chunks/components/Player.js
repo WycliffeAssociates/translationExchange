@@ -1,10 +1,30 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import jdenticon from 'jdenticon';
+import ReactPlayer from 'react-player';
 import CommentsPlayer from './CommentsPlayer';
 import config from '../../../../config/config';
 
 class Player extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      playing: false,
+    };
+    this.play = this.play.bind(this);
+    this.ended = this.ended.bind(this);
+  }
+
+  play() {
+    this.setState({playing: true});
+    
+
+  }
+
+  ended() {
+    this.setState({playing: false});
+  }
 
   componentDidMount() {
     const {owner_icon_hash} =this.props.comments || '' ;
@@ -13,22 +33,23 @@ class Player extends Component {
 
 
   render() {
-    const { id, owner_icon_hash, location} = this.props;
+    const { id, owner_icon_hash, comments} = this.props;
 
     return (
       <Container>
         <IdenticonContainer>
-          <Identicon id={`canvas${id}`} data-jdenticon-hash={owner_icon_hash} />
-          {/* <ReactPlayer url={audioURL} playing={this.state.playing} onEnded={()=> this.ended()}  /> */}
+          <Identicon onClick={()=>this.play()} id={`canvas${id}`} data-jdenticon-hash={owner_icon_hash} />
+          <ReactPlayer url={`${config.streamingUrl}${comments.owner_name_audio}`} playing={this.state.playing} onEnded={()=> this.ended()}  />
+
         </IdenticonContainer>
         <AudioContainer>
           {/* <Audio id="comment" controls controlsList="nodownload notime novolume ">
             <source style={{backgroundColor:'transparent'}} src="http://www.scricciolo.com/eurosongs/Calidris.ferruginea.wav" type="audio/wav" />
           </Audio> */}
-          <CommentsPlayer audioFile={`${config.streamingUrl}${location}`} />
+          <CommentsPlayer audioFile={`${config.streamingUrl}${comments.location}`} />
         </AudioContainer>
         <NewTextContainer>
-          {/* <NewText> New!</NewText> */}
+          <NewText> New!</NewText>
         </NewTextContainer>
 
       </Container>
@@ -47,6 +68,7 @@ const Container = styled.div`
 const Identicon= styled.svg`
     height: 1.5vw;
     width: 1.5vw;
+    cursor:pointer;
 `;
 
 const AudioContainer = styled.div`

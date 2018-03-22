@@ -211,6 +211,7 @@ export class ChunkListContainer extends Component {
 			return (
 				<div className="backgroundKaban">
 					<ChunkHeader
+					  history={this.props.history}
 						chapterNum={chapterNum}
 						book={this.props.book}
 						chapter={this.props.chapter}
@@ -279,7 +280,7 @@ export class ChunkListContainer extends Component {
 						<div>
 						<Comments comments={this.props.chapterComments} text= {`Chapter ${chapterNum}`} />
 						<Comments comments={this.props.chunkComments} text={`Chunk ${chunkNum}`} />
-						
+						{takes.map(tk=> <Comments comments={tk.comment} text={`Take ${tk.take_num}`} />) }
 
 
 
@@ -412,6 +413,8 @@ const UtilityTab = styled.div `
 	margin-top: 1vw;
 	padding: 0.2vw;
 	width: 14.7vw;
+	max-height: 43vw;
+	overflow-y: scroll;
 `;
 
 const OptionsContainer = styled.div`
