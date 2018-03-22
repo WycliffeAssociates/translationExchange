@@ -1,5 +1,6 @@
 /* eslint indent: [0, "tab"] */
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import jdenticon from 'jdenticon';
 import NavBar from '../../components/NavBar';
 import ExportTakesButton from '../takes/components/ExportTakesButton';
@@ -10,54 +11,41 @@ import 'css/takes.css';
 
 class ChunkHeader extends Component {
 
+		// 
+		// componentDidMount() {
+		// 	//jdenticon.update('undefined');
+		// 	this.getTakes(this.props.selectedChunk);
+		// }
+		//
+		// componentDidUpdate() {
+		// 	this.getTakes(this.props.selectedChunk);
+		//
+		// }
+		//
+		// getTakes(chunkId) {
+		// 	let counter = this.props.takes.length;
+		// 	let { calledChunks } = this.props;
+		// 	if (!calledChunks.includes(chunkId)) {                 // once you click a chunk, checks if the chunk has not been clicked before
+		// 		this.props.getChunkIdClicked(chunkId);
+		// 		this.props.getAudioTakes(chunkId, counter);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
+		// 		// so next time clicked to close it won't call the api
+		// 	}
+		// }
 	render() {
-		const has_comments = this.props.chapter.has_comment;
+		//const has_comments = this.props.chapter.has_comment;
+		console.log(this.props, 'CHUNK HEADER PROPS');
 		return (
-			<div>{
-			//<div style = {{display: 'flex', justifyContent: 'space-between'}}>
-			// 	<div className="headerStyle">
-			// 		<Grid padded columns={2}>
-			// 			<Grid.Column width={11} style={{ paddingTop: 23 }}>
-			// 				{this.props.book.name} {this.props.displayText.chapter} {this.props.chapterNum} ({this.props.language.name})
-			// 			</Grid.Column>
-			//
-			// 			<Grid.Column width={5} className="verticalLine">
-			// 				<div style = {{display: 'flex', justifyContent: 'space-between'}}>
-			// 					<ExportTakesButton
-			// 						chapter={this.props.chapter}
-			// 						chunks={this.props.chunks}
-			// 						mode={this.props.mode}
-			// 						chapterNum = {this.props.chapterNum}
-			// 					/>
-			//
-			// 					<RecordButton
-			// 						onClickSave={this.props.onClickSave}
-			// 						id={this.props.chapter.id}
-			// 						type={'chapter'}
-			// 						deleteComment={this.props.deleteComment}
-			// 						loadingActive={this.props.active}
-			// 						has_comments ={has_comments}
-			// 						number={this.props.chapterNum}
-			// 					/>
-			// 				</div>
-			// 			</Grid.Column>
-			// 		</Grid>
-			// 	</div>
-			// 	<div className="source">
-			// 		<SetSourceAudio
-			// 			selectedSourceProject={this.props.selectedSourceProject}
-			// 			setSourceProject={this.props.setSourceProject}
-			// 			language={this.props.language}
-			// 			projectId={this.props.projectId}
-			// 		/>
-			// 	</div>
-			// </div>
-		}
-
-		<NavBar />
-
-		</div>
+			<div>
+				<NavBar chunks ={this.props.chunks} />
+			</div>
 		);
 	}
 }
-export default ChunkHeader;
+
+
+
+const mapStateToProps = state => {
+	const { takes, loaded = false, error = '', comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
+	return {comments, takes, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
+	};
+export default connect(mapStateToProps)(ChunkHeader);
