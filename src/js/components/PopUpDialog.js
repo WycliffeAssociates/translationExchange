@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Label, Popup, Button, Header, Icon, Modal } from "semantic-ui-react";
 import "css/popup-dialog.css";
 import styled from 'styled-components';
-import { CheckAllIcon} from "mdi-react";
 class PopUpDialog extends Component {
   state = { open: false };
 
@@ -11,10 +10,10 @@ class PopUpDialog extends Component {
 
   render() {
     const { open, dimmer } = this.state;
-    const {icon,title,para1,para2,arrowIcon,skipText,reviewText}=this.props;
+    const {icon,title,para1,para2,arrowIcon,skipText,reviewText,btnIcon,btnText}=this.props;
     return (
       <div>
-        <Button onClick={this.show("blurring")}>Review</Button>
+        <Button onClick={this.show("blurring")}>{btnText}</Button>
         <Modal
           dimmer={dimmer}
           open={open}
@@ -41,7 +40,7 @@ class PopUpDialog extends Component {
               </a>
             </span>
             <div className='review-btn' onClick={()=>console.log("clicks")}>
-              <CheckAllIcon color="white" />
+            <i className="material-icons">{btnIcon}</i>
               <span
                 style={{
                   paddingLeft:5,
