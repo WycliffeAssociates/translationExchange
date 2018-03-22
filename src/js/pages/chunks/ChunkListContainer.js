@@ -30,6 +30,7 @@ import {
 	deleteComment,
 	markedAsPublished,
 	saveComment,
+	getComments,
 	getAudioTakes,
 	deleteTakeSuccess,
 	deleteCommentSuccess,
@@ -58,8 +59,9 @@ export class ChunkListContainer extends Component {
 
 	componentWillMount() {
 		const query = QueryString.parse(this.props.location.search);
-		debugger;
 		this.props.getSelectedProjectInfo(query);
+		this.props.getComments(query.chapterId, 'chapter_id');
+
 	}
 
 	toggleUtilityPanel() {
@@ -74,7 +76,7 @@ export class ChunkListContainer extends Component {
 
 	handleClick(chunkId) {
 		this.setState({selectedChunk: chunkId}); //set the start of the selected chunk here, and passes the selected chunk into the chunk component which is in the render function
-																						//  below, which in turn calls to the api to get the necessary audio takes
+		this.props.getComments(chunkId,'chunk_id');//  below, which in turn calls to the api to get the necessary audio takes
 	}
 
 	updatingDeletedComment(commentId, comments) {
@@ -191,7 +193,9 @@ export class ChunkListContainer extends Component {
 	}
 
 	render() {
-		console.log(this.props, 'IM LOOkING AT THE selected chunk!!');
+
+		const { takes } = this.props;
+
 		if (this.props.loaded && this.props.chunks.length === 0) {
 			return <NotFound />;
 		} else if (this.props.error) {
@@ -201,10 +205,13 @@ export class ChunkListContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
+			const chunkNum = this.props.chunks[this.state.selectedChunk-1].startv;
+			const chapterNum = this.props.chapter.number;
+
 			return (
 				<div className="backgroundKaban">
 					<ChunkHeader
-						chapterNum={this.props.chapter.number}
+						chapterNum={chapterNum}
 						book={this.props.book}
 						chapter={this.props.chapter}
 						language={this.props.language}
@@ -230,7 +237,7 @@ export class ChunkListContainer extends Component {
 						comments={this.props.comments}
 						takesForChunk={this.props.chunks[this.state.selectedChunk-1]} // array of takes
 						mode={'chunks'}        //TODO get mode from backend
-						number={this.props.chunks[this.state.selectedChunk-1].startv}
+						number={chunkNum}
 						chunkId={this.props.chunks[this.state.selectedChunk-1].id}
 						patchTake={this.patchTake.bind(this)}
 						deleteTake={this.deleteTake.bind(this)}
@@ -251,17 +258,43 @@ export class ChunkListContainer extends Component {
 					</div>
 				}
 
-
+				{
+					this.state.utililtyPanel ?
 					<UtilityTab >
 
 					<OptionsContainer>
 
-						<Toggle defaultChecked= {false} onChange={e=>this.setState({commentsTab: e.target.checked})} />
+
+
+						<Toggle defaultChecked= {false}
+	                  onChange={e=>this.setState({commentsTab: e.target.checked})}
+										icons ={{
+							checked: <i className="fa fa-comment" />,
+							unchecked: <i className = "fab fa-npm" />,
+						}}  />
 
 						<label style={{textDecoration: 'underline', color: '#009CFF'}}> Hide <i className= "fa fa-arrow-right" /> </label>
 					</OptionsContainer>
-          { this.state.commentsTab ? <div><Comments text="Chapter 1" /><Comments text="Chunk 1" /></div> :	this.props.chunks.map((chunk,index) => this.createChunkList(chunk, index))}
+          { !this.state.commentsTab ?
+						<div>
+						<Comments comments={this.props.chapterComments} text= {`Chapter ${chapterNum}`} />
+						<Comments comments={this.props.chunkComments} text={`Chunk ${chunkNum}`} />
+						
+
+
+
+					</div>
+						:
+							this.props.chunks.map((chunk,index) => this.createChunkList(chunk, index))
+					}
 				</UtilityTab>
+				:
+					<div style={{color: 'white', marginTop: '1vw',paddingTop: '1vw', cursor: 'pointer', textDecoration: 'underline'}}>
+						<label style={{cursor: 'pointer'}} onClick= {this.toggleUtilityPanel}> <i className="fa fa-arrow-left fa-fw" /> Show </label>
+					</div>
+				}
+
+
 				</div>
 
 
@@ -393,8 +426,10 @@ const mapStateToProps = state => {
 	const { displayText = '' } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { takes, loaded = false, error = '', comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
-	return {comments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
+	const { chunkComments, chapterComments } = state.comments;
+
+	const { takes, loaded = false, error = '',  chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
+	return {chunkComments, chapterComments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 };
 
@@ -418,6 +453,7 @@ const mapDispatchToProps = dispatch => {
 			deleteCommentSuccess,
 			getSourceTakes,
 			publishFiles,
+			getComments
 		}, dispatch);
 };
 

@@ -10,6 +10,7 @@ import ProjectsListContainerReducer from './ProjectsListContinerReducer';
 import ChunkListContainerReducer from './ChunkListContainerReducer';
 import SourceAudioReducer from './SourceAudioReducer';
 import user from './UserReducer.js';
+import comments from './CommentsReducer';
 
 
 export default combineReducers({
@@ -22,5 +23,6 @@ export default combineReducers({
   projectsListContainer: ProjectsListContainerReducer,
   chunkListContainer: ChunkListContainerReducer,
   sourceAudio: SourceAudioReducer,
-  user
+  user,
+  comments
 });
