@@ -97,7 +97,7 @@ class TakeTable extends Component {
 
 				{
 					itemPublised?
-						this.props.icon4marker ? <NextChunk onClick ={this.nextChunk}>Go to Chunk {this.props.chunkId+1} <i className="fa fa-arrow-right" /> </NextChunk> : ''
+						this.props.icon4marker ? <NextChunk onClick ={this.nextChunk}>Go To Next Chunk <i className="fa fa-arrow-right" /> </NextChunk> : ''
 
 						: ''
 				}

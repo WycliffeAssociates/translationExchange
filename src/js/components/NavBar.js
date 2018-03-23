@@ -4,7 +4,6 @@ import jdenticon from 'jdenticon';
 import { connect } from 'react-redux';
 import Menu, { Item as MenuItem, Divider } from 'rc-menu';
 import Dropdown from 'rc-dropdown';
-import 'rc-dropdown/assets/index.css';
 
 class NavBar extends Component {
   constructor(props) {
@@ -19,7 +18,7 @@ class NavBar extends Component {
   componentDidMount() {
     const {loggedInUser}= this.props;
     jdenticon.update('#ActiveUser', loggedInUser);
-    debugger;
+    //debugger;
 }
 
 

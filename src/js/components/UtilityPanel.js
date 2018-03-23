@@ -12,11 +12,17 @@ export default class ComponentName extends React.Component {
       utilityPanel: true,
     };
 
+    this.toggleUtilityPanel = this.toggleUtilityPanel.bind(this);
+
   }
 
-  componentDidMount(){
+  toggleUtilityPanel() {
+    this.setState(prevState => ({utilityPanel: !prevState.utilityPanel}));
+  }
+
+  componentDidMount() {
     const t = this.props;
-    debugger;
+    //debugger;
 
   }
 
@@ -26,11 +32,12 @@ export default class ComponentName extends React.Component {
 
     const { takes } = this.props;
     const chunkNum = this.props.chunks.startv;
-		const chapterNum = this.props.chapter.number;
+    const chapterNum = this.props.chapter.number;
+
+    console.log(this.state.utilityPanel, 'UtilityPanel STATE');
 
     return (
       this.state.utilityPanel?
-        // <div style={{background: '#2D2D2D', padding: '1vw', flex: '0.18', height: '93vh', overflow: 'auto'}}>
         <UtilityPanel >
 
 
@@ -93,10 +100,12 @@ const UtilityNavigation = styled.div`
   margin-top: 1vw;
 `;
 
-const Hide = styled.label`
+const Hide = styled.button`
   text-decoration: underline;
   color: #009CFF;
-  cursor: pointer
+  cursor: pointer;
+  border: none;
+  background: none;
 `;
 
 const Show = styled(Hide)`

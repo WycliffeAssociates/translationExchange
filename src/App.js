@@ -11,11 +11,11 @@ import axios from 'axios';
 import User from './js/pages/user/user';
 import Welcome from './js/pages/Login/LoginPage.js';
 import AvailableUsers from './js/pages/Login/AvailableUsers.js';
-import CreateUserContainer from './js/pages/user/components/CreateUserContainer'
+import CreateUserContainer from './js/pages/user/components/CreateUserContainer';
 import { DragDropContext } from 'react-dnd';
 import Notifications from 'react-notify-toast';
 import Root from './js/components/Root.js';
-import playerTracker from './js/components/playerTracker';
+import PlayerTracker from './js/components/PlayerTracker';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 // import and configure the raven client for sentry in order to track errors
@@ -63,7 +63,7 @@ class App extends Component {
           <Route  path="/chapters" component={ChaptersContainer} />
           <Route  path="/takes" component={ChunkListContainer} />
           <Route  path="/user" component={User} />
-          <Route path ="/newComponents" component={playerTracker} />
+          <Route path ="/newComponents" component={PlayerTracker} />
           <Route path="*" component={NotFound} />
         </Switch>
 

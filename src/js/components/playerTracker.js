@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import ReactPlayer from 'react-player';
+import config from '../../config/config';
 
 export default class PlayerTracker extends React.Component {
 
@@ -11,52 +13,62 @@ export default class PlayerTracker extends React.Component {
     this.state = {
       playerTime: 0,
       interval: '',
-      playing: !props.playing,
+      playing: false,
     };
 
+    this.playComment = this.playComment.bind(this);
+    this.timer = this.timer.bind(this);
   }
 
-  componentDidMount() {
-    if (this.state.playing == false) {
-      this.state.interval = setInterval(() => {
-        this.setState(prevState => ({playerTime: prevState.playerTime+ 0.025}));
-      }, 25);
-    }
-
-
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({playing: nextProps.playing});
-  }
-  //
-  // componentDidUpdate() {
-  //   console.log('called component did mount', this.state.playing);
-  //
-  //   if (this.state.playing == true) {
-  //     this.state.interval = setInterval(() => {
-  //       this.setState(prevState => ({playerTime: prevState.playerTime+ 0.025}));
-  //     }, 25);
-  //
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log(nextState);
+  //   if (nextState.playing != this.state.playing) {
+  //     return true;
   //   }
   //
   //   else {
-  //     this.setState({interval: ''});
+  //     return false;
   //   }
   // }
 
+  playComment(playerTime) {
+
+    if (this.state.playing == true) {
+      clearInterval(this.state.interval); //if state is playing, user intent was to pause. so clear interval
+    }
+
+    this.setState(prevState => ({playing: !prevState.playing, playerTime: playerTime}));
+  }
+
+  timer(incoming) {
+
+    var myValue = this.state.playerTime;
+    myValue= myValue+ 0.025;
+    //console.log(myValue, 'PLAYER TIME IN TIMER FUNCTION');
+    //return myValue;
+    this.setState({playerTime: myValue});
+  }
+
   render() {
 
+    var myValue = '';
     let playPauseIcon = 'fa fa-play';
-    if (this.state.playerTime > (this.props.duration - 0.0001)) {
+
+    if (this.state.playing) {
+      myValue= setTimeout(() => this.timer(), 25);
+    }
+
+    if (myValue > (this.props.duration - 0.0001)) {
       clearInterval(this.state.interval);
-      //this.setState({playerTime: 0, interval: ''});
     }
     return (
       <div style={{width: 'inherit', color: 'steelblue', background: 'none', display: 'flex', flexDirection: 'row',
         justifyContent: 'space-between'}}>
-        <PlayIcon onClick ={this.props.playComment}> <i className={playPauseIcon} /> </PlayIcon>
+        <PlayIcon onClick ={() => this.playComment(myValue)}> <i className={playPauseIcon} /> </PlayIcon>
         <Input type="range"  mim="0" max={this.props.duration} step="1" value={this.state.playerTime} />
+        <ReactPlayer url ={config.streamingUrl+ this.props.url}
+          style={{display: 'none'}}
+          playing = {this.state.playing} />
       </div>
     );
   }

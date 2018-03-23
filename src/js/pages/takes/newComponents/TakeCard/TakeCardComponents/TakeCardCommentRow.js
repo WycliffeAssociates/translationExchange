@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player';
 import PlayerTracker from '../../../../../components/playerTracker';
 
 
-export default class ComponentName extends React.Component {
+export default class TakeCardCommentRow extends React.Component {
 
   constructor(props) {
     super(props);
