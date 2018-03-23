@@ -213,7 +213,8 @@ export class ChunkListContainer extends Component {
 						displayText={this.props.displayText}
 						number={this.props.chunks[this.state.selectedChunk-1].startv}
 						chunkId={this.props.chunks[this.state.selectedChunk-1].id}
-						
+						{...this.props}
+
 					/>
 
 
@@ -330,10 +331,17 @@ export class ChunkListContainer extends Component {
 				<div style={{display: 'flex', flexDirection: 'row',
 					justifyContent: 'space-evenly', flex: '1', background: '#2D2D2D',
 					color: this.state.selectedChunk=== chunk.id? 'white': '#969595', paddingTop: '1vw', paddingBottom: '1vw', borderBottom: 'solid 1px #969595',
-					fontSize: '1.1vw', cursor: 'pointer'}} onClick={()=> this.handleClick(chunk.id)}>
+					fontSize: '1.1vw', cursor: 'pointer'}} >
 
 					<label style={{cursor: 'pointer', marginRight: '2vw', fontSize: '1vw'}}> Chunk {chunk.startv} </label>
-					<label style={{cursor: 'pointer'}}> {this.state.selectedChunk === chunk.id? 'Current' : <PlayerTracker />} </label>
+					<label style={{cursor: 'pointer'}}> {this.state.selectedChunk === chunk.id?
+						'Current': this.props.takes.map? this.props.takes.map((takes) => {
+							if (takes.published == true && takes.chunkId == this.state.selectedChunk) {
+								return <PlayerTracker url={takes.location} /> ;
+							}
+
+							else return 'Unavailable';
+						})  : 'Unavailable'} </label>
 
 				</div>
 
@@ -349,6 +357,7 @@ const SourceAudio =  styled.div`
 	marginTop: 0vw;
 	position: fixed;
 	bottom: 0;
+	z-index: 99;
 `;
 
 const KabanContainer =  styled.div`
@@ -370,8 +379,8 @@ const mapStateToProps = state => {
 	const { displayText = '' } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { takes, loaded = false, error = '', comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
-	return {comments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
+	const { takes, calledChunks, chunkIdClicked, loaded = false, error = '', comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
+	return {comments, takes, calledChunks,chunkIdClicked, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 };
 
