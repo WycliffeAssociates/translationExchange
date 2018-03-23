@@ -14,18 +14,11 @@ export default class ComponentName extends React.Component {
 
   }
 
-  componentDidMount(){
-    const t = this.props;
-    debugger;
-
-  }
-
-
 
   render() {
 
     const { takes } = this.props;
-    const chunkNum = this.props.chunks.startv;
+    const chunkNum = this.props.selectedChunk;
 		const chapterNum = this.props.chapter.number;
 
     return (
