@@ -2,36 +2,64 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import jdenticon from 'jdenticon';
 import { connect } from 'react-redux';
+import Menu, { Item as MenuItem, Divider } from 'rc-menu';
+import Dropdown from 'rc-dropdown';
+import 'rc-dropdown/assets/index.css';
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
-    this.state ={displayLogOut: false}
+    this.state ={
+      displayLogOut: false,
+      chunkNumSelected: 1,
+    }
+
   }
 
   componentDidMount() {
     const {loggedInUser}= this.props;
     jdenticon.update('#ActiveUser', loggedInUser);
-  
+    debugger;
 }
 
 
   logOut() {
     localStorage.removeItem('token');
     this.props.history.push('./welcome');
-
   }
 
   hiddeLogOut() {
     setTimeout(()=> this.setState({displayLogOut: false}) , 1500);
   }
 
+  onSelect({key, item}) {
+    const chunkId =key;
+    const {chunkNum} = item.props;
+
+    console.log(`${chunkId} chunk Id`);
+    console.log(`${chunkId} chunk number`);
+    debugger;
+  }
+
+  onVisibleChange(visible) {
+    console.log(visible);
+  }
+
   render() {
-    const {loggedInUser, book, language, history}= this.props;
+
+    const {chunkNumSelected} = this.state;
+    const {loggedInUser, book, language, history, chunks}= this.props;
+
+    const menu = (
+      <Menu onSelect={ ky=> this.onSelect(ky)}>
+        {chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>)}
+      </Menu>
+    );
+
     return (
       <Container>
         <TextContainer>
-          <Title>Translation Exchange </Title>
+          <Title onClick={()=>history.push('./')}>Translation Exchange </Title>
         </TextContainer>
         <IconsContainer>
           <TextIconContainer onClick={()=> history.push('/projects')}>
@@ -44,7 +72,15 @@ class NavBar extends Component {
           </TextIconContainer>
           <TextIconContainer selected={true}>
             <i class="material-icons">graphic_eq</i>
-            <Text>chunk</Text>
+            <Dropdown
+              trigger={['click']}
+              overlay={menu}
+              animation="slide-up"
+              onVisibleChange={this.onVisibleChange()}
+            >
+              <Text>Chunk {chunkNumSelected}</Text>
+            </Dropdown>
+
           </TextIconContainer>
 
         </IconsContainer>
@@ -62,6 +98,9 @@ class NavBar extends Component {
   }
 }
 
+
+
+
 const Container = styled.div`
   background-color: #fff;
   width: 100vw;
@@ -72,6 +111,7 @@ const Container = styled.div`
   z-index: 2;
 `;
 const Text = styled.p`
+  cursor: pointer;
 `;
 
 const TextIconContainer = styled.div`
@@ -105,7 +145,7 @@ const LogOut = styled.div`
   }
 `;
 
-const Dropdown = styled.div`
+const DropdownLogOut = styled.div`
   display: block;
   &:hover(:first-child) {
     display: block;
