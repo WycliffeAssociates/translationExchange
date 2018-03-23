@@ -12,7 +12,7 @@ class NavBar extends Component {
   componentDidMount() {
     const {loggedInUser}= this.props;
     jdenticon.update('#ActiveUser', loggedInUser);
-    debugger;
+  
 }
 
 
@@ -103,6 +103,17 @@ const LogOut = styled.div`
   &:hover{
     visibility: visible;
   }
+`;
+
+const Dropdown = styled.div`
+  display: block;
+  &:hover(:first-child) {
+    display: block;
+  }
+`;
+
+const List = styled.ul`
+display: none;
 `;
 
 const IconsContainer = styled.div`

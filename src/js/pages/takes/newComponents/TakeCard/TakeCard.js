@@ -6,6 +6,7 @@ import TopBar from './TakeCardComponents/TakeCardTopIcon';
 import BottomButtons from './TakeCardComponents/TakeCardBottomButtons';
 import Comments from './TakeCardComponents/TakeCardComments';
 import Waveform from '../../components/audioplayer/Waveform';
+import Marker from '../../components/audioplayer/Markers';
 import {connect} from 'react-redux';
 import config from 'config/config';
 import { addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio, getComments  } from '../../../../actions';
@@ -28,6 +29,8 @@ export class TakeCard extends React.Component {
       clear: true,
       hash: 'randomhash4324',
       playingComment: false,
+      marker: 0,
+      markerClicked: false,
     };
 
     this.expandComments = this.expandComments.bind(this);
@@ -35,6 +38,7 @@ export class TakeCard extends React.Component {
     this.playComment = this.playComment.bind(this);
     this.recordComment =  this.recordComment.bind(this);
     this.finishedPlaying = this.finishedPlaying.bind(this);
+    this.callMarker = this.callMarker.bind(this);
 
   }
 
@@ -79,25 +83,77 @@ export class TakeCard extends React.Component {
     this.setState(prevState => ({recording: !prevState.recording}));
   }
 
+  callMarker() {
+    const markerArray = [];
+
+    let receivedMarkersString = this.props.take.markers;
+
+    console.log(receivedMarkersString, 'received marker string');
+    let receivedMarkerObject = JSON.parse(receivedMarkersString);
+    console.log(receivedMarkerObject);
+
+    for (const key in receivedMarkerObject) {
+      console.log(receivedMarkerObject[key]);
+      const position = (receivedMarkerObject[key] / 44100);
+      const finalPosition = (position/this.props.take.duration)*100;
+      console.log(finalPosition, 'finalPositionFORMARKERS');
+      // calculate the position of the marker
+      // by dividing the marker position from the props, by the duration of the take
+      // * by 100 and use that percatage to place the marker on the card in correct place
+      // offset by 4 to account for the padding inside the taskList. If remove 4, marker moves all the way to the left
+      //of the container, beyond the take card.
+      console.log(finalPosition);
+      markerArray.push(
+        <Marker
+          style={{ overflow: 'visible' }}
+          visibility={true}
+          translate={finalPosition}
+          text={key}
+          key = {key}
+          dragPosition={this.dragPosition}
+        />);
+    }
+
+    console.log(markerArray, 'Marker Array');
+    return (
+      markerArray
+    );
+  }
+
+
+
+
   render() {
+    let markers ='';
+    console.log(this.props, 'PROPS FROM TAKE CARD');
+
+    if (this.state.showMarkers) {
+      markers = this.callMarker();
+    }
 
     return (
       <Container>
         <TopBar {...this.props} />
 
-        <Waveform
-          audioFile={config.streamingUrl+this.props.take.location}  playAudio={this.props.play}
-          playing = {this.state.takePlaying} durationTime={this.props.take.duration}
-          //updateTime = {this.updateTime}
-          //initialWidth = {this.initialWidth}
-          markerPosition={this.state.markerPosition} markerClicked={this.state.markerClicked}
-          resetMarkerClicked={this.resetMarkerClicked} finishedPlaying={this.finishedPlaying}
-        />
+
+        {markers}
+        <WaveformContainer>
+          <Waveform
+            audioFile={config.streamingUrl+this.props.take.location}  playAudio={this.props.play}
+            playing = {this.state.takePlaying} durationTime={this.props.take.duration}
+            //updateTime = {this.updateTime}
+            //initialWidth = {this.initialWidth}
+            options= {{ cursorWidth: 2, progressColor: '#009CFF', cursorColor: '#E74C3C', barWidth: 1, hideScrollbar: true, normalize: true, height: 35, waveColor: '#969595' }}
+            markerPosition={this.state.marker} markerClicked={this.state.markerClicked}
+            resetMarkerClicked={this.resetMarkerClicked} finishedPlaying={this.finishedPlaying}
+          />
+        </WaveformContainer>
 
         <BottomButtons {...this.props} takePlaying= {this.state.takePlaying} playTakeFromCard = {() => this.playTakeFromCard()} expandComments={() => this.expandComments()} />
 
 
-        {this.state.showComments? <Comments playComment = {()=> this.playComment()} playingComment={this.state.playingComment} blob={this.state.blob} recording={this.state.recording}
+        {this.state.showComments? <Comments playComment = {()=> this.playComment()} playingComment={this.state.playingComment}
+          blob={this.state.blob} recording={this.state.recording} {...this.props}
           recordComment = {()=> this.recordComment()} onStop={this.onStop} /> : '' }
       </Container>
 
@@ -215,7 +271,13 @@ height: inherit;
 border-radius: 0.3vw;
 overflow: hidden;
 border-bottom: none;
+text-align: left;
 
+`;
+
+const WaveformContainer = styled.div`
+  height:3vw;
+  margin-bottom: 0.5vw;
 `;
 
 const mapStateToProps = state => {

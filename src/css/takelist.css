@@ -8,7 +8,7 @@
     flex-direction: column;
     //justify-content: space-between;
     overflow: auto;
-    height: 70vh;
+    height: 45vw;
 }
 
 ::-webkit-scrollbar {

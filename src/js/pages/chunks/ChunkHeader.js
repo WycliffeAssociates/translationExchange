@@ -1,5 +1,6 @@
 /* eslint indent: [0, "tab"] */
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import jdenticon from 'jdenticon';
 import NavBar from '../../components/NavBar';
 import ExportTakesButton from '../takes/components/ExportTakesButton';
@@ -8,59 +9,22 @@ import RecordButton from '../takes/components/comments/RecordButton';
 import { Grid } from 'semantic-ui-react';
 import 'css/takes.css';
 
-class ChunkHeader extends Component{
-
-
-
+class ChunkHeader extends Component {
 
 	render() {
-		const has_comments = this.props.chapter.has_comment;
+
 		return (
-			<div>{
-			//<div style = {{display: 'flex', justifyContent: 'space-between'}}>
-			// 	<div className="headerStyle">
-			// 		<Grid padded columns={2}>
-			// 			<Grid.Column width={11} style={{ paddingTop: 23 }}>
-			// 				{this.props.book.name} {this.props.displayText.chapter} {this.props.chapterNum} ({this.props.language.name})
-			// 			</Grid.Column>
-			//
-			// 			<Grid.Column width={5} className="verticalLine">
-			// 				<div style = {{display: 'flex', justifyContent: 'space-between'}}>
-			// 					<ExportTakesButton
-			// 						chapter={this.props.chapter}
-			// 						chunks={this.props.chunks}
-			// 						mode={this.props.mode}
-			// 						chapterNum = {this.props.chapterNum}
-			// 					/>
-			//
-			// 					<RecordButton
-			// 						onClickSave={this.props.onClickSave}
-			// 						id={this.props.chapter.id}
-			// 						type={'chapter'}
-			// 						deleteComment={this.props.deleteComment}
-			// 						loadingActive={this.props.active}
-			// 						has_comments ={has_comments}
-			// 						number={this.props.chapterNum}
-			// 					/>
-			// 				</div>
-			// 			</Grid.Column>
-			// 		</Grid>
-			// 	</div>
-			// 	<div className="source">
-			// 		<SetSourceAudio
-			// 			selectedSourceProject={this.props.selectedSourceProject}
-			// 			setSourceProject={this.props.setSourceProject}
-			// 			language={this.props.language}
-			// 			projectId={this.props.projectId}
-			// 		/>
-			// 	</div>
-			// </div>
-		}
-
-		<NavBar { ...this.props } />
-
-		</div>
+			<div>
+				<NavBar { ...this.props } />
+			</div>
 		);
 	}
 }
-export default ChunkHeader;
+
+
+
+const mapStateToProps = state => {
+	const { takes, loaded = false, error = '', comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
+	return {comments, takes, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
+	};
+export default connect(mapStateToProps)(ChunkHeader);

@@ -96,7 +96,7 @@ class Chunk extends Component {
 				<label > <i className="far fa-star fa-2x" /> </label>
 			</div>
 		);
-		var icon4 = <label className="labelLines"> <i className="fas fa-check fa-2x" /> </label>;;
+		var icon4 = <label className="labelLines"> <i className="fas fa-check fa-2x" /> </label>;
 		return (
 			<div>
 				{/*<Accordion fluid styled >
@@ -109,6 +109,7 @@ class Chunk extends Component {
 						<Grid fluid columns={2}>
 							<Grid.Column width={16}>
 								<Grid fixed padded fluid columns={4} >
+
 
 										<TakeTable
 											icon={icon1}
@@ -128,6 +129,8 @@ class Chunk extends Component {
 											active={this.props.active}
 											chunkId={this.props.id}
 										/>
+
+
 
 
 									<TakeTable
@@ -169,7 +172,9 @@ class Chunk extends Component {
 
 
 									<TakeTable
+									height ={'25vh'}
 										icon={icon4}
+										icon4marker={true}
 										mode={this.props.mode}
 										addToListenList={this.props.addToListenList}
 										patchTake={this.props.patchTake}

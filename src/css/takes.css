@@ -7,6 +7,10 @@
   background-size: cover;
 }
 
+.publishedTakeColumn {
+  height: 30vh;
+}
+
 .ChapterHeader{
     color: #434;
 }
@@ -16,7 +20,7 @@
 }
 
 .ChunkTitle {
-    background-color: #e5e5e8;
+    //background-color: #e5e5e8;
 }
 
 .ChunkBody {

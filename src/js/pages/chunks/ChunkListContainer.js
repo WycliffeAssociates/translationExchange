@@ -1,4 +1,4 @@
-/* eslint indent: [0, "tab", {SwitchCase: 1}]*/
+/* eslint indent: [1, "tab", {SwitchCase: 1}]*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -7,14 +7,14 @@ import config from '../../../config/config';
 import QueryString from 'query-string';
 import 'css/takes.css';
 import ChunkHeader from './ChunkHeader';
-import Footer from '../takes/components/Footer';
 import Chunk from './Chunk';
 import NotFound from 'js/pages/NotFound';
 import ErrorButton from '../../components/ErrorButton';
+import UtilityPanel from '../../components/UtilityPanel';
 import LoadingGif from '../../components/LoadingGif';
 import Toggle from 'react-toggle';
 import styled from 'styled-components';
-import Comments from './components/Comments';
+import PlayerTracker from '../../components/playerTracker';
 
 
 import {
@@ -51,7 +51,6 @@ export class ChunkListContainer extends Component {
 
 		this.createChunkList= this.createChunkList.bind(this);
 		this.handleClick = this.handleClick.bind(this);
-		this.toggleUtilityPanel = this.toggleUtilityPanel.bind(this);
 	}
 	componentWillUnmount() {
 		this.props.resetInfo();
@@ -62,10 +61,6 @@ export class ChunkListContainer extends Component {
 		this.props.getSelectedProjectInfo(query);
 		this.props.getComments(query.chapterId, 'chapter_id');
 
-	}
-
-	toggleUtilityPanel() {
-		this.setState(prevState => ({utililtyPanel: !prevState.utililtyPanel}));
 	}
 
 	updatingDeletedTake(takeId) {
@@ -194,7 +189,7 @@ export class ChunkListContainer extends Component {
 
 	render() {
 
-		const { takes } = this.props;
+
 
 		if (this.props.loaded && this.props.chunks.length === 0) {
 			return <NotFound />;
@@ -209,7 +204,8 @@ export class ChunkListContainer extends Component {
 			const chapterNum = this.props.chapter.number;
 
 			return (
-				<div className="backgroundKaban">
+				<KabanContainer className="backgroundKaban">
+
 					<ChunkHeader
 					  history={this.props.history}
 						chapterNum={chapterNum}
@@ -225,82 +221,53 @@ export class ChunkListContainer extends Component {
 						active={this.props.active}
 						projectId={this.props.project.id}
 						displayText={this.props.displayText}
+						number={this.props.chunks[this.state.selectedChunk-1].startv}
+						chunkId={this.props.chunks[this.state.selectedChunk-1].id}
+
 					/>
 
 
-					<div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-						{
+					<div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'space-between'}}>
+
 						<div style={{flex: '1'}}>
 							<center>
-							<Chunk
-							selectedChunk={this.state.selectedChunk}
-							has_comments={this.props.chunks[this.state.selectedChunk-1].has_comment}
-						comments={this.props.comments}
-						takesForChunk={this.props.chunks[this.state.selectedChunk-1]} // array of takes
-						mode={'chunks'}        //TODO get mode from backend
-						number={chunkNum}
-						chunkId={this.props.chunks[this.state.selectedChunk-1].id}
-						patchTake={this.patchTake.bind(this)}
-						deleteTake={this.deleteTake.bind(this)}
-						updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
-						onClickSave={this.onClickSave.bind(this)}
-						id={this.props.chunks[this.state.selectedChunk-1].id}
-						deleteComment={this.deleteComment.bind(this)}
-						loaded={this.props.loaded}
-						book={this.props.book.name}
-						language={this.props.language.name}
-						onSourceClicked={this.onSourceClicked.bind(this)}
-						active={this.props.active}
-						published={this.props.project.published}
-						displayText={this.props.displayText}
-					/>
-					</center>
+								<Chunk
+									selectedChunk={this.state.selectedChunk}
+									has_comments={this.props.chunks[this.state.selectedChunk-1].has_comment}
+									comments={this.props.comments}
+									takesForChunk={this.props.chunks[this.state.selectedChunk-1]} // array of takes
+									mode={'chunks'}        //TODO get mode from backend
+									number={this.props.chunks[this.state.selectedChunk-1].startv}
+									chunkId={this.props.chunks[this.state.selectedChunk-1].id}
+									patchTake={this.patchTake.bind(this)}
+									deleteTake={this.deleteTake.bind(this)}
+									updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
+									onClickSave={this.onClickSave.bind(this)}
+									id={this.props.chunks[this.state.selectedChunk-1].id}
+									deleteComment={this.deleteComment.bind(this)}
+									loaded={this.props.loaded}
+									book={this.props.book.name}
+									language={this.props.language.name}
+									onSourceClicked={this.onSourceClicked.bind(this)}
+									active={this.props.active}
+									published={this.props.project.published}
+									displayText={this.props.displayText}
+								/>
+							</center>
 
-					</div>
-				}
-
-				{
-					this.state.utililtyPanel ?
-					<UtilityTab >
-
-					<OptionsContainer>
+						</div>
 
 
 
-						<Toggle defaultChecked= {false}
-	                  onChange={e=>this.setState({commentsTab: e.target.checked})}
-										icons ={{
-							checked: <i className="fa fa-comment" />,
-							unchecked: <i className = "fab fa-npm" />,
-						}}  />
-
-						<label style={{textDecoration: 'underline', color: '#009CFF'}}> Hide <i className= "fa fa-arrow-right" /> </label>
-					</OptionsContainer>
-          { !this.state.commentsTab ?
-						<div>
-						<Comments comments={this.props.chapterComments} text= {`Chapter ${chapterNum}`} />
-						<Comments comments={this.props.chunkComments} text={`Chunk ${chunkNum}`} />
-						{takes.map(tk=> <Comments comments={tk.comment} text={`Take ${tk.take_num}`} />) }
-
+						<UtilityPanel {...this.props} createChunkList = {this.createChunkList} />
 
 
 					</div>
-						:
-							this.props.chunks.map((chunk,index) => this.createChunkList(chunk, index))
-					}
-				</UtilityTab>
-				:
-					<div style={{color: 'white', marginTop: '1vw',paddingTop: '1vw', cursor: 'pointer', textDecoration: 'underline'}}>
-						<label style={{cursor: 'pointer'}} onClick= {this.toggleUtilityPanel}> <i className="fa fa-arrow-left fa-fw" /> Show </label>
-					</div>
-				}
 
 
-				</div>
+					<SourceAudio />
 
-
-
-				</div>
+				</KabanContainer>
 			);
 		}
 	}
@@ -367,39 +334,16 @@ export class ChunkListContainer extends Component {
 	}
 
 	createChunkList(chunk,index) {
+		console.log(chunk, 'A CHUNK LIST CONTAINER CHUNK');
 		return (
 			<div 	key={index} style={{marginTop: '0.5vw'}}>
-				{
-				// 	<Chunk
-				// 	has_comments={chunk.has_comment}
-				// 	comments={this.props.comments}
-				// 	takesForChunk={chunk} // array of takes
-				// 	mode={'chunk'}        //TODO get mode from backend
-				// 	number={chunk.startv}
-				// 	chunkId={chunk.id}
-				// 	patchTake={this.patchTake.bind(this)}
-				// 	deleteTake={this.deleteTake.bind(this)}
-				// 	updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
-				// 	onClickSave={this.onClickSave.bind(this)}
-				// 	id={chunk.id}
-				// 	deleteComment={this.deleteComment.bind(this)}
-				// 	loaded={this.props.loaded}
-				// 	book={this.props.book.name}
-				// 	language={this.props.language.name}
-				// 	onSourceClicked={this.onSourceClicked.bind(this)}
-				// 	active={this.props.active}
-				// 	published={this.props.project.published}
-				// 	displayText={this.props.displayText}
-				// />
-			}
-
 				<div style={{display: 'flex', flexDirection: 'row',
 					justifyContent: 'space-evenly', flex: '1', background: '#2D2D2D',
 					color: this.state.selectedChunk=== chunk.id? 'white': '#969595', paddingTop: '1vw', paddingBottom: '1vw', borderBottom: 'solid 1px #969595',
 					fontSize: '1.1vw', cursor: 'pointer'}} onClick={()=> this.handleClick(chunk.id)}>
 
-					<label style={{cursor: 'pointer', marginRight: '2vw'}}> Chunk {chunk.id} </label>
-					<label style={{cursor: 'pointer'}}> {this.state.selectedChunk === chunk.id? 'Current' : 'Unavailable' } </label>
+					<label style={{cursor: 'pointer', marginRight: '2vw', fontSize: '1vw'}}> Chunk {chunk.startv} </label>
+					<label style={{cursor: 'pointer'}}> {this.state.selectedChunk === chunk.id? 'Current' : <PlayerTracker />} </label>
 
 				</div>
 
@@ -408,21 +352,28 @@ export class ChunkListContainer extends Component {
 	}
 }
 
-const UtilityTab = styled.div `
-	background: #2D2D2D;
-	margin-top: 1vw;
-	padding: 0.2vw;
-	width: 14.7vw;
-	max-height: 43vw;
-	overflow-y: scroll;
+const SourceAudio =  styled.div`
+ 	background: #2D2D2D;
+	width: 100vw;
+	height: 4.55vw;
+	marginTop: 0vw;
+	position: fixed;
+	bottom: 0;
 `;
 
-const OptionsContainer = styled.div`
+const KabanContainer =  styled.div`
+	width: 100vw;
+`;
+
+const ChunkContainer= styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin-top: 1vw;
 
+`;
+
+const PublishingLevels = styled.div`
+	flex: 1;
 `;
 
 const mapStateToProps = state => {
