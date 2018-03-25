@@ -340,7 +340,6 @@ export class ChunkListContainer extends Component {
 								return <PlayerTracker url={takes.location} /> ;
 							}
 
-							else return 'Unavailable';
 						})  : 'Unavailable'} </label>
 
 				</div>

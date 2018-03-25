@@ -7,68 +7,83 @@ export default class PlayerTracker extends React.Component {
 
   constructor(props) {
     super(props);
-
-    console.log(props, 'Props in playertracker');
-
     this.state = {
       playerTime: 0,
       interval: '',
       playing: false,
+      url: null,
+      loop: false,
+      loaded: 0,
+      duration: 0,
+      played: 0,
     };
 
     this.playComment = this.playComment.bind(this);
-    this.timer = this.timer.bind(this);
+    this.onProgress = this.onProgress.bind(this);
+    this.onSeek = this.onSeek.bind(this);
+    this.onEnd = this.onEnd.bind(this);
+    this.PlayHead = this.PlayHead.bind(this);
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log(nextState);
-  //   if (nextState.playing != this.state.playing) {
-  //     return true;
-  //   }
-  //
-  //   else {
-  //     return false;
-  //   }
-  // }
-
   playComment(playerTime) {
-
-    if (this.state.playing == true) {
-      clearInterval(this.state.interval); //if state is playing, user intent was to pause. so clear interval
-    }
-
     this.setState(prevState => ({playing: !prevState.playing, playerTime: playerTime}));
   }
 
-  timer(incoming) {
-
-    var myValue = this.state.playerTime;
-    myValue= myValue+ 0.025;
-    //console.log(myValue, 'PLAYER TIME IN TIMER FUNCTION');
-    //return myValue;
-    this.setState({playerTime: myValue});
+  onProgress = state => {
+    console.log('onProgress', state);
+    // We only want to update time slider if we are not currently seeking
+    if (!this.state.seeking) {
+      this.setState(state);
+    }
   }
 
+  onSeek(e) {
+    // this.setState({ played: parseFloat(e.target.value) });
+    this.player.seekTo(parseFloat(e.target.value));
+  }
+
+  onEnd() {
+    this.setState({ playing: this.state.loop , played: 0, playedSeconds: 0});
+  }
+
+  ref = player => {
+    this.player = player;
+  }
+
+  PlayHead() {
+
+    let playing = this.state.playing;
+
+    return (
+      <div>
+        <PlayIcon style={{display: playing? 'none': ''}} onClick ={() => this.playComment()}> <i className="fa fa-play" /> </PlayIcon>
+
+        <PlayIcon style={{display: playing? '': 'none'}} onClick ={() => this.playComment()}> <i className="fa fa-pause" /> </PlayIcon>
+
+      </div>);
+
+  }
   render() {
 
-    var myValue = '';
-    let playPauseIcon = 'fa fa-play';
 
-    if (this.state.playing) {
-      myValue= setTimeout(() => this.timer(), 25);
-    }
 
-    if (myValue > (this.props.duration - 0.0001)) {
-      clearInterval(this.state.interval);
-    }
     return (
-      <div style={{width: 'inherit', color: 'steelblue', background: 'none', display: 'flex', flexDirection: 'row',
-        justifyContent: 'space-between'}}>
-        <PlayIcon onClick ={() => this.playComment(myValue)}> <i className={playPauseIcon} /> </PlayIcon>
-        <Input type="range"  mim="0" max={this.props.duration} step="1" value={this.state.playerTime} />
-        <ReactPlayer url ={config.streamingUrl+ this.props.url}
-          style={{display: 'none'}}
-          playing = {this.state.playing} />
+      <div>
+
+        <div style={{width: 'inherit', color: 'steelblue', background: 'none', display: 'flex', flexDirection: 'row',
+          justifyContent: 'space-between'}}>
+          {this.PlayHead()}
+          <Input type="range"  min="0" max ={1} step="0.01" value={this.state.played? this.state.played: 0}
+            onChange = {this.onSeek} />
+          <ReactPlayer //url ={config.streamingUrl+ this.props.url}
+            url={config.streamingUrl+ 'media/dump/1521036382.71365860d0c5aa0-0e3f-47a5-a6b4-5bf9c01f29ff/en_ulb_b63_1jn_c01_v01-02_t03.wav'}
+            style={{display: 'none'}}
+            onProgress = {this.onProgress}
+            playing = {this.state.playing}
+            onEnded = {this.onEnd}
+            ref={this.ref}
+          />
+        </div>
       </div>
     );
   }
