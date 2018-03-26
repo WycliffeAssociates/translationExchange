@@ -1,48 +1,44 @@
-import React, {Component} from 'react';
-import ReactCountdownClock from 'react-countdown-clock';
-import styled from 'styled-components';
-
+import React, { Component } from "react";
+import ReactCountdownClock from "react-countdown-clock";
+import styled from "styled-components";
 
 class RecordButton extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      counter: 0,
-
+      counter: 0
     };
     this.startRecording = this.startRecording.bind(this);
   }
 
-
-
   startRecording() {
-    this.setState( {counter: 3} );
+    this.setState({ counter: 3 });
     this.props.startRecording();
   }
 
   render() {
-    const {icon} = this.props;
     return (
       <Container>
         <ButtonContainer>
-          <PlayButton  onClick={this.startRecording} type="voice">
-            <Icon> <i className={`fa fa-${icon}`} /> </Icon>
+          <PlayButton onClick={this.startRecording} type="voice">
+            <Icon>
+              {" "}
+              <i className="material-icons" style={{ fontSize: "5.1vw", marginLeft:"-1vw" }}>
+                play_arrow
+              </i>{" "}
+            </Icon>
           </PlayButton>
         </ButtonContainer>
 
-        <ReactCountdownClock seconds={this.state.counter}
+        <ReactCountdownClock
+          seconds={this.state.counter}
           color="#E74C3C"
           alpha={0.9}
           size={100}
         />
-
-
       </Container>
     );
   }
-
-
 }
 
 const Container = styled.div`
@@ -67,21 +63,16 @@ const ButtonContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
 `;
 
 const Icon = styled.button`
-margin-left: 5%;
-color: #E74C3C;
-border: none;
-font-size: 2vw;
-margin-left: -0.005vw;
-background-color:transparent;
-cursor: pointer;
-
+  margin-left: 5%;
+  color: #e74c3c;
+  border: none;
+  font-size: 2vw;
+  margin-left: -0.005vw;
+  background-color: transparent;
+  cursor: pointer;
 `;
-
-
-
 
 export default RecordButton;

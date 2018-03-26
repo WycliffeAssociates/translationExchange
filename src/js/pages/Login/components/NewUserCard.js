@@ -19,7 +19,7 @@ export default class NewUserCard extends React.Component {
         <Card>
 
 
-          <AddUser> <i className="fa fa-user-plus" /> </AddUser>
+          <AddUser> <i className="material-icons" style={{fontSize:'5.5vw',transform:`scale(-1,1)`}}>person_add</i></AddUser>
           <CardLabel> New User </CardLabel>
 
 

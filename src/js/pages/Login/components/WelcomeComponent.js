@@ -57,7 +57,7 @@ export class WelcomeComponent extends React.Component {
         <ButtonsContainer>
 
           <ContinueButton onClick={()=> this.handleClick('continue')}>
-            Continue <i className="fa fa-arrow-right fa-fw"></i>
+            Continue <i className="material-icons">arrow_forward </i>
           </ContinueButton>
 
           <GitHubLogin clientId="f5e981378e91c2067d41"
@@ -142,7 +142,7 @@ const WelcomeIcon= styled.img`
 WelcomeIcon.displayName = 'WelcomeIcon';
 
 const Welcomeh2 = styled.h2`
-    marginTop: -0.5vw;
+    margin-top: -0.5vw;
     font-size: 1.5vw;
   `;
 Welcomeh2.displayName = 'Welcomeh2';
@@ -151,7 +151,7 @@ const WelcomeTo = styled.p`
     font-size: 1.5vw;
     font-weight: lighter;
     border-bottom: 1px solid lightgray;
-    line-eight: 0.1vw;
+    line-height: 0.1vw;
   `;
 WelcomeTo.displayName = 'WelcomeTo';
 
@@ -174,12 +174,13 @@ const WelcomeInstructions =styled.p`
 WelcomeInstructions.displayName = 'WelcomeInstructions';
 
 const ContinueButton = styled.button`
-    display: block;
+    display: flex;
+    align-items:center;
     background: linear-gradient(to bottom, #0076FF, #00C5FF);
     /* height: 2.5vw;
     width: 14vw; */
     margin-top: 1vw;
-    padding: 0.5vw 2.75vw;
+    padding: 0.4vw 2.6vw;
     font-size: 1.45vw;
     font-weight: 100;
     color: white;
@@ -202,7 +203,7 @@ GitHubSignInButton.displayName = 'GitHubSignInButton';
 const ButtonsContainer = styled.div`
     margin-top: 2vw;
     margin-left: -2vw;
-    textAlign: center;
+    text-align: center;
     padding: 2vw 8vw;
     width: inherit;
 
