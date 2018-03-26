@@ -79,7 +79,7 @@
     "start": "cross-env NODE_PATH=src react-scripts start",
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "cross-env NODE_PATH=src react-scripts test",
-    "test:ci": "cross-env NODE_PATH=src react-scripts test --coverage --silent",
+    "test:ci": "cross-env NODE_PATH=src react-scripts test --coverage ",
     "eject": "react-scripts eject"
   },
   "jest": {
