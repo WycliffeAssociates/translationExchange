@@ -6,7 +6,7 @@ import {bindActionCreators} from 'redux';
 import Menu, { Item as MenuItem } from 'rc-menu';
 import Dropdown from 'rc-dropdown';
 import 'rc-dropdown/assets/index.css';
-import { getAudioTakes } from '../actions'
+
 
 class NavBar extends Component {
   constructor(props) {
@@ -195,15 +195,5 @@ const TextContainer = styled.div`
 
 `;
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({getAudioTakes}, dispatch);
 
-};
-
-const mapStateToProps = state => {
-  const {loggedInUser} = state.user;
-
-  return {loggedInUser};
-
-};
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default NavBar;
