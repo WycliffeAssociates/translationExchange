@@ -14,7 +14,7 @@ import NotFound from 'js/pages/NotFound';
 import ErrorButton from '../../components/ErrorButton';
 import LoadingGif from '../../components/LoadingGif';
 import { bindActionCreators } from 'redux';
-import { fetchChaptersContainerData, setCheckingLevel, publishFiles, downloadProject, downloadSourceAudio } from '../../actions';
+import { fetchChaptersContainerData, setCheckingLevel, publishFiles, downloadProject, downloadSourceAudio, getTakes, getChunks } from '../../actions';
 
 class ChaptersContainer extends Component {
 	publishFiles() {
@@ -34,8 +34,10 @@ class ChaptersContainer extends Component {
 		var query = QueryString.parse(this.props.location.search);
 		query.chapter_num = chNum;
 		query.chapterId = chId;
+
+
 		this.props.history.push({
-			pathname: '/takes',
+			pathname: '/kanbanPage',
 			search: QueryString.stringify(query),
 		});
 	}
@@ -147,6 +149,7 @@ const mapStateToProps = state => {
 		downloadLoadingSourceAudio,
 		downloadErrorAudioSource,
 		direction, checked_level,
+		getTakes, getChunks
 	};
 
 };

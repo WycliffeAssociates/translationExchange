@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '../../config';
+import config from '../../config/config';
 
 export const getTakes = (chunkId) => {
   return function(dispatch) {
@@ -35,6 +35,8 @@ export const getChunks = (chapterId) => {
         })
       .then(response => {
         dispatch(getChunksSuccess(response.data));
+        dispatch(getTakes(response.data[0].id)); // get the takes from the first chunk
+
       })
       .catch(error => {
         console.log(error);
@@ -42,9 +44,9 @@ export const getChunks = (chapterId) => {
   };
 };
 
-export const getChunksSuccess = (takes) => {
+export const getChunksSuccess = (chunks) => {
   return {
     type: 'FETCH_CHUNKS_SUCCESS',
-    takes,
+    chunks,
   };
 }

@@ -11,6 +11,7 @@ import ChunkListContainerReducer from './ChunkListContainerReducer';
 import SourceAudioReducer from './SourceAudioReducer';
 import user from './UserReducer.js';
 import comments from './CommentsReducer';
+import kanbanPage from './KanbanPageReducer'
 
 
 export default combineReducers({
@@ -24,5 +25,6 @@ export default combineReducers({
   chunkListContainer: ChunkListContainerReducer,
   sourceAudio: SourceAudioReducer,
   user,
-  comments
+  comments,
+  kanbanPage
 });
