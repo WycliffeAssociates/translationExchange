@@ -8,3 +8,4 @@ export * from './ProjectsListContainerAction';
 export * from './ChunkListContainerAction';
 export * from './SourceAudioAction';
 export * from './UserActions';
+export * from './CommentsActions';

@@ -172,7 +172,7 @@ class Chunk extends Component {
 
 
 									<TakeTable
-									height ={'25vh'}
+										height ={'25vh'}
 										icon={icon4}
 										icon4marker={true}
 										mode={this.props.mode}

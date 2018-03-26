@@ -12,7 +12,6 @@ import NotFound from 'js/pages/NotFound';
 import ErrorButton from '../../components/ErrorButton';
 import UtilityPanel from '../../components/UtilityPanel';
 import LoadingGif from '../../components/LoadingGif';
-import Toggle from 'react-toggle';
 import styled from 'styled-components';
 import PlayerTracker from '../../components/PlayerTracker';
 
@@ -30,6 +29,7 @@ import {
 	deleteComment,
 	markedAsPublished,
 	saveComment,
+	getComments,
 	getAudioTakes,
 	deleteTakeSuccess,
 	deleteCommentSuccess,
@@ -41,6 +41,7 @@ export class ChunkListContainer extends Component {
 
 	constructor(props) {
 		super(props);
+		this.state ={commentsTab: true}
 
 		this.state = {
 			selectedChunk: 1,
@@ -57,6 +58,8 @@ export class ChunkListContainer extends Component {
 	componentWillMount() {
 		const query = QueryString.parse(this.props.location.search);
 		this.props.getSelectedProjectInfo(query);
+		this.props.getComments(query.chapterId, 'chapter_id');
+
 	}
 
 	updatingDeletedTake(takeId) {
@@ -67,7 +70,7 @@ export class ChunkListContainer extends Component {
 
 	handleClick(chunkId) {
 		this.setState({selectedChunk: chunkId}); //set the start of the selected chunk here, and passes the selected chunk into the chunk component which is in the render function
-																						//  below, which in turn calls to the api to get the necessary audio takes
+		this.props.getComments(chunkId,'chunk_id');//  below, which in turn calls to the api to get the necessary audio takes
 	}
 
 	updatingDeletedComment(commentId, comments) {
@@ -184,7 +187,9 @@ export class ChunkListContainer extends Component {
 	}
 
 	render() {
-		console.log(this.props, 'IM LOOkING AT THE selected chunk!!');
+
+
+
 		if (this.props.loaded && this.props.chunks.length === 0) {
 			return <NotFound />;
 		} else if (this.props.error) {
@@ -194,11 +199,15 @@ export class ChunkListContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
+			const chunkNum = this.props.chunks[this.state.selectedChunk-1].startv;
+			const chapterNum = this.props.chapter.number;
+
 			return (
 				<KabanContainer className="backgroundKaban">
 
 					<ChunkHeader
-						chapterNum={this.props.chapter.number}
+						history={this.props.history}
+						chapterNum={chapterNum}
 						book={this.props.book}
 						chapter={this.props.chapter}
 						language={this.props.language}
@@ -213,7 +222,6 @@ export class ChunkListContainer extends Component {
 						displayText={this.props.displayText}
 						number={this.props.chunks[this.state.selectedChunk-1].startv}
 						chunkId={this.props.chunks[this.state.selectedChunk-1].id}
-						{...this.props}
 
 					/>
 
@@ -336,7 +344,7 @@ export class ChunkListContainer extends Component {
 					<label style={{cursor: 'pointer', marginRight: '2vw', fontSize: '1vw'}}> Chunk {chunk.startv} </label>
 					<label style={{cursor: 'pointer'}}> {this.state.selectedChunk === chunk.id?
 						'Current': this.props.takes.map? this.props.takes.map((takes) => {
-							if (takes.published == true && takes.chunkId == this.state.selectedChunk) {
+							if (takes.published == true && takes.chunkId != this.state.selectedChunk) {
 								return <PlayerTracker url={takes.location} /> ;
 							}
 
@@ -378,8 +386,10 @@ const mapStateToProps = state => {
 	const { displayText = '' } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { takes, calledChunks, chunkIdClicked, loaded = false, error = '', comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
-	return {comments, takes, calledChunks,chunkIdClicked, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
+	const { chunkComments, chapterComments } = state.comments;
+
+	const { takes, loaded = false, error = '',  chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
+	return {chunkComments, chapterComments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 };
 
@@ -403,6 +413,7 @@ const mapDispatchToProps = dispatch => {
 			deleteCommentSuccess,
 			getSourceTakes,
 			publishFiles,
+			getComments
 		}, dispatch);
 };
 

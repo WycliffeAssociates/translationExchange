@@ -9,7 +9,7 @@ import Waveform from '../../components/audioplayer/Waveform';
 import Marker from '../../components/audioplayer/Markers';
 import {connect} from 'react-redux';
 import config from 'config/config';
-import { addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio } from '../../../../actions';
+import { addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio, getComments  } from '../../../../actions';
 import { bindActionCreators } from 'redux';
 
 
@@ -43,7 +43,9 @@ export class TakeCard extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.users);
+    console.log(this.props);
+    const { take }= this.props;
+    this.props.getComments(take.id, 'take_id', take.order);
 
     jdenticon.update('#user',this.props.users.loggedInUser? this.props.users.loggedInUser: 'random');
     jdenticon.update('#comment','imthemaster');
@@ -296,6 +298,7 @@ const mapDispatchToProps = dispatch => {
     stopAudio,
     updateTime,
     playAudio,
+    getComments
   }, dispatch);
 
 };

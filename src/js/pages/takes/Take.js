@@ -27,6 +27,8 @@ class Take extends Component {
 		// this.showMarker = this.showMarker.bind(this);
 	}
 
+	
+
 	handleClick() {
 		this.setState({ isToggleOn: !this.state.isToggleOn });
 	}

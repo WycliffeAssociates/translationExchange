@@ -5,6 +5,9 @@ import TakeList from './TakeList';
 import { connect } from 'react-redux';
 import { Table, Grid, Button, Icon } from 'semantic-ui-react';
 import 'css/takes.css';
+import { getAudioTakes, getChunkIdClicked } from './../../actions';
+import {bindActionCreators} from 'redux';
+
 
 class TakeTable extends Component {
 
@@ -12,10 +15,22 @@ class TakeTable extends Component {
 		super(props);
 
 		this.nextChunk = this.nextChunk.bind(this);
+		this.getTakes= this.getTakes.bind(this);
 	}
 
-	nextChunk() {
+	nextChunk(chunkId) {
+		this.getTakes(chunkId+1);
+	}
 
+
+	getTakes(chunkId) {
+		let counter = this.props.takes.length;
+		let { calledChunks } = this.props;
+		if (!calledChunks.includes(chunkId)) {                 // once you click a chunk, checks if the chunk has not been clicked before
+			this.props.getChunkIdClicked(chunkId);
+			this.props.getAudioTakes(chunkId, counter);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
+			// so next time clicked to close it won't call the api
+		}
 	}
 
 
@@ -97,7 +112,7 @@ class TakeTable extends Component {
 
 				{
 					itemPublised?
-						this.props.icon4marker ? <NextChunk onClick ={this.nextChunk}>Go To Next Chunk <i className="fa fa-arrow-right" /> </NextChunk> : ''
+						this.props.icon4marker ? <NextChunk onClick ={() => this.nextChunk(this.props.chunkId)}>Go To Next Chunk <i className="fa fa-arrow-right" /> </NextChunk> : ''
 
 						: ''
 				}
@@ -115,14 +130,24 @@ const NextChunk = styled.button`
 	border: none;
 	border-radius: 2vw;
 	padding: 0.75vw;
+	cursor: pointer;
 `;
 
 
 
 
 const mapStateToProps = state => {
-	const {  takes } = state.chunkListContainer;
-	return { takes };
+	const { takes, update, chunkIdClicked, calledChunks } = state.chunkListContainer;
+	return { takes, update, chunkIdClicked, calledChunks };
 };
 
-export default connect(mapStateToProps)(TakeTable);
+const mapDispatchToProps = dispatch => {
+	return bindActionCreators(
+		{
+			getAudioTakes,
+			getChunkIdClicked,
+		}, dispatch);
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(TakeTable);
