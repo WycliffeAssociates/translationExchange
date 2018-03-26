@@ -344,7 +344,7 @@ export class ChunkListContainer extends Component {
 					<label style={{cursor: 'pointer', marginRight: '2vw', fontSize: '1vw'}}> Chunk {chunk.startv} </label>
 					<label style={{cursor: 'pointer'}}> {this.state.selectedChunk === chunk.id?
 						'Current': this.props.takes.map? this.props.takes.map((takes) => {
-							if (takes.published == true && takes.chunkId != this.state.selectedChunk) {
+							if (takes.published == true && takes.chunkId == this.state.selectedChunk) {
 								return <PlayerTracker url={takes.location} /> ;
 							}
 

@@ -51,7 +51,8 @@ class NavBar extends Component {
 
     const menu = (
       <Menu onSelect={ ky=> this.onSelect(ky)}>
-        {chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>)}
+        {//chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>)
+        }
       </Menu>
     );
 
@@ -63,11 +64,11 @@ class NavBar extends Component {
         <IconsContainer>
           <TextIconContainer onClick={()=> history.push('/projects')}>
             <i class="material-icons">book</i>
-            <Text>{book.name}</Text>
+            <Text>{/*book.name*/} book</Text>
           </TextIconContainer>
           <TextIconContainer onClick={()=> history.push(`/projects?lang=${language.slug}`)} >
             <i class="material-icons">chrome_reader_mode</i>
-            <Text>{language.name}</Text>
+            <Text>{/*language.name*/ language}</Text>
           </TextIconContainer>
           <TextIconContainer selected={true}>
             <i class="material-icons">graphic_eq</i>
