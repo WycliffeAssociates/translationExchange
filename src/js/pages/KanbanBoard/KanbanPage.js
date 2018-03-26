@@ -4,6 +4,28 @@ import NavBar from '../../components/NavBar';
 import KanbanBoard from './components/KanbanBoard';
 //import UtilityPanel from '../../components/UtilityPanel';
 import styled from 'styled-components';
+import {bindActionCreators} from 'redux';
+
+import {
+  addToPlaylist,
+  playTake,
+  stopAudio,
+  getSelectedProjectInfo,
+  setSourceProject,
+  resetInfo,
+  patchTake,
+  deleteTake,
+  chapterUpdate,
+  deleteComment,
+  markedAsPublished,
+  saveComment,
+  getComments,
+  getAudioTakes,
+  deleteTakeSuccess,
+  deleteCommentSuccess,
+  getSourceTakes,
+  publishFiles,
+} from './../../actions';
 
 class ComponentName extends React.Component {
 
@@ -21,7 +43,7 @@ class ComponentName extends React.Component {
 
         <KanbanContainer>
 
-          <KanbanBoard />
+          <KanbanBoard  {...this.props} />
           <UtilityPanel />
 
         </KanbanContainer>
@@ -53,7 +75,7 @@ const KanbanContainer = styled.div`
 const UtilityPanel = styled.div`
   background: #2D2D2D;
   //height: 100vh;
-  width: 15vw;
+  flex: 0.18;
 `;
 
 const SourceAudio = styled.div`
@@ -64,12 +86,41 @@ const SourceAudio = styled.div`
   width: 100vw;
 `;
 
-const mapDispatchToProps = (dispatch) => ({dispatch});
+const mapStateToProps = state => {
+  const { displayText = '' } = state.geolocation;
+  const { direction } = state.direction;
+  const { playlistMode } = state.updatePlaylist;
+  const { chunkComments, chapterComments } = state.comments;
 
-const mapStateToProps = ({reducer1, reducer2}) => ({
+  const { selectedChunk=1, takes, loaded = false, error = '',  chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
+  return {selectedChunk, chunkComments, chapterComments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
-  // all the state variables that you want to map to props
-});
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      addToPlaylist,
+      playTake,
+      stopAudio,
+      getSelectedProjectInfo,
+      setSourceProject,
+      resetInfo,
+      patchTake,
+      deleteTake,
+      chapterUpdate,
+      deleteComment,
+      markedAsPublished,
+      saveComment,
+      getAudioTakes,
+      deleteTakeSuccess,
+      deleteCommentSuccess,
+      getSourceTakes,
+      publishFiles,
+      getComments,
+    }, dispatch);
+};
+
 
 
 export default connect(mapStateToProps,mapDispatchToProps)(ComponentName);
