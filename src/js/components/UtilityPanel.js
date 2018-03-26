@@ -20,21 +20,12 @@ export default class ComponentName extends React.Component {
     this.setState(prevState => ({utilityPanel: !prevState.utilityPanel}));
   }
 
-  componentDidMount() {
-    const t = this.props;
-    //debugger;
-
-  }
-
-
 
   render() {
 
     const { takes } = this.props;
-    const chunkNum = this.props.chunks.startv;
-    const chapterNum = this.props.chapter.number;
-
-    console.log(this.state.utilityPanel, 'UtilityPanel STATE');
+    const chunkNum = this.props.selectedChunk;
+		const chapterNum = this.props.chapter.number;
 
     return (
       this.state.utilityPanel?

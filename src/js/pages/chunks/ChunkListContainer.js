@@ -199,7 +199,7 @@ export class ChunkListContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
-			const chunkNum = this.props.chunks[this.state.selectedChunk-1].startv;
+
 			const chapterNum = this.props.chapter.number;
 
 			return (
@@ -388,8 +388,8 @@ const mapStateToProps = state => {
 	const { playlistMode } = state.updatePlaylist;
 	const { chunkComments, chapterComments } = state.comments;
 
-	const { takes, loaded = false, error = '',  chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
-	return {chunkComments, chapterComments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
+	const { selectedChunk=1, takes, loaded = false, error = '',  chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
+	return {selectedChunk, chunkComments, chapterComments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 };
 

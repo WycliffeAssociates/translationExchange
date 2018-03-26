@@ -12,7 +12,7 @@ class ComponentName extends React.Component {
 
     return (
       <div>
-
+        <
       </div>
     );
   }

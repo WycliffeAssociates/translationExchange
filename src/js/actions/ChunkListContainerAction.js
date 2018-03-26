@@ -2,7 +2,7 @@ import axios from 'axios';
 import config from '../../config/config';
 import { notify } from 'react-notify-toast';
 
-export const getAudioTakes = (chunkId, counter) => {
+export const getAudioTakes = (chunkId, selectedChunk) => {
   return function(dispatch) {
     return axios
       .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`,
@@ -10,11 +10,11 @@ export const getAudioTakes = (chunkId, counter) => {
         headers: { Authorization: "Token " + localStorage.getItem('token') }
     })
       .then(response => {
-        if (counter === 0) {
-          dispatch(dispatchTakesFirstTimeSuccess(response.data, chunkId));
-        } else {
-          dispatch(dispatchTakesSuccess(response.data, chunkId));
-        }
+        // if (counter === 0) {
+        //   dispatch(dispatchTakesFirstTimeSuccess(response.data, chunkId));
+        // } else {
+          dispatch(dispatchTakesSuccess(response.data, selectedChunk, chunkId));
+        //}
       })
       .catch(error => {
         dispatch(dispatchChunksFailed(error));
@@ -173,12 +173,13 @@ export function dispatchTakesFirstTimeSuccess(takesResponse, chunkId) {
   };
 }
 
-export function dispatchTakesSuccess(takesResponse, chunkId) {
+export function dispatchTakesSuccess(takesResponse, selectedChunk, chunkId) {
   takesResponse.map(take => (take.chunkId = chunkId));
 
   return {
     type: 'FETCH_TAKE_SUCCESS',
     takes: takesResponse,
+    selectedChunk
   };
 }
 

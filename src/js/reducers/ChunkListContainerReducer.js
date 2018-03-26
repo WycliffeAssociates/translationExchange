@@ -14,7 +14,8 @@ const INITIAL_STATE = {
     notifyFlag: false,
     update: false,
     chapterId:'',
-    takesToExport: []
+    takesToExport: [],
+    selectedChunk: 1
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -34,7 +35,8 @@ export default (state = INITIAL_STATE, action) => {
         case "FETCH_TAKE_SUCCESS":
             return {
                  ...state,
-                takes: state.takes.concat(action.takes)
+                takes: action.takes,
+                selectedChunk: action.selectedChunk
             };
         case "UPDATE_CHUNK_HAS_COMMENTS":
             return{

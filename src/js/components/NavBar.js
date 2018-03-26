@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import jdenticon from 'jdenticon';
 import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
 import Menu, { Item as MenuItem, Divider } from 'rc-menu';
 import Dropdown from 'rc-dropdown';
+import 'rc-dropdown/assets/index.css';
+import { getAudioTakes } from '../actions'
 
 class NavBar extends Component {
   constructor(props) {
@@ -11,15 +14,14 @@ class NavBar extends Component {
     this.state ={
       displayLogOut: false,
       chunkNumSelected: 1,
-    }
+    };
 
   }
 
   componentDidMount() {
     const {loggedInUser}= this.props;
     jdenticon.update('#ActiveUser', loggedInUser);
-    //debugger;
-}
+  }
 
 
   logOut() {
@@ -34,10 +36,8 @@ class NavBar extends Component {
   onSelect({key, item}) {
     const chunkId =key;
     const {chunkNum} = item.props;
-
-    console.log(`${chunkId} chunk Id`);
-    console.log(`${chunkId} chunk number`);
-    debugger;
+    this.setState({chunkNumSelected: chunkNum});
+    this.props.getAudioTakes(chunkId, chunkNum);
   }
 
   onVisibleChange(visible) {
@@ -184,9 +184,14 @@ const TextContainer = styled.div`
 
 `;
 
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({getAudioTakes}, dispatch);
+
+};
+
 const mapStateToProps = state => {
   const {loggedInUser} = state.user;
-  return {loggedInUser}
+  return {loggedInUser};
 
-}
-export default connect(mapStateToProps)(NavBar);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
