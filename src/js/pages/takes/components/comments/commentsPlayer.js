@@ -15,20 +15,13 @@ class CommentsPlayer extends Component {
     this.handlePosChange = this.handlePosChange.bind(this);
     this.finishedPlaying = this.finishedPlaying.bind(this);
     this.toggleButton = this.toggleButton.bind(this);
-    this.duration = this.duration.bind(this);
+
   }
 
   handlePosChange(e) {
     this.setState({
       pos: e.originalArgs[0],
     });
-  }
-
-  duration(e) {
-
-    if (this.props.pointer > 0) {
-      this.setState({ play: true });
-    }
   }
 
   toggleButton() {
@@ -66,7 +59,6 @@ class CommentsPlayer extends Component {
             onPosChange={this.handlePosChange}
             playing={this.state.play}
             options={{ cursorWidth: 2, progressColor: '#eff0f2', cursorColor: '#3791D5', barWidth: 2, hideScrollbar: true, normalize: true, height: 50, waveColor: '#3791D5' }}
-            onReady={this.duration}
             onFinish={this.finishedPlaying}
           />
         </div>

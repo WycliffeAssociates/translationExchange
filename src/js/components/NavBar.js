@@ -20,7 +20,11 @@ class NavBar extends Component {
 
   componentDidMount() {
     const {loggedInUser}= this.props;
+    
     jdenticon.update('#ActiveUser', loggedInUser);
+    if (loggedInUser === null) {
+      //get
+    }
   }
 
 
@@ -47,11 +51,11 @@ class NavBar extends Component {
   render() {
 
     const {chunkNumSelected} = this.state;
-    const {loggedInUser, book, language, history, chunks}= this.props;
+    const {loggedInUser, book, language, history, chunks, chapter}= this.props;
 
     const menu = (
       <Menu onSelect={ ky=> this.onSelect(ky)}>
-        {chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>)}
+        { this.props.kanban ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>): ''}
       </Menu>
     );
 
@@ -67,18 +71,25 @@ class NavBar extends Component {
           </TextIconContainer>
           <TextIconContainer onClick={()=> history.push(`/projects?lang=${language.slug}`)} >
             <i class="material-icons">chrome_reader_mode</i>
-            <Text>{language.name}</Text>
+            <Text> Chapter {chapter.number}</Text>
           </TextIconContainer>
           <TextIconContainer selected={true}>
             <i class="material-icons">graphic_eq</i>
-            <Dropdown
-              trigger={['click']}
-              overlay={menu}
-              animation="slide-up"
-              onVisibleChange={this.onVisibleChange()}
-            >
-              <Text>Chunk {chunkNumSelected}</Text>
-            </Dropdown>
+
+            {
+              this.props.kanban ?
+                <Dropdown
+                  trigger={['click']}
+                  overlay={menu}
+                  animation="slide-up"
+                  onVisibleChange={this.onVisibleChange()}
+                >
+                  <Text>Chunk {chunkNumSelected}</Text>
+                </Dropdown>
+                :
+                ''
+            }
+
 
           </TextIconContainer>
 
