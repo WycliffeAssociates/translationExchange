@@ -1,6 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+import {fadeIn} from 'react-animations';
 import jdenticon from 'jdenticon';
 import TopBar from './TakeCardComponents/TakeCardTopIcon';
 import BottomButtons from './TakeCardComponents/TakeCardBottomButtons';
@@ -243,18 +244,21 @@ export class TakeCard extends React.Component {
 
 }
 
+const fadeInAnimations =keyframes`${fadeIn}`
+
 const Container = styled.div`
 background: white;
 border-top: solid 0.04vw lightgray;
 border-left: solid 0.04vw lightgray;
 box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.4);
-width: 18vw;
+width: 15vw;
 height: inherit;
 border-radius: 0.3vw;
 overflow: hidden;
 border-bottom: none;
 text-align: left;
 margin-top: 1vw;
+animation: ${fadeInAnimations} 1s ease-in;
 
 `;
 

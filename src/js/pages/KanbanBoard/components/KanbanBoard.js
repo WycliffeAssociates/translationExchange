@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import img from '../../../../assets/images/obs-en-01-01.jpg';
+
 import KanbanColumn from './KanbanColumn';
 
 
@@ -61,9 +62,11 @@ export default class KanbanBoard extends React.Component {
 
 }
 
+
+
 const Container = styled.div`
   display: flex;
-  flex: 1;
+  width:100vw;;
   flex-direction: row;
   justify-content: space-between;
   background: url(${img});

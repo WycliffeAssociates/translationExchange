@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import TakeCard from '../../takes/newComponents/TakeCard/TakeCard';
 import update from 'immutability-helper';
 import {DropTarget} from 'react-dnd';
@@ -152,6 +153,8 @@ class KanbanColumn extends React.Component {
 
 }
 
+
+
 const Column = styled.div`
   height: auto;
   width: auto;
@@ -159,6 +162,7 @@ const Column = styled.div`
   padding: 2vw;
   margin: 1vw;
   border-radius: 1vw;
+
 
 `;
 
