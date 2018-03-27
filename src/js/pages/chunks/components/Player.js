@@ -11,6 +11,7 @@ class Player extends Component {
     super(props);
     this.state = {
       playing: false,
+      id:null,
     };
     this.play = this.play.bind(this);
     this.ended = this.ended.bind(this);
@@ -36,13 +37,13 @@ class Player extends Component {
 
 
   render() {
-    const { owner_icon_hash, comments} = this.props;
-    const id = owner_icon_hash.slice(0, 8);
+    const { comments} = this.props;
+    const id = comments.owner_icon_hash.slice(0, 8);
 
     return (
       <Container>
         <IdenticonContainer>
-          <Identicon onClick={()=>this.play()} id={`canvas${id}`} data-jdenticon-hash={owner_icon_hash} />
+          <Identicon onClick={()=>this.play()} id={`canvas${id}`} data-jdenticon-hash={comments.owner_icon_hash} />
           <ReactPlayer url={`${config.streamingUrl}${comments.owner_name_audio}`} playing={this.state.playing} onEnded={()=> this.ended()}  />
 
         </IdenticonContainer>
