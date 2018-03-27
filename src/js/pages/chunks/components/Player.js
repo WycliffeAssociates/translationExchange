@@ -29,18 +29,20 @@ class Player extends Component {
 
   componentDidMount() {
     const {owner_icon_hash} =this.props.comments || '' ;
-    jdenticon.update(`#canvas${owner_icon_hash}` , owner_icon_hash);
+    const id = owner_icon_hash.slice(0, 8);
+    jdenticon.update(`#canvas${id}` , owner_icon_hash);
 
   }
 
 
   render() {
-    const { id, owner_icon_hash, comments} = this.props;
+    const { owner_icon_hash, comments} = this.props;
+    const id = owner_icon_hash.slice(0, 8);
 
     return (
       <Container>
         <IdenticonContainer>
-          <Identicon onClick={()=>this.play()} id={`canvas${owner_icon_hash}`} data-jdenticon-hash={owner_icon_hash} />
+          <Identicon onClick={()=>this.play()} id={`canvas${id}`} data-jdenticon-hash={owner_icon_hash} />
           <ReactPlayer url={`${config.streamingUrl}${comments.owner_name_audio}`} playing={this.state.playing} onEnded={()=> this.ended()}  />
 
         </IdenticonContainer>
