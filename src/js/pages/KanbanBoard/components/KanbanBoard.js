@@ -57,9 +57,9 @@ export default class KanbanBoard extends React.Component {
     return (
       <Container>
 
-        <KanbanColumn listId ={1} icon= {1} array = {column1} />
-        <KanbanColumn listId ={2} icon= {2} array = {column2} />
-        <KanbanColumn listId ={3} icon= {3} array = {column3} />
+        <KanbanColumn listId ={1} icon= {1} array = {column1} patchTake = {this.props.patchTake} />
+        <KanbanColumn listId ={2} icon= {2} array = {column2} patchTake = {this.props.patchTake} />
+        <KanbanColumn listId ={3} icon= {3} array = {column3} patchTake ={this.props.patchTake} />
         <KanbanColumn listId ={4} icon= {4} array = {publishedColumn} />
 
 

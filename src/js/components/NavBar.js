@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import jdenticon from 'jdenticon';
-import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
 import Menu, { Item as MenuItem } from 'rc-menu';
+import QueryString from 'query-string';
 import Dropdown from 'rc-dropdown';
 import 'rc-dropdown/assets/index.css';
 
@@ -20,7 +19,6 @@ class NavBar extends Component {
 
   componentDidMount() {
     const {loggedInUser}= this.props;
-
     jdenticon.update('#ActiveUser', loggedInUser);
     if (loggedInUser === null) {
       //get
@@ -41,7 +39,7 @@ class NavBar extends Component {
     const chunkId =key;
     const {chunkNum} = item.props;
     this.setState({chunkNumSelected: chunkNum});
-    this.props.getAudioTakes(chunkId, chunkNum);
+    this.props.getTakes(chunkId, chunkNum);
   }
 
   onVisibleChange(visible) {
@@ -51,8 +49,8 @@ class NavBar extends Component {
   render() {
 
     const {chunkNumSelected} = this.state;
-    const {loggedInUser, book, language, history, chunks, chapter}= this.props;
-
+    const {loggedInUser, book, history, chunks, chapterNum, location}= this.props;
+    const searchBar = QueryString.stringify(location.search);
     const menu = (
       <Menu onSelect={ ky=> this.onSelect(ky)}>
         { this.props.kanban ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>): ''}
@@ -67,11 +65,11 @@ class NavBar extends Component {
         <IconsContainer>
           <TextIconContainer onClick={()=> history.push('/projects')}>
             <i class="material-icons">book</i>
-            <Text>{/*book.name*/} book</Text>
+            <Text>{searchBar.book}</Text>
           </TextIconContainer>
-          <TextIconContainer onClick={()=> history.push(`/projects?lang=${language.slug}`)} >
+          <TextIconContainer  >
             <i class="material-icons">chrome_reader_mode</i>
-            {/* <Text> Chapter {chapter.number}</Text> */}
+            { <Text> Chapter {chapterNum}</Text> }
           </TextIconContainer>
           <TextIconContainer selected={true}>
             <i class="material-icons">graphic_eq</i>

@@ -13,7 +13,7 @@ export const getAudioTakes = (chunkId, selectedChunk) => {
         // if (counter === 0) {
         //   dispatch(dispatchTakesFirstTimeSuccess(response.data, chunkId));
         // } else {
-          dispatch(dispatchTakesSuccess(response.data, selectedChunk, chunkId));
+          //dispatch(dispatchTakesSuccess(response.data, selectedChunk, chunkId));
         //}
       })
       .catch(error => {

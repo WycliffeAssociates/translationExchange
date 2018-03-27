@@ -21,12 +21,10 @@ export default class ComponentName extends React.Component {
   }
 
 
+
   render() {
 
-    const { takes } = this.props;
-    const chunkNum = this.props.selectedChunk;
-		const chapterNum = this.props.chapter.number;
-
+    const { takes, chunkNum , chapterNum} = this.props;
     return (
       this.state.utilityPanel?
         <UtilityPanel >
@@ -77,7 +75,7 @@ padding-top: 1vw;`;
 const UtilityPanel = styled.div`
   background: #2D2D2D;
    padding: 1vw;
-   flex: 0.18;
+   flex: 1;
    width: 26vw;
    height: 52.6vw;
    overflow: auto;

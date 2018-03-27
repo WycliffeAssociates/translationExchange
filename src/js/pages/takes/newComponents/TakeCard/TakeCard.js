@@ -282,28 +282,28 @@ const WaveformContainer = styled.div`
   margin-bottom: 0.5vw;
 `;
 
-const mapStateToProps = state => {
-  const { mode, playlist, playlistMode } = state.updatePlaylist;
-  const { displayText } = state.geolocation;
-  const users = state.user;
-  return { mode, playlistMode, playlist, displayText, users };
-};
-
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    addToPlaylist,
-    playTake,
-    multipleTakes,
-    clearPlaylist,
-    removeTakeFromPlaylist,
-    stopAudio,
-    updateTime,
-    playAudio,
-    getComments,
-  }, dispatch);
-
-};
+// const mapStateToProps = state => {
+//   const { mode, playlist, playlistMode } = state.updatePlaylist;
+//   const { displayText } = state.geolocation;
+//   const users = state.user;
+//   return { mode, playlistMode, playlist, displayText, users };
+// };
+//
+//
+// const mapDispatchToProps = dispatch => {
+//   return bindActionCreators({
+//     addToPlaylist,
+//     playTake,
+//     multipleTakes,
+//     clearPlaylist,
+//     removeTakeFromPlaylist,
+//     stopAudio,
+//     updateTime,
+//     playAudio,
+//     getComments,
+//   }, dispatch);
+//
+// };
 
 
 TakeCard.propTypes = {
@@ -318,13 +318,14 @@ TakeCard.propTypes = {
 const takeSource = {
   beginDrag(props, monitor, component) {
 
-    return { index: props.index, rating: props.rating, take: props, active: props.active};
+    return { index: props.id, rating: props.rating, take: props, active: props.active};
   },
   endDrag(props, monitor) {
     const item = monitor.getItem();
     const dropResult = monitor.getDropResult();
     if (dropResult && dropResult.listId !== item.rating) {
-      props.removeTake(item.index);
+    //  props.removeTake(item.index);
+      console.log(item.take.published, dropResult.listId, item.take);
       props.makeChanges(
         item.take.published,
         dropResult.listId,

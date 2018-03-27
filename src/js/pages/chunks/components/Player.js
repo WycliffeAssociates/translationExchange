@@ -11,13 +11,13 @@ class Player extends Component {
     super(props);
     this.state = {
       playing: false,
+      id:null,
     };
     this.play = this.play.bind(this);
     this.ended = this.ended.bind(this);
   }
 
   play() {
-    console.log(this.props.comments.owner_icon_hash)
 
     this.setState({playing: true});
 
@@ -30,18 +30,20 @@ class Player extends Component {
 
   componentDidMount() {
     const {owner_icon_hash} =this.props.comments || '' ;
-    jdenticon.update(`#canvas${owner_icon_hash}` , owner_icon_hash);
+    const id = owner_icon_hash.slice(0, 8);
+    jdenticon.update(`#canvas${id}` , owner_icon_hash);
 
   }
 
 
   render() {
-    const { id, owner_icon_hash, comments} = this.props;
+    const { comments} = this.props;
+    const id = comments.owner_icon_hash.slice(0, 8);
 
     return (
       <Container>
         <IdenticonContainer>
-          <Identicon onClick={()=>this.play()} id={`canvas${owner_icon_hash}`} data-jdenticon-hash={owner_icon_hash} />
+          <Identicon onClick={()=>this.play()} id={`canvas${id}`} data-jdenticon-hash={comments.owner_icon_hash} />
           <ReactPlayer url={`${config.streamingUrl}${comments.owner_name_audio}`} playing={this.state.playing} onEnded={()=> this.ended()}  />
 
         </IdenticonContainer>

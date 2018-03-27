@@ -11,6 +11,9 @@ class KanbanColumn extends React.Component {
     this.state = {
       take: this.props,
     };
+
+    this.makeChanges = this.makeChanges.bind(this);
+    this.removeTake = this.removeTake.bind(this);
   }
 
   pushTake(take) {
@@ -127,7 +130,7 @@ class KanbanColumn extends React.Component {
           <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', overflow: 'auto'}}>
             {
               this.props.array.map((take) => {
-                return (<TakeCard {...take} /> );
+                return (<TakeCard {...take} makeChanges= {this.makeChanges} removeTake = {this.removeTake} /> );
               })
             }
           </div>
