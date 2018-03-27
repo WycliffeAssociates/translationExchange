@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Toggle from 'react-toggle';
 import Comments from '../pages/chunks/components/Comments';
 
-export default class ComponentName extends React.Component {
+export default class UtilityPanel extends React.Component {
 
   constructor(props) {
     super(props);
@@ -25,9 +25,10 @@ export default class ComponentName extends React.Component {
   render() {
 
     const { takes, chunkNum , chapterNum} = this.props;
+
     return (
       this.state.utilityPanel?
-        <UtilityPanel >
+        <UtilityPanelContainer >
 
 
           <UtilityNavigation>
@@ -54,7 +55,7 @@ export default class ComponentName extends React.Component {
             this.props.chunks.map((chunk,index) => this.props.createChunkList(chunk, index))
           }
 
-        </UtilityPanel>
+        </UtilityPanelContainer>
         :
 
         <UtilityPanelNotVisible>
@@ -72,11 +73,11 @@ const UtilityPanelNotVisible = styled.div`
 margin-top: 1vw;
 padding-top: 1vw;`;
 
-const UtilityPanel = styled.div`
+const UtilityPanelContainer = styled.div`
   background: #2D2D2D;
    padding: 1vw;
-   flex: 1;
-   width: 26vw;
+   flex: 0.2;
+   width: 18vw;
    height: 52.6vw;
    overflow: auto;
   border-bottom: 1px solid #969595;

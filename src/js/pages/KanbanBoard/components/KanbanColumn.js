@@ -131,7 +131,7 @@ class KanbanColumn extends React.Component {
     }
 
     return connectDropTarget(
-      <div style={{background: isOver? 'yellow': ''}}>
+      <div style={{background: isOver? '#009CFF': ''}}>
         <Column>
           <div>
             <center> {icon} </center>
@@ -143,6 +143,22 @@ class KanbanColumn extends React.Component {
                 return (<TakeCard {...take} makeChanges= {this.makeChanges} removeTake = {this.removeTake} displayText = {this.props.displayText} /> );
               })
             }
+
+
+            <TakePlaceHolder>
+
+              <div>
+                <center>
+                  <label style={{display: 'block'}}> <i className = "fa fa-bars" /> </label>
+                  <br />
+                  <label style={{display: 'block'}}> Drag Here </label>
+                </center>
+              </div>
+
+            </TakePlaceHolder>
+
+
+
           </div>
 
         </Column>
@@ -154,13 +170,28 @@ class KanbanColumn extends React.Component {
 
 const Column = styled.div`
   height: auto;
-  width: auto;
+  width: inherit;
   background: rgba(45,45,45,0.5);
   padding: 2vw;
   margin: 1vw;
   border-radius: 1vw;
+  flex: 0.2;
 
 `;
+
+
+
+const TakePlaceHolder = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 13.5vw;
+	border: dashed 1.6px white;
+	width: 15vw;
+	color: white;
+	margin-top: 1vw;
+	font-size: 1.1vw;
+	`;
 
 const takeTarget = {
   drop(props, monitor, component) {

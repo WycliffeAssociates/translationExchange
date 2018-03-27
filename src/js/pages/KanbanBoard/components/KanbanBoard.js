@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import img from '../../../../assets/images/obs-en-01-01.jpg';
 import KanbanColumn from './KanbanColumn';
 
 
@@ -47,6 +46,8 @@ export default class KanbanBoard extends React.Component {
     });
 
     return (
+
+
       <Container>
 
         <KanbanColumn listId ={1} icon= {1} array = {column1} patchTake = {this.props.patchTake} takes={this.props.takes} displayText = {this.props.displayText} />
@@ -56,17 +57,18 @@ export default class KanbanBoard extends React.Component {
 
 
       </Container>
+
     );
   }
 
 }
 
 const Container = styled.div`
+
+  flex: 1
   display: flex;
-  flex: 1;
   flex-direction: row;
   justify-content: space-between;
-  background: url(${img});
-  background-repeat: no-repeat;
-  background-size: cover;
- `;
+  align-self: space-between;
+
+`;

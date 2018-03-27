@@ -247,13 +247,14 @@ background: white;
 border-top: solid 0.04vw lightgray;
 border-left: solid 0.04vw lightgray;
 box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.4);
-width: 18vw;
+width: 15vw;
 height: inherit;
 border-radius: 0.3vw;
 overflow: hidden;
 border-bottom: none;
 text-align: left;
 margin-top: 1vw;
+cursor: pointer;
 
 `;
 

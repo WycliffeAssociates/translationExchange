@@ -8,9 +8,11 @@ import {getChunks, getTakes, getComments, patchTake} from '../../actions';
 import UtilityPanel from '../../components/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
+import img from '../../../assets/images/obs-en-01-01.jpg';
 
 
-class ComponentName extends React.Component {
+
+class KanbanPage extends React.Component {
 
   constructor(props) {
     super(props);
@@ -40,12 +42,10 @@ class ComponentName extends React.Component {
         <KanbanContainer>
 
           <KanbanBoard  {...this.props} />
+
           <UtilityPanel chapterNum={query.chapter_num} {...this.props} createChunkList = {this.createChunkList} />
 
-
         </KanbanContainer>
-
-
 
         <SourceAudio />
       </KanbanPageContainer>
@@ -55,13 +55,17 @@ class ComponentName extends React.Component {
 }
 
 const KanbanPageContainer = styled.div`
+
 `;
 
 const KanbanContainer = styled.div`
  display: flex;
- flex-direction: row;
  height: 90vh;
  width: 100vw;
+ flex-direction: row;
+ background: url(${img});
+ background-repeat: no-repeat;
+ background-size: cover;
 `;
 //
 // const KanbanBoard = styled.div`
@@ -98,4 +102,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(ComponentName);
+export default connect(mapStateToProps,mapDispatchToProps)(KanbanPage);
