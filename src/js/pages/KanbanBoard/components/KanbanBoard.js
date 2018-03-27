@@ -10,12 +10,6 @@ export default class KanbanBoard extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    console.log(this.props, 'PROPS FOR KANBAN BOARD');
-
-  }
-
-
   render() {
     let column1 = [];
     let column2 = [];
@@ -23,8 +17,6 @@ export default class KanbanBoard extends React.Component {
     let publishedColumn = [];
 
     this.props.takes.forEach((take) => {
-      console.log(take.rating);
-      console.log(take.published);
       switch (take.rating) {
         case 0:
           column1.push(take);
@@ -57,10 +49,10 @@ export default class KanbanBoard extends React.Component {
     return (
       <Container>
 
-        <KanbanColumn listId ={1} icon= {1} array = {column1} />
-        <KanbanColumn listId ={2} icon= {2} array = {column2} />
-        <KanbanColumn listId ={3} icon= {3} array = {column3} />
-        <KanbanColumn listId ={4} icon= {4} array = {publishedColumn} />
+        <KanbanColumn listId ={1} icon= {1} array = {column1} patchTake = {this.props.patchTake} takes={this.props.takes} displayText = {this.props.displayText} />
+        <KanbanColumn listId ={2} icon= {2} array = {column2} patchTake = {this.props.patchTake} takes={this.props.takes} displayText = {this.props.displayText} />
+        <KanbanColumn listId ={3} icon= {3} array = {column3} patchTake ={this.props.patchTake} takes={this.props.takes} displayText = {this.props.displayText} />
+        <KanbanColumn listId ={4} icon= {4} array = {publishedColumn} patchTake ={this.props.patchTake} takes={this.props.takes} displayText = {this.props.displayText} />
 
 
       </Container>

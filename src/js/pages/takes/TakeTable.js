@@ -55,7 +55,6 @@ class TakeTable extends Component {
 
 		for (var i=0; i<this.props.takes.length; i++) {
 
-			console.log(this.props.takes[i].published, 'RATING');
 
 			if (this.props.takes[i].published) {
 				itemPublised = true;
@@ -64,7 +63,6 @@ class TakeTable extends Component {
 		}
 
 
-		console.log(this.props, 'Props from Take table');
 		return (
 			<Grid.Column >
 				<Table textAlign="center" style={{background: 'rgba(45,45,45,0.3)'}}>

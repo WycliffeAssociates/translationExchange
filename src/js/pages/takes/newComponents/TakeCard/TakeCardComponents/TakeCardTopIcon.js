@@ -19,7 +19,7 @@ export default class TakeCardTopIcon extends React.Component {
         </DragIcon>
 
         <CardInfo>
-          <h3 style={{alignSelf: 'center'}}> {/*this.props.displayText.take */ 'Take Id'} {this.props.count} </h3>
+          <h3 style={{alignSelf: 'center'}}> {this.props.displayText.take} {this.props.count} </h3>
           <p style={{color: 'lightgray', fontStyle: 'italic', fontWeight: '100', marginTop: '-0.8vw'}}> 03/13/17 </p>
         </CardInfo>
 

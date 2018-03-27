@@ -19,6 +19,12 @@ export default (state = INITIAL_STATE, action) => {
         chunks: action.chunks,
       };
 
+    case 'PATCH_TAKE_SUCCESS':
+      return {
+        ...state,
+        takes: action.updatedTakes.slice(),
+      };
+
     default: return state;
   }
 };

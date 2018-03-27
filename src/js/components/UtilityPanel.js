@@ -73,7 +73,7 @@ padding-top: 1vw;`;
 const UtilityPanel = styled.div`
   background: #2D2D2D;
    padding: 1vw;
-   flex: 0.18;
+   flex: 1;
    width: 26vw;
    height: 52.6vw;
    overflow: auto;

@@ -238,24 +238,31 @@ export const patchTake = (
   updatingDeletedTake,
   chunkId
 ) => {
+  console.log(patch, 'WHATEVER PATCH IS SUPPOSED TO BE');
+  console.log(takes, 'takes ');
   return function(dispatch) {
     return axios
-      .patch(config.apiUrl + "takes/" + takeId + "/", patch,{
-        headers: { Authorization: "Token " + localStorage.getItem('token') }
-    })
+      .patch(config.apiUrl + 'takes/' + takeId + '/', patch,{
+        headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+      })
       .then(response => {
         //find correct take to update
         let listOfTakes = takes;
-        let takeIdToUpdate;
-        takeIdToUpdate = listOfTakes
-          .map(takes => {
-            return takes.id;
-          })
-          .indexOf(takeId);
+        let takeIdToUpdate = takeId;
+        let takeToUpdateIndex;
         let updatedTakeInfo = response.data;
         updatedTakeInfo.chunkId = chunkId;
-        listOfTakes[takeIdToUpdate] = updatedTakeInfo;
+        console.log(takeIdToUpdate, 'take id to update');
+
+        for (var i =0; i<listOfTakes.length; i++) {
+          if (listOfTakes[i].id === takeId) {
+            takeToUpdateIndex = i;
+            break;
+          }
+        }
+        listOfTakes[takeToUpdateIndex] = updatedTakeInfo;
         dispatch(patchTakeSuccess(listOfTakes));
+
 
       })
       .catch(error => {
@@ -280,7 +287,7 @@ export const patchTake = (
 export function patchTakeSuccess(updatedTakes) {
   return {
     type: 'PATCH_TAKE_SUCCESS',
-    updatedTakes,
+    updatedTakes: updatedTakes,
   };
 }
 export function patchTakeFailed(error) {

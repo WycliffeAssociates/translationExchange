@@ -333,7 +333,6 @@ export class ChunkListContainer extends Component {
 	}
 
 	createChunkList(chunk,index) {
-		console.log(chunk, 'A CHUNK LIST CONTAINER CHUNK');
 		return (
 			<div 	key={index} style={{marginTop: '0.5vw'}}>
 				<div style={{display: 'flex', flexDirection: 'row',
@@ -413,7 +412,7 @@ const mapDispatchToProps = dispatch => {
 			deleteCommentSuccess,
 			getSourceTakes,
 			publishFiles,
-			getComments
+			getComments,
 		}, dispatch);
 };
 

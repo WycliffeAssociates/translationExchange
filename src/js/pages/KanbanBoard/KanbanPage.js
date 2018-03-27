@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
 import KanbanBoard from './components/KanbanBoard';
-import {getChunks, getTakes, getComments} from '../../actions';
+import {getChunks, getTakes, getComments, patchTake} from '../../actions';
 import UtilityPanel from '../../components/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
@@ -23,6 +23,9 @@ class ComponentName extends React.Component {
     this.props.getComments(query.chapterId, 'chapter_id');
   }
 
+  componentDidUpdate() {
+    console.log(this.props, 'KANBAN PAGE PROPS');
+  }
 
   render() {
     const {search} = this.props.location;
@@ -76,16 +79,18 @@ const SourceAudio = styled.div`
 `;
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({getChunks, getTakes, getComments}, dispatch)
-}
+  return bindActionCreators({getChunks, getTakes, getComments, patchTake}, dispatch);
+};
 
 const mapStateToProps = state => {
   const {takes, chunks, chunkNum} = state.kanbanPage;
   const {chapterComments, chunkComments} = state.comments;
   const {loggedInUser} = state.user;
   const {chapter = {}} =state.chunkListContainer; // TODO get chapter info from new page
+  const { displayText } = state.geolocation;
 
-  return {takes, chunks, loggedInUser, chapter, chunkNum, chapterComments, chunkComments}
+
+  return {takes, chunks, loggedInUser, chapter, chunkNum, chapterComments, chunkComments, displayText};
   // all the state variables that you want to map to props
 };
 
