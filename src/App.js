@@ -64,6 +64,7 @@ class App extends Component {
           <Route  path="/takes" component={ChunkListContainer} />
           <Route  path="/user" component={User} />
           <Route path ="/newComponents" component={KanbanPage} />
+          <Route path ="/kanbanPage" component={KanbanPage} />
           <Route path="*" component={NotFound} />
         </Switch>
 

@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import jdenticon from 'jdenticon';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import Menu, { Item as MenuItem, Divider } from 'rc-menu';
+import Menu, { Item as MenuItem } from 'rc-menu';
 import Dropdown from 'rc-dropdown';
 import 'rc-dropdown/assets/index.css';
-import { getAudioTakes } from '../actions'
+
 
 class NavBar extends Component {
   constructor(props) {
@@ -20,7 +20,11 @@ class NavBar extends Component {
 
   componentDidMount() {
     const {loggedInUser}= this.props;
+
     jdenticon.update('#ActiveUser', loggedInUser);
+    if (loggedInUser === null) {
+      //get
+    }
   }
 
 
@@ -47,12 +51,11 @@ class NavBar extends Component {
   render() {
 
     const {chunkNumSelected} = this.state;
-    const {loggedInUser, book, language, history, chunks}= this.props;
+    const {loggedInUser, book, language, history, chunks, chapter}= this.props;
 
     const menu = (
       <Menu onSelect={ ky=> this.onSelect(ky)}>
-        {//chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>)
-        }
+        { this.props.kanban ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>): ''}
       </Menu>
     );
 
@@ -68,18 +71,25 @@ class NavBar extends Component {
           </TextIconContainer>
           <TextIconContainer onClick={()=> history.push(`/projects?lang=${language.slug}`)} >
             <i class="material-icons">chrome_reader_mode</i>
-            <Text>{/*language.name*/ language}</Text>
+            {/* <Text> Chapter {chapter.number}</Text> */}
           </TextIconContainer>
           <TextIconContainer selected={true}>
             <i class="material-icons">graphic_eq</i>
-            <Dropdown
-              trigger={['click']}
-              overlay={menu}
-              animation="slide-up"
-              onVisibleChange={this.onVisibleChange()}
-            >
-              <Text>Chunk {chunkNumSelected}</Text>
-            </Dropdown>
+
+            {
+              this.props.kanban ?
+                <Dropdown
+                  trigger={['click']}
+                  overlay={menu}
+                  animation="slide-up"
+                  onVisibleChange={this.onVisibleChange()}
+                >
+                  <Text>Chunk {chunkNumSelected}</Text>
+                </Dropdown>
+                :
+                ''
+            }
+
 
           </TextIconContainer>
 
@@ -185,14 +195,5 @@ const TextContainer = styled.div`
 
 `;
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({getAudioTakes}, dispatch);
 
-};
-
-const mapStateToProps = state => {
-  const {loggedInUser} = state.user;
-  return {loggedInUser};
-
-};
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default NavBar;

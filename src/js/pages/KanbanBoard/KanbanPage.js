@@ -1,31 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
 import KanbanBoard from './components/KanbanBoard';
+import {getChunks, getAudioTakes} from '../../actions';
 //import UtilityPanel from '../../components/UtilityPanel';
 import styled from 'styled-components';
-import {bindActionCreators} from 'redux';
+import 'css/takes.css';
 
-import {
-  addToPlaylist,
-  playTake,
-  stopAudio,
-  getSelectedProjectInfo,
-  setSourceProject,
-  resetInfo,
-  patchTake,
-  deleteTake,
-  chapterUpdate,
-  deleteComment,
-  markedAsPublished,
-  saveComment,
-  getComments,
-  getAudioTakes,
-  deleteTakeSuccess,
-  deleteCommentSuccess,
-  getSourceTakes,
-  publishFiles,
-} from './../../actions';
 
 class ComponentName extends React.Component {
 
@@ -33,12 +16,19 @@ class ComponentName extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    const t = this.props;
+    const {search} = this.props.location;
+    const query = QueryString.parse(search);
+    this.props.getChunks(1);
+  }
+
 
   render() {
 
     return (
-      <div>
-        <NavBar />
+      <KanbanPageContainer>
+        <NavBar kanban={true} {...this.props} />
 
 
         <KanbanContainer>
@@ -51,11 +41,14 @@ class ComponentName extends React.Component {
 
 
         <SourceAudio />
-      </div>
+      </KanbanPageContainer>
     );
   }
 
 }
+
+const KanbanPageContainer = styled.div`
+`;
 
 const KanbanContainer = styled.div`
  display: flex;
@@ -86,41 +79,17 @@ const SourceAudio = styled.div`
   width: 100vw;
 `;
 
-const mapStateToProps = state => {
-  const { displayText = '' } = state.geolocation;
-  const { direction } = state.direction;
-  const { playlistMode } = state.updatePlaylist;
-  const { chunkComments, chapterComments } = state.comments;
-
-  const { selectedChunk=1, takes, loaded = false, error = '',  chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
-  return {selectedChunk, chunkComments, chapterComments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
-
-};
-
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      addToPlaylist,
-      playTake,
-      stopAudio,
-      getSelectedProjectInfo,
-      setSourceProject,
-      resetInfo,
-      patchTake,
-      deleteTake,
-      chapterUpdate,
-      deleteComment,
-      markedAsPublished,
-      saveComment,
-      getAudioTakes,
-      deleteTakeSuccess,
-      deleteCommentSuccess,
-      getSourceTakes,
-      publishFiles,
-      getComments,
-    }, dispatch);
+  return bindActionCreators({getChunks, getAudioTakes}, dispatch); // add actions
 };
 
+const mapStateToProps = state => {
+  const {takes, chunks} = state.kanbanPage;
+  const {loggedInUser} = state.user;
+  const { displayText } = state.geolocation;
+  return {takes, chunks, loggedInUser, displayText};
+  // all the state variables that you want to map to props
+};
 
 
 export default connect(mapStateToProps,mapDispatchToProps)(ComponentName);
