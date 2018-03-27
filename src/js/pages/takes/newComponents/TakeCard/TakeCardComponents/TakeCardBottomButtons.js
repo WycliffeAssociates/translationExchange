@@ -36,12 +36,12 @@ export default class TakeCardBottomButtons extends React.Component {
       <PlayTakeContainer>
 
         <PlayTake  style={{display: playing? 'none': ''}} onClick= {() => this.props.playTakeFromCard()}>
-          {play} {this.convertToMinutes(this.props.take.duration)}
+          {play} {this.convertToMinutes(this.props.duration)}
         </PlayTake>
 
 
         <PlayTake style={{display: playing? '': 'none' }} onClick= {() => this.props.playTakeFromCard()}>
-          {pause} {this.convertToMinutes(this.props.take.duration)}
+          {pause} {this.convertToMinutes(this.props.duration)}
         </PlayTake>
 
 

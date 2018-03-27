@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import img from '../../../../assets/images/obs-en-01-01.jpg';
-import TakeCard from '../../takes/newComponents/TakeCard/TakeCard';
+import KanbanColumn from './KanbanColumn';
+
 
 export default class KanbanBoard extends React.Component {
 
@@ -9,37 +10,58 @@ export default class KanbanBoard extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    console.log(this.props, 'PROPS FOR KANBAN BOARD');
+
+  }
+
 
   render() {
+    let column1 = [];
+    let column2 = [];
+    let column3 = [];
+    let publishedColumn = [];
+
+    this.props.takes.forEach((take) => {
+      console.log(take.rating);
+      console.log(take.published);
+      switch (take.rating) {
+        case 0:
+          column1.push(take);
+          break;
+
+        case 1:
+          column1.push(take);
+          break;
+
+        case 2:
+          column2.push(take);
+          break;
+
+        case 3:
+          if (take.published == true) {
+            publishedColumn.push(take);
+          }
+
+          else {
+            column3.push(take);
+          }
+          break;
+
+        default:
+          column1.push(take);
+          break;
+      }
+    });
 
     return (
       <Container>
 
-        <div style ={{height: 'auto', width: 'inherit', background: 'rgba(45,45,45,0.5)', padding: '2vw', color: 'white', marginTop: '1vw'}}>
-        {
-        //  <TakeCard />
-        }
-        </div>
+        <KanbanColumn listId ={1} icon= {1} array = {column1} />
+        <KanbanColumn listId ={2} icon= {2} array = {column2} />
+        <KanbanColumn listId ={3} icon= {3} array = {column3} />
+        <KanbanColumn listId ={4} icon= {4} array = {publishedColumn} />
 
-        <div style ={{height: 'auto', width: 'inherit', background: 'rgba(45,45,45,0.5)', padding: '2vw', color: 'white' , marginTop: '1vw'}}>
-
-        Column
-
-        </div>
-
-
-        <div style ={{height: 'auto', width: 'inherit', background: 'rgba(45,45,45,0.5)', padding: '2vw', color: 'white' , marginTop: '1vw'}}>
-
-        Column
-
-        </div>
-
-
-        <div style ={{height: 'auto', width: 'inherit', background: 'rgba(45,45,45,0.5)', padding: '2vw', color: 'white', marginTop: '1vw'}}>
-
-        Column
-
-        </div>
 
       </Container>
     );
@@ -51,7 +73,7 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   background: url(${img});
   background-repeat: no-repeat;
   background-size: cover;

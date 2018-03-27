@@ -7,6 +7,7 @@ import KanbanBoard from './components/KanbanBoard';
 import {getChunks, getTakes, getComments} from '../../actions';
 import UtilityPanel from '../../components/UtilityPanel';
 import styled from 'styled-components';
+import 'css/takes.css';
 
 
 class ComponentName extends React.Component {
@@ -33,10 +34,8 @@ class ComponentName extends React.Component {
 
         <KanbanContainer>
 
-          <KanbanBoard />
-          <UtilityPanel chapterNum={query.chapter_num} {...this.props} createChunkList = {this.createChunkList} />
-
-
+          <KanbanBoard {...this.props} />
+          <UtilityPanel chapterNum={query.chapter_num} {...this.props} />
         </KanbanContainer>
 
 
@@ -49,6 +48,7 @@ class ComponentName extends React.Component {
 }
 
 const KanbanPageContainer = styled.div`
+  width: 100vw;
 `;
 
 const KanbanContainer = styled.div`

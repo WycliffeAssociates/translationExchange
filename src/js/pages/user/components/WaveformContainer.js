@@ -22,7 +22,8 @@ export default ({recordedBlob, audio, onStop, recording}) => {
           className="sound-wave"
           onStop={onStop}
           strokeColor="#009CFF"
-          backgroundColor="transparent"
+          backgroundColor="#2D2D2D"
+          visualSetting="frequencyBars"
         />
       </RecordContainer>
     </Container>

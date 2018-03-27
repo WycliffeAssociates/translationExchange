@@ -205,7 +205,7 @@ export class ChunkListContainer extends Component {
 			return (
 				<KabanContainer className="backgroundKaban">
 
-					<ChunkHeader
+					{/* <ChunkHeader
 						history={this.props.history}
 						chapterNum={chapterNum}
 						book={this.props.book}
@@ -223,7 +223,7 @@ export class ChunkListContainer extends Component {
 						number={this.props.chunks[this.state.selectedChunk-1].startv}
 						chunkId={this.props.chunks[this.state.selectedChunk-1].id}
 
-					/>
+					/> */}
 
 
 					<div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'space-between'}}>
