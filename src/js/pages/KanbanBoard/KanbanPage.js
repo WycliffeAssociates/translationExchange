@@ -25,6 +25,9 @@ class ComponentName extends React.Component {
     this.props.getComments(1, 'chapter_id');
   }
 
+  componentDidUpdate() {
+    console.log(this.props, 'KANBAN PAGE PROPS');
+  }
 
   render() {
     const {search} = this.props.location;

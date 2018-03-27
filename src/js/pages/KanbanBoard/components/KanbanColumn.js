@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import TakeCard from '../../takes/newComponents/TakeCard/TakeCard';
 import update from 'immutability-helper';
-import {DropTarget, DragSource, DragDropContext} from 'react-dnd';
+import {DropTarget} from 'react-dnd';
 
 class KanbanColumn extends React.Component {
 
@@ -58,21 +58,31 @@ class KanbanColumn extends React.Component {
           this.props.updateChosenTakeForChunk(updatedTake.id);
         }
       },
+      this.props.takes,
       this.props.chunkId
     );
   }
 
   makeChanges(isPublish, newRating, take) {
     switch (newRating) {
+      // the cases line up with the list id's specified in KanbanBoard.js 0/1 is 1 star, 2 is 2 star, 3 is 3 star, 4 is publised
+      // problem is that the max for ratings is 3. differntiation between 3 star and published is a boolean flag
       case 0:
         return this.onDrop(false, 1, take);
+
       case 1:
 
-        return this.onDrop(false, 2, take);
+        return this.onDrop(false, 1, take);
+
       case 2:
-        return this.onDrop(false, 3, take);
+        return this.onDrop(false, 2, take);
+
       case 3:
-        return this.onDrop(true, take.rating, take);
+        return this.onDrop(false, 3, take);
+
+      case 4:
+        return this.onDrop(true, 3, take);
+
       default:
         return null;
 
@@ -130,7 +140,7 @@ class KanbanColumn extends React.Component {
           <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', overflow: 'auto'}}>
             {
               this.props.array.map((take) => {
-                return (<TakeCard {...take} makeChanges= {this.makeChanges} removeTake = {this.removeTake} /> );
+                return (<TakeCard {...take} makeChanges= {this.makeChanges} removeTake = {this.removeTake} displayText = {this.props.displayText} /> );
               })
             }
           </div>
@@ -148,6 +158,7 @@ const Column = styled.div`
   background: rgba(45,45,45,0.5);
   padding: 2vw;
   margin: 1vw;
+  border-radius: 1vw;
 
 `;
 
@@ -157,7 +168,6 @@ const takeTarget = {
     const sourceObj = monitor.getItem();
     if (listId !== sourceObj.listId) {
       //component.pushTake(sourceObj.take);
-      console.log(listId);
     }
     return { listId: listId };
   },

@@ -45,7 +45,6 @@ class Chunk extends Component {
 	}
 
 	render() {
-		console.log(this.props.selectedChunk, 'this is chunk props');
 		let publish = [];
 		let onestar = [];
 		let twostar = [];

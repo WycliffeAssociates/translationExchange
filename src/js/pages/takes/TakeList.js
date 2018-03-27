@@ -84,7 +84,6 @@ export class TakeList extends Component {
 	render() {
 		/* react styled components arent allowed only element in a react drag and drop context. therfore we have to wrap it in a div first */
 		const { takes } = this.props;
-		console.log(this.props, 'TAKES LENGTH');
 
 		const { connectDropTarget } = this.props;
 

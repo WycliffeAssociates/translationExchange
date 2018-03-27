@@ -64,13 +64,11 @@ export class TakeCard extends React.Component {
   }
 
   onStop(recordedBlob) {
-    console.log(recordedBlob);
     this.setState({blob: recordedBlob.blobURL});
 
   }
   finishedPlaying() {
     this.setState({takePlaying: false});
-    console.log(this.state.takePlaying, 'finished Playing');
   }
 
   playTakeFromCard() {
@@ -160,24 +158,6 @@ export class TakeCard extends React.Component {
     );
 
   }
-
-  // moveLeft() {
-  //   if (this.props.take.is_publish) {
-  //     this.props.onMarkedForExportToggled();
-  //   } else if (this.props.take.rating > 1) {
-  //     this.props.onRatingSet(this.props.take.rating - 1);
-  //   }
-  // }
-  //
-  // moveRight() {
-  //   if (this.props.take.rating >= 3) {
-  //     this.props.onMarkedForExportToggled();
-  //   } else if (this.props.take.rating < 1) {
-  //     this.props.onRatingSet(2);
-  //   } else {
-  //     this.props.onRatingSet(this.props.take.rating + 1);
-  //   }
-  // }
 
   getTakeInfo() {
     const takeLoc = this.props.take.location;
@@ -282,30 +262,6 @@ const WaveformContainer = styled.div`
   margin-bottom: 0.5vw;
 `;
 
-// const mapStateToProps = state => {
-//   const { mode, playlist, playlistMode } = state.updatePlaylist;
-//   const { displayText } = state.geolocation;
-//   const users = state.user;
-//   return { mode, playlistMode, playlist, displayText, users };
-// };
-//
-//
-// const mapDispatchToProps = dispatch => {
-//   return bindActionCreators({
-//     addToPlaylist,
-//     playTake,
-//     multipleTakes,
-//     clearPlaylist,
-//     removeTakeFromPlaylist,
-//     stopAudio,
-//     updateTime,
-//     playAudio,
-//     getComments,
-//   }, dispatch);
-//
-// };
-
-
 TakeCard.propTypes = {
   count: propTypes.number.isRequired,
   take: propTypes.object.isRequired,
@@ -325,16 +281,21 @@ const takeSource = {
     const dropResult = monitor.getDropResult();
     if (dropResult && dropResult.listId !== item.rating) {
     //  props.removeTake(item.index);
-      console.log(item.take.published, dropResult.listId, item.take);
       props.makeChanges(
         item.take.published,
         dropResult.listId,
         item.take
       );
-
     }
 
-    console.log(item, dropResult, 'END DRAG VARIABLES');
+    else if (dropResult && dropResult.listId == 3 && item.rating == 3) {
+      props.makeChanges(
+        item.take.published,
+        dropResult.listId,
+        item.take
+      );
+    }
+
   },
 };
 
