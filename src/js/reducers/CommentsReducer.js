@@ -1,7 +1,6 @@
 const INITIAL_STATE = {
   chapterComments: [],
-  chunkComments: [],
-  takesComments: []
+  chunkComments: []
 
 };
 
@@ -18,12 +17,6 @@ export default( state= INITIAL_STATE, action) => {
       return {
         ...state,
         chapterComments: action.comments,
-      };
-
-    case 'TAKES_COMMENTS':
-      return {
-        ...state,
-        takesComments: action.comments,
       };
 
     default:

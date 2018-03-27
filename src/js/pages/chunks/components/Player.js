@@ -17,7 +17,6 @@ class Player extends Component {
   }
 
   play() {
-    console.log(this.props.comments.owner_icon_hash)
 
     this.setState({playing: true});
 

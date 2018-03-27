@@ -21,12 +21,10 @@ export default class ComponentName extends React.Component {
   }
 
 
+
   render() {
 
-    const { takes } = this.props;
-    const chunkNum = this.props.selectedChunk;
-		const chapterNum = this.props.chapter.number;
-
+    const { takes, chunkNum , chapterNum} = this.props;
     return (
       this.state.utilityPanel?
         <UtilityPanel >

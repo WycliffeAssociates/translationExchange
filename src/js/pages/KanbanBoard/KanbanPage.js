@@ -4,8 +4,8 @@ import {bindActionCreators} from 'redux';
 import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
 import KanbanBoard from './components/KanbanBoard';
-import {getChunks, getAudioTakes} from '../../actions';
-//import UtilityPanel from '../../components/UtilityPanel';
+import {getChunks, getTakes, getComments} from '../../actions';
+import UtilityPanel from '../../components/UtilityPanel';
 import styled from 'styled-components';
 
 
@@ -16,24 +16,26 @@ class ComponentName extends React.Component {
   }
 
   componentWillMount() {
-    const t = this.props;
     const {search} = this.props.location;
     const query = QueryString.parse(search);
     this.props.getChunks(query.chapterId);
+    this.props.getComments(query.chapterId, 'chapter_id');
   }
 
 
   render() {
-
+    const {search} = this.props.location;
+    const query = QueryString.parse(search);
     return (
       <KanbanPageContainer>
-        <NavBar kanban={true} {...this.props} />
+        <NavBar chapterNum={query.chapter_num} kanban={true} {...this.props} />
 
 
         <KanbanContainer>
 
           <KanbanBoard />
-          <UtilityPanel />
+          <UtilityPanel chapterNum={query.chapter_num} {...this.props} createChunkList = {this.createChunkList} />
+
 
         </KanbanContainer>
 
@@ -64,11 +66,6 @@ const KanbanContainer = styled.div`
 //   background-size: cover;
 // `;
 
-const UtilityPanel = styled.div`
-  background: #2D2D2D;
-  //height: 100vh;
-  width: 15vw;
-`;
 
 const SourceAudio = styled.div`
   position: fixed;
@@ -79,14 +76,16 @@ const SourceAudio = styled.div`
 `;
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({getChunks, getAudioTakes}, dispatch) // add actions
+  return bindActionCreators({getChunks, getTakes, getComments}, dispatch)
 }
 
 const mapStateToProps = state => {
-  const {takes, chunks} = state.kanbanPage;
+  const {takes, chunks, chunkNum} = state.kanbanPage;
+  const {chapterComments, chunkComments} = state.comments;
   const {loggedInUser} = state.user;
+  const {chapter = {}} =state.chunkListContainer; // TODO get chapter info from new page
 
-  return {takes, chunks, loggedInUser}
+  return {takes, chunks, loggedInUser, chapter, chunkNum, chapterComments, chunkComments}
   // all the state variables that you want to map to props
 };
 

@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   takes: [],
   chunks: [],
+  chunkNum: 1,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -9,6 +10,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         takes: action.takes,
+        chunkNum: action.chunkNum,
 
       };
     case 'FETCH_CHUNKS_SUCCESS':
