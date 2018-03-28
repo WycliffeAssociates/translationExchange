@@ -18,7 +18,7 @@ class ProjectContainer extends Component {
             <RecentProjectsContainer />
             <MyProjectsContainer />
           </CardsContainer>
-          <ListContainer/>
+          <ListContainer />
 
 
 

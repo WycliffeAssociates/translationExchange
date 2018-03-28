@@ -49,13 +49,17 @@ class NavBar extends Component {
   render() {
 
     const {chunkNumSelected} = this.state;
-    const {loggedInUser, book, history, chunks, chapterNum, location}= this.props;
-    const searchBar = QueryString.stringify(location.search);
-    const menu = (
-      <Menu onSelect={ ky=> this.onSelect(ky)}>
-        { this.props.kanban ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>): ''}
-      </Menu>
-    );
+    const {loggedInUser, book, history, chunks, chapterNum, location, kanban}= this.props;
+    let searchBar=''
+    let menu = '';
+    if (kanban) {
+      searchBar = QueryString.stringify(location.search);
+      menu = (
+        <Menu onSelect={ ky=> this.onSelect(ky)}>
+          { kanban ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>): ''}
+        </Menu>
+      );
+    }
 
     return (
       <Container>
@@ -67,7 +71,7 @@ class NavBar extends Component {
             <i class="material-icons">book</i>
             <Text>{searchBar.book}</Text>
           </TextIconContainer>
-          <TextIconContainer  >
+          <TextIconContainer onClick={()=> window.history.back()}  >
             <i class="material-icons">chrome_reader_mode</i>
             { <Text> Chapter {chapterNum}</Text> }
           </TextIconContainer>
@@ -75,7 +79,7 @@ class NavBar extends Component {
             <i class="material-icons">graphic_eq</i>
 
             {
-              this.props.kanban ?
+              kanban ?
                 <Dropdown
                   trigger={['click']}
                   overlay={menu}

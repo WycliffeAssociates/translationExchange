@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import Player from './Player';
+import RecordCommentsModal from './RecordCommentsModal';
 
 
 class Comments extends Component {
   constructor(props) {
     super(props);
+    this.state={ displayModal: false }
   }
+
 
   render() {
     const {comments, text} = this.props;
@@ -26,9 +29,10 @@ class Comments extends Component {
 
         </AudioContainer>
         <ButtonContainer>
-          <RecordButton>
+          <RecordButton onClick={()=>{this.setState({displayModal: true})}}>
             <i class="fas fa-microphone"></i>
           </RecordButton>
+          <RecordCommentsModal display={this.state.displayModal} />
         </ButtonContainer>
 
 

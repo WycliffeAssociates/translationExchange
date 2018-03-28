@@ -17,6 +17,11 @@ export default class ComponentName extends React.Component {
 
   }
 
+  componentDidMount(){
+    const t = this.props;
+    debugger;
+  }
+
   toggleUtilityPanel() {
     this.setState(prevState => ({utilityPanel: !prevState.utilityPanel}));
   }

@@ -27,9 +27,6 @@ class MyProjectsContainer extends Component {
           }
         </CardsContainer>
 
-
-
-
       </Container>
     );
   }
@@ -58,13 +55,14 @@ const HeaderContainer = styled.div`
 `;
 
 const CardsContainer = styled.div`
-  padding-top: 2vw;
-  display: flex;
-  flex-direction:row;
-  justify-content: space-between;
-
-
-
+padding-top: 2vw;
+width: 82.5vw;
+display: flex;
+flex-direction:row;
+justify-content: space-between;
+flex-wrap: wrap;
+height: 37vw;
+overflow-y: scroll;
 `;
 
 

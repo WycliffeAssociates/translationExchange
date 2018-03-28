@@ -41,6 +41,7 @@ const Container = styled.div`
   flex-direction: column;
   padding-top:3vw;
   padding-left: 1vw;
+
 `;
 
 const Header = styled.p`
@@ -60,9 +61,12 @@ const HeaderContainer = styled.div`
 const CardsContainer = styled.div`
   padding-top: 2vw;
   display: flex;
+  width: 82.5vw;
   flex-direction:row;
   justify-content: space-between;
-
+  flex-wrap: wrap;
+  height: 37vw;
+  overflow-y: scroll;
 
 
 `;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import ChunkListContainer from './js/pages/chunks/ChunkListContainer';
 import ProjectsListContainer from './js/pages/projects/ProjectsListContainer';
+import ProjectContainer from './js/pages/projects/ProjectContainer';
 import ChaptersContainer from './js/pages/chapters/ChaptersContainer';
 import './App.css';
 import NotFound from './js/pages/NotFound';
@@ -59,6 +60,7 @@ class App extends Component {
           <Route  path="/home" component={Home} />
           <Route  path="/welcome" component={Welcome} />
           <Route  path="/about" component={About} />
+          <Route path="/ProjectContainer" component={ProjectContainer} />
           <Route  path="/projects" component={ProjectsListContainer} />
           <Route  path="/chapters" component={ChaptersContainer} />
           <Route  path="/takes" component={ChunkListContainer} />
