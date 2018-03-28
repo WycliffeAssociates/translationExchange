@@ -12,9 +12,22 @@ class NavBar extends Component {
     super(props);
     this.state ={
       displayLogOut: false,
-      chunkNumSelected: 1,
+      chunkNumSelected: props.chunkNum,
     };
 
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.chunkNum != this.props.chunkNum) {
+    }
+  }
+
+  componentWillUpdate(nextProps) {
+    const {chunkNum} = nextProps;
+    if (chunkNum != this.props.chunkNum) {
+      this.setState({chunkNumSelected: chunkNum});
+    }
   }
 
   componentDidMount() {
@@ -82,7 +95,7 @@ class NavBar extends Component {
                   animation="slide-up"
                   onVisibleChange={this.onVisibleChange()}
                 >
-                  <Text>Chunk {chunkNumSelected}</Text>
+                  <Text>Chunk {this.props.chunkNum}</Text>
                 </Dropdown>
                 :
                 ''

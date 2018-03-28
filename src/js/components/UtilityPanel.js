@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Toggle from 'react-toggle';
 import Comments from '../pages/chunks/components/Comments';
+import ChunkPanel from '../pages/KanbanBoard/components/ChunkPanel'
 
 export default class UtilityPanel extends React.Component {
 
@@ -21,18 +22,16 @@ export default class UtilityPanel extends React.Component {
   }
 
 
-
   render() {
 
-    const { takes, chunkNum , chapterNum} = this.props;
+    const { takes, chunkNum , chapterNum, chunks, chapterComments, chunkComments} = this.props;
+    let publishedTakeLocation =null;
+    takes.map(tk=>{ if(tk.published) { publishedTakeLocation = tk.location} } );
 
     return (
       this.state.utilityPanel?
         <UtilityPanelContainer >
-
-
           <UtilityNavigation>
-
             <Toggle
               onChange={e=>this.setState({commentsTab: e.target.checked})}
               defaultChecked= {false} icons ={{
@@ -42,17 +41,15 @@ export default class UtilityPanel extends React.Component {
 
             <Hide onClick={this.toggleUtilityPanel}> Hide <i className= "fa fa-arrow-right fa-fw" /> </Hide>
 
-
-
           </UtilityNavigation>
           { !this.state.commentsTab ?
             <CommentsPanel>
-              <Comments comments={this.props.chapterComments} text= {`Chapter ${chapterNum}`} />
-              <Comments comments={this.props.chunkComments} text={`Chunk ${chunkNum}`} />
+              <Comments comments={chapterComments} text= {`Chapter ${chapterNum}`} />
+              <Comments comments={chunkComments} text={`Chunk ${chunkNum}`} />
               {takes.map(tk=> <Comments comments={tk.comment} text={`Take ${tk.take_num}`} />) }
             </CommentsPanel>
             :
-            this.props.chunks.map((chunk,index) => this.props.createChunkList(chunk, index))
+            <ChunkPanel takeLocation={publishedTakeLocation} selectedChunk={chunkNum} chunks={chunks} />
           }
 
         </UtilityPanelContainer>

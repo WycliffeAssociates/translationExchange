@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import KanbanColumn from './KanbanColumn';
 
 
+
 export default class KanbanBoard extends React.Component {
 
   constructor(props) {
@@ -10,6 +11,7 @@ export default class KanbanBoard extends React.Component {
   }
 
   render() {
+
     let column1 = [];
     let column2 = [];
     let column3 = [];
@@ -31,7 +33,10 @@ export default class KanbanBoard extends React.Component {
 
         case 3:
           if (take.published == true) {
+
             publishedColumn.push(take);
+
+          //  this.props.addPublishedTake(take,);
           }
 
           else {
@@ -45,15 +50,17 @@ export default class KanbanBoard extends React.Component {
       }
     });
 
+    const publishedTake = publishedColumn.length == 1? true: false;
+
     return (
 
 
       <Container>
-
-        <KanbanColumn listId ={1} icon= {1} array = {column1} patchTake = {this.props.patchTake} takes={this.props.takes} displayText = {this.props.displayText} />
-        <KanbanColumn listId ={2} icon= {2} array = {column2} patchTake = {this.props.patchTake} takes={this.props.takes} displayText = {this.props.displayText} />
-        <KanbanColumn listId ={3} icon= {3} array = {column3} patchTake ={this.props.patchTake} takes={this.props.takes} displayText = {this.props.displayText} />
-        <KanbanColumn listId ={4} icon= {4} array = {publishedColumn} patchTake ={this.props.patchTake} takes={this.props.takes} displayText = {this.props.displayText} />
+        {/* the listId prop is needed for moving takes between different columns */}
+        <KanbanColumn listId ={1} icon= {1} array = {column1} {...this.props} publishedTake = {publishedTake} />
+        <KanbanColumn listId ={2} icon= {2} array = {column2} {...this.props} publishedTake = {publishedTake} />
+        <KanbanColumn listId ={3} icon= {3} array = {column3} {...this.props} publishedTake = {publishedTake} />
+        <KanbanColumn listId ={4} icon= {4} array = {publishedColumn} {...this.props} publishedTake = {publishedTake} publishedColumn={publishedTake} />
 
 
       </Container>
@@ -68,7 +75,7 @@ const Container = styled.div`
   flex: 1
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-self: space-between;
+  justify-content: space-evenly;
+  // align-self: space-evenly;
 
 `;

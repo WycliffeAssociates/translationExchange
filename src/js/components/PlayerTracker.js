@@ -75,7 +75,7 @@ export default class PlayerTracker extends React.Component {
           <Input type="range"  min="0" max ={1} step="0.01" value={this.state.played? this.state.played: 0}
             onChange = {this.onSeek} />
           <ReactPlayer //url ={config.streamingUrl+ this.props.url}
-            url={config.streamingUrl+ 'media/dump/1521036382.71365860d0c5aa0-0e3f-47a5-a6b4-5bf9c01f29ff/en_ulb_b63_1jn_c01_v01-02_t03.wav'}
+            url ={config.streamingUrl+ this.props.url}
             style={{display: 'none'}}
             onProgress = {this.onProgress}
             playing = {this.state.playing}

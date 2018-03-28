@@ -7,6 +7,7 @@ import BottomButtons from './TakeCardComponents/TakeCardBottomButtons';
 import Comments from './TakeCardComponents/TakeCardComments';
 import Waveform from '../../components/audioplayer/Waveform';
 import Marker from '../../components/audioplayer/Markers';
+import Notification, {notify} from 'react-notify-toast';
 import {connect} from 'react-redux';
 import config from 'config/config';
 import { addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio, getComments  } from '../../../../actions';
@@ -27,13 +28,12 @@ export class TakeCard extends React.Component {
       recording: false,
       blob: '',
       isToggleOn: true,
-      showMarkers: false,
+      showMarkers: true,
       showMarkersColor: '',
       clear: true,
       hash: 'randomhash4324',
       playingComment: false,
-      marker: 0,
-      markerClicked: false,
+      pos: 0,
     };
 
     this.expandComments = this.expandComments.bind(this);
@@ -42,13 +42,15 @@ export class TakeCard extends React.Component {
     this.recordComment =  this.recordComment.bind(this);
     this.finishedPlaying = this.finishedPlaying.bind(this);
     this.callMarker = this.callMarker.bind(this);
+    this.dragPosition = this.dragPosition.bind(this);
 
   }
 
   componentDidMount() {
     console.log(this.props, 'PROPS FROM TAKE CARD IN COMPONENT DID MOUNT');
     const  take = this.props;
-    //this.props.getComments(take.id, 'take_id', take.order);
+
+    this.props.getComments(take.id, 'take_id', take.order);
     //this.props.dispatch(getComments('take_id', take.order));
     jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'random');
     jdenticon.update('#comment','imthemaster');
@@ -59,6 +61,9 @@ export class TakeCard extends React.Component {
     jdenticon.update('#comment','imthemaster');
   }
 
+  dragPosition(position) {
+    this.setState({pos: position, takePlaying: true});
+  }
   expandComments() {
     this.setState(prevState => ({ showComments: !prevState.showComments}));
   }
@@ -89,33 +94,28 @@ export class TakeCard extends React.Component {
 
     let receivedMarkersString = this.props.markers;
 
-    console.log(receivedMarkersString, 'received marker string');
     let receivedMarkerObject = JSON.parse(receivedMarkersString);
-    console.log(receivedMarkerObject);
 
     for (const key in receivedMarkerObject) {
-      console.log(receivedMarkerObject[key]);
       const position = (receivedMarkerObject[key] / 44100);
       const finalPosition = (position/this.props.duration)*100;
-      console.log(finalPosition, 'finalPositionFORMARKERS');
       // calculate the position of the marker
       // by dividing the marker position from the props, by the duration of the take
       // * by 100 and use that percatage to place the marker on the card in correct place
       // offset by 4 to account for the padding inside the taskList. If remove 4, marker moves all the way to the left
       //of the container, beyond the take card.
-      console.log(finalPosition);
       markerArray.push(
         <Marker
           style={{ overflow: 'visible' }}
           visibility={true}
           translate={finalPosition}
+          markerTime = {position}
           text={key}
           key = {key}
           dragPosition={this.dragPosition}
         />);
     }
 
-    console.log(markerArray, 'Marker Array');
     return (
       markerArray
     );
@@ -130,6 +130,8 @@ export class TakeCard extends React.Component {
 
     return connectDragSource (
       <div>
+        <Notification />
+
         <Container style={{opacity: isDragging? 0.5: 1}}>
           <TopBar {...this.props} />
 
@@ -139,11 +141,8 @@ export class TakeCard extends React.Component {
             <Waveform
               audioFile={config.streamingUrl+this.props.location}  playAudio={this.props.play}
               playing = {this.state.takePlaying} durationTime={this.props.duration}
-              //updateTime = {this.updateTime}
-              //initialWidth = {this.initialWidth}
+              pos = {this.state.pos}
               options= {{ cursorWidth: 2, progressColor: '#009CFF', cursorColor: '#E74C3C', barWidth: 1, hideScrollbar: true, normalize: true, height: 35, waveColor: '#969595' }}
-              markerPosition={this.state.marker} markerClicked={this.state.markerClicked}
-              resetMarkerClicked={this.resetMarkerClicked} finishedPlaying={this.finishedPlaying}
             />
           </WaveformContainer>
 
@@ -247,7 +246,7 @@ background: white;
 border-top: solid 0.04vw lightgray;
 border-left: solid 0.04vw lightgray;
 box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.4);
-width: 15vw;
+width: 15.5vw;
 height: inherit;
 border-radius: 0.3vw;
 overflow: hidden;
@@ -275,29 +274,39 @@ TakeCard.propTypes = {
 const takeSource = {
   beginDrag(props, monitor, component) {
 
-    return { index: props.id, rating: props.rating, take: props, active: props.active};
+    return { index: props.id, rating: props.rating, take: props, active: props.active, publishedTake: props.publishedTake };
   },
   endDrag(props, monitor) {
     const item = monitor.getItem();
     const dropResult = monitor.getDropResult();
     if (dropResult && dropResult.listId !== item.rating) {
     //  props.removeTake(item.index);
-      props.makeChanges(
-        item.take.published,
-        dropResult.listId,
-        item.take
-      );
+
+      if (dropResult.listId == 4) {
+        if (item.take.published == false && props.publishedTake == true) {
+          notify.show('You can only have ONE published take, Unpublish first', 'error', 3000);
+        }
+
+        else {
+          props.makeChanges(
+            item.take.published,
+            dropResult.listId,
+            item.take
+          );
+        }
+      }
     }
 
     else if (dropResult && dropResult.listId == 3 && item.rating == 3) {
+
       props.makeChanges(
         item.take.published,
         dropResult.listId,
         item.take
       );
     }
-
   },
+
 };
 
 
