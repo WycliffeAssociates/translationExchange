@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Wavesurfer from 'react-wavesurfer';
-import PlayPauseBtn from './PlayPauseBtn';
 import styled from 'styled-components';
 
-class Waveform extends Component {
+class Wave extends Component {
 
   constructor(props) {
     super(props);
@@ -18,6 +17,12 @@ class Waveform extends Component {
     this.toggleButton = this.toggleButton.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.play !== this.state.play) {
+      this.setState({ play: nextProps.play });
+    }
+}
+
   handlePosChange(e) {
     this.setState({
       pos: e.originalArgs[0],
@@ -31,6 +36,7 @@ class Waveform extends Component {
   finishedPlaying() {
 
     this.setState({ play: false, pos: 0 });
+    this.props.onFinishPlaying();
 
   }
 
@@ -40,7 +46,6 @@ class Waveform extends Component {
     return (
       <Container>
         <WaveformContainer>
-
           <Wavesurfer
             audioFile={this.props.audioFile}
             pos={pos}
@@ -50,10 +55,7 @@ class Waveform extends Component {
             onReady={this.duration}
             onFinish={this.finishedPlaying}
           />
-
         </WaveformContainer>
-        <PlayPauseBtn startPlaying= {()=>this.toggleButton()} playing={play} />
-
       </Container>
 
     );
@@ -74,4 +76,4 @@ const WaveformContainer = styled.div`
     margin-right: 5%
   `;
 
-export default Waveform;
+export default Wave;

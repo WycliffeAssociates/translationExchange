@@ -28,7 +28,6 @@ export const getTakesSuccess = (takes, chunkNum) => {
   };
 }
 
-
 export const getChunks = (chapterId) => {
   return dispatch => {
     return axios

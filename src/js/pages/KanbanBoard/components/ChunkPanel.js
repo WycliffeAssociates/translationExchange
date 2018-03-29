@@ -12,11 +12,11 @@ render() {
     console.log(this.props.takeLocation);
     return (
       <Container>
-        {this.props.chunks.map(chk =>{
+        {this.props.chunks.map((chk) =>{
           return (
             <ChunksContainer selected= {selectedChunk == chk.startv} >
               <label>Chunk {chk.startv} </label>
-              {takeLocation!= null && selectedChunk != chk.startv ?
+              {takeLocation!= null && selectedChunk == chk.startv ?
                 <PlayerTracker url={takeLocation} />
                 :
                 <CurrentLabel selected= {selectedChunk == chk.startv}>{selectedChunk == chk.startv ? 'Current' : 'Unavailable'} </CurrentLabel>

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import TakeCard from '../../takes/newComponents/TakeCard/TakeCard';
 import DragHereBox from '../../../components/DragHereBox';
 import QueryString from 'query-string';
@@ -211,6 +212,8 @@ class KanbanColumn extends React.Component {
 
 }
 
+
+
 const Column = styled.div`
   height: ${props => props.published? 'auto' : '40vw'};
   width: inherit;
@@ -241,11 +244,13 @@ const Column = styled.div`
     background: #F6F9FE;
   }
 
+
   /* Handle on hover*/
 
   ::-webkit-scrollbar-thumb: hover {
       background: #00C5FF;
   }
+
 `;
 
 const NextChunk = styled.button`

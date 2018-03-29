@@ -1,6 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+import {fadeIn} from 'react-animations';
 import jdenticon from 'jdenticon';
 import TopBar from './TakeCardComponents/TakeCardTopIcon';
 import BottomButtons from './TakeCardComponents/TakeCardBottomButtons';
@@ -55,7 +56,7 @@ export class TakeCard extends React.Component {
 
     const img = new Image();
     img.onload= () => this.props.connectDragPreview(img);
-    img.src = require('../../../../../assets/images/trash.png');
+    img.src = require('../../../../../assets/images/UnitSkeleton.png');
     //console.log(this.props, 'PROPS FROM TAKE CARD IN COMPONENT DID MOUNT');
 
   }
@@ -244,6 +245,8 @@ export class TakeCard extends React.Component {
 
 }
 
+const fadeInAnimations =keyframes`${fadeIn}`
+
 const Container = styled.div`
 background: white;
 border-top: solid 0.04vw lightgray;
@@ -256,8 +259,8 @@ overflow: hidden;
 border-bottom: none;
 text-align: left;
 margin-top: 1vw;
+animation: ${fadeInAnimations} 1s ease-in;
 cursor: pointer;
-
 `;
 
 const WaveformContainer = styled.div`

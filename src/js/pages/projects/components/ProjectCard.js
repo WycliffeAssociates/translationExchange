@@ -62,6 +62,7 @@ const Card= styled.div`
     box-shadow: 0px 1px 2px 4px rgba(0,0,0,0.2);
     overflow: hidden;
     background-color: white;
+    
 
 `;
 

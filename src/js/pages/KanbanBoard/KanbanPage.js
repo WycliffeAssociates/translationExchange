@@ -49,7 +49,8 @@ class KanbanPage extends React.Component {
         <KanbanContainer>
 
           <KanbanBoard {...this.props} />
-          <UtilityPanel chapterNum={query.chapter_num} {...this.props} createChunkList = {this.createChunkList} />
+
+          <UtilityPanel chapterNum={query.chapter_num} {...this.props} />
 
         </KanbanContainer>
 
@@ -93,7 +94,9 @@ const SourceAudio = styled.div`
 `;
 
 const mapDispatchToProps = dispatch => {
+
   return bindActionCreators({getChunks, getTakes, getComments, patchTake, addPublishedTake}, dispatch);
+
 };
 
 const mapStateToProps = state => {
@@ -104,7 +107,9 @@ const mapStateToProps = state => {
   const { displayText } = state.geolocation;
 
 
+
   return {takes, chunks, loggedInUser, chapter, chunkNum, chapterComments, chunkComments, displayText, activeChunkId, publishedTakes};
+
   // all the state variables that you want to map to props
 };
 

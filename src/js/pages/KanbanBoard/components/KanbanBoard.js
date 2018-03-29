@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import KanbanColumn from './KanbanColumn';
 
 
@@ -69,6 +70,8 @@ export default class KanbanBoard extends React.Component {
   }
 
 }
+
+
 
 const Container = styled.div`
 
