@@ -227,7 +227,7 @@ const Column = styled.div`
 
   /* width */
   ::-webkit-scrollbar {
-    width: 0.5vw;
+    width: 0.2vw;
   }
 
   /* Track */

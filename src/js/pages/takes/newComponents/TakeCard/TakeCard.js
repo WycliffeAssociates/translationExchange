@@ -47,13 +47,16 @@ export class TakeCard extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props, 'PROPS FROM TAKE CARD IN COMPONENT DID MOUNT');
     const  take = this.props;
 
     this.props.getComments(take.id, 'take_id', take.order);
-    //this.props.dispatch(getComments('take_id', take.order));
     jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'random');
     jdenticon.update('#comment','imthemaster');
+
+    const img = new Image();
+    img.onload= () => this.props.connectDragPreview(img);
+    img.src = require('../../../../../assets/images/trash.png');
+    //console.log(this.props, 'PROPS FROM TAKE CARD IN COMPONENT DID MOUNT');
 
   }
 
@@ -269,6 +272,7 @@ TakeCard.propTypes = {
   onRatingSet: propTypes.func.isRequired,
   onMarkedForExportToggled: propTypes.func.isRequired,
   takeId: propTypes.number.isRequired,
+  connectDragPreview: propTypes.func.isRequired,
 };
 
 const takeSource = {
@@ -280,7 +284,6 @@ const takeSource = {
     const item = monitor.getItem();
     const dropResult = monitor.getDropResult();
     if (dropResult && dropResult.listId !== item.rating) {
-    //  props.removeTake(item.index);
 
       if (dropResult.listId == 4) {
         if (item.take.published == false && props.publishedTake == true) {
@@ -295,6 +298,14 @@ const takeSource = {
           );
         }
       }
+
+      else {
+        props.makeChanges(
+          item.take.published,
+          dropResult.listId,
+          item.take
+        );
+      }
     }
 
     else if (dropResult && dropResult.listId == 3 && item.rating == 3) {
@@ -305,6 +316,7 @@ const takeSource = {
         item.take
       );
     }
+
   },
 
 };
@@ -314,4 +326,5 @@ export default
 DragSource('TakeCard', takeSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging(),
+  connectDragPreview: connect.dragPreview(),
 }))(TakeCard);
