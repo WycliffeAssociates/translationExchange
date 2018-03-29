@@ -23,7 +23,8 @@ export const getTakesSuccess = (takes, chunkNum) => {
   return {
     type: 'FETCH_TAKE_SUCCESS',
     takes,
-    chunkNum
+    chunkNum,
+    activeChunkId: takes[0].chunk,
   };
 }
 
@@ -53,3 +54,12 @@ export const getChunksSuccess = (chunks) => {
     chunks,
   };
 }
+
+export const addPublishedTake = (take) => {
+  return {
+    type: 'ADD_PUBLISHED_TAKE',
+    location: take.location,
+    chunk: take.chunk,
+  };
+
+};

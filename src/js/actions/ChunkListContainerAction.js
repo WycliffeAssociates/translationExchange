@@ -238,8 +238,6 @@ export const patchTake = (
   updatingDeletedTake,
   chunkId
 ) => {
-  console.log(patch, 'WHATEVER PATCH IS SUPPOSED TO BE');
-  console.log(takes, 'takes ');
   return function(dispatch) {
     return axios
       .patch(config.apiUrl + 'takes/' + takeId + '/', patch,{

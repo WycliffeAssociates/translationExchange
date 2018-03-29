@@ -8,19 +8,20 @@ class ChunkPanel extends Component {
 
 render() {
     const {selectedChunk,takeLocation} = this.props; //selectedChunk is the chunk number selected in the navbar, by default is 1
+
     return (
       <Container>
         {this.props.chunks.map(chk =>{
           return (
             <ChunksContainer selected= {selectedChunk == chk.startv} >
               <label>Chunk {chk.startv} </label>
-              {takeLocation!= null && selectedChunk== chk.startv ?
+              {takeLocation!= null && selectedChunk != chk.startv ?
                 <PlayerTracker url={takeLocation} />
                 :
                 <CurrentLabel selected= {selectedChunk == chk.startv}>{selectedChunk == chk.startv ? 'Current' : 'Unavailable'} </CurrentLabel>
               }
 
-            </ChunksContainer>)
+            </ChunksContainer>);
         })}
       </Container>
     );
@@ -44,7 +45,7 @@ const ChunksContainer = styled.div`
 
 const CurrentLabel= styled.label`
   font-style:${props=> props.selected ? ' ' : 'italic'};
-`
+`;
 
 
 

@@ -4,7 +4,7 @@ import Toggle from 'react-toggle';
 import Comments from '../pages/chunks/components/Comments';
 import ChunkPanel from '../pages/KanbanBoard/components/ChunkPanel'
 
-export default class ComponentName extends React.Component {
+export default class UtilityPanel extends React.Component {
 
   constructor(props) {
     super(props);
@@ -35,7 +35,7 @@ export default class ComponentName extends React.Component {
 
     return (
       this.state.utilityPanel?
-        <UtilityPanel >
+        <UtilityPanelContainer >
           <UtilityNavigation>
             <Toggle
               onChange={e=>this.setState({commentsTab: e.target.checked})}
@@ -57,7 +57,7 @@ export default class ComponentName extends React.Component {
             <ChunkPanel takeLocation={publishedTakeLocation} selectedChunk={chunkNum} chunks={chunks} />
           }
 
-        </UtilityPanel>
+        </UtilityPanelContainer>
         :
 
         <UtilityPanelNotVisible>
@@ -75,10 +75,11 @@ const UtilityPanelNotVisible = styled.div`
 margin-top: 1vw;
 padding-top: 1vw;`;
 
-const UtilityPanel = styled.div`
+const UtilityPanelContainer = styled.div`
   background: #2D2D2D;
    padding: 1vw;
-   width: 16vw;
+   flex: 0.2;
+   width: 18vw;
    height: 52.6vw;
    overflow: auto;
   border-bottom: 1px solid #969595;
