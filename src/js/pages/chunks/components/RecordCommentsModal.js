@@ -16,6 +16,7 @@ class RecordCommentModal extends Component {
       icon: 'mic_none',
       playing: false,
       isAudioAvailable: false,
+      jsonBlob: null,
     };
     this.onStop = this.onStop.bind(this);
     this.onFinishPlaying = this.onFinishPlaying.bind(this);
@@ -24,7 +25,25 @@ class RecordCommentModal extends Component {
   show = dimmer => () => this.setState({ dimmer, open: true });
   close = () => this.setState({open: false });
 
-  onStop(recordedBlob) { this.setState({recordedBlob, isAudioAvailable: true});}
+  onStop(recordedBlob) {
+    this.setState({recordedBlob, isAudioAvailable: true});
+      const reader = new FileReader();
+      reader.addEventListener(
+          "load",
+          () => {
+
+              this.setState({
+                  jsonBlob: reader.result
+              });
+          },
+          false
+      );
+
+
+      reader.readAsDataURL(recordedBlob.blob);
+
+
+  }
 
   startRecording = ()=>{ this.setState({recording: true, header: 'Recording...', icon: 'stop' });}
 
@@ -32,8 +51,10 @@ class RecordCommentModal extends Component {
 
   onFinishPlaying() { this.setState({icon: 'play_arrow', playing: false})}
 
-  saveComent =(recordedBlob)=> {
-    debugger;
+  saveComment =()=> {
+    const {id, type} = this.props;
+    const {jsonBlob} = this.state;
+    this.props.saveComment(jsonBlob, type, id);
   }
 
   playPause=()=> {

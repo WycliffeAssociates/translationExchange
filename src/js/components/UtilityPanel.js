@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import QueryString from 'query-string';
 import Toggle from 'react-toggle';
 import Comments from '../pages/chunks/components/Comments';
 import ChunkPanel from '../pages/KanbanBoard/components/ChunkPanel'
@@ -11,6 +12,9 @@ export default class UtilityPanel extends React.Component {
 
     this.state = {
       utilityPanel: true,
+      chapterId:null,
+      chunk_id:null
+
     };
 
     this.toggleUtilityPanel = this.toggleUtilityPanel.bind(this);
@@ -18,8 +22,9 @@ export default class UtilityPanel extends React.Component {
   }
 
   componentDidMount(){
-    const t = this.props;
-    debugger;
+      const {search} = this.props.location;
+      const query = QueryString.parse(search);
+      this.setState({chapterId: query.chapterId});
   }
 
   toggleUtilityPanel() {
@@ -28,8 +33,8 @@ export default class UtilityPanel extends React.Component {
 
 
   render() {
-
-    const { takes, chunkNum , chapterNum, chunks, chapterComments, chunkComments} = this.props;
+    const {chapterId} = this.state;
+    const { takes, chunkNum , chapterNum, chunks, chapterComments, chunkComments, activeChunkId, saveComment} = this.props;
     let publishedTakeLocation =null;
     takes.map(tk=>{ if(tk.published) { publishedTakeLocation = tk.location} } );
 
@@ -49,9 +54,21 @@ export default class UtilityPanel extends React.Component {
           </UtilityNavigation>
           { !this.state.commentsTab ?
             <CommentsPanel>
-              <Comments comments={chapterComments} text= {`Chapter ${chapterNum}`} />
-              <Comments comments={chunkComments} text={`Chunk ${chunkNum}`} />
-              {takes.map(tk=> <Comments comments={tk.comment} text={`Take ${tk.take_num}`} />) }
+              <Comments
+                  saveComment={saveComment}
+                  type='chapter_id'
+                  comments={chapterComments}
+                  text= {`Chapter ${chapterNum}`}
+                  id={chapterId}
+              />
+              <Comments
+                  saveComment={saveComment}
+                  type='chunk_id'
+                  comments={chunkComments}
+                  text={`Chunk ${chunkNum}`}
+                  id={activeChunkId} />
+              {takes.map(tk=>
+                  <Comments saveComment={saveComment} type='take_id' comments={tk.comment} text={`Take ${tk.take_num}`} id={tk.id} />) }
             </CommentsPanel>
             :
             <ChunkPanel takeLocation={publishedTakeLocation} selectedChunk={chunkNum} chunks={chunks} />

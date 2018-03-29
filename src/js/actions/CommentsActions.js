@@ -17,10 +17,6 @@ export const getComments = (query, type, takeNum) => {
           case 'chapter_id':
             dispatch(getChapterCommentsSuccess(response.data));
             break;
-          case 'take_id':
-
-            dispatch(getTakesCommentsSuccess(response.data, takeNum));
-            break;
 
           default:
 
@@ -49,11 +45,40 @@ export const getChapterCommentsSuccess= (comments)=>{
   };
 };
 
-export const getTakesCommentsSuccess= (comments, takeNum )=>{
 
-  comments.map(cm => cm.takeNum = takeNum);
-  return {
-    type: 'TAKES_COMMENTS',
-    comments,
-  };
+export const saveComment = (blobx, type, id ) => {
+    return dispatch => {
+        //dispatch(saveCommentLoading());
+        return axios
+            .post(config.apiUrl + 'comments/', {
+                comment: blobx,
+                user: 3,
+                object: id,
+                type: type
+            },{
+                headers: { Authorization: "Token " + localStorage.getItem('token') }
+            })
+            .then(response => {
+                dispatch(saveCommentSuccess(response.data));
+                debugger;
+                dispatch(getComments(id, type));
+
+                if(type === 'take_id'){
+
+                }
+
+
+            })
+            .catch(exception => {
+                //dispatch(saveCommentFailed(exception));
+
+            });
+    };
+};
+
+export const saveCommentSuccess = () =>{
+  return{
+    type:'SAVE_COMMENT_SUCCESS'
+  }
+
 };

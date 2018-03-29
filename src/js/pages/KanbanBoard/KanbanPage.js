@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
 import KanbanBoard from './components/KanbanBoard';
-import {getChunks, getTakes, getComments, patchTake, addPublishedTake} from '../../actions';
+import {getChunks, getTakes, getComments, patchTake, addPublishedTake, saveComment} from '../../actions';
 import UtilityPanel from '../../components/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
@@ -95,7 +95,7 @@ const SourceAudio = styled.div`
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({getChunks, getTakes, getComments, patchTake, addPublishedTake}, dispatch);
+  return bindActionCreators({getChunks, getTakes, getComments, patchTake, addPublishedTake, saveComment}, dispatch);
 
 };
 

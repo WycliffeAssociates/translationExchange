@@ -483,61 +483,61 @@ export function markAsPublishedFailed(error) {
   };
 }
 
-//saveComment
-export const saveComment = (
-  blobx,
-  type,
-  id,
-  success,
-  chunks,
-  chapter,
-  takes
-) => {
-  return function(dispatch) {
-    dispatch(saveCommentLoading());
-    return axios
-      .post(config.apiUrl + 'comments/', {
-        comment: blobx,
-        user: 3,
-        object: id,
-        type: type
-      },{
-        headers: { Authorization: "Token " + localStorage.getItem('token') }
-      })
-      .then(results => {
-        if (type === 'take') {
-          dispatch(saveCommentSuccess(results.data));
-          let takeIdToUpdate;
-          takeIdToUpdate = takes
-            .map(tk => {
-              return tk.id;
-            })
-            .indexOf(id);
-          takes[takeIdToUpdate].has_comment = true;
-          dispatch(updateTakesSuccess(takes));
-        } else if (type === 'chunk') {
-          dispatch(saveCommentSuccess(results.data));
-          let chunkIdToUpdate;
-          chunkIdToUpdate = chunks
-            .map(chunk => {
-              return chunk.id;
-            })
-            .indexOf(id);
-          chunks[chunkIdToUpdate].has_comment = true;
-          dispatch(updateChunksSuccess(chunks));
-        } else {
-          dispatch(saveCommentSuccess(results.data));
-          chapter.has_comment = true;
-          dispatch(updateChapterSuccess(chapter));
-        }
-        success();
-      })
-      .catch(exception => {
-        dispatch(saveCommentFailed(exception));
-        success();
-      });
-  };
-};
+// //saveComment
+// export const saveComment = (
+//   blobx,
+//   type,
+//   id,
+//   success,
+//   chunks,
+//   chapter,
+//   takes
+// ) => {
+//   return function(dispatch) {
+//     dispatch(saveCommentLoading());
+//     return axios
+//       .post(config.apiUrl + 'comments/', {
+//         comment: blobx,
+//         user: 3,
+//         object: id,
+//         type: type
+//       },{
+//         headers: { Authorization: "Token " + localStorage.getItem('token') }
+//       })
+//       .then(results => {
+//         if (type === 'take') {
+//           dispatch(saveCommentSuccess(results.data));
+//           let takeIdToUpdate;
+//           takeIdToUpdate = takes
+//             .map(tk => {
+//               return tk.id;
+//             })
+//             .indexOf(id);
+//           takes[takeIdToUpdate].has_comment = true;
+//           dispatch(updateTakesSuccess(takes));
+//         } else if (type === 'chunk') {
+//           dispatch(saveCommentSuccess(results.data));
+//           let chunkIdToUpdate;
+//           chunkIdToUpdate = chunks
+//             .map(chunk => {
+//               return chunk.id;
+//             })
+//             .indexOf(id);
+//           chunks[chunkIdToUpdate].has_comment = true;
+//           dispatch(updateChunksSuccess(chunks));
+//         } else {
+//           dispatch(saveCommentSuccess(results.data));
+//           chapter.has_comment = true;
+//           dispatch(updateChapterSuccess(chapter));
+//         }
+//         success();
+//       })
+//       .catch(exception => {
+//         dispatch(saveCommentFailed(exception));
+//         success();
+//       });
+//   };
+// };
 
 export function updateTakesSuccess(updatedTakes) {
   return {

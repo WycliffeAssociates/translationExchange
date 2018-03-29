@@ -12,7 +12,7 @@ class Comments extends Component {
 
 
   render() {
-    const {comments, text} = this.props;
+    const {comments, text, id, type, saveComment} = this.props;
 
 
     return (
@@ -32,7 +32,7 @@ class Comments extends Component {
           <RecordButton onClick={()=>{this.setState({displayModal: true})}}>
             <i class="fas fa-microphone"></i>
           </RecordButton>
-          <RecordCommentsModal display={this.state.displayModal} />
+          <RecordCommentsModal saveComment={saveComment} id={id} type={type} display={this.state.displayModal} />
         </ButtonContainer>
 
 
