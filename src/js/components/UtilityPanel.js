@@ -56,27 +56,25 @@ export default class UtilityPanel extends React.Component {
             <CommentsPanel>
               <Comments
                   saveComment={saveComment}
-                  type='chapter_id'
+                  type='chapter'
                   comments={chapterComments}
                   text= {`Chapter ${chapterNum}`}
                   id={chapterId}
               />
               <Comments
                   saveComment={saveComment}
-                  type='chunk_id'
+                  type='chunk'
                   comments={chunkComments}
                   text={`Chunk ${chunkNum}`}
                   id={activeChunkId} />
               {takes.map(tk=>
-                  <Comments saveComment={saveComment} type='take_id' comments={tk.comment} text={`Take ${tk.take_num}`} id={tk.id} />) }
+                  <Comments saveComment={saveComment} type='take' comments={tk.comment} text={`Take ${tk.take_num}`} id={tk.id} />) }
             </CommentsPanel>
             :
             <ChunkPanel takeLocation={publishedTakeLocation} selectedChunk={chunkNum} chunks={chunks} />
           }
-
         </UtilityPanelContainer>
         :
-
         <UtilityPanelNotVisible>
           <Show onClick= {this.toggleUtilityPanel}> <i className="fa fa-arrow-left fa-fw" /> Show </Show>
         </UtilityPanelNotVisible>

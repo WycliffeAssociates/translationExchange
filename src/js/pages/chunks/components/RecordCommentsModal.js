@@ -55,7 +55,7 @@ class RecordCommentModal extends Component {
     const {id, type} = this.props;
     const {jsonBlob} = this.state;
     this.props.saveComment(jsonBlob, type, id);
-  }
+  };
 
   playPause=()=> {
     let icon ='pause';
