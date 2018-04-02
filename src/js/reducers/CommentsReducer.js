@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   chapterComments: [],
-  chunkComments: []
+  chunkComments: [],
+  loadingComments:false,
 
 };
 
@@ -20,10 +21,10 @@ export default( state= INITIAL_STATE, action) => {
       };
 
     case 'SAVING_COMMENT_LOADING':
-      return{...state, loading: true};
+      return{...state, loadingComments: true};
 
     case 'COMMENT_SAVED':
-      return{...state, loading: false};
+      return{...state, loadingComments: false};
     default:
       return {
         ...state,

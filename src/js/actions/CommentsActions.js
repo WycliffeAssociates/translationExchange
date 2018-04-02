@@ -17,9 +17,7 @@ export const getComments = (query, type, takeNum) => {
           case 'chapter_id':
             dispatch(getChapterCommentsSuccess(response.data));
             break;
-
           default:
-
         }
 
       })
@@ -69,12 +67,9 @@ export const saveComment = (blobx, type, id ) => {
                 if(type === 'take_id'){
 
                 }
-
-
             })
             .catch(exception => {
                 //dispatch(saveCommentFailed(exception));
-
             });
     };
 };

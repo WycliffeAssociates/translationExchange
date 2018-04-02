@@ -19,8 +19,10 @@ class NavBar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.chunkNum != this.props.chunkNum) {
+    if (nextProps.loggedInUser != this.props.loggedInUser) {
+        jdenticon.update('#ActiveUser', nextProps.loggedInUser); // used in the case the user refresh the page
     }
+
   }
 
   componentWillUpdate(nextProps) {
@@ -32,11 +34,14 @@ class NavBar extends Component {
 
   componentDidMount() {
     const {loggedInUser}= this.props;
-    jdenticon.update('#ActiveUser', loggedInUser);
+
     if (loggedInUser === null) {
-      //get
+      this.props.getUserHash();
     }
+      jdenticon.update('#ActiveUser', loggedInUser);
   }
+
+
 
 
   logOut() {
@@ -53,6 +58,7 @@ class NavBar extends Component {
     const {chunkNum} = item.props;
     this.setState({chunkNumSelected: chunkNum});
     this.props.getTakes(chunkId, chunkNum);
+    this.props.getComments(chunkId, 'chunk_id');
   }
 
   onVisibleChange(visible) {
@@ -61,8 +67,7 @@ class NavBar extends Component {
 
   render() {
 
-    const {chunkNumSelected} = this.state;
-    const {loggedInUser, book, history, chunks, chapterNum, location, kanban}= this.props;
+    const {loggedInUser, history, chunks, chapterNum, location, kanban}= this.props;
     let searchBar=''
     let menu = '';
     if (kanban) {

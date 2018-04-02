@@ -250,22 +250,16 @@ background: white;
 border-top: solid 0.04vw lightgray;
 border-left: solid 0.04vw lightgray;
 box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.4);
-<<<<<<< HEAD
-width: 15vw;
-=======
 width: 15.5vw;
->>>>>>> ns_te_dev
 height: inherit;
 border-radius: 0.3vw;
 overflow: hidden;
 border-bottom: none;
 text-align: left;
 margin-top: 1vw;
-<<<<<<< HEAD
 animation: ${fadeInAnimations} 1s ease-in;
-=======
 cursor: pointer;
->>>>>>> ns_te_dev
+
 
 `;
 

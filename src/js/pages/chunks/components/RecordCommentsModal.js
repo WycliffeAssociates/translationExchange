@@ -37,7 +37,7 @@ class RecordCommentModal extends Component {
 
   show = dimmer => () => this.setState({ dimmer, open: true });
   close = () => {
-    this.setState({showModal: false })
+    this.setState(this.initialState());
     this.props.closeModal();
 
   };
@@ -103,8 +103,7 @@ class RecordCommentModal extends Component {
         style={{position: 'absolute', left: '30vw', top: '48vh', width: '40vw', height:'40vw'}}
       >
         <ModalContainer>
-            {}
-
+            <CloseContainer><Span onClick={()=>this.close()}>X</Span></CloseContainer>
           <WaveformContainer>
             <WaveForm
               play={playing}
@@ -130,10 +129,7 @@ class RecordCommentModal extends Component {
               </ButtonsContainer>
               :
               <ButtonsContainer>
-
                       <BlueButton onClick={this.close}> <i class="material-icons">keyboard_backspace</i>Go Back  </BlueButton>
-
-
               </ButtonsContainer>
             }
           </ControlsContainer>
@@ -147,7 +143,20 @@ class RecordCommentModal extends Component {
 
 const TextContainer = styled.div`
   margin-top: .5vw;
+  
+`;
 
+const CloseContainer= styled.div`
+  
+`;
+
+const Span = styled.span`
+color:white;
+font-size:1.8vw;
+position:absolute;
+top:0.3vw;
+right:.6vw;
+cursor:pointer;
 `;
 
 const Text = styled.p`
