@@ -19,6 +19,11 @@ export default( state= INITIAL_STATE, action) => {
         chapterComments: action.comments,
       };
 
+    case 'SAVING_COMMENT_LOADING':
+      return{...state, loading: true};
+
+    case 'COMMENT_SAVED':
+      return{...state, loading: false};
     default:
       return {
         ...state,

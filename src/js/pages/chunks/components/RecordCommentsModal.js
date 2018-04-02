@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal } from "semantic-ui-react";
-import {ReactMic} from 'react-mic';
+import timeLine from '../../../../assets/images/CommentstimeLine.png';
 import styled from 'styled-components';
 import WaveForm from './WaveForm';
 
@@ -8,22 +8,39 @@ class RecordCommentModal extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      open: false,
-      recordedBlob: null,
-      recording: false,
-      header: 'Record your comment',
-      icon: 'mic_none',
-      playing: false,
-      isAudioAvailable: false,
-      jsonBlob: null,
-    };
+    this.state = this.initialState();
     this.onStop = this.onStop.bind(this);
     this.onFinishPlaying = this.onFinishPlaying.bind(this);
+    this.baseState = this.state;
+  }
+
+  initialState(modalOpened) {
+    let showModal = false;
+    if (modalOpened){   // handle the case when the modal is already opened
+        showModal = true;
+    }
+      return {
+          recordedBlob: null,
+          recording: false,
+          header: 'Record your comment',
+          icon: 'mic_none',
+          playing: false,
+          isAudioAvailable: false,
+          jsonBlob: null,
+          showModal
+      }
+  }
+
+    componentWillReceiveProps(nextProps){
+    this.setState({showModal: nextProps.display})
   }
 
   show = dimmer => () => this.setState({ dimmer, open: true });
-  close = () => this.setState({open: false });
+  close = () => {
+    this.setState({showModal: false })
+    this.props.closeModal();
+
+  };
 
   onStop(recordedBlob) {
     this.setState({recordedBlob, isAudioAvailable: true});
@@ -39,15 +56,14 @@ class RecordCommentModal extends Component {
           false
       );
 
-
       reader.readAsDataURL(recordedBlob.blob);
-
-
   }
 
-  startRecording = ()=>{ this.setState({recording: true, header: 'Recording...', icon: 'stop' });}
+  redo = () => {this.setState(this.initialState(true))};
 
-  stopRecording = ()=>{ this.setState({ header: 'is this ok?', recording: false, icon: 'play_arrow'});}
+  startRecording = () => this.setState({recording: true, header: 'Recording...', icon: 'stop' });
+
+  stopRecording = () => this.setState({ header: 'Is this ok?', recording: false, icon: 'play_arrow'});
 
   onFinishPlaying() { this.setState({icon: 'play_arrow', playing: false})}
 
@@ -57,18 +73,18 @@ class RecordCommentModal extends Component {
     this.props.saveComment(jsonBlob, type, id);
   };
 
+
   playPause=()=> {
     let icon ='pause';
     if (this.state.playing) {
       icon='play_arrow'
     }
     this.setState({ playing: !this.state.playing, icon });
-  }
+  };
 
 
   render() {
-    const { recording, header, icon, recordedBlob, playing, isAudioAvailable } = this.state;
-    const {display}= this.props;
+    const { recording, header, icon, recordedBlob, playing, isAudioAvailable, showModal } = this.state;
     let buttonState = this.startRecording;
     if (recording) {
       buttonState = this.stopRecording;
@@ -81,12 +97,14 @@ class RecordCommentModal extends Component {
 
       <Modal
         dimmer={true}
-        open={display}
+        open={showModal}
         onClose={this.close}
         size="mini"
-        style={{position: 'absolute', left: '35vw', top: '48vh', width: '30vw'}}
+        style={{position: 'absolute', left: '30vw', top: '48vh', width: '40vw', height:'40vw'}}
       >
         <ModalContainer>
+            {}
+
           <WaveformContainer>
             <WaveForm
               play={playing}
@@ -101,16 +119,21 @@ class RecordCommentModal extends Component {
               <Text>{header}</Text>
             </TextContainer>
             <RecordButtonContainer>
-              <RecordButton onClick={buttonState}> <i class="material-icons">{icon}</i> </RecordButton>
+              <BackgroundCircle>
+                 <RecordButton onClick={buttonState}> <i style={{fontSize:'2.5vw'}} class="material-icons">{icon}</i> </RecordButton>
+              </BackgroundCircle>
             </RecordButtonContainer>
             {recordedBlob != null ?
               <ButtonsContainer>
-                <RedoButton>Redo <i class="material-icons">redo</i> </RedoButton>
+                <RedoButton onClick={this.redo}> <i class="material-icons">redo</i> Redo </RedoButton>
                 <BlueButton onClick={this.saveComment}> Yes <i class="material-icons">check</i> </BlueButton>
               </ButtonsContainer>
               :
               <ButtonsContainer>
-                <BlueButton>Go Back <i class="material-icons">keyboard_backspace</i> </BlueButton>
+
+                      <BlueButton onClick={this.close}> <i class="material-icons">keyboard_backspace</i>Go Back  </BlueButton>
+
+
               </ButtonsContainer>
             }
           </ControlsContainer>
@@ -123,15 +146,21 @@ class RecordCommentModal extends Component {
 
 
 const TextContainer = styled.div`
+  margin-top: .5vw;
 
 `;
 
 const Text = styled.p`
+  font-size: 2vw;
+  font-weight: bold;
 
 `;
 
 const RecordButtonContainer = styled.div`
-
+    width: 6vw;
+	height: 6vw;
+	position: relative;
+	font-size: 1vw;
 `;
 
 const ButtonsContainer = styled.div`
@@ -141,7 +170,24 @@ const ButtonsContainer = styled.div`
 `;
 
 const RecordButton = styled.button`
+ background-color: white;
+	height: 75%;
+	width: 75%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    cursor: pointer;
+    border-radius: 3vw;
+    color: #E74C3C;
+    outline: none;
+`;
 
+const BackgroundCircle = styled.div`
+    background-color: #EEEEEE;
+	height: 100%;
+	width: 100%;
+	border-radius: 3vw;
 `;
 
 const BlueButton= styled.button`
@@ -175,17 +221,20 @@ const RedoButton= styled.button`
 const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 30vw;
+  height: 39vw;
 `;
 
 const WaveformContainer = styled.div`
  display: flex;
  justify-content: center;
  background-color: #2D2D2D;
+ background-image: url(${timeLine});
+ background-position: 50%;
+ background-repeat: no-repeat;
+ width:100%;
 `;
 
 const ControlsContainer = styled.div`
-  width:30vw;
   flex: 1;
   display: flex;
   flex-direction: column;

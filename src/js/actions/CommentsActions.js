@@ -49,7 +49,7 @@ export const getChapterCommentsSuccess= (comments)=>{
 export const saveComment = (blobx, type, id ) => {
     debugger;
     return dispatch => {
-        //dispatch(saveCommentLoading());
+        dispatch({type: 'SAVING_COMMENT_LOADING'});
         return axios
             .post(config.apiUrl + 'comments/', {
                 comment: blobx,
@@ -63,6 +63,8 @@ export const saveComment = (blobx, type, id ) => {
                 dispatch(saveCommentSuccess(response.data));
                 debugger;
                 dispatch(getComments(id, type));
+
+                dispatch({type: 'COMMENT_SAVED'});
 
                 if(type === 'take_id'){
 

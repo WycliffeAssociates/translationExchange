@@ -7,7 +7,12 @@ import RecordCommentsModal from './RecordCommentsModal';
 class Comments extends Component {
   constructor(props) {
     super(props);
-    this.state={ displayModal: false }
+    this.state={ displayModal: false };
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  closeModal(){
+      this.setState({displayModal:false})
   }
 
 
@@ -22,28 +27,22 @@ class Comments extends Component {
           <SvgContainer>
             <SvgLine />
           </SvgContainer>
-
         </TextContainer>
         <AudioContainer>
           {comments? comments.length > 0 ? <div> {comments.map(((cm, index)=> <Player id={index} comments={cm} />  ))}</div> : <NoComments>No comments Available</NoComments> : <NoComments>No comments Available</NoComments>  }
-
         </AudioContainer>
         <ButtonContainer>
           <RecordButton onClick={()=>{this.setState({displayModal: true})}}>
             <i class="fas fa-microphone"></i>
           </RecordButton>
-          <RecordCommentsModal saveComment={saveComment} id={id} type={type} display={this.state.displayModal} />
+          <RecordCommentsModal closeModal={()=>this.closeModal()} saveComment={saveComment} id={id} type={type} display={this.state.displayModal} />
         </ButtonContainer>
-
-
-
       </Container>
     );
   }
 }
 const Container = styled.div`
   padding-top: 1vw;
-
 `;
 
 const SvgContainer = styled.div`
