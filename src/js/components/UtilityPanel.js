@@ -71,7 +71,15 @@ export default class UtilityPanel extends React.Component {
                   loadingComments={loadingComments}
               />
               {takes.map(tk=>
-                  <Comments loadingComments={loadingComments} saveComment={saveComment} type='take' comments={tk.comments} text={`Take ${tk.take_num}`} id={tk.id} />) }
+                  <Comments
+                      loadingComments={loadingComments}
+                      chunkId ={activeChunkId}
+                      chunkNum ={chunkNum}
+                      saveComment={saveComment}
+                      type='take'
+                      comments={tk.comments}
+                      text={`Take ${tk.take_num}`}
+                      id={tk.id} />) }
             </CommentsPanel>
             :
             <ChunkPanel takeLocation={publishedTakeLocation} selectedChunk={chunkNum} chunks={chunks} />

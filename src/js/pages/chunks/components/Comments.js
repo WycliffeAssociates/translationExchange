@@ -17,7 +17,7 @@ class Comments extends Component {
 
 
   render() {
-    const {comments, text, id, type, saveComment, loadingComments} = this.props;
+    const {comments, text, id, type, saveComment, loadingComments, chunkId, chunkNum} = this.props;
 
 
     return (
@@ -36,6 +36,8 @@ class Comments extends Component {
             <i class="fas fa-microphone"></i>
           </RecordButton>
           <RecordCommentsModal
+              chunkNum={chunkNum}
+              chunkId={chunkId}
               loadingComments={loadingComments}
               closeModal={()=>this.closeModal()}
               saveComment={saveComment}

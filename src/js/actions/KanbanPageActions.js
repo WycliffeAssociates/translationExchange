@@ -18,7 +18,6 @@ export const getTakes = (chunkId, chunkNum) => {  // chunkNum comes from the Nav
   };
 };
 
-
 export const getTakesSuccess = (takes, chunkNum) => {
   return {
     type: 'FETCH_TAKE_SUCCESS',
@@ -26,7 +25,7 @@ export const getTakesSuccess = (takes, chunkNum) => {
     chunkNum,
     activeChunkId: takes[0].chunk,
   };
-}
+};
 
 export const getChunks = (chapterId) => {
   return dispatch => {
@@ -53,7 +52,7 @@ export const getChunksSuccess = (chunks) => {
     type: 'FETCH_CHUNKS_SUCCESS',
     chunks,
   };
-}
+};
 
 export const addPublishedTake = (take) => {
   return {

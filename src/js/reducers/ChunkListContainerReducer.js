@@ -42,18 +42,18 @@ export default (state = INITIAL_STATE, action) => {
             return{
               ...state,
               chunks: action.updatedChunks
-            }
+            };
         case "UPDATE_TAKE_HAS_COMMENTS":
             return{
               ...state,
               takes: action.updatedTakes
-            }
+            };
 
             case "UPDATE_CHAPTER_HAS_COMMENTS":
                 return{
                   ...state,
                   chapter: action.updatedChapter
-                }
+                };
 
         case "DELETE_TAKE_SUCCESS":
             return {
@@ -78,14 +78,12 @@ export default (state = INITIAL_STATE, action) => {
            return{
              ...state,
             comments: []
-           }
+           };
 
         case "FETCH_TAKE_SUCCESS_FIRST_TIME":
-
             return {
                  ...state,
                 takes: action.takes,
-
             };
 
 
@@ -146,21 +144,21 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state, chapter: action.response,
 
-            }
+            };
         case 'MARK_AS_PUBLISHED_FAILED':
             return {
                 ...state, error: action.error
-            }
+            };
         case 'SAVE_COMMENT_LOADING':
             return { ...state, active: true };
         case 'SAVE_COMMENT_SUCCESS':
             return {
                 ...state, comments: state.comments.concat(action.comments), active: false
-            }
+            };
         case 'SAVE_COMMENT_FAILED':
             return {
                 ...state, error: action.error, active: false
-            }
+            };
         case 'RESET_STATE':
             return INITIAL_STATE;
         default: return state;

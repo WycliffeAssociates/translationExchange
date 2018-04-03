@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../../config/config';
+import {getTakes} from '../actions';
 
 export const getComments = (query, type, takeNum) => {
 
@@ -28,7 +29,7 @@ export const getComments = (query, type, takeNum) => {
 };
 
 
-export const getChunkCommentsSuccess= (comments)=>{
+export const getChunkCommentsSuccess= (comments) => {
   return {
     type: 'CHUNK_COMMENTS',
     comments,
@@ -44,10 +45,9 @@ export const getChapterCommentsSuccess= (comments)=>{
 };
 
 
-export const saveComment = (blobx, type, id ) => {
-    debugger;
+export const saveComment = (blobx, type, id, chunkId, chunkNum ) => { // chunkId & chunkNum, is used for refreshing the comments on takes
     return dispatch => {
-        dispatch({type: 'SAVING_COMMENT_LOADING'});
+        dispatch({type: 'SAVING_COMMENT_LOADING', loading: true});
         return axios
             .post(config.apiUrl + 'comments/', {
                 comment: blobx,
@@ -59,14 +59,19 @@ export const saveComment = (blobx, type, id ) => {
             })
             .then(response => {
                 dispatch(saveCommentSuccess(response.data));
-                debugger;
-                dispatch(getComments(id, type));
 
-                dispatch({type: 'COMMENT_SAVED'});
-
-                if(type === 'take_id'){
-
+                if(type === 'chunk'){
+                    dispatch(updateChunkComments(response.data));
                 }
+
+                if(type === 'chapter'){
+                    dispatch(updateChapterComments(response.data))
+                }
+
+                if(type === 'take'){
+                    dispatch(getTakes(chunkId, chunkNum));
+                }
+                dispatch({type: 'SAVING_COMMENT_LOADING', loading: false});
             })
             .catch(exception => {
                 //dispatch(saveCommentFailed(exception));
@@ -74,9 +79,26 @@ export const saveComment = (blobx, type, id ) => {
     };
 };
 
+
+export const updateChunkComments = (comment) => {
+    return {
+        type: 'UPDATE_CHUNK_COMMENTS',
+        comment
+    }
+
+};
+
+export const updateChapterComments = (comment) => {
+    return {
+        type: 'UPDATE_CHAPTER_COMMENTS',
+        comment
+    }};
+
+
 export const saveCommentSuccess = () =>{
-  return{
+  return {
     type:'SAVE_COMMENT_SUCCESS'
   }
 
 };
+

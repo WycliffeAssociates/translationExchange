@@ -67,14 +67,14 @@ class RecordCommentModal extends Component {
 
   onFinishPlaying() { this.setState({icon: 'play_arrow', playing: false})}
 
-  saveComment =()=> {
-    const {id, type} = this.props;
+  saveComment = () => {
+    const {id, type, chunkId, chunkNum} = this.props;
     const {jsonBlob} = this.state;
-    this.props.saveComment(jsonBlob, type, id);
+    this.props.saveComment(jsonBlob, type, id, chunkId, chunkNum);
   };
 
 
-  playPause=()=> {
+  playPause = () => {
     let icon ='pause';
     if (this.state.playing) {
       icon='play_arrow'
