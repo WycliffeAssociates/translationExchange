@@ -17,7 +17,8 @@ describe('ChunkContainerReducer', () => {
         selectedSourceProject: {},
         notifyFlag: false,
         update: false,
-        chapterId:''
+        chapterId:'',
+	takesToExport: []
     };
 
     it('should have initial state', () => {
