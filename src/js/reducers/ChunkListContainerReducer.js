@@ -111,10 +111,10 @@ export default (state = INITIAL_STATE, action) => {
         case "SET_ACTIVE_TO_FALSE":
             return { ...state, active: false };
 
-        case 'PATCH_TAKE_SUCCESS':
-            return {
-                ...state, takes: action.updatedTakes.slice()
-            }
+        // case 'PATCH_TAKE_SUCCESS':
+        //     return {
+        //         ...state, takes: action.updatedTakes.slice()
+        //     }
 
         case 'CHUNK_ID_CLICKED':
         return{

@@ -54,11 +54,77 @@ export const getChunksSuccess = (chunks) => {
   };
 };
 
-export const addPublishedTake = (take) => {
-  return {
-    type: 'ADD_PUBLISHED_TAKE',
-    location: take.location,
-    chunk: take.chunk,
-  };
+//patch take
+export const patchTake = (
+    takeId,
+    patch,
+    success,
+    takes
+) => {
+    return function(dispatch, getState) {
 
+        const {chunks} = getState().kanbanPage;
+
+        return axios
+            .patch(config.apiUrl + 'takes/' + takeId + '/', patch,{
+                headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+            })
+            .then(response => {
+                const chunkId = response.data.chunk;
+                const take = response.data;
+                chunks.map(chk => {
+                    if(chk.id === chunkId && patch.published){    // select the chunk that we are updating and verify if it is
+                        chk.published_take = take;                // marked as published, update the published take inside the chunk obj
+                    }
+                    if(chk.id === chunkId && !patch.published){    // unpublish take at chunk level
+                        chk.published_take = null;
+                    }
+                });
+
+
+
+                //find correct take to update
+                let listOfTakes = takes;
+                let takeToUpdateIndex;
+                let updatedTakeInfo = response.data;
+
+
+                for (var i =0; i<listOfTakes.length; i++) {
+                    if (listOfTakes[i].id === takeId) {
+                        takeToUpdateIndex = i;
+                        break;
+                    }
+                }
+                listOfTakes[takeToUpdateIndex] = updatedTakeInfo;
+                dispatch(patchTakeSuccess(listOfTakes));
+
+
+            })
+            .catch(error => {
+                let message;
+                if (error.response) {
+                    if (error.response.status === 404) {
+                        message = 'Sorry, that take does not exist!';
+
+                    } else {
+                        message =
+                            'Something went wrong. Please check your connection and try again.';
+                    }
+                } else {
+                    message =
+                        'Something went wrong. Please check your connection and try again.';
+                }
+               // dispatch(patchTakeFailed(message));
+            });
+    };
 };
+
+export function patchTakeSuccess(updatedTakes) {
+    return {
+        type: 'PATCH_TAKE_SUCCESS',
+        updatedTakes: updatedTakes,
+    };
+}
+
+
+

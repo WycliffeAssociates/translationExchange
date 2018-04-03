@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
 import KanbanBoard from './components/KanbanBoard';
-import {getChunks, getTakes, getComments, patchTake, addPublishedTake, saveComment, getUserHash} from '../../actions';
+import {getChunks, getTakes, getComments, patchTake, saveComment, getUserHash} from '../../actions';
 import UtilityPanel from '../../components/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
@@ -94,12 +94,12 @@ const SourceAudio = styled.div`
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({getChunks, getTakes, getComments, patchTake, addPublishedTake, saveComment, getUserHash}, dispatch);
+  return bindActionCreators({getChunks, getTakes, getComments, patchTake, saveComment, getUserHash}, dispatch);
 
 };
 
 const mapStateToProps = state => {
-  const {takes, chunks, chunkNum, activeChunkId, publishedTakes} = state.kanbanPage;
+  const {takes, chunks, chunkNum, activeChunkId} = state.kanbanPage;
   const {chapterComments, chunkComments, loadingComments} = state.comments;
   const {loggedInUser} = state.user;
   const {chapter = {}} =state.chunkListContainer; // TODO get chapter info from new page
@@ -107,7 +107,7 @@ const mapStateToProps = state => {
 
 
 
-  return {takes, chunks, loggedInUser, chapter, chunkNum, chapterComments, chunkComments, displayText, activeChunkId, publishedTakes};
+  return {takes, chunks, loggedInUser, chapter, chunkNum, chapterComments, chunkComments, displayText, activeChunkId};
 
   // all the state variables that you want to map to props
 };

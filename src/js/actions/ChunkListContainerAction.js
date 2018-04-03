@@ -1,6 +1,8 @@
 import axios from 'axios';
 import config from '../../config/config';
 import { notify } from 'react-notify-toast';
+import store from '../store';
+import kanbanPage from "../reducers/KanbanPageReducer";
 
 export const getAudioTakes = (chunkId, selectedChunk) => {
   return function(dispatch) {
@@ -229,65 +231,76 @@ export function setSourceProjectFailed(error) {
   };
 }
 
-//patch take
-export const patchTake = (
-  takeId,
-  patch,
-  success,
-  takes,
-  updatingDeletedTake,
-  chunkId
-) => {
-  return function(dispatch) {
-    return axios
-      .patch(config.apiUrl + 'takes/' + takeId + '/', patch,{
-        headers: { Authorization: 'Token ' + localStorage.getItem('token') },
-      })
-      .then(response => {
-        //find correct take to update
-        let listOfTakes = takes;
-        let takeIdToUpdate = takeId;
-        let takeToUpdateIndex;
-        let updatedTakeInfo = response.data;
-        updatedTakeInfo.chunkId = chunkId;
-        console.log(takeIdToUpdate, 'take id to update');
-
-        for (var i =0; i<listOfTakes.length; i++) {
-          if (listOfTakes[i].id === takeId) {
-            takeToUpdateIndex = i;
-            break;
-          }
-        }
-        listOfTakes[takeToUpdateIndex] = updatedTakeInfo;
-        dispatch(patchTakeSuccess(listOfTakes));
-
-
-      })
-      .catch(error => {
-        let message;
-        if (error.response) {
-          if (error.response.status === 404) {
-            message = 'Sorry, that take does not exist!';
-            updatingDeletedTake(chunkId);
-          } else {
-            message =
-              'Something went wrong. Please check your connection and try again.';
-          }
-        } else {
-          message =
-            'Something went wrong. Please check your connection and try again.';
-        }
-        dispatch(patchTakeFailed(message));
-      });
-  };
-};
-
-export function patchTakeSuccess(updatedTakes) {
-  return {
-    type: 'PATCH_TAKE_SUCCESS',
-    updatedTakes: updatedTakes,
-  };
-}
+// //patch take
+// export const patchTake = (
+//   takeId,
+//   patch,
+//   success,
+//   takes,
+//   updatingDeletedTake,
+//   chunkId
+// ) => {
+//   return function(dispatch, getState) {
+//
+//       const {chunks, activeChunkId} = getState().kanbanPage;
+//       debugger;
+//
+//     return axios
+//       .patch(config.apiUrl + 'takes/' + takeId + '/', patch,{
+//         headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+//       })
+//       .then(response => {
+//         debugger;
+//         if(patch.published){
+//
+//
+//
+//         }
+//
+//
+//         //find correct take to update
+//         let listOfTakes = takes;
+//         let takeIdToUpdate = takeId;
+//         let takeToUpdateIndex;
+//         let updatedTakeInfo = response.data;
+//         updatedTakeInfo.chunkId = chunkId;
+//
+//         for (var i =0; i<listOfTakes.length; i++) {
+//           if (listOfTakes[i].id === takeId) {
+//             takeToUpdateIndex = i;
+//             break;
+//           }
+//         }
+//         listOfTakes[takeToUpdateIndex] = updatedTakeInfo;
+//         dispatch(patchTakeSuccess(listOfTakes));
+//
+//
+//       })
+//       .catch(error => {
+//         let message;
+//         if (error.response) {
+//           if (error.response.status === 404) {
+//             message = 'Sorry, that take does not exist!';
+//             updatingDeletedTake(chunkId);
+//           } else {
+//             message =
+//               'Something went wrong. Please check your connection and try again.';
+//           }
+//         } else {
+//           message =
+//             'Something went wrong. Please check your connection and try again.';
+//         }
+//         dispatch(patchTakeFailed(message));
+//       });
+//   };
+// };
+//
+// export function patchTakeSuccess(updatedTakes) {
+//   return {
+//     type: 'PATCH_TAKE_SUCCESS',
+//     updatedTakes: updatedTakes,
+//   };
+// }
 export function patchTakeFailed(error) {
   return {
     type: 'PATCH_TAKE_FAILED',

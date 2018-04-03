@@ -28,12 +28,7 @@ export default (state = INITIAL_STATE, action) => {
         takes: action.updatedTakes.slice(),
       };
 
-    case 'ADD_PUBLISHED_TAKE':
-      const index = action.chunk -1;
-      return {
-        ...state,
-        //publishedTakes: [...state.publishedTakes, action.location],
-      };
+
 
     default: return state;
   }
