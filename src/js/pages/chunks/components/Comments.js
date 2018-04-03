@@ -17,7 +17,7 @@ class Comments extends Component {
 
 
   render() {
-    const {comments, text, id, type, saveComment, loadingComments, chunkId, chunkNum} = this.props;
+    const {comments, text, id, type, saveComment, uploadingComments, chunkId, chunkNum} = this.props;
 
 
     return (
@@ -38,7 +38,7 @@ class Comments extends Component {
           <RecordCommentsModal
               chunkNum={chunkNum}
               chunkId={chunkId}
-              loadingComments={loadingComments}
+              uploadingComments={uploadingComments}
               closeModal={()=>this.closeModal()}
               saveComment={saveComment}
               id={id}

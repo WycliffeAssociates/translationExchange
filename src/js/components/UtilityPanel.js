@@ -34,7 +34,7 @@ export default class UtilityPanel extends React.Component {
 
   render() {
     const {chapterId} = this.state;
-    const { takes, chunkNum , chapterNum, chunks, chapterComments, chunkComments, activeChunkId, saveComment, loadingComments} = this.props;
+    const { takes, chunkNum , chapterNum, chunks, chapterComments, chunkComments, activeChunkId, saveComment, uploadingComments} = this.props;
     let publishedTakeLocation =null;
     takes.map(tk=>{ if(tk.published) { publishedTakeLocation = tk.location} } );
 
@@ -60,7 +60,7 @@ export default class UtilityPanel extends React.Component {
                   comments={chapterComments}
                   text= {`Chapter ${chapterNum}`}
                   id={chapterId}
-                  loadingComments={loadingComments}
+                  uploadingComments={uploadingComments}
               />
               <Comments
                   saveComment={saveComment}
@@ -68,11 +68,11 @@ export default class UtilityPanel extends React.Component {
                   comments={chunkComments}
                   text={`Chunk ${chunkNum}`}
                   id={activeChunkId}
-                  loadingComments={loadingComments}
+                  uploadingComments={uploadingComments}
               />
               {takes.map(tk=>
                   <Comments
-                      loadingComments={loadingComments}
+                      uploadingComments={uploadingComments}
                       chunkId ={activeChunkId}
                       chunkNum ={chunkNum}
                       saveComment={saveComment}

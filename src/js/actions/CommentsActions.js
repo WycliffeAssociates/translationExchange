@@ -2,7 +2,7 @@ import axios from 'axios';
 import config from '../../config/config';
 import {getTakes} from '../actions';
 
-export const getComments = (query, type, takeNum) => {
+export const getComments = (query, type) => {
 
   return function(dispatch) {
     return axios
@@ -45,9 +45,9 @@ export const getChapterCommentsSuccess= (comments)=>{
 };
 
 
-export const saveComment = (blobx, type, id, chunkId, chunkNum ) => { // chunkId & chunkNum, is used for refreshing the comments on takes
+export const saveComment = (blobx, type, id, chunkId, chunkNum, callback ) => { // chunkId & chunkNum, is used for refreshing the comments on takes
     return dispatch => {
-        dispatch({type: 'SAVING_COMMENT_LOADING', loading: true});
+        dispatch({type: 'SAVE_COMMENT_LOADING', uploadingComments: true}); // used to display loading UI
         return axios
             .post(config.apiUrl + 'comments/', {
                 comment: blobx,
@@ -71,7 +71,8 @@ export const saveComment = (blobx, type, id, chunkId, chunkNum ) => { // chunkId
                 if(type === 'take'){
                     dispatch(getTakes(chunkId, chunkNum));
                 }
-                dispatch({type: 'SAVING_COMMENT_LOADING', loading: false});
+                dispatch({type: 'SAVE_COMMENT_LOADING', uploadingComments: false});
+                callback();
             })
             .catch(exception => {
                 //dispatch(saveCommentFailed(exception));

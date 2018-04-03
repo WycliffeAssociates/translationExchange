@@ -3,6 +3,7 @@ import { Modal } from "semantic-ui-react";
 import timeLine from '../../../../assets/images/CommentstimeLine.png';
 import styled from 'styled-components';
 import WaveForm from './WaveForm';
+import CommentUploading from './CommentUploading';
 
 class RecordCommentModal extends Component {
 
@@ -11,7 +12,7 @@ class RecordCommentModal extends Component {
     this.state = this.initialState();
     this.onStop = this.onStop.bind(this);
     this.onFinishPlaying = this.onFinishPlaying.bind(this);
-    this.baseState = this.state;
+    this.commentSaved = this.commentSaved.bind(this);
   }
 
   initialState(modalOpened) {
@@ -27,7 +28,8 @@ class RecordCommentModal extends Component {
           playing: false,
           isAudioAvailable: false,
           jsonBlob: null,
-          showModal
+          showModal,
+          commentSaved:false,
       }
   }
 
@@ -70,9 +72,10 @@ class RecordCommentModal extends Component {
   saveComment = () => {
     const {id, type, chunkId, chunkNum} = this.props;
     const {jsonBlob} = this.state;
-    this.props.saveComment(jsonBlob, type, id, chunkId, chunkNum);
+    this.props.saveComment(jsonBlob, type, id, chunkId, chunkNum, this.commentSaved);
   };
 
+  commentSaved(){ this.setState({commentSaved:true})}
 
   playPause = () => {
     let icon ='pause';
@@ -83,8 +86,73 @@ class RecordCommentModal extends Component {
   };
 
 
+  showRecordModal(buttonState){
+      const { recording, header, icon, recordedBlob, playing, isAudioAvailable, commentSaved } = this.state;
+
+    if(commentSaved){
+      return(
+
+          <ModalContainer>
+              <TopContainer>
+                <InfoContainer>
+                  <i style={{fontSize:'6vw'}} class="material-icons">check</i>
+                  <h1 style={{fontSize:'2.5vw'}} >Success!</h1>
+                  <p style={{fontSize:'1vw'}}>Your comment has been saved.</p>
+                </InfoContainer>
+              </TopContainer>
+              <BottomContainer>
+                <OkButtonContainer>
+                    <BlueButton onClick={this.close}> Ok </BlueButton>
+                </OkButtonContainer>
+              </BottomContainer>
+          </ModalContainer>
+
+
+      )
+    }
+
+    return(
+        <ModalContainer>
+
+            <CloseContainer><Span onClick={()=>this.close()}>X</Span></CloseContainer>
+            <WaveformContainer>
+                <WaveForm
+                    play={playing}
+                    onFinishPlaying={()=>this.onFinishPlaying()}
+                    isAudioAvailable={isAudioAvailable}
+                    recordedBlob={recordedBlob}
+                    onStop={this.onStop}
+                    recording={recording} />
+            </WaveformContainer>
+            <ControlsContainer>
+                <TextContainer>
+                    <Text>{header}</Text>
+                </TextContainer>
+                <RecordButtonContainer>
+                    <BackgroundCircle>
+                        <RecordButton onClick={buttonState}> <i style={{fontSize:'2.5vw'}} class="material-icons">{icon}</i> </RecordButton>
+                    </BackgroundCircle>
+                </RecordButtonContainer>
+                {recordedBlob != null ?
+                    <ButtonsContainer>
+                        <RedoButton onClick={this.redo}> <i class="material-icons">redo</i> Redo </RedoButton>
+                        <BlueButton onClick={this.saveComment}> Yes <i class="material-icons">check</i> </BlueButton>
+                    </ButtonsContainer>
+                    :
+                    <ButtonsContainer>
+                        <BlueButton onClick={this.close}> <i class="material-icons">keyboard_backspace</i>Go Back  </BlueButton>
+                    </ButtonsContainer>
+                }
+            </ControlsContainer>
+        </ModalContainer>
+    )
+
+
+  }
+
   render() {
-    const { recording, header, icon, recordedBlob, playing, isAudioAvailable, showModal } = this.state;
+      const { recording, recordedBlob, showModal } = this.state;
+    const {uploadingComments} = this.props;
     let buttonState = this.startRecording;
     if (recording) {
       buttonState = this.stopRecording;
@@ -102,38 +170,9 @@ class RecordCommentModal extends Component {
         size="mini"
         style={{position: 'absolute', left: '30vw', top: '48vh', width: '40vw', height:'40vw'}}
       >
-        <ModalContainer>
-            <CloseContainer><Span onClick={()=>this.close()}>X</Span></CloseContainer>
-          <WaveformContainer>
-            <WaveForm
-              play={playing}
-              onFinishPlaying={()=>this.onFinishPlaying()}
-              isAudioAvailable={isAudioAvailable}
-              recordedBlob={recordedBlob}
-              onStop={this.onStop}
-              recording={recording} />
-          </WaveformContainer>
-          <ControlsContainer>
-            <TextContainer>
-              <Text>{header}</Text>
-            </TextContainer>
-            <RecordButtonContainer>
-              <BackgroundCircle>
-                 <RecordButton onClick={buttonState}> <i style={{fontSize:'2.5vw'}} class="material-icons">{icon}</i> </RecordButton>
-              </BackgroundCircle>
-            </RecordButtonContainer>
-            {recordedBlob != null ?
-              <ButtonsContainer>
-                <RedoButton onClick={this.redo}> <i class="material-icons">redo</i> Redo </RedoButton>
-                <BlueButton onClick={this.saveComment}> Yes <i class="material-icons">check</i> </BlueButton>
-              </ButtonsContainer>
-              :
-              <ButtonsContainer>
-                      <BlueButton onClick={this.close}> <i class="material-icons">keyboard_backspace</i>Go Back  </BlueButton>
-              </ButtonsContainer>
-            }
-          </ControlsContainer>
-        </ModalContainer>
+          {uploadingComments ?
+              <CommentUploading/>
+              : this.showRecordModal(buttonState)}
       </Modal>
     );
   }
@@ -164,6 +203,12 @@ const Text = styled.p`
   font-weight: bold;
 
 `;
+
+const OkButtonContainer = styled.div`
+ 
+  
+`;
+
 
 const RecordButtonContainer = styled.div`
     width: 6vw;
@@ -209,6 +254,7 @@ const BlueButton= styled.button`
   border: none;
   text-decoration: underline;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  outline:none;
   cursor: pointer;
 `;
 
@@ -249,6 +295,28 @@ const ControlsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+`;
+
+const TopContainer = styled.div`
+  background: linear-gradient(#0076FF, #00C5FF);
+  height:30vw;
+
+`;
+
+const BottomContainer =  styled.div`
+  height:100%
+  display:flex;
+  justify-content:center;
+  align-items: center;
+`;
+
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: white;
 `;
 
 export default RecordCommentModal;

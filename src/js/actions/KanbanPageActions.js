@@ -81,8 +81,6 @@ export const patchTake = (
                     }
                 });
 
-
-
                 //find correct take to update
                 let listOfTakes = takes;
                 let takeToUpdateIndex;
@@ -97,8 +95,6 @@ export const patchTake = (
                 }
                 listOfTakes[takeToUpdateIndex] = updatedTakeInfo;
                 dispatch(patchTakeSuccess(listOfTakes));
-
-
             })
             .catch(error => {
                 let message;

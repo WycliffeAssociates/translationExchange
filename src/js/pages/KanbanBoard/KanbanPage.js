@@ -100,14 +100,14 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   const {takes, chunks, chunkNum, activeChunkId} = state.kanbanPage;
-  const {chapterComments, chunkComments, loadingComments} = state.comments;
+  const {chapterComments, chunkComments, uploadingComments} = state.comments;
   const {loggedInUser} = state.user;
   const {chapter = {}} =state.chunkListContainer; // TODO get chapter info from new page
   const { displayText } = state.geolocation;
 
 
 
-  return {takes, chunks, loggedInUser, chapter, chunkNum, chapterComments, chunkComments, displayText, activeChunkId};
+  return {takes, chunks, loggedInUser, chapter, chunkNum, chapterComments, chunkComments, displayText, activeChunkId, uploadingComments};
 
   // all the state variables that you want to map to props
 };
