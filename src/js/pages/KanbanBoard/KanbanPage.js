@@ -66,7 +66,7 @@ const KanbanPageContainer = styled.div`
 
 const KanbanContainer = styled.div`
  display: flex;
- height: inherit;
+ height: 90vh ;
  width: 100vw;
  flex-direction: row;
  background: url(${img});
@@ -86,7 +86,7 @@ const KanbanContainer = styled.div`
 const SourceAudio = styled.div`
   position: fixed;
   bottom: 0;
-  height: 5vw;
+  height: 10vh;
   background: #2D2D2D;
   width: 100vw;
   z-index: 99;

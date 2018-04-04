@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import QueryString from 'query-string';
 import Toggle from 'react-toggle';
 import Comments from '../pages/chunks/components/Comments';
-import ChunkPanel from '../pages/KanbanBoard/components/ChunkPanel'
+import ChunkPanel from '../pages/KanbanBoard/components/ChunkPanel';
 
 export default class UtilityPanel extends React.Component {
 
@@ -21,6 +21,7 @@ export default class UtilityPanel extends React.Component {
 
   }
 
+
   componentDidMount(){
       const {search} = this.props.location;
       const query = QueryString.parse(search);
@@ -36,7 +37,7 @@ export default class UtilityPanel extends React.Component {
     const {chapterId} = this.state;
     const { takes, chunkNum , chapterNum, chunks, chapterComments, chunkComments, activeChunkId, saveComment, uploadingComments} = this.props;
     let publishedTakeLocation =null;
-    takes.map(tk=>{ if(tk.published) { publishedTakeLocation = tk.location} } );
+    takes.map(tk=>{ if (tk.published) { publishedTakeLocation = tk.location} } );
 
     return (
       this.state.utilityPanel?
@@ -49,7 +50,7 @@ export default class UtilityPanel extends React.Component {
                 checked: <img src={require('../../assets/images/Audio_Wave.svg')} />,
               }}  />
 
-            <Hide onClick={this.toggleUtilityPanel}> Hide <i className= "fa fa-arrow-right fa-fw" /> </Hide>
+            <Hide onClick={this.toggleUtilityPanel}> <i className= "fa fa-arrow-right fa-fw" /> </Hide>
 
           </UtilityNavigation>
           { !this.state.commentsTab ?
@@ -87,7 +88,7 @@ export default class UtilityPanel extends React.Component {
         </UtilityPanelContainer>
         :
         <UtilityPanelNotVisible>
-          <Show onClick= {this.toggleUtilityPanel}> <i className="fa fa-arrow-left fa-fw" /> Show </Show>
+          <Show onClick= {this.toggleUtilityPanel}> <i className="fa fa-arrow-left fa-fw" /> </Show>
         </UtilityPanelNotVisible>
 
     );
@@ -106,7 +107,7 @@ const UtilityPanelContainer = styled.div`
    padding: 1vw;
    flex: 0.2;
    width: 18vw;
-   height: 52.6vw;
+   height: 50vw;
    overflow: auto;
   border-bottom: 1px solid #969595;
 `;
@@ -120,10 +121,11 @@ const UtilityNavigation = styled.div`
 
 const Hide = styled.button`
   text-decoration: underline;
-  color: #009CFF;
+  color: white;
   cursor: pointer;
   border: none;
   background: none;
+  font-size: 1.6vw;
 `;
 
 const Show = styled(Hide)`

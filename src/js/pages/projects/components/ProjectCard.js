@@ -5,7 +5,7 @@ import img1 from '../mockupdata/img1.PNG';
 
 export default class ProjectCard extends React.Component {
 
-    reviewProject -= () => {
+    reviewProject = () => {
 
     };
 

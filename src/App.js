@@ -17,6 +17,7 @@ import { DragDropContext } from 'react-dnd';
 import Notifications from 'react-notify-toast';
 import Root from './js/components/Root.js';
 import KanbanPage from './js/pages/KanbanBoard/KanbanPage';
+import CustomDragLayer from './CustomDragLayer';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 // import and configure the raven client for sentry in order to track errors
@@ -52,6 +53,7 @@ class App extends Component {
 
       <div>
         <Notifications />
+        <CustomDragLayer />
 
         <Switch>
           <Route  exact path="/" component={Root} />

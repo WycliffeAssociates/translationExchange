@@ -71,7 +71,7 @@ class NavBar extends Component {
     let searchBar=''
     let menu = '';
     if (kanban) {
-      searchBar = QueryString.stringify(location.search);
+      searchBar = QueryString.parse(location.search);
       menu = (
         <Menu onSelect={ ky=> this.onSelect(ky)}>
           { kanban ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>): ''}

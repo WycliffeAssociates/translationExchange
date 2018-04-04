@@ -5,6 +5,7 @@ import { getAudioTakes, getAudioComments, setSourceProject, getSelectedProjectIn
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
+//localStorage.setItem('token', '9e2afaaf7efbf5cfb76a038bd918280387763409');
 
 describe('chunkListContainerActions', () => {
     const store = mockStore();

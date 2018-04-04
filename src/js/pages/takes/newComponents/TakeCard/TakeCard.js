@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import styled, {keyframes} from 'styled-components';
 import {fadeIn} from 'react-animations';
 import jdenticon from 'jdenticon';
+import {getEmptyImage} from 'react-dnd-html5-backend';
 import TopBar from './TakeCardComponents/TakeCardTopIcon';
 import BottomButtons from './TakeCardComponents/TakeCardBottomButtons';
 import Comments from './TakeCardComponents/TakeCardComments';
@@ -13,7 +14,7 @@ import {connect} from 'react-redux';
 import config from 'config/config';
 import { addToPlaylist, playTake, multipleTakes, clearPlaylist, removeTakeFromPlaylist, stopAudio, updateTime, playAudio, getComments  } from '../../../../actions';
 import { bindActionCreators } from 'redux';
-import {DragSource, DropTarget} from 'react-dnd';
+import {DragSource} from 'react-dnd';
 import flow from 'lodash/flow';
 
 
@@ -48,14 +49,16 @@ export class TakeCard extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props, 'PROPS FROM TAKE CARD IN COMPONENT DID MOUNT');
     const  take = this.props;
 
     this.props.getComments(take.id, 'take_id', take.order);
-
-
     jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'random');
     jdenticon.update('#comment','imthemaster');
+
+    this.props.connectDragPreview(getEmptyImage(), {
+      captureDraggingState: true,
+    });
+    //console.log(this.props, 'PROPS FROM TAKE CARD IN COMPONENT DID MOUNT');
 
   }
 
@@ -134,7 +137,8 @@ export class TakeCard extends React.Component {
       <div>
         <Notification />
 
-        <Container style={{opacity: isDragging? 0.5: 1}}>
+
+        <Container style={{opacity: isDragging? 0.5: 1}} >
           <TopBar {...this.props} />
 
 
@@ -155,6 +159,7 @@ export class TakeCard extends React.Component {
             blob={this.state.blob} recording={this.state.recording} {...this.props}
             recordComment = {()=> this.recordComment()} onStop={this.onStop} /> : '' }
         </Container>
+
       </div>
     );
 
@@ -243,6 +248,22 @@ export class TakeCard extends React.Component {
 
 }
 
+function getStyles(props) {
+  const { left, top, isDragging } = props;
+  const transform = `translate3d(${left}px, ${top}px, 0)`;
+
+  return {
+    position: 'absolute',
+    transform,
+    WebkitTransform: transform,
+    // IE fallback: hide the real node using CSS when dragging
+    // because IE will ignore our custom "empty image" drag preview.
+    opacity: isDragging ? 0 : 1,
+    height: isDragging ? 0 : '',
+  };
+}
+
+
 const fadeInAnimations =keyframes`${fadeIn}`
 
 const Container = styled.div`
@@ -259,7 +280,7 @@ text-align: left;
 margin-top: 1vw;
 animation: ${fadeInAnimations} 1s ease-in;
 cursor: pointer;
-
+transform: translateZ(0);
 
 `;
 
@@ -275,6 +296,7 @@ TakeCard.propTypes = {
   onRatingSet: propTypes.func.isRequired,
   onMarkedForExportToggled: propTypes.func.isRequired,
   takeId: propTypes.number.isRequired,
+  connectDragPreview: propTypes.func.isRequired,
 };
 
 const takeSource = {
@@ -286,11 +308,10 @@ const takeSource = {
     const item = monitor.getItem();
     const dropResult = monitor.getDropResult();
     if (dropResult && dropResult.listId !== item.rating) {
-    //  props.removeTake(item.index);
 
       if (dropResult.listId == 4) {
         if (item.take.published == false && props.publishedTake == true) {
-          notify.show('You can only have ONE published take, Unpublish first', 'error', 3000);
+          notify.show('🚫 You can only have ONE published take, Unpublish first 🚫 ', 'warning', 5000);
         }
 
         else {
@@ -300,6 +321,14 @@ const takeSource = {
             item.take
           );
         }
+      }
+
+      else {
+        props.makeChanges(
+          item.take.published,
+          dropResult.listId,
+          item.take
+        );
       }
     }
 
@@ -311,6 +340,7 @@ const takeSource = {
         item.take
       );
     }
+
   },
 
 };
@@ -320,4 +350,5 @@ export default
 DragSource('TakeCard', takeSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging(),
+  connectDragPreview: connect.dragPreview(),
 }))(TakeCard);
