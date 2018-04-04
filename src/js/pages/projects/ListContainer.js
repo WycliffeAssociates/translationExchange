@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
+import Dropdown from 'rc-dropdown';
+import Menu, { Item as MenuItem } from 'rc-menu';
+import 'rc-dropdown/assets/index.css';
+
 
 
 
@@ -18,7 +22,7 @@ class ListContainer extends Component {
 
       <Container>
         <AvailableProjectsMenu>
-              Available Projects
+            <P>Available Projects</P>
           <ButtonsContainer>
             <UlbButton color={this.state.ulbSelected} onClick={()=> this.setState({ulbSelected: true})}>
               ULB
@@ -27,6 +31,12 @@ class ListContainer extends Component {
               UDB
             </UdbButton>
           </ButtonsContainer>
+            <BookDropDown>
+                Book
+            </BookDropDown>
+            <LanguageDropDown>
+                Language
+            </LanguageDropDown>
         </AvailableProjectsMenu>
         <AvailableProjects>
           menu
@@ -42,25 +52,39 @@ class ListContainer extends Component {
 
 const Container = styled.div`
    width: 100%;
-   text-align:center;
+   text-align: center;
+   display: flex;
+   align-items: center;
+   flex-direction:column;
+   
    
 `;
 
 const AvailableProjectsMenu = styled.div`
-
+    width:80%
+    height: 11vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 `;
 
 const AvailableProjects = styled.div`
+padding-top: 1vw;
     
 
+`;
+
+const P = styled.p`
+padding-top: 1vw;
 `;
 
 const ButtonsContainer = styled.div`
   display: flex;
   flex-direction:row;
   border: solid #000;
-  border-width: 1px;
+  border-width: 1.5px;
   border-radius: .3vw;
+  height:2vw;
 `;
 
 const UlbButton = styled.button`
@@ -81,6 +105,20 @@ const UdbButton = styled.button`
   width: 50%;
   outline:none;
   cursor:pointer;
+`;
+
+const BookDropDown = styled.div`
+ height:2vw;
+  border: solid #000;
+  border-width: 1.5px;
+  border-radius: .3vw;
+`;
+
+const LanguageDropDown = styled.div`
+  height:2vw;
+  border: solid #000;
+  border-width: 1.5px;
+  border-radius: .3vw;
 `;
 
 
