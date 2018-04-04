@@ -6,7 +6,7 @@ import moxios from 'moxios';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe.skip('chunkListContainerActions', () => {
+describe('chunkListContainerActions', () => {
   beforeEach(()=> {
     moxios.install();
   });
@@ -15,8 +15,23 @@ describe.skip('chunkListContainerActions', () => {
     moxios.uninstall();
   });
 
-  it('should FETCH_TAKE_SUCCESS_FIRST_TIME', () => {
+  it('should FETCH_TAKE_SUCCESS', () => {
+    moxios.wait(()=> {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: [{}],
+      });
+    });
 
+    const expectedActions = [
+      {type: 'FETCH_TAKE_SUCCESS', selectedChunk: undefined, takes: [{chunkId: undefined }] }];
+
+    const store = mockStore({takes: []});
+
+    return store.dispatch(getAudioTakes()).then(()=> {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
 });

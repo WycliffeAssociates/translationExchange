@@ -6,15 +6,15 @@ export const getAudioTakes = (chunkId, selectedChunk) => {
   return function(dispatch) {
     return axios
       .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`,
-      {
-        headers: { Authorization: "Token " + localStorage.getItem('token') }
-    })
+        {
+          headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+        })
       .then(response => {
         // if (counter === 0) {
         //   dispatch(dispatchTakesFirstTimeSuccess(response.data, chunkId));
         // } else {
-          //dispatch(dispatchTakesSuccess(response.data, selectedChunk, chunkId));
-        //}
+        dispatch(dispatchTakesSuccess(response.data, selectedChunk, chunkId));
+        // }
       })
       .catch(error => {
         dispatch(dispatchChunksFailed(error));
