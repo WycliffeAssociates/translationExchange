@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import loadingComment from '../../../../assets/images/loading_comments.gif'
 
@@ -15,7 +15,6 @@ export default () => {
             </ItemsContainer>
         </Container>
     );
-
 }
 
 

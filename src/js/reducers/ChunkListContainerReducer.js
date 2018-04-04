@@ -149,8 +149,8 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state, error: action.error
             };
-        case 'SAVE_COMMENT_LOADING':
-            return { ...state, active: true };
+        // case 'SAVE_COMMENT_LOADING':
+        //     return { ...state, active: true };
         case 'SAVE_COMMENT_SUCCESS':
             return {
                 ...state, comments: state.comments.concat(action.comments), active: false

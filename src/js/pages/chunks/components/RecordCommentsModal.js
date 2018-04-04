@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Modal } from "semantic-ui-react";
-import timeLine from '../../../../assets/images/CommentstimeLine.png';
 import styled from 'styled-components';
 import WaveForm from './WaveForm';
 import CommentUploading from './CommentUploading';
@@ -13,6 +12,7 @@ class RecordCommentModal extends Component {
     this.onStop = this.onStop.bind(this);
     this.onFinishPlaying = this.onFinishPlaying.bind(this);
     this.commentSaved = this.commentSaved.bind(this);
+    this.error = this.error.bind(this);
   }
 
   initialState(modalOpened) {
@@ -30,6 +30,7 @@ class RecordCommentModal extends Component {
           jsonBlob: null,
           showModal,
           commentSaved:false,
+          error: false,
       }
   }
 
@@ -72,10 +73,12 @@ class RecordCommentModal extends Component {
   saveComment = () => {
     const {id, type, chunkId, chunkNum} = this.props;
     const {jsonBlob} = this.state;
-    this.props.saveComment(jsonBlob, type, id, chunkId, chunkNum, this.commentSaved);
+    this.props.saveComment(jsonBlob, type, id, chunkId, chunkNum, this.commentSaved, this.error);
   };
 
   commentSaved(){ this.setState({commentSaved:true})}
+
+  error(){this.setState({error:true})}
 
   playPause = () => {
     let icon ='pause';
@@ -87,22 +90,35 @@ class RecordCommentModal extends Component {
 
 
   showRecordModal(buttonState){
-      const { recording, header, icon, recordedBlob, playing, isAudioAvailable, commentSaved } = this.state;
+    const { recording, header, icon, recordedBlob, playing, isAudioAvailable, commentSaved, error } = this.state;
+
+
+    let ic ='check';
+    let headerText ='Success!';
+    let text = 'Your Comment has been saved.';
+
+
+    if(error){
+        ic='error';
+        headerText='uh-ho...';
+        text = 'there was an error..'
+    }
+
 
     if(commentSaved){
       return(
 
           <ModalContainer>
-              <TopContainer>
+              <TopContainer error={error}>
                 <InfoContainer>
-                  <i style={{fontSize:'6vw'}} class="material-icons">check</i>
-                  <h1 style={{fontSize:'2.5vw'}} >Success!</h1>
-                  <p style={{fontSize:'1vw'}}>Your comment has been saved.</p>
+                  <i style={{fontSize:'6vw'}} class="material-icons">{ic}</i>
+                  <h1 style={{fontSize:'2.5vw'}} >{headerText}</h1>
+                  <p style={{fontSize:'1vw'}}>{text}</p>
                 </InfoContainer>
               </TopContainer>
               <BottomContainer>
                 <OkButtonContainer>
-                    <BlueButton onClick={this.close}> Ok </BlueButton>
+                    <BlueButton error={error} onClick={this.close}> Ok </BlueButton>
                 </OkButtonContainer>
               </BottomContainer>
           </ModalContainer>
@@ -168,7 +184,7 @@ class RecordCommentModal extends Component {
         open={showModal}
         onClose={this.close}
         size="mini"
-        style={{position: 'absolute', left: '30vw', top: '48vh', width: '40vw', height:'40vw'}}
+        style={{position: 'absolute', left: '30vw', top: '48vh', width: '40vw', height:'40vw', minWidth: '825px'}}
       >
           {uploadingComments ?
               <CommentUploading/>
@@ -205,8 +221,6 @@ const Text = styled.p`
 `;
 
 const OkButtonContainer = styled.div`
- 
-  
 `;
 
 
@@ -247,7 +261,7 @@ const BackgroundCircle = styled.div`
 const BlueButton= styled.button`
   border-radius: 20px;
   color: white;
-  background: linear-gradient(to bottom, #0076FF, #00C5FF);
+  background: linear-gradient(to bottom,${props => props.error ? '#E74C3C, #820C00': '#0076FF, #00C5FF'} );
   padding: 0.4vw 4vw;
   font-size: 1.1vw;
   font-weight: 100;
@@ -283,7 +297,6 @@ const WaveformContainer = styled.div`
  display: flex;
  justify-content: center;
  background-color: #2D2D2D;
- background-image: url(${timeLine});
  background-position: 50%;
  background-repeat: no-repeat;
  width:100%;
@@ -298,7 +311,7 @@ const ControlsContainer = styled.div`
 `;
 
 const TopContainer = styled.div`
-  background: linear-gradient(#0076FF, #00C5FF);
+  background: linear-gradient(to bottom,${props => props.error ? '#E74C3C, #820C00': '#0076FF, #00C5FF'} );
   height:30vw;
 
 `;

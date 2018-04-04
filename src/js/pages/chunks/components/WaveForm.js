@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReactMic } from 'react-mic';
+import timeLine from '../../../../assets/images/CommentstimeLine.png';
 import styled from 'styled-components';
 import Wave from './Wave';
 
@@ -35,6 +36,7 @@ height: 29vh;
 min-width: 469;
 background-position: 50%;
 background-repeat: no-repeat;
+background-image: url(${timeLine});
 background-color: #2D2D2D;
 border-top-left-radius: 7px;
 border-top-right-radius: 7px;

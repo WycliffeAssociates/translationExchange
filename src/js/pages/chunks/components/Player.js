@@ -48,9 +48,6 @@ class Player extends Component {
 
         </IdenticonContainer>
         <AudioContainer>
-          {/* <Audio id="comment" controls controlsList="nodownload notime novolume ">
-            <source style={{backgroundColor:'transparent'}} src="http://www.scricciolo.com/eurosongs/Calidris.ferruginea.wav" type="audio/wav" />
-          </Audio> */}
           <CommentsPlayer audioFile={`${config.streamingUrl}${comments.location}`} />
         </AudioContainer>
         <NewTextContainer>

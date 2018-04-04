@@ -45,7 +45,7 @@ export const getChapterCommentsSuccess= (comments)=>{
 };
 
 
-export const saveComment = (blobx, type, id, chunkId, chunkNum, callback ) => { // chunkId & chunkNum, is used for refreshing the comments on takes
+export const saveComment = (blobx, type, id, chunkId, chunkNum, callback, errorCallback ) => { // chunkId & chunkNum, is used for refreshing the comments on takes
     return dispatch => {
         dispatch({type: 'SAVE_COMMENT_LOADING', uploadingComments: true}); // used to display loading UI
         return axios
@@ -58,7 +58,6 @@ export const saveComment = (blobx, type, id, chunkId, chunkNum, callback ) => { 
                 headers: { Authorization: "Token " + localStorage.getItem('token') }
             })
             .then(response => {
-                dispatch(saveCommentSuccess(response.data));
 
                 if(type === 'chunk'){
                     dispatch(updateChunkComments(response.data));
@@ -75,7 +74,7 @@ export const saveComment = (blobx, type, id, chunkId, chunkNum, callback ) => { 
                 callback();
             })
             .catch(exception => {
-                //dispatch(saveCommentFailed(exception));
+                errorCallback();
             });
     };
 };
@@ -96,10 +95,5 @@ export const updateChapterComments = (comment) => {
     }};
 
 
-export const saveCommentSuccess = () =>{
-  return {
-    type:'SAVE_COMMENT_SUCCESS'
-  }
 
-};
 
