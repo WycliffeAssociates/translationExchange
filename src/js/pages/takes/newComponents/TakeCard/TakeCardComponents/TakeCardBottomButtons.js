@@ -29,8 +29,8 @@ export default class TakeCardBottomButtons extends React.Component {
 
   playButton() {
     const playing = this.props.takePlaying;
-    const play = <i className = "fa fa-play" />;
-    const pause = <i className = "fa fa-pause" />;
+    const play = <i className = "fa fa-play fa-fw" />;
+    const pause = <i className = "fa fa-pause fa-fw" />;
 
     return (
       <PlayTakeContainer>

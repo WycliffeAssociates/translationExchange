@@ -12,6 +12,15 @@ exports[`Home Component, StartHere has no changes 1`] = `
       as="button"
       icon="right arrow"
       labelPosition="right"
+      style={
+        Object {
+          "backgroundColor": "#14D159",
+          "boxShadow": "3px 3px 3px rgba(0,0,0,0.6)",
+          "color": "white",
+          "fontSize": "20px",
+          "padding": "1.5vw",
+        }
+      }
     />
   </Link>
 </div>

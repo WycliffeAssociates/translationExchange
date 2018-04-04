@@ -1,13 +1,13 @@
 import axios from 'axios';
 import config from '../../config/config';
-import {getComments} from './CommentsActions'
+import {getComments} from './CommentsActions';
 
 export const getTakes = (chunkId, chunkNum) => {  // chunkNum comes from the NavBar to display on the comments section the chunk number
   return function(dispatch) {
     return axios
       .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`,
         {
-          headers: { Authorization: 'Token ' + localStorage.getItem('token') }
+          headers: { Authorization: 'Token ' + localStorage.getItem('token') },
         })
       .then(response => {
         dispatch(getTakesSuccess(response.data, chunkNum));
@@ -53,7 +53,7 @@ export const getChunksSuccess = (chunks) => {
     type: 'FETCH_CHUNKS_SUCCESS',
     chunks,
   };
-}
+};
 
 export const addPublishedTake = (take) => {
   return {

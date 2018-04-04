@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Toggle from 'react-toggle';
 import Comments from '../pages/chunks/components/Comments';
-import ChunkPanel from '../pages/KanbanBoard/components/ChunkPanel'
+import ChunkPanel from '../pages/KanbanBoard/components/ChunkPanel';
 
 export default class UtilityPanel extends React.Component {
 
@@ -17,9 +17,8 @@ export default class UtilityPanel extends React.Component {
 
   }
 
-  componentDidMount(){
-    const t = this.props;
-    debugger;
+  componentDidMount() {
+
   }
 
   toggleUtilityPanel() {
@@ -31,7 +30,7 @@ export default class UtilityPanel extends React.Component {
 
     const { takes, chunkNum , chapterNum, chunks, chapterComments, chunkComments} = this.props;
     let publishedTakeLocation =null;
-    takes.map(tk=>{ if(tk.published) { publishedTakeLocation = tk.location} } );
+    takes.map(tk=>{ if (tk.published) { publishedTakeLocation = tk.location} } );
 
     return (
       this.state.utilityPanel?
@@ -98,7 +97,7 @@ const Hide = styled.button`
   cursor: pointer;
   border: none;
   background: none;
-  font-size: 2vw;
+  font-size: 1.6vw;
 `;
 
 const Show = styled(Hide)`

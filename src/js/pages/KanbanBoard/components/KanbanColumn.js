@@ -12,11 +12,10 @@ class KanbanColumn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      take: this.props,
+      //take: this.props,
     };
 
     this.makeChanges = this.makeChanges.bind(this);
-    this.removeTake = this.removeTake.bind(this);
     this.nextChunk = this.nextChunk.bind(this);
     this.navigateToChapter = this.navigateToChapter.bind(this);
   }
@@ -49,39 +48,6 @@ class KanbanColumn extends React.Component {
       pathname: '/kanbanPage',
       search: QueryString.stringify(query),
     });
-  }
-
-
-  pushTake(take) {
-    this.setState(
-      update(this.state, {
-        takes: {
-          $push: [take],
-        },
-      })
-    );
-  }
-
-  removeTake(index) {
-    this.setState(
-      update(this.state, {
-        takes: {
-          $splice: [[index, 1]],
-        },
-      })
-    );
-  }
-
-  moveTake(dragIndex, hoverIndex) {
-    const { takes } = this.state;
-    const dragTake = takes[dragIndex];
-    this.setState(
-      update(this.state, {
-        takes: {
-          $splice: [[dragIndex, 1], [hoverIndex, 0, dragTake]],
-        },
-      })
-    );
   }
 
   onDrop(published, newRating, take) {
@@ -178,11 +144,11 @@ class KanbanColumn extends React.Component {
 
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', overflow: 'auto'}}>
           {
-            this.props.array? this.props.array.map((take) => {
-              return (<TakeCard {...take} makeChanges= {this.makeChanges}
+            this.props.array? this.props.array.map((take, index) => {
+              return (<TakeCard key={index} {...take} makeChanges= {this.makeChanges}
                 removeTake = {this.removeTake} displayText = {this.props.displayText}
                 getComments ={this.props.getComments}
-                publishedTake = {this.props.publishedTake} /> );
+                publishedTake = {this.props.publishedTake} /> ); /* published take passed down for react dnd */
             }) : ''
 
           }
@@ -198,7 +164,7 @@ class KanbanColumn extends React.Component {
 
         {
           this.props.publishedColumn?
-            this.props.activeChunkId == this.props.chunks.length? //if activeChunkId = chunks.length that means we are at the last chunk in the chapter (activeChunkId starts at 1)
+            this.props.activeChunkId === this.props.chunks.length? //if activeChunkId = chunks.length that means we are at the last chunk in the chapter (activeChunkId starts at 1)
               <center> <NextChapter onClick ={() => this.navigateToChapter(Number(chapter_num) +1 ,Number(chapterId) +1)} >Go To Next Chapter <i className="fa fa-arrow-right" /> </NextChapter> </center> :
               <center> <NextChunk onClick ={() => this.nextChunk()}>Go To Next Chunk <i className="fa fa-arrow-right" /> </NextChunk> </center>
             : ''
@@ -252,6 +218,7 @@ const Column = styled.div`
   }
 
 `;
+Column.displayName = 'Column';
 
 const NextChunk = styled.button`
   	color: white;
@@ -261,7 +228,18 @@ const NextChunk = styled.button`
   	padding: 0.75vw;
   	cursor: pointer;
   `;
-const NextChapter = NextChunk;
+NextChunk.displayName = 'NextChunk';
+
+const NextChapter  = styled.button`
+color: white;
+background: linear-gradient(to right, #0076FF, #00C5FF  );
+border: none;
+border-radius: 2vw;
+padding: 0.75vw;
+cursor: pointer;
+`;
+NextChapter.displayName = 'NextChapter';
+
 
 const takeTarget = {
   drop(props, monitor, component) {
