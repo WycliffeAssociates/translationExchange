@@ -16,8 +16,8 @@
 
 
 const config = {                                                        //remote api
-	apiUrl: "https://localhost:8000/api/",
-    streamingUrl: "https://localhost/"
+	apiUrl: "http://localhost:8000/api/",
+    streamingUrl: "http://localhost/"
 };
 
 // const config = {                                                        //remote api
