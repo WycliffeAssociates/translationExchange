@@ -13,6 +13,7 @@ describe('ChunkListContainer', () => {
     const store = mockStore({
         geolocation: {},
         direction: {},
+	updatePlaylist: {},
         chunkListContainer: {}
     });
 
