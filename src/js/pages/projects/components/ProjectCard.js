@@ -16,14 +16,14 @@ export default class ProjectCard extends React.Component {
         <Card>
           <InformationContainer >
             <TextContainer>
-              <BookText> <i class="fas fa-book"></i> {bookName} </BookText>
-              <Text><i class="fas fa-language"></i> {language}</Text>
-              <Text><i class="far fa-file-alt"></i> {version}</Text>
-              <Text><i class="fas fa-clock"></i> {dateModified}</Text>
+              <BookText> <i class="material-icons">book</i> {bookName} </BookText>
+              <Text><i class="material-icons">translate</i> {language}</Text>
+              <Text><i class="material-icons">description</i> {version}</Text>
+              <Text><i class="material-icons">access_time</i> {dateModified}</Text>
 
             </TextContainer>
             <ImageIndicatorContainer>
-              <div>indicator</div>
+              <div></div>
               <ImageContainer>
                 <Image src={img1} alt="Smiley face" height="10vw" width="10vw"/>
               </ImageContainer>
@@ -34,7 +34,7 @@ export default class ProjectCard extends React.Component {
           </InformationContainer>
 
           <ButtonContainer>
-            <ReviewButton> <i class="fas fa-check"></i> Review </ReviewButton>
+            <ReviewButton> <i class="material-icons">done_all</i> Review </ReviewButton>
 
           </ButtonContainer>
         </Card>

@@ -11,19 +11,20 @@ import img3 from './mockupdata/img1.PNG';
 
 class MyProjectsContainer extends Component {
   render() {
+      const {projects} = this.props;
     return (
 
       <Container>
         <HeaderContainer>
-          <i class="far fa-address-book"></i>
-          <Header> My Projects</Header>
+            <i class="material-icons">folder_shared</i>
+          <Header>Projects</Header>
         </HeaderContainer>
         <CardsContainer>
-          {  Data.map( (x, index) =>
-            <ProjectCard bookName={x.book_name}
-              language={x.language}
-              version={x.version}
-              dateModified={x.date_modified} /> )
+          {  projects.map( (p) =>
+            <ProjectCard bookName={p.book.name}
+              language={p.language.name}
+              version={p.version.slug}
+              dateModified={p.date_modified.slice(0,10)} /> )
           }
         </CardsContainer>
 

@@ -1,13 +1,21 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import NavBar from '../../components/NavBar';
 import RecentProjectsContainer from './RecentProjectsContainer';
 import MyProjectsContainer from './MyProjectsContainer';
 import ListContainer from './ListContainer';
+import { fetchAllProjects } from '../../actions';
 
 
 
 class ProjectContainer extends Component {
+
+    componentWillMount(){
+        this.props.fetchAllProjects('');
+    }
+
   render() {
     return (
 
@@ -15,13 +23,10 @@ class ProjectContainer extends Component {
         <NavBar />
         <ProjectsContainer>
           <CardsContainer>
-            <RecentProjectsContainer />
-            <MyProjectsContainer />
+            {/*<RecentProjectsContainer />*/}
+            <MyProjectsContainer {...this.props} />
           </CardsContainer>
           <ListContainer />
-
-
-
         </ProjectsContainer>
 
 
@@ -54,4 +59,14 @@ const CardsContainer = styled.div`
 `;
 
 
-export default ProjectContainer;
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({fetchAllProjects}, dispatch);
+};
+
+const mapStateToProps = state =>{
+    const { projects } = state.Projects;
+
+    return{projects};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectContainer);

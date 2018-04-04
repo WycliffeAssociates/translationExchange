@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import ChunkListContainer from './js/pages/chunks/ChunkListContainer';
 import ProjectsListContainer from './js/pages/projects/ProjectsListContainer';
-import ProjectContainer from './js/pages/projects/ProjectContainer';
+import ProjectContainer from './js/pages/projects/ProjectPage';
 import ChaptersContainer from './js/pages/chapters/ChaptersContainer';
 import './App.css';
 import NotFound from './js/pages/NotFound';

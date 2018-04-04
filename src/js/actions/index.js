@@ -4,7 +4,7 @@ export * from './GeolocationActions';
 export * from './HomeRecentProjectAction';
 export * from './ChaptersContainerAction';
 export * from './DirectionActions';
-export * from './ProjectsListContainerAction';
+export * from './ProjectsPageActions';
 export * from './ChunkListContainerAction';
 export * from './SourceAudioAction';
 export * from './UserActions';

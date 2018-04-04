@@ -25,6 +25,7 @@ class ProjectsListContainer extends Component {
 	}
 
 	requestProjects(queryString) {
+		debugger;
 		this.props.fetchAllProjects(queryString);
 	}
 
@@ -137,7 +138,7 @@ class ProjectsListContainer extends Component {
 const mapStateToProps = state => {
 	const { direction = 'ltr' } = state.direction || {};
 	const { displayText = '' } = state.geolocation;
-	const { loaded = false, projects = [], error = '', currentProjectQuery = '' } = state.projectsListContainer
+	const { loaded = false, projects = [], error = '', currentProjectQuery = '' } = state.Projects;
 	return { displayText, direction, loaded, projects, error, currentProjectQuery };
 };
 const mapDispatchToProps = dispatch => {

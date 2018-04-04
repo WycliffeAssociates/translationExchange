@@ -41,7 +41,9 @@ class ListContainer extends Component {
 }
 
 const Container = styled.div`
-
+   width: 100%;
+   text-align:center;
+   
 `;
 
 const AvailableProjectsMenu = styled.div`
@@ -49,7 +51,7 @@ const AvailableProjectsMenu = styled.div`
 `;
 
 const AvailableProjects = styled.div`
-
+    
 
 `;
 
@@ -67,6 +69,8 @@ const UlbButton = styled.button`
   border: none;
   width: 50%;
   border-radius:  .3vw 0 0 .3vw;
+  outline:none;
+  cursor:pointer;
 `;
 
 const UdbButton = styled.button`
@@ -75,6 +79,8 @@ const UdbButton = styled.button`
   border: none;
   border-radius: 0 .3vw .3vw 0;
   width: 50%;
+  outline:none;
+  cursor:pointer;
 `;
 
 

@@ -167,7 +167,7 @@ class RecordCommentModal extends Component {
   }
 
   render() {
-      const { recording, recordedBlob, showModal } = this.state;
+    const { recording, recordedBlob, showModal } = this.state;
     const {uploadingComments} = this.props;
     let buttonState = this.startRecording;
     if (recording) {
