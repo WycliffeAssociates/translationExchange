@@ -5,7 +5,9 @@ import img1 from '../mockupdata/img1.PNG';
 
 export default class ProjectCard extends React.Component {
 
+    reviewProject -= () => {
 
+    };
 
   render() {
     const{ bookName, version, dateModified, language } = this.props;
@@ -34,7 +36,7 @@ export default class ProjectCard extends React.Component {
           </InformationContainer>
 
           <ButtonContainer>
-            <ReviewButton> <i class="material-icons">done_all</i> Review </ReviewButton>
+            <ReviewButton onClick={this.reviewProject}> <i class="material-icons">done_all</i> Review </ReviewButton>
 
           </ButtonContainer>
         </Card>
