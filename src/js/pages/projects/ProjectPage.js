@@ -6,7 +6,7 @@ import NavBar from '../../components/NavBar';
 import RecentProjectsContainer from './RecentProjectsContainer';
 import MyProjectsContainer from './MyProjectsContainer';
 import ListContainer from './ListContainer';
-import { fetchAllProjects } from '../../actions';
+import { fetchAllProjects, getChapters, getUserHash } from '../../actions';
 
 
 
@@ -20,7 +20,7 @@ class ProjectContainer extends Component {
     return (
 
       <Container>
-        <NavBar />
+        <NavBar kanban={false} {...this.props} />
         <ProjectsContainer>
           <CardsContainer>
             {/*<RecentProjectsContainer />*/}
@@ -60,13 +60,14 @@ const CardsContainer = styled.div`
 
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({fetchAllProjects}, dispatch);
+    return bindActionCreators({fetchAllProjects, getChapters, getUserHash}, dispatch);
 };
 
 const mapStateToProps = state =>{
-    const { projects } = state.Projects;
+    const { projects,  } = state.Projects;
+    const {loggedInUser} = state.user;
 
-    return{projects};
+    return{projects, loggedInUser};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectContainer);

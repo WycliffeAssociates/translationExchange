@@ -34,7 +34,6 @@ class NavBar extends Component {
 
   componentDidMount() {
     const {loggedInUser}= this.props;
-
     if (loggedInUser === null) {
       this.props.getUserHash();
     }
@@ -82,7 +81,7 @@ class NavBar extends Component {
     return (
       <Container>
         <TextContainer>
-          <Title onClick={()=>history.push('./')}>Translation Exchange </Title>
+          <Title>Translation Exchange </Title>
         </TextContainer>
         <IconsContainer>
           <TextIconContainer onClick={()=> history.push('/projects')}>
@@ -139,6 +138,7 @@ const Container = styled.div`
   justify-content: space-between;
   box-shadow: 3px 4px 5px rgba(0,0,0,0.2);
   z-index: 2;
+  min-height: 80px;
 `;
 const Text = styled.p`
   cursor: pointer;

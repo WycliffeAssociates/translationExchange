@@ -20,35 +20,31 @@ class KanbanColumn extends React.Component {
   }
 
   nextChunk() {
-    var nextChunk = this.props.activeChunkId+1;
-    /*The chunkId's carries over for chunks in the same chapter.
-      Therefore chunks in following chapters won't start with chunkId = 1,
-      they could start with chunkId = 6 for example. So we need to
-      get the id of the firstChunk in the chapter, so that we can correctly
-      update chunkNum on button navigation to next chunk.*/
-    var firstChunkId = this.props.chunks[0].id;
 
-    if (this.props.chunks.length >= nextChunk )
-    {
-      /* get the chunk corresponding to the next chunk to be loaded from the chunks array
-          nextChunk-1 because the activeChunkId starts at 1, but array starts at 0*/
-      var chunkNum = this.props.chunks[nextChunk-firstChunkId].startv;
-      this.props.getTakes(nextChunk, chunkNum );
-    }
-  }
-
-  navigateToChapter(chNum, chId) {
-    var query = QueryString.parse(this.props.location.search);
-    query.chapter_num = chNum;
-    query.chapterId = chId;
+    const {activeChunkId, chunks} = this.props;
 
 
-    this.props.history.push({
-      pathname: '/kanbanPage',
-      search: QueryString.stringify(query),
+    let activeChunkIndex = null;
+
+    chunks.map( (chk, index) => {
+      if(chk.id == activeChunkId){    // find the chunk that we are at
+        activeChunkIndex = index;     // get the index in the array list
+      }
     });
+
+    const nextChunkId = chunks[activeChunkIndex+1].id;      // add + 1 to get the next item in the array
+    const nextChunkNum = chunks[activeChunkIndex+1].startv;
+
+    this.props.getTakes(nextChunkId, nextChunkNum );
+    }
+
+
+  navigateToChapter() {
+
+    const query = QueryString.parse(this.props.location.search);
     this.props.getChunks(query.chapterId);
     this.props.getComments(query.chapterId, 'chapter_id');
+
   }
 
   onDrop(published, newRating, take) {
@@ -233,6 +229,7 @@ const NextChunk = styled.button`
   	border-radius: 2vw;
   	padding: 0.75vw;
   	cursor: pointer;
+  	outline:none;
   `;
 NextChunk.displayName = 'NextChunk';
 
@@ -243,6 +240,7 @@ border: none;
 border-radius: 2vw;
 padding: 0.75vw;
 cursor: pointer;
+outline:none;
 `;
 NextChapter.displayName = 'NextChapter';
 

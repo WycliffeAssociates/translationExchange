@@ -6,11 +6,23 @@ import img1 from '../mockupdata/img1.PNG';
 export default class ProjectCard extends React.Component {
 
     reviewProject = () => {
+      const {projectId, getChapters, history } = this.props;
+
+      getChapters(projectId);
+
+     // history.push('/chaptersPage')
+
+        history.push({
+            pathname: './chapters',
+            search: `?projectId=${projectId}`
+        });
 
     };
 
   render() {
     const{ bookName, version, dateModified, language } = this.props;
+
+
 
     return (
       <Container>
