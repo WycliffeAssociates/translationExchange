@@ -17,6 +17,7 @@ import { DragDropContext } from 'react-dnd';
 import Notifications from 'react-notify-toast';
 import Root from './js/components/Root.js';
 import KanbanPage from './js/pages/KanbanBoard/KanbanPage';
+import TaskProgressPage from './js/pages/tasks/TaskProgressPage';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 // import and configure the raven client for sentry in order to track errors
@@ -67,6 +68,7 @@ class App extends Component {
           <Route  path="/user" component={User} />
           <Route path ="/newComponents" component={KanbanPage} />
           <Route path ="/kanbanPage" component={KanbanPage} />
+          <Route path ="/taskProgress" component={TaskProgressPage} />
           <Route path="*" component={NotFound} />
         </Switch>
 

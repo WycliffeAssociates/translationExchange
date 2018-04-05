@@ -86,15 +86,15 @@ class NavBar extends Component {
         </TextContainer>
         <IconsContainer>
           <TextIconContainer onClick={()=> history.push('/projects')}>
-            <i class="material-icons">book</i>
+            <i className="material-icons">book</i>
             <Text>{searchBar.book}</Text>
           </TextIconContainer>
           <TextIconContainer onClick={()=> window.history.back()}  >
-            <i class="material-icons">chrome_reader_mode</i>
+            <i className="material-icons">chrome_reader_mode</i>
             { <Text> Chapter {chapterNum}</Text> }
           </TextIconContainer>
           <TextIconContainer selected={true}>
-            <i class="material-icons">graphic_eq</i>
+            <i className="material-icons">graphic_eq</i>
 
             {
               kanban ?
@@ -119,7 +119,7 @@ class NavBar extends Component {
             data-jdenticon-hash={loggedInUser}
             onMouseEnter={()=> this.setState({displayLogOut: true})}
             onMouseLeave={()=> this.hiddeLogOut()} />
-          <LogOut display={this.state.displayLogOut} onClick={()=> this.logOut()} class="tooltip">
+          <LogOut display={this.state.displayLogOut} onClick={()=> this.logOut()} className="tooltip">
             <span>Log Out</span>
           </LogOut>
         </IdenticonContainer>

@@ -12,6 +12,7 @@ import SourceAudioReducer from './SourceAudioReducer';
 import user from './UserReducer.js';
 import comments from './CommentsReducer';
 import kanbanPage from './KanbanPageReducer'
+import taskProgress from './TaskProgressReducer';
 
 
 export default combineReducers({
@@ -26,5 +27,6 @@ export default combineReducers({
   sourceAudio: SourceAudioReducer,
   user,
   comments,
-  kanbanPage
+  kanbanPage,
+  taskProgress,
 });
