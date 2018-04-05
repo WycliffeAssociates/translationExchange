@@ -20,7 +20,7 @@ class NavBar extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.loggedInUser != this.props.loggedInUser) {
-        jdenticon.update('#ActiveUser', nextProps.loggedInUser); // used in the case the user refresh the page
+      jdenticon.update('#ActiveUser', nextProps.loggedInUser); // used in the case the user refresh the page
     }
 
   }
@@ -38,7 +38,7 @@ class NavBar extends Component {
     if (loggedInUser === null) {
       this.props.getUserHash();
     }
-      jdenticon.update('#ActiveUser', loggedInUser);
+    jdenticon.update('#ActiveUser', loggedInUser);
   }
 
 
@@ -86,11 +86,11 @@ class NavBar extends Component {
         </TextContainer>
         <IconsContainer>
           <TextIconContainer onClick={()=> history.push('/projects')}>
-            <i class="material-icons">book</i>
+            <i className="material-icons">book</i>
             <Text>{searchBar.book}</Text>
           </TextIconContainer>
           <TextIconContainer onClick={()=> window.history.back()}  >
-            <i class="material-icons">chrome_reader_mode</i>
+            <i className="material-icons">chrome_reader_mode</i>
             { <Text> Chapter {chapterNum}</Text> }
           </TextIconContainer>
           <TextIconContainer selected={true}>

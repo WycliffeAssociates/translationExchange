@@ -198,11 +198,11 @@ class RecordCommentModal extends Component {
 
 const TextContainer = styled.div`
   margin-top: .5vw;
-  
+
 `;
 
 const CloseContainer= styled.div`
-  
+
 `;
 
 const Span = styled.span`

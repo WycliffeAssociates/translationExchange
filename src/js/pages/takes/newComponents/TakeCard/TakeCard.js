@@ -58,7 +58,6 @@ export class TakeCard extends React.Component {
     this.props.connectDragPreview(getEmptyImage(), {
       captureDraggingState: true,
     });
-    console.log(this.props, 'PROPS FROM TAKE CARD IN COMPONENT DID MOUNT');
 
   }
 
@@ -155,9 +154,7 @@ export class TakeCard extends React.Component {
           <BottomButtons {...this.props} takePlaying= {this.state.takePlaying} playTakeFromCard = {() => this.playTakeFromCard()} expandComments={() => this.expandComments()} />
 
 
-          {this.state.showComments? <Comments playComment = {()=> this.playComment()} playingComment={this.state.playingComment}
-            blob={this.state.blob} recording={this.state.recording} {...this.props}
-            recordComment = {()=> this.recordComment()} onStop={this.onStop} /> : '' }
+          {this.state.showComments? <Comments  {...this.props} /> : '' }
         </Container>
 
       </div>

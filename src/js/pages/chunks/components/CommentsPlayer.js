@@ -54,9 +54,6 @@ class CommentsPlayer extends Component {
     if (this.state.play) {
       playPauseBtn = <PauseButton />;
     }
-
-    console.log(this.props, 'COMMENTS PLAYER');
-
     return (
       <Container >
         <PlayerTracker audioFile={this.props.audioFile} />

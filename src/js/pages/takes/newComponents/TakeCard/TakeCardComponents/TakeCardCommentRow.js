@@ -2,14 +2,33 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactPlayer from 'react-player';
 import PlayerTracker from '../../../../../components/PlayerTracker';
-
+import jdenticon from 'jdenticon';
+import config from '../../../../../../config/config';
 
 export default class TakeCardCommentRow extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      playing: false,
+      id: null,
+    };
+    this.play = this.play.bind(this);
+    this.ended = this.ended.bind(this);
   }
 
+  componentDidMount() {
+    const {comment} = this.props;
+    jdenticon.update(`#CommentUser${comment.id}`, comment.owner_icon_hash);
+  }
+
+  play() {
+    this.setState({playing: true});
+  }
+
+  ended() {
+    this.setState({playing: false});
+  }
 
   render() {
 
@@ -18,8 +37,10 @@ export default class TakeCardCommentRow extends React.Component {
     return (
       <CommentRow>
 
-        <CommentIcon id="comment" data-jdenticon-value={'imthemaster'} />
-
+        <IdenticonContainer>
+          <Identicon onClick={()=>this.play()} id={`CommentUser${comment.id}`} data-jdenticon-hash={comment.owner_icon_hash} />
+          <ReactPlayer url={`${config.streamingUrl}${comment.owner_name_audio}`} playing={this.state.playing} onEnded={()=> this.ended()}  />
+        </IdenticonContainer>
         <CommentPlayer >
           <PlayerTracker url={comment.location} />
         </CommentPlayer>
@@ -67,8 +88,16 @@ const RowButton = styled(Button)`
   font-size: 1vw;
 `;
 
-const CommentIcon = styled.svg`
-  height: 2vw;
-  width: 2w;
-  margin-top: 0;
+const IdenticonContainer =styled.div`
+  background-color: white;
+  height: 1.5vw;
+  width: 1.5vw;
+
+`;
+
+
+const Identicon= styled.svg`
+    height: 1.5vw;
+    width: 1.5vw;
+    cursor:pointer;
 `;

@@ -1,30 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
-import {ReactMic} from 'react-mic';
-import CommentRow from './TakeCardCommentRow'
+import CommentRow from './TakeCardCommentRow';
+import RecordCommentsModal from '../../../../chunks/components/RecordCommentsModal';
 export default class TakeCardComments extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state ={
+      displayModal: false,
+    };
 
     this.recordButton = this.recordButton.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  closeModal() {
+    this.setState({displayModal: false});
   }
 
 
   recordButton() {
-    const recording = this.props.recording;
+    const { id, saveComment, uploadingComments, activeChunkId, chunkNum} = this.props;
     const microphone = <i className = "fa fa-microphone" />;
-    const stop = <i className = "fa fa-stop" />;
-
     return (
       <div style={{backgroundColor: '#E74C3C', width: '4vw'}}>
 
-        <RecordComment style={{ display: recording? '': 'none'}} onClick = {this.props.recordComment}>
-          {stop}
-        </RecordComment>
-
-        <RecordComment style={{ display: recording? 'none': ''}} onClick = {this.props.recordComment}>
+        <RecordComment onClick = {()=> {this.setState({displayModal: true});}}>
           {microphone}
+          <RecordCommentsModal display = {this.state.displayModal}
+            chunkNum={chunkNum}
+            chunkId={activeChunkId}
+            uploadingComments={uploadingComments}
+            closeModal = {()=> this.closeModal()}
+            id={id}
+            saveComment = {saveComment}
+            type={'take'} />
         </RecordComment>
 
       </div>
@@ -37,16 +47,13 @@ export default class TakeCardComments extends React.Component {
     const {comments} = this.props;
     return (
       <Comments>
-
         {
           comments.length!==0 ?
             comments.map((comment) => {
               return (  <CommentRow key= {comment.id} comment= {comment} />);
 
             })
-
             :
-
             ''
         }
         <MoreOptions>
@@ -59,17 +66,6 @@ export default class TakeCardComments extends React.Component {
           {this.recordButton()}
 
         </MoreOptions>
-
-        {
-        // this.props.recording?
-          // <ReactMic
-          //   className = "sound-wave"
-          //   record = {this.props.recording}
-          //   onStop = {this.props.onStop}
-          //   strokeColor="#009CFF"
-          //   backgroundColor="transparent" />
-        //  : ''
-        }
 
       </Comments>
     );
@@ -117,5 +113,6 @@ const RecordComment = styled(Button)`
   padding: 1vw 1.5vw;
   align-self: flex-end;
   border-top: none;
+  cursor: pointer;
 
 `;

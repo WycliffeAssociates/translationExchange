@@ -25,7 +25,7 @@ class ProjectsListContainer extends Component {
 	}
 
 	requestProjects(queryString) {
-		debugger;
+		
 		this.props.fetchAllProjects(queryString);
 	}
 

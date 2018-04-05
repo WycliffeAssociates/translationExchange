@@ -11,8 +11,8 @@ class Comments extends Component {
     this.closeModal = this.closeModal.bind(this);
   }
 
-  closeModal(){
-      this.setState({displayModal:false})
+  closeModal() {
+    this.setState({displayModal: false});
   }
 
 
@@ -29,7 +29,7 @@ class Comments extends Component {
           </SvgContainer>
         </TextContainer>
         <AudioContainer>
-          {comments? comments.length > 0 ? <div> {comments.map(((cm, index)=> <Player id={index} comments={cm} />  ))}</div> : <NoComments>No comments Available</NoComments> : <NoComments>No comments Available</NoComments>  }
+          {comments? comments.length > 0 ? <div> {comments.map(((cm, index)=> <Player  id={index} comments={cm} />  ))}</div> : <NoComments>No comments Available</NoComments> : <NoComments>No comments Available</NoComments>  }
         </AudioContainer>
         <ButtonContainer>
           <RecordButton onClick={()=>{this.setState({displayModal: true});}}>
