@@ -1,52 +1,36 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+    local('MaterialIcons-Regular'),
+    url('./assets/iconfont/MaterialIcons-Regular.woff2') format('woff2'),
+    url('./assets/iconfont/MaterialIcons-Regular.woff') format('woff'),
+    url('./assets/iconfont/MaterialIcons-Regular.ttf') format('truetype');
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 150px;
-  color: white;
-}
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
 
-.App-main {
-  position: relative;
-  left: 240px;
-}
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
 
-.App-intro {
-  font-size: large;
-}
-
-.App-footer {
-    position: fixed;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    background-color: #222;
-    height: 50px;
-    color: white;
-    font-size: small;
-}
-
-.recentProjectsList {
-  color: black;
-}
-
-.recentProjectsList:hover {
-  color: orange;
-}
-
-button:focus {
-  outline: none;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  /* Support for IE. */
+  font-feature-settings: 'liga';
 }

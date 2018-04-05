@@ -1,23 +1,54 @@
 import axios from 'axios';
 import config from '../../config/config';
 import { notify } from 'react-notify-toast';
+import store from '../store';
+import kanbanPage from "../reducers/KanbanPageReducer";
 
-export const getAudioTakes = (chunkId, counter) => {
+export const getAudioTakes = (chunkId, selectedChunk) => {
   return function(dispatch) {
     return axios
       .get(`${config.apiUrl}takes/?chunk_id=${chunkId}`,
-      {
-        headers: { Authorization: "Token " + localStorage.getItem('token') }
-    })
+        {
+          headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+        })
       .then(response => {
-        if (counter === 0) {
-          dispatch(dispatchTakesFirstTimeSuccess(response.data, chunkId));
-        } else {
-          dispatch(dispatchTakesSuccess(response.data, chunkId));
-        }
+        // if (counter === 0) {
+        //   dispatch(dispatchTakesFirstTimeSuccess(response.data, chunkId));
+        // } else {
+        dispatch(dispatchTakesSuccess(response.data, selectedChunk, chunkId));
+        // }
       })
       .catch(error => {
         dispatch(dispatchChunksFailed(error));
+      });
+  };
+};
+
+export const getAudioComments = (query, type) => {
+
+  return function(dispatch) {
+    return axios
+      .get(`${config.apiUrl}comments/?${type}=${query}`,
+        {
+          headers: { Authorization: "Token " + localStorage.getItem('token') }
+        })
+      .then(response => {
+        switch (type) {
+          case 'chunk_id':
+            dispatch(dispatchGetAudioCommentsSuccess(response.data));
+            break;
+          case 'chapter_id':
+            dispatch(dispatchGetAudioCommentsSuccess(response.data));
+            break;
+
+          default:
+
+
+        }
+
+      })
+      .catch(error => {
+        console.log(error); // todo manage error
       });
   };
 };
@@ -42,21 +73,7 @@ export const getTakesToExport = (chapterId) => {
 
 
 
-export const getAudioComments = (query, type) => {
-  return function(dispatch) {
-    return axios
-      .get(`${config.apiUrl}comments/?${type}=${query}`,
-      {
-        headers: { Authorization: "Token " + localStorage.getItem('token') }
-    })
-      .then(response => {
-        dispatch(dispatchGetAudioCommentsSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(dispatchChunksFailed(error));
-      });
-  };
-};
+
 
 export const dispatchGetAudioCommentsSuccess = comments => {
   return {
@@ -158,12 +175,13 @@ export function dispatchTakesFirstTimeSuccess(takesResponse, chunkId) {
   };
 }
 
-export function dispatchTakesSuccess(takesResponse, chunkId) {
+export function dispatchTakesSuccess(takesResponse, selectedChunk, chunkId) {
   takesResponse.map(take => (take.chunkId = chunkId));
 
   return {
     type: 'FETCH_TAKE_SUCCESS',
     takes: takesResponse,
+    selectedChunk
   };
 }
 
@@ -213,60 +231,76 @@ export function setSourceProjectFailed(error) {
   };
 }
 
-//patch take
-export const patchTake = (
-  takeId,
-  patch,
-  success,
-  takes,
-  updatingDeletedTake,
-  chunkId
-) => {
-  return function(dispatch) {
-    return axios
-      .patch(config.apiUrl + "takes/" + takeId + "/", patch,{
-        headers: { Authorization: "Token " + localStorage.getItem('token') }
-    })
-      .then(response => {
-        //find correct take to update
-        let listOfTakes = takes;
-        let takeIdToUpdate;
-        takeIdToUpdate = listOfTakes
-          .map(takes => {
-            return takes.id;
-          })
-          .indexOf(takeId);
-        let updatedTakeInfo = response.data;
-        updatedTakeInfo.chunkId = chunkId;
-        listOfTakes[takeIdToUpdate] = updatedTakeInfo;
-        dispatch(patchTakeSuccess(listOfTakes));
-
-      })
-      .catch(error => {
-        let message;
-        if (error.response) {
-          if (error.response.status === 404) {
-            message = 'Sorry, that take does not exist!';
-            updatingDeletedTake(chunkId);
-          } else {
-            message =
-              'Something went wrong. Please check your connection and try again.';
-          }
-        } else {
-          message =
-            'Something went wrong. Please check your connection and try again.';
-        }
-        dispatch(patchTakeFailed(message));
-      });
-  };
-};
-
-export function patchTakeSuccess(updatedTakes) {
-  return {
-    type: 'PATCH_TAKE_SUCCESS',
-    updatedTakes,
-  };
-}
+// //patch take
+// export const patchTake = (
+//   takeId,
+//   patch,
+//   success,
+//   takes,
+//   updatingDeletedTake,
+//   chunkId
+// ) => {
+//   return function(dispatch, getState) {
+//
+//       const {chunks, activeChunkId} = getState().kanbanPage;
+//       debugger;
+//
+//     return axios
+//       .patch(config.apiUrl + 'takes/' + takeId + '/', patch,{
+//         headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+//       })
+//       .then(response => {
+//         debugger;
+//         if(patch.published){
+//
+//
+//
+//         }
+//
+//
+//         //find correct take to update
+//         let listOfTakes = takes;
+//         let takeIdToUpdate = takeId;
+//         let takeToUpdateIndex;
+//         let updatedTakeInfo = response.data;
+//         updatedTakeInfo.chunkId = chunkId;
+//
+//         for (var i =0; i<listOfTakes.length; i++) {
+//           if (listOfTakes[i].id === takeId) {
+//             takeToUpdateIndex = i;
+//             break;
+//           }
+//         }
+//         listOfTakes[takeToUpdateIndex] = updatedTakeInfo;
+//         dispatch(patchTakeSuccess(listOfTakes));
+//
+//
+//       })
+//       .catch(error => {
+//         let message;
+//         if (error.response) {
+//           if (error.response.status === 404) {
+//             message = 'Sorry, that take does not exist!';
+//             updatingDeletedTake(chunkId);
+//           } else {
+//             message =
+//               'Something went wrong. Please check your connection and try again.';
+//           }
+//         } else {
+//           message =
+//             'Something went wrong. Please check your connection and try again.';
+//         }
+//         dispatch(patchTakeFailed(message));
+//       });
+//   };
+// };
+//
+// export function patchTakeSuccess(updatedTakes) {
+//   return {
+//     type: 'PATCH_TAKE_SUCCESS',
+//     updatedTakes: updatedTakes,
+//   };
+// }
 export function patchTakeFailed(error) {
   return {
     type: 'PATCH_TAKE_FAILED',
@@ -462,61 +496,61 @@ export function markAsPublishedFailed(error) {
   };
 }
 
-//saveComment
-export const saveComment = (
-  blobx,
-  type,
-  id,
-  success,
-  chunks,
-  chapter,
-  takes
-) => {
-  return function(dispatch) {
-    dispatch(saveCommentLoading());
-    return axios
-      .post(config.apiUrl + 'comments/', {
-        comment: blobx,
-        user: 3,
-        object: id,
-        type: type
-      },{
-        headers: { Authorization: "Token " + localStorage.getItem('token') }
-      })
-      .then(results => {
-        if (type === 'take') {
-          dispatch(saveCommentSuccess(results.data));
-          let takeIdToUpdate;
-          takeIdToUpdate = takes
-            .map(tk => {
-              return tk.id;
-            })
-            .indexOf(id);
-          takes[takeIdToUpdate].has_comment = true;
-          dispatch(updateTakesSuccess(takes));
-        } else if (type === 'chunk') {
-          dispatch(saveCommentSuccess(results.data));
-          let chunkIdToUpdate;
-          chunkIdToUpdate = chunks
-            .map(chunk => {
-              return chunk.id;
-            })
-            .indexOf(id);
-          chunks[chunkIdToUpdate].has_comment = true;
-          dispatch(updateChunksSuccess(chunks));
-        } else {
-          dispatch(saveCommentSuccess(results.data));
-          chapter.has_comment = true;
-          dispatch(updateChapterSuccess(chapter));
-        }
-        success();
-      })
-      .catch(exception => {
-        dispatch(saveCommentFailed(exception));
-        success();
-      });
-  };
-};
+// //saveComment
+// export const saveComment = (
+//   blobx,
+//   type,
+//   id,
+//   success,
+//   chunks,
+//   chapter,
+//   takes
+// ) => {
+//   return function(dispatch) {
+//     dispatch(saveCommentLoading());
+//     return axios
+//       .post(config.apiUrl + 'comments/', {
+//         comment: blobx,
+//         user: 3,
+//         object: id,
+//         type: type
+//       },{
+//         headers: { Authorization: "Token " + localStorage.getItem('token') }
+//       })
+//       .then(results => {
+//         if (type === 'take') {
+//           dispatch(saveCommentSuccess(results.data));
+//           let takeIdToUpdate;
+//           takeIdToUpdate = takes
+//             .map(tk => {
+//               return tk.id;
+//             })
+//             .indexOf(id);
+//           takes[takeIdToUpdate].has_comment = true;
+//           dispatch(updateTakesSuccess(takes));
+//         } else if (type === 'chunk') {
+//           dispatch(saveCommentSuccess(results.data));
+//           let chunkIdToUpdate;
+//           chunkIdToUpdate = chunks
+//             .map(chunk => {
+//               return chunk.id;
+//             })
+//             .indexOf(id);
+//           chunks[chunkIdToUpdate].has_comment = true;
+//           dispatch(updateChunksSuccess(chunks));
+//         } else {
+//           dispatch(saveCommentSuccess(results.data));
+//           chapter.has_comment = true;
+//           dispatch(updateChapterSuccess(chapter));
+//         }
+//         success();
+//       })
+//       .catch(exception => {
+//         dispatch(saveCommentFailed(exception));
+//         success();
+//       });
+//   };
+// };
 
 export function updateTakesSuccess(updatedTakes) {
   return {

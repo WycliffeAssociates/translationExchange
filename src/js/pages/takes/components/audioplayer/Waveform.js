@@ -13,7 +13,7 @@ class WaveForm extends Component {
 
     this.state = {
       playing: false,
-      pos: 0,
+      pos: props.pos? props.pos : 0,
       audioFile: '',
       pointer: 1,
 
@@ -22,7 +22,9 @@ class WaveForm extends Component {
     this.handlePosChange = this.handlePosChange.bind(this);
   }
 
-
+  componentWillReceiveProps(nextProps) {
+    this.setState({pos: nextProps.pos});
+  }
 
   handlePosChange(e) {
     this.setState({
@@ -31,21 +33,21 @@ class WaveForm extends Component {
   }
 
   render() {
-    let position = this.state.pos;
+    //let position = this.state.pos;
 
     if (this.props.markerClicked) {
 
-      position = this.props.markerPosition;
+    //  position = this.props.markerPosition;
     }
 
     return (
 
       <Wavesurfer
         audioFile ={this.props.audioFile}
-        pos={position}
+        pos={this.state.pos}
         onPosChange={this.handlePosChange}
         playing={this.props.playing}
-        options={{ cursorWidth: 2, progressColor: '#009CFF', cursorColor: '#E74C3C', barWidth: 0.2, hideScrollbar: true, normalize: true, height: 90, waveColor: '#969595' }}
+        options={this.props.options}
         onReady={this.duration}
         onFinish={this.props.finishedPlaying}
       />

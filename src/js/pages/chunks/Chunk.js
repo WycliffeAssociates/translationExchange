@@ -22,28 +22,36 @@ class Chunk extends Component {
 
 	componentDidMount() {
 		//jdenticon.update('undefined');
-		this.getTakes(this.props.chunkId);
+		this.getTakes(this.props.selectedChunk);
+			const {chunkId} = this.props;
+			this.props.getAudioTakes(chunkId);
 	}
 
+
+
+	componentDidUpdate() {
+		this.getTakes(this.props.selectedChunk);
+
+	}
 
 	getTakes(chunkId) {
 		let counter = this.props.takes.length;
 		let { calledChunks } = this.props;
 		if (!calledChunks.includes(chunkId)) {                 // once you click a chunk, checks if the chunk has not been clicked before
 			this.props.getChunkIdClicked(chunkId);
-			this.props.getAudioTakes(chunkId, counter);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
+		//	this.props.getAudioTakes(chunkId, counter);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
 			// so next time clicked to close it won't call the api
 		}
 	}
 
 	render() {
-		console.log(this.props, 'this is chunk props');
 		let publish = [];
 		let onestar = [];
 		let twostar = [];
 		let threestar = [];
 
 		let orderedTakes = this.props.takes;
+
 		const has_comments = this.props.has_comments;
 		orderedTakes.map(tk => {
 			if (this.props.id === tk.chunkId) {   // get takes corresponding just to the selected chunk
@@ -78,21 +86,21 @@ class Chunk extends Component {
 			default:
 				modeLabel = this.props.displayText.segment;
 		}
-		var icon1 = <Icon name="star" color="red" size="big" />;
+		var icon1 = <label className="labelLines"> <i className="far fa-star fa-2x" /> </label>;
 		var icon2 = (
-			<div>
-				<Icon name="star" color="yellow" size="big" />
-				<Icon name="star" color="yellow" size="big" />
+			<div className="labelLines">
+				<label> <i className="far fa-star fa-2x" /> </label>
+				<label> <i className="far fa-star fa-2x" /> </label>
 			</div>
 		);
 		var icon3 = (
-			<div>
-				<Icon name="star" color="green" size="big" />
-				<Icon name="star" color="green" size="big" />
-				<Icon name="star" color="green" size="big" />
+			<div className="labelLines">
+				<label > <i className="far fa-star fa-2x" /> </label>
+				<label > <i className="far fa-star fa-2x" /> </label>
+				<label > <i className="far fa-star fa-2x" /> </label>
 			</div>
 		);
-		var icon4 = <Icon name="check" color="pink" size="big" />;
+		var icon4 = <label className="labelLines"> <i className="fas fa-check fa-2x" /> </label>;
 		return (
 			<div>
 				{/*<Accordion fluid styled >
@@ -105,6 +113,7 @@ class Chunk extends Component {
 						<Grid fluid columns={2}>
 							<Grid.Column width={16}>
 								<Grid fixed padded fluid columns={4} >
+
 
 										<TakeTable
 											icon={icon1}
@@ -124,6 +133,8 @@ class Chunk extends Component {
 											active={this.props.active}
 											chunkId={this.props.id}
 										/>
+
+
 
 
 									<TakeTable
@@ -165,7 +176,9 @@ class Chunk extends Component {
 
 
 									<TakeTable
+										height ={'25vh'}
 										icon={icon4}
+										icon4marker={true}
 										mode={this.props.mode}
 										addToListenList={this.props.addToListenList}
 										patchTake={this.props.patchTake}

@@ -8,14 +8,9 @@
     flex-direction: column;
     //justify-content: space-between;
     overflow: auto;
-    height: 70vh;
+    height: 45vw;
 }
 
-.background {
-
-  background: url('../assets/images/img1.PNG') ;
-  height: 100vh;
-}
 ::-webkit-scrollbar {
     width: 2em;
 }

@@ -3,9 +3,10 @@ import UserCard from './components/UserCard';
 import NewUserCard from './components/NewUserCard';
 import {Grid} from 'semantic-ui-react';
 import {connect} from 'react-redux';
+import styled from 'styled-components';
 import {bindActionCreators} from 'redux';
 import {fetchUsers, identiconLogin} from '../../actions';
-
+import img from '../../../assets/images/background-pattern.png';
 class AvailableUsers extends React.Component {
 
 
@@ -15,10 +16,12 @@ class AvailableUsers extends React.Component {
 
   render() {
 
+    const {users} = this.props;
+    const backgroundFill = users.length !==0? true: false;
 
     return (
       <div className="container">
-        <div className= "backgroundOverlayUsers">
+        <BackgroundOverlay backgroundFill={backgroundFill}>
 
           <h2 className={'pageHeader'}> Available Users </h2>
 
@@ -29,7 +32,7 @@ class AvailableUsers extends React.Component {
             </Grid.Column >
 
             {
-              this.props.users.length>0? this.props.users.map((user,index)  => {
+              users.length>0? users.map((user,index)  => {
 
                 return (
                   <Grid.Column width={3}>
@@ -40,7 +43,7 @@ class AvailableUsers extends React.Component {
             }
           </Grid>
 
-        </div>
+        </BackgroundOverlay>
       </div>
 
 
@@ -50,6 +53,14 @@ class AvailableUsers extends React.Component {
   }
 
 }
+
+const BackgroundOverlay = styled.div`
+  background-image: url(${img});
+  padding: 5vw;
+  height: ${props => props.backgroundFill? 'auto': '100vh'};
+  background-attachment: fixed;
+
+`;
 
 const mapStateToProps = state => {
   const { users } = state.user;

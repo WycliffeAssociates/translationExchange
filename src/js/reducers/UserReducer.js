@@ -15,7 +15,6 @@ export default( state= INITIAL_STATE, action) => {
         ...state,
         users: action.users,
         loading: false,
-
       };
     case 'LOADING_USER':
       return {
@@ -35,6 +34,12 @@ export default( state= INITIAL_STATE, action) => {
       return {
         ...state,
         loggedInUser: action.iconHash,
+      };
+
+    case 'GET_LOGGED_USER_HASH':
+      return {
+          ...state,
+          loggedInUser: action.iconHash,
       };
 
     default:

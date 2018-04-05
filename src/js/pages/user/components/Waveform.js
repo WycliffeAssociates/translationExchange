@@ -3,7 +3,7 @@ import Wavesurfer from 'react-wavesurfer';
 import PlayPauseBtn from './PlayPauseBtn';
 import styled from 'styled-components';
 
-class CommentsPlayer extends Component {
+class Waveform extends Component {
 
   constructor(props) {
     super(props);
@@ -74,4 +74,4 @@ const WaveformContainer = styled.div`
     margin-right: 5%
   `;
 
-export default CommentsPlayer;
+export default Waveform;

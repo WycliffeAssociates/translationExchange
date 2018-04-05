@@ -25,7 +25,7 @@ class CreateUser extends Component {
   startRecording = () => {
     this.setState({ recording: true });
     setTimeout(()=>{this.stopRecording(); }, 3000);
-  }
+  };
 
   stopRecording() {
     this.setState({ recording: false });
@@ -59,7 +59,7 @@ class CreateUser extends Component {
     reader.addEventListener(
       'load',
       () => {
-        const jsonblob = reader.result
+        const jsonblob = reader.result;
         this.props.createUser(jsonblob, generatedHash); // action to create user in db
       },
       false

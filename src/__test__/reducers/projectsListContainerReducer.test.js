@@ -1,4 +1,4 @@
-import ProjectsListContainerReducer from '../../js/reducers/ProjectsListContinerReducer';
+import ProjectsListContainerReducer from '../../js/reducers/ProjectsPageReducer';
 
 describe('ProjectsListContainerReducer', () => {
     const INITIAL_STATE = {

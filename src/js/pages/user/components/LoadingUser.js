@@ -6,7 +6,6 @@ import loadingRing from '../../../../assets/images/loadingRing.gif'
 
 export default () => {
 
-
   return (
     <Container>
       <TextHeader> Generating User </TextHeader>

@@ -14,7 +14,7 @@ const Button= styled.button`
   border-radius: 20px;
   color: #00C5FF;
   background: white;
-  padding: 0.4vw 4vw;
+  padding: 0.75vw 5vw;
   font-size: 1.1vw;
   font-weight: 100;
   border: solid;

@@ -1,6 +1,6 @@
 /* global it: true   expect:true  describe:true*/
 import React from 'react';
-import WelcomeComponent from '../../../../js/pages/Login/components/WelcomeComponent';
+import {WelcomeComponent} from '../../../../js/pages/Login/components/WelcomeComponent';
 import {shallow} from 'enzyme';
 
 const defaultProps = {
@@ -23,7 +23,7 @@ describe('welcome component suite', function() {
   });
 
   it('should find the handleClick function', function() {
-    const button = wrapper.find('GitHubSignInButton');
+    const button = wrapper.find('GitHubLogin');
     button.simulate('click');
     // expect(wrapper.instance().props.history.length).toEqual(2);
   });

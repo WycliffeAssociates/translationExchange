@@ -1,31 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
-import ReactPlayer from 'react-player';
-import {ReactMic} from 'react-mic';
-
+import CommentRow from './TakeCardCommentRow';
+import RecordCommentsModal from '../../../../chunks/components/RecordCommentsModal';
 export default class TakeCardComments extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state ={
+      displayModal: false,
+    };
 
     this.recordButton = this.recordButton.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  closeModal() {
+    this.setState({displayModal: false});
   }
 
 
   recordButton() {
-    const recording = this.props.recording;
+    const { id, saveComment, uploadingComments, activeChunkId, chunkNum} = this.props;
     const microphone = <i className = "fa fa-microphone" />;
-    const stop = <i className = "fa fa-stop" />;
-
     return (
       <div style={{backgroundColor: '#E74C3C', width: '4vw'}}>
 
-        <RecordComment style={{ display: recording? '': 'none'}} onClick = {this.props.recordComment}>
-          {stop}
-        </RecordComment>
-
-        <RecordComment style={{ display: recording? 'none': ''}} onClick = {this.props.recordComment}>
+        <RecordComment onClick = {()=> {this.setState({displayModal: true});}}>
           {microphone}
+          <RecordCommentsModal display = {this.state.displayModal}
+            chunkNum={chunkNum}
+            chunkId={activeChunkId}
+            uploadingComments={uploadingComments}
+            closeModal = {()=> this.closeModal()}
+            id={id}
+            saveComment = {saveComment}
+            type={'take'} />
         </RecordComment>
 
       </div>
@@ -35,23 +44,18 @@ export default class TakeCardComments extends React.Component {
 
 
   render() {
-
-    let playPauseIcon = 'fas fa-play fa-fw';
-
+    const {comments} = this.props;
     return (
       <Comments>
-        <CommentRow>
+        {
+          comments.length!==0 ?
+            comments.map((comment) => {
+              return (  <CommentRow key= {comment.id} comment= {comment} />);
 
-          <CommentIcon id="comment" data-jdenticon-value={'imthemaster'} />
-          <CommentPlayer >
-            <PlayComment onClick ={this.props.playComment}> <i className={playPauseIcon} /> </PlayComment>
-            <ReactPlayer url={this.props.blob} playing ={this.props.playingComment} style={{display: 'none'}} />
-          </CommentPlayer>
-
-          <RowButton> <i className = "fa fa-trash" /> </RowButton>
-
-        </CommentRow>
-
+            })
+            :
+            ''
+        }
         <MoreOptions>
 
           <LoadMore>
@@ -63,23 +67,11 @@ export default class TakeCardComments extends React.Component {
 
         </MoreOptions>
 
-        {
-        // this.props.recording?
-          <ReactMic
-            className = "sound-wave"
-            record = {this.props.recording}
-            onStop = {this.props.onStop}
-            strokeColor="#009CFF"
-            backgroundColor="transparent" />
-        //  : ''
-        }
-
       </Comments>
     );
   }
 
 }
-
 
 const Button = styled.button`
   font-size: 1.75vw;
@@ -89,39 +81,12 @@ const Button = styled.button`
   padding: 0.75vw;
   border-top: solid 0.05vw #009CFF;
   text-align:center;
-`;
+  background: none;
 
-const PlayComment = styled(Button)`
-  font-size: 1vw;
-  flex: 0;
-  border-top: none;
-  padding: 0.4vw;
 `;
-
 
 const Comments = styled.div`
 padding-left: 1vw;
-`;
-
-const CommentRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: solid 0.01vw lightgray;
-  overflow: hidden;
-`;
-
-const CommentPlayer = styled.div`
-  display: flex;
-  alignItems: flex-start;
-  flex: 1;
-`;
-const RowButton = styled(Button)`
-  flex:0;
-  padding: 0.4vw;
-  border-top: none;
-  font-size: 1vw;
 `;
 
 const MoreOptions = styled.div`
@@ -148,11 +113,6 @@ const RecordComment = styled(Button)`
   padding: 1vw 1.5vw;
   align-self: flex-end;
   border-top: none;
+  cursor: pointer;
 
-`;
-
-const CommentIcon = styled.svg`
-  height: 2vw;
-  width: 2w;
-  margin-top: 0;
 `;

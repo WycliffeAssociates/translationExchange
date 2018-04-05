@@ -1,4 +1,4 @@
-/* eslint indent: [0, "tab", {SwitchCase: 1}]*/
+/* eslint indent: [1, "tab", {SwitchCase: 1}]*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -7,12 +7,13 @@ import config from '../../../config/config';
 import QueryString from 'query-string';
 import 'css/takes.css';
 import ChunkHeader from './ChunkHeader';
-import Footer from '../takes/components/Footer';
 import Chunk from './Chunk';
 import NotFound from 'js/pages/NotFound';
 import ErrorButton from '../../components/ErrorButton';
+import UtilityPanel from '../../components/UtilityPanel';
 import LoadingGif from '../../components/LoadingGif';
-import Toggle from 'react-toggle';
+import styled from 'styled-components';
+import PlayerTracker from '../../components/PlayerTracker';
 
 
 import {
@@ -28,6 +29,7 @@ import {
 	deleteComment,
 	markedAsPublished,
 	saveComment,
+	getComments,
 	getAudioTakes,
 	deleteTakeSuccess,
 	deleteCommentSuccess,
@@ -39,8 +41,15 @@ export class ChunkListContainer extends Component {
 
 	constructor(props) {
 		super(props);
+		this.state ={commentsTab: true}
+
+		this.state = {
+			selectedChunk: 1,
+			utililtyPanel: true,
+		};
 
 		this.createChunkList= this.createChunkList.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 	}
 	componentWillUnmount() {
 		this.props.resetInfo();
@@ -49,12 +58,19 @@ export class ChunkListContainer extends Component {
 	componentWillMount() {
 		const query = QueryString.parse(this.props.location.search);
 		this.props.getSelectedProjectInfo(query);
+		this.props.getComments(query.chapterId, 'chapter_id');
+
 	}
 
 	updatingDeletedTake(takeId) {
 		const tks = this.props.takes;
 		this.props.deleteTakeSuccess(takeId, tks);
 		this.forceUpdate();        // used to rerender when a take is delete it
+	}
+
+	handleClick(chunkId) {
+		this.setState({selectedChunk: chunkId}); //set the start of the selected chunk here, and passes the selected chunk into the chunk component which is in the render function
+		this.props.getComments(chunkId,'chunk_id');//  below, which in turn calls to the api to get the necessary audio takes
 	}
 
 	updatingDeletedComment(commentId, comments) {
@@ -171,6 +187,9 @@ export class ChunkListContainer extends Component {
 	}
 
 	render() {
+
+
+
 		if (this.props.loaded && this.props.chunks.length === 0) {
 			return <NotFound />;
 		} else if (this.props.error) {
@@ -180,10 +199,15 @@ export class ChunkListContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
+
+			const chapterNum = this.props.chapter.number;
+
 			return (
-				<div className="background">
-					<ChunkHeader
-						chapterNum={this.props.chapter.number}
+				<KabanContainer className="backgroundKaban">
+
+					{/* <ChunkHeader
+						history={this.props.history}
+						chapterNum={chapterNum}
 						book={this.props.book}
 						chapter={this.props.chapter}
 						language={this.props.language}
@@ -196,52 +220,53 @@ export class ChunkListContainer extends Component {
 						active={this.props.active}
 						projectId={this.props.project.id}
 						displayText={this.props.displayText}
-					/>
+						number={this.props.chunks[this.state.selectedChunk-1].startv}
+						chunkId={this.props.chunks[this.state.selectedChunk-1].id}
+
+					/> */}
 
 
-					<div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-						{
+					<div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'space-between'}}>
+
 						<div style={{flex: '1'}}>
-							<Chunk
-						has_comments={this.props.chunks[0].has_comment}
-						comments={this.props.comments}
-						takesForChunk={this.props.chunks[0]} // array of takes
-						mode={'chunks'}        //TODO get mode from backend
-						number={this.props.chunks[0].startv}
-						chunkId={this.props.chunks[0].id}
-						patchTake={this.patchTake.bind(this)}
-						deleteTake={this.deleteTake.bind(this)}
-						updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
-						onClickSave={this.onClickSave.bind(this)}
-						id={this.props.chunks[0].id}
-						deleteComment={this.deleteComment.bind(this)}
-						loaded={this.props.loaded}
-						book={this.props.book.name}
-						language={this.props.language.name}
-						onSourceClicked={this.onSourceClicked.bind(this)}
-						active={this.props.active}
-						published={this.props.project.published}
-						displayText={this.props.displayText}
-					/>
+							<center>
+								<Chunk
+									selectedChunk={this.state.selectedChunk}
+									has_comments={this.props.chunks[this.state.selectedChunk-1].has_comment}
+									comments={this.props.comments}
+									takesForChunk={this.props.chunks[this.state.selectedChunk-1]} // array of takes
+									mode={'chunks'}        //TODO get mode from backend
+									number={this.props.chunks[this.state.selectedChunk-1].startv}
+									chunkId={this.props.chunks[this.state.selectedChunk-1].id}
+									patchTake={this.patchTake.bind(this)}
+									deleteTake={this.deleteTake.bind(this)}
+									updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
+									onClickSave={this.onClickSave.bind(this)}
+									id={this.props.chunks[this.state.selectedChunk-1].id}
+									deleteComment={this.deleteComment.bind(this)}
+									loaded={this.props.loaded}
+									book={this.props.book.name}
+									language={this.props.language.name}
+									onSourceClicked={this.onSourceClicked.bind(this)}
+									active={this.props.active}
+									published={this.props.project.published}
+									displayText={this.props.displayText}
+								/>
+							</center>
+
+						</div>
+
+
+
+						<UtilityPanel {...this.props} createChunkList = {this.createChunkList} />
+
 
 					</div>
-				}
 
 
-					<div style={{background: '#2D2D2D', marginTop: '1vw', padding: '0.2vw'}} >
+					<SourceAudio />
 
-					<div style={{display: 'flex', flexDirection: 'row' , justifyContent: 'space-between', marginTop: '1vw'}}>
-
-						<Toggle defaultChecked= {false} />
-
-						<label style={{textDecoration: 'underline', color: '#009CFF'}}> Hide <i className= "fa fa-arrow-right" /> </label>
-					</div>
-					{this.props.chunks.map((chunk,index) => this.createChunkList(chunk, index))}
-					</div>
-				</div>
-
-
-				</div>
+				</KabanContainer>
 			);
 		}
 	}
@@ -310,44 +335,60 @@ export class ChunkListContainer extends Component {
 	createChunkList(chunk,index) {
 		return (
 			<div 	key={index} style={{marginTop: '0.5vw'}}>
-				{
-				// 	<Chunk
-				// 	has_comments={chunk.has_comment}
-				// 	comments={this.props.comments}
-				// 	takesForChunk={chunk} // array of takes
-				// 	mode={'chunk'}        //TODO get mode from backend
-				// 	number={chunk.startv}
-				// 	chunkId={chunk.id}
-				// 	patchTake={this.patchTake.bind(this)}
-				// 	deleteTake={this.deleteTake.bind(this)}
-				// 	updateChosenTakeForChunk={this.updateChosenTakeForChunk.bind(this)}
-				// 	onClickSave={this.onClickSave.bind(this)}
-				// 	id={chunk.id}
-				// 	deleteComment={this.deleteComment.bind(this)}
-				// 	loaded={this.props.loaded}
-				// 	book={this.props.book.name}
-				// 	language={this.props.language.name}
-				// 	onSourceClicked={this.onSourceClicked.bind(this)}
-				// 	active={this.props.active}
-				// 	published={this.props.project.published}
-				// 	displayText={this.props.displayText}
-				// />
-			}
-				<label style={{margin: '2vw', color: 'white'}}key={index}> chunk </label>
-				<label style={{margin: '2vw', color: 'white'}}> Unavailble </label>
+				<div style={{display: 'flex', flexDirection: 'row',
+					justifyContent: 'space-evenly', flex: '1', background: '#2D2D2D',
+					color: this.state.selectedChunk=== chunk.id? 'white': '#969595', paddingTop: '1vw', paddingBottom: '1vw', borderBottom: 'solid 1px #969595',
+					fontSize: '1.1vw', cursor: 'pointer'}} >
 
+					<label style={{cursor: 'pointer', marginRight: '2vw', fontSize: '1vw'}}> Chunk {chunk.startv} </label>
+					<label style={{cursor: 'pointer'}}> {this.state.selectedChunk === chunk.id?
+						'Current': this.props.takes.map? this.props.takes.map((takes) => {
+							if (takes.published == true && takes.chunkId == this.state.selectedChunk) {
+								return <PlayerTracker url={takes.location} /> ;
+							}
+
+						})  : 'Unavailable'} </label>
+
+				</div>
 
 			</div>
 		);
 	}
 }
 
+const SourceAudio =  styled.div`
+ 	background: #2D2D2D;
+	width: 100vw;
+	height: 4.55vw;
+	marginTop: 0vw;
+	position: fixed;
+	bottom: 0;
+	z-index: 99;
+`;
+
+const KabanContainer =  styled.div`
+	width: 100vw;
+`;
+
+const ChunkContainer= styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+`;
+
+const PublishingLevels = styled.div`
+	flex: 1;
+`;
+
 const mapStateToProps = state => {
 	const { displayText = '' } = state.geolocation;
 	const { direction } = state.direction;
 	const { playlistMode } = state.updatePlaylist;
-	const { takes, loaded = false, error = '', comments = [], chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
-	return {comments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
+	const { chunkComments, chapterComments } = state.comments;
+
+	const { selectedChunk=1, takes, loaded = false, error = '',  chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
+	return {selectedChunk, chunkComments, chapterComments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 };
 
@@ -371,6 +412,7 @@ const mapDispatchToProps = dispatch => {
 			deleteCommentSuccess,
 			getSourceTakes,
 			publishFiles,
+			getComments,
 		}, dispatch);
 };
 
