@@ -40,16 +40,11 @@ class KanbanColumn extends React.Component {
     }
 
 
-  navigateToChapter(chNum, chId) {
-    var query = QueryString.parse(this.props.location.search);
-    query.chapter_num = chNum;
-    query.chapterId = chId;
-
-
-    this.props.history.push({
-      pathname: '/kanbanPage',
-      search: QueryString.stringify(query),
-    });
+  navigateToChapter() {
+    const {getChunks, getComments} = this.props;
+    const query = QueryString.parse(this.props.location.search);
+    getChunks(query.chapterId); 
+    getComments(query.chapterId);
   }
 
   onDrop(published, newRating, take) {
