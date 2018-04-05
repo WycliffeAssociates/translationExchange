@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TaskItem from './TaskItem';
+import TaskItemFailed from './TaskItemFailed';
 
 export default class TaskProgress extends React.Component {
 
@@ -16,8 +17,10 @@ export default class TaskProgress extends React.Component {
         
         {
           this.props.tasks.map((task) => {
-            return (
+            return task.status != "FAILURE" ? (
               <TaskItem key={task.id} task={task} {...this.props} /> 
+            ) : (
+              <TaskItemFailed key={task.id} task={task} {...this.props} />
             );
           })
         }

@@ -47,7 +47,6 @@ class TaskProgressPage extends React.Component {
     }
   }
 
-
   render() {
     const {search} = this.props.location;
     const query = QueryString.parse(search);

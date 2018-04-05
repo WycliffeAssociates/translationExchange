@@ -4,31 +4,46 @@ import styled from 'styled-components';
 import QueryString from 'query-string';
 import update from 'immutability-helper';
 
-import TaskInfoTop from './TaskInfoTop';
+import TaskInfoFailed from './TaskInfoFailed';
 import TaskProgressBar from './TaskProgressBar';
 
 import img from '../../../../assets/images/obs-en-01-01-sm.jpg';
 
-class TaskItem extends React.Component {
+class TaskItemFailed extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      clear: false,
+    };
+
+    this.clearTask = this.clearTask.bind(this);
   }
 
   render() {
 
     return (
-      <TaskDetails>
-        <Img>
-          <img style={{width: "100%"}} src={img} />
-        </Img>
-        
-        <RightColumn>
-          <TaskInfoTop {...this.props}></TaskInfoTop>
-          <TaskProgressBar task={this.props.task}></TaskProgressBar>
-        </RightColumn>
-      </TaskDetails>
+      (() => {
+        return !this.state.clear ? 
+          <TaskDetails>
+            <Img>
+              <Failed>
+                <i style={{fontSize: "3vw"}} className="material-icons">flag</i>
+                <div>Upload failed</div>
+              </Failed>
+            </Img>
+            
+            <RightColumn>
+              <TaskInfoFailed task={this.props.task} clearTask={this.clearTask} />
+            </RightColumn>
+        </TaskDetails> :
+        null;
+      })()
     );
+  }
+
+  clearTask() {
+    this.setState({clear: true});
   }
 
 }
@@ -68,4 +83,4 @@ const RightColumn = styled.div`
   padding-right: 0.5vw; 
 `;
 
-export default TaskItem;
+export default TaskItemFailed;

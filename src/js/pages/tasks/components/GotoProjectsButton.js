@@ -26,14 +26,14 @@ export default class GotoProjectsButton extends React.Component {
 const Button = styled.div`
   cursor: pointer;
   width: 15vw;
-  height: 2vw;
+  height: 2.5vw;
   background: linear-gradient(#42a3fc, #58c5ff);
-  border-radius: 1vw;
+  border-radius: 1.5vw;
   margin: 2vw auto;
   color: white;
   text-align: center;
   font-size: 1vw;
   font-weight: bold;
   text-decoration: underline;
-  padding-top: 0.4vw;
+  padding-top: 0.6vw;
 `;
