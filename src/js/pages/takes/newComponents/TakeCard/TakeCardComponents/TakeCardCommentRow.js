@@ -13,14 +13,15 @@ export default class TakeCardCommentRow extends React.Component {
 
   render() {
 
+    const {comment} = this.props;
+
     return (
       <CommentRow>
 
         <CommentIcon id="comment" data-jdenticon-value={'imthemaster'} />
 
         <CommentPlayer >
-          <PlayerTracker playing ={this.props.playingComment} duration={this.props.take.duration} />
-          <ReactPlayer url={this.props.blob} playing ={this.props.playingComment} style={{display: 'none'}} />
+          <PlayerTracker url={comment.location} />
         </CommentPlayer>
 
         <RowButton> <i className = "fa fa-trash" /> </RowButton>

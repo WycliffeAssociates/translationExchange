@@ -34,13 +34,17 @@ export default class TakeCardComments extends React.Component {
 
 
   render() {
-
+    const {comments} = this.props;
     return (
       <Comments>
 
         {
-          this.props.has_comment?
-            <CommentRow {...this.props} />
+          comments.length!==0 ?
+            comments.map((comment) => {
+              return (  <CommentRow key= {comment.id} comment= {comment} />);
+
+            })
+
             :
 
             ''

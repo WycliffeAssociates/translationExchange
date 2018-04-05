@@ -58,7 +58,7 @@ export class TakeCard extends React.Component {
     this.props.connectDragPreview(getEmptyImage(), {
       captureDraggingState: true,
     });
-    //console.log(this.props, 'PROPS FROM TAKE CARD IN COMPONENT DID MOUNT');
+    console.log(this.props, 'PROPS FROM TAKE CARD IN COMPONENT DID MOUNT');
 
   }
 
