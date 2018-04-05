@@ -8,8 +8,6 @@ class ChunkPanel extends Component {
 
 render() {
     const {selectedChunk,takeLocation} = this.props; //selectedChunk is the chunk number selected in the navbar, by default is 1
-    console.log(this.props.chunks);
-    console.log(this.props.takeLocation);
     return (
       <Container>
         {this.props.chunks.map(chk =>{

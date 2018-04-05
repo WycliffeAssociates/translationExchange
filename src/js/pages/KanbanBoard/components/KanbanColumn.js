@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import TakeCard from '../../takes/newComponents/TakeCard/TakeCard';
 import DragHereBox from '../../../components/DragHereBox';
 import QueryString from 'query-string';
-import update from 'immutability-helper';
 import {DropTarget} from 'react-dnd';
 
 class KanbanColumn extends React.Component {
@@ -41,10 +40,11 @@ class KanbanColumn extends React.Component {
 
 
   navigateToChapter() {
-    const {getChunks, getComments} = this.props;
+
     const query = QueryString.parse(this.props.location.search);
-    getChunks(query.chapterId); 
-    getComments(query.chapterId);
+    this.props.getChunks(query.chapterId);
+    this.props.getComments(query.chapterId, 'chapter_id');
+
   }
 
   onDrop(published, newRating, take) {
@@ -96,6 +96,7 @@ class KanbanColumn extends React.Component {
     var chapterId = query.chapterId;
 
     const { connectDropTarget, isOver} = this.props;
+    const { saveComment, uploadingComments, activeChunkId, chunkNum} = this.props;
 
     var icon;
     switch (this.props.icon) {
@@ -142,10 +143,14 @@ class KanbanColumn extends React.Component {
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', overflow: 'auto'}}>
           {
             this.props.array? this.props.array.map((take, index) => {
-              return (<TakeCard key={index} {...take} makeChanges= {this.makeChanges}
-                removeTake = {this.removeTake} displayText = {this.props.displayText}
-                getComments ={this.props.getComments}
-                publishedTake = {this.props.publishedTake} /> ); /* published take passed down for react dnd */
+              return (
+                <TakeCard key={index} {...take} makeChanges= {this.makeChanges}
+                  displayText = {this.props.displayText}
+                  getComments ={this.props.getComments}
+                  publishedTake = {this.props.publishedTake}
+                  saveComment={saveComment}
+                  uploadingComments={uploadingComments}
+                  activeChunkId={activeChunkId} chunkNum={chunkNum}  /> ); /* published take passed down for react dnd */
             }) : ''
 
           }

@@ -65,7 +65,9 @@ class KanbanPage extends React.Component {
 }
 
 const KanbanPageContainer = styled.div`
-
+overflow-x: hidden;
+overflow-y: auto;
+width: 100vw;
 `;
 
 const KanbanContainer = styled.div`
@@ -76,6 +78,8 @@ const KanbanContainer = styled.div`
  background: url(${img});
  background-repeat: no-repeat;
  background-size: cover;
+ overflow-x: hidden;
+ overflow-y: auto;
 `;
 //
 // const KanbanBoard = styled.div`

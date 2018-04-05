@@ -14,8 +14,11 @@ export default class PlayerTracker extends React.Component {
       url: null,
       loop: false,
       loaded: 0,
+      loadedSeconds: 0,
       duration: 0,
       played: 0,
+      playedSeconds: 0,
+      flagFinished: false,
     };
 
     this.playComment = this.playComment.bind(this);
@@ -25,8 +28,8 @@ export default class PlayerTracker extends React.Component {
     this.PlayHead = this.PlayHead.bind(this);
   }
 
-  playComment(playerTime) {
-    this.setState(prevState => ({playing: !prevState.playing, playerTime: playerTime}));
+  playComment() {
+    this.setState(prevState => ({playing: !prevState.playing}));
   }
 
   onProgress = state => {
@@ -34,6 +37,8 @@ export default class PlayerTracker extends React.Component {
     if (!this.state.seeking) {
       this.setState(state);
     }
+
+
   }
 
   onSeek(e) {
@@ -42,8 +47,8 @@ export default class PlayerTracker extends React.Component {
   }
 
   onEnd() {
-    this.setState({ playing: this.state.loop , played: 0, playedSeconds: 0});
-  }
+    setTimeout(() => {this.setState({played: 0, playedSeconds: 0, playing: this.state.loop});},
+      1000);  }
 
   ref = player => {
     this.player = player;
@@ -64,6 +69,8 @@ export default class PlayerTracker extends React.Component {
   }
   render() {
 
+    const {audioFile} = this.props;
+    const {url} = this.props;
 
 
     return (
@@ -72,10 +79,10 @@ export default class PlayerTracker extends React.Component {
         <div style={{width: 'inherit', color: 'steelblue', background: 'none', display: 'flex', flexDirection: 'row',
           justifyContent: 'space-between'}}>
           {this.PlayHead()}
-          <Input type="range"  min="0" max ={1} step="0.01" value={this.state.played? this.state.played: 0}
+          <Input type="range"  min="0" max ={this.state.loadedSeconds} step="0.01" value={this.state.playedSeconds? this.state.playedSeconds: 0}
             onChange = {this.onSeek} />
           <ReactPlayer //url ={config.streamingUrl+ this.props.url}
-            url ={config.streamingUrl+ this.props.url}
+            url ={audioFile? audioFile: config.streamingUrl+ url}
             style={{display: 'none'}}
             onProgress = {this.onProgress}
             playing = {this.state.playing}
@@ -89,7 +96,7 @@ export default class PlayerTracker extends React.Component {
 }
 
 const Input = styled.input`
-
+  margin-top: 0.2vw;
  -webkit-appearance : none;
 width: 100%;
 background: transparent;

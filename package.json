@@ -12,6 +12,7 @@
     "eslint-plugin-react": "^7.7.0",
     "express": "^4.16.2",
     "fast-deep-equal": "^1.1.0",
+    "font-awesome": "^4.7.0",
     "howler": "^2.0.4",
     "immutability-helper": "^2.6.5",
     "jdenticon": "^1.8.0",

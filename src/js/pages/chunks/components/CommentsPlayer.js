@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Wavesurfer from 'react-wavesurfer';
 import styled from 'styled-components';
+import PlayerTracker from '../../../components/PlayerTracker';
 
 class CommentsPlayer extends Component {
 
@@ -53,24 +54,9 @@ class CommentsPlayer extends Component {
     if (this.state.play) {
       playPauseBtn = <PauseButton />;
     }
-
     return (
       <Container >
-        <ButtonContainer onClick={this.toggleButton}>
-          {playPauseBtn}
-        </ButtonContainer>
-        <WaveformContainer>
-
-          <Wavesurfer
-            audioFile={this.props.audioFile}
-            pos={position}
-            onPosChange={this.handlePosChange}
-            playing={this.state.play}
-            options={{ cursorWidth: 2, progressColor: '#eff0f2', cursorColor: '#3791D5', barWidth: 2, hideScrollbar: true, normalize: true, height: 15, waveColor: '#3791D5' }}
-            onReady={this.duration}
-            onFinish={this.finishedPlaying}
-          />
-        </WaveformContainer>
+        <PlayerTracker audioFile={this.props.audioFile} />
         {/* <BlockMiddle></BlockMiddle> */}
       </Container>
 

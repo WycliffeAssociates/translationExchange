@@ -11,7 +11,7 @@ class Player extends Component {
     super(props);
     this.state = {
       playing: false,
-      id:null,
+      id: null,
     };
     this.play = this.play.bind(this);
     this.ended = this.ended.bind(this);

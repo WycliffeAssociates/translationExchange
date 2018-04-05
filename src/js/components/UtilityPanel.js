@@ -108,7 +108,8 @@ const UtilityPanelContainer = styled.div`
    flex: 0.2;
    width: 18vw;
    height: 50vw;
-   overflow: auto;
+   overflow-y: scroll;
+   overflow-x: hidden;
   border-bottom: 1px solid #969595;
 `;
 
