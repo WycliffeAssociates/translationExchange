@@ -30,10 +30,9 @@ class TaskTitle extends React.Component {
 }
 
 const Container = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
-  // align-items: stretch;
+  flex: 1;
 `;
 
 const LanguageTitle = styled.div`

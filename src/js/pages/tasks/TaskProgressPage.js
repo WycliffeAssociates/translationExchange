@@ -14,6 +14,8 @@ class TaskProgressPage extends React.Component {
 
   constructor(props) {
     super(props);
+
+    let interval;
   }
 
   componentWillMount() {
@@ -25,9 +27,13 @@ class TaskProgressPage extends React.Component {
   componentDidMount() {
     const {search} = this.props.location;
     const query = QueryString.parse(search);
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.props.getTasks(query.type);
     }, 3000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   shouldComponentUpdate(nextProps) {

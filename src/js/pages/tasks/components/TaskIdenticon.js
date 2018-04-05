@@ -50,6 +50,7 @@ const Identicon = styled.svg`
   width: 3w;
   margin: 0.5vw 0.5vw 0 0;
   cursor: pointer;
+  flex: 1;
 `;
 
 export default TaskIdenticon;

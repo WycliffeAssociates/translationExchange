@@ -35,7 +35,7 @@ class TaskProgressBar extends React.Component {
     }
 
     return (
-      <Container style={pbStyle}>
+      <Container>
         <ProgressBar 
           now={progress} 
           label={progress < 100 ? progress + "%" : ""}
@@ -45,12 +45,6 @@ class TaskProgressBar extends React.Component {
       </Container>
     );
   }
-
-}
-
-const pbStyle = {
-  marginTop: "1.4vw",
-  paddingRight: "0.5vw",
 }
 
 const Container = styled.div`

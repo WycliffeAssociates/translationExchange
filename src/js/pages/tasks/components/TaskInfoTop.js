@@ -27,6 +27,7 @@ class TaskInfoTop extends React.Component {
 
 const Container = styled.div`
   width: 100%;
+  height: 4.4vw;
   display: flex;
   flex-direction: row;
   align-items: stretch;

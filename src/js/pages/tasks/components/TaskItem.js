@@ -54,6 +54,7 @@ const RightColumn = styled.div`
   flex-direction: column;
   margin-left: 0.5vw;
   flex: 6;
+  padding-right: 0.5vw; 
 `;
 
 export default TaskItem;
