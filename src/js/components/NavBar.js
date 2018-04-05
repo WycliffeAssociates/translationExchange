@@ -34,7 +34,6 @@ class NavBar extends Component {
 
   componentDidMount() {
     const {loggedInUser}= this.props;
-
     if (loggedInUser === null) {
       this.props.getUserHash();
     }

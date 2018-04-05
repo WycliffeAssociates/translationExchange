@@ -64,6 +64,7 @@ export const patchTake = (
     return function(dispatch, getState) {
 
         const {chunks} = getState().kanbanPage;
+        const {chapters} = getState().Chapters;
 
         return axios
             .patch(config.apiUrl + 'takes/' + takeId + '/', patch,{
@@ -75,10 +76,14 @@ export const patchTake = (
                 chunks.map(chk => {
                     if(chk.id === chunkId && patch.published){    // select the chunk that we are updating and verify if it is
                         chk.published_take = take;                // marked as published, update the published take inside the chunk obj
+
                     }
                     if(chk.id === chunkId && !patch.published){    // unpublish take at chunk level
                         chk.published_take = null;
                     }
+
+
+
                 });
 
                 //find correct take to update

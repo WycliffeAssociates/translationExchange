@@ -26,3 +26,20 @@ export const getChaptersSuccess = (chapters) =>{
 
 
 };
+
+export const upgradeCheckingLevel = () =>{
+    // return dispatch => {
+    //     return axios
+    //         .patch(`${config.apiUrl}chapters/?project_id=${projectId}`,
+    //             {
+    //                 headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+    //             })
+    //         .then(response => {
+    //
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         });
+    // };
+
+};
