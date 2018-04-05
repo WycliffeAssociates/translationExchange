@@ -24,7 +24,11 @@ class MyProjectsContainer extends Component {
             <ProjectCard bookName={p.book.name}
               language={p.language.name}
               version={p.version.slug}
-              dateModified={p.date_modified.slice(0,10)} /> )
+              dateModified={p.date_modified.slice(0,10)}
+              projectId={p.id}
+             {...this.props}
+
+            /> )
           }
         </CardsContainer>
 

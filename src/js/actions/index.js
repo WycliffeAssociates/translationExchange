@@ -10,3 +10,4 @@ export * from './SourceAudioAction';
 export * from './UserActions';
 export * from './CommentsActions';
 export * from './KanbanPageActions';
+export * from './ChapterPageActions';

@@ -6,7 +6,7 @@ import NavBar from '../../components/NavBar';
 import RecentProjectsContainer from './RecentProjectsContainer';
 import MyProjectsContainer from './MyProjectsContainer';
 import ListContainer from './ListContainer';
-import { fetchAllProjects } from '../../actions';
+import { fetchAllProjects, getChapters } from '../../actions';
 
 
 
@@ -60,11 +60,11 @@ const CardsContainer = styled.div`
 
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({fetchAllProjects}, dispatch);
+    return bindActionCreators({fetchAllProjects, getChapters}, dispatch);
 };
 
 const mapStateToProps = state =>{
-    const { projects } = state.Projects;
+    const { projects,  } = state.Projects;
 
     return{projects};
 };
