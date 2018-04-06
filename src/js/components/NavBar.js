@@ -66,16 +66,26 @@ class NavBar extends Component {
 
   render() {
 
-    const {loggedInUser, history, chunks, chapterNum, location, kanban}= this.props;
-    let searchBar=''
+    const {loggedInUser, history, chunks, chapterNum, location, kanban, chapterPage}= this.props;
+    const searchBar = QueryString.parse(location.search);
     let menu = '';
+    let book ='';
+    let chapter='';
+    let goToChapters = '';
     if (kanban) {
-      searchBar = QueryString.parse(location.search);
+      chapter =`Chapter ${chapterNum}`;
+        book = searchBar.bookName;
+        goToChapters = () => {history.push(`/chapters?projectId=${searchBar.projectId}&&bookName=${searchBar.bookName}`)};
+
       menu = (
         <Menu onSelect={ ky=> this.onSelect(ky)}>
           { kanban ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>): ''}
         </Menu>
       );
+    }
+
+    if(chapterPage){
+      book = searchBar.bookName;
     }
 
     return (
@@ -86,11 +96,11 @@ class NavBar extends Component {
         <IconsContainer>
           <TextIconContainer onClick={()=> history.push('/projects')}>
             <i className="material-icons">book</i>
-            <Text>{searchBar.book}</Text>
+            <Text>{book}</Text>
           </TextIconContainer>
-          <TextIconContainer onClick={()=> window.history.back()}  >
+          <TextIconContainer onClick={goToChapters}  >
             <i className="material-icons">chrome_reader_mode</i>
-            { <Text> Chapter {chapterNum}</Text> }
+            { <Text> {chapter}</Text> }
           </TextIconContainer>
           <TextIconContainer selected={true}>
             <i class="material-icons">graphic_eq</i>

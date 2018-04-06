@@ -1,19 +1,22 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import CircularProgressbar from "react-circular-progressbar";
+import QueryString from "query-string";
 
 
 
 export default class ChapterCard extends Component {
 
     reviewChapter = () => {
-        const {id, getChunks, history, number, getComments } = this.props;
+        const {id, getChunks, history, number, getComments, location } = this.props;
+        const searchBar = QueryString.parse(location.search);
+
         getChunks(id);     // chapter id
         getComments(id, 'chapter_id');
 
         history.push({
             pathname: './kanban',
-            search: `?chapterId=${id}&&chapterNum=${number}`
+            search: `?chapterId=${id}&&chapterNum=${number}&&bookName=${searchBar.bookName}&&projectId=${searchBar.projectId}`
         });
 
     };
