@@ -8,16 +8,17 @@ import QueryString from "query-string";
 export default class ChapterCard extends Component {
 
     reviewChapter = () => {
-        const {id, getChunks, history, number, getComments, location } = this.props;
-        const searchBar = QueryString.parse(location.search);
+      const {id, getChunks, history, number, getComments, location } = this.props;
+      const searchBar = QueryString.parse(location.search);
 
-        getChunks(id);     // chapter id
-        getComments(id, 'chapter_id');
+      getChunks(id);     // chapter id
+      getComments(id, 'chapter_id');
 
-        history.push({
-            pathname: './kanban',
-            search: `?chapterId=${id}&&chapterNum=${number}&&bookName=${searchBar.bookName}&&projectId=${searchBar.projectId}`
-        });
+      history.push({
+        pathname: './kanban',
+        search: `?chapterId=${id}&chapterNum=${number}&bookName=${searchBar.bookName}&projectId=${searchBar.projectId}`,
+      });
+
 
     };
 
@@ -169,7 +170,6 @@ const P = styled.p`
 `;
 
 const InformationContainer = styled.div`
- 
 `;
 
 
@@ -191,5 +191,3 @@ const ButtonContainer= styled.div`
     border-color: white;
     border-width: 1vw;
   `;
-
-

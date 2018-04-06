@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
 import KanbanBoard from './components/KanbanBoard';
-import {getChunks, getTakes, getComments, patchTake, saveComment, getUserHash} from '../../actions';
+import {getChunks, getTakes, getComments, patchTake, saveComment, getUserHash, removeUser} from '../../actions';
 import UtilityPanel from '../../components/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
@@ -22,13 +22,14 @@ class KanbanPage extends React.Component {
     const {getComments, getChunks, takes} = this.props;
     const {search} = this.props.location;
     const query = QueryString.parse(search);
-    if(takes.length < 1) {
+    if (takes.length < 1) {
       getChunks(query.chapterId);               //get data if the user refresh the page
       getComments(query.chapterId, 'chapter_id');
 
     }
 
   }
+
 
   shouldComponentUpdate(nextProps) {
 
@@ -46,6 +47,7 @@ class KanbanPage extends React.Component {
     const {search} = this.props.location;
     const query = QueryString.parse(search);
 
+    console.log(this.props, 'KANBAN PAGE PROPS');
     return (
       <KanbanPageContainer>
         <NavBar chapterNum={query.chapterNum} kanban={true} {...this.props} />
@@ -68,7 +70,7 @@ class KanbanPage extends React.Component {
 const KanbanPageContainer = styled.div`
 overflow-x: hidden;
 overflow-y: auto;
-width: 100vw;
+width: 100%;
 `;
 
 const KanbanContainer = styled.div`
@@ -103,7 +105,7 @@ const SourceAudio = styled.div`
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({getChunks, getTakes, getComments, patchTake, saveComment, getUserHash}, dispatch);
+  return bindActionCreators({getChunks, getTakes, getComments, patchTake, saveComment, getUserHash, removeUser}, dispatch);
 
 };
 

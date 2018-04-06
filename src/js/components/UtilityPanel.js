@@ -12,8 +12,8 @@ export default class UtilityPanel extends React.Component {
 
     this.state = {
       utilityPanel: true,
-      chapterId:null,
-      chunk_id:null
+      chapterId: null,
+      chunk_id: null,
 
     };
 
@@ -22,10 +22,10 @@ export default class UtilityPanel extends React.Component {
   }
 
 
-  componentDidMount(){
-      const {search} = this.props.location;
-      const query = QueryString.parse(search);
-      this.setState({chapterId: query.chapterId});
+  componentDidMount() {
+    const {search} = this.props.location;
+    const query = QueryString.parse(search);
+    this.setState({chapterId: query.chapterId});
   }
 
   toggleUtilityPanel() {
@@ -56,31 +56,31 @@ export default class UtilityPanel extends React.Component {
           { !this.state.commentsTab ?
             <CommentsPanel>
               <Comments
-                  saveComment={saveComment}
-                  type='chapter'
-                  comments={chapterComments}
-                  text= {`Chapter ${chapterNum}`}
-                  id={chapterId}
-                  uploadingComments={uploadingComments}
+                saveComment={saveComment}
+                type="chapter"
+                comments={chapterComments}
+                text= {`Chapter ${chapterNum}`}
+                id={chapterId}
+                uploadingComments={uploadingComments}
               />
               <Comments
-                  saveComment={saveComment}
-                  type='chunk'
-                  comments={chunkComments}
-                  text={`Chunk ${chunkNum}`}
-                  id={activeChunkId}
-                  uploadingComments={uploadingComments}
+                saveComment={saveComment}
+                type="chunk"
+                comments={chunkComments}
+                text={`Chunk ${chunkNum}`}
+                id={activeChunkId}
+                uploadingComments={uploadingComments}
               />
               {takes.map(tk=>
-                  <Comments
-                      uploadingComments={uploadingComments}
-                      chunkId ={activeChunkId}
-                      chunkNum ={chunkNum}
-                      saveComment={saveComment}
-                      type='take'
-                      comments={tk.comments}
-                      text={`Take ${tk.take_num}`}
-                      id={tk.id} />) }
+                <Comments
+                  uploadingComments={uploadingComments}
+                  chunkId ={activeChunkId}
+                  chunkNum ={chunkNum}
+                  saveComment={saveComment}
+                  type="take"
+                  comments={tk.comments}
+                  text={`Take ${tk.take_num}`}
+                  id={tk.id} />) }
             </CommentsPanel>
             :
             <ChunkPanel takeLocation={publishedTakeLocation} selectedChunk={chunkNum} chunks={chunks} />
@@ -106,8 +106,8 @@ const UtilityPanelContainer = styled.div`
   background: #2D2D2D;
    padding: 1vw;
    flex: 0.2;
-   width: 18vw;
-   height: 50vw;
+   width: 15vw;
+   height: 85vh;
    overflow-y: scroll;
    overflow-x: hidden;
   border-bottom: 1px solid #969595;

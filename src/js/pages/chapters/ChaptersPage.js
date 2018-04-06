@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import QueryString from "query-string";
 import NavBar from '../../components/NavBar';
-import {getChunks, getComments, getUserHash, getChapters} from '../../actions';
+import {getChunks, getComments, getUserHash, getChapters, removeUser} from '../../actions';
 import ChapterCard from './components/ChapterCard';
 import styled from 'styled-components';
 import 'css/takes.css';
@@ -75,7 +75,7 @@ const CardsContainer = styled.div`
 
 const mapDispatchToProps = dispatch => {
 
-    return bindActionCreators({getChunks, getUserHash, getComments, getChapters}, dispatch);
+    return bindActionCreators({getChunks, getUserHash, getComments, getChapters, removeUser}, dispatch);
 
 };
 

@@ -42,6 +42,9 @@ export default( state= INITIAL_STATE, action) => {
           loggedInUser: action.iconHash,
       };
 
+    case 'REMOVE_USER':
+        return INITIAL_STATE;
+
     default:
       return {
         ...state,
