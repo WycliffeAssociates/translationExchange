@@ -30,7 +30,7 @@ class ChapterPage extends Component {
 
         return (
             <ChapterPageContainer>
-                <NavBar kanban={false} {...this.props} />
+                <NavBar chapterPage={true} kanban={false} {...this.props} />
 
                 <CardsContainer>
                     {chapters.map(chp => <ChapterCard {...chp} {...this.props} />)}

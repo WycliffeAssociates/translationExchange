@@ -29,6 +29,7 @@ class KanbanPage extends React.Component {
 
   }
 
+
   shouldComponentUpdate(nextProps) {
 
     if (nextProps.location != this.props.location) {
@@ -45,6 +46,7 @@ class KanbanPage extends React.Component {
     const {search} = this.props.location;
     const query = QueryString.parse(search);
 
+    console.log(this.props, 'KANBAN PAGE PROPS');
     return (
       <KanbanPageContainer>
         <NavBar chapterNum={query.chapterNum} kanban={true} {...this.props} />

@@ -17,6 +17,7 @@ class KanbanColumn extends React.Component {
     this.makeChanges = this.makeChanges.bind(this);
     this.nextChunk = this.nextChunk.bind(this);
     this.navigateToChapter = this.navigateToChapter.bind(this);
+    this.chapterPublished = this.chapterPublished.bind(this);
   }
 
   nextChunk() {
@@ -27,7 +28,7 @@ class KanbanColumn extends React.Component {
     let activeChunkIndex = null;
 
     chunks.map( (chk, index) => {
-      if(chk.id == activeChunkId){    // find the chunk that we are at
+      if (chk.id == activeChunkId) {    // find the chunk that we are at
         activeChunkIndex = index;     // get the index in the array list
       }
     });
@@ -41,7 +42,7 @@ class KanbanColumn extends React.Component {
 
   navigateToChapter(chapter_num, chapterId) {
 
-    const query = QueryString.parse(this.props.location.search);
+    var query = QueryString.parse(this.props.location.search);
     console.log(query, 'QUERY');
     query.chapterId = chapterId;
     query.chapterNum = chapter_num;
@@ -49,7 +50,8 @@ class KanbanColumn extends React.Component {
     console.log(queryString);
 
     this.props.history.push({
-      pathname: `/kanban?${queryString}`,
+      pathname: '/kanban',
+      search: `?chapterId=${chapterId}&chapterNum=${chapter_num}&bookName=${query.bookName}&projectId=${query.projectId}`,
     });
 
     this.props.getChunks(chapter_num+1);
@@ -96,6 +98,19 @@ class KanbanColumn extends React.Component {
         return null;
 
     }
+  }
+
+  chapterPublished() {
+    const {chunks} = this.props;
+    var chapterPublished = true;
+
+    for (var x=0; x< chunks.length; x++) {
+      if (chunks[x].published_take == null) {
+        chapterPublished = false;
+        break;
+      }
+    }
+    return chapterPublished;
 
   }
 
@@ -176,7 +191,7 @@ class KanbanColumn extends React.Component {
 
         {
           this.props.publishedColumn?
-            this.props.activeChunkId === this.props.chunks.length? //if activeChunkId = chunks.length that means we are at the last chunk in the chapter (activeChunkId starts at 1)
+            this.chapterPublished()?
               <center> <NextChapter onClick ={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)} >Go To Next Chapter <i className="fa fa-arrow-right" /> </NextChapter> </center> :
               <center> <NextChunk onClick ={() => this.nextChunk()}>Go To Next Chunk <i className="fa fa-arrow-right" /> </NextChunk> </center>
             : ''
