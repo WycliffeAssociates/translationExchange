@@ -111,8 +111,8 @@ const Card= styled.div`
     box-shadow: 0px 1px 2px 4px rgba(0,0,0,0.2);
     overflow: hidden;
     background-color: white;
-    background: ${props => props.check ? 'linear-gradient(to bottom, #0076FF, #00C5FF)':''}
-    padding-top:1vw;
+    background: ${props => props.check ? 'linear-gradient(to bottom, #0076FF, #00C5FF)':''};
+    margin-top: 3vw;
     
 `;
 
@@ -148,6 +148,7 @@ const CircularProgressContainer = styled.div`
     height: ${props=> props.check ? '68%': '75%'}
     align-items:center;
     flex-direction: column;
+    position: relative;
     
 `;
 
@@ -165,7 +166,7 @@ const P = styled.p`
 `;
 
 const InformationContainer = styled.div`
-  
+ 
 `;
 
 

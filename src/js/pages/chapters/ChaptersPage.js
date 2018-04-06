@@ -34,7 +34,7 @@ class ChapterPage extends Component {
                 <NavBar kanban={false} {...this.props} />
 
                 <CardsContainer>
-                    {Data.map(chp => <ChapterCard {...chp} {...this.props} />)}
+                    {chapters.map(chp => <ChapterCard {...chp} {...this.props} />)}
 
                 </CardsContainer>
 
@@ -66,7 +66,7 @@ const CardsContainer = styled.div`
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    padding-top: 3vw;
+    padding-top: 1vw;
     padding-left: 1vw;
    
 `;

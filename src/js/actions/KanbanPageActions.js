@@ -39,7 +39,6 @@ export const getChunks = (chapterId) => {
         const chunkId = response.data[0].id; //get the chunk id from the first chunk in the array of chunks
         dispatch(getTakes(chunkId, 1)); // get the takes from the first chunk and set chunkNum to 1
         dispatch(getComments(chunkId,'chunk_id')); // get comments for the first chunk
-
       })
       .catch(error => {
         console.log(error);
@@ -89,15 +88,15 @@ export const patchTake = (
 
                 const chptId = parseInt(chapterId);
 
+
                 chapters.map( chp => {
                     if(chp.id === chptId){
                         if(patch.published){
                             chp.published_chunks = chp.published_chunks +1;  // add + to the ch
                         }
-                        else{
+                        if(!patch.published && patch.rating === 3){
                         chp.published_chunks = chp.published_chunks -1;
                         }
-
                     }
 
                 });
