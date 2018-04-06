@@ -6,7 +6,7 @@ import img1 from '../mockupdata/img1.PNG';
 export default class ProjectCard extends React.Component {
 
     reviewProject = () => {
-      const {projectId, getChapters, history } = this.props;
+      const {projectId, getChapters, history, bookName } = this.props;
 
       getChapters(projectId);
 
@@ -14,7 +14,7 @@ export default class ProjectCard extends React.Component {
 
         history.push({
             pathname: './chapters',
-            search: `?projectId=${projectId}`
+            search: `?projectId=${projectId}&&bookName=${bookName}`
         });
 
     };
