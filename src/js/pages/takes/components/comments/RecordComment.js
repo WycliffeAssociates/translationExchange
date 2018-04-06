@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { ReactMic } from "react-mic";
+import { ReactMicPlus } from "react-mic-plus";
 import { Button, Icon } from "semantic-ui-react";
 import "./RecordComment.css";
 import LoadingGif from "assets/images/Spinner.gif";
@@ -122,11 +122,11 @@ export class RecordComment extends Component {
 			);
 		}
 		let display = (
-			<ReactMic
+			<ReactMicPlus
 				record={this.state.record}
 				className="sound-wave"
 				onStop={this.onStop}
-				strokeColor="#039BE5"
+				strokeColor="transparent"
 				backgroundColor="#000000"
 			/>
 		);
