@@ -16,7 +16,7 @@ export default class ChapterCard extends Component {
 
         history.push({
             pathname: './kanban',
-            search: `?chapterId=${id}&&chapterNum=${number}&&bookName=${searchBar.bookName}`
+            search: `?chapterId=${id}&&chapterNum=${number}&&bookName=${searchBar.bookName}&&projectId=${searchBar.projectId}`
         });
 
     };

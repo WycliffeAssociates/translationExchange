@@ -75,7 +75,7 @@ class NavBar extends Component {
     if (kanban) {
       chapter =`Chapter ${chapterNum}`;
         book = searchBar.bookName;
-        goToChapters = () => window.history.back();
+        goToChapters = () => {history.push(`/chapters?projectId=${searchBar.projectId}&&bookName=${searchBar.bookName}`)};
 
       menu = (
         <Menu onSelect={ ky=> this.onSelect(ky)}>
