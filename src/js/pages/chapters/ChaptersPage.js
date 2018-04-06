@@ -7,6 +7,7 @@ import {getChunks, getComments, getUserHash, getChapters} from '../../actions';
 import ChapterCard from './components/ChapterCard';
 import styled from 'styled-components';
 import 'css/takes.css';
+import Data from '../projects/mockupdata/data';
 
 
 
@@ -33,7 +34,7 @@ class ChapterPage extends Component {
                 <NavBar kanban={false} {...this.props} />
 
                 <CardsContainer>
-                    {chapters.map(chp => <ChapterCard {...chp} {...this.props} />)}
+                    {Data.map(chp => <ChapterCard {...chp} {...this.props} />)}
 
                 </CardsContainer>
 
@@ -83,7 +84,6 @@ const mapStateToProps = state => {
     const {chapters} =state.Chapters;
 
     const {loggedInUser} =state.user;
-
 
     return {chapters, loggedInUser};
 };

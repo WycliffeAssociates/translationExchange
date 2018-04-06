@@ -48,6 +48,8 @@ class KanbanColumn extends React.Component {
   }
 
   onDrop(published, newRating, take) {
+    const query = QueryString.parse(this.props.location.search);
+    const chapterId = query.chapterId;
     this.props.patchTake(
       take.id,
       { published: published, rating: newRating },
@@ -58,7 +60,7 @@ class KanbanColumn extends React.Component {
         }
       },
       this.props.takes,
-      this.props.chunkId
+        chapterId
     );
   }
 

@@ -37,7 +37,6 @@ export default class ChapterCard extends Component {
 
         if(uploaded_chunks === total_chunks){     // check if all the chunks uploaded matches wih the total chunks in that chapter
             dangerSign = false;
-
         }
 
         if(published_chunks === total_chunks){
@@ -54,13 +53,23 @@ export default class ChapterCard extends Component {
                         <TextContainer>
                             <P>Chapter {number}</P>
                         </TextContainer>
+                        {checkLevel_1 ?
+                            <CheckTextContainer>
+                                <CheckText>Level 1</CheckText>
+                            </CheckTextContainer>
+                            :
+                            ''
+                        }
+
                     </InformationContainer>
 
 
 
                         {checkLevel_1 ?
-                            <CircularProgressContainer>
+                            <CircularProgressContainer check ={checkLevel_1}>
+
                                 <i style={{fontSize: '9vw'}} class="material-icons">star_border</i>
+
                             </CircularProgressContainer>
                             :
                             <CircularProgressContainer>
@@ -103,6 +112,7 @@ const Card= styled.div`
     overflow: hidden;
     background-color: white;
     background: ${props => props.check ? 'linear-gradient(to bottom, #0076FF, #00C5FF)':''}
+    padding-top:1vw;
     
 `;
 
@@ -112,6 +122,10 @@ const CircularTextContainer = styled.div`
 
 const CircularText = styled.p`
     font-size: 1.5vw;
+`;
+
+const CheckText = styled.p`
+    font-size: 1vw;
 `;
 
 const ReviewButton= styled.button`
@@ -131,9 +145,17 @@ const ReviewButton= styled.button`
 const CircularProgressContainer = styled.div`
     display: flex;
     justify-content:center;
-    height: 75%;
+    height: ${props=> props.check ? '68%': '75%'}
     align-items:center;
+    flex-direction: column;
     
+`;
+
+const CheckTextContainer = styled.div`
+    width:100%;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 1vw;
 `;
 
 

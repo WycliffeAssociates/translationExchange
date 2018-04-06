@@ -26,7 +26,7 @@ class ProjectContainer extends Component {
             {/*<RecentProjectsContainer />*/}
             <MyProjectsContainer {...this.props} />
           </CardsContainer>
-          <ListContainer />
+          {/*<ListContainer />*/}
         </ProjectsContainer>
 
 
@@ -52,7 +52,7 @@ const ProjectsContainer = styled.div`
 
 
 const CardsContainer = styled.div`
-  width: 85%
+  width: 100%
   height: 100%;
   background-color: #F6F9FE;
 

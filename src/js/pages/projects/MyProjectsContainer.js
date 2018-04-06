@@ -38,7 +38,7 @@ class MyProjectsContainer extends Component {
 }
 
 const Container = styled.div`
-  width: 98%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding-top:3vw;
@@ -61,7 +61,7 @@ const HeaderContainer = styled.div`
 
 const CardsContainer = styled.div`
 padding-top: 2vw;
-width: 82.5vw;
+width: 100%;
 display: flex;
 flex-direction:row;
 justify-content: space-between;

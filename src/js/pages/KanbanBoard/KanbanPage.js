@@ -25,6 +25,7 @@ class KanbanPage extends React.Component {
     if(takes.length < 1) {
       getChunks(query.chapterId);               //get data if the user refresh the page
       getComments(query.chapterId, 'chapter_id');
+
     }
 
   }

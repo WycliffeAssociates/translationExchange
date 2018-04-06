@@ -59,8 +59,10 @@ export const patchTake = (
     takeId,
     patch,
     success,
-    takes
+    takes,
+    chapterId
 ) => {
+
     return function(dispatch, getState) {
 
         const {chunks} = getState().kanbanPage;
@@ -73,6 +75,7 @@ export const patchTake = (
             .then(response => {
                 const chunkId = response.data.chunk;
                 const take = response.data;
+
                 chunks.map(chk => {
                     if(chk.id === chunkId && patch.published){    // select the chunk that we are updating and verify if it is
                         chk.published_take = take;                // marked as published, update the published take inside the chunk obj
@@ -82,7 +85,20 @@ export const patchTake = (
                         chk.published_take = null;
                     }
 
+                });
 
+                const chptId = parseInt(chapterId);
+
+                chapters.map( chp => {
+                    if(chp.id === chptId){
+                        if(patch.published){
+                            chp.published_chunks = chp.published_chunks +1;  // add + to the ch
+                        }
+                        else{
+                        chp.published_chunks = chp.published_chunks -1;
+                        }
+
+                    }
 
                 });
 
