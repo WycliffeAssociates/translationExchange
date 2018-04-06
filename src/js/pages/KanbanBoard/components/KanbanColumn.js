@@ -36,14 +36,24 @@ class KanbanColumn extends React.Component {
     const nextChunkNum = chunks[activeChunkIndex+1].startv;
 
     this.props.getTakes(nextChunkId, nextChunkNum );
-    }
+  }
 
 
-  navigateToChapter() {
+  navigateToChapter(chapter_num, chapterId) {
 
     const query = QueryString.parse(this.props.location.search);
-    this.props.getChunks(query.chapterId);
-    this.props.getComments(query.chapterId, 'chapter_id');
+    console.log(query, 'QUERY');
+    query.chapterId = chapterId;
+    query.chapterNum = chapter_num;
+    const queryString  = QueryString.stringify(query);
+    console.log(queryString);
+
+    this.props.history.push({
+      pathname: `/kanban?${queryString}`,
+    });
+
+    this.props.getChunks(chapter_num+1);
+    this.props.getComments(chapterId+1, 'chapter_id');
 
   }
 
@@ -92,7 +102,7 @@ class KanbanColumn extends React.Component {
 
   render() {
     var query = QueryString.parse(this.props.location.search);
-    var chapter_num = query.chapter_num;
+    var chapterNum = query.chapterNum;
     var chapterId = query.chapterId;
 
     const { connectDropTarget, isOver} = this.props;
@@ -167,7 +177,7 @@ class KanbanColumn extends React.Component {
         {
           this.props.publishedColumn?
             this.props.activeChunkId === this.props.chunks.length? //if activeChunkId = chunks.length that means we are at the last chunk in the chapter (activeChunkId starts at 1)
-              <center> <NextChapter onClick ={() => this.navigateToChapter(Number(chapter_num) +1 ,Number(chapterId) +1)} >Go To Next Chapter <i className="fa fa-arrow-right" /> </NextChapter> </center> :
+              <center> <NextChapter onClick ={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)} >Go To Next Chapter <i className="fa fa-arrow-right" /> </NextChapter> </center> :
               <center> <NextChunk onClick ={() => this.nextChunk()}>Go To Next Chunk <i className="fa fa-arrow-right" /> </NextChunk> </center>
             : ''
         }
@@ -183,8 +193,8 @@ class KanbanColumn extends React.Component {
 
 
 const Column = styled.div`
-  height: ${props => props.published? 'auto' : '40vw'};
-  width: inherit;
+  height: ${props => props.published? 'auto' : '75vh'};
+  width: 20vw;
   background: rgba(45,45,45,0.5);
   padding: 2vw;
   margin-top: 1vw;

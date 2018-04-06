@@ -22,7 +22,7 @@ class KanbanPage extends React.Component {
     const {getComments, getChunks, takes} = this.props;
     const {search} = this.props.location;
     const query = QueryString.parse(search);
-    if(takes.length < 1) {
+    if (takes.length < 1) {
       getChunks(query.chapterId);               //get data if the user refresh the page
       getComments(query.chapterId, 'chapter_id');
     }
@@ -67,7 +67,7 @@ class KanbanPage extends React.Component {
 const KanbanPageContainer = styled.div`
 overflow-x: hidden;
 overflow-y: auto;
-width: 100vw;
+width: 100%;
 `;
 
 const KanbanContainer = styled.div`

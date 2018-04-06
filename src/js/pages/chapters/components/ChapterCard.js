@@ -13,7 +13,7 @@ export default class ChapterCard extends Component {
 
         history.push({
             pathname: './kanban',
-            search: `?chapterId=${id}&&chapterNum=${number}`
+            search: `?chapterId=${id}&chapterNum=${number}`
         });
 
     };
@@ -103,7 +103,7 @@ const Card= styled.div`
     overflow: hidden;
     background-color: white;
     background: ${props => props.check ? 'linear-gradient(to bottom, #0076FF, #00C5FF)':''}
-    
+
 `;
 
 const CircularTextContainer = styled.div`
@@ -133,7 +133,7 @@ const CircularProgressContainer = styled.div`
     justify-content:center;
     height: 75%;
     align-items:center;
-    
+
 `;
 
 
@@ -143,7 +143,7 @@ const P = styled.p`
 `;
 
 const InformationContainer = styled.div`
-  
+
 `;
 
 
@@ -165,5 +165,3 @@ const ButtonContainer= styled.div`
     border-color: white;
     border-width: 1vw;
   `;
-
-

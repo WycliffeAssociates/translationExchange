@@ -152,7 +152,7 @@ const TextIconContainer = styled.div`
 `;
 
 const Identicon= styled.svg`
-  height: 5vw;
+  height: 10vh;
   width: 5vw;
 
 `;
@@ -200,6 +200,8 @@ text-align: left;
 `;
 
 const IdenticonContainer = styled.div`
+margin-top: 0.5vh;
+margin-right: 0.5vw;
 
 `;
 

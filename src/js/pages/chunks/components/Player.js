@@ -79,6 +79,7 @@ const AudioContainer = styled.div`
 
 const NewText = styled.p`
   color: #FF9800;
+  font-size: 1vw;
 `;
 
 const NewTextContainer = styled.div`
