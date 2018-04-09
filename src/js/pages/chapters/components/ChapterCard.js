@@ -132,6 +132,11 @@ const CheckText = styled.p`
 `;
 
 const ReviewButton= styled.button`
+
+  i {
+    vertical-align: middle;
+  }
+
   border-radius: 20px;
   color: ${props=> props.check ? '#009CFF': 'white'};
   background: linear-gradient(to bottom,${props => props.check ? '#FFF, #FFF': '#0076FF, #00C5FF'} );
