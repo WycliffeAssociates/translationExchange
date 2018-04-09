@@ -39,7 +39,6 @@ export const getChunks = (chapterId) => {
         const chunkId = response.data[0].id; //get the chunk id from the first chunk in the array of chunks
         dispatch(getTakes(chunkId, 1)); // get the takes from the first chunk and set chunkNum to 1
         dispatch(getComments(chunkId,'chunk_id')); // get comments for the first chunk
-
       })
       .catch(error => {
         console.log(error);
@@ -59,12 +58,14 @@ export const patchTake = (
     takeId,
     patch,
     success,
-    takes
+    takes,
+    chapterId
 ) => {
+
     return function(dispatch, getState) {
 
         const {chunks} = getState().kanbanPage;
-        const {chapters} = getState().Chapters;
+
 
         return axios
             .patch(config.apiUrl + 'takes/' + takeId + '/', patch,{
@@ -73,6 +74,7 @@ export const patchTake = (
             .then(response => {
                 const chunkId = response.data.chunk;
                 const take = response.data;
+
                 chunks.map(chk => {
                     if(chk.id === chunkId && patch.published){    // select the chunk that we are updating and verify if it is
                         chk.published_take = take;                // marked as published, update the published take inside the chunk obj
@@ -81,8 +83,6 @@ export const patchTake = (
                     if(chk.id === chunkId && !patch.published){    // unpublish take at chunk level
                         chk.published_take = null;
                     }
-
-
 
                 });
 
