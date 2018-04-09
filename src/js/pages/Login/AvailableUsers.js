@@ -20,31 +20,29 @@ class AvailableUsers extends React.Component {
     const backgroundFill = users.length !==0? true: false;
 
     return (
-      <div className="container">
-        <BackgroundOverlay backgroundFill={backgroundFill}>
+      <Container backgroundFill={backgroundFill}>
 
-          <h2 className={'pageHeader'}> Available Users </h2>
+        <h2 style={{marginBottom: '5vw'}}> Available Users </h2>
 
-          <Grid columns={16}>
+        <Grid columns={16}>
 
-            <Grid.Column width ={3}>
-              <NewUserCard {...this.props} />
-            </Grid.Column >
+          <Grid.Column width ={3}>
+            <NewUserCard {...this.props} />
+          </Grid.Column >
 
-            {
-              users.length>0? users.map((user,index)  => {
+          {
+            users.length>0? users.map((user,index)  => {
 
-                return (
-                  <Grid.Column width={3}>
-                    <UserCard  key={user} id={index} user={user} {...this.props} />
-                  </Grid.Column>
-                );}) :   ''
+              return (
+                <Grid.Column width={3}>
+                  <UserCard  key={user} id={index} user={user} {...this.props} />
+                </Grid.Column>
+              );}) :   ''
 
-            }
-          </Grid>
+          }
+        </Grid>
 
-        </BackgroundOverlay>
-      </div>
+      </Container>
 
 
 
@@ -54,11 +52,13 @@ class AvailableUsers extends React.Component {
 
 }
 
-const BackgroundOverlay = styled.div`
-  background-image: url(${img});
+const Container = styled.div`
+  background-image: url(${img}), linear-gradient(to bottom right, #969595 , #969595 ) ;
   padding: 5vw;
   height: ${props => props.backgroundFill? 'auto': '100vh'};
-  background-attachment: fixed;
+  width: 100vw;
+  text-align: center;
+  color: white;
 
 `;
 

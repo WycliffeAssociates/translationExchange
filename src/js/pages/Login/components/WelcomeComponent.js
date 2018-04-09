@@ -2,16 +2,13 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import config from '../../../../config/config'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
-import {onLoginSuccess} from '../../../actions'
+import config from '../../../../config/config';
 import GitHubLogin from '../../../components/social-login/GitHubLogin';
 
 
 //import {dispatchToken} from '../../../actions/database.js';
 
-export class WelcomeComponent extends React.Component {
+export default class WelcomeComponent extends React.Component {
 
   constructor(props) {
     super(props);
@@ -37,20 +34,10 @@ export class WelcomeComponent extends React.Component {
 
     return (
 
-      <WelcomeDialog>
+      <WelcomePage>
 
-
-        <WelcomeIcon src={require('../../../../assets/images/undraw_welcome_3gvl.svg')}  />
-
-        <Welcome className="labelLines"> <label> WELCOME TO </label> </Welcome>
         <h2 className="welcomeh2"> translation Exchange  </h2>
-
-        <WelcomeInstructions className="welcomeInstructions">
-          <span> To continue, please create an account or sign in with an Authorized Account.
-          </span>
-        </WelcomeInstructions>
-
-
+        <Icon src={require('../../../../assets/images/undraw_welcome_3gvl.svg')}  />
 
         <ButtonsContainer>
 
@@ -64,9 +51,11 @@ export class WelcomeComponent extends React.Component {
             onFailure={this.onLoginFailure} />
 
 
+          <label style={{display: 'block', color: '#009CFF', textDecoration: 'underline', marginTop: '2vw', fontWeight: 'bold'}}> {"I'm an Admin"} </label>
+
         </ButtonsContainer>
 
-      </WelcomeDialog>
+      </WelcomePage>
 
     );
   }
@@ -118,26 +107,28 @@ export class WelcomeComponent extends React.Component {
 
 
 
-const  WelcomeDialog = styled.div`
-
-    width: 30vw;
-    height: 40vw;
-    padding: 2vw;
-    background-color: white;
-    box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.4);
-    margin: auto;
-    border-radius: 2vw;
-    border: none;
+const  WelcomePage = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  justify-self: center;
+  max-width: 50%;
+  height: 80%;
+  text-align: center;
+  //border: solid #969595 0.1vw;
+  border-radius: 0.5vw;
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.5);
   `;
 
-WelcomeDialog.displayName='WelcomeDialog';
+WelcomePage.displayName='WelcomePage';
 
-const WelcomeIcon= styled.img`
+const Icon= styled.img`
     height: 7vw;
     width: 7vw;
-    border-radius: 100px;
   `;
-WelcomeIcon.displayName = 'WelcomeIcon';
+Icon.displayName = 'Icon';
 
 const Welcome = styled.div`
 
@@ -192,7 +183,7 @@ const ContinueButton = styled.button`
     /* height: 2.5vw;
     width: 14vw; */
     margin-top: 1vw;
-    padding: 0.5vw 2.75vw;
+    padding: 0.5vw 3.3vw;
     font-size: 1.45vw;
     font-weight: 100;
     color: white;
@@ -221,11 +212,3 @@ const ButtonsContainer = styled.div`
 
   `;
 ButtonsContainer.displayName = 'ButtonsContainer';
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {  onLoginSuccess }, dispatch);
-};
-
-
-export default connect(null, mapDispatchToProps) (WelcomeComponent);

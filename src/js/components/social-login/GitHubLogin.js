@@ -80,7 +80,7 @@ class GitHubLogin extends Component {
       attrs.className = className;
     }
 
-    return <GitHubSignInButton {...attrs}> {icon }Sign in with Github</GitHubSignInButton>;
+    return <GitHubSignInButton {...attrs}> {icon } GitHub Sign in</GitHubSignInButton>;
   }
 }
 
