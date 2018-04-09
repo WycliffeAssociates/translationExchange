@@ -130,3 +130,11 @@ export const identiconLoginSuccess = (iconHash) => {
     iconHash: iconHash,
   };
 };
+
+
+export const removeUser = ()=>{
+  return {
+      type:'REMOVE_USER'
+  }
+
+};

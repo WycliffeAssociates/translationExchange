@@ -45,6 +45,7 @@ class NavBar extends Component {
 
   logOut() {
     localStorage.removeItem('token');
+    this.props.removeUser();
     this.props.history.push('./welcome');
   }
 
@@ -74,8 +75,12 @@ class NavBar extends Component {
     let goToChapters = '';
     if (kanban) {
       chapter =`Chapter ${chapterNum}`;
-        book = searchBar.bookName;
-        goToChapters = () => {history.push(`/chapters?projectId=${searchBar.projectId}&&bookName=${searchBar.bookName}`)};
+      book = searchBar.bookName;
+      goToChapters = () => {
+        const {getChapters} = this.props;
+        getChapters(searchBar.projectId);
+        history.push(`/chapters?projectId=${searchBar.projectId}&&bookName=${searchBar.bookName}`);
+      };
 
       menu = (
         <Menu onSelect={ ky=> this.onSelect(ky)}>
@@ -84,7 +89,7 @@ class NavBar extends Component {
       );
     }
 
-    if(chapterPage){
+    if (chapterPage) {
       book = searchBar.bookName;
     }
 
@@ -142,7 +147,7 @@ class NavBar extends Component {
 
 const Container = styled.div`
   background-color: #fff;
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -169,7 +174,7 @@ const Identicon= styled.svg`
 
 const LogOut = styled.div`
   visibility: ${props=> props.display ? 'visible' : 'hidden'};
-  width: 120px;
+  width: 7.5vw;
   background-color: black;
   color: #fff;
   text-align: center;

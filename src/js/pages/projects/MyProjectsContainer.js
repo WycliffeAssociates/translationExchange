@@ -20,15 +20,14 @@ class MyProjectsContainer extends Component {
           <Header>Projects</Header>
         </HeaderContainer>
         <CardsContainer>
-          {  projects.map( (p) =>
+          { projects.map( (p) =>
             <ProjectCard bookName={p.book.name}
               language={p.language.name}
               version={p.version.slug}
               dateModified={p.date_modified.slice(0,10)}
               projectId={p.id}
              {...this.props}
-
-            /> )
+            /> ) 
           }
         </CardsContainer>
 
@@ -38,7 +37,7 @@ class MyProjectsContainer extends Component {
 }
 
 const Container = styled.div`
-  width: 98%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding-top:3vw;
@@ -61,11 +60,12 @@ const HeaderContainer = styled.div`
 
 const CardsContainer = styled.div`
 padding-top: 2vw;
-width: 82.5vw;
+width: 100%;
 display: flex;
 flex-direction:row;
-justify-content: space-between;
+// justify-content: space-between;
 flex-wrap: wrap;
+align-items: left;
 height: 37vw;
 overflow-y: scroll;
 `;

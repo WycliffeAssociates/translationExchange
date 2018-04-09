@@ -6,7 +6,7 @@ import NavBar from '../../components/NavBar';
 import RecentProjectsContainer from './RecentProjectsContainer';
 import MyProjectsContainer from './MyProjectsContainer';
 import ListContainer from './ListContainer';
-import { fetchAllProjects, getChapters, getUserHash } from '../../actions';
+import { fetchAllProjects, getChapters, getUserHash, removeUser } from '../../actions';
 
 
 
@@ -18,7 +18,6 @@ class ProjectContainer extends Component {
 
   render() {
     return (
-
       <Container>
         <NavBar kanban={false} {...this.props} />
         <ProjectsContainer>
@@ -26,7 +25,7 @@ class ProjectContainer extends Component {
             {/*<RecentProjectsContainer />*/}
             <MyProjectsContainer {...this.props} />
           </CardsContainer>
-          <ListContainer />
+          {/*<ListContainer />*/}
         </ProjectsContainer>
 
 
@@ -52,7 +51,7 @@ const ProjectsContainer = styled.div`
 
 
 const CardsContainer = styled.div`
-  width: 85%
+  width: 100%
   height: 100%;
   background-color: #F6F9FE;
 
@@ -60,7 +59,7 @@ const CardsContainer = styled.div`
 
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({fetchAllProjects, getChapters, getUserHash}, dispatch);
+    return bindActionCreators({fetchAllProjects, getChapters, getUserHash, removeUser}, dispatch);
 };
 
 const mapStateToProps = state =>{
