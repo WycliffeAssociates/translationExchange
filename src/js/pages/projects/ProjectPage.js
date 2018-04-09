@@ -19,7 +19,7 @@ class ProjectContainer extends Component {
   render() {
     return (
       <Container>
-        <NavBar kanban={false} {...this.props} />
+        <NavBar projectPage={true} {...this.props} />
         <ProjectsContainer>
           <CardsContainer>
             {/*<RecentProjectsContainer />*/}
@@ -27,8 +27,6 @@ class ProjectContainer extends Component {
           </CardsContainer>
           {/*<ListContainer />*/}
         </ProjectsContainer>
-
-
 
       </Container>
     );
