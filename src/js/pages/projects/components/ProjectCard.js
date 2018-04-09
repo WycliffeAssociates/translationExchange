@@ -65,13 +65,13 @@ const Container = styled.div`
 
 const Card= styled.div`
     text-align: center;
-    height: 16vw;
+    height: 35vh - 5vw;
     width: 26vw;
     border-radius: .5vw;
     box-shadow: 0px 1px 2px 4px rgba(0,0,0,0.2);
     overflow: hidden;
     background-color: white;
-    
+
 
 `;
 
@@ -120,7 +120,7 @@ const TextContainer = styled.div`
 const ReviewButton = styled.button`
     color: #fff;
     border: none;
-    height: 3vw;
+    height: 3vh;
     width: 100%;
     background-color: #009CFF;
     cursor: pointer;
@@ -131,6 +131,7 @@ const ButtonContainer= styled.div`
 
     background: #009CFF;
     width: inherit;
+    padding: 0.25vw;
     overflow: hidden;
     text-align: center;
     border-color: white;
