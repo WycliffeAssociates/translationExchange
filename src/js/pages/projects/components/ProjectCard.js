@@ -122,9 +122,6 @@ const ReviewButton = styled.button`
     i {
       vertical-align: middle;
     }
-
-    text-align: center;
-    padding:auto;
     color: #fff;
     border: none;
     height: 3vh;
