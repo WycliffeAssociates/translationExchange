@@ -43,9 +43,7 @@ export default class ChapterCard extends Component {
             dangerSign = false;
         }
 
-        if(published_chunks === total_chunks){
-            checkLevel_1 = true;  // hacky way to do it, we need to verify how is the check_level upgrade is going to work.
-        }
+
 
         const chunksCompleted = `${published_chunks}/${uploaded_chunks}`;
         const percentageCompleted = (published_chunks * 100)/ total_chunks;

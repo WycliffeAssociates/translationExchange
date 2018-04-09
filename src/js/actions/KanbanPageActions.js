@@ -65,7 +65,7 @@ export const patchTake = (
     return function(dispatch, getState) {
 
         const {chunks} = getState().kanbanPage;
-        const {chapters} = getState().Chapters;
+
 
         return axios
             .patch(config.apiUrl + 'takes/' + takeId + '/', patch,{
@@ -82,21 +82,6 @@ export const patchTake = (
                     }
                     if(chk.id === chunkId && !patch.published){    // unpublish take at chunk level
                         chk.published_take = null;
-                    }
-
-                });
-
-                const chptId = parseInt(chapterId);
-
-
-                chapters.map( chp => {
-                    if(chp.id === chptId){
-                        if(patch.published){
-                            chp.published_chunks = chp.published_chunks +1;  // add + to the ch
-                        }
-                        if(!patch.published && patch.rating === 3){
-                        chp.published_chunks = chp.published_chunks -1;
-                        }
                     }
 
                 });

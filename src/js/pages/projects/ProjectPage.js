@@ -18,7 +18,6 @@ class ProjectContainer extends Component {
 
   render() {
     return (
-
       <Container>
         <NavBar kanban={false} {...this.props} />
         <ProjectsContainer>
