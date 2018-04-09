@@ -27,7 +27,7 @@ const LoginPage = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-image: url(${img}), linear-gradient(to bottom right, #969595 , #969595 ) ;
+  background-image: url(${img}), linear-gradient(to bottom right, #0076FF, #00C5FF) ;
 
 `;
 

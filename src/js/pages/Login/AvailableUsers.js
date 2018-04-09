@@ -53,7 +53,7 @@ class AvailableUsers extends React.Component {
 }
 
 const Container = styled.div`
-  background-image: url(${img}), linear-gradient(to bottom right, #969595 , #969595 ) ;
+  background-image: url(${img}), linear-gradient(to bottom right, #0076FF, #00C5FF ) ;
   padding: 5vw;
   height: ${props => props.backgroundFill? 'auto': '100vh'};
   width: 100vw;

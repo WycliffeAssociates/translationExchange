@@ -39,6 +39,7 @@ export default class WelcomeComponent extends React.Component {
         <h2 className="welcomeh2"> translation Exchange  </h2>
         <Icon src={require('../../../../assets/images/undraw_welcome_3gvl.svg')}  />
 
+
         <ButtonsContainer>
 
           <ContinueButton onClick={()=> this.handleClick('continue')}>
@@ -49,9 +50,6 @@ export default class WelcomeComponent extends React.Component {
             redirectUri={config.streamingUrl}
             onSuccess={data=>this.onLogin(data)}
             onFailure={this.onLoginFailure} />
-
-
-          <label style={{display: 'block', color: '#009CFF', textDecoration: 'underline', marginTop: '2vw', fontWeight: 'bold'}}> {"I'm an Admin"} </label>
 
         </ButtonsContainer>
 
@@ -125,57 +123,11 @@ const  WelcomePage = styled.div`
 WelcomePage.displayName='WelcomePage';
 
 const Icon= styled.img`
-    height: 7vw;
-    width: 7vw;
+    height: 8vw;
+    width: 8vw;
   `;
 Icon.displayName = 'Icon';
 
-const Welcome = styled.div`
-
-  font-size: 1.5vw;
-  font-weight: 200;
-  overflow: hidden;
-  text-align: center;
-  color: #2D2D2D;
-
-  :before,
-  :after {
-  background-color: #969595;
-  content: "";
-  display: inline-block;
-  height: 1px;
-  position: relative;
-  vertical-align: middle;
-  width: 40%;
-  }
-  :before {
-  right: 0.5em;
-  margin-left: -50%;
-  }
-  :after {
-  left: 0.5em;
-  margin-right: -50%;
-  }
-  `;
-Welcome.displayName = 'Welcomeh2';
-
-const H2span = styled.span`
-    background: #fff;
-    z-index: 2;
-    padding-left: 3vw;
-    padding-right: 3vw;
-  `;
-
-H2span.displayName = 'H2span';
-
-const WelcomeInstructions =styled.p`
-
-    font-weight: 500;
-    color: gray;
-    margin: 2vw;
-    font-size: 1.25vw;
-  `;
-WelcomeInstructions.displayName = 'WelcomeInstructions';
 
 const ContinueButton = styled.button`
     display: block;
@@ -204,8 +156,7 @@ const GitHubSignInButton= styled(ContinueButton)`
 GitHubSignInButton.displayName = 'GitHubSignInButton';
 
 const ButtonsContainer = styled.div`
-    margin-top: 2vw;
-    margin-left: -2vw;
+    margin-top: 5vw;
     textAlign: center;
     padding: 2vw 8vw;
     width: inherit;
