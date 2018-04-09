@@ -68,7 +68,7 @@ const CardsContainer = styled.div`
     flex-wrap: wrap;
     padding-top: 1vw;
     padding-left: 1vw;
-   
+
 `;
 
 
@@ -81,9 +81,11 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
 
-    const {chapters} =state.Chapters;
+  const {chapters} =state.Chapters;
 
-    const {loggedInUser} =state.user;
+  const {loggedInUser} =state.user;
+
+  const {takes} = state.kanbanPage;
 
     return {chapters, loggedInUser};
 };

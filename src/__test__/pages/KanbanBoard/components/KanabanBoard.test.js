@@ -4,8 +4,10 @@ import {shallow} from 'enzyme';
 import KanbanBoard from '../../../../js/pages/KanbanBoard/components/KanbanBoard';
 
 const mockProps = {
-  takes: [{id: '1', rating: '1', published: 'false'}, {id: '2', rating: '2', published: 'false'},
-    {id: '3', rating: '3', published: 'false'}, {id: '4', rating: '3', published: 'true'}],
+  takes: [{id: '1', rating: '1', published: 'false'},
+    {id: '2', rating: '2', published: 'false'},
+    {id: '3', rating: '3', published: 'false'},
+    {id: '4', rating: '3', published: 'true'}],
 };
 
 describe('KanbanBoard Suite', function() {

@@ -4,7 +4,9 @@ import {bindActionCreators} from 'redux';
 import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
 import KanbanBoard from './components/KanbanBoard';
-import {getChunks, getTakes, getComments, patchTake, saveComment, getUserHash, removeUser} from '../../actions';
+import {getChunks, getTakes, getComments,
+  patchTake, saveComment, getUserHash,
+  removeUser, getChapters} from '../../actions';
 import UtilityPanel from '../../components/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
@@ -71,6 +73,7 @@ const KanbanPageContainer = styled.div`
 overflow-x: hidden;
 overflow-y: auto;
 width: 100%;
+box-sizing: border-box;
 `;
 
 const KanbanContainer = styled.div`
@@ -83,6 +86,7 @@ const KanbanContainer = styled.div`
  background-size: cover;
  overflow-x: hidden;
  overflow-y: auto;
+ box-sizing: border-box;
 `;
 //
 // const KanbanBoard = styled.div`
@@ -105,7 +109,7 @@ const SourceAudio = styled.div`
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({getChunks, getTakes, getComments, patchTake, saveComment, getUserHash, removeUser}, dispatch);
+  return bindActionCreators({getChunks, getTakes, getComments, patchTake, saveComment, getUserHash, removeUser, getChapters}, dispatch);
 
 };
 

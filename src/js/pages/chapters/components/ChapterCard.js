@@ -106,7 +106,8 @@ const Card= styled.div`
     background-color: white;
     background: ${props => props.check ? 'linear-gradient(to bottom, #0076FF, #00C5FF)':''};
     margin-top: 3vw;
-    
+    padding: 1vw;
+
 `;
 
 const CircularTextContainer = styled.div`
@@ -142,7 +143,7 @@ const CircularProgressContainer = styled.div`
     align-items:center;
     flex-direction: column;
     position: relative;
-    
+
 `;
 
 const CheckTextContainer = styled.div`
