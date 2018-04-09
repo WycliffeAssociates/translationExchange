@@ -17,6 +17,7 @@ const mockProps = {
   activeChunkId: 0,
   history: [],
   getTakes: jest.fn(),
+  getChunks: jest.fn(),
 };
 
 const OriginalKanbanColumn = KanbanColumn.DecoratedComponent;
@@ -56,6 +57,7 @@ const mockPropsPChapter = {
   activeChunkId: 4,
   history: [],
   getTakes: jest.fn(),
+  getChunks: jest.fn(),
 };
 
 
