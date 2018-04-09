@@ -118,6 +118,10 @@ const TextContainer = styled.div`
 `;
 
 const ReviewButton = styled.button`
+
+    i {
+      vertical-align: middle;
+    }
     color: #fff;
     border: none;
     height: 3vh;
