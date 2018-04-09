@@ -52,7 +52,7 @@ class KanbanPage extends React.Component {
     console.log(this.props, 'KANBAN PAGE PROPS');
     return (
       <KanbanPageContainer>
-        <NavBar chapterNum={query.chapterNum} kanban={true} {...this.props} />
+        <NavBar chapterNum={query.chapterNum} kanbanPage={true} {...this.props} />
 
         <KanbanContainer>
 
