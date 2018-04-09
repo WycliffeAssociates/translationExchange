@@ -44,7 +44,6 @@ export default class ProjectCard extends React.Component {
 
             </ImageIndicatorContainer>
 
-
           </InformationContainer>
 
           <ButtonContainer>
@@ -59,14 +58,10 @@ export default class ProjectCard extends React.Component {
 
 }
 
-
-
 const Container = styled.div`
-  /* background: linear-gradient(to bottom right, rgba(0,118,255,0.5), rgba(0,197,255,0.5)); */
+  // background: linear-gradient(to bottom right, rgba(0,118,255,0.5), rgba(0,197,255,0.5));
+  margin: 0 0 1vw 1vw;
 `;
-
-
-
 
 const Card= styled.div`
     text-align: center;
@@ -105,6 +100,7 @@ const ImageIndicatorContainer = styled.div`
   width: 50;
 
 `;
+
 const ImageContainer = styled.div`
   width: 100%;
   padding-top: 2vw;
@@ -119,8 +115,6 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
-
 `;
 
 const ReviewButton = styled.button`
