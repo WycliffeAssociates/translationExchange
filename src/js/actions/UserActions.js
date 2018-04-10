@@ -3,6 +3,7 @@ import config from '../../config/config';
 
 export const fetchUsers = () => {
 return (dispatch) => {
+    dispatch({type: 'FETCHING_USERS'});
     return axios
       .get(`${config.apiUrl}profiles/`)
       .then(response => {

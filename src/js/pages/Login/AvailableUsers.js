@@ -18,29 +18,41 @@ class AvailableUsers extends React.Component {
 
     const {users} = this.props;
     const backgroundFill = users.length !==0? true: false;
+    console.log(this.props.loading, 'LOADING');
 
     return (
       <Container backgroundFill={backgroundFill}>
 
         <h2 style={{marginBottom: '5vw'}}> Available Users </h2>
 
-        <Grid columns={16}>
+        {
+          this.props.loading?
 
-          <Grid.Column width ={3}>
-            <NewUserCard {...this.props} />
-          </Grid.Column >
+            <div style={{height: '100vh'}}>
+              <img src={require('../../../assets/images/loadingRing.svg')} alt="Loading" />
+            </div>
 
-          {
-            users.length>0? users.map((user,index)  => {
+            :
 
-              return (
-                <Grid.Column width={3}>
-                  <UserCard  key={user} id={index} user={user} {...this.props} />
-                </Grid.Column>
-              );}) :   ''
+            <Grid columns={16}>
 
-          }
-        </Grid>
+              <Grid.Column width ={3}>
+                <NewUserCard {...this.props} />
+              </Grid.Column >
+
+              {
+                users.length>0? users.map((user,index)  => {
+
+                  return (
+                    <Grid.Column width={3}>
+                      <UserCard  key={user} id={index} user={user} {...this.props} />
+                    </Grid.Column>
+                  );}) :   ''
+
+              }
+            </Grid>
+
+        }
 
       </Container>
 
@@ -53,18 +65,20 @@ class AvailableUsers extends React.Component {
 }
 
 const Container = styled.div`
-  background-image: url(${img}), linear-gradient(to bottom right, #0076FF, #00C5FF ) ;
+  background-image: url(${img}), linear-gradient(to bottom right, #0076FF, #00C5FF) ;
   padding: 5vw;
   height: ${props => props.backgroundFill? 'auto': '100vh'};
-  width: 100vw;
   text-align: center;
   color: white;
+  width: 100vw;
 
 `;
 
+Container.displayName = 'Container';
+
 const mapStateToProps = state => {
-  const { users } = state.user;
-  return {users};
+  const { users, loading } = state.user;
+  return {users, loading};
 };
 
 const mapDispatchToProps = dispatch => {
