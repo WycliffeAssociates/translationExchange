@@ -46,11 +46,11 @@ export default class UtilityPanel extends React.Component {
             <Toggle
               onChange={e=>this.setState({commentsTab: e.target.checked})}
               defaultChecked= {false} icons ={{
-                unchecked: <i className="fa fa-comment" />,
+                unchecked: <i style={{fontSize:'.5vw', paddingBottom: '1vw'}} className="material-icons">mode_comment</i>,
                 checked: <img src={require('../../assets/images/Audio_Wave.svg')} />,
               }}  />
 
-            <Hide onClick={this.toggleUtilityPanel}> <i className= "fa fa-arrow-right fa-fw" /> </Hide>
+            <Hide onClick={this.toggleUtilityPanel}> <i style={{fontSize:'1.5vw'}} className="material-icons">arrow_forward</i> </Hide>
 
           </UtilityNavigation>
           { !this.state.commentsTab ?
@@ -88,7 +88,7 @@ export default class UtilityPanel extends React.Component {
         </UtilityPanelContainer>
         :
         <UtilityPanelNotVisible>
-          <Show onClick= {this.toggleUtilityPanel}> <i className="fa fa-arrow-left fa-fw" /> </Show>
+          <Show onClick= {this.toggleUtilityPanel}> <i style={{fontSize:'2.0vw', paddingRight:'1vw'}} class="material-icons">arrow_back</i> </Show>
         </UtilityPanelNotVisible>
 
     );

@@ -23,8 +23,6 @@ class KanbanColumn extends React.Component {
   nextChunk() {
 
     const {activeChunkId, chunks} = this.props;
-
-
     let activeChunkIndex = null;
 
     chunks.map( (chk, index) => {
@@ -129,14 +127,14 @@ class KanbanColumn extends React.Component {
     switch (this.props.icon) {
 
       case 1:
-        icon= <label className="labelLines"> <i className="far fa-star fa-2x" /> </label>;
+        icon= <label className="labelLines"> < i style={starSize} className="material-icons">star_border</i> </label>;
         break;
 
       case 2:
         icon = (
           <div className="labelLines">
-            <label> <i className="far fa-star fa-2x" /> </label>
-            <label> <i className="far fa-star fa-2x" /> </label>
+            <label> <i style={starSize} className="material-icons">star_border</i> </label>
+            <label> <i style={starSize}  className="material-icons">star_border</i> </label>
           </div>
         );
         break;
@@ -144,19 +142,19 @@ class KanbanColumn extends React.Component {
       case 3:
         icon = (
           <div className="labelLines">
-            <label > <i className="far fa-star fa-2x" /> </label>
-            <label > <i className="far fa-star fa-2x" /> </label>
-            <label > <i className="far fa-star fa-2x" /> </label>
+            <label > <i style={starSize}  className="material-icons">star_border</i> </label>
+              <label> <i style={starSize}  className="material-icons">star_border</i> </label>
+              <label> <i style={starSize}  className="material-icons">star_border</i> </label>
           </div>
         );
         break;
 
       case 4:
-        icon = <label className="labelLines"> <i className="fas fa-check fa-2x" /> </label>;
+        icon = <label className="labelLines"> <i style={starSize} className="material-icons">check</i> </label>;
         break;
 
       default:
-        icon= <label className="labelLines"> <i className="far fa-star fa-2x" /> </label>;
+        icon=  <label> <i style={starSize} className="material-icons">star_border</i> </label>;
         break;
     }
     return connectDropTarget(
@@ -207,6 +205,9 @@ class KanbanColumn extends React.Component {
 
 }
 
+const starSize = {
+  fontSize: '2.7vw'
+};
 
 
 const Column = styled.div`

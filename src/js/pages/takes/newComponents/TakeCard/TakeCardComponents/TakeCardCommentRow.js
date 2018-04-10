@@ -45,7 +45,7 @@ export default class TakeCardCommentRow extends React.Component {
           <PlayerTracker url={comment.location} />
         </CommentPlayer>
 
-        <RowButton> <i className = "fa fa-trash" /> </RowButton>
+        <RowButton> <i className="material-icons">delete</i> </RowButton>
 
       </CommentRow>
     );

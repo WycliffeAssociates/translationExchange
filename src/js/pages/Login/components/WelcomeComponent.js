@@ -50,20 +50,16 @@ export class WelcomeComponent extends React.Component {
           </span>
         </WelcomeInstructions>
 
-
-
         <ButtonsContainer>
 
           <ContinueButton onClick={()=> this.handleClick('continue')}>
-            Continue <i className="fa fa-arrow-right fa-fw"></i>
+            Continue <i className="material-icons">arrow_forward </i>
           </ContinueButton>
 
           <GitHubLogin clientId="f5e981378e91c2067d41"
             redirectUri={config.streamingUrl}
             onSuccess={data=>this.onLogin(data)}
             onFailure={this.onLoginFailure} />
-
-
         </ButtonsContainer>
 
       </WelcomeDialog>
@@ -139,6 +135,7 @@ const WelcomeIcon= styled.img`
   `;
 WelcomeIcon.displayName = 'WelcomeIcon';
 
+
 const Welcome = styled.div`
 
   font-size: 1.5vw;
@@ -187,12 +184,13 @@ const WelcomeInstructions =styled.p`
 WelcomeInstructions.displayName = 'WelcomeInstructions';
 
 const ContinueButton = styled.button`
-    display: block;
+    display: flex;
+    align-items:center;
     background: linear-gradient(to bottom, #0076FF, #00C5FF);
     /* height: 2.5vw;
     width: 14vw; */
     margin-top: 1vw;
-    padding: 0.5vw 2.75vw;
+    padding: 0.4vw 2.6vw;
     font-size: 1.45vw;
     font-weight: 100;
     color: white;
@@ -215,7 +213,7 @@ GitHubSignInButton.displayName = 'GitHubSignInButton';
 const ButtonsContainer = styled.div`
     margin-top: 2vw;
     margin-left: -2vw;
-    textAlign: center;
+    text-align: center;
     padding: 2vw 8vw;
     width: inherit;
 

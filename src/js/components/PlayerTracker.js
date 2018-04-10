@@ -39,7 +39,7 @@ export default class PlayerTracker extends React.Component {
     }
 
 
-  }
+  };
 
   onSeek(e) {
     // this.setState({ played: parseFloat(e.target.value) });
@@ -52,7 +52,7 @@ export default class PlayerTracker extends React.Component {
 
   ref = player => {
     this.player = player;
-  }
+  };
 
   PlayHead() {
 
@@ -60,9 +60,9 @@ export default class PlayerTracker extends React.Component {
 
     return (
       <div>
-        <PlayIcon style={{display: playing? 'none': ''}} onClick ={() => this.playComment()}> <i className="fa fa-play" /> </PlayIcon>
+        <PlayIcon style={{display: playing? 'none': ''}} onClick ={() => this.playComment()}> <i style={{fontSize:'1.6vw'}} class="material-icons">play_arrow</i> </PlayIcon>
 
-        <PlayIcon style={{display: playing? '': 'none'}} onClick ={() => this.playComment()}> <i className="fa fa-pause" /> </PlayIcon>
+        <PlayIcon style={{display: playing? '': 'none'}} onClick ={() => this.playComment()}> <i style={{fontSize:'1.6vw'}} class="material-icons">pause</i> </PlayIcon>
 
       </div>);
 

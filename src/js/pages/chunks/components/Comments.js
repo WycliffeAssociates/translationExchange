@@ -33,7 +33,7 @@ class Comments extends Component {
         </AudioContainer>
         <ButtonContainer>
           <RecordButton onClick={()=>{this.setState({displayModal: true});}}>
-            <i class="fas fa-microphone"></i>
+              <i style={{fontSize:'1.6vw', paddingTop:'.5vw'}} className="material-icons">mic_none</i>
           </RecordButton>
           <RecordCommentsModal
             chunkNum={chunkNum}

@@ -38,9 +38,9 @@ export default class UserCard extends React.Component {
     const {name_audio, icon_hash} = this.props.user || [];
     const audioURL = config.streamingUrl + name_audio;
     const {playing} = this.state;
-    let icon = 'fa fa-play';
+    let icon = 'play_arrow';
     if (playing) {
-      icon ='fa fa-volume-up';
+      icon ='volume_up';
     }
 
     return (
@@ -52,7 +52,7 @@ export default class UserCard extends React.Component {
             </ImageContainer>
 
             <CardOptions>
-              <PlayButton playing={playing} onClick={()=> this.play()}> <i className={`${icon}`}  /> </PlayButton>
+              <PlayButton playing={playing} onClick={()=> this.play()}>  <i className="material-icons" style={{fontSize:'3.5vw'}}>{icon}</i></PlayButton>
               <ReactPlayer url={audioURL} playing={this.state.playing} onEnded={()=> this.ended()}  />
             </CardOptions>
           </Card>
