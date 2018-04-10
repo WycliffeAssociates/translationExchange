@@ -23,8 +23,8 @@ class Markers extends React.Component {
 
     return (
       <label onClick= {() => this.props.dragPosition(markerTime)}
-        style={{position: 'inherit', marginLeft: `${position==0? position: position-6}%`, cursor: 'pointer', color: '#009CFF'}}
-        width="29px"
+        style={{position: 'absolute', marginLeft: `${position==0? position: position}%`, cursor: 'pointer', color: '#009CFF'}}
+        width="20px"
         height="45px">
         <i className="fa fa-map-marker" />
       </label>

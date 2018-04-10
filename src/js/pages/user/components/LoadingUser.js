@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import loadingRing from '../../../../assets/images/loadingRing.gif'
+import loadingRing from '../../../../assets/images/loadingRing.svg'
 
 
 
@@ -10,7 +10,7 @@ export default () => {
     <Container>
       <TextHeader> Generating User </TextHeader>
       <GifContainer>
-        <img style={{height: '12vw', width:'12vw'}} src={loadingRing} alt="Loading..." />
+        <img style={{height: '12vw', width: '12vw'}} src={loadingRing} alt="Loading..." />
       </GifContainer>
       <BottomText>Please Wait</BottomText>
     </Container>
