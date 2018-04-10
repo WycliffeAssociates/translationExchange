@@ -22,9 +22,10 @@ exports[`Home Component, LogoTitle has no changes 1`] = `
   >
     <Image
       as="img"
-      className="logoterra"
+      height="300vw"
       src="logo.png"
       ui={true}
+      width="300vw"
     />
   </div>
 </div>

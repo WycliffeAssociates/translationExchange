@@ -1,41 +1,41 @@
-import axios from "axios";
-import config from "../../config/config";
-import { notify } from "react-notify-toast";
+import axios from 'axios';
+import config from '../../config/config';
+import { notify } from 'react-notify-toast';
 
 //chaptersContainer
 
 export const fetchChaptersContainerData = (query) => {
-    return function (dispatch) {
-        return axios
-            .all([
-                axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`,{
-                    headers: { Authorization: "Token " + localStorage.getItem('token') }
-                }),
-                axios.get(`${config.apiUrl}languages/?slug=${query.lang}`,{
-                    headers: { Authorization: "Token " + localStorage.getItem('token') }
-                }),
-                axios.get(`${config.apiUrl}books/?slug=${query.book}`,{
-                    headers: { Authorization: "Token " + localStorage.getItem('token') }
-                }),
-                axios.get(`${config.apiUrl}versions/?project_id=${query.project_id}`,{
-                    headers: { Authorization: "Token " + localStorage.getItem('token') }
-                }),
+  return function(dispatch) {
+    return axios
+      .all([
+        axios.get(`${config.apiUrl}chapters/?project_id=${query.project_id}`,{
+          headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+        }),
+        axios.get(`${config.apiUrl}languages/?slug=${query.lang}`,{
+          headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+        }),
+        axios.get(`${config.apiUrl}books/?slug=${query.book}`,{
+          headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+        }),
+        axios.get(`${config.apiUrl}versions/?project_id=${query.project_id}`,{
+          headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+        }),
 
-            ])
-            .then(
-            axios.spread(function (
-                chaptersResponse,
-                languagesResponse,
-                booksResponse,
-                versionsResponse
-            ) {
-                dispatch(fetchChaptersContainerDataSuccess(chaptersResponse.data, languagesResponse.data, booksResponse.data, versionsResponse.data, query.project_id, query.published));
-            })
-            )
-            .catch(err => {
-                dispatch(fetchChaptersContainerDataFailed(err));
-            });
-    };
+      ])
+      .then(
+        axios.spread(function(
+          chaptersResponse,
+          languagesResponse,
+          booksResponse,
+          versionsResponse
+        ) {
+          dispatch(fetchChaptersContainerDataSuccess(chaptersResponse.data, languagesResponse.data, booksResponse.data, versionsResponse.data, query.project_id, query.published));
+        })
+      )
+      .catch(err => {
+        dispatch(fetchChaptersContainerDataFailed(err));
+      });
+  };
 };
 
 
@@ -64,9 +64,9 @@ export function setCheckingLevel(chapterId, level) {
 
     return function (dispatch) {
         return axios
-            .patch(config.apiUrl + "chapters/" + chapterId + "/", { checked_level: level },
+            .patch(config.apiUrl + 'chapters/' + chapterId + '/', { checked_level: level },
             {
-                headers: { Authorization: "Token " + localStorage.getItem('token') }
+                headers: { Authorization: 'Token ' + localStorage.getItem('token') }
             }
         )
             .then(response => {
@@ -98,15 +98,15 @@ export function publishFiles(projectId, set) {
 
     return function (dispatch) {
         return axios
-            .patch(config.apiUrl + "projects/" + projectId + "/", { published: set },
+            .patch(config.apiUrl + 'projects/' + projectId + '/', { published: set },
             {
-                headers: { Authorization: "Token " + localStorage.getItem('token') }
+                headers: { Authorization: 'Token ' + localStorage.getItem('token') }
             })
             .then(response => {
                 dispatch(dispatchPublishFilesSuccess(response.data));
                 if(set){
-                let myColor = { background: "#50f442 ", text: "#FFFFFF " };
-                notify.show(`Book Marked as Published`, "custom", 2500, myColor);
+                let myColor = { background: '#50f442 ', text: '#FFFFFF ' };
+                notify.show(`Book Marked as Published`, 'custom', 2500, myColor);
               }
             })
             .catch(err => {
@@ -135,7 +135,7 @@ export function downloadProject(projectId, file_format) {
         return axios
             .get(config.apiUrl + `zip/?id=${projectId}&file_format=${file_format}`,
             {
-				headers: { Authorization: "Token " + localStorage.getItem('token') }}
+				headers: { Authorization: 'Token ' + localStorage.getItem('token') }}
         )
             .then(response => {
                 //Todo: find the better way to download files
@@ -180,7 +180,7 @@ export function downloadSourceAudio(projectId) {
         return axios
             .get(config.apiUrl + `tr/?id=${projectId}&published=true`,
             {
-                headers: { Authorization: "Token " + localStorage.getItem('token') }
+                headers: { Authorization: 'Token ' + localStorage.getItem('token') }
             })
             .then(response => {
                 //Todo: find the better way to download files

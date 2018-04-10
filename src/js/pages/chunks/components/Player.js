@@ -11,14 +11,16 @@ class Player extends Component {
     super(props);
     this.state = {
       playing: false,
+      id: null,
     };
     this.play = this.play.bind(this);
     this.ended = this.ended.bind(this);
   }
 
   play() {
+
     this.setState({playing: true});
-    
+
 
   }
 
@@ -28,24 +30,24 @@ class Player extends Component {
 
   componentDidMount() {
     const {owner_icon_hash} =this.props.comments || '' ;
-    jdenticon.update(`#canvas${this.props.id}` , owner_icon_hash);
+    const id = owner_icon_hash.slice(0, 8);
+    jdenticon.update(`#canvas${id}` , owner_icon_hash);
+
   }
 
 
   render() {
-    const { id, owner_icon_hash, comments} = this.props;
+    const { comments} = this.props;
+    const id = comments.owner_icon_hash.slice(0, 8);
 
     return (
       <Container>
         <IdenticonContainer>
-          <Identicon onClick={()=>this.play()} id={`canvas${id}`} data-jdenticon-hash={owner_icon_hash} />
+          <Identicon onClick={()=>this.play()} id={`canvas${id}`} data-jdenticon-hash={comments.owner_icon_hash} />
           <ReactPlayer url={`${config.streamingUrl}${comments.owner_name_audio}`} playing={this.state.playing} onEnded={()=> this.ended()}  />
 
         </IdenticonContainer>
         <AudioContainer>
-          {/* <Audio id="comment" controls controlsList="nodownload notime novolume ">
-            <source style={{backgroundColor:'transparent'}} src="http://www.scricciolo.com/eurosongs/Calidris.ferruginea.wav" type="audio/wav" />
-          </Audio> */}
           <CommentsPlayer audioFile={`${config.streamingUrl}${comments.location}`} />
         </AudioContainer>
         <NewTextContainer>
@@ -77,6 +79,7 @@ const AudioContainer = styled.div`
 
 const NewText = styled.p`
   color: #FF9800;
+  font-size: 1vw;
 `;
 
 const NewTextContainer = styled.div`

@@ -14,7 +14,7 @@ import NotFound from 'js/pages/NotFound';
 import ErrorButton from '../../components/ErrorButton';
 import LoadingGif from '../../components/LoadingGif';
 import { bindActionCreators } from 'redux';
-import { fetchChaptersContainerData, setCheckingLevel, publishFiles, downloadProject, downloadSourceAudio } from '../../actions';
+import { fetchChaptersContainerData, setCheckingLevel, publishFiles, downloadProject, downloadSourceAudio, getTakes, getChunks } from '../../actions';
 
 class ChaptersContainer extends Component {
 	publishFiles() {
@@ -34,8 +34,10 @@ class ChaptersContainer extends Component {
 		var query = QueryString.parse(this.props.location.search);
 		query.chapter_num = chNum;
 		query.chapterId = chId;
+
+
 		this.props.history.push({
-			pathname: '/takes',
+			pathname: '/kanbanPage',
 			search: QueryString.stringify(query),
 		});
 	}
@@ -134,9 +136,10 @@ class ChaptersContainer extends Component {
 
 const mapStateToProps = state => {
 	const { direction } = state.direction;
+	//const { chapters } = state.Chapters;
 	const { displayText } = state.geolocation;
-	const { chapters, book, project_id, published,
-		language, loaded, downloadLoading,
+	const { book, project_id, published,
+		chapters, language, loaded, downloadLoading,
 		downloadError, downloadSuccess, downloadLoadingSourceAudio,
 		downloadErrorAudioSource, checked_level } = state.chaptersContainer;
 	return {
@@ -147,6 +150,7 @@ const mapStateToProps = state => {
 		downloadLoadingSourceAudio,
 		downloadErrorAudioSource,
 		direction, checked_level,
+		getTakes, getChunks
 	};
 
 };

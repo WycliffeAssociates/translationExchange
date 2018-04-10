@@ -6,11 +6,13 @@ import GeolocationReducer from './GeolocationReducer';
 import UpdatePlaylistReducer from './UpdatePlaylistReducer';
 import ChaptersContainerReducer from './ChaptersContainerReducer';
 import DirectionReducer from './DirectionReducer';
-import ProjectsListContainerReducer from './ProjectsListContinerReducer';
+import Projects from './ProjectsPageReducer';
 import ChunkListContainerReducer from './ChunkListContainerReducer';
 import SourceAudioReducer from './SourceAudioReducer';
 import user from './UserReducer.js';
 import comments from './CommentsReducer';
+import kanbanPage from './KanbanPageReducer'
+import Chapters from './ChapterPageReducer'
 
 
 export default combineReducers({
@@ -20,9 +22,11 @@ export default combineReducers({
   geolocation: GeolocationReducer,
   chaptersContainer: ChaptersContainerReducer,
   direction: DirectionReducer,
-  projectsListContainer: ProjectsListContainerReducer,
   chunkListContainer: ChunkListContainerReducer,
   sourceAudio: SourceAudioReducer,
   user,
-  comments
+  comments,
+  kanbanPage,
+  Projects,
+  Chapters
 });

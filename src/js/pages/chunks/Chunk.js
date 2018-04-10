@@ -23,7 +23,11 @@ class Chunk extends Component {
 	componentDidMount() {
 		//jdenticon.update('undefined');
 		this.getTakes(this.props.selectedChunk);
+			const {chunkId} = this.props;
+			this.props.getAudioTakes(chunkId);
 	}
+
+
 
 	componentDidUpdate() {
 		this.getTakes(this.props.selectedChunk);
@@ -35,19 +39,19 @@ class Chunk extends Component {
 		let { calledChunks } = this.props;
 		if (!calledChunks.includes(chunkId)) {                 // once you click a chunk, checks if the chunk has not been clicked before
 			this.props.getChunkIdClicked(chunkId);
-			this.props.getAudioTakes(chunkId, counter);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
+		//	this.props.getAudioTakes(chunkId, counter);               // if it has not been clicked we call api and add the chunk id to the list of chunks clicked
 			// so next time clicked to close it won't call the api
 		}
 	}
 
 	render() {
-		console.log(this.props.selectedChunk, 'this is chunk props');
 		let publish = [];
 		let onestar = [];
 		let twostar = [];
 		let threestar = [];
 
 		let orderedTakes = this.props.takes;
+
 		const has_comments = this.props.has_comments;
 		orderedTakes.map(tk => {
 			if (this.props.id === tk.chunkId) {   // get takes corresponding just to the selected chunk
@@ -172,7 +176,7 @@ class Chunk extends Component {
 
 
 									<TakeTable
-									height ={'25vh'}
+										height ={'25vh'}
 										icon={icon4}
 										icon4marker={true}
 										mode={this.props.mode}

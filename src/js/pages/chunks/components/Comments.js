@@ -1,15 +1,23 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import Player from './Player';
+import RecordCommentsModal from './RecordCommentsModal';
 
 
 class Comments extends Component {
   constructor(props) {
     super(props);
+    this.state={ displayModal: false };
+    this.closeModal = this.closeModal.bind(this);
   }
-  
+
+  closeModal() {
+    this.setState({displayModal: false});
+  }
+
+
   render() {
-    const {comments, text} = this.props;
+    const {comments, text, id, type, saveComment, uploadingComments, chunkId, chunkNum} = this.props;
 
 
     return (
@@ -19,27 +27,30 @@ class Comments extends Component {
           <SvgContainer>
             <SvgLine />
           </SvgContainer>
-
         </TextContainer>
         <AudioContainer>
-          {comments.length > 0 ? <div> {comments.map(((cm, index)=> <Player id={index} comments={cm} />  ))}</div> : <NoComments>No comments Available</NoComments> }
-
+          {comments? comments.length > 0 ? <div> {comments.map(((cm, index)=> <Player  id={index} comments={cm} />  ))}</div> : <NoComments>No comments Available</NoComments> : <NoComments>No comments Available</NoComments>  }
         </AudioContainer>
         <ButtonContainer>
-          <RecordButton>
-            <i class="fas fa-microphone"></i>
+          <RecordButton onClick={()=>{this.setState({displayModal: true});}}>
+              <i style={{fontSize:'1.6vw', paddingTop:'.5vw'}} className="material-icons">mic_none</i>
           </RecordButton>
+          <RecordCommentsModal
+            chunkNum={chunkNum}
+            chunkId={chunkId}
+            uploadingComments={uploadingComments}
+            closeModal={()=>this.closeModal()}
+            saveComment={saveComment}
+            id={id}
+            type={type}
+            display={this.state.displayModal} />
         </ButtonContainer>
-
-
-
       </Container>
     );
   }
 }
 const Container = styled.div`
   padding-top: 1vw;
-
 `;
 
 const SvgContainer = styled.div`

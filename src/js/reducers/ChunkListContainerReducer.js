@@ -14,7 +14,8 @@ const INITIAL_STATE = {
     notifyFlag: false,
     update: false,
     chapterId:'',
-    takesToExport: []
+    takesToExport: [],
+    selectedChunk: 1
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -34,24 +35,25 @@ export default (state = INITIAL_STATE, action) => {
         case "FETCH_TAKE_SUCCESS":
             return {
                  ...state,
-                takes: state.takes.concat(action.takes)
+                takes: action.takes,
+                selectedChunk: action.selectedChunk
             };
         case "UPDATE_CHUNK_HAS_COMMENTS":
             return{
               ...state,
               chunks: action.updatedChunks
-            }
+            };
         case "UPDATE_TAKE_HAS_COMMENTS":
             return{
               ...state,
               takes: action.updatedTakes
-            }
+            };
 
             case "UPDATE_CHAPTER_HAS_COMMENTS":
                 return{
                   ...state,
                   chapter: action.updatedChapter
-                }
+                };
 
         case "DELETE_TAKE_SUCCESS":
             return {
@@ -76,14 +78,12 @@ export default (state = INITIAL_STATE, action) => {
            return{
              ...state,
             comments: []
-           }
+           };
 
         case "FETCH_TAKE_SUCCESS_FIRST_TIME":
-
             return {
                  ...state,
                 takes: action.takes,
-
             };
 
 
@@ -111,10 +111,10 @@ export default (state = INITIAL_STATE, action) => {
         case "SET_ACTIVE_TO_FALSE":
             return { ...state, active: false };
 
-        case 'PATCH_TAKE_SUCCESS':
-            return {
-                ...state, takes: action.updatedTakes.slice()
-            }
+        // case 'PATCH_TAKE_SUCCESS':
+        //     return {
+        //         ...state, takes: action.updatedTakes.slice()
+        //     }
 
         case 'CHUNK_ID_CLICKED':
         return{
@@ -144,21 +144,21 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state, chapter: action.response,
 
-            }
+            };
         case 'MARK_AS_PUBLISHED_FAILED':
             return {
                 ...state, error: action.error
-            }
-        case 'SAVE_COMMENT_LOADING':
-            return { ...state, active: true };
+            };
+        // case 'SAVE_COMMENT_LOADING':
+        //     return { ...state, active: true };
         case 'SAVE_COMMENT_SUCCESS':
             return {
                 ...state, comments: state.comments.concat(action.comments), active: false
-            }
+            };
         case 'SAVE_COMMENT_FAILED':
             return {
                 ...state, error: action.error, active: false
-            }
+            };
         case 'RESET_STATE':
             return INITIAL_STATE;
         default: return state;

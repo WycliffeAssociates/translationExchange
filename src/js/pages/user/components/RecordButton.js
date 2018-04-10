@@ -23,7 +23,7 @@ class RecordButton extends Component {
           <PlayButton onClick={this.startRecording} type="voice">
             <Icon>
               {" "}
-              <i className="material-icons" style={{ fontSize: "5.1vw", marginLeft:"-1vw" }}>
+              <i className="material-icons" style={{ fontSize: "4vw", marginLeft:"-0.8vw" }}>
                 play_arrow
               </i>{" "}
             </Icon>

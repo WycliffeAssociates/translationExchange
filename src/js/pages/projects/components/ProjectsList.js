@@ -1,12 +1,11 @@
-/* eslint indent: ["error", "tab", {SwitchCase: 1}] */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Container, Table, Icon } from 'semantic-ui-react';
-import CircularProgressbar from 'react-circular-progressbar';
-import '../../../../css/projects.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Container, Table, Icon } from "semantic-ui-react";
+import CircularProgressbar from "react-circular-progressbar";
+import "../../../../css/projects.css";
 
-import Truncate from 'react-truncate';
+import Truncate from "react-truncate";
 
 class ProjectsList extends Component {
 	/*
@@ -14,22 +13,22 @@ class ProjectsList extends Component {
      */
 	render() {
 		return (
-			<div style ={{direction: `${this.props.direction}`}}>
-				<Container fluid>
-					<Table selectable fixed color="grey">
-						<Table.Header>
-							<Table.Row>
-								<Table.HeaderCell>{this.props.displayText.language}</Table.HeaderCell>
-								<Table.HeaderCell>{this.props.displayText.book}</Table.HeaderCell>
-								<Table.HeaderCell>{this.props.displayText.percentComplete}</Table.HeaderCell>
-								<Table.HeaderCell>{this.props.displayText.more}</Table.HeaderCell>
-							</Table.Row>
-						</Table.Header>
-						<Table.Body>
-							{this.props.projects.map(this.createListItem.bind(this))}
-						</Table.Body>
-					</Table>
-				</Container>
+			<div style ={{direction:`${this.props.direction}`}}>
+			<Container fluid>
+				<Table selectable fixed color="grey">
+					<Table.Header>
+						<Table.Row>
+							<Table.HeaderCell>{this.props.displayText.language}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.displayText.book}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.displayText.percentComplete}</Table.HeaderCell>
+							<Table.HeaderCell>{this.props.displayText.more}</Table.HeaderCell>
+						</Table.Row>
+					</Table.Header>
+					<Table.Body>
+						{this.props.projects.map(this.createListItem.bind(this))}
+					</Table.Body>
+				</Table>
+			</Container>
 
 			</div>
 		);
@@ -41,112 +40,111 @@ class ProjectsList extends Component {
 	/*{project.percentFinished}*/
 	createListItem(project) {
 
-		const navigateToProject = function() {
-			this.props.navigateToProject(
-				project.language,
-				project.book,
-				project.version,
-				project.published,
-				project.id
+	        const navigateToProject = function() {
+	            this.props.navigateToProject(
+	                project.language,
+	                project.book,
+	                project.version,
+	                project.published,
+	                project.id
 
-			);
-		}.bind(this);
+	            );
+	        }.bind(this);
 
-		return (
-			<Table.Row>
-				<Table.Cell onClick={navigateToProject}>
-					{project.language.name}
-				</Table.Cell>
-				<Table.Cell onClick={navigateToProject}>
-					{project.book.name}
-				</Table.Cell>
-				<Table.Cell onClick={navigateToProject}>
-					<CircularProgressbar
-						strokeWidth="20"
-						percentage={project.completed}
-					/>
-				</Table.Cell>
-				<Table.Cell>
-					<Truncate lines={1} onShowMore={this.props.onChange} text={this.props.displayText.more}>
-						{/* {this.parseDate(project.date_modified)} */}
-						<b>{this.props.displayText.dateModified}</b>: {'January 09, 2018'} <br />
-						<b>{this.props.displayText.translationType}</b>: {project.version.slug} <br />
-						{/* {this.getContributorText(project.contributors)} */}
-						<b>{this.props.displayText.contributors}</b>: {'Translator 1'}{' '}
-						<br />
-						<b>{this.props.displayText.published}</b>:
-						{project.published?
-							<Icon name="checkmark" color="green" />
-							: <Icon name="remove" />}
-					</Truncate>
-				</Table.Cell>
-			</Table.Row>
-		);
-	}
+	        return (
+	            <Table.Row>
+	                <Table.Cell onClick={navigateToProject}>
+	                    {project.language.name}
+	                </Table.Cell>
+	                <Table.Cell onClick={navigateToProject}>
+	                    {project.book.name}
+	                </Table.Cell>
+	                <Table.Cell onClick={navigateToProject}>
+	                    <CircularProgressbar
+	                        strokeWidth="20"
+	                        percentage={project.completed}
+	                    />
+	                </Table.Cell>
+	                <Table.Cell>
+	                    <Truncate lines={1} onShowMore={this.props.onChange} text={this.props.displayText.more}>
+	                        {/* {this.parseDate(project.date_modified)} */}
+	                        <b>{this.props.displayText.dateModified}</b>: {"January 09, 2018"} <br />
+	                        <b>{this.props.displayText.translationType}</b>: {project.version.slug} <br />
+	                        {/* {this.getContributorText(project.contributors)} */}
+	                        <b>{this.props.displayText.contributors}</b>: {"Translator 1"}{" "}
+	                        <br />
+	                        <b>{this.props.displayText.published}</b>:
+	                        {project.published
+	                            ? <Icon name="checkmark" color="green" />
+	                            : <Icon name="remove" />}
+	                    </Truncate>
+	                </Table.Cell>
+	            </Table.Row>
+	        );
+	    }
 
 	getContributorText(contributors) {
-		let contribText = '';
+		let contribText = "";
 		for (let i = 0; i < contributors.length - 1; i++) {
-			contribText += contributors[i] + ', ';
+			contribText += contributors[i] + ", ";
 		}
 		contribText += contributors[contributors.length - 1];
 		return contribText;
 	}
 
-	parseDate(dateReceived) {
-		let noon = 'am';
-		let dateArr = dateReceived.split('T');
-		let date = dateArr[0];
+    parseDate(dateReceived) {
+        let noon = "am";
+        let dateArr = dateReceived.split("T");
+        let date = dateArr[0];
 
-		var time = dateArr[1].split('.');
-		time = time[0].split(':');
-		date = date.split('-');
+		var time = dateArr[1].split(".");
+		time = time[0].split(":");
+		date = date.split("-");
 		switch (date[1]) {
-			case '01':
+			case "01":
 				date[1] = this.props.displayText.month1;
 				break;
-			case '02':
+			case "02":
 				date[1] = this.props.displayText.month2;
 				break;
-			case '03':
+			case "03":
 				date[1] = this.props.displayText.month3;
 				break;
-			case '04':
+			case "04":
 				date[1] = this.props.displayText.month4;
 				break;
-			case '05':
+			case "05":
 				date[1] = this.props.displayText.month5;
 				break;
-			case '06':
+			case "06":
 				date[1] = this.props.displayText.month6;
 				break;
-			case '07':
+			case "07":
 				date[1] = this.props.displayText.month7;
 				break;
-			case '08':
+			case "08":
 				date[1] = this.props.displayText.month8;
 				break;
-			case '09':
+			case "09":
 				date[1] = this.props.displayText.month9;
 				break;
-			case '10':
+			case "10":
 				date[1] = this.props.displayText.month10;
 				break;
-			case '11':
+			case "11":
 				date[1] = this.props.displayText.month11;
 				break;
-			case '12':
+			case "12":
 				date[1] = this.props.displayText.month12;
 				break;
-
-			default:
-				date[1] = '';
-				break;
+            default:
+                date[1] = '';
+                break;
 		}
 
 		let hour = parseInt(time[0], 10); // 10 is the radix parameter
 		if (hour / 12 > -1) {
-			noon = 'pm';
+			noon = "pm";
 		}
 
 		if (!(hour % 12 === 0)) {
@@ -154,7 +152,7 @@ class ProjectsList extends Component {
 		}
 
 		return (     `${date[1]} ${date[2]}, ${date[0]} ${this.props.displayText.at} ${hour}:${time[1]}${noon}`	);
-	}
+	   }
 }
 /*
     Use PropTypes to define what props this component expects. If it's passed the wrong props,
@@ -169,9 +167,9 @@ ProjectsList.propTypes = {
 			translationType: PropTypes.string.isRequired,
 			percentFinished: PropTypes.number.isRequired,
 			contributors: PropTypes.arrayOf(PropTypes.string).isRequired,
-			dateModified: PropTypes.string.isRequired,
+			dateModified: PropTypes.string.isRequired
 		})
-	).isRequired,
+	).isRequired
 };
 
 
@@ -179,9 +177,9 @@ const mapStateToProps = state => {
 
 	const {direction} = state.direction;
 
-	const { displayText } = state.geolocation;
+const{ displayText } = state.geolocation;
 
-	return 	{displayText, direction};
+return{displayText, direction};
 
 };
 

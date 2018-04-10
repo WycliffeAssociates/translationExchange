@@ -23,6 +23,37 @@ export const fetchUserSuccess = (users) => {
 };
 
 
+export const getUserHash = () => {
+
+    return dispatch => {
+        return axios
+            .get(`${config.apiUrl}profiles/me`,
+                {
+                    headers: { Authorization: 'Token ' + localStorage.getItem('token') }
+                })
+            .then(response => {
+
+              const{icon_hash} = response.data;
+                dispatch(getUserHashSuccess(icon_hash));
+
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+};
+
+export const getUserHashSuccess = (iconHash) =>{
+  return{
+    type: 'GET_LOGGED_USER_HASH',
+    iconHash
+
+
+
+  };
+};
+
+
 //createUser
 export const createUser = (recordedBlob, hash) => {
   return function(dispatch) {
@@ -98,4 +129,12 @@ export const identiconLoginSuccess = (iconHash) => {
     type: 'LOGIN_SUCCESS',
     iconHash: iconHash,
   };
+};
+
+
+export const removeUser = () => {
+  return {
+      type:'REMOVE_USER'
+  }
+
 };

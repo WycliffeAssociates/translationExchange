@@ -12,9 +12,8 @@ import NotFound from 'js/pages/NotFound';
 import ErrorButton from '../../components/ErrorButton';
 import UtilityPanel from '../../components/UtilityPanel';
 import LoadingGif from '../../components/LoadingGif';
-import Toggle from 'react-toggle';
 import styled from 'styled-components';
-import PlayerTracker from '../../components/playerTracker';
+import PlayerTracker from '../../components/PlayerTracker';
 
 
 import {
@@ -200,14 +199,14 @@ export class ChunkListContainer extends Component {
 				<LoadingGif />
 			);
 		} else {
-			const chunkNum = this.props.chunks[this.state.selectedChunk-1].startv;
+
 			const chapterNum = this.props.chapter.number;
 
 			return (
 				<KabanContainer className="backgroundKaban">
 
-					<ChunkHeader
-					  history={this.props.history}
+					{/* <ChunkHeader
+						history={this.props.history}
 						chapterNum={chapterNum}
 						book={this.props.book}
 						chapter={this.props.chapter}
@@ -224,7 +223,7 @@ export class ChunkListContainer extends Component {
 						number={this.props.chunks[this.state.selectedChunk-1].startv}
 						chunkId={this.props.chunks[this.state.selectedChunk-1].id}
 
-					/>
+					/> */}
 
 
 					<div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'space-between'}}>
@@ -334,16 +333,21 @@ export class ChunkListContainer extends Component {
 	}
 
 	createChunkList(chunk,index) {
-		console.log(chunk, 'A CHUNK LIST CONTAINER CHUNK');
 		return (
 			<div 	key={index} style={{marginTop: '0.5vw'}}>
 				<div style={{display: 'flex', flexDirection: 'row',
 					justifyContent: 'space-evenly', flex: '1', background: '#2D2D2D',
 					color: this.state.selectedChunk=== chunk.id? 'white': '#969595', paddingTop: '1vw', paddingBottom: '1vw', borderBottom: 'solid 1px #969595',
-					fontSize: '1.1vw', cursor: 'pointer'}} onClick={()=> this.handleClick(chunk.id)}>
+					fontSize: '1.1vw', cursor: 'pointer'}} >
 
 					<label style={{cursor: 'pointer', marginRight: '2vw', fontSize: '1vw'}}> Chunk {chunk.startv} </label>
-					<label style={{cursor: 'pointer'}}> {this.state.selectedChunk === chunk.id? 'Current' : <PlayerTracker />} </label>
+					<label style={{cursor: 'pointer'}}> {this.state.selectedChunk === chunk.id?
+						'Current': this.props.takes.map? this.props.takes.map((takes) => {
+							if (takes.published == true && takes.chunkId == this.state.selectedChunk) {
+								return <PlayerTracker url={takes.location} /> ;
+							}
+
+						})  : 'Unavailable'} </label>
 
 				</div>
 
@@ -359,6 +363,7 @@ const SourceAudio =  styled.div`
 	marginTop: 0vw;
 	position: fixed;
 	bottom: 0;
+	z-index: 99;
 `;
 
 const KabanContainer =  styled.div`
@@ -382,8 +387,8 @@ const mapStateToProps = state => {
 	const { playlistMode } = state.updatePlaylist;
 	const { chunkComments, chapterComments } = state.comments;
 
-	const { takes, loaded = false, error = '',  chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
-	return {chunkComments, chapterComments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
+	const { selectedChunk=1, takes, loaded = false, error = '',  chunks = [], project = {}, book = {}, chapter = {}, language = {}, active = false, notifyFlag = false, selectedSourceProject = {}, selectedSourceProjectQuery = '' } = state.chunkListContainer;
+	return {selectedChunk, chunkComments, chapterComments, takes, playlistMode, direction, displayText, loaded, error, chunks, project, book, chapter, language, selectedSourceProject, selectedSourceProjectQuery, active, notifyFlag };
 
 };
 
@@ -407,7 +412,7 @@ const mapDispatchToProps = dispatch => {
 			deleteCommentSuccess,
 			getSourceTakes,
 			publishFiles,
-			getComments
+			getComments,
 		}, dispatch);
 };
 

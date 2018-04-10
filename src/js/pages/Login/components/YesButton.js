@@ -18,9 +18,9 @@ const Button = styled.button`
   align-items: center;
   border-radius: 20px;
   color: white;
-  background: linear-gradient(to bottom, #0076ff, #00c5ff);
-  padding: 0.4vw 4vw;
-  font-size: 1.2vw;
+  background: linear-gradient(to bottom, #0076FF, #00C5FF);
+  padding: 0.75vw 5vw;
+  font-size: 1.1vw;
   font-weight: 100;
   border: none;
 

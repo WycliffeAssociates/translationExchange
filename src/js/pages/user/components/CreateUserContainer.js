@@ -1,13 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import "css/create.css";
-import CreateUser from "./CreateUser";
-import UserCreated from "./UserCreated";
-import styled from "styled-components";
-import { bindActionCreators } from "redux";
-import { createUser, resetUserCreated } from "../../../actions/UserActions";
+import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import 'css/create.css';
+import CreateUser from './CreateUser';
+import UserCreated from './UserCreated';
+import styled from 'styled-components';
+import {bindActionCreators} from 'redux';
+import { createUser, resetUserCreated } from '../../../actions/UserActions';
 
-class CreateUserContainer extends Component {
+
+export class CreateUserContainer extends Component {
+
+
   constructor(props) {
     super(props);
 
@@ -58,6 +61,7 @@ const Container = styled.div`
   justify-content: center;
   padding-top: 3vw;
 `;
+Container.displayName= 'Container';
 
 const Label = styled.label`
   color: white;
@@ -67,6 +71,7 @@ const Label = styled.label`
   text-decoration: underline;
   cursor: pointer;
 `;
+Label.displayName = 'Label';
 
 const Card = styled.div`
   width: 33vw;
@@ -79,6 +84,7 @@ const Card = styled.div`
   background-color: white;
   overflow: hidden;
 `;
+Card.displayName = 'Card';
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ createUser, resetUserCreated }, dispatch);

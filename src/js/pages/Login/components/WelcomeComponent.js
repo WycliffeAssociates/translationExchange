@@ -40,19 +40,15 @@ export class WelcomeComponent extends React.Component {
       <WelcomeDialog>
 
 
-        <WelcomeIcon src={require('../../../../assets/images/welcome.png')}  />
+        <WelcomeIcon src={require('../../../../assets/images/undraw_welcome_3gvl.svg')}  />
 
-        <span style={{display: 'block', margin: '1vw'}}>
-          <WelcomeTo> <H2span> WELCOME TO </H2span> </WelcomeTo>
-          <Welcomeh2 className="welcomeh2"> translation Exchange  </Welcomeh2>
-        </span>
+        <Welcome className="labelLines"> <label> WELCOME TO </label> </Welcome>
+        <h2 className="welcomeh2"> translation Exchange  </h2>
 
         <WelcomeInstructions className="welcomeInstructions">
           <span> To continue, please create an account or sign in with an Authorized Account.
           </span>
         </WelcomeInstructions>
-
-
 
         <ButtonsContainer>
 
@@ -64,8 +60,6 @@ export class WelcomeComponent extends React.Component {
             redirectUri={config.streamingUrl}
             onSuccess={data=>this.onLogin(data)}
             onFailure={this.onLoginFailure} />
-
-
         </ButtonsContainer>
 
       </WelcomeDialog>
@@ -141,19 +135,35 @@ const WelcomeIcon= styled.img`
   `;
 WelcomeIcon.displayName = 'WelcomeIcon';
 
-const Welcomeh2 = styled.h2`
-    margin-top: -0.5vw;
-    font-size: 1.5vw;
-  `;
-Welcomeh2.displayName = 'Welcomeh2';
 
-const WelcomeTo = styled.p`
-    font-size: 1.5vw;
-    font-weight: lighter;
-    border-bottom: 1px solid lightgray;
-    line-height: 0.1vw;
+const Welcome = styled.div`
+
+  font-size: 1.5vw;
+  font-weight: 200;
+  overflow: hidden;
+  text-align: center;
+  color: #2D2D2D;
+
+  :before,
+  :after {
+  background-color: #969595;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 40%;
+  }
+  :before {
+  right: 0.5em;
+  margin-left: -50%;
+  }
+  :after {
+  left: 0.5em;
+  margin-right: -50%;
+  }
   `;
-WelcomeTo.displayName = 'WelcomeTo';
+Welcome.displayName = 'Welcomeh2';
 
 const H2span = styled.span`
     background: #fff;

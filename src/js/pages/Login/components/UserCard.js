@@ -36,7 +36,6 @@ export default class UserCard extends React.Component {
   render() {
     var key= this.props.id? this.props.id: 0;
     const {name_audio, icon_hash} = this.props.user || [];
-    console.log(icon_hash);
     const audioURL = config.streamingUrl + name_audio;
     const {playing} = this.state;
     let icon = 'play_arrow';

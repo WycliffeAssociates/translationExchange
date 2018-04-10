@@ -1,7 +1,8 @@
 import axios from 'axios';
 import config from '../../config/config';
+import {getTakes} from '../actions';
 
-export const getComments = (query, type, takeNum) => {
+export const getComments = (query, type) => {
 
   return function(dispatch) {
     return axios
@@ -17,13 +18,7 @@ export const getComments = (query, type, takeNum) => {
           case 'chapter_id':
             dispatch(getChapterCommentsSuccess(response.data));
             break;
-          case 'take_id':
-
-            dispatch(getTakesCommentsSuccess(response.data, takeNum));
-            break;
-
           default:
-
         }
 
       })
@@ -34,7 +29,7 @@ export const getComments = (query, type, takeNum) => {
 };
 
 
-export const getChunkCommentsSuccess= (comments)=>{
+export const getChunkCommentsSuccess= (comments) => {
   return {
     type: 'CHUNK_COMMENTS',
     comments,
@@ -49,11 +44,56 @@ export const getChapterCommentsSuccess= (comments)=>{
   };
 };
 
-export const getTakesCommentsSuccess= (comments, takeNum )=>{
 
-  comments.map(cm => cm.takeNum = takeNum);
-  return {
-    type: 'TAKES_COMMENTS',
-    comments,
-  };
+export const saveComment = (blobx, type, id, chunkId, chunkNum, callback, errorCallback ) => { // chunkId & chunkNum, is used for refreshing the comments on takes
+    return dispatch => {
+        dispatch({type: 'SAVE_COMMENT_LOADING', uploadingComments: true}); // used to display loading UI
+        return axios
+            .post(config.apiUrl + 'comments/', {
+                comment: blobx,
+                user: 3,
+                object: id,
+                type: type
+            },{
+                headers: { Authorization: "Token " + localStorage.getItem('token') }
+            })
+            .then(response => {
+
+                if(type === 'chunk'){
+                    dispatch(updateChunkComments(response.data));
+                }
+
+                if(type === 'chapter'){
+                    dispatch(updateChapterComments(response.data))
+                }
+
+                if(type === 'take'){
+                    dispatch(getTakes(chunkId, chunkNum));
+                }
+                dispatch({type: 'SAVE_COMMENT_LOADING', uploadingComments: false});
+                callback();
+            })
+            .catch(exception => {
+                errorCallback();
+            });
+    };
 };
+
+
+export const updateChunkComments = (comment) => {
+    return {
+        type: 'UPDATE_CHUNK_COMMENTS',
+        comment
+    }
+
+};
+
+export const updateChapterComments = (comment) => {
+    return {
+        type: 'UPDATE_CHAPTER_COMMENTS',
+        comment
+    }};
+
+
+
+
