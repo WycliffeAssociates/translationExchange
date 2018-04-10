@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import WaveformContainer from './WaveformContainer';
 import BottomSection from './BottomSection';
 import LoadingUser from './LoadingUser';
+import ErrorDialog from '../../../components/ErrorDialog';
 
 
 class CreateUser extends Component {
@@ -15,10 +16,23 @@ class CreateUser extends Component {
       recordedBlob: null,
       generatedHash: '',
       audio: false,
+      displayError: false,
     };
     this.onStop = this.onStop.bind(this);
     this.redo = this.redo.bind(this);
     this.save = this.save.bind(this);
+    this.closeDialog = this.closeDialog.bind(this);
+  }
+
+
+  closeDialog() {
+    this.setState({
+      displayError: false,
+      recording: false,
+      recordedBlob: null,
+      generatedHash: '',
+      audio: false,
+    });
   }
 
 
@@ -29,17 +43,26 @@ class CreateUser extends Component {
 
   stopRecording() {
     this.setState({ recording: false });
+    setTimeout(()=>{if (this.state.recordedBlob == null) {
+      this.setState({displayError: true});
+    } }, 500);
   }
 
   onStop(recordedBlob) {
     const a = new FileReader();
-    a.readAsArrayBuffer(recordedBlob.blob);
-    let generatedHash ='';
-    a.onloadend =  () => {
-      generatedHash= SparkMD5.ArrayBuffer.hash(a.result);
-      this.setState({recordedBlob, generatedHash, audio: true});
-      jdenticon.update('#canvas', generatedHash);
-    };
+    if (recordedBlob !== null) {
+      a.readAsArrayBuffer(recordedBlob.blob);
+      let generatedHash ='';
+      a.onloadend =  () => {
+        generatedHash= SparkMD5.ArrayBuffer.hash(a.result);
+        this.setState({recordedBlob, generatedHash, audio: true});
+        jdenticon.update('#canvas', generatedHash);
+      };
+    }
+
+    else {
+      this.setState({displayError: true});
+    }
   }
 
 
@@ -68,27 +91,31 @@ class CreateUser extends Component {
   }
 
   render() {
-    const { recordedBlob, audio, recording, generatedHash } = this.state;
+    const { recordedBlob, audio, recording, generatedHash,displayError } = this.state;
     const {loading} = this.props;
 
     return (
-      loading ? <LoadingUser />:
-        <Container>
-          <WaveformContainer
-            recording={recording}
-            recordedBlob={recordedBlob}
-            audio={audio}
-            onStop={this.onStop}
-          />
-          <BottomSection
-            startRecording={this.startRecording}
-            save={this.save}
-            redo={this.redo}
-            audio={audio}
-            generatedHash={generatedHash}
-          />
 
-        </Container>
+      displayError?
+        <ErrorDialog type="mic" onClick ={this.closeDialog} />
+        :
+        loading ? <LoadingUser />:
+          <Container>
+            <WaveformContainer
+              recording={recording}
+              recordedBlob={recordedBlob}
+              audio={audio}
+              onStop={this.onStop}
+            />
+            <BottomSection
+              startRecording={this.startRecording}
+              save={this.save}
+              redo={this.redo}
+              audio={audio}
+              generatedHash={generatedHash}
+            />
+
+          </Container>
 
 
 
