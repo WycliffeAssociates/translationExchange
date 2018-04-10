@@ -72,7 +72,7 @@ class KanbanColumn extends React.Component {
         }
       },
       this.props.takes,
-        chapterId
+      chapterId
     );
   }
 

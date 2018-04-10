@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Modal } from "semantic-ui-react";
+import React, { Component } from 'react';
+import { Modal } from 'semantic-ui-react';
 import styled from 'styled-components';
 import WaveForm from './WaveForm';
 import CommentUploading from './CommentUploading';
@@ -17,25 +17,25 @@ class RecordCommentModal extends Component {
 
   initialState(modalOpened) {
     let showModal = false;
-    if (modalOpened){   // handle the case when the modal is already opened
-        showModal = true;
+    if (modalOpened) {   // handle the case when the modal is already opened
+      showModal = true;
     }
-      return {
-          recordedBlob: null,
-          recording: false,
-          header: 'Record your comment',
-          icon: 'mic_none',
-          playing: false,
-          isAudioAvailable: false,
-          jsonBlob: null,
-          showModal,
-          commentSaved:false,
-          error: false,
-      }
+    return {
+      recordedBlob: null,
+      recording: false,
+      header: 'Record your comment',
+      icon: 'mic_none',
+      playing: false,
+      isAudioAvailable: false,
+      jsonBlob: null,
+      showModal,
+      commentSaved: false,
+      error: false,
+    };
   }
 
-    componentWillReceiveProps(nextProps){
-    this.setState({showModal: nextProps.display})
+  componentWillReceiveProps(nextProps) {
+    this.setState({showModal: nextProps.display});
   }
 
   show = dimmer => () => this.setState({ dimmer, open: true });
@@ -76,14 +76,14 @@ class RecordCommentModal extends Component {
     this.props.saveComment(jsonBlob, type, id, chunkId, chunkNum, this.commentSaved, this.error);
   };
 
-  commentSaved(){ this.setState({commentSaved:true})}
+  commentSaved() { this.setState({commentSaved: true});}
 
-  error(){this.setState({error:true})}
+  error() {this.setState({error: true});}
 
   playPause = () => {
     let icon ='pause';
     if (this.state.playing) {
-      icon='play_arrow'
+      icon='play_arrow';
     }
     this.setState({ playing: !this.state.playing, icon });
   };
