@@ -22,15 +22,6 @@ export default class ChapterCard extends Component {
 
     };
 
-    // componentWillMount(){
-    //     const{ total_chunks, uploaded_chunks, upgradeCheckingLevel } = this.props;
-    //
-    //     if(uploaded_chunks === total_chunks && total_chunks == uploaded_chunks){
-    //        // this.props.upgradeCheckingLevel()
-    //     }
-    //
-    // }
-
 
 
     render() {
@@ -45,7 +36,7 @@ export default class ChapterCard extends Component {
 
 
 
-        const chunksCompleted = `${published_chunks}/${uploaded_chunks}`;
+        const chunksCompleted = `${published_chunks}/${total_chunks}`;
         const percentageCompleted = (published_chunks * 100)/ total_chunks;
 
         return (

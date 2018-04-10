@@ -43,7 +43,7 @@ export default class WelcomeComponent extends React.Component {
         <ButtonsContainer>
 
           <ContinueButton onClick={()=> this.handleClick('continue')}>
-            Continue <i className="fa fa-arrow-right fa-fw"></i>
+            Continue <i className="material-icons">arrow_forward </i>
           </ContinueButton>
 
           <GitHubLogin clientId="f5e981378e91c2067d41"
@@ -130,7 +130,8 @@ Icon.displayName = 'Icon';
 
 
 const ContinueButton = styled.button`
-    display: block;
+    display: flex;
+    align-items:center;
     background: linear-gradient(to bottom, #0076FF, #00C5FF);
     /* height: 2.5vw;
     width: 14vw; */

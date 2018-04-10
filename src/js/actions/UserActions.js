@@ -133,7 +133,7 @@ export const identiconLoginSuccess = (iconHash) => {
 };
 
 
-export const removeUser = ()=>{
+export const removeUser = () => {
   return {
       type:'REMOVE_USER'
   }

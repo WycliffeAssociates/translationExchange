@@ -20,7 +20,7 @@ export default class NewUserCard extends React.Component {
         <Card>
 
 
-          <AddUser> <i className="fa fa-user-plus" /> </AddUser>
+          <AddUser> <i className="material-icons" style={{fontSize: '7vw',transform: `scale(-1,1)`}}>person_add</i></AddUser>
           <CardLabel> New User </CardLabel>
 
 
@@ -47,7 +47,10 @@ NewUserCardContainer.displayName = 'NewUserCardContainer';
 
 const Card= styled.div`
 
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     height: 18vw;
     width: 13vw;
     border-radius: 1.5vw;
@@ -65,11 +68,10 @@ Card.displayName = 'Card';
 const AddUser = styled.div`
 
     color: #009CFF;
-    margin-bottom: 1.5vw;
     border: none;
-    font-size: 7vw;
     background-color: white;
-    margin-left: -0.5vw;
+    align-self: flex-start;
+    margin-bottom: 10vh-3vw;
   `;
 AddUser.displayName = 'AddUser';
 
@@ -78,5 +80,6 @@ const CardLabel = styled.label`
     font-size: 1.35vw;
     text-decoration: underline;
     cursor: pointer;
+    align-self: flex-end;
   `;
 CardLabel.displayName = 'CardLabel';
