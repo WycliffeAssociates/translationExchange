@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+import {bounceIn} from 'react-animations';
 
 export default class NewUserCard extends React.Component {
 
@@ -36,7 +37,7 @@ export default class NewUserCard extends React.Component {
 
 }
 
-
+const bounceInAnimations =keyframes`${bounceIn}`
 
 const NewUserCardContainer = styled.div`
 
@@ -55,6 +56,7 @@ const Card= styled.div`
     background-color: white;
     padding: 2vw 3.5vw;
     cursor: pointer;
+    animation: ${bounceInAnimations} 2s ease-in;
 
   `;
 Card.displayName = 'Card';

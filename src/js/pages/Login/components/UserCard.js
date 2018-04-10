@@ -2,8 +2,8 @@ import React from 'react';
 import jdenticon from 'jdenticon';
 import ReactPlayer from 'react-player';
 import styled,  { keyframes } from 'styled-components';
-import config from '../../../../config/config'
-import { pulse } from 'react-animations';
+import config from '../../../../config/config';
+import { pulse, bounceIn } from 'react-animations';
 
 
 export default class UserCard extends React.Component {
@@ -66,6 +66,7 @@ export default class UserCard extends React.Component {
 
 // keyframes returns a unique name based on a hash of the contents of the keyframes
 const pulse_animation = keyframes`${pulse}`;
+const bounceInAnimations = keyframes`${bounceIn}`;
 
 
 // Here we create a component that will rotate everything we pass in over two seconds
@@ -91,6 +92,7 @@ const Card= styled.div`
     overflow: hidden;
     background-color: white;
     border: solid white;
+    animation: ${bounceInAnimations} 2s ease-in;
 `;
 
 const ImageContainer = styled.div`
