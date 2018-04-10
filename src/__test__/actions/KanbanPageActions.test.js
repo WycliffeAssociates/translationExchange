@@ -2,7 +2,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
-import {getTakes, getChunks} from '../../js/actions';
+import {getTakes, getChunks, patchTake} from '../../js/actions';
 
 const middlewares = [thunk];
 const mockStore  = configureMockStore(middlewares);
@@ -54,6 +54,28 @@ describe('KanbanPageActions Suite', () => {
     const store = mockStore({chunks: []});
     return store.dispatch(getChunks()).then(()=> {
       expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+
+  it('patches take successfully', () => {
+    moxios.wait(()=> {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: [{
+          chunk: [],
+        }],
+      });
+    });
+
+    const expectedActions= [{
+      type: 'PATCH_TAKE_SUCCESS', updatedTakes: [],
+    }];
+
+    const store = mockStore({takes: []});
+    return store.dispatch(patchTake()).then(() => {
+      expect(store.getActions()).toEquak(expectedActions);
     });
   });
 });
