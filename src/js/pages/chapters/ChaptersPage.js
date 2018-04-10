@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import QueryString from "query-string";
 import NavBar from '../../components/NavBar';
-import {getChunks, getComments, getUserHash, getChapters, removeUser} from '../../actions';
+import {getChunks, getComments, getUserHash, getChapters, removeUser, downloadProject} from '../../actions';
 import ChapterCard from './components/ChapterCard';
 import styled from 'styled-components';
 import 'css/takes.css';
@@ -15,32 +15,36 @@ import Data from '../projects/mockupdata/data';
 
 class ChapterPage extends Component {
 
-    componentWillMount() {
-        const {getChapters, chapters} = this.props;
+  componentWillMount() {
+    const {getChapters, chapters} = this.props;
 
-        if(chapters.length < 1) {
-            const {search} = this.props.location;   //get data if the user refresh the page
-            const query = QueryString.parse(search);
-            getChapters(query.projectId);
-        }
-
+    if (chapters.length < 1) {
+      const {search} = this.props.location;   //get data if the user refresh the page
+      const query = QueryString.parse(search);
+      getChapters(query.projectId);
     }
 
-    render() {
-        const {chapters} = this.props;
+  }
 
-        return (
-            <ChapterPageContainer>
-                <NavBar chapterPage={true} kanban={false} {...this.props} />
+  render() {
+    const {chapters} = this.props;
+    const {search} = this.props.location;
+    const query = QueryString.parse(search);
 
-                <CardsContainer>
-                    {chapters.map(chp => <ChapterCard {...chp} {...this.props} />)}
+    return (
+      <ChapterPageContainer>
+        <NavBar chapterPage={true} kanban={false} {...this.props} />
+        <DownloadBar onClick={()=> this.props.downloadProject(query.projectId)}>
+          <DownloadButton> Download </DownloadButton>
+        </DownloadBar>
+        <CardsContainer>
+          {chapters.map(chp => <ChapterCard {...chp} {...this.props} />)}
 
-                </CardsContainer>
+        </CardsContainer>
 
-            </ChapterPageContainer>
-        );
-    }
+      </ChapterPageContainer>
+    );
+  }
 
 }
 
@@ -61,6 +65,7 @@ const ChapterPageContainer = styled.div`
 
 const CardsContainer = styled.div`
     height:100%;
+    width: 100vw;
     min-height: 850px;
     overflow-y: scroll;
     display: flex;
@@ -71,11 +76,36 @@ const CardsContainer = styled.div`
 
 `;
 
+const DownloadBar = styled.div`
+  width: 100vw;
+  height: 6vh;
+  background:#2D2D2D;
+  position: fixed;
+  top: 11vh;
+  display: flex;
+  padding: 0.5vh;
+  flex-direction: column;
+`;
+
+const DownloadButton = styled.button`
+  background: white;
+  width: auto;
+  padding: 0.5vw 1.5vw;
+  border-radius: 0.1vw;
+  height: 80%;
+  color: #009CFF;
+  align-self: flex-end;
+  margin-top: 0.7vh;
+  border: none;
+  text-decoration: underline;
+  font-weight: 500;
+`;
+
 
 
 const mapDispatchToProps = dispatch => {
 
-    return bindActionCreators({getChunks, getUserHash, getComments, getChapters, removeUser}, dispatch);
+  return bindActionCreators({getChunks, getUserHash, getComments, getChapters, removeUser, downloadProject}, dispatch);
 
 };
 
@@ -87,7 +117,7 @@ const mapStateToProps = state => {
 
   const {takes} = state.kanbanPage;
 
-    return {chapters, loggedInUser};
+  return {chapters, loggedInUser};
 };
 
 
