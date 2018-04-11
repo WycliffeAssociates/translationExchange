@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import loadingComment from '../../../../assets/images/loadingRing.svg'
+import loadingComment from '../../../../../assets/images/loadingRing.svg'
 
 
 
