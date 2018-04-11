@@ -18,19 +18,15 @@
 
 .CircularProgressbar .CircularProgressbar-path {
     stroke: #009CFF;
+    stroke-linecap: round;
     transition: stroke-dashoffset 0.5s ease 0s;
 }
 
+
 .CircularProgressbar .CircularProgressbar-trail {
-    stroke: #blue;
+    stroke: #d6d6d6;
 }
 
-.CircularProgressbar .CircularProgressbar-text {
-    fill: orange;
-    font-size: 20px;
-    dominant-baseline: central;
-    text-anchor: middle;
-}
 
 .ui.fixed.table td.dont-hide-overflow {
     overflow: visible;

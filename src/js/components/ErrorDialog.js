@@ -4,63 +4,63 @@ import * as Details from  './componentDetails/ErrorDetails';
 
 export default class ErrorDialog extends Component {
 
-  render() {
-    const {type} = this.props;
-    let details ='';
-    if (type == 'mic') {
-      details = Details.mic;
+    render() {
+        const {type} = this.props;
+        let details ='';
+        if (type == 'mic') {
+            details = Details.mic;
+        }
+
+        else if (type == 'upload_comment_fail') {
+            details = Details.upload_comment_fail;
+        }
+        return (
+            <Container>
+
+                <Card>
+                    <Close onClick={this.props.onClick}>
+                        <i style={styles.close} className="material-icons"> close </i>
+                    </Close>
+
+
+                    <ErrorInfo>
+                        <Icon>
+                            <i style={styles.icon} className="material-icons"> {details.icon} </i>
+                        </Icon>
+
+                        <Message>
+                            {details.message}
+                        </Message>
+
+                        <ExtraInfo>
+                            {details.info}
+                        </ExtraInfo>
+
+                    </ErrorInfo>
+
+                </Card>
+
+            </Container>
+        );
     }
-
-    else if (type == 'upload_comment_fail') {
-      details = Details.upload_comment_fail;
-    }
-    return (
-      <Container>
-
-        <Card>
-          <Close onClick={this.props.onClick}>
-            <i style={styles.close} className="material-icons"> close </i>
-          </Close>
-
-
-          <ErrorInfo>
-            <Icon>
-              <i style={styles.icon} className="material-icons"> {details.icon} </i>
-            </Icon>
-
-            <Message>
-              {details.message}
-            </Message>
-
-            <ExtraInfo>
-              {details.info}
-            </ExtraInfo>
-
-          </ErrorInfo>
-
-        </Card>
-
-      </Container>
-    );
-  }
 }
 
 const styles = {
 
-  close: {
-    color: 'white',
-    margin: '1vw',
-    height: '4vh',
-    width: '2vw',
-  },
+    close: {
+        color: 'white',
+        margin: '1vw',
+        height: '4vh',
+        width: '2vw',
+    },
 
-  icon: {
-    color: 'white',
-    height: '20vh',
-    width: '10vw',
-    fontSize: '10vw',
+    icon: {
+        color: 'white',
+        height: '20vh',
+        width: '10vw',
+        fontSize: '10vw',
 
-  },
+    },
 
 };
 
@@ -88,7 +88,6 @@ const Card = styled.div`
   border-radius: 2vw;
   text-align: center;
   color: white;
-
 `;
 Card.displayName = 'Card';
 

@@ -6,7 +6,6 @@ import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
 import RecentProjectsContainer from './RecentProjectsContainer';
 import MyProjectsContainer from './MyProjectsContainer';
-import ListContainer from './ListContainer';
 import { fetchAllProjects, getChapters, getUserHash, removeUser } from '../../actions';
 
 
@@ -33,7 +32,6 @@ class ProjectContainer extends Component {
               {/*<RecentProjectsContainer />*/}
               <MyProjectsContainer {...this.props} />
             </CardsContainer>
-            {/*<ListContainer />*/}
           </ProjectsContainer>
 
 

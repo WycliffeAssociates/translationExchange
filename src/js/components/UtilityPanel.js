@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import QueryString from 'query-string';
 import Toggle from 'react-toggle';
-import Comments from '../pages/chunks/components/Comments';
+import Comments from '../pages/KanbanBoard/components/RecordCommentsComponents/Comments';
 import ChunkPanel from '../pages/KanbanBoard/components/ChunkPanel';
 
 export default class UtilityPanel extends React.Component {

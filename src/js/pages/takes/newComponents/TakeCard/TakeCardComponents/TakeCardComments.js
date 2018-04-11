@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import CommentRow from './TakeCardCommentRow';
-import RecordCommentsModal from '../../../../chunks/components/RecordCommentsModal';
+import RecordCommentsModal from '../../../../KanbanBoard/components/RecordCommentsComponents/RecordCommentsModal';
 export default class TakeCardComments extends React.Component {
 
   constructor(props) {

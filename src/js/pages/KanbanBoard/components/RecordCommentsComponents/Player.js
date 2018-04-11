@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import jdenticon from 'jdenticon';
 import ReactPlayer from 'react-player';
 import CommentsPlayer from './CommentsPlayer';
-import config from '../../../../config/config';
+import config from '../../../../../config/config';
 
 class Player extends Component {
 
