@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
+import Loading from '../../components/Loading';
 import KanbanBoard from './components/KanbanBoard';
 import {getChunks, getTakes, getComments,
   patchTake, saveComment, getUserHash,
@@ -54,13 +55,21 @@ class KanbanPage extends React.Component {
       <KanbanPageContainer>
         <NavBar chapterNum={query.chapterNum} kanbanPage={true} {...this.props} />
 
-        <KanbanContainer>
+        {
+          this.props.loading?
+            <Loading height="auto" />
 
-          <KanbanBoard {...this.props} />
+            :
 
-          <UtilityPanel chapterNum={query.chapterNum} {...this.props} />
+            <KanbanContainer>
 
-        </KanbanContainer>
+              <KanbanBoard {...this.props} />
+
+              <UtilityPanel chapterNum={query.chapterNum} {...this.props} />
+
+            </KanbanContainer>
+
+        }
 
         <SourceAudio />
       </KanbanPageContainer>
@@ -114,7 +123,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => {
-  const {takes, chunks, chunkNum, activeChunkId} = state.kanbanPage;
+  const {takes, chunks, chunkNum, activeChunkId, loading} = state.kanbanPage;
   const {chapterComments, chunkComments, uploadingComments} = state.comments;
   const {loggedInUser} = state.user;
   const {chapter = {}} =state.chunkListContainer; // TODO get chapter info from new page
@@ -122,7 +131,8 @@ const mapStateToProps = state => {
 
 
 
-  return {takes, chunks, loggedInUser, chapter, chunkNum, chapterComments, chunkComments, displayText, activeChunkId, uploadingComments};
+  return {takes, chunks, loggedInUser, chapter, chunkNum, chapterComments, chunkComments,
+    displayText, activeChunkId, uploadingComments, loading};
 
   // all the state variables that you want to map to props
 };

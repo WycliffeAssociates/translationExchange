@@ -1,6 +1,7 @@
 import React from 'react';
 import UserCard from './components/UserCard';
 import NewUserCard from './components/NewUserCard';
+import Loading from '../../components/Loading';
 import {Grid} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
@@ -18,7 +19,6 @@ class AvailableUsers extends React.Component {
 
     const {users} = this.props;
     const backgroundFill = users.length !==0? true: false;
-    console.log(this.props.loading, 'LOADING');
 
     return (
       <Container backgroundFill={backgroundFill}>
@@ -28,9 +28,7 @@ class AvailableUsers extends React.Component {
         {
           this.props.loading?
 
-            <div style={{height: '100vh'}}>
-              <img src={require('../../../assets/images/loadingRing.svg')} alt="Loading" />
-            </div>
+            <Loading height = "100vh" />
 
             :
 

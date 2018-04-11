@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import NavBar from '../../components/NavBar';
+import Loading from '../../components/Loading';
 import RecentProjectsContainer from './RecentProjectsContainer';
 import MyProjectsContainer from './MyProjectsContainer';
 import ListContainer from './ListContainer';
@@ -12,21 +13,31 @@ import { fetchAllProjects, getChapters, getUserHash, removeUser } from '../../ac
 
 class ProjectContainer extends Component {
 
-    componentWillMount(){
-        this.props.fetchAllProjects('');
-    }
+  componentWillMount() {
+    this.props.fetchAllProjects('');
+  }
 
   render() {
     return (
       <Container>
         <NavBar projectPage={true} {...this.props} />
-        <ProjectsContainer>
-          <CardsContainer>
-            {/*<RecentProjectsContainer />*/}
-            <MyProjectsContainer {...this.props} />
-          </CardsContainer>
-          {/*<ListContainer />*/}
-        </ProjectsContainer>
+
+        {  this.props.loading?
+
+          <Loading height= {'auto'} />
+
+          :
+
+          <ProjectsContainer>
+            <CardsContainer>
+              {/*<RecentProjectsContainer />*/}
+              <MyProjectsContainer {...this.props} />
+            </CardsContainer>
+            {/*<ListContainer />*/}
+          </ProjectsContainer>
+
+
+        }
 
       </Container>
     );
@@ -57,14 +68,14 @@ const CardsContainer = styled.div`
 
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({fetchAllProjects, getChapters, getUserHash, removeUser}, dispatch);
+  return bindActionCreators({fetchAllProjects, getChapters, getUserHash, removeUser}, dispatch);
 };
 
 const mapStateToProps = state =>{
-    const { projects,  } = state.Projects;
-    const {loggedInUser} = state.user;
+  const { projects, loading  } = state.Projects;
+  const {loggedInUser} = state.user;
 
-    return{projects, loggedInUser};
+  return {projects, loggedInUser, loading};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectContainer);

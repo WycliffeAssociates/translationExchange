@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import QueryString from "query-string";
 import NavBar from '../../components/NavBar';
+import Loading from '../../components/Loading';
 import {getChunks, getComments, getUserHash, getChapters, removeUser, downloadProject} from '../../actions';
 import ChapterCard from './components/ChapterCard';
 import styled from 'styled-components';
@@ -35,13 +36,20 @@ class ChapterPage extends Component {
       <ChapterPageContainer>
         <NavBar chapterPage={true} kanban={false} {...this.props} />
         <DownloadBar onClick={()=> this.props.downloadProject(query.projectId)}>
-          <DownloadButton> Download </DownloadButton>
+          <DownloadButton> Download
+          <i className="material-icons"> file_download </i></DownloadButton>
         </DownloadBar>
-        <CardsContainer>
-          {chapters.map(chp => <ChapterCard {...chp} {...this.props} />)}
 
-        </CardsContainer>
+        {this.props.loading?
+          <Loading height="auto" />
+          :
 
+          <CardsContainer>
+            {chapters.map(chp => <ChapterCard {...chp} {...this.props} />)}
+
+          </CardsContainer>
+
+        }
       </ChapterPageContainer>
     );
   }
@@ -73,6 +81,7 @@ const CardsContainer = styled.div`
     flex-wrap: wrap;
     padding-top: 1vw;
     padding-left: 1vw;
+    margin-top: 5vh;
 
 `;
 
@@ -85,12 +94,13 @@ const DownloadBar = styled.div`
   display: flex;
   padding: 0.5vh;
   flex-direction: column;
+
 `;
 
 const DownloadButton = styled.button`
   background: white;
   width: auto;
-  padding: 0.5vw 1.5vw;
+  padding: 0.4vh 1.5vw;
   border-radius: 0.1vw;
   height: 80%;
   color: #009CFF;
@@ -99,6 +109,10 @@ const DownloadButton = styled.button`
   border: none;
   text-decoration: underline;
   font-weight: 500;
+  cursor: pointer;
+  i {
+    vertical-align: middle;
+  }
 `;
 
 
@@ -111,13 +125,13 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
 
-  const {chapters} =state.Chapters;
+  const {chapters, loading} =state.Chapters;
 
   const {loggedInUser} =state.user;
 
   const {takes} = state.kanbanPage;
 
-  return {chapters, loggedInUser};
+  return {chapters, loggedInUser, loading};
 };
 
 
