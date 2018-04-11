@@ -2,16 +2,13 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import config from '../../../../config/config'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
-import {onLoginSuccess} from '../../../actions'
+import config from '../../../../config/config';
 import GitHubLogin from '../../../components/social-login/GitHubLogin';
 
 
 //import {dispatchToken} from '../../../actions/database.js';
 
-export class WelcomeComponent extends React.Component {
+export default class WelcomeComponent extends React.Component {
 
   constructor(props) {
     super(props);
@@ -37,18 +34,11 @@ export class WelcomeComponent extends React.Component {
 
     return (
 
-      <WelcomeDialog>
+      <WelcomePage>
 
-
-        <WelcomeIcon src={require('../../../../assets/images/undraw_welcome_3gvl.svg')}  />
-
-        <Welcome className="labelLines"> <label> WELCOME TO </label> </Welcome>
         <h2 className="welcomeh2"> translation Exchange  </h2>
+        <Icon src={require('../../../../assets/images/undraw_welcome_3gvl.svg')}  />
 
-        <WelcomeInstructions className="welcomeInstructions">
-          <span> To continue, please create an account or sign in with an Authorized Account.
-          </span>
-        </WelcomeInstructions>
 
         <ButtonsContainer>
 
@@ -60,9 +50,10 @@ export class WelcomeComponent extends React.Component {
             redirectUri={config.streamingUrl}
             onSuccess={data=>this.onLogin(data)}
             onFailure={this.onLoginFailure} />
+
         </ButtonsContainer>
 
-      </WelcomeDialog>
+      </WelcomePage>
 
     );
   }
@@ -114,74 +105,29 @@ export class WelcomeComponent extends React.Component {
 
 
 
-const  WelcomeDialog = styled.div`
-
-    width: 30vw;
-    height: 40vw;
-    padding: 2vw;
-    background-color: white;
-    box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.4);
-    margin: auto;
-    border-radius: 2vw;
-    border: none;
-  `;
-
-WelcomeDialog.displayName='WelcomeDialog';
-
-const WelcomeIcon= styled.img`
-    height: 7vw;
-    width: 7vw;
-    border-radius: 100px;
-  `;
-WelcomeIcon.displayName = 'WelcomeIcon';
-
-
-const Welcome = styled.div`
-
-  font-size: 1.5vw;
-  font-weight: 200;
-  overflow: hidden;
+const  WelcomePage = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  justify-self: center;
+  max-width: 50%;
+  height: 80%;
   text-align: center;
-  color: #2D2D2D;
-
-  :before,
-  :after {
-  background-color: #969595;
-  content: "";
-  display: inline-block;
-  height: 1px;
-  position: relative;
-  vertical-align: middle;
-  width: 40%;
-  }
-  :before {
-  right: 0.5em;
-  margin-left: -50%;
-  }
-  :after {
-  left: 0.5em;
-  margin-right: -50%;
-  }
-  `;
-Welcome.displayName = 'Welcomeh2';
-
-const H2span = styled.span`
-    background: #fff;
-    z-index: 2;
-    padding-left: 3vw;
-    padding-right: 3vw;
+  //border: solid #969595 0.1vw;
+  border-radius: 0.5vw;
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.5);
   `;
 
-H2span.displayName = 'H2span';
+WelcomePage.displayName='WelcomePage';
 
-const WelcomeInstructions =styled.p`
-
-    font-weight: 500;
-    color: gray;
-    margin: 2vw;
-    font-size: 1.25vw;
+const Icon= styled.img`
+    height: 8vw;
+    width: 8vw;
   `;
-WelcomeInstructions.displayName = 'WelcomeInstructions';
+Icon.displayName = 'Icon';
+
 
 const ContinueButton = styled.button`
     display: flex;
@@ -190,7 +136,7 @@ const ContinueButton = styled.button`
     /* height: 2.5vw;
     width: 14vw; */
     margin-top: 1vw;
-    padding: 0.4vw 2.6vw;
+    padding: 0.5vw 3.3vw;
     font-size: 1.45vw;
     font-weight: 100;
     color: white;
@@ -211,19 +157,10 @@ const GitHubSignInButton= styled(ContinueButton)`
 GitHubSignInButton.displayName = 'GitHubSignInButton';
 
 const ButtonsContainer = styled.div`
-    margin-top: 2vw;
-    margin-left: -2vw;
-    text-align: center;
+    margin-top: 5vw;
+    textAlign: center;
     padding: 2vw 8vw;
     width: inherit;
 
   `;
 ButtonsContainer.displayName = 'ButtonsContainer';
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {  onLoginSuccess }, dispatch);
-};
-
-
-export default connect(null, mapDispatchToProps) (WelcomeComponent);

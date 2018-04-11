@@ -7,7 +7,7 @@ import '../../../css/projects.css';
 import ProjectFilter from './ProjectFilter';
 import NotFound from '../NotFound';
 import ErrorButton from '../../../js/components/ErrorButton';
-import LoadingGif from '../../../js/components/LoadingGif';
+import Loading from '../../../js/components/Loading';
 import { bindActionCreators } from 'redux';
 import { fetchAllProjects, dispatchAllProjectsReset } from '../../actions';
 
@@ -101,7 +101,7 @@ class ProjectsListContainer extends Component {
 			return (<ErrorButton displayText={this.props.displayText} error={error} />);
 		} else if (!loaded) {
 			return (
-				<LoadingGif displayText={this.props.displayText.loading} />
+				<Loading displayText={this.props.displayText.loading} />
 			);
 		} else {
 			return (

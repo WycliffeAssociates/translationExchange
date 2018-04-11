@@ -18,7 +18,7 @@ import Notifications from 'react-notify-toast';
 import Root from './js/components/Root.js';
 import KanbanPage from './js/pages/KanbanBoard/KanbanPage';
 import CustomDragLayer from './CustomDragLayer';
-import ChapterPage from './js/pages/chapters/ChaptersPage'
+import ChapterPage from './js/pages/chapters/ChaptersPage';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 // import and configure the raven client for sentry in order to track errors

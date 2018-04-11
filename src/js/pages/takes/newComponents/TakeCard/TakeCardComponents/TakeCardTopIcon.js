@@ -21,7 +21,7 @@ export default class TakeCardTopIcon extends React.Component {
           <p style={{color: 'lightgray', fontStyle: 'italic', fontWeight: '100', marginTop: '-0.8vw'}}> 03/13/17 </p>
         </CardInfo>
 
-        <Icon  id="user" data-jdenticon-value={this.props.loggedInUser? this.props.loggedInUser: 'random'} />
+        <Icon  id="user" data-jdenticon-value={this.props.loggedInUser? this.props.loggedInUser: 'no author info'} />
       </TopBar>
 
     );

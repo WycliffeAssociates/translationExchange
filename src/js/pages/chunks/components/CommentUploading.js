@@ -1,21 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import loadingComment from '../../../../assets/images/loading_comments.gif'
+import loadingComment from '../../../../assets/images/loadingRing.svg'
 
 
 
 export default () => {
-    return (
-        <Container>
-            <ItemsContainer>
-                <GifContainer>
-                    <img style={{height: '12vw', width:'12vw'}} src={loadingComment} alt="Loading_comment" />
-                </GifContainer>
-                <BottomText>Uploading...</BottomText>
-            </ItemsContainer>
-        </Container>
-    );
-}
+  return (
+    <Container>
+      <ItemsContainer>
+        <GifContainer>
+          <img style={{height: '12vw', width: '12vw'}} src={loadingComment} alt="Loading_comment" />
+        </GifContainer>
+        <BottomText>Uploading...</BottomText>
+      </ItemsContainer>
+    </Container>
+  );
+};
 
 
 
@@ -40,6 +40,3 @@ const BottomText = styled.p`
   font-weight: bold;
   text-align:center;
 `;
-
-
-

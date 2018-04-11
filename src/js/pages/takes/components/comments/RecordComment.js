@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { ReactMic } from "react-mic";
 import { Button, Icon } from "semantic-ui-react";
 import "./RecordComment.css";
-import LoadingGif from "assets/images/Spinner.gif";
+import Loading from "assets/images/Spinner.gif";
 import CommentsPlayer from "../comments/commentsPlayer";
 
 
@@ -164,7 +164,7 @@ function DisplayAudioPlayer(props) {
 
 				<div style={{ height: '5%', display: 'flex' }} >
 					{props.active
-						? <img style={{ justifyContent: 'center', display: 'flex' }} src={LoadingGif} alt="Loading..." width="40" height="40" />
+						? <img style={{ justifyContent: 'center', display: 'flex' }} src={Loading} alt="Loading..." width="40" height="40" />
 						: <Button
 							positive
 							size="small"

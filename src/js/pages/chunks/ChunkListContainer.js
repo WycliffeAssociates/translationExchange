@@ -11,7 +11,7 @@ import Chunk from './Chunk';
 import NotFound from 'js/pages/NotFound';
 import ErrorButton from '../../components/ErrorButton';
 import UtilityPanel from '../../components/UtilityPanel';
-import LoadingGif from '../../components/LoadingGif';
+import Loading from '../../components/Loading';
 import styled from 'styled-components';
 import PlayerTracker from '../../components/PlayerTracker';
 
@@ -196,7 +196,7 @@ export class ChunkListContainer extends Component {
 			return (<ErrorButton error={this.props.error} />);
 		} else if (!this.props.loaded) {
 			return (
-				<LoadingGif />
+				<Loading />
 			);
 		} else {
 

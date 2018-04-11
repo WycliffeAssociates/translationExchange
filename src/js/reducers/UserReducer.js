@@ -10,6 +10,14 @@ const INITIAL_STATE = {
 export default( state= INITIAL_STATE, action) => {
 
   switch (action.type) {
+
+    case 'FETCHING_USERS':
+      return {
+        ...state,
+        loading: true,
+      };
+
+
     case 'FETCHED_USERS':
       return {
         ...state,
@@ -38,12 +46,12 @@ export default( state= INITIAL_STATE, action) => {
 
     case 'GET_LOGGED_USER_HASH':
       return {
-          ...state,
-          loggedInUser: action.iconHash,
+        ...state,
+        loggedInUser: action.iconHash,
       };
 
     case 'REMOVE_USER':
-        return INITIAL_STATE;
+      return INITIAL_STATE;
 
     default:
       return {

@@ -75,7 +75,7 @@ Label.displayName = 'Label';
 
 const Card = styled.div`
   width: 33vw;
-  height: 40vw;
+  height: 70vh;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
   border-radius: 2%;
   min-width: 469;
