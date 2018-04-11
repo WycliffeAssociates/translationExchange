@@ -258,6 +258,7 @@ const NextChunk = styled.button`
   	padding: 0.75vw;
   	cursor: pointer;
   	outline:none;
+    font-size: 1em + 1vw;
   `;
 NextChunk.displayName = 'NextChunk';
 
@@ -269,6 +270,8 @@ border-radius: 2vw;
 padding: 0.75vw;
 cursor: pointer;
 outline:none;
+font-size: 1em + 1vw;
+
 `;
 NextChapter.displayName = 'NextChapter';
 

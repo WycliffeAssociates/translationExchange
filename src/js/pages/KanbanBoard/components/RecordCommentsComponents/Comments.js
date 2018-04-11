@@ -87,6 +87,7 @@ const NoComments = styled.p`
   text-align: center;
   padding-top: 1vw;
   font-style: italic;
+  font-size: 1vw;
 
 `;
 
