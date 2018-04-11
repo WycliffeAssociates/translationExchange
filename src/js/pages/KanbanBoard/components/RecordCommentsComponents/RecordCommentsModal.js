@@ -36,6 +36,15 @@ class RecordCommentModal extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({showModal: nextProps.display});
+    if (nextProps.uploadError == true) {
+      this.setState({error: true});
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.uploadError == true) {
+      this.setState({error: true});
+    }
   }
 
   show = dimmer => () => this.setState({ dimmer, open: true });
@@ -73,7 +82,7 @@ class RecordCommentModal extends Component {
   saveComment = () => {
     const {id, type, chunkId, chunkNum} = this.props;
     const {jsonBlob} = this.state;
-    this.props.saveComment(jsonBlob, type, id, chunkId, chunkNum, this.commentSaved, this.error);
+    this.props.saveComment( jsonBlob, type, id, chunkId, chunkNum, this.commentSaved, this.error);
   };
 
   commentSaved() { this.setState({commentSaved: true});}
@@ -89,79 +98,99 @@ class RecordCommentModal extends Component {
   };
 
 
-  showRecordModal(buttonState){
+  showRecordModal(buttonState) {
     const { recording, header, icon, recordedBlob, playing, isAudioAvailable, commentSaved, error } = this.state;
-
+    console.log(this.state.error, 'STATE ERROR');
 
     let ic ='check';
     let headerText ='Success!';
     let text = 'Your Comment has been saved.';
 
 
-    if(error){
-        ic='error';
-        headerText='uh-ho...';
-        text = 'there was an error..'
+    if (error) {
+      ic='error';
+      headerText='uh-ho...';
+      text = 'there was an error..';
     }
 
 
-    if(commentSaved){
-      return(
+    if (commentSaved) {
+      return (
 
-          <ModalContainer>
-              <TopContainer error={error}>
-                <InfoContainer>
-                  <i style={{fontSize:'6vw'}} class="material-icons">{ic}</i>
-                  <h1 style={{fontSize:'2.5vw'}} >{headerText}</h1>
-                  <p style={{fontSize:'1vw'}}>{text}</p>
-                </InfoContainer>
-              </TopContainer>
-              <BottomContainer>
-                <OkButtonContainer>
-                    <BlueButton error={error} onClick={this.close}> Ok </BlueButton>
-                </OkButtonContainer>
-              </BottomContainer>
-          </ModalContainer>
-
-
-      )
-    }
-
-    return(
         <ModalContainer>
-
-            <CloseContainer><Span onClick={()=>this.close()}>X</Span></CloseContainer>
-            <WaveformContainer>
-                <WaveForm
-                    play={playing}
-                    onFinishPlaying={()=>this.onFinishPlaying()}
-                    isAudioAvailable={isAudioAvailable}
-                    recordedBlob={recordedBlob}
-                    onStop={this.onStop}
-                    recording={recording} />
-            </WaveformContainer>
-            <ControlsContainer>
-                <TextContainer>
-                    <Text>{header}</Text>
-                </TextContainer>
-                <RecordButtonContainer>
-                    <BackgroundCircle>
-                        <RecordButton onClick={buttonState}> <i style={{fontSize:'2.5vw'}} class="material-icons">{icon}</i> </RecordButton>
-                    </BackgroundCircle>
-                </RecordButtonContainer>
-                {recordedBlob != null ?
-                    <ButtonsContainer>
-                        <RedoButton onClick={this.redo}> <i class="material-icons">redo</i> Redo </RedoButton>
-                        <BlueButton onClick={this.saveComment}> Yes <i class="material-icons">check</i> </BlueButton>
-                    </ButtonsContainer>
-                    :
-                    <ButtonsContainer>
-                        <BlueButton onClick={this.close}> <i class="material-icons">keyboard_backspace</i>Go Back  </BlueButton>
-                    </ButtonsContainer>
-                }
-            </ControlsContainer>
+          <TopContainer error={error}>
+            <InfoContainer>
+              <i style={{fontSize: '6vw'}} class="material-icons">{ic}</i>
+              <h1 style={{fontSize: '2.5vw'}} >{headerText}</h1>
+              <p style={{fontSize: '1vw'}}>{text}</p>
+            </InfoContainer>
+          </TopContainer>
+          <BottomContainer>
+            <OkButtonContainer>
+              <BlueButton error={error} onClick={this.close}> Ok </BlueButton>
+            </OkButtonContainer>
+          </BottomContainer>
         </ModalContainer>
-    )
+
+
+      );
+    }
+
+    else if (error && !commentSaved ) {
+      return (
+        <ModalContainer>
+          <TopContainer error={error}>
+            <InfoContainer>
+              <i style={{fontSize: '6vw'}} class="material-icons">{ic}</i>
+              <h1 style={{fontSize: '2.5vw'}} >{headerText}</h1>
+              <p style={{fontSize: '1vw'}}>{text}</p>
+            </InfoContainer>
+          </TopContainer>
+          <BottomContainer>
+            <OkButtonContainer>
+              <BlueButton error={error} onClick={this.close}> Ok </BlueButton>
+            </OkButtonContainer>
+          </BottomContainer>
+        </ModalContainer>
+
+      );
+    }
+
+    return (
+      <ModalContainer>
+
+        <CloseContainer><Span onClick={()=>this.close()}>X</Span></CloseContainer>
+        <WaveformContainer>
+          <WaveForm
+            play={playing}
+            onFinishPlaying={()=>this.onFinishPlaying()}
+            isAudioAvailable={isAudioAvailable}
+            recordedBlob={recordedBlob}
+            onStop={this.onStop}
+            recording={recording} />
+        </WaveformContainer>
+        <ControlsContainer>
+          <TextContainer>
+            <Text>{header}</Text>
+          </TextContainer>
+          <RecordButtonContainer>
+            <BackgroundCircle>
+              <RecordButton onClick={buttonState}> <i style={{fontSize: '2.5vw'}} class="material-icons">{icon}</i> </RecordButton>
+            </BackgroundCircle>
+          </RecordButtonContainer>
+          {recordedBlob != null ?
+            <ButtonsContainer>
+              <RedoButton onClick={this.redo}> <i class="material-icons">redo</i> Redo </RedoButton>
+              <BlueButton onClick={this.saveComment}> Yes <i class="material-icons">check</i> </BlueButton>
+            </ButtonsContainer>
+            :
+            <ButtonsContainer>
+              <BlueButton onClick={this.close}> <i class="material-icons">keyboard_backspace</i>Go Back  </BlueButton>
+            </ButtonsContainer>
+          }
+        </ControlsContainer>
+      </ModalContainer>
+    );
 
 
   }
@@ -178,18 +207,20 @@ class RecordCommentModal extends Component {
     }
 
     return (
-
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
       <Modal
         dimmer={true}
         open={showModal}
         onClose={this.close}
         size="mini"
-        style={{position: 'absolute', left: '30vw', top: '48vh', width: '40vw', height:'40vw', minWidth: '825px'}}
+        style={{ verticalAlign: 'middle', margin: 'auto', marginTop: '261px', width: '40vw', height: '40vw', minWidth: '825px'}}
       >
-          {uploadingComments ?
-              <CommentUploading/>
-              : this.showRecordModal(buttonState)}
+        {uploadingComments ?
+          <CommentUploading />
+          : this.showRecordModal(buttonState)}
       </Modal>
+
+      </div>
     );
   }
 }
@@ -229,6 +260,7 @@ const RecordButtonContainer = styled.div`
 	height: 6vw;
 	position: relative;
 	font-size: 1vw;
+
 `;
 
 const ButtonsContainer = styled.div`
@@ -270,6 +302,9 @@ const BlueButton= styled.button`
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
   outline:none;
   cursor: pointer;
+  i{
+    vertical-align: middle;
+  }
 `;
 
 const RedoButton= styled.button`
@@ -285,6 +320,9 @@ const RedoButton= styled.button`
   text-decoration: underline;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
   cursor: pointer;
+  i{
+    vertical-align: middle;
+  }
 `;
 
 const ModalContainer = styled.div`

@@ -70,12 +70,12 @@ export const saveComment = (blobx, type, id, chunkId, chunkNum, callback, errorC
                 if(type === 'take'){
                     dispatch(getTakes(chunkId, chunkNum));
                 }
-                dispatch({type: 'SAVE_COMMENT_LOADING', uploadingComments: false});
+                dispatch({type: 'SAVE_COMMENT_DONE', uploadingComments: false});
                 callback();
             })
-            .catch(exception => {
-                errorCallback();
-            });
+            .catch(error => {
+              dispatch({type: 'UPLOAD_COMMENT_ERROR', error: error.toString()});
+              });
     };
 };
 
@@ -95,5 +95,9 @@ export const updateChapterComments = (comment) => {
     }};
 
 
+export const resetError = () => {
+  return {
+    type: 'RESET_ERROR',
 
-
+  };
+};

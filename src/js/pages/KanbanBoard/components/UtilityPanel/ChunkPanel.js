@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import PlayerTracker from '../../../components/PlayerTracker';
+import PlayerTracker from '../../../../components/PlayerTracker';
 
 
 class ChunkPanel extends Component {

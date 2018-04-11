@@ -53,7 +53,7 @@ class App extends Component {
         <CustomDragLayer />
 
         <Switch>
-          <Route  exact path="/" component={Root} />
+          <Route  exact path="/" component={Welcome} />
           <Route  exact path ="/users" component={AvailableUsers} />
           <Route  exact path="/users/registration" component={CreateUserContainer} />
           <Route  path="/welcome" component={Welcome} />

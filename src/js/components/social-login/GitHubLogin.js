@@ -11,7 +11,7 @@ class GitHubLogin extends Component {
       left: 0,
       top: 0,
       height: 0,
-      width: 0
+      width: 0,
     };
   }
 
@@ -38,8 +38,10 @@ class GitHubLogin extends Component {
     const search = toQuery({
       client_id: clientId,
       scope,
-      redirect_uri: redirectUri
+      redirect_uri: redirectUri,
     });
+
+    console.log(search, 'SEARCH');
     const popup = (this.popup = PopupWindow.open(
       "github-oauth-authorize",
       `https://github.com/login/oauth/authorize?${search}`,
@@ -61,6 +63,7 @@ class GitHubLogin extends Component {
     }
 
     this.props.onSuccess(data);
+    console.log(data);
   };
 
   onFailure = error => {

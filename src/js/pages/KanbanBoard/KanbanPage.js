@@ -7,8 +7,8 @@ import Loading from '../../components/Loading';
 import KanbanBoard from './components/KanbanBoard';
 import {getChunks, getTakes, getComments,
   patchTake, saveComment, getUserHash,
-  removeUser, getChapters} from '../../actions';
-import UtilityPanel from '../../components/UtilityPanel';
+  removeUser, getChapters, resetError} from '../../actions';
+import UtilityPanel from './components/UtilityPanel/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
 import img from '../../../assets/images/obs-en-01-01.jpg';
@@ -55,21 +55,13 @@ class KanbanPage extends React.Component {
       <KanbanPageContainer>
         <NavBar chapterNum={query.chapterNum} kanbanPage={true} {...this.props} />
 
-        {
-          this.props.loading?
-            <Loading height="auto" />
+        <KanbanContainer>
 
-            :
+          <KanbanBoard {...this.props} />
 
-            <KanbanContainer>
+          <UtilityPanel chapterNum={query.chapterNum} {...this.props} />
 
-              <KanbanBoard {...this.props} />
-
-              <UtilityPanel chapterNum={query.chapterNum} {...this.props} />
-
-            </KanbanContainer>
-
-        }
+        </KanbanContainer>
 
         <SourceAudio />
       </KanbanPageContainer>
@@ -118,20 +110,20 @@ const SourceAudio = styled.div`
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({getChunks, getTakes, getComments, patchTake, saveComment, getUserHash, removeUser, getChapters}, dispatch);
+  return bindActionCreators({getChunks, getTakes, getComments, patchTake, saveComment, getUserHash, removeUser, getChapters, resetError}, dispatch);
 
 };
 
 const mapStateToProps = state => {
-  const {takes, chunks, chunkNum, activeChunkId, loading} = state.kanbanPage;
-  const {chapterComments, chunkComments, uploadingComments} = state.comments;
+  const {takes, chunks, chunkNum, activeChunkId} = state.kanbanPage;
+  const {chapterComments, chunkComments, uploadingComments,  uploadError} = state.comments;
   const {loggedInUser} = state.user;
   const { displayText } = state.geolocation;
 
 
 
   return {takes, chunks, loggedInUser, chunkNum, chapterComments, chunkComments,
-    displayText, activeChunkId, uploadingComments, loading};
+    displayText, activeChunkId, uploadingComments, uploadError};
 
   // all the state variables that you want to map to props
 };

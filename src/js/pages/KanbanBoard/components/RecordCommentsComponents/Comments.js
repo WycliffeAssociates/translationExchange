@@ -13,12 +13,12 @@ class Comments extends Component {
 
   closeModal() {
     this.setState({displayModal: false});
+    this.props.resetError();
   }
 
 
   render() {
-    const {comments, text, id, type, saveComment, uploadingComments, chunkId, chunkNum} = this.props;
-
+    const {comments, text, id, type, saveComment, uploadingComments,uploadError,  chunkId, chunkNum} = this.props;
 
     return (
       <Container>
@@ -33,11 +33,12 @@ class Comments extends Component {
         </AudioContainer>
         <ButtonContainer>
           <RecordButton onClick={()=>{this.setState({displayModal: true});}}>
-              <i style={{fontSize:'1.6vw', paddingTop:'.5vw'}} className="material-icons">mic_none</i>
+            <i style={{fontSize: '1.6vw', paddingTop: '.5vw'}} className="material-icons">mic_none</i>
           </RecordButton>
           <RecordCommentsModal
             chunkNum={chunkNum}
             chunkId={chunkId}
+            uploadError = {uploadError}
             uploadingComments={uploadingComments}
             closeModal={()=>this.closeModal()}
             saveComment={saveComment}
@@ -86,6 +87,7 @@ const NoComments = styled.p`
   text-align: center;
   padding-top: 1vw;
   font-style: italic;
+  font-size: 1vw;
 
 `;
 
