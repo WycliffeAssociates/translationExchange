@@ -10,7 +10,7 @@ import ChunkHeader from './ChunkHeader';
 import Chunk from './Chunk';
 import NotFound from 'js/pages/NotFound';
 import ErrorButton from '../../components/ErrorButton';
-import UtilityPanel from '../../components/UtilityPanel';
+import UtilityPanel from '../../components/UtilityPanel/UtilityPanel';
 import Loading from '../../components/Loading';
 import styled from 'styled-components';
 import PlayerTracker from '../../components/PlayerTracker';

@@ -7,8 +7,8 @@ import Loading from '../../components/Loading';
 import KanbanBoard from './components/KanbanBoard';
 import {getChunks, getTakes, getComments,
   patchTake, saveComment, getUserHash,
-  removeUser, getChapters} from '../../actions';
-import UtilityPanel from '../../components/UtilityPanel';
+  removeUser, getChapters, resetError} from '../../actions';
+import UtilityPanel from '../../components/UtilityPanel/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
 import img from '../../../assets/images/obs-en-01-01.jpg';
@@ -118,13 +118,13 @@ const SourceAudio = styled.div`
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({getChunks, getTakes, getComments, patchTake, saveComment, getUserHash, removeUser, getChapters}, dispatch);
+  return bindActionCreators({getChunks, getTakes, getComments, patchTake, saveComment, getUserHash, removeUser, getChapters, resetError}, dispatch);
 
 };
 
 const mapStateToProps = state => {
   const {takes, chunks, chunkNum, activeChunkId, loading} = state.kanbanPage;
-  const {chapterComments, chunkComments, uploadingComments} = state.comments;
+  const {chapterComments, chunkComments, uploadingComments,  uploadError} = state.comments;
   const {loggedInUser} = state.user;
   const {chapter = {}} =state.chunkListContainer; // TODO get chapter info from new page
   const { displayText } = state.geolocation;
@@ -132,7 +132,7 @@ const mapStateToProps = state => {
 
 
   return {takes, chunks, loggedInUser, chapter, chunkNum, chapterComments, chunkComments,
-    displayText, activeChunkId, uploadingComments, loading};
+    displayText, activeChunkId, uploadingComments, loading, uploadError};
 
   // all the state variables that you want to map to props
 };

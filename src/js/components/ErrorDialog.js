@@ -36,6 +36,10 @@ export default class ErrorDialog extends Component {
               {details.info}
             </ExtraInfo>
 
+            <Instructions>
+              {details.instructions}
+            </Instructions>
+
           </ErrorInfo>
 
         </Card>
@@ -103,6 +107,10 @@ const ErrorInfo= styled.div`
   width: 80%;
   flex: 1;
   padding: 3vw 3vw;
+`;
+
+const Instructions = styled.p`
+  font-size: 0.75vw;
 `;
 
 const Icon = styled.div`

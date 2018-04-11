@@ -73,9 +73,9 @@ export const saveComment = (blobx, type, id, chunkId, chunkNum, callback, errorC
                 dispatch({type: 'SAVE_COMMENT_LOADING', uploadingComments: false});
                 callback();
             })
-            .catch(exception => {
-                errorCallback();
-            });
+            .catch(error => {
+              dispatch({type: 'UPLOAD_COMMENT_ERROR', error: error.toString()});
+              });
     };
 };
 
@@ -95,5 +95,9 @@ export const updateChapterComments = (comment) => {
     }};
 
 
+export const resetError = () => {
+  return {
+    type: 'RESET_ERROR',
 
-
+  };
+};
