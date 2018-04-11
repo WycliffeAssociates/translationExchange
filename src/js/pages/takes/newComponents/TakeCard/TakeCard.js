@@ -49,12 +49,7 @@ export class TakeCard extends React.Component {
   }
 
   componentDidMount() {
-    const  take = this.props;
-
-    this.props.getComments(take.id, 'take_id', take.order);
-    jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'random');
-    jdenticon.update('#comment','imthemaster');
-
+    jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'no author info');
     this.props.connectDragPreview(getEmptyImage(), {
       captureDraggingState: true,
     });
@@ -62,7 +57,6 @@ export class TakeCard extends React.Component {
   }
 
   componentDidUpdate() {
-    jdenticon.update('#comment','imthemaster');
   }
 
   dragPosition(position) {
@@ -110,7 +104,7 @@ export class TakeCard extends React.Component {
       //of the container, beyond the take card.
       markerArray.push(
         <Marker
-          style={{ overflow: 'visible' }}
+          style={{ overflow: 'visible'}}
           visibility={true}
           translate={finalPosition}
           markerTime = {position}
@@ -140,8 +134,10 @@ export class TakeCard extends React.Component {
         <Container style={{opacity: isDragging? 0.5: 1}} >
           <TopBar {...this.props} />
 
+          <MarkerContainer>
+            {markers}
+          </MarkerContainer>
 
-          {markers}
           <WaveformContainer>
             <Waveform
               audioFile={config.streamingUrl+this.props.location}  playAudio={this.props.play}
@@ -284,6 +280,10 @@ transform: translateZ(0);
 const WaveformContainer = styled.div`
   height:3vw;
   margin-bottom: 0.5vw;
+`;
+
+const MarkerContainer= styled.div`
+margin-bottom: 2vh;
 `;
 
 TakeCard.propTypes = {
