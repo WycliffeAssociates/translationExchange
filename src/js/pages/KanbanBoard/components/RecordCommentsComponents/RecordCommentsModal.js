@@ -197,8 +197,7 @@ class RecordCommentModal extends Component {
 
   render() {
     const { recording, recordedBlob, showModal } = this.state;
-    const {uploadingComments, uploadError} = this.props;
-    console.log(uploadError, 'UPLOAD ERROR');
+    const {uploadingComments} = this.props;
     let buttonState = this.startRecording;
     if (recording) {
       buttonState = this.stopRecording;
@@ -208,18 +207,20 @@ class RecordCommentModal extends Component {
     }
 
     return (
-
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
       <Modal
         dimmer={true}
         open={showModal}
         onClose={this.close}
         size="mini"
-        style={{position: 'absolute', left: '30vw', top: '48vh', width: '40vw', height:'40vw', minWidth: '825px'}}
+        style={{ verticalAlign: 'middle', margin: 'auto', marginTop: '261px', width: '40vw', height: '40vw', minWidth: '825px'}}
       >
         {uploadingComments ?
           <CommentUploading />
           : this.showRecordModal(buttonState)}
       </Modal>
+
+      </div>
     );
   }
 }
