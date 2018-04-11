@@ -92,7 +92,6 @@ const Card = styled.div`
   border-radius: 2vw;
   text-align: center;
   color: white;
-
 `;
 Card.displayName = 'Card';
 

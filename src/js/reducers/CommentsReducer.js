@@ -23,6 +23,9 @@ export default( state= INITIAL_STATE, action) => {
     case 'SAVE_COMMENT_LOADING':
       return {...state, uploadingComments: action.uploadingComments};
 
+    case 'SAVE_COMMENT_DONE':
+      return {...state, uploadingComments: action.uploadingComments};
+
     case 'UPDATE_CHUNK_COMMENTS':
       return {...state, chunkComments: [...state.chunkComments , action.comment]};
 
@@ -32,6 +35,7 @@ export default( state= INITIAL_STATE, action) => {
     case 'UPLOAD_COMMENT_ERROR':
       return {
         ...state,
+        uploadingComments: false,
         uploadError: true,
       };
 

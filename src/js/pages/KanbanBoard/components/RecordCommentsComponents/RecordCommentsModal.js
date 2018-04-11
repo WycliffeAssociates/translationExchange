@@ -82,7 +82,7 @@ class RecordCommentModal extends Component {
   saveComment = () => {
     const {id, type, chunkId, chunkNum} = this.props;
     const {jsonBlob} = this.state;
-    this.props.saveComment( chunkId, chunkNum, this.commentSaved, this.error);
+    this.props.saveComment( jsonBlob, type, id, chunkId, chunkNum, this.commentSaved, this.error);
   };
 
   commentSaved() { this.setState({commentSaved: true});}
@@ -98,86 +98,107 @@ class RecordCommentModal extends Component {
   };
 
 
-  showRecordModal(buttonState){
+  showRecordModal(buttonState) {
     const { recording, header, icon, recordedBlob, playing, isAudioAvailable, commentSaved, error } = this.state;
-
+    console.log(this.state.error, 'STATE ERROR');
 
     let ic ='check';
     let headerText ='Success!';
     let text = 'Your Comment has been saved.';
 
 
-    if(error){
-        ic='error';
-        headerText='uh-ho...';
-        text = 'there was an error..'
+    if (error) {
+      ic='error';
+      headerText='uh-ho...';
+      text = 'there was an error..';
     }
 
 
-    if(commentSaved){
-      return(
+    if (commentSaved) {
+      return (
 
-          <ModalContainer>
-              <TopContainer error={error}>
-                <InfoContainer>
-                  <i style={{fontSize:'6vw'}} class="material-icons">{ic}</i>
-                  <h1 style={{fontSize:'2.5vw'}} >{headerText}</h1>
-                  <p style={{fontSize:'1vw'}}>{text}</p>
-                </InfoContainer>
-              </TopContainer>
-              <BottomContainer>
-                <OkButtonContainer>
-                    <BlueButton error={error} onClick={this.close}> Ok </BlueButton>
-                </OkButtonContainer>
-              </BottomContainer>
-          </ModalContainer>
-
-
-      )
-    }
-
-    return(
         <ModalContainer>
-
-            <CloseContainer><Span onClick={()=>this.close()}>X</Span></CloseContainer>
-            <WaveformContainer>
-                <WaveForm
-                    play={playing}
-                    onFinishPlaying={()=>this.onFinishPlaying()}
-                    isAudioAvailable={isAudioAvailable}
-                    recordedBlob={recordedBlob}
-                    onStop={this.onStop}
-                    recording={recording} />
-            </WaveformContainer>
-            <ControlsContainer>
-                <TextContainer>
-                    <Text>{header}</Text>
-                </TextContainer>
-                <RecordButtonContainer>
-                    <BackgroundCircle>
-                        <RecordButton onClick={buttonState}> <i style={{fontSize:'2.5vw'}} class="material-icons">{icon}</i> </RecordButton>
-                    </BackgroundCircle>
-                </RecordButtonContainer>
-                {recordedBlob != null ?
-                    <ButtonsContainer>
-                        <RedoButton onClick={this.redo}> <i class="material-icons">redo</i> Redo </RedoButton>
-                        <BlueButton onClick={this.saveComment}> Yes <i class="material-icons">check</i> </BlueButton>
-                    </ButtonsContainer>
-                    :
-                    <ButtonsContainer>
-                        <BlueButton onClick={this.close}> <i class="material-icons">keyboard_backspace</i>Go Back  </BlueButton>
-                    </ButtonsContainer>
-                }
-            </ControlsContainer>
+          <TopContainer error={error}>
+            <InfoContainer>
+              <i style={{fontSize: '6vw'}} class="material-icons">{ic}</i>
+              <h1 style={{fontSize: '2.5vw'}} >{headerText}</h1>
+              <p style={{fontSize: '1vw'}}>{text}</p>
+            </InfoContainer>
+          </TopContainer>
+          <BottomContainer>
+            <OkButtonContainer>
+              <BlueButton error={error} onClick={this.close}> Ok </BlueButton>
+            </OkButtonContainer>
+          </BottomContainer>
         </ModalContainer>
-    )
+
+
+      );
+    }
+
+    else if (error && !commentSaved ) {
+      return (
+        <ModalContainer>
+          <TopContainer error={error}>
+            <InfoContainer>
+              <i style={{fontSize: '6vw'}} class="material-icons">{ic}</i>
+              <h1 style={{fontSize: '2.5vw'}} >{headerText}</h1>
+              <p style={{fontSize: '1vw'}}>{text}</p>
+            </InfoContainer>
+          </TopContainer>
+          <BottomContainer>
+            <OkButtonContainer>
+              <BlueButton error={error} onClick={this.close}> Ok </BlueButton>
+            </OkButtonContainer>
+          </BottomContainer>
+        </ModalContainer>
+
+      );
+    }
+
+    return (
+      <ModalContainer>
+
+        <CloseContainer><Span onClick={()=>this.close()}>X</Span></CloseContainer>
+        <WaveformContainer>
+          <WaveForm
+            play={playing}
+            onFinishPlaying={()=>this.onFinishPlaying()}
+            isAudioAvailable={isAudioAvailable}
+            recordedBlob={recordedBlob}
+            onStop={this.onStop}
+            recording={recording} />
+        </WaveformContainer>
+        <ControlsContainer>
+          <TextContainer>
+            <Text>{header}</Text>
+          </TextContainer>
+          <RecordButtonContainer>
+            <BackgroundCircle>
+              <RecordButton onClick={buttonState}> <i style={{fontSize: '2.5vw'}} class="material-icons">{icon}</i> </RecordButton>
+            </BackgroundCircle>
+          </RecordButtonContainer>
+          {recordedBlob != null ?
+            <ButtonsContainer>
+              <RedoButton onClick={this.redo}> <i class="material-icons">redo</i> Redo </RedoButton>
+              <BlueButton onClick={this.saveComment}> Yes <i class="material-icons">check</i> </BlueButton>
+            </ButtonsContainer>
+            :
+            <ButtonsContainer>
+              <BlueButton onClick={this.close}> <i class="material-icons">keyboard_backspace</i>Go Back  </BlueButton>
+            </ButtonsContainer>
+          }
+        </ControlsContainer>
+      </ModalContainer>
+    );
 
 
   }
 
   render() {
     const { recording, recordedBlob, showModal } = this.state;
-    const {uploadingComments} = this.props;
+    const {uploadingComments, uploadError} = this.props;
+    console.log(uploadError, 'UPLOAD ERROR');
     let buttonState = this.startRecording;
     if (recording) {
       buttonState = this.stopRecording;

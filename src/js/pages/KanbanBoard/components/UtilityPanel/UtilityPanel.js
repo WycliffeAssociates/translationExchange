@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import QueryString from 'query-string';
 import Toggle from 'react-toggle';
-import Comments from '../../pages/chunks/components/Comments';
+import Comments from '../RecordCommentsComponents/Comments';
 import ChunkPanel from './ChunkPanel';
 
 export default class UtilityPanel extends React.Component {
@@ -36,7 +36,8 @@ export default class UtilityPanel extends React.Component {
   render() {
     const {chapterId} = this.state;
     const { takes, chunkNum , chapterNum,
-      chunks, chapterComments, chunkComments, activeChunkId, saveComment, uploadingComments, uploadError} = this.props;
+      chunks, chapterComments, chunkComments, activeChunkId, saveComment,
+      uploadingComments, uploadError, resetError} = this.props;
     let publishedTakeLocation =null;
     takes.map(tk=>{ if (tk.published) { publishedTakeLocation = tk.location} } );
 
@@ -48,7 +49,7 @@ export default class UtilityPanel extends React.Component {
               onChange={e=>this.setState({commentsTab: e.target.checked})}
               defaultChecked= {false} icons ={{
                 unchecked: <i style={{fontSize: '1vw', paddingBottom: '1vw'}} className="material-icons">mode_comment</i>,
-                checked: <img src={require('../../../assets/images/Audio_Wave.svg')} />,
+                checked: <img src={require('../../../../../assets/images/Audio_Wave.svg')} />,
               }}  />
 
             <Hide onClick={this.toggleUtilityPanel}> <i style={{fontSize: '1.75vw'}} className="material-icons">arrow_forward</i> </Hide>
@@ -64,6 +65,7 @@ export default class UtilityPanel extends React.Component {
                 id={chapterId}
                 uploadingComments={uploadingComments}
                 uploadError = {uploadError}
+                resetError ={resetError}
               />
               <Comments
                 saveComment={saveComment}
@@ -73,6 +75,7 @@ export default class UtilityPanel extends React.Component {
                 id={activeChunkId}
                 uploadingComments={uploadingComments}
                 uploadError = {uploadError}
+                resetError ={resetError}
               />
               {takes.map(tk=>
                 <Comments
@@ -83,8 +86,11 @@ export default class UtilityPanel extends React.Component {
                   type="take"
                   comments={tk.comments}
                   text={`Take ${tk.take_num}`}
-                  id={tk.id} />) }
+                  id={tk.id}
                   uploadError = {uploadError}
+                  resetError={resetError} />)
+              }
+
             </CommentsPanel>
             :
             <ChunkPanel takeLocation={publishedTakeLocation} selectedChunk={chunkNum} chunks={chunks} />

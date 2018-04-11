@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import ChunkListContainer from './js/pages/chunks/ChunkListContainer';
-import ProjectsListContainer from './js/pages/projects/ProjectsListContainer';
 import ProjectsPage from './js/pages/projects/ProjectPage';
-import ChaptersContainer from './js/pages/chapters/ChaptersContainer';
 import './App.css';
+import './css/chapters.css'
 import NotFound from './js/pages/NotFound';
-import Home from './js/pages/home/home';
-import About from './js/pages/about/about';
 import axios from 'axios';
 import User from './js/pages/user/user';
 import Welcome from './js/pages/Login/LoginPage.js';
@@ -60,12 +56,9 @@ class App extends Component {
           <Route  exact path="/" component={Welcome} />
           <Route  exact path ="/users" component={AvailableUsers} />
           <Route  exact path="/users/registration" component={CreateUserContainer} />
-          <Route  path="/home" component={Home} />
           <Route  path="/welcome" component={Welcome} />
-          <Route  path="/about" component={About} />
           <Route  path="/projects" component={ProjectsPage} />
           <Route  path="/chapters" component={ChapterPage} />
-          <Route  path="/takes" component={ChunkListContainer} />
           <Route  path="/user" component={User} />
           <Route path ="/newComponents" component={KanbanPage} />
           <Route path ="/kanban" component={KanbanPage} />
