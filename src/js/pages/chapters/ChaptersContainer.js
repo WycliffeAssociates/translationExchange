@@ -12,7 +12,7 @@ import PublishButton from './components/PublishButton';
 import DownloadSourceAudio from './components/DownloadSourceAudio';
 import NotFound from 'js/pages/NotFound';
 import ErrorButton from '../../components/ErrorButton';
-import LoadingGif from '../../components/LoadingGif';
+import Loading from '../../components/Loading';
 import { bindActionCreators } from 'redux';
 import { fetchChaptersContainerData, setCheckingLevel, publishFiles, downloadProject, downloadSourceAudio, getTakes, getChunks } from '../../actions';
 
@@ -60,7 +60,7 @@ class ChaptersContainer extends Component {
 			return (<ErrorButton error={this.props.error} />);
 		} else if (!this.props.loaded) {
 			return (
-				<LoadingGif />
+				<Loading />
 			);
 		} else {
 			return (
