@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import styled from 'styled-components';
+import styled,{keyframes} from 'styled-components';
+import {zoomIn, zoomOut} from 'react-animations';
 import CircularProgressbar from "react-circular-progressbar";
 import QueryString from "query-string";
 
@@ -79,7 +80,10 @@ export default class ChapterCard extends Component {
 
 
                     <ButtonContainer>
-                        <ReviewButton check={checkLevel_1} onClick={this.reviewChapter}> <i class="material-icons">done_all</i> Review </ReviewButton>
+                        <ReviewButton check={checkLevel_1} onClick={this.reviewChapter}>
+                            <i style={{fontSize:'1vw'}} class="material-icons">done_all</i>
+                            <p style={{fontSize:'1vw'}}>  Review </p>
+                        </ReviewButton>
                     </ButtonContainer>
                 </Card>
 
@@ -93,7 +97,7 @@ export default class ChapterCard extends Component {
 
 
 
-
+const zoomInAnimation = keyframes `${zoomIn}`;
 
 const Card= styled.div`
     color: ${props=> props.check ? 'white': ''}
@@ -107,6 +111,8 @@ const Card= styled.div`
     background: ${props => props.check ? 'linear-gradient(to bottom, #0076FF, #00C5FF)':''};
     margin-top: 3vw;
     padding: 1vw;
+    margin: 0 0 2vw 2vw;
+    animation: ${zoomInAnimation} .2s ease-in;
 
 `;
 
@@ -122,12 +128,13 @@ const CheckText = styled.p`
     font-size: 1vw;
 `;
 
+
 const ReviewButton= styled.button`
 
   i {
     vertical-align: middle;
   }
-
+  display:flex;  
   border-radius: 20px;
   color: ${props=> props.check ? '#009CFF': 'white'};
   background: linear-gradient(to bottom,${props => props.check ? '#FFF, #FFF': '#0076FF, #00C5FF'} );
@@ -180,9 +187,12 @@ const TextContainer = styled.div`
 `;
 
 const ButtonContainer= styled.div`
-    width: inherit;
+    width: 100%;
     overflow: hidden;
     text-align: center;
     border-color: white;
     border-width: 1vw;
+    display: flex;
+    justify-content:center;
+    padding-top: .6vw;
   `;

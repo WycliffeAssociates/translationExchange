@@ -37,10 +37,12 @@ class MyProjectsContainer extends Component {
 
 const Container = styled.div`
   width: 100%;
+  height:100%;
   display: flex;
   flex-direction: column;
   padding-top:3vw;
   padding-left: 1vw;
+ 
 `;
 
 const Header = styled.p`
@@ -60,13 +62,12 @@ const HeaderContainer = styled.div`
 const CardsContainer = styled.div`
 padding-top: 2vw;
 width: 100%;
+height: 100%;
 display: flex;
 flex-direction:row;
-// justify-content: space-between;
 flex-wrap: wrap;
 align-items: left;
-height: 37vw;
-overflow-y: scroll;
+
 `;
 
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled,{keyframes} from 'styled-components';
-import { slideInDown } from 'react-animations';
+import { zoomIn } from 'react-animations';
 import imgError from '../../../assets/images/error_image.png'
 
 
@@ -48,14 +48,14 @@ const ErrorPageContainer = styled.div`
     background-color: #F7F9FE
 `;
 
-const slideInAnimations =keyframes`${slideInDown}`;
+const zoomOutAnimation =keyframes`${zoomIn}`;
 
 const ImageContainer = styled.div`
   width: 100%;
   padding-top: 2vw;
   display:flex;
   justify-content:center;
-  animation: ${slideInAnimations} .5s ease-in;
+  animation: ${zoomOutAnimation} .5s ease-in;
 `;
 
 const Image = styled.img`
