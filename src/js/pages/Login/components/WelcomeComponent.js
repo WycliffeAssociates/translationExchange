@@ -18,15 +18,37 @@ export default class WelcomeComponent extends React.Component {
       imageSrc: 'defaultImg',
     };
 
-    this.onSignIn = this.onSignIn.bind(this);
-    this.signOut = this.signOut.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
 
 
   onLogin(user) {
-    this.props.onLoginSuccess(user);
+    this.props.createSocialUser(user);
+  }
+
+  componentDidMount() {
+    console.log('here', 'im actaully here');
+
+
+    if (this.props.socialLogin == true) {
+      this.props.history.push ({
+        pathname: '/users/registration',
+      });
+    }
+
+  }
+
+  componentWillUpdate(nextProps) {
+
+    console.log('here');
+
+    if (nextProps.socialLogin == true) {
+      this.props.history.push ({
+        pathname: '/users/registration',
+      });
+    }
+
   }
 
   render() {
@@ -47,7 +69,7 @@ export default class WelcomeComponent extends React.Component {
           </ContinueButton>
 
           <GitHubLogin clientId="f5e981378e91c2067d41"
-            redirectUri={config.streamingUrl}
+            redirectUri={config.redirectUri}
             onSuccess={data=>this.onLogin(data)}
             onFailure={this.onLoginFailure} />
 
@@ -58,47 +80,12 @@ export default class WelcomeComponent extends React.Component {
     );
   }
 
-  onSignIn(googleUser) {
-
-    //console.log(googleUser);
-    // Useful data for your client-side scripts:
-    var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Don't send this directly to your server!
-    console.log('Full Name: ' + profile.getName());
-    console.log('Given Name: ' + profile.getGivenName());
-    console.log('Family Name: ' + profile.getFamilyName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail());
-    this.setState({imageSrc: profile.getImageUrl()});
-
-    // The ID token you need to pass to your backend:
-    var id_token = googleUser.getAuthResponse().id_token;
-    console.log('ID Token: ' + id_token);
-
-
-    //this.props.dispatch(dispatchToken(id_token));
-
-  }
-
-
   handleClick(clickSrc) {
 
     if (clickSrc === 'continue') {
       this.props.history.push('./users');
     }
 
-  }
-
-
-  signOut() {
-
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function() {
-      console.log('User signed out');
-    });
-    console.log(auth2);
-
-    this.setState({imageSrc: 'defaultImg'});
   }
 
 }
@@ -130,13 +117,11 @@ Icon.displayName = 'Icon';
 
 
 const ContinueButton = styled.button`
-    display: flex;
-    align-items:center;
+    display: block;
     background: linear-gradient(to bottom, #0076FF, #00C5FF);
-    /* height: 2.5vw;
-    width: 14vw; */
+    width: 14vw;
     margin-top: 1vw;
-    padding: 0.5vw 3.3vw;
+    padding: 0.5vw 0.5vw;
     font-size: 1.45vw;
     font-weight: 100;
     color: white;
@@ -144,12 +129,16 @@ const ContinueButton = styled.button`
     border-radius: 2vw;
     box-shadow: 1px 3px 2px 1px rgba(0,0,0,0.2);
     cursor: pointer;
+
+    i {
+      vertical-align: middle;
+    }
     `;
 ContinueButton.displayName = 'ContinueButton';
 
 const GitHubSignInButton= styled(ContinueButton)`
-
-    padding: 0.5vw 3.5vw;
+    display: block;
+    padding: 1vw 1vw;
     background: white;
     margin-top: 3vw;
     color: black;
@@ -161,6 +150,7 @@ const ButtonsContainer = styled.div`
     textAlign: center;
     padding: 2vw 8vw;
     width: inherit;
+    display: block;
 
   `;
 ButtonsContainer.displayName = 'ButtonsContainer';

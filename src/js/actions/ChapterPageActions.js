@@ -20,7 +20,7 @@ export const getChapters = (projectId) =>{
 };
 
 export const getChaptersSuccess = (chapters) =>{
-    return{
+    return {
         type: 'GET_CHAPTERS_SUCCESS',
         chapters
     }

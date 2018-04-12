@@ -45,7 +45,7 @@ export default class UtilityPanel extends React.Component {
       this.state.utilityPanel?
         <UtilityPanelContainer >
           <UtilityNavigation>
-            <Toggle
+            <Toggle className="vertical_align_middle"
               onChange={e=>this.setState({commentsTab: e.target.checked})}
               defaultChecked= {false} icons ={{
                 unchecked: <i style={{fontSize: '1vw', paddingBottom: '1vw'}} className="material-icons">mode_comment</i>,

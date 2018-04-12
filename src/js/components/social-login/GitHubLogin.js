@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import PopupWindow from "./PopupWindow";
-import { toQuery } from "./utils";
+import PopupWindow from './PopupWindow';
+import { toQuery } from './utils';
 
 class GitHubLogin extends Component {
   constructor(props) {
@@ -41,7 +41,6 @@ class GitHubLogin extends Component {
       redirect_uri: redirectUri,
     });
 
-    console.log(search, 'SEARCH');
     const popup = (this.popup = PopupWindow.open(
       "github-oauth-authorize",
       `https://github.com/login/oauth/authorize?${search}`,
@@ -58,7 +57,7 @@ class GitHubLogin extends Component {
 
   onSuccess = data => {
     if (!data.code) {
-      console.log("there was a problem captain");
+      console.log('there was a problem captain');
       return this.onFailure(new Error("'code' not found"));
     }
 
@@ -80,29 +79,35 @@ class GitHubLogin extends Component {
 
     return (
       <GitHubSignInButton {...attrs}>
-        <GihubIcon src={require("../../../assets/images/github.png")} />Sign in
-        with Github
+        <GihubIcon src={require('../../../assets/images/github.png')} /> Github Sign in
       </GitHubSignInButton>
     );
   }
 }
 
 const GihubIcon = styled.img`
-  height: 1.5vw;
-  width: 1.5vw;
+  height: 2vw;
+  width: 2vw;
 `;
 const GitHubSignInButton = styled.button`
-  display: flex;
-  align-items: center;
-  padding: 0.6vw 1.4vw;
-  background: white;
-  margin-top: 3vw;
-  color: black;
-  font-size: 1vw;
-  font-weight: 100;
-  border: none;
-  border-radius: 2vw;
-  box-shadow: 1px 3px 2px 1px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
+background: white;
+width: 14vw;
+margin-top: 3vw;
+padding: 0.5vw 0.5vw;
+font-size: 1.45vw;
+font-weight: 100;
+color: black;
+border: none;
+border-radius: 2vw;
+box-shadow: 1px 3px 2px 1px rgba(0,0,0,0.2);
+cursor: pointer;
+
+i {
+  vertical-align: middle;
+}
+
+img {
+  vertical-align: middle;
+}
 `;
 export default GitHubLogin;

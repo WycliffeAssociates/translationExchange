@@ -2,12 +2,11 @@ import axios from 'axios';
 import config from '../../config/config';
 
 export const fetchUsers = () => {
-return (dispatch) => {
+  return (dispatch) => {
     dispatch({type: 'FETCHING_USERS'});
     return axios
       .get(`${config.apiUrl}profiles/`)
       .then(response => {
-
         dispatch(fetchUserSuccess(response.data));
       })
       .catch(error => {
@@ -45,7 +44,7 @@ export const getUserHash = () => {
 };
 
 export const getUserHashSuccess = (iconHash) =>{
-  return{
+  return {
     type: 'GET_LOGGED_USER_HASH',
     iconHash
 
@@ -58,6 +57,7 @@ export const getUserHashSuccess = (iconHash) =>{
 //createUser
 export const createUser = (recordedBlob, hash) => {
   return function(dispatch) {
+    console.log(recordedBlob, 'NAMEAUDIO');
     dispatch(loadingProccess()); // can be used to render a spinner
     return axios
       .post(`${config.apiUrl}profiles/`, {
@@ -67,6 +67,7 @@ export const createUser = (recordedBlob, hash) => {
       .then(response => {
         const {nameAudio, token} = response.data;
 
+        console.log(response.data, 'CREATE USER RESPONSE');
         localStorage.setItem('token', token);
         dispatch(userCreated(nameAudio, hash));
       })
@@ -92,10 +93,59 @@ export const resetUserCreated = ()=>{
   };
 };
 
+export const patchUser = (id, recordedBlob, hash) => {
+  return function(dispatch) {
+    console.log(id, recordedBlob, hash, 'PATCH USER');
+    return axios
+      .patch(`${config.apiUrl}profiles/${id}/`,{
+        iconHash: hash,
+        nameAudio: recordedBlob,
 
+      }, {headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+      },
+      ). then( response => {
+        console.log(response.data);
+        dispatch ({
+          type: 'PATCHED_USER',
+          audioName: response.name_audio,
+          hash: response.icon_hash,
+        });
+
+      });
+  };
+
+};
+
+export const createSocialUser = (user) => {
+  return function(dispatch) {
+    return axios.post(`${config.apiUrl}login/social/token_user/github/`,{clientId: 'f5e981378e91c2067d41',redirectUri: config.streamingUrl, code: user.code})
+      .then(response=>{
+
+        if (response.icon_hash == null || response.name_audio == null) {
+          dispatch({
+            type: 'SOCIAL_USER_CREATION',
+            socialLogin: true,
+            tempUserId: response.data.id,
+          });
+          localStorage.setItem('token',response.data.token);
+        }
+
+        else {
+          dispatch ({
+            type: 'LOGIN_SOCIAL_USER',
+          });
+          localStorage.setItem('token',response.data.token);
+        }
+
+      }).catch(err=>{
+        console.log(err);
+      }
+      );
+  };
+};
 
 export const onLoginSuccess = (user) => {
-  return axios.post(`${config.apiUrl}login/social/token_user/github/`,{clientId:'f5e981378e91c2067d41',redirectUri: config.streamingUrl, code: user.code})
+  return axios.post(`${config.apiUrl}login/social/token_user/github/`,{clientId: 'f5e981378e91c2067d41',redirectUri: config.streamingUrl, code: user.code})
     .then(response=>{
       localStorage.setItem('token',response.data.token);
 

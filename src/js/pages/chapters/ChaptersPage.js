@@ -59,28 +59,27 @@ class ChapterPage extends Component {
 
 const ChapterPageContainer = styled.div`
     display: flex;
-    position:fixed;
+    position:absolute;
     padding:0;
     margin:0;
     top:0;
     left:0;
     width: 100%;
-    height: 100%;
+    height: auto;
     min-height: 850px;
     flex-direction: column;
     background-color: #F7F9FE
+    overflow-y: scroll;
 `;
 
 const CardsContainer = styled.div`
     height:100%;
     width: 100vw;
     min-height: 850px;
-    overflow-y: scroll;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    padding-top: 1vw;
-    padding-left: 1vw;
+    //padding: 2vw;
     margin-top: 5vh;
 
 `;
@@ -89,11 +88,12 @@ const DownloadBar = styled.div`
   width: 100vw;
   height: 6vh;
   background:#2D2D2D;
-  position: fixed;
+  position: absolute;
   top: 11vh;
   display: flex;
   padding: 0.5vh;
   flex-direction: column;
+  z-index:99;
 
 `;
 
