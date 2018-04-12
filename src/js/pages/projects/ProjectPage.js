@@ -13,7 +13,8 @@ import { fetchAllProjects, getChapters, getUserHash, removeUser } from '../../ac
 class ProjectContainer extends Component {
 
   componentWillMount() {
-    this.props.fetchAllProjects('');
+    const {history, fetchAllProjects} = this.props;
+    fetchAllProjects('', history ); // use history for redirect to the error page
   }
 
   render() {

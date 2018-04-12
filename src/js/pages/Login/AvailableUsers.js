@@ -12,7 +12,8 @@ class AvailableUsers extends React.Component {
 
 
   componentWillMount() {
-    this.props.fetchUsers();
+      const {history, fetchUsers} = this.props;
+      fetchUsers(history);
   }
 
   render() {

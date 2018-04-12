@@ -28,7 +28,7 @@ export const getTakesSuccess = (takes, chunkNum) => {
   };
 };
 
-export const getChunks = (chapterId) => {
+export const getChunks = (chapterId, redirect) => {
   return dispatch => {
     dispatch({type: 'LOADING'});
     return axios
@@ -44,6 +44,7 @@ export const getChunks = (chapterId) => {
       })
       .catch(error => {
         console.log(error);
+        redirect.push('./ErrorPage');
       });
   };
 };

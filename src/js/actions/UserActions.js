@@ -1,7 +1,7 @@
 import axios from 'axios';
 import config from '../../config/config';
 
-export const fetchUsers = () => {
+export const fetchUsers = (redirect) => {
 return (dispatch) => {
     dispatch({type: 'FETCHING_USERS'});
     return axios
@@ -12,6 +12,7 @@ return (dispatch) => {
       })
       .catch(error => {
         console.log(error); //TODO handle error
+        redirect.push('./ErrorPage');
       });
   };
 };

@@ -22,11 +22,11 @@ class KanbanPage extends React.Component {
   }
 
   componentWillMount() {
-    const {getComments, getChunks, takes} = this.props;
+    const {getComments, getChunks, takes, history} = this.props;
     const {search} = this.props.location;
     const query = QueryString.parse(search);
     if (takes.length < 1) {
-      getChunks(query.chapterId);               //get data if the user refresh the page
+      getChunks(query.chapterId, history);               //get data if the user refresh the page
       getComments(query.chapterId, 'chapter_id');
 
     }

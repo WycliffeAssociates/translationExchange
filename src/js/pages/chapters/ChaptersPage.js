@@ -17,12 +17,12 @@ import Data from '../projects/mockupdata/data';
 class ChapterPage extends Component {
 
   componentWillMount() {
-    const {getChapters, chapters} = this.props;
+    const {getChapters, chapters, history} = this.props;
 
     if (chapters.length < 1) {
       const {search} = this.props.location;   //get data if the user refresh the page
       const query = QueryString.parse(search);
-      getChapters(query.projectId);
+      getChapters(query.projectId, history);
     }
 
   }

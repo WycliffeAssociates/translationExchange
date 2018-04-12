@@ -27,10 +27,9 @@ class MyProjectsContainer extends Component {
               dateModified={p.date_modified.slice(0,10)}
               projectId={p.id}
              {...this.props}
-            /> ) 
+            /> )
           }
         </CardsContainer>
-
       </Container>
     );
   }
