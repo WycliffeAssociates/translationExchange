@@ -1,8 +1,6 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-//import { fetchAllSourceAudio } from '../../js/actions';
 import { fetchAllSourceAudio } from '../../../js/actions';
-//import config from '../../config/config'
 import config from '../../../config/config'
 
 const middlewares = [thunk]
