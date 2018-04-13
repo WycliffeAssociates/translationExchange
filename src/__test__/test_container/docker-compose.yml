@@ -7,7 +7,7 @@ services:
       - "${TEBACKEND}:/tE-backend"
       - ./scripts:/scripts
     environment:
-      - DJANGO_SETTINGS_MODULE=tRecorderApi.settings_test
+      - DJANGO_SETTINGS_MODULE: tRecorderApi.settings_test
     command: bash -c "chmod +x /scripts/wait-for-it.sh
                       && /scripts/wait-for-it.sh -h db -p 5432 -- rm -rf /tE-backend/tRecorderApi/api/migrations
                       && mkdir /tE-backend/tRecorderApi/api/migrations
