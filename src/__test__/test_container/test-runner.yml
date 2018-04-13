@@ -1,0 +1,12 @@
+version: '2'
+services:
+  test-runner:
+    image: node
+    container_name: te_front_end_tests
+    volumes:
+      - "${WORKSPACE}:/translationExchange"
+      - ./scripts:/scripts
+    command: bash -c "chmod +x /scripts/wait-for-it.sh
+                      && /scripts/wait-for-it.sh -h backend_server -p 8000 -- cd /translationExchange 
+                      && npm install
+                      && npm run test:ci"
