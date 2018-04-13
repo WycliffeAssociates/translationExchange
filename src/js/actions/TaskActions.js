@@ -22,4 +22,4 @@ export const getTasksSuccess = (tasks) => {
     type: 'FETCH_TASKS_SUCCESS',
     tasks,
   };
-}
+};

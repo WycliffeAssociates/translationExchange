@@ -77,18 +77,19 @@ export default class UtilityPanel extends React.Component {
                 uploadError = {uploadError}
                 resetError ={resetError}
               />
-              {takes.map(tk=>
-                <Comments
-                  uploadingComments={uploadingComments}
-                  chunkId ={activeChunkId}
-                  chunkNum ={chunkNum}
-                  saveComment={saveComment}
-                  type="take"
-                  comments={tk.comments}
-                  text={`Take ${tk.take_num}`}
-                  id={tk.id}
-                  uploadError = {uploadError}
-                  resetError={resetError} />)
+              {
+              // takes.map(tk=>
+              //   <Comments
+              //     uploadingComments={uploadingComments}
+              //     chunkId ={activeChunkId}
+              //     chunkNum ={chunkNum}
+              //     saveComment={saveComment}
+              //     type="take"
+              //     comments={tk.comments}
+              //     text={`Take ${tk.take_num}`}
+              //     id={tk.id}
+              //     uploadError = {uploadError}
+              //     resetError={resetError} />)
               }
 
             </CommentsPanel>

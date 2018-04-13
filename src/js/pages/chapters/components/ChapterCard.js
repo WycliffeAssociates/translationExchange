@@ -105,7 +105,7 @@ const Card= styled.div`
     height: 22vw;
     width: 17vw;
     border-radius: .5vw;
-    box-shadow: 0px 1px 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
     overflow: hidden;
     background-color: white;
     background: ${props => props.check ? 'linear-gradient(to bottom, #0076FF, #00C5FF)':''};
@@ -134,7 +134,7 @@ const ReviewButton= styled.button`
   i {
     vertical-align: middle;
   }
-  display:flex;  
+  display:flex;
   border-radius: 20px;
   color: ${props=> props.check ? '#009CFF': 'white'};
   background: linear-gradient(to bottom,${props => props.check ? '#FFF, #FFF': '#0076FF, #00C5FF'} );
