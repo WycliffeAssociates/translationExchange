@@ -80,13 +80,13 @@ const CardsContainer = styled.div`
     justify-content: space-around;
     flex-wrap: wrap;
     padding: 1vw;
-    margin-top: 5vh;
+    margin-top: 8vh;
 
 `;
 
 const DownloadBar = styled.div`
   width: 100vw;
-  height: 6vh;
+  height: auto;
   background:#2D2D2D;
   position: absolute;
   top: 11vh;
@@ -104,12 +104,13 @@ const DownloadButton = styled.button`
   border-radius: 0.1vw;
   height: 80%;
   color: #009CFF;
-  align-self: flex-end;
+  align-self: flex-start;
   margin-top: 0.7vh;
   border: none;
   text-decoration: underline;
   font-weight: 500;
   cursor: pointer;
+  min-height: 40px;
   i {
     vertical-align: middle;
   }
