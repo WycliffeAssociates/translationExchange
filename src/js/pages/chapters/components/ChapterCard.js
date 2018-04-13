@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled,{keyframes} from 'styled-components';
-import {zoomIn, zoomOut} from 'react-animations';
+import {zoomIn} from 'react-animations';
 import CircularProgressbar from "react-circular-progressbar";
 import QueryString from "query-string";
 
