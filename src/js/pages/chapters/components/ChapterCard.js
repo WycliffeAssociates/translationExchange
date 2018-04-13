@@ -180,7 +180,7 @@ const TextContainer = styled.div`
 `;
 
 const ButtonContainer= styled.div`
-    width: inherit;
+    width: 100%;
     overflow: hidden;
     text-align: center;
     border-color: white;
