@@ -11,33 +11,38 @@ import img3 from './mockupdata/img1.PNG';
 
 class MyProjectsContainer extends Component {
   render() {
+      const {projects} = this.props;
     return (
 
       <Container>
         <HeaderContainer>
-          <i class="far fa-address-book"></i>
-          <Header> My Projects</Header>
+            <i class="material-icons">folder_shared</i>
+          <Header>Projects</Header>
         </HeaderContainer>
         <CardsContainer>
-          {  Data.map( (x, index) =>
-            <ProjectCard bookName={x.book_name}
-              language={x.language}
-              version={x.version}
-              dateModified={x.date_modified} /> )
+          { projects.map( (p) =>
+            <ProjectCard bookName={p.book.name}
+              language={p.language.name}
+              version={p.version.slug}
+              dateModified={p.date_modified.slice(0,10)}
+              projectId={p.id}
+             {...this.props}
+            /> )
           }
         </CardsContainer>
-
       </Container>
     );
   }
 }
 
 const Container = styled.div`
-  width: 98%;
+  width: 100%;
+  height:100%;
   display: flex;
   flex-direction: column;
   padding-top:3vw;
   padding-left: 1vw;
+ 
 `;
 
 const Header = styled.p`
@@ -56,13 +61,13 @@ const HeaderContainer = styled.div`
 
 const CardsContainer = styled.div`
 padding-top: 2vw;
-width: 82.5vw;
+width: 100%;
+height: 100%;
 display: flex;
 flex-direction:row;
-justify-content: space-between;
 flex-wrap: wrap;
-height: 37vw;
-overflow-y: scroll;
+align-items: left;
+
 `;
 
 

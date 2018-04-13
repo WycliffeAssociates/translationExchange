@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import TakeCard from '../../takes/newComponents/TakeCard/TakeCard';
 import DragHereBox from '../../../components/DragHereBox';
 import QueryString from 'query-string';
-import update from 'immutability-helper';
 import {DropTarget} from 'react-dnd';
 
 class KanbanColumn extends React.Component {
@@ -12,79 +11,55 @@ class KanbanColumn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      take: this.props,
+      //take: this.props,
     };
 
     this.makeChanges = this.makeChanges.bind(this);
-    this.removeTake = this.removeTake.bind(this);
     this.nextChunk = this.nextChunk.bind(this);
     this.navigateToChapter = this.navigateToChapter.bind(this);
+    this.chapterPublished = this.chapterPublished.bind(this);
   }
 
   nextChunk() {
-    var nextChunk = this.props.activeChunkId+1;
-    /*The chunkId's carries over for chunks in the same chapter.
-      Therefore chunks in following chapters won't start with chunkId = 1,
-      they could start with chunkId = 6 for example. So we need to
-      get the id of the firstChunk in the chapter, so that we can correctly
-      update chunkNum on button navigation to next chunk.*/
-    var firstChunkId = this.props.chunks[0].id;
 
-    if (this.props.chunks.length >= nextChunk )
-    {
-      /* get the chunk corresponding to the next chunk to be loaded from the chunks array
-          nextChunk-1 because the activeChunkId starts at 1, but array starts at 0*/
-      var chunkNum = this.props.chunks[nextChunk-firstChunkId].startv;
-      this.props.getTakes(nextChunk, chunkNum );
-    }
+    const {activeChunkId, chunks} = this.props;
+    let activeChunkIndex = null;
+
+    chunks.map( (chk, index) => {
+      if (chk.id == activeChunkId) {    // find the chunk that we are at
+        activeChunkIndex = index;     // get the index in the array list
+      }
+    });
+
+    const nextChunkId = chunks[activeChunkIndex+1].id;      // add + 1 to get the next item in the array
+    const nextChunkNum = chunks[activeChunkIndex+1].startv;
+
+    this.props.getTakes(nextChunkId, nextChunkNum );
   }
 
-  navigateToChapter(chNum, chId) {
-    var query = QueryString.parse(this.props.location.search);
-    query.chapter_num = chNum;
-    query.chapterId = chId;
 
+  navigateToChapter(chapter_num, chapterId) {
+
+    var query = QueryString.parse(this.props.location.search);
+    console.log(query, 'QUERY');
+    query.chapterId = chapterId;
+    query.chapterNum = chapter_num;
+    const queryString  = QueryString.stringify(query);
+    console.log(queryString);
 
     this.props.history.push({
-      pathname: '/kanbanPage',
-      search: QueryString.stringify(query),
+      pathname: '/kanban',
+      search: `?chapterId=${chapterId}&chapterNum=${chapter_num}&bookName=${query.bookName}&projectId=${query.projectId}`,
     });
-  }
 
+    this.props.getChunks(chapter_num+1);
+    this.props.getComments(chapterId+1, 'chapter_id');
 
-  pushTake(take) {
-    this.setState(
-      update(this.state, {
-        takes: {
-          $push: [take],
-        },
-      })
-    );
-  }
-
-  removeTake(index) {
-    this.setState(
-      update(this.state, {
-        takes: {
-          $splice: [[index, 1]],
-        },
-      })
-    );
-  }
-
-  moveTake(dragIndex, hoverIndex) {
-    const { takes } = this.state;
-    const dragTake = takes[dragIndex];
-    this.setState(
-      update(this.state, {
-        takes: {
-          $splice: [[dragIndex, 1], [hoverIndex, 0, dragTake]],
-        },
-      })
-    );
   }
 
   onDrop(published, newRating, take) {
+    const query = QueryString.parse(this.props.location.search);
+    const chapterId = query.chapterId;
     this.props.patchTake(
       take.id,
       { published: published, rating: newRating },
@@ -95,7 +70,7 @@ class KanbanColumn extends React.Component {
         }
       },
       this.props.takes,
-      this.props.chunkId
+      chapterId
     );
   }
 
@@ -123,29 +98,43 @@ class KanbanColumn extends React.Component {
         return null;
 
     }
+  }
+
+  chapterPublished() {
+    const {chunks} = this.props;
+    var chapterPublished = true;
+
+    for (var x=0; x< chunks.length; x++) {
+      if (chunks[x].published_take == null) {
+        chapterPublished = false;
+        break;
+      }
+    }
+    return chapterPublished;
 
   }
 
 
   render() {
     var query = QueryString.parse(this.props.location.search);
-    var chapter_num = query.chapter_num;
+    var chapterNum = query.chapterNum;
     var chapterId = query.chapterId;
 
     const { connectDropTarget, isOver} = this.props;
+    const { saveComment, uploadingComments, activeChunkId, chunkNum} = this.props;
 
     var icon;
     switch (this.props.icon) {
 
       case 1:
-        icon= <label className="labelLines"> <i className="far fa-star fa-2x" /> </label>;
+        icon= <label className="labelLines"> < i style={starSize} className="material-icons">star_border</i> </label>;
         break;
 
       case 2:
         icon = (
           <div className="labelLines">
-            <label> <i className="far fa-star fa-2x" /> </label>
-            <label> <i className="far fa-star fa-2x" /> </label>
+            <label> <i style={starSize} className="material-icons">star_border</i> </label>
+            <label> <i style={starSize}  className="material-icons">star_border</i> </label>
           </div>
         );
         break;
@@ -153,19 +142,19 @@ class KanbanColumn extends React.Component {
       case 3:
         icon = (
           <div className="labelLines">
-            <label > <i className="far fa-star fa-2x" /> </label>
-            <label > <i className="far fa-star fa-2x" /> </label>
-            <label > <i className="far fa-star fa-2x" /> </label>
+            <label > <i style={starSize}  className="material-icons">star_border</i> </label>
+              <label> <i style={starSize}  className="material-icons">star_border</i> </label>
+              <label> <i style={starSize}  className="material-icons">star_border</i> </label>
           </div>
         );
         break;
 
       case 4:
-        icon = <label className="labelLines"> <i className="fas fa-check fa-2x" /> </label>;
+        icon = <label className="labelLines"> <i style={starSize} className="material-icons">check</i> </label>;
         break;
 
       default:
-        icon= <label className="labelLines"> <i className="far fa-star fa-2x" /> </label>;
+        icon=  <label> <i style={starSize} className="material-icons">star_border</i> </label>;
         break;
     }
     return connectDropTarget(
@@ -178,11 +167,15 @@ class KanbanColumn extends React.Component {
 
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', overflow: 'auto'}}>
           {
-            this.props.array? this.props.array.map((take) => {
-              return (<TakeCard {...take} makeChanges= {this.makeChanges}
-                removeTake = {this.removeTake} displayText = {this.props.displayText}
-                getComments ={this.props.getComments}
-                publishedTake = {this.props.publishedTake} /> );
+            this.props.array? this.props.array.map((take, index) => {
+              return (
+                <TakeCard key={index} {...take} makeChanges= {this.makeChanges}
+                  displayText = {this.props.displayText}
+                  getComments ={this.props.getComments}
+                  publishedTake = {this.props.publishedTake}
+                  saveComment={saveComment}
+                  uploadingComments={uploadingComments}
+                  activeChunkId={activeChunkId} chunkNum={chunkNum}  /> ); /* published take passed down for react dnd */
             }) : ''
 
           }
@@ -198,8 +191,8 @@ class KanbanColumn extends React.Component {
 
         {
           this.props.publishedColumn?
-            this.props.activeChunkId == this.props.chunks.length? //if activeChunkId = chunks.length that means we are at the last chunk in the chapter (activeChunkId starts at 1)
-              <center> <NextChapter onClick ={() => this.navigateToChapter(Number(chapter_num) +1 ,Number(chapterId) +1)} >Go To Next Chapter <i className="fa fa-arrow-right" /> </NextChapter> </center> :
+            this.chapterPublished()?
+              <center> <NextChapter onClick ={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)} >Go To Next Chapter <i className="fa fa-arrow-right" /> </NextChapter> </center> :
               <center> <NextChunk onClick ={() => this.nextChunk()}>Go To Next Chunk <i className="fa fa-arrow-right" /> </NextChunk> </center>
             : ''
         }
@@ -212,11 +205,14 @@ class KanbanColumn extends React.Component {
 
 }
 
+const starSize = {
+  fontSize: '2.7vw'
+};
 
 
 const Column = styled.div`
-  height: ${props => props.published? 'auto' : '40vw'};
-  width: inherit;
+  height: ${props => props.published? 'auto' : '75vh'};
+  width: 20vw;
   background: rgba(45,45,45,0.5);
   padding: 2vw;
   margin-top: 1vw;
@@ -230,7 +226,7 @@ const Column = styled.div`
 
   /* width */
   ::-webkit-scrollbar {
-    width: 0.5vw;
+    width: 0.2vw;
   }
 
   /* Track */
@@ -252,6 +248,7 @@ const Column = styled.div`
   }
 
 `;
+Column.displayName = 'Column';
 
 const NextChunk = styled.button`
   	color: white;
@@ -260,8 +257,24 @@ const NextChunk = styled.button`
   	border-radius: 2vw;
   	padding: 0.75vw;
   	cursor: pointer;
+  	outline:none;
+    font-size: 1em + 1vw;
   `;
-const NextChapter = NextChunk;
+NextChunk.displayName = 'NextChunk';
+
+const NextChapter  = styled.button`
+color: white;
+background: linear-gradient(to right, #0076FF, #00C5FF  );
+border: none;
+border-radius: 2vw;
+padding: 0.75vw;
+cursor: pointer;
+outline:none;
+font-size: 1em + 1vw;
+
+`;
+NextChapter.displayName = 'NextChapter';
+
 
 const takeTarget = {
   drop(props, monitor, component) {

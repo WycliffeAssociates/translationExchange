@@ -1,15 +1,14 @@
-
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import 'css/create.css';
 import CreateUser from './CreateUser';
-import UserCreated from './UserCreated'
+import UserCreated from './UserCreated';
 import styled from 'styled-components';
 import {bindActionCreators} from 'redux';
 import { createUser, resetUserCreated } from '../../../actions/UserActions';
 
 
-class CreateUserContainer extends Component {
+export class CreateUserContainer extends Component {
 
 
   constructor(props) {
@@ -22,40 +21,47 @@ class CreateUserContainer extends Component {
 
   componentWillUnmount() {
     this.props.resetUserCreated();
-    }
-
-  handleClick() {
-    this.props.history.push({pathname: '/users'});
   }
 
+  handleClick() {
+    this.props.history.push({ pathname: "/users" });
+  }
 
   render() {
-    const {userCreated} = this.props;
+    const { userCreated } = this.props;
     return (
       <div className="pageBackground">
-
-        <Label onClick={()=>this.handleClick()}>
-          <i className="fa fa-hand-point-left fa-fw" /> Back to Login
+        <Label onClick={() => this.handleClick()}>
+          <i
+            className="material-icons"
+            style={{ fontSize: "1.7vw", verticalAlign: "middle" }}
+          >
+            arrow_back
+          </i>
+          Back to Login
         </Label>
 
         <Container>
           <Card>
-            {userCreated ? <UserCreated {...this.props} /> : <CreateUser {...this.props} />}
+            {userCreated ? (
+              <UserCreated {...this.props} />
+            ) : (
+              <CreateUser {...this.props} />
+            )}
           </Card>
-
         </Container>
       </div>
-
     );
   }
 }
 
-const  Container = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 3vw;
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3vw;
 `;
+Container.displayName= 'Container';
 
 const Label = styled.label`
   color: white;
@@ -65,10 +71,11 @@ const Label = styled.label`
   text-decoration: underline;
   cursor: pointer;
 `;
+Label.displayName = 'Label';
 
 const Card = styled.div`
   width: 33vw;
-  height: 40vw;
+  height: 70vh;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
   border-radius: 2%;
   min-width: 469;
@@ -77,16 +84,17 @@ const Card = styled.div`
   background-color: white;
   overflow: hidden;
 `;
-
+Card.displayName = 'Card';
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({createUser, resetUserCreated}, dispatch);
+  return bindActionCreators({ createUser, resetUserCreated }, dispatch);
 };
 
 const mapStateToProps = state => {
-  const {hash, audioName, userCreated, loading} = state.user;
-  return {hash, audioName, userCreated, loading };
+  const { hash, audioName, userCreated, loading } = state.user;
+  return { hash, audioName, userCreated, loading };
 };
 
-
-export default connect(mapStateToProps, mapDispatchToProps) (CreateUserContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  CreateUserContainer
+);

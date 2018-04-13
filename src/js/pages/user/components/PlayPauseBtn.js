@@ -8,7 +8,7 @@ class PlayPauseBtn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      icon: 'play',
+      icon: 'play_arrow',
 
     };
     this.startPlaying = this.startPlaying.bind(this);
@@ -16,7 +16,7 @@ class PlayPauseBtn extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.playing) {
-      this.setState({icon: 'play'});
+      this.setState({icon: 'play_arrow'});
     }
   }
 
@@ -25,7 +25,7 @@ class PlayPauseBtn extends Component {
     this.props.startPlaying();
 
     if (this.props.playing) {
-      this.setState({icon: 'play'});
+      this.setState({icon: 'play_arrow'});
     } else {
 
       this.setState({icon: 'pause'});
@@ -39,7 +39,7 @@ class PlayPauseBtn extends Component {
       <ButtonContainer>
 
         <PlayButton  onClick={()=>this.startPlaying()} type="button">
-          <Icon> <i className={`fa fa-${icon}`} /> </Icon>
+          <Icon><i className="material-icons" style={{fontSize:'3vw'}}>{icon}</i> </Icon>
         </PlayButton>
 
       </ButtonContainer>

@@ -29,8 +29,8 @@ export default class TakeCardBottomButtons extends React.Component {
 
   playButton() {
     const playing = this.props.takePlaying;
-    const play = <i className = "fa fa-play" />;
-    const pause = <i className = "fa fa-pause" />;
+    const play = <i class="material-icons">play_arrow</i>;
+    const pause = <i class="material-icons">pause</i>;
 
     return (
       <PlayTakeContainer>
@@ -44,21 +44,16 @@ export default class TakeCardBottomButtons extends React.Component {
           {pause} {this.convertToMinutes(this.props.duration)}
         </PlayTake>
 
-
       </PlayTakeContainer>
     );
   }
 
 
   render() {
-
     return (
       <BottomButtons>
         <CommentButton onClick={() => this.props.expandComments()}>
-          <span className="fa-layers fa-fw">
-            <i className="fas fa-comment" />
-            <span className="fa-layers-counter" style={{fontSize: '2.1vw', padding: '0.5vw'}}> 2 </span>
-          </span>
+            <i class="material-icons">mode_comment</i>
         </CommentButton>
 
         {this.playButton()}
@@ -103,5 +98,8 @@ const CommentButton = styled(Button)`
 const PlayTake = styled(Button)`
   color: white;
   background: #009CFF;
-  font-size: 1.2vw;
+  font-size: 1vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items:center;
 `;

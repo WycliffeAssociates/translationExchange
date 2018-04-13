@@ -1,7 +1,8 @@
 import axios from 'axios';
 import config from '../../config/config';
+import {getTakes} from '../actions';
 
-export const getComments = (query, type, takeNum) => {
+export const getComments = (query, type) => {
 
   return function(dispatch) {
     return axios
@@ -28,7 +29,7 @@ export const getComments = (query, type, takeNum) => {
 };
 
 
-export const getChunkCommentsSuccess= (comments)=>{
+export const getChunkCommentsSuccess= (comments) => {
   return {
     type: 'CHUNK_COMMENTS',
     comments,
@@ -44,10 +45,9 @@ export const getChapterCommentsSuccess= (comments)=>{
 };
 
 
-export const saveComment = (blobx, type, id ) => {
-    debugger;
+export const saveComment = (blobx, type, id, chunkId, chunkNum, callback, errorCallback ) => { // chunkId & chunkNum, is used for refreshing the comments on takes
     return dispatch => {
-        dispatch({type: 'SAVING_COMMENT_LOADING'});
+        dispatch({type: 'SAVE_COMMENT_LOADING', uploadingComments: true}); // used to display loading UI
         return axios
             .post(config.apiUrl + 'comments/', {
                 comment: blobx,
@@ -58,25 +58,46 @@ export const saveComment = (blobx, type, id ) => {
                 headers: { Authorization: "Token " + localStorage.getItem('token') }
             })
             .then(response => {
-                dispatch(saveCommentSuccess(response.data));
-                debugger;
-                dispatch(getComments(id, type));
 
-                dispatch({type: 'COMMENT_SAVED'});
-
-                if(type === 'take_id'){
-
+                if(type === 'chunk'){
+                    dispatch(updateChunkComments(response.data));
                 }
+
+                if(type === 'chapter'){
+                    dispatch(updateChapterComments(response.data))
+                }
+
+                if(type === 'take'){
+                    dispatch(getTakes(chunkId, chunkNum));
+                }
+                dispatch({type: 'SAVE_COMMENT_DONE', uploadingComments: false});
+                callback();
             })
-            .catch(exception => {
-                //dispatch(saveCommentFailed(exception));
-            });
+            .catch(error => {
+              dispatch({type: 'UPLOAD_COMMENT_ERROR', error: error.toString()});
+              });
     };
 };
 
-export const saveCommentSuccess = () =>{
-  return{
-    type:'SAVE_COMMENT_SUCCESS'
-  }
 
+export const updateChunkComments = (comment) => {
+    return {
+        type: 'UPDATE_CHUNK_COMMENTS',
+        comment
+    }
+
+};
+
+export const updateChapterComments = (comment) => {
+    return {
+        type: 'UPDATE_CHAPTER_COMMENTS',
+        comment
+    }};
+
+
+export const resetError = () => {
+  return {
+    type: 'RESET_ERROR',
+
+  };
 };

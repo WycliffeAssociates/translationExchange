@@ -1,8 +1,8 @@
 const INITIAL_STATE = {
   chapterComments: [],
   chunkComments: [],
-  loadingComments:false,
-
+  uploadingComments: false,
+  uploadError: false,
 };
 
 export default( state= INITIAL_STATE, action) => {
@@ -20,11 +20,31 @@ export default( state= INITIAL_STATE, action) => {
         chapterComments: action.comments,
       };
 
-    case 'SAVING_COMMENT_LOADING':
-      return{...state, loadingComments: true};
+    case 'SAVE_COMMENT_LOADING':
+      return {...state, uploadingComments: action.uploadingComments};
 
-    case 'COMMENT_SAVED':
-      return{...state, loadingComments: false};
+    case 'SAVE_COMMENT_DONE':
+      return {...state, uploadingComments: action.uploadingComments};
+
+    case 'UPDATE_CHUNK_COMMENTS':
+      return {...state, chunkComments: [...state.chunkComments , action.comment]};
+
+    case 'UPDATE_CHAPTER_COMMENTS':
+      return {...state, chapterComments: [...state.chapterComments , action.comment]};
+
+    case 'UPLOAD_COMMENT_ERROR':
+      return {
+        ...state,
+        uploadingComments: false,
+        uploadError: true,
+      };
+
+    case 'RESET_ERROR':
+      return {
+        ...state,
+        uploadError: false,
+      };
+
     default:
       return {
         ...state,

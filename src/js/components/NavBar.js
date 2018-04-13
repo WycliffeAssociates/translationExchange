@@ -14,15 +14,12 @@ class NavBar extends Component {
       displayLogOut: false,
       chunkNumSelected: props.chunkNum,
     };
-
-
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.loggedInUser != this.props.loggedInUser) {
-        jdenticon.update('#ActiveUser', nextProps.loggedInUser); // used in the case the user refresh the page
+      jdenticon.update('#ActiveUser', nextProps.loggedInUser); // used in the case the user refresh the page
     }
-
   }
 
   componentWillUpdate(nextProps) {
@@ -34,23 +31,16 @@ class NavBar extends Component {
 
   componentDidMount() {
     const {loggedInUser}= this.props;
-
     if (loggedInUser === null) {
       this.props.getUserHash();
     }
-      jdenticon.update('#ActiveUser', loggedInUser);
+    jdenticon.update('#ActiveUser', loggedInUser);
   }
-
-
-
-
+  
   logOut() {
     localStorage.removeItem('token');
+    this.props.removeUser();
     this.props.history.push('./welcome');
-  }
-
-  hiddeLogOut() {
-    setTimeout(()=> this.setState({displayLogOut: false}) , 1500);
   }
 
   onSelect({key, item}) {
@@ -61,48 +51,66 @@ class NavBar extends Component {
     this.props.getComments(chunkId, 'chunk_id');
   }
 
-  onVisibleChange(visible) {
-    console.log(visible);
-  }
 
   render() {
 
-    const {loggedInUser, history, chunks, chapterNum, location, kanban}= this.props;
-    let searchBar=''
+    const {loggedInUser, history, chunks, chapterNum, location, chapterPage, projectPage, kanbanPage}= this.props;
+    const searchBar = QueryString.parse(location.search);
     let menu = '';
-    if (kanban) {
-      searchBar = QueryString.stringify(location.search);
+    let book ='';
+    let chapter='';
+    let goToChapters = '';
+    let logOutMenu = (
+      <Menu onSelect={ ()=> this.logOut()}>
+        <MenuItem style={{cursor:'pointer', color:'#fff', backgroundColor:'#000' }} key="1">Log Out</MenuItem>
+      </Menu>
+    );
+
+    if (kanbanPage) {
+      chapter =`Chapter ${chapterNum}`;
+      book = searchBar.bookName;
+      goToChapters = () => {
+        const {getChapters} = this.props;
+        getChapters(searchBar.projectId);
+        history.push(`/chapters?projectId=${searchBar.projectId}&&bookName=${searchBar.bookName}`);
+      };
+
       menu = (
         <Menu onSelect={ ky=> this.onSelect(ky)}>
-          { kanban ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>): ''}
+          { kanbanPage ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>): ''}
         </Menu>
       );
+
+    }
+
+    if (chapterPage) {
+      book = searchBar.bookName;
     }
 
     return (
       <Container>
         <TextContainer>
-          <Title onClick={()=>history.push('./')}>Translation Exchange </Title>
+          <Title>Translation Exchange </Title>
         </TextContainer>
         <IconsContainer>
-          <TextIconContainer onClick={()=> history.push('/projects')}>
+
+          <ProjectsButton selected={projectPage} onClick={()=> history.push('/projects')}>
             <i className="material-icons">book</i>
-            <Text>{searchBar.book}</Text>
-          </TextIconContainer>
-          <TextIconContainer onClick={()=> window.history.back()}  >
+            <Text>{book}</Text>
+          </ProjectsButton>
+          <ChaptersButton selected={chapterPage} onClick={goToChapters}>
             <i className="material-icons">chrome_reader_mode</i>
-            { <Text> Chapter {chapterNum}</Text> }
-          </TextIconContainer>
-          <TextIconContainer selected={true}>
-            <i className="material-icons">graphic_eq</i>
+            { <Text> {chapter}</Text> }
+          </ChaptersButton>
+          <ChunksButton selected={kanbanPage}>
+            <i class="material-icons">graphic_eq</i>
 
             {
-              kanban ?
+                kanbanPage ?
                 <Dropdown
                   trigger={['click']}
                   overlay={menu}
                   animation="slide-up"
-                  onVisibleChange={this.onVisibleChange()}
                 >
                   <Text>Chunk {this.props.chunkNum}</Text>
                 </Dropdown>
@@ -110,18 +118,21 @@ class NavBar extends Component {
                 ''
             }
 
-
-          </TextIconContainer>
+          </ChunksButton>
 
         </IconsContainer>
         <IdenticonContainer>
-          <Identicon id="ActiveUser"
-            data-jdenticon-hash={loggedInUser}
-            onMouseEnter={()=> this.setState({displayLogOut: true})}
-            onMouseLeave={()=> this.hiddeLogOut()} />
-          <LogOut display={this.state.displayLogOut} onClick={()=> this.logOut()} className="tooltip">
-            <span>Log Out</span>
-          </LogOut>
+         
+            <Dropdown
+                trigger={['click']}
+                overlayClassName="logout-dropdown"
+                overlay={logOutMenu}
+                animation="slide-up"
+            >
+            <Identicon id="ActiveUser"
+                       data-jdenticon-hash={loggedInUser}
+            />
+            </Dropdown>
         </IdenticonContainer>
       </Container>
     );
@@ -133,33 +144,53 @@ class NavBar extends Component {
 
 const Container = styled.div`
   background-color: #fff;
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   box-shadow: 3px 4px 5px rgba(0,0,0,0.2);
   z-index: 2;
+  min-height: 90px;
 `;
 const Text = styled.p`
   cursor: pointer;
 `;
 
-const TextIconContainer = styled.div`
+const ChaptersButton = styled.div`
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  color: ${props=> props.selected ? '#45B649': ''}
+  font-size: ${props=> props.selected ? '2vw': ''}
+  
+`;
+
+const ProjectsButton = styled.div`
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  color: ${props=> props.selected ? '#45B649': ''}
+  font-size: ${props=> props.selected ? '2vw': ''}
+  
+`;
+
+const ChunksButton = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
   color: ${props=> props.selected ? '#009CFF': ''}
+  
 `;
 
 const Identicon= styled.svg`
-  height: 5vw;
+  height: 10vh;
   width: 5vw;
-
+  cursor: pointer;
 `;
 
 const LogOut = styled.div`
   visibility: ${props=> props.display ? 'visible' : 'hidden'};
-  width: 120px;
+  width: 7.5vw;
   background-color: black;
   color: #fff;
   text-align: center;
@@ -200,6 +231,8 @@ text-align: left;
 `;
 
 const IdenticonContainer = styled.div`
+margin-top: 0.5vh;
+margin-right: 0.5vw;
 
 `;
 

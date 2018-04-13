@@ -14,7 +14,7 @@
 
 .container {
    background: linear-gradient(to bottom right, #0076FF , #00C5FF );
-   height: 100vh;
+   height: auto;
    width: 100vw;
    text-align: center;
 
@@ -33,7 +33,7 @@
 .backgroundOverlayUsers {
   background-image: url('../assets/images/background-pattern.png');
   padding: 5vw;
-  height: 100vh;
+  height: auto;
   background-attachment: fixed;
 }
 

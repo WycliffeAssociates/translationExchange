@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import ChunkListContainer from './js/pages/chunks/ChunkListContainer';
-import ProjectsListContainer from './js/pages/projects/ProjectsListContainer';
-import ProjectContainer from './js/pages/projects/ProjectContainer';
-import ChaptersContainer from './js/pages/chapters/ChaptersContainer';
+import ProjectsPage from './js/pages/projects/ProjectPage';
 import './App.css';
+import './css/chapters.css'
 import NotFound from './js/pages/NotFound';
-import Home from './js/pages/home/home';
-import About from './js/pages/about/about';
 import axios from 'axios';
 import User from './js/pages/user/user';
 import Welcome from './js/pages/Login/LoginPage.js';
 import AvailableUsers from './js/pages/Login/AvailableUsers.js';
+import ErrorPage from './js/pages/ErrorPage/ErrorPage';
 import CreateUserContainer from './js/pages/user/components/CreateUserContainer';
 import { DragDropContext } from 'react-dnd';
 import Notifications from 'react-notify-toast';
-import Root from './js/components/Root.js';
 import KanbanPage from './js/pages/KanbanBoard/KanbanPage';
 import TaskProgressPage from './js/pages/tasks/TaskProgressPage';
+import CustomDragLayer from './CustomDragLayer';
+import ChapterPage from './js/pages/chapters/ChaptersPage';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 // import and configure the raven client for sentry in order to track errors
@@ -53,22 +51,20 @@ class App extends Component {
 
       <div>
         <Notifications />
+        <CustomDragLayer />
 
         <Switch>
-          <Route  exact path="/" component={Root} />
+          <Route  exact path="/" component={Welcome} />
           <Route  exact path ="/users" component={AvailableUsers} />
           <Route  exact path="/users/registration" component={CreateUserContainer} />
-          <Route  path="/home" component={Home} />
           <Route  path="/welcome" component={Welcome} />
-          <Route  path="/about" component={About} />
-          <Route path="/ProjectContainer" component={ProjectContainer} />
-          <Route  path="/projects" component={ProjectsListContainer} />
-          <Route  path="/chapters" component={ChaptersContainer} />
-          <Route  path="/takes" component={ChunkListContainer} />
+          <Route  path="/projects" component={ProjectsPage} />
+          <Route  path="/chapters" component={ChapterPage} />
           <Route  path="/user" component={User} />
           <Route path ="/newComponents" component={KanbanPage} />
-          <Route path ="/kanbanPage" component={KanbanPage} />
           <Route path ="/taskProgress" component={TaskProgressPage} />
+          <Route path ="/kanban" component={KanbanPage} />
+          <Route path ="/errorPage" component={ErrorPage} />
           <Route path="*" component={NotFound} />
         </Switch>
 

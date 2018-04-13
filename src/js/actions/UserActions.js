@@ -1,8 +1,9 @@
 import axios from 'axios';
 import config from '../../config/config';
 
-export const fetchUsers = () => {
+export const fetchUsers = (redirect) => {
 return (dispatch) => {
+    dispatch({type: 'FETCHING_USERS'});
     return axios
       .get(`${config.apiUrl}profiles/`)
       .then(response => {
@@ -11,6 +12,7 @@ return (dispatch) => {
       })
       .catch(error => {
         console.log(error); //TODO handle error
+        redirect.push('./ErrorPage');
       });
   };
 };
@@ -129,4 +131,12 @@ export const identiconLoginSuccess = (iconHash) => {
     type: 'LOGIN_SUCCESS',
     iconHash: iconHash,
   };
+};
+
+
+export const removeUser = () => {
+  return {
+      type:'REMOVE_USER'
+  }
+
 };

@@ -1,7 +1,11 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import WelcomeComponent from './components/WelcomeComponent.js';
-import 'css/Login.css';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {onLoginSuccess} from '../../actions';
+import img from '../../../assets/images/background-pattern.png';
+
 
 class Welcome extends React.Component {
 
@@ -9,26 +13,28 @@ class Welcome extends React.Component {
   render() {
 
     return (
-      <div className = "container">
-        <div className="backgroundOverlayLogin">
-
-          <WelcomeComponent {...this.props} />
-
-        </div>
-
-      </div>
+      <LoginPage>
+        <WelcomeComponent {...this.props} />
+      </LoginPage>
     );
   }
 
 }
 
+const LoginPage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(${img}), linear-gradient(to bottom right, #0076FF, #00C5FF) ;
 
-const mapDispatchToProps = (dispatch) => ({dispatch});
-
-// const mapStateToProps = ({reducer1, reducer2}) => ({
-//
-//   // all the state variables that you want to map to props
-// });
+`;
 
 
-export default connect(mapDispatchToProps)(Welcome);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {  onLoginSuccess }, dispatch);
+};
+
+export default connect(null, mapDispatchToProps) (Welcome);
