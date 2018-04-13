@@ -17,7 +17,7 @@ class Loading extends Component {
 const Container = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 60vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;

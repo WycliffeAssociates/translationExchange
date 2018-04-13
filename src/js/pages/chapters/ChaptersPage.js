@@ -60,13 +60,13 @@ class ChapterPage extends Component {
 
 const ChapterPageContainer = styled.div`
     display: flex;
-    position:fixed;
+    position:absolute;
     padding:0;
     margin:0;
     top:0;
     left:0;
     width: 100%;
-    height: 100%;
+    height: auto%;
     min-height: 850px;
     flex-direction: column;
     background-color: #F7F9FE
@@ -89,11 +89,12 @@ const DownloadBar = styled.div`
   width: 100vw;
   height: 6vh;
   background:transparent;
-  position: fixed;
+  position: absolute;
   top: 11vh;
   display: flex;
   padding: 0.5vh;
   flex-direction: column;
+  z-index: 99;
 
 `;
 
