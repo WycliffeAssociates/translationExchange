@@ -1,7 +1,7 @@
 import axios from 'axios'
 import config from '../../config/config';
 
-export const getChapters = (projectId) =>{
+export const getChapters = (projectId, redirect) =>{
   return dispatch => {
     dispatch({type: 'FETCHING_CHAPTERS'});
     return axios
@@ -14,13 +14,14 @@ export const getChapters = (projectId) =>{
       })
       .catch(error => {
         console.log(error);
+        redirect.push('./ErrorPage');
       });
   };
 
 };
 
 export const getChaptersSuccess = (chapters) =>{
-    return{
+    return {
         type: 'GET_CHAPTERS_SUCCESS',
         chapters
     }

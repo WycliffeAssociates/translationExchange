@@ -45,7 +45,7 @@ export default class UtilityPanel extends React.Component {
       this.state.utilityPanel?
         <UtilityPanelContainer >
           <UtilityNavigation>
-            <Toggle
+            <Toggle className="vertical_align_middle"
               onChange={e=>this.setState({commentsTab: e.target.checked})}
               defaultChecked= {false} icons ={{
                 unchecked: <i style={{fontSize: '1vw', paddingBottom: '1vw'}} className="material-icons">mode_comment</i>,
@@ -77,18 +77,19 @@ export default class UtilityPanel extends React.Component {
                 uploadError = {uploadError}
                 resetError ={resetError}
               />
-              {takes.map(tk=>
-                <Comments
-                  uploadingComments={uploadingComments}
-                  chunkId ={activeChunkId}
-                  chunkNum ={chunkNum}
-                  saveComment={saveComment}
-                  type="take"
-                  comments={tk.comments}
-                  text={`Take ${tk.take_num}`}
-                  id={tk.id}
-                  uploadError = {uploadError}
-                  resetError={resetError} />)
+              {
+              // takes.map(tk=>
+              //   <Comments
+              //     uploadingComments={uploadingComments}
+              //     chunkId ={activeChunkId}
+              //     chunkNum ={chunkNum}
+              //     saveComment={saveComment}
+              //     type="take"
+              //     comments={tk.comments}
+              //     text={`Take ${tk.take_num}`}
+              //     id={tk.id}
+              //     uploadError = {uploadError}
+              //     resetError={resetError} />)
               }
 
             </CommentsPanel>

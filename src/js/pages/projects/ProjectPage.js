@@ -13,7 +13,8 @@ import { fetchAllProjects, getChapters, getUserHash, removeUser } from '../../ac
 class ProjectContainer extends Component {
 
   componentWillMount() {
-    this.props.fetchAllProjects('');
+    const {history, fetchAllProjects} = this.props;
+    fetchAllProjects('', history ); // use history for redirect to the error page
   }
 
   render() {
@@ -44,15 +45,18 @@ class ProjectContainer extends Component {
 
 const Container = styled.div`
   width: 100%;
+  height:100vh;
   display: flex;
   flex-direction: column;
-
+  
 `;
 
 const ProjectsContainer = styled.div`
   width: 100%;
+  height:90vh;
   display: flex;
   flex-direction: row;
+  overflow-y:scroll;
 
 `;
 

@@ -3,7 +3,7 @@ import WelcomeComponent from './components/WelcomeComponent.js';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {onLoginSuccess} from '../../actions';
+import {onLoginSuccess, fetchUsers, createSocialUser} from '../../actions';
 import img from '../../../assets/images/background-pattern.png';
 
 
@@ -34,7 +34,12 @@ const LoginPage = styled.div`
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    {  onLoginSuccess }, dispatch);
+    {  onLoginSuccess, fetchUsers, createSocialUser }, dispatch);
 };
 
-export default connect(null, mapDispatchToProps) (Welcome);
+const mapStateToProps = state => {
+  const { socialLogin } = state.user;
+  return {socialLogin};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (Welcome);

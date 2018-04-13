@@ -5,6 +5,8 @@ const INITIAL_STATE = {
   audioName: '',
   hash: '',
   loggedInUser: null,
+  socialLogin: false,
+  tempUserId: null,
 };
 
 export default( state= INITIAL_STATE, action) => {
@@ -28,13 +30,32 @@ export default( state= INITIAL_STATE, action) => {
       return {
         ...state, loading: true,
       };
+
+    case 'SOCIAL_USER_CREATION':
+      return {
+        ...state,
+        socialLogin: action.socialLogin,
+        tempUserId: action.tempUserId,
+      };
+
     case 'USER_CREATED':
       return {
         ...state,
         audioName: action.audioName,
         hash: action.hash,
         userCreated: true,
+        socialLogin: false,
       };
+
+    case 'PATCHED_USER':
+      return {
+        ...state,
+        audioName: action.audioName,
+        hash: action.hash,
+        socialLogin: false,
+        tempUserId: null,
+      };
+
     case 'RESET_USER_CREATED':
       return {...state, userCreated: false};
 

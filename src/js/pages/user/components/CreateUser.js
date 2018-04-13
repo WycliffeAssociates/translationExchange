@@ -77,13 +77,19 @@ class CreateUser extends Component {
 
   save() {               // saves to database
     const {recordedBlob, generatedHash} = this.state;
+    const {tempUserId} = this.props;
     const reader = new FileReader();
 
     reader.addEventListener(
       'load',
       () => {
         const jsonblob = reader.result;
-        this.props.createUser(jsonblob, generatedHash); // action to create user in db
+        if (this.props.socialLogin) {
+          this.props.patchUser(tempUserId, jsonblob, generatedHash);
+        }
+        else  {
+          this.props.createUser(jsonblob, generatedHash); // action to create user in db
+        }
       },
       false
     );

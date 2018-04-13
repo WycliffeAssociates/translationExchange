@@ -134,6 +134,7 @@
 
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-tap-highlight-color: transparent;
+
 }
 
 .react-toggle-screenreader-only {
@@ -259,6 +260,10 @@
   -webkit-box-shadow: 0px 0px 5px 5px #0099E0;
   -moz-box-shadow: 0px 0px 5px 5px #0099E0;
   box-shadow: 0px 0px 5px 5px #0099E0;
+}
+
+.vertical_align_middle {
+  vertical-align: middle;
 }
 
 

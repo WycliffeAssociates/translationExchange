@@ -5,7 +5,7 @@ import CreateUser from './CreateUser';
 import UserCreated from './UserCreated';
 import styled from 'styled-components';
 import {bindActionCreators} from 'redux';
-import { createUser, resetUserCreated } from '../../../actions/UserActions';
+import { createUser, resetUserCreated, patchUser } from '../../../actions/UserActions';
 
 
 export class CreateUserContainer extends Component {
@@ -24,7 +24,7 @@ export class CreateUserContainer extends Component {
   }
 
   handleClick() {
-    this.props.history.push({ pathname: "/users" });
+    this.props.history.push({ pathname: '/users' });
   }
 
   render() {
@@ -87,12 +87,12 @@ const Card = styled.div`
 Card.displayName = 'Card';
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ createUser, resetUserCreated }, dispatch);
+  return bindActionCreators({ createUser, resetUserCreated, patchUser }, dispatch);
 };
 
 const mapStateToProps = state => {
-  const { hash, audioName, userCreated, loading } = state.user;
-  return { hash, audioName, userCreated, loading };
+  const { hash, audioName, userCreated, loading, socialLogin, tempUserId } = state.user;
+  return { hash, audioName, userCreated, loading, socialLogin, tempUserId };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
