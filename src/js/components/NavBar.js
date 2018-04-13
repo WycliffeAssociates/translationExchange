@@ -93,6 +93,7 @@ class NavBar extends Component {
           <Title>Translation Exchange </Title>
         </TextContainer>
         <IconsContainer>
+
           <ProjectsButton selected={projectPage} onClick={()=> history.push('/projects')}>
             <i className="material-icons">book</i>
             <Text>{book}</Text>
@@ -121,6 +122,7 @@ class NavBar extends Component {
 
         </IconsContainer>
         <IdenticonContainer>
+         
             <Dropdown
                 trigger={['click']}
                 overlayClassName="logout-dropdown"

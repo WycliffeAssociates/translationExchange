@@ -18,6 +18,7 @@
 const config = {                                                        //remote api
   apiUrl: 'http://localhost/api/',
   streamingUrl: 'http://localhost/',
+  redirectUri: 'http://localhost:3000',
   database: 'http://localhost:8000',
 };
 

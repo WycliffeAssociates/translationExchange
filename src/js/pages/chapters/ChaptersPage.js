@@ -66,21 +66,20 @@ const ChapterPageContainer = styled.div`
     top:0;
     left:0;
     width: 100%;
-    height: auto%;
+    height: auto;
     min-height: 850px;
     flex-direction: column;
     background-color: #F7F9FE
+    overflow-y: scroll;
 `;
 
 const CardsContainer = styled.div`
     height:100%;
     width: 100vw;
     min-height: 850px;
-    overflow-y: scroll;
     display: flex;
     flex-wrap: wrap;
-    padding-top: 2vw;
-    padding-left: 1vw;
+    //padding: 2vw;
     margin-top: 5vh;
 
 `;
