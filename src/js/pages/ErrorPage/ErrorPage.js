@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled,{keyframes} from 'styled-components';
 import { zoomIn } from 'react-animations';
-import imgError from '../../../assets/images/error_image.png'
+import imgError from '../../../assets/images/internet_error.png';
 
 
 
