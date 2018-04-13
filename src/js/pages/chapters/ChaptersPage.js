@@ -17,12 +17,12 @@ import Data from '../projects/mockupdata/data';
 class ChapterPage extends Component {
 
   componentWillMount() {
-    const {getChapters, chapters} = this.props;
+    const {getChapters, chapters, history} = this.props;
 
     if (chapters.length < 1) {
       const {search} = this.props.location;   //get data if the user refresh the page
       const query = QueryString.parse(search);
-      getChapters(query.projectId);
+      getChapters(query.projectId, history);
     }
 
   }
@@ -46,6 +46,7 @@ class ChapterPage extends Component {
 
           <CardsContainer>
             {chapters.map(chp => <ChapterCard {...chp} {...this.props} />)}
+              {/*{Data.map(chp => <ChapterCard  {...this.props} />)}*/}
 
           </CardsContainer>
 
@@ -77,7 +78,6 @@ const CardsContainer = styled.div`
     width: 100vw;
     min-height: 850px;
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
     //padding: 2vw;
     margin-top: 5vh;
@@ -87,13 +87,13 @@ const CardsContainer = styled.div`
 const DownloadBar = styled.div`
   width: 100vw;
   height: 6vh;
-  background:#2D2D2D;
+  background:transparent;
   position: absolute;
   top: 11vh;
   display: flex;
   padding: 0.5vh;
   flex-direction: column;
-  z-index:99;
+  z-index: 99;
 
 `;
 
