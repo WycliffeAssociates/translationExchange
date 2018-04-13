@@ -14,9 +14,9 @@ services:
                       && mkdir /tE-backend/tRecorderApi/api/migrations
                       && touch /tE-backend/tRecorderApi/api/migrations/__init__.py
                       && cd /tE-backend/tRecorderApi
-                      && python3 manage.py makemigrations
-                      && python3 manage.py migrate
-                      && python3 manage.py runserver"
+                      && python3 manage.py makemigrations --settings=tRecorderApi.settings_test
+                      && python3 manage.py migrate --settings=tRecorderApi.settings_test
+                      && python3 manage.py runserver --settings=tRecorderApi.settings_test"
     depends_on:
       - db
   db:
