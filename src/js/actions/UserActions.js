@@ -162,7 +162,6 @@ export const loadingProccess = () => {
   };
 };
 export const identiconLogin = (iconHash, callback) => {
-
 return dispatch => {
     return axios.post(`${config.apiUrl}login/`,{iconHash: iconHash})
       .then(response=>{
