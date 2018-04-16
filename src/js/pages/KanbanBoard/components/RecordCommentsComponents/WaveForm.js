@@ -1,6 +1,6 @@
 import React from 'react';
-import { ReactMic } from 'react-mic';
-import timeLine from '../../../../../assets/images/CommentstimeLine.png';
+import { ReactMicPlus } from 'react-mic-plus';
+import timeLine from '../../../../assets/images/CommentstimeLine.png';
 import styled from 'styled-components';
 import Wave from './Wave';
 
@@ -17,13 +17,13 @@ export default ({recordedBlob, isAudioAvailable, onStop, recording, play, onFini
   return (
     <Container>
       <RecordContainer>
-        <ReactMic
+        <ReactMicPlus
           record={recording}
           className="sound-wave"
           onStop={onStop}
           strokeColor="#009CFF"
-          backgroundColor="#2D2D2D"
-          visualSetting="frequencyBars"
+          backgroundColor="transparent"
+          visualSetting="spectrogram"
         />
       </RecordContainer>
     </Container>
