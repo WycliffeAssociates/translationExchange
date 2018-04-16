@@ -43,10 +43,13 @@ export const getUserHash = () => {
     };
 };
 
-export const getUserHashSuccess = (iconHash) => {
+export const getUserHashSuccess = (icon_hash) =>{
   return {
     type: 'GET_LOGGED_USER_HASH',
-    iconHash
+    icon_hash,
+
+
+
   };
 };
 
@@ -74,10 +77,10 @@ export const createUser = (recordedBlob, hash) => {
   };
 };
 
-export const userCreated = (audioName, hash)=>{
+export const userCreated = (audio_name, hash)=>{
   return {
     type: 'USER_CREATED',
-    audioName,
+    audio_name,
     hash,
 
 
@@ -90,7 +93,7 @@ export const resetUserCreated = ()=>{
   };
 };
 
-export const patchUser = (id, recordedBlob, hash) => {
+export const patchUser = (id, recordedBlob, hash, callback) => {
   return function(dispatch) {
     console.log(id, recordedBlob, hash, 'PATCH USER');
     return axios
@@ -104,21 +107,22 @@ export const patchUser = (id, recordedBlob, hash) => {
         console.log(response.data);
         dispatch ({
           type: 'PATCHED_USER',
-          audioName: response.name_audio,
-          hash: response.icon_hash,
+          audio_name: response.data.name_audio,
+          icon_hash: response.data.icon_hash,
         });
+        callback();
 
       });
   };
 
 };
 
-export const createSocialUser = (user) => {
+export const createSocialUser = (user, callback) => {
   return function(dispatch) {
     return axios.post(`${config.apiUrl}login/social/token_user/github/`,{clientId: 'f5e981378e91c2067d41',redirectUri: config.streamingUrl, code: user.code})
       .then(response=>{
 
-        if (response.icon_hash == null || response.name_audio == null) {
+        if (response.data.icon_hash == '' || response.data.name_audio == '') {
           dispatch({
             type: 'SOCIAL_USER_CREATION',
             socialLogin: true,
@@ -130,8 +134,11 @@ export const createSocialUser = (user) => {
         else {
           dispatch ({
             type: 'LOGIN_SOCIAL_USER',
+            name_audio: response.data.name_audio,
+            icon_hash: response.data.icon_hash,
           });
           localStorage.setItem('token',response.data.token);
+          callback();
         }
 
       }).catch(err=>{
@@ -157,13 +164,14 @@ export const loadingProccess = () => {
     type: 'LOADING_USER',
   };
 };
-export const identiconLogin = (iconHash, callback) => {
+export const identiconLogin = (icon_hash, callback) => {
+
 return dispatch => {
-    return axios.post(`${config.apiUrl}login/`,{icon_hash: iconHash})
+    return axios.post(`${config.apiUrl}login/`,{icon_hash: icon_hash})
       .then(response=>{
         localStorage.setItem('token',response.data.token);
         callback();
-        dispatch(identiconLoginSuccess(iconHash));
+        dispatch(identiconLoginSuccess(icon_hash));
       }).catch(err=>{
         console.log(err);
       }
@@ -171,16 +179,17 @@ return dispatch => {
   };
 };
 
-export const identiconLoginSuccess = (iconHash) => {
+export const identiconLoginSuccess = (icon_hash) => {
   return {
     type: 'LOGIN_SUCCESS',
-    iconHash: iconHash,
+    icon_hash: icon_hash,
   };
 };
 
 
 export const removeUser = () => {
   return {
-      type:'REMOVE_USER'
-  }
+    type: 'REMOVE_USER',
+  };
+
 };
