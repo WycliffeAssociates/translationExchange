@@ -158,7 +158,6 @@ export const loadingProccess = () => {
   };
 };
 export const identiconLogin = (iconHash, callback) => {
-
 return dispatch => {
     return axios.post(`${config.apiUrl}login/`,{icon_hash: iconHash})
       .then(response=>{
@@ -184,5 +183,4 @@ export const removeUser = () => {
   return {
       type:'REMOVE_USER'
   }
-
 };

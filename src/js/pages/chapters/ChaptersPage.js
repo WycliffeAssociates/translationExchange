@@ -45,8 +45,9 @@ class ChapterPage extends Component {
           :
 
           <CardsContainer>
-            {chapters.map(chp => <ChapterCard {...chp} {...this.props} />)}
-              {/*{Data.map(chp => <ChapterCard  {...this.props} />)}*/}
+            {chapters.map((chp, index) =>
+              <ChapterCard {...chp} {...this.props} />)}
+            {/*{Data.map(chp => <ChapterCard  {...this.props} />)}*/}
 
           </CardsContainer>
 
@@ -69,7 +70,7 @@ const ChapterPageContainer = styled.div`
     height: auto;
     min-height: 850px;
     flex-direction: column;
-    background-color: #F7F9FE
+    background-color: #F4F7F9;
     overflow-y: scroll;
 `;
 
@@ -79,8 +80,10 @@ const CardsContainer = styled.div`
     min-height: 850px;
     display: flex;
     flex-wrap: wrap;
-    padding: 1vw;
+    padding: 5vw 5vw;
     margin-top: 8vh;
+    background: #F4F7F9;
+    align-self: center;
 
 `;
 
