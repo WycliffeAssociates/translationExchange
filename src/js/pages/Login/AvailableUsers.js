@@ -40,11 +40,11 @@ class AvailableUsers extends React.Component {
 
               {
                 users.length>0? users.map((user,index)  => {
-
                   return (
-                    <Grid.Column width={3}>
-                      <UserCard  key={user} id={index} user={user} {...this.props} />
-                    </Grid.Column>
+                    user.is_social? '' :
+                      <Grid.Column width={3}>
+                        <UserCard  key={user} id={index} user={user} {...this.props} />
+                      </Grid.Column>
                   );}) :   ''
 
               }

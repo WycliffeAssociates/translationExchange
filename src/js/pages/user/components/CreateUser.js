@@ -85,7 +85,7 @@ class CreateUser extends Component {
       () => {
         const jsonblob = reader.result;
         if (this.props.socialLogin) {
-          this.props.patchUser(tempUserId, jsonblob, generatedHash);
+          this.props.patchUser(tempUserId, jsonblob, generatedHash, () => this.props.history.push('/projects'));
         }
         else  {
           this.props.createUser(jsonblob, generatedHash); // action to create user in db
