@@ -122,7 +122,7 @@ export const createSocialUser = (user, callback) => {
     return axios.post(`${config.apiUrl}login/social/token_user/github/`,{clientId: 'f5e981378e91c2067d41',redirectUri: config.streamingUrl, code: user.code})
       .then(response=>{
 
-        if (response.data.icon_hash == null || response.data.name_audio == null) {
+        if (response.data.icon_hash == '' || response.data.name_audio == '') {
           dispatch({
             type: 'SOCIAL_USER_CREATION',
             socialLogin: true,
