@@ -8,6 +8,16 @@ import QueryString from "query-string";
 
 export default class ChapterCard extends Component {
 
+  constructor() {
+    super();
+
+    this.state ={
+      numberInRow: '',
+    };
+
+    this.spaceCards = this.spaceCards.bind(this);
+  }
+
     reviewChapter = () => {
       const {id, getChunks, history, number, getComments, location } = this.props;
       const searchBar = QueryString.parse(location.search);
@@ -22,30 +32,49 @@ export default class ChapterCard extends Component {
 
     };
 
+    componentWillMount() {
+      this.spaceCards();
+    }
+    componentDidMount() {
 
+      window.addEventListener('resize', () => {
+        this.spaceCards();
+      });
+    }
+
+    spaceCards() {
+
+      var width = window.innerWidth;
+      width = width-(width*0.1); // takeaway 10% because of padding on parent container
+      var numberInRow = (width/220) | 0;
+      console.log(numberInRow);
+      console.log(width);
+      this.setState({
+        numberInRow: numberInRow,
+      });
+    }
 
     render() {
-        const{ number, total_chunks, uploaded_chunks, published_chunks } = this.props;
+      const { number, total_chunks, uploaded_chunks, published_chunks } = this.props;
+      const {numberInRow} = this.state;
 
-        let dangerSign = false;
-        let checkLevel_1 = false;
+      let dangerSign = true;
+      let checkLevel_1 = false;
 
-        if(uploaded_chunks !== total_chunks){     // check if all the chunks uploaded matches wih the total chunks in that chapter
-            dangerSign = true;
-        }
+      if (uploaded_chunks === total_chunks) {     // check if all the chunks uploaded matches wih the total chunks in that chapter
+        dangerSign = false;
+      }
 
-
-
-        const chunksCompleted = `${published_chunks}/${total_chunks}`;
-        const percentageCompleted = (published_chunks * 100)/ total_chunks;
+      const chunksCompleted = `${published_chunks}/${total_chunks}`;
+      const percentageCompleted = (published_chunks * 100)/ total_chunks;
 
         return (
 
-                <Card check ={checkLevel_1}>
+                <Card check ={checkLevel_1} numberInRow = {numberInRow}>
                     <InformationContainer >
                         <TextContainer>
                             <P>Chapter {number}</P>
-                            {dangerSign ? <i style={{color:'#FF9800'}} class="material-icons">warning</i>:''}
+                            {dangerSign ? <i class="material-icons">warning</i>:''}
                         </TextContainer>
                         {checkLevel_1 ?
                             <CheckTextContainer>
@@ -81,8 +110,8 @@ export default class ChapterCard extends Component {
 
                     <ButtonContainer>
                         <ReviewButton check={checkLevel_1} onClick={this.reviewChapter}>
-                            <i style={{fontSize:'1vw'}} class="material-icons">done_all</i>
-                            <p style={{fontSize:'1vw'}}>  Review </p>
+                            <i style={{fontSize: '16px'}} class="material-icons">done_all</i>
+                            <p style={{fontSize: '16px', marginLeft: '5px'}}>  Review </p>
                         </ReviewButton>
                     </ButtonContainer>
                 </Card>
@@ -102,17 +131,37 @@ const zoomInAnimation = keyframes `${zoomIn}`;
 const Card= styled.div`
     color: ${props=> props.check ? 'white': ''}
     text-align: center;
-    height: 22vw;
-    width: 17vw;
-    border-radius: .5vw;
-    box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+    height: 271px;
+    width: 200px;
+    border-radius: 15px;
+    box-shadow: 0px 6px 6px rgba(0,0,0,0.5);
     overflow: hidden;
     background-color: white;
     background: ${props => props.check ? 'linear-gradient(to bottom, #0076FF, #00C5FF)':''};
     margin-top: 3vw;
-    padding: 1vw;
-    margin: 0 0 2vw 2vw;
+    padding: 15px;
+    margin: auto;
+    margin-top: 2vw;
     animation: ${zoomInAnimation} .2s ease-in;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+
+    @media only screen and (max-width: 733px) {
+      margin: auto;
+      margin-top: 5%;
+    }
+    @media only screen and (min-width: 734px) {
+      :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+      margin-left: ${props => 90/(2+props.numberInRow)}%;
+    }
+
+    :nth-child(${props => (props.numberInRow*2)-1}n) {
+    margin-right: ${props => 75/(2+props.numberInRow)}%;
+  }
+    }
 
 `;
 
@@ -121,32 +170,37 @@ const CircularTextContainer = styled.div`
 `;
 
 const CircularText = styled.p`
-    font-size: 1.5vw;
+    font-size: 18px;
 `;
 
 const CheckText = styled.p`
-    font-size: 1vw;
+    font-size: 14px;
 `;
 
 
 const ReviewButton= styled.button`
-
-  i {
-    vertical-align: middle;
-  }
   display:flex;
-  border-radius: 20px;
   color: ${props=> props.check ? '#009CFF': 'white'};
   background: linear-gradient(to bottom,${props => props.check ? '#FFF, #FFF': '#0076FF, #00C5FF'} );
-  padding: 0.4vw 4vw;
-  font-size: 1.1vw;
+  font-size: 12px;
   font-weight: 100;
   border: none;
-  text-decoration: underline;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
   outline:none;
   cursor: pointer;
   margin: auto;
+  padding: 10px 35px;
+  min-height: 40px;
+  width: inherit;
+
+  i {
+    vertical-align: middle;
+    text-decoration: none;
+  }
+
+  p {
+    text-decoration: underline;
+  }
 `;
 
 const CircularProgressContainer = styled.div`
@@ -168,34 +222,45 @@ const CheckTextContainer = styled.div`
 
 
 const P = styled.p`
-   font-size: 1.2vw
+   font-size: 16px
    font-weight: bold;
+   display: inline-block;
 `;
 
 const InformationContainer = styled.div`
+text-align: center;
+width: 100%;
 `;
 
 
 const TextContainer = styled.div`
   padding-top: .5vw;
-  padding-left: .7vw;
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  height: 4vh
-  
+  align-items: flex-start;
+  justify-content: space-evenly;
+  height: auto;
+
+  i {
+    vertical-align: middle;
+    color: #FF9800;
+    margin-left: 10%;
+  }
+
 
 
 `;
 
 const ButtonContainer= styled.div`
-    width: 100%;
+    width: 150px;
+    margin-top: 10px;
     overflow: hidden;
     text-align: center;
     border-color: white;
     border-width: 1vw;
     display: flex;
     justify-content:center;
-    padding-top: .6vw;
+    border-radius: 25px;
+
   `;
