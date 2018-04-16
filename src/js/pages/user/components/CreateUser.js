@@ -112,6 +112,9 @@ class CreateUser extends Component {
               recordedBlob={recordedBlob}
               audio={audio}
               onStop={this.onStop}
+              width={640}
+              nonstop={false}
+              duration={3}
             />
             <BottomSection
               startRecording={this.startRecording}
