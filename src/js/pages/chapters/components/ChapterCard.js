@@ -20,7 +20,6 @@ export default class ChapterCard extends Component {
         search: `?chapterId=${id}&chapterNum=${number}&bookName=${searchBar.bookName}&projectId=${searchBar.projectId}`,
       });
 
-
     };
 
 
@@ -28,11 +27,11 @@ export default class ChapterCard extends Component {
     render() {
         const{ number, total_chunks, uploaded_chunks, published_chunks } = this.props;
 
-        let dangerSign = true;
+        let dangerSign = false;
         let checkLevel_1 = false;
 
-        if(uploaded_chunks === total_chunks){     // check if all the chunks uploaded matches wih the total chunks in that chapter
-            dangerSign = false;
+        if(uploaded_chunks !== total_chunks){     // check if all the chunks uploaded matches wih the total chunks in that chapter
+            dangerSign = true;
         }
 
 
@@ -46,6 +45,7 @@ export default class ChapterCard extends Component {
                     <InformationContainer >
                         <TextContainer>
                             <P>Chapter {number}</P>
+                            {dangerSign ? <i style={{color:'#FF9800'}} class="material-icons">warning</i>:''}
                         </TextContainer>
                         {checkLevel_1 ?
                             <CheckTextContainer>
@@ -179,10 +179,12 @@ const InformationContainer = styled.div`
 const TextContainer = styled.div`
   padding-top: .5vw;
   padding-left: .7vw;
-  width: 45%;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 4vh
+  
 
 
 `;
