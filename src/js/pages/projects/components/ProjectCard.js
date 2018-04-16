@@ -6,6 +6,7 @@ import {zoomIn} from "react-animations";
 
 export default class ProjectCard extends React.Component {
 
+
     reviewProject = () => {
       const {projectId, getChapters, history, bookName } = this.props;
 
@@ -17,7 +18,6 @@ export default class ProjectCard extends React.Component {
             pathname: './chapters',
             search: `?projectId=${projectId}&&bookName=${bookName}`
         });
-
     };
 
   render() {
@@ -25,8 +25,9 @@ export default class ProjectCard extends React.Component {
 
 
 
-    return (
 
+
+    return (
         <Card>
           <InformationContainer >
             <TextContainer>
