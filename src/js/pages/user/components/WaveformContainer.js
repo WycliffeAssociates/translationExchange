@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TimeLine from './timeLine.png';
 import Waveform from './Waveform';
 
-export default ({recordedBlob, audio, onStop, recording}) => {
+export default ({recordedBlob, audio, onStop, recording, width, nonstop, duration}) => {
 
   if (audio) {
     return (
@@ -24,8 +24,9 @@ export default ({recordedBlob, audio, onStop, recording}) => {
           strokeColor="#009CFF"
           backgroundColor="transparent"
           visualSetting="spectrogram"
-          duration={3}
-          nonstop={false}
+          duration={duration}
+          nonstop={nonstop}
+          width={width}
         />
       </RecordContainer>
     </Container>

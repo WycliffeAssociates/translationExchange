@@ -4,7 +4,7 @@ import timeLine from '../../../../../assets/images/CommentstimeLine.png';
 import styled from 'styled-components';
 import Wave from './Wave';
 
-export default ({recordedBlob, isAudioAvailable, onStop, recording, play, onFinishPlaying}) => {
+export default ({recordedBlob, isAudioAvailable, onStop, recording, play, onFinishPlaying, width, nonstop, duration}) => {
 
   if (isAudioAvailable) {
     return (
@@ -24,6 +24,9 @@ export default ({recordedBlob, isAudioAvailable, onStop, recording, play, onFini
           strokeColor="#009CFF"
           backgroundColor="transparent"
           visualSetting="spectrogram"
+          width={width}
+          nonstop={nonstop}
+          duration={duration}
         />
       </RecordContainer>
     </Container>

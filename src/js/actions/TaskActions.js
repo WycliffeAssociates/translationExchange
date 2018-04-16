@@ -4,7 +4,7 @@ import config from '../../config/config';
 export const getTasks = (type) => {
   return function(dispatch) {
     return axios
-      .get(`${config.apiUrl}tasks/?type=${type}`,
+      .get(`${config.apiUrl}tasks/?type=${type || "upload"}`,
         {
           headers: { Authorization: 'Token ' + localStorage.getItem('token') }
         })
