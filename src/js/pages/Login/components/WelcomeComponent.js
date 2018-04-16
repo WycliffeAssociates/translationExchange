@@ -1,7 +1,8 @@
 /* global require gapi:true */
 
 import React from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+import {slideInDown, zoomIn} from 'react-animations';
 import config from '../../../../config/config';
 import GitHubLogin from '../../../components/social-login/GitHubLogin';
 
@@ -87,7 +88,7 @@ export default class WelcomeComponent extends React.Component {
 
 }
 
-
+const zoomInAnimations =keyframes`${zoomIn}`;
 
 const  WelcomePage = styled.div`
   display: flex;
@@ -102,6 +103,7 @@ const  WelcomePage = styled.div`
   //border: solid #969595 0.1vw;
   border-radius: 0.5vw;
   box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.5);
+  animation: ${zoomInAnimations} .3s ease-in;
   `;
 
 WelcomePage.displayName='WelcomePage';

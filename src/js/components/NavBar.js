@@ -93,6 +93,7 @@ class NavBar extends Component {
           <Title>Translation Exchange </Title>
         </TextContainer>
         <IconsContainer>
+
           <ProjectsButton selected={projectPage} onClick={()=> history.push('/projects')}>
             <i className="material-icons">book</i>
             <Text>{book}</Text>
@@ -121,6 +122,7 @@ class NavBar extends Component {
 
         </IconsContainer>
         <IdenticonContainer>
+         
             <Dropdown
                 trigger={['click']}
                 overlayClassName="logout-dropdown"
@@ -148,7 +150,7 @@ const Container = styled.div`
   justify-content: space-between;
   box-shadow: 3px 4px 5px rgba(0,0,0,0.2);
   z-index: 2;
-  min-height: 80px;
+  min-height: 90px;
 `;
 const Text = styled.p`
   cursor: pointer;

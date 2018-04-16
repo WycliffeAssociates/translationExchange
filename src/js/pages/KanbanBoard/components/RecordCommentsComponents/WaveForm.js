@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReactMicPlus } from 'react-mic-plus';
-import timeLine from '../../../../assets/images/CommentstimeLine.png';
+import timeLine from '../../../../../assets/images/CommentstimeLine.png';
 import styled from 'styled-components';
 import Wave from './Wave';
 

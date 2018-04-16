@@ -8,6 +8,7 @@ import SourceAudioReducer from './SourceAudioReducer';
 import user from './UserReducer.js';
 import comments from './CommentsReducer';
 import kanbanPage from './KanbanPageReducer'
+import taskProgress from './TaskProgressReducer';
 import Chapters from './ChapterPageReducer'
 
 
@@ -19,6 +20,7 @@ export default combineReducers({
   user,
   comments,
   kanbanPage,
+  taskProgress,
   Projects,
   Chapters
 });
