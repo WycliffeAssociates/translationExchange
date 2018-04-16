@@ -35,18 +35,17 @@ export const getUserHash = () => {
 
               const{icon_hash} = response.data;
                 dispatch(getUserHashSuccess(icon_hash));
-
-            })
+        })
             .catch(error => {
                 console.log(error);
             });
     };
 };
 
-export const getUserHashSuccess = (icon_hash) =>{
+export const getUserHashSuccess = (iconHash) =>{
   return {
     type: 'GET_LOGGED_USER_HASH',
-    icon_hash,
+    iconHash,
 
 
 
@@ -77,10 +76,10 @@ export const createUser = (recordedBlob, hash) => {
   };
 };
 
-export const userCreated = (audio_name, hash)=>{
+export const userCreated = (nameAudio, hash)=>{
   return {
     type: 'USER_CREATED',
-    audio_name,
+    nameAudio,
     hash,
 
 
@@ -164,14 +163,14 @@ export const loadingProccess = () => {
     type: 'LOADING_USER',
   };
 };
-export const identiconLogin = (icon_hash, callback) => {
+export const identiconLogin = (iconHash, callback) => {
 
 return dispatch => {
-    return axios.post(`${config.apiUrl}login/`,{icon_hash: icon_hash})
+    return axios.post(`${config.apiUrl}login/`,{icon_hash: iconHash})
       .then(response=>{
         localStorage.setItem('token',response.data.token);
         callback();
-        dispatch(identiconLoginSuccess(icon_hash));
+        dispatch(identiconLoginSuccess(iconHash));
       }).catch(err=>{
         console.log(err);
       }
@@ -179,10 +178,10 @@ return dispatch => {
   };
 };
 
-export const identiconLoginSuccess = (icon_hash) => {
+export const identiconLoginSuccess = (iconHash) => {
   return {
     type: 'LOGIN_SUCCESS',
-    icon_hash: icon_hash,
+    iconHash: iconHash,
   };
 };
 
