@@ -92,7 +92,7 @@ const Card= styled.div`
     overflow: hidden;
     background-color: white;
     border: solid white;
-    animation: ${bounceInAnimations} 2s ease-in;
+    animation: ${bounceInAnimations} 1.5s ease-in;
 `;
 
 const ImageContainer = styled.div`

@@ -1,8 +1,8 @@
 import axios from 'axios';
 import config from '../../config/config';
 
-export const fetchUsers = () => {
-  return (dispatch) => {
+export const fetchUsers = (redirect) => {
+return (dispatch) => {
     dispatch({type: 'FETCHING_USERS'});
     return axios
       .get(`${config.apiUrl}profiles/`)
@@ -11,6 +11,7 @@ export const fetchUsers = () => {
       })
       .catch(error => {
         console.log(error); //TODO handle error
+        redirect.push('./ErrorPage');
       });
   };
 };
@@ -35,7 +36,6 @@ export const getUserHash = () => {
 
               const{icon_hash} = response.data;
                 dispatch(getUserHashSuccess(icon_hash));
-
             })
             .catch(error => {
                 console.log(error);
@@ -49,8 +49,6 @@ export const getUserHashSuccess = (icon_hash) =>{
     icon_hash,
 
 
-
-  };
 };
 
 
@@ -168,6 +166,7 @@ export const identiconLogin = (icon_hash, callback) => {
 
 return dispatch => {
     return axios.post(`${config.apiUrl}login/`,{icon_hash: icon_hash})
+
       .then(response=>{
         localStorage.setItem('token',response.data.token);
         callback();

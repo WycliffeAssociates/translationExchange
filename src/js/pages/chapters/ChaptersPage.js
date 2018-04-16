@@ -17,12 +17,12 @@ import Data from '../projects/mockupdata/data';
 class ChapterPage extends Component {
 
   componentWillMount() {
-    const {getChapters, chapters} = this.props;
+    const {getChapters, chapters, history} = this.props;
 
     if (chapters.length < 1) {
       const {search} = this.props.location;   //get data if the user refresh the page
       const query = QueryString.parse(search);
-      getChapters(query.projectId);
+      getChapters(query.projectId, history);
     }
 
   }
@@ -45,7 +45,9 @@ class ChapterPage extends Component {
           :
 
           <CardsContainer>
-            {chapters.map(chp => <ChapterCard {...chp} {...this.props} />)}
+            {chapters.map((chp, index) =>
+              <ChapterCard {...chp} {...this.props} />)}
+            {/*{Data.map(chp => <ChapterCard  {...this.props} />)}*/}
 
           </CardsContainer>
 
@@ -68,7 +70,7 @@ const ChapterPageContainer = styled.div`
     height: auto;
     min-height: 850px;
     flex-direction: column;
-    background-color: #F7F9FE
+    background-color: #F4F7F9;
     overflow-y: scroll;
 `;
 
@@ -77,23 +79,24 @@ const CardsContainer = styled.div`
     width: 100vw;
     min-height: 850px;
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
-    //padding: 2vw;
-    margin-top: 5vh;
+    padding: 5vw 5vw;
+    margin-top: 8vh;
+    background: #F4F7F9;
+    align-self: center;
 
 `;
 
 const DownloadBar = styled.div`
   width: 100vw;
-  height: 6vh;
+  height: auto;
   background:#2D2D2D;
   position: absolute;
   top: 11vh;
   display: flex;
   padding: 0.5vh;
   flex-direction: column;
-  z-index:99;
+  z-index: 99;
 
 `;
 
@@ -104,12 +107,13 @@ const DownloadButton = styled.button`
   border-radius: 0.1vw;
   height: 80%;
   color: #009CFF;
-  align-self: flex-end;
+  align-self: flex-start;
   margin-top: 0.7vh;
   border: none;
   text-decoration: underline;
   font-weight: 500;
   cursor: pointer;
+  min-height: 40px;
   i {
     vertical-align: middle;
   }

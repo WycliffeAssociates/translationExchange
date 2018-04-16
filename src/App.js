@@ -8,11 +8,12 @@ import axios from 'axios';
 import User from './js/pages/user/user';
 import Welcome from './js/pages/Login/LoginPage.js';
 import AvailableUsers from './js/pages/Login/AvailableUsers.js';
+import ErrorPage from './js/pages/ErrorPage/ErrorPage';
 import CreateUserContainer from './js/pages/user/components/CreateUserContainer';
 import { DragDropContext } from 'react-dnd';
 import Notifications from 'react-notify-toast';
-import Root from './js/components/Root.js';
 import KanbanPage from './js/pages/KanbanBoard/KanbanPage';
+import TaskProgressPage from './js/pages/tasks/TaskProgressPage';
 import CustomDragLayer from './CustomDragLayer';
 import ChapterPage from './js/pages/chapters/ChaptersPage';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
@@ -61,7 +62,9 @@ class App extends Component {
           <Route  path="/chapters" component={ChapterPage} />
           <Route  path="/user" component={User} />
           <Route path ="/newComponents" component={KanbanPage} />
+          <Route path ="/taskProgress" component={TaskProgressPage} />
           <Route path ="/kanban" component={KanbanPage} />
+          <Route path ="/errorPage" component={ErrorPage} />
           <Route path="*" component={NotFound} />
         </Switch>
 
