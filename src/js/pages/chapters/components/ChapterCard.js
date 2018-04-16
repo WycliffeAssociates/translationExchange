@@ -30,7 +30,6 @@ export default class ChapterCard extends Component {
         search: `?chapterId=${id}&chapterNum=${number}&bookName=${searchBar.bookName}&projectId=${searchBar.projectId}`,
       });
 
-
     };
 
     componentWillMount() {
@@ -55,8 +54,6 @@ export default class ChapterCard extends Component {
       });
     }
 
-
-
     render() {
       const { number, total_chunks, uploaded_chunks, published_chunks } = this.props;
       const {numberInRow} = this.state;
@@ -77,6 +74,7 @@ export default class ChapterCard extends Component {
                     <InformationContainer >
                         <TextContainer>
                             <P>Chapter {number}</P>
+                            {dangerSign ? <i class="material-icons">warning</i>:''}
                         </TextContainer>
                         {checkLevel_1 ?
                             <CheckTextContainer>
@@ -226,21 +224,31 @@ const CheckTextContainer = styled.div`
 const P = styled.p`
    font-size: 16px
    font-weight: bold;
+   display: inline-block;
 `;
 
 const InformationContainer = styled.div`
 text-align: center;
+width: 100%;
 `;
 
 
 const TextContainer = styled.div`
-
-  width: 150px;
-  text-align: center;
+  padding-top: .5vw;
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
-  margin: auto;
+  justify-content: space-evenly;
+  height: auto;
+
+  i {
+    vertical-align: middle;
+    color: #FF9800;
+    margin-left: 10%;
+  }
+
+
 
 `;
 

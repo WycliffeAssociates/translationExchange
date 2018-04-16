@@ -36,7 +36,6 @@ export const getUserHash = () => {
 
               const{icon_hash} = response.data;
                 dispatch(getUserHashSuccess(icon_hash));
-
             })
             .catch(error => {
                 console.log(error);
@@ -44,13 +43,10 @@ export const getUserHash = () => {
     };
 };
 
-export const getUserHashSuccess = (iconHash) =>{
+export const getUserHashSuccess = (iconHash) => {
   return {
     type: 'GET_LOGGED_USER_HASH',
     iconHash
-
-
-
   };
 };
 
@@ -62,8 +58,8 @@ export const createUser = (recordedBlob, hash) => {
     dispatch(loadingProccess()); // can be used to render a spinner
     return axios
       .post(`${config.apiUrl}profiles/`, {
-        nameAudio: recordedBlob,
-        iconHash: hash,
+        name_audio: recordedBlob,
+        icon_hash: hash,
       })
       .then(response => {
         const {nameAudio, token} = response.data;
@@ -99,8 +95,8 @@ export const patchUser = (id, recordedBlob, hash) => {
     console.log(id, recordedBlob, hash, 'PATCH USER');
     return axios
       .patch(`${config.apiUrl}profiles/${id}/`,{
-        iconHash: hash,
-        nameAudio: recordedBlob,
+        icon_hash: hash,
+        name_audio: recordedBlob,
 
       }, {headers: { Authorization: 'Token ' + localStorage.getItem('token') },
       },
@@ -163,7 +159,7 @@ export const loadingProccess = () => {
 };
 export const identiconLogin = (iconHash, callback) => {
 return dispatch => {
-    return axios.post(`${config.apiUrl}login/`,{iconHash: iconHash})
+    return axios.post(`${config.apiUrl}login/`,{icon_hash: iconHash})
       .then(response=>{
         localStorage.setItem('token',response.data.token);
         callback();
@@ -187,5 +183,4 @@ export const removeUser = () => {
   return {
       type:'REMOVE_USER'
   }
-
 };

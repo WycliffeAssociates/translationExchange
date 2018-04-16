@@ -20,8 +20,10 @@ class MyProjectsContainer extends Component {
           <Header>Projects</Header>
         </HeaderContainer>
         <CardsContainer>
-          { projects.map( (p) =>
-            <ProjectCard bookName={p.book.name}
+          { projects.map( (p, index) =>
+            <ProjectCard
+              index={index}
+              bookName={p.book.name}
               language={p.language.name}
               version={p.version.slug}
               dateModified={p.date_modified.slice(0,10)}
