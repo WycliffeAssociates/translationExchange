@@ -1,8 +1,8 @@
 import axios from 'axios';
 import config from '../../config/config';
 
-export const fetchUsers = () => {
-  return (dispatch) => {
+export const fetchUsers = (redirect) => {
+return (dispatch) => {
     dispatch({type: 'FETCHING_USERS'});
     return axios
       .get(`${config.apiUrl}profiles/`)
@@ -11,6 +11,7 @@ export const fetchUsers = () => {
       })
       .catch(error => {
         console.log(error); //TODO handle error
+        redirect.push('./ErrorPage');
       });
   };
 };

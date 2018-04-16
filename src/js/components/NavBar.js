@@ -72,12 +72,12 @@ class NavBar extends Component {
       goToChapters = () => {
         const {getChapters} = this.props;
         getChapters(searchBar.projectId);
-        history.push(`/chapters?projectId=${searchBar.projectId}&&bookName=${searchBar.bookName}`);
+        history.push(`/chapters?projectId=${searchBar.projectId}&&bookName=${searchBar.bookName}&&mode=${searchBar.mode}`);
       };
 
       menu = (
         <Menu onSelect={ ky=> this.onSelect(ky)}>
-          { kanbanPage ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>): ''}
+          { kanbanPage ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> {searchBar.mode} {chnk.startv}</MenuItem>): ''}
         </Menu>
       );
 
@@ -93,6 +93,7 @@ class NavBar extends Component {
           <Title>Translation Exchange </Title>
         </TextContainer>
         <IconsContainer>
+
           <ProjectsButton selected={projectPage} onClick={()=> history.push('/projects')}>
             <i className="material-icons">book</i>
             <Text>{book}</Text>
@@ -111,7 +112,7 @@ class NavBar extends Component {
                   overlay={menu}
                   animation="slide-up"
                 >
-                  <Text>Chunk {this.props.chunkNum}</Text>
+                  <Text>{searchBar.mode} {this.props.chunkNum}</Text>
                 </Dropdown>
                 :
                 ''
@@ -121,6 +122,7 @@ class NavBar extends Component {
 
         </IconsContainer>
         <IdenticonContainer>
+         
             <Dropdown
                 trigger={['click']}
                 overlayClassName="logout-dropdown"
@@ -148,7 +150,7 @@ const Container = styled.div`
   justify-content: space-between;
   box-shadow: 3px 4px 5px rgba(0,0,0,0.2);
   z-index: 2;
-  min-height: 80px;
+  min-height: 90px;
 `;
 const Text = styled.p`
   cursor: pointer;

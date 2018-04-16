@@ -22,11 +22,11 @@ class KanbanPage extends React.Component {
   }
 
   componentWillMount() {
-    const {getComments, getChunks, takes} = this.props;
+    const {getComments, getChunks, takes, history} = this.props;
     const {search} = this.props.location;
     const query = QueryString.parse(search);
     if (takes.length < 1) {
-      getChunks(query.chapterId);               //get data if the user refresh the page
+      getChunks(query.chapterId, history);               //get data if the user refresh the page
       getComments(query.chapterId, 'chapter_id');
 
     }
@@ -50,7 +50,7 @@ class KanbanPage extends React.Component {
     const {search} = this.props.location;
     const query = QueryString.parse(search);
 
-    console.log(this.props, 'KANBAN PAGE PROPS');
+
     return (
       <KanbanPageContainer>
         <NavBar chapterNum={query.chapterNum} kanbanPage={true} {...this.props} />
@@ -59,7 +59,7 @@ class KanbanPage extends React.Component {
 
           <KanbanBoard {...this.props} />
 
-          <UtilityPanel chapterNum={query.chapterNum} {...this.props} />
+          <UtilityPanel mode={query.mode} chapterNum={query.chapterNum} {...this.props} />
 
         </KanbanContainer>
 
