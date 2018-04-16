@@ -23,7 +23,7 @@ services:
       - db
   db:
     image: postgres
-    container_name: te-postgres
+    container_name: backend 
     restart: always
     environment:
       POSTGRES_USER: postgres
