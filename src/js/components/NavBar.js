@@ -72,12 +72,12 @@ class NavBar extends Component {
       goToChapters = () => {
         const {getChapters} = this.props;
         getChapters(searchBar.projectId);
-        history.push(`/chapters?projectId=${searchBar.projectId}&&bookName=${searchBar.bookName}`);
+        history.push(`/chapters?projectId=${searchBar.projectId}&&bookName=${searchBar.bookName}&&mode=${searchBar.mode}`);
       };
 
       menu = (
         <Menu onSelect={ ky=> this.onSelect(ky)}>
-          { kanbanPage ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> Chunk {chnk.startv}</MenuItem>): ''}
+          { kanbanPage ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> {searchBar.mode} {chnk.startv}</MenuItem>): ''}
         </Menu>
       );
 
@@ -112,7 +112,7 @@ class NavBar extends Component {
                   overlay={menu}
                   animation="slide-up"
                 >
-                  <Text>Chunk {this.props.chunkNum}</Text>
+                  <Text>{searchBar.mode} {this.props.chunkNum}</Text>
                 </Dropdown>
                 :
                 ''

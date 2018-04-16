@@ -26,6 +26,7 @@ class MyProjectsContainer extends Component {
               version={p.version.slug}
               dateModified={p.date_modified.slice(0,10)}
               projectId={p.id}
+              mode={p.mode.name}
              {...this.props}
             /> )
           }

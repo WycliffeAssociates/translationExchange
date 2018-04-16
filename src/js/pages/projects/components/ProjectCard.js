@@ -7,15 +7,13 @@ import {zoomIn} from "react-animations";
 export default class ProjectCard extends React.Component {
 
     reviewProject = () => {
-      const {projectId, getChapters, history, bookName } = this.props;
-
+      const {projectId, getChapters, history, bookName, mode } = this.props;
       getChapters(projectId, history);
 
-     // history.push('/chaptersPage')
-
+        const modeCap = mode.charAt(0).toUpperCase() + mode.slice(1);
         history.push({
             pathname: './chapters',
-            search: `?projectId=${projectId}&&bookName=${bookName}`
+            search: `?projectId=${projectId}&&bookName=${bookName}&&mode=${modeCap}`
         });
 
     };
