@@ -8,15 +8,16 @@ services:
       - ./scripts:/scripts
     environment:
       - DJANGO_SETTINGS_MODULE=tRecorderApi.settings_test
-    command: bash -c "printenv
-                      && chmod +x /scripts/wait-for-it.sh
-                      && /scripts/wait-for-it.sh -h db -p 5432 -- rm -rf /tE-backend/tRecorderApi/api/migrations
-                      && mkdir /tE-backend/tRecorderApi/api/migrations
-                      && touch /tE-backend/tRecorderApi/api/migrations/__init__.py
-                      && cd /tE-backend/tRecorderApi
-                      && python3 manage.py makemigrations --settings=tRecorderApi.settings_test
-                      && python3 manage.py migrate --settings=tRecorderApi.settings_test
-                      && python3 manage.py runserver --settings=tRecorderApi.settings_test"
+    command: bash -c "ls /tE-backend"
+    #command: bash -c "printenv
+                      #&& chmod +x /scripts/wait-for-it.sh
+                      #&& /scripts/wait-for-it.sh -h db -p 5432 -- rm -rf /tE-backend/tRecorderApi/api/migrations
+                      #&& mkdir /tE-backend/tRecorderApi/api/migrations
+                      #&& touch /tE-backend/tRecorderApi/api/migrations/__init__.py
+                      #&& cd /tE-backend/tRecorderApi
+                      #&& python3 manage.py makemigrations --settings=tRecorderApi.settings_test
+                      #&& python3 manage.py migrate --settings=tRecorderApi.settings_test
+                      #&& python3 manage.py runserver --settings=tRecorderApi.settings_test"
     depends_on:
       - db
   db:
