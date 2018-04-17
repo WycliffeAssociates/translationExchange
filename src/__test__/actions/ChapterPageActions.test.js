@@ -1,7 +1,7 @@
 /* global describe it expect  beforeEach afterEach*/
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { getChapters } from '../../js/actions';
+import { getChapters, downloadProject } from '../../js/actions';
 import moxios from 'moxios';
 
 const middlewares = [thunk];
@@ -42,5 +42,23 @@ describe('ChaptersPageActions Test Suite', () => {
   });
 
 
+  it ('should fail to download project', () => {
+    moxios.wait(()=> {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 400,
+        response: [],
+      });
+    });
 
+    const expectedActions = [{
+      type: 'DOWNLOAD_PROJECT_FAILED',
+      error: 'Error: Request failed with status code 400',
+    }];
+
+    const store = mockStore({});
+    return store.dispatch(downloadProject()).then(()=> {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
 });

@@ -1,6 +1,6 @@
 /* global it: true   expect:true  describe:true*/
 import React from 'react';
-import {WelcomeComponent} from '../../../../js/pages/Login/components/WelcomeComponent';
+import WelcomeComponent from '../../../../js/pages/Login/components/WelcomeComponent';
 import {shallow} from 'enzyme';
 
 const defaultProps = {

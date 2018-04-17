@@ -1,4 +1,4 @@
-/* global afterEach it describe expect beforeEach */
+/* global afterEach it describe expect beforeEach jest*/
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
@@ -26,6 +26,7 @@ describe('KanbanPageActions Suite', () => {
     });
 
     const expectedActions = [
+      {type: 'LOADING'},
       { type: 'FETCH_TAKE_SUCCESS', takes: [{activeChunkId: 1, chunkNum: 1, takes: [] }], chunkNum: undefined,
         activeChunkId: undefined},
     ];
@@ -52,7 +53,7 @@ describe('KanbanPageActions Suite', () => {
     ];
 
     const store = mockStore({chunks: []});
-    return store.dispatch(getChunks()).then(()=> {
+    return store.dispatch(getChunks(1, jest.fn())).then(()=> {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
@@ -69,13 +70,12 @@ describe('KanbanPageActions Suite', () => {
       });
     });
 
-    const expectedActions= [{
-      type: 'PATCH_TAKE_SUCCESS', updatedTakes: [],
-    }];
+    const expectedActions= [
+      {type: 'PATCH_TAKE_SUCCESS', updatedTakes: []}];
 
     const store = mockStore({takes: []});
-    return store.dispatch(patchTake()).then(() => {
-      expect(store.getActions()).toEquak(expectedActions);
+    return store.dispatch(patchTake(1, jest.fn())).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
     });
   });
 });
