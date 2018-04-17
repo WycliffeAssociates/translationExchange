@@ -1,22 +1,6 @@
-<testsuites name="jest tests" tests="42" failures="2" time="41.528000000000006">
-  <testsuite name="fetchRecentProjects" errors="0" failures="1" skipped="1" timestamp="2018-04-12T18:45:52" time="4.379" tests="2">
-    <testcase classname="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_RECEIVED and response is not null" name="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_RECEIVED and response is not null" time="1.098">
-      <failure>Error: expect(received).toEqual(expected)
-
-Expected value to equal:
-  &quot;HOME_RECENT_PROJECTS_RECEIVED&quot;
-Received:
-  &quot;HOME_RECENT_PROJECTS_ERR&quot;
-    at store.dispatch.then (C:\Users\dipinton\translationExchange\src\__test__\integration_tests\actions\homeRecentProjectAction.test.js:20:24)
-    at &lt;anonymous&gt;
-    at process._tickCallback (internal/process/next_tick.js:188:7)</failure>
-    </testcase>
-    <testcase classname="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_ERR and response is undefined." name="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_ERR and response is undefined." time="0">
-      <skipped/>
-    </testcase>
-  </testsuite>
-  <testsuite name="Source Audio Action" errors="0" failures="0" skipped="2" timestamp="2018-04-12T18:45:52" time="4.396" tests="3">
-    <testcase classname="Source Audio Action - has action type:SOURCE_AUDIO_LOADING and response is not defined" name="Source Audio Action - has action type:SOURCE_AUDIO_LOADING and response is not defined" time="1.131">
+<testsuites name="jest tests" tests="42" failures="2" time="40.489">
+  <testsuite name="Source Audio Action" errors="0" failures="0" skipped="2" timestamp="2018-04-17T13:56:36" time="7.431" tests="3">
+    <testcase classname="Source Audio Action - has action type:SOURCE_AUDIO_LOADING and response is not defined" name="Source Audio Action - has action type:SOURCE_AUDIO_LOADING and response is not defined" time="0.133">
     </testcase>
     <testcase classname="Source Audio Action - has action type:SOURCE_AUDIO_SUCCESS and response not null" name="Source Audio Action - has action type:SOURCE_AUDIO_SUCCESS and response not null" time="0">
       <skipped/>
@@ -25,124 +9,140 @@ Received:
       <skipped/>
     </testcase>
   </testsuite>
-  <testsuite name="ChaptersContainerAction" errors="0" failures="1" skipped="0" timestamp="2018-04-12T18:45:52" time="5.372" tests="2">
-    <testcase classname="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS and response is not undefined" name="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS and response is not undefined" time="1.067">
+  <testsuite name="ChaptersContainerAction" errors="0" failures="1" skipped="0" timestamp="2018-04-17T13:56:44" time="1.373" tests="2">
+    <testcase classname="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS and response is not undefined" name="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS and response is not undefined" time="0.035">
       <failure>Error: expect(received).toEqual(expected)
 
 Expected value to equal:
   &quot;FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS&quot;
 Received:
   &quot;FETCH_CHAPTERS_CONTAINER_DATA_FAILED&quot;
-    at store.dispatch.then (C:\Users\dipinton\translationExchange\src\__test__\integration_tests\actions\chaptersContainerAction.test.js:20:33)
+    at store.dispatch.then (/translationExchange/src/__test__/integration_tests/actions/chaptersContainerAction.test.js:20:33)
     at &lt;anonymous&gt;
-    at process._tickCallback (internal/process/next_tick.js:188:7)</failure>
+    at process._tickCallback (internal/process/next_tick.js:182:7)</failure>
     </testcase>
-    <testcase classname="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_FAILED and response is not undefined" name="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_FAILED and response is not undefined" time="1.04">
-    </testcase>
-  </testsuite>
-  <testsuite name="Projects Filter" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:45:56" time="5.604" tests="4">
-    <testcase classname="Projects Filter - renders" name="Projects Filter - renders" time="0">
-    </testcase>
-    <testcase classname="Projects Filter - has initial state" name="Projects Filter - has initial state" time="0">
-    </testcase>
-    <testcase classname="Projects Filter - changes loaded to true" name="Projects Filter - changes loaded to true" time="0.016">
-    </testcase>
-    <testcase classname="Projects Filter - has four child elements" name="Projects Filter - has four child elements" time="0">
+    <testcase classname="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_FAILED and response is not undefined" name="ChaptersContainerAction - has action type:FETCH_CHAPTERS_CONTAINER_DATA_FAILED and response is not undefined" time="0.022">
     </testcase>
   </testsuite>
-  <testsuite name="Project List Container" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:45:56" time="6.017" tests="2">
-    <testcase classname="Project List Container - is rendered" name="Project List Container - is rendered" time="0">
+  <testsuite name="fetchRecentProjects" errors="0" failures="1" skipped="1" timestamp="2018-04-17T13:56:45" time="1.007" tests="2">
+    <testcase classname="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_RECEIVED and response is not null" name="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_RECEIVED and response is not null" time="0.01">
+      <failure>Error: expect(received).toEqual(expected)
+
+Expected value to equal:
+  &quot;HOME_RECENT_PROJECTS_RECEIVED&quot;
+Received:
+  &quot;HOME_RECENT_PROJECTS_ERR&quot;
+    at store.dispatch.then (/translationExchange/src/__test__/integration_tests/actions/homeRecentProjectAction.test.js:20:24)
+    at &lt;anonymous&gt;
+    at process._tickCallback (internal/process/next_tick.js:182:7)</failure>
+    </testcase>
+    <testcase classname="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_ERR and response is undefined." name="fetchRecentProjects - has action type:HOME_RECENT_PROJECTS_ERR and response is undefined." time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="ChunkContainerReducer" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:56:46" time="1.394" tests="3">
+    <testcase classname="ChunkContainerReducer - should have initial state" name="ChunkContainerReducer - should have initial state" time="0.002">
+    </testcase>
+    <testcase classname="ChunkContainerReducer - should change the state" name="ChunkContainerReducer - should change the state" time="0">
+    </testcase>
+    <testcase classname="ChunkContainerReducer - should change the state" name="ChunkContainerReducer - should change the state" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Project List Container" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:56:47" time="5.866" tests="2">
+    <testcase classname="Project List Container - is rendered" name="Project List Container - is rendered" time="0.001">
     </testcase>
     <testcase classname="Project List Container - should have prop projects as array" name="Project List Container - should have prop projects as array" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Home Component, StartHere" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:45:57" time="5.925" tests="4">
-    <testcase classname="Home Component, StartHere - is rendered" name="Home Component, StartHere - is rendered" time="0">
+  <testsuite name="Projects Filter" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:56:53" time="1.605" tests="4">
+    <testcase classname="Projects Filter - renders" name="Projects Filter - renders" time="0.002">
     </testcase>
-    <testcase classname="Home Component, StartHere - has class, start-here" name="Home Component, StartHere - has class, start-here" time="0">
+    <testcase classname="Projects Filter - has initial state" name="Projects Filter - has initial state" time="0.001">
     </testcase>
-    <testcase classname="Home Component, StartHere - navigates to project page" name="Home Component, StartHere - navigates to project page" time="0.017">
+    <testcase classname="Projects Filter - changes loaded to true" name="Projects Filter - changes loaded to true" time="0.006">
     </testcase>
-    <testcase classname="Home Component, StartHere - has no changes" name="Home Component, StartHere - has no changes" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="ChaptersContainer" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:46:02" time="1.017" tests="1">
-    <testcase classname="ChaptersContainer - should render" name="ChaptersContainer - should render" time="0">
+    <testcase classname="Projects Filter - has four child elements" name="Projects Filter - has four child elements" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="Marker" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:46:03" time="0.43" tests="2">
-    <testcase classname="Marker - postions the svg element correctly" name="Marker - postions the svg element correctly" time="0">
-    </testcase>
-    <testcase classname="Marker - calls dragPosition prop when svg is clicked" name="Marker - calls dragPosition prop when svg is clicked" time="0.016">
+  <testsuite name="Record comments array" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:56:55" time="1.245" tests="1">
+    <testcase classname="Record comments array - check if the comments positions are inverted for the purpose of displaying newest to oldest comments" name="Record comments array - check if the comments positions are inverted for the purpose of displaying newest to oldest comments" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="SetAudioSource" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:46:03" time="0.881" tests="1">
-    <testcase classname="SetAudioSource - should render" name="SetAudioSource - should render" time="0.002">
+  <testsuite name="ChaptersContainerReducer" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:56:56" time="0.575" tests="2">
+    <testcase classname="ChaptersContainerReducer - should have initial state" name="ChaptersContainerReducer - should have initial state" time="0.002">
+    </testcase>
+    <testcase classname="ChaptersContainerReducer - should change state" name="ChaptersContainerReducer - should change state" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="ChunkListContainer" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:46:02" time="2.24" tests="1">
+  <testsuite name="Marker" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:56:57" time="0.991" tests="2">
+    <testcase classname="Marker - postions the svg element correctly" name="Marker - postions the svg element correctly" time="0.008">
+    </testcase>
+    <testcase classname="Marker - calls dragPosition prop when svg is clicked" name="Marker - calls dragPosition prop when svg is clicked" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="ProjectsListContainerReducer" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:56:58" time="1.114" tests="3">
+    <testcase classname="ProjectsListContainerReducer - should have initial State" name="ProjectsListContainerReducer - should have initial State" time="0.002">
+    </testcase>
+    <testcase classname="ProjectsListContainerReducer - should change the initial state" name="ProjectsListContainerReducer - should change the initial state" time="0">
+    </testcase>
+    <testcase classname="ProjectsListContainerReducer - should change the initial state" name="ProjectsListContainerReducer - should change the initial state" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="SourceAudioReducer" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:56:59" time="1.182" tests="3">
+    <testcase classname="SourceAudioReducer - should return initial state..." name="SourceAudioReducer - should return initial state..." time="0.001">
+    </testcase>
+    <testcase classname="SourceAudioReducer - should change the state of loaded and products" name="SourceAudioReducer - should change the state of loaded and products" time="0">
+    </testcase>
+    <testcase classname="SourceAudioReducer - should have error message" name="SourceAudioReducer - should have error message" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Home Component, StartHere" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:57:00" time="2.412" tests="4">
+    <testcase classname="Home Component, StartHere - is rendered" name="Home Component, StartHere - is rendered" time="0.001">
+    </testcase>
+    <testcase classname="Home Component, StartHere - has class, start-here" name="Home Component, StartHere - has class, start-here" time="0.001">
+    </testcase>
+    <testcase classname="Home Component, StartHere - navigates to project page" name="Home Component, StartHere - navigates to project page" time="0.002">
+    </testcase>
+    <testcase classname="Home Component, StartHere - has no changes" name="Home Component, StartHere - has no changes" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="Waveform" errors="0" failures="0" skipped="1" timestamp="2018-04-17T13:57:03" time="1.57" tests="1">
+    <testcase classname="Waveform - Passes through audioFile prop to Wavesurfer" name="Waveform - Passes through audioFile prop to Wavesurfer" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="ChunkListContainer" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:57:05" time="4.2" tests="1">
     <testcase classname="ChunkListContainer - should render" name="ChunkListContainer - should render" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="SourceAudioReducer" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:46:04" time="0.481" tests="3">
-    <testcase classname="SourceAudioReducer - should return initial state..." name="SourceAudioReducer - should return initial state..." time="0.002">
-    </testcase>
-    <testcase classname="SourceAudioReducer - should change the state of loaded and products" name="SourceAudioReducer - should change the state of loaded and products" time="0.001">
-    </testcase>
-    <testcase classname="SourceAudioReducer - should have error message" name="SourceAudioReducer - should have error message" time="0">
+  <testsuite name="ChaptersContainer" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:57:09" time="1.942" tests="1">
+    <testcase classname="ChaptersContainer - should render" name="ChaptersContainer - should render" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="Home Component, LogoTitle" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:46:04" time="0.88" tests="2">
-    <testcase classname="Home Component, LogoTitle - is rendered" name="Home Component, LogoTitle - is rendered" time="0.001">
+  <testsuite name="Home Recent Project Reducer" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:57:11" time="0.975" tests="2">
+    <testcase classname="Home Recent Project Reducer - should return initial state" name="Home Recent Project Reducer - should return initial state" time="0.002">
     </testcase>
-    <testcase classname="Home Component, LogoTitle - has no changes" name="Home Component, LogoTitle - has no changes" time="0.003">
+    <testcase classname="Home Recent Project Reducer - should output the given error" name="Home Recent Project Reducer - should output the given error" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="ChapterList" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:46:04" time="0.848" tests="2">
+  <testsuite name="SetAudioSource" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:57:12" time="0.87" tests="1">
+    <testcase classname="SetAudioSource - should render" name="SetAudioSource - should render" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="ProjectsListContainer Action" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:57:13" time="1.081" tests="1">
+    <testcase classname="ProjectsListContainer Action - has action type:ALL_PROJECTS_LOADING and ALL_PROJECTS_SUCCESS " name="ProjectsListContainer Action - has action type:ALL_PROJECTS_LOADING and ALL_PROJECTS_SUCCESS " time="0.008">
+    </testcase>
+  </testsuite>
+  <testsuite name="ChapterList" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:57:14" time="1.917" tests="2">
     <testcase classname="ChapterList - should render..." name="ChapterList - should render..." time="0.002">
     </testcase>
     <testcase classname="ChapterList - should return space between contributors" name="ChapterList - should return space between contributors" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="ProjectsListContainerReducer" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:46:04" time="0.423" tests="3">
-    <testcase classname="ProjectsListContainerReducer - should have initial State" name="ProjectsListContainerReducer - should have initial State" time="0">
+  <testsuite name="Home Component, LogoTitle" errors="0" failures="0" skipped="0" timestamp="2018-04-17T13:57:16" time="1.739" tests="2">
+    <testcase classname="Home Component, LogoTitle - is rendered" name="Home Component, LogoTitle - is rendered" time="0.002">
     </testcase>
-    <testcase classname="ProjectsListContainerReducer - should change the initial state" name="ProjectsListContainerReducer - should change the initial state" time="0">
-    </testcase>
-    <testcase classname="ProjectsListContainerReducer - should change the initial state" name="ProjectsListContainerReducer - should change the initial state" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="Record comments array" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:46:04" time="0.423" tests="1">
-    <testcase classname="Record comments array - check if the comments positions are inverted for the purpose of displaying newest to oldest comments" name="Record comments array - check if the comments positions are inverted for the purpose of displaying newest to oldest comments" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="Home Recent Project Reducer" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:46:05" time="0.412" tests="2">
-    <testcase classname="Home Recent Project Reducer - should return initial state" name="Home Recent Project Reducer - should return initial state" time="0.015">
-    </testcase>
-    <testcase classname="Home Recent Project Reducer - should output the given error" name="Home Recent Project Reducer - should output the given error" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="ChunkContainerReducer" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:46:05" time="0.4" tests="3">
-    <testcase classname="ChunkContainerReducer - should have initial state" name="ChunkContainerReducer - should have initial state" time="0">
-    </testcase>
-    <testcase classname="ChunkContainerReducer - should change the state" name="ChunkContainerReducer - should change the state" time="0">
-    </testcase>
-    <testcase classname="ChunkContainerReducer - should change the state" name="ChunkContainerReducer - should change the state" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="ChaptersContainerReducer" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:46:05" time="0.434" tests="2">
-    <testcase classname="ChaptersContainerReducer - should have initial state" name="ChaptersContainerReducer - should have initial state" time="0">
-    </testcase>
-    <testcase classname="ChaptersContainerReducer - should change state" name="ChaptersContainerReducer - should change state" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="ProjectsListContainer Action" errors="0" failures="0" skipped="0" timestamp="2018-04-12T18:46:05" time="0.517" tests="1">
-    <testcase classname="ProjectsListContainer Action - has action type:ALL_PROJECTS_LOADING and ALL_PROJECTS_SUCCESS " name="ProjectsListContainer Action - has action type:ALL_PROJECTS_LOADING and ALL_PROJECTS_SUCCESS " time="0.017">
-    </testcase>
-  </testsuite>
-  <testsuite name="Waveform" errors="0" failures="0" skipped="1" timestamp="2018-04-12T18:46:05" time="0.449" tests="1">
-    <testcase classname="Waveform - Passes through audioFile prop to Wavesurfer" name="Waveform - Passes through audioFile prop to Wavesurfer" time="0">
-      <skipped/>
+    <testcase classname="Home Component, LogoTitle - has no changes" name="Home Component, LogoTitle - has no changes" time="0.004">
     </testcase>
   </testsuite>
 </testsuites>
