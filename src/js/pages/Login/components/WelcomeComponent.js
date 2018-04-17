@@ -39,7 +39,6 @@ export default class WelcomeComponent extends React.Component {
 
   componentWillUpdate(nextProps) {
 
-    console.log('here');
 
     if (nextProps.socialLogin == true) {
       this.props.history.push ({

@@ -22,5 +22,5 @@ export default combineReducers({
   kanbanPage,
   taskProgress,
   Projects,
-  Chapters
+  Chapters,
 });

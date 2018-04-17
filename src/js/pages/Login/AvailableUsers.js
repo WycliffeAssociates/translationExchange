@@ -12,24 +12,24 @@ class AvailableUsers extends React.Component {
 
 
   componentWillMount() {
-      const {history, fetchUsers} = this.props;
-      fetchUsers(history);
+    const {history, fetchUsers} = this.props;
+    fetchUsers(history);
   }
 
   render() {
 
     const {users} = this.props;
-    const backgroundFill = users.length !==0? true: false;
+    const autoHeightBackground = users.length !==0? true: false;
 
     return (
-      <Container backgroundFill={backgroundFill}>
+      <Container autoHeightBackground={autoHeightBackground}>
 
         <h2 style={{marginBottom: '5vw'}}> Available Users </h2>
 
         {
           this.props.loading?
 
-            <Loading height = "100vh" />
+            <Loading height = "90vh" />
 
             :
 
@@ -66,7 +66,7 @@ class AvailableUsers extends React.Component {
 const Container = styled.div`
   background-image: url(${img}), linear-gradient(to bottom right, #0076FF, #00C5FF) ;
   padding: 5vw;
-  height: ${props => props.backgroundFill? 'auto': '100vh'};
+  height: ${props => props.autoHeightBackground? 'auto': '100vh'};
   text-align: center;
   color: white;
   width: 100vw;

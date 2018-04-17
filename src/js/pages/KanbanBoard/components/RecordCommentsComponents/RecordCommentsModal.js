@@ -100,7 +100,6 @@ class RecordCommentModal extends Component {
 
   showRecordModal(buttonState) {
     const { recording, header, icon, recordedBlob, playing, isAudioAvailable, commentSaved, error } = this.state;
-    console.log(this.state.error, 'STATE ERROR');
 
     let ic ='check';
     let headerText ='Success!';
