@@ -1,17 +1,25 @@
 const INITIAL_STATE = {
-    chapters: [],
+  chapters: [],
+  loading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
-    switch (action.type) {
+  switch (action.type) {
 
-        case 'GET_CHAPTERS_SUCCESS':
-            return {
-                ...state,
-                chapters: action.chapters,
-            };
+    case 'FETCHING_CHAPTERS':
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case 'GET_CHAPTERS_SUCCESS':
+      return {
+        ...state,
+        chapters: action.chapters,
+        loading: false,
+      };
 
 
-        default: return state;
-    }
+    default: return state;
+  }
 };

@@ -23,8 +23,6 @@ class KanbanColumn extends React.Component {
   nextChunk() {
 
     const {activeChunkId, chunks} = this.props;
-
-
     let activeChunkIndex = null;
 
     chunks.map( (chk, index) => {
@@ -42,20 +40,23 @@ class KanbanColumn extends React.Component {
 
   navigateToChapter(chapter_num, chapterId) {
 
-    var query = QueryString.parse(this.props.location.search);
-    console.log(query, 'QUERY');
-    query.chapterId = chapterId;
-    query.chapterNum = chapter_num;
-    const queryString  = QueryString.stringify(query);
-    console.log(queryString);
+    const {history, chapters} = this.props;
+    if (chapters.length < chapter_num) { // if chapter_num > chapter.len it means we have reached the last chapter in the book
+      this.props.history.push({pathname: '/projects'});
+    }
 
-    this.props.history.push({
-      pathname: '/kanban',
-      search: `?chapterId=${chapterId}&chapterNum=${chapter_num}&bookName=${query.bookName}&projectId=${query.projectId}`,
-    });
+    else {
+      var query = QueryString.parse(this.props.location.search);
+      query.chapterId = chapterId;
+      query.chapterNum = chapter_num;
 
-    this.props.getChunks(chapter_num+1);
-    this.props.getComments(chapterId+1, 'chapter_id');
+      this.props.history.push({
+        pathname: '/kanban',
+        search: `?chapterId=${chapterId}&chapterNum=${chapter_num}&bookName=${query.bookName}&projectId=${query.projectId}`,
+      });
+      this.props.getChunks(chapter_num, history);
+      this.props.getComments(chapterId, 'chapter_id');
+    }
 
   }
 
@@ -72,7 +73,7 @@ class KanbanColumn extends React.Component {
         }
       },
       this.props.takes,
-        chapterId
+      chapterId
     );
   }
 
@@ -129,14 +130,14 @@ class KanbanColumn extends React.Component {
     switch (this.props.icon) {
 
       case 1:
-        icon= <label className="labelLines"> <i className="far fa-star fa-2x" /> </label>;
+        icon= <label className="labelLines"> < i style={starSize} className="material-icons">star_border</i> </label>;
         break;
 
       case 2:
         icon = (
           <div className="labelLines">
-            <label> <i className="far fa-star fa-2x" /> </label>
-            <label> <i className="far fa-star fa-2x" /> </label>
+            <label> <i style={starSize} className="material-icons">star_border</i> </label>
+            <label> <i style={starSize}  className="material-icons">star_border</i> </label>
           </div>
         );
         break;
@@ -144,19 +145,19 @@ class KanbanColumn extends React.Component {
       case 3:
         icon = (
           <div className="labelLines">
-            <label > <i className="far fa-star fa-2x" /> </label>
-            <label > <i className="far fa-star fa-2x" /> </label>
-            <label > <i className="far fa-star fa-2x" /> </label>
+            <label > <i style={starSize}  className="material-icons">star_border</i> </label>
+              <label> <i style={starSize}  className="material-icons">star_border</i> </label>
+              <label> <i style={starSize}  className="material-icons">star_border</i> </label>
           </div>
         );
         break;
 
       case 4:
-        icon = <label className="labelLines"> <i className="fas fa-check fa-2x" /> </label>;
+        icon = <label className="labelLines"> <i style={starSize} className="material-icons">check</i> </label>;
         break;
 
       default:
-        icon= <label className="labelLines"> <i className="far fa-star fa-2x" /> </label>;
+        icon=  <label> <i style={starSize} className="material-icons">star_border</i> </label>;
         break;
     }
     return connectDropTarget(
@@ -207,6 +208,9 @@ class KanbanColumn extends React.Component {
 
 }
 
+const starSize = {
+  fontSize: '2.7vw'
+};
 
 
 const Column = styled.div`
@@ -257,6 +261,7 @@ const NextChunk = styled.button`
   	padding: 0.75vw;
   	cursor: pointer;
   	outline:none;
+    font-size: 1em + 1vw;
   `;
 NextChunk.displayName = 'NextChunk';
 
@@ -268,6 +273,8 @@ border-radius: 2vw;
 padding: 0.75vw;
 cursor: pointer;
 outline:none;
+font-size: 1em + 1vw;
+
 `;
 NextChapter.displayName = 'NextChapter';
 

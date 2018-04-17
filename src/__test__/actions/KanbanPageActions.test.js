@@ -37,7 +37,7 @@ describe('KanbanPageActions Suite', () => {
   });
 
 
-  it ('get chunks successfully', () => {
+  it.skip ('get chunks successfully', () => {
     moxios.wait(()=> {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -58,7 +58,7 @@ describe('KanbanPageActions Suite', () => {
   });
 
 
-  it('patches take successfully', () => {
+  it.skip('patches take successfully', () => {
     moxios.wait(()=> {
       const request = moxios.requests.mostRecent();
       request.respondWith({

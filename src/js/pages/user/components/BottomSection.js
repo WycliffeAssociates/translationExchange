@@ -7,9 +7,9 @@ export default ({recording, generatedHash, startRecording, redo, save, audio}) =
 
   let header ='What is your name?';
   let displayText = 'Record';
-  let icon = 'play';
 
-  let handler = <RecordButton icon={icon} startRecording={startRecording}  />
+
+  let handler = <RecordButton startRecording={startRecording}  />
 
   if (recording) {
     displayText= 'Recording'

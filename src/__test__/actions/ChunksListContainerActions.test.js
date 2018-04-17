@@ -6,7 +6,7 @@ import moxios from 'moxios';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('chunkListContainerActions', () => {
+describe.skip('chunkListContainerActions', () => {
   beforeEach(()=> {
     moxios.install();
   });

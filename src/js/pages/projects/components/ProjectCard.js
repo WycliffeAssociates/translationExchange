@@ -1,22 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import img1 from '../mockupdata/img1.PNG';
+import {zoomIn} from "react-animations";
 
 
 export default class ProjectCard extends React.Component {
 
+
     reviewProject = () => {
-      const {projectId, getChapters, history, bookName } = this.props;
+      const {projectId, getChapters, history, bookName, mode } = this.props;
+      getChapters(projectId, history);
 
-      getChapters(projectId);
-
-     // history.push('/chaptersPage')
-
+        const modeCap = mode.charAt(0).toUpperCase() + mode.slice(1);
         history.push({
             pathname: './chapters',
-            search: `?projectId=${projectId}&&bookName=${bookName}`
+            search: `?projectId=${projectId}&&bookName=${bookName}&&mode=${modeCap}`
         });
-
     };
 
   render() {
@@ -24,9 +23,9 @@ export default class ProjectCard extends React.Component {
 
 
 
-    return (
-      <Container>
 
+
+    return (
         <Card>
           <InformationContainer >
             <TextContainer>
@@ -52,16 +51,14 @@ export default class ProjectCard extends React.Component {
           </ButtonContainer>
         </Card>
 
-      </Container>
     );
   }
 
 }
 
-const Container = styled.div`
-  // background: linear-gradient(to bottom right, rgba(0,118,255,0.5), rgba(0,197,255,0.5));
-  margin: 0 0 1vw 1vw;
-`;
+
+
+const zoomInAnimation = keyframes `${zoomIn}`;
 
 const Card= styled.div`
     text-align: center;
@@ -71,6 +68,8 @@ const Card= styled.div`
     box-shadow: 0px 1px 2px 4px rgba(0,0,0,0.2);
     overflow: hidden;
     background-color: white;
+    margin: 0 0 3vw 4vw;
+    animation: ${zoomInAnimation} .2s ease-in;
 
 
 `;

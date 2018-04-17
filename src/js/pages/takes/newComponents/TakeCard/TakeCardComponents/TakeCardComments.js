@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import CommentRow from './TakeCardCommentRow';
-import RecordCommentsModal from '../../../../chunks/components/RecordCommentsModal';
+import RecordCommentsModal from '../../../../KanbanBoard/components/RecordCommentsComponents/RecordCommentsModal';
 export default class TakeCardComments extends React.Component {
 
   constructor(props) {
@@ -21,7 +21,7 @@ export default class TakeCardComments extends React.Component {
 
   recordButton() {
     const { id, saveComment, uploadingComments, activeChunkId, chunkNum} = this.props;
-    const microphone = <i className = "fa fa-microphone" />;
+    const microphone =  <i style={{fontSize:'1.6vw', paddingTop:'.5vw', paddingRight:'.2vw'}} className="material-icons">mic_none</i>;
     return (
       <div style={{backgroundColor: '#E74C3C', width: '4vw'}}>
 
@@ -59,7 +59,7 @@ export default class TakeCardComments extends React.Component {
         <MoreOptions>
 
           <LoadMore>
-            <i className="fa fa-chevron-circle-down" />
+              <i className="material-icons">add_circle</i>
             {`${' '}Load More`}
           </LoadMore>
 

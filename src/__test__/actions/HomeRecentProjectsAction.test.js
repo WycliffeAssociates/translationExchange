@@ -7,7 +7,7 @@ import moxios from 'moxios';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('fetchRecentProjects', ()=> {
+describe.skip('fetchRecentProjects', ()=> {
 
   beforeEach(() => {
     moxios.install();

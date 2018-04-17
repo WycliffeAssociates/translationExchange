@@ -7,7 +7,7 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 //localStorage.setItem('token', '9e2afaaf7efbf5cfb76a038bd918280387763409');
 
-describe('chunkListContainerActions', () => {
+describe.skip('chunkListContainerActions', () => {
     const store = mockStore();
     it('has action type: FETCH_TAKE_SUCCESS_FIRST_TIME and response is not undefined', () => {
         const expectedActions = [
