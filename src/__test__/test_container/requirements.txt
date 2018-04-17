@@ -7,10 +7,11 @@ django-cors-headers
 coreapi
 urllib3
 whitenoise
-psycopg2
+psycopg2==2.7.3.2
 django-jenkins
 coverage
 rest_social_auth
 drf-yasg
 celery
 redis
+raven

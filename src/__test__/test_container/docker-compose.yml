@@ -4,7 +4,7 @@ services:
     build: .
     container_name: te_backend
     volumes:
-      - "${TEBACKEND}:/tE-backend"
+      - C:\Users\dipinton\tE-backend:/tE-backend
       - ./scripts:/scripts
     environment:
       - DJANGO_SETTINGS_MODULE=tRecorderApi.settings_test
@@ -18,9 +18,11 @@ services:
                   && python3 manage.py runserver" 
     depends_on:
       - db
+    ports:
+      - "8000:8000"
   db:
     image: postgres
-    container_name: backend 
+    container_name: database 
     restart: always
     environment:
       POSTGRES_USER: postgres
