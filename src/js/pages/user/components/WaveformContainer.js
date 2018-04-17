@@ -48,7 +48,6 @@ border-top-right-radius: 7px;
 
 `;
 const RecordContainer = styled.div`
-margin-top: 65px;
-height: 29vh;
+margin-top: 95px;
 width: 100%;
 `;
