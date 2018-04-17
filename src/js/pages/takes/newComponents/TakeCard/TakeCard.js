@@ -143,7 +143,7 @@ export class TakeCard extends React.Component {
               audioFile={config.streamingUrl+this.props.location}  playAudio={this.props.play}
               playing = {this.state.takePlaying} durationTime={this.props.duration}
               pos = {this.state.pos}
-              options= {{ cursorWidth: 2, progressColor: '#009CFF', cursorColor: '#E74C3C', barWidth: 1, hideScrollbar: true, normalize: true, height: 35, waveColor: '#969595' }}
+              options= {{ cursorWidth: 2, progressColor: '#009CFF', cursorColor: '#E74C3C', barWidth: 3.5, hideScrollbar: true, normalize: true, height: 65, waveColor: '#969595' }}
             />
           </WaveformContainer>
 
@@ -278,8 +278,12 @@ transform: translateZ(0);
 `;
 
 const WaveformContainer = styled.div`
-  height:3vw;
+  height:4vw;
   margin-bottom: 0.5vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
 `;
 
 const MarkerContainer= styled.div`
