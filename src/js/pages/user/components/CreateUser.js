@@ -86,7 +86,7 @@ class CreateUser extends Component {
       () => {
         const jsonblob = reader.result;
         if (this.props.socialLogin) {
-          this.props.patchUser(tempUserId, jsonblob, generatedHash);
+          this.props.patchUser(tempUserId, jsonblob, generatedHash, () => this.props.history.push('/projects'));
         }
         else  {
           this.props.createUser(jsonblob, generatedHash); // action to create user in db
@@ -113,6 +113,9 @@ class CreateUser extends Component {
               recordedBlob={recordedBlob}
               audio={audio}
               onStop={this.onStop}
+              width={640}
+              nonstop={false}
+              duration={3}
             />
             <BottomSection
               startRecording={this.startRecording}

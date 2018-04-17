@@ -167,7 +167,10 @@ class RecordCommentModal extends Component {
             isAudioAvailable={isAudioAvailable}
             recordedBlob={recordedBlob}
             onStop={this.onStop}
-            recording={recording} />
+            recording={recording}
+            width={825}
+            nonstop={true}
+            duration={5} />
         </WaveformContainer>
         <ControlsContainer>
           <TextContainer>

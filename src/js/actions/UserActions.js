@@ -36,17 +36,20 @@ export const getUserHash = () => {
 
               const{icon_hash} = response.data;
                 dispatch(getUserHashSuccess(icon_hash));
-            })
+        })
             .catch(error => {
                 console.log(error);
             });
     };
 };
 
-export const getUserHashSuccess = (iconHash) => {
+export const getUserHashSuccess = (iconHash) =>{
   return {
     type: 'GET_LOGGED_USER_HASH',
-    iconHash
+    iconHash,
+
+
+
   };
 };
 
@@ -74,10 +77,10 @@ export const createUser = (recordedBlob, hash) => {
   };
 };
 
-export const userCreated = (audioName, hash)=>{
+export const userCreated = (nameAudio, hash)=>{
   return {
     type: 'USER_CREATED',
-    audioName,
+    nameAudio,
     hash,
 
 
@@ -90,7 +93,7 @@ export const resetUserCreated = ()=>{
   };
 };
 
-export const patchUser = (id, recordedBlob, hash) => {
+export const patchUser = (id, recordedBlob, hash, callback) => {
   return function(dispatch) {
     console.log(id, recordedBlob, hash, 'PATCH USER');
     return axios
@@ -104,21 +107,22 @@ export const patchUser = (id, recordedBlob, hash) => {
         console.log(response.data);
         dispatch ({
           type: 'PATCHED_USER',
-          audioName: response.name_audio,
-          hash: response.icon_hash,
+          audio_name: response.data.name_audio,
+          icon_hash: response.data.icon_hash,
         });
+        callback();
 
       });
   };
 
 };
 
-export const createSocialUser = (user) => {
+export const createSocialUser = (user, callback) => {
   return function(dispatch) {
     return axios.post(`${config.apiUrl}login/social/token_user/github/`,{clientId: 'f5e981378e91c2067d41',redirectUri: config.streamingUrl, code: user.code})
       .then(response=>{
 
-        if (response.icon_hash == null || response.name_audio == null) {
+        if (response.data.icon_hash == '' || response.data.name_audio == '') {
           dispatch({
             type: 'SOCIAL_USER_CREATION',
             socialLogin: true,
@@ -130,8 +134,11 @@ export const createSocialUser = (user) => {
         else {
           dispatch ({
             type: 'LOGIN_SOCIAL_USER',
+            name_audio: response.data.name_audio,
+            icon_hash: response.data.icon_hash,
           });
           localStorage.setItem('token',response.data.token);
+          callback();
         }
 
       }).catch(err=>{
@@ -158,6 +165,7 @@ export const loadingProccess = () => {
   };
 };
 export const identiconLogin = (iconHash, callback) => {
+
 return dispatch => {
     return axios.post(`${config.apiUrl}login/`,{icon_hash: iconHash})
       .then(response=>{
@@ -181,6 +189,7 @@ export const identiconLoginSuccess = (iconHash) => {
 
 export const removeUser = () => {
   return {
-      type:'REMOVE_USER'
-  }
+    type: 'REMOVE_USER',
+  };
+
 };

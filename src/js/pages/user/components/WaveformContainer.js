@@ -1,10 +1,10 @@
 import React from 'react';
-import { ReactMic } from 'react-mic';
+import { ReactMicPlus } from 'react-mic-plus';
 import styled from 'styled-components';
 import TimeLine from './timeLine.png';
 import Waveform from './Waveform';
 
-export default ({recordedBlob, audio, onStop, recording}) => {
+export default ({recordedBlob, audio, onStop, recording, width, nonstop, duration}) => {
 
   if (audio) {
     return (
@@ -17,13 +17,16 @@ export default ({recordedBlob, audio, onStop, recording}) => {
   return (
     <Container>
       <RecordContainer>
-        <ReactMic
+        <ReactMicPlus
           record={recording}
           className="sound-wave"
           onStop={onStop}
           strokeColor="#009CFF"
-          backgroundColor="#2D2D2D"
-          visualSetting="frequencyBars"
+          backgroundColor="transparent"
+          visualSetting="spectrogram"
+          duration={duration}
+          nonstop={nonstop}
+          width={width}
         />
       </RecordContainer>
     </Container>

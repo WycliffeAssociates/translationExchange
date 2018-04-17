@@ -26,8 +26,9 @@ class MyProjectsContainer extends Component {
               bookName={p.book.name}
               language={p.language.name}
               version={p.version.slug}
-              dateModified={p.date_modified.slice(0,10)}
+              dateModified={p.date_modified ? p.date_modified.slice(0,10) : ""}
               projectId={p.id}
+              mode={p.mode.name}
              {...this.props}
             /> )
           }

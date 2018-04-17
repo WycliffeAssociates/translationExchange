@@ -25,13 +25,10 @@ export default class WelcomeComponent extends React.Component {
 
 
   onLogin(user) {
-    this.props.createSocialUser(user);
+    this.props.createSocialUser(user, ()=> this.props.history.push('/projects'));
   }
 
   componentDidMount() {
-    console.log('here', 'im actaully here');
-
-
     if (this.props.socialLogin == true) {
       this.props.history.push ({
         pathname: '/users/registration',

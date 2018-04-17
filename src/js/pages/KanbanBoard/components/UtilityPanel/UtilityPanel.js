@@ -39,6 +39,8 @@ export default class UtilityPanel extends React.Component {
       chunks, chapterComments, chunkComments, activeChunkId, saveComment,
       uploadingComments, uploadError, resetError} = this.props;
     let publishedTakeLocation =null;
+    const {search} = this.props.location;
+    const query = QueryString.parse(search);
     takes.map(tk=>{ if (tk.published) { publishedTakeLocation = tk.location} } );
 
     return (
@@ -71,7 +73,7 @@ export default class UtilityPanel extends React.Component {
                 saveComment={saveComment}
                 type="chunk"
                 comments={chunkComments}
-                text={`Chunk ${chunkNum}`}
+                text={`${query.mode} ${chunkNum}`}
                 id={activeChunkId}
                 uploadingComments={uploadingComments}
                 uploadError = {uploadError}

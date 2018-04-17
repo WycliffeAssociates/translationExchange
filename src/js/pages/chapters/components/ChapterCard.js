@@ -27,7 +27,7 @@ export default class ChapterCard extends Component {
 
       history.push({
         pathname: './kanban',
-        search: `?chapterId=${id}&chapterNum=${number}&bookName=${searchBar.bookName}&projectId=${searchBar.projectId}`,
+        search: `?chapterId=${id}&chapterNum=${number}&bookName=${searchBar.bookName}&projectId=${searchBar.projectId}&&mode=${searchBar.mode}`,
       });
 
     };
@@ -36,13 +36,13 @@ export default class ChapterCard extends Component {
       this.spaceCards();
     }
     componentDidMount() {
-
       window.addEventListener('resize', () => {
         this.spaceCards();
       });
     }
 
     spaceCards() {
+
 
       var width = window.innerWidth;
       width = width-(width*0.1); // takeaway 10% because of padding on parent container

@@ -50,7 +50,7 @@ class KanbanPage extends React.Component {
     const {search} = this.props.location;
     const query = QueryString.parse(search);
 
-    console.log(this.props, 'KANBAN PAGE PROPS');
+
     return (
       <KanbanPageContainer>
         <NavBar chapterNum={query.chapterNum} kanbanPage={true} {...this.props} />
@@ -59,7 +59,7 @@ class KanbanPage extends React.Component {
 
           <KanbanBoard {...this.props} />
 
-          <UtilityPanel chapterNum={query.chapterNum} {...this.props} />
+          <UtilityPanel mode={query.mode} chapterNum={query.chapterNum} {...this.props} />
 
         </KanbanContainer>
 
