@@ -41,7 +41,7 @@ export default( state= INITIAL_STATE, action) => {
     case 'USER_CREATED':
       return {
         ...state,
-        audioName: action.audio_name,
+        audioName: action.nameAudio,
         hash: action.hash,
         userCreated: true,
         socialLogin: false,
@@ -68,13 +68,13 @@ export default( state= INITIAL_STATE, action) => {
     case 'LOGIN_SUCCESS':
       return {
         ...state,
-        loggedInUser: action.icon_hash,
+        loggedInUser: action.iconHash,
       };
 
     case 'GET_LOGGED_USER_HASH':
       return {
         ...state,
-        loggedInUser: action.icon_hash,
+        loggedInUser: action.iconHash,
       };
 
     case 'REMOVE_USER':
