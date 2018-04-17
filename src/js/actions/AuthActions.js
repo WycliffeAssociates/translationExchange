@@ -10,7 +10,6 @@ export function GET_AUTH_TOKEN(code) {
       accept: 'json',
     })
       .then(function(err,response) {
-        console.log(response);
       });
 
   };

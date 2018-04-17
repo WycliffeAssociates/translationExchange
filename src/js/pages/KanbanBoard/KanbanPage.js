@@ -117,13 +117,14 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   const {takes, chunks, chunkNum, activeChunkId} = state.kanbanPage;
   const {chapterComments, chunkComments, uploadingComments,  uploadError} = state.comments;
+  const {chapters} = state.Chapters;
   const {loggedInUser} = state.user;
   const { displayText } = state.geolocation;
 
 
 
   return {takes, chunks, loggedInUser, chunkNum, chapterComments, chunkComments,
-    displayText, activeChunkId, uploadingComments, uploadError};
+    displayText, activeChunkId, uploadingComments, uploadError, chapters};
 
   // all the state variables that you want to map to props
 };

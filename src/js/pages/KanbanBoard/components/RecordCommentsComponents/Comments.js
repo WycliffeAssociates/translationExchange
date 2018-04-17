@@ -19,7 +19,7 @@ class Comments extends Component {
 
   render() {
     const {comments, text, id, type, saveComment, uploadingComments,uploadError,  chunkId, chunkNum} = this.props;
-
+    //id corresponds to either the chapterId, chunkId or the takeID so that the comment is saved and attached to the appropriate element
     return (
       <Container>
         <TextContainer>

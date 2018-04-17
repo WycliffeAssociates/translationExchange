@@ -40,20 +40,23 @@ class KanbanColumn extends React.Component {
 
   navigateToChapter(chapter_num, chapterId) {
 
-    var query = QueryString.parse(this.props.location.search);
-    console.log(query, 'QUERY');
-    query.chapterId = chapterId;
-    query.chapterNum = chapter_num;
-    const queryString  = QueryString.stringify(query);
-    console.log(queryString);
+    const {history, chapters} = this.props;
+    if (chapters.length < chapter_num) { // if chapter_num > chapter.len it means we have reached the last chapter in the book
+      this.props.history.push({pathname: '/projects'});
+    }
 
-    this.props.history.push({
-      pathname: '/kanban',
-      search: `?chapterId=${chapterId}&chapterNum=${chapter_num}&bookName=${query.bookName}&projectId=${query.projectId}`,
-    });
+    else {
+      var query = QueryString.parse(this.props.location.search);
+      query.chapterId = chapterId;
+      query.chapterNum = chapter_num;
 
-    this.props.getChunks(chapter_num+1);
-    this.props.getComments(chapterId+1, 'chapter_id');
+      this.props.history.push({
+        pathname: '/kanban',
+        search: `?chapterId=${chapterId}&chapterNum=${chapter_num}&bookName=${query.bookName}&projectId=${query.projectId}`,
+      });
+      this.props.getChunks(chapter_num, history);
+      this.props.getComments(chapterId, 'chapter_id');
+    }
 
   }
 
