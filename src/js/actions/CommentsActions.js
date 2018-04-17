@@ -57,8 +57,6 @@ export const saveComment = (blobx, type, id, chunkId, chunkNum, callback, errorC
         headers: { Authorization: 'Token ' + localStorage.getItem('token') },
       })
       .then(response => {
-        console.log(response.data, 'TEST RESPONSE DATA ON SAVE COMMENT');
-
         if (type === 'chunk') {
           dispatch(updateChunkComments(response.data));
         }
