@@ -4,7 +4,7 @@ import timeLine from '../../../../../assets/images/CommentstimeLine.png';
 import styled from 'styled-components';
 import Wave from './Wave';
 
-export default ({recordedBlob, isAudioAvailable, onStop, recording, play, onFinishPlaying, width, nonstop, duration}) => {
+export default ({recordedBlob, isAudioAvailable, onStop, recording, play, onFinishPlaying, width, height, nonstop, duration}) => {
 
   if (isAudioAvailable) {
     return (
@@ -25,6 +25,7 @@ export default ({recordedBlob, isAudioAvailable, onStop, recording, play, onFini
           backgroundColor="transparent"
           visualSetting="spectrogram"
           width={width}
+          height={height}
           nonstop={nonstop}
           duration={duration}
         />
@@ -45,7 +46,6 @@ border-top-left-radius: 7px;
 border-top-right-radius: 7px;
 `;
 const RecordContainer = styled.div`
-margin-top: 4.5vh;
 height: 29vh;
 width: 100%;
 `;

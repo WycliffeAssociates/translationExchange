@@ -113,6 +113,7 @@ class CreateUser extends Component {
               audio={audio}
               onStop={this.onStop}
               width={640}
+              height={280}
               nonstop={false}
               duration={3}
             />
