@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Wavesurfer from 'react-wavesurfer';
 import PlayPauseBtn from './PlayPauseBtn';
-import styled from 'styled-components';
+import styled,{keyframes} from 'styled-components';
+import {fadeIn} from "react-animations";
 
 class Waveform extends Component {
 
@@ -60,18 +61,22 @@ class Waveform extends Component {
   }
 }
 
+const fadeInAnimation = keyframes`${fadeIn}`;
+
 const Container = styled.div`
     display: flex;
     align-self: center;
     flex: 1 1 auto;
     width: 100%;
-    padding-top: 9.9vh;
+    padding-top: 110px;
     margin-right: 2%;
+    flex-direction:column;
+    animation: ${fadeInAnimation} .3s ease-in;
 `;
 
 const WaveformContainer = styled.div`
     width: 100%;
-    margin-right: 5%
+    margin-top:10px;
   `;
 
 export default Waveform;

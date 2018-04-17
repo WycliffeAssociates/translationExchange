@@ -30,9 +30,11 @@ export default ({recordedBlob, audio, onStop, recording}) => {
   );
 };
 
+
+
 const Container = styled.div`
 width: 100%;
-height: 29vh;
+height: 320px;
 min-width: 469;
 background-image: url(${TimeLine} );
 background-position: 50%;
@@ -40,9 +42,10 @@ background-repeat: no-repeat;
 background-color: #2D2D2D;
 border-top-left-radius: 7px;
 border-top-right-radius: 7px;
+
 `;
 const RecordContainer = styled.div`
-margin-top: 4.5vh;
+margin-top: 65px;
 height: 29vh;
 width: 100%;
 `;

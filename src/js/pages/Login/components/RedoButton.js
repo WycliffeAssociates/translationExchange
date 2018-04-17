@@ -5,12 +5,11 @@ import styled from "styled-components";
 export const RedoButton = ({ onClick }) => {
   return (
     <Button onClick={onClick}>
-      <span style={{ textDecoration: "underline"}}>
+      <span style={{ textDecoration: "underline", width:'100%'}}>
         Redo
+          <i className="material-icons" style={{ fontSize: "20px" }}>redo</i>
       </span>
-      <i className="material-icons" style={{ fontSize: "1.7vw" }}>
-        redo
-      </i>
+
     </Button>
   );
 };
@@ -18,11 +17,12 @@ export const RedoButton = ({ onClick }) => {
 const Button = styled.button`
   display: flex;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 60px;
   color: #00c5ff;
   background: white;
-  padding: 0.75vw 5vw;
-  font-size: 1.1vw;
+  height:50px;
+  width:250px;
+  font-size: 20px;
   font-weight: 100;
   border: solid;
   border-width: 2px;

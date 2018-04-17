@@ -22,10 +22,10 @@ class RecordButton extends Component {
         <ButtonContainer>
           <PlayButton onClick={this.startRecording} type="voice">
             <Icon>
-              {" "}
-              <i className="material-icons" style={{ fontSize: "4vw", marginLeft:"-0.8vw" }}>
-                play_arrow
-              </i>{" "}
+
+              <i className="material-icons" style={{ fontSize: "36px", marginLeft:'-.1vw', paddingTop:'.5vw' }}>
+                mic_none
+              </i>
             </Icon>
           </PlayButton>
         </ButtonContainer>
