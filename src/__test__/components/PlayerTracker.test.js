@@ -26,7 +26,7 @@ describe('Player Tracker Test Suite', () => {
   it('should handle onClick function', () => {
     const PlayIcon = wrapper.find('PlayIcon').first().dive();
     PlayIcon.simulate('click');
-    // todo need code test on click
+    expect(wrapper.instance().state.playing).toEqual(true);
   });
 
   it('should Render ReactPlayer', () => {
