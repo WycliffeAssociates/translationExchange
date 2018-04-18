@@ -168,6 +168,7 @@ class RecordCommentModal extends Component {
             onStop={this.onStop}
             recording={recording}
             width={825}
+            height={280}
             nonstop={true}
             duration={5} />
         </WaveformContainer>
