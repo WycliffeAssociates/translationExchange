@@ -36,7 +36,7 @@ class NavBar extends Component {
     }
     jdenticon.update('#ActiveUser', loggedInUser);
   }
-  
+
   logOut() {
     localStorage.removeItem('token');
     this.props.removeUser();
@@ -62,7 +62,7 @@ class NavBar extends Component {
     let goToChapters = '';
     let logOutMenu = (
       <Menu onSelect={ ()=> this.logOut()}>
-        <MenuItem style={{cursor:'pointer', color:'#fff', backgroundColor:'#000' }} key="1">Log Out</MenuItem>
+        <MenuItem style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key="1">Log Out</MenuItem>
       </Menu>
     );
 
@@ -106,7 +106,7 @@ class NavBar extends Component {
             <i class="material-icons">graphic_eq</i>
 
             {
-                kanbanPage ?
+              kanbanPage ?
                 <Dropdown
                   trigger={['click']}
                   overlay={menu}
@@ -122,17 +122,17 @@ class NavBar extends Component {
 
         </IconsContainer>
         <IdenticonContainer>
-         
-            <Dropdown
-                trigger={['click']}
-                overlayClassName="logout-dropdown"
-                overlay={logOutMenu}
-                animation="slide-up"
-            >
+
+          <Dropdown
+            trigger={['click']}
+            overlayClassName="logout-dropdown"
+            overlay={logOutMenu}
+            animation="slide-up"
+          >
             <Identicon id="ActiveUser"
-                       data-jdenticon-hash={loggedInUser}
+              data-jdenticon-hash={loggedInUser}
             />
-            </Dropdown>
+          </Dropdown>
         </IdenticonContainer>
       </Container>
     );
@@ -152,9 +152,11 @@ const Container = styled.div`
   z-index: 2;
   min-height: 90px;
 `;
+Container.displayName= 'Container';
 const Text = styled.p`
   cursor: pointer;
 `;
+Text.displayName = 'Text';
 
 const ChaptersButton = styled.div`
   display: flex;
@@ -162,8 +164,9 @@ const ChaptersButton = styled.div`
   cursor: pointer;
   color: ${props=> props.selected ? '#45B649': ''}
   font-size: ${props=> props.selected ? '2vw': ''}
-  
+
 `;
+ChaptersButton.displayName = 'ChaptersButton';
 
 const ProjectsButton = styled.div`
   display: flex;
@@ -171,22 +174,27 @@ const ProjectsButton = styled.div`
   cursor: pointer;
   color: ${props=> props.selected ? '#45B649': ''}
   font-size: ${props=> props.selected ? '2vw': ''}
-  
+
 `;
+ProjectsButton.displayName = 'ProjectsButton';
 
 const ChunksButton = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
   color: ${props=> props.selected ? '#009CFF': ''}
-  
+
 `;
+ChunksButton.displayName = 'ChunksButton';
+
 
 const Identicon= styled.svg`
   height: 10vh;
   width: 5vw;
   cursor: pointer;
 `;
+Identicon.displayName = 'Identicon';
+
 
 const LogOut = styled.div`
   visibility: ${props=> props.display ? 'visible' : 'hidden'};
@@ -205,6 +213,8 @@ const LogOut = styled.div`
     visibility: visible;
   }
 `;
+LogOut.displayName = 'LogOut';
+
 
 const DropdownLogOut = styled.div`
   display: block;
@@ -212,10 +222,14 @@ const DropdownLogOut = styled.div`
     display: block;
   }
 `;
+DropdownLogOut.displayName = 'DropdownLogOut';
+
 
 const List = styled.ul`
 display: none;
 `;
+List.displayName = 'List';
+
 
 const IconsContainer = styled.div`
   width 30vw;
@@ -225,28 +239,35 @@ const IconsContainer = styled.div`
   font-size: 0.75vw;
   text-align: center;
 `;
+IconsContainer.displayName = 'IconsContainer';
+
 
 const Icon = styled.div`
 text-align: left;
 `;
+Icon.displayName = 'Icon';
+
 
 const IdenticonContainer = styled.div`
 margin-top: 0.5vh;
 margin-right: 0.5vw;
-
 `;
+
+IdenticonContainer.displayName = 'IdenticonContainer';
+
 
 const Title = styled.p`
   font-size:1vw;
 `;
+Title.displayName = 'Title';
+
 
 const TextContainer = styled.div`
   width: 13vw;
   display: flex;
   justify-content: center;
   align-items: center;
-
 `;
-
+TextContainer.displayName = 'TextContainer';
 
 export default NavBar;
