@@ -47,6 +47,7 @@ const ErrorPageContainer = styled.div`
     flex-direction: column;
     background-color: #F7F9FE
 `;
+ErrorPageContainer.displayName = 'ErrorPageContainer';
 
 const zoomOutAnimation =keyframes`${zoomIn}`;
 
@@ -57,11 +58,14 @@ const ImageContainer = styled.div`
   justify-content:center;
   animation: ${zoomOutAnimation} .5s ease-in;
 `;
+ImageContainer.displayName = 'ImageContainer';
 
 const Image = styled.img`
    height: 45vw;
    width: 64vw;
 `;
+Image.displayName = 'Image';
+
 
 
 
