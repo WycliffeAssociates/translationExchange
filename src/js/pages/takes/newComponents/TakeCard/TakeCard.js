@@ -154,7 +154,7 @@ export class TakeCard extends React.Component {
               audioFile={config.streamingUrl+this.props.location}  playAudio={this.props.play}
               playing = {this.state.takePlaying} durationTime={this.props.duration}
               pos = {this.state.pos}
-              options= {{ cursorWidth: 2, progressColor: '#009CFF', cursorColor: '#E74C3C', barWidth: 3.5, hideScrollbar: true, normalize: true, height: 65, waveColor: '#969595' }}
+              options= {{ cursorWidth: 2, progressColor: '#009CFF', cursorColor: '#E74C3C', barWidth: 1.5, hideScrollbar: true, normalize: true, height: 65, waveColor: '#969595' }}
             />
           </WaveformContainer>
 
