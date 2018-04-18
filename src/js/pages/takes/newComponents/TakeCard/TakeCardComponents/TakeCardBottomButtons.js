@@ -52,12 +52,14 @@ export default class TakeCardBottomButtons extends React.Component {
   render() {
     const {comments} = this.props;
     const availableComments = comments.length;
+    const { width } = this.props;
+    console.log(width);
     return (
       <BottomButtons>
         <CommentButton onClick={() => this.props.expandComments()}>
           {comments.length > 0 ?
-            <CommentBubble>
-              <CommentText>{availableComments}</CommentText>
+            <CommentBubble resize={width < 1800}>
+              {availableComments}
             </CommentBubble>
             :
             ''
@@ -79,22 +81,21 @@ const fadeInAnimation = keyframes`${fadeIn}`;
 
 const CommentBubble = styled.div`
   position:absolute;
-  border-radius:40px;
-  height: 18px;
-  width: 18px;
+  border-radius:10vw;
+  height: .9vw;
+  width: .9vw;
   background-color: #E74C3C;
   left:4.3vw;
-  bottom:1.6vw;
+  bottom:${props=> props.resize ? '2.2vw': '1.6vw'};
   color:#fff;
   display: flex;
   justify-content: center;
   align-items: center;
   animation: ${fadeInAnimation} .5s ease-in;
+  font-size: 12px;
 
 `;
-const CommentText = styled.p`
-  font-size: 12px;
-`;
+
 
 const PlayTakeContainer = styled.div`
 

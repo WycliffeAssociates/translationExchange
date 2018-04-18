@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 class Markers extends React.Component {
 
@@ -26,7 +27,8 @@ class Markers extends React.Component {
         style={{position: 'absolute', marginLeft: `${position==0? position-3: position-6}%`, cursor: 'pointer', color: '#009CFF'}}
         width="20px"
         height="45px">
-        <i className="material-icons" > place</i>
+        <i style={{fontSize: '1.6vw'}} className="material-icons" > place</i>
+        <VerseNumber>{this.props.text}</VerseNumber>
       </label>
 
 
@@ -34,7 +36,17 @@ class Markers extends React.Component {
   }
 }
 
+const VerseNumber = styled.div`
+  position: absolute;
+  top: .2vw;
+  left: .57vw;
+  color:white;
+  background-color: #009CFF;
+  border-radius: .3vw;
+  font-size: .7vw;
 
+
+`;
 
 
 

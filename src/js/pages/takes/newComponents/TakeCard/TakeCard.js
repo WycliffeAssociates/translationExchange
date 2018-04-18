@@ -36,6 +36,8 @@ export class TakeCard extends React.Component {
       hash: 'randomhash4324',
       playingComment: false,
       pos: 0,
+      width: 0,
+      height: 0,
     };
 
     this.expandComments = this.expandComments.bind(this);
@@ -45,6 +47,7 @@ export class TakeCard extends React.Component {
     this.finishedPlaying = this.finishedPlaying.bind(this);
     this.callMarker = this.callMarker.bind(this);
     this.dragPosition = this.dragPosition.bind(this);
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
   }
 
@@ -53,11 +56,19 @@ export class TakeCard extends React.Component {
     this.props.connectDragPreview(getEmptyImage(), {
       captureDraggingState: true,
     });
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
 
   }
 
-  componentDidUpdate() {
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
   }
+
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  }
+
 
   dragPosition(position) {
     this.setState({pos: position, takePlaying: true});
@@ -147,7 +158,7 @@ export class TakeCard extends React.Component {
             />
           </WaveformContainer>
 
-          <BottomButtons {...this.props} takePlaying= {this.state.takePlaying} playTakeFromCard = {() => this.playTakeFromCard()} expandComments={() => this.expandComments()} />
+          <BottomButtons {...this.props} width={this.state.width} takePlaying= {this.state.takePlaying} playTakeFromCard = {() => this.playTakeFromCard()} expandComments={() => this.expandComments()} />
 
 
           {this.state.showComments? <Comments  {...this.props} /> : '' }
@@ -288,6 +299,7 @@ const WaveformContainer = styled.div`
 
 const MarkerContainer= styled.div`
 margin-bottom: 2vh;
+position:relative;
 `;
 
 TakeCard.propTypes = {
