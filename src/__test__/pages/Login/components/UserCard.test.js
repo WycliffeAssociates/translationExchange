@@ -21,7 +21,7 @@ const mockProps = {
 describe('User card suite', function() {
   test('renderer', function() {
     const {wrapper} = shallow(<UserCard {...mockProps} />);
-    expect(wrapper.exists()).toBe(true);
+    expect(wrapper.find('')).toBe(true);
 
   });
 
