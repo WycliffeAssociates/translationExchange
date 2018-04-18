@@ -70,7 +70,7 @@ const ChapterPageContainer = styled.div`
     height: auto;
     min-height: 850px;
     flex-direction: column;
-    background-color: #F4F7F9;
+    background-color: #F6F9FE;
     overflow-y: scroll;
 `;
 
