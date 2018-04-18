@@ -13,7 +13,7 @@ class Welcome extends React.Component {
   render() {
 
     return (
-      <LoginPage>
+      <LoginPage className="pageBackground">
         <WelcomeComponent {...this.props} />
       </LoginPage>
     );
@@ -25,9 +25,6 @@ const LoginPage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background-image: url(${img}), linear-gradient(to bottom right, #0076FF, #00C5FF) ;
 
 `;
 

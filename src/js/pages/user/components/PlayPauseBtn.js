@@ -39,11 +39,9 @@ class PlayPauseBtn extends Component {
       <ButtonContainer>
 
         <PlayButton  onClick={()=>this.startPlaying()} type="button">
-          <Icon><i className="material-icons" style={{fontSize:'3vw'}}>{icon}</i> </Icon>
+          <Icon><i className="material-icons" style={{fontSize:'40px'}}>{icon}</i> </Icon>
         </PlayButton>
-
       </ButtonContainer>
-
     );
   }
 
@@ -55,9 +53,9 @@ const Container =  styled.div`
 `;
 
 const  PlayButton = styled.button`
-    height: 11vh;
-    width: 6.4vw;
-    border-radius: 8vw;
+    height: 90px;
+    width: 90px;
+    border-radius: 50px;
     background-color: #fff;
     outline: none;
     border-color: #2D2D2D;
@@ -67,24 +65,20 @@ const  PlayButton = styled.button`
 PlayButton.displayName = 'PlayButton';
 
 const ButtonContainer =styled.div`
-    position: absolute;
-    width: 18vw;
+    width:100%;
     z-index: 2;
-    top: 39vh;
-    left: 56vw;
-    transform: translate(-50%, -50%);
+    display:flex;
+    justify-content:center;
     cursor: pointer;
+    margin-top:100px
   `;
 ButtonContainer.displayName = 'ButtonContainer';
 
 const Icon = styled.button`
-  margin-left: 5%;
   color: #2D2D2D;
   border: none;
-  font-size: 2vw;
   cursor: pointer;
   background-color:transparent;
-
 `;
 Icon.displayName = 'Icon';
 

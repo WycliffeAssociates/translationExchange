@@ -5,10 +5,10 @@ import styled from "styled-components";
 export const YesButton = ({ onClick }) => {
   return (
     <Button onClick={onClick}>
-      <span style={{textDecoration:'underline'}}>Yes </span>
-      <i className="material-icons" style={{ fontSize: "1.9vw" }}>
-        check
-      </i>
+      <span style={{textDecoration: "underline", width:'100%'}}>Yes
+      <i className="material-icons" style={{ fontSize: "20px" }}>check</i>
+      </span>
+
     </Button>
   );
 };
@@ -16,11 +16,12 @@ export const YesButton = ({ onClick }) => {
 const Button = styled.button`
   display: flex;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 60px;
   color: white;
   background: linear-gradient(to bottom, #0076FF, #00C5FF);
-  padding: 0.75vw 5vw;
-  font-size: 1.1vw;
+  height:50px;
+  width:250px;
+  font-size: 20px;
   font-weight: 100;
   border: none;
 

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import jdenticon from "jdenticon";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
+import {fadeIn} from 'react-animations';
 
 class UserCreated extends Component {
   componentDidMount() {
@@ -37,17 +38,19 @@ class UserCreated extends Component {
   }
 }
 
+const fadeInAnimation = keyframes`${fadeIn}`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
-  justify-content: space-between;
+  justify-content: space-around;
+  animation: ${fadeInAnimation} .5s ease-in;
 `;
 
 const TextHeader = styled.h1`
-  padding-top: 3vw;
-  font-size: 2vw;
+  font-size: 50px;
 `;
 
 const IdenticonContainer = styled.div`
@@ -58,11 +61,13 @@ const IdenticonContainer = styled.div`
 const Button = styled.button`
   display: flex;
   align-items: center;
+  justify-content:center;
   border-radius: 20px;
   color: white;
   background: linear-gradient(to bottom, #0076ff, #00c5ff);
-  padding: 0.4vw 4vw;
-  font-size: 1.3vw;
+  height:40px;
+  width:250px;
+  font-size: 18px;
   font-weight: 100;
   border: none;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
