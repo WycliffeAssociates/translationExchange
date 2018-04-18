@@ -1,6 +1,5 @@
 import React from "react";
 import { shallow, render } from "enzyme";
-//import LogoTitle from "../../../js/pages/home/LogoTitle";
 import LogoTitle from "../../../../js/pages/home/LogoTitle";
 import toJson from 'enzyme-to-json';
 

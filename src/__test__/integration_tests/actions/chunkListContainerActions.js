@@ -1,7 +1,6 @@
 
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-//import { getAudioTakes, getAudioComments, setSourceProject, getSelectedProjectInfo } from '../../js/actions';
 import { getAudioTakes, getAudioComments, setSourceProject, getSelectedProjectInfo } from '../../../js/actions';
 
 const middlewares = [thunk];

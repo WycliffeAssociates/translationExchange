@@ -1,4 +1,3 @@
-//import ProjectsListContainerReducer from '../../js/reducers/ProjectsListContinerReducer';
 import ProjectsListContainerReducer from '../../../js/reducers/ProjectsListContinerReducer';
 
 describe('ProjectsListContainerReducer', () => {

@@ -1,8 +1,4 @@
 version: '2'
-networks:
-  default:
-    external:
-      name: testcontainer_default
 services:
   test-runner:
     image: node
@@ -13,4 +9,5 @@ services:
     command: bash -c "cd /translationExchange 
                       && npm install
                       && npm run test:ci --silent"
-
+    networks:
+      - testcontainer_default

@@ -1,7 +1,6 @@
 import { shallow, mount, render } from "enzyme";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-//import StartHere from "../../../js/pages/home/StartHere";
 import StartHere from "../../../../js/pages/home/StartHere";
 import toJson from 'enzyme-to-json';
 

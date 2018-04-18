@@ -1,4 +1,3 @@
-//import ChaptersContainerReducer from '../../js/reducers/ChaptersContainerReducer';
 import ChaptersContainerReducer from '../../../js/reducers/ChaptersContainerReducer';
 
 describe('ChaptersContainerReducer', () => {

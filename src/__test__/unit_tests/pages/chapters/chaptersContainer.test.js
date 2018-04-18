@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-//import ChaptersContainer from '../../../js/pages/chapters/ChaptersContainer';
 import ChaptersContainer from '../../../../js/pages/chapters/ChaptersContainer';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';

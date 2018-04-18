@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-//import ChunkListContainer from '../../../js/pages/chunks/ChunkListContainer';
 import ChunkListContainer from '../../../../js/pages/chunks/ChunkListContainer';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';

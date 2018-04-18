@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-//import ProjectsListContainer from '../../../js/pages/projects/ProjectsListContainer';
 import ProjectsListContainer from '../../../../js/pages/projects/ProjectsListContainer';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';

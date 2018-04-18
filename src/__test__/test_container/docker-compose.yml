@@ -18,8 +18,6 @@ services:
                   && python3 manage.py runserver" 
     depends_on:
       - db
-    ports:
-      - "8000:8000"
   db:
     image: postgres
     container_name: database 

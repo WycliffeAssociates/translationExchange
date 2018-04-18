@@ -1,4 +1,3 @@
-//import reducer from '../../js/reducers/HomeRecentProjectsReducer';
 import reducer from '../../../js/reducers/HomeRecentProjectsReducer';
 describe('Home Recent Project Reducer', () => {
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-//import ChapterList from '../../../js/pages/chapters/components/ChapterList';
 import ChapterList from '../../../../js/pages/chapters/components/ChapterList';
 
 describe('ChapterList', () => {

@@ -9,15 +9,15 @@
 //     streamingUrl: "http://172.19.145.91/"
 // };
 //
-//const test_config = {
+// var config = {
       //apiUrl: "http://127.0.0.1:8000/api/",
-      //streamingUrl: "http://127.0.0.1"
+      //streamingUrl: "http://127.0.0.1/"
  //};
 
 
 const config = {                                                        //remote api
-	apiUrl: "http://localhost:8000/api/",
-	streamingUrl: "http://localhost/"
+	apiUrl: "https://localhost/api/",
+	streamingUrl: "https://localhost/"
 };
 
 // const config = {                                                        //remote api

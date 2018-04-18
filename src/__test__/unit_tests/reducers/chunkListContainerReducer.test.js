@@ -1,4 +1,3 @@
-//import ChunkContainerReducer from '../../js/reducers/ChunkListContainerReducer';
 import ChunkContainerReducer from '../../../js/reducers/ChunkListContainerReducer';
 
 describe('ChunkContainerReducer', () => {
