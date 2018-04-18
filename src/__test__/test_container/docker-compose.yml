@@ -4,7 +4,7 @@ services:
     build: .
     container_name: te_backend
     volumes:
-      - C:\Users\dipinton\tE-backend:/tE-backend
+      - "${TEBACKEND}:/tE-backend"
       - ./scripts:/scripts
     environment:
       - DJANGO_SETTINGS_MODULE=tRecorderApi.settings_test
