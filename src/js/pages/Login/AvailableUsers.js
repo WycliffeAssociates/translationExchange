@@ -19,10 +19,9 @@ class AvailableUsers extends React.Component {
   render() {
 
     const {users} = this.props;
-    const autoHeightBackground = users.length !==0? true: false;
 
     return (
-      <Container autoHeightBackground={autoHeightBackground}>
+      <Container className="pageBackground">
 
         <h2 style={{marginBottom: '5vw'}}> Available Users </h2>
 
@@ -33,7 +32,7 @@ class AvailableUsers extends React.Component {
 
             :
 
-            <Grid columns={16}>
+            <Grid columns={16} >
 
               <Grid.Column width ={3}>
                 <NewUserCard {...this.props} />
@@ -64,12 +63,9 @@ class AvailableUsers extends React.Component {
 }
 
 const Container = styled.div`
-  background-image: url(${img}), linear-gradient(to bottom right, #0076FF, #00C5FF) ;
   padding: 5vw;
-  height: ${props => props.autoHeightBackground? 'auto': '100vh'};
   text-align: center;
   color: white;
-  width: 100vw;
 
 `;
 

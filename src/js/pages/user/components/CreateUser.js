@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import SparkMD5 from 'spark-md5';
 import jdenticon from 'jdenticon';
-import styled from 'styled-components';
+import {fadeIn} from 'react-animations';
+import styled,{keyframes} from 'styled-components';
 import WaveformContainer from './WaveformContainer';
 import BottomSection from './BottomSection';
 import LoadingUser from './LoadingUser';
@@ -113,6 +114,7 @@ class CreateUser extends Component {
               audio={audio}
               onStop={this.onStop}
               width={640}
+              height={280}
               nonstop={false}
               duration={3}
             />
@@ -132,12 +134,14 @@ class CreateUser extends Component {
   }
 }
 
+const fadeInAnimation =keyframes`${fadeIn}`;
 
 const Container = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
 height: 100%;
+animation: ${fadeInAnimation} .5s ease-in;
 `;
 
 export default CreateUser;

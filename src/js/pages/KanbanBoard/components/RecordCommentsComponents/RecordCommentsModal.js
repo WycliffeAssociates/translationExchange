@@ -82,7 +82,6 @@ class RecordCommentModal extends Component {
   saveComment = () => {
     const {id, type, chunkId, chunkNum} = this.props;
     const {jsonBlob} = this.state;
-    //console.log(jsonBlob,id, chunkId, chunkNum,type, 'data for comment creation');
     this.props.saveComment( jsonBlob, type, id, chunkId, chunkNum, this.commentSaved, this.error);
   };
 
@@ -169,6 +168,7 @@ class RecordCommentModal extends Component {
             onStop={this.onStop}
             recording={recording}
             width={825}
+            height={280}
             nonstop={true}
             duration={5} />
         </WaveformContainer>
