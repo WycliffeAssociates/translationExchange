@@ -66,6 +66,7 @@
     "fetch-mock": "^5.13.1",
     "jest": "^20.0.4",
     "jest-cli": "^20.0.4",
+    "jest-junit": "^3.6.0",
     "moxios": "^0.4.0",
     "react-addons-test-utils": "^15.6.0",
     "react-scripts": "^1.0.7",
@@ -74,12 +75,28 @@
     "web-audio-mock": "^0.1.9",
     "webpack": "^3.6.0"
   },
-
   "scripts": {
     "start": "cross-env NODE_PATH=src react-scripts start",
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "cross-env NODE_PATH=src react-scripts test",
+    "test:ci": "cross-env NODE_PATH=src react-scripts test --env=jsdom --testResultsProcessor ./node_modules/jest-junit --coverage --coverageDirectory=src/__test__/coverage",
+    "test_unit": "cross-env NODE_PATH=src react-scripts test --env=jsdom --testPathPattern=unit_tests --coverage",
+    "test_integration": "cross-env NODE_PATH=src react-scripts test --env=jsdom --testPathPattern=integration_tests --coverage",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ]
+  },
+  "jest-junit": {
+    "suitName": "jest tests",
+    "output": "src/__test__/junit.xml",
+    "classNameTemplate": "{classname} - {title}",
+    "titleTemplate": "{classname} - {title}",
+    "ancestorSeparator": " > ",
+    "usePathForSuitName": "true"
   },
   "proxy": "http://translationExchange:8080"
 }
