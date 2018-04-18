@@ -5,7 +5,7 @@ import styled from 'styled-components';
 class Loading extends Component {
   render() {
     return (
-      <Container>
+      <Container height= {this.props.height} >
         <h1>Loading...</h1>
         <img src={loading} alt="Loading..." />
       </Container>
@@ -17,7 +17,7 @@ class Loading extends Component {
 const Container = styled.div`
   display: flex;
   width: 100%;
-  height: 60vh;
+  height: ${props => props.height? props.height: '60vh' };
   flex-direction: column;
   justify-content: center;
   align-items: center;

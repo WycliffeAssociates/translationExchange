@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TimeLine from './timeLine.png';
 import Waveform from './Waveform';
 
-export default ({recordedBlob, audio, onStop, recording, width, nonstop, duration}) => {
+export default ({recordedBlob, audio, onStop, recording, width, height, nonstop, duration}) => {
 
   if (audio) {
     return (
@@ -27,6 +27,7 @@ export default ({recordedBlob, audio, onStop, recording, width, nonstop, duratio
           duration={duration}
           nonstop={nonstop}
           width={width}
+          height={height}
         />
       </RecordContainer>
     </Container>
@@ -48,6 +49,6 @@ border-top-right-radius: 7px;
 
 `;
 const RecordContainer = styled.div`
-margin-top: 95px;
+margin-top: 10px
 width: 100%;
 `;

@@ -46,37 +46,35 @@ export const getChapterCommentsSuccess= (comments)=>{
 
 
 export const saveComment = (blobx, type, id, chunkId, chunkNum, callback, errorCallback ) => { // chunkId & chunkNum, is used for refreshing the comments on takes
-    return dispatch => {
-        dispatch({type: 'SAVE_COMMENT_LOADING', uploadingComments: true}); // used to display loading UI
-        return axios
-            .post(config.apiUrl + 'comments/', {
-                comment: blobx,
-                user: 3,
-                object: id,
-                type: type
-            },{
-                headers: { Authorization: "Token " + localStorage.getItem('token') }
-            })
-            .then(response => {
+  return dispatch => {
+    dispatch({type: 'SAVE_COMMENT_LOADING', uploadingComments: true}); // used to display loading UI
+    return axios
+      .post(config.apiUrl + 'comments/', {
+        comment: blobx,
+        object: id,
+        type: type,
+      },{
+        headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+      })
+      .then(response => {
+        if (type === 'chunk') {
+          dispatch(updateChunkComments(response.data));
+        }
 
-                if(type === 'chunk'){
-                    dispatch(updateChunkComments(response.data));
-                }
+        if (type === 'chapter') {
+          dispatch(updateChapterComments(response.data));
+        }
 
-                if(type === 'chapter'){
-                    dispatch(updateChapterComments(response.data))
-                }
-
-                if(type === 'take'){
-                    dispatch(getTakes(chunkId, chunkNum));
-                }
-                dispatch({type: 'SAVE_COMMENT_DONE', uploadingComments: false});
-                callback();
-            })
-            .catch(error => {
-              dispatch({type: 'UPLOAD_COMMENT_ERROR', error: error.toString()});
-              });
-    };
+        if (type === 'take') {
+          dispatch(getTakes(chunkId, chunkNum));
+        }
+        dispatch({type: 'SAVE_COMMENT_DONE', uploadingComments: false});
+        callback();
+      })
+      .catch(error => {
+        dispatch({type: 'UPLOAD_COMMENT_ERROR', error: error.toString()});
+      });
+  };
 };
 
 

@@ -57,7 +57,6 @@ export const getUserHashSuccess = (iconHash) =>{
 //createUser
 export const createUser = (recordedBlob, hash) => {
   return function(dispatch) {
-    console.log(recordedBlob, 'NAMEAUDIO');
     dispatch(loadingProccess()); // can be used to render a spinner
     return axios
       .post(`${config.apiUrl}profiles/`, {
@@ -67,7 +66,6 @@ export const createUser = (recordedBlob, hash) => {
       .then(response => {
         const {nameAudio, token} = response.data;
 
-        console.log(response.data, 'CREATE USER RESPONSE');
         localStorage.setItem('token', token);
         dispatch(userCreated(nameAudio, hash));
       })
@@ -95,7 +93,6 @@ export const resetUserCreated = ()=>{
 
 export const patchUser = (id, recordedBlob, hash, callback) => {
   return function(dispatch) {
-    console.log(id, recordedBlob, hash, 'PATCH USER');
     return axios
       .patch(`${config.apiUrl}profiles/${id}/`,{
         icon_hash: hash,
@@ -104,7 +101,6 @@ export const patchUser = (id, recordedBlob, hash, callback) => {
       }, {headers: { Authorization: 'Token ' + localStorage.getItem('token') },
       },
       ). then( response => {
-        console.log(response.data);
         dispatch ({
           type: 'PATCHED_USER',
           audio_name: response.data.name_audio,

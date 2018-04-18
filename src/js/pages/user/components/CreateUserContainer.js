@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import 'css/create.css';
 import CreateUser from './CreateUser';
 import UserCreated from './UserCreated';
 import styled, {keyframes} from 'styled-components';
@@ -31,7 +30,7 @@ export class CreateUserContainer extends Component {
   render() {
     const { userCreated } = this.props;
     return (
-      <div className="pageBackground">
+      <PageContainer className ="pageBackground">
         <Label onClick={() => this.handleClick()}>
           <i
             className="material-icons"
@@ -42,7 +41,7 @@ export class CreateUserContainer extends Component {
           Back to Login
         </Label>
 
-        <Container>
+        <CardContainer>
           <Card>
             {userCreated ? (
               <UserCreated {...this.props} />
@@ -50,21 +49,25 @@ export class CreateUserContainer extends Component {
               <CreateUser {...this.props} />
             )}
           </Card>
-        </Container>
-      </div>
+        </CardContainer>
+      </PageContainer>
     );
   }
 }
 
 const fadeInAnimation = keyframes`${fadeIn}`;
 
-const Container = styled.div`
+const PageContainer = styled.div`
+`;
+PageContainer.displayName = 'PageContainer';
+
+const CardContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   padding-top: 3vw;
 `;
-Container.displayName= 'Container';
+CardContainer.displayName= 'CardContainer';
 
 const Label = styled.label`
   color: white;
@@ -73,6 +76,7 @@ const Label = styled.label`
   border: none;
   text-decoration: underline;
   cursor: pointer;
+  align-self: flex-start;
 `;
 Label.displayName = 'Label';
 
