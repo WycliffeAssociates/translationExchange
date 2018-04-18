@@ -52,7 +52,7 @@ class KanbanColumn extends React.Component {
 
       this.props.history.push({
         pathname: '/kanban',
-        search: `?chapterId=${chapterId}&chapterNum=${chapter_num}&bookName=${query.bookName}&projectId=${query.projectId}`,
+        search: `?chapterId=${chapterId}&chapterNum=${chapter_num}&bookName=${query.bookName}&projectId=${query.projectId}&&mode=${query.mode}`,
       });
       this.props.getChunks(chapter_num, history);
       this.props.getComments(chapterId, 'chapter_id');

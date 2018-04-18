@@ -49,6 +49,6 @@ border-top-right-radius: 7px;
 
 `;
 const RecordContainer = styled.div`
-margin-top: 10px
+margin-top: 10px;
 width: 100%;
 `;
