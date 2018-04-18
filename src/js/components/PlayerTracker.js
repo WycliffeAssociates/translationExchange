@@ -37,8 +37,6 @@ export default class PlayerTracker extends React.Component {
     if (!this.state.seeking) {
       this.setState(state);
     }
-
-
   };
 
   onSeek(e) {
@@ -60,9 +58,9 @@ export default class PlayerTracker extends React.Component {
 
     return (
       <div>
-        <PlayIcon style={{display: playing? 'none': ''}} onClick ={() => this.playComment()}> <i style={{fontSize:'1.6vw'}} class="material-icons">play_arrow</i> </PlayIcon>
+        <PlayIcon style={{display: playing? 'none': ''}} onClick ={() => this.playComment()}> <i style={{fontSize: '1.6vw'}} class="material-icons">play_arrow</i> </PlayIcon>
 
-        <PlayIcon style={{display: playing? '': 'none'}} onClick ={() => this.playComment()}> <i style={{fontSize:'1.6vw'}} class="material-icons">pause</i> </PlayIcon>
+        <PlayIcon style={{display: playing? '': 'none'}} onClick ={() => this.playComment()}> <i style={{fontSize: '1.6vw'}} class="material-icons">pause</i> </PlayIcon>
 
       </div>);
 
@@ -74,27 +72,32 @@ export default class PlayerTracker extends React.Component {
 
 
     return (
-      <div>
-
-        <div style={{width: 'inherit', color: 'steelblue', background: 'none', display: 'flex', flexDirection: 'row',
-          justifyContent: 'space-between'}}>
-          {this.PlayHead()}
-          <Input type="range"  min="0" max ={this.state.loadedSeconds} step="0.01" value={this.state.playedSeconds? this.state.playedSeconds: 0}
-            onChange = {this.onSeek} />
-          <ReactPlayer //url ={config.streamingUrl+ this.props.url}
-            url ={audioFile? audioFile: config.streamingUrl+ url}
-            style={{display: 'none'}}
-            onProgress = {this.onProgress}
-            playing = {this.state.playing}
-            onEnded = {this.onEnd}
-            ref={this.ref}
-          />
-        </div>
-      </div>
+      <Container>
+        {this.PlayHead()}
+        <Input type="range"  min="0" max ={this.state.loadedSeconds} step="0.01" value={this.state.playedSeconds? this.state.playedSeconds: 0}
+          onChange = {this.onSeek} />
+        <ReactPlayer //url ={config.streamingUrl+ this.props.url}
+          url ={audioFile? audioFile: config.streamingUrl+ url}
+          style={{display: 'none'}}
+          onProgress = {this.onProgress}
+          playing = {this.state.playing}
+          onEnded = {this.onEnd}
+          ref={this.ref}
+        />
+      </Container>
     );
   }
 }
 
+const Container = styled.div`
+  width: inherit;
+  color: steelblue;
+  background: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+Container.displayName = 'Container';
 const Input = styled.input`
   margin-top: 0.2vw;
  -webkit-appearance : none;
@@ -188,6 +191,7 @@ background: transparent;
 
 
 `;
+Input.displayName = 'Input';
 
 const PlayIcon = styled.button`
 
@@ -204,3 +208,4 @@ const PlayIcon = styled.button`
   padding: 0.4vw;
   color: #969595
 `;
+PlayIcon.displayName = 'PlayIcon';

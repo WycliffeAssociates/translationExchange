@@ -4,8 +4,9 @@ import styled from 'styled-components';
 
 class Loading extends Component {
   render() {
+    const {height}  = this.props;
     return (
-      <Container height= {this.props.height} >
+      <Container height= {height} >
         <h1>Loading...</h1>
         <img src={loading} alt="Loading..." />
       </Container>
@@ -23,6 +24,6 @@ const Container = styled.div`
   align-items: center;
 
 `;
-
+Container.displayName = 'Container';
 
 export default Loading;

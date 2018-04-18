@@ -21,10 +21,10 @@ export const getChapters = (projectId, redirect) =>{
 };
 
 export const getChaptersSuccess = (chapters) =>{
-    return {
-        type: 'GET_CHAPTERS_SUCCESS',
-        chapters
-    }
+  return {
+    type: 'GET_CHAPTERS_SUCCESS',
+    chapters,
+  };
 
 
 };

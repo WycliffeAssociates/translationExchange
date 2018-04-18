@@ -38,7 +38,7 @@ describe('KanbanPageActions Suite', () => {
   });
 
 
-  it.skip ('get chunks successfully', () => {
+  it ('get chunks successfully', () => {
     moxios.wait(()=> {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -48,24 +48,25 @@ describe('KanbanPageActions Suite', () => {
     });
 
     const expectedActions = [
+      {type: 'LOADING'},
       {type: 'FETCH_CHUNKS_SUCCESS', chunks: {chunks: []},
       },
     ];
 
     const store = mockStore({chunks: []});
-    return store.dispatch(getChunks(1, jest.fn())).then(()=> {
+    return store.dispatch(getChunks(1, [])).then(()=> {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
 
 
-  it.skip('patches take successfully', () => {
+  it('patches take successfully', () => {
     moxios.wait(()=> {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         status: 200,
         response: [{
-          chunk: [],
+          updatedTakes: [],
         }],
       });
     });
@@ -73,8 +74,17 @@ describe('KanbanPageActions Suite', () => {
     const expectedActions= [
       {type: 'PATCH_TAKE_SUCCESS', updatedTakes: []}];
 
-    const store = mockStore({takes: []});
-    return store.dispatch(patchTake(1, jest.fn())).then(() => {
+    const store = mockStore({kanbanPage: {
+      takes: [],
+      chunks: [],
+      chunkNum: 1,
+      activeChunkId: 1,
+      publishedTakes: [],
+      loading: false,
+    }});
+    return store.dispatch(patchTake(1,{
+      published: false, rating: 2},jest.fn(),
+    [],1)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
