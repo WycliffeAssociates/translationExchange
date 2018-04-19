@@ -1,0 +1,12 @@
+version: '2'
+services:
+  test-runner:
+    image: node
+    container_name: te_front_end_tests
+    volumes:
+      - "${WORKSPACE}:/translationExchange"
+      - ./scripts:/scripts
+    command: bash -c "cd /translationExchange 
+                      && npm install
+                      && npm run test:ci --silent"
+    network_mode: "host"
