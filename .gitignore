@@ -4,6 +4,7 @@
 /node_modules
 
 # testing
+lcov-report/
 coverage.xml
 junit.xml
 
@@ -24,7 +25,6 @@ yarn.lock
 # user specific IDE stuff
 .idea/workspace.xml
 .vscode
-*coverage
 
 # ignore large files
 *.mp3
