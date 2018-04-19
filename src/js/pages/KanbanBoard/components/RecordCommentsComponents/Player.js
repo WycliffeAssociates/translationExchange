@@ -37,7 +37,7 @@ class Player extends Component {
 
 
   render() {
-    const { comments} = this.props;
+    const { comments, txtNew} = this.props;
     const id = comments.owner_icon_hash.slice(0, 8);
 
     return (
@@ -51,7 +51,7 @@ class Player extends Component {
           <CommentsPlayer audioFile={`${config.streamingUrl}${comments.location}`} />
         </AudioContainer>
         <NewTextContainer>
-          <NewText> New!</NewText>
+          <NewText>{txtNew}</NewText>
         </NewTextContainer>
 
       </Container>

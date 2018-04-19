@@ -53,7 +53,7 @@ export default class ChapterCard extends Component {
     }
 
     render() {
-      const { number, total_chunks, uploaded_chunks, published_chunks } = this.props;
+      const { number, total_chunks, uploaded_chunks, published_chunks, txt } = this.props;
       const {numberInRow} = this.state;
 
       let dangerSign = true;
@@ -66,56 +66,56 @@ export default class ChapterCard extends Component {
       const chunksCompleted = `${published_chunks}/${total_chunks}`;
       const percentageCompleted = (published_chunks * 100)/ total_chunks;
 
-        return (
+      return (
 
-                <Card check ={checkLevel_1} numberInRow = {numberInRow}>
-                    <InformationContainer >
-                        <TextContainer>
-                            <P>Chapter {number}</P>
-                            {dangerSign ? <i class="material-icons">warning</i>:''}
-                        </TextContainer>
-                        {checkLevel_1 ?
-                            <CheckTextContainer>
-                                <CheckText>Level 1</CheckText>
-                            </CheckTextContainer>
-                            :
-                            ''
-                        }
+        <Card check ={checkLevel_1} numberInRow = {numberInRow}>
+          <InformationContainer >
+            <TextContainer>
+              <P>{txt.chapter} {number}</P>
+              {dangerSign ? <i class="material-icons">warning</i>:''}
+            </TextContainer>
+            {checkLevel_1 ?
+              <CheckTextContainer>
+                <CheckText>{txt.level} 1</CheckText>
+              </CheckTextContainer>
+              :
+              ''
+            }
 
-                    </InformationContainer>
-
-
-
-                        {checkLevel_1 ?
-                            <CircularProgressContainer check ={checkLevel_1}>
-
-                                <i style={{fontSize: '9vw'}} class="material-icons">star_border</i>
-
-                            </CircularProgressContainer>
-                            :
-                            <CircularProgressContainer>
-                            <CircularTextContainer>
-                                <CircularText>{chunksCompleted}</CircularText>
-                            </CircularTextContainer>
-                            <CircularProgressbar
-                                percentage={percentageCompleted}
-                                textForPercentage={null}
-                            />
-                            </CircularProgressContainer>
-                        }
+          </InformationContainer>
 
 
 
-                    <ButtonContainer>
-                        <ReviewButton check={checkLevel_1} onClick={this.reviewChapter}>
-                            <i style={{fontSize: '16px'}} class="material-icons">done_all</i>
-                            <p style={{fontSize: '16px', marginLeft: '5px'}}>  Review </p>
-                        </ReviewButton>
-                    </ButtonContainer>
-                </Card>
+          {checkLevel_1 ?
+            <CircularProgressContainer check ={checkLevel_1}>
+
+              <i style={{fontSize: '9vw'}} class="material-icons">star_border</i>
+
+            </CircularProgressContainer>
+            :
+            <CircularProgressContainer>
+              <CircularTextContainer>
+                <CircularText>{chunksCompleted}</CircularText>
+              </CircularTextContainer>
+              <CircularProgressbar
+                percentage={percentageCompleted}
+                textForPercentage={null}
+              />
+            </CircularProgressContainer>
+          }
 
 
-        );
+
+          <ButtonContainer>
+            <ReviewButton check={checkLevel_1} onClick={this.reviewChapter}>
+              <i style={{fontSize: '16px'}} class="material-icons">done_all</i>
+              <p style={{fontSize: '16px', marginLeft: '5px'}}>  {txt.review} </p>
+            </ReviewButton>
+          </ButtonContainer>
+        </Card>
+
+
+      );
     }
 
 }

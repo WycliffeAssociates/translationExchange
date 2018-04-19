@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
-import {getUserHash, getTasks} from '../../actions';
+import {getUserHash, getTasks, updateLanguage} from '../../actions';
 import TaskProgress from './components/TaskProgress';
 import GotoProjectsButton from './components/GotoProjectsButton';
 import styled from 'styled-components';
@@ -21,6 +21,10 @@ class TaskProgressPage extends React.Component {
     const {search} = this.props.location;
     const query = QueryString.parse(search);
     this.props.getTasks(query.type);
+    const language = localStorage.getItem('language');
+    if (language) {
+      updateLanguage(language);
+    }
   }
 
   componentDidMount() {
@@ -83,16 +87,16 @@ const TaskProgressContainer = styled.div`
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({getUserHash, getTasks}, dispatch);
+  return bindActionCreators({getUserHash, getTasks, updateLanguage}, dispatch);
 
 };
 
 const mapStateToProps = state => {
   const { tasks } = state.taskProgress;
   const { loggedInUser } = state.user;
-  const { displayText } = state.geolocation;
+  const { txt } = state.geolocation;
 
-  return {loggedInUser, displayText, tasks};
+  return {loggedInUser, txt, tasks};
 
   // all the state variables that you want to map to props
 };

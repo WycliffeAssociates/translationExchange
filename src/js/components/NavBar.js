@@ -36,7 +36,7 @@ class NavBar extends Component {
     }
     jdenticon.update('#ActiveUser', loggedInUser);
   }
-  
+
   logOut() {
     localStorage.removeItem('token');
     this.props.removeUser();
@@ -54,30 +54,36 @@ class NavBar extends Component {
 
   render() {
 
-    const {loggedInUser, history, chunks, chapterNum, location, chapterPage, projectPage, kanbanPage}= this.props;
+    const {loggedInUser, history, chunks, chapterNum, location, chapterPage, projectPage, kanbanPage, txt}= this.props;
     const searchBar = QueryString.parse(location.search);
     let menu = '';
     let book ='';
     let chapter='';
     let goToChapters = '';
+    let mode = '';
     let logOutMenu = (
       <Menu onSelect={ ()=> this.logOut()}>
-        <MenuItem style={{cursor:'pointer', color:'#fff', backgroundColor:'#000' }} key="1">Log Out</MenuItem>
+        <MenuItem style={{cursor: 'pointer', color:'#fff', backgroundColor:'#000' }} key="1">{txt.logOut}</MenuItem>
       </Menu>
     );
 
     if (kanbanPage) {
-      chapter =`Chapter ${chapterNum}`;
+      chapter =`${txt.chapter} ${chapterNum}`;
       book = searchBar.bookName;
+      mode = txt.chunk;
       goToChapters = () => {
         const {getChapters} = this.props;
         getChapters(searchBar.projectId);
         history.push(`/chapters?projectId=${searchBar.projectId}&&bookName=${searchBar.bookName}&&mode=${searchBar.mode}`);
       };
 
+      if (searchBar.mode === 'verse') {
+        mode = txt.verse;
+      }
+
       menu = (
         <Menu onSelect={ ky=> this.onSelect(ky)}>
-          { kanbanPage ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> {searchBar.mode} {chnk.startv}</MenuItem>): ''}
+          { kanbanPage ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> {mode} {chnk.startv}</MenuItem>): ''}
         </Menu>
       );
 
@@ -106,13 +112,13 @@ class NavBar extends Component {
             <i class="material-icons">graphic_eq</i>
 
             {
-                kanbanPage ?
+              kanbanPage ?
                 <Dropdown
                   trigger={['click']}
                   overlay={menu}
                   animation="slide-up"
                 >
-                  <Text>{searchBar.mode} {this.props.chunkNum}</Text>
+                  <Text>{mode} {this.props.chunkNum}</Text>
                 </Dropdown>
                 :
                 ''
@@ -122,17 +128,17 @@ class NavBar extends Component {
 
         </IconsContainer>
         <IdenticonContainer>
-         
-            <Dropdown
-                trigger={['click']}
-                overlayClassName="logout-dropdown"
-                overlay={logOutMenu}
-                animation="slide-up"
-            >
+
+          <Dropdown
+            trigger={['click']}
+            overlayClassName="logout-dropdown"
+            overlay={logOutMenu}
+            animation="slide-up"
+          >
             <Identicon id="ActiveUser"
-                       data-jdenticon-hash={loggedInUser}
+              data-jdenticon-hash={loggedInUser}
             />
-            </Dropdown>
+          </Dropdown>
         </IdenticonContainer>
       </Container>
     );
@@ -162,7 +168,7 @@ const ChaptersButton = styled.div`
   cursor: pointer;
   color: ${props=> props.selected ? '#45B649': ''}
   font-size: ${props=> props.selected ? '2vw': ''}
-  
+
 `;
 
 const ProjectsButton = styled.div`
@@ -171,7 +177,7 @@ const ProjectsButton = styled.div`
   cursor: pointer;
   color: ${props=> props.selected ? '#45B649': ''}
   font-size: ${props=> props.selected ? '2vw': ''}
-  
+
 `;
 
 const ChunksButton = styled.div`
@@ -179,42 +185,13 @@ const ChunksButton = styled.div`
   flex-direction: column;
   cursor: pointer;
   color: ${props=> props.selected ? '#009CFF': ''}
-  
+
 `;
 
 const Identicon= styled.svg`
   height: 10vh;
   width: 5vw;
   cursor: pointer;
-`;
-
-const LogOut = styled.div`
-  visibility: ${props=> props.display ? 'visible' : 'hidden'};
-  width: 7.5vw;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-  position: absolute;
-  z-index: 1;
-  margin-left: -2.5vw;
-  cursor: pointer;
-  &:hover{
-    visibility: visible;
-  }
-`;
-
-const DropdownLogOut = styled.div`
-  display: block;
-  &:hover(:first-child) {
-    display: block;
-  }
-`;
-
-const List = styled.ul`
-display: none;
 `;
 
 const IconsContainer = styled.div`
@@ -224,10 +201,6 @@ const IconsContainer = styled.div`
   align-items: center;
   font-size: 0.75vw;
   text-align: center;
-`;
-
-const Icon = styled.div`
-text-align: left;
 `;
 
 const IdenticonContainer = styled.div`

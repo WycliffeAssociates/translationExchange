@@ -79,7 +79,7 @@ class GitHubLogin extends Component {
 
     return (
       <GitHubSignInButton {...attrs}>
-        <GihubIcon src={require('../../../assets/images/github.png')} /> Github Sign in
+        <GihubIcon src={require('../../../assets/images/github.png')} /> {buttonText}
       </GitHubSignInButton>
     );
   }

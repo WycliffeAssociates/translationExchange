@@ -99,14 +99,14 @@ class CreateUser extends Component {
 
   render() {
     const { recordedBlob, audio, recording, generatedHash,displayError } = this.state;
-    const {loading} = this.props;
+    const {loading, txt} = this.props;
 
     return (
 
       displayError?
-        <ErrorDialog type="mic" onClick ={this.closeDialog} />
+        <ErrorDialog type="mic" txt={txt} onClick ={this.closeDialog} />
         :
-        loading ? <LoadingUser />:
+        loading ? <LoadingUser txt={txt} />:
           <Container>
             <WaveformContainer
               recording={recording}
@@ -124,6 +124,7 @@ class CreateUser extends Component {
               redo={this.redo}
               audio={audio}
               generatedHash={generatedHash}
+              txt={txt}
             />
 
           </Container>

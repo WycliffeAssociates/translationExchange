@@ -7,18 +7,18 @@ class ChunkPanel extends Component {
 
 
 render() {
-    const {selectedChunk,takeLocation} = this.props; //selectedChunk is the chunk number selected in the navbar, by default is 1
+    const {selectedChunk, mode, txt} = this.props; //selectedChunk is the chunk number selected in the navbar, by default is 1
     return (
       <Container>
         {this.props.chunks.map(chk =>{
 
           return (
             <ChunksContainer selected= {selectedChunk == chk.startv} >
-              <label>Chunk {chk.startv} </label>
+              <label>{mode} {chk.startv} </label>
               {chk.published_take != null ?
                 <PlayerTracker url={chk.published_take.location} />
                 :
-                <CurrentLabel selected= {selectedChunk == chk.startv}>{selectedChunk == chk.startv ? 'Current' : 'Unavailable'} </CurrentLabel>
+                <CurrentLabel selected= {selectedChunk == chk.startv}>{selectedChunk == chk.startv ? txt.selected : txt.unavailable} </CurrentLabel>
               }
 
             </ChunksContainer>);

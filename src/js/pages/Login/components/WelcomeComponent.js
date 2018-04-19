@@ -49,7 +49,7 @@ export default class WelcomeComponent extends React.Component {
   }
 
   render() {
-
+    const {txt} = this.props;
 
     return (
 
@@ -62,13 +62,15 @@ export default class WelcomeComponent extends React.Component {
         <ButtonsContainer>
 
           <ContinueButton onClick={()=> this.handleClick('continue')}>
-            Continue <i className="material-icons">arrow_forward </i>
+            {txt.continue} <i className="material-icons">arrow_forward </i>
           </ContinueButton>
 
           <GitHubLogin clientId="f5e981378e91c2067d41"
             redirectUri={config.redirectUri}
             onSuccess={data=>this.onLogin(data)}
-            onFailure={this.onLoginFailure} />
+            onFailure={this.onLoginFailure}
+            buttonText={txt.githubSignIn}
+          />
 
         </ButtonsContainer>
 

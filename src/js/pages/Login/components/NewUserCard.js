@@ -21,7 +21,7 @@ export default class NewUserCard extends React.Component {
 
 
           <AddUser> <i className="material-icons" style={{fontSize: '7vw',transform: `scale(-1,1)`}}>person_add</i></AddUser>
-          <CardLabel> New User </CardLabel>
+          <CardLabel> {this.props.txt.newUser} </CardLabel>
 
 
         </Card>

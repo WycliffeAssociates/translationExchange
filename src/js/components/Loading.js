@@ -6,7 +6,7 @@ class Loading extends Component {
   render() {
     return (
       <Container height= {this.props.height} >
-        <h1>Loading...</h1>
+        <h1>{this.props.txt.loading}</h1>
         <img src={loading} alt="Loading..." />
       </Container>
     );
