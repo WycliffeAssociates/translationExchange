@@ -156,10 +156,10 @@
 }
 
 .react-toggle-track {
-  width: 50px;
-  height: 24px;
+  width: 60px;
+  height: 30px;
   padding: 0;
-  border-radius: 30px;
+  border-radius: 35px;
   background-color: #FF9800;
   color: white;
   -webkit-transition: all 0.2s ease;
@@ -184,8 +184,8 @@
 
 .react-toggle-track-check {
   position: absolute;
-  width: 14px;
-  height: 10px;
+  width: 10px;
+  height: 14px;
   top: 0px;
   bottom: 0px;
   margin-top: auto;
@@ -210,11 +210,12 @@
   width: 10px;
   height: 14px;
   top: 0px;
-  bottom: 0px;
+  bottom: 10px;
   margin-top: auto;
   margin-bottom: auto;
+  margin-right: 3px;
   line-height: 0;
-  right: 10px;
+  right: 11px;
   opacity: 1;
   -webkit-transition: opacity 0.25s ease;
   -moz-transition: opacity 0.25s ease;
@@ -230,8 +231,8 @@
   position: absolute;
   top: 1px;
   left: 1px;
-  width: 22px;
-  height: 22px;
+  width: 30px;
+  height: 30px;
   border: 1px solid #4D4D4D;
   border-radius: 50%;
   background-color: #FAFAFA;

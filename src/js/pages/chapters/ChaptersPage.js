@@ -41,7 +41,7 @@ class ChapterPage extends Component {
         </DownloadBar>
 
         {this.props.loading?
-          <Loading height="auto" />
+          <Loading height= "80vh" marginTop="5vw" />
           :
 
           <CardsContainer>
