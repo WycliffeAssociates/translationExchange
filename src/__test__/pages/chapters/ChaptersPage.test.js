@@ -32,5 +32,10 @@ describe('Chapters Page Suite', () => {
     wrapper.find('DownloadButton').simulate('click');
     expect(mockProps.downloadProject.mock.calls.length).toEqual(1);
   });
+  mockProps.loading = true;
+  const loading = shallow(<ChapterPage {...mockProps} />);
+  it('should display Loading component', () => {
+    expect(loading.find('Loading').length).toEqual(1);
+  });
 
 });

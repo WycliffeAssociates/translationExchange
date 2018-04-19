@@ -83,7 +83,7 @@ class KanbanColumn extends React.Component {
       // problem is that the max for ratings is 3. differntiation between 3 star and published is a boolean flag
       case 0:
         return this.onDrop(false, 1, take);
-
+        
       case 1:
 
         return this.onDrop(false, 1, take);

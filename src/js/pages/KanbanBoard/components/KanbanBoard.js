@@ -21,23 +21,31 @@ export default class KanbanBoard extends React.Component {
     this.props.takes.forEach((take) => {
       switch (take.rating) {
         case 0:
-          column1.push(take);
+          if (take.published == true) {
+            publishedColumn.push(take);
+          }
+          else column1.push(take);
           break;
 
         case 1:
-          column1.push(take);
+          if (take.published == true) {
+            publishedColumn.push(take);
+          }
+          else column1.push(take);
           break;
 
         case 2:
-          column2.push(take);
+          if (take.published == true) {
+            publishedColumn.push(take);
+          }
+          else    column2.push(take);
           break;
 
         case 3:
           if (take.published == true) {
 
             publishedColumn.push(take);
-
-          //  this.props.addPublishedTake(take,);
+            //  this.props.addPublishedTake(take,);
           }
 
           else {

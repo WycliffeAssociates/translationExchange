@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import styled,{keyframes} from 'styled-components';
 import {zoomIn} from 'react-animations';
-import CircularProgressbar from "react-circular-progressbar";
-import QueryString from "query-string";
+import CircularProgressbar from 'react-circular-progressbar';
+import QueryString from 'query-string';
 
 
 
@@ -41,6 +41,10 @@ export default class ChapterCard extends Component {
       });
     }
 
+    componentWillUnMount() {
+      window.removeEventListener('resize');
+    }
+
     spaceCards() {
 
 
@@ -66,56 +70,56 @@ export default class ChapterCard extends Component {
       const chunksCompleted = `${published_chunks}/${total_chunks}`;
       const percentageCompleted = (published_chunks * 100)/ total_chunks;
 
-        return (
+      return (
 
-                <Card check ={checkLevel_1} numberInRow = {numberInRow}>
-                    <InformationContainer >
-                        <TextContainer>
-                            <P>Chapter {number}</P>
-                            {dangerSign ? <i class="material-icons">warning</i>:''}
-                        </TextContainer>
-                        {checkLevel_1 ?
-                            <CheckTextContainer>
-                                <CheckText>Level 1</CheckText>
-                            </CheckTextContainer>
-                            :
-                            ''
-                        }
+        <Card check ={checkLevel_1} numberInRow = {numberInRow}>
+          <InformationContainer >
+            <TextContainer>
+              <P>Chapter {number}</P>
+              {dangerSign ? <i class="material-icons">warning</i>:''}
+            </TextContainer>
+            {checkLevel_1 ?
+              <CheckTextContainer>
+                <CheckText>Level 1</CheckText>
+              </CheckTextContainer>
+              :
+              ''
+            }
 
-                    </InformationContainer>
-
-
-
-                        {checkLevel_1 ?
-                            <CircularProgressContainer check ={checkLevel_1}>
-
-                                <i style={{fontSize: '9vw'}} class="material-icons">star_border</i>
-
-                            </CircularProgressContainer>
-                            :
-                            <CircularProgressContainer>
-                            <CircularTextContainer>
-                                <CircularText>{chunksCompleted}</CircularText>
-                            </CircularTextContainer>
-                            <CircularProgressbar
-                                percentage={percentageCompleted}
-                                textForPercentage={null}
-                            />
-                            </CircularProgressContainer>
-                        }
+          </InformationContainer>
 
 
 
-                    <ButtonContainer>
-                        <ReviewButton check={checkLevel_1} onClick={this.reviewChapter}>
-                            <i style={{fontSize: '16px'}} class="material-icons">done_all</i>
-                            <p style={{fontSize: '16px', marginLeft: '5px'}}>  Review </p>
-                        </ReviewButton>
-                    </ButtonContainer>
-                </Card>
+          {checkLevel_1 ?
+            <CircularProgressContainer check ={checkLevel_1}>
+
+              <i style={{fontSize: '9vw'}} class="material-icons">star_border</i>
+
+            </CircularProgressContainer>
+            :
+            <CircularProgressContainer>
+              <CircularTextContainer>
+                <CircularText>{chunksCompleted}</CircularText>
+              </CircularTextContainer>
+              <CircularProgressbar
+                percentage={percentageCompleted}
+                textForPercentage={null}
+              />
+            </CircularProgressContainer>
+          }
 
 
-        );
+
+          <ButtonContainer>
+            <ReviewButton check={checkLevel_1} onClick={this.reviewChapter}>
+              <i style={{fontSize: '16px'}} class="material-icons">done_all</i>
+              <p style={{fontSize: '16px', marginLeft: '5px'}}>  Review </p>
+            </ReviewButton>
+          </ButtonContainer>
+        </Card>
+
+
+      );
     }
 
 }
@@ -162,18 +166,22 @@ const Card= styled.div`
     }
 
 `;
+Card.displayName = 'Card';
 
 const CircularTextContainer = styled.div`
     position: absolute;
 `;
+CircularTextContainer.displayName = 'CircularTextContainer';
 
 const CircularText = styled.p`
     font-size: 18px;
 `;
+CircularText.displayName = 'CircularText';
 
 const CheckText = styled.p`
     font-size: 14px;
 `;
+CheckText.displayName = 'CheckText';
 
 
 const ReviewButton= styled.button`
@@ -200,6 +208,7 @@ const ReviewButton= styled.button`
     text-decoration: underline;
   }
 `;
+ReviewButton.displayName = 'ReviewButton';
 
 const CircularProgressContainer = styled.div`
     display: flex;
@@ -210,6 +219,7 @@ const CircularProgressContainer = styled.div`
     position: relative;
 
 `;
+CircularProgressbar.displayName = 'CircularProgressbar';
 
 const CheckTextContainer = styled.div`
     width:100%;
@@ -217,6 +227,7 @@ const CheckTextContainer = styled.div`
     justify-content: flex-start;
     padding-left: 1vw;
 `;
+CheckTextContainer.displayName = 'CheckTextContainer';
 
 
 const P = styled.p`
@@ -224,11 +235,13 @@ const P = styled.p`
    font-weight: bold;
    display: inline-block;
 `;
+P.displayName = 'P';
 
 const InformationContainer = styled.div`
 text-align: center;
 width: 100%;
 `;
+InformationContainer.displayName = 'InformationContainer';
 
 
 const TextContainer = styled.div`
@@ -245,10 +258,8 @@ const TextContainer = styled.div`
     color: #FF9800;
     margin-left: 10%;
   }
-
-
-
 `;
+TextContainer.displayName = 'TextContainer';
 
 const ButtonContainer= styled.div`
     width: 150px;
@@ -260,5 +271,5 @@ const ButtonContainer= styled.div`
     display: flex;
     justify-content:center;
     border-radius: 25px;
-
-  `;
+`;
+ButtonContainer.displayName = 'ButtonContainer';
