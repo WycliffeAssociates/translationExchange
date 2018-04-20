@@ -2,10 +2,10 @@ import React from "react";
 
 import styled from "styled-components";
 
-export const YesButton = ({ onClick }) => {
+export const YesButton = ({ onClick, txt }) => {
   return (
     <Button onClick={onClick}>
-      <span style={{textDecoration: "underline", width:'100%'}}>Yes
+      <span style={{textDecoration: "underline", width:'100%'}}>{txt.yes}
       <i className="material-icons" style={{ fontSize: "20px" }}>check</i>
       </span>
 

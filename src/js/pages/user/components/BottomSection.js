@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import BottomButtons from './BottomButtons';
 import RecordButton from './RecordButton';
 
-export default ({recording, generatedHash, startRecording, redo, save, audio}) => {
+export default ({recording, generatedHash, startRecording, redo, save, audio, txt}) => {
 
-  let header ='What is your name?';
-  let displayText = 'Record';
+  let header = txt.whatIsYourName;
+  let displayText = txt.record;
 
 
   let handler = <RecordButton startRecording={startRecording}  />
@@ -16,16 +16,16 @@ export default ({recording, generatedHash, startRecording, redo, save, audio}) =
   }
 
   if (audio) {
-    header='Is this OK?';
+    header= txt.isThisOk;
     handler = <svg id="canvas" width="20%" height="20%" data-jdenticon-value={generatedHash} />
   }
 
   return (
     <Container>
       <Header>{header}</Header>
-      <PrivacyText> If you are concerned for your privacy or safety, please use a nickname or pseudonym.</PrivacyText>
+      <PrivacyText> {txt.privacyText}</PrivacyText>
       {handler}
-      {audio ? <BottomButtons done={save}  redo={redo} /> : <BottomText>{displayText}</BottomText>}
+      {audio ? <BottomButtons txt={txt} done={save}  redo={redo} /> : <BottomText>{displayText}</BottomText>}
     </Container>
 
   );

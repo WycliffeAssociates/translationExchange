@@ -146,8 +146,8 @@ class KanbanColumn extends React.Component {
         icon = (
           <div className="labelLines">
             <label > <i style={starSize}  className="material-icons">star_border</i> </label>
-              <label> <i style={starSize}  className="material-icons">star_border</i> </label>
-              <label> <i style={starSize}  className="material-icons">star_border</i> </label>
+            <label> <i style={starSize}  className="material-icons">star_border</i> </label>
+            <label> <i style={starSize}  className="material-icons">star_border</i> </label>
           </div>
         );
         break;
@@ -173,7 +173,7 @@ class KanbanColumn extends React.Component {
             this.props.array? this.props.array.map((take, index) => {
               return (
                 <TakeCard key={index} {...take} makeChanges= {this.makeChanges}
-                  displayText = {this.props.displayText}
+                  txt = {this.props.txt}
                   getComments ={this.props.getComments}
                   publishedTake = {this.props.publishedTake}
                   saveComment={saveComment}
@@ -185,7 +185,7 @@ class KanbanColumn extends React.Component {
 
           { this.props.publishedColumn? /* if publishedColumn column has 1 take card don't display DragHereBox*/
             '':
-            <DragHereBox />
+            <DragHereBox txt={this.props.txt} />
           }
 
         </div>
@@ -195,8 +195,8 @@ class KanbanColumn extends React.Component {
         {
           this.props.publishedColumn?
             this.chapterPublished()?
-              <center> <NextChapter onClick ={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)} >Go To Next Chapter <i className="fa fa-arrow-right" /> </NextChapter> </center> :
-              <center> <NextChunk onClick ={() => this.nextChunk()}>Go To Next Chunk <i className="fa fa-arrow-right" /> </NextChunk> </center>
+              <center> <NextChapter onClick ={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)} >{this.props.txt.goToNextChapter} <i className="fa fa-arrow-right" /> </NextChapter> </center> :
+              <center> <NextChunk onClick ={() => this.nextChunk()}>{this.props.txt.goToNextChunk} <i className="fa fa-arrow-right" /> </NextChunk> </center>
             : ''
         }
 

@@ -60,9 +60,7 @@ class App extends Component {
           <Route  path="/welcome" component={Welcome} />
           <Route  path="/projects" component={ProjectsPage} />
           <Route  path="/chapters" component={ChapterPage} />
-          <Route  path="/user" component={User} />
-          <Route path ="/newComponents" component={KanbanPage} />
-          <Route path ="/taskProgress" component={TaskProgressPage} />
+          <Route path ="/progress" component={TaskProgressPage} />
           <Route path ="/kanban" component={KanbanPage} />
           <Route path ="/errorPage" component={ErrorPage} />
           <Route path="*" component={NotFound} />

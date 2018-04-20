@@ -11,13 +11,13 @@ import img3 from './mockupdata/img1.PNG';
 
 class MyProjectsContainer extends Component {
   render() {
-      const {projects} = this.props;
+    const {projects, txt} = this.props;
     return (
 
       <Container>
         <HeaderContainer>
-            <i class="material-icons">folder_shared</i>
-          <Header>Projects</Header>
+          <i class="material-icons">folder_shared</i>
+          <Header>{txt.projects}</Header>
         </HeaderContainer>
         <CardsContainer>
           { projects.map( (p, index) =>
@@ -26,10 +26,10 @@ class MyProjectsContainer extends Component {
               bookName={p.book.name}
               language={p.language.name}
               version={p.version.slug}
-              dateModified={p.date_modified ? p.date_modified.slice(0,10) : ""}
+              dateModified={p.date_modified ? p.date_modified.slice(0,10) : ''}
               projectId={p.id}
               mode={p.mode.name}
-             {...this.props}
+              {...this.props}
             /> )
           }
         </CardsContainer>
@@ -45,7 +45,7 @@ const Container = styled.div`
   flex-direction: column;
   padding-top:3vw;
   padding-left: 1vw;
- 
+
 `;
 
 const Header = styled.p`

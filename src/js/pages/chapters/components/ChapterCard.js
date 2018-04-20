@@ -55,8 +55,8 @@ export default class ChapterCard extends Component {
     }
 
     render() {
-      const { number, total_chunks, uploaded_chunks, published_chunks } = this.props;
-      const {numberInRow, width} = this.state;
+      const { number, total_chunks, uploaded_chunks, published_chunks, txt } = this.props;
+      const {numberInRow} = this.state;
 
       let dangerSign = true;
       let checkLevel_1 = false;
@@ -70,15 +70,15 @@ export default class ChapterCard extends Component {
 
       return (
 
-        <Card check ={checkLevel_1} numberInRow = {numberInRow} screenWidth={width}>
+        <Card check ={checkLevel_1} numberInRow = {numberInRow}>
           <InformationContainer >
             <TextContainer>
-              <P>Chapter {number}</P>
+              <P>{txt.chapter} {number}</P>
               {dangerSign ? <i class="material-icons">warning</i>:''}
             </TextContainer>
             {checkLevel_1 ?
               <CheckTextContainer>
-                <CheckText>Level 1</CheckText>
+                <CheckText>{txt.level} 1</CheckText>
               </CheckTextContainer>
               :
               ''
@@ -111,7 +111,7 @@ export default class ChapterCard extends Component {
           <ButtonContainer>
             <ReviewButton check={checkLevel_1} onClick={this.reviewChapter}>
               <i style={{fontSize: '16px'}} class="material-icons">done_all</i>
-              <p style={{fontSize: '16px', marginLeft: '5px'}}>  Review </p>
+              <p style={{fontSize: '16px', marginLeft: '5px'}}>  {txt.review} </p>
             </ReviewButton>
           </ButtonContainer>
         </Card>
