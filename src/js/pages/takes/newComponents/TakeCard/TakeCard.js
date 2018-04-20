@@ -134,6 +134,7 @@ export class TakeCard extends React.Component {
   render() {
     let markers ='';
     const {connectDragSource , isDragging} = this.props;
+    const {pos} = this.state;
     if (this.state.showMarkers) {
       markers = this.callMarker();
     }
@@ -155,6 +156,7 @@ export class TakeCard extends React.Component {
               audioFile={config.streamingUrl+this.props.location}
               playing = {this.state.takePlaying} durationTime={this.props.duration}
               trackPos = {this.trackPos}
+              pos = {pos}
               finishedPlaying={this.finishedPlaying}
               options= {{ cursorWidth: 2, progressColor: '#009CFF', cursorColor: '#E74C3C', barWidth: 1, hideScrollbar: true, normalize: true, height: 35, waveColor: '#969595' }}
             />

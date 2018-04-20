@@ -13,7 +13,7 @@ class WaveForm extends Component {
 
     this.state = {
       playing: false,
-      pos: 0,
+      pos: props.pos? props.pos : 0,
       audioFile: '',
       pointer: 1,
 
