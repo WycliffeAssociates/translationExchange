@@ -15,14 +15,13 @@
 // };
 
 
-const config = {                                                        //remote api
-  //apiUrl: 'http://localhost/api/',
-  apiUrl: 'https://te.loc/api/',
-  streamingUrl: 'http://te.loc/',
+const config = {                                                        // local development
+  apiUrl: 'https://localhost/api/',
+  streamingUrl: 'http://localhost/',
   redirectUri: 'http://localhost:3000',
 };
 
-// const config = {                                                        //remote api
+// const config = {                                                        //production
 //     apiUrl: 'https://te.loc/api/',
 //     streamingUrl: 'https://te.loc/'
 //     redirectUri: 'https://te.loc/'
