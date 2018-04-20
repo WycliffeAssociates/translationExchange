@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled,{keyframes} from 'styled-components';
+import {fadeIn} from 'react-animations';
 import CommentRow from './TakeCardCommentRow';
 import RecordCommentsModal from '../../../../KanbanBoard/components/RecordCommentsComponents/RecordCommentsModal';
 export default class TakeCardComments extends React.Component {
@@ -75,6 +76,8 @@ export default class TakeCardComments extends React.Component {
 
 }
 
+const fadeInAnimation = keyframes`${fadeIn}`;
+
 const Button = styled.button`
   font-size: 1.75vw;
   flex: 1;
@@ -89,6 +92,7 @@ const Button = styled.button`
 
 const Comments = styled.div`
 padding-left: 1vw;
+animation: ${fadeInAnimation} .5s ease-in;
 `;
 
 const MoreOptions = styled.div`
