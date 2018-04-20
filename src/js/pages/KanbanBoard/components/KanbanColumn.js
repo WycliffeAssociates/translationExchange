@@ -31,10 +31,26 @@ class KanbanColumn extends React.Component {
       }
     });
 
-    const nextChunkId = chunks[activeChunkIndex+1].id;      // add + 1 to get the next item in the array
-    const nextChunkNum = chunks[activeChunkIndex+1].startv;
+    if (chunks[activeChunkIndex+1]!== undefined) {
+      const nextChunkId = chunks[activeChunkIndex+1].id;      // add + 1 to get the next item in the array
+      const nextChunkNum = chunks[activeChunkIndex+1].startv;
 
-    this.props.getTakes(nextChunkId, nextChunkNum );
+      this.props.getTakes(nextChunkId, nextChunkNum );
+    }
+
+    else { //if last chunk and not all chunks completed, redirect to incomplete chunk
+      chunks.map((chk, index) => {
+        if (!chk.published_take) {
+          activeChunkIndex = index;
+          const nextChunkId = chunks[activeChunkIndex].id;      // add + 1 to get the next item in the array
+          const nextChunkNum = chunks[activeChunkIndex].startv;
+
+          this.props.getTakes(nextChunkId, nextChunkNum );
+        }
+
+      });
+    }
+
   }
 
 
