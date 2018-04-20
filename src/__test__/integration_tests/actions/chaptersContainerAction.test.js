@@ -8,7 +8,7 @@ const mockStore = configureMockStore(middlewares);
 
 describe('ChaptersContainerAction', () => {
     const store = mockStore();
-    it('has action type:FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS and response is not undefined', () => {
+    xit('has action type:FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS and response is not undefined', () => {
         const expectedActions = [
             { type: 'FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS' }
         ];
