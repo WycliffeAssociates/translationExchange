@@ -4,14 +4,14 @@ import loadingComment from '../../../../../assets/images/loadingRing.svg';
 
 
 
-export default () => {
+export default ({txt}) => {
   return (
     <Container>
       <ItemsContainer>
         <GifContainer>
           <img style={{height: '12vw', width: '12vw'}} src={loadingComment} alt="Loading_comment" />
         </GifContainer>
-        <BottomText>Uploading...</BottomText>
+        <BottomText>{txt.uploading}</BottomText>
       </ItemsContainer>
     </Container>
   );

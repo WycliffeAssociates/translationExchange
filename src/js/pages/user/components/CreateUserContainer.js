@@ -5,7 +5,7 @@ import UserCreated from './UserCreated';
 import styled, {keyframes} from 'styled-components';
 import {fadeIn} from 'react-animations';
 import {bindActionCreators} from 'redux';
-import { createUser, resetUserCreated, patchUser } from '../../../actions/UserActions';
+import { createUser, resetUserCreated, patchUser, updateLanguage } from '../../../actions';
 
 
 export class CreateUserContainer extends Component {
@@ -19,6 +19,13 @@ export class CreateUserContainer extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  componentWillMount() {
+    const language = localStorage.getItem('language');
+    if (language) {
+      this.props.updateLanguage(language);
+    }
+  }
+
   componentWillUnmount() {
     this.props.resetUserCreated();
   }
@@ -28,7 +35,7 @@ export class CreateUserContainer extends Component {
   }
 
   render() {
-    const { userCreated } = this.props;
+    const { userCreated, txt } = this.props;
     return (
       <PageContainer className ="pageBackground">
         <Label onClick={() => this.handleClick()}>
@@ -38,7 +45,7 @@ export class CreateUserContainer extends Component {
           >
             arrow_back
           </i>
-          Back to Login
+          {txt.backToLogin}
         </Label>
 
         <CardContainer>
@@ -65,7 +72,7 @@ const CardContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 3vw;
+  padding: 3vw;
 `;
 CardContainer.displayName= 'CardContainer';
 
@@ -91,16 +98,22 @@ const Card = styled.div`
   background-color: white;
   overflow: hidden;
   animation: ${fadeInAnimation} .3s ease-in;
+
+  @-moz-document url-prefix() {
+    height: 800px;
+    width: 590px;
+  }
 `;
 Card.displayName = 'Card';
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ createUser, resetUserCreated, patchUser }, dispatch);
+  return bindActionCreators({ createUser, resetUserCreated, patchUser, updateLanguage }, dispatch);
 };
 
 const mapStateToProps = state => {
   const { hash, audioName, userCreated, loading, socialLogin, tempUserId } = state.user;
-  return { hash, audioName, userCreated, loading, socialLogin, tempUserId };
+  const {txt} = state.geolocation;
+  return { hash, audioName, userCreated, loading, socialLogin, tempUserId, txt };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(

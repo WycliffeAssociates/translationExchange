@@ -16,10 +16,16 @@ class Markers extends React.Component {
     const markerLength = verseMarkers.length;
     const position = this.props.translate;
     const {markerTime} = this.props;
+    let fontSize= '.7vw';
+    let top = '.2vw';
+    let shiftLeft = false;
 
-
-    if (markerLength > 3) {
-      verseMarkers = '';
+    if (markerLength > 1) {
+      shiftLeft = true;
+    }
+    if (markerLength > 2) {
+      fontSize = '.5vw';
+      top = '.23vw';
     }
 
     return (
@@ -28,7 +34,7 @@ class Markers extends React.Component {
         width="20px"
         height="45px">
         <i style={{fontSize: '1.6vw'}} className="material-icons" > place</i>
-        <VerseNumber>{this.props.text}</VerseNumber>
+        <VerseNumber top={top} fontSize={fontSize} shiftLeft={shiftLeft}>{this.props.text}</VerseNumber>
       </label>
 
 
@@ -38,12 +44,15 @@ class Markers extends React.Component {
 
 const VerseNumber = styled.div`
   position: absolute;
-  top: .2vw;
-  left: .57vw;
+  top: ${props=> props.top};
+  left: ${props => props.shiftLeft ? '.41vw': '.62vw'};
   color:white;
   background-color: #009CFF;
   border-radius: .3vw;
-  font-size: .7vw;
+  font-size: ${props=> props.fontSize};
+  display: flex;
+  align-items: center;
+  height: .7vw;
 
 
 `;

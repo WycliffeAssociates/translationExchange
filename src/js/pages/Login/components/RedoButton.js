@@ -2,12 +2,12 @@ import React from "react";
 
 import styled from "styled-components";
 
-export const RedoButton = ({ onClick }) => {
+export const RedoButton = ({ onClick, txt }) => {
   return (
     <Button onClick={onClick}>
-      <span style={{ textDecoration: "underline", width:'100%'}}>
-        Redo
-          <i className="material-icons" style={{ fontSize: "20px" }}>redo</i>
+      <span style={{ textDecoration: 'underline', width: '100%'}}>
+        {txt.redo}
+        <i className="material-icons" style={{ fontSize: '20px' }}>redo</i>
       </span>
 
     </Button>

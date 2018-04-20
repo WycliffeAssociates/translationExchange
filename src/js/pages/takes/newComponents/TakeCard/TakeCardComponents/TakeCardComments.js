@@ -22,7 +22,7 @@ export default class TakeCardComments extends React.Component {
 
   recordButton() {
     const { id, saveComment, uploadingComments, activeChunkId, chunkNum} = this.props;
-    const microphone =  <i style={{fontSize:'1.6vw', paddingTop:'.5vw', paddingRight:'.2vw'}} className="material-icons">mic_none</i>;
+    const microphone =  <i style={{fontSize: '1.6vw', paddingTop: '.5vw', paddingRight: '.2vw'}} className="material-icons">mic_none</i>;
     return (
       <div style={{backgroundColor: '#E74C3C', width: '4vw'}}>
 
@@ -35,7 +35,9 @@ export default class TakeCardComments extends React.Component {
             closeModal = {()=> this.closeModal()}
             id={id}
             saveComment = {saveComment}
-            type={'take'} />
+            type={'take'}
+            txt={this.props.txt}
+          />
         </RecordComment>
 
       </div>
@@ -45,7 +47,7 @@ export default class TakeCardComments extends React.Component {
 
 
   render() {
-    const {comments} = this.props;
+    const {comments, txt} = this.props;
     return (
       <Comments>
         {
@@ -61,7 +63,7 @@ export default class TakeCardComments extends React.Component {
 
           <LoadMore>
             <i className="material-icons">add_circle</i>
-            {`${' '}Load More`}
+            {` ${txt.loadMore}`}
           </LoadMore>
 
           {this.recordButton()}

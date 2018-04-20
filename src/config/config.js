@@ -16,15 +16,16 @@
 
 
 const config = {                                                        //remote api
-  apiUrl: 'http://localhost/api/',
-  streamingUrl: 'http://localhost/',
+  //apiUrl: 'http://localhost/api/',
+  apiUrl: 'https://te.loc/api/',
+  streamingUrl: 'http://te.loc/',
   redirectUri: 'http://localhost:3000',
-  database: 'http://localhost:8000',
 };
 
 // const config = {                                                        //remote api
-//     apiUrl: "https://te.loc/api/",
-//     streamingUrl: "https://te.loc/"
+//     apiUrl: 'https://te.loc/api/',
+//     streamingUrl: 'https://te.loc/'
+//     redirectUri: 'https://te.loc/'
 // };
 
 export default config;
