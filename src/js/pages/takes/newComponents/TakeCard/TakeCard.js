@@ -39,7 +39,7 @@ export class TakeCard extends React.Component {
     };
 
     this.expandComments = this.expandComments.bind(this);
-    this.onStop = this.onStop.bind(this);
+    this.trackPos = this.trackPos.bind(this);
     this.playComment = this.playComment.bind(this);
     this.recordComment =  this.recordComment.bind(this);
     this.finishedPlaying = this.finishedPlaying.bind(this);
@@ -66,12 +66,13 @@ export class TakeCard extends React.Component {
     this.setState(prevState => ({ showComments: !prevState.showComments}));
   }
 
-  onStop(recordedBlob) {
-    this.setState({blob: recordedBlob.blobURL});
-
+  trackPos(pos) {
+    this.setState({pos: pos});
   }
   finishedPlaying() {
-    this.setState({takePlaying: false});
+    this.setState({takePlaying: false,
+      pos: 0});
+
   }
 
   playTakeFromCard() {
@@ -140,9 +141,10 @@ export class TakeCard extends React.Component {
 
           <WaveformContainer>
             <Waveform
-              audioFile={config.streamingUrl+this.props.location}  playAudio={this.props.play}
+              audioFile={config.streamingUrl+this.props.location}
               playing = {this.state.takePlaying} durationTime={this.props.duration}
-              pos = {this.state.pos}
+              trackPos = {this.trackPos}
+              finishedPlaying={this.finishedPlaying}
               options= {{ cursorWidth: 2, progressColor: '#009CFF', cursorColor: '#E74C3C', barWidth: 1, hideScrollbar: true, normalize: true, height: 35, waveColor: '#969595' }}
             />
           </WaveformContainer>
