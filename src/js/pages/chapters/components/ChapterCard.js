@@ -56,7 +56,7 @@ export default class ChapterCard extends Component {
 
     render() {
       const { number, total_chunks, uploaded_chunks, published_chunks, txt } = this.props;
-      const {numberInRow} = this.state;
+      const {numberInRow, width} = this.state;
 
       let dangerSign = true;
       let checkLevel_1 = false;
@@ -70,7 +70,7 @@ export default class ChapterCard extends Component {
 
       return (
 
-        <Card check ={checkLevel_1} numberInRow = {numberInRow}>
+        <Card check ={checkLevel_1} numberInRow = {numberInRow} screenWidth={width}>
           <InformationContainer >
             <TextContainer>
               <P>{txt.chapter} {number}</P>
@@ -172,13 +172,73 @@ const Card= styled.div`
     margin-right: ${props =>  props.screenWidth*0.1}px;
   }
 
-  @media only screen and (min-width: 1300px) {
+  @media only screen and (min-width: 1333px) {
     :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
     margin-left: ${props => props.screenWidth*0.05}px;
     }
 
   :nth-child(${props => (props.numberInRow*2)-1}n) {
   margin-right: ${props =>  props.screenWidth*0.05}px;
+}
+}
+
+@media only screen and (min-width: 1482px) {
+  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+  margin-left: ${props => props.screenWidth*0.075}px;
+  }
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.075}px;
+}
+}
+
+@media only screen and (min-width: 1556px) {
+  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+  margin-left: ${props => props.screenWidth*0.05}px;
+  }
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.05}px;
+}
+}
+
+@media only screen and (min-width: 1728px) {
+  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+  margin-left: ${props => props.screenWidth*0.075}px;
+  }
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.075}px;
+}
+}
+
+@media only screen and (min-width: 1778px) {
+  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+  margin-left: ${props => props.screenWidth*0.05}px;
+  }
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.05}px;
+}
+}
+
+@media only screen and (min-width: 1976px) {
+  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+  margin-left: ${props => props.screenWidth*0.075}px;
+  }
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.075}px;
+}
+}
+
+@media only screen and (min-width: 2000px) {
+  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+  margin-left: ${props => props.screenWidth*0.05}px;
+  }
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.05}px;
 }
 }
     }

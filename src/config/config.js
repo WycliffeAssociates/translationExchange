@@ -16,8 +16,8 @@
 
 
 const config = {                                                        //remote api
-  //apiUrl: 'http://localhost/api/',
-  apiUrl: 'https://te.loc/api/',
+  apiUrl: 'http://localhost/api/',
+  // apiUrl: 'https://te.loc/api/',
   streamingUrl: 'http://localhost/',
   redirectUri: 'http://localhost:3000',
 };
