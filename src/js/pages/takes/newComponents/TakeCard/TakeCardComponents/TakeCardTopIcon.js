@@ -13,7 +13,7 @@ export default class TakeCardTopIcon extends React.Component {
     return  (
       <TopBar>
         <DragIcon>
-          <i className = "fa fa-bars" />
+          <i className = "material-icons">menu</i>
         </DragIcon>
 
         <CardInfo>

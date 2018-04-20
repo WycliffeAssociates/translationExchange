@@ -55,7 +55,7 @@ export default class UtilityPanel extends React.Component {
             <Toggle className="vertical_align_middle"
               onChange={e=>this.setState({commentsTab: e.target.checked})}
               defaultChecked= {false} icons ={{
-                unchecked: <i style={{fontSize: '1vw', paddingBottom: '1vw'}} className="material-icons">mode_comment</i>,
+                unchecked: <i  className="material-icons">mode_comment</i>,
                 checked: <img src={require('../../../../../assets/images/Audio_Wave.svg')} />,
               }}  />
 
@@ -138,7 +138,15 @@ const UtilityNavigation = styled.div`
   flex-direction: row ;
   justify-content: space-between;
   margin-top: 1vw;
+  i {
+    vertical-align: middle;
+    font-size: 18px;
+  }
 
+  img {
+    height: 14px;
+    width: 14px;
+  }
 `;
 
 const Hide = styled.button`

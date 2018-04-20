@@ -108,10 +108,11 @@ const KanbanContainer = styled.div`
 const SourceAudio = styled.div`
   position: fixed;
   bottom: 0;
-  height: 10vh;
+  height: 7.5vh;
   background: #2D2D2D;
   width: 100vw;
   z-index: 99;
+  max-height: 50px;
 `;
 
 const mapDispatchToProps = dispatch => {

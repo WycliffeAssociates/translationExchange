@@ -13,6 +13,7 @@ export default class ChapterCard extends Component {
 
     this.state ={
       numberInRow: '',
+      width: '',
     };
 
     this.spaceCards = this.spaceCards.bind(this);
@@ -46,9 +47,10 @@ export default class ChapterCard extends Component {
 
       var width = window.innerWidth;
       width = width-(width*0.1); // takeaway 10% because of padding on parent container
-      var numberInRow = (width/220) | 0;
+      var numberInRow = (width/200) | 0;
       this.setState({
         numberInRow: numberInRow,
+        width: width,
       });
     }
 
@@ -147,18 +149,38 @@ const Card= styled.div`
     flex-direction: column;
     text-align: center;
 
-    @media only screen and (max-width: 733px) {
+    @media only screen and (max-width: 666px) {
       margin: auto;
       margin-top: 5%;
     }
-    @media only screen and (min-width: 734px) {
+    @media only screen and (min-width: 667px) {
       :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
-      margin-left: ${props => 90/(2+props.numberInRow)}%;
+      margin-left: ${props => props.screenWidth*0.125}px;
     }
 
+      :nth-child(${props => (props.numberInRow*2)-1}n) {
+      margin-right: ${props =>  props.screenWidth*0.125}px;
+    }
+    }
+
+    @media only screen and (min-width: 950px) {
+      :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+      margin-left: ${props => props.screenWidth*0.1}px;
+      }
+
     :nth-child(${props => (props.numberInRow*2)-1}n) {
-    margin-right: ${props => 75/(2+props.numberInRow)}%;
+    margin-right: ${props =>  props.screenWidth*0.1}px;
   }
+
+  @media only screen and (min-width: 1300px) {
+    :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+    margin-left: ${props => props.screenWidth*0.05}px;
+    }
+
+  :nth-child(${props => (props.numberInRow*2)-1}n) {
+  margin-right: ${props =>  props.screenWidth*0.05}px;
+}
+}
     }
 
 `;

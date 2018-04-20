@@ -72,7 +72,7 @@ const CardContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 3vw;
+  padding: 3vw;
 `;
 CardContainer.displayName= 'CardContainer';
 
@@ -98,6 +98,11 @@ const Card = styled.div`
   background-color: white;
   overflow: hidden;
   animation: ${fadeInAnimation} .3s ease-in;
+
+  @-moz-document url-prefix() {
+    height: 800px;
+    width: 590px;
+  }
 `;
 Card.displayName = 'Card';
 
