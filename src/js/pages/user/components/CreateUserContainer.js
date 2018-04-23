@@ -31,7 +31,7 @@ export class CreateUserContainer extends Component {
   }
 
   handleClick() {
-    this.props.history.push({ pathname: '/users' });
+    this.props.history.push({ pathname: '/welcome' });
   }
 
   render() {
