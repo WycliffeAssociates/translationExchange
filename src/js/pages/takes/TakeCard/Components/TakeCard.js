@@ -10,6 +10,9 @@ import jdenticon from 'jdenticon';
 import propTypes from 'prop-types';
 import {DragSource} from 'react-dnd';
 import Notification, {notify} from 'react-notify-toast';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+
 
 
 export class TakeCard extends React.Component {
@@ -34,7 +37,9 @@ export class TakeCard extends React.Component {
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
 
+
   }
+
 
   componentDidMount() {
     jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'no author info');
@@ -116,8 +121,6 @@ export class TakeCard extends React.Component {
 
     return  connectDragSource( //only native element nodes can now be passed to React DnD connectors
       <div style={{opacity: isDragging? 0.5: 1}} >
-        <Notification />
-
         <TopBar {...this.props} />
 
         <MarkerContainer>
@@ -180,7 +183,10 @@ const takeSource = {
 
       if (dropResult.listId == 4) {
         if (item.take.published == false && props.publishedTake == true) {
-          notify.show('🚫 You can only have ONE published take, Unpublish first 🚫 ', 'warning', 5000);
+          toast.error('You can only have one publised take, UNPUBLISH first',
+            {
+              position: toast.POSITION.TOP_CENTER,
+            });
         }
 
         else {
