@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import TakeCard from '../../takes/newComponents/TakeCard/TakeCard';
+import TakeCard from '../../takes/TakeCard/';
 import DragHereBox from '../../../components/DragHereBox';
 import QueryString from 'query-string';
 import {DropTarget} from 'react-dnd';

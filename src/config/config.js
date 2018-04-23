@@ -16,7 +16,7 @@
 
 
 const config = {                                                        // local development
-  apiUrl: 'https://localhost/api/',
+  apiUrl: 'http://localhost/api/',
   streamingUrl: 'http://localhost/',
   redirectUri: 'http://localhost:3000',
 };

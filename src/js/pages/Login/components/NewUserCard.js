@@ -77,7 +77,7 @@ AddUser.displayName = 'AddUser';
 
 const CardLabel = styled.label`
     color: #009CFF;
-    font-size: 1.35vw;
+    font-size: 1.15vw;
     text-decoration: underline;
     cursor: pointer;
     align-self: flex-end;
