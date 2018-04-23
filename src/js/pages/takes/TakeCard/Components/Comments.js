@@ -101,8 +101,7 @@ justify-content: center;
 align-items: center;
 background-color: white;
 width: 100%;
-margin: 10px;
-
+padding: 5px;
 `;
 
 const RecordButton = styled.div`
