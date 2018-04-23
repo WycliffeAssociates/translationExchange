@@ -2,11 +2,8 @@ import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import {fadeIn} from 'react-animations';
 import jdenticon from 'jdenticon';
-import {getEmptyImage} from 'react-dnd-html5-backend';
 import TakeCardTop from './Components/TakeCard';
 import Comments from './Components/Comments';
-import Notification, {notify} from 'react-notify-toast';
-import {DragSource} from 'react-dnd';
 
 
 
@@ -38,8 +35,6 @@ export default class index extends React.Component {
 
     return  (
       <div>
-        <Notification />
-
 
         <Container>
           <TakeCardTop {...this.props} expandComments={this.expandComments} />
