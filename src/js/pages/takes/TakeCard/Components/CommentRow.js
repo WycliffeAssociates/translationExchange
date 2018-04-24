@@ -4,6 +4,8 @@ import ReactPlayer from 'react-player';
 import PlayerTracker from '../../../../components/PlayerTracker';
 import jdenticon from 'jdenticon';
 import config from '../../../../../config/config';
+import Draggable from 'react-draggable';
+import {toast } from "react-notify-toast";
 
 export default class TakeCardCommentRow extends React.Component {
 
@@ -12,14 +14,18 @@ export default class TakeCardCommentRow extends React.Component {
     this.state = {
       playing: false,
       id: null,
+      x: 0,
+      y: 0,
     };
     this.play = this.play.bind(this);
     this.ended = this.ended.bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
   }
 
   componentDidMount() {
     const {comment} = this.props;
     jdenticon.update(`#CommentUser${comment.id}`, comment.owner_icon_hash);
+
   }
 
   play() {
@@ -30,28 +36,55 @@ export default class TakeCardCommentRow extends React.Component {
     this.setState({playing: false});
   }
 
+  handleDrag(e, ui) {
+    const {x, y} = this.state;
+    const { width} = this.props;
+    console.log( x)
+
+    if (x > width-9 ) {
+      console.log('deleted')
+    }
+
+    this.setState({
+      x: x + ui.deltaX,
+      y: y + ui.deltaY,
+    });
+  }
+
+
+
+
   render() {
 
     const {comment} = this.props;
 
     return (
-      <CommentRow>
+      <Draggable onDrag={this.handleDrag} axis="x" bounds={{left :0, top:0, bottom: 0 }}>
+        <CommentRow>
 
 
-        <CommentPlayer >
-          <PlayerTracker url={comment.location} />
-        </CommentPlayer>
+          <CommentPlayer >
+            <PlayerTracker url={comment.location} />
+          </CommentPlayer>
 
-        <IdenticonContainer>
-          <Identicon onClick={()=>this.play()} id={`CommentUser${comment.id}`} data-jdenticon-hash={comment.owner_icon_hash} />
-          <ReactPlayer url={`${config.streamingUrl}${comment.owner_name_audio}`} playing={this.state.playing} onEnded={()=> this.ended()}  />
-        </IdenticonContainer>
-
-      </CommentRow>
+          <IdenticonContainer>
+            <Identicon onClick={()=>toast(<Msg />)} id={`CommentUser${comment.id}`} data-jdenticon-hash={comment.owner_icon_hash} />
+            <ReactPlayer url={`${config.streamingUrl}${comment.owner_name_audio}`} playing={this.state.playing} onEnded={()=> this.ended()}  />
+          </IdenticonContainer>
+        </CommentRow>
+      </Draggable>
     );
   }
 
 }
+
+const Msg = ({ closeToast }) => (
+<div>
+  Lorem ipsum dolor
+    <button>Retry</button>
+    <button onClick={closeToast}>Close</button>
+</div>
+)
 
 
 const CommentRow = styled.div`

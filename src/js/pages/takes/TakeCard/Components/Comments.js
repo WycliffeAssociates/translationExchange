@@ -3,12 +3,15 @@ import styled,{keyframes} from 'styled-components';
 import {fadeIn} from 'react-animations';
 import CommentRow from './CommentRow';
 import RecordCommentsModal from '../../../KanbanBoard/components/RecordCommentsComponents/RecordCommentsModal';
+
+
 export default class TakeCardComments extends React.Component {
 
   constructor(props) {
     super(props);
     this.state ={
       displayModal: false,
+      width: 0,
     };
 
     this.recordButton = this.recordButton.bind(this);
@@ -18,6 +21,12 @@ export default class TakeCardComments extends React.Component {
   closeModal() {
     this.setState({displayModal: false});
   }
+
+  componentDidMount() {
+    const width = this.myInput.offsetWidth;
+    this.setState({width});
+  }
+
 
 
   recordButton() {
@@ -43,14 +52,15 @@ export default class TakeCardComments extends React.Component {
 
 
   render() {
-    const {comments, txt} = this.props;
+    const {comments} = this.props;
+    const {width} = this.state;
     return (
-      <Container>
+      <Container innerRef={input => {this.myInput = input}}  >
         <Comments>
           {
             comments.length!==0 ?
               comments.map((comment) => {
-                return (  <CommentRow key= {comment.id} comment= {comment} />);
+                return (<CommentRow width={width} key= {comment.id} comment= {comment} />);
 
               })
               :
