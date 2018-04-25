@@ -63,8 +63,8 @@ export const getChunks = (chapterId, redirect) => {
           headers: { Authorization: 'Token ' + localStorage.getItem('token') },
         })
       .then(response => {
-        dispatch(getChunksSuccess(response.data));
         const chunkId = response.data[0].id; //get the chunk id from the first chunk in the array of chunks
+        dispatch(getChunksSuccess(response.data, chunkId));
         dispatch(getTakes(chunkId, 1)); // get the takes from the first chunk and set chunkNum to 1
         dispatch(getComments(chunkId,'chunk_id')); // get comments for the first chunk
       })
@@ -75,10 +75,11 @@ export const getChunks = (chapterId, redirect) => {
   };
 };
 
-export const getChunksSuccess = (chunks) => {
+export const getChunksSuccess = (chunks, chunkId) => {
   return {
     type: 'FETCH_CHUNKS_SUCCESS',
     chunks,
+    chunkId,
   };
 };
 

@@ -8,7 +8,7 @@ import KanbanBoard from './components/KanbanBoard';
 import {getChunks, getTakes,deleteTake, getComments,
   patchTake, saveComment, getUserHash,
   removeUser, getChapters, resetError,
-  updateLanguage} from '../../actions';
+  updateLanguage, deleteComment} from '../../actions';
 import UtilityPanel from './components/UtilityPanel/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
@@ -64,7 +64,6 @@ class KanbanPage extends React.Component {
           <UtilityPanel chapterNum={query.chapterNum} {...this.props} />
 
         </KanbanContainer>
-
         <SourceAudio />
       </KanbanPageContainer>
     );
@@ -114,7 +113,7 @@ const SourceAudio = styled.div`
 const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({getChunks, getTakes,deleteTake,
-    getComments, patchTake, saveComment, getUserHash, removeUser, getChapters, resetError, updateLanguage}, dispatch);
+    getComments, patchTake, saveComment, getUserHash, removeUser, getChapters, resetError, updateLanguage, deleteComment }, dispatch);
 
 };
 

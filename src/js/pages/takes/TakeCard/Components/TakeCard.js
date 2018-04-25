@@ -15,7 +15,6 @@ import 'css/notification.css';
 
 
 
-
 export class TakeCard extends React.Component {
 
   constructor(props) {
