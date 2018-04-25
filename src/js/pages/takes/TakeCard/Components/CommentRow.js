@@ -55,6 +55,7 @@ export default class TakeCardCommentRow extends React.Component {
 
 
 const CommentRow = styled.div`
+  margin: 2px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
