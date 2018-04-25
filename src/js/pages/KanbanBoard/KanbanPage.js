@@ -5,7 +5,6 @@ import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
 import KanbanBoard from './components/KanbanBoard';
-import { ToastContainer } from "react-notify-toast";
 import {getChunks, getTakes,deleteTake, getComments,
   patchTake, saveComment, getUserHash,
   removeUser, getChapters, resetError,
