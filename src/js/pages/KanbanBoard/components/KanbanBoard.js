@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import {ToastContainer} from 'react-toastify';
 import KanbanColumn from './KanbanColumn';
 import DeleteTake from './DeleteTake';
-import 'css/notification.css';
 
 
 
