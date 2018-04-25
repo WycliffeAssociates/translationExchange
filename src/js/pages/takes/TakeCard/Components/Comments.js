@@ -54,9 +54,10 @@ export default class TakeCardComments extends React.Component {
   render() {
     const {comments, deleteComment, txt} = this.props;
     const {width} = this.state;
+    const hasComments = comments.length!==0? true: false;
     return (
-      <Container innerRef={input => {this.myInput = input}}  >
-        <Comments>
+      <Container innerRef={input => {this.myInput = input;}} >
+        <Comments hasComments ={hasComments}>
           {
             comments.length!==0 ?
               comments.map((comment) => {
@@ -98,8 +99,9 @@ const Button = styled.button`
 `;
 
 const Comments = styled.div`
-height: 100px;
-overflow-y: auto;
+height: ${props => props.hasComments? '100px': '0px'};
+overflow-y: scroll;
+overflow-x: hidden;
 animation: ${fadeInAnimation} .5s ease-in;
 background: white;
 
