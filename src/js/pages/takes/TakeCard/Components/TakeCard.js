@@ -9,9 +9,9 @@ import BottomButtons from './BottomButtons';
 import jdenticon from 'jdenticon';
 import propTypes from 'prop-types';
 import {DragSource} from 'react-dnd';
-import Notification, {notify} from 'react-notify-toast';
-import {ToastContainer, toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
+import {toast} from 'react-toastify';
+import 'css/notification.css';
+
 
 
 
@@ -162,6 +162,85 @@ const WaveformContainer = styled.div`
   overflow: hidden;
 `;
 
+
+let undo= false;
+
+const UndoToast = ({closeToast, props}) => {
+
+  function handleClick() {
+    undo = true;
+    closeToast();
+  }
+
+  return (
+    <div style={{textAlign: 'center'}}>
+      <Undo onClick={handleClick}> {props.txt.undo}<i className="material-icons">undo</i> </Undo>
+    </div>
+  );
+
+};
+
+function showUndoToast(props) {
+  toast(<UndoToast props={props} />, {
+    position: toast.POSITION.BOTTOM_CENTER,
+    closeOnClick: true,
+    className: 'page-background',
+    onClose: () => {
+      if (undo === true) {
+        //do not delete the take
+      }
+      else if (undo === false) {
+        props.deleteTake(props.id, props.activeChunkId, props.chunkNum);
+      }
+    },
+
+  });
+}
+
+const ConfirmDelete = ({closeToast,props }) => (
+  <div style= {{textAlign: 'center'}}>
+    <p> {props.txt.deleteTake} </p>
+    <ButtonContainer>
+      <Confirm onClick={() => (showUndoToast(props), closeToast())}>
+        {props.txt.confirm} <i className="material-icons">done_all</i>
+      </Confirm>
+      <Undo onClick={closeToast}> {props.txt.undo}<i className="material-icons">undo</i> </Undo>
+    </ButtonContainer>
+  </div>
+);
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+const Confirm = styled.button`
+  min-height: 40px;
+  min-width: 90px;
+  background: linear-gradient(to top, #820C00, #E74C3C);
+  border-radius: 20px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  i {
+    vertical-align: middle;
+  }
+
+`;
+
+const Undo = styled.button`
+  min-height: 40px;
+  min-width: 90px;
+  background: linear-gradient(to top, #0076FF, #00C5FF);
+  border-radius: 20px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  i {
+    vertical-align: middle;
+  }
+`;
+
 TakeCard.propTypes = {
   count: propTypes.number.isRequired,
   take: propTypes.object.isRequired,
@@ -171,6 +250,7 @@ TakeCard.propTypes = {
   takeId: propTypes.number.isRequired,
   connectDragPreview: propTypes.func.isRequired,
 };
+
 const takeSource = {
   beginDrag(props, monitor, component) {
 
@@ -179,26 +259,39 @@ const takeSource = {
   endDrag(props, monitor) {
     const item = monitor.getItem();
     const dropResult = monitor.getDropResult();
-    if (dropResult && dropResult.listId !== item.rating) {
+    if (dropResult && dropResult.listId !== item.rating) //CHECK DROP DESTINATION VS CARD ORIGIN
+    {
 
-      if (dropResult.listId == 4) {
-        if (item.take.published == false && props.publishedTake == true) {
-          toast.error('You can only have one publised take, UNPUBLISH first',
+      if (dropResult.listId === 4) //CHECK PUBLISHED COLUMN
+      {
+        if (item.take.published === false && props.publishedTake == true) {
+          toast.error(props.txt.alreadyPublished,
             {
               position: toast.POSITION.TOP_CENTER,
             });
+
         }
 
-        else {
+        else // MOVE TAKE TO EMPTY PUBLISHED COLUMN{
           props.makeChanges(
             item.take.published,
             dropResult.listId,
             item.take
           );
-        }
       }
 
-      else {
+
+      else if (dropResult.listId === 'DELETE_TAKE') //CHECK DELETE TARGET
+      {
+        toast(<ConfirmDelete props={props} />, {
+          position: toast.POSITION.BOTTOM_CENTER,
+          className: 'Toastify__toast--default',
+          autoClose: 10000,
+          closeOnClick: false,
+        });
+      }
+      else // DEFAULT MOVE TAKE
+      {
         props.makeChanges(
           item.take.published,
           dropResult.listId,
@@ -207,7 +300,7 @@ const takeSource = {
       }
     }
 
-    else if (dropResult && dropResult.listId == 3 && item.rating == 3) {
+    else if (dropResult && dropResult.listId === 3 && item.rating === 3) {
 
       props.makeChanges(
         item.take.published,
@@ -215,7 +308,6 @@ const takeSource = {
         item.take
       );
     }
-
   },
 
 };
