@@ -190,6 +190,7 @@ class KanbanColumn extends React.Component {
               return (
                 <TakeCard key={index} {...take} makeChanges= {this.makeChanges}
                   txt = {this.props.txt}
+                  deleteComment = {this.props.deleteComment}
                   getComments ={this.props.getComments}
                   publishedTake = {this.props.publishedTake}
                   saveComment={saveComment}

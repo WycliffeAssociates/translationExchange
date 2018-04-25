@@ -30,6 +30,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         chunks: action.chunks,
         loading: false,
+        activeChunkId: action.chunkId,
       };
 
     case 'PATCH_TAKE_SUCCESS':

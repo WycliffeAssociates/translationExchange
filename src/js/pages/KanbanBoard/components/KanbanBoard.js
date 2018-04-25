@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import {ToastContainer} from 'react-toastify';
 import KanbanColumn from './KanbanColumn';
 
 
@@ -66,6 +66,7 @@ export default class KanbanBoard extends React.Component {
 
 
       <Container>
+        <ToastContainer />
         {/* the listId prop is needed for moving takes between different columns */}
         <KanbanColumn listId ={1} icon= {1} array = {column1} {...this.props} publishedTake = {publishedTake} />
         <KanbanColumn listId ={2} icon= {2} array = {column2} {...this.props} publishedTake = {publishedTake} />

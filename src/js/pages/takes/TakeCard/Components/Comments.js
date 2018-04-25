@@ -52,7 +52,7 @@ export default class TakeCardComments extends React.Component {
 
 
   render() {
-    const {comments} = this.props;
+    const {comments, deleteComment} = this.props;
     const {width} = this.state;
     return (
       <Container innerRef={input => {this.myInput = input}}  >
@@ -60,7 +60,7 @@ export default class TakeCardComments extends React.Component {
           {
             comments.length!==0 ?
               comments.map((comment) => {
-                return (<CommentRow width={width} key= {comment.id} comment= {comment} />);
+                return (<CommentRow deleteComment={deleteComment} width={width} id={comment.id} key= {comment.id} comment= {comment} />);
 
               })
               :
@@ -111,8 +111,7 @@ justify-content: center;
 align-items: center;
 background-color: white;
 width: 100%;
-margin: 10px;
-
+padding: 5px;
 `;
 
 const RecordButton = styled.div`

@@ -9,10 +9,9 @@ import { ToastContainer } from "react-notify-toast";
 import {getChunks, getTakes, getComments,
   patchTake, saveComment, getUserHash,
   removeUser, getChapters, resetError,
-  updateLanguage} from '../../actions';
+  updateLanguage, deleteComment} from '../../actions';
 import UtilityPanel from './components/UtilityPanel/UtilityPanel';
-import styled, {keyframes} from 'styled-components';
-import {fadeIn} from 'react-animations';
+import styled from 'styled-components';
 import 'css/takes.css';
 import img from '../../../assets/images/obs-en-01-01.jpg';
 
@@ -70,11 +69,6 @@ class KanbanPage extends React.Component {
           <UtilityPanel chapterNum={query.chapterNum} {...this.props} />
 
         </KanbanContainer>
-        <NotificationContainer>
-          <p>Deleting comment</p>
-          <p> gif </p>
-          <button> undo</button>
-        </NotificationContainer>
         <SourceAudio />
       </KanbanPageContainer>
     );
@@ -87,21 +81,6 @@ overflow-x: hidden;
 overflow-y: auto;
 width: 100%;
 box-sizing: border-box;
-`;
-
-const fadeInAnimation = keyframes`${fadeIn}`;
-const NotificationContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  position:fixed;
-  top: 83vh;
-  background-color: rgba(0,0,0,0.8);
-  width:70%
-  color: white;
-  left: 6vw;
-  height: 12vh;
-  align-items: center;
-  animation: ${fadeInAnimation} 1s ease-in;
 `;
 
 const KanbanContainer = styled.div`
@@ -139,7 +118,7 @@ const SourceAudio = styled.div`
 const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({getChunks, getTakes,
-    getComments, patchTake, saveComment, getUserHash, removeUser, getChapters, resetError, updateLanguage}, dispatch);
+    getComments, patchTake, saveComment, getUserHash, removeUser, getChapters, resetError, updateLanguage, deleteComment}, dispatch);
 
 };
 

@@ -36,7 +36,9 @@ export class TakeCard extends React.Component {
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
 
+
   }
+
 
   componentDidMount() {
     jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'no author info');
@@ -118,8 +120,6 @@ export class TakeCard extends React.Component {
 
     return  connectDragSource( //only native element nodes can now be passed to React DnD connectors
       <div style={{opacity: isDragging? 0.5: 1}} >
-      
-
         <TopBar {...this.props} />
 
         <MarkerContainer>

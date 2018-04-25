@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import '../../../../../css/notification.css';
 import ReactPlayer from 'react-player';
 import PlayerTracker from '../../../../components/PlayerTracker';
 import jdenticon from 'jdenticon';
 import config from '../../../../../config/config';
 import Draggable from 'react-draggable';
-import {toast } from "react-notify-toast";
+import { toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+import QueryString from "query-string";
+
 
 export default class TakeCardCommentRow extends React.Component {
 
@@ -15,11 +19,16 @@ export default class TakeCardCommentRow extends React.Component {
       playing: false,
       id: null,
       x: 0,
-      y: 0,
+      counter: 0,
+      deleteComment: true,
+      controlledPosition: {
+        x: 0, y: 0
+      }
     };
     this.play = this.play.bind(this);
     this.ended = this.ended.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
   }
 
   componentDidMount() {
@@ -37,29 +46,56 @@ export default class TakeCardCommentRow extends React.Component {
   }
 
   handleDrag(e, ui) {
-    const {x, y} = this.state;
-    const { width} = this.props;
-    console.log( x)
+    const {x, counter} = this.state;  // counter is used to display one notification of deleting
+    const {width} = this.props;
 
-    if (x > width-9 ) {
-      console.log('deleted')
+    if (x > width-30 && counter===0 ) {
+      this.setState({counter: 1})
+      toast(<Msg redo={()=> this.setState({deleteComment: false})} />, {
+        position: toast.POSITION.BOTTOM_CENTER,
+        className: 'page-bar',
+        onClose: () => this.deleteComment()
+      });
     }
 
     this.setState({
       x: x + ui.deltaX,
-      y: y + ui.deltaY,
+      controlledPosition: {x: x + ui.deltaX, y: 0}
     });
   }
 
+  deleteComment() {
+    const {deleteComment} = this.state;
+    const {id} = this.props;
 
+
+    if (deleteComment) {
+      this.props.deleteComment(id, 'take');
+    }
+    else {
+      this.adjustXPos();
+      this.setState({counter: 0, x: 0})
+    }
+
+  }
+
+  adjustXPos(e) {
+    //e.preventDefault();
+    //e.stopPropagation();
+    this.setState({controlledPosition: {x: 0, y: 0}});
+  }
 
 
   render() {
 
     const {comment} = this.props;
+    let position = null;
+    if (!this.state.deleteComment) {
+      position ={x: 0};
+    }
 
     return (
-      <Draggable onDrag={this.handleDrag} axis="x" bounds={{left :0, top:0, bottom: 0 }}>
+      <Draggable onDrag={this.handleDrag} position={this.state.controlledPosition} axis="x" bounds={{left: 0, top: 0, bottom: 0 }}>
         <CommentRow>
 
 
@@ -68,7 +104,7 @@ export default class TakeCardCommentRow extends React.Component {
           </CommentPlayer>
 
           <IdenticonContainer>
-            <Identicon onClick={()=>toast(<Msg />)} id={`CommentUser${comment.id}`} data-jdenticon-hash={comment.owner_icon_hash} />
+            <Identicon id={`CommentUser${comment.id}`} data-jdenticon-hash={comment.owner_icon_hash} />
             <ReactPlayer url={`${config.streamingUrl}${comment.owner_name_audio}`} playing={this.state.playing} onEnded={()=> this.ended()}  />
           </IdenticonContainer>
         </CommentRow>
@@ -78,14 +114,37 @@ export default class TakeCardCommentRow extends React.Component {
 
 }
 
-const Msg = ({ closeToast }) => (
-<div>
-  Lorem ipsum dolor
-    <button>Retry</button>
-    <button onClick={closeToast}>Close</button>
-</div>
-)
+const Msg = ({ redo }) => (
+<DeleteContainer>
+  Deleting comment
+    <BlueButton onClick={redo}>Redo</BlueButton>
+</DeleteContainer>
+);
 
+const DeleteContainer = styled.div`
+  background-color:transparent;
+  color:white;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const BlueButton= styled.button`
+  border-radius: 20px
+  color: white;
+  background: linear-gradient( #0076FF, #00C5FF );
+  padding: 0.4vw 2vw;
+  font-weight: 100;
+  border: none;
+  text-decoration: underline;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  outline:none;
+  cursor: pointer;
+  i{
+    vertical-align: middle;
+  }
+`;
 
 const CommentRow = styled.div`
   display: flex;
