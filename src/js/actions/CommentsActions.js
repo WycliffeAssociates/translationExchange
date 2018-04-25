@@ -3,7 +3,6 @@ import config from '../../config/config';
 import {getTakes, getTakesSuccess} from '../actions';
 
 export const getComments = (query, type) => {
-
   return function(dispatch) {
     return axios
       .get(`${config.apiUrl}comments/?${type}=${query}`,
@@ -100,18 +99,23 @@ export const resetError = () => {
   };
 };
 //delete comment
-export const deleteComment = (commentId, type) => {
+export const deleteComment = (commentId, type, typeId) => {
   return (dispatch, getState) => {
-    const {takes, activeChunkId, chunkNum} = getState().kanbanPage;
+    const {activeChunkId, chunkNum} = getState().kanbanPage;
 
     return axios
       .delete(config.apiUrl + 'comments/' + commentId + '/', {
         headers: { Authorization: 'Token ' + localStorage.getItem('token') },
       })
       .then(() => {
+
         if (type === 'take') {
-          dispatch(commentDeletedSuccess(activeChunkId, chunkNum, dispatch ));
+          dispatch(commentOnTakeDeletedSuccess(activeChunkId, chunkNum, dispatch ));
         }
+        else {
+          dispatch(commentDeletedSuccess(typeId, type, dispatch))
+        }
+
       })
       .catch(error => {
         console.log(error);
@@ -119,7 +123,7 @@ export const deleteComment = (commentId, type) => {
 
   }
 }
-export const commentDeletedSuccess = ( activeChunkId, chunkNum, dispatch) => {
+export const commentOnTakeDeletedSuccess = ( activeChunkId, chunkNum, dispatch) => { // comments on takes deleted uses another function because comments
 
 dispatch(getTakes(activeChunkId, chunkNum ));
 
@@ -127,4 +131,12 @@ return {
     type: 'COMMENT_DELETED',
 };
 
-}
+};
+
+
+export const commentDeletedSuccess = (id, type, dispatch) => {
+  dispatch(getComments(id, `${type}_id` ));
+  return {
+    type: 'COMMENT_DELETED',
+  };
+};

@@ -37,7 +37,7 @@ export default class UtilityPanel extends React.Component {
     const {chapterId} = this.state;
     const { takes, chunkNum ,
       chunks, chapterComments, chunkComments, activeChunkId, saveComment,
-      uploadingComments, uploadError, resetError, txt} = this.props;
+      uploadingComments, uploadError, resetError, txt, deleteComment} = this.props;
     let publishedTakeLocation =null;
     let mode = txt.chunk;
     const {search} = this.props.location;
@@ -74,6 +74,7 @@ export default class UtilityPanel extends React.Component {
                 uploadError = {uploadError}
                 resetError ={resetError}
                 txt={txt}
+                deleteComment={deleteComment}
               />
               <Comments
                 saveComment={saveComment}
@@ -85,6 +86,7 @@ export default class UtilityPanel extends React.Component {
                 uploadError = {uploadError}
                 resetError ={resetError}
                 txt={txt}
+                deleteComment={deleteComment}
               />
               {
               // takes.map(tk=>
