@@ -16,7 +16,6 @@ import TaskProgressPage from './js/pages/tasks/TaskProgressPage';
 import CustomDragLayer from './CustomDragLayer';
 import ChapterPage from './js/pages/chapters/ChaptersPage';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
-import 'react-toastify/dist/ReactToastify.css';
 
 // import and configure the raven client for sentry in order to track errors
 import Raven from 'raven-js';

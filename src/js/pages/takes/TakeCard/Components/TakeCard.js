@@ -184,7 +184,7 @@ function showUndoToast(props) {
   toast(<UndoToast props={props} />, {
     position: toast.POSITION.BOTTOM_CENTER,
     closeOnClick: true,
-    className: 'page-background',
+    className: 'black-background',
     onClose: () => {
       if (undo === true) {
         //do not delete the take
@@ -285,7 +285,7 @@ const takeSource = {
       {
         toast(<ConfirmDelete props={props} />, {
           position: toast.POSITION.BOTTOM_CENTER,
-          className: 'Toastify__toast--default',
+          className: 'black-background',
           autoClose: 10000,
           closeOnClick: false,
         });

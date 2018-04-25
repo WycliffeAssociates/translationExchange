@@ -52,7 +52,7 @@ export default class TakeCardComments extends React.Component {
 
 
   render() {
-    const {comments, deleteComment} = this.props;
+    const {comments, deleteComment, txt} = this.props;
     const {width} = this.state;
     return (
       <Container innerRef={input => {this.myInput = input}}  >
@@ -60,7 +60,7 @@ export default class TakeCardComments extends React.Component {
           {
             comments.length!==0 ?
               comments.map((comment) => {
-                return (<CommentRow deleteComment={deleteComment} width={width} id={comment.id} key= {comment.id} comment= {comment} />);
+                return (<CommentRow txt ={txt} deleteComment={deleteComment} width={width} id={comment.id} key= {comment.id} comment= {comment} />);
 
               })
               :

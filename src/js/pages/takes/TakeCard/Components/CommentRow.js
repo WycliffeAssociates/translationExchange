@@ -7,7 +7,6 @@ import jdenticon from 'jdenticon';
 import config from '../../../../../config/config';
 import Draggable from 'react-draggable';
 import { toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
 import QueryString from "query-string";
 
 
@@ -47,16 +46,15 @@ export default class TakeCardCommentRow extends React.Component {
 
   handleDrag(e, ui) {
     const {x, counter} = this.state;  // counter is used to display one notification of deleting
-    const {width} = this.props;
+    const {width, txt} = this.props;
 
     if (x > width-30 && counter===0 ) {
       this.setState({counter: 1})
-      toast(<Msg redo={()=> this.setState({deleteComment: false})} />, {
+      toast(<Msg txt={txt} redo={()=> this.setState({deleteComment: false})} />, {
         position: toast.POSITION.BOTTOM_CENTER,
         className: 'page-bar',
         onClose: () => this.deleteComment(),
         autoClose: 5000,
-        closeOnClick: false
       });
     }
 
@@ -76,12 +74,12 @@ export default class TakeCardCommentRow extends React.Component {
     }
     else {
       this.adjustXPos();
-      this.setState({counter: 0, x: 0})
+      this.setState({counter: 0, x: 0, deleteComment: true})
     }
 
   }
 
-  adjustXPos() {
+  adjustXPos(e) {
     this.setState({controlledPosition: {x: 0, y: 0}});
   }
 
@@ -111,10 +109,10 @@ export default class TakeCardCommentRow extends React.Component {
 
 }
 
-const Msg = ({ redo }) => (
+const Msg = ({ redo, txt }) => (
 <DeleteContainer>
-  Deleting comment
-    <BlueButton onClick={redo}>Redo</BlueButton>
+    {txt.deletingComment}
+    <BlueButton onClick={redo}>{txt.undo} <i class="material-icons">redo</i></BlueButton>
 </DeleteContainer>
 );
 
