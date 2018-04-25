@@ -123,7 +123,7 @@ export const deleteComment = (commentId, type, typeId) => {
 
   }
 }
-export const commentOnTakeDeletedSuccess = ( activeChunkId, chunkNum, dispatch) => { // comments on takes deleted uses another function because comments
+export const commentOnTakeDeletedSuccess = ( activeChunkId, chunkNum, dispatch) => { // comments on takes deleted uses another function because comments are nested on the takes
 
 dispatch(getTakes(activeChunkId, chunkNum ));
 
