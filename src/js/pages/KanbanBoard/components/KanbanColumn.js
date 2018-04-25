@@ -140,7 +140,7 @@ class KanbanColumn extends React.Component {
 
     const { connectDropTarget, isOver, deleteTake, txt,
       getComments, publishedTake} = this.props;
-    const { saveComment, uploadingComments, activeChunkId, chunkNum} = this.props;
+    const { saveComment, uploadingComments, activeChunkId, chunkNum, deleteComment } = this.props;
 
     var icon;
     switch (this.props.icon) {
@@ -189,10 +189,12 @@ class KanbanColumn extends React.Component {
             this.props.array? this.props.array.map((take, index) => {
               return (
                 <TakeCard key={index} {...take} makeChanges= {this.makeChanges}
+
                   txt = {txt}
                   getComments ={getComments}
                   publishedTake = {publishedTake}
                   deleteTake = {deleteTake}
+                  deleteComment ={deleteComment}
                   saveComment={saveComment}
                   uploadingComments={uploadingComments}
                   activeChunkId={activeChunkId} chunkNum={chunkNum}  /> ); /* published take passed down for react dnd */

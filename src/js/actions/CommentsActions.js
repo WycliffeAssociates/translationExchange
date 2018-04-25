@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '../../config/config';
-import {getTakes} from '../actions';
+import {getTakes, getTakesSuccess} from '../actions';
 
 export const getComments = (query, type) => {
 
@@ -99,3 +99,32 @@ export const resetError = () => {
 
   };
 };
+//delete comment
+export const deleteComment = (commentId, type) => {
+  return (dispatch, getState) => {
+    const {takes, activeChunkId, chunkNum} = getState().kanbanPage;
+
+    return axios
+      .delete(config.apiUrl + 'comments/' + commentId + '/', {
+        headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+      })
+      .then(() => {
+        if (type === 'take') {
+          dispatch(commentDeletedSuccess(activeChunkId, chunkNum, dispatch ));
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+  }
+}
+export const commentDeletedSuccess = ( activeChunkId, chunkNum, dispatch) => {
+
+dispatch(getTakes(activeChunkId, chunkNum ));
+
+return {
+    type: 'COMMENT_DELETED',
+};
+
+}

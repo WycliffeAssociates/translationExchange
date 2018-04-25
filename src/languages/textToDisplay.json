@@ -55,7 +55,8 @@
    "undo": "Undo",
    "confirm": "Confirm",
    "alreadyPublished": "You can only have one publised take, UNPUBLISH first",
-   "deleteTake": "Are you sure you want to delete this Take?"
+   "deleteTake": "Are you sure you want to delete this Take?",
+   "deletingComment": "Deleting comment"
    },
    "Spanish": {
      "continue": "Continuar",
@@ -113,7 +114,8 @@
      "undo": "Cancelar",
      "confirm": "Confirmar",
      "alreadyPublished": "Solo puedes tener una grabación publicada a la vez, remueve la grabación publicada",
-     "deleteTake": "Estás seguro que quieres borrar esta grabación?"
+     "deleteTake": "Estás seguro que quieres borrar esta grabación?",
+     "deletingComment": "Borrando Comentario"
    },
    "Russian": {
       "mainPage": "Перевод предоставлен",
