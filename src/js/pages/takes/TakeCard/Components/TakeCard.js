@@ -10,7 +10,7 @@ import jdenticon from 'jdenticon';
 import propTypes from 'prop-types';
 import {DragSource} from 'react-dnd';
 import {toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 import 'css/notification.css';
 
 
