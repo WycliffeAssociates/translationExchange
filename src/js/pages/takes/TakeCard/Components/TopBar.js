@@ -44,6 +44,7 @@ const DragIcon = styled.button`
   font-size: 1.5vw;
   color: gray;
   background: none;
+  cursor: pointer;
 
 `;
 
@@ -56,4 +57,5 @@ const Icon = styled.svg`
   height: 2vw;
   width: 2w;
   margin-top: 0.6vw;
+  cursor: pointer;
   `;

@@ -11,12 +11,12 @@ import AvailableUsers from './js/pages/Login/AvailableUsers.js';
 import ErrorPage from './js/pages/ErrorPage/ErrorPage';
 import CreateUserContainer from './js/pages/user/components/CreateUserContainer';
 import { DragDropContext } from 'react-dnd';
-import Notifications from 'react-notify-toast';
 import KanbanPage from './js/pages/KanbanBoard/KanbanPage';
 import TaskProgressPage from './js/pages/tasks/TaskProgressPage';
 import CustomDragLayer from './CustomDragLayer';
 import ChapterPage from './js/pages/chapters/ChaptersPage';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
+import 'react-toastify/dist/ReactToastify.css';
 
 // import and configure the raven client for sentry in order to track errors
 import Raven from 'raven-js';
@@ -50,7 +50,6 @@ class App extends Component {
     */
 
       <div>
-        <Notifications />
         <CustomDragLayer />
 
         <Switch>

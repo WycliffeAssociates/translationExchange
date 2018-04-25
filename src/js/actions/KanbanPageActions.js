@@ -28,6 +28,32 @@ export const getTakesSuccess = (takes, chunkNum) => {
   };
 };
 
+export const deleteTake = (takeId,chunkId,chunkNum) => {
+  return function(dispatch) {
+    return axios
+      .delete(`${config.apiUrl}takes/${takeId}`,
+        {
+          headers: {Authorization: 'Token' + localStorage.getItem('token')},
+        })
+      .then(response => {
+        console.log(response);
+        if (response) {
+          dispatch(getTakes(chunkId, chunkNum)); }
+      })
+      .catch(error => {
+        console.log(error);
+
+      });
+  };
+};
+
+export const deleteTakeSuccess = (res) => {
+  return {
+    type: 'DELETE_TAKE_SUCCESS',
+
+  }
+}
+
 export const getChunks = (chapterId, redirect) => {
   return dispatch => {
     dispatch({type: 'LOADING'});

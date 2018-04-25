@@ -54,7 +54,9 @@ export default class TakeCardCommentRow extends React.Component {
       toast(<Msg redo={()=> this.setState({deleteComment: false})} />, {
         position: toast.POSITION.BOTTOM_CENTER,
         className: 'page-bar',
-        onClose: () => this.deleteComment()
+        onClose: () => this.deleteComment(),
+        autoClose: 5000,
+        closeOnClick: false
       });
     }
 
@@ -79,9 +81,7 @@ export default class TakeCardCommentRow extends React.Component {
 
   }
 
-  adjustXPos(e) {
-    //e.preventDefault();
-    //e.stopPropagation();
+  adjustXPos() {
     this.setState({controlledPosition: {x: 0, y: 0}});
   }
 
@@ -89,10 +89,7 @@ export default class TakeCardCommentRow extends React.Component {
   render() {
 
     const {comment} = this.props;
-    let position = null;
-    if (!this.state.deleteComment) {
-      position ={x: 0};
-    }
+
 
     return (
       <Draggable onDrag={this.handleDrag} position={this.state.controlledPosition} axis="x" bounds={{left: 0, top: 0, bottom: 0 }}>

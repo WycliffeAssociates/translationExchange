@@ -139,14 +139,15 @@ class KanbanColumn extends React.Component {
     var chapterNum = query.chapterNum;
     var chapterId = query.chapterId;
 
-    const { connectDropTarget, isOver} = this.props;
-    const { saveComment, uploadingComments, activeChunkId, chunkNum} = this.props;
+    const { connectDropTarget, isOver, deleteTake, txt,
+      getComments, publishedTake} = this.props;
+    const { saveComment, uploadingComments, activeChunkId, chunkNum, deleteComment } = this.props;
 
     var icon;
     switch (this.props.icon) {
 
       case 1:
-        icon= <label className="labelLines"> < i style={starSize} className="material-icons">star_border</i> </label>;
+        icon= <label className="labelLines"> <i style={starSize} className="material-icons">star_border</i> </label>;
         break;
 
       case 2:
@@ -177,8 +178,8 @@ class KanbanColumn extends React.Component {
         break;
     }
     return connectDropTarget(
-      <div style={{background: isOver? '#009CFF': ''}}>
-        <Column published={this.props.icon ==4? true: false} > {/* passing props into our styled component, if the icon ==4 then this is the publish column
+      <div style={{height: 'min-content'}}>
+        <Column published={this.props.icon ==4? true: false} isOver = {isOver}> {/* passing props into our styled component, if the icon ==4 then this is the publish column
                                                                   therefore render height accordingly*/}
         <div>
           <center> {icon} </center>
@@ -189,10 +190,12 @@ class KanbanColumn extends React.Component {
             this.props.array? this.props.array.map((take, index) => {
               return (
                 <TakeCard key={index} {...take} makeChanges= {this.makeChanges}
-                  txt = {this.props.txt}
-                  deleteComment = {this.props.deleteComment}
-                  getComments ={this.props.getComments}
-                  publishedTake = {this.props.publishedTake}
+
+                  txt = {txt}
+                  getComments ={getComments}
+                  publishedTake = {publishedTake}
+                  deleteTake = {deleteTake}
+                  deleteComment ={deleteComment}
                   saveComment={saveComment}
                   uploadingComments={uploadingComments}
                   activeChunkId={activeChunkId} chunkNum={chunkNum}  /> ); /* published take passed down for react dnd */
@@ -233,7 +236,7 @@ const starSize = {
 const Column = styled.div`
   height: ${props => props.published? 'auto' : '75vh'};
   width: 20vw;
-  background: rgba(45,45,45,0.5);
+  background:${props => props.isOver? '#009CFF': 'rgba(45,45,45,0.5)'};
   padding: 2vw;
   margin-top: 1vw;
   margin-bottom: 1vw;
@@ -299,10 +302,6 @@ NextChapter.displayName = 'NextChapter';
 const takeTarget = {
   drop(props, monitor, component) {
     const { listId } = props;
-    const sourceObj = monitor.getItem();
-    if (listId !== sourceObj.listId) {
-      //component.pushTake(sourceObj.take);
-    }
     return { listId: listId };
   },
 };

@@ -6,7 +6,7 @@ import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
 import KanbanBoard from './components/KanbanBoard';
 import { ToastContainer } from "react-notify-toast";
-import {getChunks, getTakes, getComments,
+import {getChunks, getTakes,deleteTake, getComments,
   patchTake, saveComment, getUserHash,
   removeUser, getChapters, resetError,
   updateLanguage, deleteComment} from '../../actions';
@@ -14,8 +14,6 @@ import UtilityPanel from './components/UtilityPanel/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
 import img from '../../../assets/images/obs-en-01-01.jpg';
-
-
 
 class KanbanPage extends React.Component {
 
@@ -32,14 +30,12 @@ class KanbanPage extends React.Component {
       getComments(query.chapterId, 'chapter_id');
 
     }
-
     const language = localStorage.getItem('language');
     if (language) {
       updateLanguage(language);
     }
 
   }
-
 
   shouldComponentUpdate(nextProps) {
 
@@ -117,8 +113,8 @@ const SourceAudio = styled.div`
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({getChunks, getTakes,
-    getComments, patchTake, saveComment, getUserHash, removeUser, getChapters, resetError, updateLanguage, deleteComment}, dispatch);
+  return bindActionCreators({getChunks, getTakes,deleteTake,
+    getComments, patchTake, saveComment, getUserHash, removeUser, getChapters, resetError, updateLanguage, deleteComment }, dispatch);
 
 };
 

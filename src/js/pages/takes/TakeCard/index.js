@@ -80,7 +80,6 @@ border-bottom: none;
 text-align: left;
 margin-top: 1vw;
 animation: ${fadeInAnimations} 1s ease-in;
-cursor: pointer;
 transform: translateZ(0);
 
 `;

@@ -52,9 +52,11 @@
    "uploadError":"Upload Error",
    "uploadErrorInfo":"There was an error uploading your comment.",
    "internetError":"Please check your internet connection, if everything seems to work fine it is our fault, we will fix it soon, sorry.",
-   "deletingComment": "Deleting comment",
-   "undo":"undo"
-
+   "undo": "Undo",
+   "confirm": "Confirm",
+   "alreadyPublished": "You can only have one publised take, UNPUBLISH first",
+   "deleteTake": "Are you sure you want to delete this Take?",
+   "deletingComment": "Deleting comment"
    },
    "Spanish": {
      "continue": "Continuar",
@@ -109,10 +111,11 @@
      "uploadError":"Error al guardar",
      "uploadMessage":"Hubo un error guardando tu comentario.",
      "internetError":"Por favor cheque su conexión de internet, si todo functiona correctamente es nuestra culpa, estamos trabajando en arreglarlo, disculpe",
-     "deletingComment": "Borrando Comentario",
-     "undo":"Cancelar"
-
-
+     "undo": "Cancelar",
+     "confirm": "Confirmar",
+     "alreadyPublished": "Solo puedes tener una grabación publicada a la vez, remueve la grabación publicada",
+     "deleteTake": "Estás seguro que quieres borrar esta grabación?",
+     "deletingComment": "Borrando Comentario"
    },
    "Russian": {
       "mainPage": "Перевод предоставлен",
