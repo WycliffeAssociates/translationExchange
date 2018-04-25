@@ -37,8 +37,8 @@
 
 .pageBackground {
    / *background: ##00c6ff; /* fallback for old browsers */* /
-   background: -webkit-linear-gradient(to right, #00c6ff, #0072ff); /* Chrome 10-25, Safari 5.1-6 */
-   background: linear-gradient(to right, #00c6ff, #0072ff); /* W3C */
+   background: -webkit-linear-gradient(to right, #00c6ff, #00C5FF); /* Chrome 10-25, Safari 5.1-6 */
+   background: linear-gradient(to right, #0076FF, #00C5FF); /* W3C */
    background-image: url('./assets/images/background-pattern.png'), linear-gradient(to bottom right, #0076FF , #00C5FF );
    /* background-repeat: space; */
    position:fixed;
