@@ -110,7 +110,7 @@
      "uploadError":"Error al guardar",
      "uploadMessage":"Hubo un error guardando tu comentario.",
      "internetError":"Por favor cheque su conexión de internet, si todo functiona correctamente es nuestra culpa, estamos trabajando en arreglarlo, disculpe",
-     "undo": "Canclear",
+     "undo": "Cancelar",
      "confirm": "Confirmar",
      "alreadyPublished": "Solo puedes tener una grabación publicada a la vez, remueve la grabación publicada",
      "deleteTake": "Estás seguro que quieres borrar esta grabación?"
