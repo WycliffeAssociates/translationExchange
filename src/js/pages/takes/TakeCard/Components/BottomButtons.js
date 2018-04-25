@@ -53,7 +53,6 @@ export default class TakeCardBottomButtons extends React.Component {
     const {comments} = this.props;
     const availableComments = comments.length;
     const { width } = this.props;
-    console.log(width);
     return (
       <BottomButtons>
         <CommentButton onClick={() => this.props.expandComments()}>
