@@ -98,10 +98,35 @@ const Button = styled.button`
 `;
 
 const Comments = styled.div`
-padding-left: 1vw;
+height: 100px;
+overflow-y: auto;
 animation: ${fadeInAnimation} .5s ease-in;
-background: lightgray;
-padding: 7.5px;
+background: white;
+
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 0.3vw;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: white;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+
+    background: #969595;
+  }
+
+
+  /* Handle on hover*/
+
+  ::-webkit-scrollbar-thumb: hover {
+      background: #00C5FF;
+  }
+
 `;
 
 const ButtonContainer = styled.div`

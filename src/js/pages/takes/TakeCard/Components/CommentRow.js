@@ -142,6 +142,7 @@ const BlueButton= styled.button`
 `;
 
 const CommentRow = styled.div`
+  margin: 2px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
