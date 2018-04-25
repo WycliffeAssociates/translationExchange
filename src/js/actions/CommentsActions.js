@@ -110,8 +110,7 @@ export const deleteComment = (commentId, type) => {
       })
       .then(() => {
         if (type === 'take') {
-          dispatch(commentDeletedSuccess(commentId, takes, activeChunkId, chunkNum, dispatch ));
-          //  dispatch(getTakes(chunkId, chunkNum));
+          dispatch(commentDeletedSuccess(activeChunkId, chunkNum, dispatch ));
         }
       })
       .catch(error => {
@@ -120,22 +119,9 @@ export const deleteComment = (commentId, type) => {
 
   }
 }
-export const commentDeletedSuccess = (id, takes, chunkId, chunkNum, dispatch) => {
-takes.map(tk => {
-    if (tk.comments.length > 0) {  // check if a take has comment
-      let index = null;
-      tk.comments.map( cm => { // loop through the comments
-        if (cm.id === id) {     // find the id of the comment deleted
-          index = tk.comments.indexOf(cm);
-          return null;
-        }
-      })
-      if (index !==null) {
-        tk.comments.splice(index, 1);  // delete the comment fromt he take
-      }
-    }
-})
-dispatch(getTakes(chunkId, chunkNum ));
+export const commentDeletedSuccess = ( activeChunkId, chunkNum, dispatch) => {
+
+dispatch(getTakes(activeChunkId, chunkNum ));
 
 return {
     type: 'COMMENT_DELETED',
