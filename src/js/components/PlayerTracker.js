@@ -84,6 +84,7 @@ export default class PlayerTracker extends React.Component {
           <ReactPlayer //url ={config.streamingUrl+ this.props.url}
             url ={audioFile? audioFile: config.streamingUrl+ url}
             style={{display: 'none'}}
+            progressInterval ={100}
             onProgress = {this.onProgress}
             playing = {this.state.playing}
             onEnded = {this.onEnd}
@@ -97,6 +98,9 @@ export default class PlayerTracker extends React.Component {
 
 const Input = styled.input`
   margin-top: 0.2vw;
+  @-moz-document url-prefix() {
+    margin-top: 0.8vw;
+}
  -webkit-appearance : none;
 width: 100%;
 background: transparent;

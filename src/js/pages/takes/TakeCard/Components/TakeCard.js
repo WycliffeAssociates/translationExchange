@@ -173,7 +173,8 @@ const UndoToast = ({closeToast, props}) => {
   }
 
   return (
-    <div style={{textAlign: 'center'}}>
+    <div style={{textAlign: 'center', color: 'white'}}>
+      <p>{props.txt.deletingTake} </p>
       <Undo onClick={handleClick}> {props.txt.undo}<i className="material-icons">undo</i> </Undo>
     </div>
   );
@@ -222,8 +223,10 @@ const Confirm = styled.button`
   border: none;
   color: white;
   cursor: pointer;
+  text-decoration: underline;
   i {
     vertical-align: middle;
+    text-decoration: none;
   }
 
 `;
@@ -236,8 +239,10 @@ const Undo = styled.button`
   border: none;
   color: white;
   cursor: pointer;
+  text-decoration: underline;
   i {
     vertical-align: middle;
+    text-decoration: none;
   }
 `;
 

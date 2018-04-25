@@ -36,7 +36,7 @@ export default ({recordedBlob, isAudioAvailable, onStop, recording, play, onFini
 
 const Container = styled.div`
 width: 100%;
-height: 29vh;
+height: 320px;
 min-width: 469;
 background-position: 50%;
 background-repeat: no-repeat;
@@ -46,6 +46,6 @@ border-top-left-radius: 7px;
 border-top-right-radius: 7px;
 `;
 const RecordContainer = styled.div`
-height: 29vh;
+margin-top: 10px;
 width: 100%;
 `;
