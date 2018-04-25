@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import TakeCard from '../../takes/TakeCard/';
 import DragHereBox from '../../../components/DragHereBox';
 import QueryString from 'query-string';
