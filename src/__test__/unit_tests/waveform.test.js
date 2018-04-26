@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { shallow, mount } from "enzyme";
-import WaveForm from "../js/pages/takes/components/audioplayer/Waveform";
+import WaveForm from "../../js/pages/takes/components/audioplayer/Waveform";
 import Wavesurfer from "react-wavesurfer";
 
 describe.skip("Waveform", () => {

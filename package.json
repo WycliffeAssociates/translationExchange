@@ -95,6 +95,7 @@
     "jest-localstorage-mock": "^2.2.0",
     "jest-styled-components": "^5.0.0",
     "jsdom": "^11.6.2",
+    "jest-junit": "^3.6.0",
     "moxios": "^0.4.0",
     "react-addons-test-utils": "^15.6.0",
     "react-scripts": "^1.0.7",
@@ -107,12 +108,27 @@
     "start": "cross-env NODE_PATH=src react-scripts start",
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "cross-env NODE_PATH=src react-scripts test",
+    "test:ci": "cross-env NODE_PATH=src react-scripts test --env=jsdom --testResultsProcessor ./node_modules/jest-junit --coverage --collectCoverageFrom=src/js/**/*.js --coverageDirectory=src/__test__/coverage",
+    "test_unit": "cross-env NODE_PATH=src react-scripts test --env=jsdom --testPathPattern=unit_tests --coverage",
+    "test_integration": "cross-env NODE_PATH=src react-scripts test --env=jsdom --testPathPattern=integration_tests --coverage",
     "eject": "react-scripts eject"
   },
   "jest": {
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "text"
     ]
+  },
+  "jest-junit": {
+    "suitName": "jest tests",
+    "output": "src/__test__/junit.xml",
+    "classNameTemplate": "{classname} - {title}",
+    "titleTemplate": "{classname} - {title}",
+    "ancestorSeparator": " > ",
+    "usePathForSuitName": "true"
   },
   "proxy": "http://translationExchange:8080"
 }
