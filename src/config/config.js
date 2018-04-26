@@ -23,7 +23,7 @@ const config = {                                                        // local
 
 // const config = {                                                        //production
 //     apiUrl: 'https://te.loc/api/',
-//     streamingUrl: 'https://te.loc/'
+//     streamingUrl: 'https://te.loc/',
 //     redirectUri: 'https://te.loc/'
 // };
 
