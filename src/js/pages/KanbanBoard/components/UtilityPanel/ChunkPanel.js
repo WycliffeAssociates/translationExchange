@@ -15,7 +15,6 @@ class ChunkPanel extends Component {
   }
 
   render() {
-    console.log(this.props, 'ALL MY CHUNK PANEL PROPS');
     const {selectedChunk, mode, txt} = this.props; //selectedChunk is the chunk number selected in the navbar, by default is 1
     return (
       <Container>

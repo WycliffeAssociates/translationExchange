@@ -107,7 +107,6 @@ export default class UtilityPanel extends React.Component {
             :
             <ChunkPanel txt={txt} mode={mode} takeLocation={publishedTakeLocation}
               selectedChunk={chunkNum} chunks={chunks}
-              activeChunkId={activeChunkId}
               getTakes={getTakes} />
           }
         </UtilityPanelContainer>
