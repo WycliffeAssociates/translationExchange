@@ -52,7 +52,6 @@ class KanbanColumn extends React.Component {
 
   }
 
-
   navigateToChapter(chapter_num, chapterId) {
 
     const {history, chapters} = this.props;

@@ -4,9 +4,18 @@ import PlayerTracker from '../../../../components/PlayerTracker';
 
 
 class ChunkPanel extends Component {
+  constructor() {
+    super();
 
+    this.navigateChunk = this.navigateChunk.bind(this);
+  }
 
-render() {
+  navigateChunk(chunkId, chunkNum) {
+    this.props.getTakes(chunkId, chunkNum );
+  }
+
+  render() {
+    console.log(this.props, 'ALL MY CHUNK PANEL PROPS');
     const {selectedChunk, mode, txt} = this.props; //selectedChunk is the chunk number selected in the navbar, by default is 1
     return (
       <Container>
@@ -14,7 +23,7 @@ render() {
 
           return (
             <ChunksContainer selected= {selectedChunk == chk.startv} >
-              <label>{mode} {chk.startv} </label>
+              <label style={{cursor: 'pointer'}} onClick={()=> this.navigateChunk(chk.id, chk.startv)}>{mode} {chk.startv} </label>
               {chk.published_take != null ?
                 <PlayerTracker url={chk.published_take.location} />
                 :

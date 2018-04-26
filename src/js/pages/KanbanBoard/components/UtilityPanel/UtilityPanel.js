@@ -37,7 +37,7 @@ export default class UtilityPanel extends React.Component {
     const {chapterId} = this.state;
     const { takes, chunkNum ,
       chunks, chapterComments, chunkComments, activeChunkId, saveComment,
-      uploadingComments, uploadError, resetError, txt, deleteComment} = this.props;
+      uploadingComments, uploadError, resetError, txt, deleteComment, getTakes} = this.props;
     let publishedTakeLocation =null;
     let mode = txt.chunk;
     const {search} = this.props.location;
@@ -105,12 +105,15 @@ export default class UtilityPanel extends React.Component {
 
             </CommentsPanel>
             :
-            <ChunkPanel txt={txt} mode={mode} takeLocation={publishedTakeLocation} selectedChunk={chunkNum} chunks={chunks} />
+            <ChunkPanel txt={txt} mode={mode} takeLocation={publishedTakeLocation}
+              selectedChunk={chunkNum} chunks={chunks}
+              activeChunkId={activeChunkId}
+              getTakes={getTakes} />
           }
         </UtilityPanelContainer>
         :
         <UtilityPanelNotVisible>
-          <Show onClick= {this.toggleUtilityPanel}> <i style={{fontSize:'2.0vw', paddingRight:'1vw'}} class="material-icons">arrow_back</i> </Show>
+          <Show onClick= {this.toggleUtilityPanel}> <i style={{fontSize: '2.0vw', paddingRight: '1vw'}} class="material-icons">arrow_back</i> </Show>
         </UtilityPanelNotVisible>
 
     );

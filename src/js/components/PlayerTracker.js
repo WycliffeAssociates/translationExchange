@@ -207,4 +207,5 @@ const PlayIcon = styled.button`
   border-top: none;
   padding: 0.4vw;
   color: #969595
+  cursor: pointer;
 `;
