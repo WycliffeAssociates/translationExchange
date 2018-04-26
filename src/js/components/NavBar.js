@@ -4,7 +4,7 @@ import jdenticon from 'jdenticon';
 import Menu, { Item as MenuItem } from 'rc-menu';
 import QueryString from 'query-string';
 import Dropdown from 'rc-dropdown';
-import 'rc-dropdown/assets/index.css';
+import '../../css/dropdown.css';
 
 
 class NavBar extends Component {
@@ -82,8 +82,13 @@ class NavBar extends Component {
       }
 
       menu = (
-        <Menu onSelect={ ky=> this.onSelect(ky)}>
-          { kanbanPage ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> {mode} {chnk.startv}</MenuItem>): ''}
+        <Menu style={{backgroundColor: 'rgba(255,255,255, 0.9)' }} onSelect={ ky=> this.onSelect(ky)}>
+          {chunks.map(chnk=> {
+            let backgroundColor, color = '';
+            backgroundColor= chnk.published_take ? 'rgb(0,156,255,0.6)': '';
+            color = chnk.published_take ? 'white': '';
+            return (
+              <MenuItem style={{backgroundColor: `${backgroundColor}`, color: `${color}`}} chunkNum={chnk.startv} key={chnk.id}> {mode} {chnk.startv}</MenuItem>)})}
         </Menu>
       );
 
