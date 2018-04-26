@@ -77,7 +77,7 @@ class NavBar extends Component {
         history.push(`/chapters?projectId=${searchBar.projectId}&&bookName=${searchBar.bookName}&&mode=${searchBar.mode}`);
       };
 
-      if (searchBar.mode === 'verse') {
+      if (searchBar.mode === 'Verse') {
         mode = txt.verse;
       }
 
