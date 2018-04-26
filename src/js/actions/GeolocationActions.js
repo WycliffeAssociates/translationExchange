@@ -5,7 +5,7 @@ export const updateLanguage = (updatelanguage) => {
 
   return {
     type: UPDATE_LANGUAGE,
-    updatelanguage
+    updatelanguage,
 
-  }
+  };
 };

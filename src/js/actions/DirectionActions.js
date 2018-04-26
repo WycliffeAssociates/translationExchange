@@ -5,7 +5,7 @@ export const updateDirection = (updateDirection) => {          // updates left t
 
   return {
     type: UPDATE_DIRECTION,
-    updateDirection
+    updateDirection,
 
-  }
+  };
 };

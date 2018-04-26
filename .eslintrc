@@ -1,0 +1,44 @@
+
+  {
+  "parser": "babel-eslint",
+  "rules": {
+    "strict": 0,
+    "indent": [2, 2, { "SwitchCase": 1 }],
+    "quotes": [2, "single"],
+    "semi": [2, "always"],
+    "comma-dangle": [2, "always-multiline"],
+    "space-before-function-paren": [2, "never"],
+    "space-before-blocks": [2, { "functions": "always", "keywords": "always", "classes": "always" }],
+    "no-console": 0,
+    "no-case-declarations": 0,
+    "keyword-spacing": [2, { "after": true }],
+    "key-spacing": [2, { "afterColon": true }],
+    "react/jsx-no-undef": 2,
+    "react/jsx-uses-vars": 2,
+    "jsx-quotes": [2, "prefer-double"],
+    "react/jsx-uses-react": 2,
+    "react/jsx-tag-spacing": [2, {
+      "closingSlash": "never",
+      "beforeSelfClosing": "always",
+      "afterOpening": "never"
+      }]
+    },
+    "env": {
+      "es6": true,
+      "browser": true
+      },
+      "globals": {
+        "YT": false,
+        "Vimeo": false,
+        "require": true,
+        },
+      "extends": "eslint:recommended",
+        "ecmaFeatures": {
+          "jsx": true,
+          "experimentalObjectRestSpread": true,
+          "modules": true
+          },
+        "plugins": [
+          "react"
+        ]
+}

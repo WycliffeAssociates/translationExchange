@@ -9,20 +9,22 @@
 //     streamingUrl: "http://172.19.145.91/"
 // };
 //
-// var config = {
-      //apiUrl: "http://127.0.0.1:8000/api/",
-      //streamingUrl: "http://127.0.0.1/"
- //};
+//  var config = {
+//      apiUrl: "http://127.0.0.1:8000/api/",
+//      streamingUrl: "http://127.0.0.1/"
+// };
 
 
-const config = {                                                        //remote api
-	apiUrl: "http://localhost:8000/api/",
-	streamingUrl: "http://localhost:8000/"
+const config = {                                                        // local development
+  apiUrl: 'http://localhost/api/',
+  streamingUrl: 'http://localhost/',
+  redirectUri: 'http://localhost:3000',
 };
 
-// const config = {                                                        //remote api
-//     apiUrl: "https://te.loc/api/",
-//     streamingUrl: "https://te.loc/"
+// const config = {                                                        //production
+//     apiUrl: 'https://te.loc/api/',
+//     streamingUrl: 'https://te.loc/'
+//     redirectUri: 'https://te.loc/'
 // };
 
 export default config;

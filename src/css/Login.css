@@ -1,0 +1,158 @@
+.WelcomeDiv {
+   /* background: linear-gradient(to bottom right, #0076FF, #00C5FF); */
+  /* background-repeat: */
+  /* background-image: url('../assets/images/background-pattern.png'); */
+  /* height: 100vh;
+  width: 100vw; */
+  /* text-align: center; */
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  /* padding: 5vw 0; */
+
+}
+
+.container {
+   background: linear-gradient(to bottom right, #0076FF , #00C5FF );
+   height: auto;
+   width: 100vw;
+   text-align: center;
+
+}
+
+.backgroundOverlayLogin {
+  background-image: url('../assets/images/background-pattern.png');
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.backgroundOverlayUsers {
+  background-image: url('../assets/images/background-pattern.png');
+  padding: 5vw;
+  height: auto;
+  background-attachment: fixed;
+}
+
+.WelcomeDialog {
+
+  width: 35vw;
+  height: 40vw;
+  padding: 2vw;
+  background-color: white;
+  box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.4);
+  margin: auto;
+  border-radius: 15px;
+  border: none;
+
+}
+
+
+.iconWelcome {
+  height: 7vw;
+  width: 7vw;
+  border-radius: 100px;
+}
+
+.welcomeh3 {
+  margin-top: -0.5vw;
+  font-size: 1.5vw;
+}
+
+.welcomeTo {
+  font-size: 1.5vw;
+  font-weight: lighter;
+  border-bottom: 1px solid lightgray;
+  line-height: 0.1vw;
+}
+
+.h2span {
+  background: #fff;
+  z-index: 2;
+  padding-left: 3vw;
+  padding-right: 3vw;
+}
+
+.welcomeInstructions {
+
+  font-weight: 500;
+  color: gray;
+  margin: 2vw;
+  font-size: 1.25vw;
+}
+
+.continueButton {
+  display: block;
+  background: linear-gradient(to bottom right, #069DD5, #50B2D6);
+  /* height: 2.5vw;
+  width: 14vw; */
+  margin-top: 1vw;
+  padding: 0.75vw 3vw;
+  font-size: 1.5vw;
+  font-weight: 100;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 1px 3px 2px 1px rgba(0,0,0,0.6);
+
+
+}
+
+.googleSignInButton {
+
+  width: 14vw;
+  height: 2.5vw;
+  border-radius: 20px;
+  margin: 1vw;
+  /*margin-left: 5.5vw; */
+  border: 'none';
+  background-color: red;
+
+}
+
+.gitHubSignInButton {
+  /* width: 14vw;
+  height: 2.5vw; */
+  display: block;
+  font-size: 1.5vw;
+  font-weight: 100;
+  text-align: center;
+  padding: 0.75vw 3.5vw;
+  background-color: white;
+  border: none;
+  box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
+  margin-top: 3vw;
+
+
+}
+
+
+.signInLink {
+  color: gray;
+}
+
+
+.buttons {
+  margin: auto;
+  margin-top: 4vw;
+  text-align: center;
+  padding: 2vw 8vw;
+}
+
+.pageHeader {
+
+  color: white;
+  text-align: center;
+  margin: 5vw;
+}
+
+
+.usersContainer {
+  padding: 3vw;
+  /* background: linear-gradient(to bottom right, rgba(0,118,255,0.5), rgba(0,197,255,0.5)); */
+  height: 100vh;
+  width: 100vw;
+}
