@@ -44,7 +44,7 @@ export default class UtilityPanel extends React.Component {
     const query = QueryString.parse(search);
     takes.map(tk=>{ if (tk.published) { publishedTakeLocation = tk.location;} } );
 
-    if (query.mode === 'verse') {
+    if (query.mode === 'Verse') {
       mode = txt.verse;
     }
 
