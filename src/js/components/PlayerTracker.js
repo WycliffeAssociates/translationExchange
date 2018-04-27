@@ -72,7 +72,7 @@ export default class PlayerTracker extends React.Component {
 
 
     return (
-      <div>
+      <Container>
 
         <div style={{width: 'inherit', color: 'steelblue', background: 'none', display: 'flex', flexDirection: 'row',
           justifyContent: 'space-between'}}>
@@ -89,7 +89,7 @@ export default class PlayerTracker extends React.Component {
             ref={this.ref}
           />
         </div>
-      </div>
+      </Container>
     );
   }
 }

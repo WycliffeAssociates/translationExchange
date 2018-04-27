@@ -115,11 +115,7 @@ export default class ChapterCard extends Component {
           <ButtonContainer>
             <ReviewButton check={checkLevel_1} onClick={this.reviewChapter}>
               <i style={{fontSize: '16px'}} class="material-icons">done_all</i>
-<<<<<<< HEAD
-              <p style={{fontSize: '16px', marginLeft: '5px'}}>  Review </p>
-=======
               <p style={{fontSize: '16px', marginLeft: '5px'}}>  {txt.review} </p>
->>>>>>> dev
             </ReviewButton>
           </ButtonContainer>
         </Card>

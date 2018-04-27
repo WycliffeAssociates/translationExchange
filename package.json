@@ -120,6 +120,9 @@
     "coverageReporters": [
       "lcov",
       "text"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules"
     ]
   },
   "jest-junit": {

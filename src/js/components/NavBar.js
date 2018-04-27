@@ -207,44 +207,6 @@ const Identicon= styled.svg`
 Identicon.displayName = 'Identicon';
 
 
-<<<<<<< HEAD
-const LogOut = styled.div`
-  visibility: ${props=> props.display ? 'visible' : 'hidden'};
-  width: 7.5vw;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-  position: absolute;
-  z-index: 1;
-  margin-left: -2.5vw;
-  cursor: pointer;
-  &:hover{
-    visibility: visible;
-  }
-`;
-LogOut.displayName = 'LogOut';
-
-
-const DropdownLogOut = styled.div`
-  display: block;
-  &:hover(:first-child) {
-    display: block;
-  }
-`;
-DropdownLogOut.displayName = 'DropdownLogOut';
-
-
-const List = styled.ul`
-display: none;
-`;
-List.displayName = 'List';
-
-
-=======
->>>>>>> dev
 const IconsContainer = styled.div`
   width 30vw;
   display: flex;
@@ -256,15 +218,11 @@ const IconsContainer = styled.div`
 IconsContainer.displayName = 'IconsContainer';
 
 
-<<<<<<< HEAD
 const Icon = styled.div`
 text-align: left;
 `;
 Icon.displayName = 'Icon';
 
-
-=======
->>>>>>> dev
 const IdenticonContainer = styled.div`
 margin-top: 0.5vh;
 margin-right: 0.5vw;

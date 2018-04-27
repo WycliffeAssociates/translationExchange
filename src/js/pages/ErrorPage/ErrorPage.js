@@ -4,14 +4,7 @@ import {connect} from 'react-redux';
 import { zoomIn } from 'react-animations';
 import imgError from '../../../assets/images/internet_error.png';
 
-
-
-
-
-
-
-
-class ErrorPage extends Component {
+export class ErrorPage extends Component {
 
   componentDidMount() {
     setTimeout(()=>{this.redirect(); }, 3000);
@@ -88,7 +81,7 @@ const Text = styled.p`
 const mapStateToProps = state => {
   const {txt} = state.geolocation;
   return {txt};
-}
+};
 
 
 export default connect(mapStateToProps)(ErrorPage);

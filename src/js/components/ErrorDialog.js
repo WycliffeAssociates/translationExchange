@@ -23,13 +23,13 @@ export default class ErrorDialog extends Component {
 
         <Card>
           <Close onClick={this.props.onClick}>
-            <i style={styles.close} className="material-icons"> close </i>
+            <i style={styles.close} className="material-icons">close </i>
           </Close>
 
 
           <ErrorInfo>
             <Icon>
-              <i style={styles.icon} className="material-icons"> {icon} </i>
+              <i style={styles.icon} className="material-icons">{icon}</i>
             </Icon>
 
             <Message>
