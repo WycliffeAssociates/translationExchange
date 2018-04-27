@@ -1,9 +1,8 @@
 import axios from 'axios';
 import config from '../../config/config';
-import {getTakes} from '../actions';
+import {getTakes, getTakesSuccess} from '../actions';
 
 export const getComments = (query, type) => {
-
   return function(dispatch) {
     return axios
       .get(`${config.apiUrl}comments/?${type}=${query}`,
@@ -99,5 +98,47 @@ export const resetError = () => {
   return {
     type: 'RESET_ERROR',
 
+  };
+};
+//delete comment
+export const deleteComment = (commentId, type, typeId) => {
+  return (dispatch, getState) => {
+    const {activeChunkId, chunkNum} = getState().kanbanPage;
+
+    return axios
+      .delete(config.apiUrl + 'comments/' + commentId + '/', {
+        headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+      })
+      .then(() => {
+
+        if (type === 'take') {
+          dispatch(commentOnTakeDeletedSuccess(activeChunkId, chunkNum, dispatch ));
+        }
+        else {
+          dispatch(commentDeletedSuccess(typeId, type, dispatch))
+        }
+
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+  }
+}
+export const commentOnTakeDeletedSuccess = ( activeChunkId, chunkNum, dispatch) => { // comments on takes deleted uses another function because comments are nested on the takes
+
+dispatch(getTakes(activeChunkId, chunkNum ));
+
+return {
+    type: 'COMMENT_DELETED',
+};
+
+};
+
+
+export const commentDeletedSuccess = (id, type, dispatch) => {
+  dispatch(getComments(id, `${type}_id` ));
+  return {
+    type: 'COMMENT_DELETED',
   };
 };

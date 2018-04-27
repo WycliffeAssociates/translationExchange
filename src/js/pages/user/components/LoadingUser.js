@@ -5,15 +5,15 @@ import loadingRing from '../../../../assets/images/loadingRing.svg'
 
 
 
-export default () => {
+export default ({txt}) => {
 
   return (
     <Container>
-      <TextHeader> Generating User </TextHeader>
+      <TextHeader>{txt.generatingUser}</TextHeader>
       <GifContainer>
         <img style={{height: '300px', width: '300px'}} src={loadingRing} alt="Loading..." />
       </GifContainer>
-      <BottomText>Please Wait...</BottomText>
+      <BottomText>{txt.pleaseWait}</BottomText>
     </Container>
   );
 

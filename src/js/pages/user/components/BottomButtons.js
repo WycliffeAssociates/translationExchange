@@ -9,12 +9,12 @@ class BottomButtons extends Component {
 
 
   render() {
-
+    const {txt, redo, done} = this.props;
 
     return (
       <Container>
-        <RedoButton onClick={this.props.redo} />
-        <YesButton  onClick={this.props.done} />
+        <RedoButton txt={txt} onClick={redo} />
+        <YesButton txt={txt}  onClick={done} />
       </Container>
     );
   }

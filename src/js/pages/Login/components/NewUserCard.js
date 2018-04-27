@@ -21,7 +21,7 @@ export default class NewUserCard extends React.Component {
 
 
           <AddUser> <i className="material-icons" style={{fontSize: '7vw',transform: `scale(-1,1)`}}>person_add</i></AddUser>
-          <CardLabel> New User </CardLabel>
+          <CardLabel> {this.props.txt.newUser} </CardLabel>
 
 
         </Card>
@@ -77,7 +77,7 @@ AddUser.displayName = 'AddUser';
 
 const CardLabel = styled.label`
     color: #009CFF;
-    font-size: 1.35vw;
+    font-size: 1.15vw;
     text-decoration: underline;
     cursor: pointer;
     align-self: flex-end;

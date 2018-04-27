@@ -13,6 +13,7 @@ export default class ChapterCard extends Component {
 
     this.state ={
       numberInRow: '',
+      width: '',
     };
 
     this.spaceCards = this.spaceCards.bind(this);
@@ -50,15 +51,16 @@ export default class ChapterCard extends Component {
 
       var width = window.innerWidth;
       width = width-(width*0.1); // takeaway 10% because of padding on parent container
-      var numberInRow = (width/220) | 0;
+      var numberInRow = (width/200) | 0;
       this.setState({
         numberInRow: numberInRow,
+        width: width,
       });
     }
 
     render() {
-      const { number, total_chunks, uploaded_chunks, published_chunks } = this.props;
-      const {numberInRow} = this.state;
+      const { number, total_chunks, uploaded_chunks, published_chunks, txt } = this.props;
+      const {numberInRow, width} = this.state;
 
       let dangerSign = true;
       let checkLevel_1 = false;
@@ -72,15 +74,15 @@ export default class ChapterCard extends Component {
 
       return (
 
-        <Card check ={checkLevel_1} numberInRow = {numberInRow}>
+        <Card check ={checkLevel_1} numberInRow = {numberInRow} screenWidth={width}>
           <InformationContainer >
             <TextContainer>
-              <P>Chapter {number}</P>
+              <P>{txt.chapter} {number}</P>
               {dangerSign ? <i class="material-icons">warning</i>:''}
             </TextContainer>
             {checkLevel_1 ?
               <CheckTextContainer>
-                <CheckText>Level 1</CheckText>
+                <CheckText>{txt.level} 1</CheckText>
               </CheckTextContainer>
               :
               ''
@@ -113,7 +115,11 @@ export default class ChapterCard extends Component {
           <ButtonContainer>
             <ReviewButton check={checkLevel_1} onClick={this.reviewChapter}>
               <i style={{fontSize: '16px'}} class="material-icons">done_all</i>
+<<<<<<< HEAD
               <p style={{fontSize: '16px', marginLeft: '5px'}}>  Review </p>
+=======
+              <p style={{fontSize: '16px', marginLeft: '5px'}}>  {txt.review} </p>
+>>>>>>> dev
             </ReviewButton>
           </ButtonContainer>
         </Card>
@@ -151,18 +157,98 @@ const Card= styled.div`
     flex-direction: column;
     text-align: center;
 
-    @media only screen and (max-width: 733px) {
+    @media only screen and (max-width: 666px) {
       margin: auto;
       margin-top: 5%;
     }
-    @media only screen and (min-width: 734px) {
+    @media only screen and (min-width: 667px) {
       :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
-      margin-left: ${props => 90/(2+props.numberInRow)}%;
+      margin-left: ${props => props.screenWidth*0.125}px;
     }
 
+      :nth-child(${props => (props.numberInRow*2)-1}n) {
+      margin-right: ${props =>  props.screenWidth*0.125}px;
+    }
+    }
+
+    @media only screen and (min-width: 950px) {
+      :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+      margin-left: ${props => props.screenWidth*0.1}px;
+      }
+
     :nth-child(${props => (props.numberInRow*2)-1}n) {
-    margin-right: ${props => 75/(2+props.numberInRow)}%;
+    margin-right: ${props =>  props.screenWidth*0.1}px;
   }
+
+  @media only screen and (min-width: 1333px) {
+    :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+    margin-left: ${props => props.screenWidth*0.05}px;
+    }
+
+  :nth-child(${props => (props.numberInRow*2)-1}n) {
+  margin-right: ${props =>  props.screenWidth*0.05}px;
+}
+}
+
+@media only screen and (min-width: 1482px) {
+  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+  margin-left: ${props => props.screenWidth*0.075}px;
+  }
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.075}px;
+}
+}
+
+@media only screen and (min-width: 1556px) {
+  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+  margin-left: ${props => props.screenWidth*0.05}px;
+  }
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.05}px;
+}
+}
+
+@media only screen and (min-width: 1728px) {
+  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+  margin-left: ${props => props.screenWidth*0.075}px;
+  }
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.075}px;
+}
+}
+
+@media only screen and (min-width: 1778px) {
+  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+  margin-left: ${props => props.screenWidth*0.05}px;
+  }
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.05}px;
+}
+}
+
+@media only screen and (min-width: 1976px) {
+  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+  margin-left: ${props => props.screenWidth*0.075}px;
+  }
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.075}px;
+}
+}
+
+@media only screen and (min-width: 2000px) {
+  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+  margin-left: ${props => props.screenWidth*0.05}px;
+  }
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.05}px;
+}
+}
     }
 
 `;

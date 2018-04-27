@@ -11,7 +11,6 @@ import AvailableUsers from './js/pages/Login/AvailableUsers.js';
 import ErrorPage from './js/pages/ErrorPage/ErrorPage';
 import CreateUserContainer from './js/pages/user/components/CreateUserContainer';
 import { DragDropContext } from 'react-dnd';
-import Notifications from 'react-notify-toast';
 import KanbanPage from './js/pages/KanbanBoard/KanbanPage';
 import TaskProgressPage from './js/pages/tasks/TaskProgressPage';
 import CustomDragLayer from './CustomDragLayer';
@@ -50,7 +49,6 @@ class App extends Component {
     */
 
       <div>
-        <Notifications />
         <CustomDragLayer />
 
         <Switch>
@@ -60,9 +58,7 @@ class App extends Component {
           <Route  path="/welcome" component={Welcome} />
           <Route  path="/projects" component={ProjectsPage} />
           <Route  path="/chapters" component={ChapterPage} />
-          <Route  path="/user" component={User} />
-          <Route path ="/newComponents" component={KanbanPage} />
-          <Route path ="/taskProgress" component={TaskProgressPage} />
+          <Route path ="/progress" component={TaskProgressPage} />
           <Route path ="/kanban" component={KanbanPage} />
           <Route path ="/errorPage" component={ErrorPage} />
           <Route path="*" component={NotFound} />

@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+import {fadeIn} from 'react-animations';
 
 export default class TakeCardBottomButtons extends React.Component {
 
@@ -26,7 +27,6 @@ export default class TakeCardBottomButtons extends React.Component {
     return final;
   }
 
-
   playButton() {
     const playing = this.props.takePlaying;
     const play = <i class="material-icons">play_arrow</i>;
@@ -50,10 +50,22 @@ export default class TakeCardBottomButtons extends React.Component {
 
 
   render() {
+    const {comments} = this.props;
+    const availableComments = comments.length;
+    const { width } = this.props;
     return (
       <BottomButtons>
         <CommentButton onClick={() => this.props.expandComments()}>
-            <i class="material-icons">mode_comment</i>
+          {comments.length > 0 ?
+            <CommentBubble resize={width < 1800}>
+              {availableComments}
+            </CommentBubble>
+            :
+            ''
+          }
+
+          <i class="material-icons">mode_comment</i>
+
         </CommentButton>
 
         {this.playButton()}
@@ -63,6 +75,26 @@ export default class TakeCardBottomButtons extends React.Component {
   }
 
 }
+
+const fadeInAnimation = keyframes`${fadeIn}`;
+
+const CommentBubble = styled.div`
+  position:absolute;
+  border-radius:10vw;
+  height: .9vw;
+  width: .9vw;
+  background-color: #E74C3C;
+  left:4.3vw;
+  bottom:${props=> props.resize ? '2.2vw': '1.6vw'};
+  color:#fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: ${fadeInAnimation} .5s ease-in;
+  font-size: 12px;
+
+`;
+
 
 const PlayTakeContainer = styled.div`
 
@@ -80,7 +112,6 @@ const BottomButtons = styled.div`
 `;
 
 const Button = styled.button`
-  font-size: 1.75vw;
   flex: 1;
   border: none;
   align-self: stretch;
@@ -90,9 +121,11 @@ const Button = styled.button`
 `;
 
 const CommentButton = styled(Button)`
+  position: relative;
   color: #009CFF;
   background: white;
   text-decoration: underline;
+  cursor:pointer;
 `;
 
 const PlayTake = styled(Button)`
@@ -102,4 +135,5 @@ const PlayTake = styled(Button)`
   display: flex;
   justify-content: space-evenly;
   align-items:center;
+  cursor:pointer;
 `;

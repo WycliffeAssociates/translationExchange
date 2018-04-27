@@ -6,29 +6,34 @@ import {Grid} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {bindActionCreators} from 'redux';
-import {fetchUsers, identiconLogin} from '../../actions';
+import {fetchUsers, identiconLogin, updateLanguage} from '../../actions';
 import img from '../../../assets/images/background-pattern.png';
 class AvailableUsers extends React.Component {
 
 
   componentWillMount() {
-    const {history, fetchUsers} = this.props;
+    const {history, fetchUsers, updateLanguage} = this.props;
     fetchUsers(history);
+    const language = localStorage.getItem('language');
+    if (language) {
+      updateLanguage(language);
+    }
+
   }
 
   render() {
 
-    const {users} = this.props;
+    const {users, txt} = this.props;
 
     return (
       <Container className="pageBackground">
 
-        <h2 style={{marginBottom: '5vw'}}> Available Users </h2>
+        <h2 style={{marginBottom: '5vw'}}> {txt.availableUsers} </h2>
 
         {
           this.props.loading?
 
-            <Loading height = "90vh" />
+            <Loading txt={txt.loading} height = "90vh" />
 
             :
 
@@ -73,12 +78,13 @@ Container.displayName = 'Container';
 
 const mapStateToProps = state => {
   const { users, loading } = state.user;
-  return {users, loading};
+  const {txt} = state.geolocation;
+  return {users, loading, txt};
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    {  fetchUsers, identiconLogin }, dispatch);
+    {  fetchUsers, identiconLogin, updateLanguage }, dispatch);
 };
 
 export default connect (mapStateToProps, mapDispatchToProps )(AvailableUsers);

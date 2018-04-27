@@ -8,14 +8,14 @@ export default class GotoProjectsButton extends React.Component {
   }
 
   render() {
-    
-    const {history, location}= this.props;
+
+    const {history, txt}= this.props;
 
     return (
-      
+
       <Button onClick={()=> history.push('/projects')}>
         <i style={{verticalAlign: "middle", marginRight: "0.4vw"}} className="material-icons">book</i>
-        <span style={{verticalAlign: "middle"}}>Go to Projects</span>
+        <span style={{verticalAlign: "middle"}}>{txt.goToProjects}</span>
       </Button>
 
     );

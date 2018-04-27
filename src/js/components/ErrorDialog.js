@@ -1,18 +1,22 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import * as Details from  './componentDetails/ErrorDetails';
+
 
 export default class ErrorDialog extends Component {
 
   render() {
-    const {type} = this.props;
-    let details ='';
-    if (type == 'mic') {
-      details = Details.mic;
-    }
+    const {type, txt} = this.props;
+    let icon = 'mic_off';
+    let message = txt.micMessage;
+    let info =txt.micError;
+    let instructions = txt.micInstructions;
 
-    else if (type == 'upload_comment_fail') {
-      details = Details.upload_comment_fail;
+    if (type == 'upload_comment_fail') {
+      message= txt.uploadMessage;
+      info = txt.uploadError;
+      icon = 'error';
+
+
     }
     return (
       <Container>
@@ -25,19 +29,19 @@ export default class ErrorDialog extends Component {
 
           <ErrorInfo>
             <Icon>
-              <i style={styles.icon} className="material-icons">{details.icon}</i>
+              <i style={styles.icon} className="material-icons"> {icon} </i>
             </Icon>
 
             <Message>
-              {details.message}
+              {message}
             </Message>
 
             <ExtraInfo>
-              {details.info}
+              {info}
             </ExtraInfo>
 
             <Instructions>
-              {details.instructions}
+              {instructions}
             </Instructions>
 
           </ErrorInfo>

@@ -6,15 +6,19 @@ import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
 import RecentProjectsContainer from './RecentProjectsContainer';
 import MyProjectsContainer from './MyProjectsContainer';
-import { fetchAllProjects, getChapters, getUserHash, removeUser } from '../../actions';
+import { fetchAllProjects, getChapters, getUserHash, removeUser, updateLanguage } from '../../actions';
 
 
 
 class ProjectContainer extends Component {
 
   componentWillMount() {
-    const {history, fetchAllProjects} = this.props;
+    const {history, fetchAllProjects, updateLanguage} = this.props;
     fetchAllProjects('', history ); // use history for redirect to the error page
+    const language = localStorage.getItem('language');
+    if (language) {
+      updateLanguage(language);
+    }
   }
 
   render() {
@@ -24,7 +28,7 @@ class ProjectContainer extends Component {
 
         {  this.props.loading?
 
-          <Loading height= {'auto'} />
+          <Loading txt={this.props.txt} height= {'auto'} />
 
           :
 
@@ -48,7 +52,7 @@ const Container = styled.div`
   height:100vh;
   display: flex;
   flex-direction: column;
-  
+
 `;
 
 const ProjectsContainer = styled.div`
@@ -70,14 +74,15 @@ const CardsContainer = styled.div`
 
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({fetchAllProjects, getChapters, getUserHash, removeUser}, dispatch);
+  return bindActionCreators({fetchAllProjects, getChapters, getUserHash, removeUser, updateLanguage}, dispatch);
 };
 
 const mapStateToProps = state =>{
   const { projects, loading  } = state.Projects;
   const {loggedInUser} = state.user;
+  const {txt} = state.geolocation;
 
-  return {projects, loggedInUser, loading};
+  return {projects, loggedInUser, loading, txt};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectContainer);

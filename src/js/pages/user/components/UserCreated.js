@@ -14,11 +14,11 @@ class UserCreated extends Component {
   }
 
   render() {
-    const { hash } = this.props;
+    const { hash, txt } = this.props;
 
     return (
       <Container>
-        <TextHeader> You are ready to go! </TextHeader>
+        <TextHeader> {txt.youAreReadyToGo} </TextHeader>
         <IdenticonContainer>
           <svg
             id="createdUser"
@@ -28,7 +28,7 @@ class UserCreated extends Component {
           />
         </IdenticonContainer>
         <Button onClick={() => this.redirect()}>
-         <span style={{textDecoration:'underline'}}> Go to projects</span>
+          <span style={{textDecoration:'underline'}}> {txt.goToProjects}</span>
           <i className="material-icons" style={{ fontSize: "1.7vw" }}>
             arrow_forward
           </i>

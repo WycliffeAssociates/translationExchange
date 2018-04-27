@@ -71,9 +71,13 @@ const Icon = styled.button`
   color: #e74c3c;
   border: none;
   font-size: 2vw;
-  margin-left: -0.005vw;
+  margin: auto;
   background-color: transparent;
   cursor: pointer;
+
+  @-moz-document url-prefix() {
+    margin-left: -0.25vw;
+  }
 `;
 
 export default RecordButton;

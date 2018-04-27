@@ -4,7 +4,7 @@ import jdenticon from 'jdenticon';
 import Menu, { Item as MenuItem } from 'rc-menu';
 import QueryString from 'query-string';
 import Dropdown from 'rc-dropdown';
-import 'rc-dropdown/assets/index.css';
+import '../../css/dropdown.css';
 
 
 class NavBar extends Component {
@@ -54,30 +54,41 @@ class NavBar extends Component {
 
   render() {
 
-    const {loggedInUser, history, chunks, chapterNum, location, chapterPage, projectPage, kanbanPage}= this.props;
+    const {loggedInUser, history, chunks, chapterNum, location, chapterPage, projectPage, kanbanPage, txt}= this.props;
     const searchBar = QueryString.parse(location.search);
     let menu = '';
     let book ='';
     let chapter='';
     let goToChapters = '';
+    let mode = '';
     let logOutMenu = (
       <Menu onSelect={ ()=> this.logOut()}>
-        <MenuItem style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key="1">Log Out</MenuItem>
+        <MenuItem style={{cursor: 'pointer', color:'#fff', backgroundColor:'#000' }} key="1">{txt.logOut}</MenuItem>
       </Menu>
     );
 
     if (kanbanPage) {
-      chapter =`Chapter ${chapterNum}`;
+      chapter =`${txt.chapter} ${chapterNum}`;
       book = searchBar.bookName;
+      mode = txt.chunk;
       goToChapters = () => {
         const {getChapters} = this.props;
         getChapters(searchBar.projectId);
         history.push(`/chapters?projectId=${searchBar.projectId}&&bookName=${searchBar.bookName}&&mode=${searchBar.mode}`);
       };
 
+      if (searchBar.mode === 'Verse') {
+        mode = txt.verse;
+      }
+
       menu = (
-        <Menu onSelect={ ky=> this.onSelect(ky)}>
-          { kanbanPage ? chunks.map(chnk=><MenuItem chunkNum={chnk.startv} key={chnk.id}> {searchBar.mode} {chnk.startv}</MenuItem>): ''}
+        <Menu style={{backgroundColor: 'rgba(255,255,255, 0.9)' }} onSelect={ ky=> this.onSelect(ky)}>
+          {chunks.map(chnk=> {
+            let backgroundColor, color = '';
+            backgroundColor= chnk.published_take ? 'rgb(0,156,255,0.6)': '';
+            color = chnk.published_take ? 'white': '';
+            return (
+              <MenuItem style={{backgroundColor: `${backgroundColor}`, color: `${color}`}} chunkNum={chnk.startv} key={chnk.id}> {mode} {chnk.startv}</MenuItem>)})}
         </Menu>
       );
 
@@ -112,7 +123,7 @@ class NavBar extends Component {
                   overlay={menu}
                   animation="slide-up"
                 >
-                  <Text>{searchBar.mode} {this.props.chunkNum}</Text>
+                  <Text>{mode} {this.props.chunkNum}</Text>
                 </Dropdown>
                 :
                 ''
@@ -196,6 +207,7 @@ const Identicon= styled.svg`
 Identicon.displayName = 'Identicon';
 
 
+<<<<<<< HEAD
 const LogOut = styled.div`
   visibility: ${props=> props.display ? 'visible' : 'hidden'};
   width: 7.5vw;
@@ -231,6 +243,8 @@ display: none;
 List.displayName = 'List';
 
 
+=======
+>>>>>>> dev
 const IconsContainer = styled.div`
   width 30vw;
   display: flex;
@@ -242,12 +256,15 @@ const IconsContainer = styled.div`
 IconsContainer.displayName = 'IconsContainer';
 
 
+<<<<<<< HEAD
 const Icon = styled.div`
 text-align: left;
 `;
 Icon.displayName = 'Icon';
 
 
+=======
+>>>>>>> dev
 const IdenticonContainer = styled.div`
 margin-top: 0.5vh;
 margin-right: 0.5vw;

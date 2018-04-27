@@ -23,7 +23,7 @@ class RecordCommentModal extends Component {
     return {
       recordedBlob: null,
       recording: false,
-      header: 'Record your comment',
+      header: this.props.txt.recordYourComment,
       icon: 'mic_none',
       playing: false,
       isAudioAvailable: false,
@@ -56,26 +56,26 @@ class RecordCommentModal extends Component {
 
   onStop(recordedBlob) {
     this.setState({recordedBlob, isAudioAvailable: true});
-      const reader = new FileReader();
-      reader.addEventListener(
-          "load",
-          () => {
+    const reader = new FileReader();
+    reader.addEventListener(
+      'load',
+      () => {
 
-              this.setState({
-                  jsonBlob: reader.result
-              });
-          },
-          false
-      );
+        this.setState({
+          jsonBlob: reader.result
+        });
+      },
+      false
+    );
 
-      reader.readAsDataURL(recordedBlob.blob);
+    reader.readAsDataURL(recordedBlob.blob);
   }
 
   redo = () => {this.setState(this.initialState(true))};
 
-  startRecording = () => this.setState({recording: true, header: 'Recording...', icon: 'stop' });
+  startRecording = () => this.setState({recording: true, header: this.props.txt.recording, icon: 'stop' });
 
-  stopRecording = () => this.setState({ header: 'Is this ok?', recording: false, icon: 'play_arrow'});
+  stopRecording = () => this.setState({ header: this.props.txt.isThisOk, recording: false, icon: 'play_arrow'});
 
   onFinishPlaying() { this.setState({icon: 'play_arrow', playing: false})}
 
@@ -100,16 +100,16 @@ class RecordCommentModal extends Component {
 
   showRecordModal(buttonState) {
     const { recording, header, icon, recordedBlob, playing, isAudioAvailable, commentSaved, error } = this.state;
-
+    const {txt} = this.props;
     let ic ='check';
-    let headerText ='Success!';
-    let text = 'Your Comment has been saved.';
+    let headerText = txt.success;
+    let text = txt.commentSaved;
 
 
     if (error) {
       ic='error';
-      headerText='uh-ho...';
-      text = 'there was an error..';
+      headerText= txt.uhOh;
+      text = txt.error;
     }
 
 
@@ -147,7 +147,7 @@ class RecordCommentModal extends Component {
           </TopContainer>
           <BottomContainer>
             <OkButtonContainer>
-              <BlueButton error={error} onClick={this.close}> Ok </BlueButton>
+              <BlueButton error={error} onClick={this.close}> {txt.ok} </BlueButton>
             </OkButtonContainer>
           </BottomContainer>
         </ModalContainer>
@@ -183,12 +183,12 @@ class RecordCommentModal extends Component {
           </RecordButtonContainer>
           {recordedBlob != null ?
             <ButtonsContainer>
-              <RedoButton onClick={this.redo}> <i class="material-icons">redo</i> Redo </RedoButton>
-              <BlueButton onClick={this.saveComment}> Yes <i class="material-icons">check</i> </BlueButton>
+              <RedoButton onClick={this.redo}> {txt.redo} <i class="material-icons">redo</i> </RedoButton>
+              <BlueButton onClick={this.saveComment}> {txt.yes} <i class="material-icons">check</i> </BlueButton>
             </ButtonsContainer>
             :
             <ButtonsContainer>
-              <BlueButton onClick={this.close}> <i class="material-icons">keyboard_backspace</i>Go Back  </BlueButton>
+              <BlueButton onClick={this.close}> <i class="material-icons">keyboard_backspace</i>{txt.goBack} </BlueButton>
             </ButtonsContainer>
           }
         </ControlsContainer>
@@ -200,7 +200,7 @@ class RecordCommentModal extends Component {
 
   render() {
     const { recording, recordedBlob, showModal } = this.state;
-    const {uploadingComments} = this.props;
+    const {uploadingComments, txt} = this.props;
     let buttonState = this.startRecording;
     if (recording) {
       buttonState = this.stopRecording;
@@ -211,17 +211,17 @@ class RecordCommentModal extends Component {
 
     return (
       <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-      <Modal
-        dimmer={true}
-        open={showModal}
-        onClose={this.close}
-        size="mini"
-        style={{ verticalAlign: 'middle', margin: 'auto', marginTop: '261px', width: '40vw', height: '40vw', minWidth: '825px'}}
-      >
-        {uploadingComments ?
-          <CommentUploading />
-          : this.showRecordModal(buttonState)}
-      </Modal>
+        <Modal
+          dimmer={true}
+          open={showModal}
+          onClose={this.close}
+          size="mini"
+          style={{ verticalAlign: 'middle', margin: 'auto', marginTop: '261px', width: '40vw', height: '40vw', minWidth: '825px'}}
+        >
+          {uploadingComments ?
+            <CommentUploading txt={txt} />
+            : this.showRecordModal(buttonState)}
+        </Modal>
 
       </div>
     );

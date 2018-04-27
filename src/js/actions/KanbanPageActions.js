@@ -28,6 +28,32 @@ export const getTakesSuccess = (takes, chunkNum) => {
   };
 };
 
+export const deleteTake = (takeId,chunkId,chunkNum) => {
+  return function(dispatch) {
+    return axios
+      .delete(`${config.apiUrl}takes/${takeId}`,
+        {
+          headers: {Authorization: 'Token' + localStorage.getItem('token')},
+        })
+      .then(response => {
+        console.log(response);
+        if (response) {
+          dispatch(getTakes(chunkId, chunkNum)); }
+      })
+      .catch(error => {
+        console.log(error);
+
+      });
+  };
+};
+
+export const deleteTakeSuccess = (res) => {
+  return {
+    type: 'DELETE_TAKE_SUCCESS',
+
+  }
+}
+
 export const getChunks = (chapterId, redirect) => {
   return dispatch => {
     dispatch({type: 'LOADING'});
@@ -37,8 +63,8 @@ export const getChunks = (chapterId, redirect) => {
           headers: { Authorization: 'Token ' + localStorage.getItem('token') },
         })
       .then(response => {
-        dispatch(getChunksSuccess(response.data));
         const chunkId = response.data[0].id; //get the chunk id from the first chunk in the array of chunks
+        dispatch(getChunksSuccess(response.data, chunkId));
         dispatch(getTakes(chunkId, 1)); // get the takes from the first chunk and set chunkNum to 1
         dispatch(getComments(chunkId,'chunk_id')); // get comments for the first chunk
       })
@@ -49,10 +75,11 @@ export const getChunks = (chapterId, redirect) => {
   };
 };
 
-export const getChunksSuccess = (chunks) => {
+export const getChunksSuccess = (chunks, chunkId) => {
   return {
     type: 'FETCH_CHUNKS_SUCCESS',
     chunks,
+    chunkId,
   };
 };
 

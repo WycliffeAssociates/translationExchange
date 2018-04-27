@@ -35,13 +35,18 @@ export default class UtilityPanel extends React.Component {
 
   render() {
     const {chapterId} = this.state;
-    const { takes, chunkNum , chapterNum,
+    const { takes, chunkNum ,
       chunks, chapterComments, chunkComments, activeChunkId, saveComment,
-      uploadingComments, uploadError, resetError} = this.props;
+      uploadingComments, uploadError, resetError, txt, deleteComment, getTakes} = this.props;
     let publishedTakeLocation =null;
+    let mode = txt.chunk;
     const {search} = this.props.location;
     const query = QueryString.parse(search);
-    takes.map(tk=>{ if (tk.published) { publishedTakeLocation = tk.location} } );
+    takes.map(tk=>{ if (tk.published) { publishedTakeLocation = tk.location;} } );
+
+    if (query.mode === 'Verse') {
+      mode = txt.verse;
+    }
 
     return (
       this.state.utilityPanel?
@@ -50,7 +55,7 @@ export default class UtilityPanel extends React.Component {
             <Toggle className="vertical_align_middle"
               onChange={e=>this.setState({commentsTab: e.target.checked})}
               defaultChecked= {false} icons ={{
-                unchecked: <i style={{fontSize: '1vw', paddingBottom: '1vw'}} className="material-icons">mode_comment</i>,
+                unchecked: <i  className="material-icons">mode_comment</i>,
                 checked: <img src={require('../../../../../assets/images/Audio_Wave.svg')} />,
               }}  />
 
@@ -63,21 +68,25 @@ export default class UtilityPanel extends React.Component {
                 saveComment={saveComment}
                 type="chapter"
                 comments={chapterComments}
-                text= {`Chapter ${chapterNum}`}
+                text= {`${txt.chapter} ${query.chapterNum}`}
                 id={chapterId}
                 uploadingComments={uploadingComments}
                 uploadError = {uploadError}
                 resetError ={resetError}
+                txt={txt}
+                deleteComment={deleteComment}
               />
               <Comments
                 saveComment={saveComment}
                 type="chunk"
                 comments={chunkComments}
-                text={`${query.mode} ${chunkNum}`}
+                text={`${mode} ${chunkNum}`}
                 id={activeChunkId}
                 uploadingComments={uploadingComments}
                 uploadError = {uploadError}
                 resetError ={resetError}
+                txt={txt}
+                deleteComment={deleteComment}
               />
               {
               // takes.map(tk=>
@@ -96,12 +105,14 @@ export default class UtilityPanel extends React.Component {
 
             </CommentsPanel>
             :
-            <ChunkPanel takeLocation={publishedTakeLocation} selectedChunk={chunkNum} chunks={chunks} />
+            <ChunkPanel txt={txt} mode={mode} takeLocation={publishedTakeLocation}
+              selectedChunk={chunkNum} chunks={chunks}
+              getTakes={getTakes} />
           }
         </UtilityPanelContainer>
         :
         <UtilityPanelNotVisible>
-          <Show onClick= {this.toggleUtilityPanel}> <i style={{fontSize:'2.0vw', paddingRight:'1vw'}} class="material-icons">arrow_back</i> </Show>
+          <Show onClick= {this.toggleUtilityPanel}> <i style={{fontSize: '2.0vw', paddingRight: '1vw'}} class="material-icons">arrow_back</i> </Show>
         </UtilityPanelNotVisible>
 
     );
@@ -131,7 +142,15 @@ const UtilityNavigation = styled.div`
   flex-direction: row ;
   justify-content: space-between;
   margin-top: 1vw;
+  i {
+    vertical-align: middle;
+    font-size: 18px;
+  }
 
+  img {
+    height: 14px;
+    width: 14px;
+  }
 `;
 
 const Hide = styled.button`

@@ -72,19 +72,24 @@ export default class PlayerTracker extends React.Component {
 
 
     return (
-      <Container>
-        {this.PlayHead()}
-        <Input type="range"  min="0" max ={this.state.loadedSeconds} step="0.01" value={this.state.playedSeconds? this.state.playedSeconds: 0}
-          onChange = {this.onSeek} />
-        <ReactPlayer //url ={config.streamingUrl+ this.props.url}
-          url ={audioFile? audioFile: config.streamingUrl+ url}
-          style={{display: 'none'}}
-          onProgress = {this.onProgress}
-          playing = {this.state.playing}
-          onEnded = {this.onEnd}
-          ref={this.ref}
-        />
-      </Container>
+      <div>
+
+        <div style={{width: 'inherit', color: 'steelblue', background: 'none', display: 'flex', flexDirection: 'row',
+          justifyContent: 'space-between'}}>
+          {this.PlayHead()}
+          <Input type="range"  min="0" max ={this.state.loadedSeconds} step="0.01" value={this.state.playedSeconds? this.state.playedSeconds: 0}
+            onChange = {this.onSeek} />
+          <ReactPlayer //url ={config.streamingUrl+ this.props.url}
+            url ={audioFile? audioFile: config.streamingUrl+ url}
+            style={{display: 'none'}}
+            progressInterval ={100}
+            onProgress = {this.onProgress}
+            playing = {this.state.playing}
+            onEnded = {this.onEnd}
+            ref={this.ref}
+          />
+        </div>
+      </div>
     );
   }
 }
@@ -100,6 +105,9 @@ const Container = styled.div`
 Container.displayName = 'Container';
 const Input = styled.input`
   margin-top: 0.2vw;
+  @-moz-document url-prefix() {
+    margin-top: 0.8vw;
+}
  -webkit-appearance : none;
 width: 100%;
 background: transparent;
@@ -207,5 +215,6 @@ const PlayIcon = styled.button`
   border-top: none;
   padding: 0.4vw;
   color: #969595
+  cursor: pointer;
 `;
 PlayIcon.displayName = 'PlayIcon';

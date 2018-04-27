@@ -5,15 +5,14 @@ import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
 import KanbanBoard from './components/KanbanBoard';
-import {getChunks, getTakes, getComments,
+import {getChunks, getTakes,deleteTake, getComments,
   patchTake, saveComment, getUserHash,
-  removeUser, getChapters, resetError} from '../../actions';
+  removeUser, getChapters, resetError,
+  updateLanguage, deleteComment} from '../../actions';
 import UtilityPanel from './components/UtilityPanel/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
 import img from '../../../assets/images/obs-en-01-01.jpg';
-
-
 
 class KanbanPage extends React.Component {
 
@@ -22,7 +21,7 @@ class KanbanPage extends React.Component {
   }
 
   componentWillMount() {
-    const {getComments, getChunks, takes, history} = this.props;
+    const {getComments, getChunks, takes, history, updateLanguage} = this.props;
     const {search} = this.props.location;
     const query = QueryString.parse(search);
     if (takes.length < 1) {
@@ -30,9 +29,12 @@ class KanbanPage extends React.Component {
       getComments(query.chapterId, 'chapter_id');
 
     }
+    const language = localStorage.getItem('language');
+    if (language) {
+      updateLanguage(language);
+    }
 
   }
-
 
   shouldComponentUpdate(nextProps) {
 
@@ -59,10 +61,9 @@ class KanbanPage extends React.Component {
 
           <KanbanBoard {...this.props} />
 
-          <UtilityPanel mode={query.mode} chapterNum={query.chapterNum} {...this.props} />
+          <UtilityPanel chapterNum={query.chapterNum} {...this.props} />
 
         </KanbanContainer>
-
         <SourceAudio />
       </KanbanPageContainer>
     );
@@ -102,15 +103,17 @@ const KanbanContainer = styled.div`
 const SourceAudio = styled.div`
   position: fixed;
   bottom: 0;
-  height: 10vh;
+  height: 7.5vh;
   background: #2D2D2D;
   width: 100vw;
   z-index: 99;
+  max-height: 50px;
 `;
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({getChunks, getTakes, getComments, patchTake, saveComment, getUserHash, removeUser, getChapters, resetError}, dispatch);
+  return bindActionCreators({getChunks, getTakes,deleteTake,
+    getComments, patchTake, saveComment, getUserHash, removeUser, getChapters, resetError, updateLanguage, deleteComment }, dispatch);
 
 };
 
@@ -119,12 +122,12 @@ const mapStateToProps = state => {
   const {chapterComments, chunkComments, uploadingComments,  uploadError} = state.comments;
   const {chapters} = state.Chapters;
   const {loggedInUser} = state.user;
-  const { displayText } = state.geolocation;
+  const { txt } = state.geolocation;
 
 
 
   return {takes, chunks, loggedInUser, chunkNum, chapterComments, chunkComments,
-    displayText, activeChunkId, uploadingComments, uploadError, chapters};
+    txt, activeChunkId, uploadingComments, uploadError, chapters};
 
   // all the state variables that you want to map to props
 };

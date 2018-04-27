@@ -30,7 +30,9 @@ class WaveForm extends Component {
     this.setState({
       pos: e.originalArgs[0],
     });
+
   }
+
 
   render() {
     //let position = this.state.pos;

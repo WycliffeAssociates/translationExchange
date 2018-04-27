@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import QueryString from "query-string";
 import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
-import {getChunks, getComments, getUserHash, getChapters, removeUser, downloadProject} from '../../actions';
+import {getChunks, getComments, getUserHash, getChapters, removeUser, downloadProject, updateLanguage} from '../../actions';
 import ChapterCard from './components/ChapterCard';
 import styled from 'styled-components';
 import 'css/takes.css';
@@ -16,31 +16,35 @@ import 'css/takes.css';
 export class ChapterPage extends Component {
 
   componentWillMount() {
-    const {getChapters, chapters, history} = this.props;
+    const {getChapters, chapters, history, updateLanguage} = this.props;
 
     if (chapters.length < 1) {
       const {search} = this.props.location;   //get data if the user refresh the page
       const query = QueryString.parse(search);
       getChapters(query.projectId, history);
     }
+    const language = localStorage.getItem('language');
+    if (language) {
+      updateLanguage(language);
+    }
 
   }
 
   render() {
-    const {chapters} = this.props;
+    const {chapters, txt} = this.props;
     const {search} = this.props.location;
     const query = QueryString.parse(search);
 
     return (
       <ChapterPageContainer>
         <NavBar chapterPage={true} kanban={false} {...this.props} />
-        <DownloadBar >
-          <DownloadButton onClick={()=> this.props.downloadProject(query.projectId)}> Download
-          <i className="material-icons"> file_download </i></DownloadButton>
+        <DownloadBar onClick={()=> this.props.downloadProject(query.projectId)}>
+          <DownloadButton> {txt.download}
+            <i className="material-icons"> file_download </i></DownloadButton>
         </DownloadBar>
 
         {this.props.loading?
-          <Loading height="auto" />
+          <Loading txt={this.props.txt} height= "80vh" marginTop="5vw" />
           :
 
           <CardsContainer>
@@ -126,7 +130,7 @@ DownloadButton.displayName = 'DownloadButton';
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({getChunks, getUserHash, getComments, getChapters, removeUser, downloadProject}, dispatch);
+  return bindActionCreators({getChunks, getUserHash, getComments, getChapters, removeUser, downloadProject, updateLanguage}, dispatch);
 
 };
 
@@ -136,9 +140,9 @@ const mapStateToProps = state => {
 
   const {loggedInUser} =state.user;
 
-  const {takes} = state.kanbanPage;
+  const {txt} = state.geolocation;
 
-  return {chapters, loggedInUser, loading};
+  return {chapters, loggedInUser, loading, txt};
 };
 
 

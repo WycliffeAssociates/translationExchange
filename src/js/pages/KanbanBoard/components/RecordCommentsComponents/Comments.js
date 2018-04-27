@@ -18,7 +18,7 @@ class Comments extends Component {
 
 
   render() {
-    const {comments, text, id, type, saveComment, uploadingComments,uploadError,  chunkId, chunkNum} = this.props;
+    const {comments, text, id, type, saveComment, uploadingComments,uploadError,  chunkId, chunkNum, txt, deleteComment} = this.props;
     //id corresponds to either the chapterId, chunkId or the takeID so that the comment is saved and attached to the appropriate element
     return (
       <Container>
@@ -29,7 +29,7 @@ class Comments extends Component {
           </SvgContainer>
         </TextContainer>
         <AudioContainer>
-          {comments? comments.length > 0 ? <div> {comments.map(((cm, index)=> <Player  id={index} comments={cm} />  ))}</div> : <NoComments>No comments Available</NoComments> : <NoComments>No comments Available</NoComments>  }
+          {comments? comments.length > 0 ? <div> {comments.map(((cm)=> <Player typeId={id} deleteComment={deleteComment} type={type}  id={cm.id} comments={cm} txt={txt} />  ))}</div> : <NoComments>{txt.noCommentsAvailable}</NoComments> : <NoComments>{txt.noCommentsAvailable}</NoComments>  }
         </AudioContainer>
         <ButtonContainer>
           <RecordButton onClick={()=>{this.setState({displayModal: true});}}>
@@ -44,6 +44,7 @@ class Comments extends Component {
             saveComment={saveComment}
             id={id}
             type={type}
+            txt={txt}
             display={this.state.displayModal} />
         </ButtonContainer>
       </Container>

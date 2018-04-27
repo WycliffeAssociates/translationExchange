@@ -13,11 +13,11 @@ export default class TakeCardTopIcon extends React.Component {
     return  (
       <TopBar>
         <DragIcon>
-          <i className = "fa fa-bars" />
+          <i className = "material-icons">menu</i>
         </DragIcon>
 
         <CardInfo>
-          <h3 style={{alignSelf: 'center'}}> {this.props.displayText.take} {this.props.take_num} </h3>
+          <h3 style={{alignSelf: 'center'}}> {this.props.txt.take} {this.props.take_num} </h3>
           <p style={{color: 'lightgray', fontStyle: 'italic', fontWeight: '100', marginTop: '-0.8vw'}}> 03/13/17 </p>
         </CardInfo>
 
@@ -44,6 +44,7 @@ const DragIcon = styled.button`
   font-size: 1.5vw;
   color: gray;
   background: none;
+  cursor: pointer;
 
 `;
 
@@ -56,4 +57,5 @@ const Icon = styled.svg`
   height: 2vw;
   width: 2w;
   margin-top: 0.6vw;
+  cursor: pointer;
   `;

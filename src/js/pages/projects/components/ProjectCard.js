@@ -11,21 +11,21 @@ export default class ProjectCard extends React.Component {
       const {projectId, getChapters, history, bookName, mode } = this.props;
       getChapters(projectId, history);
 
-        const modeCap = mode.charAt(0).toUpperCase() + mode.slice(1);
-        history.push({
-            pathname: './chapters',
-            search: `?projectId=${projectId}&&bookName=${bookName}&&mode=${modeCap}`
-        });
+      const modeCap = mode.charAt(0).toUpperCase() + mode.slice(1);
+      history.push({
+        pathname: './chapters',
+        search: `?projectId=${projectId}&&bookName=${bookName}&&mode=${modeCap}`
+      });
     };
 
-  render() {
-    const{ bookName, version, dateModified, language } = this.props;
+    render() {
+      const { bookName, version, dateModified, language, txt } = this.props;
 
 
 
 
 
-    return (
+      return (
         <Card>
           <InformationContainer >
             <TextContainer>
@@ -46,13 +46,13 @@ export default class ProjectCard extends React.Component {
           </InformationContainer>
 
           <ButtonContainer>
-            <ReviewButton onClick={this.reviewProject}> <i class="material-icons">done_all</i> Review </ReviewButton>
+            <ReviewButton onClick={this.reviewProject}> <i class="material-icons">done_all</i> {txt.review} </ReviewButton>
 
           </ButtonContainer>
         </Card>
 
-    );
-  }
+      );
+    }
 
 }
 
