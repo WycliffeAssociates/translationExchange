@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
-describe('Project List Container', () => {
+describe.skip('Project List Container', () => {
     const store = mockStore({
         direction: {
             direction: ''

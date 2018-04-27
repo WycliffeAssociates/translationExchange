@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
-describe('SetAudioSource', () => {
+describe.skip('SetAudioSource', () => {
     const store = mockStore({
         sourceAudio: {}
     });

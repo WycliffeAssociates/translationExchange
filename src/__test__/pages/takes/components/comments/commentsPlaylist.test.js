@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 
 
-describe("Record comments array", () => {
+describe.skip("Record comments array", () => {
 	it("check if the comments positions are inverted for the purpose of displaying newest to oldest comments", () => {
 
 		const data = [{
