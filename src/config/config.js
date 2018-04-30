@@ -15,17 +15,18 @@
 // };
 
 
-const config = {                                                        // local development
-  apiUrl: 'http://localhost/api/',
-  //apiUrl: "https://te.loc/api/",
-  streamingUrl: 'http://localhost/',
-  redirectUri: 'http://localhost:3000',
-};
 
-// const config = {                                                        //production
-//     apiUrl: 'https://te.loc/api/',
-//     streamingUrl: 'https://te.loc/',
-//     redirectUri: 'https://te.loc/'
+
+// const config = {                                                        // local development
+//   apiUrl: 'http://localhost/api/',
+//   streamingUrl: 'http://localhost/',
+//   redirectUri: 'http://localhost:3000',
 // };
+
+const config = {                                                        //production
+    apiUrl: 'https://te.loc/api/',
+    streamingUrl: 'https://te.loc/',
+    redirectUri: 'https://te.loc/'
+};
 
 export default config;
