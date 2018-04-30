@@ -63,7 +63,7 @@ class NavBar extends Component {
     let mode = '';
     let logOutMenu = (
       <Menu onSelect={ ()=> this.logOut()}>
-        <MenuItem style={{cursor: 'pointer', color:'#fff', backgroundColor:'#000' }} key="1">{txt.logOut}</MenuItem>
+        <MenuItem style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key="1">{txt.logOut}</MenuItem>
       </Menu>
     );
 
@@ -84,11 +84,17 @@ class NavBar extends Component {
       menu = (
         <Menu style={{backgroundColor: 'rgba(255,255,255, 0.9)' }} onSelect={ ky=> this.onSelect(ky)}>
           {chunks.map(chnk=> {
+            let publishedTake= chnk.published_take;
             let backgroundColor, color = '';
-            backgroundColor= chnk.published_take ? 'rgb(0,156,255,0.6)': '';
+            backgroundColor= publishedTake ? 'rgb(0,156,255,1)': '';
             color = chnk.published_take ? 'white': '';
             return (
-              <MenuItem style={{backgroundColor: `${backgroundColor}`, color: `${color}`}} chunkNum={chnk.startv} key={chnk.id}> {mode} {chnk.startv}</MenuItem>)})}
+              <MenuItem
+                style={{backgroundColor: `${backgroundColor}`, color: `${color}`}} chunkNum={chnk.startv}
+                key={chnk.id}> {mode} {chnk.startv}
+                <i className="material-icons"
+                  style={{display: publishedTake? '': 'none', color: '#4ECf53'}}>done</i>
+              </MenuItem>);})}
         </Menu>
       );
 
@@ -162,6 +168,7 @@ const Container = styled.div`
   box-shadow: 3px 4px 5px rgba(0,0,0,0.2);
   z-index: 2;
   min-height: 90px;
+
 `;
 const Text = styled.p`
   cursor: pointer;
