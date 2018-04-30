@@ -1,5 +1,4 @@
 /* global it:true describe:true expect:true*/
-require('../../../setup.js');
 import React from 'react';
 import {shallow} from 'enzyme';
 import {CreateUserContainer} from '../../../../../js/pages/user/components/CreateUserContainer';
@@ -7,6 +6,9 @@ import {CreateUserContainer} from '../../../../../js/pages/user/components/Creat
 const mockProps = {
   history: [],
   userCreated: false,
+  txt: {
+    backToLogin: 'back to login',
+  },
 };
 
 describe('Create User Container Suite', function() {

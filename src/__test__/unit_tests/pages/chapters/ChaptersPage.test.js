@@ -12,6 +12,9 @@ const mockProps = {
   },
   loading: false,
   downloadProject: jest.fn(),
+  txt: {
+    download: 'download',
+  },
 };
 describe('Chapters Page Suite', () => {
 
@@ -29,7 +32,7 @@ describe('Chapters Page Suite', () => {
   });
 
   it('should handle onClick', () => {
-    wrapper.find('DownloadButton').simulate('click');
+    wrapper.find('DownloadBar').simulate('click');
     expect(mockProps.downloadProject.mock.calls.length).toEqual(1);
   });
   mockProps.loading = true;

@@ -1,7 +1,7 @@
 /* global describe beforeEach afterEach it expect*/
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { fetchAllProjects } from '../../js/actions';
+import { fetchAllProjects } from '../../../js/actions';
 import moxios from 'moxios';
 
 const middlewares = [thunk];

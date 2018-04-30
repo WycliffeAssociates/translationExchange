@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactMicPlus } from 'react-mic-plus';
+import  {ReactMicPlus}  from 'react-mic-plus';
 import styled from 'styled-components';
 import TimeLine from './timeLine.png';
 import Waveform from './Waveform';

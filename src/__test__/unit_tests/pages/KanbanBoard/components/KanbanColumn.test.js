@@ -18,6 +18,9 @@ const mockProps = {
   history: [],
   getTakes: jest.fn(),
   getChunks: jest.fn(),
+  txt: {
+    goToNextChunk: 'Next Chunk',
+  },
 };
 
 const OriginalKanbanColumn = KanbanColumn.DecoratedComponent;
@@ -58,6 +61,9 @@ const mockPropsPChapter = {
   history: [],
   getTakes: jest.fn(),
   getChunks: jest.fn(),
+  txt: {
+    goToNextChunk: 'Next Chunk',
+  },
 };
 
 

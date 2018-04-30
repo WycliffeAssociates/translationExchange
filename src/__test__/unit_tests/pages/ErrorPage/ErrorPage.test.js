@@ -5,6 +5,9 @@ import {shallow} from 'enzyme';
 
 const mockProps = {
   history: [],
+  txt: {
+    internetError: 'internet error',
+  },
 };
 
 describe('Error Page Test Suite', () => {
