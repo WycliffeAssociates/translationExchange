@@ -11,15 +11,15 @@ class ProgressBar extends React.Component {
   render() {
 
     const {now, label, resultColor, result} = this.props;
-    
+
     return (
       <ProgressContainer>
         <Result color={resultColor}>{result}</Result>
-        <Progress role={"progressbar"} 
-          ariaValuenow={now} 
-          ariaValuemin={0} 
+        <Progress role={'progressbar'}
+          ariaValuenow={now}
+          ariaValuemin={0}
           ariaValueMax={100}
-          style={{width: now + "%"}}>{label ? label : ""}
+          style={{width: now + '%'}}>{label ? label : ''}
         </Progress>
       </ProgressContainer>
     );
@@ -36,6 +36,7 @@ const ProgressContainer = styled.div`
   text-align: center;
   position: relative;
 `;
+ProgressContainer.displayName = 'ProgressContainer';
 
 const Progress = styled.div`
   float: left;
@@ -49,6 +50,7 @@ const Progress = styled.div`
   box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
   transition: width .6s ease;
 `;
+Progress.displayName = 'Progress';
 
 const Result = styled.div`
   position: absolute;
@@ -58,7 +60,8 @@ const Result = styled.div`
   width: 20vw;
   height: 100%;
   padding-top: 0.3vw;
-  color: ${props => props.color || "white"}
+  color: ${props => props.color || 'white'}
 `;
+Result.displayName ='Result';
 
 export default ProgressBar;

@@ -163,9 +163,11 @@ const Container = styled.div`
   z-index: 2;
   min-height: 90px;
 `;
+Container.displayName= 'Container';
 const Text = styled.p`
   cursor: pointer;
 `;
+Text.displayName = 'Text';
 
 const ChaptersButton = styled.div`
   display: flex;
@@ -175,6 +177,7 @@ const ChaptersButton = styled.div`
   font-size: ${props=> props.selected ? '2vw': ''}
 
 `;
+ChaptersButton.displayName = 'ChaptersButton';
 
 const ProjectsButton = styled.div`
   display: flex;
@@ -184,6 +187,7 @@ const ProjectsButton = styled.div`
   font-size: ${props=> props.selected ? '2vw': ''}
 
 `;
+ProjectsButton.displayName = 'ProjectsButton';
 
 const ChunksButton = styled.div`
   display: flex;
@@ -192,12 +196,16 @@ const ChunksButton = styled.div`
   color: ${props=> props.selected ? '#009CFF': ''}
 
 `;
+ChunksButton.displayName = 'ChunksButton';
+
 
 const Identicon= styled.svg`
   height: 10vh;
   width: 5vw;
   cursor: pointer;
 `;
+Identicon.displayName = 'Identicon';
+
 
 const IconsContainer = styled.div`
   width 30vw;
@@ -207,24 +215,34 @@ const IconsContainer = styled.div`
   font-size: 0.75vw;
   text-align: center;
 `;
+IconsContainer.displayName = 'IconsContainer';
+
+
+const Icon = styled.div`
+text-align: left;
+`;
+Icon.displayName = 'Icon';
 
 const IdenticonContainer = styled.div`
 margin-top: 0.5vh;
 margin-right: 0.5vw;
-
 `;
+
+IdenticonContainer.displayName = 'IdenticonContainer';
+
 
 const Title = styled.p`
   font-size:1vw;
 `;
+Title.displayName = 'Title';
+
 
 const TextContainer = styled.div`
   width: 13vw;
   display: flex;
   justify-content: center;
   align-items: center;
-
 `;
-
+TextContainer.displayName = 'TextContainer';
 
 export default NavBar;

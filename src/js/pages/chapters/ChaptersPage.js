@@ -8,13 +8,12 @@ import {getChunks, getComments, getUserHash, getChapters, removeUser, downloadPr
 import ChapterCard from './components/ChapterCard';
 import styled from 'styled-components';
 import 'css/takes.css';
-import Data from '../projects/mockupdata/data';
 
 
 
 
 
-class ChapterPage extends Component {
+export class ChapterPage extends Component {
 
   componentWillMount() {
     const {getChapters, chapters, history, updateLanguage} = this.props;
@@ -50,8 +49,7 @@ class ChapterPage extends Component {
 
           <CardsContainer>
             {chapters.map((chp, index) =>
-              <ChapterCard {...chp} {...this.props} />)}
-            {/*{Data.map(chp => <ChapterCard  {...this.props} />)}*/}
+              <ChapterCard key={index} {...chp} {...this.props} />)}
 
           </CardsContainer>
 
@@ -77,6 +75,7 @@ const ChapterPageContainer = styled.div`
     background-color: #F6F9FE;
     overflow-y: scroll;
 `;
+ChapterPageContainer.displayName = 'ChapterPageContainer';
 
 const CardsContainer = styled.div`
     height:100%;
@@ -88,8 +87,9 @@ const CardsContainer = styled.div`
     margin-top: 8vh;
     background: #F4F7F9;
     align-self: center;
-
 `;
+CardsContainer.displayName = 'CardsContainer';
+
 
 const DownloadBar = styled.div`
   width: 100vw;
@@ -103,6 +103,8 @@ const DownloadBar = styled.div`
   z-index: 99;
 
 `;
+DownloadBar.displayName = 'DownloadBar';
+
 
 const DownloadButton = styled.button`
   background: white;
@@ -122,6 +124,7 @@ const DownloadButton = styled.button`
     vertical-align: middle;
   }
 `;
+DownloadButton.displayName = 'DownloadButton';
 
 
 

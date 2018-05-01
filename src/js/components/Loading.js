@@ -26,6 +26,6 @@ const Container = styled.div`
   align-items: center;
 
 `;
-
+Container.displayName = 'Container';
 
 export default Loading;

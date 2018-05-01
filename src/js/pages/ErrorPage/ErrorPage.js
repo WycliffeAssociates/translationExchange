@@ -4,14 +4,7 @@ import {connect} from 'react-redux';
 import { zoomIn } from 'react-animations';
 import imgError from '../../../assets/images/internet_error.png';
 
-
-
-
-
-
-
-
-class ErrorPage extends Component {
+export class ErrorPage extends Component {
 
   componentDidMount() {
     setTimeout(()=>{this.redirect(); }, 3000);
@@ -53,6 +46,7 @@ const ErrorPageContainer = styled.div`
     flex-direction: column;
     background-color: #F7F9FE
 `;
+ErrorPageContainer.displayName = 'ErrorPageContainer';
 
 
 
@@ -67,11 +61,14 @@ const ImageContainer = styled.div`
   align-items: center;
   animation: ${zoomOutAnimation} .5s ease-in;
 `;
+ImageContainer.displayName = 'ImageContainer';
 
 const Image = styled.img`
    height: 35vw;
    width: 54vw;
 `;
+Image.displayName = 'Image';
+
 
 const Text = styled.p`
   font-size:2vw;
@@ -84,7 +81,7 @@ const Text = styled.p`
 const mapStateToProps = state => {
   const {txt} = state.geolocation;
   return {txt};
-}
+};
 
 
 export default connect(mapStateToProps)(ErrorPage);

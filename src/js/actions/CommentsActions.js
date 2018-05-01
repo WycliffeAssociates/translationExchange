@@ -56,6 +56,7 @@ export const saveComment = (blobx, type, id, chunkId, chunkNum, callback, errorC
         headers: { Authorization: 'Token ' + localStorage.getItem('token') },
       })
       .then(response => {
+
         if (type === 'chunk') {
           dispatch(updateChunkComments(response.data));
         }
@@ -78,18 +79,19 @@ export const saveComment = (blobx, type, id, chunkId, chunkNum, callback, errorC
 
 
 export const updateChunkComments = (comment) => {
-    return {
-        type: 'UPDATE_CHUNK_COMMENTS',
-        comment
-    }
+  return {
+    type: 'UPDATE_CHUNK_COMMENTS',
+    comment,
+  };
 
 };
 
 export const updateChapterComments = (comment) => {
-    return {
-        type: 'UPDATE_CHAPTER_COMMENTS',
-        comment
-    }};
+  return {
+    type: 'UPDATE_CHAPTER_COMMENTS',
+    comment,
+  };
+};
 
 
 export const resetError = () => {

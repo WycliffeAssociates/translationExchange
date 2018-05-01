@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import styled,{keyframes} from 'styled-components';
 import {zoomIn} from 'react-animations';
-import CircularProgressbar from "react-circular-progressbar";
-import QueryString from "query-string";
+import CircularProgressbar from 'react-circular-progressbar';
+import QueryString from 'query-string';
 
 
 
@@ -40,6 +40,10 @@ export default class ChapterCard extends Component {
       window.addEventListener('resize', () => {
         this.spaceCards();
       });
+    }
+
+    componentWillUnMount() {
+      window.removeEventListener('resize');
     }
 
     spaceCards() {
@@ -244,18 +248,22 @@ margin-right: ${props =>  props.screenWidth*0.05}px;
     }
 
 `;
+Card.displayName = 'Card';
 
 const CircularTextContainer = styled.div`
     position: absolute;
 `;
+CircularTextContainer.displayName = 'CircularTextContainer';
 
 const CircularText = styled.p`
     font-size: 18px;
 `;
+CircularText.displayName = 'CircularText';
 
 const CheckText = styled.p`
     font-size: 14px;
 `;
+CheckText.displayName = 'CheckText';
 
 
 const ReviewButton= styled.button`
@@ -282,6 +290,7 @@ const ReviewButton= styled.button`
     text-decoration: underline;
   }
 `;
+ReviewButton.displayName = 'ReviewButton';
 
 const CircularProgressContainer = styled.div`
     display: flex;
@@ -292,6 +301,7 @@ const CircularProgressContainer = styled.div`
     position: relative;
 
 `;
+CircularProgressbar.displayName = 'CircularProgressbar';
 
 const CheckTextContainer = styled.div`
     width:100%;
@@ -299,6 +309,7 @@ const CheckTextContainer = styled.div`
     justify-content: flex-start;
     padding-left: 1vw;
 `;
+CheckTextContainer.displayName = 'CheckTextContainer';
 
 
 const P = styled.p`
@@ -306,11 +317,13 @@ const P = styled.p`
    font-weight: bold;
    display: inline-block;
 `;
+P.displayName = 'P';
 
 const InformationContainer = styled.div`
 text-align: center;
 width: 100%;
 `;
+InformationContainer.displayName = 'InformationContainer';
 
 
 const TextContainer = styled.div`
@@ -327,10 +340,8 @@ const TextContainer = styled.div`
     color: #FF9800;
     margin-left: 10%;
   }
-
-
-
 `;
+TextContainer.displayName = 'TextContainer';
 
 const ButtonContainer= styled.div`
     width: 150px;
@@ -342,5 +353,5 @@ const ButtonContainer= styled.div`
     display: flex;
     justify-content:center;
     border-radius: 25px;
-
-  `;
+`;
+ButtonContainer.displayName = 'ButtonContainer';

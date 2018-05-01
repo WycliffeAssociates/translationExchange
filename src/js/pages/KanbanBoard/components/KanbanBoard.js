@@ -47,8 +47,7 @@ export default class KanbanBoard extends React.Component {
           if (take.published == true) {
 
             publishedColumn.push(take);
-
-          //  this.props.addPublishedTake(take,);
+            //  this.props.addPublishedTake(take,);
           }
 
           else {

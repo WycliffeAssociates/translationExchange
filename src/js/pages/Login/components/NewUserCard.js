@@ -37,7 +37,7 @@ export default class NewUserCard extends React.Component {
 
 }
 
-const bounceInAnimations =keyframes`${bounceIn}`
+const bounceInAnimations =keyframes`${bounceIn}`;
 
 const NewUserCardContainer = styled.div`
 

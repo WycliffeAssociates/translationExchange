@@ -6,7 +6,7 @@ import { fetchChaptersContainerData } from '../../../js/actions';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('ChaptersContainerAction', () => {
+describe.skip('ChaptersContainerAction', () => {
     const store = mockStore();
     xit('has action type:FETCH_CHAPTERS_CONTAINER_DATA_SUCCESS and response is not undefined', () => {
         const expectedActions = [

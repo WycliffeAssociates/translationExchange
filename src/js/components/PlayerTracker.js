@@ -37,8 +37,6 @@ export default class PlayerTracker extends React.Component {
     if (!this.state.seeking) {
       this.setState(state);
     }
-
-
   };
 
   onSeek(e) {
@@ -60,9 +58,9 @@ export default class PlayerTracker extends React.Component {
 
     return (
       <div>
-        <PlayIcon style={{display: playing? 'none': ''}} onClick ={() => this.playComment()}> <i style={{fontSize:'1.6vw'}} class="material-icons">play_arrow</i> </PlayIcon>
+        <PlayIcon style={{display: playing? 'none': ''}} onClick ={() => this.playComment()}> <i style={{fontSize: '1.6vw'}} class="material-icons">play_arrow</i> </PlayIcon>
 
-        <PlayIcon style={{display: playing? '': 'none'}} onClick ={() => this.playComment()}> <i style={{fontSize:'1.6vw'}} class="material-icons">pause</i> </PlayIcon>
+        <PlayIcon style={{display: playing? '': 'none'}} onClick ={() => this.playComment()}> <i style={{fontSize: '1.6vw'}} class="material-icons">pause</i> </PlayIcon>
 
       </div>);
 
@@ -74,7 +72,7 @@ export default class PlayerTracker extends React.Component {
 
 
     return (
-      <div>
+      <Container>
 
         <div style={{width: 'inherit', color: 'steelblue', background: 'none', display: 'flex', flexDirection: 'row',
           justifyContent: 'space-between'}}>
@@ -91,11 +89,20 @@ export default class PlayerTracker extends React.Component {
             ref={this.ref}
           />
         </div>
-      </div>
+      </Container>
     );
   }
 }
 
+const Container = styled.div`
+  width: inherit;
+  color: steelblue;
+  background: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+Container.displayName = 'Container';
 const Input = styled.input`
   margin-top: 0.2vw;
   @-moz-document url-prefix() {
@@ -192,6 +199,7 @@ background: transparent;
 
 
 `;
+Input.displayName = 'Input';
 
 const PlayIcon = styled.button`
 
@@ -209,3 +217,4 @@ const PlayIcon = styled.button`
   color: #969595
   cursor: pointer;
 `;
+PlayIcon.displayName = 'PlayIcon';

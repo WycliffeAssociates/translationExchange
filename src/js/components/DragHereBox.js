@@ -41,3 +41,5 @@ const DragBoxContainer = styled.div`
 	margin-top: 1vw;
 	font-size: 1.1vw;
 	`;
+
+DragBoxContainer.displayName = 'DragBoxContainer';
