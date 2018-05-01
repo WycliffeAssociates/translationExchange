@@ -73,42 +73,44 @@ const Card= styled.div`
     margin: 0 0 3vw 4vw;
     animation: ${zoomInAnimation} .2s ease-in;
     cursor: pointer;
-
-
 `;
+Card.displayName = 'Card';
 
 const Image = styled.img`
    height: 9.5vw;
    width: 13.5vw;
 `;
+Image.displayName = 'Image';
 
 const BookText= styled.p`
    font-size: 1.5vw
    font-weight: bold;
 `;
+BookText.displayName = 'BookText';
 
 const Text = styled.p`
    font-size: 1vw
    color: #606060;
 `;
+Text.displayName = 'Text';
 
 const InformationContainer = styled.div`
     display:flex;
     flex-direction: row;
     height: 82%;
 `;
+InformationContainer.displayName = 'InformationContainer';
 
 const ImageIndicatorContainer = styled.div`
   width: 50;
-
 `;
+ImageIndicatorContainer.displayName = 'ImageIndicatorContainer';
 
 const ImageContainer = styled.div`
   width: 100%;
   padding-top: 2vw;
-
-
 `;
+ImageContainer.displayName = 'ImageContainer';
 
 const TextContainer = styled.div`
   padding-top: .5vw;
@@ -118,6 +120,7 @@ const TextContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
 `;
+TextContainer.displayName = 'TextContainer';
 
 const ReviewButton = styled.button`
 
@@ -132,6 +135,7 @@ const ReviewButton = styled.button`
     cursor: pointer;
     font-size: 1.1vw; //in the font awesome library the font size ends up controlling the size of the icon
   `;
+ReviewButton.displayName = 'ReviewButton';
 
 const ButtonContainer= styled.div`
 
@@ -144,14 +148,4 @@ const ButtonContainer= styled.div`
     border-color: white;
     border-width: 1vw;
   `;
-
-const SignOutButton = styled.div`
-    display: inline-block;
-    color: white;
-    border: none;
-    background-color: #009CFF;
-    height: 3.5vw;
-    width: 7vw;
-    padding-left: 2vw;
-    font-size: 2vw; //in the font awesome library the font size ends up controlling the size of the icon
-`;
+ButtonContainer.displayName = 'ButtonContainer';
