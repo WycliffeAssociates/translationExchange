@@ -26,7 +26,7 @@ export default class ProjectCard extends React.Component {
 
 
       return (
-        <Card>
+        <Card onClick={this.reviewProject}>
           <InformationContainer >
             <TextContainer>
               <BookText> <i class="material-icons">book</i> {bookName} </BookText>
@@ -38,7 +38,7 @@ export default class ProjectCard extends React.Component {
             <ImageIndicatorContainer>
               <div></div>
               <ImageContainer>
-                <Image src={img1} alt="Smiley face" height="10vw" width="10vw"/>
+                <Image src={img1} alt="Smiley face" height="10vw" width="10vw" />
               </ImageContainer>
 
             </ImageIndicatorContainer>
@@ -46,7 +46,7 @@ export default class ProjectCard extends React.Component {
           </InformationContainer>
 
           <ButtonContainer>
-            <ReviewButton onClick={this.reviewProject}> <i class="material-icons">done_all</i> {txt.review} </ReviewButton>
+            <ReviewButton> <i class="material-icons">done_all</i> {txt.review} </ReviewButton>
 
           </ButtonContainer>
         </Card>
@@ -63,13 +63,16 @@ const zoomInAnimation = keyframes `${zoomIn}`;
 const Card= styled.div`
     text-align: center;
     height: 35vh - 5vw;
+    min-height: 150px;
     width: 26vw;
+    min-width: 300px;
     border-radius: .5vw;
     box-shadow: 0px 1px 2px 4px rgba(0,0,0,0.2);
     overflow: hidden;
     background-color: white;
     margin: 0 0 3vw 4vw;
     animation: ${zoomInAnimation} .2s ease-in;
+    cursor: pointer;
 
 
 `;
@@ -123,8 +126,8 @@ const ReviewButton = styled.button`
     }
     color: #fff;
     border: none;
-    height: 3vh;
-    width: 100%;
+    height: 4vh;
+    width: inherit;
     background-color: #009CFF;
     cursor: pointer;
     font-size: 1.1vw; //in the font awesome library the font size ends up controlling the size of the icon
@@ -133,7 +136,8 @@ const ReviewButton = styled.button`
 const ButtonContainer= styled.div`
 
     background: #009CFF;
-    width: inherit;
+    width: 100%;
+    min-height: 40px;
     padding: 0.25vw;
     overflow: hidden;
     text-align: center;
