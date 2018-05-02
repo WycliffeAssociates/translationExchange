@@ -6,6 +6,7 @@ import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
 import {getChunks, getComments, getUserHash, getChapters, removeUser, downloadProject, updateLanguage} from '../../actions';
 import ChapterCard from './components/ChapterCard';
+import Toggle from './components/Toggle';
 import styled from 'styled-components';
 import 'css/takes.css';
 
@@ -13,7 +14,17 @@ import 'css/takes.css';
 
 
 
+
 export class ChapterPage extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      viewingComments: false,
+    };
+
+    this.handleToggle = this.handleToggle.bind(this);
+  }
 
   componentWillMount() {
     const {getChapters, chapters, history, updateLanguage} = this.props;
@@ -28,6 +39,10 @@ export class ChapterPage extends Component {
       updateLanguage(language);
     }
 
+  }
+
+  handleToggle() {
+    this.setState(prevState => ({viewingComments: !prevState.viewingComments}));
   }
 
   render() {
@@ -48,8 +63,9 @@ export class ChapterPage extends Component {
           :
 
           <CardsContainer>
+            <Toggle onClick={this.handleToggle} viewingComments={this.state.viewingComments} />
             {chapters.map((chp, index) =>
-              <ChapterCard key={index} {...chp} {...this.props} />)}
+              <ChapterCard key={index} {...chp} {...this.props} viewingComments={this.state.viewingComments} chapterComments= {this.props.chapterComments} />)}
 
           </CardsContainer>
 
@@ -72,19 +88,20 @@ const ChapterPageContainer = styled.div`
     height: auto;
     min-height: 850px;
     flex-direction: column;
-    background-color: #F6F9FE;
+    background-color: #F3F3F3;
     overflow-y: scroll;
+    overflow-x: hidden;
 `;
 ChapterPageContainer.displayName = 'ChapterPageContainer';
 
 const CardsContainer = styled.div`
-    height:100%;
+    height:auto;
+    overflow-x: hidden;
     width: 100vw;
     min-height: 850px;
     display: flex;
     flex-wrap: wrap;
     padding: 5vw 5vw;
-    margin-top: 8vh;
     background: #F4F7F9;
     align-self: center;
 `;
@@ -142,7 +159,9 @@ const mapStateToProps = state => {
 
   const {txt} = state.geolocation;
 
-  return {chapters, loggedInUser, loading, txt};
+  const {chapterComments} = state.comments;
+
+  return {chapters, loggedInUser, loading, txt, chapterComments};
 };
 
 
