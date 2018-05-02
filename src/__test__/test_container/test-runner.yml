@@ -8,7 +8,7 @@ services:
       - ./scripts:/scripts
     command: bash -c "cd /translationExchange 
                       && npm install
-                      && rm /translationExchange/node_modules/react-mic/lib/libs/AudioContext.js
-                      && cp /scripts/AudioContext.js /translationExchange/node_modules/react-mic/lib/libs/AudioContext.js
+                      && rm /translationExchange/node_modules/react-mic-plus/lib/libs/AudioContext.js
+                      && cp /scripts/AudioContext.js /translationExchange/node_modules/react-mic-plus/lib/libs/AudioContext.js
                       && npm run test:ci --silent"
     network_mode: "host"
