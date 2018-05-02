@@ -1,6 +1,7 @@
 #!/bin/bash
 
-export TEBACKEND=$TRAVIS_BUILD_DIR/../tE-backend
+cd ..
+export TEBACKEND=$(pwd)/tE-backend
 export WORKSPACE=$TRAVIS_BUILD_DIR
 env | grep TEBACKEND
 env | grep WORKSPACE
