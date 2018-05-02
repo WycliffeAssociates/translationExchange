@@ -160,7 +160,7 @@ const CommentPlayer = styled.div`
 `;
 
 const IdenticonContainer =styled.div`
-  background-color: white;
+  background-color: lightgray;
   height: 1.5vw;
   width: 1.5vw;
   margin-right: 5%;
