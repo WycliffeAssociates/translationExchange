@@ -11,6 +11,7 @@ before_install:
 install:
   - ./set-up-travis.sh
   - cd src/__test__/test_container
+  - docker-compose build backend_server
 
 script:
   - docker-compose up -d
