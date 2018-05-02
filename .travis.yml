@@ -10,6 +10,7 @@ before_install:
 
 install:
   - ./set-up-travis.sh
+  - cd src/__test__/test_container
 
 script:
   - docker-compose up -d
