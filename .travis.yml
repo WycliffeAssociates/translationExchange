@@ -1,13 +1,21 @@
-#sudo: required
+sudo: required
 
-language: node_js
+#language: node_js
 
-#services:
-  #- docker
+services:
+  - docker
 
-install:
-  - npm install -g npm
-  - npm install
+env:
+  - "TEBACKEND=$(TRAVIS_BUILD_DIR)../tE-backend"
+
+before_install:
+  - "git clone https://github.com/WycliffeAssociates/tE-backend.git ${TEBACKEND}"
+  - "cd ${TRAVSI_BUILD_DIR}/src/__test__/test_container" 
 
 script:
-  - npm run test:ci
+  - docker-compose up -d
+  - docker-compose -f test-runner.yml run --rm test-runner
+
+after_script:
+  - docker-compose down
+  - docker ps -aq
