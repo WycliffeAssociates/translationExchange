@@ -9,7 +9,7 @@ before_install:
   - chmod +x set-up-travis.sh
 
 install:
-  - ./set-up-travis.sh
+  - source set-up-travis.sh
   - cd src/__test__/test_container
   - docker-compose build backend_server
 
