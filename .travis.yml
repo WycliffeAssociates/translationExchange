@@ -1,1 +1,12 @@
+sudo: required
+
 language: node_js
+
+services:
+  - docker
+
+install:
+  - npm install
+
+script:
+  - npm run test:ci
