@@ -3,15 +3,15 @@
 exports.__esModule = true;
 //var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 var audioCtx='';
-if(! window.AudioContext) {
-    if (!window.webkitAudioContext) {
-        console.log('bad_browser');
-        return;
-    }
-    audioCtx = window.webkitAudioContext;
+if (! window.AudioContext) {
+  if (!window.webkitAudioContext) {
+    console.log('bad_browser');
+    return;
+  }
+  audioCtx = window.webkitAudioContext;
 }
 else {
-   audioCtx = new (window.AudioContext);
+  audioCtx = new (window.AudioContext);
 }
 var analyser = audioCtx.createAnalyser();
 
@@ -26,7 +26,7 @@ var AudioContext = {
     audioCtx.decodeAudioData(audioData).then(function (decodedData) {
       // use the decoded data here
     });
-  }
+  },
 };
 
 exports.default = AudioContext;
