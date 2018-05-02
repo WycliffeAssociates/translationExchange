@@ -5,12 +5,11 @@ sudo: required
 services:
   - docker
 
-env:
-  - "TEBACKEND=$(TRAVIS_BUILD_DIR)../tE-backend"
-
 before_install:
-  - "git clone https://github.com/WycliffeAssociates/tE-backend.git ${TEBACKEND}"
-  - "cd ${TRAVSI_BUILD_DIR}/src/__test__/test_container" 
+  - chmod +x set-up-travis.sh
+
+install:
+  - ./set-up-travis.sh
 
 script:
   - docker-compose up -d
