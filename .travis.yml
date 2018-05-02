@@ -1,11 +1,13 @@
-sudo: required
+#sudo: required
 
 language: node_js
 
-services:
-  - docker
+#services:
+  #- docker
 
 install:
+  - npm install -g npm
+  - npm update
   - npm install
 
 script:
