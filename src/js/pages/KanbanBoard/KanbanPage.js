@@ -8,7 +8,8 @@ import KanbanBoard from './components/KanbanBoard';
 import {getChunks, getTakes,deleteTake, getComments,
   patchTake, saveComment, getUserHash,
   removeUser, getChapters, resetError,
-  updateLanguage, deleteComment, playTake} from '../../actions';
+  updateLanguage, deleteComment, playTake,
+  addTakeToDelete, removeTakeToDelete} from '../../actions';
 import UtilityPanel from './components/UtilityPanel/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
@@ -90,15 +91,6 @@ const KanbanContainer = styled.div`
  overflow-y: auto;
  box-sizing: border-box;
 `;
-//
-// const KanbanBoard = styled.div`
-//   flex: 1;
-//   background: url(${img})  ;
-//   height: inherit;
-//   background-repeat: no-repeat;
-//   background-size: cover;
-// `;
-
 
 const SourceAudio = styled.div`
   position: fixed;
@@ -113,12 +105,14 @@ const SourceAudio = styled.div`
 const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({getChunks, getTakes,deleteTake,
-    getComments, patchTake, saveComment, getUserHash, removeUser, getChapters, resetError, updateLanguage, deleteComment,playTake }, dispatch);
+    getComments, patchTake, saveComment, getUserHash, removeUser,
+    getChapters, resetError, updateLanguage, deleteComment,playTake,
+    addTakeToDelete,removeTakeToDelete}, dispatch);
 
 };
 
 const mapStateToProps = state => {
-  const {takes, chunks, chunkNum, activeChunkId, playingTakeId} = state.kanbanPage;
+  const {takes, chunks, chunkNum, activeChunkId, playingTakeId, takesToDelete} = state.kanbanPage;
   const {chapterComments, chunkComments, uploadingComments,  uploadError} = state.comments;
   const {chapters} = state.Chapters;
   const {loggedInUser} = state.user;
@@ -127,7 +121,7 @@ const mapStateToProps = state => {
 
 
   return {takes, chunks, loggedInUser, chunkNum, chapterComments, chunkComments,
-    txt, activeChunkId, uploadingComments, uploadError, chapters, playingTakeId};
+    txt, activeChunkId, uploadingComments, uploadError, chapters, playingTakeId, takesToDelete};
 
   // all the state variables that you want to map to props
 };
