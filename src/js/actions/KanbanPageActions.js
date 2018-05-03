@@ -34,20 +34,7 @@ export function playTake(takeId) {
     takeId,
   };
 }
-//
-// export const playTake = (takeId) => {
-//   return function(dispatch) {
-//
-//     dispatch(updatePlayingTake(takeId));
-//   };
-// };
-//
-// export const updatePlayingTake = (takeId) => {
-//   return {
-//     type: 'UPDATE_PLAYING_TAKE',
-//     takeId,
-//   };
-// };
+
 
 export const deleteTake = (takeId,chunkId,chunkNum) => {
   return function(dispatch) {
