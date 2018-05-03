@@ -1,22 +1,21 @@
 sudo: required
-
-#language: node_js
-
 services:
-  - docker
-
+- docker
 before_install:
-  - chmod +x set-up-travis.sh
-
+- chmod +x set-up-travis.sh
 install:
-  - source set-up-travis.sh
-  - cd src/__test__/test_container
-  - docker-compose build backend_server
-
+- source set-up-travis.sh
+- cd src/__test__/test_container
+- docker-compose build backend_server
 script:
-  - docker-compose up -d
-  - docker-compose -f test-runner.yml run --rm test-runner
-
+- docker-compose up -d
+- docker-compose -f test-runner.yml run --rm test-runner
 after_script:
-  - docker-compose down
-  - docker ps -aq
+- docker-compose down
+- docker ps -aq
+notifications:
+  slack:
+    rooms:
+      - secure: "qUoeOv9K3IGsJA6ogRhATEvFMvWA+5Wdd9lfRv+sUOuv1uFUJm4wLUfCLo4M2Yf+/Gz/jBEIz+ifS1Jq1VYuyxLh0j/gKDT92LZMCOTGqtMkZsyIE+a374x69ZnxFpJS8yKxcJN32ZhVMp1LZkI5Xh19glk90OkFe8SyHzfCzFgdQfFy7ENAGOcoiYiiHaNlSuA0t74TIOW7OXSdKD4lF33aZkofOQYOWm5GIMFGvrISalHJMPAhx3s0xwXVWPSZTdXeGVurV1ccU3BL4WtVSC8E08PlvilM4hL4oQQGcazNTvXe5L7vAvW5SgJf/htOr01JNMvPfvdWBihDL4eqxYYoL06hMzH16I8x49m6BtAP/NMGseoqYtyf2nlp/h5aSoDWt+zXwS2/u87ZPM7jCxyOkZc/r1iosMsv2y/7iyKzSZtpnBZMv5JM2QyR+J1v9HbIUi3mX1AZax4znYpq7JcjJtnGoObeGPbri2n9WNhNSUAXxpdvdF1/Wmo5zCrXg9IriYjZzJGWs7wV3PEI88LdSqzUOG1P+dpw4qJxhO2ZTy5hCkYaUx7gkzU7AaUH8HfkjWTSic+fciOcvO2AaMtntL5Lcmtd3QOtlFgK1ie/cb9E7VA0TGVfNPxlgrWaHSLRslVGnG/VBqv3z6EeDhyeVN+05UeVq7nelGF87zE="
+    on_success: always
+    on_failure: always
