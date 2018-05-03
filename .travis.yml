@@ -15,7 +15,7 @@ script:
 - docker-compose -f test-runner.yml run --rm test-runner
 after_script:
 - docker-compose down
-- cat /src/__test__/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+- coveralls
 #notifications:
   #slack:
     #rooms:
