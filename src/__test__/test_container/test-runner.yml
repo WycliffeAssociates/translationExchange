@@ -10,5 +10,5 @@ services:
                       && npm install
                       && rm /translationExchange/node_modules/react-mic-plus/lib/libs/AudioContext.js
                       && cp /scripts/AudioContext.js /translationExchange/node_modules/react-mic-plus/lib/libs/AudioContext.js
-                      && npm run test:ci --silent"
+                      && npm run test:ci --silent | coveralls"
     network_mode: "host"
