@@ -45,7 +45,8 @@ class RecordCommentModal extends Component {
   show = dimmer => () => this.setState({ dimmer, open: true });
   close = () => {
     this.setState(this.initialState());
-    this.props.closeModal();
+    //set timeout to ensure that state is reset to initial before the modal closes
+    setTimeout(() => this.props.closeModal(), 100);
 
   };
 
@@ -54,6 +55,7 @@ class RecordCommentModal extends Component {
       will not = 'play_arrow', so if statement is only true if stopRecording has been clicked by user*/
     const {icon} = this.state;
     console.log(recordedBlob, 'RECORDED BLOB');
+    console.log(this.state, 'STATE ONSTOP CALL');
     if (recordedBlob !== null && icon === 'play_arrow') {
       this.setState({recordedBlob, isAudioAvailable: true});
       const reader = new FileReader();
