@@ -175,7 +175,7 @@ const WaveformContainer = styled.div`
 `;
 
 
-let undo= false;
+let undo= true;
 
 const UndoToast = ({closeToast, props}) => {
 
@@ -193,7 +193,8 @@ const UndoToast = ({closeToast, props}) => {
 
 };
 
-function showUndoToast(props) {
+function showUndoToast(props, Undo) {
+  undo = Undo;
   toast(<UndoToast props={props} />, {
     position: toast.POSITION.BOTTOM_CENTER,
     closeOnClick: true,
@@ -201,9 +202,11 @@ function showUndoToast(props) {
     onClose: () => {
       if (undo === true) {
         //do not delete the take
+        props.removeTakeToDelete(props.id, props.takesToDelete);
       }
       else if (undo === false) {
         props.deleteTake(props.id, props.activeChunkId, props.chunkNum);
+        setTimeout(() => props.removeTakeToDelete(props.id, props.takesToDelete), 500);
       }
     },
 
@@ -214,7 +217,7 @@ const ConfirmDelete = ({closeToast,props }) => (
   <div style= {{textAlign: 'center'}}>
     <p> {props.txt.deleteTake} </p>
     <ButtonContainer>
-      <Confirm onClick={() => (showUndoToast(props), closeToast())}>
+      <Confirm onClick={() => (showUndoToast(props, false), closeToast())}>
         {props.txt.confirm} <i className="material-icons">done_all</i>
       </Confirm>
       <Undo onClick={closeToast}> {props.txt.undo}<i className="material-icons">undo</i> </Undo>
@@ -300,11 +303,17 @@ const takeSource = {
 
       else if (dropResult.listId === 'DELETE_TAKE') //CHECK DELETE TARGET
       {
+        props.addTakeToDelete(props.id);
         toast(<ConfirmDelete props={props} />, {
           position: toast.POSITION.BOTTOM_CENTER,
           className: 'black-background',
           autoClose: 10000,
           closeOnClick: false,
+          onClose: () => {
+            if (undo === true) {
+              props.removeTakeToDelete(props.id, props.takesToDelete);
+            }
+          },
         });
       }
       else // DEFAULT MOVE TAKE
