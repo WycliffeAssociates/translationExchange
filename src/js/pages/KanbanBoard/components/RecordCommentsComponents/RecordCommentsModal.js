@@ -15,20 +15,15 @@ class RecordCommentModal extends Component {
     this.error = this.error.bind(this);
   }
 
-  initialState(modalOpened) {
-    let showModal = false;
-    if (modalOpened) {   // handle the case when the modal is already opened
-      showModal = true;
-    }
+  initialState() {
     return {
       recordedBlob: null,
-      recording: false,
+      record: false,
       header: this.props.txt.recordYourComment,
       icon: 'mic_none',
       playing: false,
       isAudioAvailable: false,
       jsonBlob: null,
-      showModal,
       commentSaved: false,
       error: false,
     };
@@ -50,34 +45,40 @@ class RecordCommentModal extends Component {
   show = dimmer => () => this.setState({ dimmer, open: true });
   close = () => {
     this.setState(this.initialState());
-    this.props.closeModal();
+    //set timeout to ensure that state is reset to initial before the modal closes
+    setTimeout(() => this.props.closeModal(), 100);
 
   };
 
   onStop(recordedBlob) {
-    this.setState({recordedBlob, isAudioAvailable: true});
-    const reader = new FileReader();
-    reader.addEventListener(
-      'load',
-      () => {
+    /*stopRecording() is called before onStop. Therefore unless stopRecording() is called icon
+      will not = 'play_arrow', so if statement is only true if stopRecording has been clicked by user*/
+    const {icon} = this.state;
+    if (recordedBlob !== null && icon === 'play_arrow') {
+      this.setState({recordedBlob, isAudioAvailable: true});
+      const reader = new FileReader();
+      reader.addEventListener(
+        'load',
+        () => {
 
-        this.setState({
-          jsonBlob: reader.result
-        });
-      },
-      false
-    );
+          this.setState({
+            jsonBlob: reader.result,
+          });
+        },
+        false
+      );
 
-    reader.readAsDataURL(recordedBlob.blob);
+      reader.readAsDataURL(recordedBlob.blob);
+    }
   }
 
-  redo = () => {this.setState(this.initialState(true))};
+  redo = () => {this.setState(this.initialState(true));};
 
-  startRecording = () => this.setState({recording: true, header: this.props.txt.recording, icon: 'stop' });
+  startRecording = () => this.setState({record: true, header: this.props.txt.recording, icon: 'stop' });
 
-  stopRecording = () => this.setState({ header: this.props.txt.isThisOk, recording: false, icon: 'play_arrow'});
+  stopRecording = () => this.setState({ header: this.props.txt.isThisOk, record: false, icon: 'play_arrow'});
 
-  onFinishPlaying() { this.setState({icon: 'play_arrow', playing: false})}
+  onFinishPlaying() { this.setState({icon: 'play_arrow', playing: false});}
 
   saveComment = () => {
     const {id, type, chunkId, chunkNum} = this.props;
@@ -92,14 +93,14 @@ class RecordCommentModal extends Component {
   playPause = () => {
     let icon ='pause';
     if (this.state.playing) {
-      icon='play_arrow';
+      icon='play';
     }
     this.setState({ playing: !this.state.playing, icon });
   };
 
 
   showRecordModal(buttonState) {
-    const { recording, header, icon, recordedBlob, playing, isAudioAvailable, commentSaved, error } = this.state;
+    const { record, header, icon, recordedBlob, playing, isAudioAvailable, commentSaved, error } = this.state;
     const {txt} = this.props;
     let ic ='check';
     let headerText = txt.success;
@@ -166,7 +167,7 @@ class RecordCommentModal extends Component {
             isAudioAvailable={isAudioAvailable}
             recordedBlob={recordedBlob}
             onStop={this.onStop}
-            recording={recording}
+            record={record}
             width={825}
             height={280}
             nonstop={true}
@@ -199,10 +200,10 @@ class RecordCommentModal extends Component {
   }
 
   render() {
-    const { recording, recordedBlob, showModal } = this.state;
+    const { record, recordedBlob, showModal } = this.state;
     const {uploadingComments, txt} = this.props;
     let buttonState = this.startRecording;
-    if (recording) {
+    if (record) {
       buttonState = this.stopRecording;
     }
     if (recordedBlob != null) {
