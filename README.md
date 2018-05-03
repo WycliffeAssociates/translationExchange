@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/Pinto18/translationExchange.svg?branch=nd_travis_config)](https://travis-ci.org/Pinto18/translationExchange)
-[![Coverage Status](https://coveralls.io/repos/github/Pinto18/translationExchange/badge.svg?branch=nd_travis_config)](https://coveralls.io/github/Pinto18/translationExchange?branch=nd_travis_config)
 
 # translationExchange
 Manage and review development project.  Started by the 8WoC 2017 internship team and continued by Wycliffe Associates.
