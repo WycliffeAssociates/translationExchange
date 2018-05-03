@@ -29,15 +29,25 @@ export const getTakesSuccess = (takes, chunkNum) => {
 };
 
 export function playTake(takeId) {
-  return (dispatch) => {
-
-    dispatch({
-      type: 'UPDATE_PLAYING_TAKE',
-      takeId,  
-    });
+  return {
+    type: 'UPDATE_PLAYING_TAKE',
+    takeId,
   };
-
 }
+//
+// export const playTake = (takeId) => {
+//   return function(dispatch) {
+//
+//     dispatch(updatePlayingTake(takeId));
+//   };
+// };
+//
+// export const updatePlayingTake = (takeId) => {
+//   return {
+//     type: 'UPDATE_PLAYING_TAKE',
+//     takeId,
+//   };
+// };
 
 export const deleteTake = (takeId,chunkId,chunkNum) => {
   return function(dispatch) {
