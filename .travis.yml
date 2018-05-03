@@ -15,7 +15,6 @@ script:
 - docker-compose -f test-runner.yml run --rm test-runner
 after_script:
 - docker-compose down
-- coveralls
 #notifications:
   #slack:
     #rooms:
