@@ -97,7 +97,7 @@ class KanbanColumn extends React.Component {
       // problem is that the max for ratings is 3. differntiation between 3 star and published is a boolean flag
       case 0:
         return this.onDrop(false, 1, take);
-        
+
       case 1:
 
         return this.onDrop(false, 1, take);
@@ -139,7 +139,7 @@ class KanbanColumn extends React.Component {
 
     const { connectDropTarget, isOver, deleteTake, txt,
       getComments, publishedTake} = this.props;
-    const { saveComment, uploadingComments, activeChunkId, chunkNum, deleteComment } = this.props;
+    const { saveComment, uploadingComments, activeChunkId, chunkNum, deleteComment, playingTakeId, playTake } = this.props;
 
     var icon;
     switch (this.props.icon) {
@@ -196,7 +196,9 @@ class KanbanColumn extends React.Component {
                   deleteComment ={deleteComment}
                   saveComment={saveComment}
                   uploadingComments={uploadingComments}
-                  activeChunkId={activeChunkId} chunkNum={chunkNum}  /> ); /* published take passed down for react dnd */
+                  activeChunkId={activeChunkId} chunkNum={chunkNum}
+                  playingTakeId={playingTakeId}
+                  playTake={playTake}  /> ); /* published take passed down for react dnd */
             }) : ''
 
           }

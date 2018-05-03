@@ -93,7 +93,7 @@ class RecordCommentModal extends Component {
   playPause = () => {
     let icon ='pause';
     if (this.state.playing) {
-      icon='play';
+      icon='play_arrow';
     }
     this.setState({ playing: !this.state.playing, icon });
   };

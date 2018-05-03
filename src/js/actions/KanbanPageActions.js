@@ -28,6 +28,14 @@ export const getTakesSuccess = (takes, chunkNum) => {
   };
 };
 
+export function playTake(takeId) {
+  return {
+    type: 'UPDATE_PLAYING_TAKE',
+    takeId,
+  };
+}
+
+
 export const deleteTake = (takeId,chunkId,chunkNum) => {
   return function(dispatch) {
     return axios

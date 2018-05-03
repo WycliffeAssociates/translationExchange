@@ -35,6 +35,7 @@ export class TakeCard extends React.Component {
     this.finishedPlaying = this.finishedPlaying.bind(this);
     this.dragPosition = this.dragPosition.bind(this);
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    this.trackPos = this.trackPos.bind(this);
 
 
 
@@ -49,6 +50,15 @@ export class TakeCard extends React.Component {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
 
+    if (this.props.id !== this.props.playingTakeId) {
+      this.setState({takePlaying: false});
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.id !== nextProps.playingTakeId) {
+      this.setState({takePlaying: false});
+    }
   }
 
   componentWillUnmount() {
@@ -75,6 +85,8 @@ export class TakeCard extends React.Component {
   }
 
   playTakeFromCard() {
+    const {playTake} = this.props;
+    playTake(this.props.id);
     this.setState(prevState => ({takePlaying: !prevState.takePlaying}));
   }
 

@@ -2,7 +2,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
-import {getTakes, getChunks, patchTake} from '../../../js/actions';
+import {getTakes, getChunks, patchTake, playTake} from '../../../js/actions';
 
 const middlewares = [thunk];
 const mockStore  = configureMockStore(middlewares);
@@ -88,5 +88,15 @@ describe('KanbanPageActions Suite', () => {
       expect(JSON.stringify(store.getActions())).toEqual(JSON.stringify(expectedActions)); // Jest Test “Compared values have no visual difference.” conver to JSON to resolve error
 
     });
+  });
+
+  it('should update the playingTakeId', () => {
+    const takeId = 290;
+    const expectedAction= {
+      type: 'UPDATE_PLAYING_TAKE',
+      takeId,
+    };
+
+    expect(playTake(takeId)).toEqual(expectedAction);
   });
 });
