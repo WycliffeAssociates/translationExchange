@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Pinto18/translationExchange.svg?branch=nd_travis_config)](https://travis-ci.org/Pinto18/translationExchange)
+
 # translationExchange
 Manage and review development project.  Started by the 8WoC 2017 internship team and continued by Wycliffe Associates.
 
