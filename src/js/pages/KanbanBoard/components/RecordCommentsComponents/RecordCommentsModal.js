@@ -54,8 +54,6 @@ class RecordCommentModal extends Component {
     /*stopRecording() is called before onStop. Therefore unless stopRecording() is called icon
       will not = 'play_arrow', so if statement is only true if stopRecording has been clicked by user*/
     const {icon} = this.state;
-    console.log(recordedBlob, 'RECORDED BLOB');
-    console.log(this.state, 'STATE ONSTOP CALL');
     if (recordedBlob !== null && icon === 'play_arrow') {
       this.setState({recordedBlob, isAudioAvailable: true});
       const reader = new FileReader();
