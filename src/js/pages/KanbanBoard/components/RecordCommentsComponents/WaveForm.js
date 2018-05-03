@@ -4,7 +4,7 @@ import timeLine from '../../../../../assets/images/CommentstimeLine.png';
 import styled from 'styled-components';
 import Wave from './Wave';
 
-export default ({recordedBlob, isAudioAvailable, onStop, recording, play, onFinishPlaying, width, height, nonstop, duration}) => {
+export default ({recordedBlob, isAudioAvailable, onStop, record, play, onFinishPlaying, width, height, nonstop, duration}) => {
 
   if (isAudioAvailable) {
     return (
@@ -18,7 +18,7 @@ export default ({recordedBlob, isAudioAvailable, onStop, recording, play, onFini
     <Container>
       <RecordContainer>
         <ReactMicPlus
-          record={recording}
+          record={record}
           className="sound-wave"
           onStop={onStop}
           strokeColor="#009CFF"
