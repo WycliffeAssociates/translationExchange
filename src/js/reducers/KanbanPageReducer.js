@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   publishedTakes: [],
   loading: false,
   playingTakeId: '',
+  takesToDelete: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -47,7 +48,17 @@ export default (state = INITIAL_STATE, action) => {
         playingTakeId: action.takeId,
       };
 
+    case 'ADD_TAKE_TO_DELETE':
+      return {
+        ...state,
+        takesToDelete: [...state.takesToDelete, action.takeId],
+      };
 
+    case 'REMOVE_TAKE_TO_DELETE':
+      return {
+        ...state,
+        takesToDelete: action.takesToDelete,
+      };
 
     default: return state;
   }

@@ -163,3 +163,22 @@ export function patchTakeSuccess(updatedTakes) {
     updatedTakes: updatedTakes,
   };
 }
+
+export function addTakeToDelete(takeId) {
+  return {
+    type: 'ADD_TAKE_TO_DELETE',
+    takeId,
+  };
+}
+
+export function removeTakeToDelete(takeId, takesToDelete) {
+  for (var i=0; i<takesToDelete.length; i++) {
+    if (takesToDelete[i] === takeId) {
+      takesToDelete.splice(i,1);
+    }
+  }
+  return {
+    type: 'REMOVE_TAKE_TO_DELETE',
+    takesToDelete,
+  };
+}
