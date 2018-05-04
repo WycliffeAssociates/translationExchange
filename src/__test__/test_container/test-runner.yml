@@ -11,7 +11,7 @@ services:
       - "${PROJ_DIR}:/translationExchange"
       - ./scripts:/scripts
     command: bash -c "chmod +x /scripts/run-tests.sh
-                      && /scripts/run-tests.sh"
+                      && chmod +x /scripts/collect-coverage.sh
+                      && /scripts/run-tests.sh
+                      && /scripts/collect-coverage.sh"
     network_mode: "host"
-
-#&& cat src/__test__/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"

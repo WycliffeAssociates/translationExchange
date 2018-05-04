@@ -5,7 +5,6 @@ services:
 env:
   global:
     - "PROJ_DIR=${TRAVIS_BUILD_DIR}"
-    - "COVERAGE_INFO=${PROJ_DIR}/src/__test__/coverage/lcov.info"
 git:
   depth: 1
 before_install:
@@ -24,8 +23,6 @@ script:
 after_script:
 - echo "*************Cleaning Up Environment*********************"
 - docker-compose down
-- echo "********Collecting And Sending Coverage Information******"
-- "cat ${COVERAGE_INFO} | ./node_modules/coveralls/bin/coveralls.js"
 #notifications:
   #slack:
     #rooms:
