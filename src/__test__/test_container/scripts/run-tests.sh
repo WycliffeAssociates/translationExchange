@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 #This script is for running the tests for the environment defined in test-runner.yml
 #The environment variables used in this script are defined test-runner.env
