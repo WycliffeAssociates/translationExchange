@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/Pinto18/translationExchange.svg?branch=nd_travis_config)](https://travis-ci.org/Pinto18/translationExchange)
-[![Coverage Status](https://coveralls.io/repos/github/Pinto18/translationExchange/badge.svg?branch=)](https://coveralls.io/github/Pinto18/translationExchange?branch=)
+[![Coveralls github](https://img.shields.io/coveralls/github/Pinto18/bdge.svg)](https://coveralls.io/github/Pinto18/translationExchange)
+
 
 
 # translationExchange
