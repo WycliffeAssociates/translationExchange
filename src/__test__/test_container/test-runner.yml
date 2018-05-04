@@ -4,16 +4,16 @@ services:
     image: node
     container_name: te_front_end_tests
     env_file:
-      - test-runner.env
+      - ./test-runner.env
     environment:
       - COVERALLS_REPO_TOKEN
     volumes:
       - "${PROJ_DIR}:${PROJ_DIR}"
       - ./scripts:/scripts
-    command: bash -c "cd ${PROJ_DIR} 
+    command: bash -c "cd $${PROJ_DIR} 
                       && npm install
-                      && rm ${AUDIO_LIB}
-                      && cp ${AUDIO_SCRIPT} ${AUDIO_LIB}
+                      && rm $${AUDIO_LIB}
+                      && cp $${AUDIO_SCRIPT} $${AUDIO_LIB}
                       && npm run test:ci --silent" 
     network_mode: "host"
 
