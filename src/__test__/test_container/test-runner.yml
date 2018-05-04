@@ -11,6 +11,7 @@ services:
       - "${PROJ_DIR}:${PROJ_DIR}"
       - ./scripts:/scripts
     command: bash -c "cd ${PROJ_DIR} 
+                      && echo ${AUDIO_LIB}
                       && npm install
                       && rm ${AUDIO_LIB}
                       && cp ${AUDIO_SCRIPT} ${AUDIO_LIB}
