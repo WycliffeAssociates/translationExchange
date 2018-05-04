@@ -10,11 +10,8 @@ services:
     volumes:
       - "${PROJ_DIR}:${PROJ_DIR}"
       - ./scripts:/scripts
-    command: bash -c "cd $${PROJ_DIR} 
-                      && npm install
-                      && rm $${AUDIO_LIB}
-                      && cp $${AUDIO_SCRIPT} $${AUDIO_LIB}
-                      && npm run test:ci --silent" 
+    command: bash -c "chmod +x /scripts/run-tests.sh
+                      && /scripts/run-tests.sh"
     network_mode: "host"
 
 #&& cat src/__test__/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
