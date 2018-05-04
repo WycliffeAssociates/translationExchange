@@ -5,7 +5,7 @@ services:
 env:
   global:
     - "PROJ_DIR=${TRAVIS_BUILD_DIR}"
-    - COVERAGE_INFO=src/__test__/coverage/lcov.info
+    - "COVERAGE_INFO=${PROJ_DIR}/src/__test__/coverage/lcov.info"
 git:
   depth: 1
 before_install:
