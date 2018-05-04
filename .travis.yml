@@ -3,8 +3,9 @@ services:
 - docker
 #TODO: Verify the PROJ_DIR line works 
 env:
-  - "PROJ_DIR=${TRAVIS_BUILD_DIR}"
-  - COVERAGE_INFO=src/__test__/coverage/lcov.info
+  global:
+    - "PROJ_DIR=${TRAVIS_BUILD_DIR}"
+    - COVERAGE_INFO=src/__test__/coverage/lcov.info
 git:
   depth: 1
 before_install:
