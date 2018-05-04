@@ -11,7 +11,7 @@ install:
 - docker-compose build backend_server
 script:
 - docker-compose up -d
-- docker ps -aq
+- docker ps -a
 - docker-compose -f test-runner.yml run --rm test-runner
 after_script:
 - docker-compose down
