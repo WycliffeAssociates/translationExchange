@@ -3,15 +3,18 @@ services:
   test-runner:
     image: node
     container_name: te_front_end_tests
+    env_file:
+      - test-runner.env
     environment:
       - COVERALLS_REPO_TOKEN
     volumes:
-      - "${WORKSPACE}:/translationExchange"
+      - "${PROJ_DIR}:${PROJ_DIR}"
       - ./scripts:/scripts
-    command: bash -c "cd /translationExchange 
+    command: bash -c "cd ${PROJ_DIR} 
                       && npm install
-                      && rm /translationExchange/node_modules/react-mic-plus/lib/libs/AudioContext.js
-                      && cp /scripts/AudioContext.js /translationExchange/node_modules/react-mic-plus/lib/libs/AudioContext.js
-                      && npm run test:ci --silent 
-                      && cat src/__test__/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+                      && rm ${AUDIO_LIB}
+                      && cp ${AUDIO_SCRIPT} ${AUDIO_LIB}
+                      && npm run test:ci --silent" 
     network_mode: "host"
+
+#&& cat src/__test__/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"

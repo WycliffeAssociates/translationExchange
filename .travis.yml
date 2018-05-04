@@ -1,20 +1,30 @@
 sudo: required
 services:
 - docker
+#TODO: Verify the PROJ_DIR line works 
+env:
+  - "PROJ_DIR=${TRAVIS_BUILD_DIR}"
+  - COVERAGE_INFO=src/__test__/coverage/lcov.info
 git:
   depth: 1
 before_install:
-- chmod +x set-up-travis.sh
+- chmod +x extra-setup.sh
+- source extra-setup.sh
+- env
 install:
-- source set-up-travis.sh
 - cd src/__test__/test_container
 - docker-compose build backend_server
 script:
+- echo "***********Bringing Up Dependent Containers**************"
 - docker-compose up -d
 - docker ps -a
+- echo "*******Running Tests Inside a Docker Container***********"
 - docker-compose -f test-runner.yml run --rm test-runner
 after_script:
+- echo "*************Cleaning Up Environment*********************"
 - docker-compose down
+- echo "********Collecting And Sending Coverage Information******"
+- "cat ${COVERAGE_INFO} | ./node_modules/coveralls/bin/coveralls.js"
 #notifications:
   #slack:
     #rooms:
