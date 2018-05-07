@@ -11,25 +11,13 @@ env:
 git:
   depth: 1
 before_install:
-- chmod +x extra-setup.sh
-- source extra-setup.sh
 - env
-install:
-- cd src/__test__/test_container
-- docker-compose build backend_server
 addons:
   sonarcloud:
     organization: pinto18-github
 script:
-- echo "***********Bringing Up Dependent Containers**************"
-- docker-compose up -d
-- docker ps -a
-- echo "*******Running Tests Inside a Docker Container***********"
-- docker-compose -f test-runner.yml run --rm test-runner
 - sonar-scanner
 after_script:
-- echo "*************Cleaning Up Environment*********************"
-- docker-compose down
 cache:
   directories:
     - $HOME/.m2/repository
