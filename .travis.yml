@@ -8,8 +8,6 @@ env:
     - "PROJ_DIR=${TRAVIS_BUILD_DIR}"
 git:
   depth: 1
-before_install:
-- env
 addons:
   sonarcloud:
     organization: pinto18-github
