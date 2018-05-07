@@ -20,8 +20,6 @@ class Welcome extends React.Component {
       this.props.updateLanguage(storedLanguage);
     }
 
-    Object.values(Languages).map((lng, ind) => { debugger;})
-
   }
 
   onSelect({key}) {
