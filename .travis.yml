@@ -1,10 +1,8 @@
 sudo: required
 language: node_js
-nodee_js:
+node_js:
   - "iojs"
   - "7"
-services:
-- docker
 env:
   global:
     - "PROJ_DIR=${TRAVIS_BUILD_DIR}"
