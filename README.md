@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/Pinto18/translationExchange.svg?branch=nd_travis_config)](https://travis-ci.org/Pinto18/translationExchange)
-[![Coveralls github](https://img.shields.io/coveralls/github/Pinto18/bdge.svg)](https://coveralls.io/github/Pinto18/translationExchange)
+[![SonarQube Coverage](https://img.shields.io/sonar/http/sonar.petalslink.com/org.ow2.petals%3Apetals-se-ase/coverage.svg)](https://sonarcloud.io/dashboard?id=translationexchange)
+
+
 
 
 
