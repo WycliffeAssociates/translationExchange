@@ -12,6 +12,5 @@ services:
       - ./scripts:/scripts
     command: bash -c "chmod +x /scripts/run-tests.sh
                       && chmod +x /scripts/collect-coverage.sh
-                      && /scripts/run-tests.sh
-                      && /scripts/collect-coverage.sh"
+                      && /scripts/run-tests.sh"
     network_mode: "host"
