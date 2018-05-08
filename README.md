@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/Pinto18/translationExchange.svg?branch=nd_travis_config)](https://travis-ci.org/Pinto18/translationExchange)
-[![Coveralls github](https://img.shields.io/coveralls/github/Pinto18/bdge.svg)](https://coveralls.io/github/Pinto18/translationExchange)
+https://sonarcloud.io/api/project_badges/measure?project=translationexchange&metric=coverage
 
 
 
