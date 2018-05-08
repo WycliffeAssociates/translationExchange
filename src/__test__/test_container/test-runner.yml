@@ -1,0 +1,17 @@
+version: '2'
+services:
+  test-runner:
+    image: node
+    container_name: te_front_end_tests
+    env_file:
+      - ./test-runner.env
+    environment:
+      - COVERALLS_REPO_TOKEN
+    volumes:
+      - "${PROJ_DIR}:/translationExchange"
+      - ./scripts:/scripts
+    command: bash -c "chmod +x /scripts/run-tests.sh
+                      && chmod +x /scripts/collect-coverage.sh
+                      && /scripts/run-tests.sh
+                      && /scripts/collect-coverage.sh"
+    network_mode: "host"

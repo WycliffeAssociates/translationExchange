@@ -1,44 +1,53 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+    local('MaterialIcons-Regular'),
+    url('./assets/iconfont/MaterialIcons-Regular.woff2') format('woff2'),
+    url('./assets/iconfont/MaterialIcons-Regular.woff') format('woff'),
+    url('./assets/iconfont/MaterialIcons-Regular.ttf') format('truetype');
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 150px;
-  color: white;
+.pageBackground {
+   / *background: ##00c6ff; /* fallback for old browsers */* /
+   background: -webkit-linear-gradient(to right, #00c6ff, #00C5FF); /* Chrome 10-25, Safari 5.1-6 */
+   background: linear-gradient(to right, #0076FF, #00C5FF); /* W3C */
+   background-image: url('./assets/images/background-pattern.png'), linear-gradient(to bottom right, #0076FF , #00C5FF );
+   /* background-repeat: space; */
+   position:fixed;
+   padding:3vw;
+   margin:0;
+   top:0;
+   left:0;
+   width: 100%;
+   height: 100%;
+   overflow-y: scroll;
+
 }
-
-.App-main {
-  position: relative;
-  left: 240px;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-.App-footer {
-    position: fixed;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    background-color: #222;
-    height: 50px;
-    color: white;
-    font-size: small;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-
-
-
