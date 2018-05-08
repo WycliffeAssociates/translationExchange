@@ -36,14 +36,10 @@ export class TakeCard extends React.Component {
     this.dragPosition = this.dragPosition.bind(this);
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.trackPos = this.trackPos.bind(this);
-
-
-
   }
 
 
   componentDidMount() {
-    jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'no author info');
     this.props.connectDragPreview(getEmptyImage(), {
       captureDraggingState: true,
     });
@@ -53,23 +49,26 @@ export class TakeCard extends React.Component {
     if (this.props.id !== this.props.playingTakeId) {
       this.setState({takePlaying: false});
     }
+
+    if (this.props.onDeleteQueue === true) {
+      console.log(this.props, 'componentDidMount [rp[s]]')
+      ConfirmToast(this.props);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.id !== nextProps.playingTakeId) {
       this.setState({takePlaying: false});
     }
-    console.log(this.props.id, nextProps.takesToDelete, 'SDFHDSJKAFHSDJKFHDSJKF');
-    if (this.props.takesToDelete !== nextProps.takesToDelete && nextProps.takesToDelete.includes(this.props.id)) {
-      ConfirmToast(nextProps);
-    }
   }
 
-  // componentDidUpdate() {
-  //   if (this.props.takesToDelete.includes(this.props.id)) {
-  //     ConfirmToast(this.props);
-  //   }
-  // }
+  componentDidUpdate(nextProps) {
+    console.log(this.props.takesToDelete, 'props dot takes to delete');
+    if (this.props.onDeleteQueue === true && this.props.takesToDelete!==[]) {
+      console.log(nextProps.takesToDelete, 'component did update props');
+      //setTimeout(() => ConfirmToast(nextProps), 1000);
+    }
+  }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);
@@ -136,11 +135,11 @@ export class TakeCard extends React.Component {
     const {pos} = this.state;
     markers = this.callMarker();
 
-    const {connectDragSource , isDragging} = this.props;
+    const {connectDragSource , isDragging, onDeleteQueue} = this.props;
 
 
     return  connectDragSource( //only native element nodes can now be passed to React DnD connectors
-      <div style={{opacity: isDragging? 0.5: 1}} >
+      <div style={{opacity: isDragging? 0.5: 1, display: onDeleteQueue? 'none': ''}} >
         <TopBar {...this.props} />
 
         <MarkerContainer>
@@ -221,7 +220,8 @@ function showUndoToast(props, Undo) {
   });
 }
 
-const ConfirmToast = (props) => {
+function ConfirmToast(props) {
+  console.log(props, 'CONFRIM TOAST PROPS');
   toast(<ConfirmDelete props={props} />, {
     position: toast.POSITION.BOTTOM_CENTER,
     className: 'black-background',
@@ -229,15 +229,15 @@ const ConfirmToast = (props) => {
     closeOnClick: false,
     onClose: () => {
       if (undo === true) {
-        props.removeTakeToDelete(props.id, props.takesToDelete);
+        setTimeout(() => props.removeTakeToDelete(props.id, props.takesToDelete), 500);
       }
     },
   });
-};
-
-const update = (props) => toast.update(ConfirmToast, {
-  render: <UndoToast props={props} />,
-});
+}
+//
+// const update = (props) => toast.update(ConfirmToast, {
+//   render: <UndoToast props={props} />,
+// });
 
 const ConfirmDelete = ({closeToast,props }) => (
   <div style= {{textAlign: 'center'}}>
