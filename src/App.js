@@ -13,6 +13,7 @@ import CreateUserContainer from './js/pages/user/components/CreateUserContainer'
 import { DragDropContext } from 'react-dnd';
 import KanbanPage from './js/pages/KanbanBoard/KanbanPage';
 import TaskProgressPage from './js/pages/tasks/TaskProgressPage';
+import ExportPage from './js/pages/export/ExportPage';
 import CustomDragLayer from './CustomDragLayer';
 import ChapterPage from './js/pages/chapters/ChaptersPage';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
@@ -60,6 +61,7 @@ class App extends Component {
           <Route  path="/chapters" component={ChapterPage} />
           <Route path ="/progress" component={TaskProgressPage} />
           <Route path ="/kanban" component={KanbanPage} />
+          <Route path ="/export" component={ExportPage} />
           <Route path ="/errorPage" component={ErrorPage} />
           <Route path="*" component={NotFound} />
         </Switch>
