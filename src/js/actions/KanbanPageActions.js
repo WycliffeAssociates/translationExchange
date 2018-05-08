@@ -172,11 +172,15 @@ export function addTakeToDelete(takeId) {
 }
 
 export function removeTakeToDelete(takeId, takesToDelete) {
+  console.log(takesToDelete, takeId, 'takes to delete and take id')
   for (var i=0; i<takesToDelete.length; i++) {
     if (takesToDelete[i] === takeId) {
+      console.log('found');
       takesToDelete.splice(i,1);
+      break;
     }
   }
+  console.log(takesToDelete, 'TAKES TO DELETE');
   return {
     type: 'REMOVE_TAKE_TO_DELETE',
     takesToDelete,

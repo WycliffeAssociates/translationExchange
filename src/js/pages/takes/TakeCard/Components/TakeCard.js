@@ -59,7 +59,17 @@ export class TakeCard extends React.Component {
     if (this.props.id !== nextProps.playingTakeId) {
       this.setState({takePlaying: false});
     }
+    console.log(this.props.id, nextProps.takesToDelete, 'SDFHDSJKAFHSDJKFHDSJKF');
+    if (this.props.takesToDelete !== nextProps.takesToDelete && nextProps.takesToDelete.includes(this.props.id)) {
+      ConfirmToast(nextProps);
+    }
   }
+
+  // componentDidUpdate() {
+  //   if (this.props.takesToDelete.includes(this.props.id)) {
+  //     ConfirmToast(this.props);
+  //   }
+  // }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);
@@ -68,8 +78,6 @@ export class TakeCard extends React.Component {
   updateWindowDimensions() {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
-
-
 
   dragPosition(position) {
     this.setState({pos: position, takePlaying: true});
@@ -213,6 +221,24 @@ function showUndoToast(props, Undo) {
   });
 }
 
+const ConfirmToast = (props) => {
+  toast(<ConfirmDelete props={props} />, {
+    position: toast.POSITION.BOTTOM_CENTER,
+    className: 'black-background',
+    autoClose: 10000,
+    closeOnClick: false,
+    onClose: () => {
+      if (undo === true) {
+        props.removeTakeToDelete(props.id, props.takesToDelete);
+      }
+    },
+  });
+};
+
+const update = (props) => toast.update(ConfirmToast, {
+  render: <UndoToast props={props} />,
+});
+
 const ConfirmDelete = ({closeToast,props }) => (
   <div style= {{textAlign: 'center'}}>
     <p> {props.txt.deleteTake} </p>
@@ -304,17 +330,7 @@ const takeSource = {
       else if (dropResult.listId === 'DELETE_TAKE') //CHECK DELETE TARGET
       {
         props.addTakeToDelete(props.id);
-        toast(<ConfirmDelete props={props} />, {
-          position: toast.POSITION.BOTTOM_CENTER,
-          className: 'black-background',
-          autoClose: 10000,
-          closeOnClick: false,
-          onClose: () => {
-            if (undo === true) {
-              props.removeTakeToDelete(props.id, props.takesToDelete);
-            }
-          },
-        });
+        //ConfirmToast(props);
       }
       else // DEFAULT MOVE TAKE
       {
