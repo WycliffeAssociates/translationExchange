@@ -8,7 +8,7 @@ import img from '../../../assets/images/background-pattern.png';
 import Menu, { Item as MenuItem } from 'rc-menu';
 import Dropdown from 'rc-dropdown';
 import 'rc-dropdown/assets/index.css';
-import Languages from '../../../languages/availableLanguages.json';
+import Languages from '../../../languages/textToDisplay.json';
 
 
 class Welcome extends React.Component {
@@ -33,7 +33,7 @@ class Welcome extends React.Component {
   render() {
     const menu = (
       <Menu onSelect={ ky=> this.onSelect(ky)}>
-        {Languages.map(lng => <MenuItem style={{cursor:'pointer', color:'#fff', backgroundColor:'#000' }} key={lng}> {lng} </MenuItem> )}
+        {Object.keys(Languages).map(lng => <MenuItem style={{cursor:'pointer', color:'#fff', backgroundColor:'#000' }} key={lng}> {lng} </MenuItem> )}
       </Menu>
     );
 

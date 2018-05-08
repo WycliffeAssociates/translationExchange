@@ -8,7 +8,7 @@ import KanbanBoard from './components/KanbanBoard';
 import {getChunks, getTakes,deleteTake, getComments,
   patchTake, saveComment, getUserHash,
   removeUser, getChapters, resetError,
-  updateLanguage, deleteComment} from '../../actions';
+  updateLanguage, deleteComment, playTake} from '../../actions';
 import UtilityPanel from './components/UtilityPanel/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
@@ -113,12 +113,12 @@ const SourceAudio = styled.div`
 const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({getChunks, getTakes,deleteTake,
-    getComments, patchTake, saveComment, getUserHash, removeUser, getChapters, resetError, updateLanguage, deleteComment }, dispatch);
+    getComments, patchTake, saveComment, getUserHash, removeUser, getChapters, resetError, updateLanguage, deleteComment,playTake }, dispatch);
 
 };
 
 const mapStateToProps = state => {
-  const {takes, chunks, chunkNum, activeChunkId} = state.kanbanPage;
+  const {takes, chunks, chunkNum, activeChunkId, playingTakeId} = state.kanbanPage;
   const {chapterComments, chunkComments, uploadingComments,  uploadError} = state.comments;
   const {chapters} = state.Chapters;
   const {loggedInUser} = state.user;
@@ -127,7 +127,7 @@ const mapStateToProps = state => {
 
 
   return {takes, chunks, loggedInUser, chunkNum, chapterComments, chunkComments,
-    txt, activeChunkId, uploadingComments, uploadError, chapters};
+    txt, activeChunkId, uploadingComments, uploadError, chapters, playingTakeId};
 
   // all the state variables that you want to map to props
 };

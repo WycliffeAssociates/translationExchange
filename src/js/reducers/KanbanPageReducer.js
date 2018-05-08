@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   activeChunkId: 1,
   publishedTakes: [],
   loading: false,
+  playingTakeId: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -38,6 +39,12 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         takes: action.updatedTakes.slice(),
         loading: false,
+      };
+
+    case 'UPDATE_PLAYING_TAKE':
+      return {
+        ...state,
+        playingTakeId: action.takeId,
       };
 
 
