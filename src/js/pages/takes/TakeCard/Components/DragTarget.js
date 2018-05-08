@@ -42,6 +42,7 @@ const DragIcon = styled.button`
   color: gray;
   background: none;
   cursor: pointer;
+  margin-top: 0.8vw;
 
 `;
 

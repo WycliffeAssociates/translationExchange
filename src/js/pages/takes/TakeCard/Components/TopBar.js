@@ -38,14 +38,6 @@ const TopBar = styled.div`
 
 `;
 
-const DragIcon = styled.button`
-  border: none;
-  font-size: 1.5vw;
-  color: gray;
-  background: none;
-  cursor: pointer;
-
-`;
 
 const CardInfo = styled.div`
   margin-top: 0.8vw;
