@@ -10,12 +10,11 @@ git:
 addons:
   sonarcloud:
     organization: pinto18-github
-    token:
-      secure: $SONAR_TOKEN
+    token: "${SONAR_TOKEN}"
 script:
 - sonar-scanner
 after_script:
-cache:
+  cache::
   directories:
     - $HOME/.m2/repository
     - $HOME/.sonar/cache
