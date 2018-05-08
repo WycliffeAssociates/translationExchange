@@ -15,7 +15,7 @@ addons:
     token: "${SONAR_TOKEN}"
 before_install:
   - chmod +x extra-setup.sh
-  -source extra-setup.sh
+  - source extra-setup.sh
   -env
 install:
   - cd src/__test__/test_container
