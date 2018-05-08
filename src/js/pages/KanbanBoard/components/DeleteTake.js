@@ -31,9 +31,9 @@ const styles = {
     bottom: '10vh',
     right: '15.5vw',
     zIndex: '101',
-    width: '18.5vw',
-    height: '21.5vw',
-    background: 'rgba(0,0,0,0.5)',
+    width: '20.5vw',
+    height: '15.5vw',
+
   },
 
 };
@@ -41,7 +41,7 @@ const styles = {
 const DeleteContainer = styled.div`
   margin: auto;
   text-align: center;
-  padding: 8vw 12vw;
+  padding: 8vw 9vw;
   `;
 
 const DeleteTarget = styled.button`
