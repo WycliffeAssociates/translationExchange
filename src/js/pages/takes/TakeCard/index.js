@@ -17,6 +17,7 @@ export default class index extends React.Component {
       pos: 0,
       width: 0,
       height: 0,
+      onDeleteQueue: false,
     };
 
     this.expandComments = this.expandComments.bind(this);
@@ -24,7 +25,22 @@ export default class index extends React.Component {
   }
 
   componentDidMount() {
-    jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'no author info');
+    jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'ffff');
+    const {takesToDelete, id} = this.props;
+    if (takesToDelete.includes(id)) {
+      this.setState({ onDeleteQueue: true});
+    }
+  }
+
+  componentDidUpdate() {
+    const {takesToDelete, id} = this.props;
+    const {onDeleteQueue} = this.state;
+    if (takesToDelete.includes(id) && onDeleteQueue === false ) {
+      this.setState({ onDeleteQueue: true});
+    }
+    if (!takesToDelete.includes(id) && onDeleteQueue === true) {
+      this.setState({onDeleteQueue: false});
+    }
   }
 
   expandComments() {
@@ -32,19 +48,13 @@ export default class index extends React.Component {
   }
 
   render() {
-    const {takesToDelete, id} = this.props;
-    let onDeleteQueue = false;
-
-    if (takesToDelete.includes(id)) {
-      onDeleteQueue = true;
-    }
-
+    const {onDeleteQueue} = this.state;
     return  (
       <div>
         {
-          onDeleteQueue? '':
+          onDeleteQueue? <TakeCardTop {...this.props} onDeleteQueue={onDeleteQueue} />:
             <Container>
-              <TakeCardTop {...this.props} expandComments={this.expandComments} />
+              <TakeCardTop {...this.props} expandComments={this.expandComments} onDeleteQueue = {onDeleteQueue} />
 
               {this.state.showComments? <Comments  {...this.props} /> : '' }
             </Container>
