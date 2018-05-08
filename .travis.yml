@@ -10,6 +10,8 @@ git:
 addons:
   sonarcloud:
     organization: pinto18-github
+    token:
+      secure: $SONAR_TOKEN
 script:
 - sonar-scanner
 after_script:
