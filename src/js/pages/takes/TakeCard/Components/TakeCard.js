@@ -52,7 +52,7 @@ export class TakeCard extends React.Component {
 
     if (this.props.onDeleteQueue === true) {
       console.log(this.props, 'componentDidMount [rp[s]]')
-      ConfirmToast(this.props);
+      //ConfirmToast(this.props);
     }
   }
 
@@ -63,7 +63,6 @@ export class TakeCard extends React.Component {
   }
 
   componentDidUpdate(nextProps) {
-    console.log(this.props.takesToDelete, 'props dot takes to delete');
     if (this.props.onDeleteQueue === true && this.props.takesToDelete!==[]) {
       console.log(nextProps.takesToDelete, 'component did update props');
       //setTimeout(() => ConfirmToast(nextProps), 1000);
@@ -330,6 +329,7 @@ const takeSource = {
       else if (dropResult.listId === 'DELETE_TAKE') //CHECK DELETE TARGET
       {
         props.addTakeToDelete(props.id);
+        setTimeout(() => props.removeTakeToDelete(props.id, props.takesToDelete), 3000);
         //ConfirmToast(props);
       }
       else // DEFAULT MOVE TAKE
