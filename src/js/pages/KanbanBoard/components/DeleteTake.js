@@ -29,29 +29,35 @@ const styles = {
   container: {
     position: 'fixed',
     bottom: '10vh',
-    right: '25vw',
+    right: '15.5vw',
     zIndex: '101',
-    width: '10%',
-    height: '10%',
+    width: '20.5vw',
+    height: '15.5vw',
+
   },
 
 };
 
 const DeleteContainer = styled.div`
   margin: auto;
+  text-align: center;
+  margin-left: 9vw;
+  margin-top: 7vw;
+  padding: 0vw 0vw;
+  `;
+
+const DeleteTarget = styled.button`
+  color: white;
+  border: none;
   height: ${props => props.isOver? '100px': '75px'};
   width: ${props => props.isOver? '100px': '75px'};
   border-radius: ${props => props.isOver? '50px': '40px'};
   background: ${props => props.isOver? 'linear-gradient(to top, #820C00, #E74C3C)': 'linear-gradient(to top, #0076FF , #00C5FF )'};
-`;
-
-const DeleteTarget = styled.div`
-  color: white;
   text-align: center;
-  padding-top: ${props => props.isOver? '25px': '15px'};
   i{
     font-size: 36px;
   }
+  box-shadow: 2px 4px 6px rgba(0,0,0,0.5);
 `;
 
 

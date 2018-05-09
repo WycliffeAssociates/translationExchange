@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import DragSource from './DragTarget';
 export default class TakeCardTopIcon extends React.Component {
 
   constructor(props) {
@@ -12,9 +12,8 @@ export default class TakeCardTopIcon extends React.Component {
 
     return  (
       <TopBar>
-        <DragIcon>
-          <i className = "material-icons">menu</i>
-        </DragIcon>
+
+        <DragSource {...this.props} />
 
         <CardInfo>
           <h3 style={{alignSelf: 'center'}}> {this.props.txt.take} {this.props.take_num} </h3>
@@ -39,14 +38,6 @@ const TopBar = styled.div`
 
 `;
 
-const DragIcon = styled.button`
-  border: none;
-  font-size: 1.5vw;
-  color: gray;
-  background: none;
-  cursor: pointer;
-
-`;
 
 const CardInfo = styled.div`
   margin-top: 0.8vw;
