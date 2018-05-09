@@ -11,7 +11,6 @@ export const getTakes = (chunkId, chunkNum) => {  // chunkNum comes from the Nav
           headers: { Authorization: 'Token ' + localStorage.getItem('token') },
         })
       .then(response => {
-        console.log(response.data, 'RESPONSE');
         if (response.data === undefined || response.data.length === 0) {
           dispatch(noTakesForChunk(chunkId,chunkNum));
         }
