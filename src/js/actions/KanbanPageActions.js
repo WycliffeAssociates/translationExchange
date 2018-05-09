@@ -11,7 +11,11 @@ export const getTakes = (chunkId, chunkNum) => {  // chunkNum comes from the Nav
           headers: { Authorization: 'Token ' + localStorage.getItem('token') },
         })
       .then(response => {
-        dispatch(getTakesSuccess(response.data, chunkNum));
+        console.log(response.data, 'RESPONSE');
+        if (response.data === undefined || response.data.length === 0) {
+          dispatch(noTakesForChunk(chunkId,chunkNum));
+        }
+        else dispatch(getTakesSuccess(response.data, chunkNum));
       })
       .catch(error => {
         console.log(error);
@@ -25,6 +29,15 @@ export const getTakesSuccess = (takes, chunkNum) => {
     takes,
     chunkNum,
     activeChunkId: takes[0].chunk,
+  };
+};
+
+export const noTakesForChunk = (chunkId, chunkNum) => {
+  return {
+    type: 'NO_TAKES_FOR_CHUNK',
+    takes: [],
+    chunkNum,
+    activeChunkId: chunkId,
   };
 };
 
