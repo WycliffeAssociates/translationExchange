@@ -15,6 +15,7 @@ export class ExportPage extends Component {
     super(props);
     this.state= {checked: null,
       readyToExport: false,
+      downloading: false
     }
   }
 
@@ -26,6 +27,8 @@ export class ExportPage extends Component {
 
   nextStep = () => { this.setState({readyToExport: true});}
 
+  downloading = () => { this.setState({downloading: true});}
+
   goBack =() => {
     this.setState({readyToExport: false});
     this.props.resetSelected();
@@ -33,30 +36,35 @@ export class ExportPage extends Component {
   }
 
   render() {
-    const { checked, readyToExport } = this.state;
+    const { checked, readyToExport, downloading } = this.state;
     const { chaptersSelected, chapters, numbersSelected } = this.props;
 
     return (
       <ExportPageContainer>
         <NavBar chapterPage={true} kanban={false} {...this.props} />
-        <HeaderContainer>
-          <p>Export Project:</p>
-          <h1>Genesis</h1>
-        </HeaderContainer>
+        {downloading ? ''
+          :
+          <HeaderContainer>
+            <p>Export Project:</p>
+            <h1>Genesis</h1>
+          </HeaderContainer>
+        }
         {readyToExport ? '': <CompletedCheckbox toggleCheck = {this.toggleCheck} checked={checked} /> }
 
         {this.props.loading?
           <Loading txt={this.props.txt} height= "80vh" marginTop="2vw" />
           :
-          <CardsContainer center={readyToExport}>
-            {readyToExport ? numbersSelected.map(num => <ChapterSelected number={num} txt={{selected: 'selected'}} />)
-              :
-              chapters ? chapters.map(chp => <ExportCard {...this.props} {...chp} />): ''
-            }
-          </CardsContainer>
+          downloading ? ''
+            :
+            <CardsContainer center={readyToExport}>
+              {readyToExport ? numbersSelected.map(num => <ChapterSelected number={num} txt={{selected: 'selected'}} />)
+                :
+                chapters ? chapters.map(chp => <ExportCard {...this.props} {...chp} />): ''
+              }
+            </CardsContainer>
         }
 
-        {readyToExport ? <ExportProject goBack={this.goBack} /> : chaptersSelected? chaptersSelected.length > 0 ? <Footer nextStep={this.nextStep} /> : '' : ''}
+        {readyToExport ? <ExportProject goBack={this.goBack} downloading={this.downloading} /> : chaptersSelected? chaptersSelected.length > 0 ? <Footer nextStep={this.nextStep} /> : '' : ''}
 
 
       </ExportPageContainer>

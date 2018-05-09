@@ -11,18 +11,39 @@ import styled from 'styled-components';
 
 export class ExportProject extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state ={ downloading: false, type: null };
+    this.download = this.download.bind(this);
+  }
+
+  download(type) {
+    this.setState({downloading: true, type});
+    this.props.downloading();
+  }
+
+
   render() {
-    const { goBack } = this.props;
+    const { goBack} = this.props;
+
 
     return (
       <ExportProjectContainer>
-        <Button color={'#009CFF'} height={'40px'} width={'214px'} iconSize={'24px'} onClick={goBack}> <i class="material-icons"> keyboard_backspace</i> go Back </Button>
+        <Button color={'#009CFF'} height={'40px'} width={'214px'} iconSize={'24px'} border={'2px'} radius={'4px'} onClick={goBack}>
+          <i class="material-icons"> keyboard_backspace</i> go Back
+        </Button>
         <ButtonsContainer>
-          <SingleButtonContainer>
-            <Button color={'#E56060'} height={'200px'} width={'214px'} iconSize={'148px'} > <i class="material-icons"> remove_from_queue</i> </Button>
+          <SingleButtonContainer color={'#E56060'} >
+            <Button onClick={()=> this.download('wav')} color={'#E56060'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} >
+              <i class="material-icons"> remove_from_queue</i>
+            </Button>
+            <p>Editing (.WAV)</p>
           </SingleButtonContainer>
-          <SingleButtonContainer>
-            <Button color={'#009CFF'} height={'200px'} width={'214px'} iconSize={'148px'} > <i class="material-icons"> volume_up</i> </Button>
+          <SingleButtonContainer color={'#009CFF'}>
+            <Button onClick={()=> this.download('mp3')} color={'#009CFF'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} >
+              <i class="material-icons"> volume_up</i>
+            </Button>
+            <p>Listening (.mp3)</p>
           </SingleButtonContainer>
         </ButtonsContainer>
       </ExportProjectContainer>
@@ -36,7 +57,6 @@ const ExportProjectContainer = styled.div`
   display: flex;
   align-items:center;
   flex-direction: column;
-
 `;
 
 const Button = styled.button`
@@ -45,8 +65,8 @@ const Button = styled.button`
   justify-content:center;
   text-align: center;
   color:${props => props.color};
-  border-radius: 3px;
-  border: 2px solid black;
+  border-radius: ${props => props.radius};
+  border: ${props => props.border} solid black;
   background-color: transparent;
   border-color: ${props => props.color};
   height:${props => props.height};
@@ -73,7 +93,9 @@ const ButtonsContainer = styled.div`
 `;
 
 const SingleButtonContainer = styled.div`
-  margin: 40px 40px 40px 40px;
+  margin: 70px 40px 40px 40px;
+  color: ${props => props.color}
+  text-align: center;
 `;
 
 
