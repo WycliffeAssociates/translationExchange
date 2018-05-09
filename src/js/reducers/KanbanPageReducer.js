@@ -47,6 +47,15 @@ export default (state = INITIAL_STATE, action) => {
         playingTakeId: action.takeId,
       };
 
+    case 'NO_TAKES_FOR_CHUNK':
+      return {
+        ...state,
+        takes: action.takes,
+        chunkNum: action.chunkNum,
+        activeChunkId: action.activeChunkId,
+        loading: false,
+      };
+
 
 
     default: return state;
