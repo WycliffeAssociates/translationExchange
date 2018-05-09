@@ -1,20 +1,16 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 
 
-class Footer extends Component {
+export const Footer = ({nextStep}) => {
+  return (
+    <Container onClick={nextStep}>
+      <Button> <i class="material-icons">touch_app</i> Next </Button>
+    </Container>
+  );
 
-  render() {
-
-
-    return (
-      <Container>
-        <Button> <i class="material-icons">touch_app</i> Next </Button>
-      </Container>
-    );
-  }
-}
+};
 
 
 const Button = styled.button`

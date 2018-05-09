@@ -3,13 +3,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
-import {selections, getChapters, getUserHash, selectedNumbers} from '../../actions';
-import ExportCard from './components/ExportCard';
-import Footer from './components/Footer';
+import {selections, getChapters, getUserHash, resetSelected} from '../../actions';
+import {ExportCard, CompletedCheckbox, Footer, ChapterSelected, ExportProject} from './components';
 import styled from 'styled-components';
-import 'css/takes.css';
-
-
 
 
 
@@ -17,20 +13,28 @@ export class ExportPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state= {checked: null}
+    this.state= {checked: null,
+      readyToExport: false,
+    }
   }
 
   componentWillMount() {
     this.props.getChapters(1);
   }
 
-  toggleCheck = () => {
-    this.setState({checked: !this.state.checked});
+  toggleCheck = () => { this.setState({checked: !this.state.checked});}
+
+  nextStep = () => { this.setState({readyToExport: true});}
+
+  goBack =() => {
+    this.setState({readyToExport: false});
+    this.props.resetSelected();
+
   }
 
   render() {
-    const { checked } = this.state;
-    const { chaptersSelected, selections } = this.props;
+    const { checked, readyToExport } = this.state;
+    const { chaptersSelected, chapters, numbersSelected } = this.props;
 
     return (
       <ExportPageContainer>
@@ -39,43 +43,20 @@ export class ExportPage extends Component {
           <p>Export Project:</p>
           <h1>Genesis</h1>
         </HeaderContainer>
-        <ButtonContainer>
-          <CompletedButton checked={checked}>
-            <CheckBox checked={checked} onClick={this.toggleCheck}>
-              {checked ? <i class="material-icons">done</i> : ''}
-              <input id="checkBox" type="checkbox" checked={checked}  />
-            </CheckBox>
-            completed
-            <i class="material-icons">done</i>
-          </CompletedButton>
-        </ButtonContainer>
+        {readyToExport ? '': <CompletedCheckbox toggleCheck = {this.toggleCheck} checked={checked} /> }
 
         {this.props.loading?
-          <Loading txt={this.props.txt} height= "80vh" marginTop="5vw" />
+          <Loading txt={this.props.txt} height= "80vh" marginTop="2vw" />
           :
-
-          <CardsContainer>
-            {/* { chapters ? chapters.map(chp => <ExportCard {...chp} />): ''} */}
-            <ExportCard number={1} id ={1} {...this.props}  completedSelected={checked} published={true} />
-            <ExportCard number={2}  id ={2} {...this.props}   completedSelected={checked} published={false} />
-            <ExportCard number={3}  id ={3} {...this.props}   completedSelected={checked} published={true} />
-            <ExportCard number={4}  id ={4} {...this.props}   completedSelected={checked} published={true} />
-            <ExportCard number={5}  id ={5} {...this.props}  completedSelected={checked} published={false} />
-            <ExportCard number={6}  id ={6} {...this.props}  completedSelected={checked} published={true} />
-            <ExportCard number={7}  id ={7} {...this.props}   completedSelected={checked} published={false} />
-            <ExportCard number={8}  id ={8} {...this.props}   completedSelected={checked} published={true} />
-            <ExportCard number={9}  id ={9} {...this.props}   completedSelected={checked} published={true} />
-            <ExportCard number={10}  id ={10} {...this.props}  completedSelected={checked} published={false} />
-            <ExportCard number={11}  id ={11} {...this.props}  completedSelected={checked} published={true} />
-
-
-
+          <CardsContainer center={readyToExport}>
+            {readyToExport ? numbersSelected.map(num => <ChapterSelected number={num} txt={{selected: 'selected'}} />)
+              :
+              chapters ? chapters.map(chp => <ExportCard {...this.props} {...chp} />): ''
+            }
           </CardsContainer>
-
-
         }
 
-        {chaptersSelected? chaptersSelected.length > 0 ? <Footer /> : '' : ''}
+        {readyToExport ? <ExportProject goBack={this.goBack} /> : chaptersSelected? chaptersSelected.length > 0 ? <Footer nextStep={this.nextStep} /> : '' : ''}
 
 
       </ExportPageContainer>
@@ -101,10 +82,6 @@ const ExportPageContainer = styled.div`
 `;
 
 
-const ButtonContainer = styled.div`
-
-`;
-
 const CardsContainer = styled.div`
     height:100%;
     width: 97%;
@@ -112,6 +89,7 @@ const CardsContainer = styled.div`
     background: #FFF;
     align-self: center;
     display: flex;
+    justify-content: ${props => props.center ? 'center': ''}
 `;
 CardsContainer.displayName = 'CardsContainer';
 
@@ -130,82 +108,41 @@ const HeaderContainer = styled.div`
 `;
 
 
-const DownloadBar = styled.div`
-  width: 100vw;
-  height: auto;
-  background:#2D2D2D;
-  position: absolute;
-  top: 11vh;
-  display: flex;
-  padding: 0.5vh;
-  flex-direction: column;
-  z-index: 99;
-
-`;
-DownloadBar.displayName = 'DownloadBar';
-
-
-const CompletedButton = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #FFF;
-  box-shadow: 0px 3px 6px rgba(0,0,0,0.2);
-  text-align: center;
-  height: 60px;
-  width: 214px;
-  border-radius: 1px;
-  overflow: hidden;
-  margin: 20px 20px 20px 35px;
-  font-size: 16px;
-  `;
+const mockup = (
+<div>
+  <ExportCard number={1} id ={1} {...this.props}  completedSelected={true} published={true} />
+  <ExportCard number={2}  id ={2} {...this.props}   completedSelected={true} published={false} />
+  <ExportCard number={3}  id ={3} {...this.props}   completedSelected={true} published={true} />
+  <ExportCard number={4}  id ={4} {...this.props}   completedSelected={true} published={true} />
+  <ExportCard number={5}  id ={5} {...this.props}  completedSelected={true} published={false} />
+  <ExportCard number={6}  id ={6} {...this.props}  completedSelected={true} published={true} />
+  <ExportCard number={7}  id ={7} {...this.props}   completedSelected={true} published={false} />
+  <ExportCard number={8}  id ={8} {...this.props}   completedSelected={true} published={true} />
+  <ExportCard number={9}  id ={9} {...this.props}   completedSelected={true} published={true} />
+  <ExportCard number={10}  id ={10} {...this.props}  completedSelected={true} published={false} />
+  <ExportCard number={11}  id ={11} {...this.props}  completedSelected={true} published={true} /> -->
+  </div>
+);
 
 
-const CheckBox = styled.span`
-   display: inline-block;
-   position: relative;
-   top: 3px;
-   width: 18px;
-   height: 18px;
-   margin: -1px 0px 0 0;
-   vertical-align: middle;
-   background: ${props => props.checked ? '#43B52F' :'#FFF' };
-   border:${props => props.checked ? '2px solid #43B52F' :'2px solid #707070' };
-   cursor: pointer;
-   border-radius: 3px;
-
-    input{
-      display:none;
-    }
-
-    i{
-      font-size: 18px;
-      position: absolute;
-      left:-2px;
-      top: -2px;
-      color: ${props => props.checked ? '#FFF' :'#EEEEEE' };
-    }
-
-  `;
 
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({ getChapters, selections, getUserHash, selectedNumbers}, dispatch);
+  return bindActionCreators({ getChapters, selections, getUserHash, resetSelected}, dispatch);
 
 };
 
 const mapStateToProps = state => {
 
   const {chapters, loading} =state.Chapters;
-  const { chaptersSelected } = state.ExportPage;
+  const { chaptersSelected, numbersSelected } = state.ExportPage;
 
   const {loggedInUser} =state.user;
 
   const {txt} = state.geolocation;
 
-  return {chapters, loggedInUser, loading, txt, chaptersSelected};
+  return {chapters, loggedInUser, loading, txt, chaptersSelected, numbersSelected};
 };
 
 

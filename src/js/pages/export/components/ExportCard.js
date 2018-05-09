@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 
 
-class ExportCard extends Component {
+export class ExportCard extends Component {
   constructor(props) {
     super(props);
     this.state = { checked: false};
@@ -11,20 +11,18 @@ class ExportCard extends Component {
 
   componentWillReceiveProps(nextProps) {
 
-    if ( nextProps.completedSelected !== this.props.completedSelected) {
+    if ( nextProps.completedSelected !== this.props.completedSelected) { //check if the state of the button select completed changed
 
-      if (nextProps.completedSelected && nextProps.published) {
+      if (nextProps.completedSelected && nextProps.published) {                // button selected and the chapter is published, mark them as selected
         this.setState({checked: true});
-        if (!this.state.checked) {             // to avoid adding them twice
-          nextProps.selections(nextProps.id, true);
-          nextProps.selectedNumbers(nextProps.number, true);
+        if (!this.state.checked) {             // to avoid adding them twice when they already selected
+          nextProps.selections(nextProps.id, nextProps.number, true);         // send id and number to save them into an array, true is used for saved, false for remove
         }
       }
-      if (!nextProps.completedSelected && nextProps.published) {
+      if (!nextProps.completedSelected && nextProps.published) {   // once we check the checkbox
         this.setState({checked: false});
+        nextProps.selections(nextProps.id, nextProps.number, false);
 
-        nextProps.selections(nextProps.id, false);
-        nextProps.selectedNumbers(nextProps.number, false)
       }
 
     }
@@ -35,14 +33,13 @@ class ExportCard extends Component {
   toggleCheck = () => {
     const {selections, id, selectedNumbers , number} = this.props;
     const {checked} = this.state;
-    selections(id, !checked);
-    selectedNumbers(number, !checked)
+    selections(id, number, !checked);
     this.setState({checked: !checked})
 
   };
 
   render() {
-    const {published} = this.props;
+    const {published, number} = this.props;
     const { checked } = this.state;
     let icon = 'chrome_reader_mode';
     if (published) {
@@ -58,7 +55,7 @@ class ExportCard extends Component {
         </CheckBox>
         <IconContainer>
           <i class="material-icons">{icon}</i>
-          <p>01</p>
+          <p>{number}</p>
         </IconContainer>
       </Card>
     );
@@ -130,6 +127,3 @@ const CheckBox = styled.span`
   }
 
 `;
-
-
-export default ExportCard;
