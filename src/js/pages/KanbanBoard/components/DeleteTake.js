@@ -41,7 +41,9 @@ const styles = {
 const DeleteContainer = styled.div`
   margin: auto;
   text-align: center;
-  padding: 8vw 9vw;
+  margin-left: 9vw;
+  margin-top: 7vw;
+  padding: 0vw 0vw;
   `;
 
 const DeleteTarget = styled.button`
