@@ -9,7 +9,7 @@ import {getChunks, getTakes,deleteTake, getComments,
   patchTake, saveComment, getUserHash,
   removeUser, getChapters, resetError,
   updateLanguage, deleteComment, playTake,
-  addTakeToDelete, removeTakeToDelete} from '../../actions';
+  addTakeToDelete, removeTakeToDelete, updateTake} from '../../actions';
 import UtilityPanel from './components/UtilityPanel/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
@@ -52,6 +52,7 @@ class KanbanPage extends React.Component {
   render() {
     const {search} = this.props.location;
     const query = QueryString.parse(search);
+
 
 
     return (
@@ -107,12 +108,12 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({getChunks, getTakes,deleteTake,
     getComments, patchTake, saveComment, getUserHash, removeUser,
     getChapters, resetError, updateLanguage, deleteComment,playTake,
-    addTakeToDelete,removeTakeToDelete}, dispatch);
+    addTakeToDelete,removeTakeToDelete, updateTake}, dispatch);
 
 };
 
 const mapStateToProps = state => {
-  const {takes, chunks, chunkNum, activeChunkId, playingTakeId, takesToDelete} = state.kanbanPage;
+  const {takes, chunks, chunkNum, activeChunkId, playingTakeId, takesToDelete, removedTaketoDelete} = state.kanbanPage;
   const {chapterComments, chunkComments, uploadingComments,  uploadError} = state.comments;
   const {chapters} = state.Chapters;
   const {loggedInUser} = state.user;
@@ -121,7 +122,8 @@ const mapStateToProps = state => {
 
 
   return {takes, chunks, loggedInUser, chunkNum, chapterComments, chunkComments,
-    txt, activeChunkId, uploadingComments, uploadError, chapters, playingTakeId, takesToDelete};
+    txt, activeChunkId, uploadingComments, uploadError, chapters, playingTakeId,
+    takesToDelete, removedTaketoDelete};
 
   // all the state variables that you want to map to props
 };

@@ -33,13 +33,17 @@ export default class index extends React.Component {
   }
 
   componentDidUpdate() {
-    const {takesToDelete, id} = this.props;
+    const {takesToDelete, id,updateTake, removedTaketoDelete} = this.props;
     const {onDeleteQueue} = this.state;
     if (takesToDelete.includes(id) && onDeleteQueue === false ) {
       this.setState({ onDeleteQueue: true});
     }
     if (!takesToDelete.includes(id) && onDeleteQueue === true) {
       this.setState({onDeleteQueue: false});
+    }
+
+    if (removedTaketoDelete) {
+      updateTake();
     }
   }
 
