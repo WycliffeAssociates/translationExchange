@@ -65,12 +65,14 @@ export default class WelcomeComponent extends React.Component {
             {txt.continue} <i className="material-icons">arrow_forward </i>
           </ContinueButton>
 
-          <GitHubLogin clientId="f5e981378e91c2067d41"
-            redirectUri={config.redirectUri}
-            onSuccess={data=>this.onLogin(data)}
-            onFailure={this.onLoginFailure}
-            buttonText={txt.githubSignIn}
-          />
+          {
+          //<GitHubLogin clientId="f5e981378e91c2067d41"
+          //   redirectUri={config.redirectUri}
+          //   onSuccess={data=>this.onLogin(data)}
+          //   onFailure={this.onLoginFailure}
+          //   buttonText={txt.githubSignIn}
+          // />
+          }
 
         </ButtonsContainer>
 

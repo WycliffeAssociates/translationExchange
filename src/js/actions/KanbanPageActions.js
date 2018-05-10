@@ -56,7 +56,6 @@ export const deleteTake = (takeId,chunkId,chunkNum) => {
           headers: {Authorization: 'Token' + localStorage.getItem('token')},
         })
       .then(response => {
-        console.log(response);
         if (response) {
           dispatch(getTakes(chunkId, chunkNum)); }
       })
@@ -96,7 +95,7 @@ export const getChunks = (chapterId, redirect, chapterNav) => {
         else { //any other reload of kanban page
           dispatch(getChunksSuccess(response.data, kanbanState.activeChunkId));
           dispatch(getTakes(kanbanState.activeChunkId, kanbanState.chunkNum));
-          dispatch(getComments(kanbanState.activeChunkId,'chunk_id')); 
+          dispatch(getComments(kanbanState.activeChunkId,'chunk_id'));
         }
       })
       .catch(error => {
@@ -184,5 +183,33 @@ export function patchTakeSuccess(updatedTakes) {
   return {
     type: 'PATCH_TAKE_SUCCESS',
     updatedTakes: updatedTakes,
+  };
+}
+
+export function addTakeToDelete(takeId) {
+  return {
+    type: 'ADD_TAKE_TO_DELETE',
+    takeId,
+  };
+}
+
+export function removeTakeToDelete(takeId, takesToDelete) {
+  for (var i=0; i<takesToDelete.length; i++) {
+    if (takesToDelete[i] === takeId) {
+      takesToDelete.splice(i,1);
+      break;
+    }
+  }
+
+  return {
+    type: 'REMOVE_TAKE_TO_DELETE',
+    takesToDelete,
+  };
+
+}
+
+export function updateTake() {
+  return {
+    type: 'UPDATE_TAKE',
   };
 }
