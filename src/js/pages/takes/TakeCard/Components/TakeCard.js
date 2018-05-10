@@ -37,8 +37,6 @@ export default class TakeCard extends React.Component {
 
 
   componentDidMount() {
-    jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'no author info');
-
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
 

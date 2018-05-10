@@ -24,7 +24,7 @@ export default class index extends React.Component {
   }
 
   componentDidMount() {
-    jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'no author info');
+    jdenticon.update('#user',this.props.owner_icon_hash? this.props.owner_icon_hash: 'null user');
   }
 
   expandComments() {

@@ -32,7 +32,7 @@ export default class TakeCardCommentRow extends React.Component {
 
   componentDidMount() {
     const {comment} = this.props;
-    jdenticon.update(`#CommentUser${comment.id}`, comment.owner_icon_hash);
+    jdenticon.update(`#CommentUser${comment.id}`, comment.owner_icon_hash? comment.owner_icon_hash: 'null user');
 
   }
 
