@@ -11,14 +11,45 @@ export class DragTarget extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      confirmDelete: false,
+    };
+    this.changeConfirmation = this.changeConfirmation.bind(this);
+  }
+
+  changeConfirmation() {
+    this.setState(prevState => ({confirmDelete: !prevState.confirmDelete}));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    toast.update(this.toastID,{
+      render: <ConfirmDelete props={nextProps} changeConfirmation={this.changeConfirmation} />,
+    });
   }
 
   componentDidMount() {
     this.props.connectDragPreview(getEmptyImage(), {
       captureDraggingState: true,
     });
-  }
+    if (this.props.onDeleteQueue==true && this.props.takesToDelete.length !==0) {
+      this.toastID = toast(<ConfirmDelete props={this.props} changeConfirmation={this.changeConfirmation} />, {
+        position: toast.POSITION.BOTTOM_CENTER,
+        className: 'black-background',
+        autoClose: false,
+        closeOnClick: false,
+        onClose: () => {
+          if (this.state.confirmDelete === true) {
+            //
+          }
 
+          else {
+            this.props.removeTakeToDelete(this.props.id, this.props.takesToDelete);
+          }
+        },
+      });
+    }
+  }
 
   render() {
 
@@ -45,6 +76,17 @@ const DragIcon = styled.button`
   margin-top: 0.8vw;
 
 `;
+const ConfirmDelete = ({closeToast,props,changeConfirmation }) => (
+  <div style= {{textAlign: 'center'}}>
+    <p> {props.txt.deleteTake} : {props.id}</p>
+    <ButtonContainer>
+      <Confirm onClick={() => (showUndoToast(props), changeConfirmation(), closeToast())}>
+        {props.txt.confirm}  <i className="material-icons">done_all</i>
+      </Confirm>
+      <Undo onClick={closeToast}> {props.txt.undo}<i className="material-icons">undo</i> </Undo>
+    </ButtonContainer>
+  </div>
+);
 
 let undo= false;
 
@@ -72,26 +114,17 @@ function showUndoToast(props) {
     onClose: () => {
       if (undo === true) {
         //do not delete the take
+        props.removeTakeToDelete(props.id, props.takesToDelete);
       }
       else if (undo === false) {
         props.deleteTake(props.id, props.activeChunkId, props.chunkNum);
+        props.removeTakeToDelete(props.id, props.takesToDelete);
       }
     },
 
   });
 }
 
-const ConfirmDelete = ({closeToast,props }) => (
-  <div style= {{textAlign: 'center'}}>
-    <p> {props.txt.deleteTake} </p>
-    <ButtonContainer>
-      <Confirm onClick={() => (showUndoToast(props), closeToast())}>
-        {props.txt.confirm} <i className="material-icons">done_all</i>
-      </Confirm>
-      <Undo onClick={closeToast}> {props.txt.undo}<i className="material-icons">undo</i> </Undo>
-    </ButtonContainer>
-  </div>
-);
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -172,12 +205,7 @@ const takeSource = {
 
       else if (dropResult.listId === 'DELETE_TAKE') //CHECK DELETE TARGET
       {
-        toast(<ConfirmDelete props={props} />, {
-          position: toast.POSITION.BOTTOM_CENTER,
-          className: 'black-background',
-          autoClose: 10000,
-          closeOnClick: false,
-        });
+        props.addTakeToDelete(props.id);
       }
       else // DEFAULT MOVE TAKE
       {
