@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default class GotoProjectsButton extends React.Component {
+export default class GotoProjectButton extends React.Component {
 
   constructor(props) {
     super(props);
@@ -11,11 +11,15 @@ export default class GotoProjectsButton extends React.Component {
 
     const {history, txt}= this.props;
 
+    const url = '/chapters?projectId=' + this.props.task.details.project_id + 
+      '&bookName=' + this.props.task.details.book_name +
+      '&mode=' + this.props.task.details.mode;
+
     return (
 
-      <Button onClick={()=> history.push('/projects')}>
-        <span style={{verticalAlign: "middle"}}>{txt.goToProjects}</span>
-        <i style={{verticalAlign: "middle", marginLeft: "0.4vw"}} className="material-icons">book</i>
+      <Button onClick={()=> history.push(url)}>
+        <span style={{verticalAlign: "middle"}}>Select</span>
+        <i style={{verticalAlign: "middle", marginLeft: "0.4vw"}} className="material-icons">touch_app</i>
       </Button>
 
     );
@@ -27,13 +31,13 @@ const Button = styled.div`
   cursor: pointer;
   width: 20vw;
   height: 2.5vw;
-  background: linear-gradient(#00b8ff, #2757ff);
+  background: #00c43d;
   border-radius: 0.3vw;
-  margin: 2vw auto;
   color: white;
   text-align: center;
   font-size: 1vw;
   font-weight: bold;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;

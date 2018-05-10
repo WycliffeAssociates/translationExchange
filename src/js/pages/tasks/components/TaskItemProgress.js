@@ -7,9 +7,9 @@ import update from 'immutability-helper';
 import TaskInfoTop from './TaskInfoTop';
 import TaskProgressBar from './TaskProgressBar';
 
-import img from '../../../../assets/images/obs-en-01-01-sm.jpg';
+import img from '../../../../assets/images/sample.jpg';
 
-class TaskItem extends React.Component {
+class TaskItemProgress extends React.Component {
 
   constructor(props) {
     super(props);
@@ -19,13 +19,13 @@ class TaskItem extends React.Component {
 
     return (
       <TaskDetails>
-        <Img>
-          <img style={{width: "100%"}} src={img} />
-        </Img>
+        <Picture>
+          <Img src={img}></Img>
+        </Picture>
         
         <RightColumn>
           <TaskInfoTop {...this.props}></TaskInfoTop>
-          <TaskProgressBar task={this.props.task}></TaskProgressBar>
+          <TaskProgressBar task={this.props.task} />
         </RightColumn>
       </TaskDetails>
     );
@@ -34,38 +34,40 @@ class TaskItem extends React.Component {
 }
 
 const TaskDetails = styled.div`
-  background: white;
-  margin: 0.9vw 0;
-  border-radius: 0.4vw;
   overflow: hidden;
-  box-shadow: 0 0 0.6vw 0.1vw #888888;
   display: flex;
   flex-direction: row;
   flex: 0 0 auto;
-  height: 6.5vw;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 1vw;
+  padding-top: 1vw;
+  justify-content: center;
 `;
 
-const Img = styled.div`
+const Picture = styled.div`
   display: flex;
   flex: 1;
+  position: relative;
+  justify-content: center;
+  align-items: center;
 `;
 
-const Failed = styled.div`
-  background-color: #e74c3c;
-  text-align: center;
-  color: white;
-  font-size: 1vw;
-  font-weight: bold;
-  width: 100%;
-  padding-top: 0.5vw;
+const Img = styled.img`
+  width: 100%; 
+  height: 100%; 
+  border-radius: 0.3vw;
 `;
 
 const RightColumn = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 0.5vw;
+  margin-left: 1vw;
   flex: 6;
-  padding-right: 0.5vw; 
+  border-radius: 1vw;
+  // text-align: center;
+  justify-content: space-between;
+  // align-items: center;
 `;
 
-export default TaskItem;
+
+export default TaskItemProgress;

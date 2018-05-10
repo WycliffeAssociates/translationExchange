@@ -15,9 +15,16 @@ class TaskInfoTop extends React.Component {
 
   render() {
     
+    const date = new Date(this.props.task.started);
+
     return (
       <Container>
         <TaskTitle {...this.props}></TaskTitle>
+        <DateTime>
+          <i className="material-icons" style={{marginRight: "0.4vw", color: "#9c79cf"}}>schedule</i>
+          <span style={{fontWeight: "bold", marginRight: "0.4vw"}}>{date.toLocaleDateString()} </span> 
+          <span>{date.toLocaleTimeString()}</span>
+        </DateTime>
         <TaskIdenticon task={this.props.task}></TaskIdenticon>
       </Container>
     );
@@ -27,10 +34,18 @@ class TaskInfoTop extends React.Component {
 
 const Container = styled.div`
   width: 100%;
-  height: 4.4vw;
   display: flex;
   flex-direction: row;
   align-items: stretch;
+  flex: 1;
+`;
+
+const DateTime = styled.div`
+  flex: 3;
+  text-align: left;
+  align-items: center;
+  display: flex;
+  font-size: 1vw;
 `;
 
 export default TaskInfoTop;

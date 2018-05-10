@@ -27,30 +27,39 @@ class TaskIdenticon extends React.Component {
     this.setState({playing: false});
   }
 
+  componentDidMount() {
+    jdenticon.update('#user' + this.props.task.id.slice(0, 8), this.props.task.details.user_icon_hash? 
+      this.props.task.details.user_icon_hash: 'no author info');
+  }
+
   render() {
 
     const { task } = this.props;
 
     return (
-      <div style={{height: "3vw", width: "3vw"}}>
-        <Identicon onClick={()=>this.play()} id="user" data-jdenticon-value={task.details.owner ? task.details.owner.icon_hash: 'foobar'} />
+      <Container>
+        <Identicon onClick={()=>this.play()} id={"user" + task.id.slice(0, 8)} 
+          data-jdenticon-hash={task.details.user_icon_hash ? task.details.user_icon_hash: 'foobar'} />
         <ReactPlayer 
-          // url={'http://localhost/media/dump/name_audios/c0261faa.mp3'} 
-          url={`${config.streamingUrl}${task.details.owner ? task.details.owner.name_audio : ''}`}
+          url={`${config.streamingUrl}${task.details.user_name_audio ? task.details.user_name_audio : ''}`}
           playing={this.state.playing} 
-          onEnded={()=> this.ended()}  />
-      </div>
+          onEnded={()=> this.ended()}
+          style={{display: "none"}} />
+      </Container>
     );
   }
 
 }
 
-const Identicon = styled.svg`
-  height: 3vw;
-  width: 3w;
-  margin: 0.5vw 0.5vw 0 0;
-  cursor: pointer;
-  flex: 1;
+const Container = styled.div`
+  flex: 0.5;
 `;
+
+const Identicon = styled.svg`
+  height: 4vw;
+  width: 4vw;
+  cursor: pointer;
+`;
+
 
 export default TaskIdenticon;

@@ -21,8 +21,8 @@ class TaskTitle extends React.Component {
     
     return (
       <Container>
-        <LanguageTitle>{lang_name} ({lang_slug})</LanguageTitle>
-        <BookTitle>{book_name}</BookTitle>
+        <BookTitle>{book_name != "--"? book_name: "Unknown"}</BookTitle>
+        <LanguageTitle>{lang_name != "--"? lang_name + " (" + lang_slug.toUpperCase() + ")": "Unknown"}</LanguageTitle>
       </Container>
     );
   }
@@ -32,7 +32,7 @@ class TaskTitle extends React.Component {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 2;
 `;
 
 const LanguageTitle = styled.div`
