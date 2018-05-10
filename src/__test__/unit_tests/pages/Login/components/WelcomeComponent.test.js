@@ -25,7 +25,7 @@ describe('welcome component suite', function() {
 
   });
 
-  it('should find the handleClick function', function() {
+  it.skip('should find the handleClick function', function() {
     const button = wrapper.find('GitHubLogin');
     button.simulate('click');
     // expect(wrapper.instance().props.history.length).toEqual(2);
