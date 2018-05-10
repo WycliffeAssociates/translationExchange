@@ -15,6 +15,7 @@ export class DragTarget extends React.Component {
     this.state = {
       confirmDelete: false,
     };
+    //this function is used to determine if the user has clicked the confrim button on the toast
     this.changeConfirmation = this.changeConfirmation.bind(this);
   }
 
@@ -23,6 +24,9 @@ export class DragTarget extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    /*update the toasts so that all open toast dialogs
+    have the latest array of takesToDelete
+    */
     toast.update(this.toastID,{
       render: <ConfirmDelete props={nextProps} changeConfirmation={this.changeConfirmation} />,
     });
@@ -40,7 +44,7 @@ export class DragTarget extends React.Component {
         closeOnClick: false,
         onClose: () => {
           if (this.state.confirmDelete === true) {
-            //
+            //if user confirms delete do nothing and open undoToast (open undo is in onClick in ConfirmDelete)
           }
 
           else {
@@ -90,6 +94,7 @@ const ConfirmDelete = ({closeToast,props,changeConfirmation }) => (
 
 let undo= false;
 
+// the undo toast
 const UndoToast = ({closeToast, props}) => {
 
   function handleClick() {
