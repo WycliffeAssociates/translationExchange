@@ -1,14 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import DragSource from './DragTarget';
+import jdenticon from 'jdenticon';
 export default class TakeCardTopIcon extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
+  componentDidMount() {
+    const {owner_icon_hash} = this.props;
+    jdenticon.update(`#user${owner_icon_hash}`,owner_icon_hash? owner_icon_hash: 'null user');
+  }
 
   render() {
+    const {owner_icon_hash} = this.props;
 
     return  (
       <TopBar>
@@ -20,7 +26,7 @@ export default class TakeCardTopIcon extends React.Component {
           <p style={{color: 'lightgray', fontStyle: 'italic', fontWeight: '100', marginTop: '-0.8vw'}}> 03/13/17 </p>
         </CardInfo>
 
-        <Icon  id="user" data-jdenticon-value={this.props.owner_icon_hash? this.props.owner_icon_hash: 'null user'} />
+        <Icon  id={`user${owner_icon_hash}`} data-jdenticon-value={owner_icon_hash? owner_icon_hash: 'null user'} />
       </TopBar>
 
     );

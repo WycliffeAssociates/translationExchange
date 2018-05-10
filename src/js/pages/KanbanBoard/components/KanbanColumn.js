@@ -138,8 +138,13 @@ class KanbanColumn extends React.Component {
     var chapterId = query.chapterId;
 
     const { connectDropTarget, isOver, deleteTake, txt,
-      getComments, publishedTake} = this.props;
-    const { saveComment, uploadingComments, activeChunkId, chunkNum, deleteComment, playingTakeId, playTake } = this.props;
+      getComments, publishedTake, saveComment,
+      uploadingComments, activeChunkId, chunkNum,
+      deleteComment, playingTakeId,
+      playTake, takesToDelete,
+      addTakeToDelete, removeTakeToDelete, removedTaketoDelete,
+      updateTake} = this.props;
+
 
     var icon;
     switch (this.props.icon) {
@@ -198,7 +203,12 @@ class KanbanColumn extends React.Component {
                   uploadingComments={uploadingComments}
                   activeChunkId={activeChunkId} chunkNum={chunkNum}
                   playingTakeId={playingTakeId}
-                  playTake={playTake}  /> ); /* published take passed down for react dnd */
+                  playTake={playTake}
+                  takesToDelete={takesToDelete}
+                  addTakeToDelete={addTakeToDelete}
+                  removeTakeToDelete={removeTakeToDelete}
+                  removedTaketoDelete={removedTaketoDelete}
+                  updateTake={updateTake} /> ); /* published take passed down for react dnd */
             }) : ''
 
           }

@@ -37,7 +37,7 @@ class AvailableUsers extends React.Component {
 
             :
 
-            <Grid columns={16} >
+            <Grid columns={16} style={{marginLeft: '7.5vw'}}>
 
               <Grid.Column width ={3}>
                 <NewUserCard {...this.props} />
