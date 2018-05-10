@@ -187,33 +187,29 @@ export function patchTakeSuccess(updatedTakes) {
 }
 
 export function addTakeToDelete(takeId) {
-  return (dispatch) => {
-    dispatch({
-      type: 'ADD_TAKE_TO_DELETE',
-      takeId,
-    });
+  return {
+    type: 'ADD_TAKE_TO_DELETE',
+    takeId,
   };
 }
 
 export function removeTakeToDelete(takeId, takesToDelete) {
-  return (dispatch) => {
-    for (var i=0; i<takesToDelete.length; i++) {
-      if (takesToDelete[i] === takeId) {
-        takesToDelete.splice(i,1);
-        break;
-      }
+  for (var i=0; i<takesToDelete.length; i++) {
+    if (takesToDelete[i] === takeId) {
+      takesToDelete.splice(i,1);
+      break;
     }
-    dispatch ({
-      type: 'REMOVE_TAKE_TO_DELETE',
-      takesToDelete,
-    });
+  }
+
+  return {
+    type: 'REMOVE_TAKE_TO_DELETE',
+    takesToDelete,
   };
+
 }
 
 export function updateTake() {
-  return (dispatch) => {
-    dispatch({
-      type: 'UPDATE_TAKE',
-    });
+  return {
+    type: 'UPDATE_TAKE',
   };
 }
