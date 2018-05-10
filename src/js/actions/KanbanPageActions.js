@@ -11,7 +11,10 @@ export const getTakes = (chunkId, chunkNum) => {  // chunkNum comes from the Nav
           headers: { Authorization: 'Token ' + localStorage.getItem('token') },
         })
       .then(response => {
-        dispatch(getTakesSuccess(response.data, chunkNum));
+        if (response.data === undefined || response.data.length === 0) {
+          dispatch(noTakesForChunk(chunkId,chunkNum));
+        }
+        else dispatch(getTakesSuccess(response.data, chunkNum));
       })
       .catch(error => {
         console.log(error);
@@ -25,6 +28,15 @@ export const getTakesSuccess = (takes, chunkNum) => {
     takes,
     chunkNum,
     activeChunkId: takes[0].chunk,
+  };
+};
+
+export const noTakesForChunk = (chunkId, chunkNum) => {
+  return {
+    type: 'NO_TAKES_FOR_CHUNK',
+    takes: [],
+    chunkNum,
+    activeChunkId: chunkId,
   };
 };
 
@@ -44,7 +56,6 @@ export const deleteTake = (takeId,chunkId,chunkNum) => {
           headers: {Authorization: 'Token' + localStorage.getItem('token')},
         })
       .then(response => {
-        console.log(response);
         if (response) {
           dispatch(getTakes(chunkId, chunkNum)); }
       })
@@ -62,7 +73,7 @@ export const deleteTakeSuccess = (res) => {
   }
 }
 
-export const getChunks = (chapterId, redirect) => {
+export const getChunks = (chapterId, redirect, chapterNav) => {
   return dispatch => {
     dispatch({type: 'LOADING'});
     return axios
@@ -72,9 +83,20 @@ export const getChunks = (chapterId, redirect) => {
         })
       .then(response => {
         const chunkId = response.data[0].id; //get the chunk id from the first chunk in the array of chunks
-        dispatch(getChunksSuccess(response.data, chunkId));
-        dispatch(getTakes(chunkId, 1)); // get the takes from the first chunk and set chunkNum to 1
-        dispatch(getComments(chunkId,'chunk_id')); // get comments for the first chunk
+        const kanbanState = JSON.parse(localStorage.getItem('te:KanbanPage'));
+
+        if (chapterNav) { //navigation from chapter card to kanban
+          dispatch(getChunksSuccess(response.data, chunkId));
+          dispatch(getTakes(chunkId, 1)); // get the takes from the first chunk and set chunkNum to 1
+          dispatch(getComments(chunkId,'chunk_id')); // get comments for the first chunk
+
+        }
+
+        else { //any other reload of kanban page
+          dispatch(getChunksSuccess(response.data, kanbanState.activeChunkId));
+          dispatch(getTakes(kanbanState.activeChunkId, kanbanState.chunkNum));
+          dispatch(getComments(kanbanState.activeChunkId,'chunk_id'));
+        }
       })
       .catch(error => {
         console.log(error);
@@ -175,18 +197,23 @@ export function addTakeToDelete(takeId) {
 
 export function removeTakeToDelete(takeId, takesToDelete) {
   return (dispatch) => {
-    console.log(takesToDelete, takeId, 'takes to delete and take id');
     for (var i=0; i<takesToDelete.length; i++) {
       if (takesToDelete[i] === takeId) {
-        console.log('found');
         takesToDelete.splice(i,1);
         break;
       }
     }
-    console.log(takeId, takesToDelete, 'TAKES TO DELETE');
     dispatch ({
       type: 'REMOVE_TAKE_TO_DELETE',
       takesToDelete,
+    });
+  };
+}
+
+export function updateTake() {
+  return (dispatch) => {
+    dispatch({
+      type: 'UPDATE_TAKE',
     });
   };
 }
