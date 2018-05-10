@@ -22,7 +22,7 @@ class TaskIdenticon extends React.Component {
   play() {
     this.setState({playing: true});
   }
-  
+
   ended() {
     this.setState({playing: false});
   }
@@ -33,11 +33,11 @@ class TaskIdenticon extends React.Component {
 
     return (
       <div style={{height: "3vw", width: "3vw"}}>
-        <Identicon onClick={()=>this.play()} id="user" data-jdenticon-value={task.details.owner ? task.details.owner.icon_hash: 'foobar'} />
-        <ReactPlayer 
-          // url={'http://localhost/media/dump/name_audios/c0261faa.mp3'} 
+        <Identicon onClick={()=>this.play()} id="user" data-jdenticon-hash={task.details.owner ? task.details.owner.icon_hash: 'foobar'} />
+        <ReactPlayer
+          // url={'http://localhost/media/dump/name_audios/c0261faa.mp3'}
           url={`${config.streamingUrl}${task.details.owner ? task.details.owner.name_audio : ''}`}
-          playing={this.state.playing} 
+          playing={this.state.playing}
           onEnded={()=> this.ended()}  />
       </div>
     );

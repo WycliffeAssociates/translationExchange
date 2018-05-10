@@ -25,7 +25,6 @@ export default class index extends React.Component {
   }
 
   componentDidMount() {
-    jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'ffff');
     const {takesToDelete, id} = this.props;
     if (takesToDelete.includes(id)) {
       this.setState({ onDeleteQueue: true});
