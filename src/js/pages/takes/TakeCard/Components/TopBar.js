@@ -26,7 +26,7 @@ export default class TakeCardTopIcon extends React.Component {
           <p style={{color: 'lightgray', fontStyle: 'italic', fontWeight: '100', marginTop: '-0.8vw'}}> 03/13/17 </p>
         </CardInfo>
 
-        <Icon  id={`user${owner_icon_hash}`} data-jdenticon-value={owner_icon_hash? owner_icon_hash: 'null user'} />
+        <Icon  id={`user${owner_icon_hash}`} data-jdenticon-hash={owner_icon_hash? owner_icon_hash: 'null user'} />
       </TopBar>
 
     );
