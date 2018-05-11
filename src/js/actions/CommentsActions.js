@@ -72,6 +72,8 @@ export const saveComment = (blobx, type, id, chunkId, chunkNum,projectId, callba
           }
           else {
             dispatch(updateChapterComments(response.data));
+            dispatch({type: 'SAVE_COMMENT_DONE', uploadingComments: false});
+            callback();
           }
         }
 

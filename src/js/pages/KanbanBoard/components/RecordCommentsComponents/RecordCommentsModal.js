@@ -85,11 +85,11 @@ class RecordCommentModal extends Component {
   saveComment = () => {
     const {id, type, chunkId, chunkNum, chapterPageComment, history} = this.props;
     const {jsonBlob} = this.state;
-    const {search} = this.props.location;   //get data if the user refresh the page
+    const {search} = this.props.location;
     const query = QueryString.parse(search);
     let projectId = query.projectId;
     if (chapterPageComment === true) {
-      this.props.saveComment( jsonBlob, type, id, chunkId, chunkNum, projectId, this.commentSaved, this.error);
+      this.props.saveComment( jsonBlob, type, id, chunkId, chunkNum, projectId, this.commentSaved, this.error, history);
     }
     else {
       this.props.saveComment( jsonBlob, type, id, chunkId, chunkNum, null, this.commentSaved, this.error, history);

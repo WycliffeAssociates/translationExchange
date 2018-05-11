@@ -52,8 +52,10 @@ export default class ChapterCard extends Component {
 
 
       var width = window.innerWidth;
-      width = width-(width*0.1); // takeaway 10% because of padding on parent container
+      width = width-(width*0.2); // takeaway 20% because of padding on parent container
       var numberInRow = (width/200) | 0;
+      //numberInRow =  numberInRow -1;
+      console.log(numberInRow, width);
       this.setState({
         numberInRow: numberInRow,
         width: width,
@@ -165,20 +167,28 @@ i{
   font-size: 32px;
 }
 @media only screen and (max-width: 666px) {
-  margin: auto;
-  margin-top: 5%;
-}
+     margin: auto;
+     margin-top: 5%;
+   }
 @media only screen and (min-width: 667px) {
-  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
-  margin-left: ${props => props.screenWidth*0.125}px;
-}
+   :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+   margin-left: ${props => props.screenWidth*0.125}px;
+ }
+   :nth-child(${props => (props.numberInRow*2)-1}n) {
+   margin-right: ${props =>  props.screenWidth*0.125}px;
+ }
+ }
 
-  :nth-child(${props => (props.numberInRow*2)-1}n) {
-  margin-right: ${props =>  props.screenWidth*0.125}px;
-}
-}
+ @media only screen and (min-width: 950px) {
+   :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+   margin-left: ${props => props.screenWidth*0.15}px;
+   }
 
-@media only screen and (min-width: 950px) {
+ :nth-child(${props => (props.numberInRow*2)-1}n) {
+ margin-right: ${props =>  props.screenWidth*0.15}px;
+ }
+
+@media only screen and (min-width: 1000px) {
   :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
   margin-left: ${props => props.screenWidth*0.1}px;
   }
@@ -197,17 +207,37 @@ margin-right: ${props =>  props.screenWidth*0.05}px;
 }
 }
 
+@media only screen and (min-width: 1386px) {
+:nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+margin-left: ${props => props.screenWidth*0.075}px;
+}
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.075}px;
+}
+}
+
+@media only screen and (min-width: 1466px) {
+:nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+margin-left: ${props => props.screenWidth*0.1}px;
+}
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.1}px;
+}
+}
+
 @media only screen and (min-width: 1482px) {
 :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
-margin-left: ${props => props.screenWidth*0.075}px;
+margin-left: ${props => props.screenWidth*0.1}px;
 }
 
 :nth-child(${props => (props.numberInRow*2)-1}n) {
-margin-right: ${props =>  props.screenWidth*0.075}px;
+margin-right: ${props =>  props.screenWidth*0.1}px;
 }
 }
 
-@media only screen and (min-width: 1556px) {
+@media only screen and (min-width: 1500px) {
 :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
 margin-left: ${props => props.screenWidth*0.05}px;
 }
@@ -217,7 +247,7 @@ margin-right: ${props =>  props.screenWidth*0.05}px;
 }
 }
 
-@media only screen and (min-width: 1728px) {
+@media only screen and (min-width: 1671px) {
 :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
 margin-left: ${props => props.screenWidth*0.075}px;
 }
@@ -227,7 +257,7 @@ margin-right: ${props =>  props.screenWidth*0.075}px;
 }
 }
 
-@media only screen and (min-width: 1778px) {
+@media only screen and (min-width: 1750px) {
 :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
 margin-left: ${props => props.screenWidth*0.05}px;
 }
@@ -237,7 +267,7 @@ margin-right: ${props =>  props.screenWidth*0.05}px;
 }
 }
 
-@media only screen and (min-width: 1976px) {
+@media only screen and (min-width: 1940px) {
 :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
 margin-left: ${props => props.screenWidth*0.075}px;
 }

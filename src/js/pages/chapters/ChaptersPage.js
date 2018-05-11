@@ -73,7 +73,6 @@ export class ChapterPage extends Component {
           :
 
           <CardsContainer>
-            <Toggle onClick={this.handleToggle} viewingComments={this.state.viewingComments} />
             {chapters.map((chp, index) =>
               <ChapterCard key={index} {...chp}
                 {...this.props} viewingComments={this.state.viewingComments}
@@ -82,8 +81,9 @@ export class ChapterPage extends Component {
                 saveComment={saveComment} />)}
 
           </CardsContainer>
-
         }
+        <Toggle onClick={this.handleToggle} viewingComments={this.state.viewingComments} />
+
       </ChapterPageContainer>
     );
   }
@@ -115,7 +115,8 @@ const CardsContainer = styled.div`
     min-height: 850px;
     display: flex;
     flex-wrap: wrap;
-    padding: 5vw 5vw;
+    padding: 10%;
+    padding-top: 2.5%;
     background: #F4F7F9;
     align-self: center;
 `;

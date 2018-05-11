@@ -75,6 +75,7 @@ export default class UtilityPanel extends React.Component {
                 resetError ={resetError}
                 txt={txt}
                 deleteComment={deleteComment}
+                location={this.props.location}
               />
               <Comments
                 saveComment={saveComment}
@@ -87,6 +88,7 @@ export default class UtilityPanel extends React.Component {
                 resetError ={resetError}
                 txt={txt}
                 deleteComment={deleteComment}
+                location={this.props.location}
               />
               {
               // takes.map(tk=>
