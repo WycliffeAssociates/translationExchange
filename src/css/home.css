@@ -1,5 +1,5 @@
 .background {
-    background-color: #3E4453;
+    background-color: #FF5733;
     height: 700px;
 }
 .pageTitle {
@@ -24,6 +24,11 @@
     position: absolute;
     left: 50px;
     top: 150px;
+}
+
+.logoterra {
+  color: '#CC0000',
+  
 }
 
 .redBar {

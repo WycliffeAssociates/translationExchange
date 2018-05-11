@@ -1,0 +1,13 @@
+version: '2'
+services:
+  test-runner:
+    image: node
+    container_name: te_front_end_tests
+    env_file:
+      - test-runner.env
+    volumes:
+      - "${PROJ_DIR}:/translationExchange"
+      - ./scripts:/scripts
+    command: bash -c "chmod +x /scripts/run-tests.sh
+                      && /scripts/run-tests.sh" 
+    network_mode: "host"
