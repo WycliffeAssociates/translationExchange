@@ -32,5 +32,6 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
 `;
+Container.displayName = "Container";
 
 export default TaskInfoLeft;

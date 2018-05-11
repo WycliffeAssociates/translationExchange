@@ -68,6 +68,7 @@ const Container = styled.div`
   justify-content: center;
   padding: 1vw 0;
 `;
+Container.displayName = "Container";
 
 const Title = styled.div`
   // margin-top: 1.5vw;
@@ -76,11 +77,13 @@ const Title = styled.div`
   font-size: 1.3vw;
   flex: 1;
 `;
+Title.displayName = "Title";
 
 const Details = styled.div`
   // margin-top: 2vw;
   font-size: 1vw;
   flex: 2;
 `;
+Details.displayName = "Details";
 
 export default TaskInfo;

@@ -43,6 +43,7 @@ const TaskDetails = styled.div`
   padding-top: 1vw;
   justify-content: center;
 `;
+TaskDetails.displayName = 'TaskDetails';
 
 const Picture = styled.div`
   display: flex;
@@ -51,12 +52,14 @@ const Picture = styled.div`
   justify-content: center;
   align-items: center;
 `;
+Picture.displayName = 'Picture';
 
 const Img = styled.img`
   width: 100%; 
   height: 100%; 
   border-radius: 0.3vw;
 `;
+Img.displayName = 'Img';
 
 const RightColumn = styled.div`
   display: flex;
@@ -68,6 +71,7 @@ const RightColumn = styled.div`
   justify-content: space-between;
   // align-items: center;
 `;
+RightColumn.displayName = 'RightColumn';
 
 
 export default TaskItemProgress;

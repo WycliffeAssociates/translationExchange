@@ -9,7 +9,7 @@ export default class GotoProjectButton extends React.Component {
 
   render() {
 
-    const {history, txt}= this.props;
+    const {history, txt} = this.props;
 
     const url = '/chapters?projectId=' + this.props.task.details.project_id + 
       '&bookName=' + this.props.task.details.book_name +
@@ -43,3 +43,4 @@ const Button = styled.div`
   justify-content: center;
   box-shadow: 0.2vw 0.2vw 0.5vw #888888;
 `;
+Button.displayName = "Button";

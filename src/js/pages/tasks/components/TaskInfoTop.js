@@ -39,6 +39,7 @@ const Container = styled.div`
   align-items: stretch;
   flex: 1;
 `;
+Container.displayName = "Container";
 
 const DateTime = styled.div`
   flex: 3;
@@ -47,5 +48,6 @@ const DateTime = styled.div`
   display: flex;
   font-size: 1vw;
 `;
+DateTime.displayName = "DateTime";
 
 export default TaskInfoTop;

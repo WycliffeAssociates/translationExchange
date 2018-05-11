@@ -55,6 +55,7 @@ const TaskDetails = styled.div`
   padding-top: 1vw;
   justify-content: center;
 `;
+TaskDetails.displayName = 'TaskDetails';
 
 const Picture = styled.div`
   display: flex;
@@ -63,6 +64,7 @@ const Picture = styled.div`
   justify-content: center;
   align-items: center;
 `;
+Picture.displayName = 'Picture';
 
 const Img = styled.img`
   -webkit-filter:brightness(70%);
@@ -73,6 +75,7 @@ const Img = styled.img`
   height: 100%; 
   border-radius: 0.3vw;
 `;
+Img.displayName = 'Img';
 
 const Flag = styled.div`
   color: white;
@@ -85,6 +88,7 @@ const Flag = styled.div`
   justify-content: center;
   align-items: center;
 `;
+Flag.displayName = 'Flag';
 
 const RightColumn = styled.div`
   display: flex;
@@ -94,5 +98,6 @@ const RightColumn = styled.div`
   border-radius: 1vw;
   text-align: center;
 `;
+RightColumn.displayName = 'RightColumn';
 
 export default TaskItemFinished;

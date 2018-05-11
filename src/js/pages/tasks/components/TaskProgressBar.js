@@ -54,5 +54,6 @@ const Container = styled.div`
   align-items: stretch;
   flex: 0.3;
 `;
+Container.displayName = "Container";
 
 export default TaskProgressBar;

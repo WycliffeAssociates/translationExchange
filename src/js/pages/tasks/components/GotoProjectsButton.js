@@ -39,3 +39,4 @@ const Button = styled.div`
   justify-content: center;
   box-shadow: 0.2vw 0.2vw 0.5vw #888888;
 `;
+Button.displayName = "Button";
