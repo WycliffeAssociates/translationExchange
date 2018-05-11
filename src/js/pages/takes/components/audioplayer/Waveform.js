@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import Wavesurfer from 'react-wavesurfer';
-import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {playAudio, stopAudio, updateTime} from '../../../../actions';
 
 
 
@@ -30,18 +27,10 @@ class WaveForm extends Component {
     this.setState({
       pos: e.originalArgs[0],
     });
-
+    this.props.trackPos(e.originalArgs[0]);
   }
 
-
   render() {
-    //let position = this.state.pos;
-
-    if (this.props.markerClicked) {
-
-    //  position = this.props.markerPosition;
-    }
-
     return (
 
       <Wavesurfer

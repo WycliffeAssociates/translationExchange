@@ -14,7 +14,7 @@ export default class ProjectCard extends React.Component {
       const modeCap = mode.charAt(0).toUpperCase() + mode.slice(1);
       history.push({
         pathname: './chapters',
-        search: `?projectId=${projectId}&&bookName=${bookName}&&mode=${modeCap}`
+        search: `?projectId=${projectId}&&bookName=${bookName}&&mode=${modeCap}`,
       });
     };
 
@@ -62,10 +62,10 @@ const zoomInAnimation = keyframes `${zoomIn}`;
 
 const Card= styled.div`
     text-align: center;
-    height: 35vh - 5vw;
-    min-height: 150px;
+    height: 15vw;
+    min-height: 233px;
     width: 26vw;
-    min-width: 300px;
+    min-width: 350px;
     border-radius: .5vw;
     box-shadow: 0px 1px 2px 4px rgba(0,0,0,0.2);
     overflow: hidden;

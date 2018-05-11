@@ -26,7 +26,7 @@ export default class ChapterCard extends Component {
       const {id, getChunks, history, number, getComments, location } = this.props;
       const searchBar = QueryString.parse(location.search);
 
-      getChunks(id, history);     // chapter id
+      getChunks(id, history,true);     // chapter id
       getComments(id, 'chapter_id');
 
       history.push({
