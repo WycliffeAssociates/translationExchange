@@ -3,6 +3,8 @@ import { Modal } from 'semantic-ui-react';
 import styled from 'styled-components';
 import WaveForm from './WaveForm';
 import CommentUploading from './CommentUploading';
+import QueryString from 'query-string';
+
 
 class RecordCommentModal extends Component {
 
@@ -81,9 +83,17 @@ class RecordCommentModal extends Component {
   onFinishPlaying() { this.setState({icon: 'play_arrow', playing: false});}
 
   saveComment = () => {
-    const {id, type, chunkId, chunkNum} = this.props;
+    const {id, type, chunkId, chunkNum, chapterPageComment, history} = this.props;
     const {jsonBlob} = this.state;
-    this.props.saveComment( jsonBlob, type, id, chunkId, chunkNum, this.commentSaved, this.error);
+    const {search} = this.props.location;   //get data if the user refresh the page
+    const query = QueryString.parse(search);
+    let projectId = query.projectId;
+    if (chapterPageComment === true) {
+      this.props.saveComment( jsonBlob, type, id, chunkId, chunkNum, projectId, this.commentSaved, this.error);
+    }
+    else {
+      this.props.saveComment( jsonBlob, type, id, chunkId, chunkNum, null, this.commentSaved, this.error, history);
+    }
   };
 
   commentSaved() { this.setState({commentSaved: true});}

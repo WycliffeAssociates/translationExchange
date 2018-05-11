@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '../../config/config';
-import {getTakes, getTakesSuccess} from '../actions';
+import {getTakes, getTakesSuccess, getChapters} from '../actions';
 
 export const getComments = (query, type) => {
   return function(dispatch) {
@@ -44,7 +44,7 @@ export const getChapterCommentsSuccess= (comments)=>{
 };
 
 
-export const saveComment = (blobx, type, id, chunkId, chunkNum, callback, errorCallback ) => { // chunkId & chunkNum, is used for refreshing the comments on takes
+export const saveComment = (blobx, type, id, chunkId, chunkNum,projectId, callback, errorCallback, history ) => { // chunkId & chunkNum, is used for refreshing the comments on takes
   return dispatch => {
     dispatch({type: 'SAVE_COMMENT_LOADING', uploadingComments: true}); // used to display loading UI
     return axios
@@ -59,17 +59,28 @@ export const saveComment = (blobx, type, id, chunkId, chunkNum, callback, errorC
 
         if (type === 'chunk') {
           dispatch(updateChunkComments(response.data));
+          dispatch({type: 'SAVE_COMMENT_DONE', uploadingComments: false});
+          callback();
+
         }
 
         if (type === 'chapter') {
-          dispatch(updateChapterComments(response.data));
+          if (projectId !== null) {
+            dispatch({type: 'SAVE_COMMENT_DONE', uploadingComments: false});
+            callback();
+            dispatch(getChapters(projectId, history));
+          }
+          else {
+            dispatch(updateChapterComments(response.data));
+          }
         }
 
         if (type === 'take') {
           dispatch(getTakes(chunkId, chunkNum));
+          dispatch({type: 'SAVE_COMMENT_DONE', uploadingComments: false});
+          callback();
         }
-        dispatch({type: 'SAVE_COMMENT_DONE', uploadingComments: false});
-        callback();
+
       })
       .catch(error => {
         dispatch({type: 'UPLOAD_COMMENT_ERROR', error: error.toString()});

@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import QueryString from "query-string";
+import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
-import {getChunks, getComments, getUserHash, getChapters, removeUser, downloadProject, updateLanguage} from '../../actions';
+import {getChunks, getUserHash,
+  getChapters, removeUser, downloadProject, updateLanguage,
+  saveComment, getComments} from '../../actions';
 import ChapterCard from './components/ChapterCard';
 import Toggle from './components/Toggle';
 import styled from 'styled-components';
@@ -38,7 +40,15 @@ export class ChapterPage extends Component {
     if (language) {
       updateLanguage(language);
     }
+  }
 
+  componentDidMount() {
+    const {history, getChapters} = this.props;
+    if (this.props.updatePage === true && this.props.uploadingComment === false) {
+      const {search} = this.props.location;   //get data if the user refresh the page
+      const query = QueryString.parse(search);
+      getChapters(query.projectId, history);
+    }
   }
 
   handleToggle() {
@@ -46,7 +56,7 @@ export class ChapterPage extends Component {
   }
 
   render() {
-    const {chapters, txt} = this.props;
+    const {chapters, txt, uploadingComments, saveComment} = this.props;
     const {search} = this.props.location;
     const query = QueryString.parse(search);
 
@@ -65,7 +75,11 @@ export class ChapterPage extends Component {
           <CardsContainer>
             <Toggle onClick={this.handleToggle} viewingComments={this.state.viewingComments} />
             {chapters.map((chp, index) =>
-              <ChapterCard key={index} {...chp} {...this.props} viewingComments={this.state.viewingComments} chapterComments= {this.props.chapterComments} />)}
+              <ChapterCard key={index} {...chp}
+                {...this.props} viewingComments={this.state.viewingComments}
+                chapterComments= {this.props.chapterComments}
+                uploadingComments={uploadingComments}
+                saveComment={saveComment} />)}
 
           </CardsContainer>
 
@@ -147,21 +161,22 @@ DownloadButton.displayName = 'DownloadButton';
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({getChunks, getUserHash, getComments, getChapters, removeUser, downloadProject, updateLanguage}, dispatch);
+  return bindActionCreators({getChunks, getUserHash, getChapters,
+    removeUser, downloadProject, updateLanguage, saveComment, getComments}, dispatch);
 
 };
 
 const mapStateToProps = state => {
 
-  const {chapters, loading} =state.Chapters;
+  const {chapters, loading, updatePage} =state.Chapters;
 
   const {loggedInUser} =state.user;
 
+  const {uploadingComments} = state.comments;
+
   const {txt} = state.geolocation;
 
-  const {chapterComments} = state.comments;
-
-  return {chapters, loggedInUser, loading, txt, chapterComments};
+  return {chapters, loggedInUser, loading, txt, uploadingComments, updatePage};
 };
 
 

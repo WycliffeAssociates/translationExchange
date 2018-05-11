@@ -38,7 +38,7 @@ export default class Toggler extends Component {
 const ToggleContainer = styled.div`
 position: fixed;
 bottom: 10vh;
-right: 7.5vw;
+right: 5vw;
 height: 75px;
 width: 75px;
 text-align:center;

@@ -16,7 +16,6 @@ export default class ChapterCard extends Component {
     this.state ={
       numberInRow: '',
       width: '',
-      comments: props.chapterComments,
     };
 
     this.spaceCards = this.spaceCards.bind(this);
@@ -43,9 +42,6 @@ export default class ChapterCard extends Component {
       window.addEventListener('resize', () => {
         this.spaceCards();
       });
-      const {id, getComments } = this.props;
-      getComments(id, 'chapter_id');
-
     }
 
     componentWillUnMount() {
@@ -65,8 +61,8 @@ export default class ChapterCard extends Component {
     }
 
     render() {
-      const { number, total_chunks, uploaded_chunks, published_chunks, txt, viewingComments } = this.props;
-      const {numberInRow, width, comments} = this.state;
+      const { number, total_chunks, uploaded_chunks, published_chunks, txt, viewingComments, comments } = this.props;
+      const {numberInRow, width} = this.state;
 
       let dangerSign = true;
       let checkLevel_1 = false;
@@ -86,7 +82,7 @@ export default class ChapterCard extends Component {
           {
             viewingComments?
               <Card check ={checkLevel_1} >
-                <Comments comments={comments} />
+                <Comments comments={comments} {...this.props} />
               </Card> :
 
               <Card check ={checkLevel_1} > <InformationContainer >
@@ -135,7 +131,7 @@ export default class ChapterCard extends Component {
 
                   <BoardButton check={checkLevel_1} onClick={this.reviewChapter}>
                     {txt.board}
-                    <img src={require('../../../../assets/images/board.svg')} />
+                    <img src={require('../../../../assets/images/project.svg')} />
                   </BoardButton>
 
                 }

@@ -12,6 +12,7 @@ export default class TakeCardComments extends React.Component {
     this.state ={
       displayModal: false,
       width: 0,
+      playing: false,
     };
 
     this.recordButton = this.recordButton.bind(this);
@@ -26,8 +27,6 @@ export default class TakeCardComments extends React.Component {
     const width = this.myInput.offsetWidth;
     this.setState({width});
   }
-
-
 
   recordButton() {
     const { id, saveComment, uploadingComments, activeChunkId, chunkNum} = this.props;
