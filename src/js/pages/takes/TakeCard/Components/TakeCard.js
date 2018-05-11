@@ -30,15 +30,10 @@ export default class TakeCard extends React.Component {
     this.dragPosition = this.dragPosition.bind(this);
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.trackPos = this.trackPos.bind(this);
-
-
-
   }
 
 
   componentDidMount() {
-    jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'no author info');
-
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
 
@@ -60,8 +55,6 @@ export default class TakeCard extends React.Component {
   updateWindowDimensions() {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
-
-
 
   dragPosition(position) {
     this.setState({pos: position, takePlaying: true});
@@ -120,11 +113,11 @@ export default class TakeCard extends React.Component {
     const {pos} = this.state;
     markers = this.callMarker();
 
-    const {connectDragSource , isDragging} = this.props;
+    const {connectDragSource , isDragging, onDeleteQueue} = this.props;
 
 
     return  ( //only native element nodes can now be passed to React DnD connectors
-      <div style={{opacity: isDragging? 0.5: 1}} >
+      <div style={{opacity: isDragging? 0.5: 1, display: onDeleteQueue? 'none': ''}} >
         <TopBar {...this.props} />
 
         <MarkerContainer>

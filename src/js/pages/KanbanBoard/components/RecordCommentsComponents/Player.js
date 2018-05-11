@@ -47,14 +47,14 @@ class Player extends Component {
   componentDidMount() {
     const {owner_icon_hash} =this.props.comments || '' ;
     const id = owner_icon_hash.slice(0, 8);
-    jdenticon.update(`#canvas${id}` , owner_icon_hash);
+    jdenticon.update(`#canvas${id}` , owner_icon_hash? owner_icon_hash: 'null user');
 
   }
 
 
   render() {
     const { comments} = this.props;
-    const id = comments.owner_icon_hash.slice(0, 8);
+    const id = comments.owner_icon_hash? comments.owner_icon_hash.slice(0, 8): 'null user';
 
     return (
       <Container>

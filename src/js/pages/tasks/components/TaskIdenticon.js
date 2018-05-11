@@ -22,7 +22,7 @@ class TaskIdenticon extends React.Component {
   play() {
     this.setState({playing: true});
   }
-  
+
   ended() {
     this.setState({playing: false});
   }
