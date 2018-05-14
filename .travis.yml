@@ -24,8 +24,8 @@ script:
 - docker-compose up -d
 - docker ps -a
 - docker-compose -f test-runner.yml run --rm test-runner
-afer_script:
 - sonar-scanner
+afer_script:
 - docker-compose down
 cache:
   directories:
