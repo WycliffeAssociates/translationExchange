@@ -24,9 +24,9 @@ script:
 - docker-compose up -d
 - docker ps -a
 - docker-compose -f test-runner.yml run --rm test-runner
+- sonar-scanner
 afer_script:
 - docker-compose down
-- sonar-scanner
 cache:
   directories:
   - "$HOME/.m2/repository"
