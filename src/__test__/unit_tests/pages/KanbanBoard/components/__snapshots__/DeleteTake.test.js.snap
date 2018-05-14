@@ -7,7 +7,7 @@ exports[`DeleteTake DropTarget renders correctly 1`] = `
       "bottom": "7.5vh",
       "height": "25.5vh",
       "position": "fixed",
-      "right": "16vw",
+      "right": "18vw",
       "width": "20.5vw",
       "zIndex": "101",
     }

@@ -28,12 +28,11 @@ class DeleteTake extends React.Component {
 const styles = {
   container: {
     position: 'fixed',
-    bottom: '10vh',
-    right: '15.5vw',
+    bottom: '7.5vh',
+    right: '18vw',
     zIndex: '101',
     width: '20.5vw',
-    height: '15.5vw',
-
+    height: '25.5vh',
   },
 
 };
