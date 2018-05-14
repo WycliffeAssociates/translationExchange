@@ -4,10 +4,10 @@ exports[`DeleteTake DropTarget renders correctly 1`] = `
 <div
   style={
     Object {
-      "bottom": "10vh",
-      "height": "15.5vw",
+      "bottom": "7.5vh",
+      "height": "25.5vh",
       "position": "fixed",
-      "right": "15.5vw",
+      "right": "16vw",
       "width": "20.5vw",
       "zIndex": "101",
     }
