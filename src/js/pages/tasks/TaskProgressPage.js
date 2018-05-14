@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
-import {getUserHash, getTasks, updateLanguage} from '../../actions';
+import {getUserHash, getTasks, updateLanguage, removeUser} from '../../actions';
 import TaskProgress from './components/TaskProgress';
 import GotoProjectsButton from './components/GotoProjectsButton';
 import styled from 'styled-components';
@@ -89,7 +89,7 @@ TaskProgressContainer.displayName = "TaskProgressContainer";
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({getUserHash, getTasks, updateLanguage}, dispatch);
+  return bindActionCreators({getUserHash, getTasks, updateLanguage, removeUser}, dispatch);
 
 };
 
