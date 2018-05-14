@@ -77,6 +77,7 @@ class TaskProgressPage extends React.Component {
 const TaskProgressPageContainer = styled.div`
 
 `;
+TaskProgressPageContainer.displayName = "TaskProgressPageContainer";
 
 const TaskProgressContainer = styled.div`
  display: flex;
@@ -84,6 +85,7 @@ const TaskProgressContainer = styled.div`
  flex-direction: row;
  margin: 1.5vw auto;
 `;
+TaskProgressContainer.displayName = "TaskProgressContainer";
 
 const mapDispatchToProps = dispatch => {
 
