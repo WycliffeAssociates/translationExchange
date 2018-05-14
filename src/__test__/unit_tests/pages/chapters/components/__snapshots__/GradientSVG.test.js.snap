@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chapter card comments renders correctly and matches snapshot 1`] = `
+<svg
+  style={
+    Object {
+      "height": 0,
+    }
+  }
+>
+  <defs>
+    <linearGradient
+      gradientTransform="rotate(undefined)"
+      id={undefined}
+    >
+      <stop
+        offset="0%"
+        stopColor={undefined}
+      />
+      <stop
+        offset="100%"
+        stopColor={undefined}
+      />
+    </linearGradient>
+  </defs>
+</svg>
+`;

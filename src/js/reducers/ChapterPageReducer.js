@@ -1,6 +1,8 @@
 const INITIAL_STATE = {
   chapters: [],
   loading: false,
+  updatePage: false,
+  uploadingComment: false,
 };
 
 export default (state = INITIAL_STATE, action) => {

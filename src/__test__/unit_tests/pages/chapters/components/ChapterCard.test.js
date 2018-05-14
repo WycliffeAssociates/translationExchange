@@ -25,12 +25,12 @@ describe('Chapter Card test suite', () => {
     expect(wrapper.find('Card').length).toEqual(1);
   });
 
-  it('should not display a dangerSign', () => {
-    expect(wrapper.find('i').length).toEqual(1); //for the done_all icon
+  it('should have to material icons', () => {
+    expect(wrapper.find('i').length).toEqual(2); //for the done_all icon
   });
 
   it('should handle the onClick fucntion', () => {
-    wrapper.find('ReviewButton').simulate('click');
+    wrapper.find('BoardButton').simulate('click');
     expect(mockProps.history.length).toEqual(1);
   });
 

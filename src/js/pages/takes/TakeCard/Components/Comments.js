@@ -12,6 +12,7 @@ export default class TakeCardComments extends React.Component {
     this.state ={
       displayModal: false,
       width: 0,
+      playing: false,
     };
 
     this.recordButton = this.recordButton.bind(this);
@@ -27,10 +28,8 @@ export default class TakeCardComments extends React.Component {
     this.setState({width});
   }
 
-
-
   recordButton() {
-    const { id, saveComment, uploadingComments, activeChunkId, chunkNum} = this.props;
+    const { id, saveComment, uploadingComments, activeChunkId, chunkNum,location} = this.props;
     const microphone =  <i className="material-icons">mic_none</i>;
     return (
       <RecordButton onClick = {()=> {this.setState({displayModal: true});}}>
@@ -44,6 +43,7 @@ export default class TakeCardComments extends React.Component {
           saveComment = {saveComment}
           type={'take'}
           txt={this.props.txt}
+          location={location}
         />
       </RecordButton>
 
