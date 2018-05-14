@@ -122,9 +122,9 @@ function showUndoToast(props) {
         props.removeTakeToDelete(props.id, props.takesToDelete);
       }
       else if (undo === false) {
-        console.log(props.id, props,props.activeChunkId, props.chunkNum);
         props.deleteTake(props.id, props.activeChunkId, props.chunkNum);
-        //props.removeTakeToDelete(props.id, props.takesToDelete);
+        // ensure take is deleted from db before we remove from takesToDelete array
+        setTimeout(()=> props.removeTakeToDelete(props.id, props.takesToDelete),250);
       }
     },
 
