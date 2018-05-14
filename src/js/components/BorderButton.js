@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default ({txt, icon, color, width, height, radius, iconSize, onClick, fontSize }) => {
+export default ({txt, icon, color, width, height, radius, iconSize, onClick, fontSize, border }) => {
   return (
-    <Button onClick={()=>onClick()} fontSize = {fontSize} color={color} width={width} height={height} radius={radius} iconSize={iconSize}>
+    <Button onClick={()=>onClick()} border={border} fontSize = {fontSize} color={color} width={width} height={height} radius={radius} iconSize={iconSize}>
       {txt ? txt : ''}
       {icon ? <i class="material-icons"> {icon}</i> : ''}
     </Button>);

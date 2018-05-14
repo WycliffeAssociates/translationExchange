@@ -6,6 +6,7 @@ import Loading from '../../components/Loading';
 import {selections, getChapters, getUserHash, resetSelected} from '../../actions';
 import {ExportCard, CompletedCheckbox, Footer, ChapterSelected, ExportProject} from './components';
 import styled from 'styled-components';
+import QueryString from "query-string";
 
 
 
@@ -21,7 +22,9 @@ export class ExportPage extends Component {
   }
 
   componentWillMount() {
-    this.props.getChapters(1);
+    const {location, getChapters} = this.props;
+    const query = QueryString.parse(location.search);
+    getChapters(query.projectId);
   }
 
   toggleCheck = () => { this.setState({checked: !this.state.checked});}
@@ -42,7 +45,8 @@ export class ExportPage extends Component {
 
   render() {
     const { checked, readyToExport, downloading } = this.state;
-    const { chaptersSelected, chapters, numbersSelected } = this.props;
+    const { chaptersSelected, chapters, numbersSelected, location } = this.props;
+    const query = QueryString.parse(location.search);
 
     return (
       <ExportPageContainer>
@@ -51,7 +55,7 @@ export class ExportPage extends Component {
           :
           <HeaderContainer>
             <p>Export Project:</p>
-            <h1>Genesis</h1>
+            <h1>{query.bookName}</h1>
           </HeaderContainer>
         }
         {readyToExport ? '': <CompletedCheckbox toggleCheck = {this.toggleCheck} checked={checked} /> }

@@ -19,6 +19,7 @@ class ProjectContainer extends Component {
     if (language) {
       updateLanguage(language);
     }
+  
   }
 
   render() {

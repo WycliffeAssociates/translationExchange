@@ -1,11 +1,26 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import img1 from '../mockupdata/img1.PNG';
-import BorderButton from '../../../components/BorderButton'
+import BorderButton from '../../../components/BorderButton';
+import ExportModal from './ExportModal';
 import {zoomIn} from "react-animations";
+import jdenticon from 'jdenticon';
 
 
 export default class NewProjectCard extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { displayModal: false };
+  }
+
+  componentDidMount() {
+    jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'no author info');
+  }
+
+  showModal = () => this.setState({displayModal: true});
+
+  closeModal = () => this.setState({displayModal: false});
 
 
     reviewProject = () => {
@@ -20,15 +35,19 @@ export default class NewProjectCard extends React.Component {
     };
 
     render() {
-      const { bookName, version, dateModified, language, txt } = this.props;
+      const { bookName, projectId, language, txt, history } = this.props;
 
       return (
         <Card>
           <InformationContainer >
+            <QuestionButton>
+               ?
+            </QuestionButton>
             <TextContainer>
               <BookText> {bookName} </BookText>
               <Text>{language}</Text>
             </TextContainer>
+            <Icon  id="user" data-jdenticon-value={this.props.loggedInUser? this.props.loggedInUser: 'no author info'} />
           </InformationContainer>
 
 
@@ -39,7 +58,7 @@ export default class NewProjectCard extends React.Component {
 
           <ButtonsContainer>
             <BorderButton
-              onClick ={this.props.cancel} txt={'Export'}
+              onClick ={this.showModal} txt={'Export'}
               color={'#009CFF'}
               height={'40px'}
               width={'154px'}
@@ -51,6 +70,14 @@ export default class NewProjectCard extends React.Component {
             />
 
             <BlueButton onClick={this.reviewProject} >Select <i class="material-icons">touch_app</i> </BlueButton>
+            <ExportModal
+              closeModal={this.closeModal}
+              history = {history}
+              display={this.state.displayModal}
+              txt={txt}
+              bookName={bookName}
+              projectId={projectId}
+            />
 
           </ButtonsContainer>
         </Card>
@@ -75,18 +102,28 @@ const Card= styled.div`
     background-color: white;
     margin: 0 0 3vw 4vw;
     animation: ${zoomInAnimation} .2s ease-in;
-    cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 `;
 Card.displayName = 'Card';
 
+const Icon = styled.svg`
+  position:absolute;
+  height: 50px;
+  width: 50px;
+  left: 83%;
+  top:-10px;
+  margin-top: 0.6vw;
+  cursor: pointer;
+  `;
+
 const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   font-size: 14px;
+  margin-left: 12px;
 
 `;
 
@@ -110,7 +147,13 @@ const Text = styled.p`
 Text.displayName = 'Text';
 
 const InformationContainer = styled.div`
+  position: relative;
   height: 41px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 5px;
 
 `;
 InformationContainer.displayName = 'InformationContainer';
@@ -164,6 +207,17 @@ const ButtonContainer= styled.div`
   `;
 ButtonContainer.displayName = 'ButtonContainer';
 
+const QuestionButton = styled.button`
+  height: 24px;
+  width: 24px;
+  background: linear-gradient(to bottom, #00C5FF, #009CFF);
+  color: white;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  cursor:pointer;
+`;
+
 const BlueButton = styled.button`
     background: linear-gradient(to bottom, #00C5FF, #009CFF);
     width: 154px;
@@ -175,16 +229,16 @@ const BlueButton = styled.button`
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
-    transition: .2s ease-in-out;
+    transition: .3s ease-in-out;
 
     i {
       vertical-align: middle;
     }
 
     :hover{
-      background: linear-gradient(to bottom, #FFF, #FFFE);
-      color: #009CFF;
-      border: 2px solid #009CFF;
+      background: #3BAC2A;
+      color: #FFF;
+      border: 2px solid #3BAC2A;
 
     }
     `;
