@@ -25,9 +25,16 @@ const Button = styled.button`
     border-radius: 2px;
     box-shadow: 1px 3px 2px 1px rgba(0,0,0,0.2);
     cursor: pointer;
+    transition: .2s ease-in-out;
 
     i {
       vertical-align: middle;
+    }
+
+    :hover{
+      background: linear-gradient(to bottom, #FFF, #FFFE);
+      color: #0076FF;
+
     }
     `;
 

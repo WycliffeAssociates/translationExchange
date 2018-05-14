@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import ProjectCard from './components/ProjectCard';
+import NewProjectCard from './components/NewProjectCard';
 import Data from './mockupdata/data.json';
 import img1 from './mockupdata/img1.PNG';
 import img2 from './mockupdata/img1.PNG';
@@ -21,7 +21,7 @@ class MyProjectsContainer extends Component {
         </HeaderContainer>
         <CardsContainer>
           { projects.map( (p, index) =>
-            <ProjectCard
+            <NewProjectCard
               index={index}
               bookName={p.book.name}
               language={p.language.name}

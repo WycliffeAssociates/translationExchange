@@ -25,8 +25,9 @@ const CompletedButton = styled.div`
   justify-content: space-around;
   align-items: center;
   background-color: #FFF;
-  box-shadow: 0px 3px 6px rgba(0,0,0,0.2);
+  box-shadow: ${props => props.checked ? '0px 6px 6px rgba(0,0,0,0.7)': '0px 3px 6px rgba(0,0,0,0.2)' };
   text-align: center;
+  color: ${props => props.checked ? '#43B52F': '' };
   height: 60px;
   width: 214px;
   border-radius: 1px;

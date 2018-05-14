@@ -17,6 +17,7 @@ export class ExportPage extends Component {
       readyToExport: false,
       downloading: false
     }
+
   }
 
   componentWillMount() {
@@ -29,11 +30,15 @@ export class ExportPage extends Component {
 
   downloading = () => { this.setState({downloading: true});}
 
+  cancel = () => { this.setState({downloading: false});}
+
   goBack =() => {
     this.setState({readyToExport: false});
     this.props.resetSelected();
 
   }
+
+
 
   render() {
     const { checked, readyToExport, downloading } = this.state;
@@ -64,7 +69,7 @@ export class ExportPage extends Component {
             </CardsContainer>
         }
 
-        {readyToExport ? <ExportProject goBack={this.goBack} downloading={this.downloading} /> : chaptersSelected? chaptersSelected.length > 0 ? <Footer nextStep={this.nextStep} /> : '' : ''}
+        {readyToExport ? <ExportProject cancel={this.cancel} goBack={this.goBack} downloading={this.downloading} /> : chaptersSelected? chaptersSelected.length > 0 ? <Footer nextStep={this.nextStep} /> : '' : ''}
 
 
       </ExportPageContainer>

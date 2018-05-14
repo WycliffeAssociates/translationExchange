@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import NavBar from '../../../components/NavBar';
-import {ChapterSelected} from './ChapterSelected';
+import {ChapterSelected, Downloading} from './';
+
 import styled from 'styled-components';
 
 
@@ -13,39 +14,59 @@ export class ExportProject extends Component {
 
   constructor(props) {
     super(props);
-    this.state ={ downloading: false, type: null };
+    this.state ={ downloading: false, type: null, icon: '' };
     this.download = this.download.bind(this);
   }
 
   download(type) {
-    this.setState({downloading: true, type});
+    if(type=== 'mp3') {
+      this.setState({downloading: true, icon: 'volume_up', type });
+    }
+    else {
+      this.setState({downloading: true, icon: 'remove_from_queue', type });
+    }
+
     this.props.downloading();
   }
 
+  cancel() {
+    this.setState({downloading: false})
+    this.props.cancel();
+  }
+
+
+
+
 
   render() {
-    const { goBack} = this.props;
+    const { goBack, cancel } = this.props;
+    const { downloading, icon, type } = this.state;
 
 
     return (
       <ExportProjectContainer>
-        <Button color={'#009CFF'} height={'40px'} width={'214px'} iconSize={'24px'} border={'2px'} radius={'4px'} onClick={goBack}>
-          <i class="material-icons"> keyboard_backspace</i> go Back
-        </Button>
-        <ButtonsContainer>
-          <SingleButtonContainer color={'#E56060'} >
-            <Button onClick={()=> this.download('wav')} color={'#E56060'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} >
-              <i class="material-icons"> remove_from_queue</i>
+        {downloading ? <Downloading cancel={()=>this.cancel()} icon={icon} type={type}  />
+          :
+          <OptionsContainer>
+            <Button color={'#009CFF'} height={'40px'} width={'214px'} iconSize={'24px'} border={'2px'} radius={'4px'} onClick={goBack}>
+              <i class="material-icons"> keyboard_backspace</i> go Back
             </Button>
-            <p>Editing (.WAV)</p>
-          </SingleButtonContainer>
-          <SingleButtonContainer color={'#009CFF'}>
-            <Button onClick={()=> this.download('mp3')} color={'#009CFF'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} >
-              <i class="material-icons"> volume_up</i>
-            </Button>
-            <p>Listening (.mp3)</p>
-          </SingleButtonContainer>
-        </ButtonsContainer>
+            <ButtonsContainer>
+              <SingleButtonContainer color={'#E56060'} >
+                <Button onClick={()=> this.download('wav')} color={'#E56060'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} >
+                  <i class="material-icons"> remove_from_queue</i>
+                </Button>
+                <p>Editing (.WAV)</p>
+              </SingleButtonContainer>
+              <SingleButtonContainer color={'#009CFF'}>
+                <Button onClick={()=> this.download('mp3')} color={'#009CFF'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} >
+                  <i class="material-icons"> volume_up</i>
+                </Button>
+                <p>Listening (.mp3)</p>
+              </SingleButtonContainer>
+            </ButtonsContainer>
+          </OptionsContainer>
+        }
       </ExportProjectContainer>
     );
   }
@@ -57,6 +78,12 @@ const ExportProjectContainer = styled.div`
   display: flex;
   align-items:center;
   flex-direction: column;
+`;
+
+const OptionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Button = styled.button`

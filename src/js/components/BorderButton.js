@@ -1,9 +1,9 @@
-import react from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-export default ({txt, icon, color, width, height, radius, iconSize, onClick }) => {
+export default ({txt, icon, color, width, height, radius, iconSize, onClick, fontSize }) => {
   return (
-    <Button onClick={onClick} color={color} width={width} height={height} radius={radius} iconSize={iconSize}>
+    <Button onClick={()=>onClick()} fontSize = {fontSize} color={color} width={width} height={height} radius={radius} iconSize={iconSize}>
       {txt ? txt : ''}
       {icon ? <i class="material-icons"> {icon}</i> : ''}
     </Button>);
@@ -21,7 +21,7 @@ const Button = styled.button`
   border-color: ${props => props.color};
   height:${props => props.height};
   width:${props => props.width}
-  font-size: 20px;
+  font-size: ${props => props.fontSize ? props.fontSize: '20px'};
   font-weight: 100;
   cursor: pointer;
   outline:none;

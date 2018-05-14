@@ -1,4 +1,5 @@
-
+import axios from 'axios';
+import config from '../../config/config';
 
 export const selections = (id, number, type) => {
   return (dispatch, getState) => {
@@ -26,4 +27,25 @@ export const resetSelected = () => {
   return {
     type: 'RESET_SELECTED',
   };
+};
+
+
+
+
+export const download = (projectId, chaptersIds, type) => {
+  return dispatch => {
+    return axios
+      .get(`${config.apiUrl}download/?${projectId}`,
+        {
+          headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+        })
+      .then(response => {
+
+      })
+      .catch(error => {
+        console.log(error);
+        
+      });
+  };
+
 };

@@ -1,16 +1,51 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import BorderButton from '../../../components/BorderButton';
+import {Volume} from './'
 
 export class Downloading extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state={percentage: 0, previous: 0, counter: 1};
+  }
+
+  componentDidMount() {
+    //setTimeout(()=>{this.add(); }, 500);
+  }
+
+  add() {
+    const {percentage, previous} = this.state;
+
+    this.setState({percentage: percentage +5, previous: percentage +2})
+  }
+
   render() {
+    const {percentage, previous} = this.state;
+    const value = -.757*(percentage) + 85.7;
+    const prevValue = -.757*(previous) + 85.7;
+    console.log('VALUE ' + value);
+    console.log('PrevValue ' + prevValue);
+
+    if (percentage < 100) {
+      setTimeout(()=>{this.add(); }, 900);
+    }
+
+
     return (
       <Container>
-        <i class="material-icons"> volume_up</i>
-        <p>35%</p>
-        <p>downloading mp3 files </p>
-        <BorderButton txt={'Cancel'} color={'#009CFF'} height={'40px'} width={'214px'} iconSize={'24px'} border={'2px'} radius={'4px'} />
+        {/* <i class="material-icons"> {this.props.icon}</i> */}
+        <Volume percentage={`${value}%`} prevValue={`${prevValue}%`} />
+        <p>{percentage}</p>
+        <p>downloading {this.props.type} files </p>
+        <BorderButton
+          onClick ={this.props.cancel} txt={'Cancel'}
+          color={'#009CFF'}
+          height={'40px'}
+          width={'214px'}
+          iconSize={'24px'}
+          border={'2px'}
+          radius={'4px'} />
       </Container>
     );
   }
@@ -20,31 +55,9 @@ export class Downloading extends Component {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const Button = styled.button`
-  display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content:center;
-  text-align: center;
-  color:${props => props.color};
-  border-radius: ${props => props.radius};
-  border: ${props => props.border} solid black;
-  background-color: transparent;
-  border-color: ${props => props.color};
-  height:${props => props.height};
-  width:${props => props.width}
-  font-size: 20px;
-  font-weight: 100;
-  cursor: pointer;
-  outline:none;
-  transition: .2s ease-in-out;
-  :hover{
-    background-color: ${props => props.color};
-    color: #fff;
-  }
-
   i{
-    font-size: ${props => props.iconSize};
+    font-size: 450px;
   }
 `;
