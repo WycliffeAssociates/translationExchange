@@ -14,6 +14,8 @@ class NavBar extends Component {
       displayLogOut: false,
       chunkNumSelected: props.chunkNum,
     };
+
+    this.onLogoutMenuSelect = this.onLogoutMenuSelect.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -37,10 +39,17 @@ class NavBar extends Component {
     jdenticon.update('#ActiveUser', loggedInUser);
   }
 
-  logOut() {
-    localStorage.removeItem('token');
-    this.props.removeUser();
-    this.props.history.push('./welcome');
+  onLogoutMenuSelect(ky) {
+    const key = ky.key;
+    if (key === '0')
+    {
+      localStorage.removeItem('token', 'te:KanbanPage');
+      this.props.removeUser();
+      this.props.history.push('./welcome');
+    }
+    if (key === '1') {
+      this.props.history.push('./progress');
+    }
   }
 
   onSelect({key, item}) {
@@ -62,8 +71,9 @@ class NavBar extends Component {
     let goToChapters = '';
     let mode = '';
     let logOutMenu = (
-      <Menu onSelect={ ()=> this.logOut()}>
-        <MenuItem style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key="1">{txt.logOut}</MenuItem>
+      <Menu onSelect={ky => this.onLogoutMenuSelect(ky)}>
+        <MenuItem  style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={0}>{txt.logOut}</MenuItem>
+        <MenuItem  style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={1}>{txt.progressPage}</MenuItem>
       </Menu>
     );
 
