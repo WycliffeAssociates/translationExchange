@@ -56,7 +56,7 @@ export class ChapterPage extends Component {
   }
 
   render() {
-    const {chapters, txt, uploadingComments, saveComment} = this.props;
+    const {chapters, txt, uploadingComments, saveComment, chapterComments} = this.props;
     const {search} = this.props.location;
     const query = QueryString.parse(search);
 
@@ -76,7 +76,7 @@ export class ChapterPage extends Component {
             {chapters.map((chp, index) =>
               <ChapterCard key={index} {...chp}
                 {...this.props} viewingComments={this.state.viewingComments}
-                chapterComments= {this.props.chapterComments}
+                chapterComments= {chapterComments}
                 uploadingComments={uploadingComments}
                 saveComment={saveComment} />)}
 
