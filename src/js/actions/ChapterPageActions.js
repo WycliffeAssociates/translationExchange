@@ -3,7 +3,6 @@ import config from '../../config/config';
 
 export const getChapters = (projectId, redirect) =>{
   return dispatch => {
-    console.log('coming after recording a comment', projectId, redirect);
     dispatch({type: 'FETCHING_CHAPTERS'});
     return axios
       .get(`${config.apiUrl}chapters/?project_id=${projectId}`,

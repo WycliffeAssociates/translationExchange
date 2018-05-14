@@ -54,8 +54,6 @@ export default class ChapterCard extends Component {
       var width = window.innerWidth;
       width = width-(width*0.2); // takeaway 20% because of padding on parent container
       var numberInRow = (width/200) | 0;
-      //numberInRow =  numberInRow -1;
-      console.log(numberInRow, width);
       this.setState({
         numberInRow: numberInRow,
         width: width,
