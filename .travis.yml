@@ -30,8 +30,9 @@ jobs:
       script: docker-compose -f test-runner.yml run --rm test-runner
       after_script: docker-compose down
     - stage: sonar
-      if: type = push AND (branch = master OR branch = dev)
-      script: sonar-scanner -Dsonar.projectKey=translationexchange -Dsonar.sources=.
+      allow_failures:
+        if: type = push AND (branch = master OR branch = dev)
+        script: sonar-scanner -Dsonar.projectKey=translationexchange -Dsonar.sources=.
 stages:
   - test
   - sonar
