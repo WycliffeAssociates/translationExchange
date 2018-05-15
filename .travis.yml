@@ -1,3 +1,4 @@
+dist: trusty
 sudo: required
 language: node_js
 node_js:
@@ -24,6 +25,7 @@ script:
 - docker-compose up -d
 - docker ps -a
 - docker-compose -f test-runner.yml run --rm test-runner
+- sonar-scanner -Dsonar.projectKey=translationExchange -Dsonar.sources=.
 afer_script:
 - docker-compose down
 cache:
