@@ -109,7 +109,6 @@ const Input = styled.input`
   @-moz-document url-prefix() {
   margin-top: -0.2vw;
   align-self: center;
-  background:
 }
  -webkit-appearance : none;
 width: 100%;
