@@ -58,6 +58,7 @@
    "deleteTake": "Are you sure you want to delete this Take?",
    "deletingTake": "Deleting Take...",
    "deletingComment": "Deleting comment",
+   "progressPage": "Progress Page"
    "board": "Board"
 
    },
@@ -120,8 +121,8 @@
      "deleteTake": "Estás seguro que quieres borrar esta grabación?",
      "deletingTake": "Borrando grabación",
      "deletingComment": "Borrando Comentario",
+     "progressPage": "Página de Subida"
      "board": "Tablero"
-
    }
 
 }
