@@ -32,7 +32,7 @@ const ProgressContainer = styled.div`
   overflow: hidden;
   background-color: #f5f5f5;
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  border-radius: 1vw;
+  border-radius: 0.4vw;
   text-align: center;
   position: relative;
 `;
@@ -45,8 +45,7 @@ const Progress = styled.div`
   line-height: 1.6vw;
   color: white;
   text-align: center;
-  // background-color: #337ab7;
-  background: linear-gradient(#58c5ff, #0f6eff);
+  background: linear-gradient(to left, #58c5ff, #0f6eff);
   box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
   transition: width .6s ease;
 `;

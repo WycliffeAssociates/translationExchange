@@ -1,3 +1,8 @@
+| Branch | Build Status |
+| --- | --- |
+| Master | [![Build Status](https://travis-ci.org/WycliffeAssociates/translationExchange.svg?branch=master)](https://travis-ci.org/WycliffeAssociates/translationExchange) |
+| Dev | [![Build Status](https://travis-ci.org/WycliffeAssociates/translationExchange.svg?branch=dev)](https://travis-ci.org/WycliffeAssociates/translationExchange) |
+
 # translationExchange
 Manage and review development project.  Started by the 8WoC 2017 internship team and continued by Wycliffe Associates.
 

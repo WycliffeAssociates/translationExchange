@@ -53,7 +53,7 @@ export const deleteTake = (takeId,chunkId,chunkNum) => {
     return axios
       .delete(`${config.apiUrl}takes/${takeId}`,
         {
-          headers: {Authorization: 'Token' + localStorage.getItem('token')},
+          headers: {Authorization: 'Token ' + localStorage.getItem('token')},
         })
       .then(response => {
         if (response) {
