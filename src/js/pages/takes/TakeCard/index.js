@@ -25,14 +25,15 @@ export default class index extends React.Component {
   }
 
   componentDidMount() {
-    const {takesToDelete, id} = this.props;
+    const {takesToDelete, id, owner_icon_hash} = this.props;
     if (takesToDelete.includes(id)) {
       this.setState({ onDeleteQueue: true});
     }
+    jdenticon.update(`#user${owner_icon_hash}`,owner_icon_hash? owner_icon_hash: 'null user');
   }
 
   componentDidUpdate() {
-    const {takesToDelete, id,updateTake, removedTaketoDelete} = this.props;
+    const {takesToDelete, id,updateTake, removedTaketoDelete,owner_icon_hash} = this.props;
     const {onDeleteQueue} = this.state;
     if (takesToDelete.includes(id) && onDeleteQueue === false ) {
       this.setState({ onDeleteQueue: true});
@@ -44,6 +45,8 @@ export default class index extends React.Component {
     if (removedTaketoDelete) {
       updateTake();
     }
+    jdenticon.update(`#user${owner_icon_hash}`,owner_icon_hash? owner_icon_hash: 'null user');
+
   }
 
   expandComments() {

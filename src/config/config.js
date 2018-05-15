@@ -17,11 +17,11 @@
 
 
 
-// const config = {                                                        // local development
-//   apiUrl: 'http://localhost/api/',
-//   streamingUrl: 'http://localhost/',
-//   redirectUri: 'http://localhost:3000',
-// };
+ //const config = {                                                        // local development
+   //apiUrl: 'http://localhost/api/',
+   //streamingUrl: 'http://localhost/',
+   //redirectUri: 'http://localhost:3000',
+ //};
 
 const config = {                                                        //production
     apiUrl: 'https://te.loc/api/',

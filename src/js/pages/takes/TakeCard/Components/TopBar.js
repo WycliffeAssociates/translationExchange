@@ -14,9 +14,9 @@ export default class TakeCardTopIcon extends React.Component {
   }
 
   componentDidMount() {
-    const {owner_icon_hash, date_modified} = this.props;
-    jdenticon.update(`#user${owner_icon_hash}`,owner_icon_hash? owner_icon_hash: 'null user');
+    const {date_modified} = this.props;
     this.convertUTC(date_modified);
+
   }
 
   convertUTC(date_modified) {
@@ -31,7 +31,7 @@ export default class TakeCardTopIcon extends React.Component {
 
 
   render() {
-    const {owner_icon_hash, date_modified} = this.props;
+    const {owner_icon_hash} = this.props;
     const {date} = this.state;
 
     return  (
