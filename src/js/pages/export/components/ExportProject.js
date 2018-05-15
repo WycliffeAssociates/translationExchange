@@ -18,15 +18,17 @@ export class ExportProject extends Component {
     this.download = this.download.bind(this);
   }
 
+
   download(type) {
-    if(type=== 'mp3') {
+    if (type=== 'mp3') {
       this.setState({downloading: true, icon: 'volume_up', type });
+
     }
     else {
       this.setState({downloading: true, icon: 'remove_from_queue', type });
     }
 
-    this.props.downloading();
+    this.props.downloading(type);
   }
 
   cancel() {
@@ -39,30 +41,31 @@ export class ExportProject extends Component {
 
 
   render() {
-    const { goBack, cancel } = this.props;
-    const { downloading, icon, type } = this.state;
+    const { goBack, txt, downloadInProgress, taskId, getDownloadProgress , progress } = this.props;
+    const {  icon, type, downloading } = this.state;
 
 
     return (
       <ExportProjectContainer>
-        {downloading ? <Downloading cancel={()=>this.cancel()} icon={icon} type={type}  />
+        {downloadInProgress && downloading ? <Downloading
+          getDownloadProgress={getDownloadProgress} progress={progress} taskId= {taskId} txt={txt} cancel={()=>this.cancel()} icon={icon} type={type}  />
           :
           <OptionsContainer>
             <Button color={'#009CFF'} height={'40px'} width={'214px'} iconSize={'24px'} border={'2px'} radius={'4px'} onClick={goBack}>
-              <i class="material-icons"> keyboard_backspace</i> go Back
+              <i class="material-icons"> keyboard_backspace</i>  {txt.back}
             </Button>
             <ButtonsContainer>
               <SingleButtonContainer color={'#E56060'} >
                 <Button onClick={()=> this.download('wav')} color={'#E56060'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} >
                   <i class="material-icons"> remove_from_queue</i>
                 </Button>
-                <p>Editing (.WAV)</p>
+                <p>{txt.editing} (.WAV)</p>
               </SingleButtonContainer>
               <SingleButtonContainer color={'#009CFF'}>
                 <Button onClick={()=> this.download('mp3')} color={'#009CFF'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} >
                   <i class="material-icons"> volume_up</i>
                 </Button>
-                <p>Listening (.mp3)</p>
+                <p>{txt.listening} (.mp3)</p>
               </SingleButtonContainer>
             </ButtonsContainer>
           </OptionsContainer>

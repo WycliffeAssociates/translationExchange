@@ -58,7 +58,7 @@ export default class NewProjectCard extends React.Component {
 
           <ButtonsContainer>
             <BorderButton
-              onClick ={this.showModal} txt={'Export'}
+              onClick ={this.showModal} txt={txt.export}
               color={'#009CFF'}
               height={'40px'}
               width={'154px'}
@@ -69,7 +69,7 @@ export default class NewProjectCard extends React.Component {
               fontSize={'14px'}
             />
 
-            <BlueButton onClick={this.reviewProject} >Select <i class="material-icons">touch_app</i> </BlueButton>
+            <BlueButton onClick={this.reviewProject} >{txt.select} <i class="material-icons">touch_app</i> </BlueButton>
             <ExportModal
               closeModal={this.closeModal}
               history = {history}

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
-import {selections, getChapters, getUserHash, resetSelected} from '../../actions';
+import {selections, getChapters, getUserHash, resetSelected, downloadChapters, getDownloadProgress} from '../../actions';
 import {ExportCard, CompletedCheckbox, Footer, ChapterSelected, ExportProject} from './components';
 import styled from 'styled-components';
 import QueryString from "query-string";
@@ -31,7 +31,12 @@ export class ExportPage extends Component {
 
   nextStep = () => { this.setState({readyToExport: true});}
 
-  downloading = () => { this.setState({downloading: true});}
+  downloading = (type) => {
+    const {downloadChapters, chaptersSelected} = this.props;
+    downloadChapters(type, chaptersSelected);
+    this.setState({downloading: true});
+
+  }
 
   cancel = () => { this.setState({downloading: false});}
 
@@ -45,7 +50,7 @@ export class ExportPage extends Component {
 
   render() {
     const { checked, readyToExport, downloading } = this.state;
-    const { chaptersSelected, chapters, numbersSelected, location } = this.props;
+    const { chaptersSelected, chapters, numbersSelected, location, txt, taskId, downloadInProgress, progress } = this.props;
     const query = QueryString.parse(location.search);
 
     return (
@@ -54,11 +59,11 @@ export class ExportPage extends Component {
         {downloading ? ''
           :
           <HeaderContainer>
-            <p>Export Project:</p>
+            <p>{txt.exportProject}:</p>
             <h1>{query.bookName}</h1>
           </HeaderContainer>
         }
-        {readyToExport ? '': <CompletedCheckbox toggleCheck = {this.toggleCheck} checked={checked} /> }
+        {readyToExport ? '': <CompletedCheckbox txt={txt} toggleCheck = {this.toggleCheck} checked={checked} /> }
 
         {this.props.loading?
           <Loading txt={this.props.txt} height= "80vh" marginTop="2vw" />
@@ -66,14 +71,22 @@ export class ExportPage extends Component {
           downloading ? ''
             :
             <CardsContainer center={readyToExport}>
-              {readyToExport ? numbersSelected.map(num => <ChapterSelected number={num} txt={{selected: 'selected'}} />)
+              {readyToExport ? numbersSelected.map(num => <ChapterSelected number={num} txt={txt} />)
                 :
-                chapters ? chapters.map(chp => <ExportCard {...this.props} {...chp} />): ''
+                chapters ? chapters.map((chp, index) => <ExportCard key={index} {...this.props} {...chp} />): ''
               }
             </CardsContainer>
         }
 
-        {readyToExport ? <ExportProject cancel={this.cancel} goBack={this.goBack} downloading={this.downloading} /> : chaptersSelected? chaptersSelected.length > 0 ? <Footer nextStep={this.nextStep} /> : '' : ''}
+        {readyToExport ? <ExportProject
+          getDownloadProgress={getDownloadProgress}
+          taskId={taskId}
+          progress={progress}
+          txt={txt}
+          downloadInProgress={downloadInProgress}
+          cancel={this.cancel}
+          goBack={this.goBack}
+          downloading={this.downloading} /> : chaptersSelected? chaptersSelected.length > 0 ? <Footer txt={txt} nextStep={this.nextStep} /> : '' : ''}
 
 
       </ExportPageContainer>
@@ -146,20 +159,20 @@ const mockup = (
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({ getChapters, selections, getUserHash, resetSelected}, dispatch);
+  return bindActionCreators({ getChapters, selections, getUserHash, resetSelected, downloadChapters, getDownloadProgress}, dispatch);
 
 };
 
 const mapStateToProps = state => {
 
   const {chapters, loading} =state.Chapters;
-  const { chaptersSelected, numbersSelected } = state.ExportPage;
+  const { chaptersSelected, numbersSelected, taskId, downloadInProgress, progress } = state.ExportPage;
 
   const {loggedInUser} =state.user;
 
   const {txt} = state.geolocation;
 
-  return {chapters, loggedInUser, loading, txt, chaptersSelected, numbersSelected};
+  return {chapters, loggedInUser, loading, txt, chaptersSelected, numbersSelected, taskId, downloadInProgress, progress };
 };
 
 

@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 
 
-export const Footer = ({nextStep}) => {
+export const Footer = ({nextStep, txt}) => {
   return (
     <Container onClick={nextStep}>
-      <Button> <i class="material-icons">touch_app</i> Next </Button>
+      <Button> <i class="material-icons">touch_app</i> {txt.next} </Button>
     </Container>
   );
 
@@ -32,8 +32,8 @@ const Button = styled.button`
     }
 
     :hover{
-      background: linear-gradient(to bottom, #FFF, #FFFE);
-      color: #0076FF;
+      background: linear-gradient(to bottom, #3BAC29, #3BAC29);
+      color: #FFF;
 
     }
     `;

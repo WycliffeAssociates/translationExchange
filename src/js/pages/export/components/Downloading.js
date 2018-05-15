@@ -8,10 +8,24 @@ export class Downloading extends Component {
   constructor(props) {
     super(props);
     this.state={percentage: 0, previous: 0, counter: 1};
+    this.updateProgress = this.updateProgress.bind(this);
   }
 
   componentDidMount() {
-    //setTimeout(()=>{this.add(); }, 500);
+    this.interval = setInterval(() => {
+      this.props.getDownloadProgress(this.props.taskId, this.updateProgress);
+    }, 1000);
+  }
+
+  updateProgress(percentage, done) {
+    this.setState({percentage})
+    if (done) {
+      clearInterval(this.interval);
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   add() {
@@ -21,14 +35,13 @@ export class Downloading extends Component {
   }
 
   render() {
+    const {type, txt} = this.props;
     const {percentage, previous} = this.state;
     const value = -.757*(percentage) + 85.7;
     const prevValue = -.757*(previous) + 85.7;
-    console.log('VALUE ' + value);
-    console.log('PrevValue ' + prevValue);
 
     if (percentage < 100) {
-      setTimeout(()=>{this.add(); }, 900);
+      //setTimeout(()=>{this.add(); }, 900);
     }
 
 
@@ -36,10 +49,10 @@ export class Downloading extends Component {
       <Container>
         {/* <i class="material-icons"> {this.props.icon}</i> */}
         <Volume percentage={`${value}%`} prevValue={`${prevValue}%`} />
-        <p>{percentage}</p>
-        <p>downloading {this.props.type} files </p>
+        <p>{percentage} %</p>
+        <p>{txt.downloading} {type}  </p>
         <BorderButton
-          onClick ={this.props.cancel} txt={'Cancel'}
+          onClick ={this.props.cancel} txt={txt.cancel}
           color={'#009CFF'}
           height={'40px'}
           width={'214px'}

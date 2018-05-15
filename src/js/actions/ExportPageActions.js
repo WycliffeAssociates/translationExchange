@@ -32,20 +32,59 @@ export const resetSelected = () => {
 
 
 
-export const download = (projectId, chaptersIds, type) => {
+export const downloadChapters = (type, chaptersIds, callback) => {
+
   return dispatch => {
     return axios
-      .get(`${config.apiUrl}download/?${projectId}`,
+      .get(`${config.apiUrl}zip`,
         {
-          headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+          headers: { Authorization: 'Token ' + localStorage.getItem('token')},
+          params: {  file_format: type,
+            chapters: chaptersIds},
+
         })
       .then(response => {
+        const taskId = response.data.task_id;
+        dispatch({type: 'PREPARING_DOWNLOAD', taskId});
+
 
       })
       .catch(error => {
         console.log(error);
-        
+
       });
   };
+
+};
+
+
+export const getDownloadProgress = (taskId, callback) => {
+
+  return axios
+    .get(`${config.apiUrl}tasks/${taskId}`,   {
+      headers: { Authorization: 'Token ' + localStorage.getItem('token')}
+    })
+    .then(response => {
+      const {progress, details} = response.data
+
+      if (progress === 100) {
+        callback(progress, true);
+        window.location = config.streamingUrl + details.result;
+      } else {
+        callback(progress);
+      }
+
+
+
+      //dispatch({type: 'UPDATE_PROGRESS', progress});
+
+
+
+    })
+    .catch(error => {
+      console.log(error);
+
+    });
+
 
 };

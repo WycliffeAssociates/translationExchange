@@ -43,17 +43,17 @@ const Fill = styled.g`
     animation-name: fillAction;
     animation-iteration-count: infinite;
     animation-timing-function: cubic-bezier(.2, .6, .8, .4);
-    animation-duration: 1s;
+    animation-duration: 2s;
     animation-fill-mode: forwards;
 
 
 
     @keyframes fillAction {
       from {
-        transform: translateY(${props=> props.prevValue});
+        transform: translateY(82%);
       }
       to {
-        transform: translateY(${props => props.percentage});
+        transform: translateY(10%);
       }
     }
 

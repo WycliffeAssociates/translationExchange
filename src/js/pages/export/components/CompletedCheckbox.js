@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-export const CompletedCheckbox = ({checked, toggleCheck}) => {
+export const CompletedCheckbox = ({checked, toggleCheck, txt}) => {
 
   return (
     <ButtonContainer>
@@ -10,7 +10,7 @@ export const CompletedCheckbox = ({checked, toggleCheck}) => {
         <CheckBox checked={checked} onClick={toggleCheck}>
           {checked ? <i class="material-icons">done</i> : ''}
         </CheckBox>
-        completed
+        {txt.completed}
         <i class="material-icons">done</i>
       </CompletedButton>
     </ButtonContainer>

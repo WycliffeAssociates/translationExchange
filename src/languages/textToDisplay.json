@@ -57,7 +57,19 @@
    "alreadyPublished": "You can only have one publised take, UNPUBLISH first",
    "deleteTake": "Are you sure you want to delete this Take?",
    "deletingTake": "Deleting Take...",
-   "deletingComment": "Deleting comment"
+   "deletingComment": "Deleting comment",
+   "exportProject":"Export Project",
+   "editing": "Editing",
+   "listenining":"Listening",
+   "downloading": "Downloading",
+   "cancel": "Cancel",
+   "back": "Back",
+   "export": "Export",
+   "select": "Select",
+   "transfer": "Transfer",
+   "completed":"Completed",
+   "next": "Next"
+
 
    },
    "Spanish": {
@@ -118,7 +130,18 @@
      "alreadyPublished": "Solo puedes tener una grabación publicada a la vez, remueve la grabación publicada",
      "deleteTake": "Estás seguro que quieres borrar esta grabación?",
      "deletingTake": "Borrando grabación",
-     "deletingComment": "Borrando Comentario"
+     "deletingComment": "Borrando Comentario",
+     "exportProject": "Exportar Proyecto",
+     "editing": "Editar",
+     "listenining":"Escuchar",
+     "downloading": "Descargar",
+     "cancel": "Cancelar",
+     "back":"Regresar",
+     "export": "Exportar",
+     "select": "Seleccionar",
+     "transfer": "Transferir",
+     "completed":"Completados",
+     "next": "Siguiente"
 
    },
    "Russian": {
