@@ -24,7 +24,7 @@ script:
 - docker-compose up -d
 - docker ps -a
 - docker-compose -f test-runner.yml run --rm test-runner
-- sonar-scanner 
+- sonar-scanner -X 
 afer_script:
 - docker-compose down
 cache:
