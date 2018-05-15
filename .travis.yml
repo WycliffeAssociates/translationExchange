@@ -25,7 +25,7 @@ script:
 - docker-compose up -d
 - docker ps -a
 - docker-compose -f test-runner.yml run --rm test-runner
-- sonar-scanner
+- sonar-scanner -Dsonar.projectKey=translationExchange -Dsonar.sources=.
 afer_script:
 - docker-compose down
 cache:
