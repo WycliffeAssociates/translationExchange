@@ -3,13 +3,15 @@ import styled,{keyframes} from 'styled-components';
 import {zoomIn} from 'react-animations';
 import CircularProgressbar from 'react-circular-progressbar';
 import QueryString from 'query-string';
+import GradientSVG from './GradientSVG';
+import Comments from './Comments.js';
 
 
 
 export default class ChapterCard extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state ={
       numberInRow: '',
@@ -50,7 +52,7 @@ export default class ChapterCard extends Component {
 
 
       var width = window.innerWidth;
-      width = width-(width*0.1); // takeaway 10% because of padding on parent container
+      width = width-(width*0.2); // takeaway 20% because of padding on parent container
       var numberInRow = (width/200) | 0;
       this.setState({
         numberInRow: numberInRow,
@@ -59,7 +61,7 @@ export default class ChapterCard extends Component {
     }
 
     render() {
-      const { number, total_chunks, uploaded_chunks, published_chunks, txt } = this.props;
+      const { number, total_chunks, uploaded_chunks, published_chunks, txt, viewingComments, comments } = this.props;
       const {numberInRow, width} = this.state;
 
       let dangerSign = true;
@@ -74,51 +76,69 @@ export default class ChapterCard extends Component {
 
       return (
 
-        <Card check ={checkLevel_1} numberInRow = {numberInRow} screenWidth={width}>
-          <InformationContainer >
-            <TextContainer>
-              <P>{txt.chapter} {number}</P>
-              {dangerSign ? <i class="material-icons">warning</i>:''}
-            </TextContainer>
-            {checkLevel_1 ?
-              <CheckTextContainer>
-                <CheckText>{txt.level} 1</CheckText>
-              </CheckTextContainer>
-              :
-              ''
-            }
+        <CardContainer numberInRow = {numberInRow} screenWidth={width}>
+          <label><i className="material-icons">chrome_reader_mode</i> {number}</label>
 
-          </InformationContainer>
+          {
+            viewingComments?
+              <Card check ={checkLevel_1} >
+                <Comments comments={comments} {...this.props} />
+              </Card> :
+
+              <Card check ={checkLevel_1} > <InformationContainer >
+                {checkLevel_1 ?
+                  <CheckTextContainer>
+                    <CheckText>{txt.level} 1</CheckText>
+                  </CheckTextContainer>
+                  :
+                  ''
+                }
+
+              </InformationContainer>
 
 
 
-          {checkLevel_1 ?
-            <CircularProgressContainer check ={checkLevel_1}>
+              {checkLevel_1 ?
+                <CircularProgressContainer check ={checkLevel_1}>
 
-              <i style={{fontSize: '9vw'}} class="material-icons">star_border</i>
+                  <i style={{fontSize: '58px'}} class="material-icons">star_border</i>
 
-            </CircularProgressContainer>
-            :
-            <CircularProgressContainer>
-              <CircularTextContainer>
-                <CircularText>{chunksCompleted}</CircularText>
-              </CircularTextContainer>
-              <CircularProgressbar
-                percentage={percentageCompleted}
-                textForPercentage={null}
-              />
-            </CircularProgressContainer>
+                </CircularProgressContainer>
+                :
+                <CircularProgressContainer>
+                  <CircularTextContainer dangerSign={dangerSign}>
+                    {dangerSign ? <i class="material-icons">warning</i>: <i class="material-icons">warning</i>}
+                    <CircularText>{chunksCompleted}</CircularText>
+                  </CircularTextContainer>
+
+                  <GradientSVG startColor="#00C5FF" endColor= "#0076FF" rotation="90" idCSS="progress" />
+                  <CircularProgressbar
+                    percentage={percentageCompleted}
+                    textForPercentage={null}
+                    strokeWidth={13}
+                  />
+
+                </CircularProgressContainer>
+              }
+
+              <ButtonContainer>
+                {checkLevel_1?
+                  <ReviewButton check={checkLevel_1} onClick={this.reviewChapter}>
+                    <i className="material-icons">done_all</i>
+                    {txt.review}
+                  </ReviewButton>
+                  :
+
+                  <BoardButton check={checkLevel_1} onClick={this.reviewChapter}>
+                    {txt.board}
+                    <img src={require('../../../../assets/images/project.svg')} />
+                  </BoardButton>
+
+                }
+              </ButtonContainer>
+              </Card>
           }
-
-
-
-          <ButtonContainer>
-            <ReviewButton check={checkLevel_1} onClick={this.reviewChapter}>
-              <i style={{fontSize: '16px'}} class="material-icons">done_all</i>
-              <p style={{fontSize: '16px', marginLeft: '5px'}}>  {txt.review} </p>
-            </ReviewButton>
-          </ButtonContainer>
-        </Card>
+        </CardContainer>
 
 
       );
@@ -131,6 +151,142 @@ export default class ChapterCard extends Component {
 
 
 const zoomInAnimation = keyframes `${zoomIn}`;
+
+const CardContainer=styled.div`
+text-align: center;
+color: #3D3C3C;
+font-size: 32px;
+width: 200px;
+margin: auto;
+margin-top: 3vw;
+i{
+  vertical-align: middle;
+  margin-right: 5px;
+  font-size: 32px;
+}
+@media only screen and (max-width: 666px) {
+     margin: auto;
+     margin-top: 5%;
+   }
+@media only screen and (min-width: 667px) {
+   :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+   margin-left: ${props => props.screenWidth*0.125}px;
+ }
+   :nth-child(${props => (props.numberInRow*2)-1}n) {
+   margin-right: ${props =>  props.screenWidth*0.125}px;
+ }
+ }
+
+ @media only screen and (min-width: 950px) {
+   :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+   margin-left: ${props => props.screenWidth*0.15}px;
+   }
+
+ :nth-child(${props => (props.numberInRow*2)-1}n) {
+ margin-right: ${props =>  props.screenWidth*0.15}px;
+ }
+
+@media only screen and (min-width: 1000px) {
+  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+  margin-left: ${props => props.screenWidth*0.1}px;
+  }
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.1}px;
+}
+
+@media only screen and (min-width: 1333px) {
+:nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+margin-left: ${props => props.screenWidth*0.05}px;
+}
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.05}px;
+}
+}
+
+@media only screen and (min-width: 1386px) {
+:nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+margin-left: ${props => props.screenWidth*0.075}px;
+}
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.075}px;
+}
+}
+
+@media only screen and (min-width: 1466px) {
+:nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+margin-left: ${props => props.screenWidth*0.1}px;
+}
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.1}px;
+}
+}
+
+@media only screen and (min-width: 1482px) {
+:nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+margin-left: ${props => props.screenWidth*0.1}px;
+}
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.1}px;
+}
+}
+
+@media only screen and (min-width: 1500px) {
+:nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+margin-left: ${props => props.screenWidth*0.05}px;
+}
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.05}px;
+}
+}
+
+@media only screen and (min-width: 1671px) {
+:nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+margin-left: ${props => props.screenWidth*0.075}px;
+}
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.075}px;
+}
+}
+
+@media only screen and (min-width: 1750px) {
+:nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+margin-left: ${props => props.screenWidth*0.05}px;
+}
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.05}px;
+}
+}
+
+@media only screen and (min-width: 1940px) {
+:nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+margin-left: ${props => props.screenWidth*0.075}px;
+}
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.075}px;
+}
+}
+
+@media only screen and (min-width: 2000px) {
+:nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
+margin-left: ${props => props.screenWidth*0.05}px;
+}
+
+:nth-child(${props => (props.numberInRow*2)-1}n) {
+margin-right: ${props =>  props.screenWidth*0.05}px;
+}
+}
+}
+
+`;
 
 const Card= styled.div`
     color: ${props=> props.check ? 'white': ''}
@@ -145,7 +301,7 @@ const Card= styled.div`
     margin-top: 3vw;
     padding: 15px;
     margin: auto;
-    margin-top: 2vw;
+    margin-top: 1vw;
     animation: ${zoomInAnimation} .2s ease-in;
     display: flex;
     justify-content: center;
@@ -153,110 +309,21 @@ const Card= styled.div`
     flex-direction: column;
     text-align: center;
 
-    @media only screen and (max-width: 666px) {
-      margin: auto;
-      margin-top: 5%;
-    }
-    @media only screen and (min-width: 667px) {
-      :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
-      margin-left: ${props => props.screenWidth*0.125}px;
-    }
-
-      :nth-child(${props => (props.numberInRow*2)-1}n) {
-      margin-right: ${props =>  props.screenWidth*0.125}px;
-    }
-    }
-
-    @media only screen and (min-width: 950px) {
-      :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
-      margin-left: ${props => props.screenWidth*0.1}px;
-      }
-
-    :nth-child(${props => (props.numberInRow*2)-1}n) {
-    margin-right: ${props =>  props.screenWidth*0.1}px;
-  }
-
-  @media only screen and (min-width: 1333px) {
-    :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
-    margin-left: ${props => props.screenWidth*0.05}px;
-    }
-
-  :nth-child(${props => (props.numberInRow*2)-1}n) {
-  margin-right: ${props =>  props.screenWidth*0.05}px;
-}
-}
-
-@media only screen and (min-width: 1482px) {
-  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
-  margin-left: ${props => props.screenWidth*0.075}px;
-  }
-
-:nth-child(${props => (props.numberInRow*2)-1}n) {
-margin-right: ${props =>  props.screenWidth*0.075}px;
-}
-}
-
-@media only screen and (min-width: 1556px) {
-  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
-  margin-left: ${props => props.screenWidth*0.05}px;
-  }
-
-:nth-child(${props => (props.numberInRow*2)-1}n) {
-margin-right: ${props =>  props.screenWidth*0.05}px;
-}
-}
-
-@media only screen and (min-width: 1728px) {
-  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
-  margin-left: ${props => props.screenWidth*0.075}px;
-  }
-
-:nth-child(${props => (props.numberInRow*2)-1}n) {
-margin-right: ${props =>  props.screenWidth*0.075}px;
-}
-}
-
-@media only screen and (min-width: 1778px) {
-  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
-  margin-left: ${props => props.screenWidth*0.05}px;
-  }
-
-:nth-child(${props => (props.numberInRow*2)-1}n) {
-margin-right: ${props =>  props.screenWidth*0.05}px;
-}
-}
-
-@media only screen and (min-width: 1976px) {
-  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
-  margin-left: ${props => props.screenWidth*0.075}px;
-  }
-
-:nth-child(${props => (props.numberInRow*2)-1}n) {
-margin-right: ${props =>  props.screenWidth*0.075}px;
-}
-}
-
-@media only screen and (min-width: 2000px) {
-  :nth-child(${props => (props.numberInRow*2)-1}n-${props => props.numberInRow-2}) {
-  margin-left: ${props => props.screenWidth*0.05}px;
-  }
-
-:nth-child(${props => (props.numberInRow*2)-1}n) {
-margin-right: ${props =>  props.screenWidth*0.05}px;
-}
-}
-    }
-
 `;
 Card.displayName = 'Card';
 
 const CircularTextContainer = styled.div`
     position: absolute;
+    text-align: center;
+    i {
+      color: ${props=> props.dangerSign? '#FF9800': '#E9E9E9' }
+    }
 `;
 CircularTextContainer.displayName = 'CircularTextContainer';
 
 const CircularText = styled.p`
-    font-size: 18px;
+    font-size: 24px;
+    font-weight: bold;
 `;
 CircularText.displayName = 'CircularText';
 
@@ -265,32 +332,52 @@ const CheckText = styled.p`
 `;
 CheckText.displayName = 'CheckText';
 
+const ButtonContainer= styled.div`
+    width: 190px;
+    margin-top: 40px;
+    overflow: hidden;
+    text-align: center;
+    border-color: white;
+    border-width: 1vw;
+    display: flex;
+    justify-content:center;
+    border-radius: 5px;
+    min-height: 40px;
+`;
+ButtonContainer.displayName = 'ButtonContainer';
 
 const ReviewButton= styled.button`
   display:flex;
+  justify-content: center;
   color: ${props=> props.check ? '#009CFF': 'white'};
-  background: linear-gradient(to bottom,${props => props.check ? '#FFF, #FFF': '#0076FF, #00C5FF'} );
-  font-size: 12px;
+  background: linear-gradient(to top,${props => props.check ? '#FFF, #FFF': '#0076FF, #00C5FF'} );
+  font-size: 16px;
   font-weight: 100;
   border: none;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
   outline:none;
   cursor: pointer;
   margin: auto;
-  padding: 10px 35px;
+  text-align: center;
   min-height: 40px;
   width: inherit;
 
   i {
     vertical-align: middle;
-    text-decoration: none;
-  }
-
-  p {
-    text-decoration: underline;
+    font-size: 16px;
+    margin-left: 10px;
   }
 `;
 ReviewButton.displayName = 'ReviewButton';
+const BoardButton = styled(ReviewButton)`
+img{
+  color: white;
+  height: 25px;
+  width: 25px;
+  margin-left: 5px;
+}
+`;
+BoardButton.displayName = 'BoardButton';
 
 const CircularProgressContainer = styled.div`
     display: flex;
@@ -342,16 +429,3 @@ const TextContainer = styled.div`
   }
 `;
 TextContainer.displayName = 'TextContainer';
-
-const ButtonContainer= styled.div`
-    width: 150px;
-    margin-top: 10px;
-    overflow: hidden;
-    text-align: center;
-    border-color: white;
-    border-width: 1vw;
-    display: flex;
-    justify-content:center;
-    border-radius: 25px;
-`;
-ButtonContainer.displayName = 'ButtonContainer';

@@ -39,7 +39,7 @@
    "uploading": "uploading...",
    "yes": "Yes",
    "languages": "Languages",
-   "level":"level",
+   "level":"Level",
    "goToNextChapter":"Next Chapter",
    "unavailable": "Unavailable",
    "selected": "Selected",
@@ -59,6 +59,7 @@
    "deletingTake": "Deleting Take...",
    "deletingComment": "Deleting comment",
    "progressPage": "Progress Page"
+   "board": "Board"
 
    },
    "Spanish": {
@@ -121,8 +122,7 @@
      "deletingTake": "Borrando grabación",
      "deletingComment": "Borrando Comentario",
      "progressPage": "Página de Subida"
-
-
+     "board": "Tablero"
    }
 
 }

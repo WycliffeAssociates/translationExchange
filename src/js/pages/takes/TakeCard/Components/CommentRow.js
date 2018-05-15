@@ -24,7 +24,7 @@ export default class TakeCardCommentRow extends React.Component {
         x: 0, y: 0
       }
     };
-    this.play = this.play.bind(this);
+    this.playOwner = this.playOwner.bind(this);
     this.ended = this.ended.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
@@ -36,7 +36,7 @@ export default class TakeCardCommentRow extends React.Component {
 
   }
 
-  play() {
+  playOwner() {
     this.setState({playing: true});
   }
 
@@ -98,7 +98,7 @@ export default class TakeCardCommentRow extends React.Component {
             <PlayerTracker url={comment.location} />
           </CommentPlayer>
 
-          <IdenticonContainer>
+          <IdenticonContainer onClick={this.playOwner}>
             <Identicon id={`CommentUser${comment.id}`} data-jdenticon-hash={comment.owner_icon_hash} />
             <ReactPlayer url={`${config.streamingUrl}${comment.owner_name_audio}`} playing={this.state.playing} onEnded={()=> this.ended()}  />
           </IdenticonContainer>
@@ -160,7 +160,7 @@ const CommentPlayer = styled.div`
 `;
 
 const IdenticonContainer =styled.div`
-  background-color: white;
+  background-color: lightgray;
   height: 1.5vw;
   width: 1.5vw;
   margin-right: 5%;

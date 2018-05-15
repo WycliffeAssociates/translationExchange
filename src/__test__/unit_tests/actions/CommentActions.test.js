@@ -78,7 +78,7 @@ describe('Comments Actions Test Suite', ()=> {
 
     const store = mockStore({});
 
-    return store.dispatch(saveComment('blobx', 'chunk', 1, null, null, jest.fn(), null)).then(() => {
+    return store.dispatch(saveComment('blobx', 'chunk', 1, 1, 1, null,jest.fn(), jest.fn(),[])).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
@@ -101,7 +101,7 @@ describe('Comments Actions Test Suite', ()=> {
 
     const store = mockStore({});
 
-    return store.dispatch(saveComment('blobx', 'chapter', 1, null, null, jest.fn(), null)).then(() => {
+    return store.dispatch(saveComment('blobx', 'chapter', 1, 1, 1, null,jest.fn(), jest.fn(),[])).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
@@ -123,7 +123,7 @@ describe('Comments Actions Test Suite', ()=> {
 
     const store = mockStore({});
 
-    return store.dispatch(saveComment('blobx', 'take', 1, null, null, jest.fn(), null)).then(() => {
+    return store.dispatch(saveComment('blobx', 'take', 1, 1, 1, null,jest.fn(), jest.fn(),[])).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

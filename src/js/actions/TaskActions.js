@@ -6,7 +6,7 @@ export const getTasks = (type) => {
     return axios
       .get(`${config.apiUrl}tasks/?type=${type || "upload"}`,
         {
-          headers: { Authorization: 'Token ' + localStorage.getItem('token') }
+          // headers: { Authorization: 'Token ' + localStorage.getItem('token') }
         })
       .then(response => {
         dispatch(getTasksSuccess(response.data));
