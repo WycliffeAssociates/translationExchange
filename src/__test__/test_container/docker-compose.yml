@@ -1,0 +1,29 @@
+version: '2'
+services:
+  backend_server:
+    build: .
+    container_name: te_backend
+    volumes:
+      - "${TEBACKEND}:/tE-backend"
+      - ./scripts:/scripts
+    environment:
+      - DJANGO_SETTINGS_MODULE=tRecorderApi.settings_test
+    command: bash -c "chmod +x /scripts/wait-for-it.sh
+                  && /scripts/wait-for-it.sh -h db -p 5432 -- rm -rf /tE-backend/tRecorderApi/api/migrations
+                  && mkdir /tE-backend/tRecorderApi/api/migrations
+                  && touch /tE-backend/tRecorderApi/api/migrations/__init__.py
+                  && cd /tE-backend/tRecorderApi
+                  && python3 manage.py makemigrations
+                  && python3 manage.py migrate 
+                  && python3 manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  db:
+    image: postgres
+    container_name: database 
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres

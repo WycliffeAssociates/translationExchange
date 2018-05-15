@@ -17,7 +17,7 @@ class AudioPlayer extends Component {
       durationTime: 0,
       updateTime: 0,
       initialWidth: 0,
-      showMarkers: false,
+      showMarkers: true,
       markerPosition: 0,
       markerClicked: false,
       audioFile: '',
@@ -46,13 +46,13 @@ class AudioPlayer extends Component {
     this.setState({
       audioFile: this.props.playlist[0].src,
       audioName: this.props.playlist[0].name,
-      markers: this.props.playlist[0].markers
+      markers: this.props.playlist[0].markers,
     });
   }
 
   componentDidMount() {
     this.setState({ initialWidth: this.rangeInput.offsetWidth });
-    window.addEventListener("resize", this.updateDimensions.bind(this));
+    window.addEventListener('resize', this.updateDimensions.bind(this));
 
   }
 
@@ -109,7 +109,7 @@ class AudioPlayer extends Component {
 
 
     for (const key in receivedMarkerObject) {
-      
+
       const position = ((receivedMarkerObject[key] / 44100) / (this.state.durationTime)) * this.state.initialWidth;
       markerArray.push(<Marker
         style={{ overflow: 'visible' }}
@@ -137,7 +137,7 @@ class AudioPlayer extends Component {
         audioName: this.props.playlist[i].name,
         markers: this.props.playlist[i].markers,
         pointer: this.state.pointer + 1,
-        looping: true
+        looping: true,
 
       });
       this.props.takeId(i);
@@ -149,7 +149,7 @@ class AudioPlayer extends Component {
         audioName: this.props.playlist[0].name,
         markers: this.props.playlist[0].markers,
         pointer: 1,
-        looping: false
+        looping: false,
 
       });
       this.props.takeId(0);
@@ -179,7 +179,7 @@ class AudioPlayer extends Component {
     let markers = '';
     let Button = <PlayButton onClick={() => this.props.playAudio()} />;
     if (this.props.play) {
-      Button = <PauseButton onClick={() => this.props.stopAudio()} />
+      Button = <PauseButton onClick={() => this.props.stopAudio()} />;
     }
 
     if (this.state.showMarkers) {
@@ -218,25 +218,25 @@ class AudioPlayer extends Component {
 
 const styles = {
   container: {
-    display: "flex",
-    backgroundColor: "#000",
+    display: 'flex',
+    backgroundColor: '#000',
     height: 125,
-    flexDirection: "row",
-    flex: "1 1 0"
+    flexDirection: 'row',
+    flex: '1 1 0',
   },
   waveformContainer: {
-    position: "relative",
-    alignSelf: "center",
-    flex: "1 1 auto",
-    marginLeft: 20
+    position: 'relative',
+    alignSelf: 'center',
+    flex: '1 1 auto',
+    marginLeft: 20,
   },
   markerContainer: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
-    width: "100%",
-    height: "100%"
-  }
+    width: '100%',
+    height: '100%',
+  },
 };
 
 const mapStateToProps = state => {
@@ -254,7 +254,7 @@ const mapDispatchToProps = dispatch => {
     playAudio,
     stopAudio,
     updateTime,
-    takeId
+    takeId,
   }, dispatch);
 };
 

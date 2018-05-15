@@ -14,15 +14,24 @@
 //      streamingUrl: "http://127.0.0.1/"
 // };
 
-
-const config = {                                                        //remote api
-    apiUrl: "https://localhost/api/",
-    streamingUrl: "https://localhost/"
+const config = {                                                        // local development
+  apiUrl: 'http://localhost/api/',
+  streamingUrl: 'http://localhost/',
+  redirectUri: 'http://localhost:3000',
 };
 
-// const config = {                                                        //remote api
-//     apiUrl: "https://te.loc/api/",
-//     streamingUrl: "https://te.loc/"
+// const config = {                                                        //production
+//     apiUrl: 'https://te.loc/api/',
+//     streamingUrl: 'https://te.loc/',
+//     redirectUri: 'https://te.loc/'
 // };
+
+// const config = {                                                        // new VM
+//   apiUrl: 'https://opentranslationtools.org/api/',
+//   streamingUrl: 'https://opentranslationtools.org/',
+//   redirectUri: 'http://opentranslationtools.org',
+// };
+
+
 
 export default config;

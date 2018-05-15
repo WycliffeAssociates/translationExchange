@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chapter card comments renders correctly and matches snapshot 1`] = `
+<div
+  className="sc-bdVaJa clJTvb"
+  onClick={undefined}
+>
+  <button
+    className="sc-bwzfXH cRDOlu"
+  >
+    <i
+      className="material-icons"
+    >
+      forum
+    </i>
+  </button>
+</div>
+`;

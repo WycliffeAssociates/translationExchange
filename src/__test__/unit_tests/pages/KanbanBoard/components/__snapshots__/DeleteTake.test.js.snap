@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeleteTake DropTarget renders correctly 1`] = `
+<div
+  style={
+    Object {
+      "bottom": "7.5vh",
+      "height": "25.5vh",
+      "position": "fixed",
+      "right": "18vw",
+      "width": "20.5vw",
+      "zIndex": "101",
+    }
+  }
+>
+  <div
+    className="sc-bdVaJa iIHwQN"
+  >
+    <button
+      className="sc-bwzfXH cPWCet"
+    >
+      <i
+        className="material-icons"
+      >
+        delete
+      </i>
+    </button>
+  </div>
+</div>
+`;
