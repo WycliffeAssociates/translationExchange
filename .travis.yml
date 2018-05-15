@@ -9,6 +9,10 @@ services:
 - docker
 git:
   depth: 1
+addons:
+  sonarcloud:
+    organization: wa-github
+    token: "${SONAR_TOKEN}"
 before_install:
 - chmod +x extra-setup.sh
 - source extra-setup.sh
@@ -26,6 +30,7 @@ cache:
   directories:
   - "$HOME/.m2/repository"
   - "${PROJ_DIR}/node_modules"
+  - "$HOME/.sonar/cache"
 notifications:
   slack:
     rooms:
