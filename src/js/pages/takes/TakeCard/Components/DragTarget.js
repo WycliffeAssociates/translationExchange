@@ -223,8 +223,9 @@ const takeSource = {
       }
     }
 
-    else if (dropResult && dropResult.listId === 3 && item.rating === 3) {
-
+    else if (dropResult && dropResult.listId === 3 && item.rating === 3
+       && item.take.published===true) {
+      // UNPUBLISH A TAKE
       props.makeChanges(
         item.take.published,
         dropResult.listId,

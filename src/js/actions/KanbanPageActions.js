@@ -120,12 +120,13 @@ export const patchTake = (
   success,
   takes,
   chapterId,
+  rating, //what is takes current rating
+  isPublished //is take currently published
 ) => {
 
   return function(dispatch, getState) {
 
     const {chunks} = getState().kanbanPage;
-
     return axios
       .patch(config.apiUrl + 'takes/' + takeId + '/', patch,{
         headers: { Authorization: 'Token ' + localStorage.getItem('token') },
@@ -135,14 +136,16 @@ export const patchTake = (
         const take = response.data;
 
         chunks.map(chk => {
+
           if (chk.id === chunkId && patch.published) {    // select the chunk that we are updating and verify if it is
             chk.published_take = take;                // marked as published, update the published take inside the chunk obj
 
           }
-          if (chk.id === chunkId && !patch.published) {    // unpublish take at chunk level
+          else if (chk.id === chunkId && !patch.published // unpublish take at chunk level
+          && rating === 3 && isPublished ===true) {
+            //
             chk.published_take = null;
           }
-
         });
 
         //find correct take to update

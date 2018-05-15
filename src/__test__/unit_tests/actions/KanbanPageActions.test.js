@@ -85,7 +85,7 @@ describe('KanbanPageActions Suite', () => {
     }});
     return store.dispatch(patchTake(1,{
       published: false, rating: 2},jest.fn(),
-    [],1)).then(() => {
+    [],1, 2,  false)).then(() => {
       expect(JSON.stringify(store.getActions())).toEqual(JSON.stringify(expectedActions)); // Jest Test “Compared values have no visual difference.” conver to JSON to resolve error
 
     });
