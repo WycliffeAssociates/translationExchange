@@ -6,7 +6,7 @@ import Loading from '../../components/Loading';
 import {selections, getChapters, getUserHash, resetSelected, downloadChapters, getDownloadProgress} from '../../actions';
 import {ExportCard, CompletedCheckbox, Footer, ChapterSelected, ExportProject} from './components';
 import styled from 'styled-components';
-import QueryString from "query-string";
+import QueryString from 'query-string';
 
 
 
@@ -50,7 +50,7 @@ export class ExportPage extends Component {
 
   render() {
     const { checked, readyToExport, downloading } = this.state;
-    const { chaptersSelected, chapters, numbersSelected, location, txt, taskId, downloadInProgress, progress } = this.props;
+    const { chaptersSelected, chapters, location, txt, taskId, downloadInProgress, resetSelected } = this.props;
     const query = QueryString.parse(location.search);
 
     return (
@@ -71,7 +71,7 @@ export class ExportPage extends Component {
           downloading ? ''
             :
             <CardsContainer center={readyToExport}>
-              {readyToExport ? numbersSelected.map(num => <ChapterSelected number={num} txt={txt} />)
+              {readyToExport ? <ChapterSelected number={chaptersSelected.length} txt={txt} />
                 :
                 chapters ? chapters.map((chp, index) => <ExportCard key={index} {...this.props} {...chp} />): ''
               }
@@ -81,7 +81,7 @@ export class ExportPage extends Component {
         {readyToExport ? <ExportProject
           getDownloadProgress={getDownloadProgress}
           taskId={taskId}
-          progress={progress}
+          resetSelected={resetSelected}
           txt={txt}
           downloadInProgress={downloadInProgress}
           cancel={this.cancel}
@@ -104,8 +104,7 @@ const ExportPageContainer = styled.div`
     top:0;
     left:0;
     width: 100%;
-    height: auto;
-    min-height: 850px;
+    height: 100%;
     flex-direction: column;
     background-color: #FFF;
     overflow-y: scroll;
@@ -113,7 +112,6 @@ const ExportPageContainer = styled.div`
 
 
 const CardsContainer = styled.div`
-    height:100%;
     width: 97%;
     flex-wrap: wrap;
     background: #FFF;
@@ -138,41 +136,24 @@ const HeaderContainer = styled.div`
 `;
 
 
-const mockup = (
-<div>
-  <ExportCard number={1} id ={1} {...this.props}  completedSelected={true} published={true} />
-  <ExportCard number={2}  id ={2} {...this.props}   completedSelected={true} published={false} />
-  <ExportCard number={3}  id ={3} {...this.props}   completedSelected={true} published={true} />
-  <ExportCard number={4}  id ={4} {...this.props}   completedSelected={true} published={true} />
-  <ExportCard number={5}  id ={5} {...this.props}  completedSelected={true} published={false} />
-  <ExportCard number={6}  id ={6} {...this.props}  completedSelected={true} published={true} />
-  <ExportCard number={7}  id ={7} {...this.props}   completedSelected={true} published={false} />
-  <ExportCard number={8}  id ={8} {...this.props}   completedSelected={true} published={true} />
-  <ExportCard number={9}  id ={9} {...this.props}   completedSelected={true} published={true} />
-  <ExportCard number={10}  id ={10} {...this.props}  completedSelected={true} published={false} />
-  <ExportCard number={11}  id ={11} {...this.props}  completedSelected={true} published={true} /> -->
-  </div>
-);
-
-
-
-
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({ getChapters, selections, getUserHash, resetSelected, downloadChapters, getDownloadProgress}, dispatch);
+  return bindActionCreators({ getChapters,
+    selections, getUserHash, resetSelected,
+    downloadChapters, getDownloadProgress}, dispatch);
 
 };
 
 const mapStateToProps = state => {
 
   const {chapters, loading} =state.Chapters;
-  const { chaptersSelected, numbersSelected, taskId, downloadInProgress, progress } = state.ExportPage;
+  const { chaptersSelected, numbersSelected, taskId, downloadInProgress} = state.ExportPage;
 
   const {loggedInUser} =state.user;
 
   const {txt} = state.geolocation;
 
-  return {chapters, loggedInUser, loading, txt, chaptersSelected, numbersSelected, taskId, downloadInProgress, progress };
+  return {chapters, loggedInUser, loading, txt, chaptersSelected, numbersSelected, taskId, downloadInProgress };
 };
 
 

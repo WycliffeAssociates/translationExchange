@@ -17,7 +17,6 @@ import ExportPage from './js/pages/export/ExportPage';
 import CustomDragLayer from './CustomDragLayer';
 import ChapterPage from './js/pages/chapters/ChaptersPage';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
-import {Volume} from './js/pages/export/components'
 
 // import and configure the raven client for sentry in order to track errors
 import Raven from 'raven-js';
@@ -64,7 +63,6 @@ class App extends Component {
           <Route path ="/kanban" component={KanbanPage} />
           <Route path ="/export" component={ExportPage} />
           <Route path ="/errorPage" component={ErrorPage} />
-          <Route path ="/volume" component={Volume} />
           <Route path="*" component={NotFound} />
         </Switch>
 

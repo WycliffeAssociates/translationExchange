@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import NavBar from '../../../components/NavBar';
 import {ChapterSelected, Downloading} from './';
 
 import styled from 'styled-components';
@@ -41,14 +38,14 @@ export class ExportProject extends Component {
 
 
   render() {
-    const { goBack, txt, downloadInProgress, taskId, getDownloadProgress , progress } = this.props;
+    const { goBack, txt, downloadInProgress, taskId, getDownloadProgress , resetSelected } = this.props;
     const {  icon, type, downloading } = this.state;
 
 
     return (
       <ExportProjectContainer>
-        {downloadInProgress && downloading ? <Downloading
-          getDownloadProgress={getDownloadProgress} progress={progress} taskId= {taskId} txt={txt} cancel={()=>this.cancel()} icon={icon} type={type}  />
+        { downloading ? <Downloading
+          getDownloadProgress={getDownloadProgress} resetSelected={resetSelected} taskId= {taskId} txt={txt} cancel={()=>this.cancel()} icon={icon} type={type}  />
           :
           <OptionsContainer>
             <Button color={'#009CFF'} height={'40px'} width={'214px'} iconSize={'24px'} border={'2px'} radius={'4px'} onClick={goBack}>

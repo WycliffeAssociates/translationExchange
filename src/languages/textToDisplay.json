@@ -60,7 +60,7 @@
    "deletingComment": "Deleting comment",
    "exportProject":"Export Project",
    "editing": "Editing",
-   "listenining":"Listening",
+   "listening":"Listening",
    "downloading": "Downloading",
    "cancel": "Cancel",
    "back": "Back",
@@ -68,7 +68,11 @@
    "select": "Select",
    "transfer": "Transfer",
    "completed":"Completed",
-   "next": "Next"
+   "next": "Next",
+   "done": "Done",
+   "generating":"Generating",
+   "yourFiles": "Your files will continue downloading, you can go back to projects",
+   "backToProjects": "Back to Projects"
 
 
    },
@@ -133,15 +137,20 @@
      "deletingComment": "Borrando Comentario",
      "exportProject": "Exportar Proyecto",
      "editing": "Editar",
-     "listenining":"Escuchar",
-     "downloading": "Descargar",
+     "listening":"Escuchar",
+     "downloading": "Descargando",
      "cancel": "Cancelar",
      "back":"Regresar",
      "export": "Exportar",
      "select": "Seleccionar",
      "transfer": "Transferir",
      "completed":"Completados",
-     "next": "Siguiente"
+     "next": "Siguiente",
+     "done": "Terminar",
+     "generating":"Generando",
+     "yourFiles": " La descarga va a continuar, puedes volver a tus proyectos.",
+     "backToProjects": "Regresar a Proyectos"
+
 
    },
    "Russian": {
@@ -181,7 +190,7 @@
       "take": "Дубль",
       "download": "Скачать",
       "commentsOn": "Коментарии по",
-      "downloadSrcAudio": "Скачать аудио источник",
+      "SrcAudio": "Скачать аудио источник",
       "month1": "January",
       "month2": "February",
       "month3": "March",

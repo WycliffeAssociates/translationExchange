@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import BorderButton from '../../../components/BorderButton';
-import {Volume} from './'
+import Searching from '../../../../assets/images/searching.png';
+import {LoadingMp3, LoadingWav} from './';
 
 export class Downloading extends Component {
 
@@ -21,44 +23,61 @@ export class Downloading extends Component {
     this.setState({percentage})
     if (done) {
       clearInterval(this.interval);
+
     }
   }
 
   componentWillUnmount() {
+
     clearInterval(this.interval);
   }
 
-  add() {
-    const {percentage, previous} = this.state;
-
-    this.setState({percentage: percentage +5, previous: percentage +2})
-  }
 
   render() {
-    const {type, txt} = this.props;
-    const {percentage, previous} = this.state;
-    const value = -.757*(percentage) + 85.7;
-    const prevValue = -.757*(previous) + 85.7;
+    const {type, txt, resetSelected} = this.props;
+    const {percentage} = this.state;
+    let downloading = false;
+    let svg = <LoadingMp3 /> ;
+    let textColor = '#009CFF';
 
-    if (percentage < 100) {
-      //setTimeout(()=>{this.add(); }, 900);
+    if (percentage === 100) {
+      downloading = true;
+    }
+
+    if (type === 'wav') {
+      svg = <LoadingWav />;
+      textColor= '#E56060';
     }
 
 
     return (
-      <Container>
-        {/* <i class="material-icons"> {this.props.icon}</i> */}
-        <Volume percentage={`${value}%`} prevValue={`${prevValue}%`} />
-        <p>{percentage} %</p>
-        <p>{txt.downloading} {type}  </p>
-        <BorderButton
-          onClick ={this.props.cancel} txt={txt.cancel}
-          color={'#009CFF'}
-          height={'40px'}
-          width={'214px'}
-          iconSize={'24px'}
-          border={'2px'}
-          radius={'4px'} />
+      <Container textColor ={textColor}>
+        {downloading ?
+          <Container>
+            <Image src={Searching} alt="Smiley face" height="10vw" width="10vw" />
+            <h1>{txt.downloading}...</h1>
+            <p>{txt.yourFiles}  </p>
+            <Link to="/projects">
+              <BlueButton onClick={()=>resetSelected()}> {txt.backToProjects} <i class="material-icons">book</i> </BlueButton>
+            </Link>
+          </Container>
+          :
+          <Container>
+            {svg}
+            <p>{percentage} %</p>
+            <p>{txt.generating} {type}  </p>
+            <BorderButton
+              onClick ={this.props.cancel} txt={txt.cancel}
+              color={'#009CFF'}
+              height={'40px'}
+              width={'214px'}
+              iconSize={'24px'}
+              border={'2px'}
+              radius={'4px'} />
+          </Container>
+
+        }
+
       </Container>
     );
   }
@@ -72,5 +91,39 @@ const Container = styled.div`
   align-items: center;
   i{
     font-size: 450px;
+    color:#43B52F;
   }
+
+  p{
+    width: 80%;
+    text-align: center;
+    color:${props => props.textColor}
+  }
+
 `;
+const Image = styled.img`
+   height: 400px;
+   width: 400px;
+   margin-top: 50px;
+`;
+
+const BlueButton = styled.button`
+    background: linear-gradient(to bottom, #00C5FF, #009CFF);
+    width: 154px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: 100;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: .3s ease-in-out;
+
+    i {
+      vertical-align: middle;
+      font-size: 16px;
+      color:white;
+    }
+
+    `;

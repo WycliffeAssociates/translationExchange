@@ -74,12 +74,6 @@ export const getDownloadProgress = (taskId, callback) => {
         callback(progress);
       }
 
-
-
-      //dispatch({type: 'UPDATE_PROGRESS', progress});
-
-
-
     })
     .catch(error => {
       console.log(error);

@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   downloadInProgress: false,
   loading: false,
   taskId: null,
-  progress: null
+  progress: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -26,7 +26,7 @@ export default (state = INITIAL_STATE, action) => {
 
     case 'PREPARING_DOWNLOAD':
       return {
-        ...state, taskId: action.taskId, downloadInProgress: true
+        ...state, taskId: action.taskId, downloadInProgress: true,
       };
 
     case 'UPDATE_PROGRESS':
@@ -34,9 +34,6 @@ export default (state = INITIAL_STATE, action) => {
 
     case 'RESET_SELECTED':
       return INITIAL_STATE;
-
-
-
 
     default: return state;
   }

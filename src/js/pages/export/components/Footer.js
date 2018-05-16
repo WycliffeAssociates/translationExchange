@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+import {slideInUp} from 'react-animations';
 
 
 
@@ -12,6 +13,8 @@ export const Footer = ({nextStep, txt}) => {
 
 };
 
+
+const slideInAnimation = keyframes`${slideInUp}`;
 
 const Button = styled.button`
     background: linear-gradient(to bottom, #0076FF, #00C5FF);
@@ -52,6 +55,7 @@ const Container = styled.div`
   box-shadow: 3px 4px 5px 7px rgba(0,0,0,0.2);
   z-index: 2;
   min-height: 90px;
+  animation: ${slideInAnimation} .1s ease-in;
 
 `;
 Container.displayName= 'Container';

@@ -67,6 +67,7 @@ export default class NewProjectCard extends React.Component {
               border={'2px'}
               radius={'4px'}
               fontSize={'14px'}
+              hoverColor={'#3BAC2A'}
             />
 
             <BlueButton onClick={this.reviewProject} >{txt.select} <i class="material-icons">touch_app</i> </BlueButton>

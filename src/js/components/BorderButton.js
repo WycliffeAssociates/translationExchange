@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default ({txt, icon, color, width, height, radius, iconSize, onClick, fontSize, border }) => {
+export default ({txt, icon, color, width, height, radius, iconSize, onClick, fontSize, border, hoverColor }) => {
   return (
-    <Button onClick={()=>onClick()} border={border} fontSize = {fontSize} color={color} width={width} height={height} radius={radius} iconSize={iconSize}>
+    <Button onClick={()=>onClick()} hoverColor={hoverColor} border={border} fontSize = {fontSize} color={color} width={width} height={height} radius={radius} iconSize={iconSize}>
       {txt ? txt : ''}
       {icon ? <i class="material-icons"> {icon}</i> : ''}
     </Button>);
@@ -27,7 +27,8 @@ const Button = styled.button`
   outline:none;
   transition: .2s ease-in-out;
   :hover{
-    background-color: ${props => props.color};
+    background-color: ${props => props.hoverColor? props.hoverColor: props.color};
+    border-color: ${props => props.hoverColor? props.hoverColor: props.color};
     color: #fff;
   }
 
