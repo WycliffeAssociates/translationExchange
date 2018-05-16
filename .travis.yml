@@ -13,19 +13,29 @@ addons:
   sonarcloud:
     organization: wa-github
     token: "${SONAR_TOKEN}"
-before_install:
-- chmod +x extra-setup.sh
-- source extra-setup.sh
-- env
-install:
-- cd src/__test__/test_container
-- docker-compose build backend_server
-script:
-- docker-compose up -d
-- docker ps -a
-- docker-compose -f test-runner.yml run --rm test-runner
-afer_script:
-- docker-compose down
+jobs:
+  include:
+    - stage: test
+      node_js:
+        - '8'
+      before_install:
+        - chmod +x extra-setup.sh
+        - source extra-setup.sh
+        - env
+        - cd src/__test__/test_container
+      install: 
+        - docker-compose build backend_server
+        - docker-compose up -d
+        - docker ps -a
+      script: docker-compose -f test-runner.yml run --rm test-runner
+      after_script: docker-compose down
+    - stage: sonar
+      allow_failures:
+        if: type IN (push, cron)
+        script: sonar-scanner -Dsonar.projectKey=translationexchange -Dsonar.sources=.
+stages:
+  - test
+  - sonar
 cache:
   directories:
   - "$HOME/.m2/repository"
