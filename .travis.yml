@@ -31,7 +31,7 @@ jobs:
       after_script: docker-compose down
     - stage: sonar
       allow_failures:
-        if: type = push AND (branch = master OR branch = dev)
+        if: type IN (push, cron)
         script: sonar-scanner -Dsonar.projectKey=translationexchange -Dsonar.sources=.
 stages:
   - test
