@@ -30,8 +30,7 @@ jobs:
     - stage: sonar
       node_js:
         - '8'
-      allow_failures:
-        script: sonar-scanner -Dsonar.projectKey=translationexchange -Dsonar.sources=.
+      script: sonar-scanner -Dsonar.projectKey=translationexchange -Dsonar.sources=.
 stages:
   - test
   - name: sonar
