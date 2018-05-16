@@ -35,7 +35,7 @@ jobs:
 stages:
   - test
   - name: sonar
-    if: type IN (push, cron)
+    if: type = cron
 cache:
   directories:
   - "$HOME/.m2/repository"
