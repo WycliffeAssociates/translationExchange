@@ -116,7 +116,7 @@ export const resetError = () => {
 //delete comment
 export const deleteComment = (commentId, type, typeId) => {
   return (dispatch, getState) => {
-    const {activeChunkId, chunkNum} = getState().kanbanPage;
+    const {activeChunkId, chunkNum} = getState().kanbanPage? getState().kanbanPage: 1;
 
     return axios
       .delete(config.apiUrl + 'comments/' + commentId + '/', {
@@ -128,7 +128,7 @@ export const deleteComment = (commentId, type, typeId) => {
           dispatch(commentOnTakeDeletedSuccess(activeChunkId, chunkNum, dispatch ));
         }
         else {
-          dispatch(commentDeletedSuccess(typeId, type, dispatch))
+          dispatch(commentDeletedSuccess(typeId, type, dispatch));
         }
 
       })
@@ -136,15 +136,15 @@ export const deleteComment = (commentId, type, typeId) => {
         console.log(error);
       });
 
-  }
-}
+  };
+};
 export const commentOnTakeDeletedSuccess = ( activeChunkId, chunkNum, dispatch) => { // comments on takes deleted uses another function because comments are nested on the takes
 
-dispatch(getTakes(activeChunkId, chunkNum ));
+  dispatch(getTakes(activeChunkId, chunkNum ));
 
-return {
+  return {
     type: 'COMMENT_DELETED',
-};
+  };
 
 };
 

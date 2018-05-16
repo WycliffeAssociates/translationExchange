@@ -20,4 +20,9 @@ describe('Error Page Test Suite', () => {
     expect(wrapper.find('ImageContainer').length).toEqual(1);
     expect(wrapper.find('Image').length).toEqual(1);
   });
+
+  it('should redirect to welcome page', ()=> {
+    wrapper.instance().redirect();
+    expect(mockProps.history[0]).toEqual('/welcome');
+  });
 });

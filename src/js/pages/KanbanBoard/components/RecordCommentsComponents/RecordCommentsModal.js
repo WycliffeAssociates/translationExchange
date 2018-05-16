@@ -88,6 +88,7 @@ class RecordCommentModal extends Component {
     const {search} = this.props.location;
     const query = QueryString.parse(search);
     let projectId = query.projectId;
+    // we need the projectId in order to getChapters from inside the saveComment action
     if (chapterPageComment === true) {
       this.props.saveComment( jsonBlob, type, id, chunkId, chunkNum, projectId, this.commentSaved, this.error, history);
     }

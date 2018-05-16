@@ -15,7 +15,7 @@ import styled from 'styled-components';
 import 'css/takes.css';
 import img from '../../../assets/images/obs-en-01-01.jpg';
 
-class KanbanPage extends React.Component {
+export class KanbanPage extends React.Component {
 
   constructor(props) {
     super(props);
@@ -79,6 +79,7 @@ overflow-y: auto;
 width: 100%;
 box-sizing: border-box;
 `;
+KanbanPageContainer.displayName = 'KanbanPageContainer';
 
 const KanbanContainer = styled.div`
  display: flex;
@@ -92,6 +93,7 @@ const KanbanContainer = styled.div`
  overflow-y: auto;
  box-sizing: border-box;
 `;
+KanbanPage.displayName = 'KanbanPage';
 
 const SourceAudio = styled.div`
   position: fixed;
@@ -102,6 +104,7 @@ const SourceAudio = styled.div`
   z-index: 99;
   max-height: 50px;
 `;
+SourceAudio.displayName = 'SourceAudio';
 
 const mapDispatchToProps = dispatch => {
 

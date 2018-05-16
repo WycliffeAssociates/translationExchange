@@ -6,7 +6,7 @@ var audioCtx='';
 if (! window.AudioContext) {
   if (!window.webkitAudioContext) {
     console.log('bad_browser');
-    return;
+    //return;
   }
   audioCtx = window.webkitAudioContext;
 }

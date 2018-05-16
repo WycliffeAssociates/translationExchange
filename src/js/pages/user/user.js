@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 // import {OAuthSignIn} from 'redux-auth/material-ui-theme';
 import 'css/home.css';
 import {connect} from 'react-redux';
-import {dispatchToken} from '../../actions/database.js';
 var defaultImg = require('../../../assets/images/white.png');
 
 
