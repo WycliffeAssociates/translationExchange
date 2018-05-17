@@ -17,7 +17,7 @@ export default ({recording, generatedHash, startRecording, redo, save, audio, tx
 
   if (audio) {
     header= txt.isThisOk;
-    handler = <svg id="canvas" width="20%" height="20%" data-jdenticon-value={generatedHash} />
+    handler = <svg id="canvas" width="20%" height="20%" data-jdenticon-hash={generatedHash} />
   }
 
   return (

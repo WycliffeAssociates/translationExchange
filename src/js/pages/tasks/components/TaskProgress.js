@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import TaskItem from './TaskItem';
-import TaskItemFailed from './TaskItemFailed';
+import TaskItemProgress from './TaskItemProgress';
+import TaskItemFinished from './TaskItemFinished';
 
 export default class TaskProgress extends React.Component {
 
@@ -14,17 +14,15 @@ export default class TaskProgress extends React.Component {
     return (
       
       <Container>
-        
         {
           this.props.tasks.map((task) => {
-            return task.status != "FAILURE" ? (
-              <TaskItem key={task.id} task={task} {...this.props} /> 
+            return task.status == "PROGRESS" || task.status == "STARTED"? (
+              <TaskItemProgress key={task.id} task={task} {...this.props} />
             ) : (
-              <TaskItemFailed key={task.id} task={task} {...this.props} />
+              <TaskItemFinished key={task.id} task={task} {...this.props} />
             );
           })
         }
-
       </Container>
 
     );
@@ -33,7 +31,6 @@ export default class TaskProgress extends React.Component {
 }
 
 const Container = styled.div`
-  width: 60vw;
   flex: 1
   flex-direction: column;
   max-height: 35vw;
@@ -41,5 +38,5 @@ const Container = styled.div`
   display: flex;
   flex-wrap: nowrap;
   aligh-self: center;
-  padding: 0 1vw;
 `;
+Container.displayName = "Container";

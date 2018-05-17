@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import QueryString from 'query-string';
 import update from 'immutability-helper';
 
-import TaskClearButton from './TaskClearButton';
+import TaskInfo from './TaskInfo';
+import TaskIdenticon from './TaskIdenticon';
 
-class TaskInfoFailed extends React.Component {
+class TaskInfoLeft extends React.Component {
 
   constructor(props) {
     super(props);
@@ -16,7 +17,8 @@ class TaskInfoFailed extends React.Component {
     
     return (
       <Container>
-        <TaskClearButton {...this.props} />
+        <TaskInfo {...this.props}></TaskInfo>
+        <TaskIdenticon task={this.props.task}></TaskIdenticon>
       </Container>
     );
   }
@@ -28,7 +30,8 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
 `;
+Container.displayName = "Container";
 
-export default TaskInfoFailed;
+export default TaskInfoLeft;

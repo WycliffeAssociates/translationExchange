@@ -2,7 +2,8 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
-import {getTakes, getChunks, patchTake, playTake} from '../../../js/actions';
+import {getTakes, getChunks, patchTake, playTake,
+  addTakeToDelete, removeTakeToDelete, updateTake} from '../../../js/actions';
 
 const middlewares = [thunk];
 const mockStore  = configureMockStore(middlewares);
@@ -84,7 +85,7 @@ describe('KanbanPageActions Suite', () => {
     }});
     return store.dispatch(patchTake(1,{
       published: false, rating: 2},jest.fn(),
-    [],1)).then(() => {
+    [],1, 2,  false)).then(() => {
       expect(JSON.stringify(store.getActions())).toEqual(JSON.stringify(expectedActions)); // Jest Test “Compared values have no visual difference.” conver to JSON to resolve error
 
     });
@@ -98,5 +99,35 @@ describe('KanbanPageActions Suite', () => {
     };
 
     expect(playTake(takeId)).toEqual(expectedAction);
+  });
+
+  it('should addTakeToDelete Queue', () => {
+    const takeId= 1;
+    const expectedAction = {
+      type: 'ADD_TAKE_TO_DELETE',
+      takeId,
+    };
+
+    expect(addTakeToDelete(takeId)).toEqual(expectedAction);
+  });
+
+  it('should addTakeToDelete Queue', () => {
+    const takeId= 1;
+    const takesToDelete =[1,3];
+    const expectedAction = {
+      type: 'REMOVE_TAKE_TO_DELETE',
+      takesToDelete: [3],
+    };
+
+    expect(removeTakeToDelete(takeId,takesToDelete)).toEqual(expectedAction);
+  });
+
+
+  it('should update take after removeTakeToDelete', () => {
+    const expectedAction = {
+      type: 'UPDATE_TAKE',
+    };
+
+    expect(updateTake()).toEqual(expectedAction);
   });
 });

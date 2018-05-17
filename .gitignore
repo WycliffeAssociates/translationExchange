@@ -5,6 +5,7 @@
 
 # testing
 lcov-report/
+coverage/
 coverage.xml
 junit.xml
 

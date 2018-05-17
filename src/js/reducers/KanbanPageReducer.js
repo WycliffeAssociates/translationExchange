@@ -6,6 +6,8 @@ const INITIAL_STATE = {
   publishedTakes: [],
   loading: false,
   playingTakeId: '',
+  takesToDelete: [],
+  removedTaketoDelete: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -47,7 +49,34 @@ export default (state = INITIAL_STATE, action) => {
         playingTakeId: action.takeId,
       };
 
+    case 'ADD_TAKE_TO_DELETE':
+      return {
+        ...state,
+        takesToDelete: [...state.takesToDelete, action.takeId],
+      };
 
+
+    case 'REMOVE_TAKE_TO_DELETE':
+      return {
+        ...state,
+        takesToDelete: action.takesToDelete,
+        removedTaketoDelete: true,
+      };
+
+    case 'NO_TAKES_FOR_CHUNK':
+      return {
+        ...state,
+        takes: action.takes,
+        chunkNum: action.chunkNum,
+        activeChunkId: action.activeChunkId,
+        loading: false,
+      };
+
+    case 'UPDATE_TAKE':
+      return {
+        ...state,
+        removedTaketoDelete: false,
+      };
 
     default: return state;
   }

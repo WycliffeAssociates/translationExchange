@@ -45,6 +45,7 @@ class Comments extends Component {
             id={id}
             type={type}
             txt={txt}
+            location={this.props.location}
             display={this.state.displayModal} />
         </ButtonContainer>
       </Container>

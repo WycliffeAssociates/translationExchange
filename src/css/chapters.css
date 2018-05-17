@@ -11,13 +11,13 @@
      *
      * If you're not using "display: flex", you can remove this style.
      */
-    width: 125px;
-    height: 125px;
+    width: 150px;
+    height: 150px;
 
 }
 
 .CircularProgressbar .CircularProgressbar-path {
-    stroke: #009CFF;
+    stroke: url(#progress);
     stroke-linecap: round;
     transition: stroke-dashoffset 0.5s ease 0s;
 }
@@ -27,6 +27,13 @@
     stroke: #d6d6d6;
 }
 
+.CircularProgressbar .CircularProgressbar-text {
+  fill: #3e98c7;
+  font-size: 22px;
+  font-weight: bold;
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
 
 .ui.fixed.table td.dont-hide-overflow {
     overflow: visible;

@@ -1,27 +1,50 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import DragSource from './DragTarget';
+import jdenticon from 'jdenticon';
 export default class TakeCardTopIcon extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state= {
+      date: '',
+    },
+
+    this.convertUTC = this.convertUTC.bind(this);
+  }
+
+  componentDidMount() {
+    const {date_modified} = this.props;
+    this.convertUTC(date_modified);
+
+  }
+
+  convertUTC(date_modified) {
+    let date = new Date(date_modified);
+    let convertedDate= '';
+    convertedDate = date.getUTCDay()+ '/';
+    convertedDate = convertedDate + date.getUTCMonth()+ '/';
+    convertedDate = convertedDate+ date.getUTCFullYear();
+
+    this.setState({date: convertedDate});
   }
 
 
   render() {
+    const {owner_icon_hash} = this.props;
+    const {date} = this.state;
 
     return  (
       <TopBar>
-        <DragIcon>
-          <i className = "material-icons">menu</i>
-        </DragIcon>
+
+        <DragSource {...this.props} />
 
         <CardInfo>
           <h3 style={{alignSelf: 'center'}}> {this.props.txt.take} {this.props.take_num} </h3>
-          <p style={{color: 'lightgray', fontStyle: 'italic', fontWeight: '100', marginTop: '-0.8vw'}}> 03/13/17 </p>
+          <p style={{color: 'lightgray', fontStyle: 'italic', fontWeight: '100', marginTop: '-0.8vw'}}> {date}  </p>
         </CardInfo>
 
-        <Icon  id="user" data-jdenticon-value={this.props.loggedInUser? this.props.loggedInUser: 'no author info'} />
+        <Icon  id={`user${owner_icon_hash}`} data-jdenticon-hash={owner_icon_hash? owner_icon_hash: 'null user'} />
       </TopBar>
 
     );
@@ -39,14 +62,6 @@ const TopBar = styled.div`
 
 `;
 
-const DragIcon = styled.button`
-  border: none;
-  font-size: 1.5vw;
-  color: gray;
-  background: none;
-  cursor: pointer;
-
-`;
 
 const CardInfo = styled.div`
   margin-top: 0.8vw;

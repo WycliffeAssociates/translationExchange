@@ -87,7 +87,9 @@ class KanbanColumn extends React.Component {
         }
       },
       this.props.takes,
-      chapterId
+      chapterId,
+      take.rating,
+      take.published
     );
   }
 
@@ -136,10 +138,16 @@ class KanbanColumn extends React.Component {
     var query = QueryString.parse(this.props.location.search);
     var chapterNum = query.chapterNum;
     var chapterId = query.chapterId;
+    var mode = query.mode;
 
     const { connectDropTarget, isOver, deleteTake, txt,
-      getComments, publishedTake} = this.props;
-    const { saveComment, uploadingComments, activeChunkId, chunkNum, deleteComment, playingTakeId, playTake } = this.props;
+      getComments, publishedTake, saveComment,
+      uploadingComments, activeChunkId, chunkNum,
+      deleteComment, playingTakeId,
+      playTake, takesToDelete,
+      addTakeToDelete, removeTakeToDelete, removedTaketoDelete,
+      updateTake} = this.props;
+
 
     var icon;
     switch (this.props.icon) {
@@ -198,7 +206,12 @@ class KanbanColumn extends React.Component {
                   uploadingComments={uploadingComments}
                   activeChunkId={activeChunkId} chunkNum={chunkNum}
                   playingTakeId={playingTakeId}
-                  playTake={playTake}  /> ); /* published take passed down for react dnd */
+                  playTake={playTake}
+                  takesToDelete={takesToDelete}
+                  addTakeToDelete={addTakeToDelete}
+                  removeTakeToDelete={removeTakeToDelete}
+                  removedTaketoDelete={removedTaketoDelete}
+                  updateTake={updateTake} /> ); /* published take passed down for react dnd */
             }) : ''
 
           }
@@ -215,8 +228,13 @@ class KanbanColumn extends React.Component {
         {
           this.props.publishedColumn?
             this.chapterPublished()?
-              <center> <NextChapter onClick ={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)} >{this.props.txt.goToNextChapter} <i className="fa fa-arrow-right" /> </NextChapter> </center> :
-              <center> <NextChunk onClick ={() => this.nextChunk()}>{this.props.txt.goToNextChunk} <i className="fa fa-arrow-right" /> </NextChunk> </center>
+
+              <center> <NextChapter onClick ={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)} >{this.props.txt.goToNextChapter} <i className="material-icons">arrow_forward</i> </NextChapter> </center>
+              :
+              mode === 'Chunk'?
+                <center> <NextChunk onClick ={() => this.nextChunk()}>{this.props.txt.goToNextChunk} <i className= "material-icons">arrow_forward</i> </NextChunk> </center>
+                :
+                <center> <NextChunk onClick ={() => this.nextChunk()}>{this.props.txt.goToNextVerse} <i className= "material-icons">arrow_forward</i> </NextChunk> </center>
             : ''
         }
 
@@ -282,6 +300,9 @@ const NextChunk = styled.button`
   	cursor: pointer;
   	outline:none;
     font-size: 1em + 1vw;
+    i  {
+      vertical-align: middle;
+    }
   `;
 NextChunk.displayName = 'NextChunk';
 
@@ -294,6 +315,9 @@ padding: 0.75vw;
 cursor: pointer;
 outline:none;
 font-size: 1em + 1vw;
+i  {
+  vertical-align: middle;
+}
 
 `;
 NextChapter.displayName = 'NextChapter';

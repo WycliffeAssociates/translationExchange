@@ -3,9 +3,10 @@ import config from '../../config/config';
 
 export const selections = (id,type) => {
   return (dispatch, getState) => {
-    const {chaptersSelected} = getState().ExportPage;
+
 
     if (!type) {             // add id to the array
+      const {chaptersSelected} = getState().ExportPage;
       const indexId = chaptersSelected.indexOf(id);
 
       if (indexId > -1 ) {
@@ -18,8 +19,8 @@ export const selections = (id,type) => {
     else {
       dispatch({ type: 'ADD_SELECTED', id});
     }
-  }
-}
+  };
+};
 
 
 export const resetSelected = () => {
@@ -44,7 +45,7 @@ export const downloadChapters = (type, chaptersIds, callback) => {
         })
       .then(response => {
         const taskId = response.data.task_id;
-        dispatch({type: 'PREPARING_DOWNLOAD', taskId});
+        dispatch({type: 'GENERATING_DOWNLOAD', taskId});
 
 
       })

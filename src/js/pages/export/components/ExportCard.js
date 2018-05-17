@@ -40,7 +40,7 @@ export class ExportCard extends Component {
   };
 
   render() {
-    const {published, number} = this.props;
+    const {published, number, has_takes} = this.props;
     const { checked } = this.state;
     let icon = 'chrome_reader_mode';
     if (published) {
@@ -50,10 +50,14 @@ export class ExportCard extends Component {
 
     return (
       <Card published = {checked}>
-        <CheckBox checked={checked} onClick={this.toggleCheck}>
-          {checked ? <i class="material-icons">done</i> : ''}
-          <input id="checkBox" type="checkbox" checked={checked}  />
-        </CheckBox>
+        { has_takes ?
+          <CheckBox checked={checked} onClick={this.toggleCheck}>
+            {checked ? <i class="material-icons">done</i> : ''}
+            <input id="checkBox" type="checkbox" checked={checked}  />
+          </CheckBox>
+          :
+          ''
+        }
         <IconContainer>
           <i class="material-icons">{icon}</i>
           <p>{number}</p>

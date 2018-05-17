@@ -105,8 +105,10 @@ const Container = styled.div`
 Container.displayName = 'Container';
 const Input = styled.input`
   margin-top: 0.2vw;
+  align-self: center;
   @-moz-document url-prefix() {
-    margin-top: 0.8vw;
+  margin-top: -0.2vw;
+  align-self: center;
 }
  -webkit-appearance : none;
 width: 100%;

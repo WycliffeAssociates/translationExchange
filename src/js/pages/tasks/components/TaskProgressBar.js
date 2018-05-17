@@ -48,10 +48,12 @@ class TaskProgressBar extends React.Component {
 }
 
 const Container = styled.div`
-  width: 100%;
+  width: 95%;
   display: flex;
   flex-direction: row;
   align-items: stretch;
+  flex: 0.3;
 `;
+Container.displayName = "Container";
 
 export default TaskProgressBar;

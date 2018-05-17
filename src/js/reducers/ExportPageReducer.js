@@ -19,10 +19,10 @@ export default (state = INITIAL_STATE, action) => {
 
       return {
         ...state, chaptersSelected: action.chaptersSelected.concat(),
-  
+
       };
 
-    case 'PREPARING_DOWNLOAD':
+    case 'GENERATING_DOWNLOAD':
       return {
         ...state, taskId: action.taskId,
       };

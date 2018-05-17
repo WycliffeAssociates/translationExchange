@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import QueryString from "query-string";
+import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
-import {getChunks, getComments, getUserHash, getChapters, removeUser, downloadProject, updateLanguage} from '../../actions';
+import {getChunks, getUserHash,
+  getChapters, removeUser, downloadProject, updateLanguage,
+  saveComment, getComments} from '../../actions';
 import ChapterCard from './components/ChapterCard';
+import Toggle from './components/Toggle';
 import styled from 'styled-components';
 import 'css/takes.css';
 
@@ -13,7 +16,17 @@ import 'css/takes.css';
 
 
 
+
 export class ChapterPage extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      viewingComments: false,
+    };
+
+    this.handleToggle = this.handleToggle.bind(this);
+  }
 
   componentWillMount() {
     const {getChapters, chapters, history, updateLanguage} = this.props;
@@ -27,11 +40,23 @@ export class ChapterPage extends Component {
     if (language) {
       updateLanguage(language);
     }
+  }
 
+  componentDidMount() {
+    const {history, getChapters} = this.props;
+    if (this.props.updatePage === true && this.props.uploadingComment === false) {
+      const {search} = this.props.location;   //get data if the user refresh the page
+      const query = QueryString.parse(search);
+      getChapters(query.projectId, history);
+    }
+  }
+
+  handleToggle() {
+    this.setState(prevState => ({viewingComments: !prevState.viewingComments}));
   }
 
   render() {
-    const {chapters, txt} = this.props;
+    const {chapters, txt, uploadingComments, saveComment, chapterComments} = this.props;
     const {search} = this.props.location;
     const query = QueryString.parse(search);
 
@@ -48,10 +73,16 @@ export class ChapterPage extends Component {
           :
           <CardsContainer>
             {chapters.map((chp, index) =>
-              <ChapterCard key={index} {...chp} {...this.props} />)}
-          </CardsContainer>
+              <ChapterCard key={index} {...chp}
+                {...this.props} viewingComments={this.state.viewingComments}
+                chapterComments= {chapterComments}
+                uploadingComments={uploadingComments}
+                saveComment={saveComment} />)}
 
+          </CardsContainer>
         }
+        <Toggle onClick={this.handleToggle} viewingComments={this.state.viewingComments} />
+
       </ChapterPageContainer>
     );
   }
@@ -70,19 +101,21 @@ const ChapterPageContainer = styled.div`
     height: auto;
     min-height: 850px;
     flex-direction: column;
-    background-color: #F6F9FE;
+    background-color: #F3F3F3;
     overflow-y: scroll;
+    overflow-x: hidden;
 `;
 ChapterPageContainer.displayName = 'ChapterPageContainer';
 
 const CardsContainer = styled.div`
-    height:100%;
+    height:auto;
+    overflow-x: hidden;
     width: 100vw;
     min-height: 850px;
     display: flex;
     flex-wrap: wrap;
-    padding: 5vw 5vw;
-    margin-top: 8vh;
+    padding: 10%;
+    padding-top: 2.5%;
     background: #F4F7F9;
     align-self: center;
 `;
@@ -128,19 +161,22 @@ DownloadButton.displayName = 'DownloadButton';
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({getChunks, getUserHash, getComments, getChapters, removeUser, downloadProject, updateLanguage}, dispatch);
+  return bindActionCreators({getChunks, getUserHash, getChapters,
+    removeUser, downloadProject, updateLanguage, saveComment, getComments}, dispatch);
 
 };
 
 const mapStateToProps = state => {
 
-  const {chapters, loading} =state.Chapters;
+  const {chapters, loading, updatePage} =state.Chapters;
 
   const {loggedInUser} =state.user;
 
+  const {uploadingComments} = state.comments;
+
   const {txt} = state.geolocation;
 
-  return {chapters, loggedInUser, loading, txt};
+  return {chapters, loggedInUser, loading, txt, uploadingComments, updatePage};
 };
 
 
