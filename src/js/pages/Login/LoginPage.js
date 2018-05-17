@@ -4,14 +4,13 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {onLoginSuccess, fetchUsers, createSocialUser, updateLanguage} from '../../actions';
-import img from '../../../assets/images/background-pattern.png';
 import Menu, { Item as MenuItem } from 'rc-menu';
 import Dropdown from 'rc-dropdown';
 import 'rc-dropdown/assets/index.css';
 import Languages from '../../../languages/textToDisplay.json';
 
 
-class Welcome extends React.Component {
+export class Welcome extends React.Component {
 
   componentWillMount() {
     const language = window.navigator.userLanguage || window.navigator.language;
@@ -33,7 +32,7 @@ class Welcome extends React.Component {
   render() {
     const menu = (
       <Menu onSelect={ ky=> this.onSelect(ky)}>
-        {Object.keys(Languages).map(lng => <MenuItem style={{cursor:'pointer', color:'#fff', backgroundColor:'#000' }} key={lng}> {lng} </MenuItem> )}
+        {Object.keys(Languages).map(lng => <MenuItem style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={lng}> {lng} </MenuItem> )}
       </Menu>
     );
 
@@ -60,21 +59,22 @@ const LoginPage = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-
 `;
+LoginPage.displayName = 'LoginPage';
 
 const Language = styled.p`
   color:white;
   cursor:pointer;
 `;
+Language.displayName = 'Language';
 
 const LanguageContainer = styled.div`
   width:100%;
   display:flex;
   justify-content: flex-end;
   margin-bottom: 2vw;
-
 `;
+LanguageContainer.displayName = 'LanguageContainer';
 
 
 const mapDispatchToProps = dispatch => {

@@ -61,6 +61,7 @@ class Wave extends Component {
     );
   }
 }
+Wavesurfer.displayName='Wavesurfer';
 
 const Container = styled.div`
     display: flex;

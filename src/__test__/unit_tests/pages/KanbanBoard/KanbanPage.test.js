@@ -17,13 +17,12 @@ describe('KanbanPage test suite', () => {
 
   const wrapper = shallow(<KanbanPage {...mockProps} />);
   it('renders the component correctly', () => {
-
-    expect(wrapper.find('KanbanPageContainer'));
-    expect(wrapper.find('NavBar'));
-    expect(wrapper.find('KanbanContainer'));
-    expect(wrapper.find('KanbanBoard'));
-    expect(wrapper.find('UtilityPanel'));
-    expect(wrapper.find('SourceAudio'));
+    expect(wrapper.find('KanbanPageContainer').length).toBe(1);
+    expect(wrapper.find('NavBar').length).toBe(1);
+    expect(wrapper.find('KanbanContainer').length).toBe(1);
+    expect(wrapper.find('KanbanBoard').length).toBe(1);
+    expect(wrapper.find('UtilityPanel').length).toBe(1);
+    expect(wrapper.find('SourceAudio').length).toBe(1);
 
   });
 

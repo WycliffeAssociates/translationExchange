@@ -13,9 +13,9 @@ const mockProps = {
 describe('Wave test suite', () => {
   const wrapper = shallow(<Wave {...mockProps} />);
   it('should render the component correctly', () => {
-    expect(wrapper.find('Container'));
-    expect(wrapper.find('WaveformContainer'));
-    expect(wrapper.find('Wavesurfer'));
+    expect(wrapper.find('Container').length).toBe(1);
+    expect(wrapper.find('WaveformContainer').length).toBe(1);
+    expect(wrapper.find('Wavesurfer').length).toBe(1);
   });
 
   test(' test the toggleButton function', ()=> {

@@ -14,13 +14,12 @@ describe('Comments in UtilityPanel', () => {
   const wrapper = shallow(<Comments {...mockProps} />);
 
   it('should render the component successfully', ()=> {
-
-    expect(wrapper.find('Container'));
-    expect(wrapper.find('TextContainer'));
-    expect(wrapper.find('TextHeader'));
-    expect(wrapper.find('AudioContainer'));
-    expect(wrapper.find('ButtonContainer'));
-    expect(wrapper.find('RecordCommentsModal'));
+    expect(wrapper.find('Container').length).toBe(1);
+    expect(wrapper.find('TextContainer').length).toBe(1);
+    expect(wrapper.find('TextHeader').length).toBe(1);
+    expect(wrapper.find('AudioContainer').length).toBe(1);
+    expect(wrapper.find('ButtonContainer').length).toBe(1);
+    expect(wrapper.find('RecordCommentsModal').length).toBe(1);
   });
 
   test('closeModal function', () => {

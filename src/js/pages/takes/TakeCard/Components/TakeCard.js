@@ -113,7 +113,7 @@ export default class TakeCard extends React.Component {
     const {pos} = this.state;
     markers = this.callMarker();
 
-    const {connectDragSource , isDragging, onDeleteQueue} = this.props;
+    const { isDragging, onDeleteQueue} = this.props;
 
 
     return  ( //only native element nodes can now be passed to React DnD connectors
@@ -149,6 +149,7 @@ const MarkerContainer= styled.div`
 margin-bottom: 2vh;
 position:relative;
 `;
+MarkerContainer.displayName = 'MarkerContainer';
 
 const WaveformContainer = styled.div`
   height:3vw;
@@ -158,15 +159,4 @@ const WaveformContainer = styled.div`
   flex-direction: column;
   overflow: hidden;
 `;
-
-
-
-TakeCard.propTypes = {
-  count: propTypes.number.isRequired,
-  take: propTypes.object.isRequired,
-  author: propTypes.string.isRequired,
-  onRatingSet: propTypes.func.isRequired,
-  onMarkedForExportToggled: propTypes.func.isRequired,
-  takeId: propTypes.number.isRequired,
-  connectDragPreview: propTypes.func.isRequired,
-};
+WaveformContainer.displayName = 'WaveformContainer';

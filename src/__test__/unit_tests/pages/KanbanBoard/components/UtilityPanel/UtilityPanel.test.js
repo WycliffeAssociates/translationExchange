@@ -33,17 +33,18 @@ describe('UtilityPanel test suite', () => {
   const wrapper = shallow(<UtilityPanel {...mockProps} />);
 
   it('should render the component correctly', () => {
-    expect(wrapper.find('CommentsPanel'));
-    expect(wrapper.find('UtilityPanelNotVisible'));
-    expect(wrapper.find('UtilityPanelContainer'));
-    expect(wrapper.find('UtilityNavigation'));
-    expect(wrapper.find('Hide'));
-    expect(wrapper.find('Show'));
+    expect(wrapper.find('CommentsPanel').length).toBe(1);
+    expect(wrapper.find('UtilityPanelNotVisible').length).toBe(0);
+    expect(wrapper.find('UtilityPanelContainer').length).toBe(1);
+    expect(wrapper.find('UtilityNavigation').length).toBe(1);
+    expect(wrapper.find('Hide').length).toBe(1);
+    expect(wrapper.find('Show').length).toBe(0);
   });
 
   test('toggling the utilityPanel', () => {
     wrapper.instance().toggleUtilityPanel();
     expect(wrapper.instance().state.utilityPanel).toEqual(false);
+    
   });
 
 });

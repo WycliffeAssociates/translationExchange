@@ -93,7 +93,7 @@ const KanbanContainer = styled.div`
  overflow-y: auto;
  box-sizing: border-box;
 `;
-KanbanPage.displayName = 'KanbanPage';
+KanbanContainer.displayName = 'KanbanContainer';
 
 const SourceAudio = styled.div`
   position: fixed;

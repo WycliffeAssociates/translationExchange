@@ -6,7 +6,7 @@ import CommentUploading from './CommentUploading';
 import QueryString from 'query-string';
 
 
-class RecordCommentModal extends Component {
+class RecordCommentsModal extends Component {
 
   constructor(props) {
     super(props);
@@ -385,4 +385,4 @@ const InfoContainer = styled.div`
   color: white;
 `;
 
-export default RecordCommentModal;
+export default RecordCommentsModal;

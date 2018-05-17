@@ -7,8 +7,8 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {bindActionCreators} from 'redux';
 import {fetchUsers, identiconLogin, updateLanguage} from '../../actions';
-import img from '../../../assets/images/background-pattern.png';
-class AvailableUsers extends React.Component {
+
+export class AvailableUsers extends React.Component {
 
 
   componentWillMount() {
@@ -47,8 +47,8 @@ class AvailableUsers extends React.Component {
                 users.length>0? users.map((user,index)  => {
                   return (
                     user.is_social? '' :
-                      <Grid.Column width={3}>
-                        <UserCard  key={user} id={index} user={user} {...this.props} />
+                      <Grid.Column width={3} key={user.id}>
+                        <UserCard   id={index} user={user} {...this.props} />
                       </Grid.Column>
                   );}) :   ''
 
