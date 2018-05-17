@@ -32,7 +32,7 @@ jobs:
         - '8'
       install: true
       script:
-        - sonar-scanner -Dsonar.projectKey=translationExchange -Dsonar.sources=src/js
+        - sonar-scanner -Dsonar.projectKey=translationexchange -Dsonar.sources=src/js
 stages:
   - test
   - name: sonar
