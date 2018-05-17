@@ -1,18 +1,17 @@
-/* global it: true   expect:true  describe:true*/
+/* global it: true   expect:true  describe:true jest*/
 import React from 'react';
-import TaskProgressPage from '../../../../js/pages/tasks/TaskProgressPage';
+import {TaskProgressPage} from '../../../../js/pages/tasks/TaskProgressPage';
 import {shallow} from 'enzyme';
-import configureMockStore from "redux-mock-store";
-
-const mockStore = configureMockStore();
-const store = mockStore({});
 
 const mockProps = {
-  store: store
+  getTasks: jest.fn(),
+  location: {
+    search: 'hereIam',
+  },
 };
 
-describe.skip('Task Progress Page Test Suite', () => {
-  const wrapper = shallow(<TaskProgressPage {...mockProps} />).dive();
+describe('Task Progress Page Test Suite', () => {
+  const wrapper = shallow(<TaskProgressPage {...mockProps} />);
 
   it('should render page successfully', ()=> {
     expect(wrapper.find('TaskProgressPageContainer').length).toEqual(1);

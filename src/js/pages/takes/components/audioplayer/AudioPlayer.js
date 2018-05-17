@@ -25,12 +25,8 @@ class AudioPlayer extends Component {
       nextAudio: false,
       pointer: 1,
       markers: this.props.markers,
-      looping: false                   // state used to keep playing takes when playlist mode is on
-
-
-
-
-    }
+      looping: false,                   // state used to keep playing takes when playlist mode is on
+    };
     //  this.toggleButton = this.toggleButton.bind(this);
     //this.updateTime = this.updateTime.bind(this);
     this.durationTime = this.durationTime.bind(this);

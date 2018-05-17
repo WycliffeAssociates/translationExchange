@@ -1,6 +1,6 @@
 /* global describe it test expect jest*/
 import React from 'react';
-import TakeCard from '../../../../../js/pages/takes/TakeCard/Components/TakeCard';
+import TakeCard from '../../../../../../js/pages/takes/TakeCard/Components/TakeCard';
 import {shallow} from 'enzyme';
 
 const mockProps = {

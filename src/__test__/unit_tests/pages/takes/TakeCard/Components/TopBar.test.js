@@ -1,6 +1,6 @@
 /* global describe it test expect jest*/
 import React from 'react';
-import TopBar from '../../../../../js/pages/takes/TakeCard/Components/TopBar';
+import TopBar from '../../../../../../js/pages/takes/TakeCard/Components/TopBar';
 import {shallow} from 'enzyme';
 
 const mockProps = {

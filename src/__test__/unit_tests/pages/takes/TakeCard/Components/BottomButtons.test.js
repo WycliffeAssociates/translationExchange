@@ -1,6 +1,6 @@
 /* global describe it test expect jest*/
 import React from 'react';
-import BottomButtons from '../../../../../js/pages/takes/TakeCard/Components/BottomButtons';
+import BottomButtons from '../../../../../../js/pages/takes/TakeCard/Components/BottomButtons';
 import {shallow} from 'enzyme';
 
 const mockProps = {
