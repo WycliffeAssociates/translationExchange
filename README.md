@@ -1,6 +1,7 @@
-| Branch | Build Status |
-| --- | --- |
-| Master | [![Build Status](https://travis-ci.org/WycliffeAssociates/translationExchange.svg?branch=master)](https://travis-ci.org/WycliffeAssociates/translationExchange) |
+| Branch | Build Status | Coverage
+| --- | --- | --- |
+| Master | [![Build Status](https://travis-ci.org/WycliffeAssociates/translationExchange.svg?branch=master)](https://travis-ci.org/WycliffeAssociates/translationExchange) | 
+[![SonarQube Coverage](https://img.shields.io/sonar/http/sonar.petalslink.com/org.ow2.petals%3Apetals-se-ase/coverage.svg)](https://sonarcloud.io/api/project_badges/measure?project=translationexchange&metric=coverage)|
 | Dev | [![Build Status](https://travis-ci.org/WycliffeAssociates/translationExchange.svg?branch=dev)](https://travis-ci.org/WycliffeAssociates/translationExchange) |
 
 # translationExchange
