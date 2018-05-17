@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {ChapterSelected, Downloading} from './';
-
-import styled from 'styled-components';
+import { Downloading} from './';
+import { fadeIn } from 'react-animations';
+import styled, {keyframes} from 'styled-components';
 
 
 
@@ -29,7 +29,7 @@ export class ExportProject extends Component {
   }
 
   cancel() {
-    this.setState({downloading: false})
+    this.setState({downloading: false});
     this.props.cancel();
   }
 
@@ -38,7 +38,7 @@ export class ExportProject extends Component {
 
 
   render() {
-    const { goBack, txt, downloadInProgress, taskId, getDownloadProgress , resetSelected } = this.props;
+    const { goBack, txt, taskId, getDownloadProgress , resetSelected } = this.props;
     const {  icon, type, downloading } = this.state;
 
 
@@ -73,11 +73,14 @@ export class ExportProject extends Component {
 
 }
 
+const fadeInAnimation = keyframes`${fadeIn}`;
+
 
 const ExportProjectContainer = styled.div`
   display: flex;
   align-items:center;
   flex-direction: column;
+  animation: ${fadeInAnimation} .4s ease-in-out;
 `;
 
 const OptionsContainer = styled.div`

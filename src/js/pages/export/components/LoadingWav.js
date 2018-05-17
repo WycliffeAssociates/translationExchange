@@ -8,7 +8,7 @@ export const LoadingWav = ({percentage, prevValue}) => (
       <SVG version="1.1" id="logo" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink"
         height= "200px" x="0px" y="0px" space="preserve" transform="scale(2)" >
 
-        <path fill="#EEEEEE" transform="scale(8.75), translate(5,0)" d="M21 3H3c-1.11 0-2 .89-2 2v12c0 1.1.89 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.11-.9-2-2-2zm0 14H3V5h18v12zm-5-7v2H8v-2h8z"/>
+        <path fill="#EEEEEE" transform="scale(8.75), translate(5,0)" d="M21 3H3c-1.11 0-2 .89-2 2v12c0 1.1.89 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.11-.9-2-2-2zm0 14H3V5h18v12zm-5-7v2H8v-2h8z" />
 
       </SVG>
     </Background>
@@ -18,7 +18,7 @@ export const LoadingWav = ({percentage, prevValue}) => (
 
         <defs>
           <clipPath id="drop">
-            <path fill="#FFE" transform="scale(8.75), translate(5,0)" d="M21 3H3c-1.11 0-2 .89-2 2v12c0 1.1.89 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.11-.9-2-2-2zm0 14H3V5h18v12zm-5-7v2H8v-2h8z"/>
+            <path fill="#FFE" transform="scale(8.75), translate(5,0)" d="M21 3H3c-1.11 0-2 .89-2 2v12c0 1.1.89 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.11-.9-2-2-2zm0 14H3V5h18v12zm-5-7v2H8v-2h8z" />
           </clipPath>
         </defs>
 

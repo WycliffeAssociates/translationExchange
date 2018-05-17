@@ -35,7 +35,7 @@ const Button = styled.button`
     }
 
     :hover{
-      background: linear-gradient(to bottom, #3BAC29, #3BAC29);
+      background: linear-gradient(to bottom, #3BAC29, #64f38c);
       color: #FFF;
 
     }
@@ -46,8 +46,8 @@ const Button = styled.button`
 const Container = styled.div`
   background-color: #fff;
   width: 100%;
-  position: absolute;
   bottom: 0;
+  position:absolute;
   display: flex;
   align-items: center;
   flex-direction: row;

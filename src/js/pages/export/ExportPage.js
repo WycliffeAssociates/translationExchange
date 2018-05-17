@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
-import {selections, getChapters, getUserHash, resetSelected, downloadChapters, getDownloadProgress} from '../../actions';
+import {selections, getChapters, getUserHash, resetSelected, downloadChapters, getDownloadProgress, removeUser} from '../../actions';
 import {ExportCard, CompletedCheckbox, Footer, ChapterSelected, ExportProject} from './components';
 import styled from 'styled-components';
 import QueryString from 'query-string';
@@ -16,8 +16,8 @@ export class ExportPage extends Component {
     super(props);
     this.state= {checked: null,
       readyToExport: false,
-      downloading: false
-    }
+      downloading: false,
+    };
 
   }
 
@@ -25,6 +25,10 @@ export class ExportPage extends Component {
     const {location, getChapters} = this.props;
     const query = QueryString.parse(location.search);
     getChapters(query.projectId);
+  }
+
+  componentWillUnmount() {
+    this.props.resetSelected();
   }
 
   toggleCheck = () => { this.setState({checked: !this.state.checked});}
@@ -35,13 +39,12 @@ export class ExportPage extends Component {
     const {downloadChapters, chaptersSelected} = this.props;
     downloadChapters(type, chaptersSelected);
     this.setState({downloading: true});
-
   }
 
   cancel = () => { this.setState({downloading: false});}
 
   goBack =() => {
-    this.setState({readyToExport: false});
+    this.setState({readyToExport: false, checked: null});
     this.props.resetSelected();
 
   }
@@ -50,12 +53,12 @@ export class ExportPage extends Component {
 
   render() {
     const { checked, readyToExport, downloading } = this.state;
-    const { chaptersSelected, chapters, location, txt, taskId, downloadInProgress, resetSelected } = this.props;
+    const { chaptersSelected, chapters, location, txt, taskId, resetSelected } = this.props;
     const query = QueryString.parse(location.search);
 
     return (
-      <ExportPageContainer>
-        <NavBar chapterPage={true} kanban={false} {...this.props} />
+      <ExportPageContainer addMargin = {checked}>
+        <NavBar chapterPage={false} kanban={false} {...this.props} />
         {downloading ? ''
           :
           <HeaderContainer>
@@ -73,7 +76,7 @@ export class ExportPage extends Component {
             <CardsContainer center={readyToExport}>
               {readyToExport ? <ChapterSelected number={chaptersSelected.length} txt={txt} />
                 :
-                chapters ? chapters.map((chp, index) => <ExportCard key={index} {...this.props} {...chp} />): ''
+                chapters ? chapters.map((chp, index) => <ExportCard completedSelected={checked} key={index} {...this.props} {...chp} />): ''
               }
             </CardsContainer>
         }
@@ -83,7 +86,6 @@ export class ExportPage extends Component {
           taskId={taskId}
           resetSelected={resetSelected}
           txt={txt}
-          downloadInProgress={downloadInProgress}
           cancel={this.cancel}
           goBack={this.goBack}
           downloading={this.downloading} /> : chaptersSelected? chaptersSelected.length > 0 ? <Footer txt={txt} nextStep={this.nextStep} /> : '' : ''}
@@ -107,16 +109,18 @@ const ExportPageContainer = styled.div`
     height: 100%;
     flex-direction: column;
     background-color: #FFF;
-    overflow-y: scroll;
 `;
 
 
 const CardsContainer = styled.div`
+  padding-bottom: 100px;
     width: 97%;
+    height: auto;
     flex-wrap: wrap;
     background: #FFF;
     align-self: center;
     display: flex;
+    overflow-y: scroll;
     justify-content: ${props => props.center ? 'center': ''}
 `;
 CardsContainer.displayName = 'CardsContainer';
@@ -140,20 +144,20 @@ const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({ getChapters,
     selections, getUserHash, resetSelected,
-    downloadChapters, getDownloadProgress}, dispatch);
+    downloadChapters, getDownloadProgress, removeUser}, dispatch);
 
 };
 
 const mapStateToProps = state => {
 
   const {chapters, loading} =state.Chapters;
-  const { chaptersSelected, numbersSelected, taskId, downloadInProgress} = state.ExportPage;
+  const { chaptersSelected, numbersSelected, taskId} = state.ExportPage;
 
   const {loggedInUser} =state.user;
 
   const {txt} = state.geolocation;
 
-  return {chapters, loggedInUser, loading, txt, chaptersSelected, numbersSelected, taskId, downloadInProgress };
+  return {chapters, loggedInUser, loading, txt, chaptersSelected, numbersSelected, taskId };
 };
 
 

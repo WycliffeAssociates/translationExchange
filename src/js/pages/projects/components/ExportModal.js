@@ -22,8 +22,6 @@ class ExportModal extends Component {
   show = dimmer => () => this.setState({ dimmer, open: true });
   close = () => {
     this.setState({showModal: false});
-    //set timeout to ensure that state is reset to initial before the modal closes
-    //setTimeout(() => this.props.closeModal(), 100);
 
   };
 
@@ -66,7 +64,7 @@ class ExportModal extends Component {
             </TopContainer>
             <ButtonsContainer>
               <SingleButtonContainer color={'#E56060'}>
-                <BorderButton icon="share"  onClick={()=> this.download('wav')} color={'#E56060'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} />
+                <BorderButton icon="share"  onClick={()=> {}} color={'#E56060'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} />
                 <p>{txt.transfer}</p>
               </SingleButtonContainer>
               <SingleButtonContainer color={'#009CFF'}>

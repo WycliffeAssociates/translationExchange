@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+import {zoomIn} from 'react-animations';
 
 
 
@@ -16,12 +17,12 @@ export class ExportCard extends Component {
       if (nextProps.completedSelected && nextProps.published) {                // button selected and the chapter is published, mark them as selected
         this.setState({checked: true});
         if (!this.state.checked) {             // to avoid adding them twice when they already selected
-          nextProps.selections(nextProps.id, nextProps.number, true);         // send id and number to save them into an array, true is used for saved, false for remove
+          nextProps.selections(nextProps.id, true);         // send id and number to save them into an array, true is used for saved, false for remove
         }
       }
       if (!nextProps.completedSelected && nextProps.published) {   // once we check the checkbox
         this.setState({checked: false});
-        nextProps.selections(nextProps.id, nextProps.number, false);
+        nextProps.selections(nextProps.id, false);
 
       }
 
@@ -31,10 +32,10 @@ export class ExportCard extends Component {
 
 
   toggleCheck = () => {
-    const {selections, id, selectedNumbers , number} = this.props;
+    const {selections, id} = this.props;
     const {checked} = this.state;
-    selections(id, number, !checked);
-    this.setState({checked: !checked})
+    selections(id, !checked);
+    this.setState({checked: !checked});
 
   };
 
@@ -63,6 +64,8 @@ export class ExportCard extends Component {
 
 }
 
+const zoomInAnimation = keyframes `${zoomIn}`;
+
 const Card = styled.div`
   display: flex;
   flex-direction: column;
@@ -78,6 +81,8 @@ const Card = styled.div`
   margin: 20px 20px 20px 20px;
   font-size: 27px;
   font-weight: bold;
+  animation: ${zoomInAnimation} .2s ease-in;
+
 
   i{
     color: ${props => props.published ? '#43B52F': '#707070'}

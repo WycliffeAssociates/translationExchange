@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import BorderButton from '../../../components/BorderButton';
 import Searching from '../../../../assets/images/searching.png';
 import {LoadingMp3, LoadingWav} from './';
+import { fadeIn } from 'react-animations';
 
 export class Downloading extends Component {
 
@@ -20,7 +21,7 @@ export class Downloading extends Component {
   }
 
   updateProgress(percentage, done) {
-    this.setState({percentage})
+    this.setState({percentage});
     if (done) {
       clearInterval(this.interval);
 
@@ -84,11 +85,14 @@ export class Downloading extends Component {
 
 }
 
+const fadeInAnimation = keyframes`${fadeIn}`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  animation: ${fadeInAnimation} .2s ease-in-out;
   i{
     font-size: 450px;
     color:#43B52F;
@@ -124,6 +128,12 @@ const BlueButton = styled.button`
       vertical-align: middle;
       font-size: 16px;
       color:white;
+    }
+
+    :hover{
+      background: linear-gradient(to bottom, #3BAC29, #64f38c);
+      color: #FFF;
+
     }
 
     `;
