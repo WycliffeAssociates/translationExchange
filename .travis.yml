@@ -30,11 +30,13 @@ jobs:
     - stage: sonar
       node_js:
         - '8'
-      script: sonar-scanner -Dsonar.projectKey=translationexchange -Dsonar.sources=.
+      install: true
+      script:
+        - sonar-scanner -Dsonar.projectKey=translationExchange -Dsonar.sources=src/js
 stages:
   - test
   - name: sonar
-    if: type = cron
+    if: type IN (push, cron)
 cache:
   directories:
   - "$HOME/.m2/repository"
