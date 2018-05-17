@@ -41,7 +41,7 @@ describe('ChaptersPageActions Test Suite', () => {
     });
   });
 
-  it('should download the project', () => {
+  it.skip('should download the project', () => {
     //this test is passing, even though it dispatches and error
     //action not access window to perform download, spike new ways to download
     moxios.wait(()=> {
