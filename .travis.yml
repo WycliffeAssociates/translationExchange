@@ -16,8 +16,6 @@ addons:
 jobs:
   include:
     - stage: test
-      node_js:
-        - '8'
       before_install:
         - chmod +x extra-setup.sh
         - source extra-setup.sh
@@ -30,12 +28,15 @@ jobs:
       script: docker-compose -f test-runner.yml run --rm test-runner
       after_script: docker-compose down
     - stage: sonar
-      allow_failures:
-        if: type IN (push, cron)
-        script: sonar-scanner -Dsonar.projectKey=translationexchange -Dsonar.sources=.
+      node_js:
+        - '8'
+      install: true
+      script:
+        - sonar-scanner -Dsonar.projectKey=translationexchange -Dsonar.sources=src/js
 stages:
   - test
-  - sonar
+  - name: sonar
+    if: type IN (push, cron)
 cache:
   directories:
   - "$HOME/.m2/repository"
