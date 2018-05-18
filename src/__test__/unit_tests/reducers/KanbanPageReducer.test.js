@@ -11,6 +11,7 @@ describe('KanbanPageReducer' ,() => {
       publishedTakes: [],
       loading: false,
       playingTakeId: '',
+      project: null,
       takesToDelete: [],
       removedTaketoDelete: false,
     });
@@ -109,6 +110,15 @@ describe('KanbanPageReducer' ,() => {
       type: 'UPDATE_TAKE',
     })).toEqual({
       removedTaketoDelete: false,
+    });
+  });
+
+  it('should handle SET_PROJECT', () => {
+    expect(reducer([],{
+      type: 'SET_PROJECT',
+      slug: 'mat',
+    })).toEqual({
+      project: 'mat',
     });
   });
 

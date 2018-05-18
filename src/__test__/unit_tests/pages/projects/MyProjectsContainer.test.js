@@ -22,6 +22,7 @@ const mockProps = {
       mode: {
         name: 'chunk',
       },
+      slug: 'mat',
     },
 
     {id: 2,
@@ -37,7 +38,9 @@ const mockProps = {
       date_modified: '2018/05/17',
       mode: {
         name: 'verse',
-      }},
+      },
+      slug: 'luk',
+    },
   ],
   updateLanguage: jest.fn(),
 };
