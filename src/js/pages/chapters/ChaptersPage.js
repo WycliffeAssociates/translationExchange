@@ -70,7 +70,6 @@ export class ChapterPage extends Component {
         {this.props.loading?
           <Loading txt={this.props.txt} height= "80vh" marginTop="5vw" />
           :
-
           <CardsContainer>
             {chapters.map((chp, index) =>
               <ChapterCard key={index} {...chp}

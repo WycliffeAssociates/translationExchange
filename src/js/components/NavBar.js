@@ -130,7 +130,7 @@ class NavBar extends Component {
             { <Text> {chapter}</Text> }
           </ChaptersButton>
           <ChunksButton selected={kanbanPage}>
-            <i class="material-icons">graphic_eq</i>
+            <i className="material-icons">graphic_eq</i>
 
             {
               kanbanPage ?

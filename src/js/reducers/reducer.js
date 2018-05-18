@@ -10,6 +10,7 @@ import comments from './CommentsReducer';
 import kanbanPage from './KanbanPageReducer'
 import taskProgress from './TaskProgressReducer';
 import Chapters from './ChapterPageReducer'
+import ExportPage from './ExportPageReducer';
 
 
 export default combineReducers({
@@ -23,4 +24,5 @@ export default combineReducers({
   taskProgress,
   Projects,
   Chapters,
+  ExportPage
 });
