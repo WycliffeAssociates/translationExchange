@@ -1,4 +1,4 @@
-/* global expect describe it test */
+/* global expect describe it */
 import reducer from '../../../js/reducers/ChapterPageReducer';
 
 describe('ChapterPageReducer', () => {

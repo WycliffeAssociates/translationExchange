@@ -60,7 +60,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         takesToDelete: action.takesToDelete,
-        removedTaketoDelete: true,
+        removedTaketoDelete: true, //used to update after a take is deleted
       };
 
     case 'NO_TAKES_FOR_CHUNK':
@@ -75,7 +75,7 @@ export default (state = INITIAL_STATE, action) => {
     case 'UPDATE_TAKE':
       return {
         ...state,
-        removedTaketoDelete: false,
+        removedTaketoDelete: false,//used to update after a take is deleted
       };
 
     default: return state;
