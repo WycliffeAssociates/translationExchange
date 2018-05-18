@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFound Page renders correctly 1`] = `
+<div>
+   
+  <div
+    className="ui raised center aligned segment"
+  >
+    This page does not exist.
+    <div
+      className="ui divider"
+    />
+    <a
+      href="/projects"
+      onClick={[Function]}
+    >
+      <button
+        className="ui green button"
+        disabled={undefined}
+        onClick={[Function]}
+        role="button"
+        tabIndex={undefined}
+      >
+        Projects
+      </button>
+    </a>
+  </div>
+</div>
+`;

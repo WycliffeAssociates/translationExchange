@@ -13,7 +13,7 @@ describe('Play puase button suite', function() {
 
 
   it('should render correctly', function() {
-    expect(wrapper.find('ButtonContainer'));
+    expect(wrapper.find('ButtonContainer').length).toBe(1);
   });
 
   it('should handleClick correctly', function() {

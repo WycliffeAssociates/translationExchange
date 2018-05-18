@@ -11,14 +11,11 @@ export default class KanbanBoard extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.sortTakes = this.sortTakes.bind(this);
   }
 
-  render() {
-
-    let column1 = [];
-    let column2 = [];
-    let column3 = [];
-    let publishedColumn = [];
+  sortTakes(column1,column2,column3, publishedColumn) {
 
     this.props.takes.forEach((take) => {
       switch (take.rating) {
@@ -60,6 +57,16 @@ export default class KanbanBoard extends React.Component {
           break;
       }
     });
+
+    return [column1, column2, column3, publishedColumn];
+
+  }
+
+  render() {
+
+    let array = this.sortTakes([], [],[], []);
+    let column1 = array [0]; let column2 = array[1];
+    let column3 = array[2]; let publishedColumn = array[3];
 
     const publishedTake = publishedColumn.length == 1? true: false;
 

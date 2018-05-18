@@ -9,7 +9,7 @@ import GotoProjectsButton from './components/GotoProjectsButton';
 import styled from 'styled-components';
 import 'css/takes.css';
 
-class TaskProgressPage extends React.Component {
+export class TaskProgressPage extends React.Component {
 
   constructor(props) {
     super(props);
@@ -51,11 +51,6 @@ class TaskProgressPage extends React.Component {
   }
 
   render() {
-    const {search} = this.props.location;
-    const query = QueryString.parse(search);
-
-    let taskProgressComponent = "No such tasks";
-
     return (
       <TaskProgressPageContainer>
         <NavBar {...this.props} />
@@ -77,7 +72,7 @@ class TaskProgressPage extends React.Component {
 const TaskProgressPageContainer = styled.div`
 
 `;
-TaskProgressPageContainer.displayName = "TaskProgressPageContainer";
+TaskProgressPageContainer.displayName = 'TaskProgressPageContainer';
 
 const TaskProgressContainer = styled.div`
  display: flex;
@@ -85,7 +80,7 @@ const TaskProgressContainer = styled.div`
  flex-direction: row;
  margin: 1.5vw auto;
 `;
-TaskProgressContainer.displayName = "TaskProgressContainer";
+TaskProgressContainer.displayName = 'TaskProgressContainer';
 
 const mapDispatchToProps = dispatch => {
 

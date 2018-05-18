@@ -61,6 +61,7 @@ class Wave extends Component {
     );
   }
 }
+Wavesurfer.displayName='Wavesurfer';
 
 const Container = styled.div`
     display: flex;
@@ -70,10 +71,12 @@ const Container = styled.div`
     padding-top: 9.9vh;
     margin-right: 2%;
 `;
+Container.displayName = 'Container';
 
 const WaveformContainer = styled.div`
     width: 100%;
     margin-right: 5%
   `;
+WaveformContainer.displayName = 'WaveformContainer';
 
 export default Wave;

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading Component Test Suite renders correctly and matches snapshot 1`] = `
+<div
+  className="sc-bdVaJa erGDqw"
+  height={undefined}
+>
+  <h1>
+    Loading...
+  </h1>
+  <img
+    alt="Loading..."
+    src="loadingRing.svg"
+  />
+</div>
+`;

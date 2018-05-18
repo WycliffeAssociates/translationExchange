@@ -13,7 +13,7 @@ describe('NewUserCard suite', function() {
   const wrapper = shallow(<NewUserCard {...defaultProps} />);
 
   it('should render the compnenet without any error', function() {
-    expect(wrapper.find('NewUserCardContainer'));
+    expect(wrapper.find('NewUserCardContainer').length).toBe(1);
   });
 
   it('should navigate to new user creation', function() {

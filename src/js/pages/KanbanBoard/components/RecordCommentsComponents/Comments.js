@@ -55,10 +55,12 @@ class Comments extends Component {
 const Container = styled.div`
   padding-top: 1vw;
 `;
+Container.displayName = 'Container';
 
 const SvgContainer = styled.div`
   width:60%;
 `;
+SvgContainer.displayName = 'SvgContainer';
 
 const RecordButton = styled.button`
   background-color: #E74C3C;
@@ -71,18 +73,19 @@ const RecordButton = styled.button`
   border-color: transparent;
   cursor: pointer;
   font-size: 1vw;
-
 `;
+RecordButton.displayName = 'RecordButton';
 const SvgLine = ()=>{ return ( <svg height="5">
   <line x1=".5vw" y1="0" x2="8vw" y2="0" style={{stroke: 'rgb(255,255,255)', strokewidth: 2}} />
-</svg>)};
+</svg>);};
+SvgLine.displayName = 'SvgLine';
 
 const TextHeader = styled.p`
   color: #fff;
   padding-left: .5vw;
   font-size: 1vw;
-
 `;
+TextHeader.displayName = 'TextHeader';
 
 const NoComments = styled.p`
   color: #969595;
@@ -90,26 +93,26 @@ const NoComments = styled.p`
   padding-top: 1vw;
   font-style: italic;
   font-size: 1vw;
-
 `;
+NoComments.displayName = 'NoComments';
 
 const TextContainer = styled.div`
   display:flex;
   flex-direction: row;
   justify-content: center;
-
 `;
+TextContainer.displayName = 'TextContainer';
 
 const AudioContainer = styled.div`
-
 `;
+AudioContainer.displayName = 'AudioContainer';
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 1.5vw;
-
 `;
+ButtonContainer.displayName = 'ButtonContainer';
 
 
 

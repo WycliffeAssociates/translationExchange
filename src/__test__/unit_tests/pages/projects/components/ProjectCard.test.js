@@ -21,9 +21,9 @@ describe('Project Card Test Suite', () => {
   const wrapper = shallow(<ProjectCard {...mockProps} />);
 
   it('should render the component correctly', () => {
-    expect(wrapper.find('Card'));
-    expect(wrapper.find('InformationContainer'));
-    expect(wrapper.find('ButtonContainer'));
+    expect(wrapper.find('Card').length).toBe(1);
+    expect(wrapper.find('InformationContainer').length).toBe(1);
+    expect(wrapper.find('ButtonContainer').length).toBe(1);
   });
 
   it( 'should handle the onClick(reviewProject) function', () => {

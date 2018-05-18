@@ -2,7 +2,7 @@ import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import {fadeIn} from 'react-animations';
 
-export default class TakeCardBottomButtons extends React.Component {
+export default class BottomButtons extends React.Component {
 
   constructor(props) {
     super(props);
@@ -54,7 +54,7 @@ export default class TakeCardBottomButtons extends React.Component {
     const availableComments = comments.length;
     const { width } = this.props;
     return (
-      <BottomButtons>
+      <BottomButtonsContainer>
         <CommentButton onClick={() => this.props.expandComments()}>
           {comments.length > 0 ?
             <CommentBubble resize={width < 1800}>
@@ -70,7 +70,7 @@ export default class TakeCardBottomButtons extends React.Component {
 
         {this.playButton()}
 
-      </BottomButtons>
+      </BottomButtonsContainer>
     );
   }
 
@@ -94,7 +94,7 @@ const CommentBubble = styled.div`
   font-size: 12px;
 
 `;
-
+CommentBubble.displayName = 'CommentBubble';
 
 const PlayTakeContainer = styled.div`
 
@@ -103,13 +103,17 @@ const PlayTakeContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: stretch;
-
 `;
-const BottomButtons = styled.div`
+PlayTakeContainer.displayName = 'PlayTakeContainer';
+
+
+const BottomButtonsContainer = styled.div`
  display: flex;
  flex-direction: row;
  align-items: stretch;
 `;
+BottomButtonsContainer.displayName = 'BottomButtonsContainer';
+
 
 const Button = styled.button`
   flex: 1;
@@ -119,6 +123,8 @@ const Button = styled.button`
   border-top: solid 0.05vw #009CFF;
   text-align:center;
 `;
+Button.displayName = 'Button';
+
 
 const CommentButton = styled(Button)`
   position: relative;
@@ -127,6 +133,8 @@ const CommentButton = styled(Button)`
   text-decoration: underline;
   cursor:pointer;
 `;
+CommentButton.displayName = 'CommentButton';
+
 
 const PlayTake = styled(Button)`
   color: white;
@@ -137,3 +145,4 @@ const PlayTake = styled(Button)`
   align-items:center;
   cursor:pointer;
 `;
+PlayTake.displayName = 'PlayTake';

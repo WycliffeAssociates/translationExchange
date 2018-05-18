@@ -1,7 +1,7 @@
-/* global describe it expect */
+/* global describe it expect test jest*/
 import React from 'react';
 import {shallow} from 'enzyme';
-import ChunkPanel from '../../../../../js/pages/KanbanBoard/components/UtilityPanel/ChunkPanel';
+import ChunkPanel from '../../../../../../js/pages/KanbanBoard/components/UtilityPanel/ChunkPanel';
 
 const mockProps = {
   chunks: [{
@@ -29,6 +29,8 @@ const mockProps = {
     unavailable: 'unavailable',
     selected: 'selected',
   },
+
+  getTakes: jest.fn(),
 };
 
 
@@ -44,5 +46,15 @@ describe('ChunkPanel suite', () => {
 
   it('should render 2 Labels without players (published_take=null)',() => {
     expect(wrapper.find('CurrentLabel').length).toEqual(2);
+  });
+
+  test('onClick function from label',() => {
+    wrapper.find('label').first().simulate('click');
+    expect(mockProps.getTakes.mock.calls.length).toEqual(1);
+  });
+
+  test('navigateChunk function', () => {
+    wrapper.instance().navigateChunk(1,1);
+    expect(mockProps.getTakes.mock.calls.length).toEqual(2);
   });
 });

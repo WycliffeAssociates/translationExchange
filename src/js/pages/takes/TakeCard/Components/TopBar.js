@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import DragSource from './DragTarget';
+import DragTarget from './DragTarget';
 import jdenticon from 'jdenticon';
-export default class TakeCardTopIcon extends React.Component {
+export default class TopBar extends React.Component {
 
   constructor(props) {
     super(props);
@@ -22,8 +22,8 @@ export default class TakeCardTopIcon extends React.Component {
   convertUTC(date_modified) {
     let date = new Date(date_modified);
     let convertedDate= '';
-    convertedDate = date.getUTCDay()+ '/';
-    convertedDate = convertedDate + date.getUTCMonth()+ '/';
+    convertedDate = date.getUTCDate()+ '/';
+    convertedDate = convertedDate + (date.getUTCMonth()+1)+ '/';
     convertedDate = convertedDate+ date.getUTCFullYear();
 
     this.setState({date: convertedDate});
@@ -35,9 +35,9 @@ export default class TakeCardTopIcon extends React.Component {
     const {date} = this.state;
 
     return  (
-      <TopBar>
+      <TopBarContainer>
 
-        <DragSource {...this.props} />
+        <DragTarget {...this.props} />
 
         <CardInfo>
           <h3 style={{alignSelf: 'center'}}> {this.props.txt.take} {this.props.take_num} </h3>
@@ -45,14 +45,14 @@ export default class TakeCardTopIcon extends React.Component {
         </CardInfo>
 
         <Icon  id={`user${owner_icon_hash}`} data-jdenticon-hash={owner_icon_hash? owner_icon_hash: 'null user'} />
-      </TopBar>
+      </TopBarContainer>
 
     );
   }
 
 }
 
-const TopBar = styled.div`
+const TopBarContainer = styled.div`
   //height: 15%;
   display: flex;
   flex-direction: row;
@@ -61,12 +61,14 @@ const TopBar = styled.div`
   flex-wrap: wrap;
 
 `;
+TopBarContainer.displayName = 'TopBarContainer';
 
 
 const CardInfo = styled.div`
   margin-top: 0.8vw;
   text-align: center;
 `;
+CardInfo.displayName = 'CardInfo';
 
 const Icon = styled.svg`
   height: 2vw;
@@ -74,3 +76,4 @@ const Icon = styled.svg`
   margin-top: 0.6vw;
   cursor: pointer;
   `;
+Icon.displayName = 'Icon';

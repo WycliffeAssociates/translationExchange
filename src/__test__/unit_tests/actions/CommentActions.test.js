@@ -1,7 +1,7 @@
 /* global describe it expect  beforeEach afterEach jest*/
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { getComments, saveComment } from '../../../js/actions';
+import { getComments, saveComment, deleteComment } from '../../../js/actions';
 import moxios from 'moxios';
 
 const middlewares = [thunk];
@@ -106,6 +106,28 @@ describe('Comments Actions Test Suite', ()=> {
     });
   });
 
+  it('should save a chapter comment from the chapter page', ()=> {
+    moxios.wait(() =>{
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: [{}],
+      });
+    });
+
+    const expectedActions = [
+      {type: 'SAVE_COMMENT_LOADING', uploadingComments: true},
+      {type: 'SAVE_COMMENT_DONE', uploadingComments: false},
+      { type: 'FETCHING_CHAPTERS'}];
+
+    const store = mockStore({});
+
+    return store.dispatch(saveComment('blobx', 'chapter', 1, 1, 1, 1,jest.fn(), jest.fn(),[])).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+
 
   it('should save a take comment', ()=> {
     moxios.wait(() =>{
@@ -124,6 +146,46 @@ describe('Comments Actions Test Suite', ()=> {
     const store = mockStore({});
 
     return store.dispatch(saveComment('blobx', 'take', 1, 1, 1, null,jest.fn(), jest.fn(),[])).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+
+  it('should delete a  take comment', ()=> {
+    moxios.wait(() =>{
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: [{}],
+      });
+    });
+
+    const expectedActions = [
+      {type: 'LOADING'},
+      {type: 'COMMENT_DELETED'}];
+
+    const store = mockStore({});
+
+    return store.dispatch(deleteComment(1,'take', 1)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('should delete a  regular comment', ()=> {
+    moxios.wait(() =>{
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: [{}],
+      });
+    });
+
+    const expectedActions = [
+      {type: 'COMMENT_DELETED'}];
+
+    const store = mockStore({});
+
+    return store.dispatch(deleteComment(1,'not take', 1)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

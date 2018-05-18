@@ -47,5 +47,4 @@ class WaveForm extends Component {
   }
 }
 
-
 export default WaveForm;
