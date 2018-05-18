@@ -11,7 +11,7 @@ export default (state = INITIAL_STATE, action) => {
     case UPDATE_LANGUAGE:
       return {
         ...state,
-        txt: action.updatelanguage,
+        txt: language[action.updatelanguage],
       };
 
     default:

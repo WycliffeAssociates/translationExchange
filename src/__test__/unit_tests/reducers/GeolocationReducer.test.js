@@ -16,7 +16,7 @@ describe('Geolocation Reducer', ()=> {
       type: types.UPDATE_LANGUAGE,
       updatelanguage: 'swahili',
     })).toEqual({
-      txt: 'swahili',
+      txt: language['swahili'],
     });
   });
 });
