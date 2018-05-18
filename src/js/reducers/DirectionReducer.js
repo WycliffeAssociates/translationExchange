@@ -1,23 +1,23 @@
 import { UPDATE_DIRECTION } from '../actions/types';
 
-const INITIAL_STATE = { direction: "ltr"
-                      };
+const INITIAL_STATE = {
+  direction: 'ltr'};
 
 export default (state = INITIAL_STATE, action) => {
 
-    switch (action.type){
+  switch (action.type) {
 
-        case UPDATE_DIRECTION:
-          return {
-            state,
-            direction: action.updateDirection
-          };
+    case UPDATE_DIRECTION:
+      return {
+        ...state,
+        direction: action.updateDirection,
+      };
 
-       default:
-               return state;
+    default:
+      return state;
 
-    }
+  }
 
 
 
-}
+};

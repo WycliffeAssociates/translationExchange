@@ -21,9 +21,11 @@ describe.skip('Project Card Test Suite', () => {       // This test is skipped b
   const wrapper = shallow(<ProjectCard {...mockProps} />);
 
   it('should render the component correctly', () => {
-    expect(wrapper.find('Card'));
-    expect(wrapper.find('InformationContainer'));
-    expect(wrapper.find('ButtonsContainer'));
+
+    expect(wrapper.find('Card').length).toBe(1);
+    expect(wrapper.find('InformationContainer').length).toBe(1);
+    expect(wrapper.find('ButtonsContainer').length).toBe(1);
+
   });
 
 

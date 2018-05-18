@@ -10,7 +10,7 @@ import { fetchAllProjects, getChapters, getUserHash, removeUser, updateLanguage 
 
 
 
-class ProjectContainer extends Component {
+export class ProjectContainer extends Component {
 
   componentWillMount() {
     const {history, fetchAllProjects, updateLanguage} = this.props;
@@ -53,8 +53,8 @@ const Container = styled.div`
   height:100vh;
   display: flex;
   flex-direction: column;
-
 `;
+Container.displayName = 'Container';
 
 const ProjectsContainer = styled.div`
   width: 100%;
@@ -62,16 +62,16 @@ const ProjectsContainer = styled.div`
   display: flex;
   flex-direction: row;
   overflow-y:scroll;
-
 `;
+ProjectsContainer.displayName = 'ProjectsContainer';
 
 
 const CardsContainer = styled.div`
   width: 100%
   height: 100%;
   background-color: #F6F9FE;
-
 `;
+CardsContainer.displayName = 'CardsContainer';
 
 
 const mapDispatchToProps = dispatch => {

@@ -10,7 +10,7 @@ export default (state = INITIAL_STATE, action) => {
 
     case UPDATE_LANGUAGE:
       return {
-        state,
+        ...state,
         txt: language[action.updatelanguage],
       };
 

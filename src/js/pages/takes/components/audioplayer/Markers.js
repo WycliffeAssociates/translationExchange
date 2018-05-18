@@ -57,8 +57,4 @@ const VerseNumber = styled.div`
 
 `;
 
-
-
-
-
 export default Markers;

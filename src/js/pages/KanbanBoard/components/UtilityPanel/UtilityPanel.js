@@ -122,11 +122,12 @@ export default class UtilityPanel extends React.Component {
 
 }
 const CommentsPanel = styled.div`
-
 `;
+CommentsPanel.displayName= 'CommentsPanel';
 const UtilityPanelNotVisible = styled.div`
 margin-top: 1vw;
 padding-top: 1vw;`;
+UtilityPanelNotVisible.displayName= 'UtilityPanelNotVisible';
 
 const UtilityPanelContainer = styled.div`
   background: #2D2D2D;
@@ -138,6 +139,7 @@ const UtilityPanelContainer = styled.div`
    overflow-x: hidden;
   border-bottom: 1px solid #969595;
 `;
+UtilityPanelContainer.displayName= 'UtilityPanelContainer';
 
 const UtilityNavigation = styled.div`
   display: flex;
@@ -154,6 +156,7 @@ const UtilityNavigation = styled.div`
     width: 14px;
   }
 `;
+UtilityNavigation.displayName= 'UtilityNavigation';
 
 const Hide = styled.button`
   text-decoration: underline;
@@ -163,8 +166,9 @@ const Hide = styled.button`
   background: none;
   font-size: 1.6vw;
 `;
+Hide.displayName= 'Hide';
 
 const Show = styled(Hide)`
   color: white;
-
 `;
+Show.displayName= 'Show';

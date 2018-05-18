@@ -1,7 +1,7 @@
 /* global describe it expect jest*/  /* eslint indent:[1, "tab", {SwitchCase: 1}]*/
 import React from 'react';
 import { shallow } from 'enzyme';
-import Marker from '../../js/pages/takes/components/audioplayer/Markers';
+import Marker from '../../../../../../js/pages/takes/components/audioplayer/Markers';
 
 describe('Marker', () => {
 	it('postions the svg element correctly', () => {

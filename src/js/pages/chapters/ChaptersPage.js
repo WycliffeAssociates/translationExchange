@@ -47,7 +47,6 @@ export class ChapterPage extends Component {
     if (this.props.updatePage === true && this.props.uploadingComment === false) {
       const {search} = this.props.location;   //get data if the user refresh the page
       const query = QueryString.parse(search);
-      getChapters(query.projectId, history);
     }
   }
 

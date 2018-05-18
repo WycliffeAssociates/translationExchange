@@ -5,7 +5,6 @@ import './App.css';
 import './css/chapters.css'
 import NotFound from './js/pages/NotFound';
 import axios from 'axios';
-import User from './js/pages/user/user';
 import Welcome from './js/pages/Login/LoginPage.js';
 import AvailableUsers from './js/pages/Login/AvailableUsers.js';
 import ErrorPage from './js/pages/ErrorPage/ErrorPage';

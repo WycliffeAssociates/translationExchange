@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Wavesurfer from 'react-wavesurfer';
 import styled from 'styled-components';
 import PlayerTracker from '../../../../components/PlayerTracker';
 
