@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
-import Loading from '../../components/Loading';
+import getIllustrations from 'js/getIllustrations';
 import KanbanBoard from './components/KanbanBoard';
 import {getChunks, getTakes,deleteTake, getComments,
   patchTake, saveComment, getUserHash,
@@ -13,12 +13,14 @@ import {getChunks, getTakes,deleteTake, getComments,
 import UtilityPanel from './components/UtilityPanel/UtilityPanel';
 import styled from 'styled-components';
 import 'css/takes.css';
-import img from '../../../assets/images/obs-en-01-01.jpg';
 
 export class KanbanPage extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      illustrations: null,
+    };
   }
 
   componentWillMount() {
@@ -34,6 +36,9 @@ export class KanbanPage extends React.Component {
     if (language) {
       updateLanguage(language);
     }
+
+    let illustrations = getIllustrations(this.props.project);
+    this.setState({illustrations: illustrations});
 
   }
 
@@ -52,6 +57,7 @@ export class KanbanPage extends React.Component {
   render() {
     const {search} = this.props.location;
     const query = QueryString.parse(search);
+    const {illustrations} = this.state;
 
 
 
@@ -59,7 +65,7 @@ export class KanbanPage extends React.Component {
       <KanbanPageContainer>
         <NavBar chapterNum={query.chapterNum} kanbanPage={true} {...this.props} />
 
-        <KanbanContainer>
+        <KanbanContainer sketch ={illustrations.sketch}>
 
           <KanbanBoard {...this.props} />
 
@@ -86,7 +92,7 @@ const KanbanContainer = styled.div`
  height: 90vh ;
  width: 100vw;
  flex-direction: row;
- background: url(${img});
+ background: url(${props=> props.sketch});
  background-repeat: no-repeat;
  background-size: cover;
  overflow-x: hidden;
@@ -116,7 +122,8 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => {
-  const {takes, chunks, chunkNum, activeChunkId, playingTakeId, takesToDelete, removedTaketoDelete} = state.kanbanPage;
+  const {takes, chunks, chunkNum, activeChunkId, playingTakeId, takesToDelete,
+    removedTaketoDelete, project} = state.kanbanPage;
   const {chapterComments, chunkComments, uploadingComments,  uploadError} = state.comments;
   const {chapters} = state.Chapters;
   const {loggedInUser} = state.user;
@@ -126,7 +133,7 @@ const mapStateToProps = state => {
 
   return {takes, chunks, loggedInUser, chunkNum, chapterComments, chunkComments,
     txt, activeChunkId, uploadingComments, uploadError, chapters, playingTakeId,
-    takesToDelete, removedTaketoDelete};
+    takesToDelete, removedTaketoDelete, project};
 
   // all the state variables that you want to map to props
 };
