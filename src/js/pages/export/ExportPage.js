@@ -18,7 +18,6 @@ export class ExportPage extends Component {
       readyToExport: false,
       downloading: false,
     };
-
   }
 
   componentWillMount() {

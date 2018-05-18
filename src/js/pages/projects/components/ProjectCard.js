@@ -127,6 +127,7 @@ const ButtonsContainer = styled.div`
   margin-left: 12px;
 
 `;
+ButtonsContainer.displayName= 'ButtonsContainer';
 
 const Image = styled.img`
    height: 9.5vw;

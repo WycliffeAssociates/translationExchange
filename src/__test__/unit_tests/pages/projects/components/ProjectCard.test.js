@@ -23,14 +23,8 @@ describe('Project Card Test Suite', () => {
   it('should render the component correctly', () => {
     expect(wrapper.find('Card'));
     expect(wrapper.find('InformationContainer'));
-    expect(wrapper.find('ButtonContainer'));
+    expect(wrapper.find('ButtonsContainer'));
   });
 
-  it( 'should handle the onClick(reviewProject) function', () => {
-    wrapper.find('Card').simulate('click');
-    expect(mockProps.history.length).toEqual(1);
-    expect(wrapper.instance().props.getChapters.mock.calls.length).toEqual(1);
-
-  });
 
 });

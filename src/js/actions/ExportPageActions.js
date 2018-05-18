@@ -32,7 +32,7 @@ export const resetSelected = () => {
 
 
 
-export const downloadChapters = (type, chaptersIds, callback) => {
+export const downloadChapters = (type, chaptersIds) => {
 
   return dispatch => {
     return axios
