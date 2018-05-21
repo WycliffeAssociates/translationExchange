@@ -5,8 +5,11 @@ import {shallow} from 'enzyme';
 
 const mockProps = {
   task: {
-    "status": null,
-    "progress": 100
+    'status': null,
+    'progress': 100,
+    details: {
+      book_slug: 'mat',
+    },
   },
 };
 

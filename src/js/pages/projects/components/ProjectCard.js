@@ -1,17 +1,21 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
-import img1 from '../mockupdata/img2.PNG';
 import BorderButton from '../../../components/BorderButton';
 import ExportModal from './ExportModal';
 import {zoomIn} from 'react-animations';
 import jdenticon from 'jdenticon';
-
+import getIllustrations from 'js/getIllustrations';
 
 export default class ProjectCard extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { displayModal: false };
+    this.state = { displayModal: false, illustrations: null };
+  }
+
+  componentWillMount() {
+    let illustrations = getIllustrations(this.props.slug);
+    this.setState({ illustrations: illustrations});
   }
 
   componentDidMount() {
@@ -24,7 +28,8 @@ export default class ProjectCard extends React.Component {
 
 
     reviewProject = () => {
-      const {projectId, getChapters, history, bookName, mode } = this.props;
+      const {projectId, getChapters, history, bookName, mode, setProject, slug } = this.props;
+      setProject(slug);
       getChapters(projectId, history);
 
       const modeCap = mode.charAt(0).toUpperCase() + mode.slice(1);
@@ -36,7 +41,7 @@ export default class ProjectCard extends React.Component {
 
     render() {
       const { bookName, projectId, language, txt, history } = this.props;
-
+      const {illustrations} = this.state;
       return (
         <Card>
           <InformationContainer >
@@ -52,7 +57,7 @@ export default class ProjectCard extends React.Component {
 
 
           <ImageContainer>
-            <Image src={img1} alt="Smiley face" height="106px" width="338px" />
+            <Image src={illustrations.picker} alt="Smiley face" height="106px" width="338px" />
           </ImageContainer>
 
 

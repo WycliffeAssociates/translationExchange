@@ -216,3 +216,10 @@ export function updateTake() {
     type: 'UPDATE_TAKE',
   };
 }
+
+export function setProject(slug) {
+  return {
+    type: 'SET_PROJECT',
+    slug: slug,
+  };
+}

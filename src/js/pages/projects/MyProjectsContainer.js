@@ -4,7 +4,7 @@ import ProjectCard from './components/ProjectCard';
 
 class MyProjectsContainer extends Component {
   render() {
-    const {projects, txt} = this.props;
+    const {projects, txt, setProject} = this.props;
     return (
 
       <Container>
@@ -18,11 +18,13 @@ class MyProjectsContainer extends Component {
               key={p.id}
               index={index}
               bookName={p.book.name}
+              slug={p.book.slug}
               language={p.language.name}
               version={p.version.slug}
               dateModified={p.date_modified ? p.date_modified.slice(0,10) : ''}
               projectId={p.id}
               mode={p.mode.name}
+              setProject ={setProject}
               {...this.props}
             /> )
           }

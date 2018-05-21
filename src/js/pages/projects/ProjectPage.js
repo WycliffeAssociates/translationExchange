@@ -6,7 +6,8 @@ import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
 import RecentProjectsContainer from './RecentProjectsContainer';
 import MyProjectsContainer from './MyProjectsContainer';
-import { fetchAllProjects, getChapters, getUserHash, removeUser, updateLanguage } from '../../actions';
+import { fetchAllProjects, getChapters, getUserHash, removeUser,
+  setProject,updateLanguage } from '../../actions';
 
 
 
@@ -19,7 +20,7 @@ export class ProjectContainer extends Component {
     if (language) {
       updateLanguage(language);
     }
-  
+
   }
 
   render() {
@@ -75,7 +76,7 @@ CardsContainer.displayName = 'CardsContainer';
 
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({fetchAllProjects, getChapters, getUserHash, removeUser, updateLanguage}, dispatch);
+  return bindActionCreators({fetchAllProjects, getChapters, getUserHash, removeUser, updateLanguage, setProject}, dispatch);
 };
 
 const mapStateToProps = state =>{

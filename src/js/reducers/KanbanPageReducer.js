@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   playingTakeId: '',
   takesToDelete: [],
   removedTaketoDelete: false,
+  project: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -76,6 +77,12 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         removedTaketoDelete: false,//used to update after a take is deleted
+      };
+
+    case 'SET_PROJECT':
+      return {
+        ...state,
+        project: action.slug,
       };
 
     default: return state;
