@@ -57,7 +57,7 @@ export default class ProjectCard extends React.Component {
 
 
           <ImageContainer>
-            <Image src={illustrations.sketch} alt="Smiley face" height="106px" width="338px" />
+            <Image src={illustrations.picker} alt="Smiley face" height="106px" width="338px" />
           </ImageContainer>
 
 
