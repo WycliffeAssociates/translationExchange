@@ -14,8 +14,8 @@ export default class ProjectCard extends React.Component {
   }
 
   componentWillMount() {
-    let illustrations = getIllustrations(this.props.slug);
-    this.setState({ illustrations: illustrations});
+    const illustrations = getIllustrations(this.props.slug);
+    this.setState({illustrations});
   }
 
   componentDidMount() {
@@ -57,7 +57,7 @@ export default class ProjectCard extends React.Component {
 
 
           <ImageContainer>
-            <Image src={illustrations.picker} alt="Smiley face" height="106px" width="338px" />
+            <Image src={illustrations.sketch} alt="Smiley face" height="106px" width="338px" />
           </ImageContainer>
 
 
@@ -135,7 +135,8 @@ const ButtonsContainer = styled.div`
 ButtonsContainer.displayName= 'ButtonsContainer';
 
 const Image = styled.img`
-   height: 9.5vw;
+   object-fit: cover
+   height: 106px;
    width: 100%
 `;
 Image.displayName = 'Image';
