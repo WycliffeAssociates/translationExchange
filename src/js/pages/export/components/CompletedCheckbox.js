@@ -36,6 +36,8 @@ const CompletedButton = styled.div`
   font-size: 16px;
   `;
 
+ButtonContainer.displayName = 'CompletedCheckbox';
+
 const CheckBox = styled.span`
      display: inline-block;
      position: relative;

@@ -47,6 +47,8 @@ const Container = styled.div`
 `
 ;
 
+Container.displayName= 'Container';
+
 const SVG = styled.svg`
 `;
 

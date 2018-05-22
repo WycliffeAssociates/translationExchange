@@ -23,7 +23,6 @@ export class ExportCard extends Component {
       if (!nextProps.completedSelected && nextProps.published) {   // once we check the checkbox
         this.setState({checked: false});
         nextProps.selections(nextProps.id, false);
-
       }
 
     }
@@ -65,7 +64,6 @@ export class ExportCard extends Component {
       </Card>
     );
   }
-
 }
 
 const zoomInAnimation = keyframes `${zoomIn}`;
@@ -100,12 +98,16 @@ const Card = styled.div`
 
 `;
 
+Card.displayName = 'Card';
+
 const IconContainer = styled.div`
   display: flex;
   align-items: center;
   width: 80% ;
   justify-content: space-around;
 `;
+
+IconContainer.displayName ='IconContainer';
 
 const CheckBox = styled.span`
  display: inline-block;
@@ -130,9 +132,8 @@ const CheckBox = styled.span`
     left:-2px;
     top: -2px;
     color: ${props => props.checked ? '#FFF' :'#EEEEEE' };
-
-
-
   }
 
 `;
+
+CheckBox.displayName = 'CheckBox';
