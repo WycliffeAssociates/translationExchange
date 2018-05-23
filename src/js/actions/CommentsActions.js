@@ -123,9 +123,11 @@ export const deleteComment = (commentId, type, typeId) => {
         headers: { Authorization: 'Token ' + localStorage.getItem('token') },
       })
       .then(() => {
-
         if (type === 'take') {
           dispatch(commentOnTakeDeletedSuccess(activeChunkId, chunkNum, dispatch ));
+        }
+        if (type === 'chapter') {
+          dispatch(commentOnChapterDeleted(commentId, typeId));
         }
         else {
           dispatch(commentDeletedSuccess(typeId, type, dispatch));
@@ -154,4 +156,26 @@ export const commentDeletedSuccess = (id, type, dispatch) => {
   return {
     type: 'COMMENT_DELETED',
   };
+};
+
+export const commentOnChapterDeleted = (commentId, chapterId) => {
+  return (dispatch, getState) => {
+    const {chapters} = getState().Chapters;
+    let indexToDel= null;
+    for (let i = 0; i < chapters.length; i++) {            // loop through chapters
+      if (chapters[i].id === chapterId) {                  // find the chapter where comment was deleted
+        indexToDel = chapters[i].comments.some((cmt, index) => { // loop through comments and find the comment to delete
+          if (cmt.id === commentId) {
+            return index;            // find the index of the comment to delete
+          }
+        });
+        chapters[i].comments.splice(indexToDel, 1);       // remove comment fron array
+        break;
+      }
+    }
+
+    dispatch({type: 'CHAPTER_COMMENT_DELETED', chapters });
+
+  };
+
 };

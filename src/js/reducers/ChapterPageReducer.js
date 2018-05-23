@@ -21,6 +21,12 @@ export default (state = INITIAL_STATE, action) => {
         loading: false,
       };
 
+    case 'CHAPTER_COMMENT_DELETED':
+      return {
+        ...state,
+        chapters: action.chapters.concat(),
+      };
+
 
     default: return state;
   }

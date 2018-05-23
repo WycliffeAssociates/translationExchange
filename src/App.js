@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import ProjectsPage from './js/pages/projects/ProjectPage';
 import './App.css';
-import './css/chapters.css'
+import './css/chapters.css';
+import {ToastContainer} from 'react-toastify';
 import NotFound from './js/pages/NotFound';
 import axios from 'axios';
 import Welcome from './js/pages/Login/LoginPage.js';
@@ -50,6 +51,7 @@ class App extends Component {
 
       <div>
         <CustomDragLayer />
+        <ToastContainer style={{width: '25vw', padding: '0'}} />
 
         <Switch>
           <Route  exact path="/" component={Welcome} />
