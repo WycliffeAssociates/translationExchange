@@ -2,11 +2,11 @@
 
 exports[`Chapter card comments renders correctly and matches snapshot 1`] = `
 <div
-  className="sc-bdVaJa clJTvb"
+  className="sc-bdVaJa bGMtxA"
   onClick={undefined}
 >
   <button
-    className="sc-bwzfXH cRDOlu"
+    className="sc-bwzfXH jYtWDj"
   >
     <i
       className="material-icons"

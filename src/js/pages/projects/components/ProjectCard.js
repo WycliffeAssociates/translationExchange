@@ -135,7 +135,7 @@ const ButtonsContainer = styled.div`
 ButtonsContainer.displayName= 'ButtonsContainer';
 
 const Image = styled.img`
-   height: 9.5vw;
+   height: 106px;
    width: 100%
 `;
 Image.displayName = 'Image';

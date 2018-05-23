@@ -19,12 +19,6 @@ export default class Comments extends Component {
     this.state = {
       displayModal: false,
       playing: false,
-      cardWidth: 0,
-      x: 0,
-      counter: 0,
-      controlledPosition: {
-        x: 0, y: 0,
-      },
     };
 
     this.closeModal = this.closeModal.bind(this);
@@ -72,7 +66,7 @@ export default class Comments extends Component {
             comments.length!==0?
               comments.map( (comment) => {
                 return (
-                  <CommentRow txt={txt} type= "chapter" chapterId={id}  deleteComment={deleteComment} width={this.state.cardWidth} id={comment.id} key= {comment.id} comment= {comment} />
+                  <CommentRow txt={txt} type= "chapterCard" chapterId={id}  deleteComment={deleteComment} width={this.state.cardWidth} id={comment.id} key= {comment.id} comment= {comment} />
                 );
 
               }):

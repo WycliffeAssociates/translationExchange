@@ -126,7 +126,7 @@ export const deleteComment = (commentId, type, typeId) => {
         if (type === 'take') {
           dispatch(commentOnTakeDeletedSuccess(activeChunkId, chunkNum, dispatch ));
         }
-        if (type === 'chapter') {
+        else if (type === 'chapterCard') {
           dispatch(commentOnChapterDeleted(commentId, typeId));
         }
         else {
