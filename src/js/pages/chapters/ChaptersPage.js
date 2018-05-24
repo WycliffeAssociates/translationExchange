@@ -130,7 +130,7 @@ const DownloadBar = styled.div`
   display: flex;
   padding: 0.5vh;
   flex-direction: column;
-  z-index: 99;
+  z-index: 97;
 
 `;
 DownloadBar.displayName = 'DownloadBar';

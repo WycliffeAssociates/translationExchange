@@ -30,7 +30,7 @@ const styles = {
     position: 'fixed',
     bottom: '7.5vh',
     right: '18vw',
-    zIndex: '101',
+    zIndex: '98',
     width: '20.5vw',
     height: '25.5vh',
   },

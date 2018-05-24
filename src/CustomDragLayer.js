@@ -8,7 +8,7 @@ import { DragLayer } from 'react-dnd';
 const layerStyles = {
   position: 'fixed',
   pointerEvents: 'none',
-  zIndex: 100,
+  zIndex: 95,
   left: 0,
   top: 0,
   width: '100%',
