@@ -107,7 +107,7 @@ const SourceAudio = styled.div`
   height: 7.5vh;
   background: #2D2D2D;
   width: 100vw;
-  z-index: 99;
+  z-index: 10;
   max-height: 50px;
 `;
 SourceAudio.displayName = 'SourceAudio';
