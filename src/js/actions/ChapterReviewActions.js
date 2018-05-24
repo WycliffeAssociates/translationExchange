@@ -43,21 +43,12 @@ export const getAlternateTakesSuccess = (alternateTakes) => {
   };
 };
 
-export const noTakesForChunk = (chunkId, chunkNum) => {
-  return {
-    type: 'NO_TAKES_FOR_CHUNK',
-    takes: [],
-    chunkNum,
-    activeChunkId: chunkId,
-  };
-};
-
-export function playTake(takeId) {
-  return {
-    type: 'UPDATE_PLAYING_TAKE',
-    takeId,
-  };
-}
+// export function playTake(takeId) {
+//   return {
+//     type: 'UPDATE_PLAYING_TAKE',
+//     takeId,
+//   };
+// }
 
 export const getSelectedTakes = (chapterId, redirect, chapterNav) => {
   return dispatch => {
@@ -95,87 +86,87 @@ export const getSelectedTakesSuccess = (chunks) => {
 };
 
 //patch take
-export const patchTake = (
-  takeId,
-  patch,
-  success,
-  takes,
-  chapterId,
-  rating, //what is takes current rating
-  isPublished //is take currently published
-) => {
+// export const patchTake = (
+//   takeId,
+//   patch,
+//   success,
+//   takes,
+//   chapterId,
+//   rating, //what is takes current rating
+//   isPublished //is take currently published
+// ) => {
+//
+//   return function(dispatch, getState) {
+//
+//     const {chunks} = getState().kanbanPage;
+//     return axios
+//       .patch(config.apiUrl + 'takes/' + takeId + '/', patch,{
+//         headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+//       })
+//       .then(response => {
+//         const chunkId = response.data.chunk;
+//         const take = response.data;
+//
+//         chunks.map(chk => {
+//
+//           if (chk.id === chunkId && patch.published) {    // select the chunk that we are updating and verify if it is
+//             chk.published_take = take;                // marked as published, update the published take inside the chunk obj
+//
+//           }
+//           else if (chk.id === chunkId && !patch.published // unpublish take at chunk level
+//           && rating === 3 && isPublished ===true) {
+//             //
+//             chk.published_take = null;
+//           }
+//         });
+//
+//         //find correct take to update
+//         let listOfTakes = takes;
+//         let takeToUpdateIndex;
+//         let updatedTakeInfo = response.data;
+//
+//
+//         for (var i =0; i<listOfTakes.length; i++) {
+//           if (listOfTakes[i].id === takeId) {
+//             takeToUpdateIndex = i;
+//             break;
+//           }
+//         }
+//         listOfTakes[takeToUpdateIndex] = updatedTakeInfo;
+//         dispatch(patchTakeSuccess(listOfTakes));
+//       })
+//       .catch(error => {
+//         let message;
+//         if (error.response) {
+//           if (error.response.status === 404) {
+//             message = 'Sorry, that take does not exist!';
+//
+//           } else {
+//             message =
+//                     'Something went wrong. Please check your connection and try again.';
+//           }
+//         } else {
+//           message =
+//                 'Something went wrong. Please check your connection and try again.';
+//         }
+//         // dispatch(patchTakeFailed(message));
+//       });
+//   };
+// };
 
-  return function(dispatch, getState) {
-
-    const {chunks} = getState().kanbanPage;
-    return axios
-      .patch(config.apiUrl + 'takes/' + takeId + '/', patch,{
-        headers: { Authorization: 'Token ' + localStorage.getItem('token') },
-      })
-      .then(response => {
-        const chunkId = response.data.chunk;
-        const take = response.data;
-
-        chunks.map(chk => {
-
-          if (chk.id === chunkId && patch.published) {    // select the chunk that we are updating and verify if it is
-            chk.published_take = take;                // marked as published, update the published take inside the chunk obj
-
-          }
-          else if (chk.id === chunkId && !patch.published // unpublish take at chunk level
-          && rating === 3 && isPublished ===true) {
-            //
-            chk.published_take = null;
-          }
-        });
-
-        //find correct take to update
-        let listOfTakes = takes;
-        let takeToUpdateIndex;
-        let updatedTakeInfo = response.data;
-
-
-        for (var i =0; i<listOfTakes.length; i++) {
-          if (listOfTakes[i].id === takeId) {
-            takeToUpdateIndex = i;
-            break;
-          }
-        }
-        listOfTakes[takeToUpdateIndex] = updatedTakeInfo;
-        dispatch(patchTakeSuccess(listOfTakes));
-      })
-      .catch(error => {
-        let message;
-        if (error.response) {
-          if (error.response.status === 404) {
-            message = 'Sorry, that take does not exist!';
-
-          } else {
-            message =
-                    'Something went wrong. Please check your connection and try again.';
-          }
-        } else {
-          message =
-                'Something went wrong. Please check your connection and try again.';
-        }
-        // dispatch(patchTakeFailed(message));
-      });
-  };
-};
-
-export function patchTakeSuccess(updatedTakes) {
-  return {
-    type: 'PATCH_TAKE_SUCCESS',
-    updatedTakes: updatedTakes,
-  };
-}
-
-
-export function updateTake() {
-  return {
-    type: 'UPDATE_TAKE',
-  };
-}
+// export function patchTakeSuccess(updatedTakes) {
+//   return {
+//     type: 'PATCH_TAKE_SUCCESS',
+//     updatedTakes: updatedTakes,
+//   };
+// }
+//
+//
+// export function updateTake() {
+//   return {
+//     type: 'UPDATE_TAKE',
+//   };
+// }
 
 export function togglePlay(playing) {
   return {

@@ -9,7 +9,7 @@ exports[`DeleteTake DropTarget renders correctly 1`] = `
       "position": "fixed",
       "right": "18vw",
       "width": "20.5vw",
-      "zIndex": "101",
+      "zIndex": "98",
     }
   }
 >
