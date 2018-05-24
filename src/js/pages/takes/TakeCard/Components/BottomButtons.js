@@ -29,8 +29,8 @@ export default class BottomButtons extends React.Component {
 
   playButton() {
     const playing = this.props.takePlaying;
-    const play = <i class="material-icons">play_arrow</i>;
-    const pause = <i class="material-icons">pause</i>;
+    const play = <i className="material-icons">play_arrow</i>;
+    const pause = <i className="material-icons">pause</i>;
 
     return (
       <PlayTakeContainer>
@@ -64,7 +64,7 @@ export default class BottomButtons extends React.Component {
             ''
           }
 
-          <i class="material-icons">mode_comment</i>
+          <i className="material-icons">mode_comment</i>
 
         </CommentButton>
 
