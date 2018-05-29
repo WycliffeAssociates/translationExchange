@@ -7,7 +7,7 @@ import Loading from '../../components/Loading';
 import RecentProjectsContainer from './RecentProjectsContainer';
 import MyProjectsContainer from './MyProjectsContainer';
 import { fetchAllProjects, getChapters, getUserHash, removeUser,
-  setProject,updateLanguage } from '../../actions';
+  setProject,updateLanguage, getTransferProgress, transferProject, resetExport } from '../../actions';
 
 
 
@@ -76,15 +76,17 @@ CardsContainer.displayName = 'CardsContainer';
 
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({fetchAllProjects, getChapters, getUserHash, removeUser, updateLanguage, setProject}, dispatch);
+  return bindActionCreators({fetchAllProjects, getChapters, getUserHash, removeUser,
+    updateLanguage, setProject, getTransferProgress, transferProject, resetExport}, dispatch);
 };
 
 const mapStateToProps = state =>{
   const { projects, loading  } = state.Projects;
+  const { taskId } = state.ExportPage;
   const {loggedInUser} = state.user;
   const {txt} = state.geolocation;
 
-  return {projects, loggedInUser, loading, txt};
+  return {projects, loggedInUser, loading, txt, taskId};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectContainer);

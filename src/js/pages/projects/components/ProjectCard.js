@@ -22,9 +22,16 @@ export default class ProjectCard extends React.Component {
     jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'no author info');
   }
 
-  showModal = () => this.setState({displayModal: true});
+  showModal = () =>{
+    this.props.resetExport();
+    this.setState({displayModal: true});
+  }
 
-  closeModal = () => this.setState({displayModal: false});
+  closeModal = () => {
+    this.props.resetExport();
+    this.setState({displayModal: false});
+
+  };
 
 
     reviewProject = () => {
@@ -40,7 +47,7 @@ export default class ProjectCard extends React.Component {
     };
 
     render() {
-      const { bookName, projectId, language, txt, history } = this.props;
+      const { bookName, projectId, language, txt, history, getTransferProgress, transferProject, taskId, resetExport } = this.props;
       const {illustrations} = this.state;
       return (
         <Card>
@@ -83,6 +90,10 @@ export default class ProjectCard extends React.Component {
               txt={txt}
               bookName={bookName}
               projectId={projectId}
+              getTransferProgress={getTransferProgress}
+              transferProject={transferProject}
+              taskId={taskId}
+              resetExport={resetExport}
             />
 
           </ButtonsContainer>
