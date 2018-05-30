@@ -242,6 +242,7 @@ class KanbanColumn extends React.Component {
                     <ReviewDialog nextChapter={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)}
                       closeModal={this.closeModal}
                       chapterNum = {chapterNum}
+                      query={this.props.location.search}
                       history={history} />
                     :
                     ''
