@@ -2,22 +2,37 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-export const CompletedCheckbox = ({checked, toggleCheck, txt}) => {
+export const CompletedCheckbox = ({checked, toggleCheck, txt, chapterComplete}) => {
+  if (chapterComplete > 0) {
+    return (
+      <ButtonContainer>
+        <CompletedButton checked={checked}>
+          <CheckBox checked={checked} onClick={toggleCheck}>
+            {checked ? <i className="material-icons">done</i> : ''}
+          </CheckBox>
+          {txt.completed}
+          <i className="material-icons">done</i>
+        </CompletedButton>
+      </ButtonContainer>
+    );
 
-  return (
-    <ButtonContainer>
-      <CompletedButton checked={checked}>
-        <CheckBox checked={checked} onClick={toggleCheck}>
-          {checked ? <i className="material-icons">done</i> : ''}
-        </CheckBox>
-        {txt.completed}
-        <i className="material-icons">done</i>
-      </CompletedButton>
-    </ButtonContainer>
-  );
+  }
+  else {
+    return (
+      <ButtonContainer color="#E56060">
+        <CompletedButton>
+          {txt.completed}
+          <i className="material-icons">clear</i>
+        </CompletedButton>
+      </ButtonContainer>
+    );
+
+  }
 };
 
-const ButtonContainer = styled.div``;
+const ButtonContainer = styled.div`
+  color: ${props=> props.color}
+`;
 
 const CompletedButton = styled.div`
   display: flex;
