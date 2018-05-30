@@ -1,6 +1,5 @@
 import axios from 'axios';
 import config from '../../config/config';
-import {getComments} from './CommentsActions';
 
 export const getAlternateTakes = (selectedTakes) => {  // chunkNum comes from the NavBar to display on the comments section the chunk number
   return function(dispatch) {
@@ -85,88 +84,79 @@ export const getSelectedTakesSuccess = (chunks) => {
   };
 };
 
-//patch take
-// export const patchTake = (
-//   takeId,
-//   patch,
-//   success,
-//   takes,
-//   chapterId,
-//   rating, //what is takes current rating
-//   isPublished //is take currently published
-// ) => {
-//
-//   return function(dispatch, getState) {
-//
-//     const {chunks} = getState().kanbanPage;
-//     return axios
-//       .patch(config.apiUrl + 'takes/' + takeId + '/', patch,{
-//         headers: { Authorization: 'Token ' + localStorage.getItem('token') },
-//       })
-//       .then(response => {
-//         const chunkId = response.data.chunk;
-//         const take = response.data;
-//
-//         chunks.map(chk => {
-//
-//           if (chk.id === chunkId && patch.published) {    // select the chunk that we are updating and verify if it is
-//             chk.published_take = take;                // marked as published, update the published take inside the chunk obj
-//
-//           }
-//           else if (chk.id === chunkId && !patch.published // unpublish take at chunk level
-//           && rating === 3 && isPublished ===true) {
-//             //
-//             chk.published_take = null;
-//           }
-//         });
-//
-//         //find correct take to update
-//         let listOfTakes = takes;
-//         let takeToUpdateIndex;
-//         let updatedTakeInfo = response.data;
-//
-//
-//         for (var i =0; i<listOfTakes.length; i++) {
-//           if (listOfTakes[i].id === takeId) {
-//             takeToUpdateIndex = i;
-//             break;
-//           }
-//         }
-//         listOfTakes[takeToUpdateIndex] = updatedTakeInfo;
-//         dispatch(patchTakeSuccess(listOfTakes));
-//       })
-//       .catch(error => {
-//         let message;
-//         if (error.response) {
-//           if (error.response.status === 404) {
-//             message = 'Sorry, that take does not exist!';
-//
-//           } else {
-//             message =
-//                     'Something went wrong. Please check your connection and try again.';
-//           }
-//         } else {
-//           message =
-//                 'Something went wrong. Please check your connection and try again.';
-//         }
-//         // dispatch(patchTakeFailed(message));
-//       });
-//   };
-// };
+// set take using patch
+export const setTake = (
+  publishedTakeId,
+  tempTakes,
+  index,
+  alternateTakes
+) => {
+  return function(dispatch) {
 
-// export function patchTakeSuccess(updatedTakes) {
-//   return {
-//     type: 'PATCH_TAKE_SUCCESS',
-//     updatedTakes: updatedTakes,
-//   };
-// }
-//
-//
-// export function updateTake() {
-//   return {
-//     type: 'UPDATE_TAKE',
-//   };
-// }
+    axios
+      .patch(config.apiUrl + 'takes/' + publishedTakeId+ '/', {published: true, rating: 3},{
+        headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+      });
+
+    axios
+      .patch(config.apiUrl + 'takes/' + tempTakes.publishedTake.id + '/', {published: false, rating: 3},{
+        headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+      })
+      .then(response => {
+        const take= response.data;
+        console.log(take);
+        alternateTakes.forEach((chunk, chunkIndex) => {
+          if (chunk.chunkId === take.chunk) {
+            chunk.takes.forEach((take, takeIndex) => {
+              if (take.id == publishedTakeId) {
+                dispatch({
+                  type: 'UPDATE_ALTERNATE_TAKES',
+                  take: response.data,
+                  oldId: publishedTakeId, /* use the id of the new publishedTake(the old atlernate take)
+                                        to replace the oldId which is still in the alternateTakes array*/
+                  takeIndex,
+                  chunkIndex,
+                  tempTakeIndex: index,
+                });
+              }
+            });
+          }
+        });
+      })
+      .catch(error => {
+        let message;
+        if (error.response) {
+          if (error.response.status === 404) {
+            message = 'Sorry, that take does not exist!';
+
+          } else {
+            message =
+                    'Something went wrong. Please check your connection and try again.';
+          }
+        } else {
+          message =
+                'Something went wrong. Please check your connection and try again.';
+        }
+      });
+  };
+};
+
+export function swapTake(take, index) {
+  return {
+    type: 'SWAP_TAKE',
+    take,
+    index,
+  };
+}
+
+export function undoSwapTake(take, index) {
+  return {
+    type: 'UNDO_SWAP',
+    take,
+    index,
+  };
+}
+
 
 export function togglePlay(playing) {
   return {
@@ -175,12 +165,20 @@ export function togglePlay(playing) {
   };
 }
 
-export function updateActiveChunkIndex(activeChunkIndex,index) {
-  if (index !==null) {
-    console.log('index is not null')
+export function updateActiveChunkIndex(activeChunkIndex,index, takesPlaying) {
+  if (index !==null && index !== 'done') {
     return {
       type: 'UPDATE_ACTIVE_CHUNK_INDEX',
       index,
+      takesPlaying,
+    };
+  }
+
+  else if (index === 'done') {
+    return {
+      type: 'FINISH_PLAYING',
+      index: activeChunkIndex,
+      takesPlaying,
     };
   }
 
@@ -188,6 +186,13 @@ export function updateActiveChunkIndex(activeChunkIndex,index) {
     return {
       type: 'UPDATE_ACTIVE_CHUNK_INDEX',
       index: activeChunkIndex+1,
+      takesPlaying,
     };
   }
+}
+
+export function clearAlternateTakes() {
+  return {
+    type: 'CLEAR_ALTERNATE_TAKES',
+  };
 }
