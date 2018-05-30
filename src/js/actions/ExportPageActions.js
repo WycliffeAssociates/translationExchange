@@ -143,3 +143,13 @@ export const resetExport = () => {
     type: 'RESET_SELECTED',
   };
 };
+
+
+
+export const updateExportModal = (prop, value) => {
+  return {
+    type: 'UPDATE_EXPORT_MODAL',
+    prop,
+    value,
+  };
+};

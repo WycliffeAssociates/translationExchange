@@ -47,7 +47,7 @@ class DowloadingTransfer extends Component {
             <Container>
               <LoadingTransfer />
               <TextContainer>
-                <p>{percentage}</p>
+                <p>{percentage}%</p>
                 <p> {txt.generating}... </p>
               </TextContainer>
 
@@ -71,6 +71,7 @@ const SuccessContainer = styled.div`
 
 const TextContainer = styled.div`
   margin-top: 50px;
+  color: #E56060;
 `;
 
 const BlueButton = styled.button`

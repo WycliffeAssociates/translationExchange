@@ -7,43 +7,33 @@ import DowloadingTransfer from './DownloadingTransfer';
 
 class ExportModal extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {showModal: false};
-  }
 
 
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({showModal: nextProps.display});
-  }
-
-
-
-  show = dimmer => () => this.setState({ dimmer, open: true });
   close = () => {
-    this.setState({showModal: false});
+    const {resetExport, updateExportModal} = this.props;
+    resetExport();
+    updateExportModal('showModal', false);
+
 
   };
 
 
   goToExport = () => {
-    const {history, bookName, projectId}= this.props;
+    const {history, bkName, projId, updateExportModal}= this.props;
+    updateExportModal('showModal', false);
 
     history.push({
       pathname: './export',
-      search: `?projectId=${projectId}&&bookName=${bookName}`,
+      search: `?projectId=${projId}&&bookName=${bkName}`,
     });
   }
 
 
 
 
-
-
   render() {
-    const { showModal } = this.state;
-    const {bookName, txt, taskId, transferProject, projectId, getTransferProgress} = this.props;
+
+    const { txt, taskId, transferProject, getTransferProgress, projId, bkName, showModal} = this.props;
 
     return (
       <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
@@ -61,7 +51,7 @@ class ExportModal extends Component {
               <Span onClick={()=>this.close()}>X</Span>
               <TextContainer>
                 <p>{txt.exportProject}:</p>
-                <h1>{bookName}</h1>
+                <h1>{bkName}</h1>
               </TextContainer>
 
             </TopContainer>
@@ -69,7 +59,7 @@ class ExportModal extends Component {
 
               <ButtonsContainer>
                 <SingleButtonContainer color={'#E56060'}>
-                  <BorderButton icon="share"  onClick={()=> {transferProject(projectId);}} color={'#E56060'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} />
+                  <BorderButton icon="share"  onClick={()=> {transferProject(projId);}} color={'#E56060'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} />
                   <p>{txt.transfer}</p>
                 </SingleButtonContainer>
                 <SingleButtonContainer color={'#009CFF'}>

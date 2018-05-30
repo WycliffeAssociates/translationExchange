@@ -3,6 +3,9 @@ const INITIAL_STATE = {
   loading: false,
   taskId: null,
   progress: null,
+  showModal: false,
+  bkName: null,
+  projId: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -29,6 +32,9 @@ export default (state = INITIAL_STATE, action) => {
 
     case 'UPDATE_PROGRESS':
       return {...state, progress: action.progress};
+
+    case 'UPDATE_EXPORT_MODAL':
+      return {...state, [action.prop]: action.value}
 
     case 'RESET_SELECTED':
       return INITIAL_STATE;

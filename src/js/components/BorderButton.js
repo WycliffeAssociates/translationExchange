@@ -5,7 +5,7 @@ export default ({txt, icon, color, width, height, radius, iconSize, onClick, fon
   return (
     <Button onClick={()=>onClick()} hoverColor={hoverColor} border={border} fontSize = {fontSize} color={color} width={width} height={height} radius={radius} iconSize={iconSize}>
       {txt ? txt : ''}
-      {icon ? <i class="material-icons"> {icon}</i> : ''}
+      {icon ? <i className="material-icons"> {icon}</i> : ''}
     </Button>);
 };
 
