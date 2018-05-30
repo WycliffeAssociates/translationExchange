@@ -5,7 +5,7 @@ import styled from 'styled-components';
 export default class ReviewDialog extends Component {
 
   render() {
-    const {type, txt, chapterNum} = this.props;
+    const {type, txt, chapterNum, query} = this.props;
     let icon = 'done';
 
     return (
@@ -36,7 +36,7 @@ export default class ReviewDialog extends Component {
 
           <Action>
             <SkipButton onClick={this.props.nextChapter}> <i className="material-icons">arrow_forward </i> Skip to Next Chapter  </SkipButton>
-            <Button onClick={()=> this.props.history.push('./ChapterReview')}> <i className="material-icons">done_all </i> Go to Chapter Review</Button>
+            <Button onClick={()=> this.props.history.push(`/chapterReview${query}`)}> <i className="material-icons">done_all </i> Go to Chapter Review</Button>
           </Action>
 
         </Card>
