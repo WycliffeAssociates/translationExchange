@@ -1,17 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
+import SetUndo from './SetUndo';
 
 export default class ListView extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.renderList = this.renderList.bind(this);
-    this.renderPlaceholder = this.renderPlaceholder.bind(this);
-  }
+    this.state= {
+      placeHolderCount: 0,
+      alternateTakesFetched: false,
+    };
 
-  renderList(array, active) {
-    let placeHolderCount = 0;
+    this.renderList = this.renderList.bind(this);
+    this.getPlaceholders = this.getPlaceholders.bind(this);
+  }
+  componentDidUpdate() {
+    const {alternateTakes, chunkId} = this.props;
+    const {alternateTakesFetched} = this.state;
+    if (alternateTakes.length!==0 &&  alternateTakesFetched === false) {
+      for (var x=0; x<alternateTakes.length; x++) {
+        if (alternateTakes[x].chunkId === chunkId) {
+          let num = alternateTakes[x].takes.length;
+          this.setState({placeHolderCount: num, alternateTakesFetched: true});
+        }
+      }
+    }
+  }
+  renderList(array, active, index) {
 
     return (
       array.takes.length >1?
@@ -21,7 +37,7 @@ export default class ListView extends React.Component {
             <ListItem active={active}>
               <TakeNum> Take {take.take_num}</TakeNum>
 
-              <TouchTarget> <i className="material-icons">touch_app</i> </TouchTarget>
+              <TouchTarget onClick ={() => this.props.swapTake(take,index)} > <i className="material-icons">touch_app</i> </TouchTarget>
 
               <Rating>
                 <label > <i className="material-icons">star_border</i> </label>
@@ -36,7 +52,7 @@ export default class ListView extends React.Component {
         <ListItem active={active}>
           <TakeNum> Take {array.takes[0].take_num}</TakeNum>
 
-          <TouchTarget> <i className="material-icons">touch_app</i> </TouchTarget>
+          <TouchTarget onClick ={() => this.props.swapTake(array.takes[0],index)}> <i className="material-icons">touch_app</i> </TouchTarget>
 
           <Rating>
             <label > <i className="material-icons">star_border</i> </label>
@@ -47,31 +63,48 @@ export default class ListView extends React.Component {
     );
 
   }
-  renderPlaceholder(length, active) {
-    if (length<4) {
-      let count = 4-length;
-      let array = new Array(count);
-      return array.map(() => {
-        return  (
+  getPlaceholders(active) {
+    let array = [];
+    let {placeHolderCount} = this.state;
+    if (placeHolderCount<4) {
+      while (placeHolderCount < 4) {
+        placeHolderCount++;
+        array.push(
           <div>
             <ListItem active={active} style={{height: '7.5vh'}} />
           </div>
         );
-      });
+      }
     }
+
+    return array;
   }
 
 
   render() {
 
-    const {alternateTakes, index, chunkId, active} = this.props;
+    const {alternateTakes, index, chunkId, active,txt,saveComment,
+      tempTakes, undoSwapTake, take, setTake, location} = this.props;
+    let numPlaceHolders = this.getPlaceholders();
     return (
       <Container>
         {
-          alternateTakes.map((array) => {
-            if (array.chunkId === chunkId) {
-              return this.renderList(array, active); //, this.renderPlaceholder(array.takes.length, active);
-            }
+          tempTakes[index] && tempTakes[index] !== null?
+            <SetUndo undoSwapTake={undoSwapTake} index={index}
+              tempTakes={tempTakes} take={take} txt={txt}
+              alternateTakes={alternateTakes} saveComment={saveComment}
+              setTake={setTake} chunkId={chunkId} location={location} />
+            :
+            alternateTakes.map((array) => {
+              if (array.chunkId === chunkId) {
+                return this.renderList(array, active, index); //, this.renderPlaceholder(array.takes.length, active);
+              }
+            })
+        }
+
+        {
+          numPlaceHolders.map((placeholder)=> {
+            return placeholder;
           })
         }
 

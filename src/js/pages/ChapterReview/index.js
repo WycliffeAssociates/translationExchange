@@ -2,10 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {getAlternateTakes, getSelectedTakes,
-  togglePlay, updateActiveChunkIndex} from '../../actions';
+  togglePlay, updateActiveChunkIndex, swapTake,
+  undoSwapTake, setTake, saveComment, clearAlternateTakes} from '../../actions';
 import styled from 'styled-components';
 import ReviewColumn from './components/ReviewColumn';
 import BottomBar from './components/BottomBar';
+import QueryString from 'query-string';
+
 
 class index extends React.Component {
 
@@ -13,6 +16,7 @@ class index extends React.Component {
     super(props);
     this.state ={
       resetPos: false,
+      alternateTakesFetched: false,
     };
     this.resetTake = this.resetTake.bind(this);
   }
@@ -22,21 +26,28 @@ class index extends React.Component {
   }
 
   componentWillMount() {
-    this.props.getSelectedTakes(4, this.props.history);
+    var query = QueryString.parse(this.props.location.search);
+    var chapterNum = query.chapterNum;
+    this.props.getSelectedTakes(chapterNum, this.props.history);
+    this.setState({alternateTakesFetched: false});
   }
 
   componentDidUpdate() {
     const {selectedTakes, alternateTakes} = this.props;
-    if (alternateTakes.length === 0 ) {
+    const {alternateTakesFetched} = this.state;
+    if (alternateTakesFetched === false && alternateTakes.length === 0) { //only get alternate takes if the alternate takes haven't been loaded yet
       this.props.getAlternateTakes(selectedTakes);
+      this.setState({alternateTakesFetched: true});
     }
   }
 
 
   render() {
-    const {selectedTakes, alternateTakes, activeChunkIndex,
-      togglePlay, updateActiveChunkIndex} = this.props;
+    const {selectedTakes, alternateTakes, activeChunkIndex, setTake, stopPlaying,saveComment,
+      togglePlay, updateActiveChunkIndex, swapTake, clearAlternateTakes,
+      undoSwapTake, tempTakes, txt, location} = this.props;
     const {resetPos} = this.state;
+    const length = selectedTakes.length;
     return (
       <Container>
         <ReviewColumnsContainer>
@@ -44,22 +55,25 @@ class index extends React.Component {
             selectedTakes?
               selectedTakes.map((take, index) => {
                 return (
-                  <ReviewColumn take={take} index={index}
+                  <ReviewColumn take={take} index={index} txt={txt}
                     alternateTakes={alternateTakes}
                     activeChunkIndex={activeChunkIndex}
                     updateActiveChunkIndex={updateActiveChunkIndex}
-                    resetPos={resetPos}
-                    resetTake={this.resetTake} />
+                    resetPos={resetPos} resetTake={this.resetTake}
+                    tempTakes={tempTakes} swapTake={swapTake}
+                    undoSwapTake = {undoSwapTake} setTake={setTake}
+                    selectedTakesLength={length} saveComment={saveComment} location={location} />
                 );
               }) : ''
           }
         </ReviewColumnsContainer>
 
         <BottomBar activeChunkIndex={activeChunkIndex}
-          togglePlay={togglePlay}
+          togglePlay={togglePlay} clearAlternateTakes={clearAlternateTakes}
           updateActiveChunkIndex={updateActiveChunkIndex}
-          resetTake={this.resetTake} />
-
+          resetTake={this.resetTake}
+          location={this.props.location} stopPlaying={stopPlaying}
+          history={this.props.history} selectedTakesLength={length} />
       </Container>
     );
   }
@@ -69,14 +83,18 @@ class index extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({getAlternateTakes,
-    getSelectedTakes, togglePlay, updateActiveChunkIndex}, dispatch);
+    getSelectedTakes, togglePlay, updateActiveChunkIndex,
+    swapTake, undoSwapTake, setTake, saveComment, clearAlternateTakes}, dispatch);
 };
 
 const mapStateToProps = state => {
-  const {selectedTakes, alternateTakes, activeChunkIndex} = state.ChapterReview;
+  const {selectedTakes, alternateTakes,
+    activeChunkIndex, tempTakes, stopPlaying} = state.ChapterReview;
+
+  const {txt} = state.geolocation;
 
   return {
-    selectedTakes, alternateTakes, activeChunkIndex,
+    selectedTakes, alternateTakes, activeChunkIndex,tempTakes,stopPlaying,txt,
   };
   // all the state variables that you want to map to props
 };

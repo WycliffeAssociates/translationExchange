@@ -11,22 +11,25 @@ export default class index extends React.Component {
 
 
   render() {
-    const {take, alternateTakes, index,resetPos,
-      updateActiveChunkIndex, activeChunkIndex, resetTake}= this.props;
-    const {chunk} = this.props.take.publishedTake;
+    const {take, alternateTakes, index,resetPos, selectedTakesLength,
+      updateActiveChunkIndex, activeChunkIndex, resetTake, saveComment,
+      swapTake, undoSwapTake, tempTakes, setTake, txt, location}= this.props;
+    const {chunk} = this.props.take.publishedTake; //take is variable chosen when mapping array of selected takes
     let active = activeChunkIndex === index? true: false;
     return (
       <Container>
         <SelectedTake take={take}
           updateActiveChunkIndex={updateActiveChunkIndex}
           activeChunkIndex={activeChunkIndex}
-          active={active}
-          resetPos={resetPos}
+          active={active} selectedTakesLength={selectedTakesLength}
+          resetPos={resetPos} txt={txt}
           resetTake={resetTake}  />
 
         <ListView chunkId ={chunk} alternateTakes={alternateTakes}
-          index={index}
-          active={active} />
+          index={index} active={active} txt={txt}
+          swapTake={swapTake} undoSwapTake= {undoSwapTake}
+          tempTakes={tempTakes} saveComment={saveComment}
+          take={take} setTake={setTake} location={location} />
       </Container>
     );
   }

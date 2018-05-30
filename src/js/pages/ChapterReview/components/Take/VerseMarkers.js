@@ -9,12 +9,13 @@ export default class VerseMarkers extends React.Component {
 
 
   render() {
-    const {active} = this.props;
+    const {active, dragPosition} = this.props;
     const markerArray =[];
+    let position;
     let markers = JSON.parse(this.props.markers);
 
     for (const key in markers) {
-      const position = (markers[key]/44100);
+      position = (markers[key]/44100);
       markerArray.push({position: position, verse: key});
     }
     let len = markerArray.length;
@@ -24,7 +25,8 @@ export default class VerseMarkers extends React.Component {
         {
           markerArray.map((marker) => {
             return (
-              <Marker active={active} key={marker.verse} len={len} id={marker}> {marker.verse} </Marker>
+              <Marker onClick={()=> dragPosition(position)} active={active} key={marker.verse} 
+                len={len} id={marker}> {marker.verse} </Marker>
             );
           })
         }

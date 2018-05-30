@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ControlButtons from './ControlButtons';
+import QueryString from 'query-string';
 
 export default class index extends React.Component {
 
@@ -8,22 +9,28 @@ export default class index extends React.Component {
     super(props);
   }
 
+  componentWillUnMount() {
+    this.props.clearAlternateTakes();
+  }
+
 
   render() {
-    const {activeChunkIndex, togglePlay,
-      updateActiveChunkIndex, resetTake} = this.props;
-
+    const {activeChunkIndex, togglePlay, stopPlaying,
+      updateActiveChunkIndex, resetTake, history, selectedTakesLength} = this.props;
+    var query = QueryString.parse(this.props.location.search);
+    var chapterNum = query.chapterNum;
     return (
       <Container>
-        <ChapterInfo> Chapter 1  Review</ChapterInfo>
+        <ChapterInfo> Chapter {chapterNum}  Review</ChapterInfo>
 
         <ControlButtons activeChunkIndex={activeChunkIndex}
           togglePlay={togglePlay}
           updateActiveChunkIndex={updateActiveChunkIndex}
-          resetTake={resetTake}
+          resetTake={resetTake} stopPlaying={stopPlaying}
+          selectedTakesLength={selectedTakesLength}
         />
 
-        <ExitButton> <i className="material-icons">close</i> Exit Review </ExitButton>
+        <ExitButton onClick={()=> history.push(`kanban${this.props.location.search}`)}> <i className="material-icons">close</i> Exit Review </ExitButton>
 
       </Container>
     );
@@ -63,4 +70,5 @@ const ExitButton = styled.button`
     vertical-align: middle;
     font-size: 24px+2vw;
   }
+  cursor: pointer;
 `;

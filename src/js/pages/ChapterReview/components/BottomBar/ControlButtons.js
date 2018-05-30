@@ -13,6 +13,12 @@ export default class ControlButtons extends React.Component {
     this.skip = this.skip.bind(this);
 
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.stopPlaying === true) {
+      this.togglePlay();
+    }
+  }
   togglePlay() {
     const {takesPlaying} = this.state;
     if (!takesPlaying) {
@@ -26,17 +32,22 @@ export default class ControlButtons extends React.Component {
 
   skip(direction) {
     let index='';
-    const {activeChunkIndex} = this.props;
+    const {takesPlaying} = this.state;
+    const {activeChunkIndex, selectedTakesLength} = this.props;
     if (direction === 'forward') {
       index= activeChunkIndex + 1;
-      this.props.updateActiveChunkIndex(activeChunkIndex, index);
-      this.props.resetTake(true);
+      if (index < selectedTakesLength) {
+        this.props.updateActiveChunkIndex(activeChunkIndex, index, takesPlaying);
+        this.props.resetTake(true);
+      }
     }
     else if (direction === 'previous') {
-      index= activeChunkIndex - 1;
-      this.props.updateActiveChunkIndex(activeChunkIndex, index);
-      this.props.resetTake(true);
 
+      index= activeChunkIndex - 1;
+      if (index >= 0) {
+        this.props.updateActiveChunkIndex(activeChunkIndex, index, takesPlaying);
+        this.props.resetTake(true);
+      }
     }
   }
 

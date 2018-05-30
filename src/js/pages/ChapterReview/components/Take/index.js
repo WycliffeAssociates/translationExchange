@@ -8,25 +8,60 @@ export default class index extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      pos: 0,
+      takePlaying: false,
+    };
+
+    this.trackPos = this.trackPos.bind(this);
+    this.finishedPlaying = this.finishedPlaying.bind(this);
+    this.dragPosition = this.dragPosition.bind(this);
   }
 
+  trackPos(pos) {
+    this.setState({pos: pos});
+  }
+
+  dragPosition(position) {
+    this.setState({pos: position});
+  }
+
+  finishedPlaying() {
+    const {activeChunkIndex, selectedTakesLength} = this.props;
+    const {takePlaying} = this.state;
+    if (activeChunkIndex < selectedTakesLength - 1 ) {
+      this.props.updateActiveChunkIndex(activeChunkIndex, null, true);
+    }
+    else if (activeChunkIndex === selectedTakesLength -1) {
+      this.setState({takePlaying: false});
+      this.props.updateActiveChunkIndex(activeChunkIndex, 'done', false);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.resetPos === true) {
+      this.setState({pos: 0});
+      this.props.resetTake(false);
+    }
+  }
 
   render() {
+    const {pos} = this.state;
     const {publishedTake, playing} = this.props.take;
-    const {take, updateActiveChunkIndex, activeChunkIndex, active, resetPos
-      ,resetTake} = this.props;
+    const {take, updateActiveChunkIndex, activeChunkIndex, active, resetPos,
+      resetTake, selectedTakesLength} = this.props;
 
     return (
       <Container active={active}>
         <Top takeNum={publishedTake.take_num} chunkNum={take.chunkNum} />
-        <Audio audio={publishedTake.location}
+        <Audio audio={publishedTake.location} pos={pos}
           duration={publishedTake.duration}
-          playing={playing}
+          playing={playing} trackPos={this.trackPos}
           updateActiveChunkIndex={updateActiveChunkIndex}
-          activeChunkIndex={activeChunkIndex}
-          resetPos={resetPos}
+          activeChunkIndex={activeChunkIndex} finishedPlaying={this.finishedPlaying}
+          resetPos={resetPos} selectedTakesLength={selectedTakesLength}
           resetTake={resetTake} />
-        <VerseMarkers markers={publishedTake.markers} active={active} />
+        <VerseMarkers markers={publishedTake.markers} active={active} dragPosition={this.dragPosition} />
 
       </Container>
     );
