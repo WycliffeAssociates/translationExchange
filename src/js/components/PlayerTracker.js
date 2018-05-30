@@ -55,18 +55,20 @@ export default class PlayerTracker extends React.Component {
   PlayHead() {
 
     let playing = this.state.playing;
-    const {playHead} = this.props;
+    const {playHead, ChapterReview} = this.props;
 
     return (
       <div>
         <PlayIcon style={{display: playing? 'none': ''}}
-          onClick ={() => this.playComment()} playHead= {playHead}>
+          onClick ={() => this.playComment()}
+          ChapterReview={ChapterReview} playHead= {playHead}>
           <i className="material-icons">play_arrow</i>
 
         </PlayIcon>
 
         <PlayIcon style={{display: playing? '': 'none'}}
-          onClick ={() => this.playComment()} playHead={playHead}>
+          onClick ={() => this.playComment()}
+          ChapterReview={ChapterReview} playHead={playHead}>
           <i className="material-icons">pause</i>
 
         </PlayIcon>
@@ -76,8 +78,7 @@ export default class PlayerTracker extends React.Component {
   }
   render() {
 
-    const {audioFile} = this.props;
-    const {url} = this.props;
+    const {audioFile, url} = this.props;
 
 
     return (
@@ -228,6 +229,7 @@ const PlayIcon = styled.button`
   cursor: pointer;
   i {
     font-size: ${props => props.playHead !== undefined? props.playHead: '1.6vw'};
+    margin-top: ${props => props.ChapterReview === true? '': ''};
   }
 `;
 PlayIcon.displayName = 'PlayIcon';
