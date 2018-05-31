@@ -25,3 +25,4 @@ const Container = styled.div`
     font-size: 30px;
   }
 `;
+Container.displayName = 'ChapterSelected';

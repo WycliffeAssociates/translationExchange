@@ -39,7 +39,9 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width:100%;
-`
+`;
+
+Container.displayName= 'Container';
 
 
 const Front = styled.div`

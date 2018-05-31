@@ -105,6 +105,9 @@ const Container = styled.div`
   }
 
 `;
+
+Container.displayName = 'Downloading';
+
 const Image = styled.img`
    height: 400px;
    width: 400px;
@@ -137,3 +140,5 @@ const BlueButton = styled.button`
     }
 
     `;
+
+BlueButton.displayName ='CancelButton';
