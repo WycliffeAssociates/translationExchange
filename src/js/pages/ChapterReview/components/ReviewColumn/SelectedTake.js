@@ -30,5 +30,5 @@ export default class SelectedTake extends React.Component {
 }
 
 const Container = styled.div`
-
 `;
+Container.displayName = 'Container';

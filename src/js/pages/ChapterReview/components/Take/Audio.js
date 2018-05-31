@@ -31,3 +31,4 @@ const Container = styled.div`
 
 `;
 Container.displayName = 'Container';
+Waveform.displayName = 'Waveform';

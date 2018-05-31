@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SelectedTake from './SelectedTake';
 import ListView from './ListView';
 
-export default class index extends React.Component {
+export default class ReviewColumn extends React.Component {
 
   constructor(props) {
     super(props);
@@ -45,3 +45,4 @@ const Container = styled.div`
   margin: 3px;
   justify-content: space-between;
 `;
+Container.displayName='Container';

@@ -10,7 +10,7 @@ import BottomBar from './components/BottomBar';
 import QueryString from 'query-string';
 
 
-class index extends React.Component {
+export class ChapterReview extends React.Component {
 
   constructor(props) {
     super(props);
@@ -55,7 +55,7 @@ class index extends React.Component {
             selectedTakes?
               selectedTakes.map((take, index) => {
                 return (
-                  <ReviewColumn take={take} index={index} txt={txt}
+                  <ReviewColumn key={take.publishedTake.id} take={take} index={index} txt={txt}
                     alternateTakes={alternateTakes}
                     activeChunkIndex={activeChunkIndex}
                     updateActiveChunkIndex={updateActiveChunkIndex}
@@ -108,13 +108,13 @@ const Container= styled.div`
   overflow-x:hidden;
   display: flex;
   align-items: center;
-
-
 `;
+Container.displayName = 'Container';
 const ReviewColumnsContainer=styled.div`
 display: flex;
 align-items: center;
 overflow-x: auto;
 `;
+ReviewColumnsContainer.displayName = 'ReviewColumnsContainer';
 
-export default connect(mapStateToProps,mapDispatchToProps)(index);
+export default connect(mapStateToProps,mapDispatchToProps)(ChapterReview);

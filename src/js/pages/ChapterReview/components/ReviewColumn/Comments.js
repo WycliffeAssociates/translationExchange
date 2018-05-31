@@ -1,25 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import PlayerTracker from '../../../../components/PlayerTracker';
-import config from 'config/config';
 export default class Comments extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.concatComments = this.concatComments.bind(this);
   }
-
-  concatComments(comments) {
-    var array=[];
-    // var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    // let audio= audioCtx.createBuffer();
-    comments.forEach((comment) => {
-      array.push(config.streamingUrl+comment.location);
-    });
-    return array;
-  }
-
 
   render() {
     const {active, comments, txt} = this.props;
@@ -30,7 +16,7 @@ export default class Comments extends React.Component {
           comments.length>0?
             comments.map((comment) => {
               return (
-                <div style={{marginTop: '-1.5vh'}}>
+                <div style={{marginTop: '-1.5vh'}} key={comment.id}>
                   <PlayerTracker ChapterReview={true} playHead={'2.5vw'} url={comment.location} />
                 </div>
               );
@@ -63,3 +49,4 @@ const CommentContainer = styled.div`
     color: white;
   }
 `;
+CommentContainer.displayName='CommentContainer';

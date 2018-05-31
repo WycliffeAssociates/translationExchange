@@ -54,9 +54,9 @@ export default class ControlButtons extends React.Component {
 
   render() {
     const {takesPlaying} = this.state;
-    let icon = <i className="material-icons">play_arrow</i>
+    let icon = <i className="material-icons">play_arrow</i>;
     if (takesPlaying) {
-      icon = <i className="material-icons">pause</i>
+      icon = <i className="material-icons">pause</i>;
     }
 
     return (
@@ -78,8 +78,8 @@ const Container = styled.div`
   justify-content: space-evenly;
   align-items: center;
   width: 30%;
-
 `;
+Container.displayName = 'Container';
 
 
 const PlayButton = styled.button`
@@ -95,12 +95,17 @@ const PlayButton = styled.button`
     vertical-align: middle;
   }
 `;
+PlayButton.displayName = 'PlayButton';
+
 
 const SkipPrevious = styled(PlayButton)`
   background: #39414A;
 `;
+SkipPrevious.displayName = 'SkipPrevious';
+
 
 
 const SkipNext = styled(PlayButton)`
   background: #39414A;
 `;
+SkipNext.displayName = 'SkipNext';

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ControlButtons from './ControlButtons';
 import QueryString from 'query-string';
 
-export default class index extends React.Component {
+export default class BottomBar extends React.Component {
 
   constructor(props) {
     super(props);
@@ -48,13 +48,14 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   padding: 10px;
-
 `;
+Container.displayName = 'Container';
 
 const ChapterInfo = styled.label`
   color: white;
   font-size: 18px;
 `;
+ChapterInfo.displayName = 'ChapterInfo';
 
 const ExitButton = styled.button`
   background: #39414A;
@@ -72,3 +73,4 @@ const ExitButton = styled.button`
   }
   cursor: pointer;
 `;
+ExitButton.displayName = 'ExitButton';

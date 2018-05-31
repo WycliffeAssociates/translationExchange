@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Take Card Top should render the component and not explode 1`] = `
+<div
+  className="sc-bdVaJa hoIaPy"
+>
+  <div
+    className="sc-bwzfXH bFHdpU"
+  >
+    <h2
+      className="sc-htpNat buBeEl"
+    >
+       
+      take
+       
+      4
+    </h2>
+    <h2
+      className="sc-bxivhb knzSls sc-htpNat buBeEl"
+    >
+       
+      chunk
+       
+      1
+    </h2>
+  </div>
+  <div
+    className="sc-ifAKCX bmKgXx"
+  >
+     
+    <i
+      className="material-icons"
+    >
+      done 
+    </i>
+     
+  </div>
+</div>
+`;

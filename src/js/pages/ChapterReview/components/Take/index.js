@@ -4,7 +4,7 @@ import Top from './Top';
 import Audio from './Audio';
 import VerseMarkers from './VerseMarkers';
 
-export default class index extends React.Component {
+export default class Take extends React.Component {
 
   constructor(props) {
     super(props);
@@ -36,6 +36,7 @@ export default class index extends React.Component {
       this.setState({takePlaying: false});
       this.props.updateActiveChunkIndex(activeChunkIndex, 'done', false);
     }
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -80,6 +81,5 @@ const Container = styled.div`
   justify-content: space-between;
   padding: 10px;
   color: ${props => props.active? 'white' :'rgba(255,255,255,0.5)'};
-
-
 `;
+Container.displayName = 'Container';

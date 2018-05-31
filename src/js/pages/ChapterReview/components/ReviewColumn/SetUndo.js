@@ -15,7 +15,6 @@ export default class SetUndo extends React.Component {
 
   handleSet() {
     this.setState({displayModal: true});
-
   }
 
   closeModal() {
@@ -60,6 +59,7 @@ const Container = styled.div`
   padding: 2.5%;
   justify-content: space-evenly;
 `;
+Container.displayName='Container';
 
 const SetButton = styled.button`
   border: none;
@@ -71,8 +71,10 @@ const SetButton = styled.button`
     vertical-align: middle;
   }
 `;
+SetButton.displayName='SetButton';
 
 const UndoButton = styled(SetButton)`
 background: #39414A;
 
 `;
+UndoButton.displayName='UndoButton';
