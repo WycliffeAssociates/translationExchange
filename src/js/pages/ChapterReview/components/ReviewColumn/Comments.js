@@ -22,10 +22,10 @@ export default class Comments extends React.Component {
 
 
   render() {
-    const {active, comments} = this.props;
+    const {active, comments, txt} = this.props;
     return (
       <CommentContainer active={active}>
-        <p> Comments </p>
+        <p> {txt.comments} </p>
         {
           comments.length>0?
             comments.map((comment) => {

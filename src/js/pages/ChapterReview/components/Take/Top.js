@@ -9,13 +9,13 @@ export default class Top extends React.Component {
 
 
   render() {
-    const {takeNum, chunkNum} = this.props;
+    const {takeNum, chunkNum, txt} = this.props;
     return (
       <Container>
         <Text>
-          <TakeNum> Take {takeNum}</TakeNum>
+          <TakeNum> {txt.take} {takeNum}</TakeNum>
 
-          <ChunkNum> Chunk {chunkNum}</ChunkNum>
+          <ChunkNum> {txt.chunk} {chunkNum}</ChunkNum>
         </Text>
 
         <Rating> <i className= "material-icons">done </i> </Rating>

@@ -49,11 +49,11 @@ export default class index extends React.Component {
     const {pos} = this.state;
     const {publishedTake, playing} = this.props.take;
     const {take, updateActiveChunkIndex, activeChunkIndex, active, resetPos,
-      resetTake, selectedTakesLength} = this.props;
+      resetTake, selectedTakesLength, txt} = this.props;
 
     return (
       <Container active={active}>
-        <Top takeNum={publishedTake.take_num} chunkNum={take.chunkNum} />
+        <Top takeNum={publishedTake.take_num} chunkNum={take.chunkNum} txt={txt} />
         <Audio audio={publishedTake.location} pos={pos}
           duration={publishedTake.duration}
           playing={playing} trackPos={this.trackPos}

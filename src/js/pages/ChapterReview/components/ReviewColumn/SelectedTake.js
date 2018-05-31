@@ -10,18 +10,18 @@ export default class SelectedTake extends React.Component {
 
 
   render() {
-    const {take, updateActiveChunkIndex, resetPos,
+    const {take, updateActiveChunkIndex, resetPos,txt,
       activeChunkIndex, active, resetTake, selectedTakesLength} = this.props;
     return (
       <Container>
-        <Take take={take}
+        <Take take={take} txt={txt}
           updateActiveChunkIndex={updateActiveChunkIndex}
           activeChunkIndex={activeChunkIndex}
           active={active} selectedTakesLength={selectedTakesLength}
           resetPos={resetPos}
           resetTake={resetTake} />
 
-        <Comments active={active} comments= {take.publishedTake.comments} />
+        <Comments active={active} txt={txt} comments= {take.publishedTake.comments} />
 
       </Container>
     );

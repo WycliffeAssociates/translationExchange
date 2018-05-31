@@ -71,7 +71,7 @@ class index extends React.Component {
         <BottomBar activeChunkIndex={activeChunkIndex}
           togglePlay={togglePlay} clearAlternateTakes={clearAlternateTakes}
           updateActiveChunkIndex={updateActiveChunkIndex}
-          resetTake={this.resetTake}
+          resetTake={this.resetTake} txt={txt}
           location={this.props.location} stopPlaying={stopPlaying}
           history={this.props.history} selectedTakesLength={length} />
       </Container>
