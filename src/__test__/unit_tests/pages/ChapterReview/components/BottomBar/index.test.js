@@ -31,8 +31,9 @@ describe('Bottom bar test suite', ()=> {
     expect(wrapper.find('ExitButton').length).toEqual(1);
   });
 
-  test('componentWillUnMount',() => {
-    wrapper.instance().componentWillUnMount();
+  test('onClick function',() => {
+    const button = wrapper.find('ExitButton');
+    button.simulate('click');
     expect(mockProps.clearAlternateTakes.mock.calls.length).toEqual(1);
   });
 });
