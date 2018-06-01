@@ -104,16 +104,15 @@ export const setTake = (
       })
       .then(response => {
         const take= response.data;
-        console.log(take);
         alternateTakes.forEach((chunk, chunkIndex) => {
           if (chunk.chunkId === take.chunk) {
             chunk.takes.forEach((take, takeIndex) => {
               if (take.id == publishedTakeId) {
                 dispatch({
                   type: 'UPDATE_ALTERNATE_TAKES',
-                  take: response.data,
+                  take: take,
                   oldId: publishedTakeId, /* use the id of the new publishedTake(the old atlernate take)
-                                        to replace the oldId which is still in the alternateTakes array*/
+                                        to remove the take from vthe alternateTakes array*/
                   takeIndex,
                   chunkIndex,
                   tempTakeIndex: index,
