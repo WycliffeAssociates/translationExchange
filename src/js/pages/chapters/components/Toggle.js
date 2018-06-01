@@ -45,6 +45,7 @@ text-align:center;
 background: ${props=> props.viewingComments? 'white'  :'linear-gradient(to top, #0076FF, #00C5FF);'}
 border-radius: 37.5px;
 box-shadow: 2px 4px 4px rgba(0,0,0,0.5);
+cursor:pointer;
 `;
 ToggleContainer.displayName= 'ToggleContainer';
 
@@ -57,4 +58,6 @@ const Toggle = styled.button`
 }
 background: none;
 border: none;
+cursor:pointer;
+
 `;
