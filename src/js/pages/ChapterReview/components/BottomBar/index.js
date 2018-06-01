@@ -7,16 +7,20 @@ export default class BottomBar extends React.Component {
 
   constructor(props) {
     super(props);
+    this.exit = this.exit.bind(this);
   }
 
-  componentWillUnMount() {
+
+  exit() {
+    const {history} = this.props;
+    history.push(`kanban${this.props.location.search}`);
     this.props.clearAlternateTakes();
   }
 
 
   render() {
     const {activeChunkIndex, togglePlay, stopPlaying,txt,
-      updateActiveChunkIndex, resetTake, history, selectedTakesLength} = this.props;
+      updateActiveChunkIndex, resetTake, selectedTakesLength} = this.props;
     var query = QueryString.parse(this.props.location.search);
     var chapterNum = query.chapterNum;
     return (
@@ -30,7 +34,7 @@ export default class BottomBar extends React.Component {
           selectedTakesLength={selectedTakesLength}
         />
 
-        <ExitButton onClick={()=> history.push(`kanban${this.props.location.search}`)}> <i className="material-icons">close</i> {txt.exitReview} </ExitButton>
+        <ExitButton onClick={this.exit}> <i className="material-icons">close</i> {txt.exitReview} </ExitButton>
 
       </Container>
     );
