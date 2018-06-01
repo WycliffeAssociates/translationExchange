@@ -2,47 +2,38 @@ import React, { Component } from 'react';
 import { Modal } from 'semantic-ui-react';
 import styled from 'styled-components';
 import BorderButton from '../../../components/BorderButton';
+import DowloadingTransfer from './DownloadingTransfer';
 
 
 class ExportModal extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {showModal: false};
-  }
 
 
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({showModal: nextProps.display});
-  }
-
-
-
-  show = dimmer => () => this.setState({ dimmer, open: true });
   close = () => {
-    this.setState({showModal: false});
+    const {resetExport, updateExportModal} = this.props;
+    resetExport();
+    updateExportModal('showModal', false);
+
 
   };
 
 
   goToExport = () => {
-    const {history, bookName, projectId}= this.props;
+    const {history, bkName, projId, updateExportModal}= this.props;
+    updateExportModal('showModal', false);
 
     history.push({
       pathname: './export',
-      search: `?projectId=${projectId}&&bookName=${bookName}`,
+      search: `?projectId=${projId}&&bookName=${bkName}`,
     });
   }
 
 
 
 
-
-
   render() {
-    const { showModal } = this.state;
-    const {bookName, txt} = this.props;
+
+    const { txt, taskId, transferProject, getTransferProgress, projId, bkName, showModal} = this.props;
 
     return (
       <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
@@ -54,25 +45,31 @@ class ExportModal extends Component {
           style={{ verticalAlign: 'middle', margin: 'auto', marginTop: '461px', width: '710px', height: '528px'}}
         >
           <ModalContainer>
+
+
             <TopContainer>
               <Span onClick={()=>this.close()}>X</Span>
               <TextContainer>
                 <p>{txt.exportProject}:</p>
-                <h1>{bookName}</h1>
+                <h1>{bkName}</h1>
               </TextContainer>
 
             </TopContainer>
-            <ButtonsContainer>
-              <SingleButtonContainer color={'#E56060'}>
-                <BorderButton icon="share"  onClick={()=> {}} color={'#E56060'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} />
-                <p>{txt.transfer}</p>
-              </SingleButtonContainer>
-              <SingleButtonContainer color={'#009CFF'}>
-                <BorderButton icon="get_app" onClick={this.goToExport} color={'#009CFF'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} />
-                <p>{txt.download}</p>
-              </SingleButtonContainer>
+            {taskId ? <DowloadingTransfer close={this.close} txt={txt} taskId={taskId} getTransferProgress={getTransferProgress} /> :
 
-            </ButtonsContainer>
+              <ButtonsContainer>
+                <SingleButtonContainer color={'#E56060'}>
+                  <BorderButton icon="share"  onClick={()=> {transferProject(projId);}} color={'#E56060'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} />
+                  <p>{txt.transfer}</p>
+                </SingleButtonContainer>
+                <SingleButtonContainer color={'#009CFF'}>
+                  <BorderButton icon="get_app" onClick={this.goToExport} color={'#009CFF'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} />
+                  <p>{txt.download}</p>
+                </SingleButtonContainer>
+
+              </ButtonsContainer>
+
+            }
 
           </ModalContainer>
 
@@ -85,9 +82,7 @@ class ExportModal extends Component {
 
 
 
-const CloseContainer= styled.div`
 
-`;
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -97,7 +92,7 @@ const ButtonsContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-`
+`;
 
 const TopContainer = styled.div`
   margin-top: 5%;
@@ -112,12 +107,6 @@ right:.6vw;
 cursor:pointer;
 `;
 
-const Text = styled.p`
-  font-size: 2vw;
-  font-weight: bold;
-
-`;
-
 const TextContainer = styled.div`
 `;
 
@@ -126,7 +115,6 @@ const SingleButtonContainer = styled.div`
   color: ${props => props.color}
   text-align: center;
 `;
-
 
 const ModalContainer = styled.div`
   display: flex;
