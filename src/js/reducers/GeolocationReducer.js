@@ -1,4 +1,4 @@
-import { UPDATE_LANGUAGE } from '../actions/types';
+import { UPDATE_LANGUAGE } from '../reduxConstants';
 import language from '../../languages/textToDisplay.json';
 
 const INITIAL_STATE = { txt: language.English,

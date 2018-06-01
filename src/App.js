@@ -16,6 +16,7 @@ import TaskProgressPage from './js/pages/tasks/TaskProgressPage';
 import ExportPage from './js/pages/export/ExportPage';
 import CustomDragLayer from './CustomDragLayer';
 import ChapterPage from './js/pages/chapters/ChaptersPage';
+import ChapterReview from './js/pages/ChapterReview';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
 
 // import and configure the raven client for sentry in order to track errors
@@ -63,6 +64,7 @@ class App extends Component {
           <Route path ="/progress" component={TaskProgressPage} />
           <Route path ="/kanban" component={KanbanPage} />
           <Route path ="/export" component={ExportPage} />
+          <Route path ="/chapterReview" component={ChapterReview} />
           <Route path ="/errorPage" component={ErrorPage} />
           <Route path="*" component={NotFound} />
         </Switch>

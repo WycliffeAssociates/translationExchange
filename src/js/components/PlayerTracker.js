@@ -55,20 +55,30 @@ export default class PlayerTracker extends React.Component {
   PlayHead() {
 
     let playing = this.state.playing;
+    const {playHead, ChapterReview} = this.props;
 
     return (
       <div>
-        <PlayIcon style={{display: playing? 'none': ''}} onClick ={() => this.playComment()}> <i style={{fontSize: '1.6vw'}} class="material-icons">play_arrow</i> </PlayIcon>
+        <PlayIcon style={{display: playing? 'none': ''}}
+          onClick ={() => this.playComment()}
+          ChapterReview={ChapterReview} playHead= {playHead}>
+          <i className="material-icons">play_arrow</i>
 
-        <PlayIcon style={{display: playing? '': 'none'}} onClick ={() => this.playComment()}> <i style={{fontSize: '1.6vw'}} class="material-icons">pause</i> </PlayIcon>
+        </PlayIcon>
+
+        <PlayIcon style={{display: playing? '': 'none'}}
+          onClick ={() => this.playComment()}
+          ChapterReview={ChapterReview} playHead={playHead}>
+          <i className="material-icons">pause</i>
+
+        </PlayIcon>
 
       </div>);
 
   }
   render() {
 
-    const {audioFile} = this.props;
-    const {url} = this.props;
+    const {audioFile, url} = this.props;
 
 
     return (
@@ -97,7 +107,6 @@ export default class PlayerTracker extends React.Component {
 const Container = styled.div`
   width: inherit;
   color: steelblue;
-  background: none;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -205,18 +214,22 @@ Input.displayName = 'Input';
 
 const PlayIcon = styled.button`
 
-  font-size: 1.75vw;
+  font-size: 1.6vw;
   flex: 1;
   border: none;
   align-self: stretch;
   padding: 0.75vw;
   border-top: solid 0.05vw #009CFF;
   text-align:center;
-  background: none;font-size: 1vw;
+  background: none;
   flex: 0;
   border-top: none;
   padding: 0.4vw;
   color: #969595
   cursor: pointer;
+  i {
+    font-size: ${props => props.playHead !== undefined? props.playHead: '1.6vw'};
+    margin-top: ${props => props.ChapterReview === true? '': ''};
+  }
 `;
 PlayIcon.displayName = 'PlayIcon';

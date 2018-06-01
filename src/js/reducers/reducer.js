@@ -11,7 +11,7 @@ import kanbanPage from './KanbanPageReducer'
 import taskProgress from './TaskProgressReducer';
 import Chapters from './ChapterPageReducer'
 import ExportPage from './ExportPageReducer';
-
+import ChapterReview from './ChapterReviewReducer';
 
 export default combineReducers({
   setAudioPlayerState: AudioPlayerReducer,
@@ -24,5 +24,6 @@ export default combineReducers({
   taskProgress,
   Projects,
   Chapters,
-  ExportPage
+  ChapterReview,
+  ExportPage,
 });
