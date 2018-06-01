@@ -110,6 +110,8 @@ const ExportPageContainer = styled.div`
     background-color: #FFF;
 `;
 
+ExportPageContainer.displayName ='ExportPageContainer';
+
 
 const CardsContainer = styled.div`
   padding-bottom: 100px;
@@ -137,6 +139,8 @@ const HeaderContainer = styled.div`
 
   }
 `;
+
+HeaderContainer.displayName= 'HeaderContainer';
 
 
 const mapDispatchToProps = dispatch => {

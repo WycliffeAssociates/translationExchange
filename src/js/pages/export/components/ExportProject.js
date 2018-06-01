@@ -83,11 +83,15 @@ const ExportProjectContainer = styled.div`
   animation: ${fadeInAnimation} .4s ease-in-out;
 `;
 
+ExportProjectContainer.displayName = 'ExportProjectContainer';
+
 const OptionsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
+
+OptionsContainer.displayName= 'OptionsContainer';
 
 const Button = styled.button`
   display: flex;

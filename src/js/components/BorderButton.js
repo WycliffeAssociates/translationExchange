@@ -36,3 +36,5 @@ const Button = styled.button`
     font-size: ${props => props.iconSize};
   }
 `;
+
+Button.displayName = 'BorderButton';

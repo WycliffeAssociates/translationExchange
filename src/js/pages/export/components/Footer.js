@@ -41,6 +41,8 @@ const Button = styled.button`
     }
     `;
 
+Button.displayName = 'Button';
+
 
 
 const Container = styled.div`
@@ -58,7 +60,7 @@ const Container = styled.div`
   animation: ${slideInAnimation} .1s ease-in;
 
 `;
-Container.displayName= 'Container';
+Container.displayName= 'Footer';
 
 
 export default Footer;
