@@ -2,7 +2,7 @@ import update from 'immutability-helper';
 import {PLAY_PAUSE_SELECTED_TAKE, UPDATE_ACTIVE_CHUNK_INDEX,
   LOADING, FETCH_ALTERNATE_TAKES,
   FETCH_CHUNKS, SWAP_TAKE, UPDATE_ALTERNATE_TAKES,
-  UNDO_SWAP, FINISH_PLAYING, CLEAR_ALTERNATE_TAKES} from './types';
+  UNDO_SWAP, FINISH_PLAYING, CLEAR_ALTERNATE_TAKES} from '../reduxConstants';
 const INITIAL_STATE = {
   selectedTakes: [],
   alternateTakes: [],

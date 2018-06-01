@@ -1,6 +1,6 @@
 /* global expect describe it */
 import reducer from '../../../js/reducers/AudioPlayerReducer';
-import * as types from '../../../js/actions/types';
+import * as types from '../../../js/reduxConstants';
 describe('AudioPlayerReducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined,{})).toEqual({

@@ -1,6 +1,6 @@
 /* global describe it expect */
 import { updateDirection } from '../../../js/actions';
-import {UPDATE_DIRECTION}  from '../../../js/actions/types';
+import {UPDATE_DIRECTION}  from '../../../js/reduxConstants';
 
 describe('Direction Actions suite', () => {
 

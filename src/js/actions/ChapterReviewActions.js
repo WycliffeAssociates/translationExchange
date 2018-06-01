@@ -42,13 +42,6 @@ export const getAlternateTakesSuccess = (alternateTakes) => {
   };
 };
 
-// export function playTake(takeId) {
-//   return {
-//     type: 'UPDATE_PLAYING_TAKE',
-//     takeId,
-//   };
-// }
-
 export const getSelectedTakes = (chapterId, redirect, chapterNav) => {
   return dispatch => {
     dispatch({type: 'LOADING'});

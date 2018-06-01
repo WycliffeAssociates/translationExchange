@@ -1,6 +1,6 @@
 /* global expect describe it test */
 import reducer from '../../../js/reducers/DirectionReducer'
-import * as types from '../../../js/actions/types';
+import * as types from '../../../js/reduxConstants';
 
 describe('DirectionReducer', ()=> {
   it('should return the initial state', () => {

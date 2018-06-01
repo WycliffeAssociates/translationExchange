@@ -1,6 +1,6 @@
 /* global expect describe it test */
 import reducer from '../../../js/reducers/GeolocationReducer';
-import * as types from '../../../js/actions/types';
+import * as types from '../../../js/reduxConstants';
 import language from '../../../languages/textToDisplay.json';
 
 
