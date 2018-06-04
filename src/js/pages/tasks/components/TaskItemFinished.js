@@ -1,41 +1,45 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import QueryString from 'query-string';
-import update from 'immutability-helper';
-
 import TaskInfoLeft from './TaskInfoLeft';
-import TaskProgressBar from './TaskProgressBar';
+import getIllustrations from '../../../getIllustrations';
 
-import img from '../../../../assets/images/sample.jpg';
 
 class TaskItemFinished extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      illustrations: null,
+    };
   }
 
+  componentWillMount() {
+    const {task} = this.props;
+    let illustrations = getIllustrations(task.details.book_slug);
+    this.setState({illustrations: illustrations});
+  }
   render() {
+    const {illustrations} = this.state;
+    let flag_bg_color = '#00c43d';
+    let flag = 'check';
+    let bg_color = '#e7fae9';
 
-    let flag_bg_color = "#00c43d";
-    let flag = "check";
-    let bg_color = "#e7fae9";
-
-    if(this.props.task.status == "FAILURE") {
-      flag_bg_color = "#e7535f";
-      flag = "flag";
-      bg_color = "#fcecee";
+    if (this.props.task.status == 'FAILURE') {
+      flag_bg_color = '#e7535f';
+      flag = 'flag';
+      bg_color = '#fcecee';
     }
 
     return (
       <TaskDetails>
         <Picture>
-          <Img src={img}></Img>
+          <Img src={illustrations.picker}></Img>
           <Flag style={{backgroundColor: flag_bg_color}}>
-              <i style={{fontSize: "3.5vw"}} className="material-icons">{flag}</i>
+            <i style={{fontSize: '3.5vw'}} className="material-icons">{flag}</i>
           </Flag>
         </Picture>
-        
+
         <RightColumn style={{backgroundColor: bg_color}}>
           <TaskInfoLeft {...this.props}></TaskInfoLeft>
         </RightColumn>
@@ -71,8 +75,8 @@ const Img = styled.img`
   -moz-filter:brightness(70%);
   filter: url(#brightness);
   filter:brightness(70%);
-  width: 100%; 
-  height: 100%; 
+  width: 100%;
+  height: 100%;
   border-radius: 0.3vw;
 `;
 Img.displayName = 'Img';

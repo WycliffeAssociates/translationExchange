@@ -45,8 +45,9 @@ export default class ChapterCard extends Component {
     }
 
     componentWillUnMount() {
-      window.removeEventListener('resize');
+      window.removeEventListener('resize', this.spaceCards);
     }
+
 
     spaceCards() {
 
@@ -61,8 +62,8 @@ export default class ChapterCard extends Component {
     }
 
     render() {
-      const { number, total_chunks, uploaded_chunks, published_chunks, txt, viewingComments, comments } = this.props;
-      const {numberInRow, width} = this.state;
+      const { number, total_chunks, uploaded_chunks, published_chunks, txt, viewingComments, comments, deleteComment } = this.props;
+      const {numberInRow, width, cardWidth} = this.state;
 
       let dangerSign = true;
       let checkLevel_1 = false;
@@ -76,13 +77,13 @@ export default class ChapterCard extends Component {
 
       return (
 
-        <CardContainer numberInRow = {numberInRow} screenWidth={width}>
+        <CardContainer  numberInRow = {numberInRow} screenWidth={width}>
           <label><i className="material-icons">chrome_reader_mode</i> {number}</label>
 
           {
             viewingComments?
               <Card check ={checkLevel_1} >
-                <Comments comments={comments} {...this.props} />
+                <Comments deleteComment={deleteComment} width={cardWidth} comments={comments} {...this.props} />
               </Card> :
 
               <Card check ={checkLevel_1} > <InformationContainer >

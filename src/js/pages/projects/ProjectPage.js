@@ -4,13 +4,14 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
-import RecentProjectsContainer from './RecentProjectsContainer';
+// import RecentProjectsContainer from './RecentProjectsContainer';
 import MyProjectsContainer from './MyProjectsContainer';
-import { fetchAllProjects, getChapters, getUserHash, removeUser, updateLanguage } from '../../actions';
+import { fetchAllProjects, getChapters, getUserHash, removeUser,
+  setProject,updateLanguage, getTransferProgress, transferProject, resetExport, updateExportModal } from '../../actions';
 
 
 
-class ProjectContainer extends Component {
+export class ProjectContainer extends Component {
 
   componentWillMount() {
     const {history, fetchAllProjects, updateLanguage} = this.props;
@@ -19,6 +20,7 @@ class ProjectContainer extends Component {
     if (language) {
       updateLanguage(language);
     }
+
   }
 
   render() {
@@ -52,8 +54,8 @@ const Container = styled.div`
   height:100vh;
   display: flex;
   flex-direction: column;
-
 `;
+Container.displayName = 'Container';
 
 const ProjectsContainer = styled.div`
   width: 100%;
@@ -61,28 +63,30 @@ const ProjectsContainer = styled.div`
   display: flex;
   flex-direction: row;
   overflow-y:scroll;
-
 `;
+ProjectsContainer.displayName = 'ProjectsContainer';
 
 
 const CardsContainer = styled.div`
   width: 100%
   height: 100%;
   background-color: #F6F9FE;
-
 `;
+CardsContainer.displayName = 'CardsContainer';
 
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({fetchAllProjects, getChapters, getUserHash, removeUser, updateLanguage}, dispatch);
+  return bindActionCreators({fetchAllProjects, getChapters, getUserHash, removeUser,
+    updateLanguage, setProject, getTransferProgress, transferProject, resetExport, updateExportModal}, dispatch);
 };
 
 const mapStateToProps = state =>{
   const { projects, loading  } = state.Projects;
+  const { taskId, showModal, bkName, projId } = state.ExportPage;
   const {loggedInUser} = state.user;
   const {txt} = state.geolocation;
 
-  return {projects, loggedInUser, loading, txt};
+  return {projects, loggedInUser, loading, txt, taskId, showModal, bkName, projId};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectContainer);

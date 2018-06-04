@@ -14,6 +14,9 @@
 //      streamingUrl: "http://127.0.0.1/"
 // };
 
+
+
+
 const config = {                                                        // local development
   apiUrl: 'http://localhost/api/',
   streamingUrl: 'http://localhost/',
@@ -21,17 +24,9 @@ const config = {                                                        // local
 };
 
 // const config = {                                                        //production
-//     apiUrl: 'https://te.loc/api/',
-//     streamingUrl: 'https://te.loc/',
-//     redirectUri: 'https://te.loc/'
-// };
-
-// const config = {                                                        // new VM
 //   apiUrl: 'https://opentranslationtools.org/api/',
 //   streamingUrl: 'https://opentranslationtools.org/',
-//   redirectUri: 'http://opentranslationtools.org',
+//   redirectUri: 'https://opentranslationtools.org/',
 // };
-
-
 
 export default config;

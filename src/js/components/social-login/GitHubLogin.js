@@ -70,7 +70,7 @@ class GitHubLogin extends Component {
   };
 
   render() {
-    const { className, buttonText, children } = this.props;
+    const { className, buttonText } = this.props;
     const attrs = { onClick: this.onBtnClick };
 
     if (className) {

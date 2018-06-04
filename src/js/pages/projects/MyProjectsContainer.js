@@ -1,38 +1,36 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import ProjectCard from './components/ProjectCard';
-import Data from './mockupdata/data.json';
-import img1 from './mockupdata/img1.PNG';
-import img2 from './mockupdata/img1.PNG';
-import img3 from './mockupdata/img1.PNG';
-
-
-
+import ExportModal from './components/ExportModal';
 
 class MyProjectsContainer extends Component {
   render() {
-    const {projects, txt} = this.props;
+    const {projects, txt, setProject} = this.props;
     return (
 
       <Container>
         <HeaderContainer>
-          <i class="material-icons">folder_shared</i>
+          <i className="material-icons">folder_shared</i>
           <Header>{txt.projects}</Header>
         </HeaderContainer>
         <CardsContainer>
           { projects.map( (p, index) =>
             <ProjectCard
+              key={p.id}
               index={index}
               bookName={p.book.name}
+              slug={p.book.slug}
               language={p.language.name}
               version={p.version.slug}
               dateModified={p.date_modified ? p.date_modified.slice(0,10) : ''}
               projectId={p.id}
               mode={p.mode.name}
+              setProject ={setProject}
               {...this.props}
             /> )
           }
         </CardsContainer>
+        <ExportModal {...this.props} />
       </Container>
     );
   }
@@ -47,12 +45,14 @@ const Container = styled.div`
   padding-left: 1vw;
 
 `;
+Container.displayName = 'Container';
 
 const Header = styled.p`
   padding-left: 1vw;
   font-size: .9vw
 
 `;
+Header.displayName = 'Header';
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -61,6 +61,7 @@ const HeaderContainer = styled.div`
   align-items: center;
   font-size: 1.5vw;
 `;
+HeaderContainer.displayName = 'HeaderContainer';
 
 const CardsContainer = styled.div`
 padding-top: 2vw;
@@ -70,8 +71,8 @@ display: flex;
 flex-direction:row;
 flex-wrap: wrap;
 align-items: left;
-
 `;
+CardsContainer.displayName = 'CardsContainer';
 
 
 export default MyProjectsContainer;

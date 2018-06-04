@@ -6,58 +6,56 @@ import {MarkerButton} from './buttons';
 class TimeContainer extends Component {
 
 
-render(){
+  render() {
 
-  return(
+    return (
 
-    <div  style={styles.container}>
-             <div style={styles.markerContainer}>
-              <MarkerButton onClick= {this.props.markerBtnClicked} />
-            </div>
+      <div  style={styles.container}>
+        <div style={styles.markerContainer}>
+          <MarkerButton onClick= {this.props.markerBtnClicked} />
+        </div>
 
-            <div style={styles.timeContainer} >
-              <Time time={this.props.updatedTime} />
-              <div style = {{marginLeft: 5, marginRight:5}}>/</div>
-              <Time time={this.props.audioLength} />
-            </div>
-          </div>
+        <div style={styles.timeContainer} >
+          <Time time={this.props.updatedTime} />
+          <div style = {{marginLeft: 5, marginRight: 5}}>/</div>
+          <Time time={this.props.audioLength} />
+        </div>
+      </div>
 
 
-  );
+    );
 
-}
+  }
 
 
 
 }
 
 const styles = {
-  container:{
+  container: {
     display: 'flex',
-    flexDirection:'column',
+    flexDirection: 'column',
     justifyContent: 'center',
-    color: "#fff",
+    color: '#fff',
     width: 120,
-    height: '100%'
-
+    height: '100%',
   },
 
-   timeContainer:{
-      marginTop: 9,
-       display: 'flex',
-       flexDirection: 'row',
-       justifyContent: 'center'
+  timeContainer: {
+    marginTop: 9,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
 
-   },
-   nameContainer:{
-           justifyContent: 'center'
+  },
+  nameContainer: {
+    justifyContent: 'center',
+  },
+  markerContainer: {
+    justifyContent: 'center',
+  },
 
-   },
-   markerContainer:{
-        justifyContent: 'center'
-   }
-
-}
+};
 
 
 

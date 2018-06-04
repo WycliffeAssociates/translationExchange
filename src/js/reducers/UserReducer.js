@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   tempUserId: null,
 };
 
-export default( state= INITIAL_STATE, action) => {
+export default( state= INITIAL_STATE, action ={}) => {
 
   switch (action.type) {
 

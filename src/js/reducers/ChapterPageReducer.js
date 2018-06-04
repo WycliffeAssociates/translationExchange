@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   uploadingComment: false,
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
 
     case 'FETCHING_CHAPTERS':
@@ -19,6 +19,12 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         chapters: action.chapters,
         loading: false,
+      };
+
+    case 'CHAPTER_COMMENT_DELETED':
+      return {
+        ...state,
+        chapters: action.chapters.concat(),
       };
 
 

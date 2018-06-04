@@ -1,28 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import QueryString from 'query-string';
-import update from 'immutability-helper';
-
 import TaskInfoTop from './TaskInfoTop';
 import TaskProgressBar from './TaskProgressBar';
+import getIllustrations from '../../../getIllustrations';
 
-import img from '../../../../assets/images/sample.jpg';
 
 class TaskItemProgress extends React.Component {
 
+
   constructor(props) {
     super(props);
+    this.state = {
+      illustrations: null,
+    };
   }
 
+  componentWillMount() {
+    const {task} = this.props;
+    let illustrations = getIllustrations(task.details.book_slug);
+    this.setState({illustrations: illustrations});
+  }
   render() {
+    const {illustrations} = this.state;
 
     return (
       <TaskDetails>
         <Picture>
-          <Img src={img}></Img>
+          <Img src={illustrations.picker}></Img>
         </Picture>
-        
+
         <RightColumn>
           <TaskInfoTop {...this.props}></TaskInfoTop>
           <TaskProgressBar task={this.props.task} />
@@ -55,8 +61,8 @@ const Picture = styled.div`
 Picture.displayName = 'Picture';
 
 const Img = styled.img`
-  width: 100%; 
-  height: 100%; 
+  width: 100%;
+  height: 100%;
   border-radius: 0.3vw;
 `;
 Img.displayName = 'Img';

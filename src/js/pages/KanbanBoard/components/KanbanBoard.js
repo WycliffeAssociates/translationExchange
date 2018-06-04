@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import {ToastContainer} from 'react-toastify';
 import KanbanColumn from './KanbanColumn';
 import DeleteTake from './DeleteTake';
 
@@ -11,24 +10,15 @@ export default class KanbanBoard extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.sortTakes = this.sortTakes.bind(this);
   }
 
-  render() {
-
-    let column1 = [];
-    let column2 = [];
-    let column3 = [];
-    let publishedColumn = [];
+  sortTakes(column1,column2,column3, publishedColumn) {
 
     this.props.takes.forEach((take) => {
       switch (take.rating) {
         case 0:
-          if (take.published == true) {
-            publishedColumn.push(take);
-          }
-          else column1.push(take);
-          break;
-
         case 1:
           if (take.published == true) {
             publishedColumn.push(take);
@@ -61,13 +51,23 @@ export default class KanbanBoard extends React.Component {
       }
     });
 
+    return [column1, column2, column3, publishedColumn];
+
+  }
+
+  render() {
+
+    let array = this.sortTakes([], [],[], []);
+    let column1 = array [0]; let column2 = array[1];
+    let column3 = array[2]; let publishedColumn = array[3];
+
     const publishedTake = publishedColumn.length == 1? true: false;
 
     return (
 
 
       <Container>
-        <ToastContainer style={{width: '25vw', padding: '0'}} />
+
         {/* the listId prop is needed for moving takes between different columns */}
         <KanbanColumn listId ={1} icon= {1} array = {column1} {...this.props} publishedTake = {publishedTake} />
         <KanbanColumn listId ={2} icon= {2} array = {column2} {...this.props} publishedTake = {publishedTake} />

@@ -11,15 +11,15 @@ export default class GotoProjectButton extends React.Component {
 
     const {history, txt} = this.props;
 
-    const url = '/chapters?projectId=' + this.props.task.details.project_id + 
+    const url = '/chapters?projectId=' + this.props.task.details.project_id +
       '&bookName=' + this.props.task.details.book_name +
       '&mode=' + this.props.task.details.mode;
 
     return (
 
       <Button onClick={()=> history.push(url)}>
-        <span style={{verticalAlign: "middle"}}>Select</span>
-        <i style={{verticalAlign: "middle", marginLeft: "0.4vw"}} className="material-icons">touch_app</i>
+        <span style={{verticalAlign: 'middle'}}>{txt.select}</span>
+        <i style={{verticalAlign: 'middle', marginLeft: '0.4vw'}} className="material-icons">touch_app</i>
       </Button>
 
     );
@@ -43,4 +43,4 @@ const Button = styled.div`
   justify-content: center;
   box-shadow: 0.2vw 0.2vw 0.5vw #888888;
 `;
-Button.displayName = "Button";
+Button.displayName = 'Button';

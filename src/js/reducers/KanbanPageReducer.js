@@ -8,9 +8,10 @@ const INITIAL_STATE = {
   playingTakeId: '',
   takesToDelete: [],
   removedTaketoDelete: false,
+  project: null,
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = INITIAL_STATE, action ={}) => {
   switch (action.type) {
 
     case 'LOADING':
@@ -60,7 +61,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         takesToDelete: action.takesToDelete,
-        removedTaketoDelete: true,
+        removedTaketoDelete: true, //used to update after a take is deleted
       };
 
     case 'NO_TAKES_FOR_CHUNK':
@@ -75,7 +76,13 @@ export default (state = INITIAL_STATE, action) => {
     case 'UPDATE_TAKE':
       return {
         ...state,
-        removedTaketoDelete: false,
+        removedTaketoDelete: false,//used to update after a take is deleted
+      };
+
+    case 'SET_PROJECT':
+      return {
+        ...state,
+        project: action.slug,
       };
 
     default: return state;

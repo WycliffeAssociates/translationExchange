@@ -41,6 +41,28 @@ describe('ChaptersPageActions Test Suite', () => {
     });
   });
 
+  it.skip('should download the project', () => {
+    //this test is passing, even though it dispatches and error
+    //action not access window to perform download, spike new ways to download
+    moxios.wait(()=> {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: [],
+      });
+    });
+
+    const expectedActions = [{
+      type: 'DOWNLOAD_PROJECT_FAILED',
+      error: 'TypeError: Cannot set property location of #<Window> which has only a getter',
+    }];
+    const store = mockStore({});
+    return store.dispatch(downloadProject()).then(()=> {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+
+  });
 
   it ('should fail to download project', () => {
     moxios.wait(()=> {

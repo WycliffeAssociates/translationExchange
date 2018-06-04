@@ -6,9 +6,9 @@ import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
 import {getChunks, getUserHash,
   getChapters, removeUser, downloadProject, updateLanguage,
-  saveComment, getComments} from '../../actions';
+  saveComment, getComments, deleteComment} from '../../actions';
 import ChapterCard from './components/ChapterCard';
-import Toggle from './components/Toggle';
+import Toggle from './components/Toggler';
 import styled from 'styled-components';
 import 'css/takes.css';
 
@@ -41,16 +41,6 @@ export class ChapterPage extends Component {
       updateLanguage(language);
     }
   }
-
-  componentDidMount() {
-    const {history, getChapters} = this.props;
-    if (this.props.updatePage === true && this.props.uploadingComment === false) {
-      const {search} = this.props.location;   //get data if the user refresh the page
-      const query = QueryString.parse(search);
-      getChapters(query.projectId, history);
-    }
-  }
-
   handleToggle() {
     this.setState(prevState => ({viewingComments: !prevState.viewingComments}));
   }
@@ -71,7 +61,6 @@ export class ChapterPage extends Component {
         {this.props.loading?
           <Loading txt={this.props.txt} height= "80vh" marginTop="5vw" />
           :
-
           <CardsContainer>
             {chapters.map((chp, index) =>
               <ChapterCard key={index} {...chp}
@@ -132,7 +121,7 @@ const DownloadBar = styled.div`
   display: flex;
   padding: 0.5vh;
   flex-direction: column;
-  z-index: 99;
+  z-index: 97;
 
 `;
 DownloadBar.displayName = 'DownloadBar';
@@ -163,7 +152,7 @@ DownloadButton.displayName = 'DownloadButton';
 const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({getChunks, getUserHash, getChapters,
-    removeUser, downloadProject, updateLanguage, saveComment, getComments}, dispatch);
+    removeUser, downloadProject, updateLanguage, saveComment, getComments, deleteComment}, dispatch);
 
 };
 

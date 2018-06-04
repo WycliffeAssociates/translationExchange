@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import PlayerTracker from '../../../components/PlayerTracker';
-import ReactPlayer from 'react-player';
-import config from 'config/config';
 import jdenticon from 'jdenticon';
 import RecordCommentsModal from '../../KanbanBoard/components/RecordCommentsComponents/RecordCommentsModal';
+import CommentRow from '../../../components/CommentRow';
 
 
 export default class Comments extends Component {
@@ -43,33 +41,26 @@ export default class Comments extends Component {
 
   componentDidMount() {
     const {comments} = this.props;
+    const cardWidth = this.myInput.offsetWidth;
+    this.setState({cardWidth});
     comments.map((comment) => {
       jdenticon.update(`#CommentUser${comment.id}`, comment.owner_icon_hash);
     });
   }
 
+
   render() {
-    const {comments, id, uploadingComments, saveComment, saveChapterPageComment} = this.props;
-    const {playing} = this.state;
+    const {comments, id, uploadingComments, saveComment, saveChapterPageComment, deleteComment, txt} = this.props;
+
 
     return (
       <Container>
-        <div style={{height: '70%', flex: '1', overflowY: 'auto', overflowX: 'hidden'}}>
+        <div ref={input => {this.myInput = input;}} style={{height: '70%', flex: '1', overflowY: 'auto', overflowX: 'hidden'}}>
           {
             comments.length!==0?
               comments.map( (comment) => {
                 return (
-                  <CommentContainer>
-                    <CommentPlayer >
-                      <PlayerTracker url={comment.location} />
-                    </CommentPlayer>
-
-                    <IdenticonContainer onClick={this.playOwner}>
-                      <Identicon id={`CommentUser${comment.id}`} data-jdenticon-hash={comment.owner_icon_hash} />
-                      <ReactPlayer url={`${config.streamingUrl}${comment.owner_name_audio}`} playing={playing} onEnded={()=> this.ended()}  />
-                    </IdenticonContainer>
-
-                  </CommentContainer>
+                  <CommentRow txt={txt} type= "chapterCard" chapterId={id}  deleteComment={deleteComment} width={this.state.cardWidth} id={comment.id} key= {comment.id} comment= {comment} />
                 );
 
               }):
@@ -99,6 +90,8 @@ export default class Comments extends Component {
   }
 
 }
+
+
 
 const Container = styled.div`
 display: flex;

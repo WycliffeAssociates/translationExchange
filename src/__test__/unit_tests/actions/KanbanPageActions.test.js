@@ -3,7 +3,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import {getTakes, getChunks, patchTake, playTake,
-  addTakeToDelete, removeTakeToDelete, updateTake} from '../../../js/actions';
+  addTakeToDelete, removeTakeToDelete, updateTake, setProject} from '../../../js/actions';
 
 const middlewares = [thunk];
 const mockStore  = configureMockStore(middlewares);
@@ -129,5 +129,14 @@ describe('KanbanPageActions Suite', () => {
     };
 
     expect(updateTake()).toEqual(expectedAction);
+  });
+
+  it('should setProject', () => {
+    const expectedAction = {
+      type: 'SET_PROJECT',
+      slug: 'mat',
+    };
+
+    expect(setProject('mat')).toEqual(expectedAction);
   });
 });

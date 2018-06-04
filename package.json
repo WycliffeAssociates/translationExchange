@@ -15,7 +15,7 @@
     "fast-deep-equal": "^1.1.0",
     "font-awesome": "^4.7.0",
     "howler": "^2.0.4",
-    "immutability-helper": "^2.6.5",
+    "immutability-helper": "^2.7.0",
     "jdenticon": "^1.8.0",
     "js-base64": "^2.1.9",
     "json-schema-traverse": "^0.3.1",

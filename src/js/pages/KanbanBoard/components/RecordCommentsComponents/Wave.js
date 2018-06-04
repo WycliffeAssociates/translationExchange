@@ -21,7 +21,7 @@ class Wave extends Component {
     if (nextProps.play !== this.state.play) {
       this.setState({ play: nextProps.play });
     }
-}
+  }
 
   handlePosChange(e) {
     this.setState({
@@ -41,7 +41,7 @@ class Wave extends Component {
   }
 
   render() {
-    const { pos, play} = this.state;
+    const { pos} = this.state;
 
     return (
       <Container>
@@ -61,6 +61,7 @@ class Wave extends Component {
     );
   }
 }
+Wavesurfer.displayName='Wavesurfer';
 
 const Container = styled.div`
     display: flex;
@@ -70,10 +71,12 @@ const Container = styled.div`
     padding-top: 9.9vh;
     margin-right: 2%;
 `;
+Container.displayName = 'Container';
 
 const WaveformContainer = styled.div`
     width: 100%;
     margin-right: 5%
   `;
+WaveformContainer.displayName = 'WaveformContainer';
 
 export default Wave;

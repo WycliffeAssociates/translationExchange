@@ -1,16 +1,16 @@
-import { UPDATE_LANGUAGE } from '../actions/types';
+import { UPDATE_LANGUAGE } from '../reduxConstants';
 import language from '../../languages/textToDisplay.json';
 
 const INITIAL_STATE = { txt: language.English,
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = INITIAL_STATE, action ={}) => {
 
   switch (action.type) {
 
     case UPDATE_LANGUAGE:
       return {
-        state,
+        ...state,
         txt: language[action.updatelanguage],
       };
 

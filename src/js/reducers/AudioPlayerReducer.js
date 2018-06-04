@@ -1,4 +1,4 @@
-import { PLAY_AUDIO, STOP_AUDIO, FINISHED_PLAYING, UPDATE_TIME, UPDATE_AUDIO_LENGTH, RESET_AUDIOPLAYER } from '../actions/types';
+import { PLAY_AUDIO, STOP_AUDIO, FINISHED_PLAYING, UPDATE_TIME, UPDATE_AUDIO_LENGTH, RESET_AUDIOPLAYER } from '../reduxConstants';
 
 const INITIAL_STATE = {
   play: false,
@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   audioLength: 0,
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = INITIAL_STATE, action = {}) => {
 
   switch (action.type) {
 

@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   uploadError: false,
 };
 
-export default( state= INITIAL_STATE, action) => {
+export default( state= INITIAL_STATE, action ={}) => {
 
   switch (action.type) {
     case 'CHUNK_COMMENTS':

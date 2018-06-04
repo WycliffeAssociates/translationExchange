@@ -1,14 +1,38 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
-import img1 from '../mockupdata/img1.PNG';
-import {zoomIn} from "react-animations";
-
+import BorderButton from '../../../components/BorderButton';
+import {zoomIn} from 'react-animations';
+import jdenticon from 'jdenticon';
+import getIllustrations from 'js/getIllustrations';
 
 export default class ProjectCard extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = { displayModal: false, illustrations: null };
+  }
+
+  componentWillMount() {
+    let illustrations = getIllustrations(this.props.slug);
+    this.setState({ illustrations: illustrations});
+  }
+
+  componentDidMount() {
+    jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'no author info');
+  }
+
+  showModal = () =>{
+    //this.props.resetExport();
+    const {bookName, projectId, updateExportModal} = this.props;
+    updateExportModal('bkName', bookName);
+    updateExportModal('projId', projectId);
+    updateExportModal('showModal', true);
+  }
+
 
     reviewProject = () => {
-      const {projectId, getChapters, history, bookName, mode } = this.props;
+      const {projectId, getChapters, history, bookName, mode, setProject, slug } = this.props;
+      setProject(slug);
       getChapters(projectId, history);
 
       const modeCap = mode.charAt(0).toUpperCase() + mode.slice(1);
@@ -19,36 +43,45 @@ export default class ProjectCard extends React.Component {
     };
 
     render() {
-      const { bookName, version, dateModified, language, txt } = this.props;
-
-
-
-
-
+      const { bookName, language, txt } = this.props;
+      const {illustrations} = this.state;
       return (
-        <Card onClick={this.reviewProject}>
+        <Card>
           <InformationContainer >
+            <QuestionButton>
+               ?
+            </QuestionButton>
             <TextContainer>
-              <BookText> <i class="material-icons">book</i> {bookName} </BookText>
-              <Text><i class="material-icons">translate</i> {language}</Text>
-              <Text><i class="material-icons">description</i> {version}</Text>
-              <Text><i class="material-icons">access_time</i> {dateModified}</Text>
-
+              <BookText> {bookName} </BookText>
+              <Text>{language}</Text>
             </TextContainer>
-            <ImageIndicatorContainer>
-              <div></div>
-              <ImageContainer>
-                <Image src={img1} alt="Smiley face" height="10vw" width="10vw" />
-              </ImageContainer>
-
-            </ImageIndicatorContainer>
-
+            <Icon  id="user" data-jdenticon-value={this.props.loggedInUser? this.props.loggedInUser: 'no author info'} />
           </InformationContainer>
 
-          <ButtonContainer>
-            <ReviewButton> <i class="material-icons">done_all</i> {txt.review} </ReviewButton>
 
-          </ButtonContainer>
+          <ImageContainer>
+            <Image src={illustrations.picker} alt="Smiley face" height="106px" width="338px" />
+          </ImageContainer>
+
+
+          <ButtonsContainer>
+            <BorderButton
+              onClick ={this.showModal} txt={txt.export}
+              color={'#009CFF'}
+              height={'40px'}
+              width={'154px'}
+              icon={'get_app'}
+              iconSize={'24px'}
+              border={'2px'}
+              radius={'4px'}
+              fontSize={'14px'}
+              hoverColor={'#3BAC2A'}
+            />
+
+            <BlueButton onClick={this.reviewProject} >{txt.select} <i className="material-icons">touch_app</i> </BlueButton>
+
+
+          </ButtonsContainer>
         </Card>
 
       );
@@ -62,9 +95,8 @@ const zoomInAnimation = keyframes `${zoomIn}`;
 
 const Card= styled.div`
     text-align: center;
-    height: 15vw;
-    min-height: 233px;
-    width: 26vw;
+    height: 226px
+    width: 338.5px;
     min-width: 350px;
     border-radius: .5vw;
     box-shadow: 0px 1px 2px 4px rgba(0,0,0,0.2);
@@ -72,32 +104,60 @@ const Card= styled.div`
     background-color: white;
     margin: 0 0 3vw 4vw;
     animation: ${zoomInAnimation} .2s ease-in;
-    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 `;
 Card.displayName = 'Card';
 
+const Icon = styled.svg`
+  position:absolute;
+  height: 50px;
+  width: 50px;
+  left: 83%;
+  top:-10px;
+  margin-top: 0.6vw;
+  cursor: pointer;
+  `;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 14px;
+  margin-left: 12px;
+
+`;
+ButtonsContainer.displayName= 'ButtonsContainer';
+
 const Image = styled.img`
-   height: 9.5vw;
-   width: 13.5vw;
+   height: 106px;
+   width: 100%
 `;
 Image.displayName = 'Image';
 
 const BookText= styled.p`
-   font-size: 1.5vw
+   font-size: 14px;
    font-weight: bold;
+   margin-bottom: 0;
 `;
 BookText.displayName = 'BookText';
 
 const Text = styled.p`
-   font-size: 1vw
+   font-size: 14px;
    color: #606060;
 `;
 Text.displayName = 'Text';
 
 const InformationContainer = styled.div`
-    display:flex;
-    flex-direction: row;
-    height: 82%;
+  position: relative;
+  height: 41px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 5px;
+
 `;
 InformationContainer.displayName = 'InformationContainer';
 
@@ -108,7 +168,8 @@ ImageIndicatorContainer.displayName = 'ImageIndicatorContainer';
 
 const ImageContainer = styled.div`
   width: 100%;
-  padding-top: 2vw;
+  height: 106px;
+  overflow: hidden;
 `;
 ImageContainer.displayName = 'ImageContainer';
 
@@ -133,7 +194,6 @@ const ReviewButton = styled.button`
     width: inherit;
     background-color: #009CFF;
     cursor: pointer;
-    font-size: 1.1vw; //in the font awesome library the font size ends up controlling the size of the icon
   `;
 ReviewButton.displayName = 'ReviewButton';
 
@@ -149,3 +209,39 @@ const ButtonContainer= styled.div`
     border-width: 1vw;
   `;
 ButtonContainer.displayName = 'ButtonContainer';
+
+const QuestionButton = styled.button`
+  height: 24px;
+  width: 24px;
+  background: linear-gradient(to bottom, #00C5FF, #009CFF);
+  color: white;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  cursor:pointer;
+`;
+
+const BlueButton = styled.button`
+    background: linear-gradient(to bottom, #00C5FF, #009CFF);
+    width: 154px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: 100;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: .3s ease-in-out;
+
+    i {
+      vertical-align: middle;
+    }
+
+    :hover{
+      background: #3BAC2A;
+      color: #FFF;
+      border: 2px solid #3BAC2A;
+
+    }
+    `;
