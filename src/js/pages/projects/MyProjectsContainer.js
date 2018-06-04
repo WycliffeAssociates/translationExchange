@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import ProjectCard from './components/ProjectCard';
+import ExportModal from './components/ExportModal';
 
 class MyProjectsContainer extends Component {
   render() {
@@ -9,7 +10,7 @@ class MyProjectsContainer extends Component {
 
       <Container>
         <HeaderContainer>
-          <i class="material-icons">folder_shared</i>
+          <i className="material-icons">folder_shared</i>
           <Header>{txt.projects}</Header>
         </HeaderContainer>
         <CardsContainer>
@@ -29,6 +30,7 @@ class MyProjectsContainer extends Component {
             /> )
           }
         </CardsContainer>
+        <ExportModal {...this.props} />
       </Container>
     );
   }

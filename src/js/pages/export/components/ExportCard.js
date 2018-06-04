@@ -28,6 +28,13 @@ export class ExportCard extends Component {
     }
   }
 
+  componentWillMount() {
+    const {published, chapterComplete} = this.props;
+    if (published) {
+      chapterComplete();
+    }
+  }
+
 
 
   toggleCheck = () => {

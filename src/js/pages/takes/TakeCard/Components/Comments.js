@@ -1,7 +1,7 @@
 import React from 'react';
 import styled,{keyframes} from 'styled-components';
 import {fadeIn} from 'react-animations';
-import CommentRow from './CommentRow';
+import CommentRow from '../../../../components/CommentRow';
 import RecordCommentsModal from '../../../KanbanBoard/components/RecordCommentsComponents/RecordCommentsModal';
 
 
@@ -61,7 +61,7 @@ export default class TakeCardComments extends React.Component {
           {
             comments.length!==0 ?
               comments.map((comment) => {
-                return (<CommentRow txt ={txt} deleteComment={deleteComment} width={width} id={comment.id} key= {comment.id} comment= {comment} />);
+                return (<CommentRow type= "take" txt ={txt} deleteComment={deleteComment} width={width} id={comment.id} key= {comment.id} comment= {comment} />);
 
               })
               :
@@ -86,17 +86,6 @@ const fadeInAnimation = keyframes`${fadeIn}`;
 
 const Container = styled.div`
   `;
-const Button = styled.button`
-  font-size: 1.75vw;
-  flex: 1;
-  border: none;
-  align-self: stretch;
-  padding: 0.75vw;
-  border-top: solid 0.05vw #009CFF;
-  text-align:center;
-  background: none;
-
-`;
 
 const Comments = styled.div`
 height: ${props => props.hasComments? '100px': '0px'};
@@ -154,24 +143,5 @@ const RecordButton = styled.div`
   i {
     font-size: 28px;
   }
-
-`;
-
-const LoadMore = styled.label`
-  font-size: 1vw;
-  text-decoration: underline;
-  color: #009CFF;
-  font-weight: bold;
-`;
-
-const RecordComment = styled(Button)`
-  background: none;
-  color: white;
-  flex: 0;
-  font-size: 1.4vw;
-  padding: 1vw 1.5vw;
-  align-self: flex-end;
-  border-top: none;
-  cursor: pointer;
 
 `;

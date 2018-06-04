@@ -1,4 +1,4 @@
-import { UPDATE_DIRECTION } from '../actions/types';
+import { UPDATE_DIRECTION } from '../reduxConstants';
 
 const INITIAL_STATE = {
   direction: 'ltr'};
