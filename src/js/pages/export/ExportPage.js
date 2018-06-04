@@ -17,6 +17,7 @@ export class ExportPage extends Component {
     this.state= {checked: null,
       readyToExport: false,
       downloading: false,
+      chapterComplete: 0,
     };
   }
 
@@ -48,10 +49,14 @@ export class ExportPage extends Component {
 
   }
 
+  chapterComplete = () => {
+    this.setState({chapterComplete: this.state.chapterComplete + 1});
+  }
+
 
 
   render() {
-    const { checked, readyToExport, downloading } = this.state;
+    const { checked, readyToExport, downloading, chapterComplete } = this.state;
     const { chaptersSelected, chapters, location, txt, taskId, resetSelected } = this.props;
     const query = QueryString.parse(location.search);
 
@@ -65,7 +70,7 @@ export class ExportPage extends Component {
             <h1>{query.bookName}</h1>
           </HeaderContainer>
         }
-        {readyToExport ? '': <CompletedCheckbox txt={txt} toggleCheck = {this.toggleCheck} checked={checked} /> }
+        {readyToExport ? '': <CompletedCheckbox chapterComplete={chapterComplete} txt={txt} toggleCheck = {this.toggleCheck} checked={checked} /> }
 
         {this.props.loading?
           <Loading txt={this.props.txt} height= "80vh" marginTop="2vw" />
@@ -75,7 +80,7 @@ export class ExportPage extends Component {
             <CardsContainer center={readyToExport}>
               {readyToExport ? <ChapterSelected number={chaptersSelected.length} txt={txt} />
                 :
-                chapters ? chapters.map((chp, index) => <ExportCard completedSelected={checked} key={index} {...this.props} {...chp} />): ''
+                chapters ? chapters.map((chp, index) => <ExportCard chapterComplete={this.chapterComplete} completedSelected={checked} key={index} {...this.props} {...chp} />): ''
               }
             </CardsContainer>
         }

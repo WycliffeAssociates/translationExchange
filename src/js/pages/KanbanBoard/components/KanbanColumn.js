@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import TakeCard from '../../takes/TakeCard/';
 import DragHereBox from '../../../components/DragHereBox';
+import ReviewDialog from './ReviewDialog';
 import QueryString from 'query-string';
 import {DropTarget} from 'react-dnd';
 
@@ -10,13 +11,18 @@ class KanbanColumn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //take: this.props,
+      displayModal: true,
     };
 
     this.makeChanges = this.makeChanges.bind(this);
     this.nextChunk = this.nextChunk.bind(this);
     this.navigateToChapter = this.navigateToChapter.bind(this);
     this.chapterPublished = this.chapterPublished.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  closeModal() {
+    this.setState({displayModal: false});
   }
 
   nextChunk() {
@@ -68,7 +74,7 @@ class KanbanColumn extends React.Component {
         pathname: '/kanban',
         search: `?chapterId=${chapterId}&chapterNum=${chapter_num}&bookName=${query.bookName}&projectId=${query.projectId}&&mode=${query.mode}`,
       });
-      this.props.getChunks(chapter_num, history);
+      this.props.getChunks(chapter_num, history,true);
       this.props.getComments(chapterId, 'chapter_id');
     }
 
@@ -146,7 +152,8 @@ class KanbanColumn extends React.Component {
       deleteComment, playingTakeId,
       playTake, takesToDelete,
       addTakeToDelete, removeTakeToDelete, removedTaketoDelete,
-      updateTake} = this.props;
+      updateTake, history} = this.props;
+    const {displayModal} = this.state;
 
 
     var icon;
@@ -229,7 +236,18 @@ class KanbanColumn extends React.Component {
           this.props.publishedColumn?
             this.chapterPublished()?
 
-              <center> <NextChapter onClick ={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)} >{this.props.txt.goToNextChapter} <i className="material-icons">arrow_forward</i> </NextChapter> </center>
+              <center> <NextChapter onClick ={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)} >{this.props.txt.goToNextChapter} <i className="material-icons">arrow_forward</i> </NextChapter>
+                {
+                  displayModal?
+                    <ReviewDialog nextChapter={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)}
+                      closeModal={this.closeModal}
+                      chapterNum = {chapterNum}
+                      query={this.props.location.search}
+                      history={history} />
+                    :
+                    ''
+                }
+              </center>
               :
               mode === 'Chunk'?
                 <center> <NextChunk onClick ={() => this.nextChunk()}>{this.props.txt.goToNextChunk} <i className= "material-icons">arrow_forward</i> </NextChunk> </center>
@@ -247,7 +265,7 @@ class KanbanColumn extends React.Component {
 }
 
 const starSize = {
-  fontSize: '2.7vw'
+  fontSize: '2.7vw',
 };
 
 

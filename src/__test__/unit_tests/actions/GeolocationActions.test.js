@@ -1,6 +1,6 @@
 /* global describe it expect */
 import { updateLanguage } from '../../../js/actions';
-import {UPDATE_LANGUAGE}  from '../../../js/actions/types';
+import {UPDATE_LANGUAGE}  from '../../../js/reduxConstants';
 
 describe('Geolocation Actions suite', () => {
 

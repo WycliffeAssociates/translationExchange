@@ -1,4 +1,4 @@
-import { UPDATE_LANGUAGE} from './types';
+import { UPDATE_LANGUAGE} from '../reduxConstants';
 
 
 export const updateLanguage = (updatelanguage) => {

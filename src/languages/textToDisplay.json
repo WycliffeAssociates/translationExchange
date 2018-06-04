@@ -76,7 +76,15 @@
    "yourFiles": "Your files will continue downloading, you can go back to projects",
    "backToProjects": "Back to Projects",
    "progressPage": "Progress Page",
-   "board": "Board"
+   "board": "Board",
+   "goodJob": "Good Job!",
+   "chapterCompleted": "You have completed Chapter",
+   "reviewChapter": "Would you like to review the chapter?",
+   "skipChapter": "Next Chapter",
+   "goToReview": "Chapter Review",
+   "exitReview": "Exit Review",
+   "comments": "Comments",
+   "review": "Review"
 
 
    },

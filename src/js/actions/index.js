@@ -9,3 +9,4 @@ export * from './KanbanPageActions';
 export * from './TaskActions';
 export * from './ChapterPageActions';
 export * from './ExportPageActions';
+export * from './ChapterReviewActions';

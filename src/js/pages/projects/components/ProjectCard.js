@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import BorderButton from '../../../components/BorderButton';
-import ExportModal from './ExportModal';
 import {zoomIn} from 'react-animations';
 import jdenticon from 'jdenticon';
 import getIllustrations from 'js/getIllustrations';
@@ -22,9 +21,13 @@ export default class ProjectCard extends React.Component {
     jdenticon.update('#user',this.props.loggedInUser? this.props.loggedInUser: 'no author info');
   }
 
-  showModal = () => this.setState({displayModal: true});
-
-  closeModal = () => this.setState({displayModal: false});
+  showModal = () =>{
+    //this.props.resetExport();
+    const {bookName, projectId, updateExportModal} = this.props;
+    updateExportModal('bkName', bookName);
+    updateExportModal('projId', projectId);
+    updateExportModal('showModal', true);
+  }
 
 
     reviewProject = () => {
@@ -40,7 +43,7 @@ export default class ProjectCard extends React.Component {
     };
 
     render() {
-      const { bookName, projectId, language, txt, history } = this.props;
+      const { bookName, language, txt } = this.props;
       const {illustrations} = this.state;
       return (
         <Card>
@@ -75,15 +78,8 @@ export default class ProjectCard extends React.Component {
               hoverColor={'#3BAC2A'}
             />
 
-            <BlueButton onClick={this.reviewProject} >{txt.select} <i class="material-icons">touch_app</i> </BlueButton>
-            <ExportModal
-              closeModal={this.closeModal}
-              history = {history}
-              display={this.state.displayModal}
-              txt={txt}
-              bookName={bookName}
-              projectId={projectId}
-            />
+            <BlueButton onClick={this.reviewProject} >{txt.select} <i className="material-icons">touch_app</i> </BlueButton>
+
 
           </ButtonsContainer>
         </Card>
@@ -135,7 +131,7 @@ const ButtonsContainer = styled.div`
 ButtonsContainer.displayName= 'ButtonsContainer';
 
 const Image = styled.img`
-   height: 9.5vw;
+   height: 106px;
    width: 100%
 `;
 Image.displayName = 'Image';
