@@ -1,13 +1,13 @@
 import axios from 'axios';
 import config from '../../config/config';
-import {getTakes, getTakesSuccess, getChapters} from '../actions';
+import {getTakes, getChapters} from '../actions';
 
 export const getComments = (query, type) => {
   return function(dispatch) {
     return axios
       .get(`${config.apiUrl}comments/?${type}=${query}`,
         {
-          headers: { Authorization: "Token " + localStorage.getItem('token') }
+          headers: { Authorization: 'Token ' + localStorage.getItem('token') },
         })
       .then(response => {
         switch (type) {

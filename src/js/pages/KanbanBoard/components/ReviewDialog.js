@@ -5,7 +5,7 @@ import styled from 'styled-components';
 export default class ReviewDialog extends Component {
 
   render() {
-    const {type, txt, chapterNum, query} = this.props;
+    const {chapterNum, query} = this.props;
     let icon = 'done';
 
     return (

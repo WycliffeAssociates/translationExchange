@@ -1,13 +1,7 @@
-/* global require gapi:true */
-
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
-import {slideInDown, zoomIn} from 'react-animations';
-import config from '../../../../config/config';
-import GitHubLogin from '../../../components/social-login/GitHubLogin';
-
-
-//import {dispatchToken} from '../../../actions/database.js';
+import {zoomIn} from 'react-animations';
+// import GitHubLogin from '../../../components/social-login/GitHubLogin';
 
 export default class WelcomeComponent extends React.Component {
 

@@ -2,6 +2,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const d = 'M300,600V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4'+
+'c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9'+
+'c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V800H200z';
 export const LoadingMp3 = ({percentage, prevValue}) => (
   <Container>
 
@@ -17,9 +20,7 @@ export const LoadingMp3 = ({percentage, prevValue}) => (
 
         <g  clipPath="url(#drop)">
           <Fill percentage={percentage} prevValue={prevValue}>
-            <WaveShape   width="600px"  fill="#04ACFF" id="waveShape" d="M300,600V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4
-  c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9
-  c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V800H200z" />
+            <WaveShape   width="600px"  fill="#04ACFF" id="waveShape" d={d} />
           </Fill>
         </g>
 

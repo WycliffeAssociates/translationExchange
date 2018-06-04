@@ -1,9 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import QueryString from 'query-string';
-import update from 'immutability-helper';
-
 import TaskInfo from './TaskInfo';
 import TaskIdenticon from './TaskIdenticon';
 
@@ -14,7 +10,7 @@ class TaskInfoLeft extends React.Component {
   }
 
   render() {
-    
+
     return (
       <Container>
         <TaskInfo {...this.props}></TaskInfo>
@@ -32,6 +28,6 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
 `;
-Container.displayName = "Container";
+Container.displayName = 'Container';
 
 export default TaskInfoLeft;

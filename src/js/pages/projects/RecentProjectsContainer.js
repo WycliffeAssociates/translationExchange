@@ -14,7 +14,7 @@ class RecentProjectsContainer extends Component {
         </HeaderContainer>
         <CardsContainer>
           {/* need to remove the mockData and provide a valid key*/ }
-          {  Data.map( (x, index) =>
+          {  Data.map( (x) =>
             <ProjectCard
               key={Math.random()}
               bookName={x.book_name}

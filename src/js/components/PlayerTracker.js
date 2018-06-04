@@ -229,7 +229,6 @@ const PlayIcon = styled.button`
   cursor: pointer;
   i {
     font-size: ${props => props.playHead !== undefined? props.playHead: '1.6vw'};
-    margin-top: ${props => props.ChapterReview === true? '': ''};
   }
 `;
 PlayIcon.displayName = 'PlayIcon';

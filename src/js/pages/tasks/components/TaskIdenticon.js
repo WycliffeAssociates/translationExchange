@@ -1,8 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import QueryString from 'query-string';
-import update from 'immutability-helper';
 import jdenticon from 'jdenticon';
 import ReactPlayer from 'react-player';
 import config from '../../../../config/config';
@@ -13,7 +10,7 @@ class TaskIdenticon extends React.Component {
     super(props);
     this.state = {
       playing: false,
-      id:null,
+      id: null,
     };
     this.play = this.play.bind(this);
     this.ended = this.ended.bind(this);
@@ -28,7 +25,7 @@ class TaskIdenticon extends React.Component {
   }
 
   componentDidMount() {
-    jdenticon.update(`#user${this.props.task.id.slice(0, 8)}`, this.props.task.details.user_icon_hash? 
+    jdenticon.update(`#user${this.props.task.id.slice(0, 8)}`, this.props.task.details.user_icon_hash?
       this.props.task.details.user_icon_hash: 'null user');
   }
 
@@ -38,13 +35,13 @@ class TaskIdenticon extends React.Component {
 
     return (
       <Container>
-        <Identicon onClick={()=>this.play()} id={`#user${task.id.slice(0, 8)}`} 
+        <Identicon onClick={()=>this.play()} id={`#user${task.id.slice(0, 8)}`}
           data-jdenticon-hash={task.details.user_icon_hash ? task.details.user_icon_hash: 'null user'} />
-        <ReactPlayer 
+        <ReactPlayer
           url={`${config.streamingUrl}${task.details.user_name_audio ? task.details.user_name_audio : ''}`}
-          playing={this.state.playing} 
+          playing={this.state.playing}
           onEnded={()=> this.ended()}
-          style={{display: "none"}} />
+          style={{display: 'none'}} />
       </Container>
     );
   }
@@ -54,14 +51,14 @@ class TaskIdenticon extends React.Component {
 const Container = styled.div`
   flex: 0.5;
 `;
-Container.displayName = "Container";
+Container.displayName = 'Container';
 
 const Identicon = styled.svg`
   height: 4vw;
   width: 4vw;
   cursor: pointer;
 `;
-Identicon.displayName = "Identicon";
+Identicon.displayName = 'Identicon';
 
 
 export default TaskIdenticon;

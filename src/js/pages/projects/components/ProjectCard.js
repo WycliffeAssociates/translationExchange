@@ -70,7 +70,7 @@ export default class ProjectCard extends React.Component {
               color={'#009CFF'}
               height={'40px'}
               width={'154px'}
-              icon={'publish'}
+              icon={'get_app'}
               iconSize={'24px'}
               border={'2px'}
               radius={'4px'}

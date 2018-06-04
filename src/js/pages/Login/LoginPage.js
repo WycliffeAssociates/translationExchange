@@ -13,7 +13,6 @@ import Languages from '../../../languages/textToDisplay.json';
 export class Welcome extends React.Component {
 
   componentWillMount() {
-    const language = window.navigator.userLanguage || window.navigator.language;
     const storedLanguage = localStorage.getItem('language');
     if (storedLanguage) {
       this.props.updateLanguage(storedLanguage);

@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   uploadingComment: false,
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
 
     case 'FETCHING_CHAPTERS':

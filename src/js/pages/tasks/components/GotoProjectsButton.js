@@ -14,8 +14,8 @@ export default class GotoProjectsButton extends React.Component {
     return (
 
       <Button onClick={()=> history.push('/projects')}>
-        <span style={{verticalAlign: "middle"}}>{txt.goToProjects}</span>
-        <i style={{verticalAlign: "middle", marginLeft: "0.4vw"}} className="material-icons">book</i>
+        <span style={{verticalAlign: 'middle'}}>{txt.goToProjects}</span>
+        <i style={{verticalAlign: 'middle', marginLeft: '0.4vw'}} className="material-icons">book</i>
       </Button>
 
     );
@@ -39,4 +39,4 @@ const Button = styled.div`
   justify-content: center;
   box-shadow: 0.2vw 0.2vw 0.5vw #888888;
 `;
-Button.displayName = "Button";
+Button.displayName = 'Button';

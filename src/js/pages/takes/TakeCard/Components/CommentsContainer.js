@@ -5,7 +5,7 @@ import CommentRow from '../../../../components/CommentRow';
 import RecordCommentsModal from '../../../KanbanBoard/components/RecordCommentsComponents/RecordCommentsModal';
 
 
-export default class TakeCardComments extends React.Component {
+export default class CommentsContainer extends React.Component {
 
   constructor(props) {
     super(props);

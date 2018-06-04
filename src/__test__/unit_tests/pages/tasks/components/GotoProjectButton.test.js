@@ -6,8 +6,11 @@ import {shallow} from 'enzyme';
 const mockProps = {
   history: [],
   task: {
-    details: {}
-  }
+    details: {},
+  },
+  txt: {
+    select: 'Select',
+  },
 };
 
 describe('GotoProjectButton Test Suite', () => {
