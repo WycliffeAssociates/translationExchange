@@ -1,14 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import QueryString from 'query-string';
-import update from 'immutability-helper';
-
 import TaskInfoTop from './TaskInfoTop';
 import TaskProgressBar from './TaskProgressBar';
 import getIllustrations from '../../../getIllustrations';
 
-import img from '../../../../assets/images/sample.jpg';
 
 class TaskItemProgress extends React.Component {
 

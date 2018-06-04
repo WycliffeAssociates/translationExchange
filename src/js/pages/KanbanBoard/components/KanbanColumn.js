@@ -342,7 +342,7 @@ NextChapter.displayName = 'NextChapter';
 
 
 const takeTarget = {
-  drop(props, monitor, component) {
+  drop(props) {
     const { listId } = props;
     return { listId: listId };
   },

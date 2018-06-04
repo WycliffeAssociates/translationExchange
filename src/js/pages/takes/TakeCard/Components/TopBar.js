@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import DragTarget from './DragTarget';
-import jdenticon from 'jdenticon';
 export default class TopBar extends React.Component {
 
   constructor(props) {

@@ -1,6 +1,6 @@
 /* global it expect describe*/
 import React from 'react';
-import Toggle from '../../../../../js/pages/chapters/components/Toggle';
+import Toggle from '../../../../../js/pages/chapters/components/Toggler';
 import renderer from 'react-test-renderer';
 
 describe('Chapter card comments', () => {

@@ -1,9 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import QueryString from 'query-string';
-import update from 'immutability-helper';
-
 import TaskTitle from './TaskTitle';
 import TaskIdenticon from './TaskIdenticon';
 
@@ -14,15 +10,15 @@ class TaskInfoTop extends React.Component {
   }
 
   render() {
-    
+
     const date = new Date(this.props.task.started);
 
     return (
       <Container>
         <TaskTitle {...this.props}></TaskTitle>
         <DateTime>
-          <i className="material-icons" style={{marginRight: "0.4vw", color: "#9c79cf"}}>schedule</i>
-          <span style={{fontWeight: "bold", marginRight: "0.4vw"}}>{date.toLocaleDateString()} </span> 
+          <i className="material-icons" style={{marginRight: '0.4vw', color: '#9c79cf'}}>schedule</i>
+          <span style={{fontWeight: 'bold', marginRight: '0.4vw'}}>{date.toLocaleDateString()} </span>
           <span>{date.toLocaleTimeString()}</span>
         </DateTime>
         <TaskIdenticon task={this.props.task}></TaskIdenticon>
@@ -39,7 +35,7 @@ const Container = styled.div`
   align-items: stretch;
   flex: 1;
 `;
-Container.displayName = "Container";
+Container.displayName = 'Container';
 
 const DateTime = styled.div`
   flex: 3;
@@ -48,6 +44,6 @@ const DateTime = styled.div`
   display: flex;
   font-size: 1vw;
 `;
-DateTime.displayName = "DateTime";
+DateTime.displayName = 'DateTime';
 
 export default TaskInfoTop;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import LoadingTransfer from './LoadingTransfer';
 
 
-class DowloadingTransfer extends Component {
+class DownloadingTransfer extends Component {
 
   constructor(props) {
     super(props);
@@ -99,4 +99,4 @@ const BlueButton = styled.button`
     }
     `;
 
-export default DowloadingTransfer;
+export default DownloadingTransfer;

@@ -5,10 +5,10 @@ const INITIAL_STATE = {
   progress: null,
   showModal: false,
   bkName: null,
-  projId: null
+  projId: null,
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = INITIAL_STATE, action ={}) => {
   switch (action.type) {
 
     case 'ADD_SELECTED':
@@ -34,7 +34,7 @@ export default (state = INITIAL_STATE, action) => {
       return {...state, progress: action.progress};
 
     case 'UPDATE_EXPORT_MODAL':
-      return {...state, [action.prop]: action.value}
+      return {...state, [action.prop]: action.value};
 
     case 'RESET_SELECTED':
       return INITIAL_STATE;

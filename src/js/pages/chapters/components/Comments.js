@@ -1,11 +1,5 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import PlayerTracker from '../../../components/PlayerTracker';
-import DeleteCommentToast from '../../../components/DeleteCommentToast';
-import Draggable from 'react-draggable';
-import { toast} from 'react-toastify';
-import ReactPlayer from 'react-player';
-import config from 'config/config';
 import jdenticon from 'jdenticon';
 import RecordCommentsModal from '../../KanbanBoard/components/RecordCommentsComponents/RecordCommentsModal';
 import CommentRow from '../../../components/CommentRow';

@@ -70,8 +70,8 @@ export const deleteTakeSuccess = (res) => {
   return {
     type: 'DELETE_TAKE_SUCCESS',
 
-  }
-}
+  };
+};
 
 export const getChunks = (chapterId, redirect, chapterNav) => {
   return dispatch => {
@@ -177,7 +177,7 @@ export const patchTake = (
           message =
                 'Something went wrong. Please check your connection and try again.';
         }
-        // dispatch(patchTakeFailed(message));
+        return message;
       });
   };
 };

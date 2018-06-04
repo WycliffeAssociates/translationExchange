@@ -1,9 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import QueryString from 'query-string';
-import update from 'immutability-helper';
-
 import ProgressBar from '../../../components/ProgressBar';
 
 class TaskProgressBar extends React.Component {
@@ -18,27 +14,27 @@ class TaskProgressBar extends React.Component {
 
     let resultStr;
     let resultColor;
-    if(this.props.task.status == "SUCCESS")
+    if (this.props.task.status == 'SUCCESS')
     {
-        resultStr = "Complete";
-        resultColor = "white";
+      resultStr = 'Complete';
+      resultColor = 'white';
     }
-    else if(this.props.task.status == "FAILURE")
+    else if (this.props.task.status == 'FAILURE')
     {
-      resultStr = "Failed";
-      resultColor = "red";
+      resultStr = 'Failed';
+      resultColor = 'red';
     }
-    else if(this.props.task.status == "STARTED")
+    else if (this.props.task.status == 'STARTED')
     {
-      resultStr = "Started";
-      resultColor = "black";
+      resultStr = 'Started';
+      resultColor = 'black';
     }
 
     return (
       <Container>
-        <ProgressBar 
-          now={progress} 
-          label={progress < 100 ? progress + "%" : ""}
+        <ProgressBar
+          now={progress}
+          label={progress < 100 ? progress + '%' : ''}
           result={resultStr}
           resultColor={resultColor}>
         </ProgressBar>
@@ -54,6 +50,6 @@ const Container = styled.div`
   align-items: stretch;
   flex: 0.3;
 `;
-Container.displayName = "Container";
+Container.displayName = 'Container';
 
 export default TaskProgressBar;

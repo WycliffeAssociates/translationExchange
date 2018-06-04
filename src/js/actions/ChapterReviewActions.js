@@ -129,6 +129,7 @@ export const setTake = (
           message =
                 'Something went wrong. Please check your connection and try again.';
         }
+        return message;
       });
   };
 };

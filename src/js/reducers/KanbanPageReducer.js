@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   project: null,
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = INITIAL_STATE, action ={}) => {
   switch (action.type) {
 
     case 'LOADING':

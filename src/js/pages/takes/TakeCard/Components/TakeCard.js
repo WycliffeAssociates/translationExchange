@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import TopBar from './TopBar';
-import {getEmptyImage} from 'react-dnd-html5-backend';
 import Waveform from '../../components/audioplayer/Waveform';
 import Marker from '../../components/audioplayer/Markers';
 import config from 'config/config';
 import BottomButtons from './BottomButtons';
-import jdenticon from 'jdenticon';
-import propTypes from 'prop-types';
+
 
 export default class TakeCard extends React.Component {
 

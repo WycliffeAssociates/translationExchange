@@ -3,7 +3,7 @@ import styled, {keyframes} from 'styled-components';
 import {fadeIn} from 'react-animations';
 import jdenticon from 'jdenticon';
 import TakeCardTop from './Components/TakeCard';
-import Comments from './Components/Comments';
+import Comments from './Components/CommentsContainer';
 
 
 

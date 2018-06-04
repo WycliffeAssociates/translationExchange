@@ -28,7 +28,6 @@ export default class Take extends React.Component {
 
   finishedPlaying() {
     const {activeChunkIndex, selectedTakesLength} = this.props;
-    const {takePlaying} = this.state;
     if (activeChunkIndex < selectedTakesLength - 1 ) {
       this.props.updateActiveChunkIndex(activeChunkIndex, null, true);
     }

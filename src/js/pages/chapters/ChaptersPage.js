@@ -8,7 +8,7 @@ import {getChunks, getUserHash,
   getChapters, removeUser, downloadProject, updateLanguage,
   saveComment, getComments, deleteComment} from '../../actions';
 import ChapterCard from './components/ChapterCard';
-import Toggle from './components/Toggle';
+import Toggle from './components/Toggler';
 import styled from 'styled-components';
 import 'css/takes.css';
 
@@ -41,15 +41,6 @@ export class ChapterPage extends Component {
       updateLanguage(language);
     }
   }
-
-  componentDidMount() {
-    const {history, getChapters} = this.props;
-    if (this.props.updatePage === true && this.props.uploadingComment === false) {
-      const {search} = this.props.location;   //get data if the user refresh the page
-      const query = QueryString.parse(search);
-    }
-  }
-
   handleToggle() {
     this.setState(prevState => ({viewingComments: !prevState.viewingComments}));
   }

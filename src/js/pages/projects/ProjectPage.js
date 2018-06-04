@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
-import RecentProjectsContainer from './RecentProjectsContainer';
+// import RecentProjectsContainer from './RecentProjectsContainer';
 import MyProjectsContainer from './MyProjectsContainer';
 import { fetchAllProjects, getChapters, getUserHash, removeUser,
   setProject,updateLanguage, getTransferProgress, transferProject, resetExport, updateExportModal } from '../../actions';

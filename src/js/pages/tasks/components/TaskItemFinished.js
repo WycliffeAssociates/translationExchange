@@ -1,14 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import QueryString from 'query-string';
-import update from 'immutability-helper';
-
 import TaskInfoLeft from './TaskInfoLeft';
-import TaskProgressBar from './TaskProgressBar';
 import getIllustrations from '../../../getIllustrations';
 
-import img from '../../../../assets/images/sample.jpg';
 
 class TaskItemFinished extends React.Component {
 
@@ -26,14 +21,14 @@ class TaskItemFinished extends React.Component {
   }
   render() {
     const {illustrations} = this.state;
-    let flag_bg_color = "#00c43d";
-    let flag = "check";
-    let bg_color = "#e7fae9";
+    let flag_bg_color = '#00c43d';
+    let flag = 'check';
+    let bg_color = '#e7fae9';
 
-    if(this.props.task.status == "FAILURE") {
-      flag_bg_color = "#e7535f";
-      flag = "flag";
-      bg_color = "#fcecee";
+    if (this.props.task.status == 'FAILURE') {
+      flag_bg_color = '#e7535f';
+      flag = 'flag';
+      bg_color = '#fcecee';
     }
 
     return (
@@ -41,7 +36,7 @@ class TaskItemFinished extends React.Component {
         <Picture>
           <Img src={illustrations.picker}></Img>
           <Flag style={{backgroundColor: flag_bg_color}}>
-              <i style={{fontSize: "3.5vw"}} className="material-icons">{flag}</i>
+            <i style={{fontSize: '3.5vw'}} className="material-icons">{flag}</i>
           </Flag>
         </Picture>
 

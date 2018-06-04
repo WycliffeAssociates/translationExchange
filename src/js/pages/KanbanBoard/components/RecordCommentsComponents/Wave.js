@@ -21,7 +21,7 @@ class Wave extends Component {
     if (nextProps.play !== this.state.play) {
       this.setState({ play: nextProps.play });
     }
-}
+  }
 
   handlePosChange(e) {
     this.setState({
@@ -41,7 +41,7 @@ class Wave extends Component {
   }
 
   render() {
-    const { pos, play} = this.state;
+    const { pos} = this.state;
 
     return (
       <Container>

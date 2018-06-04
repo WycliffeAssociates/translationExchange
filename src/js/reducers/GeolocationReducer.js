@@ -4,7 +4,7 @@ import language from '../../languages/textToDisplay.json';
 const INITIAL_STATE = { txt: language.English,
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = INITIAL_STATE, action ={}) => {
 
   switch (action.type) {
 

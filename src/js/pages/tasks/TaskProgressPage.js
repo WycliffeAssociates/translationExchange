@@ -13,8 +13,6 @@ export class TaskProgressPage extends React.Component {
 
   constructor(props) {
     super(props);
-
-    let interval;
   }
 
   componentWillMount() {
