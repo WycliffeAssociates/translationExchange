@@ -113,7 +113,7 @@
     "test_unit": "cross-env NODE_PATH=src react-scripts test --env=jsdom --testPathPattern=unit_tests --coverage",
     "test_integration": "cross-env NODE_PATH=src react-scripts test --env=jsdom --testPathPattern=integration_tests --coverage",
     "eject": "react-scripts eject",
-    "coverage": "npm run test -- --coverage"
+    "coverage": "npm run test -- --coverage --ci"
   },
   "jest": {
     "snapshotSerializers": [
@@ -132,10 +132,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "branches":80,
-        "functions":80,
-        "lines": 80,
-        "statements": -10
+        "branches":30,
+        "functions":30,
+        "lines": 30,
+        "statements": -10000
       }
     }
   },

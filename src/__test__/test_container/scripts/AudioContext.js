@@ -6,8 +6,8 @@ exports.__esModule = true;
 var audioCtx='';
 if (! window.AudioContext) {
   if (!window.webkitAudioContext) {
-    console.log('unable to get window.AudioContext');
-  //  return;
+    //console.log('unable to get window.AudioContext');
+    return console.log('unable to get window.AudioContext');
   }
   audioCtx = window.webkitAudioContext;
 }
