@@ -74,7 +74,7 @@ class RecordCommentsModal extends Component {
     }
   }
 
-  redo = () => {this.setState(this.initialState(true));};
+  redo = () => {this.setState(this.initialState());};
 
   startRecording = () => this.setState({record: true, header: this.props.txt.recording, icon: 'stop' });
 

@@ -108,7 +108,7 @@ export default class ChapterCard extends Component {
                 :
                 <CircularProgressContainer>
                   <CircularTextContainer dangerSign={dangerSign}>
-                    {dangerSign ? <i class="material-icons">warning</i>: <i class="material-icons">warning</i>}
+                    <i class="material-icons">warning</i>
                     <CircularText>{chunksCompleted}</CircularText>
                   </CircularTextContainer>
 
