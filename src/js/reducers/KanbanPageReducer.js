@@ -21,6 +21,7 @@ export default (state = INITIAL_STATE, action ={}) => {
       };
 
     case 'FETCH_TAKE_SUCCESS':
+    case 'NO_TAKES_FOR_CHUNK':
       return {
         ...state,
         takes: action.takes,
@@ -62,15 +63,6 @@ export default (state = INITIAL_STATE, action ={}) => {
         ...state,
         takesToDelete: action.takesToDelete,
         removedTaketoDelete: true, //used to update after a take is deleted
-      };
-
-    case 'NO_TAKES_FOR_CHUNK':
-      return {
-        ...state,
-        takes: action.takes,
-        chunkNum: action.chunkNum,
-        activeChunkId: action.activeChunkId,
-        loading: false,
       };
 
     case 'UPDATE_TAKE':

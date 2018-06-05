@@ -1,5 +1,5 @@
-/* global expect describe it test */
-import reducer from '../../../js/reducers/DirectionReducer'
+/* global expect describe it  */
+import reducer from '../../../js/reducers/DirectionReducer';
 import * as types from '../../../js/reduxConstants';
 
 describe('DirectionReducer', ()=> {
