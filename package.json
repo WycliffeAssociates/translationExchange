@@ -113,7 +113,7 @@
     "test_unit": "cross-env NODE_PATH=src react-scripts test --env=jsdom --testPathPattern=unit_tests --coverage",
     "test_integration": "cross-env NODE_PATH=src react-scripts test --env=jsdom --testPathPattern=integration_tests --coverage",
     "eject": "react-scripts eject",
-    "coverage": "npm run test -- --coverage --ci"
+    "coverage": "npm run test:ci -- --coverage --ci"
   },
   "jest": {
     "snapshotSerializers": [
