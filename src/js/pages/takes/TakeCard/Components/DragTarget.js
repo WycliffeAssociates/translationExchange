@@ -57,7 +57,7 @@ export class DragTarget extends React.Component {
 
   render() {
 
-    const {connectDragSource , isDragging} = this.props;
+    const {connectDragSource} = this.props;
 
 
     return  connectDragSource(

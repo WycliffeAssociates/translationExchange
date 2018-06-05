@@ -14,6 +14,7 @@ export default( state= INITIAL_STATE, action ={}) => {
   switch (action.type) {
 
     case 'FETCHING_USERS':
+    case 'LOADING_USER':
       return {
         ...state,
         loading: true,
@@ -26,11 +27,6 @@ export default( state= INITIAL_STATE, action ={}) => {
         users: action.users,
         loading: false,
       };
-    case 'LOADING_USER':
-      return {
-        ...state, loading: true,
-      };
-
     case 'SOCIAL_USER_CREATION':
       return {
         ...state,
@@ -66,17 +62,11 @@ export default( state= INITIAL_STATE, action ={}) => {
       return {...state, userCreated: false};
 
     case 'LOGIN_SUCCESS':
-      return {
-        ...state,
-        loggedInUser: action.iconHash,
-      };
-
     case 'GET_LOGGED_USER_HASH':
       return {
         ...state,
         loggedInUser: action.iconHash,
       };
-
     case 'REMOVE_USER':
       return INITIAL_STATE;
 

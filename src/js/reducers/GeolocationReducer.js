@@ -7,7 +7,6 @@ const INITIAL_STATE = { txt: language.English,
 export default (state = INITIAL_STATE, action ={}) => {
 
   switch (action.type) {
-
     case UPDATE_LANGUAGE:
       return {
         ...state,
@@ -16,9 +15,6 @@ export default (state = INITIAL_STATE, action ={}) => {
 
     default:
       return state;
-
   }
-
-
 
 };

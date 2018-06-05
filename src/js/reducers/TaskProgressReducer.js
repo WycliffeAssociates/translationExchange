@@ -10,6 +10,7 @@ export default (state = INITIAL_STATE, action ={}) => {
         tasks: action.tasks,
       };
 
-    default: return state;
+    default:
+      return state;
   }
 };
