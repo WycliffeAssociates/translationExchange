@@ -1,4 +1,4 @@
-/* global expect describe it test */
+/* global expect describe it  */
 import reducer from '../../../js/reducers/GeolocationReducer';
 import * as types from '../../../js/reduxConstants';
 import language from '../../../languages/textToDisplay.json';
@@ -19,4 +19,5 @@ describe('Geolocation Reducer', ()=> {
       txt: language['swahili'],
     });
   });
+
 });

@@ -7,4 +7,4 @@ cd $PROJ_DIR
 npm install
 rm $AUDIO_LIB
 cp $AUDIO_SCRIPT $AUDIO_LIB
-npm coverage:ci --silent
+npm run coverage:ci --silent

@@ -5,15 +5,14 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action ={}) => {
 
-  if (action.type === UPDATE_DIRECTION) {
-    return {
-      ...state,
-      direction: action.updateDirection,
-    };
-  }
+  switch (action.type) {
+    case UPDATE_DIRECTION:
+      return {
+        ...state,
+        direction: action.updateDirection,
+      };
 
-  else  {
-    return state;
+    default:
+      return state;
   }
-
 };

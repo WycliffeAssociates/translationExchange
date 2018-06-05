@@ -16,4 +16,5 @@ describe('TaskProgressReducer', () => {
       tasks: ['array of tasks', 'task2', 'task3'],
     });
   });
+
 });
