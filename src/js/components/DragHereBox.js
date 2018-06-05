@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default class DrageHereBox extends React.Component {
+export default class DragHereBox extends React.Component {
 
   constructor(props) {
     super(props);

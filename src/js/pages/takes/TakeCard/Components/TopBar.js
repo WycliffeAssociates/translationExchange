@@ -7,7 +7,7 @@ export default class TopBar extends React.Component {
     super(props);
     this.state= {
       date: '',
-    },
+    };
 
     this.convertUTC = this.convertUTC.bind(this);
   }
