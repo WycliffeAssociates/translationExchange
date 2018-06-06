@@ -19,6 +19,19 @@ export const fetchAllProjects = (query, redirect) => {
   };
 };
 
+export const importProject= (file) => {
+  var data = new FormData();
+  data.append('file', file);
+  return function(dispatch) {
+    return axios
+      .post(`${config.apiUrl}upload/file`, data, {
+        headers: { Authorization: 'Token '+localStorage.getItem('token'),
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  };
+};
+
 export const dispatchAllProjectsReceived = (response, queryString) => {
   return {
     type: 'ALL_PROJECTS_SUCCESS',
