@@ -6,7 +6,7 @@ import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
 // import RecentProjectsContainer from './RecentProjectsContainer';
 import MyProjectsContainer from './MyProjectsContainer';
-import { fetchAllProjects, getChapters, getUserHash, removeUser,
+import { fetchAllProjects, getChapters, getUserHash, removeUser,importProject,
   setProject,updateLanguage, getTransferProgress, transferProject, resetExport, updateExportModal } from '../../actions';
 
 
@@ -15,7 +15,7 @@ export class ProjectContainer extends Component {
 
   componentWillMount() {
     const {history, fetchAllProjects, updateLanguage} = this.props;
-    fetchAllProjects('', history ); // use history for redirect to the error page
+    //fetchAllProjects('', history ); // use history for redirect to the error page
     const language = localStorage.getItem('language');
     if (language) {
       updateLanguage(language);
@@ -76,7 +76,7 @@ CardsContainer.displayName = 'CardsContainer';
 
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({fetchAllProjects, getChapters, getUserHash, removeUser,
+  return bindActionCreators({fetchAllProjects, getChapters, getUserHash, removeUser, importProject,
     updateLanguage, setProject, getTransferProgress, transferProject, resetExport, updateExportModal}, dispatch);
 };
 

@@ -84,7 +84,11 @@
    "goToReview": "Chapter Review",
    "exitReview": "Exit Review",
    "comments": "Comments",
-   "review": "Review"
+   "review": "Review",
+   "projectImport": "Import a project",
+   "import": "Import",
+   "chooseProject": "Choose a Project...",
+   "noProjects": "There are no available projects"
 
 
    },
@@ -163,7 +167,20 @@
      "yourFiles": " La descarga va a continuar, puedes volver a tus proyectos.",
      "backToProjects": "Regresar a Proyectos",
      "progressPage": "Página de Subida",
-     "board": "Tablero"
+     "board": "Tablero",
+     "goodJob": "Good Job!",
+     "chapterCompleted": "You have completed Chapter",
+     "reviewChapter": "Would you like to review the chapter?",
+     "skipChapter": "Next Chapter",
+     "goToReview": "Chapter Review",
+     "exitReview": "Exit Review",
+     "comments": "Comments",
+     "review": "Review",
+     "projectImport": "Import a project",
+     "import": "Import",
+     "chooseProject": "Choose a Project...",
+     "noProjects": "There are no available projects"
+
 
 
    }

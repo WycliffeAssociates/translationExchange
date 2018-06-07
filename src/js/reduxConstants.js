@@ -29,3 +29,10 @@ export const TAKE_ID = 'take_id';
 //Geolocation Constants
 export const UPDATE_LANGUAGE = 'update_language';
 export const UPDATE_DIRECTION = 'update_direction';
+
+//Project Constants
+export const ALL_PROJECTS_SUCCESS = 'ALL_PROJECTS_SUCCESS';
+export const ALL_PROJECTS_FAILED = 'ALL_PROJECTS_FAILED';
+export const ALL_PROJECTS_LOADING = 'ALL_PROJECTS_LOADING';
+export const ALL_PROJECTS_RESET = 'ALL_PROJECTS_RESET';
+export const IMPORT_PROJECT = 'IMPORT_PROJECT';

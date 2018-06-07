@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '../../config/config';
-
+import {IMPORT_PROJECT} from '../reduxConstants';
 export const fetchAllProjects = (query, redirect) => {
   return function(dispatch) {
     dispatch(dispatchAllProjectsLoading());
@@ -12,9 +12,27 @@ export const fetchAllProjects = (query, redirect) => {
         dispatch(dispatchAllProjectsReceived(response.data, query ));
       })
       .catch(err => {
-        //dispatch(dispatchAllProjectsFailed(err));
+        dispatch(dispatchAllProjectsFailed(err));
         redirect.push('/errorPage');
 
+      });
+  };
+};
+
+export const importProject= (file) => {
+  var data = new FormData();
+  data.append('file', file);
+  return function(dispatch) {
+    return axios
+      .post(`${config.apiUrl}upload/file`, data, {
+        headers: { Authorization: 'Token '+localStorage.getItem('token'),
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then(() => {
+        dispatch({
+          type: IMPORT_PROJECT,
+        });
       });
   };
 };
