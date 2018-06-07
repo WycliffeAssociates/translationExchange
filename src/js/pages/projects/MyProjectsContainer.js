@@ -8,14 +8,14 @@ import AddFile from './components/ImportProject/AddFile';
 
 class MyProjectsContainer extends Component {
   render() {
-    const {projects, txt, setProject, importProject, history} = this.props;
+    const {projects, txt, setProject, importProject,history} = this.props;
     return (
 
       <Container>
         <HeaderContainer>
           <Header>  <i className="material-icons">folder_shared</i>{txt.projects}</Header>
           <div style={{alignSelf: 'flexEnd'}} >
-            <AddFile />
+            <AddFile txt={txt} />
           </div>
         </HeaderContainer>
         <CardsContainer>
@@ -36,7 +36,8 @@ class MyProjectsContainer extends Component {
                   {...this.props}
                 /> )
               :
-              <ImportProject importProject={importProject} history={history} />
+              <ImportProject importProject={importProject}
+                history={history} txt={txt} />
           }
         </CardsContainer>
         <ExportModal {...this.props} />

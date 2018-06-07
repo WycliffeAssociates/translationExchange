@@ -46,14 +46,15 @@ export default class AddFile extends React.Component {
 
 
   render() {
-
+    const {txt} = this.props;
+    console.log(this.props);
     return (
       <Form onSubmit={this.handleSubmit}>
         <Container>
           <Input type="file" name="file" id="file" className="inputFile" accept= ".zip"  innerRef={input => {
             this.fileInput = input;}} />
-          <label htmlFor="file" style={styles.label}> <i className="material-icons">create_new_folder</i> <strong>Choose Project...</strong></label>
-          <Submit className="submit" type="submit" > <strong>Import</strong> </Submit>
+          <label htmlFor="file" style={styles.label}> <i className="material-icons">create_new_folder</i> <strong>{txt.chooseProject}</strong></label>
+          <Submit className="submit" type="submit" > <strong>{txt.import}</strong> </Submit>
         </Container>
       </Form>
     );

@@ -10,11 +10,12 @@ export default class DropTarget extends React.Component {
 
   render() {
     //TODO add ability to drop files for upload
+    const {txt} = this.props;
     return (
       <Container>
         <DashBorder>
-          <h2> Import a Project </h2>
-          <h3> Or </h3>
+          <h2> {txt.projectImport} </h2>
+
           <AddFile {...this.props} />
         </DashBorder>
       </Container>
