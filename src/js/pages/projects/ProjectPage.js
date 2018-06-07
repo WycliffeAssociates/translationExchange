@@ -15,7 +15,7 @@ export class ProjectContainer extends Component {
 
   componentWillMount() {
     const {history, fetchAllProjects, updateLanguage} = this.props;
-    fetchAllProjects('', history ); // use history for redirect to the error page
+    //fetchAllProjects('', history ); // use history for redirect to the error page
     const language = localStorage.getItem('language');
     if (language) {
       updateLanguage(language);

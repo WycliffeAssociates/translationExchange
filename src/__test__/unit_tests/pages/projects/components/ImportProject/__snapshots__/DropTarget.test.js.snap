@@ -8,11 +8,10 @@ exports[`Drop Target test suite should render the component without exploding 1`
     className="sc-EHOje ljiIeS"
   >
     <h2>
-       Import a Project 
+       
+      Import a project
+       
     </h2>
-    <h3>
-       Or 
-    </h3>
     <form
       className="sc-bdVaJa cDjLwG"
       onSubmit={[Function]}
@@ -57,18 +56,14 @@ exports[`Drop Target test suite should render the component without exploding 1`
             create_new_folder
           </i>
            
-          <strong>
-            Choose Project...
-          </strong>
+          <strong />
         </label>
         <button
           className="submit sc-htpNat iuNMEV"
           type="submit"
         >
            
-          <strong>
-            Import
-          </strong>
+          <strong />
            
         </button>
       </div>

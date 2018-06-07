@@ -16,19 +16,21 @@ export default class AddFile extends React.Component {
   }
 
   componentDidMount() {
+    const {txt} = this.props;
     var inputs = document.querySelectorAll('.inputFile');
     var submit = document.querySelector('.submit');
     if (submit) {
-      submit.style.opacity=0; }
+      submit.style.opacity=0;
+    }
     Array.prototype.forEach.call (inputs, function(input) {
       var label = input.nextElementSibling,
         labelVal = label.innerHTML;
 
-      input.addEventListener('change', function(e, ) {
+      input.addEventListener('change', function(e) {
         var fileName = '';
         fileName = e.target.value.split('\\').pop();
 
-        if (fileName)
+        if (fileName && labelVal!== txt.chooseProject)
         {
           label.querySelector('strong').innerHTML =fileName;
           submit.style.opacity=1;
@@ -47,7 +49,6 @@ export default class AddFile extends React.Component {
 
   render() {
     const {txt} = this.props;
-    console.log(this.props);
     return (
       <Form onSubmit={this.handleSubmit}>
         <Container>

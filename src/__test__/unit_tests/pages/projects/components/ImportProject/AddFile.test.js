@@ -6,7 +6,10 @@ import AddFile from '../../../../../../js/pages/projects/components/ImportProjec
 const mockProps = {
   history: [],
   importProject: jest.fn(),
-
+  txt: {
+    import: 'import',
+    chooseProject: 'chooseProject',
+  },
 };
 
 describe('Add File test suite', () => {

@@ -85,9 +85,10 @@
    "exitReview": "Exit Review",
    "comments": "Comments",
    "review": "Review",
-   "projectImport": "Import a Project",
+   "projectImport": "Import a project",
    "import": "Import",
-   "chooseProject": "Choose a Project..."
+   "chooseProject": "Choose a Project...",
+   "noProjects": "There are no available projects"
 
 
    },
@@ -175,9 +176,11 @@
      "exitReview": "Exit Review",
      "comments": "Comments",
      "review": "Review",
-     "projectImport": "Import a Project",
+     "projectImport": "Import a project",
      "import": "Import",
-     "chooseProject": "Choose a Project..."
+     "chooseProject": "Choose a Project...",
+     "noProjects": "There are no available projects"
+
 
 
    }

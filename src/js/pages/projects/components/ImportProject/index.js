@@ -11,10 +11,10 @@ export default class ImportProject extends React.Component {
 
 
   render() {
-
+    const {txt} = this.props;
     return (
       <Container>
-        <h2 style={{fontWeight: '100'}}> There are no available projects </h2>
+        <h2 style={{fontWeight: '100'}}> {txt.noProjects} </h2>
         <DropTarget {...this.props} />
       </Container>
     );

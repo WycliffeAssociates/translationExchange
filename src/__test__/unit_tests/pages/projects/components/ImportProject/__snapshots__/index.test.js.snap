@@ -11,7 +11,9 @@ exports[`ImportProject test suite should render the component without exploding 
       }
     }
   >
-     There are no available projects 
+     
+    There are no available projects
+     
   </h2>
   <div
     className="sc-ifAKCX gAured"
@@ -20,11 +22,9 @@ exports[`ImportProject test suite should render the component without exploding 
       className="sc-EHOje ljiIeS"
     >
       <h2>
-         Import a Project 
+         
+         
       </h2>
-      <h3>
-         Or 
-      </h3>
       <form
         className="sc-bdVaJa cDjLwG"
         onSubmit={[Function]}
@@ -69,18 +69,14 @@ exports[`ImportProject test suite should render the component without exploding 
               create_new_folder
             </i>
              
-            <strong>
-              Choose Project...
-            </strong>
+            <strong />
           </label>
           <button
             className="submit sc-htpNat iuNMEV"
             type="submit"
           >
              
-            <strong>
-              Import
-            </strong>
+            <strong />
              
           </button>
         </div>

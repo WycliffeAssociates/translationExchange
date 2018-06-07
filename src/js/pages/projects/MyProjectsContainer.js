@@ -15,7 +15,10 @@ class MyProjectsContainer extends Component {
         <HeaderContainer>
           <Header>  <i className="material-icons">folder_shared</i>{txt.projects}</Header>
           <div style={{alignSelf: 'flexEnd'}} >
-            <AddFile txt={txt} />
+            {projects.length >0 ?
+              <AddFile txt={txt} /> :
+              ''
+            }
           </div>
         </HeaderContainer>
         <CardsContainer>
