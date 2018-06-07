@@ -1,3 +1,4 @@
+import * as types from '../reduxConstants'
 const INITIAL_STATE = {
   loading: false,
   error: '',
@@ -9,22 +10,22 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action={}) => {
   switch (action.type) {
-    case 'ALL_PROJECTS_SUCCESS':
+    case types.ALL_PROJECTS_SUCCESS:
       return {
         ...state,
         projects: action.response,
         loading: false,
         currentProjectQuery: action.queryString,
       };
-    case 'ALL_PROJECTS_FAILED':
+    case types.ALL_PROJECTS_FAILED:
       return {
         ...state, error: action.err,loading: false,
       };
-    case 'ALL_PROJECTS_LOADING':
+    case types.ALL_PROJECTS_LOADING:
       return {
         ...state, loading: true,
       };
-    case 'ALL_PROJECTS_RESET':
+    case types.ALL_PROJECTS_RESET:
       return {
         ...state, currentProjectQuery: '', projects: [],loading: false,
       };

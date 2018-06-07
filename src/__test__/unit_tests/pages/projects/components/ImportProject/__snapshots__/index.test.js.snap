@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImportProject test suite should render the component without exploding 1`] = `
+<div
+  className="sc-bZQynM iOFjkh"
+>
+  <h2
+    style={
+      Object {
+        "fontWeight": "100",
+      }
+    }
+  >
+     There are no available projects 
+  </h2>
+  <div
+    className="sc-ifAKCX gAured"
+  >
+    <div
+      className="sc-EHOje ljiIeS"
+    >
+      <h2>
+         Drag your projects here 
+      </h2>
+      <h3>
+         Or 
+      </h3>
+      <form
+        className="sc-bdVaJa cDjLwG"
+        onSubmit={[Function]}
+      >
+        <div
+          className="sc-bwzfXH jYANKA"
+        >
+          <input
+            accept=".zip"
+            className="inputFile sc-bxivhb jDxcbG"
+            id="file"
+            name="file"
+            type="file"
+          />
+          <label
+            htmlFor="file"
+            style={
+              Object {
+                "alignItems": "center",
+                "background": "linear-gradient(to top, #0076FF, #00C5FF  )",
+                "border": "none",
+                "borderRadius": "5px",
+                "color": "white",
+                "cursor": "pointer",
+                "display": "flex",
+                "fontSize": "14px",
+                "height": "auto",
+                "justifyContent": "center",
+                "maxHeight": "80px",
+                "maxWidth": "250px",
+                "minHeight": "40px",
+                "minWidth": "190px",
+                "verticalAlign": "middle",
+                "width": "55%",
+              }
+            }
+          >
+             
+            <i
+              className="material-icons"
+            >
+              create_new_folder
+            </i>
+             
+            <strong>
+              Choose Project...
+            </strong>
+          </label>
+          <button
+            className="submit sc-htpNat iuNMEV"
+            type="submit"
+          >
+             
+            <strong>
+              Import
+            </strong>
+             
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;

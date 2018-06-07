@@ -16,7 +16,6 @@ export default class ImportProject extends React.Component {
       <Container>
         <h2 style={{fontWeight: '100'}}> There are no available projects </h2>
         <DropTarget {...this.props} />
-
       </Container>
     );
   }

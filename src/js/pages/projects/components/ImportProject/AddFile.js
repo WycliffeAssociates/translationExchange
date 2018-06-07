@@ -11,14 +11,15 @@ export default class AddFile extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.importProject(this.fileInput.files[0]);
+    if (this.fileInput) this.props.importProject(this.fileInput.files[0]);
     this.props.history.push('/progress');
   }
 
   componentDidMount() {
     var inputs = document.querySelectorAll('.inputFile');
     var submit = document.querySelector('.submit');
-    submit.style.opacity=0;
+    if (submit) {
+      submit.style.opacity=0; }
     Array.prototype.forEach.call (inputs, function(input) {
       var label = input.nextElementSibling,
         labelVal = label.innerHTML;
@@ -52,7 +53,7 @@ export default class AddFile extends React.Component {
           <Input type="file" name="file" id="file" className="inputFile" accept= ".zip"  innerRef={input => {
             this.fileInput = input;}} />
           <label htmlFor="file" style={styles.label}> <i className="material-icons">create_new_folder</i> <strong>Choose Project...</strong></label>
-          <Submit className="submit" type="submit"> <strong>Import</strong> </Submit>
+          <Submit className="submit" type="submit" > <strong>Import</strong> </Submit>
         </Container>
       </Form>
     );
@@ -88,7 +89,7 @@ const Form = styled.form`
   align-items: center;
   justify-content: center;
 `;
-
+Form.displayName= 'Form';
 
 const Container = styled.div`
   width: inherit;
@@ -98,6 +99,7 @@ const Container = styled.div`
   justify-content: center;
   margin: auto;
 `;
+Container.displayName= 'Container';
 
 const Submit = styled.button`
   background: green;
@@ -119,7 +121,7 @@ const Submit = styled.button`
   cursor: pointer;
   font-size: 14px;
 `;
-
+Submit.displayName= 'Submit';
 const Input = styled.input`
   border: none;
   width: 0.1px;
@@ -129,3 +131,4 @@ const Input = styled.input`
   position: absolute;
   z-index: -1;
 `;
+Input.displayName= 'Input';
