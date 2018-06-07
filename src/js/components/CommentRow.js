@@ -48,7 +48,6 @@ export default class CommentRow extends React.Component {
   handleDrag(e, ui) {
     const {x, counter} = this.state;  // counter is used to display one notification of deleting
     const {width, txt} = this.props;
-    console.log(x);
     if (x > width-30 && counter===0 ) {
       this.setState({counter: 1});
       toast(<DeleteCommentToast txt={txt} redo={()=> this.setState({deleteComment: false})} />, {
@@ -68,7 +67,7 @@ export default class CommentRow extends React.Component {
   deleteComment() {
     const {deleteComment} = this.state;
     const {id, type, chapterId} = this.props;
-  
+
     if (deleteComment) {
       this.props.deleteComment(id, type, chapterId);
     }
