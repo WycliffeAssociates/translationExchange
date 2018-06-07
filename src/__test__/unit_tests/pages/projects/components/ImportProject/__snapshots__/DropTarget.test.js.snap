@@ -8,7 +8,7 @@ exports[`Drop Target test suite should render the component without exploding 1`
     className="sc-EHOje ljiIeS"
   >
     <h2>
-       Drag your projects here 
+       Import a Project 
     </h2>
     <h3>
        Or 
