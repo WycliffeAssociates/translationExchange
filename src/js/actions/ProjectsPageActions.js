@@ -28,7 +28,7 @@ export const importProject= (file) => {
         headers: { Authorization: 'Token '+localStorage.getItem('token'),
           'Content-Type': 'multipart/form-data',
         },
-        timeout: 120000,
+        timeout: 1200000,
       })
       .then(() => {
         dispatch({
