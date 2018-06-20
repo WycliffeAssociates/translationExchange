@@ -12,11 +12,6 @@ import Toggle from './components/Toggler';
 import styled from 'styled-components';
 import 'css/takes.css';
 
-
-
-
-
-
 export class ChapterPage extends Component {
 
   constructor() {
@@ -29,13 +24,13 @@ export class ChapterPage extends Component {
   }
 
   componentWillMount() {
-    const {getChapters, chapters, history, updateLanguage} = this.props;
+    const {getChapters, history, updateLanguage} = this.props;
 
-    if (chapters.length < 1) {
-      const {search} = this.props.location;   //get data if the user refresh the page
-      const query = QueryString.parse(search);
-      getChapters(query.projectId, history);
-    }
+
+    const {search} = this.props.location;   //get data if the user refresh the page
+    const query = QueryString.parse(search);
+    getChapters(query.projectId, history);
+
     const language = localStorage.getItem('language');
     if (language) {
       updateLanguage(language);
