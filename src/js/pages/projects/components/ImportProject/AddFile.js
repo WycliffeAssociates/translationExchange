@@ -12,7 +12,7 @@ export default class AddFile extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.fileInput) this.props.importProject(this.fileInput.files[0]);
-    setTimeout(() => this.props.history.push('/progress'), 500);
+    this.props.history.push('/progress');
   }
 
   componentDidMount() {
