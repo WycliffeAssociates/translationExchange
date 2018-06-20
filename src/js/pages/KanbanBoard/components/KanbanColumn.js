@@ -249,7 +249,7 @@ class KanbanColumn extends React.Component {
                 }
               </center>
               :
-              mode === 'Chunk'?
+              mode === 'Chunk' || 'chunk'?
                 <center> <NextChunk onClick ={() => this.nextChunk()}>{this.props.txt.goToNextChunk} <i className= "material-icons">arrow_forward</i> </NextChunk> </center>
                 :
                 <center> <NextChunk onClick ={() => this.nextChunk()}>{this.props.txt.goToNextVerse} <i className= "material-icons">arrow_forward</i> </NextChunk> </center>

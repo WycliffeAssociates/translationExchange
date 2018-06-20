@@ -1,4 +1,4 @@
-/* global describe it expect  beforeEach afterEach test*/
+/* global describe  expect  beforeEach afterEach test*/
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { getAlternateTakes, getSelectedTakes,setTake,
@@ -51,7 +51,7 @@ describe('ChapterReview Actions', ()=> {
     });
     const expectedActions = [
       {type: 'LOADING'},
-      {type: 'FETCH_CHUNKS',
+      {type: 'GET_SELECTED_TAKES',
         selectedTakes: [{publishedTake: {id: 1, location: 'xxx'}, chunkNum: 1, playing: false},
           {publishedTake: {id: 2, location: 'yyy'}, chunkNum: 4, playing: false}]},
     ];
