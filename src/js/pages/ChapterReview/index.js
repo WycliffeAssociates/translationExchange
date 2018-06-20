@@ -27,8 +27,8 @@ export class ChapterReview extends React.Component {
 
   componentWillMount() {
     var query = QueryString.parse(this.props.location.search);
-    var chapterNum = query.chapterNum;
-    this.props.getSelectedTakes(chapterNum, this.props.history);
+    var chapterId = query.chapterId;
+    this.props.getSelectedTakes(chapterId, this.props.history);
     this.setState({alternateTakesFetched: false});
   }
 
