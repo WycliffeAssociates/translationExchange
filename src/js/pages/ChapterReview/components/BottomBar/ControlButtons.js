@@ -86,6 +86,7 @@ const PlayButton = styled.button`
   height: 6vh;
   width: 6vh;
   border-radius: 100px;
+  padding: 0.5vh;
   background:linear-gradient(to top left, #0076FF, #00C5FF);
   color: white;
   border: none;

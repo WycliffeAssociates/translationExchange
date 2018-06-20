@@ -64,7 +64,7 @@ ChapterInfo.displayName = 'ChapterInfo';
 const ExitButton = styled.button`
   background: #39414A;
   width: 10vw;
-  height: 80%;
+  height: 5vh;
   min-width: 150px;
   border-radius: 5px;
   color: white;
