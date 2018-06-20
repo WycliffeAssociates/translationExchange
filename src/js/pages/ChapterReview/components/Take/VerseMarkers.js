@@ -25,7 +25,7 @@ export default class VerseMarkers extends React.Component {
         {
           markerArray.map((marker) => {
             return (
-              <Marker onClick={()=> dragPosition(position)} active={active} key={marker.verse}
+              <Marker onClick={()=> dragPosition(marker.position)} active={active} key={marker.verse} length={markerArray.length}
                 len={len} id={marker}> {marker.verse} </Marker>
             );
           })
@@ -46,7 +46,7 @@ const Container = styled.div`
 Container.displayName = 'Container';
 
 const Marker = styled.button`
-  width: 33%;
+  width: ${props => 100/props.length+'%'};;
   height: 3vh;
   min-height: 40px;
   color: ${props => props.active? 'black': 'rgba(255,255,255,0.5)'};
