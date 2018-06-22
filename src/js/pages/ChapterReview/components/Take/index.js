@@ -23,7 +23,8 @@ export default class Take extends React.Component {
   }
 
   dragPosition(position) {
-    this.setState({pos: position});
+    if (position == 0) this.setState({pos: 0.0000001}); //work around for audio position not being reset to 0 on verse click
+    else this.setState({pos: position});
   }
 
   finishedPlaying() {

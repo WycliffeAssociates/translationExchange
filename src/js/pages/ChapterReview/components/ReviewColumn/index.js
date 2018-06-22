@@ -11,19 +11,19 @@ export default class ReviewColumn extends React.Component {
 
 
   render() {
-    const {take, alternateTakes, index,resetPos, selectedTakesLength,
+    const {take, alternateTakes, index,resetPos, selectedTakesLength, togglePlayingTakes,
       updateActiveChunkIndex, activeChunkIndex, resetTake, saveComment,
-      swapTake, undoSwapTake, tempTakes, setTake, txt, location}= this.props;
+      swapTake, undoSwapTake, tempTakes, setTake, txt, location, takesPlaying}= this.props;
     const {chunk} = this.props.take.publishedTake; //take is variable chosen when mapping array of selected takes
     let active = activeChunkIndex === index? true: false;
     return (
       <Container>
-        <SelectedTake take={take}
+        <SelectedTake take={take} index={index} togglePlayingTakes={togglePlayingTakes}
           updateActiveChunkIndex={updateActiveChunkIndex}
-          activeChunkIndex={activeChunkIndex}
+          activeChunkIndex={activeChunkIndex} resetTake={resetTake}
           active={active} selectedTakesLength={selectedTakesLength}
           resetPos={resetPos} txt={txt}
-          resetTake={resetTake}  />
+          resetTake={resetTake} takesPlaying={takesPlaying}  />
 
         <ListView chunkId ={chunk} alternateTakes={alternateTakes}
           index={index} active={active} txt={txt}

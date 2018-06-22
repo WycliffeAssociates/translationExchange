@@ -6,28 +6,33 @@ export default class ControlButtons extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      takesPlaying: false,
+      takesPlaying: props.takesPlaying,
     };
 
-    this.togglePlay = this.togglePlay.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.skip = this.skip.bind(this);
 
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.takesPlaying != this.state.takesPlaying) {
+      this.setState(prevState => ({takesPlaying: !prevState.takesPlaying}));
+    }
     if (nextProps.stopPlaying === true) {
-      this.togglePlay();
+      this.handleClick();
     }
   }
-  togglePlay() {
+  handleClick() {
     const {takesPlaying} = this.state;
+    const {togglePlayingTakes} = this.props;
     if (!takesPlaying) {
+      togglePlayingTakes();
       this.props.togglePlay(true);
     }
     else {
+      togglePlayingTakes();
       this.props.togglePlay(false);
     }
-    setTimeout(() => this.setState((prevState) => ({ takesPlaying: !prevState.takesPlaying})), 100);
   }
 
   skip(direction) {
@@ -63,7 +68,7 @@ export default class ControlButtons extends React.Component {
       <Container>
 
         <SkipPrevious onClick={() => this.skip('previous')}> <i className="material-icons">skip_previous </i> </SkipPrevious>
-        <PlayButton onClick={this.togglePlay}> {icon}</PlayButton>
+        <PlayButton onClick={this.handleClick}> {icon}</PlayButton>
         <SkipNext onClick={() => this.skip('forward')}> <i className="material-icons">skip_next </i></SkipNext>
 
 

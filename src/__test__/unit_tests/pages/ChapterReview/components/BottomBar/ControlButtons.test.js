@@ -9,6 +9,8 @@ const mockProps = {
   updateActiveChunkIndex: jest.fn(),
   resetTake: jest.fn(),
   togglePlay: jest.fn(),
+  togglePlayingTakes: jest.fn(),
+  takesPlaying: true,
 };
 describe('Control Buttons test suite', () => {
   const wrapper = shallow(<ControlButtons {...mockProps} />);
@@ -31,22 +33,24 @@ describe('Control Buttons test suite', () => {
     expect(mockProps.resetTake.mock.calls.length).toEqual(2);
   });
 
-  test('togglePlay function', ()=> {
-    wrapper.instance().togglePlay();
-    setTimeout(()=>expect(wrapper.instance().state.takesPlaying).toBe(true), 100);
-    // set timeout because we have a set timout in the actual funciton
+  test('handleClick function', ()=> {
+    const button3 =  wrapper.find('PlayButton');
+    button3.simulate('click');
     expect(mockProps.togglePlay.mock.calls.length).toEqual(1);
+    expect(mockProps.togglePlayingTakes.mock.calls.length).toEqual(1);
+
 
     //call again to touch else statement
-    wrapper.instance().togglePlay();
-    setTimeout(()=>expect(wrapper.instance().state.takesPlaying).toBe(false), 100);
-    // set timeout because we have a set timout in the actual funciton
+    button3.simulate('click');
     expect(mockProps.togglePlay.mock.calls.length).toEqual(2);
+    expect(mockProps.togglePlayingTakes.mock.calls.length).toEqual(2);
+
   });
 
   test('componentWillReceiveProps function', ()=> {
     wrapper.instance().componentWillReceiveProps({stopPlaying: true});
-    expect(wrapper.instance().state.takesPlaying).toBe(false);
     expect(mockProps.togglePlay.mock.calls.length).toEqual(3);
+    expect(mockProps.togglePlayingTakes.mock.calls.length).toEqual(3);
+
   });
 });
