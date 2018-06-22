@@ -5,7 +5,7 @@ import styled from 'styled-components';
 export default class ReviewDialog extends Component {
 
   render() {
-    const {chapterNum, query} = this.props;
+    const {chapterNum, query, txt} = this.props;
     let icon = 'done';
 
     return (
@@ -22,21 +22,21 @@ export default class ReviewDialog extends Component {
             </Icon>
 
             <Message>
-              Great Job!
+              {txt.goodJob}
             </Message>
 
             <ExtraInfo>
-              You have completed Chapter {chapterNum}
+              {txt.chapterCompleted} {chapterNum}
             </ExtraInfo>
 
             <Instructions>
-              Would you like to review the chapter?
+              {txt.reviewChapter}
             </Instructions>
           </Info>
 
           <Action>
-            <SkipButton onClick={this.props.nextChapter}> <i className="material-icons">arrow_forward </i> Skip to Next Chapter  </SkipButton>
-            <Button onClick={()=> this.props.history.push(`/chapterReview${query}`)}> <i className="material-icons">done_all </i> Go to Chapter Review</Button>
+            <SkipButton onClick={this.props.nextChapter}> <i className="material-icons">arrow_forward </i> {txt.skipChapter}  </SkipButton>
+            <Button onClick={()=> this.props.history.push(`/chapterReview${query}`)}> <i className="material-icons">done_all </i> {txt.goToChapterReview}</Button>
           </Action>
 
         </Card>
