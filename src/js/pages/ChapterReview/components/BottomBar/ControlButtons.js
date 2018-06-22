@@ -19,7 +19,7 @@ export default class ControlButtons extends React.Component {
       this.setState(prevState => ({takesPlaying: !prevState.takesPlaying}));
     }
     if (nextProps.stopPlaying === true) {
-      this.togglePlay();
+      this.handleClick();
     }
   }
   handleClick() {

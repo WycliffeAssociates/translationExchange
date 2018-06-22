@@ -41,4 +41,13 @@ describe('Chapter Review test suite', ()=> {
     wrapper.instance().resetTake(true);
     expect(wrapper.instance().state.resetPos).toBe(true);
   });
+
+  test(' to the togglePlayingTakes function' , () => {
+    wrapper.instance().togglePlayingTakes();
+    expect(wrapper.instance().state.takesPlaying).toBe(true);
+
+    wrapper.instance().togglePlayingTakes();
+    expect(wrapper.instance().state.takesPlaying).toBe(false);
+
+  });
 });
