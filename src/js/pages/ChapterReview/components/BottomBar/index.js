@@ -19,8 +19,9 @@ export default class BottomBar extends React.Component {
 
 
   render() {
-    const {activeChunkIndex, togglePlay, stopPlaying,txt,
-      updateActiveChunkIndex, resetTake, selectedTakesLength} = this.props;
+    const {activeChunkIndex, togglePlay, stopPlaying,txt, togglePlayingTakes,
+      updateActiveChunkIndex, resetTake, selectedTakesLength,
+      takesPlaying} = this.props;
     var query = QueryString.parse(this.props.location.search);
     var chapterNum = query.chapterNum;
     return (
@@ -32,6 +33,8 @@ export default class BottomBar extends React.Component {
           updateActiveChunkIndex={updateActiveChunkIndex}
           resetTake={resetTake} stopPlaying={stopPlaying}
           selectedTakesLength={selectedTakesLength}
+          togglePlayingTakes = {togglePlayingTakes}
+          takesPlaying={takesPlaying}
         />
 
         <ExitButton onClick={this.exit}> <i className="material-icons">close</i> {txt.exitReview} </ExitButton>
@@ -64,7 +67,7 @@ ChapterInfo.displayName = 'ChapterInfo';
 const ExitButton = styled.button`
   background: #39414A;
   width: 10vw;
-  height: 80%;
+  height: 5vh;
   min-width: 150px;
   border-radius: 5px;
   color: white;

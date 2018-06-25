@@ -17,16 +17,16 @@
 
 
 
-const config = {                                                        // local development
-  apiUrl: 'http://localhost/api/',
-  streamingUrl: 'http://localhost/',
-  redirectUri: 'http://localhost:3000',
-};
-
-// const config = {                                                        //production
-//   apiUrl: 'https://opentranslationtools.org/api/',
-//   streamingUrl: 'https://opentranslationtools.org/',
-//   redirectUri: 'https://opentranslationtools.org/',
+// const config = {                                                        // local development
+//   apiUrl: 'http://localhost/api/',
+//   streamingUrl: 'http://localhost/',
+//   redirectUri: 'http://localhost:3000',
 // };
+
+const config = {                                                        //production
+  apiUrl: 'https://opentranslationtools.org/api/',
+  streamingUrl: 'https://opentranslationtools.org/',
+  redirectUri: 'https://opentranslationtools.org/',
+};
 
 export default config;

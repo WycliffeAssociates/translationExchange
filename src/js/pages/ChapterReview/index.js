@@ -17,18 +17,24 @@ export class ChapterReview extends React.Component {
     this.state ={
       resetPos: false,
       alternateTakesFetched: false,
+      takesPlaying: false,
     };
     this.resetTake = this.resetTake.bind(this);
+    this.togglePlayingTakes = this.togglePlayingTakes.bind(this);
   }
 
   resetTake(bool) {
     this.setState({resetPos: bool});
   }
 
+  togglePlayingTakes() {
+    this.setState(prevState => ({takesPlaying: !prevState.takesPlaying}));
+  }
+
   componentWillMount() {
     var query = QueryString.parse(this.props.location.search);
-    var chapterNum = query.chapterNum;
-    this.props.getSelectedTakes(chapterNum, this.props.history);
+    var chapterId = query.chapterId;
+    this.props.getSelectedTakes(chapterId, this.props.history);
     this.setState({alternateTakesFetched: false});
   }
 
@@ -46,7 +52,7 @@ export class ChapterReview extends React.Component {
     const {selectedTakes, alternateTakes, activeChunkIndex, setTake, stopPlaying,saveComment,
       togglePlay, updateActiveChunkIndex, swapTake, clearAlternateTakes,
       undoSwapTake, tempTakes, txt, location} = this.props;
-    const {resetPos} = this.state;
+    const {resetPos, takesPlaying} = this.state;
     const length = selectedTakes.length;
     return (
       <Container>
@@ -56,13 +62,14 @@ export class ChapterReview extends React.Component {
               selectedTakes.map((take, index) => {
                 return (
                   <ReviewColumn key={take.publishedTake.id} take={take} index={index} txt={txt}
-                    alternateTakes={alternateTakes}
+                    alternateTakes={alternateTakes} togglePlayingTakes={this.togglePlayingTakes}
                     activeChunkIndex={activeChunkIndex}
                     updateActiveChunkIndex={updateActiveChunkIndex}
                     resetPos={resetPos} resetTake={this.resetTake}
                     tempTakes={tempTakes} swapTake={swapTake}
                     undoSwapTake = {undoSwapTake} setTake={setTake}
-                    selectedTakesLength={length} saveComment={saveComment} location={location} />
+                    selectedTakesLength={length} saveComment={saveComment} location={location}
+                    takesPlaying = {takesPlaying} />
                 );
               }) : ''
           }
@@ -73,7 +80,9 @@ export class ChapterReview extends React.Component {
           updateActiveChunkIndex={updateActiveChunkIndex}
           resetTake={this.resetTake} txt={txt}
           location={this.props.location} stopPlaying={stopPlaying}
-          history={this.props.history} selectedTakesLength={length} />
+          history={this.props.history} selectedTakesLength={length}
+          togglePlayingTakes = {this.togglePlayingTakes}
+          takesPlaying={takesPlaying} />
       </Container>
     );
   }

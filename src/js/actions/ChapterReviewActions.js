@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../../config/config';
+import {GET_SELECTED_TAKES}  from '../reduxConstants'
 
 export const getAlternateTakes = (selectedTakes) => {  // chunkNum comes from the NavBar to display on the comments section the chunk number
   return function(dispatch) {
@@ -54,7 +55,6 @@ export const getSelectedTakes = (chapterId, redirect, chapterNav) => {
         let chunks = response.data;
         let selectedTakes = [];
 
-
         for (var x=0; x<chunks.length; x++) {
           if (chunks.published_take !== null) {
             selectedTakes.push({publishedTake: chunks[x].published_take,
@@ -72,7 +72,7 @@ export const getSelectedTakes = (chapterId, redirect, chapterNav) => {
 
 export const getSelectedTakesSuccess = (chunks) => {
   return {
-    type: 'FETCH_CHUNKS',
+    type: GET_SELECTED_TAKES,
     selectedTakes: chunks,
   };
 };

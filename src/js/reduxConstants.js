@@ -4,6 +4,7 @@ export const PAUSE_SELECTED_TAKE='PAUSE_SELECTED_TAKE';
 export const LOADING='LOADING';
 export const FETCH_ALTERNATE_TAKES='FETCH_ALTERNATE_TAKES';
 export const FETCH_CHUNKS='FETCH_CHUNKS';
+export const GET_SELECTED_TAKES = 'GET_SELECTED_TAKES';
 export const UPDATE_ACTIVE_CHUNK_INDEX = 'UPDATE_ACTIVE_CHUNK_INDEX';
 export const SWAP_TAKE = 'SWAP_TAKE';
 export const UNDO_SWAP = 'UNDO_SWAP';
@@ -29,3 +30,10 @@ export const TAKE_ID = 'take_id';
 //Geolocation Constants
 export const UPDATE_LANGUAGE = 'update_language';
 export const UPDATE_DIRECTION = 'update_direction';
+
+//Project Constants
+export const ALL_PROJECTS_SUCCESS = 'ALL_PROJECTS_SUCCESS';
+export const ALL_PROJECTS_FAILED = 'ALL_PROJECTS_FAILED';
+export const ALL_PROJECTS_LOADING = 'ALL_PROJECTS_LOADING';
+export const ALL_PROJECTS_RESET = 'ALL_PROJECTS_RESET';
+export const IMPORT_PROJECT = 'IMPORT_PROJECT';

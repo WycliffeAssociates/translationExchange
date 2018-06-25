@@ -22,7 +22,8 @@
   word-wrap: normal;
   white-space: nowrap;
   direction: ltr;
-
+  vertical-align: middle;
+  margin-right: 5px;
   /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
   /* Support for Safari and Chrome. */
@@ -49,5 +50,4 @@
    width: 100%;
    height: 100%;
    overflow-y: scroll;
-
 }

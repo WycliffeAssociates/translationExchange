@@ -1,6 +1,6 @@
 /* global expect describe it */
 import reducer from '../../../js/reducers/ProjectsPageReducer';
-
+import * as types from '../../../js/reduxConstants';
 describe('ProjectsPageReducer', () => {
   it('should return initial state', ()=> {
     expect(reducer(undefined, {})).toEqual({
@@ -13,7 +13,7 @@ describe('ProjectsPageReducer', () => {
 
   it('should handle ALL_PROJECTS_SUCCESS', () => {
     expect(reducer([],{
-      type: 'ALL_PROJECTS_SUCCESS',
+      type: types.ALL_PROJECTS_SUCCESS,
       response: ['project1','project2'],
       queryString: 'current query string',
     })).toEqual({
@@ -25,7 +25,7 @@ describe('ProjectsPageReducer', () => {
 
   it('should handle ALL_PROJECTS_FAILED', () => {
     expect(reducer([],{
-      type: 'ALL_PROJECTS_FAILED',
+      type: types.ALL_PROJECTS_FAILED,
       err: 'all projects failed',
     })).toEqual({
       error: 'all projects failed',
@@ -35,7 +35,7 @@ describe('ProjectsPageReducer', () => {
 
   it('should handle ALL_PROJECTS_LOADING', () => {
     expect(reducer([],{
-      type: 'ALL_PROJECTS_LOADING',
+      type: types.ALL_PROJECTS_LOADING,
     })).toEqual({
       loading: true,
     });
@@ -43,7 +43,7 @@ describe('ProjectsPageReducer', () => {
 
   it('should handle ALL_PROJECTS_RESET', () => {
     expect(reducer([],{
-      type: 'ALL_PROJECTS_RESET',
+      type: types.ALL_PROJECTS_RESET,
     })).toEqual({
       loading: false,
       currentProjectQuery: '',

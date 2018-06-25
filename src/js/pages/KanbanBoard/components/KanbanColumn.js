@@ -153,6 +153,7 @@ class KanbanColumn extends React.Component {
       playTake, takesToDelete,
       addTakeToDelete, removeTakeToDelete, removedTaketoDelete,
       updateTake, history} = this.props;
+    const {search} = this.props.location;
     const {displayModal} = this.state;
 
 
@@ -236,20 +237,28 @@ class KanbanColumn extends React.Component {
           this.props.publishedColumn?
             this.chapterPublished()?
 
-              <center> <NextChapter onClick ={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)} >{this.props.txt.goToNextChapter} <i className="material-icons">arrow_forward</i> </NextChapter>
-                {
-                  displayModal?
-                    <ReviewDialog nextChapter={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)}
-                      closeModal={this.closeModal}
-                      chapterNum = {chapterNum}
-                      query={this.props.location.search}
-                      history={history} />
-                    :
-                    ''
-                }
+              <center>
+                <VBox>
+                  <ChapterReview onClick ={() => this.props.history.push(`/chapterReview${search}`)} >
+                    {txt.goToChapterReview}<i className="material-icons">done_all</i>
+                  </ChapterReview>
+                  {
+                    displayModal?
+                      <ReviewDialog nextChapter={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)}
+                        closeModal={this.closeModal}
+                        chapterNum = {chapterNum}
+                        query={this.props.location.search}
+                        history={history}
+                        txt={txt}
+                      />
+                      :
+                      ''
+                  }
+                  <NextChapter onClick ={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)} >{txt.goToNextChapter} <i className="material-icons">arrow_forward</i> </NextChapter>
+                </VBox>
               </center>
               :
-              mode === 'Chunk'?
+              mode === 'Chunk' || 'chunk'?
                 <center> <NextChunk onClick ={() => this.nextChunk()}>{this.props.txt.goToNextChunk} <i className= "material-icons">arrow_forward</i> </NextChunk> </center>
                 :
                 <center> <NextChunk onClick ={() => this.nextChunk()}>{this.props.txt.goToNextVerse} <i className= "material-icons">arrow_forward</i> </NextChunk> </center>
@@ -336,10 +345,20 @@ font-size: 1em + 1vw;
 i  {
   vertical-align: middle;
 }
+margin-top: 5px;
 
 `;
 NextChapter.displayName = 'NextChapter';
 
+const ChapterReview = styled(NextChapter)`
+`;
+ChapterReview.displayName = 'ChapterReview';
+
+const VBox = styled.div`
+display: flex;
+flex-direction: column;
+`;
+VBox.displayName = 'VBox';
 
 const takeTarget = {
   drop(props) {

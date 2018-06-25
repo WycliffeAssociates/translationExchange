@@ -60,7 +60,7 @@ class Player extends Component {
       <Container>
         <IdenticonContainer>
           <Identicon onClick={()=>this.play()} id={`canvas${id}`} data-jdenticon-hash={comments.owner_icon_hash} />
-          <ReactPlayer url={`${config.streamingUrl}${comments.owner_name_audio}`} playing={this.state.playing} onEnded={()=> this.ended()}  />
+          <ReactPlayer style={{display: 'none'}} url={`${config.streamingUrl}${comments.owner_name_audio}`} playing={this.state.playing} onEnded={()=> this.ended()}  />
 
         </IdenticonContainer>
         <AudioContainer>

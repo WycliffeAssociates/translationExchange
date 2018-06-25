@@ -1,6 +1,6 @@
 /* global expect describe it */
 import reducer from '../../../js/reducers/ChapterReviewReducer';
-import {FETCH_ALTERNATE_TAKES, FETCH_CHUNKS, CLEAR_ALTERNATE_TAKES,
+import {FETCH_ALTERNATE_TAKES, GET_SELECTED_TAKES, CLEAR_ALTERNATE_TAKES,
   PLAY_PAUSE_SELECTED_TAKE, UPDATE_ACTIVE_CHUNK_INDEX, FINISH_PLAYING,
   SWAP_TAKE, UNDO_SWAP, UPDATE_ALTERNATE_TAKES, LOADING} from '../../../js/reduxConstants';
 describe('ChapterReviewReducer', () => {
@@ -32,9 +32,9 @@ describe('ChapterReviewReducer', () => {
     });
   });
 
-  it('should handle FETCH_CHUNKS', () => {
+  it('should handle GET_SELECTED_TAKES', () => {
     expect(reducer({},{
-      type: FETCH_CHUNKS,
+      type: GET_SELECTED_TAKES,
       selectedTakes: [{chunkNum: 1, publishedTake: {}, playing: false}],
     })).toEqual({
       selectedTakes: [{chunkNum: 1, publishedTake: {}, playing: false}],
