@@ -94,8 +94,9 @@ const  WelcomePage = styled.div`
   align-items: center;
   background: white;
   justify-self: center;
-  max-width: 50%;
-  height: 80%;
+  min-width: 250px;
+  min-height: 400px;
+  height: 66%;
   text-align: center;
   //border: solid #969595 0.1vw;
   border-radius: 0.5vw;
@@ -108,6 +109,8 @@ WelcomePage.displayName='WelcomePage';
 const Icon= styled.img`
     height: 8vw;
     width: 8vw;
+    min-height: 100px;
+    min-width: 100px;
   `;
 Icon.displayName = 'Icon';
 
@@ -116,13 +119,15 @@ const ContinueButton = styled.button`
     display: block;
     background: linear-gradient(to bottom, #0076FF, #00C5FF);
     width: 14vw;
+    min-width: 150px;
+    min-height: 40px;
     margin-top: 1vw;
     padding: 0.5vw 0.5vw;
-    font-size: 1.45vw;
+    font-size: 16px;
     font-weight: 100;
     color: white;
     border: none;
-    border-radius: 2vw;
+    border-radius: 20px;
     box-shadow: 1px 3px 2px 1px rgba(0,0,0,0.2);
     cursor: pointer;
 

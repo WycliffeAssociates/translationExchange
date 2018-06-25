@@ -57,6 +57,7 @@ export class Welcome extends React.Component {
 const LoginPage = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
 `;
 LoginPage.displayName = 'LoginPage';
