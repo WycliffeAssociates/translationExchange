@@ -119,6 +119,7 @@ function showUndoToast(props) {
     onClose: () => {
       if (undo === true) {
         //do not delete the take
+        undo = false;
         props.removeTakeToDelete(props.id, props.takesToDelete);
       }
       else if (undo === false) {
