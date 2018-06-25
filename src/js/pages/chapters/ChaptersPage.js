@@ -42,19 +42,13 @@ export class ChapterPage extends Component {
 
   render() {
     const {chapters, txt, uploadingComments, saveComment, chapterComments} = this.props;
-    const {search} = this.props.location;
-    const query = QueryString.parse(search);
 
     return (
       <ChapterPageContainer>
         <NavBar chapterPage={true} kanban={false} {...this.props} />
-        <DownloadBar onClick={()=> this.props.downloadProject(query.projectId)}>
-          <DownloadButton> {txt.download}
-            <i className="material-icons"> file_download </i></DownloadButton>
-        </DownloadBar>
 
         {this.props.loading?
-          <Loading txt={this.props.txt} height= "80vh" marginTop="5vw" />
+          <Loading txt={txt} height= "80vh" marginTop="5vw" />
           :
           <CardsContainer>
             {chapters.map((chp, index) =>

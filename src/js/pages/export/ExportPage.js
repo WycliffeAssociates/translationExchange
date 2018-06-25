@@ -136,6 +136,7 @@ const HeaderContainer = styled.div`
   flex-direction: column;
   text-align: center;
   margin-top: 40px;
+  z-index: 2;
   h1{
     margin-top: -15px;
   }
