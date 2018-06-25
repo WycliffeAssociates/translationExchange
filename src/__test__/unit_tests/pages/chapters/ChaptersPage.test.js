@@ -26,15 +26,10 @@ describe('Chapters Page Suite', () => {
 
   it('should render all children', () => {
     expect(wrapper.find('NavBar').length).toEqual(1);
-    expect(wrapper.find('DownloadBar').length).toEqual(1);
     expect(wrapper.find('CardsContainer').length).toEqual(1);
     expect(wrapper.find('Loading').length).toEqual(0);
   });
 
-  it('should handle onClick', () => {
-    wrapper.find('DownloadBar').simulate('click');
-    expect(mockProps.downloadProject.mock.calls.length).toEqual(1);
-  });
   mockProps.loading = true;
   const loading = shallow(<ChapterPage {...mockProps} />);
   it('should display Loading component', () => {
