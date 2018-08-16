@@ -10,7 +10,7 @@ import {getChunks, getUserHash,
 import ChapterCard from './components/ChapterCard';
 import Toggle from './components/Toggler';
 import styled from 'styled-components';
-import 'css/takes.css';
+import '../../../css/takes.css';
 
 export class ChapterPage extends Component {
 

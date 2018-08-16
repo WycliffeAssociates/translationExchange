@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Waveform from '../../../takes/components/audioplayer/Waveform';
-import config from 'config/config';
+import config from '../../../../../config/config';
 
 export default class Audio extends React.Component {
 

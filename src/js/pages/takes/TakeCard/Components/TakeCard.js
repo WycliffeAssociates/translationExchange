@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import TopBar from './TopBar';
 import Waveform from '../../components/audioplayer/Waveform';
 import Marker from '../../components/audioplayer/Markers';
-import config from 'config/config';
+import config from '../../../../../config/config';
 import BottomButtons from './BottomButtons';
 
 

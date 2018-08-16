@@ -1,7 +1,11 @@
 {
   "name": "translationexchange",
+  "author": "mxaln",
   "version": "0.1.0",
+  "description": "translationexchange",
   "private": true,
+  "homepage": "./",
+  "main": "src/start.js",
   "dependencies": {
     "0": "0.0.0",
     "axios": "^0.16.2",
@@ -87,6 +91,8 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "cross-env": "^5.0.1",
+    "electron": "^2.0.7",
+    "electron-builder": "^20.28.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
@@ -106,14 +112,22 @@
     "webpack": "^3.6.0"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=src react-scripts start",
+    "start": "nf start -p 3000",
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "cross-env NODE_PATH=src react-scripts test",
     "test:ci": "cross-env NODE_PATH=src react-scripts test --env=jsdom --testResultsProcessor ./node_modules/jest-junit --coverage --collectCoverageFrom=src/js/**/*.js --coverageDirectory=src/__test__/coverage",
     "test_unit": "cross-env NODE_PATH=src react-scripts test --env=jsdom --testPathPattern=unit_tests --coverage",
     "test_integration": "cross-env NODE_PATH=src react-scripts test --env=jsdom --testPathPattern=integration_tests --coverage",
     "eject": "react-scripts eject",
-    "coverage": "npm run test:ci -- --coverage --ci"
+    "coverage": "npm run test:ci -- --coverage --ci",
+    "electron": "electron .",
+    "electron-start": "node src/start-react",
+    "react-start": "react-scripts start",
+    "pack": "build --dir",
+    "dist": "npm run build && electron-builder --win",
+    "dist-linux": "npm run build && electron-builder --linux",
+    "dist-mac": "npm run build && electron-builder --mac",
+    "postinstall": "install-app-deps"
   },
   "jest": {
     "snapshotSerializers": [
@@ -132,8 +146,8 @@
     ],
     "coverageThreshold": {
       "global": {
-        "branches":30,
-        "functions":30,
+        "branches": 30,
+        "functions": 30,
         "lines": 30,
         "statements": -10000
       }
@@ -147,5 +161,14 @@
     "ancestorSeparator": " > ",
     "usePathForSuitName": "true"
   },
-  "proxy": "http://translationExchange:8080"
+  "proxy": "http://translationExchange:8080",
+  "build": {
+    "appId": "com.electron.translation.exchange",
+    "linux": {},
+    "directories": {
+      "buildResources": "public"
+    },
+    "extends": null,
+    "asar": true
+  }
 }

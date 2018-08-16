@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
-import getIllustrations from 'js/getIllustrations';
+import getIllustrations from '../../../js/getIllustrations';
 import KanbanBoard from './components/KanbanBoard';
 import {getChunks, getTakes,deleteTake, getComments,
   patchTake, saveComment, getUserHash,
@@ -12,7 +12,7 @@ import {getChunks, getTakes,deleteTake, getComments,
   addTakeToDelete, removeTakeToDelete, updateTake} from '../../actions';
 import UtilityPanel from './components/UtilityPanel/UtilityPanel';
 import styled from 'styled-components';
-import 'css/takes.css';
+import '../../../css/takes.css';
 
 export class KanbanPage extends React.Component {
 

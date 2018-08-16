@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import 'css/notification.css';
+import '../../../../../css/notification.css';
 import propTypes from 'prop-types';
 import {DragSource} from 'react-dnd';
 import {getEmptyImage} from 'react-dnd-html5-backend';

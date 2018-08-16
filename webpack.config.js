@@ -12,10 +12,8 @@ module.exports = {
     loaders: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules\/react-mic-plus/ },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
+      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.(png|jpg|svg)$/, loader: 'url-loader' }
     ],
-    query: {
-      presets: ['stage-1'],
-    },
   },
 };

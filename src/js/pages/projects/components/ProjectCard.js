@@ -3,7 +3,7 @@ import styled, {keyframes} from 'styled-components';
 import BorderButton from '../../../components/BorderButton';
 import {zoomIn} from 'react-animations';
 import jdenticon from 'jdenticon';
-import getIllustrations from 'js/getIllustrations';
+import getIllustrations from '../../../../js/getIllustrations';
 
 export default class ProjectCard extends React.Component {
 

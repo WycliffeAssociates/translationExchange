@@ -24,9 +24,9 @@
 // };
 
 const config = {                                                        //production
-  apiUrl: 'https://opentranslationtools.org/api/',
-  streamingUrl: 'https://opentranslationtools.org/',
-  redirectUri: 'https://opentranslationtools.org/',
+  apiUrl: 'http://opentranslationtools.org/api/',
+  streamingUrl: 'http://opentranslationtools.org/',
+  redirectUri: 'http://opentranslationtools.org/',
 };
 
 export default config;
