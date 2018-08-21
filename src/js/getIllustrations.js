@@ -2,18 +2,15 @@ import config from '../config/config';
 
 export default function getIllustrations(bookSlug) {
 
-  try {
+  if (bookSlug != undefined) {
     return {
-      picker: require(`${config.streamingUrl}static/Book_Illustrations/${bookSlug}_Picker.jpg`),
-      sketch: require(`${config.streamingUrl}static/Book_Illustrations/${bookSlug}_Sketch_Medium.jpg`),
+      picker: `${config.streamingUrl}static/Book_Illustrations/${bookSlug}_Picker.jpg`,
+      sketch: `${config.streamingUrl}static/Book_Illustrations/${bookSlug}_Sketch_Medium.jpg`,
     };
-  }
-
-  catch (err) {
+  } else {
     return {
       picker: `${config.streamingUrl}static/Book_Illustrations/default.jpg`,
       sketch: `${config.streamingUrl}static/Book_Illustrations/default.jpg`,
-
     };
   }
 }
