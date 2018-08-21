@@ -3,7 +3,7 @@
 */
 const path = require('path');
 module.exports = {
-  entry: './client/index.js',
+  entry: './src/index.js',
   output: {
     path: path.resolve('dist'),
     filename: 'index_bundle.js',
@@ -13,7 +13,8 @@ module.exports = {
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules\/react-mic-plus/ },
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.(png|jpg|svg)$/, loader: 'url-loader' }
+      { test: /\.(png|jpg|svg)$/, loader: 'url-loader' },
+      { test: /\.(css|js)$/, loader: 'url-loader' }
     ],
   },
 };

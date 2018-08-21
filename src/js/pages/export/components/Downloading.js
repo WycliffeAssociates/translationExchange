@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import BorderButton from '../../../components/BorderButton';
-import Searching from '../../../../assets/images/searching.png';
 import {LoadingMp3, LoadingWav} from './';
 import { fadeIn } from 'react-animations';
+import config from '../../../../config/config';
 
 export class Downloading extends Component {
 
@@ -55,7 +55,7 @@ export class Downloading extends Component {
       <Container textColor ={textColor}>
         {downloading ?
           <Container>
-            <Image src={Searching} alt="Smiley face" height="10vw" width="10vw" />
+            <Image src={`${config.streamingUrl}static/images/searching.png`} alt="Smiley face" height="10vw" width="10vw" />
             <h1>{txt.downloading}...</h1>
             <p>{txt.yourFiles}  </p>
             <Link to="/projects">

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
+import config from '../../../config/config';
 import PopupWindow from './PopupWindow';
 import { toQuery } from './utils';
 
@@ -79,7 +79,7 @@ class GitHubLogin extends Component {
 
     return (
       <GitHubSignInButton {...attrs}>
-        <GihubIcon src={require('../../../assets/images/github.png')} /> {buttonText}
+        <GihubIcon src={`${config.streamingUrl}static/images/github.png`} /> {buttonText}
       </GitHubSignInButton>
     );
   }

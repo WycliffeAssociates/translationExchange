@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import loadingComment from '../../../../../assets/images/loadingRing.svg';
-
+import config from '../../../../../config/config';
 
 
 export default ({txt}) => {
@@ -9,7 +8,7 @@ export default ({txt}) => {
     <Container>
       <ItemsContainer>
         <GifContainer>
-          <img style={{height: '12vw', width: '12vw'}} src={loadingComment} alt="Loading_comment" />
+          <img style={{height: '12vw', width: '12vw'}} src={`${config.streamingUrl}static/images/loadingRing.svg`} alt="Loading_comment" />
         </GifContainer>
         <BottomText>{txt.uploading}</BottomText>
       </ItemsContainer>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import {zoomIn} from 'react-animations';
+import config from '../../../../config/config';
 // import GitHubLogin from '../../../components/social-login/GitHubLogin';
 
 export default class WelcomeComponent extends React.Component {
@@ -50,7 +51,7 @@ export default class WelcomeComponent extends React.Component {
       <WelcomePage>
 
         <h2 className="welcomeh2"> translation Exchange  </h2>
-        <Icon src={require('../../../../assets/images/undraw_welcome_3gvl.svg')}  />
+        <Icon src={`${config.streamingUrl}static/images/undraw_welcome_3gvl.svg`}  />
 
 
         <ButtonsContainer>

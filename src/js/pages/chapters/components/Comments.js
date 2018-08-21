@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import jdenticon from 'jdenticon';
 import RecordCommentsModal from '../../KanbanBoard/components/RecordCommentsComponents/RecordCommentsModal';
 import CommentRow from '../../../components/CommentRow';
+import config from '../../../../config/config';
 
 
 export default class Comments extends Component {
@@ -64,7 +65,7 @@ export default class Comments extends Component {
                 );
 
               }):
-              <img src={require('../../../../assets/images/no_comments.svg')} height="150px" width= "150px" />
+              <img src={`${config.streamingUrl}static/images/no_comments.svg`} height="150px" width= "150px" />
           }
         </div>
         <ButtonContainer>

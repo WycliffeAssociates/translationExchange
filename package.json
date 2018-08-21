@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "translationexchange",
   "private": true,
-  "homepage": "./",
+  "homepage": ".",
   "main": "src/start.js",
   "dependencies": {
     "0": "0.0.0",
@@ -124,7 +124,8 @@
     "electron-start": "node src/start-react",
     "react-start": "react-scripts start",
     "pack": "build --dir",
-    "dist": "npm run build && electron-builder --win",
+    "dist": "npm run build && electron-builder -wlm",
+    "dist-win": "npm run build && electron-builder --win",
     "dist-linux": "npm run build && electron-builder --linux",
     "dist-mac": "npm run build && electron-builder --mac",
     "postinstall": "install-app-deps"
@@ -165,6 +166,17 @@
   "build": {
     "appId": "com.electron.translation.exchange",
     "linux": {},
+    "win": {
+      "icon": "./public/logo.ico"
+    },
+    "mac": {
+      "category": "public.app-category.education",
+      "icon": "./public/logo.icns",
+      "target": "zip"
+    },
+    "dmg": {
+      "icon": "./public/logo.icns"
+    },
     "directories": {
       "buildResources": "public"
     },
