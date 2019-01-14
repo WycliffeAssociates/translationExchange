@@ -74,8 +74,6 @@ class KanbanColumn extends React.Component {
         query.chapterId = nextChapter.id;
         query.chapterNum = next_chapter_num;
       
-        console.log(nextChapter.id, nextChapter.number, "THIS IS THE NEXT CHAPTER DETAILS")
-
       this.props.history.push({
         pathname: '/kanban',
         search: `?chapterId=${nextChapter.id}&chapterNum=${next_chapter_num}&bookName=${query.bookName}&projectId=${query.projectId}&&mode=${query.mode}`,
