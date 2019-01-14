@@ -16,7 +16,7 @@ class KanbanColumn extends React.Component {
 
     this.makeChanges = this.makeChanges.bind(this);
     this.nextChunk = this.nextChunk.bind(this);
-    this.navigateToChapter = this.navigateToChapter.bind(this);
+    this.nextChapter = this.nextChapter.bind(this);
     this.chapterPublished = this.chapterPublished.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
@@ -58,24 +58,30 @@ class KanbanColumn extends React.Component {
 
   }
 
-  navigateToChapter(chapter_num, chapterId) {
+  nextChapter(next_chapter_num) {
 
     const {history, chapters} = this.props;
-    if (chapters.length < chapter_num) { // if chapter_num > chapter.len it means we have reached the last chapter in the book
+    if (chapters.length < next_chapter_num) { // if next_chapter_num > chapter.len it means we have reached the last chapter in the book
       this.props.history.push({pathname: '/projects'});
     }
 
     else {
+      var nextChapter= chapters.find(function(chapter){
+        return chapter.number == next_chapter_num
+      })
+      
       var query = QueryString.parse(this.props.location.search);
-      query.chapterId = chapterId;
-      query.chapterNum = chapter_num;
+        query.chapterId = nextChapter.id;
+        query.chapterNum = next_chapter_num;
+      
+        console.log(nextChapter.id, nextChapter.number, "THIS IS THE NEXT CHAPTER DETAILS")
 
       this.props.history.push({
         pathname: '/kanban',
-        search: `?chapterId=${chapterId}&chapterNum=${chapter_num}&bookName=${query.bookName}&projectId=${query.projectId}&&mode=${query.mode}`,
+        search: `?chapterId=${nextChapter.id}&chapterNum=${next_chapter_num}&bookName=${query.bookName}&projectId=${query.projectId}&&mode=${query.mode}`,
       });
-      this.props.getChunks(chapter_num, history,true);
-      this.props.getComments(chapterId, 'chapter_id');
+      this.props.getChunks(nextChapter.id, history,true);
+      this.props.getComments(nextChapter.id, 'chapter_id');
     }
 
   }
@@ -244,7 +250,7 @@ class KanbanColumn extends React.Component {
                   </ChapterReview>
                   {
                     displayModal?
-                      <ReviewDialog nextChapter={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)}
+                      <ReviewDialog nextChapter={() => this.nextChapter(Number(chapterNum) +1)}
                         closeModal={this.closeModal}
                         chapterNum = {chapterNum}
                         query={this.props.location.search}
@@ -254,7 +260,7 @@ class KanbanColumn extends React.Component {
                       :
                       ''
                   }
-                  <NextChapter onClick ={() => this.navigateToChapter(Number(chapterNum) +1 ,Number(chapterId) +1)} >{txt.goToNextChapter} <i className="material-icons">arrow_forward</i> </NextChapter>
+                  <NextChapter onClick ={() => this.nextChapter(Number(chapterNum) +1)} >{txt.goToNextChapter} <i className="material-icons">arrow_forward</i> </NextChapter>
                 </VBox>
               </center>
               :
