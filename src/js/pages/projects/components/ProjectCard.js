@@ -31,7 +31,7 @@ export default class ProjectCard extends React.Component {
 
 
     reviewProject = () => {
-      const {projectId, getChapters, history, bookName, mode, setProject, slug } = this.props;
+      const {projectId, history, bookName, mode, setProject, slug } = this.props;
       setProject(slug);
       //getChapters(projectId, history);
 
