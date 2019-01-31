@@ -33,7 +33,6 @@ export default class ProjectCard extends React.Component {
     reviewProject = () => {
       const {projectId, history, bookName, mode, setProject, slug } = this.props;
       setProject(slug);
-      //getChapters(projectId, history);
 
       const modeCap = mode.charAt(0).toUpperCase() + mode.slice(1);
       history.push({
