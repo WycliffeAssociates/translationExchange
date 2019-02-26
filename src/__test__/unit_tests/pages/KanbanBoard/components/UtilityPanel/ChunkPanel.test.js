@@ -30,6 +30,8 @@ const mockProps = {
     selected: 'selected',
   },
 
+  history: [],
+
   location: {
     search: 'address bar location',
   },
@@ -61,4 +63,6 @@ describe('ChunkPanel suite', () => {
     wrapper.instance().navigateChunk(1,1);
     expect(mockProps.getTakes.mock.calls.length).toEqual(2);
   });
+
+  
 });
