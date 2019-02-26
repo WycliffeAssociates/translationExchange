@@ -30,6 +30,10 @@ const mockProps = {
     selected: 'selected',
   },
 
+  location: {
+    search: 'address bar location',
+  },
+
   getTakes: jest.fn(),
 };
 
