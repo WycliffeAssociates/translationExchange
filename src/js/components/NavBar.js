@@ -58,6 +58,19 @@ class NavBar extends Component {
     this.setState({chunkNumSelected: chunkNum});
     this.props.getTakes(chunkId, chunkNum);
     this.props.getComments(chunkId, 'chunk_id');
+
+    const {history, location} = this.props;
+    const searchBar = QueryString.parse(location.search);
+
+    history.push({
+      pathname: './kanban',
+      search: `?chapterId=${searchBar.chapterId}`+
+              `&chapterNum=${searchBar.chapterNum}`+
+              `&startv=${chunkNum}`+
+              `&bookName=${searchBar.bookName}`+
+              `&projectId=${searchBar.projectId}`+
+              `&mode=${searchBar.mode}`,
+    });
   }
 
 
@@ -68,7 +81,7 @@ class NavBar extends Component {
     let menu = '';
     let book ='';
     let chapter='';
-    let goToChapters = '';
+    let goToChapters = () => void(0)
     let mode = '';
     let logOutMenu = (
       <Menu onSelect={ky => this.onLogoutMenuSelect(ky)}>
@@ -84,7 +97,7 @@ class NavBar extends Component {
       goToChapters = () => {
         const {getChapters} = this.props;
         getChapters(searchBar.projectId);
-        history.push(`/chapters?projectId=${searchBar.projectId}&&bookName=${searchBar.bookName}&&mode=${searchBar.mode}`);
+        history.push(`/chapters?projectId=${searchBar.projectId}&bookName=${searchBar.bookName}&mode=${searchBar.mode}`);
       };
 
       if (searchBar.mode === 'Verse') {
