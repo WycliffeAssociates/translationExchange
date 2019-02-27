@@ -27,11 +27,10 @@ export class KanbanPage extends React.Component {
     const {getComments, getChunks, takes, history, updateLanguage} = this.props;
     const {search} = this.props.location;
     const query = QueryString.parse(search);
-    if (takes.length < 1) {
-      getChunks(query.chapterId, history);               //get data if the user refresh the page
-      getComments(query.chapterId, 'chapter_id');
-
-    }
+    
+    getChunks(query.chapterId, query.startv, history);
+    getComments(query.chapterId, 'chapter_id');
+    
     const language = localStorage.getItem('language');
     if (language) {
       updateLanguage(language);
@@ -39,11 +38,9 @@ export class KanbanPage extends React.Component {
 
     let illustrations = getIllustrations(this.props.project);
     this.setState({illustrations: illustrations});
-
   }
 
   shouldComponentUpdate(nextProps) {
-
     if (nextProps.location != this.props.location) {
       return true;
     }
@@ -58,8 +55,6 @@ export class KanbanPage extends React.Component {
     const {search} = this.props.location;
     const query = QueryString.parse(search);
     const {illustrations} = this.state;
-
-
 
     return (
       <KanbanPageContainer>

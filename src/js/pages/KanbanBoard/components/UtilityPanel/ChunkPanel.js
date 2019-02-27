@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PlayerTracker from '../../../../components/PlayerTracker';
+import QueryString from 'query-string';
 
 
 class ChunkPanel extends Component {
@@ -11,7 +12,20 @@ class ChunkPanel extends Component {
   }
 
   navigateChunk(chunkId, chunkNum) {
-    this.props.getTakes(chunkId, chunkNum );
+    this.props.getTakes(chunkId, chunkNum);
+
+    const {history, location} = this.props;
+    const searchBar = QueryString.parse(location.search);
+
+    history.push({
+      pathname: './kanban',
+      search: `?chapterId=${searchBar.chapterId}`+
+              `&chapterNum=${searchBar.chapterNum}`+
+              `&startv=${chunkNum}`+
+              `&bookName=${searchBar.bookName}`+
+              `&projectId=${searchBar.projectId}`+
+              `&mode=${searchBar.mode}`,
+    });
   }
 
   render() {
