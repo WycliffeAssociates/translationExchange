@@ -16,7 +16,6 @@ const mockProps = {
     id: 2,
 
   },
-
   {
     startv: 7,
     published_take: {
@@ -24,21 +23,16 @@ const mockProps = {
       id: 3,
     },
   }],
-
   txt: {
     unavailable: 'unavailable',
     selected: 'selected',
   },
-
   history: [],
-
   location: {
     search: 'address bar location',
   },
-
   getTakes: jest.fn(),
 };
-
 
 describe('ChunkPanel suite', () => {
   const wrapper = shallow(<ChunkPanel {...mockProps} />);
@@ -63,6 +57,4 @@ describe('ChunkPanel suite', () => {
     wrapper.instance().navigateChunk(1,1);
     expect(mockProps.getTakes.mock.calls.length).toEqual(2);
   });
-
-  
 });

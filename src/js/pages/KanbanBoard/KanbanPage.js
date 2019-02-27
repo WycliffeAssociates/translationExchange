@@ -41,7 +41,6 @@ export class KanbanPage extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-
     if (nextProps.location != this.props.location) {
       return true;
     }

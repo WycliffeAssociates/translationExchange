@@ -97,7 +97,12 @@ class NavBar extends Component {
       goToChapters = () => {
         const {getChapters} = this.props;
         getChapters(searchBar.projectId);
-        history.push(`/chapters?projectId=${searchBar.projectId}&bookName=${searchBar.bookName}&mode=${searchBar.mode}`);
+        history.push({
+          pathname: '/chapters',
+          search: `?projectId=${searchBar.projectId}`+
+                  `&bookName=${searchBar.bookName}`+
+                  `&mode=${searchBar.mode}`,
+        });
       };
 
       if (searchBar.mode === 'Verse') {
