@@ -27,7 +27,8 @@ class KanbanColumn extends React.Component {
 
   nextChunk() {
 
-    const {activeChunkId, chunks} = this.props;
+    const {activeChunkId, chunks, history, location} = this.props;
+    const searchBar = QueryString.parse(location.search);
     let activeChunkIndex = null;
 
     chunks.map( (chk, index) => {
@@ -40,6 +41,16 @@ class KanbanColumn extends React.Component {
       const nextChunkId = chunks[activeChunkIndex+1].id;      // add + 1 to get the next item in the array
       const nextChunkNum = chunks[activeChunkIndex+1].startv;
 
+      history.push({
+        pathname: './kanban',
+        search: `?chapterId=${searchBar.chapterId}`+
+                `&chapterNum=${searchBar.chapterNum}`+
+                `&startv=${nextChunkNum}`+
+                `&bookName=${searchBar.bookName}`+
+                `&projectId=${searchBar.projectId}`+
+                `&mode=${searchBar.mode}`,
+      });
+
       this.props.getTakes(nextChunkId, nextChunkNum );
     }
 
@@ -50,6 +61,16 @@ class KanbanColumn extends React.Component {
           const nextChunkId = chunks[activeChunkIndex].id;      // add + 1 to get the next item in the array
           const nextChunkNum = chunks[activeChunkIndex].startv;
 
+          history.push({
+            pathname: './kanban',
+            search: `?chapterId=${searchBar.chapterId}`+
+                    `&chapterNum=${searchBar.chapterNum}`+
+                    `&startv=${nextChunkNum}`+
+                    `&bookName=${searchBar.bookName}`+
+                    `&projectId=${searchBar.projectId}`+
+                    `&mode=${searchBar.mode}`,
+          });
+
           this.props.getTakes(nextChunkId, nextChunkNum );
         }
 
@@ -59,29 +80,32 @@ class KanbanColumn extends React.Component {
   }
 
   nextChapter(next_chapter_num) {
-
     const {history, chapters} = this.props;
-    if (chapters.length < next_chapter_num) { // if next_chapter_num > chapter.len it means we have reached the last chapter in the book
+    
+    var nextChapter = chapters.find(function(chapter){
+      return chapter.number == next_chapter_num
+    })
+
+    if(nextChapter == undefined) { // if nextChapter is undefined, it means we have reached the last chapter in the book
       this.props.history.push({pathname: '/projects'});
-    }
-
+    } 
     else {
-      var nextChapter= chapters.find(function(chapter){
-        return chapter.number == next_chapter_num
-      })
-      
       var query = QueryString.parse(this.props.location.search);
-        query.chapterId = nextChapter.id;
-        query.chapterNum = next_chapter_num;
-      
-      this.props.history.push({
-        pathname: '/kanban',
-        search: `?chapterId=${nextChapter.id}&chapterNum=${next_chapter_num}&bookName=${query.bookName}&projectId=${query.projectId}&&mode=${query.mode}`,
-      });
-      this.props.getChunks(nextChapter.id, history,true);
-      this.props.getComments(nextChapter.id, 'chapter_id');
+      query.chapterId = nextChapter.id;
+      query.chapterNum = next_chapter_num;
+    
+    this.props.history.push({
+      pathname: '/kanban',
+      search: `?chapterId=${nextChapter.id}`+
+              `&chapterNum=${next_chapter_num}`+
+              `&startv=1`+
+              `&bookName=${query.bookName}`+
+              `&projectId=${query.projectId}`+
+              `&mode=${query.mode}`,
+    });
+    this.props.getChunks(nextChapter.id, 1, history);
+    this.props.getComments(nextChapter.id, 'chapter_id');
     }
-
   }
 
   onDrop(published, newRating, take) {
