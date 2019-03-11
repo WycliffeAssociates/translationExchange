@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import config from '../../config/config';
+import loadingRingImg from '../../assets/images/loadingRing.svg';
 
 class Loading extends Component {
   render() {
@@ -9,7 +10,7 @@ class Loading extends Component {
 
       <Container height= {height} marginTop = {marginTop} >
         <h1>{this.props.txt.loading}</h1>
-        <img src={`${config.streamingUrl}static/images/loadingRing.svg`} alt="Loading..." />
+        <img src={loadingRingImg} alt="Loading..." />
       </Container>
     );
   }

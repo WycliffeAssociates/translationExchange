@@ -5,7 +5,7 @@ import CircularProgressbar from 'react-circular-progressbar';
 import QueryString from 'query-string';
 import GradientSVG from './GradientSVG';
 import Comments from './Comments.js';
-import config from '../../../../config/config';
+import projectImg from '../../../../assets/images/project.svg'
 
 
 
@@ -98,8 +98,6 @@ export default class ChapterCard extends Component {
 
               </InformationContainer>
 
-
-
               {checkLevel_1 ?
                 <CircularProgressContainer check ={checkLevel_1}>
 
@@ -133,7 +131,7 @@ export default class ChapterCard extends Component {
 
                   <BoardButton check={checkLevel_1} onClick={this.reviewChapter}>
                     {txt.board}
-                    <img src={`${config.streamingUrl}static/images/project.svg`} />
+                    <img src={projectImg} />
                   </BoardButton>
 
                 }

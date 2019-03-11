@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 // import BoxDragPreview from './BoxDragPreview';
 // import snapToGrid from './snapToGrid';
 import { DragLayer } from 'react-dnd';
-import config from './config/config';
+import unitSkeleton from './assets/images/UnitSkeleton.png'
+
 
 const layerStyles = {
   position: 'fixed',
@@ -37,7 +38,7 @@ class CustomDragLayer extends React.Component {
     switch (type) {
       case 'TakeCard':
         return (
-          <img style={{height: 'inherit', width: '15.5vw'}}src={`${config.streamingUrl}static/images/UnitSkeleton.png`} />
+          <img src={unitSkeleton} />
         );
     }
   }

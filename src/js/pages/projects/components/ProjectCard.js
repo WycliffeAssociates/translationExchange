@@ -54,14 +54,12 @@ export default class ProjectCard extends React.Component {
               <BookText> {bookName} </BookText>
               <Text>{language}</Text>
             </TextContainer>
-            <Icon  id="user" data-jdenticon-value={this.props.loggedInUser? this.props.loggedInUser: 'no author info'} />
+            <Icon id="user" data-jdenticon-value={this.props.loggedInUser? this.props.loggedInUser: 'no author info'} />
           </InformationContainer>
-
 
           <ImageContainer>
             <Image src={illustrations.picker} alt="Smiley face" height="106px" width="338px" />
           </ImageContainer>
-
 
           <ButtonsContainer>
             <BorderButton
@@ -78,7 +76,6 @@ export default class ProjectCard extends React.Component {
             />
 
             <BlueButton onClick={this.reviewProject} >{txt.select} <i className="material-icons">touch_app</i> </BlueButton>
-
 
           </ButtonsContainer>
         </Card>
@@ -131,7 +128,7 @@ ButtonsContainer.displayName= 'ButtonsContainer';
 
 const Image = styled.img`
    height: 106px;
-   width: 100%
+   width: 100%;
 `;
 Image.displayName = 'Image';
 

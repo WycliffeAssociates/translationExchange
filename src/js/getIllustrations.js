@@ -2,15 +2,28 @@ import config from '../config/config';
 
 export default function getIllustrations(bookSlug) {
 
+  let defaultPicker = require(`../assets/Book_Illustrations/default.jpg`);
+  let defaultSketch = require(`../assets/Book_Illustrations/default.jpg`);
+  let bookPicker;
+  let bookSketch;
+
+  try {
+    bookPicker = require(`../assets/Book_Illustrations/${bookSlug}_Picker.jpg`);
+    bookSketch = require(`../assets/Book_Illustrations/${bookSlug}_Sketch_Medium.jpg`);
+  } catch(error) {
+    bookPicker = defaultPicker;
+    bookSketch = defaultSketch;
+  }
+
   if (bookSlug != undefined) {
     return {
-      picker: `${config.streamingUrl}static/Book_Illustrations/${bookSlug}_Picker.jpg`,
-      sketch: `${config.streamingUrl}static/Book_Illustrations/${bookSlug}_Sketch_Medium.jpg`,
+      picker: bookPicker,
+      sketch: bookSketch,
     };
   } else {
     return {
-      picker: `${config.streamingUrl}static/Book_Illustrations/default.jpg`,
-      sketch: `${config.streamingUrl}static/Book_Illustrations/default.jpg`,
+      picker: defaultPicker,
+      sketch: defaultSketch,
     };
   }
 }

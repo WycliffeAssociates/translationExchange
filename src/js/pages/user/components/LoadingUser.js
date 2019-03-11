@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import {fadeIn} from 'react-animations';
-import config from '../../../../config/config';
+import loadingRing from '../../../../assets/images/loadingRing.svg';
 
 
 
@@ -11,7 +11,7 @@ export default ({txt}) => {
     <Container>
       <TextHeader>{txt.generatingUser}</TextHeader>
       <GifContainer>
-        <img style={{height: '300px', width: '300px'}} src={`${config.streamingUrl}static/images/loadingRing.svg`} alt="Loading..." />
+        <img style={{height: '300px', width: '300px'}} src={loadingRing} alt="Loading..." />
       </GifContainer>
       <BottomText>{txt.pleaseWait}</BottomText>
     </Container>

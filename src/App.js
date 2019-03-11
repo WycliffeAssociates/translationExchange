@@ -18,10 +18,11 @@ import CustomDragLayer from './CustomDragLayer';
 import ChapterPage from './js/pages/chapters/ChaptersPage';
 import ChapterReview from './js/pages/ChapterReview';
 import { default as TouchBackend } from 'react-dnd-touch-backend';
+import config from './config/config';
 
 // import and configure the raven client for sentry in order to track errors
 import Raven from 'raven-js';
-Raven.config('http://87c87feff8a940c2801867000766c13d@localhost:9000/3').install();
+Raven.config(`http://9183fe1745da4049889061d44d154a4b@${config.domain}:9000/3`).install();
 
 
 class App extends Component {
@@ -55,20 +56,19 @@ class App extends Component {
         <ToastContainer style={{width: '25vw', padding: '0'}} />
 
         <Switch>
-          <Route  exact path="/" component={Welcome} />
-          <Route  exact path ="/users" component={AvailableUsers} />
-          <Route  exact path="/users/registration" component={CreateUserContainer} />
-          <Route  path="/welcome" component={Welcome} />
-          <Route  path="/projects" component={ProjectsPage} />
-          <Route  path="/chapters" component={ChapterPage} />
-          <Route path ="/progress" component={TaskProgressPage} />
-          <Route path ="/kanban" component={KanbanPage} />
-          <Route path ="/export" component={ExportPage} />
-          <Route path ="/chapterReview" component={ChapterReview} />
-          <Route path ="/errorPage" component={ErrorPage} />
-          <Route path="*" component={NotFound} />
+          <Route exact path = "/" component={Welcome} />
+          <Route exact path = "/users" component={AvailableUsers} />
+          <Route exact path = "/users/registration" component={CreateUserContainer} />
+          <Route path = "/welcome" component={Welcome} />
+          <Route path = "/projects" component={ProjectsPage} />
+          <Route path = "/chapters" component={ChapterPage} />
+          <Route path = "/progress" component={TaskProgressPage} />
+          <Route path = "/kanban" component={KanbanPage} />
+          <Route path = "/export" component={ExportPage} />
+          <Route path = "/chapterReview" component={ChapterReview} />
+          <Route path = "/errorPage" component={ErrorPage} />
+          <Route component={NotFound} />
         </Switch>
-
 
       </div>
     );

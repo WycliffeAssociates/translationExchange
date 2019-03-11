@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import BorderButton from '../../../components/BorderButton';
 import {LoadingMp3, LoadingWav} from './';
 import { fadeIn } from 'react-animations';
-import config from '../../../../config/config';
+import searchingImg from '../../../../assets/images/searching.png';
 
 export class Downloading extends Component {
 
@@ -55,7 +55,7 @@ export class Downloading extends Component {
       <Container textColor ={textColor}>
         {downloading ?
           <Container>
-            <Image src={`${config.streamingUrl}static/images/searching.png`} alt="Smiley face" height="10vw" width="10vw" />
+            <Image src={searchingImg} alt="Smiley face" height="10vw" width="10vw" />
             <h1>{txt.downloading}...</h1>
             <p>{txt.yourFiles}  </p>
             <Link to="/projects">
@@ -109,8 +109,8 @@ const Container = styled.div`
 Container.displayName = 'Downloading';
 
 const Image = styled.img`
-   height: 400px;
-   width: 400px;
+  height: 400px;
+  width: 400px;
    margin-top: 50px;
 `;
 

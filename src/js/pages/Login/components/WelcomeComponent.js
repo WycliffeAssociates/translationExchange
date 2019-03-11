@@ -1,7 +1,8 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import {zoomIn} from 'react-animations';
-import config from '../../../../config/config';
+import welcomeImg from '../../../../assets/images/undraw_welcome_3gvl.svg'
+
 // import GitHubLogin from '../../../components/social-login/GitHubLogin';
 
 export default class WelcomeComponent extends React.Component {
@@ -17,8 +18,6 @@ export default class WelcomeComponent extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-
-
   onLogin(user) {
     this.props.createSocialUser(user, ()=> this.props.history.push('/projects'));
   }
@@ -29,11 +28,9 @@ export default class WelcomeComponent extends React.Component {
         pathname: '/users/registration',
       });
     }
-
   }
 
   componentWillUpdate(nextProps) {
-
 
     if (nextProps.socialLogin == true) {
       this.props.history.push ({
@@ -51,8 +48,7 @@ export default class WelcomeComponent extends React.Component {
       <WelcomePage>
 
         <h2 className="welcomeh2"> translation Exchange  </h2>
-        <Icon src={`${config.streamingUrl}static/images/undraw_welcome_3gvl.svg`}  />
-
+        <Icon src={welcomeImg} />
 
         <ButtonsContainer>
 
@@ -79,7 +75,7 @@ export default class WelcomeComponent extends React.Component {
   handleClick(clickSrc) {
 
     if (clickSrc === 'continue') {
-      this.props.history.push('./users');
+      this.props.history.push('/users');
     }
 
   }
@@ -107,12 +103,10 @@ const  WelcomePage = styled.div`
 
 WelcomePage.displayName='WelcomePage';
 
-const Icon= styled.img`
-    height: 8vw;
-    width: 8vw;
-    min-height: 100px;
-    min-width: 100px;
-  `;
+const Icon = styled.img`
+  height: 8vw;
+  width: 9.5vw;
+`;
 Icon.displayName = 'Icon';
 
 

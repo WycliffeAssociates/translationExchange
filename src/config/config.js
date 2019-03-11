@@ -27,6 +27,7 @@ const config = {                                                        //produc
   apiUrl: 'http://opentranslationtools.org/api/',
   streamingUrl: 'http://opentranslationtools.org/',
   redirectUri: 'http://opentranslationtools.org/',
+  domain: 'opentranslationtools.org'
 };
 
 export default config;

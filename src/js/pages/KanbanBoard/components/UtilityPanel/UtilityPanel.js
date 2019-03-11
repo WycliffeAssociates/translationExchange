@@ -4,7 +4,7 @@ import QueryString from 'query-string';
 import Toggle from 'react-toggle';
 import Comments from '../RecordCommentsComponents/Comments';
 import ChunkPanel from './ChunkPanel';
-import config from '../../../../../config/config';
+import audioWaveImg from '../../../../../assets/images/Audio_Wave.svg'
 
 export default class UtilityPanel extends React.Component {
 
@@ -57,7 +57,7 @@ export default class UtilityPanel extends React.Component {
               onChange={e=>this.setState({commentsTab: e.target.checked})}
               defaultChecked= {false} icons ={{
                 unchecked: <i  className="material-icons">mode_comment</i>,
-                checked: <img src={`${config.streamingUrl}static/images/Audio_Wave.svg`} />,
+                checked: <img src={audioWaveImg}  />,
               }}  />
 
             <Hide onClick={this.toggleUtilityPanel}> <i style={{fontSize: '1.75vw'}} className="material-icons">arrow_forward</i> </Hide>

@@ -22,7 +22,6 @@ class RecordButton extends Component {
         <ButtonContainer>
           <PlayButton onClick={this.startRecording} type="voice">
             <Icon>
-
               <i className="material-icons" style={{ fontSize: "44px", marginLeft:'-.1vw', paddingTop:'.5vw' }}>
                 mic_none
               </i>
@@ -66,7 +65,7 @@ const ButtonContainer = styled.div`
   overflow: hidden;
 `;
 
-const Icon = styled.button`
+const Icon = styled.div`
   margin-left: 5%;
   color: #e74c3c;
   border: none;

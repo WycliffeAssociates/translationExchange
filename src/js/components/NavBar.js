@@ -68,7 +68,7 @@ class NavBar extends Component {
     let menu = '';
     let book ='';
     let chapter='';
-    let goToChapters = '';
+    let goToChapters = () => {};
     let mode = '';
     let logOutMenu = (
       <Menu onSelect={ky => this.onLogoutMenuSelect(ky)}>
@@ -96,7 +96,7 @@ class NavBar extends Component {
           {chunks.map(chnk=> {
             let publishedTake= chnk.published_take;
             let backgroundColor, color = '';
-            backgroundColor= publishedTake ? 'rgb(0,156,255,1)': '';
+            backgroundColor= publishedTake ? 'rgba(0,156,255,1)': '';
             color = chnk.published_take ? 'white': '';
             return (
               <MenuItem

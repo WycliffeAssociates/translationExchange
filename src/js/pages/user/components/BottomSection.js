@@ -33,6 +33,8 @@ export default ({recording, generatedHash, startRecording, redo, save, audio, tx
 
 
 const Header = styled.h1`
+  font-size: 3vh;
+  text-align: center;
 `;
 
 const BottomText = styled.p`
@@ -53,5 +55,6 @@ display: flex;
 flex-direction: column;
 align-items: center;
 width: 100%;
-margin-top: 90px;
+margin-top: 3vw;
+font-size: 2vh;
 `;
