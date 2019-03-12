@@ -10,7 +10,7 @@ exports[`Loading Component Test Suite renders correctly and matches snapshot 1`]
   </h1>
   <img
     alt="Loading..."
-    src="http://opentranslationtools.org/static/images/loadingRing.svg"
+    src="loadingRing.svg"
   />
 </div>
 `;

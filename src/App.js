@@ -67,7 +67,7 @@ class App extends Component {
           <Route path = "/export" component={ExportPage} />
           <Route path = "/chapterReview" component={ChapterReview} />
           <Route path = "/errorPage" component={ErrorPage} />
-          <Route component={NotFound} />
+          <Route path = "*" component={NotFound} />
         </Switch>
 
       </div>

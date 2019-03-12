@@ -21,7 +21,7 @@ class ChunkPanel extends Component {
         {this.props.chunks.map(chk =>{
 
           return (
-            <ChunksContainer selected= {selectedChunk == chk.startv} >
+            <ChunksContainer selected={selectedChunk == chk.startv} key={chk.id} >
               <label style={{cursor: 'pointer'}} onClick={()=> this.navigateChunk(chk.id, chk.startv)}>{mode} {chk.startv} </label>
               {chk.published_take != null ?
                 <PlayerTracker  url={chk.published_take.location} />

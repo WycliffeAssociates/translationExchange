@@ -4,14 +4,6 @@ import {Link} from 'react-router-dom';
 
 class NotFound extends Component {
 
-  componentWillMount() {
-    if(!this.props.match.isExact && this.props.match.path == "/") {
-      this.props.history.push ({
-        pathname: '/welcome',
-      });
-    }
-  }
-
   render() {
     return (
       <Segment raised textAlign="center">
