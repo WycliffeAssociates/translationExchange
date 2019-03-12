@@ -55,7 +55,7 @@ describe('KanbanPageActions Suite', () => {
     ];
 
     const store = mockStore({chunks: []});
-    return store.dispatch(getChunks(1, [])).then(()=> {
+    return store.dispatch(getChunks(1, 1, [])).then(()=> {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

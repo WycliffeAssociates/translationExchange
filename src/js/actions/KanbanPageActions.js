@@ -73,7 +73,7 @@ export const deleteTakeSuccess = (res) => {
   };
 };
 
-export const getChunks = (chapterId, redirect, chapterNav) => {
+export const getChunks = (chapterId, startv, redirect) => {
   return dispatch => {
     dispatch({type: 'LOADING'});
     return axios
@@ -82,21 +82,18 @@ export const getChunks = (chapterId, redirect, chapterNav) => {
           headers: { Authorization: 'Token ' + localStorage.getItem('token') },
         })
       .then(response => {
-        const chunkId = response.data[0].id; //get the chunk id from the first chunk in the array of chunks
-        const kanbanState = JSON.parse(localStorage.getItem('te:KanbanPage'));
+        var chunkId = 0;
 
-        if (chapterNav) { //navigation from chapter card to kanban
-          dispatch(getChunksSuccess(response.data, chunkId));
-          dispatch(getTakes(chunkId, 1)); // get the takes from the first chunk and set chunkNum to 1
-          dispatch(getComments(chunkId,'chunk_id')); // get comments for the first chunk
-
+        for(var chunk in response.data) {
+          if(response.data[chunk].startv == startv) {
+            chunkId = response.data[chunk].id;
+            break;
+          }
         }
-
-        else { //any other reload of kanban page
-          dispatch(getChunksSuccess(response.data, kanbanState.activeChunkId));
-          dispatch(getTakes(kanbanState.activeChunkId, kanbanState.chunkNum));
-          dispatch(getComments(kanbanState.activeChunkId,'chunk_id'));
-        }
+        
+        dispatch(getChunksSuccess(response.data, chunkId));
+        dispatch(getTakes(chunkId, startv));
+        dispatch(getComments(chunkId, 'chunk_id'));        
       })
       .catch(error => {
         console.log(error);
