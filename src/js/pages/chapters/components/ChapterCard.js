@@ -26,12 +26,17 @@ export default class ChapterCard extends Component {
       const {id, getChunks, history, number, getComments, location } = this.props;
       const searchBar = QueryString.parse(location.search);
 
-      getChunks(id, history,true);     // chapter id
+      getChunks(id, searchBar.startv, history);     // chapter id
       getComments(id, 'chapter_id');
 
       history.push({
         pathname: './kanban',
-        search: `?chapterId=${id}&chapterNum=${number}&bookName=${searchBar.bookName}&projectId=${searchBar.projectId}&&mode=${searchBar.mode}`,
+        search: `?chapterId=${id}`+
+                `&chapterNum=${number}`+
+                `&startv=1`+
+                `&bookName=${searchBar.bookName}`+
+                `&projectId=${searchBar.projectId}`+
+                `&mode=${searchBar.mode}`,
       });
 
     };
