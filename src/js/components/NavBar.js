@@ -68,7 +68,7 @@ class NavBar extends Component {
     let menu = '';
     let book ='';
     let chapter='';
-    let goToChapters = () => {};
+    let goToChapters = () => void(0)
     let mode = '';
     let logOutMenu = (
       <Menu onSelect={ky => this.onLogoutMenuSelect(ky)}>
