@@ -15,7 +15,8 @@ export default class ReviewColumn extends React.Component {
       updateActiveChunkIndex, activeChunkIndex, resetTake, saveComment,
       swapTake, undoSwapTake, tempTakes, setTake, txt, location, takesPlaying}= this.props;
     const {chunk} = this.props.take.publishedTake; //take is variable chosen when mapping array of selected takes
-    let active = activeChunkIndex === index? true: false;
+    let active = activeChunkIndex === index || (index == 0 && activeChunkIndex > (selectedTakesLength-1))? true: false;
+    
     return (
       <Container>
         <SelectedTake take={take} index={index} togglePlayingTakes={togglePlayingTakes}

@@ -26,6 +26,7 @@ const mockProps = {
   swapTake: jest.fn(), clearAlternateTakes: jest.fn(), undoSwapTake: jest.fn(),
   tempTakes: jest.fn(), txt: 'txt',
   getSelectedTakes: jest.fn(),
+  getAlternateTakes: jest.fn(),
 };
 
 describe('Chapter Review test suite', ()=> {

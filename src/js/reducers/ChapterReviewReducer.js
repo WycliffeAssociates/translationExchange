@@ -39,6 +39,9 @@ export default (state = INITIAL_STATE, action ={}) => {
       };
 
     case PLAY_PAUSE_SELECTED_TAKE:
+      if(state.activeChunkIndex > state.selectedTakes.length-1) { 
+        state.activeChunkIndex = 0; 
+      }
       return update(state, {
         selectedTakes: {
           [state.activeChunkIndex]: {
@@ -49,6 +52,10 @@ export default (state = INITIAL_STATE, action ={}) => {
       });
 
     case UPDATE_ACTIVE_CHUNK_INDEX:
+      if(state.activeChunkIndex > state.selectedTakes.length-1) { 
+        state.activeChunkIndex = 0; 
+        action.index = 0; 
+      }
       return update(state, {
         selectedTakes: {
           [state.activeChunkIndex]: {
