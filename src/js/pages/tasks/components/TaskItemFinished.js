@@ -77,6 +77,7 @@ const Img = styled.img`
   filter:brightness(70%);
   width: 100%;
   height: 100%;
+  object-fit: cover;
   border-radius: 0.3vw;
 `;
 Img.displayName = 'Img';

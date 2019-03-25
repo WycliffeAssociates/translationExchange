@@ -13,6 +13,7 @@ class TaskInfo extends React.Component {
     const lang_name = this.props.task.details.lang_name || '--';
     const lang_slug = this.props.task.details.lang_slug || '--';
     const book_name = this.props.task.details.book_name || '--';
+    const file_name = this.props.task.details.file_name || '--';
     const title = this.props.task.status == 'SUCCESS' ? 'Success!' : 'Upload failed!';
     const title_color = this.props.task.status == 'SUCCESS' ? '#00c43d' : '#f64753';
 
@@ -24,9 +25,9 @@ class TaskInfo extends React.Component {
       <div>
         <span>Your </span>
         <span style={{fontWeight: 'bold'}}>
-          {book_name != '--' ? book_name + ' ' + lang_name + ' (' + lang_slug.toUpperCase() + ')' : 'unknown project '}
+          {book_name != '--' ? book_name + ' ' + lang_name + ' (' + lang_slug.toUpperCase() + ')' : (file_name != '--' ? file_name + " file" : 'unknown project')}
         </span>
-        <span>failed to upload. Please see tech support.</span>
+        <span> failed to upload. Please see tech support.</span>
       </div>
     );
 
