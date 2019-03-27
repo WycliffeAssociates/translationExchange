@@ -13,6 +13,7 @@ export const fetchAllProjects = (query, redirect) => {
       })
       .catch(err => {
         dispatch(dispatchAllProjectsFailed(err));
+        localStorage.removeItem('token');
         redirect.push('/errorPage');
 
       });
