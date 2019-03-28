@@ -124,10 +124,10 @@
     "electron-start": "node src/start-react",
     "react-start": "react-scripts start",
     "pack": "build --dir",
-    "dist": "npm run build && electron-builder -wlm",
-    "dist-win": "npm run build && electron-builder --win",
-    "dist-linux": "npm run build && electron-builder --linux",
-    "dist-mac": "npm run build && electron-builder --mac",
+    "dist": "npm run build && electron-builder --publish never -wlm",
+    "dist-win": "npm run build && electron-builder --publish never --win",
+    "dist-linux": "npm run build && electron-builder --publish never --linux",
+    "dist-mac": "npm run build && electron-builder --publish never --mac",
     "postinstall": "install-app-deps"
   },
   "jest": {
