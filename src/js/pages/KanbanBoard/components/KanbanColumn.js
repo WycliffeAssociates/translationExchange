@@ -355,6 +355,7 @@ const NextChunk = styled.button`
   	cursor: pointer;
   	outline:none;
     font-size: 1em + 1vw;
+    z-index: 99;
     i  {
       vertical-align: middle;
     }
@@ -370,6 +371,7 @@ padding: 0.75vw;
 cursor: pointer;
 outline:none;
 font-size: 1em + 1vw;
+z-index: 99;
 i  {
   vertical-align: middle;
 }
@@ -379,6 +381,7 @@ margin-top: 5px;
 NextChapter.displayName = 'NextChapter';
 
 const ChapterReview = styled(NextChapter)`
+  z-index: 99;
 `;
 ChapterReview.displayName = 'ChapterReview';
 
