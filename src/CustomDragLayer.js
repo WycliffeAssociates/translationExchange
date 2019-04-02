@@ -10,7 +10,7 @@ import unitSkeleton from './assets/images/UnitSkeleton.png'
 const layerStyles = {
   position: 'fixed',
   pointerEvents: 'none',
-  zIndex: 95,
+  zIndex: 101,
   left: 0,
   top: 0,
   width: '100%',
