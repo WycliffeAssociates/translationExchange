@@ -37,9 +37,8 @@ class PlayPauseBtn extends Component {
     const {icon}= this.state;
     return (
       <ButtonContainer>
-
         <PlayButton  onClick={()=>this.startPlaying()} type="button">
-          <Icon><i className="material-icons" style={{fontSize:'40px'}}>{icon}</i> </Icon>
+          <Icon className="material-icons">{icon} </Icon>
         </PlayButton>
       </ButtonContainer>
     );
@@ -48,37 +47,34 @@ class PlayPauseBtn extends Component {
 
 }
 
-const Container =  styled.div`
-    position: relative;
-`;
-
-const  PlayButton = styled.button`
-    height: 90px;
-    width: 90px;
-    border-radius: 50px;
+const PlayButton = styled.button`
+    height: 6vw;
+    width: 6vw;
+    border-radius: 5vw;
     background-color: #fff;
     outline: none;
     border-color: #2D2D2D;
-    border: .5%;
     cursor: pointer;
+    padding: 0;
   `;
 PlayButton.displayName = 'PlayButton';
 
-const ButtonContainer =styled.div`
-    width:100%;
+const ButtonContainer = styled.div`
+    width: 100%;
     z-index: 2;
-    display:flex;
-    justify-content:center;
+    display: flex;
+    justify-content: center;
     cursor: pointer;
-    margin-top:100px
+    margin-top: -3vw;
   `;
 ButtonContainer.displayName = 'ButtonContainer';
 
-const Icon = styled.button`
+const Icon = styled.i`
   color: #2D2D2D;
   border: none;
   cursor: pointer;
   background-color:transparent;
+  font-size: 5vw;
 `;
 Icon.displayName = 'Icon';
 

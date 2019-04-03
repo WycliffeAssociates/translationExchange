@@ -19,9 +19,9 @@ const Button = styled.button`
   border-radius: 60px;
   color: #00c5ff;
   background: white;
-  height:50px;
-  width:250px;
-  font-size: 20px;
+  height: 5vw;
+  width: 17vw;
+  font-size: 2vw;
   font-weight: 100;
   border: solid;
   border-width: 2px;

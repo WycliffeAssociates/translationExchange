@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styled,{keyframes} from 'styled-components';
 import {connect} from 'react-redux';
 import { zoomIn } from 'react-animations';
-import imgError from '../../../assets/images/internet_error.png';
+import internetErrorImg from '../../../assets/images/internet_error.png';
 
 export class ErrorPage extends Component {
 
@@ -21,7 +21,7 @@ export class ErrorPage extends Component {
       <ErrorPageContainer>
 
         <ImageContainer>
-          <Image src={imgError} alt="Smiley face" height="10vw" width="10vw"/>
+          <Image src={internetErrorImg} alt="Smiley face" height="10vw" width="10vw"/>
           <Text>{this.props.txt.internetError}</Text>
         </ImageContainer>
 
@@ -48,8 +48,6 @@ const ErrorPageContainer = styled.div`
 `;
 ErrorPageContainer.displayName = 'ErrorPageContainer';
 
-
-
 const zoomOutAnimation =keyframes`${zoomIn}`;
 
 const ImageContainer = styled.div`
@@ -64,8 +62,8 @@ const ImageContainer = styled.div`
 ImageContainer.displayName = 'ImageContainer';
 
 const Image = styled.img`
-   height: 35vw;
-   width: 54vw;
+  height: 35vw;
+  width: 54vw;
 `;
 Image.displayName = 'Image';
 

@@ -14,10 +14,10 @@ export class ChapterReview extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state ={
+    this.state = {
       resetPos: false,
       alternateTakesFetched: false,
-      takesPlaying: false,
+      takesPlaying: false
     };
     this.resetTake = this.resetTake.bind(this);
     this.togglePlayingTakes = this.togglePlayingTakes.bind(this);

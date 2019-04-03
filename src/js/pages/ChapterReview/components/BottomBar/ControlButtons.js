@@ -22,6 +22,7 @@ export default class ControlButtons extends React.Component {
       this.handleClick();
     }
   }
+
   handleClick() {
     const {takesPlaying} = this.state;
     const {togglePlayingTakes} = this.props;
@@ -40,9 +41,12 @@ export default class ControlButtons extends React.Component {
     const {takesPlaying} = this.state;
     const {activeChunkIndex, selectedTakesLength} = this.props;
     if (direction === 'forward') {
-      index= activeChunkIndex + 1;
+      index = activeChunkIndex + 1;
       if (index < selectedTakesLength) {
         this.props.updateActiveChunkIndex(activeChunkIndex, index, takesPlaying);
+        this.props.resetTake(true);
+      } else {
+        this.props.updateActiveChunkIndex(0, 0, takesPlaying);
         this.props.resetTake(true);
       }
     }

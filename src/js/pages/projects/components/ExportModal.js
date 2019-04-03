@@ -42,10 +42,9 @@ class ExportModal extends Component {
           open={showModal}
           onClose={this.close}
           size="mini"
-          style={{ verticalAlign: 'middle', margin: 'auto', marginTop: '461px', width: '710px', height: '528px'}}
+          style={{ verticalAlign: 'middle', margin: 'auto', marginTop: '461px', width: '710px', height: '528px', position: 'initial'}}
         >
           <ModalContainer>
-
 
             <TopContainer>
               <Span onClick={()=>this.close()}>X</Span>

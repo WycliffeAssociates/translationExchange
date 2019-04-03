@@ -18,6 +18,11 @@ export class Welcome extends React.Component {
       this.props.updateLanguage(storedLanguage);
     }
 
+    if(localStorage.getItem('token') != null) {
+      this.props.history.push ({
+        pathname: '/projects',
+      });
+    }
   }
 
   onSelect({key}) {
@@ -43,7 +48,7 @@ export class Welcome extends React.Component {
             overlay={menu}
             animation="slide-up"
           >
-            <Language>{this.props.txt.languages} <i class="material-icons">language</i></Language>
+            <Language>{this.props.txt.languages} <i className="material-icons">language</i></Language>
           </Dropdown>
         </LanguageContainer>
 

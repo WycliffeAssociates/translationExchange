@@ -13,6 +13,7 @@ export const fetchAllProjects = (query, redirect) => {
       })
       .catch(err => {
         dispatch(dispatchAllProjectsFailed(err));
+        localStorage.removeItem('token');
         redirect.push('/errorPage');
 
       });
@@ -27,6 +28,7 @@ export const importProject= (file) => {
       .post(`${config.apiUrl}upload/file`, data, {
         headers: { Authorization: 'Token '+localStorage.getItem('token'),
           'Content-Type': 'multipart/form-data',
+          'tr-file-name': file.name
         },
         timeout: 1200000,
       })

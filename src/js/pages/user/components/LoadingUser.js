@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import {fadeIn} from 'react-animations';
-import loadingRing from '../../../../assets/images/loadingRing.svg'
+import loadingRing from '../../../../assets/images/loadingRing.svg';
 
 
 

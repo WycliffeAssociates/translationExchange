@@ -5,7 +5,7 @@ import renderer from 'react-test-renderer';
 import {Router} from 'react-router';
 import {createMemoryHistory} from 'history';
 
-const history = createMemoryHistory('/');
+const history = createMemoryHistory('/notexist');
 
 describe('NotFound Page', () => {
   it('renders correctly', () => {

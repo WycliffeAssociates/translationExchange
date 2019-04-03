@@ -92,7 +92,6 @@ export default class CommentRow extends React.Component {
       <Draggable onDrag={this.handleDrag} position={this.state.controlledPosition} axis="x" bounds={{left: 0, top: 0, bottom: 0 }}>
         <CommentRowContainer>
 
-
           <CommentPlayer >
             <PlayerTracker url={comment.location} />
           </CommentPlayer>

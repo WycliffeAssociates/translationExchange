@@ -10,9 +10,6 @@ const mockProps =  {
   },
 };
 describe('Loading Component Test Suite', () => {
-
-
-
   //test with just jest
   it('renders correctly and matches snapshot', () => {
     const tree = renderer

@@ -36,16 +36,21 @@ export default ({recordedBlob, isAudioAvailable, onStop, record, play, onFinishP
 
 const Container = styled.div`
 width: 100%;
-height: 320px;
-min-width: 469;
+height: 20vw;
 background-position: 50%;
 background-repeat: no-repeat;
 background-image: url(${timeLine});
 background-color: #2D2D2D;
+background-size: content;
 border-top-left-radius: 7px;
 border-top-right-radius: 7px;
+display: flex;
 `;
 const RecordContainer = styled.div`
-margin-top: 10px;
 width: 100%;
+height: 100%;
+& > canvas {
+  width: 55vw;
+  height: 20vw;
+}
 `;

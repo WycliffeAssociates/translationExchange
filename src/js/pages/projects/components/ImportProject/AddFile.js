@@ -30,9 +30,9 @@ export default class AddFile extends React.Component {
         var fileName = '';
         fileName = e.target.value.split('\\').pop();
 
-        if (fileName && labelVal!== txt.chooseProject)
+        if (fileName && labelVal !== txt.chooseProject)
         {
-          label.querySelector('strong').innerHTML =fileName;
+          label.querySelector('strong').innerHTML = fileName;
           submit.style.opacity=1;
         }
         else {
@@ -40,7 +40,6 @@ export default class AddFile extends React.Component {
           label.style.background= 'linear-gradient(to top, #0076FF, #00C5FF  )';
           submit.style.opacity=0;
         }
-
       });
     });
   }

@@ -67,7 +67,7 @@ class Player extends Component {
           <CommentsPlayer audioFile={`${config.streamingUrl}${comments.location}`} />
         </AudioContainer>
         <NewTextContainer onClick={()=>this.deleteToast()}>
-          <NewText><i class="material-icons">delete</i></NewText>
+          <NewText><i className="material-icons">delete</i></NewText>
         </NewTextContainer>
 
       </Container>

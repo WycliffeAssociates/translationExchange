@@ -40,18 +40,19 @@ class Waveform extends Component {
 
     return (
       <Container>
+        
         <WaveformContainer>
-
-          <Wavesurfer
-            audioFile={this.props.audioFile}
-            pos={pos}
-            onPosChange={this.handlePosChange}
-            playing={this.state.play}
-            options={{ cursorWidth: 2, progressColor: '#eff0f2', cursorColor: 'transparent', barWidth: 4, hideScrollbar: true, normalize: true, height: 60, waveColor: '#3791D5' }}
-            onReady={this.duration}
-            onFinish={this.finishedPlaying}
-          />
-
+          <WaveSurferContainer>
+            <Wavesurfer
+              audioFile={this.props.audioFile}
+              pos={pos}
+              onPosChange={this.handlePosChange}
+              playing={this.state.play}
+              options={{ cursorWidth: 2, progressColor: '#eff0f2', cursorColor: 'transparent', barWidth: 4, hideScrollbar: true, normalize: true, height: 60, waveColor: '#3791D5' }}
+              onReady={this.duration}
+              onFinish={this.finishedPlaying}
+            />
+          </WaveSurferContainer>
         </WaveformContainer>
         <PlayPauseBtn startPlaying= {()=>this.toggleButton()} playing={play} />
 
@@ -64,19 +65,20 @@ class Waveform extends Component {
 const fadeInAnimation = keyframes`${fadeIn}`;
 
 const Container = styled.div`
-    display: flex;
-    align-self: center;
-    flex: 1 1 auto;
     width: 100%;
-    padding-top: 110px;
-    margin-right: 2%;
-    flex-direction:column;
-    animation: ${fadeInAnimation} .3s ease-in;
+    height: 100%;
 `;
 
 const WaveformContainer = styled.div`
-    width: 100%;
-    margin-top:10px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  animation: ${fadeInAnimation} .3s ease-in;
   `;
+
+const WaveSurferContainer = styled.div`
+  width: 100%;
+`; 
 
 export default Waveform;

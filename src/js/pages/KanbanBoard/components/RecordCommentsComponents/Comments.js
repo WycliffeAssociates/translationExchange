@@ -29,7 +29,7 @@ class Comments extends Component {
           </SvgContainer>
         </TextContainer>
         <AudioContainer>
-          {comments? comments.length > 0 ? <div> {comments.map(((cm)=> <Player typeId={id} deleteComment={deleteComment} type={type}  id={cm.id} comments={cm} txt={txt} />  ))}</div> : <NoComments>{txt.noCommentsAvailable}</NoComments> : <NoComments>{txt.noCommentsAvailable}</NoComments>  }
+          {comments? comments.length > 0 ? <div> {comments.map(((cm)=> <Player typeId={id} deleteComment={deleteComment} type={type}  id={cm.id} comments={cm} txt={txt} key={cm.id} />  ))}</div> : <NoComments>{txt.noCommentsAvailable}</NoComments> : <NoComments>{txt.noCommentsAvailable}</NoComments>  }
         </AudioContainer>
         <ButtonContainer>
           <RecordButton onClick={()=>{this.setState({displayModal: true});}}>
