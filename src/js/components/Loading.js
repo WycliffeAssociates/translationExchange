@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import config from '../../config/config';
 import loadingRingImg from '../../assets/images/loadingRing.svg';
 
 class Loading extends Component {

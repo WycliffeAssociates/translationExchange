@@ -71,14 +71,10 @@ const Container = styled.div`
 
 const WaveformContainer = styled.div`
   display: flex;
-  /*align-self: center;*/
   align-items: center;
-  /*flex: 1 1 auto;*/
   width: 100%;
   height: 100%;
-  /*flex-direction:column;*/
   animation: ${fadeInAnimation} .3s ease-in;
-    /*margin-top:10vw;*/
   `;
 
 const WaveSurferContainer = styled.div`

@@ -4,7 +4,6 @@ import PopupWindow from './PopupWindow';
 import { toQuery } from './utils';
 import githubImg from '../../../assets/images/github.png';
 
-
 class GitHubLogin extends Component {
   constructor(props) {
     super(props);
