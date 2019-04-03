@@ -19,9 +19,9 @@ const Button = styled.button`
   border-radius: 60px;
   color: white;
   background: linear-gradient(to bottom, #0076FF, #00C5FF);
-  height:50px;
-  width:250px;
-  font-size: 20px;
+  height:5vw;
+  width:17vw;
+  font-size: 2vw;
   font-weight: 100;
   border: none;
 

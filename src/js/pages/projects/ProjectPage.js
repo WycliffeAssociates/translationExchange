@@ -20,7 +20,6 @@ export class ProjectContainer extends Component {
     if (language) {
       updateLanguage(language);
     }
-
   }
 
   render() {
@@ -40,7 +39,6 @@ export class ProjectContainer extends Component {
               <MyProjectsContainer {...this.props} />
             </CardsContainer>
           </ProjectsContainer>
-
 
         }
 

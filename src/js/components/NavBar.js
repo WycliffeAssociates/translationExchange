@@ -114,7 +114,7 @@ class NavBar extends Component {
           {chunks.map(chnk=> {
             let publishedTake= chnk.published_take;
             let backgroundColor, color = '';
-            backgroundColor= publishedTake ? 'rgb(0,156,255,1)': '';
+            backgroundColor= publishedTake ? 'rgba(0,156,255,1)': '';
             color = chnk.published_take ? 'white': '';
             return (
               <MenuItem
@@ -137,8 +137,8 @@ class NavBar extends Component {
         <TextContainer>
           <Title>Translation Exchange </Title>
         </TextContainer>
+        
         <IconsContainer>
-
           <ProjectsButton selected={projectPage} onClick={()=> history.push('/projects')}>
             <i className="material-icons">book</i>
             <Text>{book}</Text>
@@ -149,7 +149,6 @@ class NavBar extends Component {
           </ChaptersButton>
           <ChunksButton selected={kanbanPage}>
             <i className="material-icons">graphic_eq</i>
-
             {
               kanbanPage ?
                 <Dropdown
@@ -164,8 +163,8 @@ class NavBar extends Component {
             }
 
           </ChunksButton>
-
         </IconsContainer>
+
         <IdenticonContainer>
 
           <Dropdown
@@ -195,7 +194,7 @@ const Container = styled.div`
   justify-content: space-between;
   box-shadow: 3px 4px 5px rgba(0,0,0,0.2);
   z-index: 2;
-  min-height: 90px;
+  padding: .5vw 0;
 
 `;
 Container.displayName= 'Container';
@@ -235,8 +234,7 @@ ChunksButton.displayName = 'ChunksButton';
 
 
 const Identicon= styled.svg`
-  height: 10vh;
-  width: 5vw;
+  width: 3.5vw;
   cursor: pointer;
 `;
 Identicon.displayName = 'Identicon';

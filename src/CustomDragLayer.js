@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 // import BoxDragPreview from './BoxDragPreview';
 // import snapToGrid from './snapToGrid';
 import { DragLayer } from 'react-dnd';
+import unitSkeleton from './assets/images/UnitSkeleton.png'
+
 
 const layerStyles = {
   position: 'fixed',
   pointerEvents: 'none',
-  zIndex: 95,
+  zIndex: 101,
   left: 0,
   top: 0,
   width: '100%',
@@ -36,7 +38,7 @@ class CustomDragLayer extends React.Component {
     switch (type) {
       case 'TakeCard':
         return (
-          <img style={{height: 'inherit', width: '15.5vw'}}src={require('./assets/images/UnitSkeleton.png')} />
+          <img src={unitSkeleton} />
         );
     }
   }

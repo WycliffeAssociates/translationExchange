@@ -7,7 +7,7 @@ import {getUserHash, getTasks, updateLanguage, removeUser} from '../../actions';
 import TaskProgress from './components/TaskProgress';
 import GotoProjectsButton from './components/GotoProjectsButton';
 import styled from 'styled-components';
-import 'css/takes.css';
+import '../../../css/takes.css';
 
 export class TaskProgressPage extends React.Component {
 

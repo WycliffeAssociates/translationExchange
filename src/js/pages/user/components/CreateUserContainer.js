@@ -88,16 +88,14 @@ const Label = styled.label`
 Label.displayName = 'Label';
 
 const Card = styled.div`
-  width: 590px;
-  height: 800px;
+  width: 40vw;
+  height: 100%;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
   border-radius: 2%;
-  min-width: 469px;
-  max-width: 1200px;
-  padding-bottom: 1.5vw;
   background-color: white;
   overflow: hidden;
   animation: ${fadeInAnimation} .3s ease-in;
+  padding-bottom: 2vw;
 
   @-moz-document url-prefix() {
     height: 800px;

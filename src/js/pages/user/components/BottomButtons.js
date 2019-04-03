@@ -28,7 +28,7 @@ const Container= styled.div`
     flex-direction: row;
     justify-content: space-between;
     width: 90%;
-    margin-top: 12%;
+    margin-top: 2vw;
     animation: ${fadeInAnmiation} .5s ease-in;
   `;
 

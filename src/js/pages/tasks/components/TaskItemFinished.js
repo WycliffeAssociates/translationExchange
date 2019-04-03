@@ -34,7 +34,7 @@ class TaskItemFinished extends React.Component {
     return (
       <TaskDetails>
         <Picture>
-          <Img src={illustrations.picker}></Img>
+          <Img src={illustrations.picker} />
           <Flag style={{backgroundColor: flag_bg_color}}>
             <i style={{fontSize: '3.5vw'}} className="material-icons">{flag}</i>
           </Flag>
@@ -77,6 +77,7 @@ const Img = styled.img`
   filter:brightness(70%);
   width: 100%;
   height: 100%;
+  object-fit: cover;
   border-radius: 0.3vw;
 `;
 Img.displayName = 'Img';

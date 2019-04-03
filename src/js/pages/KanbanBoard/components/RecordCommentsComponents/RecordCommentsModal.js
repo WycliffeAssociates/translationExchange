@@ -228,7 +228,7 @@ class RecordCommentsModal extends Component {
           open={showModal}
           onClose={this.close}
           size="mini"
-          style={{ verticalAlign: 'middle', margin: 'auto', marginTop: '261px', width: '40vw', height: '40vw', minWidth: '825px'}}
+          style={{verticalAlign: 'middle', margin: 'auto', marginTop: '261px', width: '55vw', height: '40vw', position: 'initial'}}
         >
           {uploadingComments ?
             <CommentUploading txt={txt} />
@@ -366,7 +366,6 @@ const ControlsContainer = styled.div`
 const TopContainer = styled.div`
   background: linear-gradient(to bottom,${props => props.error ? '#E74C3C, #820C00': '#0076FF, #00C5FF'} );
   height:30vw;
-
 `;
 
 const BottomContainer =  styled.div`

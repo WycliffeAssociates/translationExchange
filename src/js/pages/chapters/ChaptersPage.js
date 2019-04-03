@@ -10,7 +10,7 @@ import {getChunks, getUserHash,
 import ChapterCard from './components/ChapterCard';
 import Toggle from './components/Toggler';
 import styled from 'styled-components';
-import 'css/takes.css';
+import '../../../css/takes.css';
 
 export class ChapterPage extends Component {
 
@@ -25,9 +25,7 @@ export class ChapterPage extends Component {
 
   componentWillMount() {
     const {getChapters, history, updateLanguage} = this.props;
-
-
-    const {search} = this.props.location;   //get data if the user refresh the page
+    const {search} = this.props.location;
     const query = QueryString.parse(search);
     getChapters(query.projectId, history);
 
