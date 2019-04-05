@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {getAlternateTakes, getSelectedTakes,
+import {getAlternateTakes, getSelectedTakes, getChapters, getChunks, getComments,
   togglePlay, updateActiveChunkIndex, swapTake,
   undoSwapTake, setTake, saveComment, clearAlternateTakes} from '../../actions';
 import styled from 'styled-components';
@@ -21,6 +21,36 @@ export class ChapterReview extends React.Component {
     };
     this.resetTake = this.resetTake.bind(this);
     this.togglePlayingTakes = this.togglePlayingTakes.bind(this);
+  }
+
+  nextChapter(next_chapter_num) {
+    const {history, chapters} = this.props;
+    
+    var nextChapter = chapters.find(function(chapter){
+      return chapter.number == next_chapter_num
+    })
+
+    if(nextChapter == undefined) { // if nextChapter is undefined, it means we have reached the last chapter in the book
+      this.props.history.push({pathname: '/projects'});
+    } 
+    else {
+      var query = QueryString.parse(this.props.location.search);
+      query.chapterId = nextChapter.id;
+      query.chapterNum = next_chapter_num;
+    
+      this.props.history.push({
+        pathname: '/chapterReview',
+        search: `?chapterId=${nextChapter.id}`+
+                `&chapterNum=${next_chapter_num}`+
+                `&startv=1`+
+                `&bookName=${query.bookName}`+
+                `&projectId=${query.projectId}`+
+                `&mode=${query.mode}`,
+      });
+
+      this.props.getSelectedTakes(nextChapter.id, this.props.history);
+      this.setState({alternateTakesFetched: false});
+    }
   }
 
   resetTake(bool) {
@@ -54,6 +84,8 @@ export class ChapterReview extends React.Component {
       undoSwapTake, tempTakes, txt, location} = this.props;
     const {resetPos, takesPlaying} = this.state;
     const length = selectedTakes.length;
+    var query = QueryString.parse(this.props.location.search);
+    var chapterNum = query.chapterNum;
     return (
       <Container>
         <ReviewColumnsContainer>
@@ -82,7 +114,7 @@ export class ChapterReview extends React.Component {
           location={this.props.location} stopPlaying={stopPlaying}
           history={this.props.history} selectedTakesLength={length}
           togglePlayingTakes = {this.togglePlayingTakes}
-          takesPlaying={takesPlaying} />
+          takesPlaying={takesPlaying} nextChapter={() => this.nextChapter(Number(chapterNum) +1)} />
       </Container>
     );
   }
@@ -91,7 +123,7 @@ export class ChapterReview extends React.Component {
 
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({getAlternateTakes,
+  return bindActionCreators({getAlternateTakes, getChapters, getChunks, getComments, 
     getSelectedTakes, togglePlay, updateActiveChunkIndex,
     swapTake, undoSwapTake, setTake, saveComment, clearAlternateTakes}, dispatch);
 };
@@ -99,11 +131,11 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = state => {
   const {selectedTakes, alternateTakes,
     activeChunkIndex, tempTakes, stopPlaying} = state.ChapterReview;
-
+  const {chapters} = state.Chapters;
   const {txt} = state.geolocation;
 
   return {
-    selectedTakes, alternateTakes, activeChunkIndex,tempTakes,stopPlaying,txt,
+    selectedTakes, alternateTakes, activeChunkIndex,tempTakes,stopPlaying,txt,chapters
   };
   // all the state variables that you want to map to props
 };
