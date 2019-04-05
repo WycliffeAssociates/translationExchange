@@ -37,7 +37,15 @@ export default class BottomBar extends React.Component {
           takesPlaying={takesPlaying}
         />
 
-        <ExitButton onClick={this.exit}> <i className="material-icons">close</i> {txt.exitReview} </ExitButton>
+        <ButtonContainer>
+          
+          <NextChapterButton onClick={this.props.nextChapter}> <i className="material-icons">arrow_forward</i> {txt.goToNextChapter} </NextChapterButton>
+
+          <ExitButton onClick={this.exit}> <i className="material-icons">close</i> {txt.exitReview} </ExitButton>
+        
+        </ButtonContainer>
+
+        
 
       </Container>
     );
@@ -64,6 +72,12 @@ const ChapterInfo = styled.label`
 `;
 ChapterInfo.displayName = 'ChapterInfo';
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const ExitButton = styled.button`
   background: #39414A;
   width: 10vw;
@@ -73,7 +87,7 @@ const ExitButton = styled.button`
   color: white;
   font-size: 16px;
   border: none;
-  padding: 5px;
+  padding: 0.75vw;
   i{
     vertical-align: middle;
     font-size: 24px+2vw;
@@ -81,3 +95,22 @@ const ExitButton = styled.button`
   cursor: pointer;
 `;
 ExitButton.displayName = 'ExitButton';
+
+const NextChapterButton = styled.button`
+  background: linear-gradient(to right, #0076FF, #00C5FF  );
+  width: 10vw;
+  height: 5vh;
+  min-width: 150px;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  border: none;
+  padding: 0.75vw;
+  cursor: pointer;
+  margin-right: 2vh;
+  i{
+    vertical-align: middle;
+    font-size: 24px+2vw;
+  }
+`;
+NextChapterButton.displayName = 'NextChapterButton';

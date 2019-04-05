@@ -11,6 +11,7 @@ const mockProps ={
     chapter: 'chapter',
     review: 'review',
     exitReview: 'exit review',
+    goToNextChapter: 'next chapter'
 
   },
   updateActiveChunkIndex: jest.fn(),
@@ -18,7 +19,7 @@ const mockProps ={
   history: [],
   selectedTakesLength: 10,
   location: {
-    serach: 'location/at/this/point',
+    search: 'location/at/this/point',
   },
   clearAlternateTakes: jest.fn(),
 };
@@ -29,11 +30,18 @@ describe('Bottom bar test suite', ()=> {
     expect(wrapper.find('ChapterInfo').length).toEqual(1);
     expect(wrapper.find('ControlButtons').length).toEqual(1);
     expect(wrapper.find('ExitButton').length).toEqual(1);
+    expect(wrapper.find('NextChapterButton').length).toEqual(1);
   });
 
   test('onClick function',() => {
     const button = wrapper.find('ExitButton');
     button.simulate('click');
     expect(mockProps.clearAlternateTakes.mock.calls.length).toEqual(1);
+  });
+
+  test('should navigate to the next chapter', () => {
+    const NextChapterButton = wrapper.find('NextChapterButton');
+    NextChapterButton.simulate('click');
+    expect(wrapper.instance().props.history.length).toEqual(1);
   });
 });
