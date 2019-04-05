@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {getAlternateTakes, getSelectedTakes, getChapters, getChunks, getComments,
+import {getAlternateTakes, getSelectedTakes,
   togglePlay, updateActiveChunkIndex, swapTake,
   undoSwapTake, setTake, saveComment, clearAlternateTakes} from '../../actions';
 import styled from 'styled-components';
@@ -123,7 +123,7 @@ export class ChapterReview extends React.Component {
 
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({getAlternateTakes, getChapters, getChunks, getComments, 
+  return bindActionCreators({getAlternateTakes,
     getSelectedTakes, togglePlay, updateActiveChunkIndex,
     swapTake, undoSwapTake, setTake, saveComment, clearAlternateTakes}, dispatch);
 };
