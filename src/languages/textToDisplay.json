@@ -91,7 +91,8 @@
    "chooseProject": "Choose a Project...",
    "noProjects": "There are no available projects",
    "skipChapter": "Skip to next Chapter",
-   "goToChapterReview" : "Go to Chapter Review"
+   "goToChapterReview" : "Go to Chapter Review",
+   "selectAll": "Select All"
 
 
 
@@ -186,7 +187,8 @@
     "chooseProject": "Elegir Proyecto...",
     "noProjects": "No hay proyectos disponibles",
     "skipChapter": "Ir a siguiente capítulo",
-    "goToChapterReview" : "Ir a revisión de capítulo"
+    "goToChapterReview" : "Ir a revisión de capítulo",
+    "selectAll": "Seleccionar todo"
 
 
 

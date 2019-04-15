@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
 import {selections, getChapters, getUserHash, resetSelected, downloadChapters, getDownloadProgress, removeUser} from '../../actions';
-import {ExportCard, CompletedCheckbox, Footer, ChapterSelected, ExportProject} from './components';
+import {ExportCard, CompletedCheckbox, SelectAllCheckbox, Footer, ChapterSelected, ExportProject} from './components';
 import styled from 'styled-components';
 import QueryString from 'query-string';
 
@@ -14,7 +14,9 @@ export class ExportPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state= {checked: null,
+    this.state= {
+      checked: false,
+      checkedAll: false,
       readyToExport: false,
       downloading: false,
       chapterComplete: 0,
@@ -31,7 +33,19 @@ export class ExportPage extends Component {
     this.props.resetSelected();
   }
 
-  toggleCheck = () => { this.setState({checked: !this.state.checked});}
+  toggleCheck = () => { 
+    this.setState({
+      checked: !this.state.checked,
+      checkedAll: false
+    });
+  }
+
+  toggleCheckAll = () => { 
+    this.setState({
+      checkedAll: !this.state.checkedAll,
+      checked: false
+    });
+  }
 
   nextStep = () => { this.setState({readyToExport: true});}
 
@@ -44,7 +58,10 @@ export class ExportPage extends Component {
   cancel = () => { this.setState({downloading: false});}
 
   goBack =() => {
-    this.setState({readyToExport: false, checked: null});
+    this.setState({
+      readyToExport: false, 
+      checked: false, 
+      checkedAll: false});
     this.props.resetSelected();
 
   }
@@ -56,12 +73,12 @@ export class ExportPage extends Component {
 
 
   render() {
-    const { checked, readyToExport, downloading, chapterComplete } = this.state;
+    const { checked, checkedAll, readyToExport, downloading, chapterComplete } = this.state;
     const { chaptersSelected, chapters, location, txt, taskId, resetSelected } = this.props;
     const query = QueryString.parse(location.search);
 
     return (
-      <ExportPageContainer addMargin = {checked}>
+      <ExportPageContainer addMargin = {checked || checkedAll}>
         <NavBar chapterPage={false} kanban={false} {...this.props} />
         {downloading ? ''
           :
@@ -70,7 +87,13 @@ export class ExportPage extends Component {
             <h1>{query.bookName}</h1>
           </HeaderContainer>
         }
-        {readyToExport ? '': <CompletedCheckbox chapterComplete={chapterComplete} txt={txt} toggleCheck = {this.toggleCheck} checked={checked} /> }
+        {readyToExport ? ''
+          : 
+          <CheckboxContainer>
+            <CompletedCheckbox chapterComplete={chapterComplete} txt={txt} toggleCheck = {this.toggleCheck} checked={checked} />
+            <SelectAllCheckbox txt={txt} toggleCheck = {this.toggleCheckAll} checked={checkedAll} />
+          </CheckboxContainer>
+        }
 
         {this.props.loading?
           <Loading txt={this.props.txt} height= "80vh" marginTop="2vw" />
@@ -80,7 +103,7 @@ export class ExportPage extends Component {
             <CardsContainer center={readyToExport}>
               {readyToExport ? <ChapterSelected number={chaptersSelected.length} txt={txt} />
                 :
-                chapters ? chapters.map((chp, index) => <ExportCard chapterComplete={this.chapterComplete} completedSelected={checked} key={index} {...this.props} {...chp} />): ''
+                chapters ? chapters.map((chp, index) => <ExportCard chapterComplete={this.chapterComplete} completedSelected={checked} allSelected={checkedAll} key={index} {...this.props} {...chp} />): ''
               }
             </CardsContainer>
         }
@@ -148,6 +171,12 @@ const HeaderContainer = styled.div`
 
 HeaderContainer.displayName= 'HeaderContainer';
 
+const CheckboxContainer = styled.div`
+    display: flex;
+    width: 100%;
+`;
+
+CheckboxContainer.displayName ='CheckboxContainer';
 
 const mapDispatchToProps = dispatch => {
 
