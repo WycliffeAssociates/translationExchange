@@ -11,6 +11,7 @@ export const UNDO_SWAP = 'UNDO_SWAP';
 export const UPDATE_ALTERNATE_TAKES = 'UPDATE_ALTERNATE_TAKES';
 export const FINISH_PLAYING = 'FINISH_PLAYING';
 export const CLEAR_ALTERNATE_TAKES = 'CLEAR_ALTERNATE_TAKES';
+export const CLEAR_SELECTED_TAKES = 'CLEAR_SELECTED_TAKES';
 
 //Audio Constants
 export const FINISHED_PLAYING = 'finished_playing';

@@ -33,14 +33,15 @@ class ChunkPanel extends Component {
     return (
       <Container >
         {this.props.chunks.map(chk =>{
-
           return (
             <ChunksContainer selected={selectedChunk == chk.startv} key={chk.id} >
               <label style={{cursor: 'pointer'}} onClick={()=> this.navigateChunk(chk.id, chk.startv)}>{mode} {chk.startv} </label>
               {chk.published_take != null ?
                 <PlayerTracker  url={chk.published_take.location} />
                 :
-                <CurrentLabel selected= {selectedChunk == chk.startv}>{selectedChunk == chk.startv ? txt.selected : txt.unavailable} </CurrentLabel>
+                <CurrentLabel selected={selectedChunk == chk.startv}> 
+                  {chk.has_takes == undefined || chk.has_takes ? txt.unpublished : txt.noTakes} 
+                </CurrentLabel>
               }
 
             </ChunksContainer>);
@@ -57,7 +58,7 @@ Container.displayName = 'Container';
 const ChunksContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   color: ${props=> props.selected ? 'white': '#969595' } ;
   border-bottom: solid 1px #969595;

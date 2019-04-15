@@ -2,7 +2,7 @@
 import reducer from '../../../js/reducers/ChapterReviewReducer';
 import {FETCH_ALTERNATE_TAKES, GET_SELECTED_TAKES, CLEAR_ALTERNATE_TAKES,
   PLAY_PAUSE_SELECTED_TAKE, UPDATE_ACTIVE_CHUNK_INDEX, FINISH_PLAYING,
-  SWAP_TAKE, UNDO_SWAP, UPDATE_ALTERNATE_TAKES, LOADING} from '../../../js/reduxConstants';
+  SWAP_TAKE, UNDO_SWAP, UPDATE_ALTERNATE_TAKES, LOADING, CLEAR_SELECTED_TAKES} from '../../../js/reduxConstants';
 describe('ChapterReviewReducer', () => {
   it('should return initial state', () => {
     expect(reducer(undefined,{})).toEqual({
@@ -46,6 +46,14 @@ describe('ChapterReviewReducer', () => {
       type: CLEAR_ALTERNATE_TAKES,
     })).toEqual({
       alternateTakes: [],
+    });
+  });
+  
+  it('should handle CLEAR_SELECTED_TAKES', () => {
+    expect(reducer({},{
+      type: CLEAR_SELECTED_TAKES,
+    })).toEqual({
+      selectedTakes: [],
     });
   });
 

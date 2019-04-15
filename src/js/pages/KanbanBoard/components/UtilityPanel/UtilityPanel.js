@@ -45,6 +45,8 @@ export default class UtilityPanel extends React.Component {
     const query = QueryString.parse(search);
     takes.map(tk=>{ if (tk.published) { publishedTakeLocation = tk.location;} } );
 
+    let toggled = localStorage.getItem("panelToggled") || "true";
+    
     if (query.mode === 'Verse') {
       mode = txt.verse;
     }
@@ -54,8 +56,11 @@ export default class UtilityPanel extends React.Component {
         <UtilityPanelContainer >
           <UtilityNavigation>
             <Toggle className="vertical_align_middle"
-              onChange={e=>this.setState({commentsTab: e.target.checked})}
-              defaultChecked= {false} icons ={{
+              onChange={ e => {
+                this.setState({commentsTab: !e.target.checked});
+                localStorage.setItem("panelToggled", e.target.checked ? "true" : "false");
+              }}
+              defaultChecked = {toggled == "true"} icons ={{
                 unchecked: <i  className="material-icons">mode_comment</i>,
                 checked: <img src={audioWaveImg}  />,
               }}  />
@@ -63,7 +68,7 @@ export default class UtilityPanel extends React.Component {
             <Hide onClick={this.toggleUtilityPanel}> <i style={{fontSize: '1.75vw'}} className="material-icons">arrow_forward</i> </Hide>
 
           </UtilityNavigation>
-          { !this.state.commentsTab ?
+          { toggled != "true" ?
             <CommentsPanel>
               <Comments
                 saveComment={saveComment}
@@ -91,21 +96,6 @@ export default class UtilityPanel extends React.Component {
                 deleteComment={deleteComment}
                 location={location}
               />
-              {
-              // takes.map(tk=>
-              //   <Comments
-              //     uploadingComments={uploadingComments}
-              //     chunkId ={activeChunkId}
-              //     chunkNum ={chunkNum}
-              //     saveComment={saveComment}
-              //     type="take"
-              //     comments={tk.comments}
-              //     text={`Take ${tk.take_num}`}
-              //     id={tk.id}
-              //     uploadError = {uploadError}
-              //     resetError={resetError} />)
-              }
-
             </CommentsPanel>
             :
             <ChunkPanel txt={txt} mode={mode} takeLocation={publishedTakeLocation}
