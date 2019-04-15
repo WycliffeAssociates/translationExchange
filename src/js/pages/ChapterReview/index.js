@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {getAlternateTakes, getSelectedTakes,
   togglePlay, updateActiveChunkIndex, swapTake,
-  undoSwapTake, setTake, saveComment, clearAlternateTakes} from '../../actions';
+  undoSwapTake, setTake, saveComment, clearAlternateTakes, clearSelectedTakes} from '../../actions';
 import styled from 'styled-components';
 import ReviewColumn from './components/ReviewColumn';
 import BottomBar from './components/BottomBar';
@@ -24,8 +24,12 @@ export class ChapterReview extends React.Component {
   }
 
   nextChapter(next_chapter_num) {
-    const {history, chapters} = this.props;
+    const {chapters} = this.props;
     
+    this.props.updateActiveChunkIndex(0, 0, false);
+    this.props.clearAlternateTakes();
+    this.props.clearSelectedTakes();
+
     var nextChapter = chapters.find(function(chapter){
       return chapter.number == next_chapter_num
     })
@@ -80,7 +84,7 @@ export class ChapterReview extends React.Component {
 
   render() {
     const {selectedTakes, alternateTakes, activeChunkIndex, setTake, stopPlaying,saveComment,
-      togglePlay, updateActiveChunkIndex, swapTake, clearAlternateTakes,
+      togglePlay, updateActiveChunkIndex, swapTake, clearAlternateTakes, clearSelectedTakes,
       undoSwapTake, tempTakes, txt, location} = this.props;
     const {resetPos, takesPlaying} = this.state;
     const length = selectedTakes.length;
@@ -109,6 +113,7 @@ export class ChapterReview extends React.Component {
 
         <BottomBar activeChunkIndex={activeChunkIndex}
           togglePlay={togglePlay} clearAlternateTakes={clearAlternateTakes}
+          clearSelectedTakes={clearSelectedTakes}
           updateActiveChunkIndex={updateActiveChunkIndex}
           resetTake={this.resetTake} txt={txt}
           location={this.props.location} stopPlaying={stopPlaying}
@@ -123,9 +128,9 @@ export class ChapterReview extends React.Component {
 
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({getAlternateTakes,
-    getSelectedTakes, togglePlay, updateActiveChunkIndex,
-    swapTake, undoSwapTake, setTake, saveComment, clearAlternateTakes}, dispatch);
+  return bindActionCreators({getAlternateTakes, getSelectedTakes, togglePlay,
+    updateActiveChunkIndex, swapTake, undoSwapTake, setTake, saveComment,
+    clearAlternateTakes, clearSelectedTakes}, dispatch);
 };
 
 const mapStateToProps = state => {

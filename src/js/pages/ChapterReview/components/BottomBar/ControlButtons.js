@@ -52,7 +52,7 @@ export default class ControlButtons extends React.Component {
     }
     else if (direction === 'previous') {
 
-      index= activeChunkIndex - 1;
+      index = activeChunkIndex - 1;
       if (index >= 0) {
         this.props.updateActiveChunkIndex(activeChunkIndex, index, takesPlaying);
         this.props.resetTake(true);
