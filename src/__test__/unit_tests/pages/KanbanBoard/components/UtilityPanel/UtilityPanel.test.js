@@ -33,7 +33,7 @@ describe('UtilityPanel test suite', () => {
   const wrapper = shallow(<UtilityPanel {...mockProps} />);
 
   it('should render the component correctly', () => {
-    expect(wrapper.find('CommentsPanel').length).toBe(1);
+    expect(wrapper.find('ChunkPanel').length).toBe(1);
     expect(wrapper.find('UtilityPanelNotVisible').length).toBe(0);
     expect(wrapper.find('UtilityPanelContainer').length).toBe(1);
     expect(wrapper.find('UtilityNavigation').length).toBe(1);
