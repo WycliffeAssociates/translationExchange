@@ -72,12 +72,6 @@ export class ChapterReview extends React.Component {
     this.setState({alternateTakesFetched: false});
   }
 
-  componentWillUnmount() {
-    //this.props.updateActiveChunkIndex(0, 0, false);
-    //this.props.clearAlternateTakes();
-    //this.props.clearSelectedTakes();
-  }
-
   componentDidUpdate() {
     const {selectedTakes, alternateTakes} = this.props;
     const {alternateTakesFetched} = this.state;
