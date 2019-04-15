@@ -14,7 +14,10 @@ export default class BottomBar extends React.Component {
   exit() {
     const {history} = this.props;
     history.push(`kanban${this.props.location.search}`);
+    
+    this.props.updateActiveChunkIndex(0, 0, false);
     this.props.clearAlternateTakes();
+    this.props.clearSelectedTakes();
   }
 
 

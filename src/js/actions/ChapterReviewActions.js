@@ -189,3 +189,9 @@ export function clearAlternateTakes() {
     type: 'CLEAR_ALTERNATE_TAKES',
   };
 }
+
+export function clearSelectedTakes() {
+  return {
+    type: 'CLEAR_SELECTED_TAKES',
+  };
+}

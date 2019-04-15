@@ -22,6 +22,7 @@ const mockProps ={
     search: 'location/at/this/point',
   },
   clearAlternateTakes: jest.fn(),
+  clearSelectedTakes: jest.fn(),
 };
 describe('Bottom bar test suite', ()=> {
   const wrapper = shallow(<BottomBar {...mockProps} />);
@@ -36,12 +37,17 @@ describe('Bottom bar test suite', ()=> {
   test('onClick function',() => {
     const button = wrapper.find('ExitButton');
     button.simulate('click');
+    expect(mockProps.updateActiveChunkIndex.mock.calls.length).toEqual(1);
     expect(mockProps.clearAlternateTakes.mock.calls.length).toEqual(1);
+    expect(mockProps.clearSelectedTakes.mock.calls.length).toEqual(1);
   });
 
   test('should navigate to the next chapter', () => {
     const NextChapterButton = wrapper.find('NextChapterButton');
     NextChapterButton.simulate('click');
     expect(wrapper.instance().props.history.length).toEqual(1);
+    expect(mockProps.updateActiveChunkIndex.mock.calls.length).toEqual(1);
+    expect(mockProps.clearAlternateTakes.mock.calls.length).toEqual(1);
+    expect(mockProps.clearSelectedTakes.mock.calls.length).toEqual(1);
   });
 });
