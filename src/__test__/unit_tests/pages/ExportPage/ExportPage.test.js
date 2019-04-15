@@ -12,7 +12,7 @@ const mockProps = {
   },
   loading: false,
   txt: {
-    exportProject: 'Export Project',
+    downloadProject: 'Download Project',
   },
 };
 describe('Export Page Suite', () => {
