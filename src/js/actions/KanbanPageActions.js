@@ -158,6 +158,7 @@ export const patchTake = (
           }
         }
         listOfTakes[takeToUpdateIndex] = updatedTakeInfo;
+        success();
         dispatch(patchTakeSuccess(listOfTakes));
       })
       .catch(error => {
@@ -185,6 +186,49 @@ export function patchTakeSuccess(updatedTakes) {
     updatedTakes: updatedTakes,
   };
 }
+
+//patch chapter
+export const patchChapter = (
+  chapterId,
+  patch,
+  success,
+) => {
+
+  return function(dispatch) {
+
+    return axios
+      .patch(config.apiUrl + 'chapters/' + chapterId + '/', patch,{
+        headers: { Authorization: 'Token ' + localStorage.getItem('token') },
+      })
+      .then(response => {
+        success();
+        dispatch(patchChapterSuccess(response.data));
+      })
+      .catch(error => {
+        let message;
+        if (error.response) {
+          if (error.response.status === 404) {
+            message = 'Sorry, that chapter does not exist!';
+
+          } else {
+            message =
+                    'Something went wrong. Please check your connection and try again.';
+          }
+        } else {
+          message =
+                'Something went wrong. Please check your connection and try again.';
+        }
+        return message;
+      });
+  };
+};
+
+export const patchChapterSuccess = (chapter) =>{
+  return {
+    type: 'PATCH_CHAPTER_SUCCESS',
+    chapter: chapter,
+  };
+};
 
 export function addTakeToDelete(takeId) {
   return {

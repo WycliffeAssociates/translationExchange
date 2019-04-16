@@ -6,7 +6,7 @@ import NavBar from '../../components/NavBar';
 import getIllustrations from '../../../js/getIllustrations';
 import KanbanBoard from './components/KanbanBoard';
 import {getChunks, getTakes,deleteTake, getComments,
-  patchTake, saveComment, getUserHash,
+  patchTake, patchChapter, saveComment, getUserHash,
   removeUser, getChapters, resetError,
   updateLanguage, deleteComment, playTake,
   addTakeToDelete, removeTakeToDelete, updateTake} from '../../actions';
@@ -110,7 +110,7 @@ SourceAudio.displayName = 'SourceAudio';
 const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({getChunks, getTakes,deleteTake,
-    getComments, patchTake, saveComment, getUserHash, removeUser,
+    getComments, patchTake, patchChapter, saveComment, getUserHash, removeUser,
     getChapters, resetError, updateLanguage, deleteComment,playTake,
     addTakeToDelete,removeTakeToDelete, updateTake}, dispatch);
 
