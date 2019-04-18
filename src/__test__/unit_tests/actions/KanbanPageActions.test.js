@@ -2,7 +2,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
-import {getTakes, getChunks, patchTake, playTake,
+import {getTakes, getChunks, patchTake, patchChapter, playTake,
   addTakeToDelete, removeTakeToDelete, updateTake, setProject} from '../../../js/actions';
 
 const middlewares = [thunk];
@@ -88,6 +88,27 @@ describe('KanbanPageActions Suite', () => {
     [],1, 2,  false)).then(() => {
       expect(JSON.stringify(store.getActions())).toEqual(JSON.stringify(expectedActions)); // Jest Test “Compared values have no visual difference.” conver to JSON to resolve error
 
+    });
+  });
+
+  it('patches chapter successfully', () => {
+    moxios.wait(()=> {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: {},
+      });
+    });
+
+    const expectedActions= [
+      {type: 'PATCH_CHAPTER_SUCCESS', chapter: {}}];
+
+    const store = mockStore({kanbanPage: {
+      chunks: [],
+    }});
+    return store.dispatch(patchChapter(1,{
+      published: false})).then(() => {
+      expect(JSON.stringify(store.getActions())).toEqual(JSON.stringify(expectedActions)); // Jest Test “Compared values have no visual difference.” conver to JSON to resolve error
     });
   });
 

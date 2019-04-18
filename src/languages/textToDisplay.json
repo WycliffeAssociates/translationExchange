@@ -63,6 +63,7 @@
    "deletingTake": "Deleting Take...",
    "deletingComment": "Deleting comment",
    "exportProject":"Export Project",
+   "downloadProject":"Download Project",
    "editing": "Editing",
    "listening":"Listening",
    "downloading": "Downloading",
@@ -92,7 +93,8 @@
    "chooseProject": "Choose a Project...",
    "noProjects": "There are no available projects",
    "skipChapter": "Skip to next Chapter",
-   "goToChapterReview" : "Go to Chapter Review"
+   "goToChapterReview" : "Go to Chapter Review",
+   "selectAll": "Select All"
 
 
 
@@ -159,6 +161,7 @@
      "deletingTake": "Borrando grabación",
      "deletingComment": "Borrando Comentario",
      "exportProject": "Exportar Proyecto",
+     "downloadProject":"Descargar Proyecto",
      "editing": "Editar",
      "listening":"Escuchar",
      "downloading": "Descargando",
@@ -188,7 +191,8 @@
     "chooseProject": "Elegir Proyecto...",
     "noProjects": "No hay proyectos disponibles",
     "skipChapter": "Ir a siguiente capítulo",
-    "goToChapterReview" : "Ir a revisión de capítulo"
+    "goToChapterReview" : "Ir a revisión de capítulo",
+    "selectAll": "Seleccionar todo"
 
 
 

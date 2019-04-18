@@ -45,6 +45,12 @@ export default (state = INITIAL_STATE, action ={}) => {
         loading: false,
       };
 
+    case 'PATCH_CHAPTER_SUCCESS':
+      return {
+        ...state,
+        chapter: action.chapter
+      };
+
     case 'UPDATE_PLAYING_TAKE':
       return {
         ...state,
