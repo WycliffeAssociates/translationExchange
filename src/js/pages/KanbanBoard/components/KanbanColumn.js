@@ -114,14 +114,12 @@ class KanbanColumn extends React.Component {
     this.props.patchTake(
       take.id,
       { published: published, rating: newRating },
-      updatedTake => {
+      () => {
       //success callback
         this.props.patchChapter(
           chapterId, 
           { published: this.chapterPublished() },
-          updatedChapter => {
-            // chapter has been updated
-          })
+        )
       },
       this.props.takes,
       chapterId,

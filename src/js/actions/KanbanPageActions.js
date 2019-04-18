@@ -201,7 +201,6 @@ export const patchChapter = (
         headers: { Authorization: 'Token ' + localStorage.getItem('token') },
       })
       .then(response => {
-        success();
         dispatch(patchChapterSuccess(response.data));
       })
       .catch(error => {
