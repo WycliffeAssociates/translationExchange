@@ -191,7 +191,6 @@ export function patchTakeSuccess(updatedTakes) {
 export const patchChapter = (
   chapterId,
   patch,
-  success,
 ) => {
 
   return function(dispatch) {
