@@ -11,16 +11,14 @@ export class ExportCard extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
-    if ( nextProps.completedSelected !== this.props.completedSelected) { //check if the state of the button select completed changed
-
-      if (nextProps.completedSelected && nextProps.published) {                // button selected and the chapter is published, mark them as selected
+    if ( nextProps.checked !== this.props.checked || nextProps.checkedAll !== this.props.checkedAll) { //check if the state of the button select completed changed
+      if ((nextProps.checked && nextProps.published) || nextProps.checkedAll) {                // button selected and the chapter is published, mark them as selected
         this.setState({checked: true});
         if (!this.state.checked) {             // to avoid adding them twice when they already selected
           nextProps.selections(nextProps.id, true);         // send id and number to save them into an array, true is used for saved, false for remove
         }
       }
-      if (!nextProps.completedSelected && nextProps.published) {   // once we check the checkbox
+      if ((!nextProps.checked || (nextProps.checked && !nextProps.published)) && !nextProps.checkedAll) {   // once we check the checkbox
         this.setState({checked: false});
         nextProps.selections(nextProps.id, false);
       }

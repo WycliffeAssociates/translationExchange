@@ -1,4 +1,5 @@
 export * from './CompletedCheckbox';
+export * from './SelectAllCheckbox';
 export * from './ExportCard';
 export * from './Footer';
 export * from './ChapterSelected';
