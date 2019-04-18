@@ -34,17 +34,11 @@ export class ExportPage extends Component {
   }
 
   toggleCheck = () => { 
-    this.setState({
-      checked: !this.state.checked,
-      checkedAll: false
-    });
+    this.setState( prevState => ({checked: !prevState.checked, checkedAll: false}));
   }
 
   toggleCheckAll = () => { 
-    this.setState({
-      checkedAll: !this.state.checkedAll,
-      checked: false
-    });
+    this.setState( prevState => ({checkedAll: !prevState.checkedAll, checked: false}));
   }
 
   nextStep = () => { this.setState({readyToExport: true});}
@@ -103,7 +97,7 @@ export class ExportPage extends Component {
             <CardsContainer center={readyToExport}>
               {readyToExport ? <ChapterSelected number={chaptersSelected.length} txt={txt} />
                 :
-                chapters ? chapters.map((chp, index) => <ExportCard chapterComplete={this.chapterComplete} completedSelected={checked} allSelected={checkedAll} key={index} {...this.props} {...chp} />): ''
+                chapters ? chapters.map((chp, index) => <ExportCard chapterComplete={this.chapterComplete} checked={checked} checkedAll={checkedAll} key={index} {...this.props} {...chp} />): ''
               }
             </CardsContainer>
         }
