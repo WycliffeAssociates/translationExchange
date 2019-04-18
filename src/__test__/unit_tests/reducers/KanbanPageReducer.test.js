@@ -62,6 +62,15 @@ describe('KanbanPageReducer' ,() => {
     });
   });
 
+  it('should handle PATCH_CHAPTER_SUCCESS', ()=> {
+    expect(reducer([],{
+      type: 'PATCH_CHAPTER_SUCCESS',
+      chapter: {},
+    })).toEqual({
+      chapter: {},
+    });
+  });
+
   it('should handle UPDATE_PLAYING_TAKE', ()=> {
     expect(reducer([],{
       type: 'UPDATE_PLAYING_TAKE',
