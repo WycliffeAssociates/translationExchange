@@ -10,3 +10,4 @@ export * from './TaskActions';
 export * from './ChapterPageActions';
 export * from './ExportPageActions';
 export * from './ChapterReviewActions';
+export * from './DownloadPageActions';

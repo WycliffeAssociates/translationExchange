@@ -10,6 +10,18 @@ import {fetchUsers, identiconLogin, updateLanguage} from '../../actions';
 
 export class AvailableUsers extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(clickSrc) {
+
+    if (clickSrc === 'download') {
+      this.props.history.push('/download');
+    }
+
+  }
 
   componentWillMount() {
     const {history, fetchUsers, updateLanguage} = this.props;
@@ -27,6 +39,10 @@ export class AvailableUsers extends React.Component {
 
     return (
       <Container className="pageBackground">
+
+        <DownloadLink onClick={()=> this.handleClick('download')}>
+          {txt.download}
+        </DownloadLink>
 
         <h2 style={{marginBottom: '5vw'}}> {txt.availableUsers} </h2>
 
@@ -73,8 +89,20 @@ const Container = styled.div`
   color: white;
 
 `;
-
 Container.displayName = 'Container';
+
+const DownloadLink = styled.a`
+    text-decoration: underline !important;
+    color: #ffffff !important;
+    font-size: 20px;
+    display: block;
+    margin-top: 30px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 50px;
+`;
+DownloadLink.displayName = 'DownloadLink';
 
 const mapStateToProps = state => {
   const { users, loading } = state.user;

@@ -94,10 +94,10 @@
    "noProjects": "There are no available projects",
    "skipChapter": "Skip to next Chapter",
    "goToChapterReview" : "Go to Chapter Review",
-   "selectAll": "Select All"
-
-
-
+   "selectAll": "Select All",
+   "noDownloads": "Nothing to download :(",
+   "recommended": "recommended",
+   "downloadClients": "Download client apps"
    },
    "Spanish": {
      "continue": "Continuar",
@@ -192,11 +192,9 @@
     "noProjects": "No hay proyectos disponibles",
     "skipChapter": "Ir a siguiente capítulo",
     "goToChapterReview" : "Ir a revisión de capítulo",
-    "selectAll": "Seleccionar todo"
-
-
-
+    "selectAll": "Seleccionar todo",
+    "noDownloads": "Nada para descargar :(",
+    "recommended": "recomendado",
+    "downloadClients": "Download client apps"
    }
-
-
 }
