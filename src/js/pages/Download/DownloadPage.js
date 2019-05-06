@@ -64,22 +64,29 @@ export class Download extends Component {
           {txt.downloadClients}
         </Header>
 
-        <DownloadList>
         {
-          downloads.length > 0 ?
-            downloads.map( (download, index) =>
-              <DownloadLink
-                key={index}
-                name ={download.name}
-                url ={download.url}
-                userAgent={this.state.userAgent}
-                {...this.props}
-              /> )
-            :
-            <NoDownloads>{txt.noDownloads}</NoDownloads>
+          this.props.loading?
+
+          <Loading marginTop={'50px'} txt={this.props.txt} height= {'auto'} />
+
+          :
+
+          <DownloadList>
+          {
+            downloads.length > 0 ?
+              downloads.map( (download, index) =>
+                <DownloadLink
+                  key={index}
+                  name ={download.name}
+                  url ={download.url}
+                  userAgent={this.state.userAgent}
+                  {...this.props}
+                /> )
+              :
+              <NoDownloads>{txt.noDownloads}</NoDownloads>
+          }
+          </DownloadList>
         }
-        </DownloadList>
-        
       </Container>
     );
   }

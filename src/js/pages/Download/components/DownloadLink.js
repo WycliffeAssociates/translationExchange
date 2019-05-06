@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import config from '../../../../config/config';
+import DownloadButton from './DownloadButton';
 
 export default class DownloadLink extends React.Component {
 
@@ -32,13 +33,12 @@ export default class DownloadLink extends React.Component {
 
     return (
       <Container>
-        <div style={{width: "10vh"}}>{fileOs} 
+        <Os>{fileOs} 
           <div>{recommended ? "("+txt.recommended+")" : ""}</div>
-        </div>
-        <div style={{textAlign: "left", width: "40vh"}}>{name}</div>
-        <DownloadButton href={config.streamingUrl + url}>
-        {txt.download} <i className="material-icons">arrow_downward </i>
-        </DownloadButton>
+        </Os>
+        <FileName>{name}</FileName>
+        <DownloadButton onClick={()=> {}} url={config.streamingUrl + url} txt={txt} 
+          isSecondary={!recommended} marginRight={'3vh'}/>
       </Container>
     );
   }
@@ -47,27 +47,20 @@ export default class DownloadLink extends React.Component {
 
 const Container = styled.li`
   border-bottom: 1px solid #ccc;
-  height: 12vh;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 Container.displayName = 'Container';
 
-const DownloadButton = styled.a`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(to bottom, #0076FF, #00C5FF);
-    width: 7vw;
-    min-width: 150px;
-    min-height: 40px;
-    font-size: 16px;
-    font-weight: 100;
-    color: white !important;
-    border: none;
-    border-radius: 20px;
-    box-shadow: 1px 3px 2px 1px rgba(0,0,0,0.2);
-    cursor: pointer;
-    `;
-DownloadButton.displayName = 'DownloadButton';
+const Os = styled.div`
+  width: 10vh
+`;
+Os.displayName = 'Os';
+
+const FileName = styled.div`
+  text-align: left;
+  width: 40vh;
+`;
+FileName.displayName = 'FielName';

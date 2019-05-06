@@ -2,6 +2,7 @@ import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import {zoomIn} from 'react-animations';
 import welcomeImg from '../../../../assets/images/undraw_welcome_3gvl.svg'
+import DownloadButton from '../../Download/components/DownloadButton';
 
 // import GitHubLogin from '../../../components/social-login/GitHubLogin';
 
@@ -60,19 +61,18 @@ export default class WelcomeComponent extends React.Component {
         <ButtonsContainer>
 
           {isClient ? ( 
+            <ContinueButton onClick={()=> this.handleClick('continue')}>
+              {txt.continue} <i className="material-icons">arrow_forward </i>
+            </ContinueButton>
+            ) : (
             <div>
-              <DownloadButton onClick={()=> this.handleClick('download')}>
-                {txt.download} <i className="material-icons">arrow_downward </i>
-              </DownloadButton>
+              <DownloadButton onClick={()=> this.handleClick('download')} txt={txt}
+                marginRight={'0'}/>
 
               <ContinueLink onClick={()=> this.handleClick('continue')}>
                 {txt.continue}
               </ContinueLink>
             </div>
-            ) : (
-            <ContinueButton onClick={()=> this.handleClick('continue')}>
-              {txt.continue} <i className="material-icons">arrow_forward </i>
-            </ContinueButton>
             )}
 
           {
@@ -162,9 +162,6 @@ const ContinueLink = styled.a`
     cursor: pointer;
 `;
 ContinueLink.displayName = 'ContinueLink';
-
-const DownloadButton = styled(ContinueButton)``;
-DownloadButton.displayName = 'DownloadButton';
 
 const GitHubSignInButton= styled(ContinueButton)`
     display: block;
