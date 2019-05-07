@@ -7,6 +7,7 @@ import {ToastContainer} from 'react-toastify';
 import NotFound from './js/pages/NotFound';
 import axios from 'axios';
 import Welcome from './js/pages/Login/LoginPage.js';
+import Download from './js/pages/Download/DownloadPage.js';
 import AvailableUsers from './js/pages/Login/AvailableUsers.js';
 import ErrorPage from './js/pages/ErrorPage/ErrorPage';
 import CreateUserContainer from './js/pages/user/components/CreateUserContainer';
@@ -60,6 +61,7 @@ class App extends Component {
           <Route exact path = "/users" component={AvailableUsers} />
           <Route exact path = "/users/registration" component={CreateUserContainer} />
           <Route path = "/welcome" component={Welcome} />
+          <Route path = "/download" component={Download} />
           <Route path = "/projects" component={ProjectsPage} />
           <Route path = "/chapters" component={ChapterPage} />
           <Route path = "/progress" component={TaskProgressPage} />

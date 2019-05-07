@@ -12,6 +12,7 @@ import taskProgress from './TaskProgressReducer';
 import Chapters from './ChapterPageReducer'
 import ExportPage from './ExportPageReducer';
 import ChapterReview from './ChapterReviewReducer';
+import Downloads from './DownloadPageReducer';
 
 export default combineReducers({
   setAudioPlayerState: AudioPlayerReducer,
@@ -26,4 +27,5 @@ export default combineReducers({
   Chapters,
   ChapterReview,
   ExportPage,
+  Downloads,
 });
