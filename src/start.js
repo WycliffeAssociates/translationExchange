@@ -12,7 +12,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({ width: 1024, height: 768 })
 
   mainWindow.webContents.setUserAgent(
-    mainWindow.webContents.getUserAgent() + " TranslationExchangeClient");
+    mainWindow.webContents.getUserAgent() + " TranslationExchangeClient"
+  );
   mainWindow.loadURL(
     process.env.ELECTRON_START_URL ||
       url.format({

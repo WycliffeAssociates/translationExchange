@@ -27,13 +27,16 @@ describe('Downloads Page Actions suite', () => {
       });
     });
 
-    const expectedActions = [{type: types.DOWNLOADS_LIST_LOADING},
-      {type: types.DOWNLOADS_LIST_SUCCESS, response: undefined, queryString: undefined}];
+    const expectedActions = [
+      {type: types.DOWNLOADS_LIST_LOADING},
+      {type: types.DOWNLOADS_LIST_SUCCESS, response: undefined, queryString: undefined}
+    ];
+    
     const store = mockStore({downloads: []});
+    
     return store.dispatch(getDownloads()).then(()=> {
       expect(store.getActions()).toEqual(expectedActions);
     });
-
   });
 
   it('should not fetch all downloads', () => {
@@ -45,13 +48,15 @@ describe('Downloads Page Actions suite', () => {
       });
     });
 
-    const expectedActions = [{type: types.DOWNLOADS_LIST_LOADING},
-      {type: types.DOWNLOADS_LIST_FAILED, err: 'Error: Request failed with status code 404'}];
+    const expectedActions = [
+      {type: types.DOWNLOADS_LIST_LOADING},
+      {type: types.DOWNLOADS_LIST_FAILED, err: 'Error: Request failed with status code 404'}
+    ];
+    
     const store = mockStore({downloads: []});
+    
     return store.dispatch(getDownloads('query', [])).then(()=> {
       expect(store.getActions()).toEqual(expectedActions);
     });
-
   });
-
 });
