@@ -2,6 +2,7 @@ import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import {zoomIn} from 'react-animations';
 import welcomeImg from '../../../../assets/images/undraw_welcome_3gvl.svg'
+import DownloadButton from '../../Download/components/DownloadButton';
 
 // import GitHubLogin from '../../../components/social-login/GitHubLogin';
 
@@ -9,13 +10,19 @@ export default class WelcomeComponent extends React.Component {
 
   constructor(props) {
     super(props);
+    const $this = this;
 
     this.state = {
       auth2: '',
       imageSrc: 'defaultImg',
+      isClient: $this.isClient(),
     };
 
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  isClient() {
+    return navigator.userAgent.indexOf("TranslationExchangeClient") > -1
   }
 
   onLogin(user) {
@@ -42,6 +49,7 @@ export default class WelcomeComponent extends React.Component {
 
   render() {
     const {txt} = this.props;
+    const {isClient} = this.state;
 
     return (
 
@@ -52,9 +60,20 @@ export default class WelcomeComponent extends React.Component {
 
         <ButtonsContainer>
 
-          <ContinueButton onClick={()=> this.handleClick('continue')}>
-            {txt.continue} <i className="material-icons">arrow_forward </i>
-          </ContinueButton>
+          {isClient ? ( 
+            <ContinueButton onClick={()=> this.handleClick('continue')}>
+              {txt.continue} <i className="material-icons">arrow_forward </i>
+            </ContinueButton>
+            ) : (
+            <div>
+              <DownloadButton onClick={()=> this.handleClick('download')} txt={txt}
+                marginRight={'0'}/>
+
+              <ContinueLink onClick={()=> this.handleClick('continue')}>
+                {txt.continue}
+              </ContinueLink>
+            </div>
+            )}
 
           {
           //<GitHubLogin clientId="f5e981378e91c2067d41"
@@ -76,6 +95,8 @@ export default class WelcomeComponent extends React.Component {
 
     if (clickSrc === 'continue') {
       this.props.history.push('/users');
+    } else if (clickSrc === 'download') {
+      this.props.history.push('/download');
     }
 
   }
@@ -131,6 +152,16 @@ const ContinueButton = styled.button`
     }
     `;
 ContinueButton.displayName = 'ContinueButton';
+
+const ContinueLink = styled.a`
+    text-decoration: underline !important;
+    color: #4183c4 !important;
+    font-size: 16px;
+    display: block;
+    margin-top: 30px;
+    cursor: pointer;
+`;
+ContinueLink.displayName = 'ContinueLink';
 
 const GitHubSignInButton= styled(ContinueButton)`
     display: block;
