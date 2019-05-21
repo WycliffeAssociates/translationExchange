@@ -33,7 +33,7 @@ export default class TaskProgress extends React.Component {
 const Container = styled.div`
   flex: 1
   flex-direction: column;
-  max-height: 35vw;
+  max-height: 75vh;
   overflow-y: auto;
   display: flex;
   flex-wrap: nowrap;

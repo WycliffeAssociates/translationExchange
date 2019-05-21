@@ -52,17 +52,14 @@ const TaskDetails = styled.div`
 TaskDetails.displayName = 'TaskDetails';
 
 const Picture = styled.div`
-  display: flex;
   flex: 1;
   position: relative;
-  justify-content: center;
-  align-items: center;
 `;
 Picture.displayName = 'Picture';
 
 const Img = styled.img`
   width: 100%;
-  height: 100%;
+  height: 10vw;
   object-fit: cover;
   border-radius: 0.3vw;
 `;

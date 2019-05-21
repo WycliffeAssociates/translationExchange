@@ -62,11 +62,8 @@ const TaskDetails = styled.div`
 TaskDetails.displayName = 'TaskDetails';
 
 const Picture = styled.div`
-  display: flex;
   flex: 1;
   position: relative;
-  justify-content: center;
-  align-items: center;
 `;
 Picture.displayName = 'Picture';
 
@@ -76,7 +73,7 @@ const Img = styled.img`
   filter: url(#brightness);
   filter:brightness(70%);
   width: 100%;
-  height: 100%;
+  height: 10vw;
   object-fit: cover;
   border-radius: 0.3vw;
 `;
@@ -89,9 +86,9 @@ const Flag = styled.div`
   height: 4vw;
   border-radius: 2vw;
   position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 Flag.displayName = 'Flag';
 
