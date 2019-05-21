@@ -319,6 +319,10 @@ Card.displayName = 'Card';
 
 const CircularTextContainer = styled.div`
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 50%;
     text-align: center;
     i {
       color: ${props=> props.dangerSign? '#FF9800': '#E9E9E9' }
