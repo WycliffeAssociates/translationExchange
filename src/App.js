@@ -22,8 +22,8 @@ import { default as TouchBackend } from 'react-dnd-touch-backend';
 import config from './config/config';
 
 // import and configure the raven client for sentry in order to track errors
-//import Raven from 'raven-js';
-//Raven.config(`http://9183fe1745da4049889061d44d154a4b@${config.domain}:9000/3`).install();
+import Raven from 'raven-js';
+Raven.config(`http://9183fe1745da4049889061d44d154a4b@${config.domain}:9000/3`).install();
 
 
 class App extends Component {
