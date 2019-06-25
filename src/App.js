@@ -40,7 +40,7 @@ class App extends Component {
 
   componentDidCatch(error, info) {
     this.setState({hasError: true});
-    //Raven.captureException(error, {extra: info}); //send error to raven client
+    Raven.captureException(error, {extra: info}); //send error to raven client
   }
 
 
