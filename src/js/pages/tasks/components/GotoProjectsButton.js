@@ -38,5 +38,9 @@ const Button = styled.div`
   align-items: center;
   justify-content: center;
   box-shadow: 0.2vw 0.2vw 0.5vw #888888;
+  position: fixed;
+  bottom: 0.5vh;
+  left: 50%;
+  transform: translate(-50%, 0);
 `;
 Button.displayName = 'Button';

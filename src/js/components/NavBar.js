@@ -193,6 +193,7 @@ class NavBar extends Component {
 const Container = styled.div`
   background-color: #fff;
   width: 100%;
+  height: 5vw;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

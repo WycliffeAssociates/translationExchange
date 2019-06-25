@@ -85,8 +85,11 @@ export default class ControlButtons extends React.Component {
 const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
   width: 30%;
+
+  button {
+    margin-right: 2vw;
+  }
 `;
 Container.displayName = 'Container';
 

@@ -32,6 +32,7 @@ export class ChapterReview extends React.Component {
 
     var nextChapter = chapters.find(function(chapter){
       return chapter.number == next_chapter_num
+        && chapter.published_chunks == chapter.total_chunks
     })
 
     if(nextChapter == undefined) { // if nextChapter is undefined, it means we have reached the last chapter in the book
@@ -152,8 +153,6 @@ const Container= styled.div`
   position: absolute;
   overflow-y: hidden;
   overflow-x:hidden;
-  display: flex;
-  align-items: center;
 `;
 Container.displayName = 'Container';
 const ReviewColumnsContainer=styled.div`

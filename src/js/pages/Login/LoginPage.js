@@ -62,7 +62,7 @@ export class Welcome extends React.Component {
 const LoginPage = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
 `;
 LoginPage.displayName = 'LoginPage';
@@ -77,7 +77,7 @@ const LanguageContainer = styled.div`
   width:100%;
   display:flex;
   justify-content: flex-end;
-  margin-bottom: 2vw;
+  margin: 0;
 `;
 LanguageContainer.displayName = 'LanguageContainer';
 
