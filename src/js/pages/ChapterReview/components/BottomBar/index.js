@@ -59,7 +59,7 @@ export default class BottomBar extends React.Component {
 const Container = styled.div`
   position: fixed;
   bottom: 0;
-  height: 7.5vh;
+  height: 10vh;
   background: #222B35;
   display: flex;
   justify-content: space-between;
@@ -84,7 +84,7 @@ const ButtonContainer = styled.div`
 const ExitButton = styled.button`
   background: #39414A;
   width: 10vw;
-  height: 5vh;
+  height: 6vh;
   min-width: 150px;
   border-radius: 5px;
   color: white;
@@ -102,7 +102,7 @@ ExitButton.displayName = 'ExitButton';
 const NextChapterButton = styled.button`
   background: linear-gradient(to right, #0076FF, #00C5FF  );
   width: 10vw;
-  height: 5vh;
+  height: 6vh;
   min-width: 150px;
   border-radius: 5px;
   color: white;

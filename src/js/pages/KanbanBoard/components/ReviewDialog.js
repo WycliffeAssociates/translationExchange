@@ -146,7 +146,7 @@ Action.displayName = 'Action';
 
 const ChapterReviewButton = styled.button`
   width: 35%;
-  height: 30%;
+  height: 6vh;
   min-height: 40px;
   border-radius: 25px;
   background: linear-gradient(to right, #0076FF, #00C5FF);

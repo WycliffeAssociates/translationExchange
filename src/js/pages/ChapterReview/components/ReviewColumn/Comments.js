@@ -32,7 +32,7 @@ export default class Comments extends React.Component {
 }
 
 const CommentContainer = styled.div`
-  height: 10vh;
+  height: 11vh;
   width: 100%;
   background: ${props => props.active? '#0D4E78' :'#1B2633'};
   border-radius: 5px;

@@ -68,7 +68,9 @@ export class TaskProgressPage extends React.Component {
 }
 
 const TaskProgressPageContainer = styled.div`
-
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
 `;
 TaskProgressPageContainer.displayName = 'TaskProgressPageContainer';
 

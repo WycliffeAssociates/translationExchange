@@ -113,8 +113,7 @@ const  WelcomePage = styled.div`
   background: white;
   justify-self: center;
   min-width: 250px;
-  min-height: 400px;
-  height: 66%;
+  height: 70vh;
   text-align: center;
   //border: solid #969595 0.1vw;
   border-radius: 0.5vw;
