@@ -4,6 +4,10 @@ import jdenticon from 'jdenticon';
 import ReactPlayer from 'react-player';
 import config from '../../../../config/config';
 
+jdenticon.config = {
+  replaceMode: "observe"
+};
+
 class TaskIdenticon extends React.Component {
 
   constructor(props) {
@@ -24,19 +28,16 @@ class TaskIdenticon extends React.Component {
     this.setState({playing: false});
   }
 
-  componentDidMount() {
-    jdenticon.update(`#user${this.props.task.id.slice(0, 8)}`, this.props.task.details.user_icon_hash?
-      this.props.task.details.user_icon_hash: 'null user');
-  }
-
   render() {
 
     const { task } = this.props;
 
     return (
       <Container>
-        <Identicon onClick={()=>this.play()} id={`#user${task.id.slice(0, 8)}`}
-          data-jdenticon-hash={task.details.user_icon_hash ? task.details.user_icon_hash: 'null user'} />
+        <IconBox>
+          <Identicon onClick={()=>this.play()} id={`#user${task.id.slice(0, 8)}`}
+            data-jdenticon-hash={task.details.user_icon_hash ? task.details.user_icon_hash: 'null user'} />
+        </IconBox>
         <ReactPlayer
           url={`${config.streamingUrl}${task.details.user_name_audio ? task.details.user_name_audio : ''}`}
           playing={this.state.playing}
@@ -53,9 +54,17 @@ const Container = styled.div`
 `;
 Container.displayName = 'Container';
 
+const IconBox = styled.div`
+  width: 3.5vw;
+  height: 3.5vw;
+  background-color: white;
+  border-top-right-radius: 1vw;
+`;
+IconBox.displayName = 'IconBox';
+
 const Identicon = styled.svg`
-  height: 4vw;
-  width: 4vw;
+  width: 3.5vw;
+  height: 3.5vw;
   cursor: pointer;
 `;
 Identicon.displayName = 'Identicon';
