@@ -23,7 +23,10 @@ export default class UserCard extends React.Component {
   }
 
   identLogin(hash) {
-    this.props.identiconLogin(hash, ()=>this.props.history.push('/projects'));
+    this.props.identiconLogin(hash, ()=>{
+      localStorage.setItem("login:" + hash, Date.now());
+      this.props.history.push('/projects');
+    });
   }
 
   play() {
