@@ -10,7 +10,7 @@ return (dispatch) => {
         dispatch(fetchUserSuccess(response.data));
       })
       .catch(error => {
-        console.log(error); //TODO handle error
+        console.log("ERROR: ", config.apiUrl); //TODO handle error
         redirect.push('./ErrorPage');
       });
   };

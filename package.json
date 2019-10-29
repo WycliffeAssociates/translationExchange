@@ -1,8 +1,8 @@
 {
-  "name": "translationexchange",
-  "author": "mxaln",
-  "version": "1.1.7",
-  "description": "Translation Exchange",
+  "name": "bttexchanger",
+  "author": "WA",
+  "version": "1.1.8",
+  "description": "BTT Exchanger",
   "private": true,
   "homepage": ".",
   "main": "src/start.js",

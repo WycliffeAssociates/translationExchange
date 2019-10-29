@@ -15,9 +15,10 @@ export const fetchAllProjects = (query, redirect) => {
         dispatch(dispatchAllProjectsFailed(err));
         localStorage.removeItem('token');
         
-        if(err.response.status == 401) {
+        if(err.response != undefined && err.response.status == 401) {
           redirect.push('/welcome');
         } else {
+          console.log("ERROR: ", config.apiUrl, query);
           redirect.push('/errorPage');
         }
       });

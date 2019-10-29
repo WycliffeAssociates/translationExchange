@@ -26,23 +26,35 @@ export class Welcome extends React.Component {
   }
 
   onSelect({key}) {
-    const language =key;
+    const language = key;
     this.props.updateLanguage(language);
     localStorage.setItem('language', language);
+  }
 
+  onSettingsClick() {
+    this.props.history.push ({
+      pathname: '/settings',
+    });
   }
 
 
   render() {
     const menu = (
       <Menu onSelect={ ky=> this.onSelect(ky)}>
-        {Object.keys(Languages).map(lng => <MenuItem style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={lng}> {lng} </MenuItem> )}
+        {Object.keys(Languages).map(lng => 
+          <MenuItem style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={lng}>
+             {lng} 
+          </MenuItem> 
+        )}
       </Menu>
     );
 
     return (
       <LoginPage className="pageBackground">
         <LanguageContainer>
+          <SettingsButton onClick={this.onSettingsClick.bind(this)}>
+            {this.props.txt.settings} <i className="material-icons">settings</i>
+          </SettingsButton>
           <Dropdown
             trigger={['click']}
             overlay={menu}
@@ -81,6 +93,16 @@ const LanguageContainer = styled.div`
 `;
 LanguageContainer.displayName = 'LanguageContainer';
 
+const SettingsButton = styled.a`
+  margin-right: 1vh;
+  color: white;
+  cursor: pointer;
+
+  :hover {
+    color: white;
+  }
+`;
+SettingsButton.displayName = 'SettingsButton';
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
