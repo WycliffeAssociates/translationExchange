@@ -7,7 +7,8 @@ import {ToastContainer} from 'react-toastify';
 import NotFound from './js/pages/NotFound';
 import axios from 'axios';
 import Welcome from './js/pages/Login/LoginPage.js';
-import Download from './js/pages/Download/DownloadPage.js';
+import DownloadPage from './js/pages/Download/DownloadPage.js';
+import SettingsPage from './js/pages/Settings/SettingsPage.js';
 import AvailableUsers from './js/pages/Login/AvailableUsers.js';
 import ErrorPage from './js/pages/ErrorPage/ErrorPage';
 import CreateUserContainer from './js/pages/user/components/CreateUserContainer';
@@ -23,7 +24,11 @@ import config from './config/config';
 
 // import and configure the raven client for sentry in order to track errors
 import Raven from 'raven-js';
-Raven.config(`http://9183fe1745da4049889061d44d154a4b@${config.domain}:9000/3`).install();
+try {
+  Raven.config(`http://9183fe1745da4049889061d44d154a4b@${config.domain}:9000/3`).install();
+} catch(error) {
+  console.log("Raven is not configured!");
+}
 
 
 class App extends Component {
@@ -33,7 +38,7 @@ class App extends Component {
     //configuration for web requests
     axios.defaults.timeout = 120000;
 
-    this.state ={
+    this.state = {
       hasError: false,
     };
   }
@@ -42,8 +47,6 @@ class App extends Component {
     this.setState({hasError: true});
     Raven.captureException(error, {extra: info}); //send error to raven client
   }
-
-
 
   render() {
     return (
@@ -61,7 +64,8 @@ class App extends Component {
           <Route exact path = "/users" component={AvailableUsers} />
           <Route exact path = "/users/registration" component={CreateUserContainer} />
           <Route path = "/welcome" component={Welcome} />
-          <Route path = "/download" component={Download} />
+          <Route path = "/download" component={DownloadPage} />
+          <Route path = "/settings" component={SettingsPage} />
           <Route path = "/projects" component={ProjectsPage} />
           <Route path = "/chapters" component={ChapterPage} />
           <Route path = "/progress" component={TaskProgressPage} />

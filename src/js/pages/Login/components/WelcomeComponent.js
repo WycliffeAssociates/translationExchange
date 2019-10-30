@@ -55,7 +55,7 @@ export default class WelcomeComponent extends React.Component {
 
       <WelcomePage>
 
-        <h2 className="welcomeh2"> translation Exchange  </h2>
+        <h2 className="welcomeh2"> BTT Exchanger </h2>
         <Icon src={welcomeImg} />
 
         <ButtonsContainer>

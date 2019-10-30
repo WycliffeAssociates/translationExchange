@@ -13,6 +13,7 @@ export class AvailableUsers extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.sortedUsers = this.sortedUsers.bind(this);
   }
 
   handleClick(clickSrc) {
@@ -30,12 +31,28 @@ export class AvailableUsers extends React.Component {
     if (language) {
       updateLanguage(language);
     }
+  }
 
+  sortedUsers() {
+    const {users} = this.props;
+    
+    users.forEach((element) => {
+      element["timestamp"] = localStorage.getItem("login:" + element.icon_hash);
+    });
+    
+    users.sort((a, b) => {
+      if(a.timestamp == null) return 1;
+      if(b.timestamp == null) return -1;
+
+      return b.timestamp - a.timestamp;
+    });
+    
+    return users;
   }
 
   render() {
 
-    const {users, txt} = this.props;
+    const {txt} = this.props;
 
     return (
       <Container className="pageBackground">
@@ -60,13 +77,13 @@ export class AvailableUsers extends React.Component {
               </Grid.Column >
 
               {
-                users.length>0? users.map((user,index)  => {
+                this.sortedUsers().length > 0? this.sortedUsers().map((user,index)  => {
                   return (
                     user.is_social? '' :
                       <Grid.Column width={3} key={user.id}>
-                        <UserCard   id={index} user={user} {...this.props} />
+                        <UserCard id={index} user={user} {...this.props} />
                       </Grid.Column>
-                  );}) :   ''
+                  );}) : ''
 
               }
             </Grid>

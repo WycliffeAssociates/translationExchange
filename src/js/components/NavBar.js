@@ -53,6 +53,9 @@ class NavBar extends Component {
     if (key === '2') {
       this.props.history.push('./download');
     }
+    if (key === '3') {
+      this.props.history.push('./settings');
+    }
   }
 
   onSelect({key, item}) {
@@ -91,6 +94,7 @@ class NavBar extends Component {
         <MenuItem  style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={0}>{txt.logOut}</MenuItem>
         <MenuItem  style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={1}>{txt.progressPage}</MenuItem>
         <MenuItem  style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={2}>{txt.downloadClients}</MenuItem>
+        <MenuItem  style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={3}>{txt.settings}</MenuItem>
       </Menu>
     );
 
@@ -139,7 +143,7 @@ class NavBar extends Component {
     return (
       <Container>
         <TextContainer>
-          <Title>Translation Exchange </Title>
+          <Title>BTT Exchanger</Title>
         </TextContainer>
         
         <IconsContainer>
