@@ -91,7 +91,10 @@
     "selectAll": "Pili-a tanan",
     "noDownloads": "Wala nay ma-download :(",
     "recommended": "rekomendasyon",
-    "downloadClients": "I-Download ang client apps"
+    "downloadClients": "I-Download ang client apps",
+    "settings": "Setting",
+    "restoreDefaults": "Iuli ang mga default",
+    "save": "Luwasa"
   },
   "Ilocano": {
     "continue": "Continue",
@@ -185,7 +188,10 @@
     "selectAll": "Piliem amin",
     "noDownloads": "Awan pulos ti nadownload :(",
     "recommended": "nai- rekomenda",
-    "downloadClients": "I- Download ti client apps"
+    "downloadClients": "I- Download ti client apps",
+    "settings": "Setting",
+    "restoreDefaults": "Restore defaults",
+    "save": "Save"
   },
   "Tagalog": {
     "continue": "Magpatuloy",
@@ -279,7 +285,10 @@
     "selectAll": "Piliin lahat",
     "noDownloads": "Walang ma-download :(",
     "recommended": "inirerekomenda",
-    "downloadClients": "I-Download ang client apps"
+    "downloadClients": "I-Download ang client apps",
+    "settings": "Setting",
+    "restoreDefaults": "Restore defaults",
+    "save": "Save"
   },
   "English": {
     "continue": "Continue",
@@ -373,7 +382,11 @@
     "selectAll": "Select All",
     "noDownloads": "Nothing to download :(",
     "recommended": "recommended",
-    "downloadClients": "Download client apps"
+    "downloadClients": "Download client apps",
+    "settings": "Settings",
+    "serverName": "Server Name",
+    "restoreDefaults": "Restore defaults",
+    "save": "Save"
   },
   "Spanish": {
     "continue": "Continuar",
@@ -466,6 +479,10 @@
     "selectAll": "Seleccionar todo",
     "noDownloads": "Nada para descargar :(",
     "recommended": "recomendado",
-    "downloadClients": "Descargar aplicaciones de cliente"
+    "downloadClients": "Descargar aplicaciones de cliente",
+    "settings": "Ajustes",
+    "serverName": "Nombre del servidor",
+    "restoreDefaults": "Restaurar los valores predeterminados",
+    "save": "Salvar"
   }
 }

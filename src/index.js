@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom';
 
 import App from './App';
-import 'semantic-ui-css/semantic.min.css';
+import 'semantic-ui-css-offline/semantic.min.css';
 import './index.css';
 import { Provider } from 'react-redux';
 import store from './js/store';
