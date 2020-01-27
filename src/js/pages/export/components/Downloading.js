@@ -56,19 +56,19 @@ export class Downloading extends Component {
         {downloading ?
           <Container>
             <Image src={searchingImg} alt="Smiley face" height="10vw" width="10vw" />
-            <h1>{txt.downloading}...</h1>
-            <p>{txt.yourFiles}  </p>
+            <h1>{txt.get("downloading")}...</h1>
+            <p>{txt.get("yourFiles")}  </p>
             <Link to="/projects">
-              <BlueButton onClick={()=>resetSelected()}> {txt.backToProjects} <i class="material-icons">book</i> </BlueButton>
+              <BlueButton onClick={()=>resetSelected()}> {txt.get("backToProjects")} <i class="material-icons">book</i> </BlueButton>
             </Link>
           </Container>
           :
           <Container>
             {svg}
             <p>{percentage} %</p>
-            <p>{txt.generating} {type}  </p>
+            <p>{txt.get("generating")} {type}  </p>
             <BorderButton
-              onClick ={this.props.cancel} txt={txt.cancel}
+              onClick ={this.props.cancel} txt={txt.get("cancel")}
               color={'#009CFF'}
               height={'40px'}
               width={'214px'}

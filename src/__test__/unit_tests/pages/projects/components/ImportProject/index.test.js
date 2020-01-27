@@ -5,7 +5,7 @@ import renderer from 'react-test-renderer';
 
 const mockProps = {
   txt: {
-    noProjects: 'There are no available projects',
+    get: jest.fn()
   },
 };
 describe('ImportProject test suite', () => {

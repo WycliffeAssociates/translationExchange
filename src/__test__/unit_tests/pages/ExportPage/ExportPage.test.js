@@ -12,7 +12,7 @@ const mockProps = {
   },
   loading: false,
   txt: {
-    downloadProject: 'Download Project',
+    get: jest.fn()
   },
 };
 describe('Export Page Suite', () => {

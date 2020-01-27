@@ -18,7 +18,7 @@ export default class GotoProjectButton extends React.Component {
     return (
 
       <Button onClick={()=> history.push(url)}>
-        <span style={{verticalAlign: 'middle'}}>{txt.select}</span>
+        <span style={{verticalAlign: 'middle'}}>{txt.get("select")}</span>
         <i style={{verticalAlign: 'middle', marginLeft: '0.4vw'}} className="material-icons">touch_app</i>
       </Button>
 

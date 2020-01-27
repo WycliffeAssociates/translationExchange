@@ -5,7 +5,7 @@ import  {Footer} from '../../../../../js/pages/export/components/';
 
 const mockProps = {
   nextStep: jest.fn(),
-  txt: {next: 'Next'},
+  txt: { get: jest.fn() },
 };
 describe('Footer test suite', () => {
   const wrapper = shallow(<Footer {...mockProps} />);

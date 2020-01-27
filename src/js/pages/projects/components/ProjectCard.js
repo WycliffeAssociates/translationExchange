@@ -63,7 +63,7 @@ export default class ProjectCard extends React.Component {
 
           <ButtonsContainer>
             <BorderButton
-              onClick ={this.showModal} txt={txt.export}
+              onClick ={this.showModal} txt={txt.get("export")}
               color={'#009CFF'}
               height={'40px'}
               width={'154px'}
@@ -75,7 +75,7 @@ export default class ProjectCard extends React.Component {
               hoverColor={'#3BAC2A'}
             />
 
-            <BlueButton onClick={this.reviewProject} >{txt.select} <i className="material-icons">touch_app</i> </BlueButton>
+            <BlueButton onClick={this.reviewProject} >{txt.get("select")} <i className="material-icons">touch_app</i> </BlueButton>
 
           </ButtonsContainer>
         </Card>

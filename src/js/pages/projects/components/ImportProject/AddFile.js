@@ -30,7 +30,7 @@ export default class AddFile extends React.Component {
         var fileName = '';
         fileName = e.target.value.split('\\').pop();
 
-        if (fileName && labelVal !== txt.chooseProject)
+        if (fileName && labelVal !== txt.get("chooseProject"))
         {
           label.querySelector('strong').innerHTML = fileName;
           submit.style.opacity=1;
@@ -53,8 +53,8 @@ export default class AddFile extends React.Component {
         <Container>
           <Input type="file" name="file" id="file" className="inputFile" accept= ".zip"  innerRef={input => {
             this.fileInput = input;}} />
-          <label htmlFor="file" style={styles.label}> <i className="material-icons">create_new_folder</i> <strong>{txt.chooseProject}</strong></label>
-          <Submit className="submit" type="submit" > <strong>{txt.import}</strong> </Submit>
+          <label htmlFor="file" style={styles.label}> <i className="material-icons">create_new_folder</i> <strong>{txt.get("chooseProject")}</strong></label>
+          <Submit className="submit" type="submit" > <strong>{txt.get("import")}</strong> </Submit>
         </Container>
       </Form>
     );

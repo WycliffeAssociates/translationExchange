@@ -7,8 +7,7 @@ const mockProps = {
   history: [],
   importProject: jest.fn(),
   txt: {
-    import: 'import',
-    chooseProject: 'chooseProject',
+    get: jest.fn()
   },
 };
 

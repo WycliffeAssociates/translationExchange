@@ -9,7 +9,7 @@ const mockProps = {
     {id: 1, location: 'location 1'},
     {id: 2, location: 'location 2'}],
   txt: {
-    comments: 'comments',
+    get: jest.fn()
   },
 };
 

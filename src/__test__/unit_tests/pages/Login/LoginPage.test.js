@@ -6,12 +6,11 @@ import {shallow} from 'enzyme';
 const mockProps = {
   history: [],
   txt: {
-    loading: false,
-    availableUsers: 'availableUsers',
-    languages: 'english',
+    get: jest.fn()
   },
   users: [{is_social: false, id: 1}, {is_social: true, id: 2}],
   updateLanguage: jest.fn(),
+  fetchLocalization: jest.fn()
 };
 describe('LoginPage test suite', () => {
   const wrapper = shallow(<Welcome {...mockProps} />);

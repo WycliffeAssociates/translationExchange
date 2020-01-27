@@ -13,7 +13,7 @@ class MyProjectsContainer extends Component {
 
       <Container>
         <HeaderContainer>
-          <Header>  <i className="material-icons">folder_shared</i>{txt.projects}</Header>
+          <Header>  <i className="material-icons">folder_shared</i>{txt.get("projects")}</Header>
           <div style={{alignSelf: 'flexEnd'}} >
             {projects.length >0 ?
               <AddFile txt={txt} importProject={importProject}

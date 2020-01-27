@@ -8,7 +8,7 @@ import KanbanBoard from './components/KanbanBoard';
 import {getChunks, getTakes,deleteTake, getComments,
   patchTake, patchChapter, saveComment, getUserHash,
   removeUser, getChapters, resetError,
-  updateLanguage, deleteComment, playTake,
+  deleteComment, playTake,
   addTakeToDelete, removeTakeToDelete, updateTake} from '../../actions';
 import UtilityPanel from './components/UtilityPanel/UtilityPanel';
 import styled from 'styled-components';
@@ -24,17 +24,12 @@ export class KanbanPage extends React.Component {
   }
 
   componentWillMount() {
-    const {getComments, getChunks, takes, history, updateLanguage} = this.props;
+    const {getComments, getChunks, takes, history} = this.props;
     const {search} = this.props.location;
     const query = QueryString.parse(search);
     
     getChunks(query.chapterId, query.startv, history);
     getComments(query.chapterId, 'chapter_id');
-    
-    const language = localStorage.getItem('language');
-    if (language) {
-      updateLanguage(language);
-    }
 
     let illustrations = getIllustrations(this.props.project);
     this.setState({illustrations: illustrations});
@@ -111,7 +106,7 @@ const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({getChunks, getTakes,deleteTake,
     getComments, patchTake, patchChapter, saveComment, getUserHash, removeUser,
-    getChapters, resetError, updateLanguage, deleteComment,playTake,
+    getChapters, resetError, deleteComment,playTake,
     addTakeToDelete,removeTakeToDelete, updateTake}, dispatch);
 
 };

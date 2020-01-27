@@ -82,12 +82,12 @@ const DragIcon = styled.button`
 `;
 const ConfirmDelete = ({closeToast,props,changeConfirmation }) => (
   <div style= {{textAlign: 'center'}}>
-    <p> {props.txt.deleteTake} : {props.id}</p>
+    <p> {props.txt.get("deleteTake")} : {props.id}</p>
     <ButtonContainer>
       <Confirm onClick={() => (showUndoToast(props), changeConfirmation(), closeToast())}>
-        {props.txt.confirm}  <i className="material-icons">done_all</i>
+        {props.txt.get("confirm")}  <i className="material-icons">done_all</i>
       </Confirm>
-      <Undo onClick={closeToast}> {props.txt.undo}<i className="material-icons">undo</i> </Undo>
+      <Undo onClick={closeToast}> {props.txt.get("undo")}<i className="material-icons">undo</i> </Undo>
     </ButtonContainer>
   </div>
 );
@@ -104,8 +104,8 @@ const UndoToast = ({closeToast, props}) => {
 
   return (
     <div style={{textAlign: 'center', color: 'white'}}>
-      <p>{props.txt.deletingTake} </p>
-      <Undo onClick={handleClick}> {props.txt.undo}<i className="material-icons">undo</i> </Undo>
+      <p>{props.txt.get("deletingTake")} </p>
+      <Undo onClick={handleClick}> {props.txt.get("undo")}<i className="material-icons">undo</i> </Undo>
     </div>
   );
 
@@ -194,7 +194,7 @@ const takeSource = {
       if (dropResult.listId === 4) //CHECK PUBLISHED COLUMN
       {
         if (item.take.published === false && props.publishedTake == true) {
-          toast.error(props.txt.alreadyPublished,
+          toast.error(props.txt.get("alreadyPublished"),
             {
               position: toast.POSITION.TOP_CENTER,
             });

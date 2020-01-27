@@ -91,17 +91,17 @@ class NavBar extends Component {
     let mode = '';
     let logOutMenu = (
       <Menu onSelect={ky => this.onLogoutMenuSelect(ky)}>
-        <MenuItem  style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={0}>{txt.logOut}</MenuItem>
-        <MenuItem  style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={1}>{txt.progressPage}</MenuItem>
-        <MenuItem  style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={2}>{txt.downloadClients}</MenuItem>
-        <MenuItem  style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={3}>{txt.settings}</MenuItem>
+        <MenuItem  style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={0}>{txt.get("logOut")}</MenuItem>
+        <MenuItem  style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={1}>{txt.get("progressPage")}</MenuItem>
+        <MenuItem  style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={2}>{txt.get("downloadClients")}</MenuItem>
+        <MenuItem  style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={3}>{txt.get("settings")}</MenuItem>
       </Menu>
     );
 
     if (kanbanPage) {
-      chapter =`${txt.chapter} ${chapterNum}`;
+      chapter =`${txt.get("chapter")} ${chapterNum}`;
       book = searchBar.bookName;
-      mode = txt.chunk;
+      mode = txt.get("chunk");
       goToChapters = () => {
         const {getChapters} = this.props;
         getChapters(searchBar.projectId);
@@ -114,7 +114,7 @@ class NavBar extends Component {
       };
 
       if (searchBar.mode === 'Verse') {
-        mode = txt.verse;
+        mode = txt.get("verse");
       }
 
       menu = (

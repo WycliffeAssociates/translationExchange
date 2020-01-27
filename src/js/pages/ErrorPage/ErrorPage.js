@@ -22,7 +22,7 @@ export class ErrorPage extends Component {
 
         <ImageContainer>
           <Image src={internetErrorImg} alt="Smiley face" height="10vw" width="10vw"/>
-          <Text>{this.props.txt.internetError}</Text>
+          <Text>{this.props.txt.get("internetError")}</Text>
         </ImageContainer>
 
       </ErrorPageContainer>

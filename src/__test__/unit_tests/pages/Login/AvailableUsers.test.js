@@ -5,8 +5,7 @@ import {shallow} from 'enzyme';
 
 const mockProps = {
   txt: {
-    loading: false,
-    availableUsers: 'availableUsers',
+    get: jest.fn()
   },
   users: [{is_social: false, id: 1}, {is_social: true, id: 2}],
   fetchUsers: jest.fn(),

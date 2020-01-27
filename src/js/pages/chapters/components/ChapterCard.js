@@ -95,7 +95,7 @@ export default class ChapterCard extends Component {
               <Card check ={checkLevel_1} > <InformationContainer >
                 {checkLevel_1 ?
                   <CheckTextContainer>
-                    <CheckText>{txt.level} 1</CheckText>
+                    <CheckText>{txt.get("level")} 1</CheckText>
                   </CheckTextContainer>
                   :
                   ''
@@ -130,12 +130,12 @@ export default class ChapterCard extends Component {
                 {checkLevel_1?
                   <ReviewButton check={checkLevel_1} onClick={this.reviewChapter}>
                     <i className="material-icons">done_all</i>
-                    {txt.review}
+                    {txt.get("review")}
                   </ReviewButton>
                   :
 
                   <BoardButton check={checkLevel_1} onClick={this.reviewChapter}>
-                    {txt.board}
+                    {txt.get("board")}
                     <img src={projectImg} />
                   </BoardButton>
 

@@ -57,11 +57,11 @@ export class Download extends Component {
       <Container>
         
         <BackLink onClick={()=> this.props.history.goBack()}>
-          <i className="material-icons">arrow_backward </i> {txt.goBack}
+          <i className="material-icons">arrow_backward </i> {txt.get("goBack")}
         </BackLink>
 
         <Header>
-          {txt.downloadClients}
+          {txt.get("downloadClients")}
         </Header>
 
         {
@@ -83,7 +83,7 @@ export class Download extends Component {
                   {...this.props}
                 /> )
               :
-              <NoDownloads>{txt.noDownloads}</NoDownloads>
+              <NoDownloads>{txt.get("noDownloads")}</NoDownloads>
           }
           </DownloadList>
         }

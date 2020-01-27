@@ -5,7 +5,7 @@ export const ChapterSelected = ({txt, number}) => {
   return (
     <Container>
       <i class="material-icons">chrome_reader_mode</i>
-      <p>{`(${number}) ${txt.selected}`}</p>
+      <p>{`(${number}) ${txt.get("selected")}`}</p>
     </Container>
   );
 
