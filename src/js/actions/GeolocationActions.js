@@ -20,25 +20,6 @@ export const fetchLocalization = () => {
   };
 };
 
-export const importLocalization = (file) => {
-  var data = new FormData();
-  data.append('file', file);
-  return function(dispatch) {
-    return axios
-      .post(`${config.apiUrl}localization/upload/file`, data, {
-        headers: { Authorization: 'Token '+localStorage.getItem('token'),
-          'Content-Type': 'multipart/form-data',
-        },
-        timeout: 120000,
-      })
-      .then(() => {
-        dispatch({
-          type: IMPORT_LOCALIZATION,
-        });
-      });
-  };
-};
-
 export const updateLanguage = (updatelanguage) => {
   return {
     type: UPDATE_LANGUAGE,
