@@ -5,7 +5,7 @@ import  {ChapterSelected} from '../../../../../js/pages/export/components/';
 
 
 describe('Selected Chapter test suite', () => {
-  const wrapper = shallow(<ChapterSelected number={6} txt={{selected: 'Selected'}}  />);
+  const wrapper = shallow(<ChapterSelected number={6} txt={{get: jest.fn()}}  />);
 
   it('should render ChapterSelected successfully', () => {
     expect(wrapper.find('ChapterSelected').length).toEqual(1);

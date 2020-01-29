@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
-import {getUserHash, getTasks, updateLanguage, removeUser} from '../../actions';
+import {getUserHash, getTasks, removeUser} from '../../actions';
 import TaskProgress from './components/TaskProgress';
 import GotoProjectsButton from './components/GotoProjectsButton';
 import styled from 'styled-components';
@@ -19,10 +19,6 @@ export class TaskProgressPage extends React.Component {
     const {search} = this.props.location;
     const query = QueryString.parse(search);
     this.props.getTasks(query.type);
-    const language = localStorage.getItem('language');
-    if (language) {
-      updateLanguage(language);
-    }
   }
 
   componentDidMount() {
@@ -84,7 +80,7 @@ TaskProgressContainer.displayName = 'TaskProgressContainer';
 
 const mapDispatchToProps = dispatch => {
 
-  return bindActionCreators({getUserHash, getTasks, updateLanguage, removeUser}, dispatch);
+  return bindActionCreators({getUserHash, getTasks, removeUser}, dispatch);
 
 };
 

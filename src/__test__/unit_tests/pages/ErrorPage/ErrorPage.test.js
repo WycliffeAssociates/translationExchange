@@ -6,7 +6,7 @@ import {shallow} from 'enzyme';
 const mockProps = {
   history: [],
   txt: {
-    internetError: 'internet error',
+    get: jest.fn()
   },
 };
 

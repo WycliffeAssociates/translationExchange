@@ -49,20 +49,20 @@ export class ExportProject extends Component {
           :
           <OptionsContainer>
             <Button color={'#009CFF'} height={'40px'} width={'214px'} iconSize={'24px'} border={'2px'} radius={'4px'} onClick={goBack}>
-              <i class="material-icons"> keyboard_backspace</i>  {txt.back}
+              <i class="material-icons"> keyboard_backspace</i>  {txt.get("back")}
             </Button>
             <ButtonsContainer>
               <SingleButtonContainer color={'#E56060'} >
                 <Button onClick={()=> this.download('wav')} color={'#E56060'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} >
                   <i class="material-icons"> remove_from_queue</i>
                 </Button>
-                <p>{txt.editing} (.WAV)</p>
+                <p>{txt.get("editing")} (.WAV)</p>
               </SingleButtonContainer>
               <SingleButtonContainer color={'#009CFF'}>
                 <Button onClick={()=> this.download('mp3')} color={'#009CFF'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} >
                   <i class="material-icons"> volume_up</i>
                 </Button>
-                <p>{txt.listening} (.mp3)</p>
+                <p>{txt.get("listening")} (.mp3)</p>
               </SingleButtonContainer>
             </ButtonsContainer>
           </OptionsContainer>

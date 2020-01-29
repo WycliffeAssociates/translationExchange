@@ -9,7 +9,7 @@ const mockProps = {
   toggleCheck: jest.fn(),
   downloading: true,
   getDownloadProgress: jest.fn(),
-  txt: { completed: 'Completed'},
+  txt: { get: jest.fn() },
 };
 
 describe('Downloading test suite', () => {

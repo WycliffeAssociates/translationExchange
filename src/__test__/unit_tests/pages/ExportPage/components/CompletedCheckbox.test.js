@@ -6,7 +6,7 @@ import  {CompletedCheckbox} from '../../../../../js/pages/export/components/';
 const mockProps = {
   checked: false,
   toggleCheck: jest.fn(),
-  txt: { completed: 'Completed'},
+  txt: { get: jest.fn() },
 };
 
 describe('CheckBox test suite', () => {

@@ -62,7 +62,7 @@ export default class WelcomeComponent extends React.Component {
 
           {isClient ? ( 
             <ContinueButton onClick={()=> this.handleClick('continue')}>
-              {txt.continue} <i className="material-icons">arrow_forward </i>
+              {txt.get("continue")} <i className="material-icons">arrow_forward </i>
             </ContinueButton>
             ) : (
             <div>
@@ -70,7 +70,7 @@ export default class WelcomeComponent extends React.Component {
                 marginRight={'0'}/>
 
               <ContinueLink onClick={()=> this.handleClick('continue')}>
-                {txt.continue}
+                {txt.get("continue")}
               </ContinueLink>
             </div>
             )}
@@ -80,7 +80,7 @@ export default class WelcomeComponent extends React.Component {
           //   redirectUri={config.redirectUri}
           //   onSuccess={data=>this.onLogin(data)}
           //   onFailure={this.onLoginFailure}
-          //   buttonText={txt.githubSignIn}
+          //   buttonText={txt.get("githubSignIn")}
           // />
           }
 

@@ -5,7 +5,7 @@ import renderer from 'react-test-renderer';
 
 const mockProps = {
   txt: {
-    projectImport: 'Import a project',
+    get: jest.fn()
   },
 };
 describe('Drop Target test suite', () => {

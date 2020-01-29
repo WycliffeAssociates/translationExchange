@@ -19,7 +19,7 @@ const mockProps = {
   getTakes: jest.fn(),
   getChunks: jest.fn(),
   txt: {
-    goToNextChunk: 'Next Chunk',
+    get: jest.fn()
   },
 };
 
@@ -62,7 +62,7 @@ const mockPropsPChapter = {
   getTakes: jest.fn(),
   getChunks: jest.fn(),
   txt: {
-    goToNextChunk: 'Next Chunk',
+    get: jest.fn()
   },
 };
 

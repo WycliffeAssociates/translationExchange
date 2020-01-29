@@ -9,7 +9,7 @@ const mockProps = {
   resetSelected: jest.fn(),
   downloading: jest.fn(),
   getDownloadProgress: jest.fn(),
-  txt: { listening: 'Listening'},
+  txt: { get: jest.fn() },
 };
 
 describe('ExportProject test suite', () => {

@@ -5,8 +5,8 @@ import RecordButton from './RecordButton';
 
 export default ({recording, generatedHash, startRecording, redo, save, audio, txt}) => {
 
-  let header = txt.whatIsYourName;
-  let displayText = txt.record;
+  let header = txt.get("whatIsYourName");
+  let displayText = txt.get("record");
 
 
   let handler = <RecordButton startRecording={startRecording}  />
@@ -16,14 +16,14 @@ export default ({recording, generatedHash, startRecording, redo, save, audio, tx
   }
 
   if (audio) {
-    header= txt.isThisOk;
+    header= txt.get("isThisOk");
     handler = <svg id="canvas" width="20%" height="20%" data-jdenticon-hash={generatedHash} />
   }
 
   return (
     <Container>
       <Header>{header}</Header>
-      <PrivacyText> {txt.privacyText}</PrivacyText>
+      <PrivacyText> {txt.get("privacyText")}</PrivacyText>
       {handler}
       {audio ? <BottomButtons txt={txt} done={save}  redo={redo} /> : <BottomText>{displayText}</BottomText>}
     </Container>

@@ -21,7 +21,7 @@ class RecordCommentsModal extends Component {
     return {
       recordedBlob: null,
       record: false,
-      header: this.props.txt.recordYourComment,
+      header: this.props.txt.get("recordYourComment"),
       icon: 'mic_none',
       playing: false,
       isAudioAvailable: false,
@@ -76,9 +76,9 @@ class RecordCommentsModal extends Component {
 
   redo = () => {this.setState(this.initialState());};
 
-  startRecording = () => this.setState({record: true, header: this.props.txt.recording, icon: 'stop' });
+  startRecording = () => this.setState({record: true, header: this.props.txt.get("recording"), icon: 'stop' });
 
-  stopRecording = () => this.setState({ header: this.props.txt.isThisOk, record: false, icon: 'play_arrow'});
+  stopRecording = () => this.setState({ header: this.props.txt.get("isThisOk"), record: false, icon: 'play_arrow'});
 
   onFinishPlaying() { this.setState({icon: 'play_arrow', playing: false});}
 
@@ -114,14 +114,14 @@ class RecordCommentsModal extends Component {
     const { record, header, icon, recordedBlob, playing, isAudioAvailable, commentSaved, error } = this.state;
     const {txt} = this.props;
     let ic ='check';
-    let headerText = txt.success;
-    let text = txt.commentSaved;
+    let headerText = txt.get("success");
+    let text = txt.get("commentSaved");
 
 
     if (error) {
       ic='error';
-      headerText= txt.uhOh;
-      text = txt.error;
+      headerText= txt.get("uhOh");
+      text = txt.get("error");
     }
 
 
@@ -159,7 +159,7 @@ class RecordCommentsModal extends Component {
           </TopContainer>
           <BottomContainer>
             <OkButtonContainer>
-              <BlueButton error={error} onClick={this.close}> {txt.ok} </BlueButton>
+              <BlueButton error={error} onClick={this.close}> {txt.get("ok")} </BlueButton>
             </OkButtonContainer>
           </BottomContainer>
         </ModalContainer>
@@ -195,12 +195,12 @@ class RecordCommentsModal extends Component {
           </RecordButtonContainer>
           {recordedBlob != null ?
             <ButtonsContainer>
-              <RedoButton onClick={this.redo}> {txt.redo} <i class="material-icons">redo</i> </RedoButton>
-              <BlueButton onClick={this.saveComment}> {txt.yes} <i class="material-icons">check</i> </BlueButton>
+              <RedoButton onClick={this.redo}> {txt.get("redo")} <i class="material-icons">redo</i> </RedoButton>
+              <BlueButton onClick={this.saveComment}> {txt.get("yes")} <i class="material-icons">check</i> </BlueButton>
             </ButtonsContainer>
             :
             <ButtonsContainer>
-              <BlueButton onClick={this.close}> <i class="material-icons">keyboard_backspace</i>{txt.goBack} </BlueButton>
+              <BlueButton onClick={this.close}> <i class="material-icons">keyboard_backspace</i>{txt.get("goBack")} </BlueButton>
             </ButtonsContainer>
           }
         </ControlsContainer>

@@ -8,7 +8,7 @@ const mockProps = {
   task: {
     details: {}
   },
-  txt: ""
+  txt: { get: jest.fn() }
 };
 
 describe('GotoProjectButton Test Suite', () => {

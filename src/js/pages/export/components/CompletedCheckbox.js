@@ -10,7 +10,7 @@ export const CompletedCheckbox = ({checked, toggleCheck, txt, chapterComplete}) 
           <CheckBox checked={checked} onClick={toggleCheck}>
             {checked ? <i className="material-icons">done</i> : ''}
           </CheckBox>
-          {txt.completed}
+          {txt.get("completed")}
           <i className="material-icons">done</i>
         </CompletedButton>
       </ButtonContainer>
@@ -21,7 +21,7 @@ export const CompletedCheckbox = ({checked, toggleCheck, txt, chapterComplete}) 
     return (
       <ButtonContainer color="#E56060">
         <CompletedButton>
-          {txt.completed}
+          {txt.get("completed")}
           <i className="material-icons">clear</i>
         </CompletedButton>
       </ButtonContainer>

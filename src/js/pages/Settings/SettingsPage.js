@@ -37,16 +37,16 @@ export class SettingsPage extends Component {
       <Container>
         
         <BackLink onClick={()=> this.props.history.goBack()}>
-          <i className="material-icons">arrow_backward </i> {txt.goBack}
+          <i className="material-icons">arrow_backward </i> {txt.get("goBack")}
         </BackLink>
 
         <Header>
-          {txt.settings}
+          {txt.get("settings")}
         </Header>
 
         <SettingsContainer>
           <SettingsItem>
-            <SettingsTitle>{txt.serverName}</SettingsTitle>
+            <SettingsTitle>{txt.get("serverName")}</SettingsTitle>
             <SettingsValue>
               <SettingsInput type="text" id="serverName" 
                 value={this.state.serverName}
@@ -56,8 +56,8 @@ export class SettingsPage extends Component {
         </SettingsContainer>
 
         <ButtonsContainer>
-          <SaveButton onClick={this.onSaveClick.bind(this)}>{txt.save}</SaveButton>
-          <RestoreDefaultsButton onClick={this.onRestoreClick.bind(this)}>{txt.restoreDefaults}</RestoreDefaultsButton>
+          <SaveButton onClick={this.onSaveClick.bind(this)}>{txt.get("save")}</SaveButton>
+          <RestoreDefaultsButton onClick={this.onRestoreClick.bind(this)}>{txt.get("restoreDefaults")}</RestoreDefaultsButton>
         </ButtonsContainer>
       </Container>
     );

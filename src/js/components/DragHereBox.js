@@ -17,7 +17,7 @@ export default class DragHereBox extends React.Component {
           <center>
             <label style={{display: 'block'}}> <i className = "material-icons">menu</i> </label>
             <br />
-            <label style={{display: 'block'}}> {this.props.txt.dragHere} </label>
+            <label style={{display: 'block'}}> {this.props.txt.get("dragHere")} </label>
           </center>
         </div>
 

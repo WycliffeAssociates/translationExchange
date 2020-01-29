@@ -3,7 +3,7 @@ import WelcomeComponent from './components/WelcomeComponent.js';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {onLoginSuccess, fetchUsers, createSocialUser, updateLanguage} from '../../actions';
+import {onLoginSuccess, fetchUsers, createSocialUser, updateLanguage, fetchLocalization} from '../../actions';
 import Menu, { Item as MenuItem } from 'rc-menu';
 import Dropdown from 'rc-dropdown';
 import 'rc-dropdown/assets/index.css';
@@ -13,10 +13,8 @@ import Languages from '../../../languages/textToDisplay.json';
 export class Welcome extends React.Component {
 
   componentWillMount() {
-    const storedLanguage = localStorage.getItem('language');
-    if (storedLanguage) {
-      this.props.updateLanguage(storedLanguage);
-    }
+    const { fetchLocalization } = this.props;
+    fetchLocalization();
 
     if(localStorage.getItem('token') != null) {
       this.props.history.push ({
@@ -39,9 +37,17 @@ export class Welcome extends React.Component {
 
 
   render() {
+    const {localization} = this.props;
+    
+    let langs = Languages
+
+    if(localization != undefined) {
+      langs = localization;
+    }
+    
     const menu = (
       <Menu onSelect={ ky=> this.onSelect(ky)}>
-        {Object.keys(Languages).map(lng => 
+        {Object.keys(langs).map(lng => 
           <MenuItem style={{cursor: 'pointer', color: '#fff', backgroundColor: '#000' }} key={lng}>
              {lng} 
           </MenuItem> 
@@ -53,14 +59,14 @@ export class Welcome extends React.Component {
       <LoginPage className="pageBackground">
         <LanguageContainer>
           <SettingsButton onClick={this.onSettingsClick.bind(this)}>
-            {this.props.txt.settings} <i className="material-icons">settings</i>
+            {this.props.txt.get("settings")} <i className="material-icons">settings</i>
           </SettingsButton>
           <Dropdown
             trigger={['click']}
             overlay={menu}
             animation="slide-up"
           >
-            <Language>{this.props.txt.languages} <i className="material-icons">language</i></Language>
+            <Language>{this.props.txt.get("languages")} <i className="material-icons">language</i></Language>
           </Dropdown>
         </LanguageContainer>
 
@@ -106,13 +112,13 @@ SettingsButton.displayName = 'SettingsButton';
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    {  onLoginSuccess, fetchUsers, createSocialUser, updateLanguage }, dispatch);
+    { onLoginSuccess, fetchUsers, createSocialUser, updateLanguage, fetchLocalization }, dispatch);
 };
 
 const mapStateToProps = state => {
   const { socialLogin } = state.user;
-  const {txt} = state.geolocation;
-  return {socialLogin, txt};
+  const { txt, localization } = state.geolocation;
+  return { socialLogin, txt, localization };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps) (Welcome);

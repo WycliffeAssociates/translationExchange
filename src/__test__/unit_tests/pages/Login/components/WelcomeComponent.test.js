@@ -6,8 +6,7 @@ import {shallow} from 'enzyme';
 const defaultProps = {
   history: [],
   txt: {
-    continue: 'continue',
-    gitHubSignIn: 'git sign in',
+    get: jest.fn()
   },
 };
 

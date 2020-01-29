@@ -5,7 +5,7 @@ import {shallow} from 'enzyme';
 
 describe('Error Dialog Test Suite', () => {
   const mockProps = { type: 'mic', onClick: jest.fn(), txt: {
-    micMessage: 'mic message',
+    get: jest.fn()
   }};
   const wrapper = shallow(<ErrorDialog {...mockProps} />);
 

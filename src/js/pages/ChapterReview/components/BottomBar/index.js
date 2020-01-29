@@ -29,7 +29,7 @@ export default class BottomBar extends React.Component {
     var chapterNum = query.chapterNum;
     return (
       <Container>
-        <ChapterInfo> {txt.chapter} {chapterNum}  {txt.review} </ChapterInfo>
+        <ChapterInfo> {txt.get("chapter")} {chapterNum}  {txt.get("review")} </ChapterInfo>
 
         <ControlButtons activeChunkIndex={activeChunkIndex}
           togglePlay={togglePlay}
@@ -42,9 +42,9 @@ export default class BottomBar extends React.Component {
 
         <ButtonContainer>
           
-          <NextChapterButton onClick={this.props.nextChapter}> <i className="material-icons">arrow_forward</i> {txt.goToNextChapter} </NextChapterButton>
+          <NextChapterButton onClick={this.props.nextChapter}> <i className="material-icons">arrow_forward</i> {txt.get("goToNextChapter")} </NextChapterButton>
 
-          <ExitButton onClick={this.exit}> <i className="material-icons">close</i> {txt.exitReview} </ExitButton>
+          <ExitButton onClick={this.exit}> <i className="material-icons">close</i> {txt.get("exitReview")} </ExitButton>
         
         </ButtonContainer>
 

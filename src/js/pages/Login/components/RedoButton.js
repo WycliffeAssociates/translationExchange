@@ -5,7 +5,7 @@ export const RedoButton = ({ onClick, txt }) => {
   return (
     <Button onClick={onClick}>
       <span style={{ textDecoration: 'underline', width: '100%'}}>
-        {txt.redo}
+        {txt.get("redo")}
         <i className="material-icons" style={{ fontSize: '20px' }}>redo</i>
       </span>
 

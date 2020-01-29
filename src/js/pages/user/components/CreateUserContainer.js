@@ -5,7 +5,7 @@ import UserCreated from './UserCreated';
 import styled, {keyframes} from 'styled-components';
 import {fadeIn} from 'react-animations';
 import {bindActionCreators} from 'redux';
-import { createUser, resetUserCreated, patchUser, updateLanguage } from '../../../actions';
+import { createUser, resetUserCreated, patchUser } from '../../../actions';
 
 
 export class CreateUserContainer extends Component {
@@ -14,16 +14,11 @@ export class CreateUserContainer extends Component {
   constructor(props) {
     super(props);
 
-    //const {dispatch} = this.props;
-
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillMount() {
-    const language = localStorage.getItem('language');
-    if (language) {
-      this.props.updateLanguage(language);
-    }
+    
   }
 
   componentWillUnmount() {
@@ -45,7 +40,7 @@ export class CreateUserContainer extends Component {
           >
             arrow_back
           </i>
-          {txt.backToLogin}
+          {txt.get("backToLogin")}
         </Label>
 
         <CardContainer>
@@ -105,7 +100,7 @@ const Card = styled.div`
 Card.displayName = 'Card';
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ createUser, resetUserCreated, patchUser, updateLanguage }, dispatch);
+  return bindActionCreators({ createUser, resetUserCreated, patchUser }, dispatch);
 };
 
 const mapStateToProps = state => {

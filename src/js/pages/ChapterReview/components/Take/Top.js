@@ -13,9 +13,9 @@ export default class Top extends React.Component {
     return (
       <Container>
         <Text>
-          <TakeNum> {txt.take} {takeNum}</TakeNum>
+          <TakeNum> {txt.get("take")} {takeNum}</TakeNum>
 
-          <ChunkNum> {txt.chunk} {chunkNum}</ChunkNum>
+          <ChunkNum> {txt.get("chunk")} {chunkNum}</ChunkNum>
         </Text>
 
         <Rating> <i className= "material-icons">done </i> </Rating>

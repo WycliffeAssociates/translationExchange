@@ -14,7 +14,7 @@ export default class ImportProject extends React.Component {
     const {txt} = this.props;
     return (
       <Container>
-        <h2 style={{fontWeight: '100'}}> {txt.noProjects} </h2>
+        <h2 style={{fontWeight: '100'}}> {txt.get("noProjects")} </h2>
         <DropTarget {...this.props} />
       </Container>
     );

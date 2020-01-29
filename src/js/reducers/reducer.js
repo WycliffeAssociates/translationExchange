@@ -27,5 +27,5 @@ export default combineReducers({
   Chapters,
   ChapterReview,
   ExportPage,
-  Downloads,
+  Downloads
 });
