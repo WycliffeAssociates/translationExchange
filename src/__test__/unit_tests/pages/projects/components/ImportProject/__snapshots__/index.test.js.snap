@@ -12,7 +12,6 @@ exports[`ImportProject test suite should render the component without exploding 
     }
   >
      
-    There are no available projects
      
   </h2>
   <div

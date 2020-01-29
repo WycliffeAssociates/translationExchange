@@ -5,7 +5,7 @@ import styled from "styled-components";
 export const YesButton = ({ onClick, txt }) => {
   return (
     <Button onClick={onClick}>
-      <span style={{textDecoration: "underline", width:'100%'}}>{txt.yes}
+      <span style={{textDecoration: "underline", width:'100%'}}>{txt.get("yes")}
       <i className="material-icons" style={{ fontSize: "20px" }}>check</i>
       </span>
 

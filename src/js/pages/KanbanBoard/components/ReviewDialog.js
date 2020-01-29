@@ -22,22 +22,22 @@ export default class ReviewDialog extends Component {
             </Icon>
 
             <Message>
-              {txt.goodJob}
+              {txt.get("goodJob")}
             </Message>
 
             <ExtraInfo>
-              {txt.chapterCompleted} {chapterNum}
+              {txt.get("chapterCompleted")} {chapterNum}
             </ExtraInfo>
 
             <Instructions>
-              {txt.reviewChapter}
+              {txt.get("reviewChapter")}
             </Instructions>
           </Info>
 
           <Action>
-            <SkipButton onClick={this.props.nextChapter}> <i className="material-icons">arrow_forward </i> {txt.skipChapter}  </SkipButton>
+            <SkipButton onClick={this.props.nextChapter}> <i className="material-icons">arrow_forward </i> {txt.get("skipChapter")}  </SkipButton>
             <ChapterReviewButton onClick={()=> this.props.history.push(`/chapterReview${query}`)}> <i className="material-icons">done_all </i>
-              {txt.goToChapterReview}
+              {txt.get("goToChapterReview")}
             </ChapterReviewButton>
           </Action>
 

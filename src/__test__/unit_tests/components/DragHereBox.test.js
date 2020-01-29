@@ -5,7 +5,7 @@ import {shallow} from 'enzyme';
 
 const props = {
   txt: {
-    dragHere: 'drag Here',
+    get: jest.fn()
   },
 };
 describe('DragHereBox suite', () => {

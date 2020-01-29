@@ -5,9 +5,7 @@ import {SettingsPage} from '../../../../js/pages/Settings/SettingsPage';
 
 const mockProps =  {
   txt: {
-    serverName: 'Server name',
-    settings: 'settings',
-    goBack: 'go back',
+    get: jest.fn()
   },
   onServerNameChange: jest.fn(),
 };

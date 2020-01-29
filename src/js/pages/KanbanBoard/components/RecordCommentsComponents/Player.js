@@ -77,8 +77,8 @@ class Player extends Component {
 
 const Msg = ({ redo, txt }) => (
 <DeleteContainer>
-    {txt.deletingComment}
-    <BlueButton onClick={redo}>{txt.undo} <i class="material-icons">redo</i></BlueButton>
+    {txt.get("deletingComment")}
+    <BlueButton onClick={redo}>{txt.get("undo")} <i class="material-icons">redo</i></BlueButton>
 </DeleteContainer>
 );
 

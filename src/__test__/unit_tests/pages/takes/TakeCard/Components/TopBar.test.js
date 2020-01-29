@@ -8,7 +8,7 @@ const mockProps = {
   date_modified: '2018-04-25T14:11:27.354383Z',
   take_num: 300,
   txt: {
-    take: 'take',
+    get: jest.fn()
   },
 };
 describe('LoginPage test suite', () => {

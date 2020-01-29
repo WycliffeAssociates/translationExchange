@@ -6,7 +6,7 @@ import {Grid} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {bindActionCreators} from 'redux';
-import {fetchUsers, identiconLogin, updateLanguage} from '../../actions';
+import {fetchUsers, identiconLogin} from '../../actions';
 
 export class AvailableUsers extends React.Component {
 
@@ -25,12 +25,8 @@ export class AvailableUsers extends React.Component {
   }
 
   componentWillMount() {
-    const {history, fetchUsers, updateLanguage} = this.props;
+    const {history, fetchUsers} = this.props;
     fetchUsers(history);
-    const language = localStorage.getItem('language');
-    if (language) {
-      updateLanguage(language);
-    }
   }
 
   sortedUsers() {
@@ -58,15 +54,15 @@ export class AvailableUsers extends React.Component {
       <Container className="pageBackground">
 
         <DownloadLink onClick={()=> this.handleClick('download')}>
-          {txt.download}
+          {txt.get("download")}
         </DownloadLink>
 
-        <h2 style={{marginBottom: '5vw'}}> {txt.availableUsers} </h2>
+        <h2 style={{marginBottom: '5vw'}}> {txt.get("availableUsers")} </h2>
 
         {
           this.props.loading?
 
-            <Loading txt={txt.loading} height = "90vh" />
+            <Loading txt={txt} height = "90vh" />
 
             :
 
@@ -129,7 +125,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    {  fetchUsers, identiconLogin, updateLanguage }, dispatch);
+    {  fetchUsers, identiconLogin }, dispatch);
 };
 
 export default connect (mapStateToProps, mapDispatchToProps )(AvailableUsers);

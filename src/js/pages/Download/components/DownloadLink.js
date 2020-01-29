@@ -34,7 +34,7 @@ export default class DownloadLink extends React.Component {
     return (
       <Container>
         <Os>{fileOs} 
-          <div>{recommended ? "("+txt.recommended+")" : ""}</div>
+          <div>{recommended ? "("+txt.get("recommended")+")" : ""}</div>
         </Os>
         <FileName>{name}</FileName>
         <DownloadButton onClick={()=> {}} url={config.streamingUrl + url} txt={txt} 

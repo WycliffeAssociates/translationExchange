@@ -7,13 +7,13 @@ export default class ErrorDialog extends Component {
   render() {
     const {type, txt} = this.props;
     let icon = 'mic_off';
-    let message = txt.micMessage;
-    let info =txt.micError;
-    let instructions = txt.micInstructions;
+    let message = txt.get("micMessage");
+    let info = txt.get("micError");
+    let instructions = txt.get("micInstructions");
 
     if (type == 'upload_comment_fail') {
-      message= txt.uploadMessage;
-      info = txt.uploadError;
+      message = txt.get("uploadMessage");
+      info = txt.get("uploadError");
       icon = 'error';
 
 

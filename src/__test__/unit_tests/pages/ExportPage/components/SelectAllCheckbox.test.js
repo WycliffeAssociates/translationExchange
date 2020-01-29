@@ -6,7 +6,7 @@ import  {SelectAllCheckbox} from '../../../../../js/pages/export/components';
 const mockProps = {
   checked: false,
   toggleCheck: jest.fn(),
-  txt: { selectAll: 'Select All'},
+  txt: { get: jest.fn() },
 };
 
 describe('CheckBox test suite', () => {

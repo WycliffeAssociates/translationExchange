@@ -40,7 +40,7 @@ export default class UtilityPanel extends React.Component {
       chunks, chapterComments, chunkComments, activeChunkId, saveComment,
       uploadingComments, uploadError, resetError, txt, deleteComment, getTakes} = this.props;
     let publishedTakeLocation =null;
-    let mode = txt.chunk;
+    let mode = txt.get("chunk");
     const {search} = this.props.location;
     const query = QueryString.parse(search);
     takes.map(tk=>{ if (tk.published) { publishedTakeLocation = tk.location;} } );
@@ -48,7 +48,7 @@ export default class UtilityPanel extends React.Component {
     let toggled = localStorage.getItem("panelToggled") || "true";
     
     if (query.mode === 'Verse') {
-      mode = txt.verse;
+      mode = txt.get("verse");
     }
 
     return (
@@ -74,7 +74,7 @@ export default class UtilityPanel extends React.Component {
                 saveComment={saveComment}
                 type="chapter"
                 comments={chapterComments}
-                text= {`${txt.chapter} ${query.chapterNum}`}
+                text= {`${txt.get("chapter")} ${query.chapterNum}`}
                 id={chapterId}
                 uploadingComments={uploadingComments}
                 uploadError = {uploadError}

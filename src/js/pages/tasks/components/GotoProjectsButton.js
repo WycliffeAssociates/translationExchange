@@ -14,7 +14,7 @@ export default class GotoProjectsButton extends React.Component {
     return (
 
       <Button onClick={()=> history.push('/projects')}>
-        <span style={{verticalAlign: 'middle'}}>{txt.goToProjects}</span>
+        <span style={{verticalAlign: 'middle'}}>{txt.get("goToProjects")}</span>
         <i style={{verticalAlign: 'middle', marginLeft: '0.4vw'}} className="material-icons">book</i>
       </Button>
 

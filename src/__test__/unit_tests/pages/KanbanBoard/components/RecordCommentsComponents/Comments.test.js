@@ -5,8 +5,7 @@ import Comments from '../../../../../../js/pages/KanbanBoard/components/RecordCo
 
 const mockProps = {
   resetError: jest.fn(),
-  txt:
-    {noCommentsAvailable: 'noCommentsAvailable'},
+  txt: { get: jest.fn() },
 };
 
 describe('Comments in UtilityPanel', () => {

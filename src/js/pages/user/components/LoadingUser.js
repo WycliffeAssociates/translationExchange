@@ -9,11 +9,11 @@ export default ({txt}) => {
 
   return (
     <Container>
-      <TextHeader>{txt.generatingUser}</TextHeader>
+      <TextHeader>{txt.get("generatingUser")}</TextHeader>
       <GifContainer>
         <img style={{height: '300px', width: '300px'}} src={loadingRing} alt="Loading..." />
       </GifContainer>
-      <BottomText>{txt.pleaseWait}</BottomText>
+      <BottomText>{txt.get("pleaseWait")}</BottomText>
     </Container>
   );
 

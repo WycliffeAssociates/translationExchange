@@ -9,12 +9,7 @@ const mockProps = {
   chapterNum: 1,
   query: 'search?/review?****',
   txt: {
-    goodJob: 'good job',
-    chapterCompleted: 'chapterCompleted',
-    reviewChapter: 'reviewChapter',
-    skipChapter: 'skipChapter',
-    goToChapterReview: 'goToChapterReview',
-
+    get: jest.fn()
   },
 
   closeModal: jest.fn(),

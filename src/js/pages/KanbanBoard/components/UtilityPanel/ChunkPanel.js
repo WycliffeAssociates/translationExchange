@@ -40,7 +40,7 @@ class ChunkPanel extends Component {
                 <PlayerTracker  url={chk.published_take.location} />
                 :
                 <CurrentLabel selected={selectedChunk == chk.startv}> 
-                  {chk.has_takes == undefined || chk.has_takes ? txt.unpublished : txt.noTakes} 
+                  {chk.has_takes == undefined || chk.has_takes ? txt.get("unpublished") : txt.get("noTakes")} 
                 </CurrentLabel>
               }
 

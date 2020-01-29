@@ -22,8 +22,7 @@ const mockProps = {
   uploadError: jest.fn(),
   resetError: jest.fn(),
   txt: {
-    chunk: 'chunk',
-    chapter: 'chapter',
+    get: jest.fn()
   },
   deleteComment: jest.fn(),
   getTakes: jest.fn(),

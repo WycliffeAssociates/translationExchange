@@ -39,7 +39,7 @@ export default class TopBar extends React.Component {
         <DragTarget {...this.props} />
 
         <CardInfo>
-          <h3 style={{alignSelf: 'center'}}> {this.props.txt.take} {this.props.take_num} </h3>
+          <h3 style={{alignSelf: 'center'}}> {this.props.txt.get("take")} {this.props.take_num} </h3>
           <p style={{color: 'lightgray', fontStyle: 'italic', fontWeight: '100', marginTop: '-0.8vw'}}> {date}  </p>
         </CardInfo>
 

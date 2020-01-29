@@ -11,7 +11,6 @@ exports[`Take Card Top should render the component and not explode 1`] = `
       className="sc-htpNat buBeEl"
     >
        
-      take
        
       4
     </h2>
@@ -19,7 +18,6 @@ exports[`Take Card Top should render the component and not explode 1`] = `
       className="sc-bxivhb knzSls sc-htpNat buBeEl"
     >
        
-      chunk
        
       1
     </h2>

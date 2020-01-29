@@ -7,8 +7,7 @@ describe('Take Card Top', () => {
   it('should render the component and not explode', () => {
     const mockProps = {
       txt: {
-        take: 'take',
-        chunk: 'chunk',
+        get: jest.fn()
       },
       chunkNum: 1,
       takeNum: 4,

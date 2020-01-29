@@ -9,7 +9,7 @@ export const SelectAllCheckbox = ({checked, toggleCheck, txt}) => {
         <CheckBox checked={checked} onClick={toggleCheck}>
           {checked ? <i className="material-icons">done</i> : ''}
         </CheckBox>
-        {txt.selectAll}
+        {txt.get("selectAll")}
       </CompletedButton>
     </ButtonContainer>
   );

@@ -6,18 +6,26 @@ import language from '../../../languages/textToDisplay.json';
 
 describe('Geolocation Reducer', ()=> {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual({
-      txt: language.English,
-    });
+    expect(JSON.stringify(reducer(undefined, {}))).toEqual(JSON.stringify({
+      txt: {
+        get: jest.fn(),
+        language: language.English
+      },
+      localization: language
+    }));
   });
 
   it('should handle UPDATE_LANGUAGE',() => {
-    expect(reducer([],{
+    expect(JSON.stringify(reducer(undefined, {
       type: types.UPDATE_LANGUAGE,
-      updatelanguage: 'swahili',
-    })).toEqual({
-      txt: language['swahili'],
-    });
+      updatelanguage: 'Cebuano',
+    }))).toEqual(JSON.stringify({
+      txt: {
+        get: jest.fn(),
+        language: language.Cebuano
+      },
+      localization: language
+    }));
   });
 
 });

@@ -18,7 +18,7 @@ class UserCreated extends Component {
 
     return (
       <Container>
-        <TextHeader> {txt.youAreReadyToGo} </TextHeader>
+        <TextHeader> {txt.get("youAreReadyToGo")} </TextHeader>
         <IdenticonContainer>
           <svg
             id="createdUser"
@@ -28,7 +28,7 @@ class UserCreated extends Component {
           />
         </IdenticonContainer>
         <Button onClick={() => this.redirect()}>
-          <span style={{textDecoration:'underline'}}> {txt.goToProjects}</span>
+          <span style={{textDecoration:'underline'}}> {txt.get("goToProjects")}</span>
           <i className="material-icons" style={{ fontSize: "1.7vw" }}>
             arrow_forward
           </i>

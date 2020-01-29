@@ -14,7 +14,7 @@ export default class DropTarget extends React.Component {
     return (
       <Container>
         <DashBorder>
-          <h2> {txt.projectImport} </h2>
+          <h2> {txt.get("projectImport")} </h2>
 
           <AddFile {...this.props} />
         </DashBorder>

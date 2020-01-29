@@ -269,7 +269,7 @@ class KanbanColumn extends React.Component {
               <center>
                 <VBox>
                   <ChapterReview onClick ={() => this.props.history.push(`/chapterReview${search}`)} >
-                    {txt.goToChapterReview}<i className="material-icons">done_all</i>
+                    {txt.get("goToChapterReview")}<i className="material-icons">done_all</i>
                   </ChapterReview>
                   {
                     displayModal?
@@ -283,14 +283,14 @@ class KanbanColumn extends React.Component {
                       :
                       ''
                   }
-                  <NextChapter onClick ={() => this.nextChapter(Number(chapterNum) +1)} >{txt.goToNextChapter} <i className="material-icons">arrow_forward</i> </NextChapter>
+                  <NextChapter onClick ={() => this.nextChapter(Number(chapterNum) +1)} >{txt.get("goToNextChapter")} <i className="material-icons">arrow_forward</i> </NextChapter>
                 </VBox>
               </center>
               :
               mode === 'Chunk' || mode === 'chunk'?
-                <center> <NextChunk onClick ={() => this.nextChunk()}>{this.props.txt.goToNextChunk} <i className= "material-icons">arrow_forward</i> </NextChunk> </center>
+                <center> <NextChunk onClick ={() => this.nextChunk()}>{this.props.txt.get("goToNextChunk")} <i className= "material-icons">arrow_forward</i> </NextChunk> </center>
                 :
-                <center> <NextChunk onClick ={() => this.nextChunk()}>{this.props.txt.goToNextVerse} <i className= "material-icons">arrow_forward</i> </NextChunk> </center>
+                <center> <NextChunk onClick ={() => this.nextChunk()}>{this.props.txt.get("goToNextVerse")} <i className= "material-icons">arrow_forward</i> </NextChunk> </center>
             : ''
         }
 
