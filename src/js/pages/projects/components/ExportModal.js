@@ -49,7 +49,7 @@ class ExportModal extends Component {
             <TopContainer>
               <Span onClick={()=>this.close()}>X</Span>
               <TextContainer>
-                <p>{txt.exportProject}:</p>
+                <p>{txt.get("exportProject")}:</p>
                 <h1>{bkName}</h1>
               </TextContainer>
 
@@ -59,11 +59,11 @@ class ExportModal extends Component {
               <ButtonsContainer>
                 <SingleButtonContainer color={'#E56060'}>
                   <BorderButton icon="share"  onClick={()=> {transferProject(projId);}} color={'#E56060'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} />
-                  <p>{txt.transfer}</p>
+                  <p>{txt.get("transfer")}</p>
                 </SingleButtonContainer>
                 <SingleButtonContainer color={'#009CFF'}>
                   <BorderButton icon="get_app" onClick={this.goToExport} color={'#009CFF'} height={'200px'} width={'214px'} iconSize={'148px'} border={'4px'} radius={'20px'} />
-                  <p>{txt.download}</p>
+                  <p>{txt.get("download")}</p>
                 </SingleButtonContainer>
 
               </ButtonsContainer>

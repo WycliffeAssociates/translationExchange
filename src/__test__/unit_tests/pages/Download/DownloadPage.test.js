@@ -7,8 +7,7 @@ const mockProps =  {
   loading: false,
   downloads: [],
   txt: {
-    downloadClients: 'download clients',
-    goBack: 'go back',
+    get: jest.fn()
   },
   getDownloads: jest.fn(),
 };

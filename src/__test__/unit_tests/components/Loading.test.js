@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer';
 
 const mockProps =  {
   txt: {
-    loading: 'Loading...',
+    get: jest.fn()
   },
 };
 describe('Loading Component Test Suite', () => {

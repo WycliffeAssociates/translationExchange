@@ -13,10 +13,7 @@ const mockProps = {
   total_chunks: 10,
   uploaded_chunks: 10,
   published_chunks: 10,
-  txt: {
-    chapter: 1,
-    level: 1,
-  },
+  txt: { get: jest.fn() },
 };
 describe('Chapter Card test suite', () => {
   const wrapper = shallow(<ChapterCard {...mockProps} />);

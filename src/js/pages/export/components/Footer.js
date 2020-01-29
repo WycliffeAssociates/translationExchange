@@ -7,7 +7,7 @@ import {slideInUp} from 'react-animations';
 export const Footer = ({nextStep, txt}) => {
   return (
     <Container onClick={nextStep}>
-      <Button> <i class="material-icons">touch_app</i> {txt.next} </Button>
+      <Button> <i class="material-icons">touch_app</i> {txt.get("next")} </Button>
     </Container>
   );
 

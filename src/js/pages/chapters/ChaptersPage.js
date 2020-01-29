@@ -5,7 +5,7 @@ import QueryString from 'query-string';
 import NavBar from '../../components/NavBar';
 import Loading from '../../components/Loading';
 import {getChunks, getUserHash,
-  getChapters, removeUser, downloadProject, updateLanguage,
+  getChapters, removeUser, downloadProject,
   saveComment, getComments, deleteComment} from '../../actions';
 import ChapterCard from './components/ChapterCard';
 import Toggle from './components/Toggler';
@@ -24,16 +24,12 @@ export class ChapterPage extends Component {
   }
 
   componentWillMount() {
-    const {getChapters, history, updateLanguage} = this.props;
+    const {getChapters, history} = this.props;
     const {search} = this.props.location;
     const query = QueryString.parse(search);
     getChapters(query.projectId, history);
-
-    const language = localStorage.getItem('language');
-    if (language) {
-      updateLanguage(language);
-    }
   }
+
   handleToggle() {
     this.setState(prevState => ({viewingComments: !prevState.viewingComments}));
   }
@@ -139,7 +135,7 @@ DownloadButton.displayName = 'DownloadButton';
 const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({getChunks, getUserHash, getChapters,
-    removeUser, downloadProject, updateLanguage, saveComment, getComments, deleteComment}, dispatch);
+    removeUser, downloadProject, saveComment, getComments, deleteComment}, dispatch);
 
 };
 

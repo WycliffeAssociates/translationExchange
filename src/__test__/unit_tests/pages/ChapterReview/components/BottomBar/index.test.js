@@ -8,11 +8,7 @@ const mockProps ={
   togglePlay: jest.fn(),
   stopPlaying: jest.fn(),
   txt: {
-    chapter: 'chapter',
-    review: 'review',
-    exitReview: 'exit review',
-    goToNextChapter: 'next chapter'
-
+    get: jest.fn()
   },
   updateActiveChunkIndex: jest.fn(),
   resetTake: jest.fn(),

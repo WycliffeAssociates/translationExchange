@@ -77,7 +77,7 @@ export class ExportPage extends Component {
         {downloading ? ''
           :
           <HeaderContainer>
-            <p>{txt.downloadProject}:</p>
+            <p>{txt.get("downloadProject")}:</p>
             <h1>{query.bookName}</h1>
           </HeaderContainer>
         }

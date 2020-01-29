@@ -13,7 +13,7 @@ export default class DownloadButton extends React.Component {
 
     return (
       <Container onClick={()=>onClick()} href={url} isSecondary={isSecondary} marginRight={marginRight}>
-        {txt.download} <i className="material-icons">get_app </i>
+        {txt.get("download")} <i className="material-icons">get_app </i>
       </Container>
     );
   }

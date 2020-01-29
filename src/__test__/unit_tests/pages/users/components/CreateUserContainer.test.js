@@ -7,7 +7,7 @@ const mockProps = {
   history: [],
   userCreated: false,
   txt: {
-    backToLogin: 'back to login',
+    get: jest.fn()
   },
 };
 

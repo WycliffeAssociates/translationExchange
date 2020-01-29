@@ -24,8 +24,7 @@ const mockProps = {
     },
   }],
   txt: {
-    unavailable: 'unavailable',
-    selected: 'selected',
+    get: jest.fn()
   },
   history: [],
   location: {

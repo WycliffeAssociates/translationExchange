@@ -6,7 +6,7 @@ import NewUserCard from '../../../../../js/pages/Login/components/NewUserCard';
 const defaultProps = {
   history: [],
   txt: {
-    newUser: 'new User',
+    get: jest.fn()
   },
 };
 describe('NewUserCard suite', function() {

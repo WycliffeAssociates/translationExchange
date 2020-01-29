@@ -40,15 +40,15 @@ class DownloadingTransfer extends Component {
           done ?
             <SuccessContainer>
               <i className="material-icons">check_circle</i>
-              <p>{txt.success}</p>
-              <BlueButton onClick={()=> close()}>{txt.done} <i class="material-icons">touch_app</i> </BlueButton>
+              <p>{txt.get("success")}</p>
+              <BlueButton onClick={()=> close()}>{txt.get("done")} <i class="material-icons">touch_app</i> </BlueButton>
             </SuccessContainer>
             :
             <Container>
               <LoadingTransfer />
               <TextContainer>
                 <p>{percentage}%</p>
-                <p> {txt.generating}... </p>
+                <p> {txt.get("generating")}... </p>
               </TextContainer>
 
             </Container>

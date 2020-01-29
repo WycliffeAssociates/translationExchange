@@ -10,7 +10,7 @@ export default ({txt}) => {
         <GifContainer>
           <img style={{height: '12vw', width: '12vw'}} src={loadingRing} alt="Loading_comment" />
         </GifContainer>
-        <BottomText>{txt.uploading}</BottomText>
+        <BottomText>{txt.get("uploading")}</BottomText>
       </ItemsContainer>
     </Container>
   );

@@ -9,7 +9,7 @@ const mockProps = {
     details: {},
   },
   txt: {
-    select: 'Select',
+    get: jest.fn()
   },
 };
 

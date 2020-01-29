@@ -5,7 +5,7 @@ import {shallow} from 'enzyme';
 
 const mockProps = {
   txt: {
-    projects: 'projects',
+    get: jest.fn()
   },
   projects: [
     {id: 1,

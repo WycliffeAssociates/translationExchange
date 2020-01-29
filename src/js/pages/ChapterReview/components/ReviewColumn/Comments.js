@@ -11,7 +11,7 @@ export default class Comments extends React.Component {
     const {active, comments, txt} = this.props;
     return (
       <CommentContainer active={active}>
-        <p> {txt.comments} </p>
+        <p> {txt.get("comments")} </p>
         {
           comments.length>0?
             comments.map((comment) => {
